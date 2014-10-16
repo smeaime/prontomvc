@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="3917654c-4647-402c-b956-fa65d0b8921c" name="Mariano@MARIANO-PC 2014-10-14 11:37:57" runUser="Mariano-PC\Mariano" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="93c0947b-7c83-4097-baa4-06abe32360e1">
+    <Deployment runDeploymentRoot="Mariano_MARIANO-PC 2014-10-14 11_37_57">
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\Trirand.Web.Mvc.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ClaseMigrar\bin\Debug\ClaseMigrar.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Servicio\bin\Debug\Servicio.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\WSAFIPFE.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Data\bin\x86\Debug\ProntoMVC.Data.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\BussinessObject\bin\Debug\BusinessObject.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Lib.Web.Mvc.6.1.0\lib\net40\Lib.Web.Mvc.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\DataAccess\bin\Debug\DataAccess.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\Repositorio.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ProntoMVC.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2014-10-14T11:37:57.4141156-03:00" queuing="2014-10-14T11:37:58.3231384-03:00" start="2014-10-14T11:37:58.4531417-03:00" finish="2014-10-14T11:41:21.7892453-03:00" />
+  <ResultSummary outcome="Inconclusive">
+    <Counters total="4" executed="4" passed="3" error="0" failed="0" timeout="0" aborted="0" inconclusive="1" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T11:37:58.0951327-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Google.GData.Spreadsheets' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T11:37:58.0951327-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Google.GData.Client' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T11:37:58.0951327-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'MySql.Data' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T11:37:58.0951327-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Npgsql' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T11:37:58.0951327-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'System.Data.SQLite' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="ProbarGrabacionDelServicioDeFondoFijo" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="f26feba5-8093-bdd3-a6bd-bc6b1c95143f">
+      <Execution id="9da38cf9-719d-4a45-b8dd-bc33d275bab9" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ProbarGrabacionDelServicioDeFondoFijo" />
+    </UnitTest>
+    <UnitTest name="BatchUpdateFFTest" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="ffd6932d-a77e-2fda-0062-7abf6b407de2">
+      <Execution id="814de711-e23d-47fd-9ea8-0fc04d132c91" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BatchUpdateFFTest" />
+    </UnitTest>
+    <UnitTest name="IndexMoq" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f">
+      <Execution id="73afd7ee-d3d0-48a4-b1eb-6315033e2742" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IndexMoq" />
+    </UnitTest>
+    <UnitTest name="EditMoq" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="e82c6de4-a4c6-f8d8-2a11-223807a9f52d">
+      <Execution id="68d05ef0-736a-4f8b-bbc3-40c592056010" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EditMoq" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="f26feba5-8093-bdd3-a6bd-bc6b1c95143f" executionId="9da38cf9-719d-4a45-b8dd-bc33d275bab9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffd6932d-a77e-2fda-0062-7abf6b407de2" executionId="814de711-e23d-47fd-9ea8-0fc04d132c91" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f" executionId="73afd7ee-d3d0-48a4-b1eb-6315033e2742" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e82c6de4-a4c6-f8d8-2a11-223807a9f52d" executionId="68d05ef0-736a-4f8b-bbc3-40c592056010" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="9da38cf9-719d-4a45-b8dd-bc33d275bab9" testId="f26feba5-8093-bdd3-a6bd-bc6b1c95143f" testName="ProbarGrabacionDelServicioDeFondoFijo" computerName="MARIANO-PC" duration="00:00:09.0557553" startTime="2014-10-14T11:37:58.9141533-03:00" endTime="2014-10-14T11:38:08.8824035-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9da38cf9-719d-4a45-b8dd-bc33d275bab9">
+    </UnitTestResult>
+    <UnitTestResult executionId="814de711-e23d-47fd-9ea8-0fc04d132c91" testId="ffd6932d-a77e-2fda-0062-7abf6b407de2" testName="BatchUpdateFFTest" computerName="MARIANO-PC" duration="00:03:07.8400337" startTime="2014-10-14T11:38:08.8954038-03:00" endTime="2014-10-14T11:41:17.2301309-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Inconclusive" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="814de711-e23d-47fd-9ea8-0fc04d132c91">
+      <Output>
+        <StdOut>System.Object[]</StdOut>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive failed. System.Object[]</Message>
+          <StackTrace>   at CallSite.Target(Closure , CallSite , Type , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid2[T0,T1](CallSite site, T0 arg0, T1 arg1)
+   at ProntoMVC.Tests.FondoFijoControllerTest.BatchUpdateFFTest() in C:\Backup\BDL\ProntoMVC\TestProject2\NuevosTests.cs:line 119
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="73afd7ee-d3d0-48a4-b1eb-6315033e2742" testId="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f" testName="IndexMoq" computerName="MARIANO-PC" duration="00:00:00.0352263" startTime="2014-10-14T11:41:17.2451312-03:00" endTime="2014-10-14T11:41:17.2871323-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73afd7ee-d3d0-48a4-b1eb-6315033e2742">
+    </UnitTestResult>
+    <UnitTestResult executionId="68d05ef0-736a-4f8b-bbc3-40c592056010" testId="e82c6de4-a4c6-f8d8-2a11-223807a9f52d" testName="EditMoq" computerName="MARIANO-PC" duration="00:00:02.5598421" startTime="2014-10-14T11:41:17.3411337-03:00" endTime="2014-10-14T11:41:19.9141982-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68d05ef0-736a-4f8b-bbc3-40c592056010">
+    </UnitTestResult>
+  </Results>
+</TestRun>

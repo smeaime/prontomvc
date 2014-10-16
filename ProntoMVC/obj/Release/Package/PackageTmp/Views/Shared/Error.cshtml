@@ -1,0 +1,120 @@
+﻿@*el que maneja esto es el ErrorController.cs
+ojo con la confusion de la vista Error.cshtml en el \Shared\ y la que esta en \ErrorPages\
+*@ @*cómo hacer para no usar el layout acá?*@
+@{
+    Layout = null;
+}
+@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Disculpame.";
+}
+@{
+    
+    
+    
+    try
+    {
+
+        
+@*<div class="accordion-inner" style="border: 0px; padding: 0px;">
+                    <p>
+                        Controller = @Model.ControllerName</p>
+                    <p>
+                        Action = @Model.ActionName</p>
+                    <p>
+                        Message = @Model.Exception.Message</p>
+                    <p>
+                        StackTrace :</p>
+                    <pre>@Model.Exception.StackTrace</pre>
+                </div>*@
+
+    
+        
+        
+        string ErrorMail = "mscalella911@gmail.com", SmtpUser = "ProntoWebMail@gmail.com", SmtpServer = "smtp.gmail.com", SmtpPass = "50TriplesdJQ";
+        long SmtpPort = 587;
+
+        string body = Model.Exception.StackTrace;
+
+
+        ProntoFuncionesGenerales.MandaEmailSimple(ErrorMail,
+                            "Error.cshtml",
+                        body,
+                        SmtpUser,
+                        SmtpServer,
+                        SmtpUser,
+                        SmtpPass,
+                          "",
+                       SmtpPort);
+
+    }
+
+    catch (Exception e)
+    {
+        try
+        {
+            ErrHandler.WriteError(e);
+
+        }
+        catch (Exception)
+        {
+
+
+        }
+        //throw;
+    }
+
+
+    
+    
+}
+@if (@Model.Exception.Message.Contains("Permisos"))
+{
+    <br />
+    <br />
+    <br />
+    <center>
+        <strong>Te faltan permisos </strong>
+        <br />
+        <br />
+        <p>
+            @Model.Exception.Message
+        </p>
+    </center>
+}
+else
+{
+    <center>
+        <img src="@Url.Content("~/Content/images/logosolo.gif")" alt="" style="text-align: left; width: 100px;" />
+        <strong>Disculpame. Tuve un problema </strong>
+        <p>
+            Le mandé un mail con detalles al Administrador. Por favor, comunicate con él.</p>
+        Sugerencias: volver a intentar de o Volver a lo que estaba haciendo
+    </center>
+    
+
+    <div class="accordion" id="accordion4">
+        <div class="accordion-group" style="border: 0px; padding: 0px;">
+            <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseAdicionales"
+                    style="border: 0px; padding: 0px;">ver detalles... </a>
+            </div>
+            <div id="collapseAdicionales" class="accordion-body collapse" style="border: 0px;
+                padding: 0px;">
+                @*si pones "collapse in" empieza abierto*@
+                <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                    <p>
+                        Controller = @Model.ControllerName</p>
+                    <p>
+                        Action = @Model.ActionName</p>
+                    <p>
+                        Message = @Model.Exception.Message</p>
+                    <p>
+                        StackTrace :</p>
+                    <pre>@Model.Exception.StackTrace</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+}

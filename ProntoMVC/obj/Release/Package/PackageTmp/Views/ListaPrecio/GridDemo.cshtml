@@ -1,0 +1,28 @@
+﻿@*@model JQGridMVCExamples.Models.OrdersJqGridModel
+@using  Trirand.Web.Mvc
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="container-fluid">
+        @Html.Trirand().JQGrid(Model.OrdersGrid, "JQGrid1")
+        @Html.ValidationSummary(true)
+        <form class="form-horizontal">
+        <legend>Lista de precios</legend>
+        </form>
+        <div class="row-fluid">
+            <div class="span2">
+                <!--Sidebar content-->
+            </div>
+            <div class="span10">
+                <!--Body content-->
+            </div>
+        </div>
+    </div>  
+    
+  
+}
+*@

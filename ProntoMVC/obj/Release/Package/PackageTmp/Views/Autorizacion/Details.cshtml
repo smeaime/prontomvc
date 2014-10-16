@@ -1,0 +1,92 @@
+﻿@model ProntoMVC.Models.Requerimiento
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Requerimiento</legend>
+
+    @Html.HiddenFor(model => model.IdRequerimiento)
+
+    <div class="display-label">NumeroRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NumeroRequerimiento)
+    </div>
+
+    <div class="display-label">FechaRequerimiento</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaRequerimiento)
+    </div>
+
+    <div class="display-label">Obra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Obra.NumeroObra)
+    </div>
+
+    <div class="display-label">Empleados1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Empleados1.Nombre)
+    </div>
+
+    <div class="display-label">Sectores</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sectores.Descripcion)
+    </div>
+
+    <div class="display-label">Empleados</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Empleados.Nombre)
+    </div>
+
+    <div class="display-label">Detalle</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detalle)
+    </div>
+
+    <br />
+      <table class="tbl" id="tbl">
+       <thead>
+       <tr>
+       <th>Item</th> 
+       <th>Cant.</th>
+       <th>Un.</th>
+       <th>Cod.</th>
+       <th>Material</th>
+       </tr>
+       </thead>
+       
+       <tbody>
+       @if (Model != null)
+       {
+           foreach (var item in Model.DetalleRequerimientos)
+           { 
+           <tr>
+           <td>
+           @Html.DisplayTextFor(i => item.NumeroItem)
+           </td>
+           <td>
+           @Html.DisplayTextFor(i => item.Cantidad)
+           </td>
+           <td>
+           @Html.DisplayTextFor(i => item.Unidad.Abreviatura)
+           </td>
+           <td>
+           @Html.DisplayTextFor(i => item.Articulo.Codigo)
+           </td>
+           <td>
+           @Html.DisplayTextFor(i => item.Articulo.Descripcion)
+           </td>
+           </tr>
+           }
+       }
+       </tbody>
+      </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdRequerimiento }) |
+    @Html.ActionLink("Volver al listado", "Index")
+</p>

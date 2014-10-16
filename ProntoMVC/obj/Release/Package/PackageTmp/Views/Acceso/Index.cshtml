@@ -1,0 +1,151 @@
+﻿@model IEnumerable<ProntoMVC.Models.Articulo>
+@{
+    ViewBag.Title = "Artículos";
+}
+@*<h2>Index</h2>*@
+<div class="container-fluid">
+    <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary"  >
+        Nuevo Artículo
+    </button>
+    Elegir usuario Modo Superadmin
+    <div class="row-fluid">
+        <div class="span4 lightblue">
+            @*                // verificar que pongo el cuarto parametro de SelectList que elige el item del combo *@
+            @* @Html.LabelFor(model => model.IdRubro, "Rubro")*@
+            @Html.DropDownList("IdEmpleado", null, "", new { @class = "span12" })
+            @*          @Html.ValidationMessageFor(model => model.IdRubro)*@
+            <script>
+                $(function () {
+                    $('#IdRubro').change(function () {
+                        //ActualizarPuntoVenta();
+                        RefrescarM();
+                    });
+
+                });
+
+            </script>
+        </div>
+        <br />
+        <br />
+        @*<p>@Html.ActionLink("Create New", "Create")</p>
+*@
+        <table id="ArticulosList" class="scroll" cellpadding="0" cellspacing="0">
+        </table>
+        <div id="ArticulosPager" class="scroll" style="text-align: center;">
+        </div>
+
+
+
+        
+
+
+        <script type="text/javascript">
+            $().ready(function () {
+
+
+
+
+                $("#ArticulosList").jqGrid({
+                    url: '@Url.Action("AccesosGridData", "Acceso")',
+                    //url: './Articulo/ArticulosGridDataSP/',
+                    datatype: 'json',
+                    mtype: 'POST',
+                    cellEdit: true,
+                    cellurl: '@Url.Action("UpdateArticuloProperty")',
+                    colNames: ['', '', 'Codigo', 'Descripcion'
+
+            , 'Rubro'
+
+            , 'Subrubro'
+            , 'Nro.inv.'
+            , '% IVA'
+            , 'Costo PPP'
+            , 'Costo PPP u$s'
+            , 'Costo Rep.'
+            , 'Costo Rep u$s'
+            , 'Stock Min.'
+            , 'Stock Rep.'
+            , 'Stock actual'
+            , 'En'
+            , 'Ubicacion'
+            , 'Fecha alta'
+            , 'Usuario alta'
+            , 'Fecha ult.modif.'
+            , 'p/mant.'
+              , 'NMC'
+
+
+            ],
+                    colModel: [
+            { name: 'Edit', index: 'Edit', width: 80, align: 'left', sortable: false, search: false },
+            { name: 'Delete', index: 'Delete', width: 80, align: 'left', sortable: false, search: false },
+            { name: 'Codigo', index: 'Codigo', width: 300, align: 'left', search: true, stype: 'text' },
+            { name: 'Descripcion', index: 'Descripcion', width: 600, align: 'left', search: true, stype: 'text', editable: true, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true} },
+            { name: 'Unidad', index: 'Unidad', width: 200, align: 'left', search: true, editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true} },
+
+
+            { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+
+            { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+
+            { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+
+            { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' },
+    { name: '', index: '', width: 300, align: 'left', search: true, stype: 'text' }
+
+            ],
+                    pager: $('#ArticulosPager'),
+                    rowNum: 20,
+                    rowList: [10, 20, 50],
+                    sortname: 'IdArticulo',
+                    sortorder: "desc",
+                    viewrecords: true,
+                    height: '100%',
+                    emptyrecords: 'No hay registros para mostrar',
+                    caption: 'Articulos',
+
+
+                    width: 'auto',
+                    altRows: false,
+                    footerrow: true,
+                    userDataOnFooter: true,
+                    //imgpath: '/content/cupertino/images',
+                    //loadonce: true,
+                    autowidth: true
+
+                })
+        .navGrid("#ArticulosPager",
+            { refresh: true, add: false, edit: false, del: false },
+                {}, // settings for edit
+                {}, // settings for add
+                {}, // settings for delete
+                {closeAfterSearch: true, closeOnEscape: true },
+                { sopt: ["cn"]} // Search options. Some options can be set on column level
+         );
+
+
+
+
+
+
+                jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+                jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+            }); 
+        </script>
+    </div>
