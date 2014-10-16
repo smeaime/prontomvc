@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="Equimac">
+      <rd:DataSourceID>f89ea338-c6c0-4c1b-ab1a-d12dbc758dae</rd:DataSourceID>
+      <DataSourceReference>Equimac</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <rd:ReportID>280817a2-38ed-4c38-8dc8-590b0856bb64</rd:ReportID>
+  <Width>5in</Width>
+  <Body>
+    <Height>0.78in</Height>
+    <ColumnSpacing>0.5in</ColumnSpacing>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Style>
+          <FontFamily>Tahoma</FontFamily>
+          <FontSize>20pt</FontSize>
+          <Color>SteelBlue</Color>
+          <FontWeight>Bold</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Value>Obras</Value>
+        <CanGrow>true</CanGrow>
+        <Height>0.36in</Height>
+      </Textbox>
+      <Matrix Name="matrix1">
+        <Top>0.36in</Top>
+        <RowGroupings>
+          <RowGrouping>
+            <DynamicRows>
+              <Grouping Name="matrix1_Obra">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Obra.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=Fields!Obra.Value</SortExpression>
+                </SortBy>
+              </Sorting>
+              <ReportItems>
+                <Textbox Name="Obra">
+                  <Style>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>10pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>White</Color>
+                    <BackgroundColor>#6e9eca</BackgroundColor>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                  <rd:DefaultName>Obra</rd:DefaultName>
+                  <Value>=Fields!Obra.Value</Value>
+                  <CanGrow>true</CanGrow>
+                  <Height>0.21in</Height>
+                  <Width>1in</Width>
+                </Textbox>
+              </ReportItems>
+            </DynamicRows>
+            <Width>1in</Width>
+          </RowGrouping>
+          <RowGrouping>
+            <DynamicRows>
+              <Grouping Name="matrix1_Detalle">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Detalle.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=Fields!Detalle.Value</SortExpression>
+                </SortBy>
+              </Sorting>
+              <ReportItems>
+                <Textbox Name="Detalle">
+                  <Style>
+                    <Color>White</Color>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>10pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <BackgroundColor>SlateGray</BackgroundColor>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                  <rd:DefaultName>Detalle</rd:DefaultName>
+                  <Value>=Fields!Detalle.Value</Value>
+                  <CanGrow>true</CanGrow>
+                  <Height>0.21in</Height>
+                  <Width>1in</Width>
+                </Textbox>
+              </ReportItems>
+            </DynamicRows>
+            <Width>1in</Width>
+          </RowGrouping>
+        </RowGroupings>
+        <MatrixRows>
+          <MatrixRow>
+            <MatrixCells>
+              <MatrixCell>
+                <ReportItems>
+                  <Textbox Name="textbox2">
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>10pt</FontSize>
+                      <BorderStyle>
+                        <Default>Solid</Default>
+                      </BorderStyle>
+                      <BorderColor>
+                        <Default>LightGrey</Default>
+                      </BorderColor>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                      <PaddingBottom>2pt</PaddingBottom>
+                    </Style>
+                    <rd:DefaultName>textbox2</rd:DefaultName>
+                    <Value>=Sum(Fields!Importe.Value)</Value>
+                    <CanGrow>true</CanGrow>
+                    <Height>0.21in</Height>
+                    <Width>1in</Width>
+                  </Textbox>
+                </ReportItems>
+              </MatrixCell>
+            </MatrixCells>
+            <Height>0.21in</Height>
+          </MatrixRow>
+        </MatrixRows>
+        <Corner>
+          <ReportItems>
+            <Textbox Name="textbox3">
+              <Style>
+                <FontFamily>Tahoma</FontFamily>
+                <FontSize>10pt</FontSize>
+                <BorderStyle>
+                  <Default>Solid</Default>
+                </BorderStyle>
+                <BorderColor>
+                  <Default>LightGrey</Default>
+                </BorderColor>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+              <rd:DefaultName>textbox3</rd:DefaultName>
+              <Value>
+              </Value>
+              <CanGrow>true</CanGrow>
+              <Height>0.21in</Height>
+            </Textbox>
+          </ReportItems>
+        </Corner>
+        <DataSetName>DataSet1</DataSetName>
+        <MatrixColumns>
+          <MatrixColumn>
+            <Width>1in</Width>
+          </MatrixColumn>
+        </MatrixColumns>
+        <ColumnGroupings>
+          <ColumnGrouping>
+            <DynamicColumns>
+              <Grouping Name="matrix1_Tipo">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Tipo.Value</GroupExpression>
+                </GroupExpressions>
+              </Grouping>
+              <Sorting>
+                <SortBy>
+                  <SortExpression>=Fields!Tipo.Value</SortExpression>
+                </SortBy>
+              </Sorting>
+              <ReportItems>
+                <Textbox Name="Tipo">
+                  <Style>
+                    <FontFamily>Tahoma</FontFamily>
+                    <FontSize>10pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>White</Color>
+                    <BackgroundColor>#6e9eca</BackgroundColor>
+                    <BorderStyle>
+                      <Default>Solid</Default>
+                    </BorderStyle>
+                    <BorderColor>
+                      <Default>LightGrey</Default>
+                    </BorderColor>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                  <rd:DefaultName>Tipo</rd:DefaultName>
+                  <Value>=Fields!Tipo.Value</Value>
+                  <CanGrow>true</CanGrow>
+                  <Height>0.21in</Height>
+                  <Width>1in</Width>
+                </Textbox>
+              </ReportItems>
+            </DynamicColumns>
+            <Height>0.21in</Height>
+          </ColumnGrouping>
+        </ColumnGroupings>
+      </Matrix>
+    </ReportItems>
+  </Body>
+  <Language>es-ES</Language>
+  <LeftMargin>1in</LeftMargin>
+  <RightMargin>1in</RightMargin>
+  <TopMargin>1in</TopMargin>
+  <BottomMargin>1in</BottomMargin>
+  <PageWidth>8.5in</PageWidth>
+  <PageHeight>11in</PageHeight>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Fields>
+        <Field Name="Tipo">
+          <DataField>Tipo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UnidadOperativa">
+          <DataField>UnidadOperativa</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Obra">
+          <DataField>Obra</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RubroContable">
+          <DataField>RubroContable</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Detalle">
+          <DataField>Detalle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Importe">
+          <DataField>Importe</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Grupo">
+          <DataField>Grupo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Entidad">
+          <DataField>Entidad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IdObra">
+          <DataField>IdObra</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>Equimac</DataSourceName>
+        <CommandType>Text</CommandType>
+        <CommandText>SET NOCOUNT ON
+
+DECLARE @IdRubroAnticipos int, @IdRubroDevolucionAnticipos int, @ModeloContableSinApertura varchar(2), @Modelo varchar(2), 
+	@IdTipoComprobanteFacturaVenta int, @IdTipoComprobanteDevoluciones int, @IdTipoComprobanteNotaDebito int, 
+	@IdTipoComprobanteNotaCredito int, @IdTipoComprobanteRecibo int, @IdTipoComprobanteOrdenPago int
+
+SET @IdRubroAnticipos=IsNull((Select Top 1 Valor From Parametros2 Where Campo='IdRubroAnticipos'),-1)
+SET @IdRubroDevolucionAnticipos=IsNull((Select Top 1 Valor From Parametros2 Where Campo='IdRubroDevolucionAnticipos'),-1)
+SET @ModeloContableSinApertura=IsNull((Select Top 1 Valor From Parametros2 Where Campo='ModeloContableSinApertura'),'NO')
+SET @IdTipoComprobanteFacturaVenta=(Select Top 1 IdTipoComprobanteFacturaVenta From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteDevoluciones=(Select Top 1 IdTipoComprobanteDevoluciones From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteNotaDebito=(Select Top 1 IdTipoComprobanteNotaDebito From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteNotaCredito=(Select Top 1 IdTipoComprobanteNotaCredito From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteRecibo=(Select Top 1 IdTipoComprobanteRecibo From Parametros Where IdParametro=1)
+SET @IdTipoComprobanteOrdenPago=(Select Top 1 IdTipoComprobanteOrdenPago From Parametros Where IdParametro=1)
+SET @Modelo=Isnull((Select Top 1 ProntoIni.Valor From ProntoIni 
+				Left Outer Join ProntoIniClaves pic On pic.IdProntoIniClave=ProntoIni.IdProntoIniClave
+				Where pic.Clave='Modelo informe cubo de ingresos y egresos por obra'),'01')
+
+CREATE TABLE #Auxiliar0	
+			(
+			 Tipo VARCHAR(30),
+			 UnidadOperativa VARCHAR(50),
+			 Obra VARCHAR(100),
+			 RubroContable VARCHAR(50),
+			 Detalle VARCHAR(1000),
+			 Importe NUMERIC(18,2),
+			 Grupo VARCHAR(50),
+			 Entidad VARCHAR(50),
+			 IdObra INTEGER
+			)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',
+  Substring('['+Convert(varchar,Facturas.FechaFactura,112)+'] '+Convert(varchar,Facturas.FechaFactura,103)+' '+'FAC '+Facturas.TipoABC+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,Facturas.PuntoVenta)))+Convert(varchar,Facturas.PuntoVenta)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,Facturas.NumeroFactura)))+Convert(varchar,Facturas.NumeroFactura)+' - '+
+	'Cliente : '+IsNull(Clientes.RazonSocial,''),1,100),
+  Case When Facturas.CotizacionMoneda is not null 
+	Then 	Case When Facturas.TipoABC='B' 
+			Then ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) / (1+(Facturas.PorcentajeIva1/100)) * Facturas.CotizacionMoneda
+			Else ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) * Facturas.CotizacionMoneda
+		End
+	Else 	Case When Facturas.TipoABC='B' 
+			Then ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) / (1+(Facturas.PorcentajeIva1/100))
+			Else ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100)))
+		End
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'), 
+  IsNull(Clientes.RazonSocial,''),
+  Obras.IdObra
+ FROM DetalleFacturasOrdenesCompra dfoc
+ LEFT OUTER JOIN DetalleOrdenesCompra doc ON doc.IdDetalleOrdenCompra = dfoc.IdDetalleOrdenCompra
+ LEFT OUTER JOIN OrdenesCompra ON doc.IdOrdenCompra = OrdenesCompra.IdOrdenCompra
+ LEFT OUTER JOIN DetalleFacturas df ON df.IdDetalleFactura = dfoc.IdDetalleFactura
+ LEFT OUTER JOIN Facturas ON dfoc.IdFactura = Facturas.IdFactura
+ LEFT OUTER JOIN Clientes ON Facturas.IdCliente = Clientes.IdCliente
+ LEFT OUTER JOIN Obras ON IsNull(OrdenesCompra.IdObra,Facturas.IdObra) = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ LEFT OUTER JOIN Articulos ON df.IdArticulo = Articulos.IdArticulo
+ WHERE (Facturas.FechaFactura between @FechaDesde and @FechaHasta) and 
+	IsNull(Facturas.Anulada,'NO')&lt;&gt;'SI' and IsNull(Facturas.NoIncluirEnCubos,'NO')&lt;&gt;'SI' and 
+	(@IdObra=-1 or IsNull(OrdenesCompra.IdObra,0)=@IdObra or IsNull(Facturas.IdObra,0)=@IdObra) and 
+	(@IdRubroAnticipos=-1 or not Articulos.IdRubro=@IdRubroAnticipos) and 
+	(@IdRubroDevolucionAnticipos=-1 or not Articulos.IdRubro=@IdRubroDevolucionAnticipos)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',
+  Substring('['+Convert(varchar,Facturas.FechaFactura,112)+'] '+Convert(varchar,Facturas.FechaFactura,103)+' '+'FAC '+Facturas.TipoABC+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,Facturas.PuntoVenta)))+Convert(varchar,Facturas.PuntoVenta)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,Facturas.NumeroFactura)))+Convert(varchar,Facturas.NumeroFactura)+' - '+
+	'Cliente : '+IsNull(Clientes.RazonSocial,''),1,100),
+  Case When Facturas.CotizacionMoneda is not null 
+	Then 	Case When Facturas.TipoABC='B' 
+			Then ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) / (1+(Facturas.PorcentajeIva1/100)) * Facturas.CotizacionMoneda
+			Else ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) * Facturas.CotizacionMoneda
+		End
+	Else	Case When Facturas.TipoABC='B' 
+			Then ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100))) / (1+(Facturas.PorcentajeIva1/100))
+			Else ((df.Cantidad*df.PrecioUnitario)*(1-(df.Bonificacion/100)))
+		End
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'), 
+  IsNull(Clientes.RazonSocial,''),
+  Obras.IdObra
+ FROM DetalleFacturas df
+ LEFT OUTER JOIN Facturas ON df.IdFactura = Facturas.IdFactura
+ LEFT OUTER JOIN Clientes ON Facturas.IdCliente = Clientes.IdCliente
+ LEFT OUTER JOIN Obras ON Facturas.IdObra = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ LEFT OUTER JOIN Articulos ON df.IdArticulo = Articulos.IdArticulo
+ WHERE (Facturas.FechaFactura between @FechaDesde and @FechaHasta) and 
+	IsNull(Facturas.Anulada,'NO')&lt;&gt;'SI' and IsNull(Facturas.NoIncluirEnCubos,'NO')&lt;&gt;'SI' and 
+	Facturas.IdObra is not null and 
+	(@IdObra=-1 or IsNull(Facturas.IdObra,0)=@IdObra) and 
+	not exists(Select Top 1 dfoc.IdDetalleFactura From DetalleFacturasOrdenesCompra dfoc Where dfoc.IdDetalleFactura=df.IdDetalleFactura) and 
+	(@IdRubroAnticipos=-1 or not Articulos.IdRubro=@IdRubroAnticipos) and 
+	(@IdRubroDevolucionAnticipos=-1 or not Articulos.IdRubro=@IdRubroDevolucionAnticipos)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',  
+  Substring('['+Convert(varchar,Devoluciones.FechaDevolucion,112)+'] '+Convert(varchar,Devoluciones.FechaDevolucion,103)+' '+'DEV '+Devoluciones.TipoABC+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,Devoluciones.PuntoVenta)))+Convert(varchar,Devoluciones.PuntoVenta)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,Devoluciones.NumeroDevolucion)))+Convert(varchar,Devoluciones.NumeroDevolucion)+' - '+
+	'Cliente : '+IsNull(Clientes.RazonSocial,''),1,100),
+  Case When Devoluciones.CotizacionMoneda is not null
+	Then 	Case When Devoluciones.TipoABC='B' 
+			Then ((dv.Cantidad*dv.PrecioUnitario)*(1-(dv.Bonificacion/100))) / (1+(Devoluciones.PorcentajeIva1/100)) * Devoluciones.CotizacionMoneda * -1
+			Else ((dv.Cantidad*dv.PrecioUnitario)*(1-(dv.Bonificacion/100))) * Devoluciones.CotizacionMoneda * -1
+		End
+	Else 	Case When Devoluciones.TipoABC='B' 
+			Then ((dv.Cantidad*dv.PrecioUnitario)*(1-(dv.Bonificacion/100))) / (1+(Devoluciones.PorcentajeIva1/100)) * -1
+			Else ((dv.Cantidad*dv.PrecioUnitario)*(1-(dv.Bonificacion/100))) * -1
+		End
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'),
+  IsNull(Clientes.RazonSocial,''),
+  Obras.IdObra
+ FROM DetalleDevoluciones dv
+ LEFT OUTER JOIN Devoluciones ON dv.IdDevolucion = Devoluciones.IdDevolucion
+ LEFT OUTER JOIN Clientes ON Devoluciones.IdCliente = Clientes.IdCliente
+ LEFT OUTER JOIN Obras ON dv.IdObra = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ LEFT OUTER JOIN Articulos ON dv.IdArticulo = Articulos.IdArticulo
+ WHERE (Devoluciones.FechaDevolucion between @FechaDesde and @FechaHasta) and 
+	(Devoluciones.Anulada is null or Devoluciones.Anulada&lt;&gt;'SI') and 
+	(@IdObra=-1 or IsNull(dv.IdObra,0)=@IdObra or IsNull(Devoluciones.IdObra,0)=@IdObra) and 
+	(@IdRubroAnticipos=-1 or not Articulos.IdRubro=@IdRubroAnticipos) and 
+	(@IdRubroDevolucionAnticipos=-1 or not Articulos.IdRubro=@IdRubroDevolucionAnticipos)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',
+  Substring('['+Convert(varchar,NotasDebito.FechaNotaDebito,112)+'] '+Convert(varchar,NotasDebito.FechaNotaDebito,103)+' '+'DEB '+NotasDebito.TipoABC+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,NotasDebito.PuntoVenta)))+Convert(varchar,NotasDebito.PuntoVenta)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,NotasDebito.NumeroNotaDebito)))+Convert(varchar,NotasDebito.NumeroNotaDebito)+' - '+
+	'Cliente : '+IsNull(Clientes.RazonSocial,''),1,100),
+  Case When NotasDebito.TipoABC='B' 
+	Then ((IsNull((Select Sum(DetND.Importe) From DetalleNotasDebito DetND Where DetND.IdNotaDebito=NotasDebito.IdNotaDebito and DetND.Gravado='SI'),0) / 
+		  (1+(NotasDebito.PorcentajeIva1/100))) + IsNull((Select Sum(DetND.Importe) From DetalleNotasDebito DetND Where DetND.IdNotaDebito=NotasDebito.IdNotaDebito and DetND.Gravado&lt;&gt;'SI'),0)) * 
+		IsNull(NotasDebito.CotizacionMoneda,1)
+	Else IsNull((Select Sum(DetND.Importe) From DetalleNotasDebito DetND Where DetND.IdNotaDebito=NotasDebito.IdNotaDebito),0) * IsNull(NotasDebito.CotizacionMoneda,1)
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'),
+  IsNull(Clientes.RazonSocial,''),
+  Obras.IdObra
+ FROM NotasDebito
+ LEFT OUTER JOIN Clientes ON NotasDebito.IdCliente = Clientes.IdCliente
+ LEFT OUTER JOIN Obras ON NotasDebito.IdObra = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (NotasDebito.FechaNotaDebito between @FechaDesde and @FechaHasta) and 
+	IsNull(NotasDebito.Anulada,'NO')&lt;&gt;'SI' and IsNull(NotasDebito.CtaCte,'SI')='SI' and 
+	IsNull(NotasDebito.NoIncluirEnCubos,'NO')&lt;&gt;'SI' and 
+	(@IdObra=-1 or IsNull(NotasDebito.IdObra,0)=@IdObra)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',
+  Substring('['+Convert(varchar,NotasCredito.FechaNotaCredito,112)+'] '+Convert(varchar,NotasCredito.FechaNotaCredito,103)+' '+'CRE '+NotasCredito.TipoABC+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,NotasCredito.PuntoVenta)))+Convert(varchar,NotasCredito.PuntoVenta)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,NotasCredito.NumeroNotaCredito)))+Convert(varchar,NotasCredito.NumeroNotaCredito)+' - '+
+	'Cliente : '+IsNull(Clientes.RazonSocial,''),1,100),
+  Case When NotasCredito.TipoABC='B' 
+	Then ((IsNull((Select Sum(DetNC.Importe) From DetalleNotasCredito DetNC Where DetNC.IdNotaCredito=NotasCredito.IdNotaCredito and DetNC.Gravado='SI'),0) / 
+		  (1+(NotasCredito.PorcentajeIva1/100))) + IsNull((Select Sum(DetNC.Importe) From DetalleNotasCredito DetNC Where DetNC.IdNotaCredito=NotasCredito.IdNotaCredito and DetNC.Gravado&lt;&gt;'SI'),0)) * 
+		IsNull(NotasCredito.CotizacionMoneda,1) * -1
+	Else IsNull((Select Sum(DetNC.Importe) From DetalleNotasCredito DetNC Where DetNC.IdNotaCredito=NotasCredito.IdNotaCredito),0) * IsNull(NotasCredito.CotizacionMoneda,1) * -1
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'),
+  IsNull(Clientes.RazonSocial,''),
+  Obras.IdObra
+ FROM NotasCredito
+ LEFT OUTER JOIN Clientes ON NotasCredito.IdCliente = Clientes.IdCliente
+ LEFT OUTER JOIN Obras ON NotasCredito.IdObra = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (NotasCredito.FechaNotaCredito between @FechaDesde and @FechaHasta) and 
+	IsNull(NotasCredito.Anulada,'NO')&lt;&gt;'SI' and IsNull(NotasCredito.CtaCte,'SI')='SI' and 
+	IsNull(NotasCredito.NoIncluirEnCubos,'NO')&lt;&gt;'SI' and 
+	(@IdObra=-1 or IsNull(NotasCredito.IdObra,0)=@IdObra)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '1.INGRESOS',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  'VENTAS',
+  Substring('['+Convert(varchar,Asientos.FechaAsiento,112)+'] '+Convert(varchar,Asientos.FechaAsiento,103)+' AS '+
+	Substring('00000000',1,8-Len(Convert(varchar,Asientos.NumeroAsiento)))+Convert(varchar,Asientos.NumeroAsiento)+' '+IsNull(Asientos.Concepto,''),1,100),
+  Case 	When DetAsi.Debe is not null and DetAsi.Haber is null Then DetAsi.Debe * -1
+	When DetAsi.Debe is null and DetAsi.Haber is not null Then DetAsi.Haber
+	When DetAsi.Debe is not null and DetAsi.Haber is not null Then (DetAsi.Debe - DetAsi.Haber) * -1
+	Else 0
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'),
+  '',
+  Obras.IdObra
+ FROM DetalleAsientos DetAsi 
+ LEFT OUTER JOIN Asientos ON DetAsi.IdAsiento=Asientos.IdAsiento
+ LEFT OUTER JOIN Cuentas ON DetAsi.IdCuenta=Cuentas.IdCuenta
+ LEFT OUTER JOIN CuentasGastos ON CuentasGastos.IdCuentaGasto=Cuentas.IdCuentaGasto
+ LEFT OUTER JOIN RubrosContables ON RubrosContables.IdRubroContable=CuentasGastos.IdRubroContable
+ LEFT OUTER JOIN Obras ON IsNull(DetAsi.IdObra,Cuentas.IdObra) = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (Asientos.FechaAsiento between @FechaDesde and @FechaHasta) and 
+	Asientos.IdCuentaSubdiario is null and 
+/*
+	((Cuentas.IdObra Is Not Null and Cuentas.IdCuentaGasto Is Not Null) or 
+	 (Cuentas.IdObra Is Null and Cuentas.IdCuentaGasto Is Null and 
+	  Exists(Select Top 1 CuentasGastos.IdCuentaMadre 
+		 From CuentasGastos
+		 Where CuentasGastos.IdCuentaMadre=DetAsi.IdCuenta))) and 
+*/
+	(@IdObra=-1 or IsNull(DetAsi.IdObra,0)=@IdObra or IsNull(Cuentas.IdObra,0)=@IdObra) and 
+	Substring(IsNull(Cuentas.Jerarquia,''),1,1)='4' and 
+	Substring(IsNull(Asientos.Tipo,''),1,3)&lt;&gt;'CIE' and Substring(IsNull(Asientos.Tipo,''),1,3)&lt;&gt;'APE'
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '2.EGRESOS ( Gastos )',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  Case When RubrosContables.Descripcion is not null 
+	Then RubrosContables.Descripcion COLLATE Modern_Spanish_CI_AS
+	Else Cuentas.Descripcion COLLATE Modern_Spanish_CI_AS
+  End,
+  Substring('['+Convert(varchar,cp.FechaRecepcion,112)+'] '+Convert(varchar,cp.FechaRecepcion,103)+' '+
+	TiposComprobante.DescripcionAb+' '+cp.Letra+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+Convert(varchar,cp.NumeroComprobante1)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2)+' - '+'Proveedor : '+
+	Case When cp.IdProveedor is not null
+		Then IsNull(Proveedores.RazonSocial,'')
+		Else (Select Top 1 IsNull(P.RazonSocial,'') From Proveedores P Where P.IdProveedor=cp.IdProveedorEventual)
+	End,1,100),
+  Case When cp.Letra='A' or cp.Letra='M' 
+	Then DetCP.Importe * cp.CotizacionMoneda * TiposComprobante.Coeficiente * -1
+	Else (DetCP.Importe - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje1,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje2,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje3,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje4,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje5,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje6,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje7,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje8,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje9,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje10,0)/100))))) * 
+		cp.CotizacionMoneda * TiposComprobante.Coeficiente * -1
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'), 
+  Case When cp.IdProveedor is not null
+	Then IsNull(Proveedores.RazonSocial,'')
+	Else (Select Top 1 IsNull(P.RazonSocial,'') From Proveedores P Where P.IdProveedor=cp.IdProveedorEventual)
+  End,
+  Obras.IdObra
+ FROM DetalleComprobantesProveedores DetCP 
+ LEFT OUTER JOIN ComprobantesProveedores cp ON cp.IdComprobanteProveedor=DetCP.IdComprobanteProveedor
+ LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=cp.IdTipoComprobante
+ LEFT OUTER JOIN Proveedores ON Proveedores.IdProveedor=cp.IdProveedor
+ LEFT OUTER JOIN Cuentas ON Cuentas.IdCuenta=DetCP.IdCuenta
+ LEFT OUTER JOIN CuentasGastos ON CuentasGastos.IdCuentaGasto=Cuentas.IdCuentaGasto
+ LEFT OUTER JOIN RubrosContables ON RubrosContables.IdRubroContable=CuentasGastos.IdRubroContable
+ LEFT OUTER JOIN Obras ON IsNull(DetCP.IdObra,Cuentas.IdObra) = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (cp.FechaRecepcion between @FechaDesde and @FechaHasta) and IsNull(cp.Confirmado,'')&lt;&gt;'NO' and 
+	((Cuentas.IdObra Is Not Null and Cuentas.IdCuentaGasto Is Not Null) or 
+	 (@ModeloContableSinApertura='SI' and Substring(IsNull(Cuentas.Jerarquia,''),1,1)='5') or 
+	 (Cuentas.IdObra Is Null and Cuentas.IdCuentaGasto Is Null and Exists(Select Top 1 cg.IdCuentaMadre From CuentasGastos cg Where cg.IdCuentaMadre=DetCP.IdCuenta))) and 
+	(@IdObra=-1 or IsNull(DetCP.IdObra,0)=@IdObra or IsNull(Cuentas.IdObra,0)=@IdObra)
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '2.EGRESOS ( Gastos )',
+  UnidadesOperativas.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  Case When RubrosContables.Descripcion is not null Then RubrosContables.Descripcion Else 'SIN RUBRO' End,
+  Substring('['+Convert(varchar,Subdiarios.FechaComprobante,112)+'] '+Convert(varchar,Subdiarios.FechaComprobante,103)+' '+TiposComprobante.Descripcion+' '+
+		Substring('0000000000',1,10-Len(Convert(varchar,Subdiarios.NumeroComprobante)))+Convert(varchar,Subdiarios.NumeroComprobante),1,100),
+  Case 	When Subdiarios.Debe is not null and Subdiarios.Haber is null Then Subdiarios.Debe * -1
+	When Subdiarios.Debe is null and Subdiarios.Haber is not null Then Subdiarios.Haber
+	When Subdiarios.Debe is not null and Subdiarios.Haber is not null Then (Subdiarios.Debe - Subdiarios.Haber) * -1
+	Else 0
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'),
+  '',
+  Obras.IdObra
+ FROM Subdiarios 
+ LEFT OUTER JOIN Cuentas ON Subdiarios.IdCuenta=Cuentas.IdCuenta
+ LEFT OUTER JOIN TiposComprobante ON Subdiarios.IdTipoComprobante=TiposComprobante.IdTipoComprobante
+ LEFT OUTER JOIN ComprobantesProveedores cp ON cp.IdComprobanteProveedor=Subdiarios.IdComprobante and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteFacturaVenta and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteDevoluciones and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteNotaDebito and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteNotaCredito and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteRecibo and 
+						Subdiarios.IdTipoComprobante&lt;&gt;@IdTipoComprobanteOrdenPago and 
+						IsNull(TiposComprobante.Agrupacion1,' ')='PROVEEDORES'
+ LEFT OUTER JOIN Facturas ON Facturas.IdFactura=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteFacturaVenta
+ LEFT OUTER JOIN Devoluciones ON Devoluciones.IdDevolucion=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteDevoluciones
+ LEFT OUTER JOIN NotasDebito ON NotasDebito.IdNotaDebito=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteNotaDebito
+ LEFT OUTER JOIN NotasCredito ON NotasCredito.IdNotaCredito=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteNotaCredito
+ LEFT OUTER JOIN Recibos ON Recibos.IdRecibo=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteRecibo
+ LEFT OUTER JOIN OrdenesPago ON OrdenesPago.IdOrdenPago=Subdiarios.IdComprobante and Subdiarios.IdTipoComprobante=@IdTipoComprobanteOrdenPago
+ LEFT OUTER JOIN Valores ON Valores.IdValor=Subdiarios.IdComprobante and IsNull(TiposComprobante.Agrupacion1,'')='GASTOSBANCOS'
+ LEFT OUTER JOIN Obras ON Obras.IdObra=IsNull(Cuentas.IdObra,IsNull(Facturas.IdObra,IsNull(Devoluciones.IdObra,IsNull(NotasDebito.IdObra,IsNull(NotasCredito.IdObra,IsNull(Recibos.IdObra,IsNull(OrdenesPago.IdObra,IsNull(Valores.IdObra,0))))))))
+ LEFT OUTER JOIN CuentasGastos ON CuentasGastos.IdCuentaGasto=Cuentas.IdCuentaGasto
+ LEFT OUTER JOIN RubrosContables ON RubrosContables.IdRubroContable=IsNull(CuentasGastos.IdRubroContable,Cuentas.IdRubroContable)
+ LEFT OUTER JOIN UnidadesOperativas ON UnidadesOperativas.IdUnidadOperativa=Obras.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (Subdiarios.FechaComprobante between @FechaDesde and @FechaHasta) and cp.IdComprobanteProveedor is null and 
+	((Cuentas.IdObra Is Not Null and Cuentas.IdCuentaGasto Is Not Null) or 
+	 (@ModeloContableSinApertura='SI' and Substring(IsNull(Cuentas.Jerarquia,''),1,1)='5') or 
+	 (Cuentas.IdObra Is Null and Cuentas.IdCuentaGasto Is Null and Exists(Select Top 1 cg.IdCuentaMadre From CuentasGastos cg Where cg.IdCuentaMadre=Subdiarios.IdCuenta))) and 
+	(@IdObra=-1 or IsNull(Cuentas.IdObra,0)=@IdObra) and Subdiarios.IdTipoComprobante&lt;&gt;50 and 
+	IsNull(TiposComprobante.Agrupacion1,'')&lt;&gt;'VENTAS'
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '2.EGRESOS ( Gastos )',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  Case When RubrosContables.Descripcion is not null Then RubrosContables.Descripcion Else 'SIN RUBRO' End,
+  Substring('['+Convert(varchar,Asientos.FechaAsiento,112)+'] '+Convert(varchar,Asientos.FechaAsiento,103)+' AS '+Substring('00000000',1,8-Len(Convert(varchar,Asientos.NumeroAsiento)))+Convert(varchar,Asientos.NumeroAsiento),1,100),
+  Case 	When DetAsi.Debe is not null and DetAsi.Haber is null Then DetAsi.Debe * -1
+	When DetAsi.Debe is null and DetAsi.Haber is not null Then DetAsi.Haber
+	When DetAsi.Debe is not null and DetAsi.Haber is not null Then (DetAsi.Debe - DetAsi.Haber) * -1
+	Else 0
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'), 
+  '',
+  Obras.IdObra
+ FROM DetalleAsientos DetAsi 
+ LEFT OUTER JOIN Asientos ON DetAsi.IdAsiento=Asientos.IdAsiento
+ LEFT OUTER JOIN Cuentas ON DetAsi.IdCuenta=Cuentas.IdCuenta
+ LEFT OUTER JOIN CuentasGastos ON CuentasGastos.IdCuentaGasto=Cuentas.IdCuentaGasto
+ LEFT OUTER JOIN RubrosContables ON RubrosContables.IdRubroContable=CuentasGastos.IdRubroContable
+ LEFT OUTER JOIN Obras ON IsNull(DetAsi.IdObra,Cuentas.IdObra) = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (Asientos.FechaAsiento between @FechaDesde and @FechaHasta) and 
+	Asientos.IdCuentaSubdiario is null and 
+	((Cuentas.IdObra Is Not Null and Cuentas.IdCuentaGasto Is Not Null) or 
+	 (@ModeloContableSinApertura='SI' and Substring(IsNull(Cuentas.Jerarquia,''),1,1)='5') or 
+	 (Cuentas.IdObra Is Null and Cuentas.IdCuentaGasto Is Null and Exists(Select Top 1 cg.IdCuentaMadre From CuentasGastos cg Where cg.IdCuentaMadre=DetAsi.IdCuenta))) and 
+	(@IdObra=-1 or IsNull(DetAsi.IdObra,0)=@IdObra or IsNull(Cuentas.IdObra,0)=@IdObra) and 
+	Substring(IsNull(Asientos.Tipo,''),1,3)&lt;&gt;'CIE' and Substring(IsNull(Asientos.Tipo,''),1,3)&lt;&gt;'APE'
+
+INSERT INTO #Auxiliar0 
+ SELECT 
+  '3.EGRESOS ( Bienes/Servicios )',
+  uo.Descripcion,
+  IsNull(Obras.NumeroObra,' NO IMPUTABLE'),
+  Case When RubrosContables.Descripcion is not null Then RubrosContables.Descripcion COLLATE Modern_Spanish_CI_AS Else Cuentas.Descripcion COLLATE Modern_Spanish_CI_AS End,
+  Substring('['+Convert(varchar,cp.FechaRecepcion,112)+'] '+Convert(varchar,cp.FechaRecepcion,103)+' '+TiposComprobante.DescripcionAb+' '+cp.Letra+'-'+
+	Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+Convert(varchar,cp.NumeroComprobante1)+'-'+
+	Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2)+' - '+'Proveedor : '+
+	Case When cp.IdProveedor is not null 
+		Then IsNull(Proveedores.RazonSocial,'')
+		Else (Select Top 1 IsNull(P.RazonSocial,'') From Proveedores P Where P.IdProveedor=cp.IdProveedorEventual)
+	End,1,100),
+  Case When cp.Letra='A' or cp.Letra='M' 
+	Then DetCP.Importe * cp.CotizacionMoneda * TiposComprobante.Coeficiente * -1
+	Else (DetCP.Importe - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje1,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje2,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje3,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje4,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje5,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje6,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje7,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje8,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje9,0)/100)))) - 
+		(DetCP.Importe-(DetCP.Importe/(1+(IsNull(DetCP.IVAComprasPorcentaje10,0)/100))))) * 
+		cp.CotizacionMoneda * TiposComprobante.Coeficiente * -1
+  End,
+  IsNull(GruposObras.Descripcion,'S/D'), 
+  Case When cp.IdProveedor is not null 
+	Then IsNull(Proveedores.RazonSocial,'')
+	Else (Select Top 1 IsNull(P.RazonSocial,'') From Proveedores P Where P.IdProveedor=cp.IdProveedorEventual)
+  End,
+  Obras.IdObra
+ FROM DetalleComprobantesProveedores DetCP 
+ LEFT OUTER JOIN ComprobantesProveedores cp ON cp.IdComprobanteProveedor=DetCP.IdComprobanteProveedor
+ LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=cp.IdTipoComprobante
+ LEFT OUTER JOIN Proveedores ON Proveedores.IdProveedor=cp.IdProveedor
+ LEFT OUTER JOIN Cuentas ON Cuentas.IdCuenta=DetCP.IdCuenta
+ LEFT OUTER JOIN CuentasGastos ON CuentasGastos.IdCuentaGasto=Cuentas.IdCuentaGasto
+ LEFT OUTER JOIN RubrosContables ON RubrosContables.IdRubroContable=CuentasGastos.IdRubroContable
+ LEFT OUTER JOIN Obras ON IsNull(DetCP.IdObra,Cuentas.IdObra) = Obras.IdObra
+ LEFT OUTER JOIN UnidadesOperativas uo ON Obras.IdUnidadOperativa = uo.IdUnidadOperativa
+ LEFT OUTER JOIN GruposObras ON Obras.IdGrupoObra = GruposObras.IdGrupoObra
+ WHERE (cp.FechaRecepcion between @FechaDesde and @FechaHasta) and IsNull(cp.Confirmado,'')&lt;&gt;'NO' and 
+	(DetCP.IdObra is not null and Cuentas.IdObra Is Null and Cuentas.IdCuentaGasto Is Null and 
+	 Not Exists(Select Top 1 CuentasGastos.IdCuentaMadre From CuentasGastos Where CuentasGastos.IdCuentaMadre=DetCP.IdCuenta)) and 
+	(@IdObra=-1 or IsNull(DetCP.IdObra,0)=@IdObra or IsNull(Cuentas.IdObra,0)=@IdObra)
+
+
+UPDATE #Auxiliar0
+SET Obra=' NO IMPUTABLE'
+WHERE Obra IS NULL
+
+SET NOCOUNT OFF
+
+SELECT *
+FROM #Auxiliar0
+
+DROP TABLE #Auxiliar0</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+        <QueryParameters>
+          <QueryParameter Name="@FechaDesde">
+            <Value>=Parameters!FechaDesde.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FechaHasta">
+            <Value>=Parameters!FechaHasta.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@IdObra">
+            <Value>=Parameters!IdObra.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <Timeout>0</Timeout>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="FechaDesde">
+      <DataType>String</DataType>
+      <Prompt>Fecha Desde</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaHasta">
+      <DataType>String</DataType>
+      <Prompt>Fecha Hasta</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="IdObra">
+      <DataType>String</DataType>
+      <Prompt>Id Obra</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

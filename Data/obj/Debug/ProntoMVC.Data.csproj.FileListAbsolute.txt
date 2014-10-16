@@ -1,0 +1,9 @@
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\ProntoMVC.Data.dll.config
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\ProntoMVC.Data.dll
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\ProntoMVC.Data.pdb
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\EntityFramework.dll
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\EntityFramework.xml
+C:\Backup\BDL\ProntoMVC\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Backup\BDL\ProntoMVC\Data\obj\Debug\ProntoMVC.Data.dll
+C:\Backup\BDL\ProntoMVC\Data\obj\Debug\ProntoMVC.Data.pdb

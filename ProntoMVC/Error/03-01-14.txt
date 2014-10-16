@@ -1,0 +1,1165 @@
+
+Log Entry : 
+01/03/2014 00:57:23
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 00:57:26
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:06:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 384
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/03/2014 03:07:23
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:07:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:09:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:09:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:14:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:14:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:15:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:15:29
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:17:38
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 03:17:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:01:31
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:01:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:02:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:02:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:02:23
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:02:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:02:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:04
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:38
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:48
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:03:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:04:13
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:04:15
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:04:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:04:48
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:06:36
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:06:42
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:29:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:29:48
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:35:53
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:35:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:36:10
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:36:13
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:37:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:37:10
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:41:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:41:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:42:22
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:42:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:43:12
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:43:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:56:39
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:56:45
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:57:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:57:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:57:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:58:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:58:08
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 09:58:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:00:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18244. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:00:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:02:21
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18258. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:02:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:02:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18258. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:02:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:04:40
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18258. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:04:45
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:04:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:04:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:06:49
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:06:54
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:06:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:06:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:07:44
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 10:07:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:08:52
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:09:26
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:11:25
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:11:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:12:05
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 864
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/03/2014 11:12:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:12:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:15:56
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:16:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:17:21
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:17:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:03
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:30
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:36
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:45
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:22:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:30:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:30:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:34:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:34:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:36:03
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:36:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:40:30
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:40:34
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:43:29
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:43:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:46:40
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:46:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:46:56
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:47:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:48:09
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:48:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:48:25
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 11:48:27
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:23
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:35
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18252. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:37
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18255. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:48:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:55:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:55:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:55:58
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 864
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/03/2014 12:55:58
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:56:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:56:28
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 864
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/03/2014 12:56:28
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 12:56:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:00:06
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:00:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:02:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:02:02
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:03:41
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:03:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:05:48
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:05:52
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:09:38
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:09:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:11:35
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:11:39
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:11:54
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:11:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:29:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:29:15
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 13:30:39
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:30:40
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetPasswordWithAnswer(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 858
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:32:45
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:32:52
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetPasswordWithAnswer(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 858
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:44:54
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:44:55
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:47:12
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:47:33
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:13
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:13
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:26
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:27
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:45
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:50:50
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:53:26
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:53:26
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 13:53:39
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 13:53:39
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Web.Security.MembershipPasswordException
+The user account has been locked out.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 14:08:03
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/705e6364-4535-4fcc-8746-a1ade8c66c98. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 14:08:14
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/705e6364-4535-4fcc-8746-a1ade8c66c98. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 14:08:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/705e6364-4535-4fcc-8746-a1ade8c66c98. Error Message:System.Web.Security.MembershipPasswordException
+The password-answer supplied is wrong.
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 14:09:57
+Error in: http://localhost:40053/Pronto500/Account/Register. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Controllers.AccountController.Register(RegisterModel model) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccountController.cs:line 354
+ProntoMVC
+__________________________
+
+Log Entry : 
+01/03/2014 14:18:52
+Error in: http://localhost:40053/Pronto500/Account/Verificar/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.FormatException
+Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).
+   at System.Guid.GuidResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument, String failureArgumentName, Exception innerException)
+   at System.Guid.TryParseGuidWithDashes(String guidString, GuidResult& result)
+   at System.Guid.TryParseGuid(String g, GuidStyles flags, GuidResult& result)
+   at System.Guid..ctor(String g)
+   at ProntoMVC.Controllers.AccountController.Verificar(String id) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccountController.cs:line 707
+mscorlib
+__________________________
+
+Log Entry : 
+01/03/2014 15:25:18
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.ArgumentException
+The parameter 'passwordAnswer' must not be empty.
+Parameter name: passwordAnswer
+   at System.Web.Util.SecUtility.CheckParameter(String& param, Boolean checkForNull, Boolean checkIfEmpty, Boolean checkForCommas, Int32 maxSize, String paramName)
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at MvcMembership.AspNetMembershipProviderWrapper.ResetPassword(MembershipUser user, String passwordAnswer) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetMembershipProviderWrapper.cs:line 42
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 860
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 15:26:45
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 891
+System
+__________________________
+
+Log Entry : 
+01/03/2014 15:39:50
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 904
+System
+__________________________
+
+Log Entry : 
+01/03/2014 15:49:20
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.ArgumentException
+Non alpha numeric characters in 'newPassword' needs to be greater than or equal to '1'.
+   at System.Web.Security.SqlMembershipProvider.ChangePassword(String username, String oldPassword, String newPassword)
+   at System.Web.Security.MembershipUser.ChangePassword(String oldPassword, String newPassword)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 874
+System.Web
+__________________________
+
+Log Entry : 
+01/03/2014 15:53:08
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 908
+System
+__________________________
+
+Log Entry : 
+01/03/2014 15:54:56
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 908
+System
+__________________________
+
+Log Entry : 
+01/03/2014 15:57:12
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 908
+System
+__________________________
+
+Log Entry : 
+01/03/2014 16:03:35
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 910
+System
+__________________________
+
+Log Entry : 
+01/03/2014 16:06:01
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/e0b87193-1de6-45e4-bc14-4d588d9b71f5. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, String from)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 910
+System
+__________________________
+
+Log Entry : 
+01/03/2014 16:46:35
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:46:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:47:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:47:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:50:36
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:50:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:51:06
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:51:11
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:51:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:51:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:52:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/03/2014 16:52:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________

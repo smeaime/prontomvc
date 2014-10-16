@@ -1,0 +1,1541 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
+using System.Web.Security;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Security;
+
+using System.Data.Entity.Core.Objects; // using System.Data.Objects;
+
+using Pronto.ERP.Bll;
+
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
+
+namespace ProntoMVC.Controllers
+{
+    public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
+    {
+        public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
+
+        public string SC;
+
+
+
+        public int glbIdUsuario
+        {
+
+            get
+            {
+                string usuario = ViewBag.NombreUsuario;
+                int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+                return IdUsuario;
+            }
+
+            set { return; }
+        }
+
+        public Empleado glbUsuario
+        {
+
+            get
+            {
+                return db.Empleados.Find(glbIdUsuario);
+            }
+
+            set {}
+        }
+
+
+
+
+        public const int pageSize = 10;
+
+        public string SCsql()
+        {
+            var d = new dsEncrypt();
+            d.KeyString = "EDS";
+
+            string s = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            return d.Encrypt(s);
+
+
+        }
+
+
+
+
+        private void asignacadena(string rccadena)
+        {
+
+
+
+
+            string sc;
+            try
+            {
+                sc = Generales.sCadenaConex(rccadena);
+            }
+            catch (Exception)
+            {
+                //return;
+                throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + rccadena + "]");
+            }
+
+            if (sc == null)
+            {
+
+                // estás perdiendo la sesion por lo del web.config?????
+                // http://stackoverflow.com/questions/10629882/asp-net-mvc-session-is-null
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////
+                // MAL MAL!!!!!!!!!
+                // http://stackoverflow.com/questions/7705802/httpcontext-current-session-is-null-in-mvc-3-appplication
+                // Why are you using HttpContext.Current in an ASP.NET MVC application? Never use it. That's evil even 
+                // in classic ASP.NET webforms applications but in ASP.NET MVC it's a disaster that takes all the fun out of this nice web framework
+                ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                // FormsAuthentication.SignOut();
+
+                if (Membership.GetUser() == null)
+                {
+                    FormsAuthentication.SignOut();
+                    Session.Abandon();
+
+                    //// clear authentication cookie
+                    //HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+                    //cookie1.Expires = DateTime.Now.AddYears(-1);
+                    //Response.Cookies.Add(cookie1);
+
+                    //// clear session cookie 
+                    //HttpCookie cookie2 = new HttpCookie("ASP.NET_SessionId", "");
+                    //cookie2.Expires = DateTime.Now.AddYears(-1);
+                    //Response.Cookies.Add(cookie2);
+
+                    FormsAuthentication.RedirectToLoginPage();
+                    return;
+                }
+
+                //if (false)
+                //{
+                // return RedirectToAction("ElegirBase", "Account");
+
+
+
+
+                if (this.Session["BasePronto"] == null)
+                {
+                    // de alguna manera lo tengo que redirigir a la eleccion de la base, pero desde acá no puedo hacer 
+                    // un redirect. 
+
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                    // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                    // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                    // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+
+
+
+                    // http://stackoverflow.com/questions/4793452/mvc-redirect-inside-the-constructor
+
+                    //return;
+                    //throw new Exception("No hay base elegida");
+                }
+
+
+                var n = new AccountController();
+
+                if ((n.BuscarUltimaBaseAccedida() ?? "") != "")
+                {
+                    this.Session["BasePronto"] = n.BuscarUltimaBaseAccedida();
+                    // return Redirect(returnUrl);
+
+
+                    
+                    string sss2 = this.Session["BasePronto"].ToString();
+                    sc = Generales.sCadenaConex(sss2);
+                    if (sc == null)
+                    {
+                        // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
+                        this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                    }
+                    
+
+                }
+                else
+                {
+
+                    this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
+                }
+
+
+                //}
+                string sss = this.Session["BasePronto"].ToString();
+                sc = Generales.sCadenaConex(sss);
+                //    return RedirectToAction("Index", "Home");
+                if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: ["+ sss +"]");
+            }
+            db = new DemoProntoEntities(sc);
+            SC = sc;
+
+
+            if (db == null)
+            {
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    System.Diagnostics.Debugger.Break();
+                }
+                else
+                {
+                    throw new Exception("error en creacion del context. " + sc);
+
+                }
+            }
+
+        }
+
+
+
+        protected override void Initialize(System.Web.Routing.RequestContext rc)
+        {
+            base.Initialize(rc);
+
+            // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
+            // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
+
+            asignacadena((string)rc.HttpContext.Session["BasePronto"]);
+
+
+
+            string us = Membership.GetUser().ProviderUserKey.ToString();
+
+            string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+            System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                                     "SELECT * FROM BASES " +
+                                                     "join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                     "where UserId='" + us + "'");
+            //DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
+            // List<string> baselistado = new List<string>();
+            List<SelectListItem> baselistado = new List<SelectListItem>();
+            foreach (DataRow r in dt.Rows)
+            {
+                baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
+            }
+
+
+            ViewBag.Bases = baselistado;
+
+
+            //try
+            //{
+            //    if (!PuedeLeer(rc.RouteData.Values["controller"].ToString())) db = null;
+
+            //}
+            //catch (Exception)
+            //{
+
+            //  //  throw;
+            //}
+
+            //PuedeLeer(rc.RouteData.Values["action"])
+
+        }
+
+
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            // http://stackoverflow.com/questions/3214774/how-to-redirect-from-onactionexecuting-in-base-controller
+            //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+            //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+
+            base.OnActionExecuting(filterContext);
+
+
+
+
+
+
+            if (this.Session["BasePronto"] == null)
+            {
+
+                // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
+                // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
+
+                // -ok, pero pasá la información de en qué página estaba antes!!!!
+
+                AccountController a = new AccountController();
+                if (a.BuscarUltimaBaseAccedida() != "")
+                {
+                    this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
+
+                }
+
+                else
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                              new System.Web.Routing.RouteValueDictionary { { "controller", "Account" }, { "action", "ElegirBase" }, { "area", "" }
+                              , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
+                          });
+                    return;
+                }
+            }
+
+            if (!VerificarPassBase(filterContext))
+            {
+                //filterContext.Result = new RedirectResult(  AppDom  );
+                filterContext.Result = new RedirectToRouteResult(
+                        new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } 
+                                , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
+                        });
+
+                return;
+            }
+
+
+
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+
+
+
+
+
+            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
+            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
+            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
+
+
+            bool ok;
+
+            try
+            {
+
+                ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
+
+            }
+            catch (Exception)
+            {
+                ok = true;
+                //  throw;
+            }
+
+
+            if (!ok)
+            {
+                db = null;
+                throw new Exception("Permisos insuficientes de lectura");
+            }
+
+
+
+            try
+            {
+                if ((filterContext.RouteData.Values["action"].NullSafeToString() == "Edit" &&
+                     filterContext.HttpContext.Request.HttpMethod == "POST") ||
+                    filterContext.RouteData.Values["id"].NullSafeToString() == "-1")
+
+                    ok = (PuedeEditar(filterContext.RouteData.Values["controller"].ToString()));
+                else ok = true;
+
+            }
+            catch (Exception)
+            {
+                ok = true;
+                //  throw;
+            }
+
+
+            if (!ok)
+            {
+                db = null;
+                throw new Exception("Permisos insuficientes de edición");
+            }
+
+
+
+
+            try
+            {
+                if (filterContext.RouteData.Values["action"].ToString().Contains("Delete"))
+                    ok = (PuedeBorrar(filterContext.RouteData.Values["controller"].ToString()));
+                else ok = true;
+
+            }
+            catch (Exception)
+            {
+                ok = true;
+                //  throw;
+            }
+
+
+            if (!ok)
+            {
+                db = null;
+                throw new Exception("Permisos insuficientes de borrado");
+            }
+
+        }
+
+
+
+        //http://stackoverflow.com/questions/4036582/asp-net-mvc-displaying-user-name-from-a-profile
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+
+
+
+            //Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+            //string us = Membership.GetUser().UserName;
+            //string us = userGuid.ToString();
+
+
+
+            base.OnActionExecuted(filterContext);
+        }
+
+
+
+
+
+        public string BuscarClaveINI(string clave)
+        {
+
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var idclav = db.ProntoIniClaves.Where(x => x.Clave == clave).Select(x => x.IdProntoIniClave).FirstOrDefault();
+            string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && x.IdUsuario == IdUsuario).Select(x => x.Valor).FirstOrDefault();
+
+            return idclava;
+        }
+
+
+
+
+        bool VerificarPassBase(ActionExecutingContext filterContext)
+        {
+            string sBasePronto = (string)filterContext.HttpContext.Session["BasePronto"];
+            ViewData["BasePronto"] = sBasePronto;
+            ViewBag.BasePronto = sBasePronto;
+
+            if (sBasePronto == null)
+            {
+                //  FormsAuthentication.SignOut();
+                return false;
+                // return RedirectToAction("Index", "Home");
+            }
+
+
+            try
+            {
+                ViewBag.NombreUsuario = Membership.GetUser().UserName;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+
+        //[HttpPost]
+        //public ActionResult Edit()
+        //{
+        //    if (id==0) // no se declaró el hidden en Razor para que no salte el error de Store update, insert, or delete statement affected an unexpected number of rows (0)
+        //}
+
+        // if (ModelState.IsValid)
+        //{
+        //    if (PuntosVenta.IdPuntoVenta == -1)
+        //    {
+        //        db.PuntosVentas.Add(PuntosVenta);
+        //        db.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        // verificar que esté el ID --->>>>>       @Html.HiddenFor(model => model.productID)
+
+        //        // ERROR: Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries
+        //        // I ran into this and it was caused by the entity's ID (key) field not being set. 
+        //        // Thus when the context went to save the data, it could not find an ID = 0. 
+        //        // Be sure to place a break point in your update statement and verify that the entity's ID has been set.
+        //        //+1 Thanks for adding this answer - I had this exact issue, caused by forgetting to include the hidden ID input in the .cshtml edit page. – Paul Bellora Dec 22 '11 at 19:26
+        //        //+1 I was having same problem and this helped find the solution. 
+        //          Turns out I had [Bind(Exclude = "OrderID")] in my Order model which was causing the value of
+        //         the entity's ID to be zero on HttpPost. – David HAust Jan 23 '12 at 2:07
+        //        //That's exactly what I was missing. My object's ID was 0. – Azhar Khorasany Aug 16 '12 at 21:18
+        //        //@Html.HiddenFor(model => model.productID) -- worked perfect. I was missing the productID on the EDIT PAGE (MVC RAZOR) – David K Egghead Aug 28 '12 at 5:02
+
+
+        //        // http://stackoverflow.com/a/6337741/1054200
+
+        //        db.Entry(PuntosVenta).State = System.Data.Entity.EntityState.Modified;
+        //        db.SaveChanges();
+        //        //try
+        //        //{
+        //        //    db.SaveChanges();
+        //        //}
+        //        //catch (OptimisticConcurrencyException)
+        //        //{
+        //        //    db.Refresh(RefreshMode.ClientWins, db.Articles);
+
+        //        //}
+
+        //    }
+        //}
+
+
+
+
+        //public ActionResult Edit(int id)
+        //{
+        //    Models.ListasPrecio o;
+        //    if (id == -1)
+        //    {
+        //        o = new Models.ListasPrecio();
+
+        //    }
+        //    else
+        //    {
+        //        o = db.ListasPrecios.Find(id);
+        //    }
+
+        //    // ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", Ganancias.IdTipoRetencionGanancia);
+        //    return View(o);
+        //}
+
+        ////
+        //// POST: /PuntosVenta/Edit/5
+
+        //[HttpPost]
+        //public ActionResult Edit(Models.ListasPrecio o)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (o.IdListaPrecios <= 0)
+        //        {
+        //            db.ListasPrecios.Add(o);
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            db.Entry(o).State = System.Data.Entity.EntityState.Modified;
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    return View(o);
+
+        //}
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //cuales son las funciones basicas que deben definirse en cada clase que me herede?
+        // abstract protected void Edit();    // para objetos normales
+        // abstract protected void BatchUpdate();    // para objetos complejos (que usan jqGrid)
+        // abstract protected void Index();  
+        //abstract protected void CargarViewBag(Object o); //como hacer para que, en lugar de Object, use la clase hija?
+        // void UpdateColecciones(ref Models.Articulo o)
+        // private bool Validar(ProntoMVC.Data.Models.Articulo o, ref string sErrorMsg)
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (db != null) db.Dispose();
+            base.Dispose(disposing);
+        }
+
+
+
+
+        EmpleadosAcceso acce(string Modulo)
+        {
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+            EmpleadosAcceso acc = (from i in db.EmpleadosAccesos
+                                   where (i.IdEmpleado == IdUsuario &&
+
+                                       (i.Nodo == Modulo || i.Nodo == Modulo + "s" || i.Nodo == Modulo + "es")
+                                       )
+                                   select i).FirstOrDefault();
+
+            // falló con el nodo "PuntosVenta", porque la vista (el módulo) se llama "PuntoVenta"
+
+            if (acc == null) throw new Exception("Error de permisos. No se encuentra el empleado/permiso");
+            return acc;
+        }
+
+
+        public bool PuedeLeer(string Modulo)
+        {
+
+            return true;// desactivados desde el uso de los roles de asp.net
+
+
+            try
+            {
+
+                var acc = acce(Modulo);
+                if (acc.Nivel < 9) return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            return false;
+        }
+
+
+
+        public bool PuedeEditar(string Modulo)
+        {
+            return true;// desactivados desde el uso de los roles de asp.net
+
+            try
+            {
+                var acc = acce(Modulo);
+                if (acc.Nivel <= 5) return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return false;
+        }
+
+        public bool PuedeBorrar(string Modulo)
+        {
+            return true;// desactivados desde el uso de los roles de asp.net
+
+            try
+            {
+                var acc = acce(Modulo);
+
+                if (acc.Nivel == 1) return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return false;
+        }
+
+
+
+
+
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="empresa"></param>
+        /// <returns></returns>
+
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual RedirectToRouteResult AddToEmpresa(Guid id, string empresa)
+        {
+
+
+
+            BDLMasterEntities dbMaster = new BDLMasterEntities(Generales.ConexEFMaster());
+
+            //si tengo cuidado aca
+
+            try
+            {
+                CrearUsuarioProntoEnDichaBase(empresa, Membership.GetUser(id).UserName);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+
+            ProntoMVC.Data.Models.DetalleUserBD i = (from u in dbMaster.DetalleUserBD
+                                                    join b in dbMaster.Bases on u.IdBD equals b.IdBD
+                                                    where (b.Descripcion == empresa && u.UserId == id)
+                                                    select u).FirstOrDefault();
+
+            if (i != null) return RedirectToAction("UsersEmpresas", new { id }); // ya existe
+            i = new ProntoMVC.Data.Models.DetalleUserBD();
+
+
+            Bases basedb = (from x in dbMaster.Bases where (x.Descripcion == empresa) select x).FirstOrDefault();
+            if (i == null) return RedirectToAction("UsersEmpresas", new { id });
+            i.IdBD = basedb.IdBD;
+            i.UserId = id;
+
+
+
+            dbMaster.DetalleUserBD.Add(i);
+            dbMaster.SaveChanges();
+
+
+            //return null;
+            return RedirectToAction("UsersEmpresas", new { id });
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual RedirectToRouteResult RemoveFromEmpresa(Guid id, string empresa)
+        {
+
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+            ProntoMVC.Data.Models.DetalleUserBD i = (from u in dbMaster.DetalleUserBD
+                                                    join b in dbMaster.Bases on u.IdBD equals b.IdBD
+                                                    where (b.Descripcion == empresa && u.UserId == id)
+                                                    select u).FirstOrDefault();
+
+            
+
+            dbMaster.DetalleUserBD.Remove(i);
+            dbMaster.SaveChanges();
+
+
+            return RedirectToAction("UsersEmpresas", new { id });
+        }
+
+
+
+
+
+        public void CrearUsuarioProntoEnDichaBase(string nombrebasepronto, string nombreusuariopronto, string pass = "ldb", int? IdSector = null, int? IdObra = null)
+        {
+            string dest;
+            ProntoMVC.Data.Models.DemoProntoEntities dbDest;
+            //si tengo cuidado aca
+
+            if (nombrebasepronto == "") throw new Exception("Falta el nombre de la base");
+
+            try
+            {
+                dest = Generales.sCadenaConex(nombrebasepronto);
+                dbDest = new ProntoMVC.Data.Models.DemoProntoEntities(dest);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("No existe la base", ex);
+            }
+
+            ProntoMVC.Data.Models.Empleado emp;
+            //ojo, acá quizas la base pronto no encastra bien con el modelito mvc
+            try
+            {
+                emp = dbDest.Empleados.Where(e => e.UsuarioNT == nombreusuariopronto).FirstOrDefault();
+
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("", "La base " + dest + " no encastra bien con el modelo");
+                // la base "dest" no encastra bien con el modelo
+                throw;
+            }
+
+
+            if (emp != null) return;
+
+            emp = new ProntoMVC.Data.Models.Empleado();
+
+            emp.UsuarioNT = nombreusuariopronto;
+            emp.Nombre = nombreusuariopronto;
+            emp.Password = pass;
+            emp.IdObraAsignada = IdObra;
+            emp.IdSector = IdSector;
+            emp.Administrador = "NO";
+
+            dbDest.Empleados.Add(emp);
+            dbDest.SaveChanges();
+
+        }
+
+
+        void CrearConexionlaEnLaTablaBases(string nombrebasenueva, string connectionString)
+        {
+
+
+
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+            ProntoMVC.Data.Models.Bases b = new Bases();
+
+            b.Descripcion = nombrebasenueva;
+            b.StringConection = connectionString;
+
+            dbMaster.Bases.Add(b);
+            dbMaster.SaveChanges();
+
+        }
+
+        public void CrearBaseyAsignarEmpleado(string guid, string nombrebaseoriginal, string nombrebasenueva, string nombreusuariopronto)
+        {
+
+
+
+            string directorio = ConfigurationManager.AppSettings["DirSQL"]; //acá iria a parar no solo el .bak, sino tambien el mdf y el ldf
+            //string directorio = "C:\\";
+
+
+
+
+            const string spName = "wDuplicarBase";
+
+
+
+            // solucionado por sql, usando WITH INIT
+            //string archivotemp = directorio + "BackupFile.Bak";  // esto no sirve... acá estas borrando en el servidor web, no en el sql.
+
+            ////borrar bak original
+
+            //if (System.IO.File.Exists(archivotemp))
+            //{
+            //    System.IO.File.Delete(archivotemp);
+            //}
+
+
+
+            string connectionString = Generales.sCadenaConexSQLbdlmaster();
+
+            if (string.IsNullOrEmpty(connectionString)) return;
+
+
+            string nuevaconex = Generales.sCadenaConexSQL(nombrebaseoriginal).Replace(nombrebaseoriginal, nombrebasenueva);
+
+            CrearConexionlaEnLaTablaBases(nombrebasenueva, nuevaconex); // corregir. estoy pasando la conexion de la bdlmaster
+
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(spName, sqlConnection);
+                sqlCommand.CommandTimeout = 600; // ok pero en cuanto está el timeout de la pagina???
+
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                SqlParameter[] sqlParameterCollection = SetParameterSP(nombrebaseoriginal, nombrebasenueva, directorio);
+                sqlCommand.Parameters.AddRange(sqlParameterCollection);
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                //TreeCollection = FillTreeEntity(sqlCommand);
+            }
+
+
+
+            try
+            {
+                AddToEmpresa(new Guid(guid), nombrebasenueva);
+                CrearUsuarioProntoEnDichaBase(nombrebasenueva, nombreusuariopronto);
+
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
+
+
+            // return TreeCollection;
+
+            //return RedirectToAction("Index");
+        }
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        public int buscaridproveedorporcuit(string cuit)
+        {
+            if (cuit==null) return -1;
+            var provs = db.Proveedores.Where(p => p.Cuit.Replace("-", "") == cuit.Replace("-", ""));
+            return provs.Select(p => p.IdProveedor).FirstOrDefault();
+
+        }
+
+
+
+        public int buscaridclienteporcuit(string cuit)
+        {
+            if (cuit == null) return -1;
+            var provs = db.Clientes.Where(p => p.Cuit.Replace("-", "") == cuit.Replace("-", ""));
+            return provs.Select(p => p.IdCliente).FirstOrDefault();
+
+        } 
+       
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        public string DatosExtendidosDelUsuario_GrupoUsuarios(Guid guidUsuario)
+        {
+
+            var user = Membership.GetUser(guidUsuario);
+            string grupo = "";
+
+            using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
+            {
+                UserDatosExtendidos u = bdlmaster.UserDatosExtendidos.Where(x => x.UserId == guidUsuario).FirstOrDefault();
+                if (u != null) grupo = u.RazonSocial;
+            }
+
+
+            // if (Roles.IsUserInRole(user.UserName, "Externo") || Roles.IsUserInRole(user.UserName, "AdminExterno")) 
+            if (grupo != "") return grupo;
+
+            return null;
+        }
+
+
+
+
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        // http://stackoverflow.com/questions/4690967/asp-net-mvc-3-json-model-binding-and-server-side-model-validation-mixed-with-cli
+
+        public enum Status
+        {
+            Ok,
+            Error
+        }
+
+        public class JsonResponse
+        {
+            public Status Status { get; set; }
+            public string Message { get; set; }
+            public List<string> Errors { get; set; }
+        }
+
+        public List<string> GetModelStateErrorsAsString(ModelStateDictionary state)
+        {
+            List<string> errors = new List<string>();
+
+            foreach (var key in ModelState.Keys)
+            {
+                var error = ModelState[key].Errors.FirstOrDefault();
+                if (error != null)
+                {
+                    errors.Add(error.ErrorMessage);
+                }
+            }
+
+            return errors;
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Fill SQL paramter for Stored Procedure
+        /// <returns>Collection of SQL paramters object</returns>
+        private static SqlParameter[] SetParameterSP(string par1, string par2, string par3)
+        {
+            SqlParameter FiltroParam = new SqlParameter("@YourDatabaseName", SqlDbType.VarChar, 60);
+            SqlParameter FiltroParam2 = new SqlParameter("@YourNewDatabaseName", SqlDbType.VarChar, 60);
+            SqlParameter FiltroParam3 = new SqlParameter("@dir", SqlDbType.VarChar, 200);
+
+            FiltroParam.Value = par1;
+            FiltroParam2.Value = par2;
+            FiltroParam3.Value = par3;
+            return new SqlParameter[]
+            { 
+                FiltroParam,FiltroParam2,FiltroParam3
+            };
+        }
+
+
+        public IDictionary<string, bool> BasesPorUsuarioColeccion2(Guid id, Guid idAdmin)
+        {
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+            Dictionary<string, bool> baselistado = new Dictionary<string, bool>();
+
+            // tengo que traer tambien las bases que no tienen el usuario asociado
+            //  http://stackoverflow.com/questions/9171063/convert-sql-to-linq-left-join-with-null
+
+
+
+            /*
+                 
+        var basesDelUsuario = (from b in dbMaster.Bases
+                               // join u in dbMaster.aspnet_Users 
+                               // join u in dbMaster.UserDatosExtendidos
+                               // join r in dbMaster.aspnet_Roles
+                               join ub in dbMaster.DetalleUserBD
+                                    on b.IdBD equals ub.IdBD into ub2
+                               from ub in ub2.DefaultIfEmpty()
+                               where (ub == null || (ub ?? new ProntoMVC.Data.Models.DetalleUserBD()).UserId == id)
+                               select new { nombrebase = b.Descripcion, Esta = (ub == null) });
+
+            */
+
+
+            // var basesDelUsuario=  (from b in dbMaster.Bases select b).ToList();   
+
+            string usuario = ViewBag.NombreUsuario;
+            //Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey; // si no lo encontró en la base pronto, el usuario está en null
+            Guid guiduser = (Guid)Membership.GetUser().ProviderUserKey;
+
+
+            bool EsSuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+
+            foreach (ProntoMVC.Data.Models.Bases b in dbMaster.Bases)
+            {
+                var basesDelUsuario = (from ub in dbMaster.DetalleUserBD where (ub.UserId == id && ub.IdBD == b.IdBD) select ub).FirstOrDefault();
+
+                var basesDelUsuarioQuepidioLosDatos = (from ub in dbMaster.DetalleUserBD where (ub.UserId == idAdmin && ub.IdBD == b.IdBD) select ub).FirstOrDefault();
+
+                if (!EsSuperadmin && basesDelUsuarioQuepidioLosDatos == null) continue; // si el usuario que pidió los datos no es superadmin, solo le paso aquellas bases a las 
+
+                try
+                {
+                    baselistado.Add(b.Descripcion, (basesDelUsuario != null));
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler.WriteError(ex);
+
+                }
+
+            }
+
+
+
+
+
+
+            //baselistado = basesDelUsuario.ToDictionary(x => x.nombrebase.ToString(),
+            //                                            x => x.Esta,
+            //                                            StringComparer.OrdinalIgnoreCase);
+
+
+            // filtrar las bases a las que tiene acceso el que va a administrar
+
+
+
+
+
+
+            return baselistado;
+        }
+
+
+
+
+
+
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        public List<Tablas.Tree> TreeConNiveles(int IdUsuario, string sBase, string usuario)
+        {
+
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase);
+            List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
+
+            //string usuario = ViewBag.NombreUsuario;
+            //int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+
+
+
+
+            bool esSuperAdmin = Roles.GetRolesForUser(usuario).Contains("SuperAdmin");
+            bool esAdmin = Roles.GetRolesForUser(usuario).Contains("Administrador");
+
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+
+            var z = from n in Tree
+                    join p in permisos on n.Clave equals p.Nodo
+                    select new { n, p };
+
+            // la cuestion es: si no lo ves (el superadmin te puso nivel mínimo) , tampoco lo debés poder administrar (aunque seas administrador)
+            // Con esto bastaría... si no fuese porque alguien puede meterse y editar las tablas. Ahí usar el .app
+
+            //var q = from p in permisos 
+            //        join n in Tree on p.Nodo equals n.Clave
+            //        select n;
+
+
+            foreach (Tablas.Tree o in Tree)
+            {
+
+
+                EmpleadosAcceso acc = permisos.Where(x => x.Nodo == o.Clave).FirstOrDefault();
+
+                //               if (acc == null) continue;
+                //if (o.Descripcion.Contains("(")) continue;
+
+                o.nivel = 9;
+
+                if (o.Descripcion.Contains("2") || o.Descripcion.Contains("1")) // || o.Descripcion.Contains("por ")) no, esto lo debo hacer con eliminarNodoHijos, porque el nodo padre debe verse
+                {
+                    //no los puedo saltar porque los cierres <ul> hechos manualmente en jscript dependiendo del nivel del item, te descajetan el arbol
+
+                    //continue;
+                    o.Descripcion = "NO MOSTRAR";
+                    o.Orden = -999;
+
+                }
+
+                else if (acc == null ? false : !acc.Acceso)
+                {
+                    // si el Acceso está en 0, el nodo está invisible para el usuario
+                    o.Clave = acc.Nodo;
+                    o.Orden = acc.IdEmpleadoAcceso;//  acc.IdEmpleadoAcceso;
+                    o.Link = "9";
+                }
+
+
+                else if ((acc == null || (acc ?? new EmpleadosAcceso()).Nivel == 9) && !esSuperAdmin && !esAdmin)
+                {
+                    // la cuestion es: si no lo ves (el superadmin te puso nivel mínimo) , tampoco lo debés 
+                    // poder administrar (aunque seas administrador -ok, pero ahí tenes que revisar el nivel del administrador, no del acc.nivel que es el usuario editado)
+                    // Con esto bastaría... si no fuese porque alguien puede meterse y editar las tablas. Ahí usar el .app
+
+                    o.Descripcion = "NO MOSTRAR";
+                    o.Orden = -999;
+                }
+
+                else if (acc != null)
+                {
+                    o.Clave = acc.Nodo;
+                    o.Orden = acc.IdEmpleadoAcceso;
+                    o.Link = acc.Nivel.NullSafeToString();
+
+                    o.nivel = acc.Nivel ?? 9;
+
+                }
+                else
+                {
+                    if (esSuperAdmin)
+                    {
+
+                        o.nivel = 9;
+                    }
+                    else
+                    {
+
+                        o.Orden = 0;
+                    }
+                }
+
+
+
+
+
+                TreeDest.Add(o);
+
+            }
+
+            var l = TreeDest.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR").ToList();
+            foreach (Tablas.Tree n in l)
+            {
+                eliminarNodoySusHijos(n, ref TreeDest);
+            }
+
+            var g = TreeDest.Where(n => n.Descripcion.StartsWith("por ") || n.Descripcion.StartsWith("PorRendi")).ToList();
+            foreach (Tablas.Tree n in g)
+            {
+                eliminarSoloHijos(n, ref TreeDest);
+            }
+
+
+            if (TreeDest.Count > 900) throw new Exception("La cantidad de EmpleadosAccesos es mayor que 900");
+
+
+            return TreeDest;
+        }
+
+
+
+        public void eliminarSoloHijos(Tablas.Tree o, ref List<Tablas.Tree> TreeDest)
+        {
+            List<Tablas.Tree> hijos = TreeDest.Where(x => x.ParentId == o.IdItem).ToList();
+            foreach (Tablas.Tree h in hijos)
+            {
+                eliminarSoloHijos(h, ref TreeDest);
+                TreeDest.Remove(h);
+            }
+            //TreeDest.Remove(o); // si esta afuera del foreach, elimina tambien al padre
+        }
+
+        public void eliminarNodoySusHijos(Tablas.Tree o, ref List<Tablas.Tree> TreeDest)
+        {
+            List<Tablas.Tree> hijos = TreeDest.Where(x => x.ParentId == o.IdItem).ToList();
+            foreach (Tablas.Tree h in hijos)
+            {
+                eliminarNodoySusHijos(h, ref TreeDest);
+                //TreeDest.Remove(h);
+            }
+            TreeDest.Remove(o); // si esta afuera del foreach, elimina tambien al padre
+        }
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ///////////////////////////////////////ENCRIPTACIONES //////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <returns></returns>
+
+        public bool VerificarClaveDeRoles()
+        {
+            return true; //TO DO: volver a habilitar
+
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+            string checksumguardado = dbMaster.Bases.Where(x => x.Descripcion == "Checksum").Select(x => x.StringConection).FirstOrDefault();
+
+            string checksumactual = CalcularActualClaveDeRoles();
+
+
+
+            return (checksumguardado == checksumactual || checksumguardado == "Inicio de Base");
+        }
+
+        public void GrabarNuevaClaveDeRoles()
+        {
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+            ProntoMVC.Data.Models.Bases b = dbMaster.Bases.Where(x => x.Descripcion == "Checksum").FirstOrDefault();
+
+            if (b == null)
+            {
+                b = new ProntoMVC.Data.Models.Bases();
+                b.Descripcion = "Checksum";
+                b.StringConection = CalcularActualClaveDeRoles();
+                dbMaster.Bases.Add(b);
+            }
+            else
+            {
+                b.StringConection = CalcularActualClaveDeRoles();
+            }
+
+            //   dbMaster.SaveChanges();
+        }
+
+
+        public string CalcularActualClaveDeRoles()
+        {
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+
+            long checksum = dbMaster.vw_aspnet_UsersInRoles.Sum(x => 4); // (long) x.RoleId. );
+
+            return (checksum % 1234567).ToString();
+
+        }
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // Edu hace así:
+        // Case 0, 9
+        //If mvarSuperAdministrador Then
+        // es decir, solo reacciona ante los niveles extremos Y ADEMAS tiene que estar puesto el superadministrador
+
+
+        public void GuardarArchivoSecuencial__EncriptadoPuntoAPP()
+        {
+
+
+            // Edu hace así en frmAccesos:
+            // Case 0, 9
+            //If mvarSuperAdministrador Then
+            // es decir, solo reacciona ante los niveles extremos Y ADEMAS tiene que estar puesto el superadministrador
+
+
+        }
+
+
+        public void LeerArchivoSecuencial_____EncriptadoPuntoAPP()
+        {
+
+            // Edu hace así frmAccesos:
+            // Case 0, 9
+            //If mvarSuperAdministrador Then
+            // es decir, solo reacciona ante los niveles extremos Y ADEMAS tiene que estar puesto el superadministrador
+
+
+
+            //           mString = LeerArchivoSecuencial(mArchivoDefinicionAccesos)
+            //If Len(mString) > 0 Then
+            //   mString = mId(mString, 1, Len(mString) - 2)
+            //End If
+            //mString = MydsEncrypt.Encrypt(mString)
+            //mVectorAccesos = VBA.Split(mString, "|")
+        }
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        public int CantidadFirmasConfirmadas(Pronto.ERP.Bll.EntidadManager.EnumFormularios Comprobante,
+                                         long IdComprobante,
+                                           double? Importe = null)
+        {
+            //Dim oRsAut1 As ADOR.Recordset
+            //Dim oRsAut2 As ADOR.Recordset
+            //Dim mCantidadFirmas As Integer, i As Integer, mFirmasConfirmadas As Integer
+            //Dim mFirmas() As Boolean
+
+            //mFirmasConfirmadas = 0
+
+            //Set oRsAut1 = Aplicacion.Autorizaciones.TraerFiltrado("_CantidadAutorizaciones", Array(Comprobante, Importe, IdComprobante))
+
+            var q = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, 0, -1).Count();
+
+            //If oRsAut1.RecordCount > 0 Then
+            //   mCantidadFirmas = oRsAut1.RecordCount
+            //   ReDim mFirmas(mCantidadFirmas)
+            //   For i = 1 To mCantidadFirmas
+            //      mFirmas(i) = False
+            //   Next
+
+            //   Set oRsAut2 = Aplicacion.AutorizacionesPorComprobante.TraerFiltrado("_AutorizacionesPorComprobante", Array(Comprobante, IdComprobante))
+            //   With oRsAut2
+            //      If .RecordCount > 0 Then
+            //         .MoveFirst
+            //         Do While Not .EOF
+            //            oRsAut1.MoveFirst
+            //            Do While Not oRsAut1.EOF
+            //               If oRsAut1.Fields(0).Value = .Fields("OrdenAutorizacion").Value Then
+            //                  mFirmas(oRsAut1.AbsolutePosition) = True
+            //                  Exit Do
+            //               End If
+            //               oRsAut1.MoveNext
+            //            Loop
+            //            .MoveNext
+            //         Loop
+            //      End If
+            //      oRsAut2.Close
+            //   End With
+
+            //   For i = 1 To mCantidadFirmas
+            //      If mFirmas(i) Then mFirmasConfirmadas = mFirmasConfirmadas + 1
+            //   Next
+            //Else
+            //   Set oRsAut2 = Aplicacion.AutorizacionesPorComprobante.TraerFiltrado("_AutorizacionesPorComprobante", Array(Comprobante, IdComprobante))
+            //   mFirmasConfirmadas = oRsAut2.RecordCount
+            //   oRsAut2.Close
+            //End If
+            //oRsAut1.Close
+
+            //Set oRsAut1 = Nothing
+            //Set oRsAut2 = Nothing
+
+            //CantidadFirmasConfirmadas = mFirmasConfirmadas
+
+            return 0;
+        }
+
+
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    }
+
+
+
+
+    /// <summary>
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+
+    public interface IProntoInterface<T>
+    {
+        // string Word { get; set; }
+        // void DoIt();
+        void CargarViewBag(T obj);
+    }
+
+
+
+}

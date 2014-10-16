@@ -1,0 +1,276 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Articulo>
+@{
+    ViewBag.Title = "Artículos";
+}
+@*<h2>Index</h2>*@ @* <div class="container-fluid">*@
+<br />
+<div class="row-fluid">
+    <div class="span12 lightblue">
+        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary span2"  >
+            Nuevo Artículo
+        </button>
+        <div class="span4">
+            <div class="input-append ">
+                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                @*<div class="btn-group append ">
+                    <button class="btn dropdown-toggle append" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" id="CampoParaBuscar">
+                        <li><a href="#">Código</a></li>
+                        <li><a href="#">Descripción</a></li>
+                    </ul>
+                </div>
+                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                    avanzada</button>*@
+            </div>
+        </div>
+        @*<button onclick=" exportExcel($('#Lista')) " class="btn span1">
+            Excel
+        </button>*@
+        @*  <div class="input-prepend ">
+            <input id="BuscarProximoNoFiltra" type="text" class="" placeholder="Buscar" style="" />
+            <div class="btn-group  ">
+                <button onclick="  " class="btn">
+                    <
+                </button>
+                <button onclick="  " class="btn ">
+                    >
+                </button>
+            </div>
+        </div>*@
+      @*  <div class="btn-group  span1 pull-right ">
+            <button onclick="  " class="btn">
+                <
+            </button>
+            <button onclick="  " class="btn ">
+                >
+            </button>
+        </div>*@
+        <br />
+        @*<p>@Html.ActionLink("Create New", "Create")</p>
+*@
+    </div>
+</div>
+<table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
+</table>
+<div id="ListaPager" class="scroll" style="text-align: center;">
+</div>
+<script type="text/javascript">
+    $().ready(function () {
+
+        $('#BuscadorListado').focus();
+
+        $("#Lista").jqGrid({
+            url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
+            datatype: 'json',
+            mtype: 'POST',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); },
+                'IdObra': function () { return $("#IdObra").val(); }
+            },
+            //            cellEdit: true,
+            //            cellurl: '@Url.Action("UpdateArticuloProperty")',
+            colNames: ['', '', 'Codigo', 'Descripcion'
+
+            , 'Rubro'
+
+            , 'Subrubro'
+            , 'Nro.inv.'
+          
+
+            ],
+            colModel: [
+            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+            { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
+            { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
+
+                , search: true, searchoptions: { sopt: ['cn'] }
+            },
+            { name: '', index: '', width: 80, align: 'left', editable: true, edittype: 'select',
+                editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+                , search: true, searchoptions: { sopt: ['cn'] }
+            },
+
+
+            { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
+            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+
+            ],
+
+
+
+            ondblClickRow: function (idrow) {
+                window.location.href = ROOT + 'Articulo/Edit/' + idrow;
+
+
+                // $("#edtData").click();
+
+                //edicion inline
+                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
+                //                if(id && id!==lastSel){ 
+                //                    jQuery('#Lista').restoreRow(lastSel); 
+                //                    lastSel=id; 
+                //                }
+                //                jQuery('#Lista').editRow(id, true); 
+                //   
+
+            },
+            pager: $('#ListaPager'),
+            rowNum: 50,
+            rowList: [10, 20, 50, 100],
+            sortname: 'IdArticulo',
+            sortorder: "desc",
+            viewrecords: true,
+            //toppager: true,
+
+            emptyrecords: 'No hay registros para mostrar',
+
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>PEDIDOS</b>'
+
+
+              , multiboxonly: true
+        })
+        //        .navGrid("#ListaPager",
+        //            { refresh: true, add: false, edit: false, del: false },
+        //                {}, // settings for edit
+        //                {}, // settings for add
+        //                {}, // settings for delete
+        //                {closeAfterSearch: true, closeOnEscape: true },
+        //                { sopt: ["cn"]} // Search options. Some options can be set on column level
+        //         );
+
+
+
+
+
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
+            );
+
+        //$("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
+        //$("#Lista").setFrozenColumns();
+
+
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+
+        $("#BuscadorListado").keyup(function () {
+
+
+            filtrar()
+
+        });
+
+
+        $("#BuscadorListado").change(function () {
+
+            filtrar()
+
+
+        });
+
+
+
+        $("#BuscarProximoNoFiltra").change(function () {
+
+            buscar()
+
+
+        });
+
+
+
+        function filtrar() {
+            var grid = jQuery("#Lista");
+            var postdata = grid.jqGrid('getGridParam', 'postData');
+            jQuery.extend(postdata,
+               { filters: '',
+                   searchField: 'Descripcion', // $("#CampoParaBuscar").val(), // 'Descripcion',   // Codigo
+                   searchOper: 'contains',
+                   searchString: $("#BuscadorListado").val()
+               });
+            grid.jqGrid('setGridParam', { search: true, postData: postdata });
+            grid.trigger("reloadGrid", [{ page: 1}]);
+
+        }
+
+
+        function RefrescaAnchoGrillaDetalle() {
+            // $("#Lista").setGridWidth($(window).width());
+            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
+
+            $("#Lista").setGridWidth($("#divGrilla").width());
+
+            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
+            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
+        }
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+    function exportExcel($id) {
+        var keys = [], ii = 0, rows = "";
+        var ids = $id.getDataIDs();  // Get All IDs
+        var row = $id.getRowData(ids[0]);     // Get First row to get the labels
+        for (var k in row) {
+            keys[ii++] = k;    // capture col names
+            rows = rows + k + "\t";     // output each Column as tab delimited
+        }
+        rows = rows + "\n";   // Output header with end of line
+        for (i = 0; i < ids.length; i++) {
+            row = $id.getRowData(ids[i]); // get each row
+            for (j = 0; j < keys.length; j++) rows = rows + row[keys[j]] + "\t"; // output each Row as tab delimited
+            rows = rows + "\n";  // output each row with end of line
+        }
+        rows = rows + "\n";  // end of line at the end
+        var form = "<form name='csvexportform' action='" + php_path + "csvexport.php' method='post'>";
+        form = form + "<input type='hidden' name='csvBuffer' value='" + rows + "'>";
+        form = form + "</form><script>document.csvexportform.submit();</sc" + "ript>";
+        OpenWindow = window.open('', '');
+        OpenWindow.document.write(form);
+        OpenWindow.document.close();
+    }
+
+    function gridcsvexport(id) {
+        $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
+            caption: '',
+            title: 'export',
+            buttonicon: 'ui-icon-newwin',
+            position: 'last',
+            onClickButton: function () {
+                exportExcel($(this));
+            }
+        });
+    }
+
+</script>
+@*</div>*@

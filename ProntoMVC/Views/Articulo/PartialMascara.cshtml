@@ -1,0 +1,41 @@
+﻿@model ProntoMVC.Data.Models.Articulo
+@*@for (var themeIndex = 0; themeIndex < ViewBag.Mascara.Count(); themeIndex++)
+                    {    ProntoMVC.Data.Models.DefinicionArticulo prod = ViewBag.Mascara;
+                    }*@
+@foreach (ProntoMVC.Data.Models.DefinicionArticulo prod in @ViewBag.Mascara)
+{
+                     
+                    
+    <div class="row-fluid">
+        <div class="span8 lightblue">
+            @Html.Label(prod.Etiqueta)
+            @if (prod.TablaCombo == null && prod.CampoSiNo != "SI")
+            {
+                @Html.TextBox(prod.Campo, null, new { @class = "span12" })
+            }
+            else if (prod.CampoSiNo == "SI" || prod.TablaCombo == "SiNo")
+            {
+
+
+
+                // es un checkbox
+                @Html.DropDownList(prod.Campo, null, new { @class = "span12" })
+            }
+            else if (prod.TablaCombo != null)
+            {
+                try
+                {
+                @Html.DropDownList(prod.Campo, null, new { @class = "span12" })
+                }
+                catch (Exception)
+                {
+
+                    // throw;
+                }
+
+            }
+            
+            @Html.ValidationMessage(prod.Campo)
+        </div>
+    </div>
+}

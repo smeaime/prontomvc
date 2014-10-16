@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 3.0 License
+
+Name       : Unofficial Channels
+Description: A two-column, fixed-width design with a bright color scheme.
+Version    : 1.0
+Released   : 20120723
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>@ViewBag.Title</title>
+		<link href="http://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" type="text/css" />
+
+        <link href="@Url.Content("~/Content/unofficialchannels/style.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Scripts/js/jquery-ui-1.9.0.custom.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/jquery-grid/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/themes/base/jquery.ui.autocomplete.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+
+        <script src="@Url.Content("~/Scripts/js/jquery-1.8.2.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/js/jquery-ui-1.9.0.custom.js")" type="text/javascript"></script>
+
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.locale-en.js")" type="text/javascript"></script>
+      
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.common.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.formedit.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.inlinedit.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/grid.jqueryui.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-grid/jqModal.js")" type="text/javascript"></script>
+
+        <script src="@Url.Content("~/Scripts/json/jquery.json-2.3.min.js")" type="text/javascript"></script>
+
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+        <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="bg1"></div>
+		<div id="bg2"></div>
+		<div id="outer">
+			<div id="header">
+				<div id="logo">
+					<h1>
+						<a href="#">PRONTO</a>
+					</h1>
+				</div>
+				<div id="search">
+					<form action="" method="post">
+						<div>
+							<input class="text" name="search" size="32" maxlength="64" />
+						</div>
+					</form>
+				</div>
+				<div id="nav">
+					<ul>
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Articulos", "Index", "Articulo")</li>
+                    <li>@Html.ActionLink("Sectores", "Index", "Sector")</li>
+                    <li>@Html.ActionLink("Empleados", "Index", "Empleado")</li>
+                    <li>@Html.ActionLink("Requerimientos", "Index", "Requerimiento")</li>
+					</ul><br class="clear" />
+				</div>
+			</div>
+			<div id="banner">
+				<div class="captions">
+					<h2>SISTEMA DE GESTION</h2>
+				</div>
+				<img src="../../Content/unofficialchannels/images/banner.jpg" alt="" />
+			</div>
+			<div id="main">
+				<div id="sidebar">
+					<div class="box">
+						<h4>
+							Actualizaciones
+						</h4>
+						<div class="dateList">
+							<ul class="linkedList dateList">
+								<li class="first">
+									<span class="date">Jul 23</span> <a href="#">Ver detalles</a>
+								</li>
+								<li>
+									<span class="date">Jul 18</span> <a href="#">Ver detalles</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="box">
+						<h4>
+							Novedades
+						</h4>
+						<p>
+							Nuevas funcionalidades : Acceso a nuevos modulos operativos
+						</p>
+						<ul class="linkedList">
+							<li class="first">
+								<a href="#">Mantenimiento de equipos</a>
+							</li>
+							<li>
+								<a href="#">Sueldos y jornales</a>
+							</li>
+							<li>
+								<a href="#">Balanza</a>
+							</li>
+							<li class="last">
+								<a href="#">Sat</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="content">
+					<div class="box">
+						@*<img src="../../Content/unofficialchannels/images/pic01.jpg" width="150" height="150" alt="" class="left" />*@
+                        @*@Html.Partial("_LogOnPartial")*@
+                        @RenderBody()
+					</div>
+					<div class="box">
+						<ul class="linkedList">
+							@*<li class="first">
+								<a href="#">Turpis et posuere urna dolor justo</a>
+							</li>
+							<li>
+								<a href="#">Fringilla sem nisl purus lobortis magnis magna pellentesque</a>
+							</li>
+							<li>
+								<a href="#">Venenatis magna ultricies sollicitudin sodales commodo nibh aenean</a>
+							</li>
+							<li>
+								<a href="#">Magnis luctus penatibus non natoque nascetur tempus erat</a>
+							</li>
+							<li class="last">
+								<a href="#">Penatibus dolor pharetra viverra ac erat proin</a>
+							</li>*@
+						</ul>
+					</div><br class="clear" />
+				</div><br class="clear" />
+			</div>
+		</div>
+		<div id="copyright">
+			&copy; BDL Consultores. Design by <a href="http://www.bdlconsultores.com.ar/">BDLConsultores.com.ar</a>
+		</div>
+	</body>
+</html>

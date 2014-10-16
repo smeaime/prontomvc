@@ -1,0 +1,16 @@
+------ Build started: Project: Report Project1, Configuration: Release ------
+Building the report, Orden Pago.rdl, for SQL Server 2008 R2 Reporting Services.
+Build complete -- 0 errors, 0 warnings
+------ Deploy started: Project: Report Project1, Configuration: Release ------
+Deploying to http://192.168.66.3/ReportServer
+Deploying report '/Pronto informes/Orden Pago'.
+Warning : Los objetos ‘Textbox17’ de tipo text box y ‘TipoComprobante15’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox11’ de tipo text box y ‘TipoComprobante9’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox7’ de tipo text box y ‘TipoComprobante5’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox6’ de tipo text box y ‘TipoComprobante4’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox4’ de tipo text box y ‘TipoComprobante2’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox3’ de tipo text box y ‘TipoComprobante’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Warning : Los objetos ‘Textbox14’ de tipo text box y ‘TipoComprobante12’ de tipo text box se superponen. No todos los representadores admiten la superposición de elementos de informe.
+Deploy complete -- 0 errors, 7 warnings
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+========== Deploy: 1 succeeded, 0 failed, 0 skipped ==========

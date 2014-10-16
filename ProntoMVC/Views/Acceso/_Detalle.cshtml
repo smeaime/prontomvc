@@ -1,0 +1,18 @@
+﻿@using EditorDemo.Helpers
+@model ProntoMVC.Data.Models.EmpleadosAcceso
+@*        http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/
+        http://stackoverflow.com/questions/5532568/master-detail-sample-code-for-mvc-3-razor-using-ajax-for-details
+*@ @*<div class="row-fluid">
+    <div class="span8 lightblue">
+        @Html.LabelFor(x => x.Nodo)
+        @Html.TextBoxFor(x => x.Nivel, new { @class = "span12" })
+        
+    </div>
+</div>*@
+<div class="editorRow">
+    @using (Html.BeginCollectionItem("EmpleadosAcceso"))
+    { 
+        @Html.LabelFor(x => x.Nodo) 
+        @Html.TextBoxFor(x => x.Nivel)
+    }
+</div>
