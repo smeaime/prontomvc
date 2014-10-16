@@ -1,0 +1,14 @@
+rProntoMVC/bin
+rProntoMVC/obj/Debug
+rProntoMVC/obj/Debug/CSAutoParameterize/original
+rProntoMVC/obj/Debug/CSAutoParameterize/original/Areas/MvcMembership/Views
+rProntoMVC/obj/Debug/CSAutoParameterize/original/Views
+rProntoMVC/obj/Debug/CSAutoParameterize/transformed
+rProntoMVC/obj/Debug/CSAutoParameterize/transformed/Areas/MvcMembership/Views
+rProntoMVC/obj/Debug/CSAutoParameterize/transformed/Views
+rProntoMVC/obj/Debug/Package/PackageTmp/Content
+rProntoMVC/obj/Debug/Package/PackageTmp/Content/images
+rProntoMVC/obj/Debug/Package/PackageTmp/bin
+rProntoMVC/obj/Debug/TransformWebConfig/original
+rProntoMVC/obj/Debug/TransformWebConfig/transformed
+rTestProject2/obj/Debug

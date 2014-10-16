@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="BusinessLogic">
+</Property><Property Name="Solution File" Value="C:\ProntoWeb\BusinessLogic\BusinessLogic.sln">
+</Property><Property Name="User Options File" Value="C:\ProntoWeb\BusinessLogic\BusinessLogic.suo">
+</Property><Property Name="Date" Value="jueves, 12 de mayo de 2011">
+</Property><Property Name="Time" Value="10:51">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="BusinessLogic.sln" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\BusinessLogic.sln">
+</Event><Event ErrorLevel="0" Project="" Source="BusinessLogic.suo" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\BusinessLogic.suo">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="BusinessLogic.vbproj" Description="Project file successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\BusinessLogic.vbproj">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="BusinessLogic.vbproj.user" Description="Project user file successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\BusinessLogic.vbproj.user">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ArticuloManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ArticuloManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="CartaDePorteManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\CartaDePorteManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="CDPHumedadManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\CDPHumedadManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ComparativaManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ComparativaManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ComparativaItemManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ComparativaItemManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="CDPMailFiltrosManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\CDPMailFiltrosManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ClienteManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ClienteManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="CtaCteAcreedorManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\CtaCteAcreedorManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="CtaCteDeudorManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\CtaCteDeudorManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="EntidadManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\EntidadManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="FacturaManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\FacturaManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ICompMTSManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ICompMTSManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="InterfazProntoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\InterfazProntoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="NotaDeCreditoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\NotaDeCreditoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="NotaDeDebitoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\NotaDeDebitoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="OrdenCompraManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\OrdenCompraManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="DiccionarioEquivalenciaManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\DiccionarioEquivalenciaManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ListaPreciosManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ListaPreciosManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="DatabaseSetup.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\DatabaseSetup.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="PedidoItemManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\PedidoItemManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="PedidoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\PedidoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="PresupuestoItemManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\PresupuestoItemManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="PresupuestoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\PresupuestoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ParametroManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ParametroManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="EmpleadoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\EmpleadoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="EmpresaManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\EmpresaManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="FirmaDocumentoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\FirmaDocumentoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="LocalidadManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\LocalidadManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\AssemblyInfo.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\AssemblyInfo.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Application.Designer.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Application.Designer.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Resources.Designer.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Resources.Designer.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Settings.Designer.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Settings.Designer.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ObraManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ObraManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="PaisManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\PaisManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ProveedorManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ProveedorManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ProvinciaManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ProvinciaManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="ReciboManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\ReciboManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="RemitoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\RemitoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="RequerimientoItemManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\RequerimientoItemManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="RequerimientoManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\RequerimientoManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="RubroManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\RubroManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="SubrubroManager.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\SubrubroManager.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="wDemoWilliamsDataSet.Designer.vb" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\wDemoWilliamsDataSet.Designer.vb">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="app.config" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\app.config">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Application.myapp" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Application.myapp">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Settings.settings" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Settings.settings">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="wDemoWilliamsDataSet.xsc" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\wDemoWilliamsDataSet.xsc">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="wDemoWilliamsDataSet.xsd" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\wDemoWilliamsDataSet.xsd">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="wDemoWilliamsDataSet.xss" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\wDemoWilliamsDataSet.xss">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="My Project\Resources.resx" Description="File successfully backed up as C:\ProntoWeb\BusinessLogic\Backup\My Project\Resources.resx">
+</Event><Event ErrorLevel="0" Project="BusinessLogic" Source="BusinessLogic.vbproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="BusinessLogic" Source="BusinessLogic.vbproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="BusinessLogic.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="BusinessLogic.sln" Description="Converted">
+</Event></UpgradeLog>

@@ -1,0 +1,29 @@
+﻿<table id="list" class="scroll" cellpadding="0" cellspacing="0">
+</table>
+
+<script type="text/javascript">
+
+Direccion de entrega DireccionEntrega Localidad de entrega IdLocalidadEntrega Localidades
+Provincia de entrega IdProvinciaEntrega Provincias Mas lugares de entrega DetalleClientesLugaresEntrega
+    $(document).ready(function () {
+        $("#list").jqGrid({
+            url: '/Home/GridData/',
+            datatype: 'json',
+            mtype: 'GET',
+            colNames: ['Id', 'Votes', 'Title'],
+            colModel: [
+                                          { name: 'Id', index: 'Id', width: 40, align: 'left' },
+                                          { name: 'Votes', index: 'Votes', width: 40, align: 'left' },
+                                          { name: 'Title', index: 'Title', width: 200, align: 'left'}],
+            pager: jQuery('#pager'),
+            rowNum: 10,
+            rowList: [5, 10, 20, 50],
+            sortname: 'Id',
+            sortorder: "desc",
+            viewrecords: true,
+            imgpath: '/scripts/themes/coffee/images',
+            caption: 'My first grid',
+            autowidth: true
+        });
+    }); 
+</script>

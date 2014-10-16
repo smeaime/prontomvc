@@ -1,0 +1,128 @@
+
+Log Entry : 
+02/06/2014 05:16:11
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 05:16:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 07:21:56
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 07:22:39
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 07:22:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 07:22:48
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 15:36:41
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 15:36:44
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 15:36:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 15:36:53
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18266. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 15:36:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/06/2014 18:25:41
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+The user 'nanito' is already not in role 'SuperAdmin'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at MvcMembership.AspNetRoleProviderWrapper.RemoveFromRole(MembershipUser user, String roleName) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:line 56
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RemoveFromRole(Guid id, String role) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1026
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1233
+System.Web
+__________________________
+
+Log Entry : 
+02/06/2014 18:25:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Reflection.TargetException
+Non-static method requires a target.
+   at System.Reflection.RuntimeMethodInfo.CheckConsistency(Object target)
+   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
+   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)
+   at System.Data.Objects.ELinq.QueryParameterExpression.TryGetFieldOrPropertyValue(MemberExpression me, Object instance, Object& memberValue)
+   at System.Data.Objects.ELinq.QueryParameterExpression.TryEvaluatePath(Expression expression, ConstantExpression& constantExpression)
+   at System.Data.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments)
+   at System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1246
+mscorlib
+__________________________
+
+Log Entry : 
+02/06/2014 18:25:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+The user 'nanito' is already in role 'Comercial'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:line 51
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1017
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1274
+System.Web
+__________________________
+
+Log Entry : 
+02/06/2014 18:25:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+The user 'nanito' is already in role 'FacturaElectronica'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:line 51
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1017
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1299
+System.Web
+__________________________
+
+Log Entry : 
+02/06/2014 18:25:42
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+The user 'nanito' is already in role 'Requerimientos'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:line 51
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1017
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 1311
+System.Web
+__________________________

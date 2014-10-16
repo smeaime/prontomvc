@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ToolsVersion="2.0">
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+  <DataSources>
+    <ProjectItem>
+      <Name>Cubos.rds</Name>
+      <FullPath>Cubos.rds</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DemoPronto.rds</Name>
+      <FullPath>DemoPronto.rds</FullPath>
+    </ProjectItem>
+  </DataSources>
+  <DataSets>
+    <ProjectItem>
+      <Name>Articulos_TL.rsd</Name>
+      <FullPath>Articulos_TL.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Obras_TL.rsd</Name>
+      <FullPath>Obras_TL.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ubicaciones_TL.rsd</Name>
+      <FullPath>Ubicaciones_TL.rsd</FullPath>
+    </ProjectItem>
+  </DataSets>
+  <Reports>
+    <ProjectItem>
+      <Name>Ajuste Stock.rdl</Name>
+      <FullPath>Ajuste Stock.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Asiento.rdl</Name>
+      <FullPath>Asiento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Balance.rdl</Name>
+      <FullPath>Balance.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Balance2.rdl</Name>
+      <FullPath>Balance2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Caja ingresos.rdl</Name>
+      <FullPath>Caja ingresos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cardex.rdl</Name>
+      <FullPath>Cardex.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cheques diferidos pendientes.rdl</Name>
+      <FullPath>Cheques diferidos pendientes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Comprobante Proveedores.rdl</Name>
+      <FullPath>Comprobante Proveedores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Creditos Vencidos a Fecha.rdl</Name>
+      <FullPath>Creditos Vencidos a Fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Egresos Proyectados.rdl</Name>
+      <FullPath>Cubo Egresos Proyectados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Gastos Detallados.rdl</Name>
+      <FullPath>Cubo Gastos Detallados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Ingresos Egresos Por Obra 2.rdl</Name>
+      <FullPath>Cubo Ingresos Egresos Por Obra 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Ingresos Egresos Por Obra.rdl</Name>
+      <FullPath>Cubo Ingresos Egresos Por Obra.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cubo Stock.rdl</Name>
+      <FullPath>Cubo Stock.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Dashboard1.rdl</Name>
+      <FullPath>Dashboard1.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Deposito Bancario.rdl</Name>
+      <FullPath>Deposito Bancario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
+      <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Desarrollo y seguimiento por item de requerimiento.rdl</Name>
+      <FullPath>Desarrollo y seguimiento por item de requerimiento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Ajuste Stock.rdl</Name>
+      <FullPath>Detalle Ajuste Stock.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Asiento.rdl</Name>
+      <FullPath>Detalle Asiento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Comprobante Proveedores.rdl</Name>
+      <FullPath>Detalle Comprobante Proveedores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Deposito Bancario.rdl</Name>
+      <FullPath>Detalle Deposito Bancario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Factura Venta.rdl</Name>
+      <FullPath>Detalle Factura Venta.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Gasto Bancario.rdl</Name>
+      <FullPath>Detalle Gasto Bancario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Nota Credito Imputaciones.rdl</Name>
+      <FullPath>Detalle Nota Credito Imputaciones.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Nota Credito.rdl</Name>
+      <FullPath>Detalle Nota Credito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Nota Debito.rdl</Name>
+      <FullPath>Detalle Nota Debito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Cuentas 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Cuentas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Cuentas.rdl</Name>
+      <FullPath>Detalle Orden Pago Cuentas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Impuestos.rdl</Name>
+      <FullPath>Detalle Orden Pago Impuestos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Imputaciones 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Imputaciones 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Imputaciones.rdl</Name>
+      <FullPath>Detalle Orden Pago Imputaciones.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Valores 2.rdl</Name>
+      <FullPath>Detalle Orden Pago Valores 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Orden Pago Valores.rdl</Name>
+      <FullPath>Detalle Orden Pago Valores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Otros Ingresos.rdl</Name>
+      <FullPath>Detalle Otros Ingresos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Pedido.rdl</Name>
+      <FullPath>Detalle Pedido.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recepcion.rdl</Name>
+      <FullPath>Detalle Recepcion.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Cuentas 2.rdl</Name>
+      <FullPath>Detalle Recibo Cuentas 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Cuentas.rdl</Name>
+      <FullPath>Detalle Recibo Cuentas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Impuestos 2.rdl</Name>
+      <FullPath>Detalle Recibo Impuestos 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Imputaciones 2.rdl</Name>
+      <FullPath>Detalle Recibo Imputaciones 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Imputaciones.rdl</Name>
+      <FullPath>Detalle Recibo Imputaciones.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Valores 2.rdl</Name>
+      <FullPath>Detalle Recibo Valores 2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Recibo Valores.rdl</Name>
+      <FullPath>Detalle Recibo Valores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Remito.rdl</Name>
+      <FullPath>Detalle Remito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Requerimiento.rdl</Name>
+      <FullPath>Detalle Requerimiento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Detalle Salida Materiales.rdl</Name>
+      <FullPath>Detalle Salida Materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Deuda Vencida a Fecha.rdl</Name>
+      <FullPath>Deuda Vencida a Fecha.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Documentos a Autorizar.rdl</Name>
+      <FullPath>Documentos a Autorizar.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Factura Venta.rdl</Name>
+      <FullPath>Factura Venta.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Gasto Bancario.rdl</Name>
+      <FullPath>Gasto Bancario.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Listado de ordenes de pago.rdl</Name>
+      <FullPath>Listado de ordenes de pago.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Mapa Compras.rdl</Name>
+      <FullPath>Mapa Compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Mayor.rdl</Name>
+      <FullPath>Mayor.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Movimientos por partida.rdl</Name>
+      <FullPath>Movimientos por partida.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Nota Credito.rdl</Name>
+      <FullPath>Nota Credito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Nota Debito.rdl</Name>
+      <FullPath>Nota Debito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Obras.rdl</Name>
+      <FullPath>Obras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Orden Pago.rdl</Name>
+      <FullPath>Orden Pago.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Otros Ingresos.rdl</Name>
+      <FullPath>Otros Ingresos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Pedido.rdl</Name>
+      <FullPath>Pedido.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Pedidos pendientes de recibir.rdl</Name>
+      <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Posicion Financiera.rdl</Name>
+      <FullPath>Posicion Financiera.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Principal.rdl</Name>
+      <FullPath>Principal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Proveedores - Listado de comprobantes detallado.rdl</Name>
+      <FullPath>Proveedores - Listado de comprobantes detallado.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Proveedores - Resumen de compras.rdl</Name>
+      <FullPath>Proveedores - Resumen de compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Proveedores - SICORE - Retencion iva.rdl</Name>
+      <FullPath>Proveedores - SICORE - Retencion iva.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Ranking proveedores.rdl</Name>
+      <FullPath>Ranking proveedores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Recepcion.rdl</Name>
+      <FullPath>Recepcion.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Recibo.rdl</Name>
+      <FullPath>Recibo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RegistrosTXT.rdl</Name>
+      <FullPath>RegistrosTXT.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Remito.rdl</Name>
+      <FullPath>Remito.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Remitos por cliente.rdl</Name>
+      <FullPath>Remitos por cliente.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Requerimiento.rdl</Name>
+      <FullPath>Requerimiento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Requerimientos desliberados.rdl</Name>
+      <FullPath>Requerimientos desliberados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Requerimientos pendientes de asignacion.rdl</Name>
+      <FullPath>Requerimientos pendientes de asignacion.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Requerimientos pendientes sin pedido.rdl</Name>
+      <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Saldo Bancos.rdl</Name>
+      <FullPath>Saldo Bancos.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Saldos Clientes.rdl</Name>
+      <FullPath>Saldos Clientes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Saldos Proveedores.rdl</Name>
+      <FullPath>Saldos Proveedores.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Salida Materiales.rdl</Name>
+      <FullPath>Salida Materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Salidas de materiales.rdl</Name>
+      <FullPath>Salidas de materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Seguimiento Compras.rdl</Name>
+      <FullPath>Seguimiento Compras.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Transporte de mercaderia.rdl</Name>
+      <FullPath>Transporte de mercaderia.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Vales emitidos no retirados.rdl</Name>
+      <FullPath>Vales emitidos no retirados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Stock a fecha.rdl</Name>
+      <FullPath>Stock a fecha.rdl</FullPath>
+    </ProjectItem>
+  </Reports>
+  <Configurations>
+    <Configuration>
+      <Name>Debug</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Debug</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetServerURL>http://serversql1:81/Reportserver</TargetServerURL>
+        <TargetFolder>Pronto informes</TargetFolder>
+        <TargetDataSourceFolder>Orígenes de datos</TargetDataSourceFolder>
+        <OverwriteDataSources>true</OverwriteDataSources>
+        <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
+        <OverwriteDatasets>true</OverwriteDatasets>
+        <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
+        <StartItem>Principal.rdl</StartItem>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>DebugLocal</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\DebugLocal</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>Pronto informes</TargetFolder>
+        <TargetDataSourceFolder>Orígenes de datos</TargetDataSourceFolder>
+        <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
+        <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+    <Configuration>
+      <Name>Release</Name>
+      <Platform>Win32</Platform>
+      <Options>
+        <OutputPath>bin\Release</OutputPath>
+        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+        <TargetFolder>Pronto informes</TargetFolder>
+        <TargetDataSourceFolder>Orígenes de datos</TargetDataSourceFolder>
+        <TargetDatasetFolder>Conjuntos de datos</TargetDatasetFolder>
+        <TargetReportPartFolder>Elementos de informe</TargetReportPartFolder>
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>

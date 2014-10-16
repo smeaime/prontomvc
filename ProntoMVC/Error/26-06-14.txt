@@ -1,0 +1,10 @@
+
+Log Entry : 
+06/26/2014 00:44:40
+Error in: http://localhost:40053/Pronto500/Error/JSErrorHandler. Error Message:System.Net.Mail.SmtpException
+Failure sending mail.
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+   at ProntoMVC.Controllers.ErrorController.JSErrorHandler(String msg, String url, String line) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\ErrorController.cs:line 168
+System
+__________________________

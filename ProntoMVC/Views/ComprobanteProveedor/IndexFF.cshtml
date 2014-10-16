@@ -1,0 +1,606 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.ComprobanteProveedor>
+@{
+    ViewBag.Title = "Fondos fijos";
+}
+<div>
+    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div>
+    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+<div>
+    <input id="rendicion" name="rendicion" type="hidden" value=@Request.QueryString["rendicion"]></div>
+<div>
+    <input id="idcuenta" name="idcuenta" type="hidden" value=@Request.QueryString["idcuenta"]></div>
+@if (false)
+{
+    <style>
+        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+        
+        /* este es el marco principal de la grilla */
+        .ui-widget-content
+        {
+            border: 0px solid #aaaaaa;
+        }
+    </style>
+    <style>
+        .ui-jqgrid
+        {
+            border-right-width: 0px;
+            border-left-width: 0px;
+        }
+        /* If you need to remove all grid's borders you can use
+
+.ui-jqgrid { border-width: 0px; }
+If you want additionally remove vertical border between the cells in the grid you can use */
+        
+        .ui-jqgrid tr.ui-row-ltr td
+        {
+            border-right-color: #E4E4E4;
+        }
+        
+        
+        .ui-jqgrid tr.footrow-ltr td
+        {
+            border-right-color: #E4E4E4 !important;
+        }
+        
+        /*To remove horizontal border between the rows you can use */
+        
+        .ui-jqgrid tr.ui-row-ltr td
+        {
+            border-bottom-color: #E4E4E4;
+        }
+        /*To remove vertical borders between the column headers you can use */
+        
+        th.ui-th-column
+        {
+            border-right-color: #E4E4E4 !important;
+        }
+        /* or alternatively (without the usage of !important) */
+        
+        .ui-jqgrid-labels .ui-th-column
+        {
+            border-right-color: #E4E4E4;
+        }
+    </style>
+}
+<style>
+    .ui-jqgrid tr.footrow-ltr td
+    {
+        border-right-color: transparent !important;
+        border: 0 transparent !important;
+    }
+</style>
+<div class="row-fluid ">
+    @* navbar-fixed-top*@ @* navbar-static-top*@
+    <div class="alert fade in span12 " id="mensajeAlerta" style="display: none;">
+        <button type="button" class="close">
+            &times;</button>
+        <div id="textoMensajeAlerta">
+            @(System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "")
+            @Html.Raw(TempData["Alerta"].NullSafeToString().Replace("\n", "<br/>")) @*uso Raw para que no tome los saltos de linea como caracteres*@
+        </div>
+    </div>
+</div>
+<br />
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid ">
+        <div class="span12 lightblue">
+            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-primary span2 ">
+                Nuevo
+            </button>
+            <div class="span4">
+                <div class="input-prepend input-append">
+                    @* <div class="btn-group ">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                En todo <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu">
+                                Requerimientos
+                            </div>
+                            <ul class="dropdown-menu">
+                                Número
+                            </ul>
+                        </div>*@
+                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                    {
+
+                        <select id="campos " class="span4">
+                            <option>Número</option>
+                            <option>Fecha</option>
+                        </select>
+                        <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                            ...</button>
+
+                    }
+
+@*<div>
+                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+                        <div>
+                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+                        <div>
+                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
+                </div>
+            </div>
+            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+            {
+                <button onclick="window.location.href='@Url.Action("IncrementarRendicionFF", new { idcuentaFF = 500, mProximaRendicion = 10 })'" class="btn ">
+                    cerrar rendicion
+                </button>
+
+            }
+@*obra fondo fijo *@
+@*<button onclick="  " class="btn span1">
+                Excel
+            </button>*@
+            <a id="lImprimir" class="btn pull-right" style="color: Black" href="@Url.Action("ExportarExcelCSV", new { @id = 444 })">
+                <i class="icon-print"></i>&nbsp;CSV</a>
+            <script>
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                $(function () {
+
+
+                    $('#crearbase').click(function () {
+
+                        var cabecera = { guid: $("#UsuarioGuid").val(),
+                            basenueva: $("#EmpresaNueva").val(),
+                            EmpresaDefault: $("#EmpresaDefault").val()
+                        };
+
+
+                        $('html, body').css('cursor', 'wait');
+                        $.ajax({
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            url: ROOT + 'MvcMembership/UserAdministration/CrearBasePronto',
+                            dataType: 'json',
+                            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+                            success: function (result) {
+
+                                if (result) {
+                                    $('html, body').css('cursor', 'auto');
+
+                                    if (true) {
+                                        //window.location = (ROOT + "Pedido/index");
+                                        // window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
+
+                                    } else {
+
+                                        var dt = new Date();
+                                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                                        $("#mensajeAlerta").show();
+                                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                                        //si graban de nuevo, va a dar un alta!!!!
+
+
+                                        $('html, body').css('cursor', 'auto');
+                                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                                    }
+
+                                } else {
+
+
+                                    alert('Base creada');
+                                    $('.loading').html('');
+                                    $('html, body').css('cursor', 'auto');
+                                    //$('#grabar2').attr("disabled", false).val("Aceptar");
+                                }
+
+                            },
+
+                            beforeSend: function () {
+                                $("#loading").show();
+                                // $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+                            },
+                            complete: function () {
+                                $("#loading").hide();
+                            },
+
+
+                            error: function (xhr, textStatus, exceptionThrown) {
+                                try {
+                                    var errorData = $.parseJSON(xhr.responseText);
+                                    var errorMessages = [];
+
+                                    $('html, body').css('cursor', 'auto');
+
+                                    alert(errorData.Message);
+                                } catch (e) {
+                                    $('html, body').css('cursor', 'auto');
+                                }
+
+                            }
+                        });
+                    });
+
+                });
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            </script>
+            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+            {
+        
+          
+                <div class="btn-group  pull-right ">
+                    <button onclick="  " class="btn">
+                        <
+                    </button>
+                    <button onclick="  " class="btn ">
+                        >
+                    </button>
+                </div>
+                <div class="btn-group span2   pull-right ">
+                    <button class="btn dropdown-toggle " data-toggle="dropdown">
+                        más <span class="caret "></span>
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li><a id="Renumerar" href='@Url.Content("~")ComprobanteProveedor/Importador'>Excel</a></li>
+                        <li><a id="DuplicarItems" href="#">Importar fondos fijos</a></li>
+                    </ul>
+                </div>
+        
+            }
+        </div>
+    </div>
+    <script>
+
+        $("#BuscadorListado").change(function () {
+
+
+
+            var grid = jQuery("#Lista");
+            var postdata = grid.jqGrid('getGridParam', 'postData');
+            jQuery.extend(postdata,
+               { filters: '',
+                   searchField: 'NumeroReferencia',
+                   searchOper: 'eq',
+                   searchString: $("#BuscadorListado").val() // parseInt($("#BuscadorListado").val(), 10) || 0
+               });
+            grid.jqGrid('setGridParam', { search: true, postData: postdata });
+            grid.trigger("reloadGrid", [{ page: 1}]);
+
+
+            //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
+        });
+    </script>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
+    </table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+    </div>
+    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+    {
+
+        using (Html.BeginForm("Importar", "ComprobanteProveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+ 
+@*<div class="row-fluid">
+        <div class="">
+            <input type="file" name="file" />
+           
+        </div>
+    </div>*@
+    
+@*   http://stackoverflow.com/questions/11235206/twitter-bootstrap-form-file-element-upload-button *@
+    
+        <br />
+        <div>
+            <div style="position: relative;" class="span5">
+                <a class='btn' href='javascript:;'>Elija archivo...
+                    <input type="file" name="file" style='position: absolute; z-index: 2; top: 0; left: 0;
+                        filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                        opacity: 0; background-color: transparent; color: transparent;' size="40" onchange='$("#upload-file-info").html($(this).val());'>
+                </a>&nbsp; <span class='label label-info' id="upload-file-info"></span>@*<i class="icon-user icon-white"></i>*@
+            </div>
+            <button type="submit" class="btn span1">
+                subir
+            </button>
+        </div>
+    
+    
+    
+        <a class="span1" href="@Url.Content("~")ComprobanteProveedor/Test">test importar</a>
+        <a href="@Url.Content("~")Test/FondoFijo">test alta</a>
+        <br />
+        }
+    }
+</div>
+@*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
+<script type="text/javascript">
+
+    //////////////////////////////////////
+    //////////////////////////////////////
+
+    function PieTotales() {
+
+
+
+        //    http://stackoverflow.com/questions/14481751/how-to-calculate-the-sum-of-column-and-show-on-footerrow-in-jqgrid-in-asp-net
+        //If you need to calculate the sum on the server side, then you must enable userDataOnFooter option first:
+        //$('#gridId').jqGrid({
+        //    ...
+        //    footerrow : true,
+        //    userDataOnFooter : true
+        //});
+        //And then include the sum in your server response. For exmple in case of JSON it should look like this:
+
+
+        /*
+    
+
+
+        var Subtotal = $('#Lista').jqGrid('getCol', 'Subtotal', false, 'sum');
+        var neto = $('#Lista').jqGrid('getCol', 'neto', false, 'sum');
+        var IVA1 = $('#Lista').jqGrid('getCol', 'IVA1', false, 'sum');
+        var IVA2 = $('#Lista').jqGrid('getCol', 'IVA2', false, 'sum');
+        var Total = $('#Lista').jqGrid('getCol', 'Total', false, 'sum');
+
+
+        $('#Lista').jqGrid('footerData', 'set', {
+        // NumeroObra: 'TOTALES', 
+        // Importe: totalCantidad.toFixed(DECIMALES),
+        Subtotal: Subtotal,
+        neto: neto,
+        IVA1: IVA1,
+        IVA2: IVA2, // estas son las percepciones??
+        Total: Total
+
+
+        });
+
+        */
+    }
+
+
+
+    //////////////////////////////////////
+
+    $(document).ready(function () {
+
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("ComprobantesProveedorFF", "ComprobanteProveedor")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); },
+                'rendicion': function () { return $("#rendicion").val(); },
+                'idcuenta': function () { return $("#idcuenta").val(); }
+            },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', '', '', 'IdPedido', 'Tipo comp', 'Nro.interno', 'Numero', 'CtaCte/FFijo',
+
+
+             'Proveedor',
+
+             "Subtotal",
+            "Neto gravado",
+            "IVA 1",
+            "IVA 2",
+            "Aj.IVA",
+
+            "Imp.bonif.",
+             "Total",
+
+            'Fecha comp.', 'Fecha recep', 'Vence', 'Cod.Prov.',
+
+            "Proveedor FF",
+            "Vale",
+             "Condicion IVA",
+            "Obra",
+            "Cuenta contable",
+
+
+
+            "Mon.",
+            "Cotiz. dolar",
+            "Provincia destino",
+
+            "Observaciones",
+             "Ingreso",
+             "Fecha ingreso",
+          "Modifico",
+             "Fecha modif.",
+
+           "Dest.Pago",
+         "Nro.Rend.FF",
+         "Etapa",
+      "Rubro",
+         "Circuito de firmas completo",
+
+
+],
+
+            colModel: [
+
+                        { name: 'act', index: 'act', align: 'center', width: 220, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        {name: 'act', index: 'act', align: 'center', width: 80, hidden: false, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        {name: 'act', index: 'act', align: 'center', width: 80, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Tipo', index: 'Numero', align: 'left', width: 100, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Nro int', index: 'Numero', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Nro', index: 'Orden', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'tipoff', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', hidden: true, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+
+                        { name: 'Proveedor', index: 'zzzzzz', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+            /* , formatter: "number" */
+                        {name: 'Subtotal', index: 'zzzzzz', align: 'right', formatter: "number", width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Neto', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IVA1', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IVA2', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'ajusteiva', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                          { name: 'bonif', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Total', index: 'zzzzzz', align: 'right', formatter: "number", width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'codProveedor', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                              { name: 'ProveedorFF', index: 'ProveedorFF', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+
+
+
+
+
+                        { name: 'vale', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'cond', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'obra', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'cuenta', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+
+
+
+                       { name: 'Mon', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Cotiz', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'ProvDest', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'Obs', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva2', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva3', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva4', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+
+
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            ondblClickRow: function (idrow) {
+                window.location.href = ROOT + 'ComprobanteProveedor/EditFF/' + idrow;
+
+
+                // $("#edtData").click();
+
+                //edicion inline
+                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
+                //                if(id && id!==lastSel){ 
+                //                    jQuery('#Lista').restoreRow(lastSel); 
+                //                    lastSel=id; 
+                //                }
+                //                jQuery('#Lista').editRow(id, true); 
+                //   
+
+            },
+
+            loadComplete: function () {
+
+                PieTotales();
+
+            },
+
+
+            pager: $('#ListaPager'),
+            rowNum: 50,
+            rowList: [10, 20, 50, 100],
+            sortname: 'Numero',
+            sortorder: 'desc',
+            viewrecords: true,
+            toppager: true,
+
+
+
+
+            ///////////////////////////////
+            //width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+
+            footerrow: true,
+            userDataOnFooter: true
+            // ,caption: '<b>PEDIDOS</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+
+        //////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
+
+        //////////////////////////////////////
+        //////////////////////////////////////
+
+        function exportExcel($id) {
+            var keys = [], ii = 0, rows = "";
+            var ids = $id.getDataIDs();  // Get All IDs
+            var row = $id.getRowData(ids[0]);     // Get First row to get the labels
+            for (var k in row) {
+                keys[ii++] = k;    // capture col names
+                rows = rows + k + "\t";     // output each Column as tab delimited
+            }
+            rows = rows + "\n";   // Output header with end of line
+            for (i = 0; i < ids.length; i++) {
+                row = $id.getRowData(ids[i]); // get each row
+                for (j = 0; j < keys.length; j++) rows = rows + row[keys[j]] + "\t"; // output each Row as tab delimited
+                rows = rows + "\n";  // output each row with end of line
+            }
+            rows = rows + "\n";  // end of line at the end
+            var form = "<form name='csvexportform' action='" + php_path + "csvexport.php' method='post'>";
+            form = form + "<input type='hidden' name='csvBuffer' value='" + rows + "'>";
+            form = form + "</form><script>document.csvexportform.submit();</sc" + "ript>";
+            OpenWindow = window.open('', '');
+            OpenWindow.document.write(form);
+            OpenWindow.document.close();
+        }
+
+        function gridcsvexport(id) {
+            $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
+                caption: '',
+                title: 'export',
+                buttonicon: 'ui-icon-newwin',
+                position: 'last',
+                onClickButton: function () {
+                    exportExcel($(this));
+                }
+            });
+        }
+
+
+
+
+
+
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+
+    });
+
+
+
+
+</script>

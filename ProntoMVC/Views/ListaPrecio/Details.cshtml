@@ -1,0 +1,9 @@
+﻿@*http://stackoverflow.com/questions/5532568/master-detail-sample-code-for-mvc-3-razor-using-ajax-for-details*@
+
+@model ProntoMVC.Data.Models.ListasPreciosDetalle
+<ul>
+ @Html.TextBoxFor(model => model.IdArticulo) 
+ @Html.TextBoxFor(model => model.Articulo.Descripcion) 
+ @Html.TextBoxFor(model => model.Precio) 
+ </ul>
+ 

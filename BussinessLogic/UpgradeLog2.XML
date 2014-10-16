@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="BusinessLogic">
+</Property><Property Name="Solution File" Value="C:\Backup\BussinessLogic\BusinessLogic.sln">
+</Property><Property Name="Date" Value="sábado, 16 de marzo de 2013">
+</Property><Property Name="Time" Value="13:50 p.m.">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="BusinessLogic" Source="BusinessLogic.vbproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="BusinessLogic" Source="BusinessLogic.vbproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="BusinessLogic.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="BusinessLogic.sln" Description="Converted">
+</Event></UpgradeLog>

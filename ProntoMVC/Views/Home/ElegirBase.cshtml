@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Elija la base";
+}
+<h2>
+    Elija la base</h2>
+<p>
+    @Html.DropDownList("Bases", String.Empty)
+    @*    @Html.ActionLink("Continuar", "BaseElegida", "Home", new { sBase = "Autotrol" }, null)*@
+    @*<input type="button" id="grabar" value="Grabar" class="but" />
+                    @Url.Action("BaseElegida", "Home")*@ @* http://stackoverflow.com/questions/4113314/html-actionlink-with-id-value-from-a-dropdownlist*@
+    @Html.ActionLink("Continuar", "BaseElegida", "Home", null, new { @id = "SubmitName" })
+    <script type="text/javascript">
+        $('#SubmitName').click(function () {
+            //var first = $('#Bases').val();
+            var first = $("#Bases option:selected").text();
+            var path = '@Url.Content("~/Home/BaseElegida")' + "?sBase=" + first
+            $(this).attr("href", path);
+        });
+    </script>
+</p>

@@ -1,0 +1,742 @@
+﻿@model ProntoMVC.Data.Models.Cliente
+@{
+    ViewBag.Title = "Cliente " + Model.RazonSocial;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
+{
+
+    @Html.ValidationSummary(true)
+
+       
+    
+
+    
+    <div class="container-fluid">
+        @*        <legend>Cliente</legend>
+*@
+        <div>@Html.Hidden("IdCliente", Model.IdCliente)</div>
+        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+            @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500;
+                text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                <span class="span1" style="padding-top: 15px; width: 110px; margin-right: 10px">Cliente</span>
+                @Html.TextBox("CopiaPuntoVenta", Model.RazonSocial, new { style = "height: 50px ;  font-weight: 500; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span8", @readonly = "readonly" })
+                
+            </div>
+            <script>
+                $(function () {
+
+                    function resizeInput() {
+                        // $(this).attr('size', $(this).val().length + 2);
+                        $(this).css('width', $(this).val().length * 32);
+                    }
+
+
+                    // $('#PuntoVenta').keyup(resizeInput).each(resizeInput);
+
+                    //    $('#NumeroFactura').css('width', $('#NumeroFactura').val().length * 21);
+
+                })
+            </script>
+        </div>
+        <style>
+            .nav-tabs > li > a
+            {
+                border: 1px solid rgba(0, 0, 0, 0.03); /* !important; */
+            }
+        </style>
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li class="active"><a href="#red" data-toggle="tab">Datos generales</a></li>
+            <li><a href="#contactos" data-toggle="tab">Contactos</a></li>
+            <li><a href="#retenc" data-toggle="tab">Informacion para retenciones</a></li>
+            <li><a href="#exporta" data-toggle="tab">Informacion para exportaciones</a></li>
+            <li><a href="#contables" data-toggle="tab">Datos contables</a></li>
+            <li><a href="#lugares" data-toggle="tab">Lugares de entrega</a></li>
+        </ul>
+        @*<div class="alert">
+            Allllllllll
+            @Html.Raw(ViewBag.Errores)
+            <button type="button" class="close" data-dismiss="alert">
+                &times;</button>
+        </div>*@
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="red">
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.CodigoCliente, "Codigo")
+                        @Html.TextBoxFor(model => model.CodigoCliente, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.CodigoCliente)
+                    </div>
+                    <div class="span4 lightblue">
+                        @*   @Html.Hidden( "TipoCliente", Model.TipoCliente)*@
+                        @Html.LabelFor(model => model.TipoCliente, "Tipo")
+                        @Html.RadioButtonFor(model => model.TipoCliente, "1") CL
+                        @Html.RadioButtonFor(model => model.TipoCliente, "2") CE
+                        @Html.RadioButtonFor(model => model.TipoCliente, "3") CV
+                        @Html.RadioButtonFor(model => model.TipoCliente, "4") CO
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.Hidden("Codigo", Model.Codigo)
+                        @*la combinacion de los dos se pone en Codigo =TipoCliente+CodigoCliente*@
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.RazonSocial, "Razon Social")
+                        @Html.TextBoxFor(model => model.RazonSocial, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.RazonSocial)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.NombreFantasia, "Nombre Comercial")
+                        @Html.TextBoxFor(model => model.NombreFantasia, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.NombreFantasia)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdEstado, "Estado actual")
+                        @Html.DropDownList("IdEstado")
+                        @Html.ValidationMessageFor(model => model.IdEstado)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Direccion)
+                        @Html.TextBoxFor(model => model.Direccion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Direccion)
+                    </div>
+                    <div class="span4 lightblue">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @*  @Html.LabelFor(model => model.IdLocalidad, "Localidad")
+                        @Html.DropDownList("IdLocalidad", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdLocalidad)
+                        <script>
+                            $('#IdLocalidad').change(function () {
+                                $('IdProvincia').val(100);
+                                $.ajax({
+                                    type: 'POST',
+                                    contentType: 'application/json; charset=utf-8',
+                                    url: '/Pronto2/Cliente/GetLocalidades',
+                                    dataType: 'json',
+                                    data: dataToSend,
+                                    success: function (result) {
+                                        if (result) {
+                                            grid1.trigger('reloadGrid');
+                                            window.location.replace(ROOT + "Cliente/index");
+                                        } else {
+                                            alert('No se pudo grabar el comprobante.');
+                                        }
+                                    }
+                                });
+
+
+                            });
+                        </script>*@ @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @Html.HiddenFor(model => model.IdLocalidad)
+                        @Html.LabelFor(model => model.IdLocalidad, "Localidad")
+                        @Html.TextBox("Localidad", (Model.Localidad == null ? "" : Model.Localidad.Nombre), new { @class = "span10" })
+                        <script type="text/jscript">
+
+                            $("#Localidad").autocomplete({
+                                source: '@Url.Action("GetLocalidadesAutocomplete")',
+                                minLength: 0,
+                                messages: { noResults: "", results: function () { } },
+                                select: function (event, ui) {
+                                    $("#IdLocalidad").val(ui.item.id);
+                                    $("#Localidad").val(ui.item.value);
+                                    $("#IdProvincia").val(ui.item.idprovincia);
+
+                                    event.preventDefault();
+                                }
+
+                            });
+
+                        </script>
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                    </div>
+                    <div class="span4 lightblue">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Provincia, "Provincia")
+                        @Html.DropDownList("IdProvincia", String.Empty)
+                        @Html.ValidationMessageFor(model => model.Provincia)
+                    </div>
+                    <div class="span4 lightblue">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.CodigoPostal, "Codigo Postal")
+                        @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.CodigoPostal)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdPais, "Pais")
+                        @Html.DropDownList("IdPais", String.Empty)
+                        @Html.ValidationMessageFor(model => model.Pais)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Cuit)
+                        @Html.TextBoxFor(model => model.Cuit, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Cuit)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Telefono)
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdCodigoIva, "Codigo de IVA")
+                        @Html.DropDownList("IdCodigoIva", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdCodigoIva)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Fax)
+                        @Html.TextBoxFor(model => model.Fax, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Fax)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdListaPrecios, "Lista de Precios")
+                        @Html.DropDownList("IdListaPrecios", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdListaPrecios)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdCondicionVenta, "Condicion de Venta")
+                        @Html.DropDownList("IdCondicionVenta", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdCondicionVenta)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdMoneda, "Moneda")
+                        @Html.DropDownList("IdMoneda", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdMoneda)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Vendedor1, "Vendedor")
+                        @Html.DropDownList("Vendedor1", String.Empty)
+                        @Html.ValidationMessageFor(model => model.Vendedor1)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.CreditoMaximo, "Limite de credito")
+                        @Html.TextBoxFor(model => model.CreditoMaximo, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.CreditoMaximo)
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaAlta, "Fecha de alta")
+                        @Html.TextBoxFor(model => model.FechaAlta, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaAlta)
+                        <script type="text/jscript">
+                            $("#FechaAlta").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Cobrador)
+                        @Html.DropDownList("Cobrador", String.Empty)
+                        @Html.ValidationMessageFor(model => model.Cobrador)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Auxiliar)
+                        @Html.TextBoxFor(model => model.Auxiliar, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Auxiliar)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span11 lightblue">
+                        @Html.LabelFor(model => model.Observaciones)
+                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Observaciones)
+                    </div>
+                    <!--/span-->
+                </div>
+            </div>
+            <div class="tab-pane" id="contactos">
+                <div class="row-fluid">
+                    <div class="span11 lightblue">
+                        @Html.LabelFor(model => model.Contacto, "Contacto Principal")
+                        @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Contacto)
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 lightblue">
+                        @*  ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////*@
+                        <table id="ListaContactos" class="scroll" cellpadding="0" cellspacing="0" style="width: 100%">
+                        </table>
+                        @*pinta que al no usar el tag de cierre separado se vuelve loco*@
+                        <div id="PagerContactos" class="scroll">
+                        </div>
+                        <input type="button" id="addDataContactos" class="btn btn-mini" value="Agregar item" />
+                        <input type="button" id="edtDataContactos" class="btn btn-mini" value="Modificar item" />
+                        <input type="button" id="delDataContactos" class="btn btn-mini" value="Borrar item" />
+                        @* ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////*@
+                    </div>
+                    <!--/span-->
+                </div>
+            </div>
+            <div class="tab-pane" id="retenc">
+                Ingresos brutos
+                <hr />
+                <div class="row-fluid">
+                    <div class="span6 lightblue">
+                        @Html.LabelFor(model => model.IBCondicion, "Condicion")
+                        @Html.RadioButtonFor(model => model.IBCondicion, "1") Exento
+                        @Html.RadioButtonFor(model => model.IBCondicion, "2") Inscripto Jurisdicion Local
+                        @Html.RadioButtonFor(model => model.IBCondicion, "3") Inscripto convenio multilateral
+                        @Html.RadioButtonFor(model => model.IBCondicion, "4") No alcanzado
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IBNumeroInscripcion, "Nro. Inscripcion")
+                        @Html.TextBoxFor(model => model.IBNumeroInscripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IBNumeroInscripcion)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdIBCondicionPorDefecto, "Categoria por defecto 1")
+                        @Html.DropDownList("IdIBCondicionPorDefecto", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdIBCondicionPorDefecto)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdIBCondicionPorDefecto2, "Categoria por defecto 2")
+                        @Html.DropDownList("IdIBCondicionPorDefecto2", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdIBCondicionPorDefecto2)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdIBCondicionPorDefecto3, "Categoria por defecto 3")
+                        @Html.DropDownList("IdIBCondicionPorDefecto3", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdIBCondicionPorDefecto3)
+                    </div>
+                </div>
+                <h5>
+                    Buenos Aires</h5>
+                <div class="row-fluid">
+                    <div class="span1 lightblue">
+                        @Html.LabelFor(model => model.PorcentajeIBDirecto, "%IB directo")
+                        @Html.TextBoxFor(model => model.PorcentajeIBDirecto, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.PorcentajeIBDirecto)
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaInicioVigenciaIBDirecto, "Fecha inicio vigencia")
+                        @Html.TextBoxFor(model => model.FechaInicioVigenciaIBDirecto, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaInicioVigenciaIBDirecto)
+                        <script type="text/jscript">
+                            $("#FechaInicioVigenciaIBDirecto").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaFinVigenciaIBDirecto, "Fecha inicio vigencia")
+                        @Html.TextBoxFor(model => model.FechaFinVigenciaIBDirecto, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaFinVigenciaIBDirecto)
+                        <script type="text/jscript">
+                            $("#FechaFinVigenciaIBDirecto").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.GrupoIIBB, "Grupo")
+                        @Html.TextBoxFor(model => model.GrupoIIBB, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.GrupoIIBB)
+                    </div>
+                </div>
+                <h5>
+                    Capital</h5>
+                <div class="row-fluid">
+                    <div class="span1 lightblue">
+                        @Html.LabelFor(model => model.PorcentajeIBDirectoCapital, "%IB directo")
+                        @Html.TextBoxFor(model => model.PorcentajeIBDirectoCapital, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.PorcentajeIBDirectoCapital)
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaFinVigenciaIBDirectoCapital, "Fecha inicio vigencia")
+                        @Html.TextBoxFor(model => model.FechaFinVigenciaIBDirectoCapital, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaFinVigenciaIBDirectoCapital)
+                        <script type="text/jscript">
+                            $("#FechaFinVigenciaIBDirectoCapital").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaFinVigenciaIBDirectoCapital, "Fecha inicio vigencia")
+                        @Html.TextBoxFor(model => model.FechaFinVigenciaIBDirectoCapital, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaFinVigenciaIBDirectoCapital)
+                        <script type="text/jscript">
+                            $("#FechaFinVigenciaIBDirectoCapital").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.GrupoIIBBCapital, "Grupo")
+                        @Html.TextBoxFor(model => model.GrupoIIBBCapital, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.GrupoIIBBCapital)
+                    </div>
+                </div>
+                <h5>
+                    Percepcion IVA</h5>
+                <hr />
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.EsAgenteRetencionIVA, "El cliente es agente de retencion IVA")
+                        @*@Html.CheckBox("EsAgenteRetencionIVA", true, new { @class = "" })*@
+                        @Html.RadioButtonFor(model => model.EsAgenteRetencionIVA, "SI") SI
+                        @Html.RadioButtonFor(model => model.EsAgenteRetencionIVA, "NO") NO
+                        @Html.ValidationMessageFor(model => model.EsAgenteRetencionIVA)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.BaseMinimaParaPercepcionIVA, "Base minima para calcular percepcion")
+                        @Html.TextBoxFor(model => model.BaseMinimaParaPercepcionIVA, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.BaseMinimaParaPercepcionIVA)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.PorcentajePercepcionIVA, "Porcentaje a aplicar")
+                        @Html.TextBoxFor(model => model.PorcentajePercepcionIVA, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.PorcentajePercepcionIVA)
+                    </div>
+                </div>
+                <hr />
+                Impuesto a las ganancias
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IGCondicion, "Condicion ganancias")
+                        @Html.DropDownList("IGCondicion", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IGCondicion)
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="exporta">
+                <div class="row-fluid">
+                    <div class="span11 lightblue">
+                        @Html.LabelFor(model => model.IBNumeroInscripcion, "Numero de inscripcion")
+                        @Html.TextBoxFor(model => model.IBNumeroInscripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IBNumeroInscripcion)
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row-fluid">
+                    <div class="span11 lightblue">
+                        @Html.LabelFor(model => model.Importaciones_DenominacionInscripcion, "Denominacion inscripcion")
+                        @Html.TextBoxFor(model => model.Importaciones_DenominacionInscripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Importaciones_DenominacionInscripcion)
+                    </div>
+                    <!--/span-->
+                </div>
+            </div>
+            <div class="tab-pane" id="contables">
+                <div class="row-fluid">
+                    <div class="span6 lightblue">
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @Html.HiddenFor(model => model.IdCuenta)
+                        @Html.LabelFor(model => model.IdCuenta, "Cuenta contable para operaciones en pesos")
+                        @Html.TextBox("CodigoCuentaNormal", (Model.Cuenta == null ? "" : Model.Cuenta.Codigo.ToString()), new { @class = "span2" })
+                        @Html.TextBox("DescripcionCuentaNormal", (Model.Cuenta == null ? "" : Model.Cuenta.Descripcion), new { @class = "span10" })
+                        <script type="text/jscript">
+
+
+                            $("#CodigoCuentaNormal").autocomplete({
+                                source: '@Url.Action("GetCodigosCuentasAutocomplete2", "Cuenta")', minLength: 3,
+                                messages: { noResults: "", results: function () { } },
+                                select: function (event, ui) {
+                                    $("#IdCuenta").val(ui.item.id);
+                                    $("#CodigoCuentaNormal").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                    $("#DescripcionCuentaNormal").val(ui.item.title);
+                                    event.preventDefault();
+                                }
+                            })
+
+                            $("#DescripcionCuentaNormal").autocomplete({
+                                source: '@Url.Action("GetCuentasAutocomplete", "Cuenta")',
+                                minLength: 0,
+                                messages: { noResults: "", results: function () { } },
+                                select: function (event, ui) {
+                                    $("#IdCuenta").val(ui.item.id);
+                                    $("#CodigoCuentaNormal").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                    $("#DescripcionCuentaNormal").val(ui.item.title);
+                                    event.preventDefault();
+                                }
+
+                            });
+
+                        </script>
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6 lightblue">
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @Html.HiddenFor(model => model.IdCuentaMonedaExt)
+                        @Html.LabelFor(model => model.IdCuentaMonedaExt, "Cuenta contable para operaciones en moneda extranjera")
+                        @Html.TextBox("CodigoCuentaExt", (Model.CuentaMonedaExt == null ? "" : Model.CuentaMonedaExt.Codigo.ToString()), new { @class = "span2" })
+                        @Html.TextBox("DescripcionCuentaExt", (Model.CuentaMonedaExt == null ? "" : Model.CuentaMonedaExt.Descripcion), new { @class = "span10" })
+                        <script type="text/jscript">
+
+
+                            $("#CodigoCuentaExt").autocomplete({
+                                source: '@Url.Action("GetCodigosCuentasAutocomplete2", "Cuenta")', minLength: 3,
+                                messages: { noResults: "", results: function () { } },
+                                select: selecIdCuentaMonedaExt
+                            })
+
+                            $("#DescripcionCuentaExt").autocomplete({
+                                source: '@Url.Action("GetCuentasAutocomplete", "Cuenta")',
+                                minLength: 0,
+                                messages: { noResults: "", results: function () { } },
+                                select: selecIdCuentaMonedaExt
+
+                            });
+
+                            function selecIdCuentaMonedaExt(event, ui) {
+                                $("#IdCuentaMonedaExt").val(ui.item.id);
+                                $("#CodigoCuentaExt").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
+                                $("#DescripcionCuentaExt").val(ui.item.title);
+                                event.preventDefault();
+                            }
+                           
+
+                        </script>
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                    </div>
+                </div>
+                <hr />
+                Informacion para servicios de cobranza bancaria
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdBancoDebito, " Activar debito bancario ")
+                        @Html.CheckBox("ActivarDebito", true, new { @class = "" })
+                        <script>
+                            $("#ActivarDebito").click(function () {
+                                CheckDebito();
+                            });
+
+                            function CheckDebito() {
+                                var thischeck = $('#ActivarDebito');
+                                if (thischeck.is(':checked')) {
+                                    $("#IdBancoDebito").prop('disabled', false);
+                                    $("#CBU").prop('disabled', false);
+                                    $("#IdBancoGestionador").prop('disabled', false);
+
+
+                                }
+                                else {
+                                    $("#IdBancoDebito").prop('disabled', true);
+                                    $("#CBU").prop('disabled', true);
+                                    $("#IdBancoGestionador").prop('disabled', true);
+
+                                }
+                            }
+                            
+                        </script>
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdBancoDebito, "Banco")
+                        @Html.DropDownList("IdBancoDebito", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdBancoDebito)
+                    </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.CBU, "CBU")
+                        @Html.TextBoxFor(model => model.CBU, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.CBU)
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdBancoGestionador, "Banco que gestiona el cobro")
+                        @Html.DropDownList("IdBancoGestionador", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdBancoGestionador)
+                    </div>
+                </div>
+                @if (false)
+                {
+                    <div class="row-fluid">
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.Importaciones_DenominacionInscripcion, "Activar debito tarjeta")
+                            @Html.CheckBox("ActivarTarjeta", false, new { @class = "" })
+                            <script>
+                                $("#ActivarTarjeta").click(function () {
+                                    CheckTarjeta();
+                                });
+
+                                function CheckTarjeta() {
+                                    var thischeck = $('#ActivarTarjeta');
+                                    if (thischeck.is(':checked')) {
+                                        $("#Importaciones_DenominacionInscripcion").prop('disabled', false);
+                                        $("#Importaciones_DenominacionInscripcion").prop('disabled', false);
+                                    }
+                                    else {
+                                        $("#IdBancoDebito").prop('disabled', true);
+                                        $("#CBU").prop('disabled', true);
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.IdBancoDebito, "Tarjeta")
+                            @Html.TextBoxFor(model => model.Importaciones_DenominacionInscripcion, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Importaciones_DenominacionInscripcion)
+                        </div>
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.Importaciones_DenominacionInscripcion, "Numero")
+                            @Html.TextBoxFor(model => model.Importaciones_DenominacionInscripcion, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Importaciones_DenominacionInscripcion)
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="tab-pane" id="lugares">
+                @*       @{Html.Partial("_GrillaLugaresEntrega", Model); }*@
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.DireccionEntrega, "Dirección entrega")
+                        @Html.TextBoxFor(model => model.DireccionEntrega, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.DireccionEntrega)
+                    </div>
+                    <div class="span2 lightblue">
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                        @Html.HiddenFor(model => model.IdLocalidadEntrega)
+                        @Html.LabelFor(model => model.IdLocalidadEntrega, "Localidad")
+                        @Html.TextBox("LocalidadEntregaAC", (Model.LocalidadEntrega == null ? "" : Model.LocalidadEntrega.Nombre), new { @class = "span10" })
+                        <script type="text/jscript">
+
+                            $("#LocalidadEntregaAC").autocomplete({
+                                source: '@Url.Action("GetLocalidadesAutocomplete")',
+                                minLength: 0,
+                                messages: { noResults: "", results: function () { } },
+                                select: function (event, ui) {
+                                    $("#IdLocalidadEntrega").val(ui.item.id);
+                                    $("#LocalidadEntregaAC").val(ui.item.value);
+                                    $("#IdProvinciaEntrega").val(ui.item.idprovincia);
+
+                                    event.preventDefault();
+                                }
+
+                            });
+
+                        </script>
+                        @*---------------------------------------------------------------------------------------*@
+                        @*---------------------------------------------------------------------------------------*@
+                    </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdProvinciaEntrega, "Provincia entrega")
+                        @Html.DropDownList("IdProvinciaEntrega", String.Empty)
+                        @Html.ValidationMessageFor(model => model.IdProvinciaEntrega)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 lightblue">
+                        @*  ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////*@
+                        <table id="ListaLugaresEntrega" class="scroll" cellpadding="0" cellspacing="0" style="width: 100%">
+                        </table>
+                        @*pinta que al no usar el tag de cierre separado se vuelve loco*@
+                        <div id="PagerLugaresEntrega" class="scroll">
+                        </div>
+                        <input type="button" id="addDataLugaresEntrega" class="btn btn-mini" value="Agregar item" />
+                        <input type="button" id="edtDataLugaresEntrega" class="btn btn-mini" value="Modificar item" />
+                        <input type="button" id="delDataLugaresEntrega" class="btn btn-mini" value="Borrar item" />
+                        <script src="@Url.Content("~/Scripts/jsCliente.js")" type="text/javascript"></script>
+                        @* ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div>
+            @*http://stackoverflow.com/questions/7292590/problem-with-different-model-type-in-partial-view*@
+            @*Even if the types match, you can get this error when a null is passed to a partial view,*@
+            @*http://stackoverflow.com/questions/2315129/the-model-item-passed-into-the-dictionary-is-of-type-mvc-models-modela-but-thi*@
+            @*http://stackoverflow.com/questions/650393/renderpartial-with-null-model-gets-passed-the-wrong-type*@
+            @*http://stackoverflow.com/questions/6381574/how-to-pass-parent-model-from-inside-partial-view*@
+            @*ok, pero el problema no es tanto como pasar el IdCliente al modelogrilla anidado (agrego una property y listo), sino
+            cómo le devuelve el modelogrilla anidado los rengloenes al modelo de la entidad*@
+            @*           @{
+                Model.grilla.constructor();
+            }
+            @{Html.RenderPartial("_GrillaContactos", Model.grilla, new ViewDataDictionary());}
+ *@ @*@{Html.RenderAction("_GrillaContactos", null, new { id = Model.IdCliente });}*@ @* @Html.EditorFor(x => Model.grilla) *@
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row-fluid">
+            @*<div class="navbar navbar-fixed-bottom">*@
+            <div class="span11 lightblue">
+                @* <input type="submit" id="grabar" value="Aceptar" class="btn btn-primary" />*@
+                <input type="button" id="grabar" value="Aceptar" class="btn btn-primary" />
+                @*<input type="button" id="grabarNormal" value="Guardar generico" class="btn btn-primary" />*@
+                @*<input type="button" id="Guardar" value="Borrar" class="butCancela" />*@
+                @if (Model.IdCliente > 0)
+                { @Html.ActionLink("Borrar", "DeleteConfirmedDirecto", new { id = Model.IdCliente }, new { @class = "btn btn-link" }) 
+                }
+                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+                @*<input type="submit" id="grabar2" value="Guardar 2" class="btn btn-primary" />*@
+            </div>
+            @*</div>*@
+        </div>
+    </div>
+    <!--/.fluid-container-->
+}
