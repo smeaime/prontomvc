@@ -1,0 +1,12 @@
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\Repositorio.dll.config
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\Repositorio.dll
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\Repositorio.pdb
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\EntityFramework.dll
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\EntityFramework.SqlServer.dll
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\ProntoMVC.Data.dll
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\ProntoMVC.Data.pdb
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\EntityFramework.xml
+C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\EntityFramework.SqlServer.xml
+C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\ProntoMVC.Repositorio.csprojResolveAssemblyReference.cache
+C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\Repositorio.dll
+C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\Repositorio.pdb
