@@ -1,0 +1,350 @@
+
+Log Entry : 
+02/18/2014 12:07:34
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:34
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:34
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:42
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:Me faltan parametros. Cuentas_TX_PorObraCuentaGasto esperaba 3 y se le pasaron 2
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:50
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.InvalidOperationException
+The stored procedure 'wObras_TX_PorNumero' doesn't exist.
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 138
+System.Data
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:50
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:50
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.InvalidOperationException
+The stored procedure 'wCuentasGastos_TX_PorCodigo2' doesn't exist.
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 138
+System.Data
+__________________________
+
+Log Entry : 
+02/18/2014 12:07:50
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.ComprobanteProveedorController.BatchUpdate(ComprobanteProveedor ComprobanteProveedor) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\ComprobanteProveedorController.cs:line 822
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:02
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:Me faltan parametros. Cuentas_TX_PorObraCuentaGasto esperaba 3 y se le pasaron 2
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:03
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.InvalidOperationException
+The stored procedure 'wObras_TX_PorNumero' doesn't exist.
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 138
+System.Data
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:04
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:04
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.InvalidOperationException
+The stored procedure 'wCuentasGastos_TX_PorCodigo2' doesn't exist.
+   at System.Data.SqlClient.SqlCommand.DeriveParameters()
+   at System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 138
+System.Data
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:04
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.ComprobanteProveedorController.BatchUpdate(ComprobanteProveedor ComprobanteProveedor) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\ComprobanteProveedorController.cs:line 822
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:05
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________
+
+Log Entry : 
+02/18/2014 12:08:06
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/Test. Error Message:There is no row at position 0.
+__________________________

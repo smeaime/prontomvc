@@ -1,0 +1,61 @@
+﻿Imports System
+Imports System.Reflection
+Imports System.Web.UI.WebControls
+Imports Pronto.ERP.Bll
+Imports Pronto.ERP.BO
+
+Partial Class Pedido
+    Inherits System.Web.UI.Page
+
+    Private IdPedido As Integer = -1
+	Private mKey As String, SC As String
+
+    Public Property IdEntity() As Integer
+        Get
+            Return DirectCast(ViewState("IdPedido"), Integer)
+        End Get
+        Set(ByVal Value As Integer)
+            ViewState("IdPedido") = Value
+        End Set
+    End Property
+
+	Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+		If Not (Request.QueryString.Get("Id") Is Nothing) Then
+			IdPedido = Convert.ToInt32(Request.QueryString.Get("Id"))
+			Me.IdEntity = IdPedido
+		End If
+		mKey = "Pedido_" & Me.IdEntity.ToString
+		If ExistSession() Then
+			'SC = Session.Item("SC1").ToString
+			ShowData()
+		End If
+	End Sub
+
+	Private Function ExistSession() As Boolean
+        If (session(SESSIONPRONTO_UserId) Is Nothing) Then
+            Response.Redirect("../Login.aspx")
+        Else
+            Return True
+        End If
+	End Function
+
+	Private Sub ShowData()
+		If Not Page.IsPostBack Then
+			Dim myPedido As Pronto.ERP.BO.Pedido
+			If IdPedido > 0 Then
+                'SC = DirectCast(session(SESSIONPRONTO_USUARIO), Usuario).StringConnection
+				myPedido = PedidoManager.GetItem(SC, IdPedido, True)
+				If Not (myPedido Is Nothing) Then
+					lblNumero.Text = myPedido.Numero
+					lblFecha.Text = myPedido.Fecha.ToString("dd/MM/yyyy")
+					lblObra.Text = myPedido.Obras
+					GridView1.DataSource = myPedido.Detalles
+					GridView1.DataBind()
+					Me.Title = "PE " + myPedido.Numero.ToString
+				End If
+			End If
+		End If
+	End Sub
+
+
+End Class

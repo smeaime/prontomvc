@@ -1,0 +1,470 @@
+﻿using System;
+using System.Collections.Generic;
+
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Globalization;
+using System.Web.Security;
+
+using System.Configuration;
+
+
+namespace ProntoMVC
+{
+    // Nota: para obtener instrucciones sobre cómo habilitar el modo clásico de IIS6 o IIS7, 
+    // visite http://go.microsoft.com/?LinkId=9394801
+
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{exclude}/{extnet}/ext.axd");
+            routes.IgnoreRoute("PaginaWebForm/{resource}.aspx/{*pathInfo}");
+            routes.IgnoreRoute("{myWebForms}.aspx/{*pathInfo}");
+            routes.IgnoreRoute("{myWebServices}.asmx/{*pathInfo}");
+            routes.IgnoreRoute("myCustomHttpHandler.foo/{*pathInfo}");
+            routes.IgnoreRoute("Contents/{*pathInfo}");
+
+            routes.IgnoreRoute("WebformsViejo/{*pathInfo}");
+            routes.IgnoreRoute("ProntoWeb/{*pathInfo}");
+
+
+            routes.MapRoute(
+                "Default", // Nombre de ruta
+                "{controller}/{action}/{id}", // URL con parámetros
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Valores predeterminados de parámetro
+            );
+            routes.MapRoute(
+                "EditGrid",                                              // Route name
+                "Requerimiento/EditGridData/{id}",                           // URL with parameters
+                new { controller = "Home", action = "EditGridData", id = UrlParameter.Optional, NumeroItem = UrlParameter.Optional, Cantidad = UrlParameter.Optional }  // Parameter defaults
+            );
+        }
+
+        protected void Application_Start()
+        {
+
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
+            AreaRegistration.RegisterAllAreas();
+
+
+            RegisterGlobalFilters(GlobalFilters.Filters);
+            RegisterRoutes(RouteTable.Routes);
+
+
+            //http://stackoverflow.com/questions/14400643/accept-comma-and-dot-as-decimal-separator
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+
+
+            //if (true)
+            //{
+            //   // this.Session["BasePronto"] = "Autotrol";
+            //    if (Membership.ValidateUser("Mariano", "pirulo!"))
+            //    {
+            //        FormsAuthentication.SetAuthCookie("Mariano", true);
+            //    }
+            //}
+
+
+
+        }
+
+
+
+
+
+        protected void Application_Error()
+        {
+
+            // si salta el error : Could not load file or assembly 
+            // 'CodeEngine.Framework.QueryBuilder' or one of its dependencies. El parámetro no es correcto. (Exception from HRESULT: 0x80070057 (E_INVALIDARG))
+            // limpiar los directorios temporales de asp.net
+            // http://stackoverflow.com/questions/3831287/could-not-load-file-or-assembly-app-licenses
+
+
+            //http://stackoverflow.com/questions/1171035/asp-net-mvc-custom-error-handling-application-error-global-asax
+
+
+
+            Exception lastErrorWrapper = Server.GetLastError();
+
+
+            Exception lastError = lastErrorWrapper;
+            if (lastErrorWrapper.InnerException != null) lastError = lastErrorWrapper.InnerException;
+
+
+            string lastErrorTypeName = lastError.GetType().ToString();
+            string lastErrorMessage = lastError.Message;
+            string lastErrorStackTrace = lastError.StackTrace;
+
+            if (lastErrorStackTrace == null) lastErrorStackTrace = ""; 
+
+
+            //  Attach the Yellow Screen of Death for this error   
+            string YSODmarkup = "";
+            HttpException lastErrorWrapperHttp = null;
+            try
+            {
+
+                lastErrorWrapperHttp = (System.Web.HttpException)lastErrorWrapper;
+
+                YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage();
+                if (!String.IsNullOrEmpty(YSODmarkup))
+                {
+                    var YSOD = System.Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm");
+                }
+
+
+                if (lastErrorWrapperHttp.Message == "The controller for path '/Pronto2/Content/jquery-ui-layout/jquery.ui.base.css' was not found or does not implement IController.")
+                //.ErrorCode == -2147467259)
+                {
+                    // es el error del jquery.layout que le falta el theme
+                    ErrHandler.WriteError(lastErrorWrapperHttp.Message);
+                    return;
+                }
+
+
+            }
+            catch (Exception ex) { };
+
+
+            string Body = "";
+            //            if (lastErrorWrapperHttp != null)
+            try
+            {
+                Body = String.Format(
+                    "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=\"5\" cellspacing=\"0\" border=\"1\">  <tr>  <td style=\"text-align: right;font-weight: bold\">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=\"text-align: right;font-weight: bold\">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>",
+                        (lastErrorWrapperHttp == null ? "NO EXISTE REQUEST" : Request.RawUrl),
+                            (lastErrorWrapperHttp == null ? "NO EXISTE USUARIO" : User.Identity.Name),
+                    lastErrorTypeName,
+                    lastErrorMessage,
+                    lastErrorStackTrace.Replace(Environment.NewLine, "<br />"));
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+            Body += (YSODmarkup ?? "");
+
+
+            // var direccion = "mscalella911@gmail.com";
+            string direccion;
+            try
+            {
+                direccion = ConfigurationManager.AppSettings["ErrorMail"];
+            }
+            catch (Exception)
+            {
+
+                direccion = "mscalella911@gmail.com";
+            }
+
+
+
+            try
+            {
+
+                // 'apgurisatti@bdlconsultores.com.ar", _
+                ProntoFuncionesGenerales.MandaEmailSimple(direccion,
+                             (lastErrorWrapperHttp == null ? "" : User.Identity.Name + " en ") + ConfigurationManager.AppSettings["ConfiguracionEmpresa"] + " (ProntoMVC)" + ": " + lastErrorMessage,
+                               Body,
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpServer"],
+                                ConfigurationManager.AppSettings["SmtpUser"],
+                                ConfigurationManager.AppSettings["SmtpPass"],
+                                YSODmarkup ?? "",
+                               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+            }
+            catch (Exception ex) { };
+
+
+
+
+            // http://stackoverflow.com/questions/5226791/custom-error-pages-on-asp-net-mvc3
+            var exception = Server.GetLastError();
+            var httpException = exception as HttpException;
+            Response.Clear();
+            Server.ClearError();
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "Errors";
+            routeData.Values["action"] = "Index"; // "General";
+            routeData.Values["exception"] = exception;
+            Response.StatusCode = 500;
+            if (httpException != null)
+            {
+                Response.StatusCode = httpException.GetHttpCode();
+                switch (Response.StatusCode)
+                {
+                    //case 403:
+                    //    routeData.Values["action"] = "Http403";
+                    //    break;
+                    case 404:
+                        routeData.Values["action"] = "PageNotFound";
+                        break;
+                    default:
+                        routeData.Values["action"] = "Index";
+                        break;
+                }
+            }
+
+            IController errorsController = new Controllers.ErrorController();
+            var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
+            errorsController.Execute(rc);
+
+            /*
+                    Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
+                    ' Code that runs when an unhandled error occurs
+        
+                    ' http://www.asp.net/hosting/tutorials/processing-unhandled-exceptions-cs
+
+        
+                    'Get the error details
+
+        
+                    'Dim lastErrorWrapper As HttpException = Server.GetLastError()
+                    Dim lastErrorWrapper As Exception = Server.GetLastError()
+        
+        
+                    Dim lastError As Exception = lastErrorWrapper
+                    If lastErrorWrapper.InnerException IsNot Nothing Then
+                        lastError = lastErrorWrapper.InnerException
+                    End If
+        
+                    Dim lastErrorTypeName As String = lastError.GetType().ToString()
+                    Dim lastErrorMessage As String = lastError.Message
+                    Dim lastErrorStackTrace As String = lastError.StackTrace
+        
+                    If lastErrorStackTrace Is Nothing Then lastErrorStackTrace = ""
+        
+                    ErrHandler.WriteError(lastError)
+    
+        
+                    ' Attach the Yellow Screen of Death for this error   
+                    Dim YSODmarkup As String
+                    Dim lastErrorWrapperHttp As HttpException
+                    Try
+                        lastErrorWrapperHttp = lastErrorWrapper
+        
+                        YSODmarkup = lastErrorWrapperHttp.GetHtmlErrorMessage()
+                        If (Not String.IsNullOrEmpty(YSODmarkup)) Then
+            
+                            Dim YSOD = Net.Mail.Attachment.CreateAttachmentFromString(YSODmarkup, "YSOD.htm")
+                            'mm.Attachments.Add(YSOD)
+            
+                        End If
+                    Catch ex As Exception
+            
+                    End Try
+    
+                    Dim Body As String = ""
+                    If Not IsNothing(lastErrorWrapperHttp) Then
+                        Body = String.Format( _
+                            "<html><body> <h1>Hubo un error!</h1>_  <table cellpadding=""5"" cellspacing=""0"" border=""1"">  <tr>  <td style=""text-align: right;font-weight: bold"">URL:</td>  <td>{0}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">User:</td>  <td>{1}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Exception Type:</td>  <td>{2}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Message:</td>  <td>{3}</td>  </tr>  <tr>  <td style=""text-align: right;font-weight: bold"">Stack Trace:</td>  <td>{4}</td>  </tr>   </table></body></html>", _
+                            If(lastErrorWrapperHttp Is Nothing, "NO EXISTE REQUEST", Request.RawUrl), _
+                             If(lastErrorWrapperHttp Is Nothing, "NO EXISTE USUARIO", User.Identity.Name), _
+                            lastErrorTypeName, _
+                            lastErrorMessage, _
+                            lastErrorStackTrace.Replace(Environment.NewLine, "<br />"))
+                    End If
+            
+                    Body &= iisNull(YSODmarkup, "")
+        
+                    Dim direccion As String
+                    Try
+                        direccion = ConfigurationManager.AppSettings("ErrorMail")
+                    Catch ex As Exception
+                        direccion = ""
+                        'Dim direccion = "mscalella911@gmail.com"
+                    End Try
+                    If iisNull(direccion, "") = "" Then direccion = "mscalella911@gmail.com,apgurisatti@bdlconsultores.com.ar"
+        
+        
+                    'me fijo si estoy depurando en el IDE. No lo hago antes para probar el pedazo de codigo de arriba. Es el mail
+                    'lo que traba todo
+                    If System.Diagnostics.Debugger.IsAttached() Then Return
+    
+        
+                    Try
+                        'apgurisatti@bdlconsultores.com.ar", _
+                        MandaEmailSimple(direccion, _
+                                        ConfigurationManager.AppSettings("ConfiguracionEmpresa") & " ProntoWeb" & ": " & lastErrorMessage, _
+                                       Body, _
+                                        ConfigurationManager.AppSettings("SmtpUser"), _
+                                        ConfigurationManager.AppSettings("SmtpServer"), _
+                                        ConfigurationManager.AppSettings("SmtpUser"), _
+                                        ConfigurationManager.AppSettings("SmtpPass"), _
+                                        iisNull(YSODmarkup, ""), _
+                                        ConfigurationManager.AppSettings("SmtpPort"), , , )
+            
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+        
+        
+        
+        
+                    '/////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////
+                    'http://stackoverflow.com/questions/178600/microsoft-reportviewer-session-expired-errors
+                    Dim exc As Exception = Server.GetLastError().GetBaseException()
+                    If TypeOf exc Is Microsoft.Reporting.WebForms.AspNetSessionExpiredException Then
+                        Server.ClearError()
+                        Response.Redirect(FormsAuthentication.LoginUrl + "?ReturnUrl=" + HttpUtility.UrlEncode(Request.Url.PathAndQuery), True)
+                    End If
+                    '/////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////
+                                   
+                End Sub
+              */
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+    public class DecimalModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+            ModelBindingContext bindingContext)
+        {
+            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ModelState modelState = new ModelState { Value = valueResult };
+            object actualValue = null;
+
+            if (valueResult == null) actualValue = null;
+            else
+            {
+                try
+                {
+
+                    if (valueResult.AttemptedValue.Equals("N.aN") ||
+                        valueResult.AttemptedValue.Equals("NaN") ||
+                        valueResult.AttemptedValue.Equals("Infini.ty") ||
+                        valueResult.AttemptedValue.Equals("Infinity") ||
+                        string.IsNullOrEmpty(valueResult.AttemptedValue))
+                    { actualValue = 0m; }
+                    else 
+                    {
+                        // actualValue = Convert.ToDecimal(valueResult.AttemptedValue,                        CultureInfo.CurrentCulture);
+                        string tempResult= valueResult.AttemptedValue.Replace(",", ".");
+                        double n;
+                        bool isNumeric = double.TryParse(tempResult, out n);
+
+                        if (isNumeric)
+                        {
+                            actualValue = Convert.ToDecimal(tempResult, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            actualValue = null;
+                        }
+                    }
+
+
+                }
+                catch (FormatException e)
+                {
+                    ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
+
+                    modelState.Errors.Add(e);
+                }
+                catch (Exception e)
+                {
+                    ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
+
+                    ErrHandler.WriteError(e);
+                }
+            }
+
+            bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+            return actualValue;
+        }
+    }
+
+    public class DateTimeModelBinder : DefaultModelBinder
+    {
+        //    public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        //  {
+        // ???
+        //    }
+    }
+
+
+
+    ////http://stackoverflow.com/questions/14400643/accept-comma-and-dot-as-decimal-separator
+    //public class DecimalModelBinder : DefaultModelBinder
+    //{
+    //    #region Implementation of IModelBinder
+
+    //    public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+    //    {
+    //        var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+
+    //        if (valueProviderResult.AttemptedValue.Equals("N.aN") ||
+    //            valueProviderResult.AttemptedValue.Equals("NaN") ||
+    //            valueProviderResult.AttemptedValue.Equals("Infini.ty") ||
+    //            valueProviderResult.AttemptedValue.Equals("Infinity") ||
+    //            string.IsNullOrEmpty(valueProviderResult.AttemptedValue))
+    //            return 0m;
+
+    //        return valueProviderResult == null ? base.BindModel(controllerContext, bindingContext) : Convert.ToDecimal(valueProviderResult.AttemptedValue);
+    //    }
+
+    //    #endregion
+    //}
+
+
+
+
+
+
+}
+
+/*
+
+
+// http://www.packtpub.com/article/mixing-aspnet-webforms-and-aspnet-mvc mas que nada para lo de Reporting Services
+namespace MixingBothWorldsExample
+{
+    public class Global : System.Web.HttpApplication
+    {
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.aspx/{*pathInfo}");
+            routes.MapRoute(
+            "Default",
+                // Route name
+            "{controller}/{action}/{id}",
+                // URL with parameters
+            new { controller = "Home", action = "Index", id = "" }
+                // Parameter defaults
+            );
+        } 
+        protected void Application_Start()
+        {
+            RegisterRoutes(RouteTable.Routes);
+        }
+    }
+}
+ */

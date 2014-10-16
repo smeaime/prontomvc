@@ -1,0 +1,394 @@
+
+Log Entry : 
+04/15/2014 00:48:19
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'claudio' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 330
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 00:56:46
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'claudio' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 330
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 00:59:03
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'claudio' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 330
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 01:15:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/15/2014 01:15:03
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/15/2014 01:17:48
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18280. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/15/2014 01:17:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/15/2014 15:58:06
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'claudio' is already not in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.RemoveUserFromRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 330
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:06:19
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:07:10
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:07:49
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:23:36
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:24:31
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:28:07
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:28:53
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 16:29:29
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 326
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:40:39
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:41:02
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:44:08
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:44:32
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:44:50
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:45:13
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:45:36
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:46:19
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 17:46:56
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:04:25
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:06:18
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:14:23
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 327
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:17:11
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:21:34
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:26:14
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:30:22
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:33:19
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:33:43
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:34:22
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:39:04
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:43:16
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________
+
+Log Entry : 
+04/15/2014 18:45:20
+Error in: http://localhost:40053/Pronto500/Acceso/Edit. Error Message:System.Configuration.Provider.ProviderException
+The user 'Mariano' is already in role 'Administrador'.
+   at System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   at System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   at System.Web.Security.Roles.AddUserToRole(String username, String roleName)
+   at ProntoMVC.Controllers.AccesoController.Edit(Empleado o) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\AccesoController.cs:line 328
+System.Web
+__________________________

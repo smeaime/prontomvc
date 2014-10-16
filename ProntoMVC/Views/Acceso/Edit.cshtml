@@ -1,0 +1,427 @@
+﻿@model ProntoMVC.Data.Models.Empleado
+@{
+    ViewBag.Title = "Accesos";
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
+{
+    <script src="@Url.Content("~/Scripts/jsAccesos.js?1506")"  type="text/javascript" >  </script> 
+
+@*  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />*@
+@*
+    <link href="@Url.Content("~/Scripts/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    
+*@
+    
+    
+    //solo el superadmin tiene acceso a poner a un nodo el nivel mas bajo (es decir, solo el superadmin puede anular el nodo)
+    //hagamos así: si grabo un nivel 10, que desaparezca para los que no son superadmin
+
+      
+    
+@*<style type="text/css">
+  .ui-slider-horizontal .ui-state-default {background: white url(  @Url.Content("~/Content/Images/lupita.jpg")   ) no-repeat scroll 50% 50% !important;}
+  </style> *@   
+    
+    <div id="mensajeLocal" class="alert " style="display: none">
+        <button type="button" class="close" data-dismiss="alert">
+            &times;</button>
+        @*<strong>Alerta</strong> *@ Grabado
+    </div> 
+
+    
+    <div class="modal" id="loading">
+        <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
+        Cargando...
+    </div>
+        
+    
+    <script>
+   
+    </script>    
+        
+    <div class="container-fluid">
+        <br />
+        <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
+            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+            Usuario @Model.UsuarioNT - Accesos
+        </div>
+        <div class="row-fluid">
+            <div class="alert fade in span12 " id="mensajeAlerta" style="display: none;">
+                <button type="button" class="close">
+                    &times;</button>
+                <p id="textoMensajeAlerta">
+                    @TempData["Alerta"]
+                </p>
+                @if ((@TempData["Alerta"] ?? "") != "")
+                {
+                    <script>
+                        $("#mensajeAlerta").show();
+                    </script>
+                }
+            </div>
+        </div>
+        <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = -1 }, null)</li>
+        <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = -1 }, null)</li>
+        <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = -1 }, null)</li>
+        <li>@Html.ActionLink("Empleado", "Edit", "Empleado", new { id = -1, area = "" }, null)</li>
+        @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
+        @*     http://www.techiesweb.net/asp-net-mvc3-dynamically-added-form-fields-model-binding/*@
+        @*    <button  type=submit onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary"  >
+            Grabar
+        </button>*@
+        <br />
+        <div class="row-fluid navbar-static-top">
+            <div class="span4 lightblue">
+                @*                // verificar que pongo el cuarto parametro de SelectList que elige el item del combo *@
+                @*@Html.LabelFor(model => model.IdRubro, "Rubro")*@
+                @Html.LabelFor(m => m.IdEmpleado, "Usuario")
+                @Html.DropDownList("IdEmpleado", null, "", new { @class = "span12" })
+                @*          @Html.ValidationMessageFor(model => model.IdRubro)*@
+                <script>
+                    $(function () {
+                        $('#IdEmpleado').change(function () {
+                            //ActualizarPuntoVenta();
+                            // RefrescarM();
+                            window.location.href = ROOT + 'Acceso/Edit/' + $('#IdEmpleado').val();
+
+
+                        });
+
+                    });
+
+                </script>
+            </div>
+            <div class="span3 lightblue">
+                @Html.LabelFor(model => model.Administrador, ".")
+                @Html.TextBoxFor(m => m.UsuarioNT, new { style = "display: none" })
+                @*no sacar, para no perder los datos del usuario!!!!*@
+                @Html.TextBoxFor(m => m.Nombre, new { style = "display: none" })
+                @Html.TextBoxFor(m => m.Password, new { style = "display: none" })
+                @Html.TextBoxFor(m => m.TipoUsuario, new { style = "display: none" })
+            </div>
+            <div class="span3 lightblue">
+                @Html.LabelFor(model => model.Administrador, "Es administrador")
+                @Html.RadioButtonFor(model => model.Administrador, "SI") SI
+                @Html.RadioButtonFor(model => model.Administrador, "NO") NO
+            </div>
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.Administrador, ".")
+                <button type="button" id="grabar2" class="btn  btn-large btn-primary" style="display: none">
+                    Grabar
+                </button>
+                <div id="terms" style="display: none;">
+                    Contraseña
+                    <input id="contr" /><br />
+                    <button id="adminContr">
+                        Ok
+                    </button>
+                </div>
+                @*                <button type="button" id="resetear" class="btn  btn-large btn-danger">
+                    Resetear
+                </button>
+*@
+                <script>
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    $(function () {
+
+                        $('#resetear').click(function () {
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json; charset=utf-8',
+                                url: ROOT + 'Acceso/ResetearProntoAccesos',
+                                dataType: 'json',
+                                data: null, // $.toJSON(cabecera),
+                                success: function (result) {
+
+                                }
+                            });
+                        });
+
+
+                    });
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+                    
+                    
+                    
+                </script>
+                <br />
+                <a id="showTerms" href="#" style="color: white; width: 20px;">@*Superadmin*@</a>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        //                $('#showTerms').click(function () {
+                        //                    $('#terms').dialog({ modal: true });
+                        //                });
+
+
+
+
+                        $("body").on({
+                            ajaxStart: function () {
+                                $(this).addClass("loading");
+                            },
+                            ajaxStop: function () {
+                                $(this).removeClass("loading");
+                            }
+                        });
+
+
+
+
+                        $('#showTerms').click(function (e) {
+                            if (e.shiftKey) {
+                                //Shift-Click
+                            }
+                            if (e.ctrlKey) {
+                                $('#terms').dialog({ modal: true });
+                                //Ctrl+Click
+                            }
+                            if (e.altKey) {
+                                //Alt+Click
+                            }
+                        });
+
+
+
+
+                        function validatePwdC(pass) {
+                            $.ajax({
+                                type: "GET",
+                                contentType: "application/json; charset=utf-8",
+                                url: ROOT + 'Empleado/BuscarPassSuperadmin/',
+                                data: { pass: pass },
+                                dataType: "text",
+                                success: function (data) {
+                                    var combo = $("#Aux0").val();
+                                    if (data.length > 0) {
+                                        $("#IdEmpleado").hide(); //.prop('visible', false);
+                                        $("#IdEmpleado").val(-99);
+                                        $("#terms").dialog('close');
+
+                                        alert("Modo Superadministrador");
+
+                                        if (true) {
+                                            window.location = "~/MvcMembership/UserAdministration";
+                                        }
+
+
+                                        //$("#usuario").html(data);
+                                        //                                var idusuario = $("#Aux1").val();
+                                        //                                var post = $("#Aux10").val();
+                                        //                                $('#' + combo).val(idusuario);
+                                        //                                $("#Aux3").val(idusuario);
+                                        //                                if (post == "anularRM") {
+                                        //                                    $("#UsuarioAnulacion").val(idusuario);
+                                        //                                    $('#dialog-motivo').dialog('open');
+                                        //                                }
+                                    }
+                                    else {
+                                        jAlert('Password incorrecta', 'Usuarios');
+                                        $('#' + combo).val("");
+                                        $("#Aux3").val("");
+                                    }
+                                }
+                            });
+                            //alert('ok');
+
+                            $("#dialog-password").dialog('close');
+                        }
+
+                        $('#adminContr').click(function () {
+                            validatePwdC($("#contr").val());
+                        });
+                    });
+
+
+                    //            $("#showTerms").click(function () {
+                    ////            var IdAprobo = $("#Aprobo > option:selected").attr("value");
+                    ////            var Aprobo = $("#Aprobo > option:selected").html();
+                    ////            $("#Aux1").val(IdAprobo);
+                    ////            $("#Aux2").val(Aprobo);
+                    ////            $("#Aux3").val("");
+                    ////            $("#Aux10").val("");
+                    ////            $('#dialog-password').data('Combo', 'Aprobo');
+                    //            $('#dialog-password').dialog('open');
+                    //        });
+
+                </script>
+                @* <button id="sss" class="btn"  >
+            Superadmin
+        </button>*@
+            </div>
+        </div>
+        <div class="row-fluid">
+            <table id="arbolpermisos" class="test link-class" style="background: transparent;
+                font-size: 16px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
+                font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
+            </table>
+            <div id="parbolpermisos">
+            </div>
+            <table id="arbolpermisos2">
+            </table>
+        </div>
+        @Html.HiddenFor(model => model.Activo)
+        @Html.HiddenFor(model => model.Clientes)
+        @Html.HiddenFor(model => model.Clientes1)
+        @Html.HiddenFor(model => model.CuentaBancaria)
+        @Html.HiddenFor(model => model.Dominio)
+        @Html.HiddenFor(model => model.Email)
+        @Html.HiddenFor(model => model.EsConductor)
+        @Html.HiddenFor(model => model.FechaNacimiento)
+        @Html.HiddenFor(model => model.FechaVencimientoRegistro)
+        @Html.HiddenFor(model => model.GrupoDeCarga)
+        @Html.HiddenFor(model => model.HorasJornada)
+        @Html.HiddenFor(model => model.IdCargo)
+        @Html.HiddenFor(model => model.IdCargo1)
+        @Html.HiddenFor(model => model.IdCargo2)
+        @Html.HiddenFor(model => model.IdCargo3)
+        @Html.HiddenFor(model => model.IdCargo4)
+        @Html.HiddenFor(model => model.IdCargo4)
+        @Html.HiddenFor(model => model.IdCuentaFondoFijo)
+        @Html.HiddenFor(model => model.Idioma)
+        @Html.HiddenFor(model => model.IdLugarEntregaAsignado_1)
+        @Html.HiddenFor(model => model.IdObraAsignada)
+        @Html.HiddenFor(model => model.IdSector)
+        @Html.HiddenFor(model => model.IdSector1)
+        @Html.HiddenFor(model => model.IdSector2)
+        @Html.HiddenFor(model => model.IdSector3)
+        @Html.HiddenFor(model => model.IdSector4)
+        @Html.HiddenFor(model => model.InformacionAuxiliar)
+        @Html.HiddenFor(model => model.Iniciales)
+        @Html.HiddenFor(model => model.Interno)
+        @Html.HiddenFor(model => model.Legajo)
+        @Html.HiddenFor(model => model.PuntoVentaAsociado_1)
+        @Html.HiddenFor(model => model.SisMan)
+        @Html.HiddenFor(model => model.SisMat)
+        @Html.HiddenFor(model => model.TipoUsuario)
+        <div>
+            @*        http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/
+        http://stackoverflow.com/questions/5532568/master-detail-sample-code-for-mvc-3-razor-using-ajax-for-details
+*@ @* for (var themeIndex = 0; themeIndex < Model.EmpleadosAccesos.Count(); themeIndex++)*@
+            @foreach (ProntoMVC.Data.Models.EmpleadosAcceso i in Model.EmpleadosAccesos)
+            {
+                // ProntoMVC.Data.Models.EmpleadosAcceso order =
+
+                //  @Html.LabelFor( model=>model.EmpleadosAccesos[2]..EmpleadosAccesos) // => model.EmpleadosAccesos[themeIndex])
+
+                // @Html.Hidden( i.Nivel)
+                // @Html.HiddenFor(i.Nivel)
+
+        
+@* @Html.Label(i.Nodo)
+        @Html.TextBox(i.Nivel.ToString(), i.Nivel, new { @class = "span12" })*@
+
+                //Html.RenderPartial("_Detalle", i);
+
+            }
+            @*@Html.EditorFor(x => x.EmpleadosAccesos)*@
+        </div>
+        @*        <br />
+        <br />
+        <br />
+*@ @*   <div class="row-fluid">
+            <div class="span4 lightblue">
+                más permiso &#9668;
+            </div>
+            <div class="span4 lightblue">
+                &#9658; menos permiso
+            </div>
+        </div>*@
+        <div class="row-fluid">
+            <div class="span8 lightblue">
+                <style>
+                .treeviewMod-famfamfam .hitarea, .treeviewMod-famfamfam li.lastCollapsable, .treeviewMod-famfamfam li.lastExpandable
+                {
+                      background-image: none !important;
+                }
+                .treeviewMod, .treeviewMod ul
+                {
+                    background-image: none !important;
+                    padding: ;
+                    margin: 25px;
+                    list-style: none;
+                    white-space: nowrap;
+                }
+                
+                .treeviewMod li
+                {
+                    background-image: none !important;
+                    margin: 25px; 
+                   width: 100px;
+                    padding: 3px 0pt 3px 3px;
+                }
+                
+                
+                .inputboxes input, .inputboxes .placeholder{
+                    /*position: absolute;*/
+                    /*left: 300px;*/
+                    margin-left: none !important;
+                    margin-right: 200px !important;
+          
+                }
+                
+                
+                
+ 
+ .ui-widget-content {
+ /* border: 1px solid #aaaaaa; */
+ /* background : #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; */
+/* color: #222222;*/ 
+}
+                
+                .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+border: 1px solid #d3d3d3;
+/* background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;*/
+font-weight: normal;
+color: #555555;
+}
+                
+            </style>
+                <div id="Accord233" class="test" style="background: none; margin: 10px; width: 70%">
+                </div>
+                <br />
+                <br />
+                <div id="AccordDeMenus" class="test" style="background: none; margin: 10px; width: 70%">
+                </div>
+            </div>
+        </div>
+        @*
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                más permiso &#9668;
+            </div>
+            <div class="span4 lightblue">
+                &#9658; menos permiso
+            </div>
+        </div>*@
+        <div class="row-fluid">
+            @*      <br />
+            <br />*@ @*<p>@Html.ActionLink("Create New", "Create")</p>
+*@ @*<table id="ArticulosList" class="scroll" cellpadding="0" cellspacing="0">
+        </table>
+        <div id="ArticulosPager" class="scroll" style="text-align: center;">
+        </div>*@
+            <script type="text/javascript">
+             
+
+
+            </script>
+        </div>
+    </div>
+}
+<script>
+
+
+    $().ready(function () {
+
+        pageLayout.show('south');
+
+
+    });
+</script>

@@ -1,0 +1,23 @@
+﻿@model ProntoMVC.Models.RegisterModel
+@{
+    ViewBag.Title = "Registrarse";
+}
+<div class="container-fluid">
+   <br />   <br />
+    <div class="row-fluid">
+        <div class="span8" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500;
+            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+            @TempData["UserName"] Habilitado!</div>
+    </div>
+    <br />
+    <p>
+        El usuario @TempData["UserName"] @*@Model.UserName*@ fue habilitado y le fue enviado
+        un mail @*a @Model.Email*@
+        <br />
+        <br />
+        @Html.ActionLink("Asignar empresas al usuario " + @TempData["UserName"], "UsersEmpresas", "UserAdministration", new { Area = "MvcMembership", id = @TempData["ProviderUserKey"] }, new { })
+        <br />
+        <br />
+        <a  href=@Url.Content("~")  >Inicio</a>
+    </p>
+</div>

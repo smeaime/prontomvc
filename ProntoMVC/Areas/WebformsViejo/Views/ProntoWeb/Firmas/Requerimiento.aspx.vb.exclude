@@ -1,0 +1,46 @@
+﻿Imports System
+Imports System.Reflection
+Imports System.Web.UI.WebControls
+Imports Pronto.ERP.Bll
+Imports Pronto.ERP.BO
+
+Partial Class Requerimiento
+    Inherits System.Web.UI.Page
+
+    Private IdRequerimiento As Integer = -1
+    Private mKey As String, SC As String
+
+    Public Property IdEntity() As Integer
+        Get
+            Return DirectCast(ViewState("IdRequerimiento"), Integer)
+        End Get
+        Set(ByVal Value As Integer)
+            ViewState("IdRequerimiento") = Value
+        End Set
+    End Property
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not (Request.QueryString.Get("Id") Is Nothing) Then
+            IdRequerimiento = Convert.ToInt32(Request.QueryString.Get("Id"))
+            Me.IdEntity = IdRequerimiento
+        End If
+        mKey = "Requerimiento_" & Me.IdEntity.ToString
+        SC = Session.Item("SC1").ToString
+        If Not Page.IsPostBack Then
+            Dim myRequerimiento As Pronto.ERP.BO.Requerimiento
+			If IdRequerimiento > 0 Then
+				myRequerimiento = RequerimientoManager.GetItem(SC, IdRequerimiento, True)
+				If Not (myRequerimiento Is Nothing) Then
+					lblNumero.Text = myRequerimiento.Numero
+					lblFecha.Text = myRequerimiento.Fecha.ToString("dd/MM/yyyy")
+					lblObra.Text = myRequerimiento.Obra
+					lblConfecciono.Text = myRequerimiento.Solicito
+					GridView1.DataSource = myRequerimiento.Detalles
+					GridView1.DataBind()
+					Me.Title = "RM " + myRequerimiento.Numero.ToString
+				End If
+			End If
+        End If
+
+    End Sub
+End Class

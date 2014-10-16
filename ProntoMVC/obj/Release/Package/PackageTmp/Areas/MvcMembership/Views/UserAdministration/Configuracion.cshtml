@@ -1,0 +1,56 @@
+@using PagedList.Mvc
+@model ProntoMVC.Areas.MvcMembership.Models.UserAdministration.ConfiguracionViewModel
+@{
+    ViewBag.Title = "Administración";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="" method="post" enctype="multipart/form-data">
+<br />
+    <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
+    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+   
+Parámetros</div>
+@if (Roles.IsUserInRole("SuperAdmin") || Roles.IsUserInRole("Administrador"))
+{
+    
+
+    
+    @Html.LabelFor(model => model.CartelAviso, "Aviso") @*para que quede el espacio*@
+    @Html.TextAreaFor(m => m.CartelAviso, new { id = "Aviso", @class = "span12" })
+
+    
+    
+    @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Numeradores:") @*para que quede el espacio*@
+    @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span12" })
+    @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Compr. Proveedor") @*para que quede el espacio*@
+    
+    <input type="submit" value='Aceptar' class="btn  btn-large btn-primary" />
+        
+        
+    using (Html.BeginForm("SubirPlantilla", "UserAdministration"))
+    {
+        <br />
+        <br />      <br />      <br />
+    <div>
+        Plantilla de Requerimientos<br />
+        <input type="file" name="file" />
+        <input type="submit" class="btn" value="Subir" />
+        <br />
+        <a class="btn  " style="color: Black" href="@Url.Action("BajarPlantilla")"><i class="icon-print">
+        </i>&nbsp;Descargar</a>
+    </div>
+
+    @*<input type="submit" value="Eliminar" class="btn" />*@
+    }
+
+
+}
+@if (Roles.IsUserInRole("SuperAdmin"))
+{
+    
+   @* <a class="btn  " style="color: Black" href="@Url.Action("actualizarSql")"><i class="icon-print">
+    </i>&nbsp;actualizar sql</a>*@
+     
+ 
+}
+</form>

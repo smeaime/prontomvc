@@ -1,0 +1,48 @@
+@using System.Globalization
+@model ProntoMVC.Areas.MvcMembership.Models.UserAdministration.DetailsViewModel
+@{
+    ViewBag.Title = "User Details: " + Model.DisplayName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
+<h2 class="mvcMembership">
+    @Model.DisplayName [@Model.Status]</h2>
+<ul class="mvcMembership-tabs">
+    <li>@Html.ActionLink("Detalles", "Details", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+    <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+    <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+</ul>
+<h3 class="mvcMembership">
+    Roles</h3>
+<div class="mvcMembership-userRoles">
+    <ul class="mvcMembership">
+        @foreach (var role in Model.Roles)
+        {
+            if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") ||
+                Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") && Roles.IsUserInRole(ViewBag.NombreUsuario, role.Key))
+            {
+            <div class="row-fluid">
+                <div class="span2">
+                    @Html.ActionLink(role.Key, "Role", new { id = role.Key })
+                </div>
+                <div class="span2">
+                    @if (role.Value)
+                    {
+                        using (Html.BeginForm("RemoveFromRole", "UserAdministration", new { id = Model.User.ProviderUserKey, role = role.Key }))
+                        {
+                        <input type="submit" class="btn" value="Quitar" />
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("AddToRole", "UserAdministration", new { id = Model.User.ProviderUserKey, role = role.Key }))
+                        {
+                        <input type="submit" class="btn" value="Agregar" />
+                        }
+                    }
+                </div>
+            </div>
+            }
+        }
+    </ul>
+</div>

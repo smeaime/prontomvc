@@ -1,0 +1,170 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
+	ProjectSection(SolutionItems) = preProject
+		..\ProntoWeb\Documentos\dev\ALTERTABLE 2011 Modulo WEB.sql = ..\ProntoWeb\Documentos\dev\ALTERTABLE 2011 Modulo WEB.sql
+		..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql = ..\ProntoWeb\Documentos\otros\comparar cabeza y detalle req.sql
+		..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb = ..\ProntoWeb\ProntoWeb\Comparativa.aspx.vb
+		..\ProntoWeb\Documentos\Factura_Williams.dot = ..\ProntoWeb\Documentos\Factura_Williams.dot
+		..\ProntoWeb\Documentos\dev\instalacion.docx = ..\ProntoWeb\Documentos\dev\instalacion.docx
+		..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql = ..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql
+		..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql = ..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql
+		..\Pronto\Novedades\Nuevos_SP.sql = ..\Pronto\Novedades\Nuevos_SP.sql
+		..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb = ..\ProntoWeb\App_Code\vbcode\ManagerDebug\SincronismosWilliamsManager.vb
+		..\ProntoWeb\Documentos\dev\superbuscador.sql = ..\ProntoWeb\Documentos\dev\superbuscador.sql
+		..\ProntoWeb\web.config = ..\ProntoWeb\web.config
+		..\ProntoWeb\Documentos\otros\williams.sql = ..\ProntoWeb\Documentos\otros\williams.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capen", "Capen", "{AD47E999-E287-4218-AA37-C6C22B899D33}"
+	ProjectSection(SolutionItems) = preProject
+		..\ProntoProduccion\Formularios\frmEtiqueta.frm = ..\ProntoProduccion\Formularios\frmEtiqueta.frm
+		..\ProntoProduccion\Formularios\frmMiniParte.frm = ..\ProntoProduccion\Formularios\frmMiniParte.frm
+		..\ProntoProduccion\Formularios\frmPrincipal.frm = ..\ProntoProduccion\Formularios\frmPrincipal.frm
+		..\ProntoProduccion\Formularios\ProduccionModulo.bas = ..\ProntoProduccion\Formularios\ProduccionModulo.bas
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proyectos", "proyectos", "{D36118EC-8AAB-4E61-B264-5D29A5232BDC}"
+	ProjectSection(SolutionItems) = preProject
+		ProntoMVC\Reportes\Proyectos de reporting\Report Project1.sln = ProntoMVC\Reportes\Proyectos de reporting\Report Project1.sln
+		..\SQL Server Scripts1\SQL Server Scripts1.ssmssqlproj = ..\SQL Server Scripts1\SQL Server Scripts1.ssmssqlproj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC", "ProntoMVC\ProntoMVC.csproj", "{17487390-6297-4D1C-8B73-57B636F0C114}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9} = {AB8BB713-FFA1-4440-B49B-1857E61367C9}
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31} = {2F9B9020-304C-44A6-BCC4-9E434C687D31}
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1} = {562FC343-B9F1-4418-A862-2D4F2097DDC1}
+		{7596A08C-8F01-423E-8FD9-776075737591} = {7596A08C-8F01-423E-8FD9-776075737591}
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessLogic", "BussinessLogic\BusinessLogic.vbproj", "{AB8BB713-FFA1-4440-B49B-1857E61367C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Test", "TestProject2\ProntoMVC.Test.csproj", "{4E3DDBC8-E035-452F-9984-06E02E173E73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Servicio", "Servicio\ProntoMVC.Servicio.csproj", "{562FC343-B9F1-4418-A862-2D4F2097DDC1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31} = {2F9B9020-304C-44A6-BCC4-9E434C687D31}
+		{7596A08C-8F01-423E-8FD9-776075737591} = {7596A08C-8F01-423E-8FD9-776075737591}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Repositorio", "Repositorio\ProntoMVC.Repositorio.csproj", "{7596A08C-8F01-423E-8FD9-776075737591}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31} = {2F9B9020-304C-44A6-BCC4-9E434C687D31}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Data", "Data\ProntoMVC.Data.csproj", "{2F9B9020-304C-44A6-BCC4-9E434C687D31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		DebugLocal|Any CPU = DebugLocal|Any CPU
+		DebugLocal|Mixed Platforms = DebugLocal|Mixed Platforms
+		DebugLocal|x86 = DebugLocal|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Debug|x86.Build.0 = Debug|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugLocal|Any CPU.ActiveCfg = DebugLocal|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugLocal|Mixed Platforms.ActiveCfg = DebugLocal|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugLocal|Mixed Platforms.Build.0 = DebugLocal|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.DebugLocal|x86.ActiveCfg = DebugLocal|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{17487390-6297-4D1C-8B73-57B636F0C114}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|Any CPU.ActiveCfg = DebugLocal|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|Mixed Platforms.ActiveCfg = DebugLocal|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|x86.ActiveCfg = DebugLocal|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Release|x86.ActiveCfg = Release|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{562FC343-B9F1-4418-A862-2D4F2097DDC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Debug|x86.Build.0 = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7596A08C-8F01-423E-8FD9-776075737591}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|x86.ActiveCfg = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Debug|x86.Build.0 = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|Mixed Platforms.Build.0 = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|x86.ActiveCfg = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.DebugLocal|x86.Build.0 = Debug|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|x86.ActiveCfg = Release|x86
+		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD47E999-E287-4218-AA37-C6C22B899D33} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
+		{D36118EC-8AAB-4E61-B264-5D29A5232BDC} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ProntoMVC.vsmdi
+	EndGlobalSection
+EndGlobal
