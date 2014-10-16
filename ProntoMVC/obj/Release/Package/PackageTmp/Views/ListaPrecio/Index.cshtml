@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ProntoMVC.Models.ListasPrecio>
+
+@{
+    ViewBag.Title = "Listas de precios";
+}
+
+@*<p>@Html.ActionLink("Nueva Lista de precios", "Edit", new { id = -1 }, null)</p> *@
+<br />
+
+   <button onclick="window.location.href='@Url.Action("Nuevo", new { id = -1 })'"  class="btn btn-primary"  >
+                    Nuevo
+                </button>
+
+
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+<div><input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
+
+<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+<div id="ListaPager" class="scroll" style="text-align: center;"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("Listado_jqGrid", "ListaPrecio")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdListaPrecio','Descripcion', 'Numero', 'Fecha vigencia', 'Activa', 'Moneda'
+            
+            ],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdListaPrecio', index: 'IdListaPrecio', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 75, align: 'center'},
+                        { name: 'NumeroLista', index: 'NumeroLista', width: 75, align: 'center', sorttype: 'date', 
+                            editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaVigencia', index: 'FechaVigencia', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Activa', index: 'Activa', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+            
+
+
+
+
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'IdListaPrecios',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 'auto',
+            height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            autowidth: true,
+            //imgpath: '/content/cupertino/images',
+            //loadonce: true,
+            caption: '<b>Listas de Precios</b>'
+        });
+        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+    });
+
+</script>
+

@@ -1,0 +1,17 @@
+﻿@model ProntoMVC.Models.ListasPrecio
+
+<ul>
+    @Html.DisplayForModel()
+</ul>
+
+
+<div id="details"></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.detailsLink').click(function () {
+            $('#details').load(this.href);
+            return false;
+        });
+    });
+</script>

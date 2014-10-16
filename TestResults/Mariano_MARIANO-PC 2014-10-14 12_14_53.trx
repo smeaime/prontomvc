@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="45d11bb9-da3f-4bc7-ac00-c17b4628adb4" name="Mariano@MARIANO-PC 2014-10-14 12:14:53" runUser="Mariano-PC\Mariano" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="628151b7-060b-4890-a403-0b308f078bc6">
+    <Deployment runDeploymentRoot="Mariano_MARIANO-PC 2014-10-14 12_14_53">
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\Trirand.Web.Mvc.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ClaseMigrar\bin\Debug\ClaseMigrar.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Servicio\bin\Debug\Servicio.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\WSAFIPFE.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Data\bin\x86\Debug\ProntoMVC.Data.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\BussinessObject\bin\Debug\BusinessObject.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Lib.Web.Mvc.6.1.0\lib\net40\Lib.Web.Mvc.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\DataAccess\bin\Debug\DataAccess.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\Repositorio.dll" />
+      <DeploymentItem filename="C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ProntoMVC.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2014-10-14T12:14:53.4997380-03:00" queuing="2014-10-14T12:14:54.8047707-03:00" start="2014-10-14T12:14:54.9507744-03:00" finish="2014-10-14T12:16:42.3304696-03:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="4" executed="4" passed="2" error="0" failed="2" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T12:14:53.9557494-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Google.GData.Spreadsheets' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T12:14:53.9557494-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Google.GData.Client' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T12:14:53.9557494-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'MySql.Data' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T12:14:53.9557494-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'Npgsql' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+      <RunInfo computerName="MARIANO-PC" outcome="Warning" timestamp="2014-10-14T12:14:53.9557494-03:00">
+        <Text>Warning: Test Run deployment issue: The assembly or module 'System.Data.SQLite' directly or indirectly referenced by the test container 'c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll' was not found.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="ProbarGrabacionDelServicioDeFondoFijo" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="f26feba5-8093-bdd3-a6bd-bc6b1c95143f">
+      <Execution id="044f6662-ccba-440a-a79b-6c804285e48c" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ProbarGrabacionDelServicioDeFondoFijo" />
+    </UnitTest>
+    <UnitTest name="BatchUpdateFFTest" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="ffd6932d-a77e-2fda-0062-7abf6b407de2">
+      <Execution id="87c876a0-a132-40df-a348-95d8f43dfe9f" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BatchUpdateFFTest" />
+    </UnitTest>
+    <UnitTest name="IndexMoq" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f">
+      <Execution id="d6356fd5-eda4-4d7a-b047-a2f76d5158ca" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="IndexMoq" />
+    </UnitTest>
+    <UnitTest name="EditMoq" storage="c:\backup\bdl\prontomvc\testproject2\bin\debug\testproject2.dll" id="e82c6de4-a4c6-f8d8-2a11-223807a9f52d">
+      <Execution id="7e53d82d-7013-436e-9248-3b19d8e12c7b" />
+      <TestMethod codeBase="C:/Backup/BDL/ProntoMVC/TestProject2/bin/Debug/TestProject2.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProntoMVC.Tests.FondoFijoControllerTest, TestProject2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EditMoq" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="f26feba5-8093-bdd3-a6bd-bc6b1c95143f" executionId="044f6662-ccba-440a-a79b-6c804285e48c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffd6932d-a77e-2fda-0062-7abf6b407de2" executionId="87c876a0-a132-40df-a348-95d8f43dfe9f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f" executionId="d6356fd5-eda4-4d7a-b047-a2f76d5158ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e82c6de4-a4c6-f8d8-2a11-223807a9f52d" executionId="7e53d82d-7013-436e-9248-3b19d8e12c7b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="044f6662-ccba-440a-a79b-6c804285e48c" testId="f26feba5-8093-bdd3-a6bd-bc6b1c95143f" testName="ProbarGrabacionDelServicioDeFondoFijo" computerName="MARIANO-PC" duration="00:01:27.5906358" startTime="2014-10-14T12:14:55.1487794-03:00" endTime="2014-10-14T12:16:24.1120123-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="044f6662-ccba-440a-a79b-6c804285e48c">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method ProntoMVC.Tests.FondoFijoControllerTest.ProbarGrabacionDelServicioDeFondoFijo threw exception: 
+System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---&gt; System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---&gt; System.Data.SqlClient.SqlException: Instrucción INSERT en conflicto con la restricción FOREIGN KEY "FK_ComprobantesProveedores_Proveedores". El conflicto ha aparecido en la base de datos "DemoProntoWeb", tabla "dbo.Proveedores", column 'IdProveedor'.
+Se terminó la instrucción.</Message>
+          <StackTrace>    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task&amp; task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task&amp; task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.&lt;Reader&gt;b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+ --- End of inner exception stack trace ---
+    at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.&lt;Update&gt;b__2(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.&lt;SaveChangesToStore&gt;b__d()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.&lt;&gt;c__DisplayClassb.&lt;SaveChangesInternal&gt;b__8()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+ --- End of inner exception stack trace ---
+    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Repo.UnitOfWork.Save() in C:\Backup\BDL\ProntoMVC\Repositorio\UnitOfWork.cs:line 77
+   at ProntoMVC.Tests.FondoFijoControllerTest.ProbarGrabacionDelServicioDeFondoFijo()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="87c876a0-a132-40df-a348-95d8f43dfe9f" testId="ffd6932d-a77e-2fda-0062-7abf6b407de2" testName="BatchUpdateFFTest" computerName="MARIANO-PC" duration="00:00:12.3419292" startTime="2014-10-14T12:16:24.1200125-03:00" endTime="2014-10-14T12:16:36.5023233-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="87c876a0-a132-40df-a348-95d8f43dfe9f">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method ProntoMVC.Tests.FondoFijoControllerTest.BatchUpdateFFTest threw exception: 
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.</Message>
+          <StackTrace>    at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at CallSite.Target(Closure , CallSite , Object , String )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at ProntoMVC.Tests.FondoFijoControllerTest.BatchUpdateFFTest()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d6356fd5-eda4-4d7a-b047-a2f76d5158ca" testId="1db1579f-dbbd-36a7-b0c6-1d6e5f41be2f" testName="IndexMoq" computerName="MARIANO-PC" duration="00:00:00.0280899" startTime="2014-10-14T12:16:36.5113235-03:00" endTime="2014-10-14T12:16:36.5433243-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d6356fd5-eda4-4d7a-b047-a2f76d5158ca">
+    </UnitTestResult>
+    <UnitTestResult executionId="7e53d82d-7013-436e-9248-3b19d8e12c7b" testId="e82c6de4-a4c6-f8d8-2a11-223807a9f52d" testName="EditMoq" computerName="MARIANO-PC" duration="00:00:03.8936765" startTime="2014-10-14T12:16:36.5563246-03:00" endTime="2014-10-14T12:16:40.4644227-03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e53d82d-7013-436e-9248-3b19d8e12c7b">
+    </UnitTestResult>
+  </Results>
+</TestRun>

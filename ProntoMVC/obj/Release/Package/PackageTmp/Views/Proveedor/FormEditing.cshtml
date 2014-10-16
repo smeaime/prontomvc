@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "jqGrid in ASP.NET MVC - CRUD [Form Editing]";
+
+    var grid = new Lib.Web.Mvc.JQuery.JqGrid.JqGridHelper<jqGrid.Models.ProductEditableViewModel>("products",
+        dataType: Lib.Web.Mvc.JQuery.JqGrid.JqGridDataTypes.Json,
+        methodType: Lib.Web.Mvc.JQuery.JqGrid.JqGridMethodTypes.Post,
+        pager: true,
+        rowsNumber: 10,
+        sortingName: "Id",
+        sortingOrder: Lib.Web.Mvc.JQuery.JqGrid.JqGridSortingOrders.Asc,
+        url: Url.Action("Products"),
+        viewRecords: true
+    ).Navigator(new Lib.Web.Mvc.JQuery.JqGrid.JqGridNavigatorOptions() { Search = false },
+        editActionOptions: new Lib.Web.Mvc.JQuery.JqGrid.JqGridNavigatorEditActionOptions() { Url = Url.Action("UpdateProduct") },
+        addActionOptions: new Lib.Web.Mvc.JQuery.JqGrid.JqGridNavigatorEditActionOptions() { Url = Url.Action("InsertProduct") },
+        deleteActionOptions: new Lib.Web.Mvc.JQuery.JqGrid.JqGridNavigatorDeleteActionOptions() { Url = Url.Action("DeleteProduct") }
+    );
+}
+
+@grid.GetHtml()
+<div id="supplier"></div>
+
+@section JavaScript {
+    <script id="supplier-tmpl" type="text/x-jquery-tmpl">
+        ${CompanyName}<br /><br />
+        ${Address}<br />
+        ${PostalCode}, ${City}<br />
+        ${Country}<br /><br />
+        ${Phone}<br />
+        ${HomePage}
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @grid.GetJavaScript()
+            $('#supplier').dialog({ autoOpen: false, bgiframe: true, resizable: false, title: 'Supplier' });
+            $('a[data-supplier-id]').live('click', function (e) {
+                if (e.preventDefault)
+                    e.preventDefault();
+                else
+                    e.returnValue = false;
+
+                var dialogPosition = $(this).offset();
+                $.post('@Url.Action("Supplier")', { id: $(this).attr('data-supplier-id') }, function(data) {
+                    $('#supplier').empty();
+                    $('#supplier-tmpl').tmpl(data).appendTo('#supplier');
+                    $('#supplier').dialog('option', 'position', [dialogPosition.left, dialogPosition.top]);
+                    $('#supplier').dialog('open');
+                });
+            });
+        });
+
+        $.unitsInStockFormatter = function(cellvalue, options, rowObject) {
+            var cellValueInt = parseInt(cellvalue);
+            if (cellValueInt > 10)
+                return "<img src='@Url.Content("~/Content/images/ui-flag_green.png")' alt='" + cellvalue + "' title='" + cellvalue + "' />";
+            else if (cellValueInt > 0)
+                return "<img src='@Url.Content("~/Content/images/ui-flag_blue.png")' alt='" + cellvalue + "' title='" + cellvalue + "' />";
+            else
+                return "<img src='@Url.Content("~/Content/images/ui-flag_red.png")' alt='" + cellvalue + "' title='" + cellvalue + "' />";
+        };
+
+        $.unitsInStockUnFormatter = function(cellvalue, options, cellobject) {
+            return $('img', cellobject).attr('title');
+        };
+
+        $.supplierFormatter = function(cellvalue, options, rowObject) {
+            return "<a href='#' data-supplier-id='" + cellvalue.substr(1, cellvalue.indexOf(']') - 1) + "'>" + cellvalue.substr(cellvalue.indexOf(']') + 2) + "</a>";
+        };
+
+        $.supplierUnFormatter = function(cellvalue, options, cellobject) {
+            return cellvalue;
+        };
+    </script>
+}

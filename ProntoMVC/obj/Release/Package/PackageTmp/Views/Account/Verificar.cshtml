@@ -1,0 +1,15 @@
+﻿@model ProntoMVC.Models.RegisterModel
+@{
+    ViewBag.Title = "Registrarse";
+}
+<div class="container-fluid">
+    <h2>
+        Habilitado!</h2>
+    <p>
+        El usuario @*@Model.UserName*@ fue habilitado y le fue enviado un mail @*a @Model.Email*@
+        <br />
+        @Html.ActionLink("Asignar empresas al usuario " + @TempData["UserName"], "UsersEmpresas", "UserAdministration", new { Area = "MvcMembership", id = @TempData["ProviderUserKey"] }, new { })
+        <br />
+        <a  href=@Url.Content("~")  >Inicio</a>
+    </p>
+</div>

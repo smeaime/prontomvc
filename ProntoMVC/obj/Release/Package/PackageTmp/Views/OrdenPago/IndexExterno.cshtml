@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ProntoMVC.Models.Presupuesto>
+@{
+    ViewBag.Title = "Ordenes de Pago en Caja";
+}
+<div>
+    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div>
+    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+@*<br />*@
+
+<br />
+<br />
+<table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
+</table>
+<div id="ListaPager" class="scroll" style="text-align: center;">
+</div>
+@*<p>@Html.ActionLink("Nuevo Presupuesto", "Edit", new { id = -1 }, null)</p> *@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            //url: '@Url.Action("OrdenesPagoEnCaja", "OrdenPago")',
+            url: '@Url.Action("OrdenesPagoEnCajaUsandoDataset", "OrdenPago")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: [
+            'ver', 'Emitir cert.',
+                   'IdOPComplementariaFF', 'Orden en caja', 'IdOP', 'Cod',
+
+                  
+                       'Fecha Pago', 'Tipo', 'Estado', 'Proveedor', 'Cuenta',
+                       'Mon.', 'Efectivo', 'Descuentos', 'Valores', 'Documentos',
+
+                       'Acreedores', 'Ret.IVA', 'Ret.gan', 'Ret.ing.b.', 'Ret.SUSS',
+                       'Dev.F.F.', 'Dif. Balanceo', 'OP complem. FF', 'Cotiz. dolar', 'Destinatario fondo fijo',
+                       'Observaciones', 'Obra', 'Modalidad', 'Enviar a', 'Auxiliar',
+                       '', ''
+                       ],
+
+            colModel: [
+
+              { name: 'ver', index: 'ver', hidden: false, width: 50 }, 
+              { name: 'Emitir', index: '', hidden: true, width: 50 },
+          { name: 'IdOPComplementariaFF', index: '', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+
+                        {name: 'Orden en caja', index: 'IdPresupuesto', align: 'left', width: 80, editable: false, hidden: false },
+
+                        { name: 'IdOP', index: 'Numero', align: 'right', width: 80, editable: false, hidden: true, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Cod', index: 'Orden', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq']} },
+
+                        { name: 'Fecha', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+                        { name: 'Tipo', index: 'Proveedor', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Estado', index: 'Validez', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Proveedor', index: 'Bonificacion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Cuenta', index: 'PorcentajeIva1', align: 'left', width: 300, editable: false },
+                        { name: 'Mon', index: 'Moneda', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Documentos', index: 'PlazoEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'Acreedores', index: 'CondicionCompra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Garantia', index: 'Garantia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Comprador', index: 'Comprador', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'Dev', index: 'Referencia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Detalle', index: 'Detalle', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Contacto', index: 'Contacto', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: '', index: '', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                         { name: '', index: '', width: 200 },
+                           { name: 'Observaciones', index: '', width: 300 },
+
+
+                               { name: '', index: '' },
+                               { name: '', index: '' },
+                       
+                         { name: '', index: '' },
+                         { name: '', index: '' },
+                         { name: '', index: '' },
+                       
+                            { name: '', index: '' ,hidden:true}
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'Numero',
+            sortorder: 'asc',
+            viewrecords: true,
+            
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>Ordenes de Pago en Caja</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    });
+
+</script>

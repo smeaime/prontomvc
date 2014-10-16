@@ -1,0 +1,231 @@
+﻿@model IEnumerable<ProntoMVC.Models.Empleado>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            IdEmpleado
+        </th>
+        <th>
+            Legajo
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            UsuarioNT
+        </th>
+        <th>
+            Sector
+        </th>
+        <th>
+            IdCargo
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Interno
+        </th>
+        <th>
+            Administrador
+        </th>
+        <th>
+            Iniciales
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            SisMan
+        </th>
+        <th>
+            HorasJornada
+        </th>
+        <th>
+            IdSector1
+        </th>
+        <th>
+            IdCargo1
+        </th>
+        <th>
+            IdSector2
+        </th>
+        <th>
+            IdCargo2
+        </th>
+        <th>
+            IdSector3
+        </th>
+        <th>
+            IdCargo3
+        </th>
+        <th>
+            IdSector4
+        </th>
+        <th>
+            IdCargo4
+        </th>
+        <th>
+            Dominio
+        </th>
+        <th>
+            SisMat
+        </th>
+        <th>
+            FechaNacimiento
+        </th>
+        <th>
+            TipoUsuario
+        </th>
+        <th>
+            GrupoDeCarga
+        </th>
+        <th>
+            CuentaBancaria
+        </th>
+        <th>
+            InformacionAuxiliar
+        </th>
+        <th>
+            IdCuentaFondoFijo
+        </th>
+        <th>
+            IdObraAsignada
+        </th>
+        <th>
+            Activo
+        </th>
+        <th>
+            Idioma
+        </th>
+        <th>
+            PuntoVentaAsociado
+        </th>
+        <th>
+            IdLugarEntregaAsignado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Legajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioNT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sector.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Interno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Administrador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Iniciales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SisMan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HorasJornada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSector1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCargo1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSector2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCargo2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSector3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCargo3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSector4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCargo4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dominio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SisMat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrupoDeCarga)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuentaBancaria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InformacionAuxiliar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCuentaFondoFijo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdObraAsignada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Idioma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PuntoVentaAsociado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdLugarEntregaAsignado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdEmpleado }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IdEmpleado }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdEmpleado })
+        </td>
+    </tr>
+}
+
+</table>

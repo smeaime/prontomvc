@@ -1,0 +1,50 @@
+﻿@model ProntoMVC.Models.Sector
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Sector</legend>
+
+    <div class="display-label">IdSector</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdSector)
+    </div>
+
+    <div class="display-label">Descripcion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">SectorDeObra</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SectorDeObra)
+    </div>
+
+    <div class="display-label">IdEncargado</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdEncargado)
+    </div>
+
+    <div class="display-label">SeUsaEnPresupuestos</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SeUsaEnPresupuestos)
+    </div>
+
+    <div class="display-label">OrdenPresentacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrdenPresentacion)
+    </div>
+
+    <div class="display-label">EnviarEmail</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnviarEmail)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Volver al listado", "Index")
+</p>
