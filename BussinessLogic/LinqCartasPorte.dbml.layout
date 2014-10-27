@@ -26,7 +26,7 @@
         <elementListCompartment Id="d5aac758-78ed-426e-bf43-45e00eeb249d" absoluteBounds="0.64000000000000057, 4.5850000000000009, 1.9700000000000002, 46.9786376953125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.625 : 4.125); (1.625 : 3.875); (2.51041666666667 : 3.875 : JumpStart); (2.67708333333333 : 3.875 : JumpEnd); (2.75 : 3.875); (2.75 : 1.2); (3.10416666666667 : 1.2 : JumpStart); (3.27083333333333 : 1.2 : JumpEnd); (3.625 : 1.2); (3.625 : 0.725); (4.60416841666667 : 0.724999999999999 : JumpStart); (4.77083508333333 : 0.725 : JumpEnd); (7.625 : 0.725)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.625 : 4.35); (2.91666666666667 : 4.35 : JumpStart); (3.08333333333333 : 4.35 : JumpEnd); (3.375 : 4.35); (3.375 : 1.7); (5.29166666666667 : 1.7 : JumpStart); (5.45833333333333 : 1.7 : JumpEnd); (5.5 : 1.7); (5.5 : 1.125); (5.91666666666667 : 1.125 : JumpStart); (6.08333333333333 : 1.125 : JumpEnd); (8.625 : 1.125); (8.625 : 0.95)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/linqArticulo/linqArticulo_CartasPorteMovimiento" />
       <nodes>
         <classShapeMoniker Id="e8c1860c-a81d-465d-863d-725d2bcb9ed4" />
@@ -99,66 +99,25 @@
         <elementListCompartment Id="38012a07-61e8-452f-b221-d28d6fef1134" absoluteBounds="7.6400000000000006, 6.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="86688e31-4db1-404a-b608-6a34edcdb2c9" absoluteBounds="3, 1.875, 2, 17.731915690104167">
-      <DataClassMoniker Name="/LinqCartasPorteDataContext/linqCliente" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6ef9ef3a-2b9d-47ba-b077-95a420debd6f" absoluteBounds="3.0149999999999997, 2.335, 1.9700000000000002, 17.171915690104164" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(4.3124995 : 1.875); (4.3124995 : 0.868752); (4.60416841666667 : 0.868751999999999 : JumpStart); (4.77083508333333 : 0.868752 : JumpEnd); (7.625 : 0.868752)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasPorteMovimiento" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="7f61cb07-ee57-4e9f-b972-559762ce111e" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.68750175 : 1.875); (4.68750175 : 0.581248); (7.625 : 0.581248)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasPorteMovimiento1" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="7f61cb07-ee57-4e9f-b972-559762ce111e" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 7.90887915665064); (7.5 : 7.90887915665064); (7.5 : 8.5); (8.5700005 : 8.5); (8.5700005 : 7.45)]" fixedFrom="NotFixed" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_linqFactura" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="69345366-4aa0-41c0-84e9-0fe0edf320bc" />
-      </nodes>
-    </associationConnector>
     <classShape Id="5559f6bb-17a9-405f-af10-057435cecdff" isExpanded="false" absoluteBounds="1.375, 0.5, 2, 0.45">
       <DataClassMoniker Name="/LinqCartasPorteDataContext/CartasDePorteReglasDeFacturacion" />
       <nestedChildShapes>
         <elementListCompartment Id="1c2e0221-e83b-4eae-88f5-37f2a9f163ef" absoluteBounds="1.3900000000000001, 0.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.1875 : 1.875); (3.1875 : 0.95)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorteReglasDeFacturacion" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="5559f6bb-17a9-405f-af10-057435cecdff" />
-      </nodes>
-    </associationConnector>
     <classShape Id="c60a556e-ed76-4fbf-bb25-6c55e584f678" absoluteBounds="9.75, 4.625, 2, 3.1170068359375">
       <DataClassMoniker Name="/LinqCartasPorteDataContext/Localidade" />
       <nestedChildShapes>
         <elementListCompartment Id="d0939958-cb4b-4d7c-8381-13baca038a96" absoluteBounds="9.765, 5.0850000000000009, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10.46875 : 7.7420068359375); (10.46875 : 12.8242817545573); (8.10677233333333 : 12.8242817545573 : JumpStart); (7.94010566666667 : 12.8242817545573 : JumpEnd); (7.74153658333333 : 12.8242817545573 : JumpStart); (7.57486991666667 : 12.8242817545573 : JumpEnd); (7.55891870833333 : 12.8242817545573 : JumpStart); (7.39225204166667 : 12.8242817545573 : JumpEnd); (7.19368295833333 : 12.8242817545573 : JumpStart); (7.02701629166667 : 12.8242817545573 : JumpEnd); (7.01106508333333 : 12.8242817545573 : JumpStart); (6.84439841666667 : 12.8242817545573 : JumpEnd); (5 : 12.8242817545573)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/Localidade/Localidade_linqCliente" />
-      <nodes>
-        <classShapeMoniker Id="c60a556e-ed76-4fbf-bb25-6c55e584f678" />
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-      </nodes>
-    </associationConnector>
     <classShape Id="5d58b614-bc58-4d33-97f1-7e45f68cfd4e" absoluteBounds="7.75, 8.75, 2, 1.9631982421875">
       <DataClassMoniker Name="/LinqCartasPorteDataContext/Partido" />
       <nestedChildShapes>
         <elementListCompartment Id="e3d153c1-80e9-442e-859e-50de07a9881a" absoluteBounds="7.765, 9.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(9.75 : 8.75); (9.92607443490112 : 8.57392556509888 : JumpStart); (10.0439255650989 : 8.45607443490112 : JumpEnd); (10.125 : 8.375); (10.125 : 8.1170068359375); (10.0683333333333 : 8.1170068359375 : JumpStart); (9.90166666666667 : 8.1170068359375 : JumpEnd); (9.375 : 8.1170068359375); (9.75 : 7.7420068359375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(9.75 : 8.75); (10.125 : 8.375); (10.125 : 8.1170068359375); (9.375 : 8.1170068359375); (9.75 : 7.7420068359375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/Partido/Partido_Localidade" />
       <nodes>
         <classShapeMoniker Id="5d58b614-bc58-4d33-97f1-7e45f68cfd4e" />
@@ -178,240 +137,44 @@
         <classShapeMoniker Id="9a140538-7ae6-417d-85e6-8ed0410f4f41" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5 : 11.4944075520833); (6.84439841666667 : 11.4944075520833 : JumpStart); (7.01106508333333 : 11.4944075520833 : JumpEnd); (7.02701629166667 : 11.4944075520833 : JumpStart); (7.19368295833333 : 11.4944075520833 : JumpEnd); (7.39225204166667 : 11.4944075520833 : JumpStart); (7.55891870833333 : 11.4944075520833 : JumpEnd); (7.94010566666667 : 11.4944075520833 : JumpStart); (8.10677233333333 : 11.4944075520833 : JumpEnd); (10.3854166666667 : 11.4944075520833 : JumpStart); (10.5520833333333 : 11.4944075520833 : JumpEnd); (10.875 : 11.4944075520833)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_WilliamsDestino" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="9a140538-7ae6-417d-85e6-8ed0410f4f41" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 11.0725528971354); (6.84439841666667 : 11.0725528971354 : JumpStart); (7.01106508333333 : 11.0725528971354 : JumpEnd); (7.02701629166667 : 11.0725528971354 : JumpStart); (7.19368295833333 : 11.0725528971354 : JumpEnd); (7.39225204166667 : 11.0725528971354 : JumpStart); (7.55891870833333 : 11.0725528971354 : JumpEnd); (7.94010566666667 : 11.0725528971354 : JumpStart); (8.10677233333333 : 11.0725528971354 : JumpEnd); (10.3854166666667 : 11.0725528971354 : JumpStart); (10.5520833333333 : 11.0725528971354 : JumpEnd); (10.875 : 11.0725528971354)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_WilliamsDestino1" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="9a140538-7ae6-417d-85e6-8ed0410f4f41" />
-      </nodes>
-    </associationConnector>
     <classShape Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" absoluteBounds="6.625, 15.75, 2, 26.385480143229167">
       <DataClassMoniker Name="/LinqCartasPorteDataContext/CartasDePorte" />
       <nestedChildShapes>
         <elementListCompartment Id="003c0156-623e-43ef-b4cd-e6d567cb478f" absoluteBounds="6.64, 16.21, 1.9700000000000002, 25.825480143229164" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.023439 : 15.75); (8.023439 : 10.8631982421875); (9.985 : 10.8631982421875); (9.985 : 7.8920068359375); (9.68333333333333 : 7.8920068359375 : JumpStart); (9.51666666666667 : 7.8920068359375 : JumpEnd); (9.515 : 7.8920068359375); (9.515 : 1.2); (9.875 : 1.2); (9.875 : 0.725); (9.625 : 0.725)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.023439 : 15.75); (8.023439 : 10.8631982421875); (9.985 : 10.8631982421875); (9.985 : 7.8920068359375); (9.68333333333333 : 7.8920068359375 : JumpStart); (9.51666666666667 : 7.8920068359375 : JumpEnd); (9.515 : 7.8920068359375); (9.515 : 1.2); (9.875 : 1.2); (9.875 : 0.725); (9.625 : 0.725)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/CartasDePorte/CartasDePorte_CartasPorteMovimiento" />
       <nodes>
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
         <classShapeMoniker Id="7f61cb07-ee57-4e9f-b972-559762ce111e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(0.65625 : 4.575); (0.65625 : 31.695986328125); (2.97916416666667 : 31.695986328125 : JumpStart); (3.23958458333333 : 31.695986328125 : JumpEnd); (6.625 : 31.695986328125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(0.65625 : 4.575); (0.65625 : 32.0755029296875); (2.72916666666667 : 32.0755029296875 : JumpStart); (2.89583333333333 : 32.0755029296875 : JumpEnd); (6.625 : 32.0755029296875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/linqArticulo/linqArticulo_CartasDePorte" />
       <nodes>
         <classShapeMoniker Id="e8c1860c-a81d-465d-863d-725d2bcb9ed4" />
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5 : 17.6784578450521); (6.625 : 17.6784578450521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(0.53125 : 3.7); (0.53125 : 26.4449869205729); (0.572916666666667 : 26.4449869205729 : JumpStart); (0.739583333333333 : 26.4449869205729 : JumpEnd); (2.97916416666667 : 26.4449869205729 : JumpStart); (3.23958458333333 : 26.4449869205729 : JumpEnd); (6.625 : 26.4449869205729)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(0.53125 : 3.7); (0.53125 : 27.0142618229167); (0.572916666666667 : 27.0142618229167 : JumpStart); (0.739583333333333 : 27.0142618229167 : JumpEnd); (2.72916666666667 : 27.0142618229167 : JumpStart); (2.89583333333333 : 27.0142618229167 : JumpEnd); (6.625 : 27.0142618229167)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCorredor/linqCorredor_CartasDePorte" />
       <nodes>
         <classShapeMoniker Id="20caf568-14e2-451f-8c4e-ad6f163fabb4" />
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.475); (2.9375 : 5.475); (2.9375 : 19.6694156901042); (6.5625 : 19.6694156901042); (6.5625 : 15.6875); (7.2929675 : 15.6875); (7.2929675 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 5.7); (1.75 : 5.9375); (2.8125 : 5.9375); (2.8125 : 37.1367435364583); (6.625 : 37.1367435364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/Transportista/Transportista_CartasDePorte" />
       <nodes>
         <classShapeMoniker Id="7d6ae087-d807-460f-9f33-99ea9f612cad" />
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5 : 16.651728922526); (6.625 : 16.651728922526)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte1" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 18.7051867675781); (6.625 : 18.7051867675781)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte2" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 18.1918223063151); (6.625 : 18.1918223063151)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte3" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 17.1650933837891); (6.625 : 17.1650933837891)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte4" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 16.138364461263); (6.625 : 16.138364461263)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte5" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 19.2185512288411); (6.625 : 19.2185512288411)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte6" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 17.9351400756836); (6.625 : 17.9351400756836)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte7" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 17.4217756144206); (6.625 : 17.4217756144206)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte8" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 16.9084111531576); (6.625 : 16.9084111531576)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte9" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 18.4485045369466); (6.625 : 18.4485045369466)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte10" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 16.3950466918945); (6.625 : 16.3950466918945)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte11" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 18.9618689982096); (6.625 : 18.9618689982096)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte12" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 15.8816822306315); (6.625 : 15.8816822306315)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte13" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 19.4752334594727); (6.625 : 19.4752334594727)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte14" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 9.68079442008464); (6.84439841666667 : 9.68079442008464 : JumpStart); (7.01106508333333 : 9.68079442008464 : JumpEnd); (7.475585375 : 9.68079442008464); (7.475585375 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte15" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 10.7286235315755); (6.84439841666667 : 10.7286235315755 : JumpStart); (7.01106508333333 : 10.7286235315755 : JumpEnd); (7.110349625 : 10.7286235315755); (7.110349625 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte16" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 13.7078974233774); (6.745113875 : 13.7078974233774); (6.745113875 : 15.75)]" fixedFrom="NotFixed" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte17" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.09375 : 19.6069156901042); (3.09375 : 36.9469857356771); (6.625 : 36.9469857356771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte18" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.03124875 : 19.6069156901042); (3.03124875 : 22.5067373649089); (3.04166916666667 : 22.5067373649089 : JumpStart); (3.23958458333333 : 22.5067373649089 : JumpEnd); (6.625 : 22.5067373649089)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte19" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 11.7764526430664); (6.84439841666667 : 11.7764526430664 : JumpStart); (7.01106508333333 : 11.7764526430664 : JumpEnd); (7.02701629166667 : 11.7764526430664 : JumpStart); (7.19368295833333 : 11.7764526430664 : JumpEnd); (7.39225204166667 : 11.7764526430664 : JumpStart); (7.55891870833333 : 11.7764526430664 : JumpEnd); (7.65820325 : 11.7764526430664); (7.65820325 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte20" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.10937625 : 19.6069156901042); (3.10937625 : 25.1322370686849); (6.625 : 25.1322370686849)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte21" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(0.546875 : 3.7); (0.546875 : 23.8194872167969); (0.572916666666667 : 23.8194872167969 : JumpStart); (0.739583333333333 : 23.8194872167969 : JumpEnd); (2.97916416666667 : 23.8194872167969 : JumpStart); (3.23958458333333 : 23.8194872167969 : JumpEnd); (6.625 : 23.8194872167969)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(0.546875 : 3.7); (0.546875 : 24.4836412695312); (0.572916666666667 : 24.4836412695312 : JumpStart); (0.739583333333333 : 24.4836412695312 : JumpEnd); (2.72916666666667 : 24.4836412695312 : JumpStart); (2.89583333333333 : 24.4836412695312 : JumpEnd); (6.625 : 24.4836412695312)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCorredor/linqCorredor_CartasDePorte1" />
       <nodes>
         <classShapeMoniker Id="20caf568-14e2-451f-8c4e-ad6f163fabb4" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5 : 14.2871433772786); (6.66178054166667 : 14.2871433772786 : JumpStart); (6.82844720833333 : 14.2871433772786 : JumpEnd); (6.84439841666667 : 14.2871433772786 : JumpStart); (7.01106508333333 : 14.2871433772786 : JumpEnd); (7.02701629166667 : 14.2871433772786 : JumpStart); (7.19368295833333 : 14.2871433772786 : JumpEnd); (7.2929675 : 14.2871433772786); (7.2929675 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte22" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.1250025 : 19.6069156901042); (3.1250025 : 29.070486624349); (6.625 : 29.070486624349)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte23" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.0624975 : 19.6069156901042); (3.0624975 : 34.321486031901); (3.07291791666667 : 34.321486031901 : JumpStart); (3.23958458333333 : 34.321486031901 : JumpEnd); (6.625 : 34.321486031901)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte24" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
-        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.15625125 : 19.6069156901042); (3.15625125 : 39.5724854394531); (6.625 : 39.5724854394531)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte25" />
-      <nodes>
-        <classShapeMoniker Id="86688e31-4db1-404a-b608-6a34edcdb2c9" />
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
       </nodes>
     </associationConnector>
@@ -427,19 +190,293 @@
         <elementListCompartment Id="3e1700e2-99bf-4630-b169-e254f638cba4" absoluteBounds="5.64, 2.21, 1.9700000000000002, 6.0184326171875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.92773175 : 8.3284326171875); (6.92773175 : 15.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqDetalleFacturas/DetalleFacturas_CartasDePorte" />
+    <associationConnector edgePoints="[(7.28125 : 8.3284326171875); (7.28125 : 15.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqDetalleFacturas/linqDetalleFacturas_CartasDePorte" />
       <nodes>
         <classShapeMoniker Id="a6dc5ed8-00c4-4c62-b8e0-ba6dec2976c3" />
         <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.59375 : 4.125); (2.59375 : 1.78125); (2.66666666666667 : 1.78125 : JumpStart); (2.83333333333333 : 1.78125 : JumpEnd); (3.10416666666667 : 1.78125 : JumpStart); (3.27083333333333 : 1.78125 : JumpEnd); (4.22916616666667 : 1.78125 : JumpStart); (4.39583283333333 : 1.78125 : JumpEnd); (4.60416841666667 : 1.78125 : JumpStart); (4.77083508333333 : 1.78125 : JumpEnd); (5.625 : 1.78125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqArticulo/linqArticulo_DetalleFacturas" />
+    <associationConnector edgePoints="[(2.59375 : 4.125); (2.59375 : 2.6625); (5.625 : 2.6625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqArticulo/linqArticulo_linqDetalleFacturas" />
       <nodes>
         <classShapeMoniker Id="e8c1860c-a81d-465d-863d-725d2bcb9ed4" />
         <classShapeMoniker Id="a6dc5ed8-00c4-4c62-b8e0-ba6dec2976c3" />
       </nodes>
     </associationConnector>
+    <classShape Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" absoluteBounds="3.625, 2.875, 2, 19.078025716145834">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/linqCliente" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5693fea3-829b-4eee-bde6-84bd020fd7c3" absoluteBounds="3.6399999999999997, 3.335, 1.9700000000000002, 18.518025716145832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.5625005 : 2.875); (4.5625005 : 1.95); (5.375 : 1.95); (5.375 : 1.5); (6 : 1.5); (6 : 0.725); (7.625 : 0.725)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasPorteMovimiento" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="7f61cb07-ee57-4e9f-b972-559762ce111e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.06249825 : 2.875); (4.06249825 : 1.825); (5.4375 : 1.825); (5.4375 : 1.53125); (6 : 1.53125); (6 : 0.868752); (7.625 : 0.868752)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasPorteMovimiento1" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="7f61cb07-ee57-4e9f-b972-559762ce111e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 12.4140128580729); (7.19791666666667 : 12.4140128580729 : JumpStart); (7.36458333333333 : 12.4140128580729 : JumpEnd); (7.5 : 12.4140128580729); (7.5 : 8.5784326171875); (8.5700005 : 8.5784326171875); (8.5700005 : 7.45)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_linqFactura" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="69345366-4aa0-41c0-84e9-0fe0edf320bc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.625 : 13.975); (3 : 13.975); (3 : 0.95)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorteReglasDeFacturacion" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="5559f6bb-17a9-405f-af10-057435cecdff" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 11.6006575520833); (7.19791666666667 : 11.6006575520833 : JumpStart); (7.36458333333333 : 11.6006575520833 : JumpEnd); (7.41666666666667 : 11.6006575520833 : JumpStart); (7.58333333333333 : 11.6006575520833 : JumpEnd); (10.3854166666667 : 11.6006575520833 : JumpStart); (10.5520833333333 : 11.6006575520833 : JumpEnd); (10.875 : 11.6006575520833)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_WilliamsDestino" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="9a140538-7ae6-417d-85e6-8ed0410f4f41" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 11.2319278971354); (7.19791666666667 : 11.2319278971354 : JumpStart); (7.36458333333333 : 11.2319278971354 : JumpEnd); (7.41666666666667 : 11.2319278971354 : JumpStart); (7.58333333333333 : 11.2319278971354 : JumpEnd); (10.3854166666667 : 11.2319278971354 : JumpStart); (10.5520833333333 : 11.2319278971354 : JumpEnd); (10.875 : 11.2319278971354)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_WilliamsDestino1" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="9a140538-7ae6-417d-85e6-8ed0410f4f41" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 18.8515128580729); (6.625 : 18.8515128580729)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 17.2382564290365); (6.625 : 17.2382564290365)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte1" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 20.4647692871094); (6.625 : 20.4647692871094)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte2" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 19.6581410725911); (6.625 : 19.6581410725911)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte3" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 18.0448846435547); (6.625 : 18.0448846435547)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte4" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 16.4316282145182); (6.625 : 16.4316282145182)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte5" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 21.2713975016276); (6.625 : 21.2713975016276)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte6" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 19.254826965332); (6.625 : 19.254826965332)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte7" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 18.4481987508138); (6.625 : 18.4481987508138)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte8" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 20.0614551798503); (6.625 : 20.0614551798503)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte9" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 17.6415705362956); (6.625 : 17.6415705362956)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte10" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 20.8680833943685); (6.625 : 20.8680833943685)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte11" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 16.8349423217773); (6.625 : 16.8349423217773)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte12" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 16.0283141072591); (6.625 : 16.0283141072591)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte13" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 21.6747116088867); (6.625 : 21.6747116088867)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte14" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 19.0531699117025); (6.625 : 19.0531699117025)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte15" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 18.6498558044434); (6.625 : 18.6498558044434)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte16" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 19.4564840189616); (6.625 : 19.4564840189616)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte17" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 18.2465416971842); (6.625 : 18.2465416971842)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte18" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 19.8597981262207); (6.625 : 19.8597981262207)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte19" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 17.8432275899251); (6.625 : 17.8432275899251)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte20" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 20.2631122334798); (6.625 : 20.2631122334798)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte21" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 17.439913482666); (6.625 : 17.439913482666)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte22" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 20.6664263407389); (6.625 : 20.6664263407389)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte23" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 17.0365993754069); (6.625 : 17.0365993754069)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte24" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 21.069740447998); (6.625 : 21.069740447998)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte25" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.625 : 16.6332852681478); (6.625 : 16.6332852681478)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/linqCliente/linqCliente_CartasDePorte26" />
+      <nodes>
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+        <classShapeMoniker Id="2a405dea-9274-4c70-a660-4a8b7871e1ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.46875 : 7.7420068359375); (10.46875 : 14.0820089290365); (5.625 : 14.0820089290365)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/LinqCartasPorteDataContext/Localidade/Localidade_linqCliente" />
+      <nodes>
+        <classShapeMoniker Id="c60a556e-ed76-4fbf-bb25-6c55e584f678" />
+        <classShapeMoniker Id="da696bbc-3fc0-4dfb-92e6-1c11ddc2c95f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2f99054d-037a-4451-9a3a-61a803d39c1f" isExpanded="false" absoluteBounds="0.5, 2, 2, 0.45">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/Empresa" />
+      <nestedChildShapes>
+        <elementListCompartment Id="25b79d2c-8faa-489c-acc4-56f27d7c997e" absoluteBounds="0.51499999999999968, 2.46, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="35159c13-883c-4ba9-8c0a-7f0f232945f1" isExpanded="false" absoluteBounds="0.5, 1.375, 2, 0.45">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/TiposComprobante" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e0590148-79c5-431e-9bbb-ac20aea2aaa8" absoluteBounds="0.51500000000000012, 1.835, 1.9700000000000002, 6.5953369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1bdc062d-6f22-47b8-9790-a412e14c6bd9" isExpanded="false" absoluteBounds="3.25, 1, 2, 0.45">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/Deposito" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc6872e7-d70f-4ece-8561-18a3097160bc" absoluteBounds="3.2649999999999997, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3dcb5d70-17d3-456b-a67b-eaa5b18391a8" isExpanded="false" absoluteBounds="3.75, 0.5, 2, 0.45">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/PuntosVenta" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4fd16c86-7308-45f2-8017-864351911c5b" absoluteBounds="3.7649999999999997, 0.96, 1.9700000000000002, 8.3260498046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6706fe7d-c05e-4fd5-8b88-204d33be72bf" isExpanded="false" absoluteBounds="0.75, 6, 2, 0.45">
+      <DataClassMoniker Name="/LinqCartasPorteDataContext/linqObra" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc213ed9-ba32-45d6-a3b8-6b250b8b2d4c" absoluteBounds="0.76500000000000012, 6.46, 1.9700000000000002, 11.2105712890625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

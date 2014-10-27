@@ -82,9 +82,9 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BusinessObject, Version=1.0.0.27525, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BusinessObject, Version=1.0.0.32434, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BussinessObject\bin\Debug\BusinessObject.dll</HintPath>
+      <HintPath>..\..\BussinessObject\bin\Debug\BusinessObject.dll</HintPath>
     </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

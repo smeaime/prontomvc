@@ -218,14 +218,7 @@ namespace ProntoMVC.Controllers
         [NonAction]
         partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, ProntoMVC.Data.Models.PuntosVenta PuntosVenta);
 
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Edit(ProntoMVC.Data.Models.PuntosVenta PuntosVenta)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "PuntosVenta", PuntosVenta);
-            EditOverride(callInfo, PuntosVenta);
-            return callInfo;
-        }
+
 
         [NonAction]
         partial void Listado_jqGridOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal, string IdObra);

@@ -120,7 +120,7 @@ Namespace Pronto.ERP.Bll
 
             Dim i As Integer = 0
             Dim cs As String = String.Empty
-            For Each empresa As Empresa In empresaList
+            For Each empresa As Pronto.ERP.BO.Empresa In empresaList
                 If (empresaList(i).Id = idEmpresa Or empresaList(i).Descripcion.ToLower = NombreEmpresa.ToLower) Then
                     cs = empresaList(i).ConnectionString
                 End If
