@@ -513,7 +513,7 @@ namespace ProntoMVC.Controllers
                              (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
                              
  
-                             ((a.Ubicacione ?? new Ubicacion()).Deposito ?? new Deposito()).Descripcion.NullSafeToString() +
+                             ((a.Ubicacione ?? new Ubicacion()).Deposito ?? new Data.Models.Deposito()).Descripcion.NullSafeToString() +
                              
                             (a.Ubicacione ?? new Ubicacion()).Descripcion.NullSafeToString() +
                             (a.Ubicacione ?? new Ubicacion()).Estanteria.NullSafeToString() +

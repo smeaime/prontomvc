@@ -92,6 +92,8 @@ Namespace Pronto.ERP.Bll
 
                         .EsEntregador = oCliente.EsEntregador
 
+                        .CartaPorteTipoDeAdjuntoDeFacturacion = If(oCliente.CartaPorteTipoDeAdjuntoDeFacturacion, -1)
+
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
@@ -199,7 +201,7 @@ Namespace Pronto.ERP.Bll
                     .TelefonosCelulares = myCliente.TelefonosCelulares
 
                     .EsEntregador = myCliente.EsEntregador
-
+                    .CartaPorteTipoDeAdjuntoDeFacturacion = myCliente.CartaPorteTipoDeAdjuntoDeFacturacion
                 End With
                 'If IsNothing(ue) Then
                 '    ue = New UserDatosExtendido

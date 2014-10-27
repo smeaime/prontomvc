@@ -977,6 +977,10 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 {
                     u.RazonSocial = grupo;
                     bdlmaster.UserDatosExtendidos.Attach(u);
+
+                    //todo
+                    bdlmaster.Entry(u).State = System.Data.Entity.EntityState.Modified;
+
                 }
 
                 bdlmaster.SaveChanges();

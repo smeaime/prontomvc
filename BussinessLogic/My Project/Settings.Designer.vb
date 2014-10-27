@@ -202,6 +202,17 @@ Namespace My
                 Return CType(Me("WilliamsConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=serversql1;Initial Catalog=WilliamsEntregas;Persist Security Info=Tru"& _ 
+            "e;User ID=sa;Password=3D1consultore5")>  _
+        Public ReadOnly Property WilliamsEntregasConnectionString() As String
+            Get
+                Return CType(Me("WilliamsEntregasConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

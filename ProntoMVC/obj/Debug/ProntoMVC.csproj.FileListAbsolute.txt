@@ -21,7 +21,6 @@ C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ProntoMVC.Data.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\Repositorio.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\Servicio.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Helpers.dll
-C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Mvc.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Razor.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.WebPages.Deployment.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.WebPages.dll
@@ -51,14 +50,12 @@ C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\Newtonsoft.Json.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\PagedList.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\PagedList.Mvc.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Helpers.xml
-C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Mvc.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.Razor.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.WebPages.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.WebPages.Deployment.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\System.Web.WebPages.Razor.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\WebMatrix.Data.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\WebMatrix.WebData.xml
-C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\DataAccess.xml
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ar\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\cs\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\de\AjaxControlToolkit.resources.dll
