@@ -57,12 +57,12 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             //ojo: si llama a esta funcion al hacer POST, debe ser porque la vista no pusiste el Html.BeginForm()
-            PuntosVenta PuntosVenta;
+          Data.Models.PuntosVenta PuntosVenta;
 
             if (id == -1)
             {
 
-                PuntosVenta = new PuntosVenta();
+                PuntosVenta = new Data.Models.PuntosVenta();
             }
             else
             {
@@ -77,7 +77,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        void CargarViewBag(PuntosVenta o)
+        void CargarViewBag(Data.Models.PuntosVenta o)
         {
             ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
             //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", requerimiento.Aprobo);
@@ -85,7 +85,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-        private bool Validar(PuntosVenta o)
+        private bool Validar(Data.Models.PuntosVenta o)
         {
             // una opcion es extender el modelo autogenerado, para ensoquetar ahí las validaciones
             // si no, podemos usar una funcion como esta, y devolver los  errores de dos maneras:
@@ -111,7 +111,7 @@ namespace ProntoMVC.Controllers
         // POST: /PuntosVenta/Edit/5
 
         [HttpPost]
-        public virtual ActionResult Edit(PuntosVenta PuntosVenta)
+        public virtual ActionResult Edit(Data.Models.PuntosVenta PuntosVenta)
         {
 
             try

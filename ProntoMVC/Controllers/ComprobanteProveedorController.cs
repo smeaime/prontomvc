@@ -5043,7 +5043,7 @@ namespace ProntoMVC.Controllers
                                 a.IdComprobanteProveedor.ToString(), 
                   
 
-                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  TiposComprobante()).Descripcion, // as [Tipo comp.],  
+                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
                                 
                               
                                 a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  
@@ -5325,7 +5325,7 @@ namespace ProntoMVC.Controllers
                                 a.IdComprobanteProveedor.ToString(), 
                   
 
-                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  TiposComprobante()).Descripcion, // as [Tipo comp.],  
+                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
                                 
                               
                                 a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  

@@ -166,6 +166,10 @@ namespace ProntoMVC.Controllers
                 {
                     us.UltimaBaseAccedida = UltimaBaseAccedida;
                     bdlmaster.UserDatosExtendidos.Attach(us);
+
+                    bdlmaster.Entry(us).State = System.Data.Entity.EntityState.Modified;
+
+
                 }
 
                 bdlmaster.SaveChanges();
