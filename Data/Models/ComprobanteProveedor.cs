@@ -147,6 +147,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> ImporteRetencionIvaEnOrdenPago { get; set; }
         public string DebitoAutomatico { get; set; }
         public Nullable<System.DateTime> FechaPrestacionServicio { get; set; }
+        public Nullable<int> IdTipoOperacion { get; set; }
     
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual Proveedor Proveedor { get; set; }
@@ -154,5 +155,8 @@ namespace ProntoMVC.Data.Models
         public virtual Cuenta Cuenta { get; set; }
         public virtual Obra Obra { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Moneda Moneda { get; set; }
     }
 }

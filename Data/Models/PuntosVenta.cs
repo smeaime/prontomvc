@@ -17,6 +17,7 @@ namespace ProntoMVC.Data.Models
         public PuntosVenta()
         {
             this.Remitos = new HashSet<Remito>();
+            this.Facturas = new HashSet<Factura>();
         }
     
         public int IdPuntoVenta { get; set; }
@@ -64,5 +65,6 @@ namespace ProntoMVC.Data.Models
     
         public virtual TiposComprobante TiposComprobante { get; set; }
         public virtual ICollection<Remito> Remitos { get; set; }
+        public virtual ICollection<Factura> Facturas { get; set; }
     }
 }
