@@ -1,0 +1,187 @@
+
+Log Entry : 
+10/27/2014 12:24:05
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:24:12
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:24:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/6e85e4e9-e888-4bbb-8c73-2c792fce173c. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:24:34
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/6e85e4e9-e888-4bbb-8c73-2c792fce173c. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:28:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/6e85e4e9-e888-4bbb-8c73-2c792fce173c. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:40:40
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:40:43
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:41:00
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/bb59760f-e0ec-4143-b8a3-264adcf3f463. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:41:23
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:41:44
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/bb59760f-e0ec-4143-b8a3-264adcf3f463. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:41:53
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:55:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/bb59760f-e0ec-4143-b8a3-264adcf3f463. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:55:40
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:55:56
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/bb59760f-e0ec-4143-b8a3-264adcf3f463. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en C:\Backup\BDL\ProntoMVC\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 12:56:34
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:56:48
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:03:07
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:18:59
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:19:01
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:19:02
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
