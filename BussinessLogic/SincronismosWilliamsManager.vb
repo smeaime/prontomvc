@@ -6066,7 +6066,7 @@ Namespace Pronto.ERP.Bll
             'Return TextToExcel(vFileName, titulo)
         End Function
 
-        Public Shared Function Sincronismo_Syngenta(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
+        Public Shared Function Sincronismo_Syngenta(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, ByVal SC As String) As String
 
 
 
@@ -6135,7 +6135,7 @@ Namespace Pronto.ERP.Bll
             '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
             '63	ObsAna	100	Observaciones Analisis		Izquierda	945
 
-            Dim sErroresProcedencia, sErroresDestinos As String
+            Dim sErroresProcedencia, sErroresDestinos, sErroresOtros As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
             Dim vFileName As String = Path.GetTempPath & "SincroSyngenta " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
@@ -6342,10 +6342,22 @@ Namespace Pronto.ERP.Bll
 
 
 
+                    'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=12905
+                    '                    Para emitir el sincro syngenta es obligatorio que estén cargados los siguientes campos en todas las cartas de porte emitidas:
+                    '                    CTG()
+                    '                    CEE()
+                    'Fecha de Vencimiento CEE
+                    '                    A esto hay que agregarle lo siguiente:
+                    'Si la carta tiene corredor DIRECTO, enviar en vez del corredor, el corredor obs
+
+                    If .CTG = 0 Then
+                        sErroresOtros &= "<a href=""CartaDePorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & " falta el CTG</a>; <br/>"
+                    End If
 
 
-
-
+                    If .CEE = "" Or .IsFechaVencimientoNull Then
+                        sErroresOtros &= "<a href=""CartaDePorte.aspx?Id=" & .IdCartaDePorte & """ target=""_blank"">" & .NumeroCartaDePorte & " falta el CEE o Vencimiento</a>; <br/>"
+                    End If
 
 
 
@@ -6408,15 +6420,29 @@ Namespace Pronto.ERP.Bll
                         ErrHandler.WriteError(ex)
                     End Try
 
+
                     Try
                         If .CorredorDesc.Trim() = "DIRECTO" Then
-                            .CorredorDesc = ""
-                            .CorredorCUIT = ""
+
+                            'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=12905
+
+                            '                    A esto hay que agregarle lo siguiente:
+                            'Si la carta tiene corredor DIRECTO, enviar en vez del corredor, el corredor obs
+                            If .Corredor2 > 0 Then
+                                .CorredorDesc = NombreVendedor(SC, .Corredor2)
+                                .CorredorCUIT = ClienteManager.GetItem(SC, BuscaIdClientePreciso(.CorredorDesc, SC)).Cuit
+                            Else
+                                .CorredorDesc = ""
+                                .CorredorCUIT = ""
+                            End If
                         End If
 
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
+
+
+
 
                     Try
 
@@ -6830,10 +6856,10 @@ Namespace Pronto.ERP.Bll
             FileClose(nF)
 
 
-            sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos & "<br/>Otros: <br/>" & sErroresOtros
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
             End If
 
             Return vFileName

@@ -1,34 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo._BorradoSubdiarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="_BorradoSubdiarios">
-    <Key>
-      <PropertyRef Name="IdSubdiario" />
-    </Key>
-    <Property Name="IdSubdiario" Type="int" Nullable="false" />
-    <Property Name="PROVEEDOR" Type="varchar" MaxLength="7" />
-    <Property Name="CABEZA" Type="varchar" MaxLength="12" />
-    <Property Name="CODCABEZA" Type="varchar" MaxLength="2" />
-  </EntityType>
-  <EntityType Name="_TempAutorizaciones">
-    <Key>
-      <PropertyRef Name="IdTempAutorizacion" />
-    </Key>
-    <Property Name="IdComprobante" Type="int" />
-    <Property Name="TipoComprobante" Type="varchar" MaxLength="20" />
-    <Property Name="Numero" Type="varchar" MaxLength="15" />
-    <Property Name="IdAutorizacion" Type="int" />
-    <Property Name="IdFormulario" Type="int" />
-    <Property Name="IdDetalleAutorizacion" Type="int" />
-    <Property Name="SectorEmisor" Type="varchar" MaxLength="1" />
-    <Property Name="OrdenAutorizacion" Type="int" />
-    <Property Name="IdAutoriza" Type="int" />
-    <Property Name="IdSector" Type="int" />
-    <Property Name="IdLibero" Type="int" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="IdTempAutorizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-  </EntityType>
+advertencia 6013: La tabla o vista 'DemoProntoWeb.dbo._TempAutorizaciones' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="_TempAutorizaciones">
+          <Property Name="IdComprobante" Type="int" />
+          <Property Name="TipoComprobante" Type="varchar" MaxLength="20" />
+          <Property Name="Numero" Type="varchar" MaxLength="15" />
+          <Property Name="IdAutorizacion" Type="int" />
+          <Property Name="IdFormulario" Type="int" />
+          <Property Name="IdDetalleAutorizacion" Type="int" />
+          <Property Name="SectorEmisor" Type="varchar" MaxLength="1" />
+          <Property Name="OrdenAutorizacion" Type="int" />
+          <Property Name="IdAutoriza" Type="int" />
+          <Property Name="IdSector" Type="int" />
+          <Property Name="IdLibero" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>-->
   <EntityType Name="Articulos">
     <Key>
       <PropertyRef Name="IdArticulo" />
@@ -291,7 +278,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo._BorradoSubdiarios' no tiene de
     <Property Name="FechaUltimaActualizacion" Type="datetime" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.AutorizacionesCompra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.AutorizacionesCompra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="AutorizacionesCompra">
     <Key>
       <PropertyRef Name="IdAutorizacionCompra" />
@@ -633,6 +620,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.AutorizacionesCompra' no tiene 
     <Property Name="ImporteRetencionIvaEnOrdenPago" Type="numeric" Precision="18" Scale="2" />
     <Property Name="DebitoAutomatico" Type="varchar" MaxLength="2" />
     <Property Name="FechaPrestacionServicio" Type="datetime" />
+    <Property Name="IdTipoOperacion" Type="int" />
   </EntityType>
   <EntityType Name="Conceptos">
     <Key>
@@ -718,6 +706,8 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.AutorizacionesCompra' no tiene 
     <Property Name="IdMoneda" Type="int" />
     <Property Name="Cotizacion" Type="numeric" Precision="18" Scale="4" />
     <Property Name="CotizacionLibre" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Replicador_Insert" Type="varchar" MaxLength="1" />
+    <Property Name="Replicador_Update" Type="varchar" MaxLength="1" />
     <Property Name="REP_COTIZACION_INS" Type="varchar" MaxLength="1" />
     <Property Name="REP_COTIZACION_UPD" Type="varchar" MaxLength="1" />
   </EntityType>
@@ -1007,7 +997,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.AutorizacionesCompra' no tiene 
     <Property Name="IdsTipoCompra" Type="varchar" MaxLength="100" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleAutorizacionesCompra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.DetalleAutorizacionesCompra' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleAutorizacionesCompra">
     <Key>
       <PropertyRef Name="IdDetalleAutorizacionCompra" />
@@ -1020,7 +1010,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleAutorizacionesCompra' no
     <Property Name="Observaciones" Type="ntext" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleAutorizacionesFirmantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.DetalleAutorizacionesFirmantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleAutorizacionesFirmantes">
     <Key>
       <PropertyRef Name="IdDetalleAutorizacionFirmantes" />
@@ -1046,6 +1036,8 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleAutorizacionesFirmantes'
     <Property Name="Telefono" Type="varchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.DetalleClientesLugaresEntrega' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleClientesLugaresEntrega">
     <Key>
       <PropertyRef Name="IdDetalleClienteLugarEntrega" />
@@ -1171,7 +1163,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleAutorizacionesFirmantes'
     <Property Name="FechaModificacionCuenta" Type="datetime" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleComprobantesProveedoresPresupuestosObras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.DetalleComprobantesProveedoresPresupuestosObras' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleComprobantesProveedoresPresupuestosObras">
     <Key>
       <PropertyRef Name="IdDetalleComprobanteProveedorPresupuestosObras" />
@@ -1190,8 +1182,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleComprobantesProveedoresP
     <Property Name="IdProvinciaDestino" Type="int" />
     <Property Name="Porcentaje" Type="numeric" Precision="6" Scale="2" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleCuentas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleCuentas">
     <Key>
       <PropertyRef Name="IdDetalleCuenta" />
@@ -1213,7 +1203,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleCuentas' no tiene defini
     <Property Name="FechaEgreso" Type="datetime" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleEmpleadosCuentasBancarias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.DetalleEmpleadosCuentasBancarias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="DetalleEmpleadosCuentasBancarias">
     <Key>
       <PropertyRef Name="IdDetalleEmpleadoCuentaBancaria" />
@@ -1464,7 +1454,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleEmpleadosCuentasBancaria
     <Property Name="ImpuestoAdicional" Type="numeric" Precision="18" Scale="2" />
     <Property Name="LeyendaPorcentajeAdicional" Type="varchar" MaxLength="50" />
     <Property Name="ImporteTotalFacturasMPagadasSujetasARetencion" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="IdRubroContable" Type="int" />
     <Property Name="IdDetalleImpuesto" Type="int" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoRendicionesFF">
@@ -1753,8 +1742,8 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleEmpleadosCuentasBancaria
     <Property Name="Partida" Type="varchar" MaxLength="20" />
     <Property Name="DescargaPorKit" Type="varchar" MaxLength="2" />
     <Property Name="NumeroCaja" Type="int" />
-    <Property Name="Talle" Type="varchar" MaxLength="2" />
     <Property Name="IdColor" Type="int" />
+    <Property Name="Talle" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="DetalleRequerimientos">
     <Key>
@@ -1854,7 +1843,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.DetalleEmpleadosCuentasBancaria
     <Property Name="FechaFinalizacion" Type="datetime" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="EjerciciosPeriodos">
     <Key>
       <PropertyRef Name="IdEjercicioPeriodo" />
@@ -2085,9 +2074,10 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.EjerciciosPeriodos' no tiene de
     <Property Name="ComisionDiferenciada" Type="numeric" Precision="6" Scale="2" />
     <Property Name="IdTipoNegocioVentas" Type="int" />
     <Property Name="NumeroOrdenCompraExterna" Type="int" />
+    <Property Name="IdTipoOperacion" Type="int" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.Formularios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Formularios">
     <Key>
       <PropertyRef Name="IdFormulario" />
@@ -2115,7 +2105,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="IdIBCondicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="ImporteTopeMinimo" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="Alicuota" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="Alicuota" Type="numeric" Precision="8" Scale="3" />
     <Property Name="FechaVigencia" Type="datetime" />
     <Property Name="AcumulaMensualmente" Type="varchar" MaxLength="2" />
     <Property Name="BaseCalculo" Type="varchar" MaxLength="15" />
@@ -2203,9 +2193,9 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="CodigoESRI" Type="varchar" MaxLength="2" />
     <Property Name="CodigoWilliams" Type="varchar" MaxLength="20" />
     <Property Name="CodigoLosGrobo" Type="varchar" MaxLength="20" />
-    <Property Name="IdPartido" Type="int" />
     <Property Name="Codigo" Type="int" />
     <Property Name="Partido" Type="varchar" MaxLength="60" />
+    <Property Name="IdPartido" Type="int" />
   </EntityType>
   <EntityType Name="Monedas">
     <Key>
@@ -2288,6 +2278,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="CuentaVentaLetra" Type="varchar" MaxLength="1" />
     <Property Name="CuentaVentaPuntoVenta" Type="int" />
     <Property Name="CuentaVentaNumero" Type="int" />
+    <Property Name="IdTipoOperacion" Type="int" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -2391,6 +2382,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="Observaciones3" Type="ntext" />
     <Property Name="IdSubjefe" Type="int" />
     <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="IdLocalidad" Type="int" />
     <Property Name="IdProvincia" Type="int" />
     <Property Name="IdPais" Type="int" />
     <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
@@ -2402,7 +2394,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="Operarios" Type="int" />
     <Property Name="Zona" Type="int" />
     <Property Name="Jurisdiccion" Type="int" />
-    <Property Name="IdLocalidad" Type="int" />
     <Property Name="IdCuentaContableFF" Type="int" />
     <Property Name="ValorObra" Type="numeric" Precision="18" Scale="2" />
     <Property Name="IdMonedaValorObra" Type="int" />
@@ -2804,12 +2795,12 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="IdMonedaEuro" Type="int" />
     <Property Name="LineasDiarioDetallado" Type="int" />
     <Property Name="LineasDiarioResumido" Type="int" />
-    <Property Name="ImporteComprobantesMParaRetencionIVA" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PathEnvioEmailsMANTENIMIENTO" Type="varchar" MaxLength="100" />
+    <Property Name="PathRecepcionEmailsMANTENIMIENTO" Type="varchar" MaxLength="100" />
+    <Property Name="ImporteComprobantesMParaRetencionIVA" Type="numeric" Precision="18" Scale="3" />
     <Property Name="PorcentajeRetencionIVAComprobantesM" Type="numeric" Precision="6" Scale="2" />
     <Property Name="ImporteComprobantesMParaRetencionGanancias" Type="numeric" Precision="18" Scale="2" />
     <Property Name="PorcentajeRetencionGananciasComprobantesM" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="PathEnvioEmailsMANTENIMIENTO" Type="varchar" MaxLength="100" />
-    <Property Name="PathRecepcionEmailsMANTENIMIENTO" Type="varchar" MaxLength="100" />
     <Property Name="IdTipoComprobanteFacturaCompraExportacion" Type="int" />
     <Property Name="IvaCompras_DesglosarNOGRAVADOS" Type="varchar" MaxLength="2" />
     <Property Name="IdCuentaImpuestosInternos" Type="int" />
@@ -2859,7 +2850,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     </Key>
     <Property Name="IdParametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Campo" Type="varchar" MaxLength="50" />
-    <Property Name="Valor" Type="varchar" MaxLength="500" />
+    <Property Name="Valor" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Pedidos">
     <Key>
@@ -3015,7 +3006,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.Formularios' no tiene definida 
     <Property Name="FechaRespuestaweb" Type="datetime" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIni' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.ProntoIni' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProntoIni">
     <Key>
       <PropertyRef Name="IdProntoIni" />
@@ -3026,7 +3017,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIni' no tiene definida ni
     <Property Name="Valor" Type="varchar" MaxLength="1000" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DemoProntoWeb.dbo.ProntoIniClaves' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="ProntoIniClaves">
     <Key>
       <PropertyRef Name="IdProntoIniClave" />
@@ -3107,7 +3098,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="IdImpuestoDirectoSUSS" Type="int" />
     <Property Name="Importaciones_NumeroInscripcion" Type="varchar" MaxLength="20" />
     <Property Name="Importaciones_DenominacionInscripcion" Type="varchar" MaxLength="10" />
-    <Property Name="EnviarEmail" Type="int" />
+    <Property Name="EnviarEmail" Type="tinyint" />
     <Property Name="REP_PROVEEDO_INS" Type="varchar" MaxLength="1" />
     <Property Name="REP_PROVEEDO_UPD" Type="varchar" MaxLength="1" />
     <Property Name="InformacionAuxiliar" Type="varchar" MaxLength="50" />
@@ -3196,7 +3187,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="FechaCAI_R_A" Type="datetime" />
     <Property Name="NumeroCAI_F_A" Type="varchar" MaxLength="20" />
     <Property Name="FechaCAI_F_A" Type="datetime" />
-    <Property Name="NumeroCAI_D_A" Type="varchar" MaxLength="20" />
+    <Property Name="NumeroCAI_D_A" Type="varchar" MaxLength="50" />
     <Property Name="FechaCAI_D_A" Type="datetime" />
     <Property Name="NumeroCAI_C_A" Type="varchar" MaxLength="20" />
     <Property Name="FechaCAI_C_A" Type="datetime" />
@@ -3253,7 +3244,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="RetencionGanancias" Type="numeric" Precision="19" Scale="2" />
     <Property Name="RetencionIBrutos" Type="numeric" Precision="19" Scale="2" />
     <Property Name="GastosGenerales" Type="numeric" Precision="19" Scale="2" />
-    <Property Name="Cotizacion" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Cotizacion" Type="numeric" Precision="18" Scale="3" />
     <Property Name="Observaciones" Type="ntext" />
     <Property Name="IdMoneda" Type="int" />
     <Property Name="Dolarizada" Type="varchar" MaxLength="2" />
@@ -3475,6 +3466,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="IdCuentaCompras9" Type="int" />
     <Property Name="IdCuentaCompras10" Type="int" />
     <Property Name="Codigo" Type="int" />
+    <Property Name="IdTipoOperacion" Type="int" />
   </EntityType>
   <EntityType Name="RubrosContables">
     <Key>
@@ -3528,9 +3520,9 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="IdObra" Type="int" />
     <Property Name="NumeroCaja" Type="int" />
     <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdColor" Type="int" />
     <Property Name="Equivalencia" Type="numeric" Precision="18" Scale="6" />
     <Property Name="CantidadEquivalencia" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="IdColor" Type="int" />
     <Property Name="Talle" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Subdiarios">
@@ -3550,6 +3542,8 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="IdComprobante" Type="int" />
     <Property Name="IdMoneda" Type="int" />
     <Property Name="CotizacionMoneda" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Replicador_Insert" Type="varchar" MaxLength="1" />
+    <Property Name="Replicador_Update" Type="varchar" MaxLength="1" />
     <Property Name="REP_IMPUTAC_INS" Type="varchar" MaxLength="1" />
     <Property Name="REP_IMPUTAC_UPD" Type="varchar" MaxLength="1" />
     <Property Name="IdDetalleComprobante" Type="int" />
@@ -3559,18 +3553,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.ProntoIniClaves' no tiene defin
     <Property Name="FechaImportacionTransmision" Type="datetime" />
     <Property Name="IdComprobanteOriginal" Type="int" />
   </EntityType>
-  <EntityType Name="SubRubros">
-    <Key>
-      <PropertyRef Name="IdSubrubro" />
-    </Key>
-    <Property Name="IdSubrubro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-    <Property Name="Abreviatura" Type="varchar" MaxLength="15" />
-    <Property Name="EnviarEmail" Type="tinyint" />
-    <Property Name="Codigo" Type="int" />
-  </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="TarjetasCredito">
     <Key>
       <PropertyRef Name="IdTarjetaCredito" />
@@ -3665,6 +3647,30 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     </Key>
     <Property Name="IdTitulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Titulo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Transportistas">
+    <Key>
+      <PropertyRef Name="IdTransportista" />
+    </Key>
+    <Property Name="IdTransportista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="IdLocalidad" Type="int" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+    <Property Name="IdProvincia" Type="int" />
+    <Property Name="IdPais" Type="int" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="Fax" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="IdCodigoIva" Type="tinyint" />
+    <Property Name="Cuit" Type="varchar" MaxLength="13" />
+    <Property Name="Contacto" Type="varchar" MaxLength="50" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="Horario" Type="varchar" MaxLength="50" />
+    <Property Name="Celular" Type="varchar" MaxLength="50" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdProveedor" Type="int" />
+    <Property Name="Codigo" Type="int" />
   </EntityType>
   <EntityType Name="Ubicaciones">
     <Key>
@@ -3798,6 +3804,42 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
     <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
   </EntityType>
+  <Association Name="FK_Articulos_Cuentas">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="Articulos">
+        <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articulos_Cuentas1">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="Articulos">
+        <PropertyRef Name="IdCuentaAmortizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articulos_Cuentas2">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="Articulos">
+        <PropertyRef Name="IdCuentaCompras" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Articulos_Rubros">
     <End Role="Rubros" Type="Self.Rubros" Multiplicity="1" />
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
@@ -3810,75 +3852,51 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Articulos_SubRubros">
-    <End Role="SubRubros" Type="Self.SubRubros" Multiplicity="1" />
+  <Association Name="FK_Articulos_Unidades">
+    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SubRubros">
-        <PropertyRef Name="IdSubrubro" />
+      <Principal Role="Unidades">
+        <PropertyRef Name="IdUnidad" />
       </Principal>
       <Dependent Role="Articulos">
-        <PropertyRef Name="IdSubrubro" />
+        <PropertyRef Name="IdUnidad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Articulos_Ubicacion">
-    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
-    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+  <Association Name="FK_BancoChequeras_Bancos">
+    <End Role="Bancos" Type="Self.Bancos" Multiplicity="0..1" />
+    <End Role="BancoChequeras" Type="Self.BancoChequeras" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Ubicaciones">
-        <PropertyRef Name="IdUbicacion" />
+      <Principal Role="Bancos">
+        <PropertyRef Name="IdBanco" />
       </Principal>
-      <Dependent Role="Articulos">
-        <PropertyRef Name="IdUbicacionStandar" />
+      <Dependent Role="BancoChequeras">
+        <PropertyRef Name="IdBanco" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_CatIIBB2">
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+  <Association Name="FK_Bancos_Cuentas">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Bancos" Type="Self.Bancos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="IBCondiciones">
-        <PropertyRef Name="IdIBCondicion" />
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
       </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdIBCondicionPorDefecto2" />
+      <Dependent Role="Bancos">
+        <PropertyRef Name="IdCuenta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_CatIIBB3">
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+  <Association Name="FK_Bancos_Cuentas1">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Bancos" Type="Self.Bancos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="IBCondiciones">
-        <PropertyRef Name="IdIBCondicion" />
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
       </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdIBCondicionPorDefecto3" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_Cobrador">
-    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vendedores">
-        <PropertyRef Name="IdVendedor" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="Cobrador" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_CondicionCompras">
-    <End Role="Condiciones Compra" Type="Self.Condiciones Compra" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Condiciones Compra">
-        <PropertyRef Name="IdCondicionCompra" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdCondicionVenta" />
+      <Dependent Role="Bancos">
+        <PropertyRef Name="IdCuentaParaChequesDiferidos" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3894,31 +3912,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_CuentasMonedaExt">
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cuentas">
-        <PropertyRef Name="IdCuenta" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdCuentaMonedaExt" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_DescripcionIva">
-    <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DescripcionIva">
-        <PropertyRef Name="IdCodigoIva" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdCodigoIva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_Empleados_Ingreso">
+  <Association Name="FK_Clientes_Empleados">
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3930,7 +3924,7 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_Empleados_Modifico">
+  <Association Name="FK_Clientes_Empleados1">
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3939,54 +3933,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Principal>
       <Dependent Role="Clientes">
         <PropertyRef Name="IdUsuarioModifico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_Estados">
-    <End Role="Estados Proveedores" Type="Self.Estados Proveedores" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Estados Proveedores">
-        <PropertyRef Name="IdEstado" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdEstado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_IGCondiciones">
-    <End Role="IGCondiciones" Type="Self.IGCondiciones" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="IGCondiciones">
-        <PropertyRef Name="IdIGCondicion" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IGCondicion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_listasprecio">
-    <End Role="ListasPrecios" Type="Self.ListasPrecios" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ListasPrecios">
-        <PropertyRef Name="IdListaPrecios" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdListaPrecios" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_LocalidadEntrega">
-    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Localidades">
-        <PropertyRef Name="IdLocalidad" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdLocalidadEntrega" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4014,18 +3960,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_Pais">
-    <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Paises">
-        <PropertyRef Name="IdPais" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdPais" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Clientes_Paises">
     <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
@@ -4035,18 +3969,6 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Principal>
       <Dependent Role="Clientes">
         <PropertyRef Name="IdPais" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_ProvinciaEntrega">
-    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincias">
-        <PropertyRef Name="IdProvincia" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdProvinciaEntrega" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4062,27 +3984,27 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_Vendedor">
-    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+  <Association Name="FK_Comparativas_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Comparativas" Type="Self.Comparativas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Vendedores">
-        <PropertyRef Name="IdVendedor" />
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
       </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="Vendedor1" />
+      <Dependent Role="Comparativas">
+        <PropertyRef Name="IdConfecciono" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ComprobantesProveedores_Cuenta">
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
+  <Association Name="FK_Comparativas_Empleados1">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Comparativas" Type="Self.Comparativas" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Cuentas">
-        <PropertyRef Name="IdCuenta" />
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
       </Principal>
-      <Dependent Role="ComprobantesProveedores">
-        <PropertyRef Name="IdCuenta" />
+      <Dependent Role="Comparativas">
+        <PropertyRef Name="IdAprobo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4098,7 +4020,43 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ComprobantesProveedores_Obra">
+  <Association Name="FK_ComprobantesProveedores_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="ComprobantesProveedores">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComprobantesProveedores_Empleados1">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="ComprobantesProveedores">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComprobantesProveedores_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="ComprobantesProveedores">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComprobantesProveedores_Obras">
     <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
     <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
     <ReferentialConstraint>
@@ -4118,31 +4076,67 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
         <PropertyRef Name="IdProveedor" />
       </Principal>
       <Dependent Role="ComprobantesProveedores">
-        <PropertyRef Name="IdProveedorEventual" />
+        <PropertyRef Name="IdProveedor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cuentas_CuentasGastos">
-    <End Role="CuentasGastos" Type="Self.CuentasGastos" Multiplicity="0..1" />
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+  <Association Name="FK_Conceptos_Cuentas">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CuentasGastos">
-        <PropertyRef Name="IdCuentaGasto" />
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
       </Principal>
-      <Dependent Role="Cuentas">
-        <PropertyRef Name="IdCuentaGasto" />
+      <Dependent Role="Conceptos">
+        <PropertyRef Name="IdCuenta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cuentas_TipoCuentaGrupos">
-    <End Role="TiposCuentaGrupos" Type="Self.TiposCuentaGrupos" Multiplicity="0..1" />
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+  <Association Name="FK_Conjuntos_Articulos">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="Conjuntos" Type="Self.Conjuntos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TiposCuentaGrupos">
-        <PropertyRef Name="IdTipoCuentaGrupo" />
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
       </Principal>
-      <Dependent Role="Cuentas">
-        <PropertyRef Name="IdTipoCuentaGrupo" />
+      <Dependent Role="Conjuntos">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conjuntos_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Conjuntos" Type="Self.Conjuntos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Conjuntos">
+        <PropertyRef Name="IdRealizo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Conjuntos_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="Conjuntos" Type="Self.Conjuntos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="Conjuntos">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cotizaciones_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Cotizaciones" Type="Self.Cotizaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Cotizaciones">
+        <PropertyRef Name="IdMoneda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4182,79 +4176,31 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DefinicionArticulos_SubRubros">
-    <End Role="SubRubros" Type="Self.SubRubros" Multiplicity="1" />
-    <End Role="DefinicionArticulos" Type="Self.DefinicionArticulos" Multiplicity="*" />
+  <Association Name="FK_DetalleClientesLugaresEntrega_Localidades">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="DetalleClientesLugaresEntrega" Type="Self.DetalleClientesLugaresEntrega" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SubRubros">
-        <PropertyRef Name="IdSubrubro" />
+      <Principal Role="Localidades">
+        <PropertyRef Name="IdLocalidad" />
       </Principal>
-      <Dependent Role="DefinicionArticulos">
-        <PropertyRef Name="IdSubrubro" />
+      <Dependent Role="DetalleClientesLugaresEntrega">
+        <PropertyRef Name="IdLocalidadEntrega" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleArticulosDocumentos_Articulos">
-    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
-    <End Role="DetalleArticulosDocumentos" Type="Self.DetalleArticulosDocumentos" Multiplicity="*" />
+  <Association Name="FK_DetalleClientesLugaresEntrega_Provincias">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="DetalleClientesLugaresEntrega" Type="Self.DetalleClientesLugaresEntrega" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Articulos">
-        <PropertyRef Name="IdArticulo" />
+      <Principal Role="Provincias">
+        <PropertyRef Name="IdProvincia" />
       </Principal>
-      <Dependent Role="DetalleArticulosDocumentos">
-        <PropertyRef Name="IdArticulo" />
+      <Dependent Role="DetalleClientesLugaresEntrega">
+        <PropertyRef Name="IdProvinciaEntrega" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleArticulosImagenes_Articulos">
-    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
-    <End Role="DetalleArticulosImagenes" Type="Self.DetalleArticulosImagenes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulos">
-        <PropertyRef Name="IdArticulo" />
-      </Principal>
-      <Dependent Role="DetalleArticulosImagenes">
-        <PropertyRef Name="IdArticulo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleArticulosUnidades_Articulos">
-    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
-    <End Role="DetalleArticulosUnidades" Type="Self.DetalleArticulosUnidades" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulos">
-        <PropertyRef Name="IdArticulo" />
-      </Principal>
-      <Dependent Role="DetalleArticulosUnidades">
-        <PropertyRef Name="IdArticulo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleArticulosUnidades_Unidades">
-    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
-    <End Role="DetalleArticulosUnidades" Type="Self.DetalleArticulosUnidades" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Unidades">
-        <PropertyRef Name="IdUnidad" />
-      </Principal>
-      <Dependent Role="DetalleArticulosUnidades">
-        <PropertyRef Name="IdUnidad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleClientes_Clientes">
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
-    <End Role="DetalleClientes" Type="Self.DetalleClientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="IdCliente" />
-      </Principal>
-      <Dependent Role="DetalleClientes">
-        <PropertyRef Name="IdCliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleComparativas_Articulo">
+  <Association Name="FK_DetalleComparativas_Articulos">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="DetalleComparativas" Type="Self.DetalleComparativas" Multiplicity="*" />
     <ReferentialConstraint>
@@ -4266,7 +4212,19 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleComparativas_Unidad">
+  <Association Name="FK_DetalleComparativas_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="DetalleComparativas" Type="Self.DetalleComparativas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="DetalleComparativas">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleComparativas_Unidades">
     <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
     <End Role="DetalleComparativas" Type="Self.DetalleComparativas" Multiplicity="*" />
     <ReferentialConstraint>
@@ -4278,26 +4236,14 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleComprobantesProveedores">
-    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="0..1" />
-    <End Role="DetalleComprobantesProveedores" Type="Self.DetalleComprobantesProveedores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ComprobantesProveedores">
-        <PropertyRef Name="IdComprobanteProveedor" />
-      </Principal>
-      <Dependent Role="DetalleComprobantesProveedores">
-        <PropertyRef Name="IdComprobanteProveedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleComprobantesProveedores_Cuenta">
+  <Association Name="FK_DetalleCuentas_Cuentas">
     <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="DetalleComprobantesProveedores" Type="Self.DetalleComprobantesProveedores" Multiplicity="*" />
+    <End Role="DetalleCuentas" Type="Self.DetalleCuentas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cuentas">
         <PropertyRef Name="IdCuenta" />
       </Principal>
-      <Dependent Role="DetalleComprobantesProveedores">
+      <Dependent Role="DetalleCuentas">
         <PropertyRef Name="IdCuenta" />
       </Dependent>
     </ReferentialConstraint>
@@ -4314,51 +4260,27 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleFacturas_Facturas">
-    <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
-    <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="*" />
+  <Association Name="FK_DetalleNotasCredito_Conceptos">
+    <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
+    <End Role="DetalleNotasCredito" Type="Self.DetalleNotasCredito" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Facturas">
-        <PropertyRef Name="IdFactura" />
+      <Principal Role="Conceptos">
+        <PropertyRef Name="IdConcepto" />
       </Principal>
-      <Dependent Role="DetalleFacturas">
-        <PropertyRef Name="IdFactura" />
+      <Dependent Role="DetalleNotasCredito">
+        <PropertyRef Name="IdConcepto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleFacturas_Unidades">
-    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
-    <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="*" />
+  <Association Name="FK_DetalleNotasDebito_Conceptos">
+    <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
+    <End Role="DetalleNotasDebito" Type="Self.DetalleNotasDebito" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Unidades">
-        <PropertyRef Name="IdUnidad" />
+      <Principal Role="Conceptos">
+        <PropertyRef Name="IdConcepto" />
       </Principal>
-      <Dependent Role="DetalleFacturas">
-        <PropertyRef Name="IdUnidad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
-    <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="0..1" />
-    <End Role="DetalleFacturasOrdenesCompra" Type="Self.DetalleFacturasOrdenesCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DetalleFacturas">
-        <PropertyRef Name="IdDetalleFactura" />
-      </Principal>
-      <Dependent Role="DetalleFacturasOrdenesCompra">
-        <PropertyRef Name="IdDetalleFactura" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleLugaresEntrega_Clientes">
-    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
-    <End Role="DetalleClientesLugaresEntrega" Type="Self.DetalleClientesLugaresEntrega" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="IdCliente" />
-      </Principal>
-      <Dependent Role="DetalleClientesLugaresEntrega">
-        <PropertyRef Name="IdCliente" />
+      <Dependent Role="DetalleNotasDebito">
+        <PropertyRef Name="IdConcepto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4374,255 +4296,327 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleOrdenesCompra_OrdenesCompra">
-    <End Role="OrdenesCompra" Type="Self.OrdenesCompra" Multiplicity="0..1" />
-    <End Role="DetalleOrdenesCompra" Type="Self.DetalleOrdenesCompra" Multiplicity="*" />
+  <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPagoRubrosContables" Type="Self.DetalleOrdenesPagoRubrosContables" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrdenesCompra">
-        <PropertyRef Name="IdOrdenCompra" />
+      <Principal Role="RubrosContables">
+        <PropertyRef Name="IdRubroContable" />
       </Principal>
-      <Dependent Role="DetalleOrdenesCompra">
-        <PropertyRef Name="IdOrdenCompra" />
+      <Dependent Role="DetalleOrdenesPagoRubrosContables">
+        <PropertyRef Name="IdRubroContable" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleOrdenesPagoValores_IdTipoValor">
-    <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
+  <Association Name="FK_DetalleOrdenesPagoValores_BancoChequeras">
+    <End Role="BancoChequeras" Type="Self.BancoChequeras" Multiplicity="0..1" />
     <End Role="DetalleOrdenesPagoValores" Type="Self.DetalleOrdenesPagoValores" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TiposComprobante">
-        <PropertyRef Name="IdTipoComprobante" />
+      <Principal Role="BancoChequeras">
+        <PropertyRef Name="IdBancoChequera" />
       </Principal>
       <Dependent Role="DetalleOrdenesPagoValores">
-        <PropertyRef Name="IdTipoValor" />
+        <PropertyRef Name="IdBancoChequera" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetallePedidos_ControlCalidad">
-    <End Role="ControlesCalidad" Type="Self.ControlesCalidad" Multiplicity="0..1" />
-    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ControlesCalidad">
-        <PropertyRef Name="IdControlCalidad" />
-      </Principal>
-      <Dependent Role="DetallePedidos">
-        <PropertyRef Name="IdControlCalidad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetallePedidos_DetalleComparativa">
-    <End Role="DetalleComparativas" Type="Self.DetalleComparativas" Multiplicity="0..1" />
-    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DetalleComparativas">
-        <PropertyRef Name="IdDetalleComparativa" />
-      </Principal>
-      <Dependent Role="DetallePedidos">
-        <PropertyRef Name="IdDetalleComparativa" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetallePedidos_DetalleRequerimientos">
-    <End Role="DetalleRequerimientos" Type="Self.DetalleRequerimientos" Multiplicity="0..1" />
-    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DetalleRequerimientos">
-        <PropertyRef Name="IdDetalleRequerimiento" />
-      </Principal>
-      <Dependent Role="DetallePedidos">
-        <PropertyRef Name="IdDetalleRequerimiento" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleRecibos_Recibos">
-    <End Role="Recibos" Type="Self.Recibos" Multiplicity="0..1" />
-    <End Role="DetalleRecibos" Type="Self.DetalleRecibos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Recibos">
-        <PropertyRef Name="IdRecibo" />
-      </Principal>
-      <Dependent Role="DetalleRecibos">
-        <PropertyRef Name="IdRecibo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleRecibosCuentas_Recibos">
-    <End Role="Recibos" Type="Self.Recibos" Multiplicity="0..1" />
-    <End Role="DetalleRecibosCuentas" Type="Self.DetalleRecibosCuentas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Recibos">
-        <PropertyRef Name="IdRecibo" />
-      </Principal>
-      <Dependent Role="DetalleRecibosCuentas">
-        <PropertyRef Name="IdRecibo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleRecibosRubrosContables_Recibos">
-    <End Role="Recibos" Type="Self.Recibos" Multiplicity="0..1" />
-    <End Role="DetalleRecibosRubrosContables" Type="Self.DetalleRecibosRubrosContables" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Recibos">
-        <PropertyRef Name="IdRecibo" />
-      </Principal>
-      <Dependent Role="DetalleRecibosRubrosContables">
-        <PropertyRef Name="IdRecibo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleRecibosValores_Recibos">
-    <End Role="Recibos" Type="Self.Recibos" Multiplicity="0..1" />
-    <End Role="DetalleRecibosValores" Type="Self.DetalleRecibosValores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Recibos">
-        <PropertyRef Name="IdRecibo" />
-      </Principal>
-      <Dependent Role="DetalleRecibosValores">
-        <PropertyRef Name="IdRecibo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DetalleRemitos_Remitos">
-    <End Role="Remitos" Type="Self.Remitos" Multiplicity="0..1" />
-    <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Remitos">
-        <PropertyRef Name="IdRemito" />
-      </Principal>
-      <Dependent Role="DetalleRemitos">
-        <PropertyRef Name="IdRemito" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Facturas_Provincia">
-    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
-    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincias">
-        <PropertyRef Name="IdProvincia" />
-      </Principal>
-      <Dependent Role="Facturas">
-        <PropertyRef Name="IdProvinciaDestino" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Facturas_Vendedor">
-    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
-    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vendedores">
-        <PropertyRef Name="IdVendedor" />
-      </Principal>
-      <Dependent Role="Facturas">
-        <PropertyRef Name="IdVendedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IBCondiciones_Cuentas_IIBB">
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cuentas">
-        <PropertyRef Name="IdCuenta" />
-      </Principal>
-      <Dependent Role="IBCondiciones">
-        <PropertyRef Name="IdCuentaPercepcionIIBB" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IBCondiciones_Cuentas_IIBBCompras">
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cuentas">
-        <PropertyRef Name="IdCuenta" />
-      </Principal>
-      <Dependent Role="IBCondiciones">
-        <PropertyRef Name="IdCuentaPercepcionIIBBCompras" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IBCondiciones_Cuentas_IIBBConvenio">
-    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cuentas">
-        <PropertyRef Name="IdCuenta" />
-      </Principal>
-      <Dependent Role="IBCondiciones">
-        <PropertyRef Name="IdCuentaPercepcionIIBBConvenio" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IBCondiciones_Provincias">
-    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincias">
-        <PropertyRef Name="IdProvincia" />
-      </Principal>
-      <Dependent Role="IBCondiciones">
-        <PropertyRef Name="IdProvincia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IBCondiciones_Provincias_Real">
-    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
-    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincias">
-        <PropertyRef Name="IdProvincia" />
-      </Principal>
-      <Dependent Role="IBCondiciones">
-        <PropertyRef Name="IdProvinciaReal" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ListasPrecios_Monedas">
-    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
-    <End Role="ListasPrecios" Type="Self.ListasPrecios" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Monedas">
-        <PropertyRef Name="IdMoneda" />
-      </Principal>
-      <Dependent Role="ListasPrecios">
-        <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ListasPreciosDetalle_Articulos">
+  <Association Name="FK_DetallePedidos_Articulos">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
-    <End Role="ListasPreciosDetalle" Type="Self.ListasPreciosDetalle" Multiplicity="*" />
+    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Articulos">
         <PropertyRef Name="IdArticulo" />
       </Principal>
-      <Dependent Role="ListasPreciosDetalle">
+      <Dependent Role="DetallePedidos">
         <PropertyRef Name="IdArticulo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ListasPreciosDetalle_ListasPrecios">
-    <End Role="ListasPrecios" Type="Self.ListasPrecios" Multiplicity="0..1" />
-    <End Role="ListasPreciosDetalle" Type="Self.ListasPreciosDetalle" Multiplicity="*" />
+  <Association Name="FK_DetallePedidos_Unidades">
+    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
+    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ListasPrecios">
-        <PropertyRef Name="IdListaPrecios" />
+      <Principal Role="Unidades">
+        <PropertyRef Name="IdUnidad" />
       </Principal>
-      <Dependent Role="ListasPreciosDetalle">
-        <PropertyRef Name="IdListaPrecios" />
+      <Dependent Role="DetallePedidos">
+        <PropertyRef Name="IdUnidad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_OrdenesPago_Proveedor">
-    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
-    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+  <Association Name="FK_DetalleRemitos_Articulos1">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Proveedores">
-        <PropertyRef Name="IdProveedor" />
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
       </Principal>
-      <Dependent Role="OrdenesPago">
-        <PropertyRef Name="IdProveedor" />
+      <Dependent Role="DetalleRemitos">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRemitos_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleRemitos">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRemitos_Ubicaciones">
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
+    <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicaciones">
+        <PropertyRef Name="IdUbicacion" />
+      </Principal>
+      <Dependent Role="DetalleRemitos">
+        <PropertyRef Name="IdUbicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRemitos_Unidades">
+    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
+    <End Role="DetalleRemitos" Type="Self.DetalleRemitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unidades">
+        <PropertyRef Name="IdUnidad" />
+      </Principal>
+      <Dependent Role="DetalleRemitos">
+        <PropertyRef Name="IdUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRequerimientos_Articulos">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="DetalleRequerimientos" Type="Self.DetalleRequerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="DetalleRequerimientos">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRequerimientos_Unidades">
+    <End Role="Unidades" Type="Self.Unidades" Multiplicity="0..1" />
+    <End Role="DetalleRequerimientos" Type="Self.DetalleRequerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unidades">
+        <PropertyRef Name="IdUnidad" />
+      </Principal>
+      <Dependent Role="DetalleRequerimientos">
+        <PropertyRef Name="IdUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Sectores">
+    <End Role="Sectores" Type="Self.Sectores" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sectores">
+        <PropertyRef Name="IdSector" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdSector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_PuntosVenta">
+    <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PuntosVenta">
+        <PropertyRef Name="IdPuntoVenta" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdPuntoVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ganancias_TiposRetencionGanancia">
+    <End Role="TiposRetencionGanancia" Type="Self.TiposRetencionGanancia" Multiplicity="0..1" />
+    <End Role="Ganancias" Type="Self.Ganancias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposRetencionGanancia">
+        <PropertyRef Name="IdTipoRetencionGanancia" />
+      </Principal>
+      <Dependent Role="Ganancias">
+        <PropertyRef Name="IdTipoRetencionGanancia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IBCondiciones">
+    <End Role="IBCondiciones" Type="Self.IBCondiciones" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IBCondiciones">
+        <PropertyRef Name="IdIBCondicion" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdIBCondicion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesCompra_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="OrdenesCompra" Type="Self.OrdenesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="OrdenesCompra">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesCompra_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="OrdenesCompra" Type="Self.OrdenesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="OrdenesCompra">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="IdMoneda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4638,63 +4632,51 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Proveedores_DescripcionIva">
-    <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
-    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+  <Association Name="FK_Presupuestos_Condiciones Compra">
+    <End Role="Condiciones Compra" Type="Self.Condiciones Compra" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DescripcionIva">
-        <PropertyRef Name="IdCodigoIva" />
+      <Principal Role="Condiciones Compra">
+        <PropertyRef Name="IdCondicionCompra" />
       </Principal>
-      <Dependent Role="Proveedores">
-        <PropertyRef Name="IdCodigoIva" />
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="IdCondicionCompra" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Proveedores_Localidades">
-    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
-    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+  <Association Name="FK_Presupuestos_Monedas">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Localidades">
-        <PropertyRef Name="IdLocalidad" />
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
       </Principal>
-      <Dependent Role="Proveedores">
-        <PropertyRef Name="IdLocalidad" />
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="IdMoneda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Proveedores_Paises">
+  <Association Name="FK_Presupuestos_Proveedores">
+    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedores">
+        <PropertyRef Name="IdProveedor" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Provincias_Paises">
     <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
-    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Paises">
         <PropertyRef Name="IdPais" />
       </Principal>
-      <Dependent Role="Proveedores">
+      <Dependent Role="Provincias">
         <PropertyRef Name="IdPais" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Proveedores_Provincias">
-    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
-    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincias">
-        <PropertyRef Name="IdProvincia" />
-      </Principal>
-      <Dependent Role="Proveedores">
-        <PropertyRef Name="IdProvincia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PuntosVenta_TiposComprobante">
-    <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
-    <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TiposComprobante">
-        <PropertyRef Name="IdTipoComprobante" />
-      </Principal>
-      <Dependent Role="PuntosVenta">
-        <PropertyRef Name="IdTipoComprobante" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4710,6 +4692,66 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Remitos_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Remitos" Type="Self.Remitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Remitos">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Remitos_Proveedores">
+    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+    <End Role="Remitos" Type="Self.Remitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedores">
+        <PropertyRef Name="IdProveedor" />
+      </Principal>
+      <Dependent Role="Remitos">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Remitos_PuntosVenta">
+    <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="0..1" />
+    <End Role="Remitos" Type="Self.Remitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PuntosVenta">
+        <PropertyRef Name="IdPuntoVenta" />
+      </Principal>
+      <Dependent Role="Remitos">
+        <PropertyRef Name="IdPuntoVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rubros_Cuentas">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Rubros" Type="Self.Rubros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="Rubros">
+        <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Subdiarios_Cuentas">
     <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
     <End Role="Subdiarios" Type="Self.Subdiarios" Multiplicity="*" />
@@ -4722,6 +4764,18 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ubicaciones_Depositos">
+    <End Role="Depositos" Type="Self.Depositos" Multiplicity="0..1" />
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Depositos">
+        <PropertyRef Name="IdDeposito" />
+      </Principal>
+      <Dependent Role="Ubicaciones">
+        <PropertyRef Name="IdDeposito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Articulos_TX_DatosConCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdArticulo" Type="int" Mode="In" />
   </Function>
@@ -4731,12 +4785,12 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_A" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Visto" Type="varchar" Mode="In" />
     <Parameter Name="IdFormulario" Type="int" Mode="In" />
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
     <Parameter Name="OrdenAutorizacion" Type="int" Mode="In" />
     <Parameter Name="IdAutorizo" Type="int" Mode="In" />
     <Parameter Name="FechaAutorizacion" Type="datetime" Mode="In" />
-    <Parameter Name="Visto" Type="varchar" Mode="In" />
     <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -4777,12 +4831,11 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
   </Function>
   <Function Name="wActualizacionesVariasPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
     <Parameter Name="IdTipoCOmprobante" Type="int" Mode="In" />
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
-    <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="DemoProntoModelStoreContainer">
-    <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AutorizacionesPorComprobante" EntityType="Self.AutorizacionesPorComprobante" Schema="dbo" store:Type="Tables" />
@@ -4812,10 +4865,10 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     <EntitySet Name="DetalleArticulosUnidades" EntityType="Self.DetalleArticulosUnidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleAutorizaciones" EntityType="Self.DetalleAutorizaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleClientes" EntityType="Self.DetalleClientes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleClientesLugaresEntrega" EntityType="Self.DetalleClientesLugaresEntrega" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComparativas" EntityType="Self.DetalleComparativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComprobantesProveedores" EntityType="Self.DetalleComprobantesProveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComprobantesProveedoresProvincias" EntityType="Self.DetalleComprobantesProveedoresProvincias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosSectores" EntityType="Self.DetalleEmpleadosSectores" Schema="dbo" store:Type="Tables" />
@@ -4885,196 +4938,154 @@ advertencia 6002: La tabla o vista 'Autotrol.dbo.TarjetasCredito' no tiene defin
     <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subdiarios" EntityType="Self.Subdiarios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SubRubros" EntityType="Self.SubRubros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposComprobante" EntityType="Self.TiposComprobante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuentaGrupos" EntityType="Self.TiposCuentaGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="_BorradoSubdiarios" EntityType="Self._BorradoSubdiarios" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-[_BorradoSubdiarios].[IdSubdiario] AS [IdSubdiario], 
-[_BorradoSubdiarios].[PROVEEDOR] AS [PROVEEDOR], 
-[_BorradoSubdiarios].[CABEZA] AS [CABEZA], 
-[_BorradoSubdiarios].[CODCABEZA] AS [CODCABEZA]
-FROM [dbo].[_BorradoSubdiarios] AS [_BorradoSubdiarios]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="AutorizacionesCompra" EntityType="Self.AutorizacionesCompra" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[AutorizacionesCompra].[IdAutorizacionCompra] AS [IdAutorizacionCompra], 
-[AutorizacionesCompra].[Numero] AS [Numero], 
-[AutorizacionesCompra].[Fecha] AS [Fecha], 
-[AutorizacionesCompra].[IdObra] AS [IdObra], 
-[AutorizacionesCompra].[IdProveedor] AS [IdProveedor], 
-[AutorizacionesCompra].[Observaciones] AS [Observaciones], 
-[AutorizacionesCompra].[IdRealizo] AS [IdRealizo], 
-[AutorizacionesCompra].[IdAprobo] AS [IdAprobo], 
-[AutorizacionesCompra].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
-[AutorizacionesCompra].[FechaIngreso] AS [FechaIngreso], 
-[AutorizacionesCompra].[IdUsuarioModifico] AS [IdUsuarioModifico], 
-[AutorizacionesCompra].[FechaModifico] AS [FechaModifico], 
-[AutorizacionesCompra].[CircuitoFirmasCompleto] AS [CircuitoFirmasCompleto]
-FROM [dbo].[AutorizacionesCompra] AS [AutorizacionesCompra]</DefiningQuery>
+    [AutorizacionesCompra].[IdAutorizacionCompra] AS [IdAutorizacionCompra], 
+    [AutorizacionesCompra].[Numero] AS [Numero], 
+    [AutorizacionesCompra].[Fecha] AS [Fecha], 
+    [AutorizacionesCompra].[IdObra] AS [IdObra], 
+    [AutorizacionesCompra].[IdProveedor] AS [IdProveedor], 
+    [AutorizacionesCompra].[Observaciones] AS [Observaciones], 
+    [AutorizacionesCompra].[IdRealizo] AS [IdRealizo], 
+    [AutorizacionesCompra].[IdAprobo] AS [IdAprobo], 
+    [AutorizacionesCompra].[IdUsuarioIngreso] AS [IdUsuarioIngreso], 
+    [AutorizacionesCompra].[FechaIngreso] AS [FechaIngreso], 
+    [AutorizacionesCompra].[IdUsuarioModifico] AS [IdUsuarioModifico], 
+    [AutorizacionesCompra].[FechaModifico] AS [FechaModifico], 
+    [AutorizacionesCompra].[CircuitoFirmasCompleto] AS [CircuitoFirmasCompleto]
+    FROM [dbo].[AutorizacionesCompra] AS [AutorizacionesCompra]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="DetalleAutorizacionesCompra" EntityType="Self.DetalleAutorizacionesCompra" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[DetalleAutorizacionesCompra].[IdDetalleAutorizacionCompra] AS [IdDetalleAutorizacionCompra], 
-[DetalleAutorizacionesCompra].[IdAutorizacionCompra] AS [IdAutorizacionCompra], 
-[DetalleAutorizacionesCompra].[IdArticulo] AS [IdArticulo], 
-[DetalleAutorizacionesCompra].[Cantidad] AS [Cantidad], 
-[DetalleAutorizacionesCompra].[IdUnidad] AS [IdUnidad], 
-[DetalleAutorizacionesCompra].[Observaciones] AS [Observaciones]
-FROM [dbo].[DetalleAutorizacionesCompra] AS [DetalleAutorizacionesCompra]</DefiningQuery>
+    [DetalleAutorizacionesCompra].[IdDetalleAutorizacionCompra] AS [IdDetalleAutorizacionCompra], 
+    [DetalleAutorizacionesCompra].[IdAutorizacionCompra] AS [IdAutorizacionCompra], 
+    [DetalleAutorizacionesCompra].[IdArticulo] AS [IdArticulo], 
+    [DetalleAutorizacionesCompra].[Cantidad] AS [Cantidad], 
+    [DetalleAutorizacionesCompra].[IdUnidad] AS [IdUnidad], 
+    [DetalleAutorizacionesCompra].[Observaciones] AS [Observaciones]
+    FROM [dbo].[DetalleAutorizacionesCompra] AS [DetalleAutorizacionesCompra]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="DetalleAutorizacionesFirmantes" EntityType="Self.DetalleAutorizacionesFirmantes" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[DetalleAutorizacionesFirmantes].[IdDetalleAutorizacionFirmantes] AS [IdDetalleAutorizacionFirmantes], 
-[DetalleAutorizacionesFirmantes].[IdDetalleAutorizacion] AS [IdDetalleAutorizacion], 
-[DetalleAutorizacionesFirmantes].[IdAutorizacion] AS [IdAutorizacion], 
-[DetalleAutorizacionesFirmantes].[IdFirmante] AS [IdFirmante], 
-[DetalleAutorizacionesFirmantes].[IdRubro] AS [IdRubro], 
-[DetalleAutorizacionesFirmantes].[IdSubrubro] AS [IdSubrubro], 
-[DetalleAutorizacionesFirmantes].[ParaTaller] AS [ParaTaller], 
-[DetalleAutorizacionesFirmantes].[ImporteDesde] AS [ImporteDesde], 
-[DetalleAutorizacionesFirmantes].[ImporteHasta] AS [ImporteHasta]
-FROM [dbo].[DetalleAutorizacionesFirmantes] AS [DetalleAutorizacionesFirmantes]</DefiningQuery>
+    [DetalleAutorizacionesFirmantes].[IdDetalleAutorizacionFirmantes] AS [IdDetalleAutorizacionFirmantes], 
+    [DetalleAutorizacionesFirmantes].[IdDetalleAutorizacion] AS [IdDetalleAutorizacion], 
+    [DetalleAutorizacionesFirmantes].[IdAutorizacion] AS [IdAutorizacion], 
+    [DetalleAutorizacionesFirmantes].[IdFirmante] AS [IdFirmante], 
+    [DetalleAutorizacionesFirmantes].[IdRubro] AS [IdRubro], 
+    [DetalleAutorizacionesFirmantes].[IdSubrubro] AS [IdSubrubro], 
+    [DetalleAutorizacionesFirmantes].[ParaTaller] AS [ParaTaller], 
+    [DetalleAutorizacionesFirmantes].[ImporteDesde] AS [ImporteDesde], 
+    [DetalleAutorizacionesFirmantes].[ImporteHasta] AS [ImporteHasta]
+    FROM [dbo].[DetalleAutorizacionesFirmantes] AS [DetalleAutorizacionesFirmantes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="DetalleClientesLugaresEntrega" EntityType="Self.DetalleClientesLugaresEntrega" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DetalleClientesLugaresEntrega].[IdDetalleClienteLugarEntrega] AS [IdDetalleClienteLugarEntrega], 
+    [DetalleClientesLugaresEntrega].[IdCliente] AS [IdCliente], 
+    [DetalleClientesLugaresEntrega].[DireccionEntrega] AS [DireccionEntrega], 
+    [DetalleClientesLugaresEntrega].[IdLocalidadEntrega] AS [IdLocalidadEntrega], 
+    [DetalleClientesLugaresEntrega].[IdProvinciaEntrega] AS [IdProvinciaEntrega]
+    FROM [dbo].[DetalleClientesLugaresEntrega] AS [DetalleClientesLugaresEntrega]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="DetalleComprobantesProveedoresPresupuestosObras" EntityType="Self.DetalleComprobantesProveedoresPresupuestosObras" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[DetalleComprobantesProveedoresPresupuestosObras].[IdDetalleComprobanteProveedorPresupuestosObras] AS [IdDetalleComprobanteProveedorPresupuestosObras], 
-[DetalleComprobantesProveedoresPresupuestosObras].[IdComprobanteProveedor] AS [IdComprobanteProveedor], 
-[DetalleComprobantesProveedoresPresupuestosObras].[IdPresupuestoObrasNodo] AS [IdPresupuestoObrasNodo], 
-[DetalleComprobantesProveedoresPresupuestosObras].[Importe] AS [Importe]
-FROM [dbo].[DetalleComprobantesProveedoresPresupuestosObras] AS [DetalleComprobantesProveedoresPresupuestosObras]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-[DetalleCuentas].[IdDetalleCuenta] AS [IdDetalleCuenta], 
-[DetalleCuentas].[IdCuenta] AS [IdCuenta], 
-[DetalleCuentas].[NombreAnterior] AS [NombreAnterior], 
-[DetalleCuentas].[FechaCambio] AS [FechaCambio], 
-[DetalleCuentas].[CodigoAnterior] AS [CodigoAnterior], 
-[DetalleCuentas].[JerarquiaAnterior] AS [JerarquiaAnterior]
-FROM [dbo].[DetalleCuentas] AS [DetalleCuentas]</DefiningQuery>
+    [DetalleComprobantesProveedoresPresupuestosObras].[IdDetalleComprobanteProveedorPresupuestosObras] AS [IdDetalleComprobanteProveedorPresupuestosObras], 
+    [DetalleComprobantesProveedoresPresupuestosObras].[IdComprobanteProveedor] AS [IdComprobanteProveedor], 
+    [DetalleComprobantesProveedoresPresupuestosObras].[IdPresupuestoObrasNodo] AS [IdPresupuestoObrasNodo], 
+    [DetalleComprobantesProveedoresPresupuestosObras].[Importe] AS [Importe]
+    FROM [dbo].[DetalleComprobantesProveedoresPresupuestosObras] AS [DetalleComprobantesProveedoresPresupuestosObras]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[DetalleEmpleadosCuentasBancarias].[IdDetalleEmpleadoCuentaBancaria] AS [IdDetalleEmpleadoCuentaBancaria], 
-[DetalleEmpleadosCuentasBancarias].[IdEmpleado] AS [IdEmpleado], 
-[DetalleEmpleadosCuentasBancarias].[IdCuentaBancaria] AS [IdCuentaBancaria]
-FROM [dbo].[DetalleEmpleadosCuentasBancarias] AS [DetalleEmpleadosCuentasBancarias]</DefiningQuery>
+    [DetalleEmpleadosCuentasBancarias].[IdDetalleEmpleadoCuentaBancaria] AS [IdDetalleEmpleadoCuentaBancaria], 
+    [DetalleEmpleadosCuentasBancarias].[IdEmpleado] AS [IdEmpleado], 
+    [DetalleEmpleadosCuentasBancarias].[IdCuentaBancaria] AS [IdCuentaBancaria]
+    FROM [dbo].[DetalleEmpleadosCuentasBancarias] AS [DetalleEmpleadosCuentasBancarias]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
-[EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
-[EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
-[EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
-FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
+    [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
+    [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
+    [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
+    [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
+    FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Formularios" EntityType="Self.Formularios" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[Formularios].[IdFormulario] AS [IdFormulario], 
-[Formularios].[Descripcion] AS [Descripcion]
-FROM [dbo].[Formularios] AS [Formularios]</DefiningQuery>
+    [Formularios].[IdFormulario] AS [IdFormulario], 
+    [Formularios].[Descripcion] AS [Descripcion]
+    FROM [dbo].[Formularios] AS [Formularios]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ProntoIni" EntityType="Self.ProntoIni" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[ProntoIni].[IdProntoIni] AS [IdProntoIni], 
-[ProntoIni].[IdUsuario] AS [IdUsuario], 
-[ProntoIni].[IdProntoIniClave] AS [IdProntoIniClave], 
-[ProntoIni].[Valor] AS [Valor]
-FROM [dbo].[ProntoIni] AS [ProntoIni]</DefiningQuery>
+    [ProntoIni].[IdProntoIni] AS [IdProntoIni], 
+    [ProntoIni].[IdUsuario] AS [IdUsuario], 
+    [ProntoIni].[IdProntoIniClave] AS [IdProntoIniClave], 
+    [ProntoIni].[Valor] AS [Valor]
+    FROM [dbo].[ProntoIni] AS [ProntoIni]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ProntoIniClaves" EntityType="Self.ProntoIniClaves" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[ProntoIniClaves].[IdProntoIniClave] AS [IdProntoIniClave], 
-[ProntoIniClaves].[Clave] AS [Clave], 
-[ProntoIniClaves].[Descripcion] AS [Descripcion], 
-[ProntoIniClaves].[ValorPorDefecto] AS [ValorPorDefecto]
-FROM [dbo].[ProntoIniClaves] AS [ProntoIniClaves]</DefiningQuery>
+    [ProntoIniClaves].[IdProntoIniClave] AS [IdProntoIniClave], 
+    [ProntoIniClaves].[Clave] AS [Clave], 
+    [ProntoIniClaves].[Descripcion] AS [Descripcion], 
+    [ProntoIniClaves].[ValorPorDefecto] AS [ValorPorDefecto]
+    FROM [dbo].[ProntoIniClaves] AS [ProntoIniClaves]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-[TarjetasCredito].[IdTarjetaCredito] AS [IdTarjetaCredito], 
-[TarjetasCredito].[Nombre] AS [Nombre], 
-[TarjetasCredito].[IdCuenta] AS [IdCuenta], 
-[TarjetasCredito].[IdMoneda] AS [IdMoneda], 
-[TarjetasCredito].[TipoTarjeta] AS [TipoTarjeta], 
-[TarjetasCredito].[DiseñoRegistro] AS [DiseñoRegistro], 
-[TarjetasCredito].[NumeroEstablecimiento] AS [NumeroEstablecimiento], 
-[TarjetasCredito].[CodigoServicio] AS [CodigoServicio], 
-[TarjetasCredito].[NumeroServicio] AS [NumeroServicio], 
-[TarjetasCredito].[Codigo] AS [Codigo]
-FROM [dbo].[TarjetasCredito] AS [TarjetasCredito]</DefiningQuery>
-    </EntitySet>
+    <AssociationSet Name="FK_Articulos_Cuentas" Association="Self.FK_Articulos_Cuentas">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Articulos" EntitySet="Articulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articulos_Cuentas1" Association="Self.FK_Articulos_Cuentas1">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Articulos" EntitySet="Articulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articulos_Cuentas2" Association="Self.FK_Articulos_Cuentas2">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Articulos" EntitySet="Articulos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
       <End Role="Rubros" EntitySet="Rubros" />
       <End Role="Articulos" EntitySet="Articulos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Articulos_SubRubros" Association="Self.FK_Articulos_SubRubros">
-      <End Role="SubRubros" EntitySet="SubRubros" />
+    <AssociationSet Name="FK_Articulos_Unidades" Association="Self.FK_Articulos_Unidades">
+      <End Role="Unidades" EntitySet="Unidades" />
       <End Role="Articulos" EntitySet="Articulos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Articulos_Ubicacion" Association="Self.FK_Articulos_Ubicacion">
-      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-      <End Role="Articulos" EntitySet="Articulos" />
+    <AssociationSet Name="FK_BancoChequeras_Bancos" Association="Self.FK_BancoChequeras_Bancos">
+      <End Role="Bancos" EntitySet="Bancos" />
+      <End Role="BancoChequeras" EntitySet="BancoChequeras" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_CatIIBB2" Association="Self.FK_Clientes_CatIIBB2">
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-      <End Role="Clientes" EntitySet="Clientes" />
+    <AssociationSet Name="FK_Bancos_Cuentas" Association="Self.FK_Bancos_Cuentas">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Bancos" EntitySet="Bancos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_CatIIBB3" Association="Self.FK_Clientes_CatIIBB3">
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Cobrador" Association="Self.FK_Clientes_Cobrador">
-      <End Role="Vendedores" EntitySet="Vendedores" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_CondicionCompras" Association="Self.FK_Clientes_CondicionCompras">
-      <End Role="Condiciones Compra" EntitySet="Condiciones Compra" />
-      <End Role="Clientes" EntitySet="Clientes" />
+    <AssociationSet Name="FK_Bancos_Cuentas1" Association="Self.FK_Bancos_Cuentas1">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Bancos" EntitySet="Bancos" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_Cuentas" Association="Self.FK_Clientes_Cuentas">
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_CuentasMonedaExt" Association="Self.FK_Clientes_CuentasMonedaExt">
-      <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_DescripcionIva" Association="Self.FK_Clientes_DescripcionIva">
-      <End Role="DescripcionIva" EntitySet="DescripcionIva" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Empleados_Ingreso" Association="Self.FK_Clientes_Empleados_Ingreso">
+    <AssociationSet Name="FK_Clientes_Empleados" Association="Self.FK_Clientes_Empleados">
       <End Role="Empleados" EntitySet="Empleados" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Empleados_Modifico" Association="Self.FK_Clientes_Empleados_Modifico">
+    <AssociationSet Name="FK_Clientes_Empleados1" Association="Self.FK_Clientes_Empleados1">
       <End Role="Empleados" EntitySet="Empleados" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Estados" Association="Self.FK_Clientes_Estados">
-      <End Role="Estados Proveedores" EntitySet="Estados Proveedores" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_IGCondiciones" Association="Self.FK_Clientes_IGCondiciones">
-      <End Role="IGCondiciones" EntitySet="IGCondiciones" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_listasprecio" Association="Self.FK_Clientes_listasprecio">
-      <End Role="ListasPrecios" EntitySet="ListasPrecios" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_LocalidadEntrega" Association="Self.FK_Clientes_LocalidadEntrega">
-      <End Role="Localidades" EntitySet="Localidades" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_Localidades" Association="Self.FK_Clientes_Localidades">
@@ -5085,35 +5096,39 @@ FROM [dbo].[TarjetasCredito] AS [TarjetasCredito]</DefiningQuery>
       <End Role="Monedas" EntitySet="Monedas" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Pais" Association="Self.FK_Clientes_Pais">
-      <End Role="Paises" EntitySet="Paises" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
     <AssociationSet Name="FK_Clientes_Paises" Association="Self.FK_Clientes_Paises">
       <End Role="Paises" EntitySet="Paises" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_ProvinciaEntrega" Association="Self.FK_Clientes_ProvinciaEntrega">
-      <End Role="Provincias" EntitySet="Provincias" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_Provincias" Association="Self.FK_Clientes_Provincias">
       <End Role="Provincias" EntitySet="Provincias" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Vendedor" Association="Self.FK_Clientes_Vendedor">
-      <End Role="Vendedores" EntitySet="Vendedores" />
-      <End Role="Clientes" EntitySet="Clientes" />
+    <AssociationSet Name="FK_Comparativas_Empleados" Association="Self.FK_Comparativas_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Comparativas" EntitySet="Comparativas" />
     </AssociationSet>
-    <AssociationSet Name="FK_ComprobantesProveedores_Cuenta" Association="Self.FK_ComprobantesProveedores_Cuenta">
-      <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
+    <AssociationSet Name="FK_Comparativas_Empleados1" Association="Self.FK_Comparativas_Empleados1">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Comparativas" EntitySet="Comparativas" />
     </AssociationSet>
     <AssociationSet Name="FK_ComprobantesProveedores_DescripcionIva" Association="Self.FK_ComprobantesProveedores_DescripcionIva">
       <End Role="DescripcionIva" EntitySet="DescripcionIva" />
       <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
     </AssociationSet>
-    <AssociationSet Name="FK_ComprobantesProveedores_Obra" Association="Self.FK_ComprobantesProveedores_Obra">
+    <AssociationSet Name="FK_ComprobantesProveedores_Empleados" Association="Self.FK_ComprobantesProveedores_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComprobantesProveedores_Empleados1" Association="Self.FK_ComprobantesProveedores_Empleados1">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComprobantesProveedores_Monedas" Association="Self.FK_ComprobantesProveedores_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComprobantesProveedores_Obras" Association="Self.FK_ComprobantesProveedores_Obras">
       <End Role="Obras" EntitySet="Obras" />
       <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
     </AssociationSet>
@@ -5121,13 +5136,25 @@ FROM [dbo].[TarjetasCredito] AS [TarjetasCredito]</DefiningQuery>
       <End Role="Proveedores" EntitySet="Proveedores" />
       <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cuentas_CuentasGastos" Association="Self.FK_Cuentas_CuentasGastos">
-      <End Role="CuentasGastos" EntitySet="CuentasGastos" />
+    <AssociationSet Name="FK_Conceptos_Cuentas" Association="Self.FK_Conceptos_Cuentas">
       <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Conceptos" EntitySet="Conceptos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cuentas_TipoCuentaGrupos" Association="Self.FK_Cuentas_TipoCuentaGrupos">
-      <End Role="TiposCuentaGrupos" EntitySet="TiposCuentaGrupos" />
-      <End Role="Cuentas" EntitySet="Cuentas" />
+    <AssociationSet Name="FK_Conjuntos_Articulos" Association="Self.FK_Conjuntos_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="Conjuntos" EntitySet="Conjuntos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conjuntos_Empleados" Association="Self.FK_Conjuntos_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Conjuntos" EntitySet="Conjuntos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Conjuntos_Obras" Association="Self.FK_Conjuntos_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="Conjuntos" EntitySet="Conjuntos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cotizaciones_Monedas" Association="Self.FK_Cotizaciones_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Cotizaciones" EntitySet="Cotizaciones" />
     </AssociationSet>
     <AssociationSet Name="FK_CuentasCorrientesAcreedores_Proveedores" Association="Self.FK_CuentasCorrientesAcreedores_Proveedores">
       <End Role="Proveedores" EntitySet="Proveedores" />
@@ -5141,185 +5168,205 @@ FROM [dbo].[TarjetasCredito] AS [TarjetasCredito]</DefiningQuery>
       <End Role="Rubros" EntitySet="Rubros" />
       <End Role="DefinicionArticulos" EntitySet="DefinicionArticulos" />
     </AssociationSet>
-    <AssociationSet Name="FK_DefinicionArticulos_SubRubros" Association="Self.FK_DefinicionArticulos_SubRubros">
-      <End Role="SubRubros" EntitySet="SubRubros" />
-      <End Role="DefinicionArticulos" EntitySet="DefinicionArticulos" />
+    <AssociationSet Name="FK_DetalleClientesLugaresEntrega_Localidades" Association="Self.FK_DetalleClientesLugaresEntrega_Localidades">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="DetalleClientesLugaresEntrega" EntitySet="DetalleClientesLugaresEntrega" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleArticulosDocumentos_Articulos" Association="Self.FK_DetalleArticulosDocumentos_Articulos">
-      <End Role="Articulos" EntitySet="Articulos" />
-      <End Role="DetalleArticulosDocumentos" EntitySet="DetalleArticulosDocumentos" />
+    <AssociationSet Name="FK_DetalleClientesLugaresEntrega_Provincias" Association="Self.FK_DetalleClientesLugaresEntrega_Provincias">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="DetalleClientesLugaresEntrega" EntitySet="DetalleClientesLugaresEntrega" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleArticulosImagenes_Articulos" Association="Self.FK_DetalleArticulosImagenes_Articulos">
-      <End Role="Articulos" EntitySet="Articulos" />
-      <End Role="DetalleArticulosImagenes" EntitySet="DetalleArticulosImagenes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleArticulosUnidades_Articulos" Association="Self.FK_DetalleArticulosUnidades_Articulos">
-      <End Role="Articulos" EntitySet="Articulos" />
-      <End Role="DetalleArticulosUnidades" EntitySet="DetalleArticulosUnidades" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleArticulosUnidades_Unidades" Association="Self.FK_DetalleArticulosUnidades_Unidades">
-      <End Role="Unidades" EntitySet="Unidades" />
-      <End Role="DetalleArticulosUnidades" EntitySet="DetalleArticulosUnidades" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleClientes_Clientes" Association="Self.FK_DetalleClientes_Clientes">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="DetalleClientes" EntitySet="DetalleClientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleComparativas_Articulo" Association="Self.FK_DetalleComparativas_Articulo">
+    <AssociationSet Name="FK_DetalleComparativas_Articulos" Association="Self.FK_DetalleComparativas_Articulos">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="DetalleComparativas" EntitySet="DetalleComparativas" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleComparativas_Unidad" Association="Self.FK_DetalleComparativas_Unidad">
+    <AssociationSet Name="FK_DetalleComparativas_Monedas" Association="Self.FK_DetalleComparativas_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="DetalleComparativas" EntitySet="DetalleComparativas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleComparativas_Unidades" Association="Self.FK_DetalleComparativas_Unidades">
       <End Role="Unidades" EntitySet="Unidades" />
       <End Role="DetalleComparativas" EntitySet="DetalleComparativas" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleComprobantesProveedores" Association="Self.FK_DetalleComprobantesProveedores">
-      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
-      <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleComprobantesProveedores_Cuenta" Association="Self.FK_DetalleComprobantesProveedores_Cuenta">
+    <AssociationSet Name="FK_DetalleCuentas_Cuentas" Association="Self.FK_DetalleCuentas_Cuentas">
       <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
+      <End Role="DetalleCuentas" EntitySet="DetalleCuentas" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleFacturas_Articulos" Association="Self.FK_DetalleFacturas_Articulos">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleFacturas_Facturas" Association="Self.FK_DetalleFacturas_Facturas">
-      <End Role="Facturas" EntitySet="Facturas" />
-      <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
+    <AssociationSet Name="FK_DetalleNotasCredito_Conceptos" Association="Self.FK_DetalleNotasCredito_Conceptos">
+      <End Role="Conceptos" EntitySet="Conceptos" />
+      <End Role="DetalleNotasCredito" EntitySet="DetalleNotasCredito" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleFacturas_Unidades" Association="Self.FK_DetalleFacturas_Unidades">
-      <End Role="Unidades" EntitySet="Unidades" />
-      <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas" Association="Self.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
-      <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
-      <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleLugaresEntrega_Clientes" Association="Self.FK_DetalleLugaresEntrega_Clientes">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="DetalleClientesLugaresEntrega" EntitySet="DetalleClientesLugaresEntrega" />
+    <AssociationSet Name="FK_DetalleNotasDebito_Conceptos" Association="Self.FK_DetalleNotasDebito_Conceptos">
+      <End Role="Conceptos" EntitySet="Conceptos" />
+      <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleOrdenesCompra_Articulos" Association="Self.FK_DetalleOrdenesCompra_Articulos">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompra" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleOrdenesCompra_OrdenesCompra" Association="Self.FK_DetalleOrdenesCompra_OrdenesCompra">
-      <End Role="OrdenesCompra" EntitySet="OrdenesCompra" />
-      <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompra" />
+    <AssociationSet Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables" Association="Self.FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
+      <End Role="DetalleOrdenesPagoRubrosContables" EntitySet="DetalleOrdenesPagoRubrosContables" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetalleOrdenesPagoValores_IdTipoValor" Association="Self.FK_DetalleOrdenesPagoValores_IdTipoValor">
-      <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+    <AssociationSet Name="FK_DetalleOrdenesPagoValores_BancoChequeras" Association="Self.FK_DetalleOrdenesPagoValores_BancoChequeras">
+      <End Role="BancoChequeras" EntitySet="BancoChequeras" />
       <End Role="DetalleOrdenesPagoValores" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetallePedidos_ControlCalidad" Association="Self.FK_DetallePedidos_ControlCalidad">
-      <End Role="ControlesCalidad" EntitySet="ControlesCalidad" />
+    <AssociationSet Name="FK_DetallePedidos_Articulos" Association="Self.FK_DetallePedidos_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
       <End Role="DetallePedidos" EntitySet="DetallePedidos" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetallePedidos_DetalleComparativa" Association="Self.FK_DetallePedidos_DetalleComparativa">
-      <End Role="DetalleComparativas" EntitySet="DetalleComparativas" />
+    <AssociationSet Name="FK_DetallePedidos_Unidades" Association="Self.FK_DetallePedidos_Unidades">
+      <End Role="Unidades" EntitySet="Unidades" />
       <End Role="DetallePedidos" EntitySet="DetallePedidos" />
     </AssociationSet>
-    <AssociationSet Name="FK_DetallePedidos_DetalleRequerimientos" Association="Self.FK_DetallePedidos_DetalleRequerimientos">
-      <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
-      <End Role="DetallePedidos" EntitySet="DetallePedidos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleRecibos_Recibos" Association="Self.FK_DetalleRecibos_Recibos">
-      <End Role="Recibos" EntitySet="Recibos" />
-      <End Role="DetalleRecibos" EntitySet="DetalleRecibos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleRecibosCuentas_Recibos" Association="Self.FK_DetalleRecibosCuentas_Recibos">
-      <End Role="Recibos" EntitySet="Recibos" />
-      <End Role="DetalleRecibosCuentas" EntitySet="DetalleRecibosCuentas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleRecibosRubrosContables_Recibos" Association="Self.FK_DetalleRecibosRubrosContables_Recibos">
-      <End Role="Recibos" EntitySet="Recibos" />
-      <End Role="DetalleRecibosRubrosContables" EntitySet="DetalleRecibosRubrosContables" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleRecibosValores_Recibos" Association="Self.FK_DetalleRecibosValores_Recibos">
-      <End Role="Recibos" EntitySet="Recibos" />
-      <End Role="DetalleRecibosValores" EntitySet="DetalleRecibosValores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleRemitos_Remitos" Association="Self.FK_DetalleRemitos_Remitos">
-      <End Role="Remitos" EntitySet="Remitos" />
+    <AssociationSet Name="FK_DetalleRemitos_Articulos1" Association="Self.FK_DetalleRemitos_Articulos1">
+      <End Role="Articulos" EntitySet="Articulos" />
       <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Facturas_Provincia" Association="Self.FK_Facturas_Provincia">
-      <End Role="Provincias" EntitySet="Provincias" />
-      <End Role="Facturas" EntitySet="Facturas" />
+    <AssociationSet Name="FK_DetalleRemitos_Obras" Association="Self.FK_DetalleRemitos_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Facturas_Vendedor" Association="Self.FK_Facturas_Vendedor">
-      <End Role="Vendedores" EntitySet="Vendedores" />
-      <End Role="Facturas" EntitySet="Facturas" />
+    <AssociationSet Name="FK_DetalleRemitos_Ubicaciones" Association="Self.FK_DetalleRemitos_Ubicaciones">
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+      <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
     </AssociationSet>
-    <AssociationSet Name="FK_IBCondiciones_Cuentas_IIBB" Association="Self.FK_IBCondiciones_Cuentas_IIBB">
-      <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
+    <AssociationSet Name="FK_DetalleRemitos_Unidades" Association="Self.FK_DetalleRemitos_Unidades">
+      <End Role="Unidades" EntitySet="Unidades" />
+      <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
     </AssociationSet>
-    <AssociationSet Name="FK_IBCondiciones_Cuentas_IIBBCompras" Association="Self.FK_IBCondiciones_Cuentas_IIBBCompras">
-      <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IBCondiciones_Cuentas_IIBBConvenio" Association="Self.FK_IBCondiciones_Cuentas_IIBBConvenio">
-      <End Role="Cuentas" EntitySet="Cuentas" />
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IBCondiciones_Provincias" Association="Self.FK_IBCondiciones_Provincias">
-      <End Role="Provincias" EntitySet="Provincias" />
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IBCondiciones_Provincias_Real" Association="Self.FK_IBCondiciones_Provincias_Real">
-      <End Role="Provincias" EntitySet="Provincias" />
-      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ListasPrecios_Monedas" Association="Self.FK_ListasPrecios_Monedas">
-      <End Role="Monedas" EntitySet="Monedas" />
-      <End Role="ListasPrecios" EntitySet="ListasPrecios" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ListasPreciosDetalle_Articulos" Association="Self.FK_ListasPreciosDetalle_Articulos">
+    <AssociationSet Name="FK_DetalleRequerimientos_Articulos" Association="Self.FK_DetalleRequerimientos_Articulos">
       <End Role="Articulos" EntitySet="Articulos" />
-      <End Role="ListasPreciosDetalle" EntitySet="ListasPreciosDetalle" />
+      <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
     </AssociationSet>
-    <AssociationSet Name="FK_ListasPreciosDetalle_ListasPrecios" Association="Self.FK_ListasPreciosDetalle_ListasPrecios">
-      <End Role="ListasPrecios" EntitySet="ListasPrecios" />
-      <End Role="ListasPreciosDetalle" EntitySet="ListasPreciosDetalle" />
+    <AssociationSet Name="FK_DetalleRequerimientos_Unidades" Association="Self.FK_DetalleRequerimientos_Unidades">
+      <End Role="Unidades" EntitySet="Unidades" />
+      <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrdenesPago_Proveedor" Association="Self.FK_OrdenesPago_Proveedor">
-      <End Role="Proveedores" EntitySet="Proveedores" />
-      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    <AssociationSet Name="FK_Empleados_Sectores" Association="Self.FK_Empleados_Sectores">
+      <End Role="Sectores" EntitySet="Sectores" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_Clientes" Association="Self.FK_Facturas_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_Empleados" Association="Self.FK_Facturas_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_Monedas" Association="Self.FK_Facturas_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_PuntosVenta" Association="Self.FK_Facturas_PuntosVenta">
+      <End Role="PuntosVenta" EntitySet="PuntosVenta" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ganancias_TiposRetencionGanancia" Association="Self.FK_Ganancias_TiposRetencionGanancia">
+      <End Role="TiposRetencionGanancia" EntitySet="TiposRetencionGanancia" />
+      <End Role="Ganancias" EntitySet="Ganancias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_Clientes" Association="Self.FK_NotasCredito_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_Empleados" Association="Self.FK_NotasCredito_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IBCondiciones" Association="Self.FK_NotasCredito_IBCondiciones">
+      <End Role="IBCondiciones" EntitySet="IBCondiciones" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_Monedas" Association="Self.FK_NotasCredito_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_Clientes" Association="Self.FK_NotasDebito_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_Empleados" Association="Self.FK_NotasDebito_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_Monedas" Association="Self.FK_NotasDebito_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesCompra_Clientes" Association="Self.FK_OrdenesCompra_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="OrdenesCompra" EntitySet="OrdenesCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesCompra_Monedas" Association="Self.FK_OrdenesCompra_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="OrdenesCompra" EntitySet="OrdenesCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_Empleados" Association="Self.FK_Pedidos_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_Monedas" Association="Self.FK_Pedidos_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
     </AssociationSet>
     <AssociationSet Name="FK_Pedidos_Proveedores" Association="Self.FK_Pedidos_Proveedores">
       <End Role="Proveedores" EntitySet="Proveedores" />
       <End Role="Pedidos" EntitySet="Pedidos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Proveedores_DescripcionIva" Association="Self.FK_Proveedores_DescripcionIva">
-      <End Role="DescripcionIva" EntitySet="DescripcionIva" />
-      <End Role="Proveedores" EntitySet="Proveedores" />
+    <AssociationSet Name="FK_Presupuestos_Condiciones Compra" Association="Self.FK_Presupuestos_Condiciones Compra">
+      <End Role="Condiciones Compra" EntitySet="Condiciones Compra" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Proveedores_Localidades" Association="Self.FK_Proveedores_Localidades">
-      <End Role="Localidades" EntitySet="Localidades" />
-      <End Role="Proveedores" EntitySet="Proveedores" />
+    <AssociationSet Name="FK_Presupuestos_Monedas" Association="Self.FK_Presupuestos_Monedas">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
+    <AssociationSet Name="FK_Presupuestos_Proveedores" Association="Self.FK_Presupuestos_Proveedores">
+      <End Role="Proveedores" EntitySet="Proveedores" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Provincias_Paises" Association="Self.FK_Provincias_Paises">
       <End Role="Paises" EntitySet="Paises" />
-      <End Role="Proveedores" EntitySet="Proveedores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Proveedores_Provincias" Association="Self.FK_Proveedores_Provincias">
       <End Role="Provincias" EntitySet="Provincias" />
-      <End Role="Proveedores" EntitySet="Proveedores" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PuntosVenta_TiposComprobante" Association="Self.FK_PuntosVenta_TiposComprobante">
-      <End Role="TiposComprobante" EntitySet="TiposComprobante" />
-      <End Role="PuntosVenta" EntitySet="PuntosVenta" />
     </AssociationSet>
     <AssociationSet Name="FK_Recibos_Clientes" Association="Self.FK_Recibos_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Recibos" EntitySet="Recibos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Remitos_Clientes" Association="Self.FK_Remitos_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Remitos" EntitySet="Remitos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Remitos_Proveedores" Association="Self.FK_Remitos_Proveedores">
+      <End Role="Proveedores" EntitySet="Proveedores" />
+      <End Role="Remitos" EntitySet="Remitos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Remitos_PuntosVenta" Association="Self.FK_Remitos_PuntosVenta">
+      <End Role="PuntosVenta" EntitySet="PuntosVenta" />
+      <End Role="Remitos" EntitySet="Remitos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Obras" Association="Self.FK_Requerimientos_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rubros_Cuentas" Association="Self.FK_Rubros_Cuentas">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Rubros" EntitySet="Rubros" />
+    </AssociationSet>
     <AssociationSet Name="FK_Subdiarios_Cuentas" Association="Self.FK_Subdiarios_Cuentas">
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="Subdiarios" EntitySet="Subdiarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ubicaciones_Depositos" Association="Self.FK_Ubicaciones_Depositos">
+      <End Role="Depositos" EntitySet="Depositos" />
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
