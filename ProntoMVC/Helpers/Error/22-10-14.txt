@@ -1,0 +1,10 @@
+
+Log Entry : 
+10/22/2014 13:43:38
+Error in: http://localhost:40053/Pronto500/Home/Superbuscador?term=a. Error Message:System.InvalidOperationException
+No existe el procedimiento almacenado 'wbusqueda'.
+   en System.Data.SqlClient.SqlCommand.DeriveParameters()
+   en System.Data.SqlClient.SqlCommandBuilder.DeriveParameters(SqlCommand command)
+   en Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql)
+System.Data
+__________________________

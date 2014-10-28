@@ -1,0 +1,341 @@
+
+Log Entry : 
+10/27/2014 11:43:56
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en d:\ProntoMVC3\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:08
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'SuperAdmin'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1540
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:08
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Reflection.TargetException
+El método no estático necesita un destino.
+   en System.Reflection.RuntimeMethodInfo.CheckConsistency(Object target)
+   en System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   en System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   en System.Reflection.RuntimePropertyInfo.GetValue(Object obj, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
+   en System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryGetFieldOrPropertyValue(MemberExpression me, Object instance, Object& memberValue)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryEvaluatePath(Expression expression, ConstantExpression& constantExpression)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments)
+   en System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1554
+mscorlib
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:09
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'Comercial'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1582
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:09
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'FacturaElectronica'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1607
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:09
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'Requerimientos'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1619
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:13
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en d:\ProntoMVC3\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 11:44:29
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.ArgumentException
+The argument 'nameOrConnectionString' cannot be null, empty or contain only white space.
+   en System.Data.Entity.Utilities.Check.NotEmpty(String value, String parameterName)
+   en System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   en ProntoMVC.Data.Models.DemoProntoEntities..ctor(String connectionString) en d:\ProntoMVC3\Data\Models\Class1.cs:línea 20
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 411
+EntityFramework
+__________________________
+
+Log Entry : 
+10/27/2014 11:52:16
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:52:40
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:52:48
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:53:44
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:55:31
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:57:59
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:59:20
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 11:59:38
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 12:00:24
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'SuperAdmin'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1540
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 12:00:24
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Reflection.TargetException
+El método no estático necesita un destino.
+   en System.Reflection.RuntimeMethodInfo.CheckConsistency(Object target)
+   en System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   en System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   en System.Reflection.RuntimePropertyInfo.GetValue(Object obj, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
+   en System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryGetFieldOrPropertyValue(MemberExpression me, Object instance, Object& memberValue)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryEvaluatePath(Expression expression, ConstantExpression& constantExpression)
+   en System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments)
+   en System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1554
+mscorlib
+__________________________
+
+Log Entry : 
+10/27/2014 12:00:24
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'Comercial'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1582
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 12:00:24
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'FacturaElectronica'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1607
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 12:00:24
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ActualizarRenglon. Error Message:System.Configuration.Provider.ProviderException
+El usuario 'supervisor' ya está en el rol 'Requerimientos'.
+   en System.Web.Security.SqlRoleProvider.AddUsersToRolesCore(SqlConnection conn, String usernames, String roleNames)
+   en System.Web.Security.SqlRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(String[] usernames, String[] roleNames)
+   en MvcMembership.AspNetRoleProviderWrapper.AddToRole(MembershipUser user, String roleName) en c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\AspNetRoleProviderWrapper.cs:línea 51
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.AddToRole(Guid id, String role) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1324
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ActualizarRenglon(Guid id, Boolean EsSuperAdmin, Boolean EsAdmin, Boolean EsComercial, Boolean EsFacturaElec, Boolean EsRequerimientos, String BaseDefault) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 1619
+System.Web
+__________________________
+
+Log Entry : 
+10/27/2014 12:01:53
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:25:28
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:26:10
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:26:54
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:27:03
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:28:05
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:35:32
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:35:57
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:36:07
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________
+
+Log Entry : 
+10/27/2014 13:36:16
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1118
+ProntoMVC
+__________________________

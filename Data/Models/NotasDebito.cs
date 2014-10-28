@@ -75,5 +75,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdIdentificacionCAE { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Moneda Moneda { get; set; }
     }
 }

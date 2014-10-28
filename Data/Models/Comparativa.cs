@@ -42,5 +42,7 @@ namespace ProntoMVC.Data.Models
         public string MotivoAnulacion { get; set; }
     
         public virtual ICollection<DetalleComparativa> DetalleComparativas { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
     }
 }

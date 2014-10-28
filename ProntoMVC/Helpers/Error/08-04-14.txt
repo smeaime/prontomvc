@@ -1,0 +1,119 @@
+
+Log Entry : 
+04/08/2014 04:23:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18276. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:23:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:25:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18276. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:25:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:25:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18273. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:25:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:26:06
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+04/08/2014 04:26:06
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18273. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:26:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+04/08/2014 04:40:21
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+04/08/2014 04:40:24
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 910
+System
+__________________________
+
+Log Entry : 
+04/08/2014 04:50:52
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.NullReferenceException
+Object reference not set to an instance of an object.
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController..ctor() in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 40
+ProntoMVC
+__________________________
+
+Log Entry : 
+04/08/2014 04:50:54
+Error in: http://localhost:40053/Pronto500/Account/RecuperarPassword. Error Message:System.Net.Mail.SmtpException
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at MvcMembership.SmtpClientProxy.Send(MailMessage mailMessage) in c:\Users\Troy\Documents\GitHub\MembershipStarterKit\src\MvcMembership\SmtpClientProxy.cs:line 23
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 910
+System
+__________________________
+
+Log Entry : 
+04/08/2014 04:57:21
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/ResetPasswordWithAnswer/04f60708-dac6-4794-9423-733b1dd7c386. Error Message:System.ArgumentException
+The parameter 'passwordAnswer' must not be empty.
+Parameter name: passwordAnswer
+   at System.Web.Util.SecUtility.CheckParameter(String& param, Boolean checkForNull, Boolean checkIfEmpty, Boolean checkForCommas, Int32 maxSize, String paramName)
+   at System.Web.Security.SqlMembershipProvider.ResetPassword(String username, String passwordAnswer)
+   at System.Web.Security.MembershipUser.ResetPassword(String passwordAnswer)
+   at ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.ResetearPass(Guid id, String answer) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:line 875
+System.Web
+__________________________

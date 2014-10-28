@@ -35,5 +35,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdTarjetaCredito { get; set; }
     
         public virtual TiposComprobante TiposComprobante { get; set; }
+        public virtual BancoChequera BancoChequera { get; set; }
     }
 }

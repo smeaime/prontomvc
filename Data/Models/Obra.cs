@@ -21,6 +21,7 @@ namespace ProntoMVC.Data.Models
             this.DetalleRemitos = new HashSet<DetalleRemito>();
             this.Facturas = new HashSet<Factura>();
             this.ComprobantesProveedores = new HashSet<ComprobanteProveedor>();
+            this.Conjuntos = new HashSet<Conjunto>();
         }
     
         public int IdObra { get; set; }
@@ -86,5 +87,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleRemito> DetalleRemitos { get; set; }
         public virtual ICollection<Factura> Facturas { get; set; }
         public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores { get; set; }
+        public virtual ICollection<Conjunto> Conjuntos { get; set; }
     }
 }
