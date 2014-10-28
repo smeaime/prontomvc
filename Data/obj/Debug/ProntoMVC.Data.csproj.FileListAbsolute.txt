@@ -8,3 +8,13 @@ C:\Backup\BDL\ProntoMVC\Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Backup\BDL\ProntoMVC\Data\obj\Debug\ProntoMVC.Data.dll
 C:\Backup\BDL\ProntoMVC\Data\obj\Debug\ProntoMVC.Data.pdb
 C:\Backup\BDL\ProntoMVC\Data\obj\Debug\ProntoMVC.Data.csprojResolveAssemblyReference.cache
+D:\ProntoMVC3\Data\bin\Debug\ProntoMVC.Data.dll.config
+D:\ProntoMVC3\Data\bin\Debug\ProntoMVC.Data.dll
+D:\ProntoMVC3\Data\bin\Debug\ProntoMVC.Data.pdb
+D:\ProntoMVC3\Data\bin\Debug\EntityFramework.dll
+D:\ProntoMVC3\Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\ProntoMVC3\Data\bin\Debug\EntityFramework.xml
+D:\ProntoMVC3\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\ProntoMVC3\Data\obj\Debug\ProntoMVC.Data.csprojResolveAssemblyReference.cache
+D:\ProntoMVC3\Data\obj\Debug\ProntoMVC.Data.dll
+D:\ProntoMVC3\Data\obj\Debug\ProntoMVC.Data.pdb

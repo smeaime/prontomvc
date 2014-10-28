@@ -1,0 +1,455 @@
+
+Log Entry : 
+01/09/2014 13:42:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 13:42:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 14:26:22
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 14:26:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 14:44:39
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 14:44:46
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:03:25
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:03:32
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:04:20
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:04:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:04:38
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 15:04:39
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:04:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:27:24
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 15:27:27
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:27:34
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:28:37
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:01
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:02
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:30
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:31
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:29:34
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:30:28
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:30:33
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:30:36
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:30:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:33:58
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 15:33:59
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 15:34:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:15:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18257. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:16:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:27:35
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:27:36
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:10
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:12
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:20
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:21
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:35
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:36
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:51
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:46:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:47:52
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:47:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:48:10
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:48:13
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:51:07
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 16:51:10
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:19
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18258. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:22
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:29
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:34
+Error in: http://localhost:40053/Pronto500/Pedido/AnularFirmas. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:36
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 17:39:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:12:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:13:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:14:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:14:32
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:14:36
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:19:52
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/09/2014 18:19:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________

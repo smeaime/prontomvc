@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class BancoChequera
     {
+        public BancoChequera()
+        {
+            this.DetalleOrdenesPagoValores = new HashSet<DetalleOrdenesPagoValore>();
+        }
+    
         public int IdBancoChequera { get; set; }
         public Nullable<int> IdBanco { get; set; }
         public Nullable<int> IdCuentaBancaria { get; set; }
@@ -26,5 +31,6 @@ namespace ProntoMVC.Data.Models
         public string ChequeraPagoDiferido { get; set; }
     
         public virtual Banco Banco { get; set; }
+        public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
     }
 }

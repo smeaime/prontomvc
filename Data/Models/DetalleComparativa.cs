@@ -41,5 +41,6 @@ namespace ProntoMVC.Data.Models
         public virtual Unidad Unidade { get; set; }
         public virtual Comparativa Comparativa { get; set; }
         public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
+        public virtual Moneda Moneda { get; set; }
     }
 }

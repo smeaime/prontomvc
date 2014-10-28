@@ -140,6 +140,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> ComisionDiferenciada { get; set; }
         public Nullable<int> IdTipoNegocioVentas { get; set; }
         public Nullable<int> NumeroOrdenCompraExterna { get; set; }
+        public Nullable<int> IdTipoOperacion { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Empleado Empleado { get; set; }
@@ -148,5 +149,6 @@ namespace ProntoMVC.Data.Models
         public virtual Vendedor Vendedore { get; set; }
         public virtual Obra Obra { get; set; }
         public virtual Provincia Provincia { get; set; }
+        public virtual PuntosVenta PuntosVenta { get; set; }
     }
 }

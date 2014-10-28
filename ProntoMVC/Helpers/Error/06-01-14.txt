@@ -1,0 +1,675 @@
+
+Log Entry : 
+01/06/2014 00:44:26
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 00:44:32
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 00:48:15
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 00:48:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 00:51:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 00:52:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:03:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:03:26
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:05:06
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:05:08
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:05:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:05:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:05:28
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:11:17
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:11:20
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:13:25
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:13:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:29:57
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning()
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.SetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 864
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+01/06/2014 01:29:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:29:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:31:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:31:05
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:31:10
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:31:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:34:19
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:34:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:35:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:35:11
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:56:07
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 01:56:11
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 02:06:35
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 02:06:38
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:37:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:37:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:48:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:48:26
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:48:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:48:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:53:28
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 08:53:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:03:42
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:03:47
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:04:30
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:04:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:05:49
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:05:53
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:20:44
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 09:20:48
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:16:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18260. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:16:04
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:16:52
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18245. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:16:54
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:17:04
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:17:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:27:01
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:27:03
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:54:19
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:54:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:58:08
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 13:58:13
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:03:55
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:03:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:44:38
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:44:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:46:03
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:46:07
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:46:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 14:46:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:20:39
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:20:42
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:25:21
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:25:24
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:30:51
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:30:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:31:20
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:31:23
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:39:24
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18264. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:39:26
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:44:58
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18263. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:45:00
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:49:53
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18262. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:49:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 15:51:51
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:09:56
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:09:58
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:12:44
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:32:32
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:32:33
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 17:32:36
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:40:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:40:12
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:40:19
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:45:56
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:45:57
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:45:59
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:46:13
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:46:17
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:46:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:58:22
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:58:25
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:31
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:35
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:54
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:55
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 18:59:57
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:01:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:01:08
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:01:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:01:46
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18261. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:02:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18254. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:02:23
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18254. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:02:31
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18254. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:02:34
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:04
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18254. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:06
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:10
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18259. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:11
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:16
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18263. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:11:18
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:12:28
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:12:29
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18263. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:12:31
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:17:13
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:17:15
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:36:12
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:36:15
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:38:05
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:38:10
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:40:09
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+01/06/2014 19:40:11
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________

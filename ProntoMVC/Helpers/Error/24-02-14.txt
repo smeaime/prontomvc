@@ -1,0 +1,1005 @@
+
+Log Entry : 
+02/24/2014 01:21:50
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.ComprobanteProveedorController.BatchUpdate(ComprobanteProveedor ComprobanteProveedor) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\ComprobanteProveedorController.cs:line 829
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 01:22:11
+Error in: http://localhost:40053/Pronto500/ComprobanteProveedor/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.ComprobanteProveedorController.BatchUpdate(ComprobanteProveedor ComprobanteProveedor) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\ComprobanteProveedorController.cs:line 829
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 01:23:19
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 01:23:27
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:26:46
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:26:57
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:28:37
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:29:46
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:29:52
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:30:57
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:33:15
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:33:25
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:33:35
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:35:08
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:35:15
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:36:42
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 03:36:52
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 07:58:45
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 07:58:53
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 07:59:03
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 07:59:14
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:04:06
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:04:09
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:06:24
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:06:42
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:07:47
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:07:57
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:11:29
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 417
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:14:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:14:50
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:18:42
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 430
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:18:51
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 430
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:22:14
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/-1. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:22:16
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:23:47
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:23:47
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:23:49
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:24:00
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:24:00
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:24:01
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:25:41
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:25:43
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:26:03
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:26:04
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:26:05
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:27:13
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:27:14
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:27:38
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:27:40
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:03
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:05
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:11
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:11
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:12
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:39
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:40
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:41
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:50
+Error in: http://localhost:40053/Pronto500/Pedido/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.PedidoController.BatchUpdate(Pedido Pedido) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\PedidoController.cs:line 908
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:50
+Error in: http://localhost:40053/Pronto500/Pedido/Edit/18278. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 08:28:52
+Error in: http://localhost:40053/Pronto500/Empleado/EmpleadosParaComboSectorCompras/. Error Message:Me faltan parametros. Empleados_TX_PorSector esperaba 3 y se le pasaron 1
+__________________________
+
+Log Entry : 
+02/24/2014 09:29:56
+Error in: http://localhost:40053/Pronto500/Requerimiento/BatchUpdate. Error Message:System.Data.SqlClient.SqlException
+String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TrySetMetaData(_SqlMetaDataSet metaData, Boolean moreInfo)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at ProntoMVC.Models.TablasDAL.FillTreeEntity(SqlCommand sqlCommand) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 265
+   at ProntoMVC.Models.TablasDAL.ArbolRegenerar(String nombrebase) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Models\ModeloDAL.cs:line 257
+   at ProntoMVC.Controllers.RequerimientoController.BatchUpdate(Requerimiento requerimiento) in C:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\RequerimientoController.cs:line 430
+.Net SqlClient Data Provider
+__________________________

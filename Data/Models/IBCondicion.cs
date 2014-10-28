@@ -21,6 +21,7 @@ namespace ProntoMVC.Data.Models
             this.Clientes1_1 = new HashSet<Cliente>();
             this.Clientes2 = new HashSet<Cliente>();
             this.DetalleProveedoresIBs = new HashSet<DetalleProveedoresIB>();
+            this.NotasCreditoes = new HashSet<NotasCredito>();
         }
     
         public int IdIBCondicion { get; set; }
@@ -60,5 +61,6 @@ namespace ProntoMVC.Data.Models
         public virtual Cuenta CuentaIIBBcompras { get; set; }
         public virtual Cuenta CuentaIIBBconvenio { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }
+        public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
     }
 }
