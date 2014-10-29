@@ -267,7 +267,9 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Autorizaciones_TX_CantidadAutorizaciones", idFormularioParameter, importeParameter, idComprobanteParameter);
         }
     
-        public virtual int AutorizacionesPorComprobante_A(string visto, Nullable<int> idFormulario, Nullable<int> idComprobante, Nullable<int> ordenAutorizacion, Nullable<int> idAutorizo, Nullable<System.DateTime> fechaAutorizacion, ObjectParameter idAutorizacionPorComprobante)
+        //public virtual int AutorizacionesPorComprobante_A(string visto, Nullable<int> idFormulario, Nullable<int> idComprobante, Nullable<int> ordenAutorizacion, Nullable<int> idAutorizo, Nullable<System.DateTime> fechaAutorizacion, ObjectParameter idAutorizacionPorComprobante)
+        public virtual int AutorizacionesPorComprobante_A(Nullable<int> idFormulario, Nullable<int> idComprobante, Nullable<int> ordenAutorizacion, Nullable<int> idAutorizo, Nullable<System.DateTime> fechaAutorizacion, string visto, ObjectParameter idAutorizacionPorComprobante)
+
         {
             var vistoParameter = visto != null ?
                 new ObjectParameter("Visto", visto) :
@@ -296,7 +298,9 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutorizacionesPorComprobante_A", vistoParameter, idFormularioParameter, idComprobanteParameter, ordenAutorizacionParameter, idAutorizoParameter, fechaAutorizacionParameter, idAutorizacionPorComprobante);
         }
     
-        public virtual int wActualizacionesVariasPorComprobante(string tipoMovimiento, Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante)
+//        public virtual int wActualizacionesVariasPorComprobante(string tipoMovimiento, Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante)
+         public virtual int wActualizacionesVariasPorComprobante(Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante, string tipoMovimiento)
+
         {
             var tipoMovimientoParameter = tipoMovimiento != null ?
                 new ObjectParameter("TipoMovimiento", tipoMovimiento) :
