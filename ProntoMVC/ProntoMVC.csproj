@@ -439,7 +439,7 @@
     <Content Include="Documentos\sql\pruebas\autotrol mvc.sql" />
     <Content Include="Documentos\sql\pruebas\bdl master.sql" />
     <Content Include="Documentos\sql\pruebas\sincro demopronto campos de tabla.sql" />
-    <Content Include="Documentos\sql\pruebas\SQLs Varios.sql" />
+    <Content Include="Documentos\sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
     <Content Include="Documentos\sql\restoreDB.sql" />
     <Content Include="Documentos\sql\superbuscador  wFuncionBusqueda wBusqueda   .sql" />
     <Content Include="Documentos\sql\Tree_TX_Arbol Tree_TX_Generar.sql" />
