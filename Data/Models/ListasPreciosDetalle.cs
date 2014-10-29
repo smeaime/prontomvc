@@ -18,25 +18,28 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdListaPrecios { get; set; }
         public Nullable<int> IdArticulo { get; set; }
         public Nullable<decimal> Precio { get; set; }
-        public Nullable<int> IdDestinoDeCartaDePorte_1 { get; set; }
-        public Nullable<decimal> PrecioDescargaLocal_1 { get; set; }
+        public Nullable<int> IdDestinoDeCartaDePorte { get; set; }
+        public Nullable<decimal> PrecioDescargaLocal { get; set; }
+        public Nullable<decimal> PrecioDescargaExportacion { get; set; }
+        public Nullable<decimal> PrecioCaladaLocal { get; set; }
+        public Nullable<decimal> PrecioCaladaExportacion { get; set; }
+        public Nullable<decimal> PrecioRepetidoPeroConPrecision { get; set; }
         public Nullable<int> IdCliente { get; set; }
         public Nullable<decimal> Precio2 { get; set; }
+        public Nullable<decimal> Precio3 { get; set; }
         public Nullable<System.DateTime> FechaVigenciaHasta { get; set; }
         public Nullable<decimal> Precio4 { get; set; }
         public Nullable<decimal> Precio5 { get; set; }
         public Nullable<decimal> Precio6 { get; set; }
+        public Nullable<decimal> PrecioExportacion { get; set; }
+        public Nullable<decimal> PrecioEmbarque { get; set; }
         public Nullable<decimal> Precio7 { get; set; }
         public Nullable<decimal> Precio8 { get; set; }
         public Nullable<decimal> Precio9 { get; set; }
         public Nullable<decimal> PrecioEmbarque2 { get; set; }
         public Nullable<decimal> MaximaCantidadParaPrecioEmbarque { get; set; }
-        public Nullable<decimal> PrecioDescargaExportacion_ { get; set; }
-        public Nullable<decimal> PrecioCaladaLocal_ { get; set; }
-        public Nullable<decimal> PrecioCaladaExportacion__ { get; set; }
-        public Nullable<decimal> PrecioRepetidoPeroConPrecision__ { get; set; }
     
-        public virtual ListasPrecio ListasPrecio { get; set; }
         public virtual Articulo Articulo { get; set; }
+        public virtual ListasPrecio ListasPrecio { get; set; }
     }
 }

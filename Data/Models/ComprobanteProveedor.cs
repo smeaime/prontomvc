@@ -148,6 +148,8 @@ namespace ProntoMVC.Data.Models
         public string DebitoAutomatico { get; set; }
         public Nullable<System.DateTime> FechaPrestacionServicio { get; set; }
         public Nullable<int> IdTipoOperacion { get; set; }
+        public string ArchivoAdjunto1 { get; set; }
+        public string ArchivoAdjunto2 { get; set; }
     
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual Proveedor Proveedor { get; set; }

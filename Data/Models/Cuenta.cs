@@ -29,7 +29,6 @@ namespace ProntoMVC.Data.Models
             this.Bancos = new HashSet<Banco>();
             this.Bancos1 = new HashSet<Banco>();
             this.DetalleCuentas = new HashSet<DetalleCuenta>();
-            this.Subdiarios = new HashSet<Subdiario>();
             this.DetalleComprobantesProveedores = new HashSet<DetalleComprobantesProveedore>();
             this.Cajas = new HashSet<Caja>();
             this.ComprobantesProveedores = new HashSet<ComprobanteProveedor>();
@@ -91,7 +90,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<Banco> Bancos { get; set; }
         public virtual ICollection<Banco> Bancos1 { get; set; }
         public virtual ICollection<DetalleCuenta> DetalleCuentas { get; set; }
-        public virtual ICollection<Subdiario> Subdiarios { get; set; }
         public virtual ICollection<DetalleComprobantesProveedore> DetalleComprobantesProveedores { get; set; }
         public virtual ICollection<Caja> Cajas { get; set; }
         public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores { get; set; }
