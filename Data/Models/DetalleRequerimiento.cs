@@ -93,6 +93,7 @@ namespace ProntoMVC.Data.Models
         public string ObservacionesFirmante_1 { get; set; }
         public Nullable<int> IdFirmanteObservo_1 { get; set; }
         public Nullable<System.DateTime> FechaUltimaObservacionFirmante_1 { get; set; }
+        public Nullable<int> IdPresupuestoObrasNodo { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual Unidad Unidad { get; set; }

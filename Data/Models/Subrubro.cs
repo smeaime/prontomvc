@@ -17,7 +17,6 @@ namespace ProntoMVC.Data.Models
         public Subrubro()
         {
             this.Articulos = new HashSet<Articulo>();
-            this.DefinicionArticulos = new HashSet<DefinicionArticulo>();
         }
     
         public int IdSubrubro { get; set; }
@@ -27,6 +26,5 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> Codigo { get; set; }
     
         public virtual ICollection<Articulo> Articulos { get; set; }
-        public virtual ICollection<DefinicionArticulo> DefinicionArticulos { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdObra { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
-        public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
     }
 }

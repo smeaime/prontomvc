@@ -35,6 +35,5 @@ namespace ProntoMVC.Data.Models
         public string CampoSiNo { get; set; }
     
         public virtual Rubro Rubro { get; set; }
-        public virtual Subrubro Subrubro { get; set; }
     }
 }

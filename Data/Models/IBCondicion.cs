@@ -48,7 +48,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CodigoNormaRetencion { get; set; }
         public Nullable<int> CodigoNormaPercepcion { get; set; }
         public Nullable<int> CodigoActividad { get; set; }
-        public Nullable<decimal> Alícuota_1 { get; set; }
         public string CodigoArticuloInciso { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }

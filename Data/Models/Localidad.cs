@@ -30,10 +30,10 @@ namespace ProntoMVC.Data.Models
         public string CodigoWilliams_1 { get; set; }
         public string CodigoLosGrobo_1 { get; set; }
         public string CodigoESRI { get; set; }
-        public string CodigoONCAA__ { get; set; }
         public Nullable<int> IdPartido { get; set; }
         public Nullable<int> Codigo { get; set; }
         public string Partido { get; set; }
+        public string CodigoONCAA { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual ICollection<Cliente> Clientes1 { get; set; }
