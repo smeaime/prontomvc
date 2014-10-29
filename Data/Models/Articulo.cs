@@ -20,7 +20,6 @@ namespace ProntoMVC.Data.Models
             this.DetallePedidos = new HashSet<DetallePedido>();
             this.DetallePresupuestos = new HashSet<DetallePresupuesto>();
             this.DetalleFacturas = new HashSet<DetalleFactura>();
-            this.ListasPreciosDetalles = new HashSet<ListasPreciosDetalle>();
             this.DetalleOrdenesCompras = new HashSet<DetalleOrdenesCompra>();
             this.DetalleRemitos = new HashSet<DetalleRemito>();
             this.DetalleArticulosDocumentos = new HashSet<DetalleArticulosDocumento>();
@@ -28,11 +27,12 @@ namespace ProntoMVC.Data.Models
             this.DetalleArticulosUnidades = new HashSet<DetalleArticulosUnidade>();
             this.DetalleComparativas = new HashSet<DetalleComparativa>();
             this.Conjuntos = new HashSet<Conjunto>();
+            this.ListasPreciosDetalles = new HashSet<ListasPreciosDetalle>();
         }
     
         public int IdArticulo { get; set; }
-        public int IdRubro { get; set; }
-        public int IdSubrubro { get; set; }
+        public Nullable<int> IdRubro { get; set; }
+        public Nullable<int> IdSubrubro { get; set; }
         public Nullable<int> IdFamilia { get; set; }
         public string Descripcion { get; set; }
         public string Productivo { get; set; }
@@ -281,7 +281,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
         public virtual ICollection<DetallePresupuesto> DetallePresupuestos { get; set; }
         public virtual ICollection<DetalleFactura> DetalleFacturas { get; set; }
-        public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
         public virtual Rubro Rubro { get; set; }
         public virtual ICollection<DetalleOrdenesCompra> DetalleOrdenesCompras { get; set; }
         public virtual ICollection<DetalleRemito> DetalleRemitos { get; set; }
@@ -289,8 +288,9 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleArticulosDocumento> DetalleArticulosDocumentos { get; set; }
         public virtual ICollection<DetalleArticulosImagene> DetalleArticulosImagenes { get; set; }
         public virtual ICollection<DetalleArticulosUnidade> DetalleArticulosUnidades { get; set; }
-        public virtual Subrubro Subrubro { get; set; }
         public virtual ICollection<DetalleComparativa> DetalleComparativas { get; set; }
         public virtual ICollection<Conjunto> Conjuntos { get; set; }
+        public virtual Subrubro Subrubro { get; set; }
+        public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
     }
 }

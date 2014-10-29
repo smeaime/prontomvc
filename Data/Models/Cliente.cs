@@ -121,6 +121,7 @@ namespace ProntoMVC.Data.Models
         public string RegistrarMovimientosEnCuentaCorriente { get; set; }
         public Nullable<decimal> ComisionDiferenciada { get; set; }
         public string OperacionesMercadoInternoEntidadVinculada { get; set; }
+        public Nullable<int> CartaPorteTipoDeAdjuntoDeFacturacion { get; set; }
     
         public virtual Empleado Empleados { get; set; }
         public virtual Empleado Empleados1 { get; set; }

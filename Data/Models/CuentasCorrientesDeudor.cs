@@ -42,8 +42,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdComprobanteOriginal { get; set; }
         public Nullable<int> IdImputacionOriginal { get; set; }
         public string CuitClienteTransmision { get; set; }
-        public Nullable<decimal> Saldotrs { get; set; }
         public string Marca { get; set; }
+        public Nullable<decimal> SaldoTrs { get; set; }
     
         public virtual Cliente Cliente { get; set; }
     }

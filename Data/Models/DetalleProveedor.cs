@@ -20,6 +20,7 @@ namespace ProntoMVC.Data.Models
         public string Puesto { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
+        public string Acciones { get; set; }
     
         public virtual Proveedor Proveedor { get; set; }
     }

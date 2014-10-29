@@ -14,7 +14,8 @@ namespace ProntoMVC.Data.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-        public partial class DemoProntoEntities : DbContext
+    
+    public partial class DemoProntoEntities : DbContext
     {
         public DemoProntoEntities()
             : base("name=DemoProntoEntities")
@@ -43,7 +44,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Ganancia> Ganancias { get; set; }
         public virtual DbSet<IGCondicion> IGCondiciones { get; set; }
         public virtual DbSet<ListasPrecio> ListasPrecios { get; set; }
-        public virtual DbSet<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
         public virtual DbSet<TiposRetencionGanancia> TiposRetencionGanancias { get; set; }
         public virtual DbSet<Concepto> Conceptos { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
@@ -77,7 +77,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<CuentasEjerciciosContable> CuentasEjerciciosContables { get; set; }
         public virtual DbSet<CuentasGasto> CuentasGastos { get; set; }
         public virtual DbSet<DetalleCuenta> DetalleCuentas { get; set; }
-        public virtual DbSet<Subdiario> Subdiarios { get; set; }
         public virtual DbSet<DetalleOrdenesCompra> DetalleOrdenesCompras { get; set; }
         public virtual DbSet<DetalleRemito> DetalleRemitos { get; set; }
         public virtual DbSet<OrdenesCompra> OrdenesCompras { get; set; }
@@ -103,7 +102,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<RubrosContable> RubrosContables { get; set; }
         public virtual DbSet<RubrosValore> RubrosValores { get; set; }
         public virtual DbSet<Valore> Valores { get; set; }
-        public virtual DbSet<Subrubro> Subrubros { get; set; }
         public virtual DbSet<Comparativa> Comparativas { get; set; }
         public virtual DbSet<DetalleComparativa> DetalleComparativas { get; set; }
         public virtual DbSet<Autorizacione> Autorizaciones { get; set; }
@@ -113,13 +111,10 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleAutorizacione> DetalleAutorizaciones { get; set; }
         public virtual DbSet<DetalleAutorizacionesCompra> DetalleAutorizacionesCompras { get; set; }
         public virtual DbSet<DetalleAutorizacionesFirmante> DetalleAutorizacionesFirmantes { get; set; }
-        public virtual DbSet<C_BorradoSubdiarios> C_BorradoSubdiarios { get; set; }
         public virtual DbSet<ProntoIni> ProntoIni { get; set; }
         public virtual DbSet<ProntoIniClaves> ProntoIniClaves { get; set; }
-        public virtual DbSet<C_TempAutorizaciones> C_TempAutorizaciones { get; set; }
         public virtual DbSet<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }
         public virtual DbSet<DetalleOrdenesPagoCuenta> DetalleOrdenesPagoCuentas { get; set; }
-        public virtual DbSet<DetalleOrdenesPagoImpuesto> DetalleOrdenesPagoImpuestos { get; set; }
         public virtual DbSet<DetalleOrdenesPagoRendicionesFF> DetalleOrdenesPagoRendicionesFFs { get; set; }
         public virtual DbSet<DetalleOrdenesPagoRubrosContable> DetalleOrdenesPagoRubrosContables { get; set; }
         public virtual DbSet<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
@@ -153,6 +148,11 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DescripcionIva> DescripcionIvas { get; set; }
         public virtual DbSet<Conjunto> Conjuntos { get; set; }
         public virtual DbSet<Transportista> Transportistas { get; set; }
+        public virtual DbSet<Subrubro> Subrubros { get; set; }
+        public virtual DbSet<DetalleOrdenesPagoImpuesto> DetalleOrdenesPagoImpuestos { get; set; }
+        public virtual DbSet<Subdiario> Subdiarios { get; set; }
+        public virtual DbSet<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
+        public virtual DbSet<C_TempAutorizaciones> C_TempAutorizaciones { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -241,13 +241,17 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CtasCtesA_TXPorTrs", idProveedorParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
         }
     
-        public virtual ObjectResult<OrdenesPago_TX_EnCaja_Result> OrdenesPago_TX_EnCaja(string estado)
+        public virtual ObjectResult<OrdenesPago_TX_EnCaja_Result> OrdenesPago_TX_EnCaja(string estado, Nullable<int> idUsuario)
         {
             var estadoParameter = estado != null ?
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OrdenesPago_TX_EnCaja_Result>("OrdenesPago_TX_EnCaja", estadoParameter);
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OrdenesPago_TX_EnCaja_Result>("OrdenesPago_TX_EnCaja", estadoParameter, idUsuarioParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Autorizaciones_TX_CantidadAutorizaciones(Nullable<int> idFormulario, Nullable<decimal> importe, Nullable<int> idComprobante)
@@ -267,14 +271,8 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Autorizaciones_TX_CantidadAutorizaciones", idFormularioParameter, importeParameter, idComprobanteParameter);
         }
     
-        //public virtual int AutorizacionesPorComprobante_A(string visto, Nullable<int> idFormulario, Nullable<int> idComprobante, Nullable<int> ordenAutorizacion, Nullable<int> idAutorizo, Nullable<System.DateTime> fechaAutorizacion, ObjectParameter idAutorizacionPorComprobante)
         public virtual int AutorizacionesPorComprobante_A(Nullable<int> idFormulario, Nullable<int> idComprobante, Nullable<int> ordenAutorizacion, Nullable<int> idAutorizo, Nullable<System.DateTime> fechaAutorizacion, string visto, ObjectParameter idAutorizacionPorComprobante)
-
         {
-            var vistoParameter = visto != null ?
-                new ObjectParameter("Visto", visto) :
-                new ObjectParameter("Visto", typeof(string));
-    
             var idFormularioParameter = idFormulario.HasValue ?
                 new ObjectParameter("IdFormulario", idFormulario) :
                 new ObjectParameter("IdFormulario", typeof(int));
@@ -295,17 +293,15 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("FechaAutorizacion", fechaAutorizacion) :
                 new ObjectParameter("FechaAutorizacion", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutorizacionesPorComprobante_A", vistoParameter, idFormularioParameter, idComprobanteParameter, ordenAutorizacionParameter, idAutorizoParameter, fechaAutorizacionParameter, idAutorizacionPorComprobante);
+            var vistoParameter = visto != null ?
+                new ObjectParameter("Visto", visto) :
+                new ObjectParameter("Visto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AutorizacionesPorComprobante_A", idFormularioParameter, idComprobanteParameter, ordenAutorizacionParameter, idAutorizoParameter, fechaAutorizacionParameter, vistoParameter, idAutorizacionPorComprobante);
         }
     
-//        public virtual int wActualizacionesVariasPorComprobante(string tipoMovimiento, Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante)
-         public virtual int wActualizacionesVariasPorComprobante(Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante, string tipoMovimiento)
-
+        public virtual int wActualizacionesVariasPorComprobante(Nullable<int> idTipoCOmprobante, Nullable<int> idComprobante, string tipoMovimiento)
         {
-            var tipoMovimientoParameter = tipoMovimiento != null ?
-                new ObjectParameter("TipoMovimiento", tipoMovimiento) :
-                new ObjectParameter("TipoMovimiento", typeof(string));
-    
             var idTipoCOmprobanteParameter = idTipoCOmprobante.HasValue ?
                 new ObjectParameter("IdTipoCOmprobante", idTipoCOmprobante) :
                 new ObjectParameter("IdTipoCOmprobante", typeof(int));
@@ -314,7 +310,11 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("IdComprobante", idComprobante) :
                 new ObjectParameter("IdComprobante", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("wActualizacionesVariasPorComprobante", tipoMovimientoParameter, idTipoCOmprobanteParameter, idComprobanteParameter);
+            var tipoMovimientoParameter = tipoMovimiento != null ?
+                new ObjectParameter("TipoMovimiento", tipoMovimiento) :
+                new ObjectParameter("TipoMovimiento", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("wActualizacionesVariasPorComprobante", idTipoCOmprobanteParameter, idComprobanteParameter, tipoMovimientoParameter);
         }
     }
 }

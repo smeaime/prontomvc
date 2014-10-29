@@ -35,9 +35,5 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdSubdiarioOriginal { get; set; }
         public Nullable<System.DateTime> FechaImportacionTransmision { get; set; }
         public Nullable<int> IdComprobanteOriginal { get; set; }
-        public string Replicador_Insert { get; set; }
-        public string Replicador_Update { get; set; }
-    
-        public virtual Cuenta Cuenta { get; set; }
     }
 }

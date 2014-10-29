@@ -21,8 +21,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> CotizacionLibre { get; set; }
         public string REP_COTIZACION_INS { get; set; }
         public string REP_COTIZACION_UPD { get; set; }
-        public string Replicador_Insert { get; set; }
-        public string Replicador_Update { get; set; }
     
         public virtual Moneda Moneda { get; set; }
     }
