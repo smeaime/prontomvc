@@ -263,6 +263,7 @@
     <EntitySetMapping Name="DetalleRequerimientos">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleRequerimiento">
         <MappingFragment StoreEntitySet="DetalleRequerimientos">
+          <ScalarProperty Name="IdPresupuestoObrasNodo" ColumnName="IdPresupuestoObrasNodo" />
           <ScalarProperty Name="FechaUltimaObservacionFirmante_1" ColumnName="FechaUltimaObservacionFirmante" />
           <ScalarProperty Name="IdFirmanteObservo_1" ColumnName="IdFirmanteObservo" />
           <ScalarProperty Name="ObservacionesFirmante_1" ColumnName="ObservacionesFirmante" />
@@ -883,6 +884,7 @@
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
         <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="CartaPorteTipoDeAdjuntoDeFacturacion" ColumnName="CartaPorteTipoDeAdjuntoDeFacturacion" />
           <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
           <ScalarProperty Name="ComisionDiferenciada" ColumnName="ComisionDiferenciada" />
           <ScalarProperty Name="RegistrarMovimientosEnCuentaCorriente" ColumnName="RegistrarMovimientosEnCuentaCorriente" />
@@ -1117,33 +1119,6 @@
           <ScalarProperty Name="NumeroLista" ColumnName="NumeroLista" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdListaPrecios" ColumnName="IdListaPrecios" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ListasPreciosDetalles">
-      <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
-        <MappingFragment StoreEntitySet="ListasPreciosDetalle">
-          <ScalarProperty Name="PrecioRepetidoPeroConPrecision__" ColumnName="PrecioRepetidoPeroConPrecision  " />
-          <ScalarProperty Name="PrecioCaladaExportacion__" ColumnName="PrecioCaladaExportacion  " />
-          <ScalarProperty Name="PrecioCaladaLocal_" ColumnName="PrecioCaladaLocal " />
-          <ScalarProperty Name="PrecioDescargaExportacion_" ColumnName="PrecioDescargaExportacion " />
-          <ScalarProperty Name="MaximaCantidadParaPrecioEmbarque" ColumnName="MaximaCantidadParaPrecioEmbarque" />
-          <ScalarProperty Name="PrecioEmbarque2" ColumnName="PrecioEmbarque2" />
-          <ScalarProperty Name="Precio9" ColumnName="Precio9" />
-          <ScalarProperty Name="Precio8" ColumnName="Precio8" />
-          <ScalarProperty Name="Precio7" ColumnName="Precio7" />
-          <ScalarProperty Name="Precio6" ColumnName="Precio6" />
-          <ScalarProperty Name="Precio5" ColumnName="Precio5" />
-          <ScalarProperty Name="Precio4" ColumnName="Precio4" />
-          <ScalarProperty Name="FechaVigenciaHasta" ColumnName="FechaVigenciaHasta" />
-          <ScalarProperty Name="Precio2" ColumnName="Precio2" />
-          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-          <ScalarProperty Name="PrecioDescargaLocal_1" ColumnName="PrecioDescargaLocal" />
-          <ScalarProperty Name="IdDestinoDeCartaDePorte_1" ColumnName="IdDestinoDeCartaDePorte" />
-          <ScalarProperty Name="Precio" ColumnName="Precio" />
-          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-          <ScalarProperty Name="IdListaPrecios" ColumnName="IdListaPrecios" />
-          <ScalarProperty Name="IdListaPreciosDetalle" ColumnName="IdListaPreciosDetalle" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1484,7 +1459,6 @@
       <EntityTypeMapping TypeName="DemoProntoModel.IBCondicion">
         <MappingFragment StoreEntitySet="IBCondiciones">
           <ScalarProperty Name="CodigoArticuloInciso" ColumnName="CodigoArticuloInciso" />
-          <ScalarProperty Name="Alícuota_1" ColumnName="Alícuota" />
           <ScalarProperty Name="CodigoActividad" ColumnName="CodigoActividad" />
           <ScalarProperty Name="CodigoNormaPercepcion" ColumnName="CodigoNormaPercepcion" />
           <ScalarProperty Name="CodigoNormaRetencion" ColumnName="CodigoNormaRetencion" />
@@ -1515,10 +1489,10 @@
     <EntitySetMapping Name="Localidades">
       <EntityTypeMapping TypeName="DemoProntoModel.Localidad">
         <MappingFragment StoreEntitySet="Localidades">
+          <ScalarProperty Name="CodigoONCAA" ColumnName="CodigoONCAA" />
           <ScalarProperty Name="Partido" ColumnName="Partido" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="IdPartido" ColumnName="IdPartido" />
-          <ScalarProperty Name="CodigoONCAA__" ColumnName="CodigoONCAA  " />
           <ScalarProperty Name="CodigoESRI" ColumnName="CodigoESRI" />
           <ScalarProperty Name="CodigoLosGrobo_1" ColumnName="CodigoLosGrobo" />
           <ScalarProperty Name="CodigoWilliams_1" ColumnName="CodigoWilliams" />
@@ -1790,6 +1764,7 @@
     <EntitySetMapping Name="DetalleProveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleProveedor">
         <MappingFragment StoreEntitySet="DetalleProveedores">
+          <ScalarProperty Name="Acciones" ColumnName="Acciones" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Puesto" ColumnName="Puesto" />
@@ -1978,6 +1953,7 @@
     <EntitySetMapping Name="DetalleClientes">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleCliente">
         <MappingFragment StoreEntitySet="DetalleClientes">
+          <ScalarProperty Name="Acciones" ColumnName="Acciones" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Puesto" ColumnName="Puesto" />
@@ -2062,8 +2038,6 @@
     <EntitySetMapping Name="Cotizaciones">
       <EntityTypeMapping TypeName="DemoProntoModel.Cotizacione">
         <MappingFragment StoreEntitySet="Cotizaciones">
-          <ScalarProperty Name="Replicador_Update" ColumnName="Replicador_Update" />
-          <ScalarProperty Name="Replicador_Insert" ColumnName="Replicador_Insert" />
           <ScalarProperty Name="REP_COTIZACION_UPD" ColumnName="REP_COTIZACION_UPD" />
           <ScalarProperty Name="REP_COTIZACION_INS" ColumnName="REP_COTIZACION_INS" />
           <ScalarProperty Name="CotizacionLibre" ColumnName="CotizacionLibre" />
@@ -2104,8 +2078,8 @@
     <EntitySetMapping Name="CuentasCorrientesDeudores">
       <EntityTypeMapping TypeName="DemoProntoModel.CuentasCorrientesDeudor">
         <MappingFragment StoreEntitySet="CuentasCorrientesDeudores">
+          <ScalarProperty Name="SaldoTrs" ColumnName="SaldoTrs" />
           <ScalarProperty Name="Marca" ColumnName="Marca" />
-          <ScalarProperty Name="Saldotrs" ColumnName="Saldotrs" />
           <ScalarProperty Name="CuitClienteTransmision" ColumnName="CuitClienteTransmision" />
           <ScalarProperty Name="IdImputacionOriginal" ColumnName="IdImputacionOriginal" />
           <ScalarProperty Name="IdComprobanteOriginal" ColumnName="IdComprobanteOriginal" />
@@ -2183,35 +2157,6 @@
           <ScalarProperty Name="NombreAnterior" ColumnName="NombreAnterior" />
           <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
           <ScalarProperty Name="IdDetalleCuenta" ColumnName="IdDetalleCuenta" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Subdiarios">
-      <EntityTypeMapping TypeName="DemoProntoModel.Subdiario">
-        <MappingFragment StoreEntitySet="Subdiarios">
-          <ScalarProperty Name="Replicador_Update" ColumnName="Replicador_Update" />
-          <ScalarProperty Name="Replicador_Insert" ColumnName="Replicador_Insert" />
-          <ScalarProperty Name="IdComprobanteOriginal" ColumnName="IdComprobanteOriginal" />
-          <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
-          <ScalarProperty Name="IdSubdiarioOriginal" ColumnName="IdSubdiarioOriginal" />
-          <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-          <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-          <ScalarProperty Name="IdDetalleComprobante" ColumnName="IdDetalleComprobante" />
-          <ScalarProperty Name="REP_IMPUTAC_UPD" ColumnName="REP_IMPUTAC_UPD" />
-          <ScalarProperty Name="REP_IMPUTAC_INS" ColumnName="REP_IMPUTAC_INS" />
-          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
-          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
-          <ScalarProperty Name="Haber" ColumnName="Haber" />
-          <ScalarProperty Name="Debe" ColumnName="Debe" />
-          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-          <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
-          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
-          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-          <ScalarProperty Name="IdCuentaSubdiario" ColumnName="IdCuentaSubdiario" />
-          <ScalarProperty Name="Ejercicio" ColumnName="Ejercicio" />
-          <ScalarProperty Name="IdSubdiario" ColumnName="IdSubdiario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3350,29 +3295,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleOrdenesPagoImpuestos">
-      <EntityTypeMapping TypeName="DemoProntoModel.DetalleOrdenesPagoImpuesto">
-        <MappingFragment StoreEntitySet="DetalleOrdenesPagoImpuestos">
-          <ScalarProperty Name="IdDetalleImpuesto" ColumnName="IdDetalleImpuesto" />
-          <ScalarProperty Name="ImporteTotalFacturasMPagadasSujetasARetencion" ColumnName="ImporteTotalFacturasMPagadasSujetasARetencion" />
-          <ScalarProperty Name="LeyendaPorcentajeAdicional" ColumnName="LeyendaPorcentajeAdicional" />
-          <ScalarProperty Name="ImpuestoAdicional" ColumnName="ImpuestoAdicional" />
-          <ScalarProperty Name="PorcentajeAdicional" ColumnName="PorcentajeAdicional" />
-          <ScalarProperty Name="PorcentajeATomarSobreBase" ColumnName="PorcentajeATomarSobreBase" />
-          <ScalarProperty Name="AlicuotaConvenioAplicada" ColumnName="AlicuotaConvenioAplicada" />
-          <ScalarProperty Name="AlicuotaAplicada" ColumnName="AlicuotaAplicada" />
-          <ScalarProperty Name="NumeroCertificadoRetencionIIBB" ColumnName="NumeroCertificadoRetencionIIBB" />
-          <ScalarProperty Name="NumeroCertificadoRetencionGanancias" ColumnName="NumeroCertificadoRetencionGanancias" />
-          <ScalarProperty Name="IdIBCondicion" ColumnName="IdIBCondicion" />
-          <ScalarProperty Name="ImpuestoRetenido" ColumnName="ImpuestoRetenido" />
-          <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
-          <ScalarProperty Name="IdTipoRetencionGanancia" ColumnName="IdTipoRetencionGanancia" />
-          <ScalarProperty Name="TipoImpuesto" ColumnName="TipoImpuesto" />
-          <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-          <ScalarProperty Name="IdDetalleOrdenPagoImpuestos" ColumnName="IdDetalleOrdenPagoImpuestos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DetalleOrdenesPagoRendicionesFFs">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleOrdenesPagoRendicionesFF">
         <MappingFragment StoreEntitySet="DetalleOrdenesPagoRendicionesFF">
@@ -3538,6 +3460,8 @@
     <EntitySetMapping Name="ComprobantesProveedor">
       <EntityTypeMapping TypeName="DemoProntoModel.ComprobanteProveedor">
         <MappingFragment StoreEntitySet="ComprobantesProveedores">
+          <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
+          <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
           <ScalarProperty Name="IdTipoOperacion" ColumnName="IdTipoOperacion" />
           <ScalarProperty Name="FechaPrestacionServicio" ColumnName="FechaPrestacionServicio" />
           <ScalarProperty Name="DebitoAutomatico" ColumnName="DebitoAutomatico" />
@@ -3673,6 +3597,7 @@
     <EntitySetMapping Name="DetalleComprobantesProveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleComprobantesProveedore">
         <MappingFragment StoreEntitySet="DetalleComprobantesProveedores">
+          <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
           <ScalarProperty Name="FechaModificacionCuenta" ColumnName="FechaModificacionCuenta" />
           <ScalarProperty Name="IdUsuarioModificoCuenta" ColumnName="IdUsuarioModificoCuenta" />
           <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
@@ -4192,6 +4117,116 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
           <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subrubros">
+      <EntityTypeMapping TypeName="DemoProntoModel.Subrubro">
+        <MappingFragment StoreEntitySet="Subrubros">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+          <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdSubrubro" ColumnName="IdSubrubro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleOrdenesPagoImpuestos">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleOrdenesPagoImpuesto">
+        <MappingFragment StoreEntitySet="DetalleOrdenesPagoImpuestos">
+          <ScalarProperty Name="IdDetalleImpuesto" ColumnName="IdDetalleImpuesto" />
+          <ScalarProperty Name="ImporteTotalFacturasMPagadasSujetasARetencion" ColumnName="ImporteTotalFacturasMPagadasSujetasARetencion" />
+          <ScalarProperty Name="LeyendaPorcentajeAdicional" ColumnName="LeyendaPorcentajeAdicional" />
+          <ScalarProperty Name="ImpuestoAdicional" ColumnName="ImpuestoAdicional" />
+          <ScalarProperty Name="PorcentajeAdicional" ColumnName="PorcentajeAdicional" />
+          <ScalarProperty Name="PorcentajeATomarSobreBase" ColumnName="PorcentajeATomarSobreBase" />
+          <ScalarProperty Name="AlicuotaConvenioAplicada" ColumnName="AlicuotaConvenioAplicada" />
+          <ScalarProperty Name="AlicuotaAplicada" ColumnName="AlicuotaAplicada" />
+          <ScalarProperty Name="NumeroCertificadoRetencionIIBB" ColumnName="NumeroCertificadoRetencionIIBB" />
+          <ScalarProperty Name="NumeroCertificadoRetencionGanancias" ColumnName="NumeroCertificadoRetencionGanancias" />
+          <ScalarProperty Name="IdIBCondicion" ColumnName="IdIBCondicion" />
+          <ScalarProperty Name="ImpuestoRetenido" ColumnName="ImpuestoRetenido" />
+          <ScalarProperty Name="ImportePagado" ColumnName="ImportePagado" />
+          <ScalarProperty Name="IdTipoRetencionGanancia" ColumnName="IdTipoRetencionGanancia" />
+          <ScalarProperty Name="TipoImpuesto" ColumnName="TipoImpuesto" />
+          <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+          <ScalarProperty Name="IdDetalleOrdenPagoImpuestos" ColumnName="IdDetalleOrdenPagoImpuestos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subdiarios">
+      <EntityTypeMapping TypeName="DemoProntoModel.Subdiario">
+        <MappingFragment StoreEntitySet="Subdiarios">
+          <ScalarProperty Name="IdComprobanteOriginal" ColumnName="IdComprobanteOriginal" />
+          <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
+          <ScalarProperty Name="IdSubdiarioOriginal" ColumnName="IdSubdiarioOriginal" />
+          <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+          <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+          <ScalarProperty Name="IdDetalleComprobante" ColumnName="IdDetalleComprobante" />
+          <ScalarProperty Name="REP_IMPUTAC_UPD" ColumnName="REP_IMPUTAC_UPD" />
+          <ScalarProperty Name="REP_IMPUTAC_INS" ColumnName="REP_IMPUTAC_INS" />
+          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+          <ScalarProperty Name="Haber" ColumnName="Haber" />
+          <ScalarProperty Name="Debe" ColumnName="Debe" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
+          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="IdCuentaSubdiario" ColumnName="IdCuentaSubdiario" />
+          <ScalarProperty Name="Ejercicio" ColumnName="Ejercicio" />
+          <ScalarProperty Name="IdSubdiario" ColumnName="IdSubdiario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListasPreciosDetalles">
+      <EntityTypeMapping TypeName="DemoProntoModel.ListasPreciosDetalle">
+        <MappingFragment StoreEntitySet="ListasPreciosDetalle">
+          <ScalarProperty Name="MaximaCantidadParaPrecioEmbarque" ColumnName="MaximaCantidadParaPrecioEmbarque" />
+          <ScalarProperty Name="PrecioEmbarque2" ColumnName="PrecioEmbarque2" />
+          <ScalarProperty Name="Precio9" ColumnName="Precio9" />
+          <ScalarProperty Name="Precio8" ColumnName="Precio8" />
+          <ScalarProperty Name="Precio7" ColumnName="Precio7" />
+          <ScalarProperty Name="PrecioEmbarque" ColumnName="PrecioEmbarque" />
+          <ScalarProperty Name="PrecioExportacion" ColumnName="PrecioExportacion" />
+          <ScalarProperty Name="Precio6" ColumnName="Precio6" />
+          <ScalarProperty Name="Precio5" ColumnName="Precio5" />
+          <ScalarProperty Name="Precio4" ColumnName="Precio4" />
+          <ScalarProperty Name="FechaVigenciaHasta" ColumnName="FechaVigenciaHasta" />
+          <ScalarProperty Name="Precio3" ColumnName="Precio3" />
+          <ScalarProperty Name="Precio2" ColumnName="Precio2" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="PrecioRepetidoPeroConPrecision" ColumnName="PrecioRepetidoPeroConPrecision" />
+          <ScalarProperty Name="PrecioCaladaExportacion" ColumnName="PrecioCaladaExportacion" />
+          <ScalarProperty Name="PrecioCaladaLocal" ColumnName="PrecioCaladaLocal" />
+          <ScalarProperty Name="PrecioDescargaExportacion" ColumnName="PrecioDescargaExportacion" />
+          <ScalarProperty Name="PrecioDescargaLocal" ColumnName="PrecioDescargaLocal" />
+          <ScalarProperty Name="IdDestinoDeCartaDePorte" ColumnName="IdDestinoDeCartaDePorte" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="IdListaPrecios" ColumnName="IdListaPrecios" />
+          <ScalarProperty Name="IdListaPreciosDetalle" ColumnName="IdListaPreciosDetalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_TempAutorizaciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.C_TempAutorizaciones">
+        <MappingFragment StoreEntitySet="_TempAutorizaciones">
+          <ScalarProperty Name="IdTempAutorizacion" ColumnName="IdTempAutorizacion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdLibero" ColumnName="IdLibero" />
+          <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+          <ScalarProperty Name="IdAutoriza" ColumnName="IdAutoriza" />
+          <ScalarProperty Name="OrdenAutorizacion" ColumnName="OrdenAutorizacion" />
+          <ScalarProperty Name="SectorEmisor" ColumnName="SectorEmisor" />
+          <ScalarProperty Name="IdDetalleAutorizacion" ColumnName="IdDetalleAutorizacion" />
+          <ScalarProperty Name="IdFormulario" ColumnName="IdFormulario" />
+          <ScalarProperty Name="IdAutorizacion" ColumnName="IdAutorizacion" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="TipoComprobante" ColumnName="TipoComprobante" />
+          <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
