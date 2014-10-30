@@ -75,4 +75,3 @@ C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\zh-CHT\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.pdb
-C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ProntoMVC.dll.config
