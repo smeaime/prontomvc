@@ -561,14 +561,17 @@ namespace ProntoMVC.Controllers
                 else
                 {
                     //no existe. verificar que no estoy mandando los subitems de agrupamiento
-                    if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")))
+                    if (dr.Nodo != null)
                     {
-                        dr.IdEmpleado = o.IdEmpleado;
-                        if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
-                        else dr.Acceso = true;
-                        EntidadOriginal.EmpleadosAccesos.Add(dr); // necesito traer la clave en estos casos, que
-                        // han de ser los de los menus, que no tienen bien la equivalencia
-                        // de su clave con el nodo de EmpleadosAccesos.
+                        if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")))
+                        {
+                            dr.IdEmpleado = o.IdEmpleado;
+                            if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
+                            else dr.Acceso = true;
+                            EntidadOriginal.EmpleadosAccesos.Add(dr); // necesito traer la clave en estos casos, que
+                            // han de ser los de los menus, que no tienen bien la equivalencia
+                            // de su clave con el nodo de EmpleadosAccesos.
+                        }
                     }
                 }
             }

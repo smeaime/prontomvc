@@ -75,6 +75,7 @@ C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\zh-CHT\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.dll
 C:\Backup\BDL\ProntoMVC\ProntoMVC\obj\Debug\ProntoMVC.pdb
+<<<<<<< HEAD
 C:\Backup\BDL\ProntoMVC\ProntoMVC\bin\ProntoMVC.dll.config
 D:\ProntoMVC3\ProntoMVC\bin\AutoMapper.Net4.dll
 D:\ProntoMVC3\ProntoMVC\bin\ProntoMVC.dll.config
@@ -155,3 +156,5 @@ D:\ProntoMVC3\ProntoMVC\bin\zh-CHT\AjaxControlToolkit.resources.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.csprojResolveAssemblyReference.cache
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.dll
 D:\ProntoMVC3\ProntoMVC\obj\Debug\ProntoMVC.pdb
+=======
+>>>>>>> ef570597781b91d6adc755ba1e9d82166cffe963
