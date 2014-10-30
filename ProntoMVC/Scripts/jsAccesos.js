@@ -377,7 +377,10 @@ $(document).ready(function () {
         GrabarGrillaLocal()
 
         var cabecera = SerializaForm();
+        var d = JSON.stringify(cabecera)
 
+        //var count = Object.keys(d).length
+        //console.log(count);
 
         $('html, body').css('cursor', 'wait');
         $.ajax({
@@ -385,7 +388,7 @@ $(document).ready(function () {
             contentType: 'application/json; charset=utf-8',
             url: ROOT + 'Acceso/Edit',
             dataType: 'json',
-            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+            data: d, // $.toJSON(cabecera),
             success: function (result) {
                 //                    if (result) {
                 //                        $('#Lista').trigger('reloadGrid');
