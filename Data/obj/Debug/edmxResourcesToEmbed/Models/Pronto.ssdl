@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -362,6 +362,13 @@
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="IdCuenta" Type="int" />
     <Property Name="IdMoneda" Type="int" />
+  </EntityType>
+  <EntityType Name="Cargos">
+    <Key>
+      <PropertyRef Name="IdCargo" />
+    </Key>
+    <Property Name="IdCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Clientes">
     <Key>
@@ -1213,6 +1220,14 @@
     <Property Name="FechaCambio" Type="datetime" />
     <Property Name="HorasJornada" Type="numeric" Precision="6" Scale="2" />
   </EntityType>
+  <EntityType Name="DetalleEmpleadosObras">
+    <Key>
+      <PropertyRef Name="IdDetalleEmpleadoObra" />
+    </Key>
+    <Property Name="IdDetalleEmpleadoObra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEmpleado" Type="int" />
+    <Property Name="IdObra" Type="int" />
+  </EntityType>
   <EntityType Name="DetalleEmpleadosSectores">
     <Key>
       <PropertyRef Name="IdDetalleEmpleadoSector" />
@@ -1221,6 +1236,14 @@
     <Property Name="IdEmpleado" Type="int" />
     <Property Name="FechaCambio" Type="datetime" />
     <Property Name="IdSectorNuevo" Type="int" />
+  </EntityType>
+  <EntityType Name="DetalleEmpleadosUbicaciones">
+    <Key>
+      <PropertyRef Name="IdDetalleEmpleadoUbicacion" />
+    </Key>
+    <Property Name="IdDetalleEmpleadoUbicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEmpleado" Type="int" />
+    <Property Name="IdUbicacion" Type="int" />
   </EntityType>
   <EntityType Name="DetalleFacturas">
     <Key>
@@ -4483,6 +4506,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Empleados_Cargos">
+    <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="IdCargo" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Empleados_Sectores">
     <End Role="Sectores" Type="Self.Sectores" Multiplicity="0..1" />
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
@@ -4639,6 +4674,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Localidades_Provincias">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="Localidades">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NotasCredito_Clientes">
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
     <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
@@ -4747,6 +4794,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Transportistas_Localidades">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="Transportistas" Type="Self.Transportistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="Transportistas">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Articulos_TX_DatosConCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdArticulo" Type="int" Mode="In" />
   </Function>
@@ -4817,6 +4876,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="BancoChequeras" EntityType="Self.BancoChequeras" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComprobantesProveedores" EntityType="Self.ComprobantesProveedores" Schema="dbo" store:Type="Tables" />
@@ -4850,7 +4910,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleEmpleadosObras" EntityType="Self.DetalleEmpleadosObras" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosSectores" EntityType="Self.DetalleEmpleadosSectores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="Self.DetalleEmpleadosUbicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleFacturas" EntityType="Self.DetalleFacturas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleFacturasClientesPRESTO" EntityType="Self.DetalleFacturasClientesPRESTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleFacturasOrdenesCompra" EntityType="Self.DetalleFacturasOrdenesCompra" Schema="dbo" store:Type="Tables" />
@@ -5169,6 +5231,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Remitos" EntitySet="Remitos" />
       <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
+      <End Role="Cargos" EntitySet="Cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
     <AssociationSet Name="FK_Empleados_Sectores" Association="Self.FK_Empleados_Sectores">
       <End Role="Sectores" EntitySet="Sectores" />
       <End Role="Empleados" EntitySet="Empleados" />
@@ -5221,6 +5287,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="ListasPrecios" EntitySet="ListasPrecios" />
       <End Role="ListasPreciosDetalle" EntitySet="ListasPreciosDetalle" />
     </AssociationSet>
+    <AssociationSet Name="FK_Localidades_Provincias" Association="Self.FK_Localidades_Provincias">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="Localidades" EntitySet="Localidades" />
+    </AssociationSet>
     <AssociationSet Name="FK_NotasCredito_Clientes" Association="Self.FK_NotasCredito_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="NotasCredito" EntitySet="NotasCredito" />
@@ -5256,6 +5326,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Recibos_Clientes" Association="Self.FK_Recibos_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="Transportistas" EntitySet="Transportistas" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
