@@ -279,6 +279,7 @@
     <Compile Include="Controllers\NotaDebitoController.cs" />
     <Compile Include="Controllers\OrdenCompraController.cs" />
     <Compile Include="Controllers\DepositoController.cs" />
+    <Compile Include="Controllers\TransportistaController.cs" />
     <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\AsientoController.cs" />
@@ -588,6 +589,12 @@
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Pronto informes.rptproj.user" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj.user" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
+    <Content Include="Views\Moneda\Delete.cshtml" />
+    <Content Include="Views\Moneda\Edit.cshtml" />
+    <Content Include="Views\Moneda\Index.cshtml" />
+    <Content Include="Views\Transportista\Delete.cshtml" />
+    <Content Include="Views\Transportista\Edit.cshtml" />
+    <Content Include="Views\Transportista\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\jsProveedor.js" />
