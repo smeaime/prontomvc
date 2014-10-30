@@ -92,5 +92,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<Conjunto> Conjuntos { get; set; }
         public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
         public virtual ICollection<NotasDebito> NotasDebitoes { get; set; }
+        public virtual Cargo Cargo { get; set; }
     }
 }
