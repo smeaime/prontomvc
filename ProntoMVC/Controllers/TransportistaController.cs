@@ -29,7 +29,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Index(int page = 1)
         {
             var Transportistas = db.Transportistas
-                .OrderBy(s => s.Nombre)
+                .OrderBy(s => s.RazonSocial)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -49,7 +49,7 @@ namespace ProntoMVC.Controllers
 
         // POST: 
         [HttpPost]
-        public virtual ActionResult Create(Transportista Transportista)
+        public virtual ActionResult Create(ProntoMVC.Data.Models.Transportista Transportista)
         {
             if (ModelState.IsValid)
             {
@@ -63,11 +63,11 @@ namespace ProntoMVC.Controllers
         // GET: 
         public virtual ActionResult Edit(int id)
         {
-            Transportista Transportista;
+            ProntoMVC.Data.Models.Transportista Transportista;
 
             if (id == -1)
             {
-                Transportista = new Transportista();
+                Transportista = new ProntoMVC.Data.Models.Transportista();
             }
             else
             {
@@ -78,7 +78,7 @@ namespace ProntoMVC.Controllers
 
         // POST: 
         [HttpPost]
-        public virtual ActionResult Edit(Transportista Transportista)
+        public virtual ActionResult Edit(ProntoMVC.Data.Models.Transportista Transportista)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace ProntoMVC.Controllers
         // GET: 
         public virtual ActionResult Delete(int id)
         {
-            Transportista Transportista = db.Transportistas.Find(id);
+            ProntoMVC.Data.Models.Transportista Transportista = db.Transportistas.Find(id);
             return View(Transportista);
         }
 
@@ -140,7 +140,7 @@ namespace ProntoMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public virtual ActionResult DeleteConfirmed(int id)
         {
-            Transportista Transportista = db.Transportistas.Find(id);
+            ProntoMVC.Data.Models.Transportista Transportista = db.Transportistas.Find(id);
             db.Transportistas.Remove(Transportista);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -180,7 +180,10 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Tabla
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        join b in db.Provincias on a.IdProvincia equals b.IdProvincia into ab from b in ab.DefaultIfEmpty()
+                        select new { a.IdTransportista, a.RazonSocial, a.Codigo, a.Direccion, Localidad = a.Localidade.Nombre, a.CodigoPostal, a.Telefono, a.Email, a.Cuit, 
+                                     provincia = b != null ? b.Nombre : null }
+                        ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -194,36 +197,36 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdTransportista}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdTransportista}) +">Eliminar</>",
                                 a.IdTransportista.ToString(),
-                                a.Nombre,
-                                a.Abreviatura,
-                                a.CodigoAFIP,
-                                a.GeneraImpuestos
+                                a.RazonSocial,
+                                a.Codigo.ToString(),
+                                a.Direccion,
+                                a.Localidad,
+                                a.CodigoPostal,
+                                a.provincia,
+                                a.Telefono,
+                                a.Email,
+                                a.Cuit
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult Transportista_Cotizacion(DateTime? fecha, int IdTransportista)
+        public virtual JsonResult GetLocalidadesAutocomplete(string term)
         {
-            if (db == null) return null;
-            if (fecha == null) fecha = DateTime.Now;
+            var ci = new System.Globalization.CultureInfo("en-US");
 
-            decimal cotizacion;
-
-            if (false)
-            {
-                cotizacion = db.Cotizaciones_TX_PorFechaTransportista(fecha, IdTransportista);
-            }
-            else
-            {
-                DateTime desde = fecha.Value.Date;
-                DateTime hasta = desde.AddDays(1);
-
-                var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdTransportista == IdTransportista).FirstOrDefault();
-                if (mvarCotizacion == null) cotizacion = -1; else cotizacion = mvarCotizacion.Cotizacion ?? -1;
-            }
-            return Json(cotizacion, JsonRequestBehavior.AllowGet);
+            var filtereditems = (from item in db.Localidades
+                                 where (item.Nombre.StartsWith(term))
+                                 orderby item.Nombre
+                                 select new
+                                 {
+                                     id = item.IdLocalidad,
+                                     value = item.Nombre,  
+                                     title = item.Nombre + " " + item.CodigoPostal, 
+                                     idprovincia = item.IdProvincia
+                                 }).Take(20).ToList();
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
