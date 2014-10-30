@@ -1,9 +1,10 @@
 
 Log Entry : 
-10/29/2014 09:39:31
+10/29/2014 10:04:23
 Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
 An error occurred while preparing the command definition. See the inner exception for details.
    en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
    en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
@@ -22,15 +23,16 @@ An error occurred while preparing the command definition. See the inner exceptio
    en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
    en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
    en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
-   en ProntoMVC.Controllers.HomeController.Index() en c:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 60
+   en ProntoMVC.Controllers.HomeController.Index() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 60
 EntityFramework
 __________________________
 
 Log Entry : 
-10/29/2014 09:39:34
+10/29/2014 10:04:26
 Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
 An error occurred while preparing the command definition. See the inner exception for details.
    en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
    en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
@@ -45,15 +47,16 @@ An error occurred while preparing the command definition. See the inner exceptio
    en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en c:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 414
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 414
 EntityFramework
 __________________________
 
 Log Entry : 
-10/29/2014 09:39:55
+10/29/2014 10:04:53
 Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
 An error occurred while preparing the command definition. See the inner exception for details.
    en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
    en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
    en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
@@ -72,120 +75,110 @@ An error occurred while preparing the command definition. See the inner exceptio
    en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
    en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
    en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
-   en ProntoMVC.Controllers.HomeController.Menu() en c:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1117
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1117
 EntityFramework
 __________________________
 
 Log Entry : 
-10/29/2014 11:34:45
-Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.MappingException
-Schema specified is not valid. Errors: 
-Models.Pronto.msl(970,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Cliente' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Clientes'.
-Models.Pronto.msl(1912,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Proveedor' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Proveedores'.
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection.Init(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths, Boolean throwOnError)
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection..ctor(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.LoadStoreCollection(EdmItemCollection edmItemCollection, MetadataArtifactLoader loader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__1()
-   en System.Lazy`1.CreateValue()
-   en System.Lazy`1.LazyInitValue()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__4()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.LoadAndCheckItemCollection[T](Func`1 itemCollectionLoader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.<>c__DisplayClass16.<.ctor>b__f()
-   en System.Lazy`1.CreateValue()
-   en System.Lazy`1.LazyInitValue()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace, Boolean required)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace)
-   en System.Data.Entity.Core.Objects.ObjectContext.InitializeMappingViewCacheFactory(DbContext owner)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection)
-   en System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
-   en System.Data.Entity.Internal.InternalContext.Initialize()
-   en System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
-   en System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
-   en System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
-   en System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
-   en System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
-   en ProntoMVC.Controllers.HomeController.Index() en c:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 60
+10/29/2014 10:16:07
+Error in: http://localhost:40053/Pronto500/. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
+An error occurred while preparing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Boolean streaming, Span span, IEnumerable`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   en System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en ProntoMVC.Controllers.HomeController.Index() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 60
 EntityFramework
 __________________________
 
 Log Entry : 
-10/29/2014 11:34:47
-Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.MappingException
-Schema specified is not valid. Errors: 
-Models.Pronto.msl(970,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Cliente' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Clientes'.
-Models.Pronto.msl(1912,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Proveedor' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Proveedores'.
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection.Init(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths, Boolean throwOnError)
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection..ctor(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.LoadStoreCollection(EdmItemCollection edmItemCollection, MetadataArtifactLoader loader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__1()
-   en System.Lazy`1.CreateValue()
-   en System.Lazy`1.LazyInitValue()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__4()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.LoadAndCheckItemCollection[T](Func`1 itemCollectionLoader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.<>c__DisplayClass16.<.ctor>b__f()
-   en System.Lazy`1.CreateValue()
---- Fin del seguimiento de la pila de la ubicación anterior donde se produjo la excepción ---
-   en System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace, Boolean required)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace)
-   en System.Data.Entity.Core.Objects.ObjectContext.InitializeMappingViewCacheFactory(DbContext owner)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection)
-   en System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
-   en System.Data.Entity.Internal.InternalContext.Initialize()
-   en System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
-   en System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
-   en System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
-   en System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+10/29/2014 10:16:08
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
+An error occurred while preparing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Boolean streaming, Span span, IEnumerable`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   en System.Data.Entity.Core.Objects.EntitySqlQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en c:\Backup\BDL\ProntoMVC\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 414
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 414
 EntityFramework
 __________________________
 
 Log Entry : 
-10/29/2014 11:35:08
-Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.Data.Entity.Core.MappingException
-Schema specified is not valid. Errors: 
-Models.Pronto.msl(970,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Cliente' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Clientes'.
-Models.Pronto.msl(1912,12) : error 2019: Member Mapping specified is not valid. The type 'Edm.Int32[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Proveedor' is not compatible with 'SqlServer.tinyint[Nullable=True,DefaultValue=]' of member 'IdCodigoIva' in type 'DemoProntoModel.Store.Proveedores'.
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection.Init(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths, Boolean throwOnError)
-   en System.Data.Entity.Core.Mapping.StorageMappingItemCollection..ctor(EdmItemCollection edmCollection, StoreItemCollection storeCollection, IEnumerable`1 xmlReaders, IList`1 filePaths)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.LoadStoreCollection(EdmItemCollection edmItemCollection, MetadataArtifactLoader loader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__1()
-   en System.Lazy`1.CreateValue()
-   en System.Lazy`1.LazyInitValue()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__4()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.LoadAndCheckItemCollection[T](Func`1 itemCollectionLoader)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.<>c__DisplayClass16.<.ctor>b__f()
-   en System.Lazy`1.CreateValue()
---- Fin del seguimiento de la pila de la ubicación anterior donde se produjo la excepción ---
-   en System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
-   en System.Lazy`1.get_Value()
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace, Boolean required)
-   en System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace)
-   en System.Data.Entity.Core.Objects.ObjectContext.InitializeMappingViewCacheFactory(DbContext owner)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
-   en System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection)
-   en System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
-   en System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
-   en System.Data.Entity.Internal.InternalContext.Initialize()
-   en System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
-   en System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
-   en System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
-   en System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
-   en System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
-   en ProntoMVC.Controllers.HomeController.Menu() en c:\Backup\BDL\ProntoMVC\ProntoMVC\Controllers\HomeController.cs:línea 1117
+10/29/2014 10:16:13
+Error in: http://localhost:40053/Pronto500/Home/Menu. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
+An error occurred while preparing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Boolean streaming, Span span, IEnumerable`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   en System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en ProntoMVC.Controllers.HomeController.Menu() en d:\ProntoMVC3\ProntoMVC\Controllers\HomeController.cs:línea 1117
+EntityFramework
+__________________________
+
+Log Entry : 
+10/29/2014 10:18:23
+Error in: http://localhost:40053/Pronto500/MvcMembership/UserAdministration/Details/1804b573-0439-4ea0-b631-712684b54473. Error Message:System.Data.Entity.Core.EntityCommandCompilationException
+An error occurred while preparing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition..ctor(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver, BridgeDataReaderFactory bridgeDataReaderFactory, ColumnMapFactory columnMapFactory)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree, DbInterceptionContext interceptionContext, IDbDependencyResolver resolver)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Common.DbProviderServices.CreateCommandDefinition(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.CreateCommandDefinition(ObjectContext context, DbQueryCommandTree tree)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlanFactory.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Boolean streaming, Span span, IEnumerable`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   en System.Data.Entity.Core.Objects.EntitySqlQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController.RecargarViewbag(Guid id) en d:\ProntoMVC3\ProntoMVC\Areas\MvcMembership\Controllers\UserAdministrationController.cs:línea 414
 EntityFramework
 __________________________

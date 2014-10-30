@@ -753,7 +753,6 @@
       <End Role="Proveedor" EntitySet="Proveedores" />
     </AssociationSet>
     <EntitySet Name="Conjuntos" EntityType="DemoProntoModel.Conjunto" />
-    <EntitySet Name="Transportistas" EntityType="DemoProntoModel.Transportista" />
     <AssociationSet Name="FK_Conjuntos_Articulos" Association="DemoProntoModel.FK_Conjuntos_Articulos">
       <End Role="Articulo" EntitySet="Articulos" />
       <End Role="Conjunto" EntitySet="Conjuntos" />
@@ -835,6 +834,22 @@
       <End Role="ListasPreciosDetalle" EntitySet="ListasPreciosDetalles" />
     </AssociationSet>
     <EntitySet Name="C_TempAutorizaciones" EntityType="DemoProntoModel.C_TempAutorizaciones" />
+    <EntitySet Name="Transportistas" EntityType="DemoProntoModel.Transportista" />
+    <AssociationSet Name="FK_Localidades_Provincias" Association="DemoProntoModel.FK_Localidades_Provincias">
+      <End Role="Provincia" EntitySet="Provincias" />
+      <End Role="Localidad" EntitySet="Localidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transportistas_Localidades" Association="DemoProntoModel.FK_Transportistas_Localidades">
+      <End Role="Localidad" EntitySet="Localidades" />
+      <End Role="Transportista" EntitySet="Transportistas" />
+    </AssociationSet>
+    <EntitySet Name="DetalleEmpleadosObras" EntityType="DemoProntoModel.DetalleEmpleadosObra" />
+    <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" />
+    <EntitySet Name="Cargos" EntityType="DemoProntoModel.Cargo" />
+    <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
+      <End Role="Cargo" EntitySet="Cargos" />
+      <End Role="Empleado" EntitySet="Empleados" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -1259,6 +1274,7 @@
     <NavigationProperty Name="Conjuntos" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Empleado" ToRole="Conjunto" />
     <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Empleados" FromRole="Empleado" ToRole="NotasCredito" />
     <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Empleados" FromRole="Empleado" ToRole="NotasDebito" />
+    <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
   </EntityType>
   <EntityType Name="Obra">
     <Key>
@@ -2910,6 +2926,8 @@
     <Property Type="Int32" Name="Codigo" />
     <Property Type="String" Name="Partido" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="CodigoONCAA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Provincia" Relationship="DemoProntoModel.FK_Localidades_Provincias" FromRole="Localidad" ToRole="Provincia" />
+    <NavigationProperty Name="Transportistas" Relationship="DemoProntoModel.FK_Transportistas_Localidades" FromRole="Localidad" ToRole="Transportista" />
   </EntityType>
   <EntityType Name="Moneda">
     <Key>
@@ -2985,6 +3003,7 @@
     <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Provincia" FromRole="Provincia" ToRole="Factura" />
     <Property Type="String" Name="CodigoESRI_1" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="Codigo2" />
+    <NavigationProperty Name="Localidades" Relationship="DemoProntoModel.FK_Localidades_Provincias" FromRole="Provincia" ToRole="Localidad" />
   </EntityType>
   <EntityType Name="TiposComprobante">
     <Key>
@@ -6868,30 +6887,6 @@
     <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Conjunto" ToRole="Empleado" />
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Conjuntos_Obras" FromRole="Conjunto" ToRole="Obra" />
   </EntityType>
-  <EntityType Name="Transportista">
-    <Key>
-      <PropertyRef Name="IdTransportista" />
-    </Key>
-    <Property Name="IdTransportista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IdLocalidad" Type="Int32" />
-    <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="IdProvincia" Type="Int32" />
-    <Property Name="IdPais" Type="Int32" />
-    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IdCodigoIva" Type="Byte" />
-    <Property Name="Cuit" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="EnviarEmail" Type="Byte" />
-    <Property Name="IdProveedor" Type="Int32" />
-    <Property Name="Codigo" Type="Int32" />
-  </EntityType>
   <Association Name="FK_Conjuntos_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
     <End Type="DemoProntoModel.Conjunto" Role="Conjunto" Multiplicity="*" />
@@ -7228,4 +7223,89 @@
     <Property Name="Fecha" Type="DateTime" Precision="3" />
     <Property Name="IdTempAutorizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
+  <EntityType Name="Transportista">
+    <Key>
+      <PropertyRef Name="IdTransportista" />
+    </Key>
+    <Property Name="IdTransportista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdLocalidad" Type="Int32" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdCodigoIva" Type="Byte" />
+    <Property Name="Cuit" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EnviarEmail" Type="Byte" />
+    <Property Name="IdProveedor" Type="Int32" />
+    <Property Name="Codigo" Type="Int32" />
+    <NavigationProperty Name="Localidade" Relationship="DemoProntoModel.FK_Transportistas_Localidades" FromRole="Transportista" ToRole="Localidad" />
+  </EntityType>
+  <Association Name="FK_Localidades_Provincias">
+    <End Type="DemoProntoModel.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transportistas_Localidades">
+    <End Type="DemoProntoModel.Localidad" Role="Localidad" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Transportista" Role="Transportista" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidad">
+        <PropertyRef Name="IdLocalidad" />
+      </Principal>
+      <Dependent Role="Transportista">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleEmpleadosObra">
+    <Key>
+      <PropertyRef Name="IdDetalleEmpleadoObra" />
+    </Key>
+    <Property Name="IdDetalleEmpleadoObra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEmpleado" Type="Int32" />
+    <Property Name="IdObra" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DetalleEmpleadosUbicacione">
+    <Key>
+      <PropertyRef Name="IdDetalleEmpleadoUbicacion" />
+    </Key>
+    <Property Name="IdDetalleEmpleadoUbicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEmpleado" Type="Int32" />
+    <Property Name="IdUbicacion" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="IdCargo" />
+    </Key>
+    <Property Name="IdCargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Cargo" ToRole="Empleado" />
+  </EntityType>
+  <Association Name="FK_Empleados_Cargos">
+    <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargo">
+        <PropertyRef Name="IdCargo" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="IdCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

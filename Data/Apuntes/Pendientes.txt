@@ -1,0 +1,16 @@
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Transportistas_Localidades]') AND parent_object_id = OBJECT_ID(N'[dbo].[Transportistas]'))
+ALTER TABLE [dbo].[Transportistas] DROP CONSTRAINT [FK_Transportistas_Localidades]
+GO
+
+ALTER TABLE [dbo].[Transportistas]  WITH NOCHECK ADD  CONSTRAINT [FK_Transportistas_Localidades] FOREIGN KEY([IdLocalidad])
+REFERENCES [dbo].[Localidades] ([IdLocalidad])
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Localidades_Provincias]') AND parent_object_id = OBJECT_ID(N'[dbo].[Localidades]'))
+ALTER TABLE [dbo].[Localidades] DROP CONSTRAINT [FK_Localidades_Provincias]
+GO
+
+ALTER TABLE [dbo].[Localidades]  WITH NOCHECK ADD  CONSTRAINT [FK_Localidades_Provincias] FOREIGN KEY([IdProvincia])
+REFERENCES [dbo].[Provincias] ([IdProvincia])
+GO

@@ -256,15 +256,6 @@ namespace ProntoMVC.Controllers
         partial void DetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Details(int id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Details);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DetailsOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]

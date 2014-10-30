@@ -33,5 +33,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<byte> EnviarEmail { get; set; }
         public Nullable<int> IdProveedor { get; set; }
         public Nullable<int> Codigo { get; set; }
+    
+        public virtual Localidad Localidade { get; set; }
     }
 }
