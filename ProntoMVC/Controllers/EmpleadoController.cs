@@ -2,25 +2,44 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 using ProntoMVC.Data.Models; 
 using ProntoMVC.Models;
-using System.Web.Security;
+using jqGrid.Models;
+using Lib.Web.Mvc.JQuery.JqGrid;
+using System.Text;
+using System.Data.Entity.SqlServer;
+using System.Data.Objects;
+using System.Reflection;
+using System.Configuration;
 using Pronto.ERP.Bll;
+using Trirand.Web.Mvc;
 
 namespace ProntoMVC.Controllers
 {
     public partial class EmpleadoController : ProntoBaseController
     {
-        // GET: /Empleado/Index
-        public virtual ViewResult Index()
+        [HttpGet]
+        public virtual ActionResult Index(int page = 1)
         {
-            var empleados = db.Empleados.Include(e => e.Sector);
-            return View(empleados.ToList());
+            var Empleados = db.Empleados
+                .OrderBy(s => s.Nombre)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+
+            return View(Empleados);
         }
 
         // GET: /Empleado/Create
@@ -50,6 +69,9 @@ namespace ProntoMVC.Controllers
         {
             Empleado empleado = db.Empleados.Find(id);
             ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
+            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo);
+            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo);
+            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada);
             return View(empleado);
         }
 
@@ -64,6 +86,9 @@ namespace ProntoMVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
+            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo);
+            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo);
+            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada);
             return View(empleado);
         }
 
@@ -152,6 +177,62 @@ namespace ProntoMVC.Controllers
                 return "";
         }
 
+        public virtual ActionResult DetEmpleados(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
+        {
+            int IdEmpleado1 = IdEmpleado ?? 0;
+            var Det = db.DetalleEmpleados.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            switch (sidx.ToLower())
+            {
+                case "fechaingreso":
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.FechaIngreso);
+                    else
+                        Det = Det.OrderBy(a => a.FechaIngreso);
+                    break;
+                default:
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdEmpleado);
+                    else
+                        Det = Det.OrderBy(a => a.IdEmpleado);
+                    break;
+            }
+
+            var data = (from a in Det
+                        select new
+                        {
+                            a.IdDetalleEmpleado,
+                            a.IdEmpleado,
+                            a.FechaIngreso,
+                            a.FechaEgreso
+                        }).Skip((currentPage - 1) * pageSize).OrderBy(x => x.FechaIngreso).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleEmpleado.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdDetalleEmpleado.ToString(), 
+                                a.IdEmpleado.ToString(), 
+                                a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaEgreso.GetValueOrDefault().ToString("dd/MM/yyyy")
+                         }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+        
         public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
@@ -192,7 +273,7 @@ namespace ProntoMVC.Controllers
                             a.Legajo,
                             a.UsuarioNT,
                             Sector = a.Sector.Descripcion,
-                            Cargo = a.Cargo.Descripcion, 
+                            Cargo = "", //a.Cargo.Descripcion,
                             a.Email,
                             a.Iniciales,
                             a.Administrador,
@@ -229,6 +310,23 @@ namespace ProntoMVC.Controllers
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public IList<Cuenta> GetCuentasFF()
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int? mIdTipoCuentaGrupoFF = parametros.IdTipoCuentaGrupoFF;
+
+            IQueryable<Cuenta> query = db.Cuentas.Where(c => c.IdTipoCuentaGrupo == mIdTipoCuentaGrupoFF);
+
+            return query.ToList();
+        }
+
+        public IList<Obra> GetObras()
+        {
+            IQueryable<Obra> query = db.Obras;
+
+            return query.ToList();
         }
     }
 }
