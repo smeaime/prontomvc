@@ -36,7 +36,7 @@ namespace ProntoMVC.Controllers
 
             ViewBag.CurrentPage = page;
             ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+            ViewBag.TotalPages = Math.Ceiling((double)db.Transportistas.Count() / pageSize);
 
             return View(Transportistas);
         }
@@ -73,6 +73,7 @@ namespace ProntoMVC.Controllers
             {
                 Transportista = db.Transportistas.Find(id);
             }
+            ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", Transportista.IdProvincia);
             return View(Transportista);
         }
 
@@ -181,8 +182,18 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Tabla
                         join b in db.Provincias on a.IdProvincia equals b.IdProvincia into ab from b in ab.DefaultIfEmpty()
-                        select new { a.IdTransportista, a.RazonSocial, a.Codigo, a.Direccion, Localidad = a.Localidade.Nombre, a.CodigoPostal, a.Telefono, a.Email, a.Cuit, 
-                                     provincia = b != null ? b.Nombre : null }
+                        select new { 
+                                    a.IdTransportista, 
+                                    a.RazonSocial, 
+                                    a.Codigo, 
+                                    a.Direccion, 
+                                    Localidad = a.Localidade.Nombre, 
+                                    a.CodigoPostal, 
+                                    a.Telefono, 
+                                    a.Email, 
+                                    a.Cuit, 
+                                    provincia = b != null ? b.Nombre : null 
+                        }
                         ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()

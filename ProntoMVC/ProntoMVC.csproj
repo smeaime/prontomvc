@@ -1359,8 +1359,6 @@
     <Content Include="Views\Sector\Edit.cshtml" />
     <Content Include="Views\Sector\Delete.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
-    <Content Include="Views\Empleado\Details.cshtml" />
-    <Content Include="Views\Empleado\Create.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Empleado\Delete.cshtml" />
     <Content Include="Views\Articulo\Index.cshtml" />
