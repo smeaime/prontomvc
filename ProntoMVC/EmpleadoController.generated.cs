@@ -245,14 +245,6 @@ namespace ProntoMVC.Controllers
         partial void IndexOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void DetailsOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, int id);
 
         [NonAction]
