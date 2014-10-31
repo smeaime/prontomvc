@@ -4,294 +4,252 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Empleado</legend>
+        <div class="container-fluid">
+            <legend>Empleado</legend>
+            <div class="row-fluid">
+                <div>
+                    @Html.Hidden("IdTransportista", Model.IdEmpleado)
+                    @Html.HiddenFor(model => model.IdEmpleado)
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdEmpleado)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdEmpleado)
-            @Html.ValidationMessageFor(model => model.IdEmpleado)
-        </div>
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Legajo, "Legajo")
+                        @Html.TextBoxFor(model => model.Legajo, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Legajo)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Legajo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Legajo)
-            @Html.ValidationMessageFor(model => model.Legajo)
-        </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Nombre, "Nombre")
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nombre)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
-            @Html.ValidationMessageFor(model => model.Nombre)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.UsuarioNT, "Usuario de red")
+                        @Html.TextBoxFor(model => model.UsuarioNT, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.UsuarioNT)
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UsuarioNT)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UsuarioNT)
-            @Html.ValidationMessageFor(model => model.UsuarioNT)
-        </div>
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Password, "Password")
+                        @Html.TextBoxFor(model => model.Password, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSector, "Sector")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdSector", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdSector)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Iniciales, "Iniciales")
+                        @Html.TextBoxFor(model => model.Iniciales, new { @class = "span4" })
+                        @Html.ValidationMessageFor(model => model.Iniciales)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCargo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCargo)
-            @Html.ValidationMessageFor(model => model.IdCargo)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Interno, "Interno")
+                        @Html.TextBoxFor(model => model.Interno, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Interno)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.FechaNacimiento, "Fecha de nacimiento")
+                        @Html.TextBoxFor(model => model.FechaNacimiento, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                        <script type="text/jscript">
+                            $("#FechaNacimiento").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                //numberOfMonths: 2,
+                            });
+                        </script>
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Interno)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Interno)
-            @Html.ValidationMessageFor(model => model.Interno)
-        </div>
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdSector, "Sector")
+                        @Html.DropDownList("IdSector", null, "", new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IdSector)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Administrador)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Administrador)
-            @Html.ValidationMessageFor(model => model.Administrador)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.IdCargo, "Cargo")
+                        @Html.DropDownList("IdCargo", null, "", new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IdCargo)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Iniciales)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Iniciales)
-            @Html.ValidationMessageFor(model => model.Iniciales)
-        </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.Email, "Email")
+                        @Html.TextBoxFor(model => model.Email, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.CuentaBancaria, "Numero de cuenta bancaria")
+                        @Html.TextBoxFor(model => model.CuentaBancaria, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.CuentaBancaria)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SisMan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SisMan)
-            @Html.ValidationMessageFor(model => model.SisMan)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.InformacionAuxiliar, "Informacion auxiliar")
+                        @Html.TextBoxFor(model => model.InformacionAuxiliar, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.InformacionAuxiliar)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HorasJornada)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HorasJornada)
-            @Html.ValidationMessageFor(model => model.HorasJornada)
-        </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdCuentaFondoFijo, "Cuenta de fondo fijo asignada")
+                        @Html.DropDownList("IdCuentaFondoFijo", null, "", new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IdCuentaFondoFijo)
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSector1)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSector1)
-            @Html.ValidationMessageFor(model => model.IdSector1)
-        </div>
+                <div class="row-fluid">
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.IdObraAsignada, "Obra asignada")
+                        @Html.DropDownList("IdObraAsignada", null, "", new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.IdObraAsignada)
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCargo1)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCargo1)
-            @Html.ValidationMessageFor(model => model.IdCargo1)
-        </div>
+                <div class="row-fluid">
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Administrador, "Administrador")
+                        @Html.RadioButtonFor(model => model.Administrador, "SI") SI
+                        @Html.RadioButtonFor(model => model.Administrador, "NO") NO
+                        @Html.ValidationMessageFor(model => model.Administrador)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSector2)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSector2)
-            @Html.ValidationMessageFor(model => model.IdSector2)
-        </div>
+                    <div class="span2 lightblue">
+                        @Html.LabelFor(model => model.Activo, "Activo?")
+                        @Html.RadioButtonFor(model => model.Activo, "SI") SI
+                        @Html.RadioButtonFor(model => model.Activo, "NO") NO
+                        @Html.ValidationMessageFor(model => model.Activo)
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCargo2)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCargo2)
-            @Html.ValidationMessageFor(model => model.IdCargo2)
-        </div>
+                    <div class="span4 lightblue">
+                        @Html.LabelFor(model => model.TipoUsuario, "Tipo de usuario")
+                        @Html.RadioButtonFor(model => model.TipoUsuario, 1) Propio
+                        @Html.RadioButtonFor(model => model.TipoUsuario, 2) Obras propias
+                        @Html.RadioButtonFor(model => model.TipoUsuario, 3) Obras ext.
+                        @Html.RadioButtonFor(model => model.TipoUsuario, 4) Tercerizado
+                        @Html.ValidationMessageFor(model => model.TipoUsuario)
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSector3)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSector3)
-            @Html.ValidationMessageFor(model => model.IdSector3)
-        </div>
+                <div class="row-fluid">
+                    <div class="span3 lightblue">
+                        <table id="ListaIngresoEgreso" class="scroll" cellpadding="0" cellspacing="0"></table>
+                        <div id="ListaPager1" class="scroll" style="text-align: center; height: 30px"></div>
+                    </div>
+                    <div class="span3 lightblue">
+                        <table id="ListaSectores" class="scroll" cellpadding="0" cellspacing="0"></table>
+                        <div id="ListaPager2" class="scroll" style="text-align: center; height: 30px"></div>
+                    </div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCargo3)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCargo3)
-            @Html.ValidationMessageFor(model => model.IdCargo3)
-        </div>
+                <br />
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdSector4)
+                <p>
+                    <input type="submit" value="Guardar" />
+                </p>
+                <div>
+                    @Html.ActionLink("Volver al listado", "Index")
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdSector4)
-            @Html.ValidationMessageFor(model => model.IdSector4)
-        </div>
+</fieldset>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCargo4)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCargo4)
-            @Html.ValidationMessageFor(model => model.IdCargo4)
-        </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Dominio)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Dominio)
-            @Html.ValidationMessageFor(model => model.Dominio)
-        </div>
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SisMat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SisMat)
-            @Html.ValidationMessageFor(model => model.SisMat)
-        </div>
+        $('#ListaIngresoEgreso').jqGrid({
+            url: ROOT + 'Empleado/DetEmpleados/',
+            postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            shrinkToFit: true,
+            colNames: ['Acciones', 'IdDetalleEmpleado', 'IdEmpleado', 'Fecha de ingreso', 'Fecha de egreso'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false }
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager1'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'FechaIngreso',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: '300',
+            //height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            caption: '<b>INGRESOS - EGRESOS</b>'
+        });
+        jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaNacimiento)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaNacimiento)
-            @Html.ValidationMessageFor(model => model.FechaNacimiento)
-        </div>
+        $('#ListaSectores').jqGrid({
+            url: ROOT + 'Empleado/DetEmpleados/',
+            postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            shrinkToFit: true,
+            colNames: ['Acciones', 'IdDetalleEmpleado', 'IdEmpleado', 'Fecha de ingreso', 'Fecha de egreso'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager2'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'FechaIngreso',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: '300',
+            //height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            caption: '<b>CAMBIOS DE SECTORES</b>'
+        });
+        jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaSectores").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    });
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TipoUsuario)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TipoUsuario)
-            @Html.ValidationMessageFor(model => model.TipoUsuario)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GrupoDeCarga)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GrupoDeCarga)
-            @Html.ValidationMessageFor(model => model.GrupoDeCarga)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CuentaBancaria)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CuentaBancaria)
-            @Html.ValidationMessageFor(model => model.CuentaBancaria)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.InformacionAuxiliar)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.InformacionAuxiliar)
-            @Html.ValidationMessageFor(model => model.InformacionAuxiliar)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdCuentaFondoFijo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdCuentaFondoFijo)
-            @Html.ValidationMessageFor(model => model.IdCuentaFondoFijo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdObraAsignada)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdObraAsignada)
-            @Html.ValidationMessageFor(model => model.IdObraAsignada)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Activo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Activo)
-            @Html.ValidationMessageFor(model => model.Activo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Idioma)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Idioma)
-            @Html.ValidationMessageFor(model => model.Idioma)
-        </div>
-
-@*        <div class="editor-label">
-            @Html.LabelFor(model => model.PuntoVentaAsociado)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PuntoVentaAsociado)
-            @Html.ValidationMessageFor(model => model.PuntoVentaAsociado)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdLugarEntregaAsignado)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IdLugarEntregaAsignado)
-            @Html.ValidationMessageFor(model => model.IdLugarEntregaAsignado)
-        </div>*@
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+</script>
 }
-
-<div>
-    @Html.ActionLink("Volver al listado", "Index")
-</div>
