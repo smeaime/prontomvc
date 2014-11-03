@@ -4256,5 +4256,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CuentasBancarias">
+      <EntityTypeMapping TypeName="DemoProntoModel.CuentasBancaria">
+        <MappingFragment StoreEntitySet="CuentasBancarias">
+          <ScalarProperty Name="DiseñoCheque" ColumnName="DiseñoCheque" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+          <ScalarProperty Name="CaracteresBeneficiario" ColumnName="CaracteresBeneficiario" />
+          <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
+          <ScalarProperty Name="CBU" ColumnName="CBU" />
+          <ScalarProperty Name="ChequesPorPlancha" ColumnName="ChequesPorPlancha" />
+          <ScalarProperty Name="PlantillaChequera" ColumnName="PlantillaChequera" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
