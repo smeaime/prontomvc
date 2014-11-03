@@ -144,6 +144,8 @@
                     </div>
                 </div>
 
+                <br />
+
                 <div class="row-fluid">
                     <div class="span3 lightblue">
                         <table id="ListaIngresoEgreso" class="scroll" cellpadding="0" cellspacing="0"></table>
@@ -152,6 +154,23 @@
                     <div class="span3 lightblue">
                         <table id="ListaSectores" class="scroll" cellpadding="0" cellspacing="0"></table>
                         <div id="ListaPager2" class="scroll" style="text-align: center; height: 30px"></div>
+                    </div>
+                    <div class="span3 lightblue">
+                        <table id="ListaJornadas" class="scroll" cellpadding="0" cellspacing="0"></table>
+                        <div id="ListaPager3" class="scroll" style="text-align: center; height: 30px"></div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row-fluid">
+                    <div class="span3 lightblue">
+                        <table id="ListaCuentasBancarias" class="scroll" cellpadding="0" cellspacing="0"></table>
+                        <div id="ListaPager4" class="scroll" style="text-align: center; height: 30px"></div>
+                    </div>
+                    <div class="span3 lightblue">
+                        <table id="ListaUbicaciones" class="scroll" cellpadding="0" cellspacing="0"></table>
+                        <div id="ListaPager5" class="scroll" style="text-align: center; height: 30px"></div>
                     </div>
                 </div>
 
@@ -213,18 +232,18 @@
         jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
         $('#ListaSectores').jqGrid({
-            url: ROOT + 'Empleado/DetEmpleados/',
+            url: ROOT + 'Empleado/DetEmpleadosSectores/',
             postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
             datatype: 'json',
             mtype: 'POST',
             shrinkToFit: true,
-            colNames: ['Acciones', 'IdDetalleEmpleado', 'IdEmpleado', 'Fecha de ingreso', 'Fecha de egreso'],
+            colNames: ['Acciones', 'IdDetalleEmpleadoSector', 'IdEmpleado', 'Fecha de cambio', 'Sector'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
-                        { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdDetalleEmpleadoSector', index: 'IdDetalleEmpleadoSector', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false }
+                        { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, editrules: { required: false } },
+                        { name: 'Sector', index: 'Sector', align: 'left', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, editrules: { required: false } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -237,7 +256,7 @@
             pager: $('#ListaPager2'),
             rowNum: 15,
             rowList: [10, 20, 50, 100],
-            sortname: 'FechaIngreso',
+            sortname: 'FechaCambio',
             sortorder: 'asc',
             viewrecords: true,
             width: '300',
@@ -249,6 +268,137 @@
         });
         jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#ListaSectores").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        $('#ListaJornadas').jqGrid({
+            url: ROOT + 'Empleado/DetEmpleadosJornadas/',
+            postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            shrinkToFit: true,
+            colNames: ['Acciones', 'IdDetalleEmpleadoJornada', 'IdEmpleado', 'Fecha de cambio', 'Hs.p/jornada'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'IdDetalleEmpleadoJornada', index: 'IdDetalleEmpleadoJornada', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+                        {
+                            name: 'HorasJornada', index: 'HorasJornada', label: 'TB', align: 'right', width: 80, editable: true, hidden: false, edittype: 'currency',
+                            editoptions: {maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } },
+                                         {
+                                             type: 'keypress',
+                                             fn: function (e) {
+                                                 if (e.keyCode >= 48 && e.keyCode <= 57) {
+                                                     return true;
+                                                 } else {
+                                                     alert("nada de letras");
+                                                     return false;
+                                                 }
+                                             }
+                                         }
+                            ]
+
+                        }, editrules: { required: false }, defaultValue: 0}
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager3'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'FechaCambio',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: '300',
+            //height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            caption: '<b>JORNADAS</b>'
+        });
+        jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaJornadas").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        $('#ListaCuentasBancarias').jqGrid({
+            url: ROOT + 'Empleado/DetEmpleadosCuentasBancarias/',
+            postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            shrinkToFit: true,
+            colNames: ['Acciones', 'IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Banco', 'Cuenta bancaria'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Banco', index: 'Banco', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CuentaBancaria', index: 'CuentaBancaria', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager4'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'CuentaBancaria',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: '300',
+            //height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            caption: '<b>CUENTAS BANCARIAS ASIGNADAS</b>'
+        });
+        jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaCuentasBancarias").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        $('#ListaUbicaciones').jqGrid({
+            url: ROOT + 'Empleado/DetEmpleadosUbicaciones/',
+            postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            shrinkToFit: true,
+            colNames: ['Acciones', 'IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Cuenta bancaria'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'CuentaBancaria', index: 'CuentaBancaria', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager5'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 100],
+            sortname: 'CuentaBancaria',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: '300',
+            //height: '100%',
+            altRows: false,
+            footerrow: true,
+            userDataOnFooter: true,
+            caption: '<b>UBICACIONES ASIGNADAS</b>'
+        });
+        jQuery("#ListaUbicaciones").jqGrid('navGrid', '#ListaPager5', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaUbicaciones").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
     });
 
 </script>

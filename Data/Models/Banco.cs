@@ -17,6 +17,7 @@ namespace ProntoMVC.Data.Models
         public Banco()
         {
             this.BancoChequeras = new HashSet<BancoChequera>();
+            this.CuentasBancarias = new HashSet<CuentasBancaria>();
         }
     
         public int IdBanco { get; set; }
@@ -36,5 +37,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<BancoChequera> BancoChequeras { get; set; }
         public virtual Cuenta Cuenta { get; set; }
         public virtual Cuenta Cuenta1 { get; set; }
+        public virtual ICollection<CuentasBancaria> CuentasBancarias { get; set; }
     }
 }
