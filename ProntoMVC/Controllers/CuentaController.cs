@@ -9,7 +9,11 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using ProntoMVC.Data.Models; using ProntoMVC.Models;
+
+
+using ProntoMVC.Data.Models;
+
+using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Text;
@@ -120,6 +124,70 @@ namespace ProntoMVC.Controllers
         }
 
 
+        public virtual JsonResult GetCuentasBancariasAutocomplete(string term, int obra = 0)
+        {
+
+
+            // http://stackoverflow.com/questions/444798/case-insensitive-containsstring
+
+            var ci = new System.Globalization.CultureInfo("en-US");
+
+
+
+ //            SELECT   
+ // IdCuentaBancaria,  
+ // Bancos.Nombre,  
+ // CuentasBancarias.Cuenta  
+ //FROM CuentasBancarias   
+ //LEFT OUTER JOIN Bancos ON Bancos.IdBanco=CuentasBancarias.IdBanco  
+ //WHERE @IdEmpleado=-1 or Not Exists(Select Top 1 decb.IdEmpleado From DetalleEmpleadosCuentasBancarias decb Where decb.IdEmpleado=@IdEmpleado) or   
+ //Exists(Select Top 1 decb.IdCuentaBancaria From DetalleEmpleadosCuentasBancarias decb   
+ // Where decb.IdEmpleado=@IdEmpleado and decb.IdCuentaBancaria=CuentasBancarias.IdCuentaBancaria)  
+
+
+
+
+            var filtereditems = (from item in db.CuentasBancarias
+                                 // TO DO: no me funciona el  .StartsWith(term, true, ci) !!!!!!!!! 
+                                 // y usarlo con el int del codigo tambien es un dolor de cabeza!!!!!
+                                 // http://stackoverflow.com/questions/1066760/problem-with-converting-int-to-string-in-linq-to-entities/3292773#3292773
+                                 // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
+
+                                 join banco in db.Bancos on item.IdBanco equals banco.IdBanco
+
+                                 where ((
+
+                                 (item.Cuenta).StartsWith(term)
+                                     //(item.Descripcion + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))).StartsWith(term)
+
+                                     //       || SqlFunctions.StringConvert((double)(item.Codigo ?? 0)).StartsWith(term)
+                                         )
+                                    // && (cu.IdTipoCuenta == 2 || cu.IdTipoCuenta == 4)
+                                     // && item.Descripcion.Trim().Length > 0
+
+                                    // && (obra == 0 || cu.IdObra == obra)
+                                     )
+                                 orderby item.Cuenta
+                                 select new
+                                 {
+                                     id = item.IdCuentaBancaria,
+                                     codigo = item.Cuenta.Trim(), // me estaba agregando espacios en blanco http://stackoverflow.com/questions/6158706/sqlfunctions-stringconvert-unnecessary-padding-added
+                                     value = item.IdCuentaBancaria // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)),
+                                     ,
+                                     title = item.Cuenta // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))
+
+                                     //,
+                                     //idcuentagasto = item.IdCuenta
+
+                                 }).Take(20).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public virtual JsonResult GetCodigosCuentasAutocomplete2(string term)
         {
             int term2 = Generales.Val (term);
@@ -173,7 +241,7 @@ namespace ProntoMVC.Controllers
         {
 
             
-            Parametros parametros = db.Parametros.Find(1);
+           Parametros parametros = db.Parametros.Find(1);
             int? i = parametros.IdTipoCuentaGrupoFF;
 
 

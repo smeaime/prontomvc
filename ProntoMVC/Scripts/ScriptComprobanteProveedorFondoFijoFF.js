@@ -259,8 +259,10 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
     ok, la cuestion es que, usando celledit (es decir, la edicion inline por celda, no por renglon entero), cuando cambio el valor
     dentro de un autocomplete, no puedo refrescar la celda adyacente de id porque no está en modo edicion. es decir, tendría que hacerlo
-    una vez que pone enter, es decir, no en el evento 'select' del autocomplete creado dentro del editoptions de la columna, sino en el afterSaveCell general de la grilla. 
-    Lo que pasa es... que en el evento select sí dispongo del id del elemento elegido. En cambio, en el afterSaveCell lo debo ir a buscar de nuevo, usando el texto
+    una vez que pone enter, es decir, no en el evento 'select' del autocomplete creado dentro del editoptions de la columna, 
+    sino en el afterSaveCell general de la grilla. 
+    Lo que pasa es... que en el evento select sí dispongo del id del elemento elegido. En cambio, en el afterSaveCell lo debo ir a buscar de nuevo, 
+    usando el texto
     que está en pantalla. El único problema con esto es si hay descripciones repetidas.
     -Bueno, pero tambien tengo que hacer un CASE para distinguir si me estan cambiando los articulos o las unidades, etc! 
 
