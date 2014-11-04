@@ -484,6 +484,22 @@ $(function () {
 
     window.onerror = function (message, file, line, column, errorObj) {
 
+
+        //qué hacer con los casos de “Script Error.”???? http://danlimerick.wordpress.com/2014/01/18/how-to-catch-javascript-errors-with-window-onerror-even-on-chrome-and-firefox/
+        //usar crossorigin
+        // -pero no es tan simple http://stackoverflow.com/questions/14124940/how-to-see-what-is-returned-when-a-remote-script-is-blocked?lq=1
+        //Cryptic “Script Error.” reported in Javascript in Chrome and Firefox
+
+        //Firefox and Chrome will for security reasons not report exceptions from scripts that are of a different origin. All you get is a cryptic “Script Error.” and nothing else. Totally useless. 
+        //Solving the Cryptic “Script Error.”
+
+        //The latest versions of Chrome (see point 3 in the linked post) and Firefox have now provided a way to allow reporting of exceptions from CDNs.
+
+        //There are two steps to be taken to get it working:
+
+
+
+
         var stack = "";
         if (errorObj !== undefined) //so it won't blow up in the rest of the browsers
         {
