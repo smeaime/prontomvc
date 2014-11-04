@@ -551,7 +551,6 @@ namespace ProntoMVC.Controllers
         public IList<Obra> GetObras()
         {
             IQueryable<Obra> query = db.Obras;
-
             return query.ToList();
         }
     }
