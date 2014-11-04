@@ -25,7 +25,23 @@ using Trirand.Web.Mvc;
 namespace ProntoMVC.Controllers
 {
     public partial class EmpleadoController : ProntoBaseController
-    {
+        {
+
+
+
+
+        [HttpPost]
+        public virtual JsonResult BatchUpdate(Empleado Empleado)
+        {
+
+            return Json("");
+
+
+        }
+
+
+
+
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
@@ -176,6 +192,25 @@ namespace ProntoMVC.Controllers
             else
                 return "";
         }
+
+
+
+        [HttpPost]
+        public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
+        {
+            switch (oper)
+            {
+                case "add": //Validate Input ; Add Method
+                    break;
+                case "edit":  //Validate Input ; Edit Method
+                    break;
+                case "del": //Validate Input ; Delete Method
+                    break;
+                default: break;
+            }
+
+        }
+
 
         public virtual ActionResult DetEmpleados(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
         {
