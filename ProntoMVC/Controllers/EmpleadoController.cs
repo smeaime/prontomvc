@@ -27,20 +27,11 @@ namespace ProntoMVC.Controllers
     public partial class EmpleadoController : ProntoBaseController
         {
 
-
-
-
         [HttpPost]
         public virtual JsonResult BatchUpdate(Empleado Empleado)
         {
-
             return Json("");
-
-
         }
-
-
-
 
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
@@ -193,8 +184,6 @@ namespace ProntoMVC.Controllers
                 return "";
         }
 
-
-
         [HttpPost]
         public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
@@ -210,7 +199,6 @@ namespace ProntoMVC.Controllers
             }
 
         }
-
 
         public virtual ActionResult DetEmpleados(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
         {
@@ -257,7 +245,6 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleEmpleado.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
                                 a.IdDetalleEmpleado.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -314,7 +301,6 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleEmpleadoSector.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
                                 a.IdDetalleEmpleadoSector.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -370,7 +356,6 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleEmpleadoJornada.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
                                 a.IdDetalleEmpleadoJornada.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -429,13 +414,11 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleEmpleadoCuentaBancaria.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
                                 a.IdDetalleEmpleadoCuentaBancaria.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.Banco,
                                 a.CuentaBancaria,
                                 a.IdCuentaBancaria.ToString()
-
                          }
                         }).ToArray()
             };
@@ -487,7 +470,6 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleEmpleadoUbicacion.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
                                 a.IdDetalleEmpleadoUbicacion.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.Ubicacion
