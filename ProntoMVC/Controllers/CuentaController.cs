@@ -172,10 +172,10 @@ namespace ProntoMVC.Controllers
                                  {
                                      id = item.IdCuentaBancaria,
                                      codigo = item.Cuenta.Trim(), // me estaba agregando espacios en blanco http://stackoverflow.com/questions/6158706/sqlfunctions-stringconvert-unnecessary-padding-added
-                                     value = item.IdCuentaBancaria // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)),
+                                     value = item.Cuenta // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)),
                                      ,
-                                     title = item.Cuenta // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))
-
+                                     title = item.Cuenta, // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))
+                                     label = item.Cuenta
                                      //,
                                      //idcuentagasto = item.IdCuenta
 
