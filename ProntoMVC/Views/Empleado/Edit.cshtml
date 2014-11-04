@@ -417,19 +417,23 @@
 
                                             source: ROOT + 'Cuenta/GetCuentasBancariasAutocomplete',
                                             minLength: 0,
-                                            select: function (event, ui) {
 
+
+                                            select: function (event, ui) {
+                                                // http://www.trirand.com/blog/?page_id=393/help/while-the-select-editoption-posts-the-value-or-id-of-the-selected-list-item-autocomplete-posts-the-label-i-need-id-posted
                                                 if (ui.item.label === NoResultsLabel) {
                                                     event.preventDefault();
                                                     return;
                                                 }
-
-                                                //$("#IdCuenta").val(ui.item.id);
-                                                //$("#Codigo").val(ui.item.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                //$("#CuentaGasto").val(ui.item.title);
-                                                //}
-
+                                                event.preventDefault();
+                                                $(elem).val(ui.item.label);
+                                                var rowid = $('#ListaCuentasBancarias').getGridParam('selrow');
+                                                // set the hidden wo_CUID cell with selected value of the selected label.
+                                                $('#ListaCuentasBancarias').jqGrid('setCell', rowid, 'IdCuentaBancaria', ui.item.id);
                                             },
+
+
+                                        
                                             focus: function (event, ui) {
                                                 if (ui.item.label === NoResultsLabel) {
                                                     event.preventDefault();
@@ -439,8 +443,8 @@
                                         .data("ui-autocomplete")._renderItem = function (ul, item) {
                                             return $("<li></li>")
                                                 .data("ui-autocomplete-item", item)
-                                                //.append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.title + "</b></span></a>")
-                                                .append("<a>" + item.value + "<br>" + item.title + "</a>")
+                                                .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.title + "</b></span></a>")
+                                                //.append("<a>" + item.value + "<br>" + item.title + "</a>")
                                                 .appendTo(ul);
                                         };
                                     }
@@ -624,7 +628,7 @@
         $('#grabar2').click(function () {
 
 
-            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+            //jQuery('#ListaCuentasBancarias').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
             var cabecera = SerializaForm();
 
@@ -650,7 +654,7 @@
 
                         if (true) {
                             // window.location = (ROOT + "ComprobanteProveedor/EditFF/" + result.IdComprobanteProveedor);
-                            window.location = (ROOT + "ComprobanteProveedor/EditFF/-1");
+                            window.location = (ROOT + "Empleado/Edit/-1");
 
                         } else {
 
@@ -750,32 +754,8 @@
         function SerializaForm() {
 
 
-
-            //$("#Lista").getChangedCells('dirty')
-            //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-
-
-
-            //tambien podría llamar directamente con ajax y que me devuelvan el modelo...
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
             var cm, data1, data2, valor;
 
-
-            var ImporteBonificacion = $("#TotalBonificacionGlobal").val();
-            //            ImporteBonificacion = ImporteBonificacion.replace(".", ",");
 
             //////////////////////////////////////////////////////////////////////////////////////////////
             var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
@@ -805,13 +785,13 @@
                     var data = $('#ListaCuentasBancarias').jqGrid('getRowData', dataIds[i]);
 
 
-                    var iddeta = data['IdDetalleComprobanteProveedor'];
+                    var iddeta = data['IdDetalleEmpleadoCuentaBancaria'];
                     //alert(iddeta);
                     if (!iddeta) continue;
 
 
 
-                    data1 = '{"IdComprobanteProveedor":"' + $("#IdComprobanteProveedor").val() + '",'
+                    data1 = '{"IdEmpleado":"' + $("#IdEmpleado").val() + '",'
                     for (var j = 0; j < colModel.length; j++) {
                         cm = colModel[j]
 
@@ -823,11 +803,6 @@
                             data1 = data1 + '"' + cm.name + '":"' + valor + '",';
                         }
                     }
-
-
-
-                    data1 += '"' + 'AplicarIVA1' + '":"' + 'SI' + '",';
-
 
 
 

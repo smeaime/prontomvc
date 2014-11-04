@@ -415,7 +415,8 @@ namespace ProntoMVC.Controllers
                             a.IdDetalleEmpleadoCuentaBancaria,
                             a.IdEmpleado,
                             Banco = c != null ? c.Nombre : null,
-                            CuentaBancaria = b != null ? b.Cuenta : null
+                            CuentaBancaria = b != null ? b.Cuenta : null,
+                            a.IdCuentaBancaria
                         }).OrderBy(x => x.Banco).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -432,7 +433,9 @@ namespace ProntoMVC.Controllers
                                 a.IdDetalleEmpleadoCuentaBancaria.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.Banco,
-                                a.CuentaBancaria
+                                a.CuentaBancaria,
+                                a.IdCuentaBancaria.ToString()
+
                          }
                         }).ToArray()
             };
