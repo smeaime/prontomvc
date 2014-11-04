@@ -232,7 +232,233 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public virtual ActionResult DetEmpleadosSectores(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
+        {
+            int IdEmpleado1 = IdEmpleado ?? 0;
+            var Det = db.DetalleEmpleadosSectores.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            switch (sidx.ToLower())
+            {
+                case "fechacambio":
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.FechaCambio);
+                    else
+                        Det = Det.OrderBy(a => a.FechaCambio);
+                    break;
+                default:
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdEmpleado);
+                    else
+                        Det = Det.OrderBy(a => a.IdEmpleado);
+                    break;
+            }
+
+            var data = (from a in Det
+                        join b in db.Sectores on a.IdSectorNuevo equals b.IdSector into ab from b in ab.DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleEmpleadoSector,
+                            a.IdEmpleado,
+                            a.FechaCambio,
+                            Sector = b != null ? b.Descripcion : null
+                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleEmpleadoSector.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdDetalleEmpleadoSector.ToString(), 
+                                a.IdEmpleado.ToString(), 
+                                a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Sector
+                         }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetEmpleadosJornadas(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
+        {
+            int IdEmpleado1 = IdEmpleado ?? 0;
+            var Det = db.DetalleEmpleadosJornadas.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            switch (sidx.ToLower())
+            {
+                case "fechacambio":
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.FechaCambio);
+                    else
+                        Det = Det.OrderBy(a => a.FechaCambio);
+                    break;
+                default:
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdEmpleado);
+                    else
+                        Det = Det.OrderBy(a => a.IdEmpleado);
+                    break;
+            }
+
+            var data = (from a in Det
+                        select new
+                        {
+                            a.IdDetalleEmpleadoJornada,
+                            a.IdEmpleado,
+                            a.FechaCambio,
+                            a.HorasJornada
+                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleEmpleadoJornada.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdDetalleEmpleadoJornada.ToString(), 
+                                a.IdEmpleado.ToString(), 
+                                a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.HorasJornada.ToString()
+                         }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetEmpleadosCuentasBancarias(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
+        {
+            int IdEmpleado1 = IdEmpleado ?? 0;
+            var Det = db.DetalleEmpleadosCuentasBancarias.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            switch (sidx.ToLower())
+            {
+                case "idcuentabancaria":
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdCuentaBancaria);
+                    else
+                        Det = Det.OrderBy(a => a.IdCuentaBancaria);
+                    break;
+                default:
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdEmpleado);
+                    else
+                        Det = Det.OrderBy(a => a.IdEmpleado);
+                    break;
+            }
+
+            var data = (from a in Det
+                        join b in db.CuentasBancarias on a.IdCuentaBancaria equals b.IdCuentaBancaria into ab from b in ab.DefaultIfEmpty()
+                        join c in db.Bancos on b.IdBanco equals c.IdBanco into ac from c in ac.DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleEmpleadoCuentaBancaria,
+                            a.IdEmpleado,
+                            Banco = c != null ? c.Nombre : null,
+                            CuentaBancaria = b != null ? b.Cuenta : null
+                        }).OrderBy(x => x.Banco).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleEmpleadoCuentaBancaria.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdDetalleEmpleadoCuentaBancaria.ToString(), 
+                                a.IdEmpleado.ToString(), 
+                                a.Banco,
+                                a.CuentaBancaria
+                         }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetEmpleadosUbicaciones(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
+        {
+            int IdEmpleado1 = IdEmpleado ?? 0;
+            var Det = db.DetalleEmpleadosUbicaciones.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            switch (sidx.ToLower())
+            {
+                case "idubicacion":
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdUbicacion);
+                    else
+                        Det = Det.OrderBy(a => a.IdUbicacion);
+                    break;
+                default:
+                    if (sord.Equals("desc"))
+                        Det = Det.OrderByDescending(a => a.IdEmpleado);
+                    else
+                        Det = Det.OrderBy(a => a.IdEmpleado);
+                    break;
+            }
+
+            var data = (from a in Det
+                        join b in db.Ubicaciones on a.IdUbicacion equals b.IdUbicacion into ab from b in ab.DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleEmpleadoUbicacion,
+                            a.IdEmpleado,
+                            Ubicacion = b != null ? b.Descripcion : null
+                        }).OrderBy(x => x.Ubicacion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleEmpleadoUbicacion.ToString(),
+                            cell = new string[] { 
+                                string.Empty, 
+                                a.IdDetalleEmpleadoUbicacion.ToString(), 
+                                a.IdEmpleado.ToString(), 
+                                a.Ubicacion
+                         }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
@@ -325,7 +551,6 @@ namespace ProntoMVC.Controllers
         public IList<Obra> GetObras()
         {
             IQueryable<Obra> query = db.Obras;
-
             return query.ToList();
         }
     }

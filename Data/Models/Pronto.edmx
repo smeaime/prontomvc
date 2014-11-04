@@ -770,6 +770,24 @@
           <Property Name="TextoAuxiliar3" Type="varchar" MaxLength="100" />
           <Property Name="ImputarAPresupuestoDeObra" Type="varchar" MaxLength="2" />
         </EntityType>
+        <EntityType Name="CuentasBancarias">
+          <Key>
+            <PropertyRef Name="IdCuentaBancaria" />
+          </Key>
+          <Property Name="IdCuentaBancaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cuenta" Type="varchar" MaxLength="50" />
+          <Property Name="IdBanco" Type="int" />
+          <Property Name="IdMoneda" Type="int" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="Detalle" Type="varchar" MaxLength="30" />
+          <Property Name="PlantillaChequera" Type="varchar" MaxLength="50" />
+          <Property Name="ChequesPorPlancha" Type="int" />
+          <Property Name="CBU" Type="varchar" MaxLength="22" />
+          <Property Name="InformacionAuxiliar" Type="varchar" MaxLength="10" />
+          <Property Name="CaracteresBeneficiario" Type="int" />
+          <Property Name="Activa" Type="varchar" MaxLength="2" />
+          <Property Name="DiseñoCheque" Type="varchar" MaxLength="4000" />
+        </EntityType>
         <EntityType Name="CuentasCorrientesAcreedores">
           <Key>
             <PropertyRef Name="IdCtaCte" />
@@ -4163,6 +4181,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CuentasBancarias_Bancos">
+          <End Role="Bancos" Type="Self.Bancos" Multiplicity="0..1" />
+          <End Role="CuentasBancarias" Type="Self.CuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bancos">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="CuentasBancarias">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CuentasCorrientesAcreedores_Proveedores">
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
           <End Role="CuentasCorrientesAcreedores" Type="Self.CuentasCorrientesAcreedores" Multiplicity="*" />
@@ -4891,6 +4921,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="ControlesCalidad" EntityType="Self.ControlesCalidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentasBancarias" EntityType="Self.CuentasBancarias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasCorrientesAcreedores" EntityType="Self.CuentasCorrientesAcreedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasCorrientesDeudores" EntityType="Self.CuentasCorrientesDeudores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasEjerciciosContables" EntityType="Self.CuentasEjerciciosContables" Schema="dbo" store:Type="Tables" />
@@ -5119,6 +5150,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_Cuentas_TipoCuentaGrupos" Association="Self.FK_Cuentas_TipoCuentaGrupos">
             <End Role="TiposCuentaGrupos" EntitySet="TiposCuentaGrupos" />
             <End Role="Cuentas" EntitySet="Cuentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentasBancarias_Bancos" Association="Self.FK_CuentasBancarias_Bancos">
+            <End Role="Bancos" EntitySet="Bancos" />
+            <End Role="CuentasBancarias" EntitySet="CuentasBancarias" />
           </AssociationSet>
           <AssociationSet Name="FK_CuentasCorrientesAcreedores_Proveedores" Association="Self.FK_CuentasCorrientesAcreedores_Proveedores">
             <End Role="Proveedores" EntitySet="Proveedores" />
@@ -6190,6 +6225,11 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
             <End Role="Cargo" EntitySet="Cargos" />
             <End Role="Empleado" EntitySet="Empleados" />
+          </AssociationSet>
+          <EntitySet Name="CuentasBancarias" EntityType="DemoProntoModel.CuentasBancaria" />
+          <AssociationSet Name="FK_CuentasBancarias_Bancos" Association="DemoProntoModel.FK_CuentasBancarias_Bancos">
+            <End Role="Banco" EntitySet="Bancos" />
+            <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -9371,6 +9411,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="BancoChequeras" Relationship="DemoProntoModel.FK_BancoChequeras_Bancos" FromRole="Banco" ToRole="BancoChequera" />
           <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Bancos_Cuentas" FromRole="Banco" ToRole="Cuenta" />
           <NavigationProperty Name="Cuenta1" Relationship="DemoProntoModel.FK_Bancos_Cuentas1" FromRole="Banco" ToRole="Cuenta" />
+          <NavigationProperty Name="CuentasBancarias" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="Banco" ToRole="CuentasBancaria" />
         </EntityType>
         <EntityType Name="TarjetasCredito">
           <Key>
@@ -12658,6 +12699,37 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="Empleado">
               <PropertyRef Name="IdCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CuentasBancaria">
+          <Key>
+            <PropertyRef Name="IdCuentaBancaria" />
+          </Key>
+          <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="IdMoneda" Type="Int32" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="Detalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PlantillaChequera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChequesPorPlancha" Type="Int32" />
+          <Property Name="CBU" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="InformacionAuxiliar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CaracteresBeneficiario" Type="Int32" />
+          <Property Name="Activa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DiseñoCheque" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Banco" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="CuentasBancaria" ToRole="Banco" />
+        </EntityType>
+        <Association Name="FK_CuentasBancarias_Bancos">
+          <End Type="DemoProntoModel.Banco" Role="Banco" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.CuentasBancaria" Role="CuentasBancaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="CuentasBancaria">
+              <PropertyRef Name="IdBanco" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -16891,6 +16963,25 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CuentasBancarias">
+            <EntityTypeMapping TypeName="DemoProntoModel.CuentasBancaria">
+              <MappingFragment StoreEntitySet="CuentasBancarias">
+                <ScalarProperty Name="DiseñoCheque" ColumnName="DiseñoCheque" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="CaracteresBeneficiario" ColumnName="CaracteresBeneficiario" />
+                <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
+                <ScalarProperty Name="CBU" ColumnName="CBU" />
+                <ScalarProperty Name="ChequesPorPlancha" ColumnName="ChequesPorPlancha" />
+                <ScalarProperty Name="PlantillaChequera" ColumnName="PlantillaChequera" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -19349,6 +19440,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="1.5" PointX="7.375" PointY="16.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="9.375" PointY="16.875" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Cargos" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="9.625" PointY="42.375" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasBancarias_Bancos" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
