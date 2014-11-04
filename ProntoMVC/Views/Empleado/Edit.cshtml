@@ -174,6 +174,14 @@
 
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
         $('#ListaIngresoEgreso').jqGrid({
             url: ROOT + 'Empleado/DetEmpleados/',
             postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
@@ -185,8 +193,20 @@
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
                         { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false }
+                        {
+                            name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: true,
+                            editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false },
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false
+                        },
+                        {
+                            name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date',
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false
+
+                            // cosas necesarias para la edicion inline
+                            , editable: true, label: 'TB', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
+
+
+                        }
                     ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -208,9 +228,40 @@
             footerrow: true,
             userDataOnFooter: true,
             caption: '<b>INGRESOS - EGRESOS</b>'
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
+            ,
+            cellEdit: true,
+            cellsubmit: 'clientArray'
+            , editurl: ROOT + 'Empleado/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
+            // poner "editable" en true, de cada columna
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
         });
-        jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { refresh: true, add: true, edit: true, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
         $('#ListaSectores').jqGrid({
             url: ROOT + 'Empleado/DetEmpleados/',
