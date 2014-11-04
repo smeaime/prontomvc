@@ -15,7 +15,7 @@
             <legend>Empleado</legend>
             <div class="row-fluid">
                 <div>
-                    @Html.Hidden("IdTransportista", Model.IdEmpleado)
+                    @Html.Hidden("IdEmpleado", Model.IdEmpleado)
                     @Html.HiddenFor(model => model.IdEmpleado)
                 </div>
 
@@ -178,8 +178,7 @@
                 <br />
 
                 <p>
-                    <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary "
-                           usesubmitbehavior="false" />
+                    <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                 </p>
                 <div>
                     @Html.ActionLink("Volver al listado", "Index")
@@ -195,38 +194,26 @@
 
             $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-
             $('#ListaIngresoEgreso').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleados/',
                 postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['Acciones', 'IdDetalleEmpleado', 'IdEmpleado', 'Fecha de ingreso', 'Fecha de egreso'],
+                colNames: ['IdDetalleEmpleado', 'IdEmpleado', 'Fecha ingreso', 'Fecha egreso'],
                 colModel: [
-                            { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
-                            { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                            //{ name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                            { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
+                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
                             {
                                 name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: true,
                                 editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false },
-                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false
+                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, label: 'TB'
                             },
                             {
-                                name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date',
-                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false
-
-                                // cosas necesarias para la edicion inline
-                                , editable: true, label: 'TB', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
-
-
+                                name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: true,
+                                editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }, 
+                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, label: 'TB'
                             }
                 ],
                 onSelectRow: function (id) {
@@ -248,41 +235,14 @@
                 altRows: false,
                 footerrow: true,
                 userDataOnFooter: true,
-                caption: '<b>INGRESOS - EGRESOS</b>'
-
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
+                caption: '<b>INGRESOS - EGRESOS</b>',
                 // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
-                ,
                 cellEdit: true,
-                cellsubmit: 'clientArray'
-                , editurl: ROOT + 'Empleado/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
-                // poner "editable" en true, de cada columna
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
             });
             jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { refresh: true, add: true, edit: true, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
             jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-
-
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
             $('#ListaSectores').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleadosSectores/',
@@ -290,9 +250,8 @@
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['Acciones', 'IdDetalleEmpleadoSector', 'IdEmpleado', 'Fecha de cambio', 'Sector'],
+                colNames: ['IdDetalleEmpleadoSector', 'IdEmpleado', 'Fecha de cambio', 'Sector'],
                 colModel: [
-                            { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
                             { name: 'IdDetalleEmpleadoSector', index: 'IdDetalleEmpleadoSector', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, editrules: { required: false } },
@@ -328,15 +287,13 @@
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['Acciones', 'IdDetalleEmpleadoJornada', 'IdEmpleado', 'Fecha de cambio', 'Hs.p/jornada'],
+                colNames: ['IdDetalleEmpleadoJornada', 'IdEmpleado', 'Fecha de cambio', 'Hs.p/jornada'],
                 colModel: [
-                            { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
                             { name: 'IdDetalleEmpleadoJornada', index: 'IdDetalleEmpleadoJornada', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
                             {
-                                name: 'HorasJornada', index: 'HorasJornada', label: 'TB', align: 'right', width: 80, editable: true, hidden: false, edittype: 'currency',
+                              name: 'HorasJornada', index: 'HorasJornada', label: 'TB', align: 'right', width: 80, editable: true, hidden: false, edittype: 'currency',
                                 editoptions: {
                                     maxlength: 20, defaultValue: '0.00',
                                     dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } },
@@ -352,8 +309,9 @@
                                                      }
                                                  }
                                     ]
-
-                                }, editrules: { required: false }, defaultValue: 0
+                                },
+                                editrules: { required: false },
+                                defaultValue: 0
                             }
                 ],
                 onSelectRow: function (id) {
@@ -380,45 +338,27 @@
             jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { refresh: true, add: true, edit: true, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
             jQuery("#ListaJornadas").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-
-
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
             $('#ListaCuentasBancarias').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleadosCuentasBancarias/',
                 postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['Acciones', 'IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Banco', 'Cuenta bancaria', 'IdCuentaBancaria'],
+                colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Banco', 'Cuenta bancaria', 'IdCuentaBancaria'],
                 colModel: [
-                            { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
-                            { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                            { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
+                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
                             { name: 'Banco', index: 'Banco', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                             {
-                                name: 'CuentaBancaria', formoptions: { rowpos: 8, colpos: 2, label: "CuentaBancaria" }, index: 'CuentaBancaria', align: 'left', width: 400,
-                                hidden: false,
-                                editable: true, edittype: 'text',
+                                name: 'CuentaBancaria', formoptions: { rowpos: 8, colpos: 2, label: "CuentaBancaria" }, index: 'CuentaBancaria', align: 'left', width: 100,
+                                hidden: false, editable: true, edittype: 'text',
                                 editoptions: {
                                     rows: '1', cols: '1',
                                     dataInit: function (elem) {
                                         var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
-
                                         $(elem).autocomplete({
-
-                                            source: ROOT + 'Cuenta/GetCuentasBancariasAutocomplete',
+                                            source: ROOT + 'Banco/GetCuentasBancariasAutocomplete',
                                             minLength: 0,
-
-
                                             select: function (event, ui) {
                                                 // http://www.trirand.com/blog/?page_id=393/help/while-the-select-editoption-posts-the-value-or-id-of-the-selected-list-item-autocomplete-posts-the-label-i-need-id-posted
                                                 if (ui.item.label === NoResultsLabel) {
@@ -428,12 +368,8 @@
                                                 event.preventDefault();
                                                 $(elem).val(ui.item.label);
                                                 var rowid = $('#ListaCuentasBancarias').getGridParam('selrow');
-                                                // set the hidden wo_CUID cell with selected value of the selected label.
                                                 $('#ListaCuentasBancarias').jqGrid('setCell', rowid, 'IdCuentaBancaria', ui.item.id);
                                             },
-
-
-                                        
                                             focus: function (event, ui) {
                                                 if (ui.item.label === NoResultsLabel) {
                                                     event.preventDefault();
@@ -447,22 +383,17 @@
                                                 //.append("<a>" + item.value + "<br>" + item.title + "</a>")
                                                 .appendTo(ul);
                                         };
-                                    }
-
-
-                                    ,
+                                    },
                                     dataEvents: [{
                                         type: 'change',
                                         fn: function (e) {
-
                                             //alert(this.value);
-
                                             if (this.value == "No se encontraron resultados") {
                                                 $("#Descripcion").val("");
                                                 return;
                                             }
 
-                                            $.post(ROOT + 'Cuenta/GetCuentasBancariasAutocomplete',  // ?term=' + val
+                                            $.post(ROOT + 'Banco/GetCuentasBancariasAutocomplete',  // ?term=' + val
                                                 { term: this.value },
                                                 function (data) {
                                                     if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
@@ -473,48 +404,21 @@
                                                             $("#Descripcion").val("");
                                                             return;
                                                         }
-
-
                                                         //alert('hay ' + data.length);
-
                                                         // alert(ui.codigo);
-
-                                                        $("#IdCuenta").val(ui.id);
-                                                        $("#Codigo").val(ui.codigo); // por qué acá traes la propiedad codigo en lugar de value? -porque sugiero un texto pero al seleccionar solo tomo un pedazo
-                                                        $("#CuentaGasto").val(ui.title);
-
-                                                        //                                                    $("#IdArticulo").val(ui.id);
-                                                        //                                                    $("#Codigo").val(ui.codigo);
-                                                        //                                                    $("#IdUnidad").val(ui.IdUnidad);
-                                                        //                                                    //$("#Unidad").val(ui.item.Unidad);
-                                                        //                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
-
-                                                        //                                                    UltimoIdArticulo = ui.id;
-                                                        //                                                    UltimoIdUnidad = ui.IdUnidad;
-
-
+                                                        $("#IdCuentaBancaria").val(ui.id);
                                                     }
                                                     else {
-
-                                                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        alert("No existe la cuenta bancaria"); // se está bancando que no sea identica la descripcion
                                                     }
                                                 }
                                             );
-
-
-
                                         }
                                     }]
                                 },
                                 editrules: { required: false }
-                            }
-
-                            , {
-                                name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true,
-                                label: 'TB'
-                            }
-
-
+                            },
+                            { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
@@ -535,45 +439,26 @@
                 altRows: false,
                 footerrow: true,
                 userDataOnFooter: true,
-                caption: '<b>CUENTAS BANCARIAS ASIGNADAS</b>'
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
+                caption: '<b>CUENTAS BANCARIAS ASIGNADAS</b>',
                 // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
-                ,
                 cellEdit: true,
-                cellsubmit: 'clientArray'
-                , editurl: ROOT + 'Empleado/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
-                // poner "editable" en true, de cada columna
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////////////////////////////
-
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
             });
             jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
             jQuery("#ListaCuentasBancarias").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
             $('#ListaUbicaciones').jqGrid({
-
                 url: ROOT + 'Empleado/DetEmpleadosUbicaciones/',
                 postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['Acciones', 'IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Cuenta bancaria'],
+                colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Cuenta bancaria'],
                 colModel: [
-                            { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
                             { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'CuentaBancaria', index: 'CuentaBancaria', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                            { name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
@@ -600,38 +485,10 @@
             jQuery("#ListaUbicaciones").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         });
 
-
-
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////grabar///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         $('#grabar2').click(function () {
-
-
             //jQuery('#ListaCuentasBancarias').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
             var cabecera = SerializaForm();
-
 
             $('html, body').css('cursor', 'wait');
             $.ajax({
@@ -641,46 +498,28 @@
                 dataType: 'json',
                 data: JSON.stringify(cabecera), // $.toJSON(cabecera),
                 success: function (result) {
-                    //                    if (result) {
-                    //                        $('#Lista').trigger('reloadGrid');
-                    //                        window.location.replace(ROOT + "Pedido/index");
-                    //                    } else {
-                    //                        alert('No se pudo grabar el comprobante.');
-                    //                    }
-
                     if (result) {
                         $('html, body').css('cursor', 'auto');
-
-
                         if (true) {
                             // window.location = (ROOT + "ComprobanteProveedor/EditFF/" + result.IdComprobanteProveedor);
                             window.location = (ROOT + "Empleado/Edit/-1");
-
                         } else {
-
                             var dt = new Date();
                             var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
 
                             $("#textoMensajeAlerta").html("Grabado " + currentTime);
                             $("#mensajeAlerta").show();
-                            // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
-                            //si graban de nuevo, va a dar un alta!!!!
-
-
                             $('html, body').css('cursor', 'auto');
                             $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
                         }
 
                     } else {
-
-
                         alert('No se pudo grabar el comprobante.');
                         $('.loading').html('');
 
                         $('html, body').css('cursor', 'auto');
                         $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
                     }
-
                 },
 
                 beforeSend: function () {
@@ -714,60 +553,27 @@
                         $("#mensajeAlerta").show();
                         pageLayout.show('east');
 
-
-
                         alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
-
-
-
                     } catch (e) {
                         // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
                         // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
 
                         $('html, body').css('cursor', 'auto');
                         $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
-
-
                         //alert(xhr.responseText);
-
-
                         $("#textoMensajeAlerta").html(xhr.responseText);
                         $("#mensajeAlerta").show();
                     }
-
-
                 }
-
-
-
-
-
 
             });
         });
 
-
-
-
-
-
         function SerializaForm() {
-
-
             var cm, data1, data2, valor;
-
-
-            //////////////////////////////////////////////////////////////////////////////////////////////
-            var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
-
-
-
-
-
-
+            var cabecera = $("#formid").serializeObject(); 
             cabecera.DetalleCuentasBancarias = [];
             var colModel = jQuery("#ListaCuentasBancarias").jqGrid('getGridParam', 'colModel');
-
 
             var dataIds = $('#ListaCuentasBancarias').jqGrid('getDataIDs');
             for (var i = 0; i < dataIds.length; i++) {
@@ -776,38 +582,21 @@
                         $('#ListaCuentasBancarias').jqGrid('saveRow', dataIds[i], false, 'clientArray');
                     } catch (e) {
                         $('#ListaCuentasBancarias').jqGrid('restoreRow', dataIds[i]);
-                        //                alert("SerializaForm(): problema al hacer saverow de un renglon inline en modo edicion.  " + e);
-                        //                return;
                         continue;
                     }
 
-
                     var data = $('#ListaCuentasBancarias').jqGrid('getRowData', dataIds[i]);
-
-
                     var iddeta = data['IdDetalleEmpleadoCuentaBancaria'];
-                    //alert(iddeta);
                     if (!iddeta) continue;
-
-
 
                     data1 = '{"IdEmpleado":"' + $("#IdEmpleado").val() + '",'
                     for (var j = 0; j < colModel.length; j++) {
                         cm = colModel[j]
-
-
-
                         if (cm.label === 'TB') {
                             valor = data[cm.name];
-
                             data1 = data1 + '"' + cm.name + '":"' + valor + '",';
                         }
                     }
-
-
-
-
-
                     data1 = data1.substring(0, data1.length - 1) + '}';
                     data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                     data2 = JSON.parse(data1);
@@ -819,12 +608,8 @@
                     return;
                 }
             }
-
-
             return cabecera;
-
         }
-
 
 
     </script>

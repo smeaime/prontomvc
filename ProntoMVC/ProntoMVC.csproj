@@ -261,6 +261,7 @@
     <Compile Include="Controllers\ArticuloController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\BancoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\BDLmasterController.cs" />
     <Compile Include="Controllers\ConceptoController.cs" />
