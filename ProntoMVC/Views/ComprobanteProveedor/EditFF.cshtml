@@ -1028,7 +1028,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             ////////////////////////////////////////////////////////////////////////
             // http://stackoverflow.com/questions/4599169/using-razor-within-javascript
             //llamar a JsonearModelo
-            var modelito = '@Html.Raw(Json.Encode(Model))';
+            // var modelito = 'arrobaHtml.Raw(Json.Encode(Model))';
             // tira error: razor raw. model reference circular serialize 'System.Data.Entity.DynamicProxies.
             // -me tiraba error cuando cuando usaba el objeto EF con sus colecciones navegables loadlazy
             // con el viewmodel no tengo ese problema. de todas maneras, se resolvería enn el JsonearModelo con ppEFContext.Configuration.ProxyCreationEnabled = false;
