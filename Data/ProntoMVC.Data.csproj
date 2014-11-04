@@ -168,6 +168,9 @@
     <Compile Include="Models\Cuenta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CuentasBancaria.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CuentasCorrientesAcreedor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
