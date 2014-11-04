@@ -238,6 +238,9 @@ namespace ProntoMVC.Models
                 sqlConnection.Open();
                 TreeCollection = FillTreeEntity(sqlCommand);
             }
+
+            if (TreeCollection.Count == 0) ArbolRegenerar(nombrebase);
+ 
             return TreeCollection;
         }
 

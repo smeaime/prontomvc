@@ -406,13 +406,15 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             try
             {
-
-                //si no hay con qué llenar .Empleados, llora la vista
-                using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase)))
+                if (nombrebase.NullSafeToString() != "")
                 {
-                    // no mostrar los que ya estan en la bdlmaster
-                    ViewBag.Empleados = new SelectList(tempdb.Empleados.ToList(), "IdEmpleado", "UsuarioNT");
-                };
+                    //si no hay con qué llenar .Empleados, llora la vista
+                    using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase)))
+                    {
+                        // no mostrar los que ya estan en la bdlmaster
+                        ViewBag.Empleados = new SelectList(tempdb.Empleados.ToList(), "IdEmpleado", "UsuarioNT");
+                    };
+                }
             }
             catch (Exception ex)
             {
