@@ -267,16 +267,9 @@
             <table id="arbolpermisos2"></table>
         </div>
         @Html.HiddenFor(model => model.Activo)
-        @try
-        {
-            @Html.HiddenFor(model => model.Clientes)
+            @Html.HiddenFor(model => model.Clientes) @*si explota por acá es que le debe faltar a la base algun campo nuevo de la tabla Clientes*@
             @Html.HiddenFor(model => model.Clientes1)
-        }
-        catch (Exception)
-        {
-
-            //throw;
-        }
+   
 
         @Html.HiddenFor(model => model.CuentaBancaria)
         @Html.HiddenFor(model => model.Dominio)

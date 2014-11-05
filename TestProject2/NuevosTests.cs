@@ -19,6 +19,9 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+using System.Transactions;
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -33,6 +36,168 @@ namespace ProntoMVC.Tests
     public class FondoFijoControllerTest
     {
 
+
+        [TestMethod()]
+        public void El_Superadmin_Desactiva_RMs_y_PEDs()
+        {
+            using (TransactionScope _scope = new TransactionScope())
+            {
+
+                // ir a  buscar el APP compartido
+
+
+
+
+
+
+
+
+                var c = new AccesoController();
+               BDLMasterEntities dbmaster=new BDLMasterEntities(scbdlmaster);
+                DemoProntoEntities db = new DemoProntoEntities(sc);
+                // Generales.sCadenaConexSQL("Autotrol", new Guid("5211110C-AF10-4D39-80CC-2542F69D3179"))
+
+                string glbArchivoAyuda = db.Parametros.Find(1).ArchivoAyuda;
+                string glbPathPlantillas = "";
+                string s = db.Parametros.Find(1).PathPlantillas;
+                if (s.Length == 0)
+                {
+                    //glbPathPlantillas= App.Path & "\Plantillas"
+                }
+
+                else
+                {
+                    glbPathPlantillas = s;
+                }
+
+                string glbEmpresaSegunString = "DemoProntoWeb";// "Vialagro";
+                string usuario = "Mariano";
+                int IdUsuario = db.Empleados.Where(x=>x.Nombre==usuario).First().IdEmpleado;
+                Guid userGuid = dbmaster.aspnet_Users.Where(x => x.UserName == usuario).First().UserId;
+                    
+
+
+
+                string glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + glbEmpresaSegunString + ".app";
+
+                //if  Dir(glbPathPlantillas & "\..\app\*.app", vbArchive) <> "" Then
+                //   GuardarArchivoSecuencial glbPathPlantillas & "\..\app\" & glbEmpresaSegunString & ".app", mString
+                //Else
+                //   GuardarArchivoSecuencial App.Path & "\" & glbEmpresaSegunString & ".app", mString
+                //End If
+
+                glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
+
+                string contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
+                //                    If Len(mString) > 0 Then
+                //   mString = mId(mString, 1, Len(mString) - 2)
+                //End If
+                //mString = MydsEncrypt.Encrypt(mString)
+                string salida = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(contents);
+
+
+                var a = salida.Split('|');
+
+                // sacado de frmAccesos.DefinirOrigen()
+
+
+                //class sss {
+                //    idempleado
+                //}
+
+                List<EmpleadosAcceso> mVectorAccesos = new List<EmpleadosAcceso>();
+
+                var Arbol = c.TreeConNiveles(IdUsuario, glbEmpresaSegunString, usuario, db,userGuid);
+
+
+                foreach (Tablas.Tree i in Arbol)
+                {
+                    bool Esta = false;
+
+
+                    //mVectorAccesos.Find(x=>x.Nodo)
+
+                    // For j = 0 To UBound(mVectorAccesos)
+                    //   If mVectorAccesos(j) = oArbol.Nodes(i).Key Then
+                    //      Esta = True
+                    //      Exit For
+                    //   End If
+                    //Next
+
+
+
+                    //With oRsAcc
+                    //   .AddNew
+                    //   .Fields("IdEmpleado").Value = 0
+                    //   .Fields("Nodo").Value = oArbol.Nodes(i).Key
+                    //   .Fields("Nivel").Value = 1
+                    //   If Esta Then
+                    //      Arbol.Nodes(i).Image = "Abierto_1"
+                    //      .Fields("Acceso").Value = 1
+                    //   Else
+                    //      Arbol.Nodes(i).Image = "Cerrado"
+                    //      .Fields("Acceso").Value = 0
+                    //   End If
+                    //   .Update
+                    //End With
+                }
+
+                //For i = 1 To ArbolMenu.Nodes.Count
+                //   Esta = False
+                //   For j = 0 To UBound(mVectorAccesos)
+                //      If mVectorAccesos(j) = ArbolMenu.Nodes(i).Key Then
+                //         Esta = True
+                //         Exit For
+                //      End If
+                //   Next
+                //   With oRsAcc
+                //      .AddNew
+                //      .Fields("IdEmpleado").Value = 0
+                //      .Fields("Nodo").Value = ArbolMenu.Nodes(i).Key
+                //      .Fields("Nivel").Value = 1
+                //      If Esta Then
+                //         ArbolMenu.Nodes(i).Image = "Abierto_1"
+                //         .Fields("Acceso").Value = 1
+                //      Else
+                //         ArbolMenu.Nodes(i).Image = "Cerrado"
+                //         .Fields("Acceso").Value = 0
+                //      End If
+                //      .Update
+                //   End With
+                //Next
+
+
+
+
+                Empleado o = new Empleado();
+
+                c.UpdateColecciones(ref o, db);
+
+                //ComprobanteProveedor d = fondoFijoService.ObtenerPorId(10);
+
+                //Assert.AreNotEqual(numerooriginal, d.NumeroComprobante2);
+
+
+
+                // _scope.Complete();
+            }
+
+        }
+
+
+
+
+
+        [TestMethod()]
+        public void Un_Admin_Comun_intenta_cambiar_su_nivel_de_RMs_pero_no_tiene_acceso_al_modulo()
+        {
+            using (TransactionScope _scope = new TransactionScope())
+            {
+
+                // _scope.Complete();
+            }
+
+        }
 
 
 

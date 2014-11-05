@@ -4,6 +4,9 @@
     <EntitySetMapping Name="Bases">
       <EntityTypeMapping TypeName="BDLMasterModel.Bases">
         <MappingFragment StoreEntitySet="Bases">
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="Usr" ColumnName="Usr" />
+          <ScalarProperty Name="ServidorSQL" ColumnName="ServidorSQL" />
           <ScalarProperty Name="IdBD" ColumnName="IdBD" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="StringConection" ColumnName="StringConection" />
