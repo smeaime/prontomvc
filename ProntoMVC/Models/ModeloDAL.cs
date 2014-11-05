@@ -221,13 +221,13 @@ namespace ProntoMVC.Models
 
         }
 
-        public static List<Tablas.Tree> Arbol(string nombrebase)
+        public static List<Tablas.Tree> Arbol(string nombrebase, Guid userGuid = new Guid())
         {
             const string spName = "Tree_TX_Arbol";
             List<Tablas.Tree> TreeCollection;
 
             //string connectionString = ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString;
-            string connectionString = Generales.sCadenaConexSQL(nombrebase);
+            string connectionString = Generales.sCadenaConexSQL(nombrebase, userGuid);
 
             if (string.IsNullOrEmpty(connectionString))
                 return null;

@@ -384,18 +384,19 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////
 
             //hay que volar los nodos de fondo fijo
-
-            if ((glbUsuario.IdCuentaFondoFijo ?? 0) > 0)
+            if (glbUsuario != null) // puede ser que el usuarioweb no esté definido en esta base como empleado
             {
-                string nombrecuentaff = db.Cuentas.Find(glbUsuario.IdCuentaFondoFijo ?? 0).Descripcion;
-                nombrecuentaff = nombrecuentaff.Substring(0, (nombrecuentaff.Length > 30) ? 30 : nombrecuentaff.Length);
-                var l = TreeDest.Where(n => n.ParentId == "01-11-16-07" && n.Descripcion != nombrecuentaff).ToList();
-                foreach (Tablas.Tree n in l)
+                if ((glbUsuario.IdCuentaFondoFijo ?? 0) > 0)
                 {
-                    eliminarNodoySusHijos(n, ref TreeDest);
+                    string nombrecuentaff = db.Cuentas.Find(glbUsuario.IdCuentaFondoFijo ?? 0).Descripcion;
+                    nombrecuentaff = nombrecuentaff.Substring(0, (nombrecuentaff.Length > 30) ? 30 : nombrecuentaff.Length);
+                    var l = TreeDest.Where(n => n.ParentId == "01-11-16-07" && n.Descripcion != nombrecuentaff).ToList();
+                    foreach (Tablas.Tree n in l)
+                    {
+                        eliminarNodoySusHijos(n, ref TreeDest);
+                    }
                 }
             }
-
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
@@ -758,6 +759,10 @@ namespace ProntoMVC.Controllers
             //    }
             //}
 
+            
+            // aca tengo que filtrar los nodos desactivados por el superadmin (-y si es un 
+            // superadmin el que llama? -en ese caso quizas convenga usar otra vista)
+
 
 
 
@@ -779,7 +784,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            q = TreeConNiveles(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario);
+            q = TreeConNiveles(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario,db);
 
             //var l = q.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR" || n.Descripcion.StartsWith("por ")).ToList();
 
@@ -1115,7 +1120,7 @@ namespace ProntoMVC.Controllers
             try
             {
                 empleado = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).FirstOrDefault();
-                IdUsuario = empleado.IdEmpleado;
+                if (empleado!=null) IdUsuario = empleado.IdEmpleado;
             }
             catch (Exception e)
             {

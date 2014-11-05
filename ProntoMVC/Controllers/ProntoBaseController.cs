@@ -1157,14 +1157,14 @@ namespace ProntoMVC.Controllers
 
 
 
-        public List<Tablas.Tree> TreeConNiveles(int IdUsuario, string sBase, string usuario)
+        public List<Tablas.Tree> TreeConNiveles(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
         {
 
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase);
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, userGuid);
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
 
             //string usuario = ViewBag.NombreUsuario;
-            //int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            //int IdUsuario = dbcontext.Empleados.Where(x => x.Nombre == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
 
 
 
@@ -1174,7 +1174,7 @@ namespace ProntoMVC.Controllers
             bool esAdmin = Roles.GetRolesForUser(usuario).Contains("Administrador");
 
 
-            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+            var permisos = (from i in dbcontext.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
 
             var z = from n in Tree
                     join p in permisos on n.Clave equals p.Nodo
