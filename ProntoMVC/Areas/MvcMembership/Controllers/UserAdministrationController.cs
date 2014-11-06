@@ -1733,7 +1733,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             Parametros parametros = db.Parametros.Find(1);
             m.ProximoComprobanteProveedorReferencia = parametros.ProximoComprobanteProveedorReferencia ?? 1;
-
+            m.ArchivoAyuda = parametros.ArchivoAyuda;
+            m.PathPlantillas = parametros.PathPlantillas;
 
 
 
@@ -1762,6 +1763,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 config.AppSettings.Settings.Remove("CartelAviso");
                 config.AppSettings.Settings.Add("CartelAviso", configuracionViewModel.CartelAviso);
 
+
+
                 config.Save();
 
                 //perdes los valores de sesion!!!!
@@ -1769,6 +1772,10 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             Parametros parametros = db.Parametros.Find(1);
             parametros.ProximoComprobanteProveedorReferencia = configuracionViewModel.ProximoComprobanteProveedorReferencia;
+            parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
+            parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
+            parametros.PathPlantillas = configuracionViewModel.PathPlantillas;
+            
             db.SaveChanges();
 
 
