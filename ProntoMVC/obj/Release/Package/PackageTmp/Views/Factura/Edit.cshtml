@@ -1,7 +1,10 @@
-﻿@model ProntoMVC.Models.Factura
+﻿@model ProntoMVC.Data.Models.Factura
 @{
     ViewBag.Title = "Factura";
 }
+
+@using mercadopago;
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
 
@@ -848,6 +851,33 @@ If you want additionally remove vertical border between the cells in the grid yo
                         }
                         @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
                         @*<input type="button" id="anular" class="boton" value="Anular RM" />*@
+      
+      
+      @{
+                        
+      
+                        MP mp = new MP("7300779784794197", "yKhGAzhyjGOck9Lox4UEK9fSs3fVpUMR");
+
+                        String accessToken = mp.getAccessToken();
+
+                        Response.Write(accessToken);
+
+
+
+
+                       
+                        System.Collections.Hashtable preference = mp.createPreference("{'items':[{'title':'sdk-dotnet','quantity':1,'currency_id':'ARS','unit_price':10.5}]}");
+
+                        var sss = preference["response"]["sandbox_init_point"];
+                        
+                        Response.Write(preference["response"]["sandbox_init_point"]);
+        }
+
+
+            	<a href=" " name="MP-Checkout" class="orange-ar-m-sq-arall">Pay</a>
+		<script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
+ 
+      
                     </div>
                 </div>
             </div>

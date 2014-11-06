@@ -5,34 +5,49 @@
 }
 <div class="container-fluid">
     <link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
-    <ul class="breadcrumb">
+@*    <script type="text/javascript" src="jquery.editable-select.pack.js"></script>*@
+    @*    <ul class="breadcrumb">
         <li><a href="#">Inicio</a> <span class="divider">/</span></li>
         <li><a href="/Pronto2/MvcMembership/UserAdministration">Usuarios</a> <span class="divider">
             /</span></li>
         <li class="active">Nuevo usuario</li>
-    </ul>
+    </ul>*@
+    <br />
+    <div class="span8" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500;
+        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+        Nuevo Usuario Interno</div>
+    <br />
     @*<legend>Nuevo Usuario</legend>*@
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid", @autocomplete = "off" }))
     { 
+        
+
+
+
+        
         <div class="row-fluid">
+            @*http://stackoverflow.com/questions/15738259/disabling-chrome-autofill?lq=1*@
+            <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+            <input style="display: none" type="text" name="fakeusernameremembered" />
+            <input style="display: none" type="password" name="fakepasswordremembered" />
             <div class="span4">
                 @* http://stackoverflow.com/questions/9212621/modelstate-errors-not-showing-in-view?rq=1*@
                 @* @Html.ValidationSummary(true)   *@ @Html.ValidationSummary(false)
                 @*
                     <fieldset>
                         @Html.EditorForModel()
-                    </fieldset> *@ Usuario<br />
+                    </fieldset> *@
+                @Html.LabelFor(model => model.Username, "Usuario")
                 @Html.TextBoxFor(m => m.Username, new { @autocomplete = "off" })<br />
-                Password<br />
+                @Html.LabelFor(model => model.Password, "Contraseña")
                 @Html.PasswordFor(m => m.Password, new { @autocomplete = "off" })<br />
-                Confirmar
-                <br />
+                @Html.LabelFor(model => model.ConfirmPassword, "Confirmar contraseña")
                 @Html.PasswordFor(m => m.ConfirmPassword)<br />
-                Mail<br />
+                @Html.LabelFor(model => model.Email, "Correo eléctronico")
                 @Html.TextBoxFor(m => m.Email)<br />
-                Pregunta secreta<br />
+                @Html.LabelFor(model => model.PasswordQuestion, "Pregunta secreta")
                 @Html.TextBoxFor(m => m.PasswordQuestion)<br />
-                Respuesta secreta<br />
+                @Html.LabelFor(model => model.PasswordAnswer, "Respuesta secreta")
                 @Html.TextBoxFor(m => m.PasswordAnswer)<br />
             </div>
             <div class="span3">
@@ -42,7 +57,7 @@
                             
                             
                         <fieldset>
-                            Roles
+                            @Html.Label("Roles")
                             @for (var i = 0; i < Model.InitialRoles.Count; i++)
                             {
                                 var role = Model.InitialRoles.ElementAt(i);
@@ -52,7 +67,7 @@
                                      
                                 <div>
                                     <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
-                                    <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
+                                    @Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key
                                 </div>
                                 }
                             }
@@ -65,8 +80,7 @@
             </div>
             <div class="span3">
                 <br />
-                Base default
-                <br />
+                @Html.Label("Base default")
                 @Html.DropDownList("EmpresaDefault", null, new { @class = "span12" })
                 @{
                     string[] listItems = { "1", "2" };
@@ -77,9 +91,25 @@
                 <br />
                 @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                 {
+                     
+                    <div class="row-fluid">
+                        @Html.Label("Empleados en esa base sin usuario web")
+
+                        @try
+                        {
+                            Html.DropDownList("Empleados", null, new { @class = "span12" });
+                        }
+                        catch (Exception)
+                        {
+                            //throw;
+                        }
+                        
+
+
+                    </div>
                     <div class="row-fluid">
                         <div class="span12">
-                            Crear base @*@Html.TextBoxFor(x => x.EmpresaNueva)*@
+                            @Html.Label("Crear nueva base a partir de Default") @*@Html.TextBoxFor(x => x.EmpresaNueva)*@
                         </div>
                     </div>
                     <div class="row-fluid">
@@ -88,6 +118,8 @@
                             @* <input type="button" value="Crearle base" class="btn" />*@
                         </div>
                     </div>
+                  
+                    <br />
                 }
                 <br />
                 <br />
@@ -100,7 +132,35 @@
                         $(this).attr("href", path);
                     });
 
+                    $('#EmpresaDefault').change(function () {
+                        refrescarEmpleados();
+                    });
 
+                    $('#Empleados').change(function () {
+                        $('#Username').val($("#Empleados option:selected").text());
+                    });
+
+                    function refrescarEmpleados() {
+
+                        //    $('#Empleados').editableSelect({...});
+
+                        // usar un control como el ComboBox del AjaxToolkit (que es como el combo de VB6)?
+                        // - Ajax toolkit doesn't work with MVC because it was built for WebForms. So You have to use alternates for that purpose like "JQUERY".
+                        $('#Empleados').empty()
+                        $.getJSON('@Url.Action("EmpleadosPorBase")' + "?sBase=" + $('#EmpresaDefault').val(),
+                             function (result) {
+                                 var options = $("#Empleados");
+                                 $.each(result, function () {
+                                     options.append($("<option />").val(this.IdEmpleado).text(this.Nombre));
+                                 });
+                             });
+                    }
+
+
+                    $(function () {
+                        refrescarEmpleados();
+                        pageLayout.hide('east');
+                    })
                     //                        $(document).ready(function () {
 
                     //                            if ($.browser.webkit) {
@@ -123,12 +183,14 @@
                 </script>
             </div>
         </div>
+        <br />
+        <br />
         <div class="row-fluid">
-            <br />
-            <br />
-            <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
+            <button style="margin-left: 50px" type="submit" value="Aceptar" class="btn btn-primary btn-large">
                 Aceptar
             </button>
+            <a style="margin-left:60px"  href="@Url.Content("~")MvcMembership/UserAdministration">
+                Volver</a>
         </div>
     }
 </div>

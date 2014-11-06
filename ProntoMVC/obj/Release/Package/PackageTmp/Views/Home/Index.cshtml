@@ -5,6 +5,15 @@
             @Url.Content("~/Content/images/logosolo.gif");*@
 <div>
     <div class="container-fluid">
+
+<div class="span8" style='font-size: 34px; margin-top: 5px; height: 65px; font-weight: 500;
+                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+
+                    <br /><br /><br />
+                    @*Bienvenido*@
+                    
+                    </div>
+                    
         @*-webkit-gradient(linear, left top, left bottom, from(rgb(243, 243, 243)) , color-stop(100%, #e8e8e8)) !important;"*@
         <div class="row-fluid">
             <div class="span12 lightblue">
@@ -31,6 +40,34 @@
         <div id="">
             @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
             {
+                
+                
+                <br />
+                    <p>
+                        Ultimos Tests</p>
+                    <br />
+                    <a href="@Url.Content("~")Test/FondoFijo">Fondo Fijo</a>
+                    <br />
+                    <a href="@Url.Content("~")Test/ImportarFondosFijos">Importar Fondos Fijos</a>
+                    <br />
+                    <a href="Test/CircuitoVentas">Circuito de ventas</a>
+                    <br />
+                    <a href="Test/RequerimientoParcial">Circuito de compras</a>
+                    <br />
+                    <a href="Test/RequerimientoParcialConFirmas_Asserts">RequerimientoParcialConFirmas_Asserts</a>
+                    <br />
+                    <br />
+                
+                
+                <a class="btn " href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                    acreedores </a>
+                <a class="btn " href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
+                    deudores</a>
+                <a class="btn " href="@Url.Content("~/Reporte.aspx?ReportName=Balance de sumas y saldos")">
+                    Balance de sumas y saldos</a>
+                <a class="btn " href="@Url.Content("~/Reporte.aspx?ReportName=Mayor de cuentas detallado")">
+                    Mayor de cuentas detallado</a>
+                
                 <div>
                     Ultimas modificaciones
                 </div>
@@ -58,10 +95,10 @@
                             </a></li>
                         </div>
                         <div class="btn-group span4">
-                            <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Articulo")">
+                            <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Empleado")">
                                 <h3>
-                                    ...</h3>
-                            </a><a class="btn"  href=" @Url.Action("Edit", "Articulo", new { id = -1 })">
+                                    Empleados</h3>
+                            </a><a class="btn"  href=" @Url.Action("Edit", "Empleado", new { id = -1 })">
                                 <h3>
                                     +</h3>
                             </a></li>
@@ -69,6 +106,7 @@
                     </ul>
                 </div>
                 
+
                 <p>
                     Superadministrador</p>
                 
@@ -81,26 +119,16 @@
                 <div class="row-fluid">
                     <ul class="thumbnails">
                         <div class="btn-group span4">
-                            <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Articulo")">
+                            <li class="span4 tile tile-teal"><a  class="btn" href="@Url.Content("~")elmah.axd" target="_blank">
                                 <h3>
-                                    ...</h3>
-                            </a><a class="btn"  href=" @Url.Action("Edit", "Articulo", new { id = -1 })">
-                                <h3>
-                                    +</h3>
-                            </a></li>
+                                    Ver Log</h3>
+                            </a><a class="btn"  href=" @Url.Action("Edit", "Articulo", new { id = -1 })"></a>
+                            </li>
                         </div>
-                        <div class="btn-group span4">
-                            <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Autorizacion")">
-                                <h3>
-                                    ...
-                                    <h3>
-                                    </h3>
-                            </a></li>
-                        </div>
-                        <div class="btn-group span4">
-                            <a class="btn span1"  href=" @Url.Action("TestError", "Test")">Forzar Log </a><a class="btn span1"  href=" @Url.Action("TestError", "Test")">
-                                Forzar Error </a><a class="btn span1" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
-                                    Forzar Error jscript </a><a class="btn span1" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                        <div class="btn-group span8">
+                            <a class="btn span2"  href=" @Url.Action("TestError", "Test")">Forzar Log </a><a class="btn span2"  href=" @Url.Action("TestError", "Test")">
+                                Forzar Error </a><a class="btn span2" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                                    Forzar Error jscript </a><a class="btn span2" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
                                         @* http://stackoverflow.com/questions/4912092/using-html5-canvas-javascript-to-take-screenshots/6678156#6678156*@
                                         Capturar pantalla </a>
                         </div>
@@ -208,7 +236,7 @@
                             </a></li>
                         </div>
                         <div class="btn-group span4">
-                            <li class="span4 "><a class="btn" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                            <li class="span4 tile tile-teal"><a class="btn" href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
                                 Ctas Corr. Acreedor </a></li>
                         </div>
                     </ul>
@@ -298,7 +326,7 @@
                         </a></li>
                     </ul>
                 </div>
-             @*    }
+@*    }
           
           
             @if (System.Diagnostics.Debugger.IsAttached)
@@ -308,7 +336,6 @@
                 
          
                 <div class="row-fluid">
-
                     <ul class="thumbnails">
                         <li class="span2"><a href="@Url.Action("Index", "Requerimiento")  " class="thumbnail">
                             <img data-src="holder.js/160x120" alt="160x120" style="width: 160px; height: 120px;"
@@ -376,18 +403,7 @@
                     <a href="  http://192.168.66.6/Reports/Pages/Report.aspx?ItemPath=%2fSaldos+Proveedores">
                         sss</a>
                     <br />
-                    <br />
-                    <p>
-                        Ultimos Tests</p>
-                    <br />
-                    <a href="@Url.Content("~")Test/ImportarFondosFijos">Importar Fondos Fijos</a>
-                    <br />
-                    <a href="Test/CircuitoVentas">Circuito de ventas</a>
-                    <br />
-                    <a href="Test/RequerimientoParcial">Circuito de compras</a>
-                    <br />
-                    <a href="Test/RequerimientoParcialConFirmas_Asserts">RequerimientoParcialConFirmas_Asserts</a>
-                    <br />
+                    
                     <b>Circuito Roles Externos</b>
                     <br />
                     <a href="Presupuesto/Edit/1">A1-"esucoadmin" revisa Presupuesto 1</a>
@@ -599,7 +615,7 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $(window).resize(function () {
-        RefrescaAnchoGrillaDetalle();
+        // RefrescaAnchoGrillaDetalle();
     });
 
     $(function () {
@@ -700,7 +716,7 @@
 
         pageLayout.hide('east');
         pageLayout.hide('south');
- 
+
 
     })
 

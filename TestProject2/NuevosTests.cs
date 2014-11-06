@@ -37,150 +37,108 @@ namespace ProntoMVC.Tests
     {
 
 
+
         [TestMethod()]
         public void El_Superadmin_Desactiva_RMs_y_PEDs()
         {
-            using (TransactionScope _scope = new TransactionScope())
+            //   using (TransactionScope _scope = new TransactionScope())
+            //   {
+
+            // ir a  buscar el APP compartido
+
+
+
+
+
+            //            System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+
+
+            BDLMasterEntities dbmaster = new BDLMasterEntities(scbdlmaster);
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+            // Generales.sCadenaConexSQL("Autotrol", new Guid("5211110C-AF10-4D39-80CC-2542F69D3179"))
+            string glbEmpresaSegunString = "DemoProntoWeb";// "Vialagro";
+            string usuario = "Mariano";
+            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario).First().IdEmpleado;
+
+
+            Guid userGuid = dbmaster.aspnet_Users.Where(x => x.UserName == usuario).First().UserId; // me tira la bronca  por el transactionscope? "The partner transaction manager has disabled its support for remote/network transactions. 
+
+            var c = new AccesoController();
+            var Arbol = c.LeerArchivoAPP(IdUsuario, glbEmpresaSegunString, usuario, db, userGuid);
+
+
+
+            foreach (string s in Arbol)
             {
-
-                // ir a  buscar el APP compartido
-
+                bool Esta = false;
 
 
+                //mVectorAccesos.Find(x=>x.Nodo)
 
-
-
-
-
-                var c = new AccesoController();
-               BDLMasterEntities dbmaster=new BDLMasterEntities(scbdlmaster);
-                DemoProntoEntities db = new DemoProntoEntities(sc);
-                // Generales.sCadenaConexSQL("Autotrol", new Guid("5211110C-AF10-4D39-80CC-2542F69D3179"))
-
-                string glbArchivoAyuda = db.Parametros.Find(1).ArchivoAyuda;
-                string glbPathPlantillas = "";
-                string s = db.Parametros.Find(1).PathPlantillas;
-                if (s.Length == 0)
-                {
-                    //glbPathPlantillas= App.Path & "\Plantillas"
-                }
-
-                else
-                {
-                    glbPathPlantillas = s;
-                }
-
-                string glbEmpresaSegunString = "DemoProntoWeb";// "Vialagro";
-                string usuario = "Mariano";
-                int IdUsuario = db.Empleados.Where(x=>x.Nombre==usuario).First().IdEmpleado;
-                Guid userGuid = dbmaster.aspnet_Users.Where(x => x.UserName == usuario).First().UserId;
-                    
-
-
-
-                string glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + glbEmpresaSegunString + ".app";
-
-                //if  Dir(glbPathPlantillas & "\..\app\*.app", vbArchive) <> "" Then
-                //   GuardarArchivoSecuencial glbPathPlantillas & "\..\app\" & glbEmpresaSegunString & ".app", mString
-                //Else
-                //   GuardarArchivoSecuencial App.Path & "\" & glbEmpresaSegunString & ".app", mString
-                //End If
-
-                glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
-
-                string contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
-                //                    If Len(mString) > 0 Then
-                //   mString = mId(mString, 1, Len(mString) - 2)
-                //End If
-                //mString = MydsEncrypt.Encrypt(mString)
-                string salida = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(contents);
-
-
-                var a = salida.Split('|');
-
-                // sacado de frmAccesos.DefinirOrigen()
-
-
-                //class sss {
-                //    idempleado
-                //}
-
-                List<EmpleadosAcceso> mVectorAccesos = new List<EmpleadosAcceso>();
-
-                var Arbol = c.TreeConNiveles(IdUsuario, glbEmpresaSegunString, usuario, db,userGuid);
-
-
-                foreach (Tablas.Tree i in Arbol)
-                {
-                    bool Esta = false;
-
-
-                    //mVectorAccesos.Find(x=>x.Nodo)
-
-                    // For j = 0 To UBound(mVectorAccesos)
-                    //   If mVectorAccesos(j) = oArbol.Nodes(i).Key Then
-                    //      Esta = True
-                    //      Exit For
-                    //   End If
-                    //Next
-
-
-
-                    //With oRsAcc
-                    //   .AddNew
-                    //   .Fields("IdEmpleado").Value = 0
-                    //   .Fields("Nodo").Value = oArbol.Nodes(i).Key
-                    //   .Fields("Nivel").Value = 1
-                    //   If Esta Then
-                    //      Arbol.Nodes(i).Image = "Abierto_1"
-                    //      .Fields("Acceso").Value = 1
-                    //   Else
-                    //      Arbol.Nodes(i).Image = "Cerrado"
-                    //      .Fields("Acceso").Value = 0
-                    //   End If
-                    //   .Update
-                    //End With
-                }
-
-                //For i = 1 To ArbolMenu.Nodes.Count
-                //   Esta = False
-                //   For j = 0 To UBound(mVectorAccesos)
-                //      If mVectorAccesos(j) = ArbolMenu.Nodes(i).Key Then
-                //         Esta = True
-                //         Exit For
-                //      End If
-                //   Next
-                //   With oRsAcc
-                //      .AddNew
-                //      .Fields("IdEmpleado").Value = 0
-                //      .Fields("Nodo").Value = ArbolMenu.Nodes(i).Key
-                //      .Fields("Nivel").Value = 1
-                //      If Esta Then
-                //         ArbolMenu.Nodes(i).Image = "Abierto_1"
-                //         .Fields("Acceso").Value = 1
-                //      Else
-                //         ArbolMenu.Nodes(i).Image = "Cerrado"
-                //         .Fields("Acceso").Value = 0
-                //      End If
-                //      .Update
-                //   End With
+                // For j = 0 To UBound(mVectorAccesos)
+                //   If mVectorAccesos(j) = oArbol.Nodes(i).Key Then
+                //      Esta = True
+                //      Exit For
+                //   End If
                 //Next
 
 
 
-
-                Empleado o = new Empleado();
-
-                c.UpdateColecciones(ref o, db);
-
-                //ComprobanteProveedor d = fondoFijoService.ObtenerPorId(10);
-
-                //Assert.AreNotEqual(numerooriginal, d.NumeroComprobante2);
-
-
-
-                // _scope.Complete();
+                //With oRsAcc
+                //   .AddNew
+                //   .Fields("IdEmpleado").Value = 0
+                //   .Fields("Nodo").Value = oArbol.Nodes(i).Key
+                //   .Fields("Nivel").Value = 1
+                //   If Esta Then
+                //      Arbol.Nodes(i).Image = "Abierto_1"
+                //      .Fields("Acceso").Value = 1
+                //   Else
+                //      Arbol.Nodes(i).Image = "Cerrado"
+                //      .Fields("Acceso").Value = 0
+                //   End If
+                //   .Update
+                //End With
             }
+
+            //For i = 1 To ArbolMenu.Nodes.Count
+            //   Esta = False
+            //   For j = 0 To UBound(mVectorAccesos)
+            //      If mVectorAccesos(j) = ArbolMenu.Nodes(i).Key Then
+            //         Esta = True
+            //         Exit For
+            //      End If
+            //   Next
+            //   With oRsAcc
+            //      .AddNew
+            //      .Fields("IdEmpleado").Value = 0
+            //      .Fields("Nodo").Value = ArbolMenu.Nodes(i).Key
+            //      .Fields("Nivel").Value = 1
+            //      If Esta Then
+            //         ArbolMenu.Nodes(i).Image = "Abierto_1"
+            //         .Fields("Acceso").Value = 1
+            //      Else
+            //         ArbolMenu.Nodes(i).Image = "Cerrado"
+            //         .Fields("Acceso").Value = 0
+            //      End If
+            //      .Update
+            //   End With
+            //Next
+
+
+
+
+            Empleado o = new Empleado();
+
+            c.UpdateColecciones(ref o, db);
+
+            //ComprobanteProveedor d = fondoFijoService.ObtenerPorId(10);
+
+            //Assert.AreNotEqual(numerooriginal, d.NumeroComprobante2);
+
+
+
+            // _scope.Complete();
+            //}
 
         }
 
@@ -629,7 +587,9 @@ namespace ProntoMVC.Tests
 
 
 
-        const string scbdlmaster = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=BDLMaster;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
+        const string scbdlmaster =
+                         @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
+
         const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
         //string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=MARIANO-PC\\SQLEXPRESS;initial catalog=Autotrol;integrated security=True;multipleactiveresultsets=True;App=EntityFramework'";
         //            "metadata=res://*/Entity.csdl|res://*/Entity.ssdl|res://*/Entity.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SOMESERVER;Initial Catalog=SOMECATALOG;Persist Security Info=True;User ID=Entity;Password=Entity;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" 

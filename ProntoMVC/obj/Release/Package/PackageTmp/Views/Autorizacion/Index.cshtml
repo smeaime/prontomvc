@@ -1,5 +1,5 @@
 ﻿@using System.Linq;
-@model ProntoMVC.Models.Autorizacione
+@model ProntoMVC.Data.Models.Autorizacione
 @{
     ViewBag.Title = "Autorizaciones";
 }
@@ -8,8 +8,14 @@
 @*<div class="container-fluid">
     <div>
         <div class="row-fluid">*@
-<div class="span3 lightblue">
-    <br />
+<br />
+<div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500; margin-left: 20px;
+    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+    Autorizaciones
+</div>
+
+<div class="row-fluid">
+<div class="span2 lightblue">
     <br />
     <div id="ArbolFirmas">
     </div>
@@ -25,56 +31,49 @@
                     firmar prueba
                 </button>*@
     <br />
-    <br />
-
     <div id="progress" class="dialogContent" style="text-align: left; display: none;">
-<img id="loading" src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
-<asp:literal id="literalPleaseWait" runat="server" text="Espere por favor..." />
-</div>
-
-<style>
-
-/* Start by setting display:none to make this hidden.
+        <img id="loading" src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
+        <asp:literal id="literalPleaseWait" runat="server" text="Espere por favor..." />
+    </div>
+    <style>
+        /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
    with position:fixed. Width, height, top and left speak
    speak for themselves. Background we set to 80% white with
    our animation centered, and no-repeating */
-.modal {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 ) 
-                url('http://sampsonresume.com/labs/pIkfp.gif') 
-                50% 50% 
-                no-repeat;
-}
-
-/* When the body has the loading class, we turn
+        .modal
+        {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba( 255, 255, 255, .8 ) url('http://sampsonresume.com/labs/pIkfp.gif') 50% 50% no-repeat;
+        }
+        
+        /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
-body.loading {
-    overflow: hidden;   
-}
-
-/* Anytime the body has the loading class, our
+        body.loading
+        {
+            overflow: hidden;
+        }
+        
+        /* Anytime the body has the loading class, our
    modal element will be visible */
-body.loading .modal {
-    display: block;
-}
-
-</style>
-
-
+        body.loading .modal
+        {
+            display: block;
+        }
+    </style>
     <div>
         <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
     <div>
         <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
     <div>
         <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
-    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"  style="font-size: 14px;">
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
     </table>
     <div id="ListaPager" class="scroll" style="text-align: center;">
     </div>
@@ -83,6 +82,7 @@ body.loading .modal {
     {
         <a class="btn  " style="color: Black" href="@Url.Action("FirmarTodo", new { @id = 1 })">
             @*  <i class="icon-print"></i>*@ &nbsp;Firmar todo</a> }
+</div>
 </div>
 @*         </div>
    </div>
@@ -201,9 +201,11 @@ $("body").on({
 
 
             colModel: [
-                    { name: 'editar', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'editar', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     {name: 'editar', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                    {name: 'Imprimir', index: 'Imprimir', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
+                    {name: 'Imprimir', index: 'Imprimir', align: 'center', width: 50, sortable: false, 
+                    editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
+
                     {name: 'firmar', index: 'Imprimir', align: 'center', width: 50, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
 
 
@@ -298,7 +300,97 @@ $("body").on({
 
 
 
+          function GrabarFirma2() {
+            //alert('GrabarFirma2');
+            var idusuario = $("#mySelect").val();
+            var idComparativa = $("#Aux10").val();
+            //var idFormulario = 5; // ojo q es diferente q IdFormulario
+
+
+            var idFormulario = $("#Aux5").val();
+            var IdComprobante = $("#Aux2").val();
+            var IdAutorizacion = $("#Aux3").val();
+            var IdAutoriza = $("#Aux1").val();
+
+
+            if ($.isNumeric(idusuario)) {
+
+                //alert('Firmando...');
+
+
+                if (!$.isNumeric(IdComprobante)) {
+                    idFormulario = 3; // alta de requerimiento, parche
+                    IdComprobante = -1;
+                }
+
+
+                var urlpath = ROOT + 'Autorizacion/Firmar' + '?idFormulario=' + idFormulario + '&IdComprobante=' + IdComprobante + '&OrdenAutorizacion=' + 1 + '&IdAutorizo=' + idusuario
+                //alert(urlpath);
+                //con $.post no me anduvo bien...
+
+                // http: //stackoverflow.com/questions/9416556/jquery-how-to-disable-the-entire-page
+                //ShowProgressAnimation();
+
+                //        $("body").on({
+                //            ajaxStart: function () {
+                //                $(this).addClass("loading");
+                //            },
+                //            ajaxStop: function () {
+                //                $(this).removeClass("loading");
+                //            }
+                //        });  
+
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: urlpath,
+                    //            beforeSend: function () {
+                    //                $("#loading").show();
+                    //            },
+                    //            complete: function () {
+                    //                $("#loading").hide();
+                    //            },
+                    success: function (data) {
+                        $("#Lista").trigger("reloadGrid")
+                        alert('Firmado!');
+
+
+                    }
+                });
+
+
+
+            }
+            else {
+                // alert('No tengo los datos! ' + urlpath);
+            }
+        }
+
+
+
         armarArbolAutorizaciones();
+
+
+               
+        // configuro el comportamiento del dialog, por si me madrugó el que está puesto en el layout
+        $("#dialog-password").dialog({
+                            buttons: {
+                                'Aceptar': function () {
+                                    //alert('hola');
+                                    // $(this).dialog('close');
+                                    // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
+                                    validatePwd2(GrabarFirma2, function () { });
+                                    $(this).dialog('close');
+                                },
+                                'Cancelar': function () {
+                                    $(this).dialog('close');
+                                }
+                            },
+                            open: function () {
+
+                            }
+                        });
 
         $("#Firmar").change(function () {
             var IdAprobo = $("#Aprobo > option:selected").attr("value");
@@ -307,9 +399,26 @@ $("body").on({
             $("#Aux2").val(Aprobo);
             $("#Aux3").val("");
             $("#Aux10").val("");
+
+
+     
+
+
             $('#dialog-password').data('Combo', 'Aprobo');
             $('#dialog-password').dialog('open');
+
+
+
+
         });
+
+
+
+
+        
+      
+
+
 
         $("#anular").click(function () {
             $("#Aux1").val("");
