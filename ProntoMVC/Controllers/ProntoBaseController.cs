@@ -18,6 +18,9 @@ using Pronto.ERP.Bll;
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 
+using Elmah;
+
+
 namespace ProntoMVC.Controllers
 {
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
@@ -1182,16 +1185,28 @@ namespace ProntoMVC.Controllers
 
             }
 
+
+
             //if  Dir(glbPathPlantillas & "\..\app\*.app", vbArchive) <> "" Then
             //   GuardarArchivoSecuencial glbPathPlantillas & "\..\app\" & glbEmpresaSegunString & ".app", mString
             //Else
             //   GuardarArchivoSecuencial App.Path & "\" & glbEmpresaSegunString & ".app", mString
             //End If
 
+            string contents;
+            try
+            {
+                contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
+
+            }
+            catch (Exception ex)
+            {
+                ErrHandler.WriteError("archivo " + glbPathArchivoAPP);
+                ErrorLog2.LogError(ex, "archivo " + glbPathArchivoAPP);
+                throw;
+            }
 
 
-
-            string contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
             //                    If Len(mString) > 0 Then
             //   mString = mId(mString, 1, Len(mString) - 2)
             //End If
@@ -1624,4 +1639,42 @@ namespace ProntoMVC.Controllers
 
 
 
+}
+
+
+
+
+public static class ErrorLog2
+{
+    /// <summary>
+    /// Log error to Elmah
+    /// </summary>
+    public static void LogError(Exception ex, string contextualMessage=null)
+    {
+        try
+        {
+            // log error to Elmah
+            if (contextualMessage != null) 
+            {
+                // log exception with contextual information that's visible when 
+                // clicking on the error in the Elmah log
+                var annotatedException = new Exception(contextualMessage, ex); 
+                ErrorSignal.FromCurrentContext().Raise(annotatedException, HttpContext.Current);
+            }
+            else 
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex, HttpContext.Current);
+            }
+
+            // send errors to ErrorWS (my own legacy service)
+            // using (ErrorWSSoapClient client = new ErrorWSSoapClient())
+            // {
+            //    client.LogErrors(...);
+            // }
+        }
+        catch (Exception)
+        {
+            // uh oh! just keep going
+        }
+    }
 }

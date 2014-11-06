@@ -44,7 +44,8 @@ namespace ProntoMVC.Areas.MvcMembership.Models.UserAdministration
         //[HiddenInput(DisplayValue = false)]
         public string CartelAviso { get; set; }
         public int ProximoComprobanteProveedorReferencia { get; set; }
-
+        public string ArchivoAyuda { get; set; }
+        public string PathPlantillas { get; set; }
         
         //[HiddenInput(DisplayValue = false)]
         //public string EmpresaNueva { get; set; }

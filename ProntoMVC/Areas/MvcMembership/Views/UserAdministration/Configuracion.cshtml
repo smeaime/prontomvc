@@ -39,12 +39,16 @@
 
     @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Compr. Proveedor") @*para que quede el espacio*@
     @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span2" })
+
+
     
-        
-        
+        @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas") @*para que quede el espacio*@
+    @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span2" })
+
+
     using (Html.BeginForm("SubirPlantilla", "UserAdministration"))
     {
-        
+
     <br />      <br />
     <div>
         @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Plantilla de Requerimientos")
