@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProntoMVC.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
 @{
     ViewBag.Title = "Pedidos";
 }
@@ -6,65 +6,69 @@
     <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
 <div>
     <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
+@if (false)
+{
+    <style>
+        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+        
+        
+        
+        .ui-widget-content
+        {
+            border: 0px solid #aaaaaa;
+        }
+        
+        .ui-jqgrid
+        {
+            border-right-width: 0px;
+            border-left-width: 0px;
+        }
+        /* If you need to remove all grid's borders you can use
 
 .ui-jqgrid { border-width: 0px; }
 If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4;
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
-    }
-</style>
+        
+        .ui-jqgrid tr.ui-row-ltr td
+        {
+            border-right-color: #E4E4E4;
+        }
+        
+        
+        .ui-jqgrid tr.footrow-ltr td
+        {
+            border-right-color: #E4E4E4 !important;
+        }
+        
+        /*To remove horizontal border between the rows you can use */
+        
+        .ui-jqgrid tr.ui-row-ltr td
+        {
+            border-bottom-color: #E4E4E4;
+        }
+        /*To remove vertical borders between the column headers you can use */
+        
+        th.ui-th-column
+        {
+            border-right-color: #E4E4E4 !important;
+        }
+        /* or alternatively (without the usage of !important) */
+        
+        .ui-jqgrid-labels .ui-th-column
+        {
+            border-right-color: #E4E4E4;
+        }
+    </style> 
+}
 <br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-prepend input-append">
-                @* <div class="btn-group ">
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span12 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
+                Nuevo
+            </button>
+            <div class="span4">
+                <div class="input-prepend input-append">
+                    @* <div class="btn-group ">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 En todo <span class="caret"></span>
                             </button>
@@ -75,61 +79,65 @@ If you want additionally remove vertical border between the cells in the grid yo
                                 Número
                             </ul>
                         </div>*@
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                <select id="campos " class="span4">
-                    <option>Número</option>
-                    @*<option>Fecha</option>*@
-                </select>
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    ...</button>
-                @*<div>
+                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                    {
+                        <select id="campos " class="span4">
+                            <option>Número</option>
+                            @*<option>Fecha</option>*@
+                        </select>
+                        <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                            ...</button>
+                    }
+@*<div>
                             <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
                         <div>
                             <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
                         <div>
                             <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
+                </div>
             </div>
+            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+            {
+                <div class="span2">
+                </div>                                  
+                <div class="span2">
+                    <button onclick=" exportExcel($('#Lista')) " class="btn span12">
+                        Excel
+                    </button>
+                </div>
+
+            }
         </div>
-     
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-        {
-             <div class="span2"></div>                                  
-            <div class="span2">
-                <button onclick=" exportExcel($('#Lista')) " class="btn span12">
-                    Excel
-                </button>
-            </div>
-
-        }
-    </div>
-  
-    <script>
+        <script>
 
 
 
-        $("#BuscadorListado").change(function () {
+            $("#BuscadorListado").change(function () {
 
 
 
-            var grid = jQuery("#Lista");
-            var postdata = grid.jqGrid('getGridParam', 'postData');
-            jQuery.extend(postdata,
+                var grid = jQuery("#Lista");
+                var postdata = grid.jqGrid('getGridParam', 'postData');
+                jQuery.extend(postdata,
                { filters: '',
                    searchField: 'NumeroPedido',
                    searchOper: 'eq',
-                   searchString: parseInt($("#BuscadorListado").val(), 10) || 0
+                   searchString: $("#BuscadorListado").val()
                });
-            grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1}]);
+                grid.jqGrid('setGridParam', { search: true, postData: postdata });
+                grid.trigger("reloadGrid", [{ page: 1}]);
 
 
-            //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-        });
-    </script>
-</div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+                //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
+            });
+        </script>
+    </div>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
+    </table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+    </div>
 </div>
 @*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 <script type="text/javascript">
@@ -141,6 +149,9 @@ If you want additionally remove vertical border between the cells in the grid yo
         //Para que haga wrap en las celdas
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
+
+
+
         $('#Lista').jqGrid({
             url: '@Url.Action("Pedidos", "Pedido")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
@@ -149,10 +160,10 @@ If you want additionally remove vertical border between the cells in the grid yo
             colNames: ['Acciones', 'IdPedido', 'Numero', 'Sub', 'Fecha', 'Salida',
             'Cumplido', 'RMs', 'Obras', 'Proveedor', 'Total',
             'Bonif.', 'IVA', 'Moneda', 'Comprador', 'Aprobo',
-            'Items', 'idaux', 'Comparativa', 'Tipo Compra', 'Observaciones',
-            'Detalle cond. compra', 'Pedido Exterior', 'IdPedidoAbierto', 'Licitacion', 'Impresa',
-            'Anuló', 'Fecha Anulacion', 'Motivo Anulacion', 'Impuestos Internos', 'Equipos',
-            'Circuito Firmas Completo', '', '', '', 'Web'
+            'Items', 'idaux', 'Comparativa', 'TipCompra', 'Observaciones',
+            'Detcondcompra', 'PedExterior', 'IdPedAbierto', 'Licitacion', 'Impresa',
+            'Anuló', 'Fecha Anulacion', 'MotivAn', 'ImpInts', 'Equipos',
+            'CircFirmComp', '', '', '', 'Web'
 
             ],
             colModel: [
@@ -240,6 +251,14 @@ If you want additionally remove vertical border between the cells in the grid yo
             toppager: true,
 
 
+
+            ////////////////////////////
+            ///// problemas de desfasaje en las columnas entre el encabezado y el cuerpo
+            //deepempty: true,
+            //cellLayout: 20,
+            /////////////////
+
+
             ///////////////////////////////
             //width: 'auto', // 'auto',
             autowidth: true,
@@ -251,19 +270,40 @@ If you want additionally remove vertical border between the cells in the grid yo
             footerrow: false, //true,
             userDataOnFooter: true
             // ,caption: '<b>PEDIDOS</b>'
+
+
+
+
+               , multiboxonly: true
         });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-        //jQuery("#Lista").jqGrid('setFrozenColumns');
-        jQuery("#Lista").jqGrid('bindKeys');
+
+        //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //      jQuery("#Lista").jqGrid('bindKeys');
 
         // http://stackoverflow.com/questions/20190137/jqgrid-toolbar-search-add-clear-search-button-next-to-search-box
-//        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
+        //        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
         //$("#Lista").filterToolbar();
+
+        // $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
+        //$("#Lista").setFrozenColumns();
+        jQuery("#Lista").jqGrid('bindKeys');
+
+
+        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        { sopt: ["cn"], width: 0, closeOnEscape: true, closeAfterSearch: true });
+        // jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+
 
         pageLayout.hide('east');
         pageLayout.hide('south');
- 
+
 
     });
 

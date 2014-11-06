@@ -1,4 +1,13 @@
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+// http://stackoverflow.com/questions/7169227/javascript-best-practices-for-asp-net-mvc-developers
+// http://stackoverflow.com/questions/247209/current-commonly-accepted-best-practices-around-code-organization-in-javascript el truco interesante de var DED = (function() {
+// http://stackoverflow.com/questions/251814/jquery-and-organized-code?lq=1   una risa
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 "use strict";
 
@@ -18,6 +27,16 @@ var lastRowIndex;
 var lastSelectedId;
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function calculateTotal() {
     //        var totalCantidad = grid.jqGrid('getCol', 'Cantidad', false, 'sum') || 0;
 
@@ -56,10 +75,20 @@ function initDateEdit(elem) {
 };
 
 
+
 function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
+    //    alert('RefrescarRestoDelRenglon');
+    /*
 
+    ok, la cuestion es que, usando celledit (es decir, la edicion inline por celda, no por renglon entero), cuando cambio el valor
+    dentro de un autocomplete, no puedo refrescar la celda adyacente de id porque no está en modo edicion. es decir, tendría que hacerlo
+    una vez que pone enter, es decir, no en el evento 'select' del autocomplete creado dentro del editoptions de la columna, sino en el afterSaveCell general de la grilla. 
+    Lo que pasa es... que en el evento select sí dispongo del id del elemento elegido. En cambio, en el afterSaveCell lo debo ir a buscar de nuevo, usando el texto
+    que está en pantalla. El único problema con esto es si hay descripciones repetidas.
+    -Bueno, pero tambien tengo que hacer un CASE para distinguir si me estan cambiando los articulos o las unidades, etc! 
+    */
 
     var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
     var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
@@ -105,6 +134,8 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
     else if (colName == "Unidad") {
 
+        //    alert('ssss');
+
         data['IdUnidad'] = UltimoIdUnidad
         data['Unidad'] = UltimoDescUnidad
         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
@@ -149,7 +180,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
 
-
+                        sacarDeEditMode(); // me salvó esto!! (porque en el caso de que aprieten TAB, no está bueno que quede una celda en edicion mientras estas grabando)
 
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
@@ -158,19 +189,50 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
+
+                        //quizas el problema con el tab, es que estan pasando a un campo que recien fue modificado (desde 'codigo' hacia 'descripcion')
+                        // -Aun sin cambiarlo acá, el textbox en 'descripcion' deja de tener autocomplete. se rompe hasta la siguiente edicion
+                        // -Además, tambien pasa cuando va desde 'descripcion' a 'fecha de entrega', porque ahí te quedas sin el plugin de fecha
+                        // Sospecho un poco de cuando agrega renglones justo antes de seguir -parece que no es eso: comenté el AgregarRenglones y sigue pasando
+
+                        //alert(ui.title);
                         data['Descripcion'] = ui.title;
+
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
+
+
+                        //   data['Descripcion'] = "ASDASD";
 
                         data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
 
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+
+                        FinRefresco();
+
+
+
                     }
                     else {
 
-                        // hay que cancelar la grabacion
+
+
+                        alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                        data['Descripcion'] = "";
+                        data['IdArticulo'] = 0;
+                        data['Codigo'] = "";
+                        data['Cantidad'] = 0;
+
+                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+
                     }
                 }
         );
@@ -180,23 +242,42 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
     else if (colName == "Descripcion") {   // esto siempre y cuando el cambio haya sido del nombre de articulo
 
 
-//        data['IdArticulo'] = UltimoIdArticulo
-//        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+        //        data['IdArticulo'] = UltimoIdArticulo
+        //        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+
 
 
         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
                 {term: val }, // JSON.stringify(val)},
                 function (data) {
-                    if (data.length > 0) {
+                    if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
                         var ui = data[0];
-                        //alert(ui.value);
 
 
+
+                        sacarDeEditMode();
+
+                        if (ui.value == "No se encontraron resultados") {
+
+
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                            data['Descripcion'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                            return;
+                        }
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
 
 
-                
+
+
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
 
@@ -204,7 +285,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
-                        data['Descripcion'] = ui.title;
+                        data['Descripcion'] = ui.value; // ui.title;
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
@@ -215,9 +296,27 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
                         FinRefresco();
+
+
+
                     }
                     else {
 
+                        alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        if (true) {
+
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                            data['Descripcion'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                        } else {
+                            $('#Lista').jqGrid('restoreRow', dataIds[iRow - 1]);
+                        }
                         // hay que cancelar la grabacion
                     }
                 }
@@ -271,8 +370,12 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
     else if (colName == "Cantidad") { }
 
     else {
-     //   alert(colName);
+        FinRefresco()
+        //   alert(colName);
     }
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
 
 }
 
@@ -300,6 +403,123 @@ function RefrescarRenglon(x) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function RefrescarOrigenDescripcion() {
+
+    var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+
+    for (var i = 0; i < dataIds.length; i++) {
+
+
+        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+
+        if (!data['IdDetalleRequerimiento']) {
+            //$("#Lista").jqGrid('delGridRow', dataIds[i]);
+            continue;
+        }
+
+        if (!data['IdArticulo']) {
+            //$("#Lista").jqGrid('delGridRow', dataIds[i]);
+            continue;
+        }
+
+
+        // if (OrigenDescripcionDefault == 3) { data['OrigenDescripcion'] = 3 };
+
+
+
+        var tipoDesc = data['OrigenDescripcion'] || 1;
+        var sDesc = data['Descripcion'];
+        var sObs = data['Observaciones'];
+
+
+        ///////////////////////////////////////////
+
+        // "0:Solo el material; 1:Solo las observaciones; 2:Material mas observaciones"
+
+        if (tipoDesc == 1 || tipoDesc == "Solo el material") {
+            data['DescripcionFalsa'] = sDesc;
+        }
+        else if (tipoDesc == 2 || tipoDesc == "Solo las observaciones") {
+            data['DescripcionFalsa'] = sObs;
+        }
+        else if (tipoDesc == 3 || tipoDesc == "Material mas observaciones") {
+            data['DescripcionFalsa'] = sDesc + ' ' + sObs;
+        }
+
+        $('#Lista').jqGrid('setRowData', dataIds[i], data); // vuelvo a grabar el renglon
+        //$('#Lista').jqGrid('saveRow', dataIds[i]);
+    }
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function GrabarGrillaLocal() {
+    var $this = $('#Lista')
+    var ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+
+    for (i = 0; i < l; i++) {
+        try {
+            var rowdata = $('#Lista').jqGrid('saveRow', ids[i]);
+        } catch (e) {
+            $('#Lista').jqGrid('restoreRow', ids[i]);
+            continue;
+        }
+    }
+}
+
+
+
+function PopupCentrar() {
+    var grid = $("#Lista");
+    var dlgDiv = $("#editmod" + grid[0].id);
+
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+
+    //            $("#editmod" + grid[0].id + " [type=button]").attr("class", "btn btn-primary");
+    //            $(":button").attr("class", "btn btn-primary");
+    $("#editmod" + grid[0].id).find('#FechaEntrega').width(160);
+
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    $("#sData").attr("class", "btn btn-primary");
+    $("#sData").css("color", "white");
+    $("#sData").css("margin-right", "20px");
+    $("#cData").attr("class", "btn");
+
+    //            $("#editmod" + grid[0].id).find(":hr").remove();
+
+    $("#editmod" + grid[0].id).find('.ui-icon-disk').remove();
+    $("#editmod" + grid[0].id).find('.ui-icon-close').remove();
+
+    //                    $("#sData").addClass("btn");
+    //                    $("#cData").addClass("btn");
+
+
+    var parentDiv = dlgDiv.parent(); // div#gbox_list
+    var dlgWidth = dlgDiv.width();
+    var parentWidth = parentDiv.width();
+    var dlgHeight = dlgDiv.height();
+    var parentHeight = parentDiv.height();
+
+    var left = (screen.width / 2) - (dlgWidth / 2) + "px";
+    var top = (screen.height / 2) - (dlgHeight / 2) + "px";
+
+    dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+    dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+
+}
 
 
 
@@ -307,6 +527,18 @@ function RefrescarRenglon(x) {
 
 
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -444,6 +676,8 @@ $(function () {
 
 
 
+
+
     //        $("body").on({
     //            ajaxStart: function () {
     //                $(this).addClass("loading");
@@ -496,7 +730,7 @@ $(function () {
     });
 
     //Para que haga wrap en las celdas
-    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    //  $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
     //$.jgrid.formatter.integer.thousandsSeparator=',';
 
     function radioFormatter(cellvalue, options, rowObject) {
@@ -517,11 +751,105 @@ $(function () {
 
 
 
+    function Validar() {
+
+
+
+        //quiz�s no est� esperando que vuelva la llamada.....
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        // valido el nuevo comprobante
+
+        var cabecera = SerializaForm();
+
+        $.ajax({
+
+            type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'Pedido/ValidarJson',
+
+            dataType: 'json',
+            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+
+                // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
+
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
+                    //  Podría mostrar directamente el Messages?
+
+                    var errorMessages = [];
+
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData.Errors) {
+                        errorMessages.push(errorData[key]);
+                    }
+                    //      $('#result').html(errorMessages.join("<br />"));
+
+                    //       $('html, body').css('cursor', 'auto');
+                    //       $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                    $("#textoMensajeAlerta").html(errorData.Message);
+                    //$("#textoMensajeAlerta").html(errorMessages.join());
+                    $("#mensajeAlerta").show();
+                    QuitarRenglones(errorData.Errors);
+
+                    // alert(errorMessages.join("<br />"));
+
+                } catch (e) {
+                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
+                    //$(".alert").alert();
+                    //   alert(xhr.responseText);
+                }
+            },
+            success: function (data) {
+                // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
+                // si falta uno, lo borro.
+
+                var arraydemensajes = xhr.responseText;
+                QuitarRenglones(arraydemensajes);
+
+            }
+        });
+
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////DEFINICION DE GRILLAS   ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     $('#Lista').jqGrid({
         url: ROOT + 'Requerimiento/DetRequerimientos/',
-        postData: { 'IdRequerimiento': function () { return $("#IdRequerimiento").val(); } },
+        postData: { 'IdRequerimiento': function () {
+            return $("#IdRequerimiento").val();
+        }
+
+        },
         datatype: 'json',
         mtype: 'POST',
         colNames: ['', 'IdDetalleRequerimiento', 'IdArticulo', 'IdUnidad', '#', 'Cant.', 'Un.', 'Codigo',
@@ -530,13 +858,13 @@ $(function () {
         colModel: [
                         { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre',
                             width: 30,
-                             hidden: true, sortable: false, editable: false
+                            hidden: true, sortable: false, editable: false
 
                          , formatter: 'actions',
                             formatoptions: {
-                                editformbutton: false,
-                                editbutton: false, 
-                                delbutton: true,
+                                editformbutton: true,
+                                editbutton: false,
+                                delbutton: false,
                                 keys: false
                             }
                         },
@@ -549,11 +877,13 @@ $(function () {
         //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
 
 
-                        {name: 'NumeroItem'
+                        {
+                        name: 'NumeroItem'
                             , formoptions: { rowpos: 3, colpos: 1 }
                             , index: 'NumeroItem'
-                            , label: 'TB', align: 'center', width: 40,
+                            , label: 'TB', align: 'center', width: 30,
                         editable: true, edittype: 'text',
+                        editoptions: { disabled: true },
                         editrules: { readonly: 'readonly' }
                     },
         ////////////////////////////////////////////
@@ -570,17 +900,24 @@ $(function () {
                         {name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left',
                         width: 60, editable: true, edittype: 'select', editrules: { required: true },
                         editoptions: { dataUrl: ROOT + 'Articulo/Unidades',
-                            dataEvents: [{ type: 'change', fn: function (e) {
+                            dataEvents: [{
+                                type: 'change',
+                                fn: function (e) {
 
-                                RefrescarRenglon(this);
-                                //  UltimoIdArticulo=ui.item.id;
-                                UltimoIdUnidad = this.value;
-                                $('#IdUnidad').val(this.value);
-                                //UltimoDescUnidad
-                            }
+                                    //alert('aasasd');
+                                    RefrescarRenglon(this);
+                                    //  UltimoIdArticulo=ui.item.id;
+                                    UltimoIdUnidad = this.value;
+                                    $('#IdUnidad').val(this.value);
+                                    //UltimoDescUnidad =""
+                                    // ojo. si está editando inline, #Unidad no existe
+                                    // if (modoform) {
+                                    //      UltimoDescUnidad = $("#Unidad").children("option").filter(":selected").text(); // ojo. si está editando inline, #Unidad no existe
+                                    //}
+                                    //alert(UltimoDescUnidad);
+                                    //UltimoDescUnidad
+                                }
                             }]
-
-
                         }
 
                     },
@@ -591,7 +928,7 @@ $(function () {
                             width: 100, editable: true, edittype: 'text',
                             editoptions: {
                                 dataInit: function (elem) {
-                                    var NoResultsLabel = "No Results"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
+                                    var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
 
                                     $(elem).autocomplete({
                                         source: ROOT + "Articulo/GetCodigosArticulosAutocomplete2", minLength: 0,
@@ -630,7 +967,64 @@ $(function () {
                                             .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " + item.title + "</b></span></a>")
                                             .appendTo(ul);
                                     };
+
+
+
                                 }
+
+                                ,
+
+                                dataEvents: [{
+                                    type: 'change',
+                                    fn: function (e) {
+
+
+                                        // alert('aasasd');
+
+                                        $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
+                                            {term: this.value },
+                                            function (data) {
+                                                if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    var ui = data[0];
+
+                                                    if (ui.title == "") {
+                                                        alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                                                        $("#Codigo").val("");
+                                                        return;
+                                                    }
+
+                                                    if (this.value == "No se encontraron resultados") {
+                                                        $("#Codigo").val("");
+                                                        return;
+                                                    }
+
+
+                                                    //alert('hay ' + data.length);
+
+                                                    $("#IdArticulo").val(ui.id);
+                                                    $("#Codigo").val(ui.value);
+                                                    $("#Descripcion").val(ui.title);
+                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                    $("#Unidad").val(ui.IdUnidad);
+                                                    UltimoIdArticulo = ui.id;
+                                                    UltimoIdUnidad = ui.IdUnidad;
+
+                                                }
+                                                else {
+
+                                                    alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                                                }
+                                            }
+                                        );
+
+
+
+                                    }
+                                }]
+
+
+
+
                             },
                             editrules: { required: false }
                         },
@@ -642,11 +1036,19 @@ $(function () {
                         { name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450,
                             hidden: false,
                             editable: true, edittype: 'text',
-                            editoptions: { rows: '1', cols: '1',
+                            editoptions: {
+                                rows: '1', cols: '1',
                                 dataInit: function (elem) {
+                                    var NoResultsLabel = "No se encontraron resultados";
                                     $(elem).autocomplete({ source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
                                         select: function (event, ui) {
 
+                                            //alert(ui.item.value);
+
+                                            if (ui.item.value === NoResultsLabel) {
+                                                event.preventDefault();
+                                                return;
+                                            }
 
 
                                             $("#IdArticulo").val(ui.item.id);
@@ -662,7 +1064,15 @@ $(function () {
                                             // if ($("#IdUnidad") == null) $("#Unidad").val(ui.item.IdUnidad);  mvarIdUnidadCU
 
                                         }
+                                        ,
+                                        focus: function (event, ui) {
+                                            if (ui.item.value === NoResultsLabel) {
+                                                event.preventDefault();
+                                            }
+                                        }
+
                                     })
+
                                     .data("ui-autocomplete")._renderItem = function (ul, item) {
                                         return $("<li></li>")
                                             .data("ui-autocomplete-item", item)
@@ -670,12 +1080,72 @@ $(function () {
                                             .appendTo(ul);
                                     };
                                 }
+
+                                ,
+                                dataEvents: [{
+                                    type: 'change',
+                                    fn: function (e) {
+
+                                        //alert(this.value);
+
+                                        if (this.value == "No se encontraron resultados") {
+                                            $("#Descripcion").val("");
+                                            return;
+                                        }
+
+                                        $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
+                                            {term: this.value },
+                                            function (data) {
+                                                if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    var ui = data[0];
+
+                                                    if (ui.codigo == "") {
+                                                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        $("#Descripcion").val("");
+                                                        return;
+                                                    }
+
+
+                                                    //alert('hay ' + data.length);
+
+
+
+
+                                                    $("#IdArticulo").val(ui.id);
+                                                    $("#Codigo").val(ui.codigo);
+                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                    //$("#Unidad").val(ui.item.Unidad);
+                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                    UltimoIdArticulo = ui.id;
+                                                    UltimoIdUnidad = ui.IdUnidad;
+
+
+                                                }
+                                                else {
+
+                                                    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                }
+                                            }
+                                        );
+
+
+
+                                    }
+                                }]
+
                             },
                             editrules: { required: true }
                         },
         //{ name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Articulos")' }, editrules: { required: true} },
-                        {name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 }, index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
-                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: true }
+                        {name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 },
+                        index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
+                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit },
+                        editrules: { required: false }
+
+
+
                     },
         //                        { name: 'Adjunto', index: 'Adjunto', align: 'left', width: 67, align: 'center', formatter: 'checkbox', editable: true, edittype: 'checkbox', hidden: true, 
         //                            editoptions: { value: "True:False", //value: 'Yes:No', defaultValue: 'Si', 
@@ -758,7 +1228,7 @@ $(function () {
                     {
 
                     name: 'OrigenDescripcion', label: 'TB'
-                            , formoptions: { rowpos: 11, colpos: 2, label: "Tomar la descripción de" }
+                            , formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }
                             , index: 'OrigenDescripcion',
                     align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
                     // formatter: radioFormatter, unformat: unformatRadio,
@@ -803,7 +1273,7 @@ $(function () {
                            $('#IdControlCalidad').val(this.value);
                            UltimoIdControlCalidad = this.value;
 
-                           RefrescarRenglon(this);
+                            RefrescarRenglon(this);
 
                        }
                        }]
@@ -840,6 +1310,9 @@ $(function () {
                     grid.jqGrid('restoreRow', lastSelectedId);
                 }
 
+
+                // sacarDeEditMode();
+
                 jQuery('#Lista').restoreRow(lastSelectedId);  // para inline
                 lastSelectedId = id;
             }
@@ -872,7 +1345,9 @@ $(function () {
             // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:cell_editing
 
 
-            jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+            // jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+
+            sacarDeEditMode();
 
             //            var ids = jQuery("#Lista").getChangedCells('dirty'); // .jqGrid('getDataIDs');
             //            for (var i = 0; i < ids.length; i++) {
@@ -893,9 +1368,7 @@ $(function () {
             EditarItem(id);
         },
 
-        onClose: function (data) {
-            RefrescarOrigenDescripcion();
-        },
+
 
 
         afterEditCell: function (rowid, cellname, value, iRow, iCol) {
@@ -922,14 +1395,10 @@ $(function () {
         },
 
 
-
-
-
-
-
-
-
-
+        onClose: function (data) {
+            //alert('adfdfaafdafdsfdsa');
+            RefrescarOrigenDescripcion();
+        },
 
         beforeShowForm: function (form) {
 
@@ -952,6 +1421,9 @@ $(function () {
         },
 
 
+        onclickSubmit: function (params, posdata) {
+            //    alert('asdasdad');
+        },
 
 
 
@@ -1010,7 +1482,6 @@ $(function () {
             //            if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
 
         },
-        //            pager: $('#ListaPager'),
 
 
 
@@ -1023,6 +1494,8 @@ $(function () {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        cmTemplate: { sortable: false },
 
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -1045,6 +1518,8 @@ $(function () {
         , multiselect: true
 
 
+        , cellLayout: 10
+
         ///////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,8 +1531,10 @@ $(function () {
         ///////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
+        // , pager: $('#ListaPager')
 
 
+        //, recreateForm:false 
 
         //,
         //loadonce: true,
@@ -1066,6 +1543,22 @@ $(function () {
 
     //        jQuery("#grid_id").jqGrid('navGrid',pagerid, {});
     //jQuery("#grid_id").jqGrid('inlineNav',pagerid, parameters);
+    $('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last"} });
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////FIN DE DEFINICION DE GRILLALISTA   ////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -1079,6 +1572,25 @@ $(function () {
     }
     })
     */
+
+
+
+
+
+
+    //    var table = $("#Lista")[0];
+    //    var r = table.rows[0], selftable = table;
+    //    if (r) {
+    //        $("td", r).each(function (k) {
+    //            $(this).css('width', selftable.grid.headers[k].width + 'px');
+    //        });
+    //        table.grid.cols = r.cells;
+    //    }
+
+
+
+
+
 
 
 
@@ -1149,118 +1661,23 @@ $(function () {
     //    $("#Lista").jqGrid("inlineNav", "#pager", { addParams: { position: "last"} }); //para que los nuevos renglones aparezcan al final (MODO INLINE)
     // $("#Lista").jqGrid('FormToGrid', rowid, formid, mode, position); //para que los nuevos renglones aparezcan al final (MODO FORM)
 
-    $("#addData").click(function () {
-        dobleclic = true;
-        jQuery("#Lista").jqGrid('editGridRow', "new",
-                { addCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
-                    //                addParams: { position: "last"},
-                    closeOnEscape: true,
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    beforeShowForm: function (form) {
-
-                        GrabarGrillaLocal();
-                        PopupCentrar();
-
-                        $('#tr_IdDetalleRequerimiento', form).hide();
-                        $('#tr_IdArticulo', form).hide();
-                        $('#tr_IdUnidad', form).hide();
-                    },
-                    beforeInitData: function () {
-                        inEdit = false;
-                    },
-                    onInitializeForm: function (form) {
-                        $('#IdDetalleRequerimiento', form).val(0);
-                        $('#NumeroItem', form).val(ProximoNumeroItem());
-                        $('#NumeroItem').attr('readonly', 'readonly');
 
 
-                        /////////////////////////////////////////////////////////////////////////////////
-
-
-                        var now = new Date();
-                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-
-                        //$('#OrigenDescripcion', form).val( OrigenDescripcionDefault);
-                        //                    $('#OrigenDescripcion', form).val('Material mas observaciones');
-                        //                    $('#OrigenDescripcion', form).val('3');
-
-
-                        $('#FechaEntrega', form).val(currentDate);
-                        $('#Cantidad', form).val(1);
-                        $('#Unidad', form).val(1);
-                        //                      mvarAux = BuscarClaveINI("Dias default para fecha necesidad en RM")
-                        //                      If Len(mvarAux) > 0 Then
-                        //                         DTFields(0).Value = DateAdd("d", Val(mvarAux), Me.FechaRequerimiento)
-                        //                      Else
-                        //                         DTFields(0).Value = Date
-                        //                      End If
-                    },
-
-                    onClose: function (data) {
-                        GrabarGrillaLocal()
-                        RefrescarOrigenDescripcion();
-                        PonerRenglonesInline();
-                        //jQuery('#Lista').saveRow(id, true); 
-                    }
-
-                });
-    });
-
-
-
-
-
-    $("#edtData").click(function () {
-
-        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
-        EditarItem(gr)
-
-
-    });
-
-
-
-
-    $("#delData").click(function () {
-        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
-        if (gr != null) {
-            //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
-            //$("#"+gr).hide();  
-            if (false) {
-                jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?",
-                    bSubmit: "Borrar", bCancel: "Cancelar", width: 300, closeOnEscape: true, reloadAfterSubmit: false
-                });
-            }
-            else {
-
-                var $grid = $("#Lista");
-                var righe = $grid.jqGrid("getGridParam", "selarrrow");
-
-                if ((righe == null) || (righe.length == 0)) {
-                    return false;
-                }
-
-
-                for (var i = righe.length - 1; i >= 0; i--) {
-                    $grid.delRowData(righe[i]);
-                }
-
-
-            }
-        }
-        else alert("Debe seleccionar un item!");
-    });
-
-
-
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////grabar///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
     $('#grabar2').click(function () {
 
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+
+        }
+
 
 
         var cabecera = SerializaForm();
@@ -1391,6 +1808,17 @@ $(function () {
 
     jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // para qué es esto???
+
     // get the header row which contains
     headerRow = grid.closest("div.ui-jqgrid-view")
             .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
@@ -1407,6 +1835,13 @@ $(function () {
         var ts = $(this);
         ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
     });
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     $("#ListaDrag").jqGrid({
         url: ROOT + "Articulo/ArticulosGridData2",
@@ -1459,8 +1894,10 @@ $(function () {
     // $("#ListaDrag").filterToolbar();
     $("#ListaDrag").setFrozenColumns();
 
+    // $("#ListaDrag").parents('div.ui-jqgrid-bdiv').css("max-height", "600px");
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1515,7 +1952,7 @@ $(function () {
             grid = $("ListaDrag2");
             // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
 
-            AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+            //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
             // rows = $("#Lista").getGridParam("reccount");
             //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
@@ -1641,7 +2078,7 @@ $(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $("#Aprobo").change(function () {
         var IdAprobo = $("#Aprobo > option:selected").attr("value");
@@ -1808,6 +2245,9 @@ $(function () {
         $("#ListaDrag").jqGrid('gridDnD', {
             connectWith: '#Lista', //drag_opts:{stop:null},
             onstart: function (ev, ui) {
+
+                sacarDeEditMode();
+
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                         .addClass("ui-state-error ui-widget")
                         .css({ border: "5px ridge tomato" });
@@ -1826,7 +2266,18 @@ $(function () {
                 var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
                 var j = 0, tmpdata = {}, dropname;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-                var prox = ProximoNumeroItem();
+                //var prox = ProximoNumeroItem();
+
+
+                var IdArticulo = getdata['IdArticulo'];
+                copiarArticulo(IdArticulo);
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
+                return;
+
+
+
                 try {
                     //					for (var key in getdata) {
                     //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
@@ -1865,12 +2316,6 @@ $(function () {
 
 
 
-    function ProximoNumeroItem() {
-        //  return jQuery("#Lista").jqGrid('getGridParam', 'records')   + 1;
-
-        var totalCantidad = grid.jqGrid('getCol', 'NumeroItem', false, 'max')
-        return (totalCantidad || 0) + 1;
-    }
 
 
     function ConectarGrillas2() {
@@ -1879,6 +2324,7 @@ $(function () {
         $("#ListaDrag2").jqGrid('gridDnD', {
             connectWith: '#Lista',
             onstart: function (ev, ui) {
+                sacarDeEditMode();
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                         .addClass("ui-state-error ui-widget")
                         .css({ border: "5px ridge tomato" });
@@ -1889,6 +2335,18 @@ $(function () {
                 var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
                 var j = 0, tmpdata = {}, dropname, IdRequerimiento;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+
+
+
+                IdRequerimiento = getdata['IdRequerimiento'];
+                copiarRM(IdRequerimiento);
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+                return;
+
+
+
+
+
                 var grid;
                 try {
                     $("#Observaciones").val(getdata['Observaciones']);
@@ -1947,9 +2405,17 @@ $(function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
     function copiarArticulo(id) {
 
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+            LogJavaScript("Error en Script copiarArticulo   ", e);
+        }
+
+        sacarDeEditMode();
 
         GrabarGrillaLocal()
 
@@ -1982,10 +2448,60 @@ $(function () {
             tmpdata['NumeroItem'] = prox++;
             getdata = tmpdata;
         } catch (e) { }
-        var grid;
-        grid = Math.ceil(Math.random() * 1000000);
+
+        var idazar = Math.ceil(Math.random() * 1000000);
         // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-        $("#Lista").jqGrid('addRowData', grid, getdata);
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+        ///////////////
+        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+        ///////////////
+        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+        //alert(segundorenglon);
+        if (segundorenglon.indexOf("dnd") != -1) {
+            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            $("#Lista").jqGrid('delRowData', segundorenglon);
+        }
+        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+        ///////////////
+        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+        ///////////////
+
+        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+        var pos = TraerPosicionLibre();
+        if (pos == null) {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+        }
+        else {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+        }
+        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
         //resetAltRows.call(this);
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
         RefrescarOrigenDescripcion();
@@ -1997,9 +2513,18 @@ $(function () {
 
     }
 
+
+
+
+
+
     function copiarRM(id) {
 
+
         jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        sacarDeEditMode();
+
 
         GrabarGrillaLocal()
 
@@ -2043,8 +2568,57 @@ $(function () {
 
                         prox++;
                         getdata = tmpdata;
-                        grid = Math.ceil(Math.random() * 1000000);
-                        $("#Lista").jqGrid('addRowData', grid, getdata);
+                        var idazar = Math.ceil(Math.random() * 1000000);
+
+
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                        ///////////////
+                        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+                        ///////////////
+                        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+                        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+                        //alert(segundorenglon);
+                        if (segundorenglon.indexOf("dnd") != -1) {
+                            // tiró el renglon en modo dragdrop, no hizo dobleclic
+                            $("#Lista").jqGrid('delRowData', segundorenglon);
+                        }
+                        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+                        ///////////////
+                        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+                        ///////////////
+
+                        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+                        var pos = TraerPosicionLibre();
+                        if (pos == null) {
+                            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+                        }
+                        else {
+                            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+                        }
+                        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+                        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+                        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
                     }
                     RefrescarOrigenDescripcion();
 
@@ -2060,9 +2634,158 @@ $(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $("#addData").click(function () {
+        dobleclic = true;
+
+        sacarDeEditMode();
+
+        jQuery("#Lista").jqGrid('editGridRow', "new",
+                { addCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
+
+                    // addParams: { position: "last"}, // esto va en el ListaPager
+
+                    closeOnEscape: true,
+                    closeAfterAdd: true,
+                    recreateForm: true,
+                    beforeShowForm: function (form) {
+
+                        GrabarGrillaLocal();
+                        PopupCentrar();
+
+                        $('#tr_IdDetalleRequerimiento', form).hide();
+                        $('#tr_IdArticulo', form).hide();
+                        $('#tr_IdUnidad', form).hide();
+                    },
+                    beforeInitData: function () {
+                        inEdit = false;
+                    },
+                    onInitializeForm: function (form) {
+                        $('#IdDetalleRequerimiento', form).val(0);
+                        $('#NumeroItem', form).val(ProximoNumeroItem());
+                        $('#NumeroItem').attr('readonly', 'readonly');
+
+
+                        /////////////////////////////////////////////////////////////////////////////////
+
+
+                        var now = new Date();
+                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+
+                        //$('#OrigenDescripcion', form).val( OrigenDescripcionDefault);
+                        //                    $('#OrigenDescripcion', form).val('Material mas observaciones');
+                        //                    $('#OrigenDescripcion', form).val('3');
+
+
+                        $('#FechaEntrega', form).val(currentDate);
+                        $('#Cantidad', form).val(1);
+                        $('#Unidad', form).val(1);
+                        //                      mvarAux = BuscarClaveINI("Dias default para fecha necesidad en RM")
+                        //                      If Len(mvarAux) > 0 Then
+                        //                         DTFields(0).Value = DateAdd("d", Val(mvarAux), Me.FechaRequerimiento)
+                        //                      Else
+                        //                         DTFields(0).Value = Date
+                        //                      End If
+                    },
+
+                    onClose: function (data) {
+                        GrabarGrillaLocal()
+                        RefrescarOrigenDescripcion();
+                        PonerRenglonesInline();
+
+                        AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+                        //jQuery('#Lista').saveRow(id, true); 
+                    }
+
+                });
+    });
+
+
+    $("#edtData").click(function () {
+
+        sacarDeEditMode();
+
+
+
+
+        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+        EditarItem(gr)
+
+
+    });
+
+
+
+
+
+
+
+    $("#delData").click(function () {
+        //var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selarrrow');
+        
+        if (gr != null) {
+            //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
+            //$("#"+gr).hide();  
+            if (false) {
+                jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?",
+                    bSubmit: "Borrar", bCancel: "Cancelar", width: 300, closeOnEscape: true, reloadAfterSubmit: false
+                });
+            }
+            else {
+
+                var $grid = $("#Lista");
+                var righe = $grid.jqGrid("getGridParam", "selarrrow");
+
+                if ((righe == null) || (righe.length == 0)) {
+                    return false;
+                }
+
+
+                for (var i = righe.length - 1; i >= 0; i--) {
+                    $grid.delRowData(righe[i]);
+                }
+
+
+            }
+        }
+        else alert("Debe seleccionar un item!");
+    });
+
+
+
 
 
 
@@ -2076,95 +2799,6 @@ $(function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-function RefrescarOrigenDescripcion() {
-
-    var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-
-
-    for (var i = 0; i < dataIds.length; i++) {
-
-
-        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-
-
-        if (!data['IdDetalleRequerimiento']) {
-            //$("#Lista").jqGrid('delGridRow', dataIds[i]);
-            continue;
-        }
-
-        if (!data['IdArticulo']) {
-            //$("#Lista").jqGrid('delGridRow', dataIds[i]);
-            continue;
-        }
-
-
-        // if (OrigenDescripcionDefault == 3) { data['OrigenDescripcion'] = 3 };
-
-
-
-        var tipoDesc = data['OrigenDescripcion'] || 1;
-        var sDesc = data['Descripcion'];
-        var sObs = data['Observaciones'];
-
-
-        ///////////////////////////////////////////
-
-        // "0:Solo el material; 1:Solo las observaciones; 2:Material mas observaciones"
-
-        if (tipoDesc == 1 || tipoDesc == "Solo el material") {
-            data['DescripcionFalsa'] = sDesc;
-        }
-        else if (tipoDesc == 2 || tipoDesc == "Solo las observaciones") {
-            data['DescripcionFalsa'] = sObs;
-        }
-        else if (tipoDesc == 3 || tipoDesc == "Material mas observaciones") {
-            data['DescripcionFalsa'] = sDesc + ' ' + sObs;
-        }
-
-        $('#Lista').jqGrid('setRowData', dataIds[i], data); // vuelvo a grabar el renglon
-        //$('#Lista').jqGrid('saveRow', dataIds[i]);
-    }
-
-}
-
-function GrabarGrillaLocal() {
-    var $this = $('#Lista')
-    var ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
-
-    for (i = 0; i < l; i++) {
-        try {
-            var rowdata = $('#Lista').jqGrid('saveRow', ids[i]);
-        } catch (e) {
-            $('#Lista').jqGrid('restoreRow', ids[i]);
-            continue;
-        }
-    }
-}
-
-
 
 
 function EditarItem(rowid) {
@@ -2197,10 +2831,29 @@ function EditarItem(rowid) {
                                                     }
                                                  ,
                                                     onClose: function (data) {
+
                                                         RefrescarOrigenDescripcion();
-                                                        PonerRenglonesInline();
+                                                        AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+                                                        //var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                                                        //data['Unidad'] = $("#Unidad").text(); ;
+                                                        //$('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                                                        //PonerRenglonesInline();
                                                         // jQuery('#Lista').editRow(gr, true);
                                                     }
+                                                    ,
+                                                    beforeSubmit: function (postdata, formid) {
+
+                                                        //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
+                                                        //postdata.Unidad es un numero?????
+                                                        postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                                                        postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
+
+                                                        return [true, 'no se puede'];
+                                                    }
+
 
                                                 });
     else alert("Debe seleccionar un item!");
@@ -2208,51 +2861,37 @@ function EditarItem(rowid) {
 }
 
 
-function PopupCentrar() {
-    var grid = $("#Lista");
-    var dlgDiv = $("#editmod" + grid[0].id);
-
-    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
-
-    //            $("#editmod" + grid[0].id + " [type=button]").attr("class", "btn btn-primary");
-    //            $(":button").attr("class", "btn btn-primary");
-    $("#editmod" + grid[0].id).find('#FechaEntrega').width(160);
-
-    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
-    $("#sData").attr("class", "btn btn-primary");
-    $("#sData").css("color", "white");
-    $("#sData").css("margin-right", "20px");
-    $("#cData").attr("class", "btn");
-
-    //            $("#editmod" + grid[0].id).find(":hr").remove();
-
-    $("#editmod" + grid[0].id).find('.ui-icon-disk').remove();
-    $("#editmod" + grid[0].id).find('.ui-icon-close').remove();
-
-    //                    $("#sData").addClass("btn");
-    //                    $("#cData").addClass("btn");
-
-
-    var parentDiv = dlgDiv.parent(); // div#gbox_list
-    var dlgWidth = dlgDiv.width();
-    var parentWidth = parentDiv.width();
-    var dlgHeight = dlgDiv.height();
-    var parentHeight = parentDiv.height();
-
-    var left = (screen.width / 2) - (dlgWidth / 2) + "px";
-    var top = (screen.height / 2) - (dlgHeight / 2) + "px";
-
-    dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
-    dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
-
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

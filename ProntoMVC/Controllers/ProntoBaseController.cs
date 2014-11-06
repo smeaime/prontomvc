@@ -49,7 +49,7 @@ namespace ProntoMVC.Controllers
                 return db.Empleados.Find(glbIdUsuario);
             }
 
-            set {}
+            set { }
         }
 
 
@@ -166,7 +166,7 @@ namespace ProntoMVC.Controllers
                     // return Redirect(returnUrl);
 
 
-                    
+
                     string sss2 = this.Session["BasePronto"].ToString();
                     sc = Generales.sCadenaConex(sss2);
                     if (sc == null)
@@ -174,7 +174,7 @@ namespace ProntoMVC.Controllers
                         // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
                         this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
                     }
-                    
+
 
                 }
                 else
@@ -188,7 +188,7 @@ namespace ProntoMVC.Controllers
                 string sss = this.Session["BasePronto"].ToString();
                 sc = Generales.sCadenaConex(sss);
                 //    return RedirectToAction("Index", "Home");
-                if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: ["+ sss +"]");
+                if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
             }
             db = new DemoProntoEntities(sc);
             SC = sc;
@@ -736,9 +736,9 @@ namespace ProntoMVC.Controllers
 
 
             ProntoMVC.Data.Models.DetalleUserBD i = (from u in dbMaster.DetalleUserBD
-                                                    join b in dbMaster.Bases on u.IdBD equals b.IdBD
-                                                    where (b.Descripcion == empresa && u.UserId == id)
-                                                    select u).FirstOrDefault();
+                                                     join b in dbMaster.Bases on u.IdBD equals b.IdBD
+                                                     where (b.Descripcion == empresa && u.UserId == id)
+                                                     select u).FirstOrDefault();
 
             if (i != null) return RedirectToAction("UsersEmpresas", new { id }); // ya existe
             i = new ProntoMVC.Data.Models.DetalleUserBD();
@@ -767,11 +767,11 @@ namespace ProntoMVC.Controllers
             ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
 
             ProntoMVC.Data.Models.DetalleUserBD i = (from u in dbMaster.DetalleUserBD
-                                                    join b in dbMaster.Bases on u.IdBD equals b.IdBD
-                                                    where (b.Descripcion == empresa && u.UserId == id)
-                                                    select u).FirstOrDefault();
+                                                     join b in dbMaster.Bases on u.IdBD equals b.IdBD
+                                                     where (b.Descripcion == empresa && u.UserId == id)
+                                                     select u).FirstOrDefault();
 
-            
+
 
             dbMaster.DetalleUserBD.Remove(i);
             dbMaster.SaveChanges();
@@ -945,7 +945,7 @@ namespace ProntoMVC.Controllers
 
         public int buscaridproveedorporcuit(string cuit)
         {
-            if (cuit==null) return -1;
+            if (cuit == null) return -1;
             var provs = db.Proveedores.Where(p => p.Cuit.Replace("-", "") == cuit.Replace("-", ""));
             return provs.Select(p => p.IdProveedor).FirstOrDefault();
 
@@ -959,8 +959,8 @@ namespace ProntoMVC.Controllers
             var provs = db.Clientes.Where(p => p.Cuit.Replace("-", "") == cuit.Replace("-", ""));
             return provs.Select(p => p.IdCliente).FirstOrDefault();
 
-        } 
-       
+        }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1157,6 +1157,69 @@ namespace ProntoMVC.Controllers
 
 
 
+        public List<string> LeerArchivoAPP(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid)
+        {
+            string glbArchivoAyuda = dbcontext.Parametros.Find(1).ArchivoAyuda;
+            string glbPathPlantillas = "";
+            string s = dbcontext.Parametros.Find(1).PathPlantillas;
+            if (s.Length == 0)
+            {
+                //glbPathPlantillas= App.Path & "\Plantillas"
+            }
+
+            else
+            {
+                glbPathPlantillas = s;
+            }
+
+
+
+
+            string glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
+
+            }
+
+            //if  Dir(glbPathPlantillas & "\..\app\*.app", vbArchive) <> "" Then
+            //   GuardarArchivoSecuencial glbPathPlantillas & "\..\app\" & glbEmpresaSegunString & ".app", mString
+            //Else
+            //   GuardarArchivoSecuencial App.Path & "\" & glbEmpresaSegunString & ".app", mString
+            //End If
+
+
+
+
+            string contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
+            //                    If Len(mString) > 0 Then
+            //   mString = mId(mString, 1, Len(mString) - 2)
+            //End If
+            //mString = MydsEncrypt.Encrypt(mString)
+            string salida = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(contents);
+
+
+
+
+            List<string> mVectorAccesos = salida.Split('|').ToList();
+
+            // sacado de frmAccesos.DefinirOrigen()
+
+
+            //class sss {
+            //    idempleado
+            //}
+
+            // List<EmpleadosAcceso> mVectorAccesos = new List<EmpleadosAcceso>();
+            //var c = new AccesoController();
+            //var Arbol = TreeConNiveles(IdUsuario, sBase, usuario, dbcontext, userGuid);
+
+            return mVectorAccesos;
+
+        }
+
+
+
         public List<Tablas.Tree> TreeConNiveles(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
         {
 
@@ -1169,9 +1232,24 @@ namespace ProntoMVC.Controllers
 
 
 
+            bool esSuperAdmin;
+            bool esAdmin;
 
-            bool esSuperAdmin = Roles.GetRolesForUser(usuario).Contains("SuperAdmin");
-            bool esAdmin = Roles.GetRolesForUser(usuario).Contains("Administrador");
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                esSuperAdmin = true;
+                esAdmin = true;
+            }
+            else
+            {
+                esSuperAdmin = Roles.GetRolesForUser(usuario).Contains("SuperAdmin");
+                esAdmin = Roles.GetRolesForUser(usuario).Contains("Administrador");
+
+            }
+
+
+            var archivoapp = LeerArchivoAPP(IdUsuario, sBase, usuario, dbcontext, userGuid);
 
 
             var permisos = (from i in dbcontext.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
@@ -1199,7 +1277,15 @@ namespace ProntoMVC.Controllers
 
                 o.nivel = 9;
 
-                if (o.Descripcion.Contains("2") || o.Descripcion.Contains("1")) // || o.Descripcion.Contains("por ")) no, esto lo debo hacer con eliminarNodoHijos, porque el nodo padre debe verse
+
+                if (!archivoapp.Contains(o.Clave))
+                {
+
+                    o.Descripcion = "NO MOSTRAR";
+                    o.Orden = -999;
+                }
+
+                else if (o.Descripcion.Contains("2") || o.Descripcion.Contains("1")) // || o.Descripcion.Contains("por ")) no, esto lo debo hacer con eliminarNodoHijos, porque el nodo padre debe verse
                 {
                     //no los puedo saltar porque los cierres <ul> hechos manualmente en jscript dependiendo del nivel del item, te descajetan el arbol
 

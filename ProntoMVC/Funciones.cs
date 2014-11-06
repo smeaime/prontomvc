@@ -285,7 +285,23 @@ public static class Generales
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
         //usuario.Empresa = IdEmpresa
 
-        string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        string sConexBDLMaster;
+        bool esSuperadmin;
+
+        if (System.Diagnostics.Debugger.IsAttached)
+        {
+            sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+            esSuperadmin = true;
+        }
+        else
+        {
+            sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+
+        }
+        sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
+
+
 
         string s;
 
@@ -302,7 +318,7 @@ public static class Generales
                 var sSQL = "SELECT * FROM BASES " +
                                                           "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
                                                           "where " +
-                                                          (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ? "UserId='" + us + "' AND" : "") +
+                                                          ((!esSuperadmin) ? "UserId='" + us + "' AND" : "") +
                                                           " Descripcion='" + nombreEmpresa + "'   ";
 
                 System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,

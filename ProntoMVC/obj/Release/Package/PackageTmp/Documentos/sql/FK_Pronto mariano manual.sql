@@ -978,3 +978,30 @@ where T2.IdDetalleRequerimiento is null
 go	
 
 
+
+
+
+sp_help 'ComprobantesProveedores'
+
+--ALTER TABLE DescripcionIva ALTER COLUMN IdCodigoIVA int --hay que hacerlo mediante el ManagmentStudio por todas las referencias que hay que modificar
+ALTER TABLE NotasDebito ALTER COLUMN IdCodigoIVA int --hay que hacerlo mediante el ManagmentStudio por todas las referencias que hay que modificar
+ALTER TABLE NotasCredito ALTER COLUMN IdCodigoIVA int --hay que hacerlo mediante el ManagmentStudio por todas las referencias que hay que modificar
+
+
+
+alter table  ComprobantesProveedores
+		ADD CONSTRAINT FK_ComprobantesProveedores_DescripcionIva
+		FOREIGN KEY (IdCodigoIVA) REFERENCES DescripcionIva(IdCodigoIVA)
+go
+
+update T1
+set T1.IdCodigoIVA=null   
+--select T1.IdCodigoIVA,*
+from ComprobantesProveedores T1		--tabla apuntadora (tiene el FK)
+left join DescripcionIva T2 on T1.IdCodigoIVA=T2.IdCodigoIVA   --tabla apuntada (tiene el PK)
+where T2.IdCodigoIVA is null
+	and not T1.IdCodigoIVA is null
+go	
+
+
+

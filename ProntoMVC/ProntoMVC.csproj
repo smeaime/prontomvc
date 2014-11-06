@@ -153,6 +153,7 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -328,8 +329,33 @@
     <Content Include="Content\images\Default Apps\Videos.png" />
     <Content Include="Content\images\Default Apps\Weather.png" />
     <Content Include="Content\images\Default Apps\YouTube.png" />
+    <Content Include="Content\images\Empresas\Autotrol2.png" />
+    <Content Include="Content\images\Empresas\AutotrolRenovables.png" />
+    <Content Include="Content\images\Empresas\Capen - Copy.jpg" />
+    <Content Include="Content\images\Empresas\Capen.jpg" />
+    <Content Include="Content\images\Empresas\Capen.png" />
+    <Content Include="Content\images\Empresas\Copy of Decavial.png" />
+    <Content Include="Content\images\Empresas\Decavial.png" />
+    <Content Include="Content\images\Empresas\DemoPronto.png" />
+    <Content Include="Content\images\Empresas\DemoProntoWeb.png" />
     <Content Include="Content\images\Empresas\esuco.gif" />
     <Content Include="Content\images\Empresas\esuco.jpg" />
+    <Content Include="Content\images\Empresas\esuco.png" />
+    <Content Include="Content\images\Empresas\fernando6.png" />
+    <Content Include="Content\images\Empresas\fernando7.png" />
+    <Content Include="Content\images\Empresas\Hawk.png" />
+    <Content Include="Content\images\Empresas\nueva.png" />
+    <Content Include="Content\images\Empresas\Pronto.png" />
+    <Content Include="Content\images\Empresas\pruebaAutotrol.png" />
+    <Content Include="Content\images\Empresas\Prueba_VialAgro.png" />
+    <Content Include="Content\images\Empresas\Vialagro.png" />
+    <Content Include="Content\images\Empresas\wDemoWilliams.jpg" />
+    <Content Include="Content\images\Empresas\wDemoWilliams.png" />
+    <Content Include="Content\images\Empresas\wDemoWilliams2.png" />
+    <Content Include="Content\images\Empresas\williams.png" />
+    <Content Include="Content\images\favicon16.png" />
+    <Content Include="Content\images\faviconfiel.png" />
+    <Content Include="Content\images\FhHRx.gif" />
     <Content Include="Content\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\images\virtualmartiresatardecer.jpg" />
     <Content Include="Content\images\vistaareaaniacua1200px.jpg" />
@@ -462,6 +488,8 @@
     <None Include="Documentos\vb6\frmDetRequerimientos.frmz" />
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
     <None Include="Documentos\RequerimientoWeb_AUTOTROL.docx" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -472,6 +500,9 @@
     <Content Include="Reportes\Proyectos de reporting\Report Project1\codigo certificados.vb" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Pronto informes.rptproj.user" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj.user" />
+    <Content Include="Scripts\jquery-grid\grid.locale-es.js" />
+    <Content Include="Scripts\jquery-layout\jquery.layout-latest.js" />
+    <Content Include="Scripts\jquery-layout\jquery.layout-latest.min.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Views\Moneda\Delete.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />

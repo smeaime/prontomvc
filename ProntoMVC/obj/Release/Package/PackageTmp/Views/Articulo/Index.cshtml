@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProntoMVC.Models.Articulo>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Articulo>
 @{
     ViewBag.Title = "Artículos";
 }
@@ -7,24 +7,31 @@
 <div class="row-fluid">
     <div class="span12 lightblue">
         <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary span2"  >
-            Nuevo 
+            Nuevo
         </button>
         <div class="span4">
             <div class="input-append span4">
                 <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                <select id="campos " class="span4 append">
-                    <option>Número</option>
-                    <option>Fecha</option>
-                </select>
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    ...</button>
+                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                {
+                    <select id="campos " class="span4 append">
+                        <option>Número</option>
+                        <option>Fecha</option>
+                    </select>
+                    <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                        ...</button>
+
+                }
             </div>
         </div>
-        <div class="span2">
-            <button onclick=" exportExcel($('#Lista')) " class="btn span12">
-                Excel
-            </button>
-        </div>
+        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+        {
+            <div class="span2">
+                <button onclick=" exportExcel($('#Lista')) " class="btn span12">
+                    Excel
+                </button>
+            </div>
+        }
     </div>
 </div>
 <table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
@@ -171,7 +178,7 @@
              { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
             );
 
-//        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
+        //        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
         //$("#Lista").setFrozenColumns();
 
         jQuery("#Lista").jqGrid('bindKeys');
@@ -249,7 +256,7 @@
 
         pageLayout.hide('east');
         pageLayout.hide('south');
- 
+
 
 
 

@@ -5,34 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form action="" method="post" enctype="multipart/form-data">
+<div style="padding-left: 15px; padding-right: 15px;">
 <br />
-    <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
+<div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-   
-Parámetros</div>
+    Configuración</div>
 @if (Roles.IsUserInRole("SuperAdmin") || Roles.IsUserInRole("Administrador"))
 {
-    
 
+    
+    
+    
+    <p>Version de storeproc    </p>
+
+               <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"]">Servidor de informes</a>
+                <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"].Replace("ReportServer", "Reports") ">
+                    <p> localhost/Reports_MSSQLSERVER2/Pages/Folder.aspx?ViewMode=Detail </p>
+
+                    Interfaz web</a>
+                   <p>  Logs de RRSS en la base (tablas [ExecutionLogStorage] ?)
+                    http://stackoverflow.com/questions/491389/where-does-reporting-services-store-its-log-files
+                                        C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles
+                                        </p>
+             
+        
     
     @Html.LabelFor(model => model.CartelAviso, "Aviso") @*para que quede el espacio*@
     @Html.TextAreaFor(m => m.CartelAviso, new { id = "Aviso", @class = "span12" })
 
-    
-    
+    <br />
+    <br />    
     @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Numeradores:") @*para que quede el espacio*@
-    @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span12" })
+
     @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Compr. Proveedor") @*para que quede el espacio*@
+    @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span2" })
     
-    <input type="submit" value='Aceptar' class="btn  btn-large btn-primary" />
         
         
     using (Html.BeginForm("SubirPlantilla", "UserAdministration"))
     {
-        <br />
-        <br />      <br />      <br />
+        
+    <br />      <br />
     <div>
-        Plantilla de Requerimientos<br />
+        @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Plantilla de Requerimientos")
+        @*para que quede el espacio*@
         <input type="file" name="file" />
         <input type="submit" class="btn" value="Subir" />
         <br />
@@ -40,17 +56,26 @@ Parámetros</div>
         </i>&nbsp;Descargar</a>
     </div>
 
-    @*<input type="submit" value="Eliminar" class="btn" />*@
+    <br />
+    <br />
+    
+
+@*<input type="submit" value="Eliminar" class="btn" />*@
     }
 
+
+    
+    <input type="submit" value='Aceptar' class="btn  btn-large btn-primary" style="width: 100px;
+        height: 40px" />
 
 }
 @if (Roles.IsUserInRole("SuperAdmin"))
 {
     
-   @* <a class="btn  " style="color: Black" href="@Url.Action("actualizarSql")"><i class="icon-print">
+@* <a class="btn  " style="color: Black" href="@Url.Action("actualizarSql")"><i class="icon-print">
     </i>&nbsp;actualizar sql</a>*@
      
  
 }
+</div>
 </form>

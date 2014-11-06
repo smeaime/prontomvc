@@ -1,231 +1,67 @@
-﻿@model IEnumerable<ProntoMVC.Models.Empleado>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Empleado>
+    @{
+        ViewBag.Title = "Empleados";
+    }
 
-@{
-    ViewBag.Title = "Index";
-}
+    <br />
+    <p>
+        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo</button>
+    </p>
 
-<h2>Index</h2>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            IdEmpleado
-        </th>
-        <th>
-            Legajo
-        </th>
-        <th>
-            Nombre
-        </th>
-        <th>
-            UsuarioNT
-        </th>
-        <th>
-            Sector
-        </th>
-        <th>
-            IdCargo
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Interno
-        </th>
-        <th>
-            Administrador
-        </th>
-        <th>
-            Iniciales
-        </th>
-        <th>
-            Password
-        </th>
-        <th>
-            SisMan
-        </th>
-        <th>
-            HorasJornada
-        </th>
-        <th>
-            IdSector1
-        </th>
-        <th>
-            IdCargo1
-        </th>
-        <th>
-            IdSector2
-        </th>
-        <th>
-            IdCargo2
-        </th>
-        <th>
-            IdSector3
-        </th>
-        <th>
-            IdCargo3
-        </th>
-        <th>
-            IdSector4
-        </th>
-        <th>
-            IdCargo4
-        </th>
-        <th>
-            Dominio
-        </th>
-        <th>
-            SisMat
-        </th>
-        <th>
-            FechaNacimiento
-        </th>
-        <th>
-            TipoUsuario
-        </th>
-        <th>
-            GrupoDeCarga
-        </th>
-        <th>
-            CuentaBancaria
-        </th>
-        <th>
-            InformacionAuxiliar
-        </th>
-        <th>
-            IdCuentaFondoFijo
-        </th>
-        <th>
-            IdObraAsignada
-        </th>
-        <th>
-            Activo
-        </th>
-        <th>
-            Idioma
-        </th>
-        <th>
-            PuntoVentaAsociado
-        </th>
-        <th>
-            IdLugarEntregaAsignado
-        </th>
-        <th></th>
-    </tr>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var lastSelectedId;
+            var inEdit;
+            grid = $("#Lista");
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdEmpleado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Legajo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioNT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sector.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Interno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Administrador)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Iniciales)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SisMan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HorasJornada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSector1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCargo1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSector2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCargo2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSector3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCargo3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSector4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCargo4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dominio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SisMat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GrupoDeCarga)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CuentaBancaria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InformacionAuxiliar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCuentaFondoFijo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdObraAsignada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Idioma)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PuntoVentaAsociado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLugarEntregaAsignado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdEmpleado }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdEmpleado }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdEmpleado })
-        </td>
-    </tr>
-}
+            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-</table>
+            $('#Lista').jqGrid({
+                url: '@Url.Action("Listado_jqGrid", "Empleado")',
+                datatype: 'json',
+                mtype: 'POST',
+                shrinkToFit: true,
+                colNames: ['Acciones', 'IdEmpleado', 'Nombre', 'Legajo', 'Usuario red', 'Sector', 'Cargo', 'Email', 'Iniciales', 'Es adm?', 'Cuenta ff asignada', 'C.Costo asignado', 'Activo?'],
+                colModel: [
+                            { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false },
+                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 0, editable: false, hidden: true },
+                            { name: 'Nombre', index: 'Nombre', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Legajo', index: 'Legajo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'UsuarioNT', index: 'UsuarioNT', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Cargo', index: 'Cargo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Email', index: 'Email', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Iniciales', index: 'Iniciales', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Administrador', index: 'Administrador', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'CuentaFFAsignada', index: 'CuentaFFAsignada', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'ObraAsignada', index: 'ObraAsignada', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                            { name: 'Activo', index: 'Activo', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                ],
+                onSelectRow: function (id) {
+                    if (id && id !== lastSelectedId) {
+                        if (typeof lastSelectedId !== "undefined") {
+                            grid.jqGrid('restoreRow', lastSelectedId);
+                        }
+                        lastSelectedId = id;
+                    }
+                },
+                pager: $('#ListaPager'),
+                rowNum: 50,
+                rowList: [10, 20, 50, 100],
+                sortname: 'Nombre',
+                sortorder: 'asc',
+                viewrecords: true,
+                width: 'auto',
+                height: '100%',
+                altRows: false,
+                footerrow: true,
+                userDataOnFooter: true,
+                caption: '<b>EMPLEADOS</b>'
+            });
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        });
+    </script>
