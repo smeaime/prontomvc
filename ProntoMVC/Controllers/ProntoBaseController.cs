@@ -1178,7 +1178,24 @@ namespace ProntoMVC.Controllers
 
 
 
-            string glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
+            string glbPathArchivoAPP;
+
+
+            if (true)
+            {
+                // agregamos un sufijo para tener por ahora 2 app hasta que migremos todo;
+                glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + "_web.app";
+            }
+            else
+            {
+
+                glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
+
+            }
+
+
+
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
@@ -1649,19 +1666,19 @@ public static class ErrorLog2
     /// <summary>
     /// Log error to Elmah
     /// </summary>
-    public static void LogError(Exception ex, string contextualMessage=null)
+    public static void LogError(Exception ex, string contextualMessage = null)
     {
         try
         {
             // log error to Elmah
-            if (contextualMessage != null) 
+            if (contextualMessage != null)
             {
                 // log exception with contextual information that's visible when 
                 // clicking on the error in the Elmah log
-                var annotatedException = new Exception(contextualMessage, ex); 
+                var annotatedException = new Exception(contextualMessage, ex);
                 ErrorSignal.FromCurrentContext().Raise(annotatedException, HttpContext.Current);
             }
-            else 
+            else
             {
                 ErrorSignal.FromCurrentContext().Raise(ex, HttpContext.Current);
             }
