@@ -120,6 +120,7 @@ namespace ProntoMVC.Controllers
 
             TreeDest = new List<Tablas.Tree>(Tree); //la duplico
 
+            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(Membership.GetUser().ProviderUserKey.ToString()));
 
 
             bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
@@ -143,6 +144,10 @@ namespace ProntoMVC.Controllers
                 {
                     nivel = 1;
                 }
+
+
+
+
                 else if (escomercial &&
                     (o.Clave.Contains("Comercial")
                     || o.Clave.Contains("IBCondici")
@@ -230,7 +235,16 @@ namespace ProntoMVC.Controllers
                 }
 
 
+                if (!essuperadmin && !archivoapp.Contains(o.Clave))
+                {
+                    nivel = 9;
+                }
+
+
+
                 o.nivel = nivel ?? 9;
+
+
 
 
                 if (nivel >= 9)
@@ -249,7 +263,7 @@ namespace ProntoMVC.Controllers
                 var n = new Tablas.Tree();
                 if (Roles.IsUserInRole(usuario, "Externo"))
                 {
-                    string nombreproveedor="";
+                    string nombreproveedor = "";
                     try
                     {
                         Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -536,6 +550,10 @@ namespace ProntoMVC.Controllers
 
             q = TablaTree();
 
+
+            
+
+
             // If we found out a level, we enter the if
             //if (role != -1)
             //{
@@ -759,7 +777,7 @@ namespace ProntoMVC.Controllers
             //    }
             //}
 
-            
+
             // aca tengo que filtrar los nodos desactivados por el superadmin (-y si es un 
             // superadmin el que llama? -en ese caso quizas convenga usar otra vista)
 
@@ -784,7 +802,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            q = TreeConNiveles(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario,db);
+            q = TreeConNiveles(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db);
 
             //var l = q.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR" || n.Descripcion.StartsWith("por ")).ToList();
 
@@ -1120,7 +1138,7 @@ namespace ProntoMVC.Controllers
             try
             {
                 empleado = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).FirstOrDefault();
-                if (empleado!=null) IdUsuario = empleado.IdEmpleado;
+                if (empleado != null) IdUsuario = empleado.IdEmpleado;
             }
             catch (Exception e)
             {
