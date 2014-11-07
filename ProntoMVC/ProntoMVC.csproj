@@ -372,6 +372,10 @@
     <Content Include="Content\jquery-grid\css\custom-theme\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\jquery-grid\css\custom-theme\jquery-ui-1.10.3.custom.css" />
     <Content Include="Content\jquery-grid\css\custom-theme\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.all.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.base.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.theme.css" />
+    <Content Include="Content\jquery-ui-layout\layout-default-latest.css" />
     <Content Include="Content\MvcMembership.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
