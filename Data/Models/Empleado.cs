@@ -16,23 +16,25 @@ namespace ProntoMVC.Data.Models
     {
         public Empleado()
         {
-            this.Requerimientos = new HashSet<Requerimiento>();
-            this.Requerimientos1 = new HashSet<Requerimiento>();
             this.Clientes = new HashSet<Cliente>();
             this.Clientes1 = new HashSet<Cliente>();
+            this.DetalleEmpleados = new HashSet<DetalleEmpleado>();
             this.Pedidos = new HashSet<Pedido>();
-            this.Facturas = new HashSet<Factura>();
+            this.Pedidos1 = new HashSet<Pedido>();
+            this.Pedidos2 = new HashSet<Pedido>();
+            this.EmpleadosAccesos = new HashSet<EmpleadosAcceso>();
             this.Presupuestos = new HashSet<Presupuesto>();
             this.Presupuestos1 = new HashSet<Presupuesto>();
-            this.EmpleadosAccesos = new HashSet<EmpleadosAcceso>();
-            this.Pedidos_1 = new HashSet<Pedido>();
-            this.Comparativas = new HashSet<Comparativa>();
-            this.Comparativas1 = new HashSet<Comparativa>();
-            this.ComprobantesProveedores = new HashSet<ComprobanteProveedor>();
-            this.ComprobantesProveedores1 = new HashSet<ComprobanteProveedor>();
-            this.Conjuntos = new HashSet<Conjunto>();
-            this.NotasCreditoes = new HashSet<NotasCredito>();
-            this.NotasDebitoes = new HashSet<NotasDebito>();
+            this.Requerimientos = new HashSet<Requerimiento>();
+            this.Requerimientos1 = new HashSet<Requerimiento>();
+            this.Requerimientos2 = new HashSet<Requerimiento>();
+            this.Requerimientos3 = new HashSet<Requerimiento>();
+            this.Requerimientos4 = new HashSet<Requerimiento>();
+            this.DetalleEmpleadosCuentasBancarias = new HashSet<DetalleEmpleadosCuentasBancaria>();
+            this.DetalleEmpleadosJornadas = new HashSet<DetalleEmpleadosJornada>();
+            this.DetalleEmpleadosObras = new HashSet<DetalleEmpleadosObra>();
+            this.DetalleEmpleadosSectores = new HashSet<DetalleEmpleadosSectore>();
+            this.DetalleEmpleadosUbicaciones = new HashSet<DetalleEmpleadosUbicacione>();
         }
     
         public int IdEmpleado { get; set; }
@@ -67,31 +69,33 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdObraAsignada { get; set; }
         public string Activo { get; set; }
         public string Idioma { get; set; }
-        public Nullable<int> PuntoVentaAsociado_1 { get; set; }
-        public Nullable<int> IdLugarEntregaAsignado_1 { get; set; }
+        public Nullable<int> PuntoVentaAsociado { get; set; }
+        public Nullable<int> IdLugarEntregaAsignado { get; set; }
         public string EsConductor { get; set; }
         public Nullable<System.DateTime> FechaVencimientoRegistro { get; set; }
         public string LimitarUbicacionesAsignadas { get; set; }
         public string PermitirAccesoATodasLasObras { get; set; }
     
-        public virtual Sector Sector { get; set; }
-        public virtual ICollection<Requerimiento> Requerimientos { get; set; }
-        public virtual ICollection<Requerimiento> Requerimientos1 { get; set; }
+        public virtual Cargo Cargo { get; set; }
         public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual ICollection<Cliente> Clientes1 { get; set; }
+        public virtual ICollection<DetalleEmpleado> DetalleEmpleados { get; set; }
+        public virtual Sector Sectore { get; set; }
         public virtual ICollection<Pedido> Pedidos { get; set; }
-        public virtual ICollection<Factura> Facturas { get; set; }
+        public virtual ICollection<Pedido> Pedidos1 { get; set; }
+        public virtual ICollection<Pedido> Pedidos2 { get; set; }
+        public virtual ICollection<EmpleadosAcceso> EmpleadosAccesos { get; set; }
         public virtual ICollection<Presupuesto> Presupuestos { get; set; }
         public virtual ICollection<Presupuesto> Presupuestos1 { get; set; }
-        public virtual ICollection<EmpleadosAcceso> EmpleadosAccesos { get; set; }
-        public virtual ICollection<Pedido> Pedidos_1 { get; set; }
-        public virtual ICollection<Comparativa> Comparativas { get; set; }
-        public virtual ICollection<Comparativa> Comparativas1 { get; set; }
-        public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores { get; set; }
-        public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores1 { get; set; }
-        public virtual ICollection<Conjunto> Conjuntos { get; set; }
-        public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
-        public virtual ICollection<NotasDebito> NotasDebitoes { get; set; }
-        public virtual Cargo Cargo { get; set; }
+        public virtual ICollection<Requerimiento> Requerimientos { get; set; }
+        public virtual ICollection<Requerimiento> Requerimientos1 { get; set; }
+        public virtual ICollection<Requerimiento> Requerimientos2 { get; set; }
+        public virtual ICollection<Requerimiento> Requerimientos3 { get; set; }
+        public virtual ICollection<Requerimiento> Requerimientos4 { get; set; }
+        public virtual ICollection<DetalleEmpleadosCuentasBancaria> DetalleEmpleadosCuentasBancarias { get; set; }
+        public virtual ICollection<DetalleEmpleadosJornada> DetalleEmpleadosJornadas { get; set; }
+        public virtual ICollection<DetalleEmpleadosObra> DetalleEmpleadosObras { get; set; }
+        public virtual ICollection<DetalleEmpleadosSectore> DetalleEmpleadosSectores { get; set; }
+        public virtual ICollection<DetalleEmpleadosUbicacione> DetalleEmpleadosUbicaciones { get; set; }
     }
 }

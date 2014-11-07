@@ -189,10 +189,18 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            'use strict';
+
             var lastSelectedId;
             var inEdit;
-
+            var selICol; 
+            var selIRow;
+                        
             $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+            $.extend($.jgrid.inlineEdit, {
+                keys: true
+            });
 
             $('#ListaIngresoEgreso').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleados/',
@@ -203,26 +211,67 @@
                 colNames: ['IdDetalleEmpleado', 'IdEmpleado', 'Fecha ingreso', 'Fecha egreso'],
                 colModel: [
                             //{ name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
-                            { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
-                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
+                            { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
+                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                             {
-                                name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: true,
-                                editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false },
-                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, label: 'TB'
+                                name: 'FechaIngreso', index: 'FechaIngreso', width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                             },
                             {
-                                name: 'FechaEgreso', index: 'FechaEgreso', width: 100, align: 'center', sorttype: 'date', editable: true,
-                                editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }, 
-                                formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, label: 'TB'
+                                name: 'FechaEgreso', index: 'FechaEgreso', width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                             }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
                         if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                            jQuery("#ListaIngresoEgreso").jqGrid('restoreRow', lastSelectedId);
                         }
                         lastSelectedId = id;
                     }
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    if (name == 'FechaIngreso') {
+                        jQuery("#" + iRow + "_FechaIngreso", "#ListaIngresoEgreso").datepicker({ dateFormat: "dd/mm/yy" });
+                    }
+                    if (name == 'FechaEgreso') {
+                        jQuery("#" + iRow + "_FechaEgreso", "#ListaIngresoEgreso").datepicker({ dateFormat: "dd/mm/yy" });
+                    }
+                },
+                //Ejemplo de como afectar otras columnas de la grilla
+                afterSaveCell: function (rowid, name, val, iRow, iCol) {
+                    //if(name == 'amount') {
+                    //    var taxval = jQuery("#celltbl").jqGrid('getCell',rowid,iCol+1);
+                    //    jQuery("#celltbl").jqGrid('setRowData',rowid,{total:parseFloat(val)+parseFloat(taxval)});
+                    //}
+                    //if(name == 'tax') {
+                    //    var amtval = jQuery("#celltbl").jqGrid('getCell',rowid,iCol-1);
+                    //    jQuery("#celltbl").jqGrid('setRowData',rowid,{total:parseFloat(val)+parseFloat(amtval)});
+                    //}
                 },
                 pager: $('#ListaPager1'),
                 rowNum: 15,
@@ -233,15 +282,15 @@
                 width: '300',
                 //height: '100%',
                 altRows: false,
-                footerrow: true,
+                footerrow: false,
                 userDataOnFooter: true,
                 caption: '<b>INGRESOS - EGRESOS</b>',
-                // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
                 cellEdit: true,
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { refresh: true, add: true, edit: true, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaIngresoEgreso").jqGrid('inlineNav', '#ListaPager1', { addParams: { position: "last" } });
             jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaSectores').jqGrid({
@@ -250,19 +299,48 @@
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['IdDetalleEmpleadoSector', 'IdEmpleado', 'Fecha de cambio', 'Sector'],
+                colNames: ['IdDetalleEmpleadoSector', 'IdEmpleado', 'Fecha cambio', 'Sector', 'IdSectorNuevo'],
                 colModel: [
                             { name: 'IdDetalleEmpleadoSector', index: 'IdDetalleEmpleadoSector', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: true, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, editrules: { required: false } },
-                            { name: 'Sector', index: 'Sector', align: 'left', width: 100, editable: true, search: true, searchoptions: { sopt: ['cn'] }, editrules: { required: false } }
+                            { name: 'FechaCambio', index: 'FechaCambio', width: 100, sortable: false, align: 'right', editable: true, label: 'TB', 
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                            },
+                            {
+                                name: 'Sector', index: 'Sector', align: 'left', width: 100, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                    editoptions: {
+                                        dataUrl: ROOT + 'Sector/GetSectores',
+                                        dataEvents: [{ type: 'change', fn: function (e) { 
+                                            var rowid = $('#ListaSectores').getGridParam('selrow');
+                                            $('#ListaSectores').jqGrid('setCell', rowid, 'IdSectorNuevo', this.value);
+                                        } }]
+                                    },
+                            },
+                            { name: 'IdSectorNuevo', index: 'IdSectorNuevo', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
                         if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                            jQuery("#ListaSectores").jqGrid('restoreRow', lastSelectedId);
                         }
                         lastSelectedId = id;
+                    }
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    if (name == 'FechaCambio') {
+                        jQuery("#" + iRow + "_FechaCambio", "#ListaSectores").datepicker({ dateFormat: "dd/mm/yy" });
                     }
                 },
                 pager: $('#ListaPager2'),
@@ -274,12 +352,46 @@
                 width: '300',
                 //height: '100%',
                 altRows: false,
-                footerrow: true,
+                footerrow: false,
                 userDataOnFooter: true,
-                caption: '<b>CAMBIOS DE SECTORES</b>'
+                caption: '<b>CAMBIOS DE SECTORES</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaSectores").jqGrid('inlineNav', '#ListaPager2', { addParams: { position: "last" } });
             jQuery("#ListaSectores").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+            //var filledSelects = 0, $grid = jQuery("#ListaSectores");
+            //fillSelectWithData = function (data, colName, idProp, nameProp) {
+            //    var len = data.length, i, html = '', item;
+            //    for (i = 0; i < len; i++) {
+            //        item = data[i];
+            //        if (i !== 0) {
+            //            html += ',';
+            //        }
+            //        html += "'" + item[idProp] + "':'" + item[nameProp] + "'";
+            //    }
+            //    $grid.jqGrid('setColProp', colName, {
+            //        edittype: 'select',
+            //        editoptions: {value: html},
+            //        editable: true
+            //    });
+            //};
+            //loadGridIfRequired = function () {
+            //    filledSelects++;
+            //    if (filledSelects > 0) {
+            //        $grid.jqGrid('setGridParam', {
+            //            datatype: 'json'
+            //        }).trigger('reloadGrid');
+            //    }
+            //};
+
+            //$.getJSON(ROOT + "Sector/GetSectoresJson", function (data) {
+            //    fillSelectWithData(data, 'IdSectorNuevo', 'value', 'title');
+            //    loadGridIfRequired();
+            //});
 
             $('#ListaJornadas').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleadosJornadas/',
@@ -291,51 +403,74 @@
                 colModel: [
                             { name: 'IdDetalleEmpleadoJornada', index: 'IdDetalleEmpleadoJornada', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'FechaCambio', index: 'FechaCambio', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                            {
-                              name: 'HorasJornada', index: 'HorasJornada', label: 'TB', align: 'right', width: 80, editable: true, hidden: false, edittype: 'currency',
+                            { name: 'FechaCambio1', index: 'FechaCambio1', width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                                editoptions: {
+                                    size: 10,
+                                    maxlengh: 10,
+                                    dataInit: function (element) {
+                                        $(element).datepicker({
+                                            dateFormat: 'dd/mm/yy',
+                                            constrainInput: false,
+                                            showOn: 'button',
+                                            buttonText: '...'
+                                        });
+                                    }
+                                },
+                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                            },
+                            { name: 'HorasJornada', index: 'HorasJornada', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                                 editoptions: {
                                     maxlength: 20, defaultValue: '0.00',
-                                    dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } },
-                                                 {
-                                                     type: 'keypress',
-                                                     fn: function (e) {
-                                                         if (e.keyCode >= 48 && e.keyCode <= 57) {
-                                                             return true;
-                                                         } else {
-                                                             alert("nada de letras");
-                                                             return false;
-                                                         }
-                                                     }
-                                                 }
-                                    ]
-                                },
-                                editrules: { required: false },
-                                defaultValue: 0
+                                    dataEvents: [
+                                    {   type: 'keypress',
+                                        fn: function (e) {
+                                            var key = e.charCode || e.keyCode;
+                                            if (key == 13) { setTimeout("jQuery('#ListaJornadas').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                        }
+                                    }]
+                                }
                             }
                 ],
+                gridComplete: function () {
+                },
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
                         if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                            jQuery("#ListaJornadas").jqGrid('restoreRow', lastSelectedId);
                         }
                         lastSelectedId = id;
                     }
                 },
+                beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+                    selICol = iCol;
+                    selIRow = iRow;
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    if (name == 'FechaCambio1') {
+                        jQuery("#" + iRow + "_FechaCambio1", "#ListaJornadas").datepicker({ dateFormat: "dd/mm/yy" });
+                    };
+                },
+                afterSaveCell: function (rowid, name, val, iRow, iCol) {
+                },
                 pager: $('#ListaPager3'),
                 rowNum: 15,
                 rowList: [10, 20, 50, 100],
-                sortname: 'FechaCambio',
+                sortname: 'FechaCambio1',
                 sortorder: 'asc',
                 viewrecords: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
-                footerrow: true,
+                footerrow: false,
                 userDataOnFooter: true,
-                caption: '<b>JORNADAS</b>'
+                caption: '<b>JORNADAS</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { refresh: true, add: true, edit: true, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaJornadas").jqGrid('inlineNav', '#ListaPager3', { addParams: { position: "last" } });
             jQuery("#ListaJornadas").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaCuentasBancarias').jqGrid({
@@ -351,16 +486,14 @@
                             { name: 'Banco', index: 'Banco', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                             {
                                 name: 'CuentaBancaria', formoptions: { rowpos: 8, colpos: 2, label: "CuentaBancaria" }, index: 'CuentaBancaria', align: 'left', width: 100,
-                                hidden: false, editable: true, edittype: 'text',
-                                editoptions: {
-                                    rows: '1', cols: '1',
+                                hidden: false, editable: true, edittype: 'text', editrules: { required: true }, 
+                                editoptions: {rows: '1', cols: '1', 
                                     dataInit: function (elem) {
-                                        var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
+                                        var NoResultsLabel = "No se encontraron resultados";
                                         $(elem).autocomplete({
                                             source: ROOT + 'Banco/GetCuentasBancariasAutocomplete',
                                             minLength: 0,
                                             select: function (event, ui) {
-                                                // http://www.trirand.com/blog/?page_id=393/help/while-the-select-editoption-posts-the-value-or-id-of-the-selected-list-item-autocomplete-posts-the-label-i-need-id-posted
                                                 if (ui.item.label === NoResultsLabel) {
                                                     event.preventDefault();
                                                     return;
@@ -369,6 +502,7 @@
                                                 $(elem).val(ui.item.label);
                                                 var rowid = $('#ListaCuentasBancarias').getGridParam('selrow');
                                                 $('#ListaCuentasBancarias').jqGrid('setCell', rowid, 'IdCuentaBancaria', ui.item.id);
+                                                $('#ListaCuentasBancarias').jqGrid('setCell', rowid, 'Banco', ui.item.Banco);
                                             },
                                             focus: function (event, ui) {
                                                 if (ui.item.label === NoResultsLabel) {
@@ -384,46 +518,14 @@
                                                 .appendTo(ul);
                                         };
                                     },
-                                    dataEvents: [{
-                                        type: 'change',
-                                        fn: function (e) {
-                                            //alert(this.value);
-                                            if (this.value == "No se encontraron resultados") {
-                                                $("#Descripcion").val("");
-                                                return;
-                                            }
-
-                                            $.post(ROOT + 'Banco/GetCuentasBancariasAutocomplete',  // ?term=' + val
-                                                { term: this.value },
-                                                function (data) {
-                                                    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                                                        var ui = data[0];
-
-                                                        if (ui.codigo == "") {
-                                                            alert("No existe la cuenta"); // se está bancando que no sea identica la descripcion
-                                                            $("#Descripcion").val("");
-                                                            return;
-                                                        }
-                                                        //alert('hay ' + data.length);
-                                                        // alert(ui.codigo);
-                                                        $("#IdCuentaBancaria").val(ui.id);
-                                                    }
-                                                    else {
-                                                        alert("No existe la cuenta bancaria"); // se está bancando que no sea identica la descripcion
-                                                    }
-                                                }
-                                            );
-                                        }
-                                    }]
-                                },
-                                editrules: { required: false }
+                                }
                             },
                             { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' }
                 ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
                         if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                            jQuery("#ListaCuentasBancarias").jqGrid('restoreRow', lastSelectedId);
                         }
                         lastSelectedId = id;
                     }
@@ -437,15 +539,15 @@
                 width: '300',
                 //height: '100%',
                 altRows: false,
-                footerrow: true,
+                footerrow: false,
                 userDataOnFooter: true,
                 caption: '<b>CUENTAS BANCARIAS ASIGNADAS</b>',
-                // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
                 cellEdit: true,
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaCuentasBancarias").jqGrid('inlineNav', '#ListaPager4', { addParams: { position: "last" } });
             jQuery("#ListaCuentasBancarias").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaUbicaciones').jqGrid({
@@ -454,16 +556,25 @@
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Cuenta bancaria'],
+                colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Ubicacion asignada', 'IdUbicacion'],
                 colModel: [
                             { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
-                ],
+                            { name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 100, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                editoptions: {
+                                    dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
+                                    dataEvents: [{ type: 'change', fn: function (e) { 
+                                        var rowid = $('#ListaUbicaciones').getGridParam('selrow');
+                                        $('#ListaUbicaciones').jqGrid('setCell', rowid, 'IdUbicacion', this.value);
+                                    } }]
+                                },
+                            },
+                            { name: 'IdUbicacion', index: 'IdUbicacion', align: 'left', width: 10, editable: false, hidden: true }
+                    ],
                 onSelectRow: function (id) {
                     if (id && id !== lastSelectedId) {
                         if (typeof lastSelectedId !== "undefined") {
-                            grid.jqGrid('restoreRow', lastSelectedId);
+                            jQuery("#ListaUbicaciones").jqGrid('restoreRow', lastSelectedId);
                         }
                         lastSelectedId = id;
                     }
@@ -471,23 +582,25 @@
                 pager: $('#ListaPager5'),
                 rowNum: 15,
                 rowList: [10, 20, 50, 100],
-                sortname: 'CuentaBancaria',
+                sortname: 'Ubicacion',
                 sortorder: 'asc',
                 viewrecords: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
-                footerrow: true,
+                footerrow: false,
                 userDataOnFooter: true,
-                caption: '<b>UBICACIONES ASIGNADAS</b>'
+                caption: '<b>UBICACIONES ASIGNADAS</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaUbicaciones").jqGrid('navGrid', '#ListaPager5', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaUbicaciones").jqGrid('navGrid', '#ListaPager5', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
             jQuery("#ListaUbicaciones").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+            jQuery("#ListaUbicaciones").jqGrid('inlineNav', '#ListaPager5', { addParams: { position: "last" } });
         });
 
         $('#grabar2').click(function () {
-            //jQuery('#ListaCuentasBancarias').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
             var cabecera = SerializaForm();
 
             $('html, body').css('cursor', 'wait');
@@ -496,13 +609,12 @@
                 contentType: 'application/json; charset=utf-8',
                 url: ROOT + 'Empleado/BatchUpdate',
                 dataType: 'json',
-                data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+                data: JSON.stringify(cabecera), 
                 success: function (result) {
                     if (result) {
                         $('html, body').css('cursor', 'auto');
                         if (true) {
-                            // window.location = (ROOT + "ComprobanteProveedor/EditFF/" + result.IdComprobanteProveedor);
-                            window.location = (ROOT + "Empleado/Edit/-1");
+                            window.location = (ROOT + "Empleado/Edit/" + result.IdEmpleado);
                         } else {
                             var dt = new Date();
                             var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
@@ -512,7 +624,6 @@
                             $('html, body').css('cursor', 'auto');
                             $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
                         }
-
                     } else {
                         alert('No se pudo grabar el comprobante.');
                         $('.loading').html('');
@@ -536,31 +647,18 @@
                     try {
                         var errorData = $.parseJSON(xhr.responseText);
                         var errorMessages = [];
-                        //this ugly loop is because List<> is serialized to an object instead of an array
                         for (var key in errorData) {
                             errorMessages.push(errorData[key]);
                         }
-
-
                         $('html, body').css('cursor', 'auto');
                         $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
-                        //alert(errorMessages.join("<br />"));
-
-                        // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
-                        //$('#result').html(errorMessages.join("<br />"));
-                        //$("#textoMensajeAlerta").html(xhr.responseText);
                         $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
                         $("#mensajeAlerta").show();
                         pageLayout.show('east');
-
                         alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
                     } catch (e) {
-                        // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                        // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
                         $('html, body').css('cursor', 'auto');
                         $('#grabar2').attr("disabled", false).val("Aceptar y nuevo");
-                        //alert(xhr.responseText);
                         $("#textoMensajeAlerta").html(xhr.responseText);
                         $("#mensajeAlerta").show();
                     }
@@ -570,27 +668,51 @@
         });
 
         function SerializaForm() {
-            var cm, data1, data2, valor;
-            var cabecera = $("#formid").serializeObject(); 
-            cabecera.DetalleCuentasBancarias = [];
-            var colModel = jQuery("#ListaCuentasBancarias").jqGrid('getGridParam', 'colModel');
+            var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
+            var cabecera = $("#formid").serializeObject();
 
-            var dataIds = $('#ListaCuentasBancarias').jqGrid('getDataIDs');
-            for (var i = 0; i < dataIds.length; i++) {
+            cabecera.IdEmpleado = $("#IdEmpleado").val();
+            cabecera.Legajo = $("#Legajo").val();
+            cabecera.Nombre = $("#Nombre").val();
+            cabecera.UsuarioNT = $("#UsuarioNT").val();
+            cabecera.Password = $("#Password").val();
+            cabecera.Iniciales = $("#Iniciales").val();
+            cabecera.Interno = $("#Interno").val();
+            cabecera.FechaNacimiento = FechaIngles($("#FechaNacimiento").val());
+            cabecera.IdSector = $("#IdSector").val();
+            cabecera.IdCargo = $("#IdCargo").val();
+            cabecera.Email = $("#Email").val();
+            cabecera.CuentaBancaria = $("#CuentaBancaria").val();
+            cabecera.InformacionAuxiliar = $("#InformacionAuxiliar").val();
+            cabecera.IdCuentaFondoFijo = $("#IdCuentaFondoFijo").val();
+            cabecera.IdObraAsignada = $("#IdObraAsignada").val();
+            cabecera.Administrador = $("#Administrador").val();
+            cabecera.Activo = $("#Activo").val();
+            cabecera.TipoUsuario = $("#TipoUsuario").val();
+
+            cabecera.DetalleEmpleados = [];
+            nuevo = -1;
+            colModel = jQuery("#ListaIngresoEgreso").jqGrid('getGridParam', 'colModel');
+            dataIds = $('#ListaIngresoEgreso').jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
                 try {
                     try {
-                        $('#ListaCuentasBancarias').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+                        $('#ListaIngresoEgreso').jqGrid('saveRow', dataIds[i], false, 'clientArray');
                     } catch (e) {
-                        $('#ListaCuentasBancarias').jqGrid('restoreRow', dataIds[i]);
+                        $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
                         continue;
                     }
 
-                    var data = $('#ListaCuentasBancarias').jqGrid('getRowData', dataIds[i]);
-                    var iddeta = data['IdDetalleEmpleadoCuentaBancaria'];
-                    if (!iddeta) continue;
+                    data = $('#ListaIngresoEgreso').jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdDetalleEmpleado'];
+                    if (!iddeta) {
+                        iddeta = nuevo;
+                        nuevo--;
+                    }
 
-                    data1 = '{"IdEmpleado":"' + $("#IdEmpleado").val() + '",'
-                    for (var j = 0; j < colModel.length; j++) {
+                    data1 = '{"IdDetalleEmpleado":"' + iddeta + '",';
+                    data1 = data1 + '"IdEmpleado":"' + $("#IdEmpleado").val() + '",';
+                    for (j = 0; j < colModel.length; j++) {
                         cm = colModel[j]
                         if (cm.label === 'TB') {
                             valor = data[cm.name];
@@ -600,10 +722,51 @@
                     data1 = data1.substring(0, data1.length - 1) + '}';
                     data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                     data2 = JSON.parse(data1);
-                    cabecera.DetalleCuentasBancarias.push(data2);
+                    cabecera.DetalleEmpleados.push(data2);
                 }
                 catch (ex) {
-                    $('#ListaCuentasBancarias').jqGrid('restoreRow', dataIds[i]);
+                    $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
+                    alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                    return;
+                }
+            }
+
+            cabecera.DetalleEmpleadosSectores = [];
+            nuevo = -1;
+            colModel = jQuery("#ListaSectores").jqGrid('getGridParam', 'colModel');
+            dataIds = $('#ListaSectores').jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                try {
+                    try {
+                        $('#ListaSectores').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+                    } catch (e) {
+                        $('#ListaSectores').jqGrid('restoreRow', dataIds[i]);
+                        continue;
+                    }
+
+                    data = $('#ListaSectores').jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdDetalleEmpleadoSector'];
+                    if (!iddeta) {
+                        iddeta = nuevo;
+                        nuevo--;
+                    }
+
+                    data1 = '{"IdDetalleEmpleadoSector":"' + iddeta + '",';
+                    data1 = data1 + '"IdEmpleado":"' + $("#IdEmpleado").val() + '",';
+                    for (j = 0; j < colModel.length; j++) {
+                        cm = colModel[j]
+                        if (cm.label === 'TB') {
+                            valor = data[cm.name];
+                            data1 = data1 + '"' + cm.name + '":"' + valor + '",';
+                        }
+                    }
+                    data1 = data1.substring(0, data1.length - 1) + '}';
+                    data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                    data2 = JSON.parse(data1);
+                    cabecera.DetalleEmpleadosSectores.push(data2);
+                }
+                catch (ex) {
+                    $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
                     alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
                     return;
                 }

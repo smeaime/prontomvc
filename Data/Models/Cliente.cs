@@ -123,8 +123,6 @@ namespace ProntoMVC.Data.Models
         public string OperacionesMercadoInternoEntidadVinculada { get; set; }
         public Nullable<int> CartaPorteTipoDeAdjuntoDeFacturacion { get; set; }
     
-        public virtual Empleado Empleados { get; set; }
-        public virtual Empleado Empleados1 { get; set; }
         public virtual Cuenta Cuenta { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }
         public virtual Vendedor VendedorCobrador { get; set; }
@@ -154,5 +152,7 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
         public virtual ICollection<NotasDebito> NotasDebitoes { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
     }
 }
