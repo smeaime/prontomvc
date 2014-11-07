@@ -86,9 +86,12 @@ namespace ProntoMVC.Data.Models
         public string SalidasMateriales { get; set; }
     
         public virtual Obra Obra { get; set; }
-        public virtual Empleado Empleados { get; set; }
-        public virtual Empleado Empleados1 { get; set; }
         public virtual Sector Sectores { get; set; }
         public virtual ICollection<DetalleRequerimiento> DetalleRequerimientos { get; set; }
+        public virtual Empleado AproboRequerimiento { get; set; }
+        public virtual Empleado AutorizoCumplidoRequerimiento { get; set; }
+        public virtual Empleado CompradorRequerimiento { get; set; }
+        public virtual Empleado DioPorCumplidoRequerimiento { get; set; }
+        public virtual Empleado SolicitoRequerimiento { get; set; }
     }
 }

@@ -17,5 +17,7 @@ namespace ProntoMVC.Data.Models
         public int IdDetalleEmpleadoObra { get; set; }
         public Nullable<int> IdEmpleado { get; set; }
         public Nullable<int> IdObra { get; set; }
+    
+        public virtual Empleado Empleado { get; set; }
     }
 }

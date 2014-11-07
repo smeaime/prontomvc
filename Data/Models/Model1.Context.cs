@@ -30,7 +30,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Articulo> Articulos { get; set; }
         public virtual DbSet<ControlCalidad> ControlesCalidads { get; set; }
         public virtual DbSet<DetalleRequerimiento> DetalleRequerimientos { get; set; }
-        public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Obra> Obras { get; set; }
         public virtual DbSet<Requerimiento> Requerimientos { get; set; }
         public virtual DbSet<Sector> Sectores { get; set; }
@@ -124,7 +123,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleComprobantesProveedoresPresupuestosObra> DetalleComprobantesProveedoresPresupuestosObras { get; set; }
         public virtual DbSet<DetalleComprobantesProveedoresProvincia> DetalleComprobantesProveedoresProvincias { get; set; }
         public virtual DbSet<Caja> Cajas { get; set; }
-        public virtual DbSet<DetalleEmpleado> DetalleEmpleados { get; set; }
         public virtual DbSet<DetalleEmpleadosCuentasBancaria> DetalleEmpleadosCuentasBancarias { get; set; }
         public virtual DbSet<DetalleEmpleadosJornada> DetalleEmpleadosJornadas { get; set; }
         public virtual DbSet<DetalleEmpleadosSectore> DetalleEmpleadosSectores { get; set; }
@@ -157,6 +155,8 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleEmpleadosUbicacione> DetalleEmpleadosUbicaciones { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<CuentasBancaria> CuentasBancarias { get; set; }
+        public virtual DbSet<DetalleEmpleado> DetalleEmpleados { get; set; }
+        public virtual DbSet<Empleado> Empleados { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

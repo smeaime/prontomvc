@@ -1373,7 +1373,7 @@ a.PercepcionIVA.GetValueOrDefault().NullSafeToString() , // as [Perc.IVA],
 ( a.Moneda ?? new Moneda()).Abreviatura.NullSafeToString(), // as [Mon.],  
  (a.Cliente ?? new Cliente()).Telefono.NullSafeToString(), //  as [Telefono del cliente],   
  (a.Vendedore ?? new Vendedor()).Nombre, //  as [Vendedor],  
- (a.Empleado ?? new Empleado()).Nombre, //   as [Ingreso],  
+ //(a.Empleado ?? new Empleado()).Nombre, //   as [Ingreso],  
  
 a.FechaIngreso.NullSafeToString(), //  as [Fecha ingreso],  
 (a.Obra ?? new Obra()).NumeroObra,// as [Obra (x defecto)],  

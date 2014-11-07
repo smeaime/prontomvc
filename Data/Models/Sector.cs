@@ -16,8 +16,8 @@ namespace ProntoMVC.Data.Models
     {
         public Sector()
         {
-            this.Empleados = new HashSet<Empleado>();
             this.Requerimientos = new HashSet<Requerimiento>();
+            this.Empleados = new HashSet<Empleado>();
         }
     
         public int IdSector { get; set; }
@@ -28,7 +28,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> OrdenPresentacion { get; set; }
         public Nullable<byte> EnviarEmail { get; set; }
     
-        public virtual ICollection<Empleado> Empleados { get; set; }
         public virtual ICollection<Requerimiento> Requerimientos { get; set; }
+        public virtual ICollection<Empleado> Empleados { get; set; }
     }
 }
