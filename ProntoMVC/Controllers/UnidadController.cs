@@ -128,7 +128,7 @@ namespace ProntoMVC.Controllers
                 // .Include("DetallePedidos.Unidad") // funciona tambien
                     .Include(x => x.Proveedor)
                     .Include(x => x.Proveedor.DescripcionIva)
-                    .Include(x => x.Comprador)
+                    //.Include(x => x.comprador)
 
                   .SingleOrDefault(x => x.IdPedido == id);
 

@@ -853,8 +853,8 @@ namespace ProntoMVC.Controllers
                 //    .Include(x => x.Moneda)
                     .Include(x => x.Obra)
 
-                    .Include(x => x.Empleados)
-                    .Include(x => x.Empleados1)
+                    .Include(x => x.SolicitoRequerimiento)
+                    .Include(x => x.AproboRequerimiento)
                     .Include(x => x.Sectores)
                 //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
                 //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
@@ -1089,8 +1089,8 @@ namespace ProntoMVC.Controllers
                                 
                                 
                                 
-                                (a.Empleados==null) ?  "" :   a.Empleados.Nombre,
-                                (a.Empleados1==null) ?  "" :  a.Empleados1.Nombre,
+                                (a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
+                                (a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
                                 (a.Sectores==null) ?  "" : a.Sectores.Descripcion,
 
                                 a.UsuarioAnulacion,
@@ -1248,8 +1248,8 @@ namespace ProntoMVC.Controllers
                             Pedidos = a.Pedidos,
                             Recepciones = a.Recepciones,
                             Salidas = a.SalidasMateriales,
-                            Libero = a.Empleados.Nombre,
-                            Solicito = a.Empleados1.Nombre,
+                            Libero = a.AproboRequerimiento.Nombre,
+                            Solicito = a.SolicitoRequerimiento.Nombre,
                             Sector = a.Sectores.Descripcion,
                             Usuario_anulo = a.UsuarioAnulacion,
                             Fecha_anulacion = a.FechaAnulacion,

@@ -4325,6 +4325,78 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleEmpleados_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleados" Type="Self.DetalleEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosCuentasBancarias_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleadosCuentasBancarias" Type="Self.DetalleEmpleadosCuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosCuentasBancarias">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosJornadas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleadosJornadas" Type="Self.DetalleEmpleadosJornadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosJornadas">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosObras_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleadosObras" Type="Self.DetalleEmpleadosObras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosObras">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosSectores_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleadosSectores" Type="Self.DetalleEmpleadosSectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosSectores">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosUbicaciones_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="DetalleEmpleadosUbicaciones" Type="Self.DetalleEmpleadosUbicaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosUbicaciones">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleFacturas_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
           <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="*" />
@@ -4562,6 +4634,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="Empleados">
               <PropertyRef Name="IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosAccesos_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="EmpleadosAccesos" Type="Self.EmpleadosAccesos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadosAccesos">
+              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4805,6 +4889,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Presupuestos_Empleados_Aprobo">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="Aprobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuestos_Empleados_IdComprador">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Presupuestos">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PuntosVenta_TiposComprobante">
           <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
           <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="*" />
@@ -4826,6 +4934,66 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="Recibos">
               <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_Aprobo">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="Aprobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdAutorizoCumplido">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="IdAutorizoCumplido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdComprador">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdDioPorCumplido">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="IdDioPorCumplido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdSolicito">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimientos">
+              <PropertyRef Name="IdSolicito" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5199,6 +5367,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Cuentas" EntitySet="Cuentas" />
             <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="Self.FK_DetalleEmpleados_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleados" EntitySet="DetalleEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosCuentasBancarias_Empleados" Association="Self.FK_DetalleEmpleadosCuentasBancarias_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosCuentasBancarias" EntitySet="DetalleEmpleadosCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosJornadas_Empleados" Association="Self.FK_DetalleEmpleadosJornadas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosJornadas" EntitySet="DetalleEmpleadosJornadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosObras_Empleados" Association="Self.FK_DetalleEmpleadosObras_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosObras" EntitySet="DetalleEmpleadosObras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosSectores_Empleados" Association="Self.FK_DetalleEmpleadosSectores_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosSectores" EntitySet="DetalleEmpleadosSectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="Self.FK_DetalleEmpleadosUbicaciones_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosUbicaciones" EntitySet="DetalleEmpleadosUbicaciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleFacturas_Facturas" Association="Self.FK_DetalleFacturas_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
@@ -5278,6 +5470,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_Empleados_Sectores" Association="Self.FK_Empleados_Sectores">
             <End Role="Sectores" EntitySet="Sectores" />
             <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="Self.FK_EmpleadosAccesos_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="EmpleadosAccesos" EntitySet="EmpleadosAccesos" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Clientes" Association="Self.FK_Facturas_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
@@ -5359,6 +5555,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Monedas" EntitySet="Monedas" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Presupuestos_Empleados_Aprobo" Association="Self.FK_Presupuestos_Empleados_Aprobo">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuestos_Empleados_IdComprador" Association="Self.FK_Presupuestos_Empleados_IdComprador">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+          </AssociationSet>
           <AssociationSet Name="FK_PuntosVenta_TiposComprobante" Association="Self.FK_PuntosVenta_TiposComprobante">
             <End Role="TiposComprobante" EntitySet="TiposComprobante" />
             <End Role="PuntosVenta" EntitySet="PuntosVenta" />
@@ -5366,6 +5570,26 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_Recibos_Clientes" Association="Self.FK_Recibos_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Recibos" EntitySet="Recibos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_Aprobo" Association="Self.FK_Requerimientos_Empleados_Aprobo">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdAutorizoCumplido" Association="Self.FK_Requerimientos_Empleados_IdAutorizoCumplido">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdComprador" Association="Self.FK_Requerimientos_Empleados_IdComprador">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdDioPorCumplido" Association="Self.FK_Requerimientos_Empleados_IdDioPorCumplido">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdSolicito" Association="Self.FK_Requerimientos_Empleados_IdSolicito">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Requerimientos" EntitySet="Requerimientos" />
           </AssociationSet>
           <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
             <End Role="Localidades" EntitySet="Localidades" />
@@ -5380,7 +5604,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="Articulos" EntityType="DemoProntoModel.Articulo" />
           <EntitySet Name="ControlesCalidads" EntityType="DemoProntoModel.ControlCalidad" />
           <EntitySet Name="DetalleRequerimientos" EntityType="DemoProntoModel.DetalleRequerimiento" />
-          <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
           <EntitySet Name="Obras" EntityType="DemoProntoModel.Obra" />
           <EntitySet Name="Requerimientos" EntityType="DemoProntoModel.Requerimiento" />
           <EntitySet Name="Sectores" EntityType="DemoProntoModel.Sector" />
@@ -5397,10 +5620,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Unidades" EntitySet="Unidades" />
             <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
-            <End Role="Sectores" EntitySet="Sectores" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
           <AssociationSet Name="FK_Requerimientos_Obras" Association="DemoProntoModel.FK_Requerimientos_Obras">
             <End Role="Obras" EntitySet="Obras" />
             <End Role="Requerimientos" EntitySet="Requerimientos" />
@@ -5408,14 +5627,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_DetalleRequerimientos_ControlesCalidad" Association="DemoProntoModel.FK_DetalleRequerimientos_ControlesCalidad">
             <End Role="ControlCalidad" EntitySet="ControlesCalidads" />
             <End Role="DetalleRequerimiento" EntitySet="DetalleRequerimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requerimientos_Empleados1" Association="DemoProntoModel.FK_Requerimientos_Empleados1">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Requerimiento" EntitySet="Requerimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Requerimientos_Empleados2" Association="DemoProntoModel.FK_Requerimientos_Empleados2">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Requerimiento" EntitySet="Requerimientos" />
           </AssociationSet>
           <AssociationSet Name="FK_Requerimientos_Sectores" Association="DemoProntoModel.FK_Requerimientos_Sectores">
             <End Role="Sector" EntitySet="Sectores" />
@@ -5433,14 +5644,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <Parameter Name="IdDetalleRequerimiento" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Clientes" EntityType="DemoProntoModel.Cliente" />
-          <AssociationSet Name="FK_Clientes_Empleados" Association="DemoProntoModel.FK_Clientes_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clientes_Empleados1" Association="DemoProntoModel.FK_Clientes_Empleados1">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
           <EntitySet Name="PuntosVentas" EntityType="DemoProntoModel.PuntosVenta" />
           <FunctionImport Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" ReturnType="Collection(DemoProntoModel.AutorizacionesPorComprobante)">
             <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
@@ -5508,10 +5711,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_DetallePresupuestos_Unidades" Association="DemoProntoModel.FK_DetallePresupuestos_Unidades">
             <End Role="Unidad" EntitySet="Unidades" />
             <End Role="DetallePresupuesto" EntitySet="DetallePresupuestos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pedidos_Empleados" Association="DemoProntoModel.FK_Pedidos_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Pedido" EntitySet="Pedidos" />
           </AssociationSet>
           <AssociationSet Name="FK_Ganancias_TiposRetencionGanancia" Association="DemoProntoModel.FK_Ganancias_TiposRetencionGanancia">
             <End Role="TiposRetencionGanancia" EntitySet="TiposRetencionGanancias" />
@@ -5629,10 +5828,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Factura" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Facturas_Empleados" Association="DemoProntoModel.FK_Facturas_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Factura" EntitySet="Facturas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Facturas_Monedas" Association="DemoProntoModel.FK_Facturas_Monedas">
             <End Role="Moneda" EntitySet="Monedas" />
             <End Role="Factura" EntitySet="Facturas" />
@@ -5660,14 +5855,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_DetallePresupuestos_DetalleRequerimientos" Association="DemoProntoModel.FK_DetallePresupuestos_DetalleRequerimientos">
             <End Role="DetalleRequerimiento" EntitySet="DetalleRequerimientos" />
             <End Role="DetallePresupuesto" EntitySet="DetallePresupuestos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Presupuestos_Empleados1" Association="DemoProntoModel.FK_Presupuestos_Empleados1">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Presupuesto" EntitySet="Presupuestos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Presupuestos_Empleados2" Association="DemoProntoModel.FK_Presupuestos_Empleados2">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Presupuesto" EntitySet="Presupuestos" />
           </AssociationSet>
           <EntitySet Name="DetalleProveedores" EntityType="DemoProntoModel.DetalleProveedor" />
           <EntitySet Name="DetalleProveedoresIBs" EntityType="DemoProntoModel.DetalleProveedoresIB" />
@@ -5909,10 +6096,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="DetalleArticulosUnidade" EntitySet="DetalleArticulosUnidades" />
           </AssociationSet>
           <EntitySet Name="EmpleadosAccesos" EntityType="DemoProntoModel.EmpleadosAcceso" />
-          <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="EmpleadosAcceso" EntitySet="EmpleadosAccesos" />
-          </AssociationSet>
           <EntitySet Name="DetalleRecibos" EntityType="DemoProntoModel.DetalleRecibo" />
           <EntitySet Name="DetalleRecibosCuentas" EntityType="DemoProntoModel.DetalleRecibosCuenta" />
           <EntitySet Name="DetalleRecibosRubrosContables" EntityType="DemoProntoModel.DetalleRecibosRubrosContable" />
@@ -5991,10 +6174,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <Parameter Name="Importe" Mode="In" Type="Decimal" />
             <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_Pedidos_EmpleadoAprobo" Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Pedido" EntitySet="Pedidos" />
-          </AssociationSet>
           <AssociationSet Name="FK_DetallePedidos_ControlCalidad" Association="DemoProntoModel.FK_DetallePedidos_ControlCalidad">
             <End Role="ControlCalidad" EntitySet="ControlesCalidads" />
             <End Role="DetallePedido" EntitySet="DetallePedidos" />
@@ -6032,7 +6211,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="OrdenPago" EntitySet="OrdenesPago" />
           </AssociationSet>
           <EntitySet Name="Cajas" EntityType="DemoProntoModel.Caja" />
-          <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
           <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="DemoProntoModel.DetalleEmpleadosCuentasBancaria" />
           <EntitySet Name="DetalleEmpleadosJornadas" EntityType="DemoProntoModel.DetalleEmpleadosJornada" />
           <EntitySet Name="DetalleEmpleadosSectores" EntityType="DemoProntoModel.DetalleEmpleadosSectore" />
@@ -6137,29 +6315,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="BancoChequera" EntitySet="BancoChequeras" />
             <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comparativas_Empleados" Association="DemoProntoModel.FK_Comparativas_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Comparativa" EntitySet="Comparativas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comparativas_Empleados1" Association="DemoProntoModel.FK_Comparativas_Empleados1">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Comparativa" EntitySet="Comparativas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComprobantesProveedores_Empleados" Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComprobantesProveedores_Empleados1" Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados1">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-          </AssociationSet>
           <AssociationSet Name="FK_ComprobantesProveedores_Monedas" Association="DemoProntoModel.FK_ComprobantesProveedores_Monedas">
             <End Role="Moneda" EntitySet="Monedas" />
             <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Conjuntos_Empleados" Association="DemoProntoModel.FK_Conjuntos_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="Conjunto" EntitySet="Conjuntos" />
           </AssociationSet>
           <AssociationSet Name="FK_Conjuntos_Obras" Association="DemoProntoModel.FK_Conjuntos_Obras">
             <End Role="Obra" EntitySet="Obras" />
@@ -6168,14 +6326,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_DetalleComparativas_Monedas" Association="DemoProntoModel.FK_DetalleComparativas_Monedas">
             <End Role="Moneda" EntitySet="Monedas" />
             <End Role="DetalleComparativa" EntitySet="DetalleComparativas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NotasCredito_Empleados" Association="DemoProntoModel.FK_NotasCredito_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="NotasCredito" EntitySet="NotasCreditoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NotasDebito_Empleados" Association="DemoProntoModel.FK_NotasDebito_Empleados">
-            <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="NotasDebito" EntitySet="NotasDebitoes" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_PuntosVenta" Association="DemoProntoModel.FK_Facturas_PuntosVenta">
             <End Role="PuntosVenta" EntitySet="PuntosVentas" />
@@ -6222,14 +6372,96 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="DetalleEmpleadosObras" EntityType="DemoProntoModel.DetalleEmpleadosObra" />
           <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" />
           <EntitySet Name="Cargos" EntityType="DemoProntoModel.Cargo" />
-          <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
-            <End Role="Cargo" EntitySet="Cargos" />
-            <End Role="Empleado" EntitySet="Empleados" />
-          </AssociationSet>
           <EntitySet Name="CuentasBancarias" EntityType="DemoProntoModel.CuentasBancaria" />
           <AssociationSet Name="FK_CuentasBancarias_Bancos" Association="DemoProntoModel.FK_CuentasBancarias_Bancos">
             <End Role="Banco" EntitySet="Bancos" />
             <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
+          </AssociationSet>
+          <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
+          <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
+          <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
+            <End Role="Cargo" EntitySet="Cargos" />
+            <End Role="Empleado" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Empleados_Ingreso" Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Empleados_Modifico" Association="DemoProntoModel.FK_Clientes_Empleados_Modifico">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="DemoProntoModel.FK_DetalleEmpleados_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleado" EntitySet="DetalleEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
+            <End Role="Sector" EntitySet="Sectores" />
+            <End Role="Empleado" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_EmpleadoAprobo" Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Pedido" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_EmpleadoComprador" Association="DemoProntoModel.FK_Pedidos_EmpleadoComprador">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Pedido" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Empleados" Association="DemoProntoModel.FK_Pedidos_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Pedido" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="EmpleadosAcceso" EntitySet="EmpleadosAccesos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuestos_Empleados" Association="DemoProntoModel.FK_Presupuestos_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Presupuesto" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presupuestos_Empleados1" Association="DemoProntoModel.FK_Presupuestos_Empleados1">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Presupuesto" EntitySet="Presupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_Aprobo" Association="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Requerimiento" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdAutorizoCumplido" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Requerimiento" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdComprador" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Requerimiento" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdDioPorCumplido" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Requerimiento" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requerimientos_Empleados_IdSolicito" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Requerimiento" EntitySet="Requerimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosCuentasBancarias_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosCuentasBancaria" EntitySet="DetalleEmpleadosCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosJornadas_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosJornada" EntitySet="DetalleEmpleadosJornadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosObras_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosObra" EntitySet="DetalleEmpleadosObras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosSectores_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosSectore" EntitySet="DetalleEmpleadosSectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="DetalleEmpleadosUbicacione" EntitySet="DetalleEmpleadosUbicaciones" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -6599,69 +6831,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_DetalleRequerimientos" FromRole="DetalleRequerimiento" ToRole="DetallePedido" />
           <Property Name="IdPresupuestoObrasNodo" Type="Int32" />
           </EntityType>
-        <EntityType Name="Empleado">
-          <Key>
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="Legajo" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="UsuarioNT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="IdSector" Type="Int32" />
-          <Property Name="IdCargo" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Interno" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Administrador" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-          <Property Name="Iniciales" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SisMan" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-          <Property Name="HorasJornada" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IdSector1" Type="Int32" />
-          <Property Name="IdCargo1" Type="Int32" />
-          <Property Name="IdSector2" Type="Int32" />
-          <Property Name="IdCargo2" Type="Int32" />
-          <Property Name="IdSector3" Type="Int32" />
-          <Property Name="IdCargo3" Type="Int32" />
-          <Property Name="IdSector4" Type="Int32" />
-          <Property Name="IdCargo4" Type="Int32" />
-          <Property Name="Dominio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SisMat" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="TipoUsuario" Type="Int32" />
-          <Property Name="GrupoDeCarga" Type="Int32" />
-          <Property Name="CuentaBancaria" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="InformacionAuxiliar" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="IdCuentaFondoFijo" Type="Int32" />
-          <Property Name="IdObraAsignada" Type="Int32" />
-          <Property Name="Activo" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-          <Property Name="Idioma" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
-        
-          <NavigationProperty Name="Sector" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleados" ToRole="Sectores" />
-          <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Empleados1" FromRole="Empleado" ToRole="Requerimiento" />
-          <NavigationProperty Name="Requerimientos1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados2" FromRole="Empleado" ToRole="Requerimiento" />
-          <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados" FromRole="Empleado" ToRole="Clientes" />
-          <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados1" FromRole="Empleado" ToRole="Clientes" />
-          <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Empleado" ToRole="Pedido" />
-          <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Empleados" FromRole="Empleado" ToRole="Factura" />
-          <NavigationProperty Name="Presupuestos" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Empleado" ToRole="Presupuesto" />
-          <NavigationProperty Name="Presupuestos1" Relationship="DemoProntoModel.FK_Presupuestos_Empleados2" FromRole="Empleado" ToRole="Presupuesto" />
-          <NavigationProperty Name="EmpleadosAccesos" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="Empleado" ToRole="EmpleadosAcceso" />
-          <Property Type="Int32" Name="PuntoVentaAsociado_1" />
-          <Property Type="Int32" Name="IdLugarEntregaAsignado_1" />
-          <Property Type="String" Name="EsConductor" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaVencimientoRegistro" Precision="3" />
-          <NavigationProperty Name="Pedidos_1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
-          <Property Type="String" Name="LimitarUbicacionesAsignadas" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PermitirAccesoATodasLasObras" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Comparativas" Relationship="DemoProntoModel.FK_Comparativas_Empleados" FromRole="Empleado" ToRole="Comparativa" />
-          <NavigationProperty Name="Comparativas1" Relationship="DemoProntoModel.FK_Comparativas_Empleados1" FromRole="Empleado" ToRole="Comparativa" />
-          <NavigationProperty Name="ComprobantesProveedores" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados" FromRole="Empleado" ToRole="ComprobanteProveedor" />
-          <NavigationProperty Name="ComprobantesProveedores1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados1" FromRole="Empleado" ToRole="ComprobanteProveedor" />
-          <NavigationProperty Name="Conjuntos" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Empleado" ToRole="Conjunto" />
-          <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Empleados" FromRole="Empleado" ToRole="NotasCredito" />
-          <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Empleados" FromRole="Empleado" ToRole="NotasDebito" />
-          <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
-        </EntityType>
         <EntityType Name="Obra">
           <Key>
             <PropertyRef Name="IdObra" />
@@ -6794,8 +6963,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="NumeradorModificaciones" Type="Int32" />
           <Property Name="ParaTaller" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Requerimientos_Obras" FromRole="Requerimientos" ToRole="Obras" />
-          <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Requerimientos_Empleados1" FromRole="Requerimiento" ToRole="Empleado" />
-          <NavigationProperty Name="Empleados1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados2" FromRole="Requerimiento" ToRole="Empleado" />
           <NavigationProperty Name="Sectores" Relationship="DemoProntoModel.FK_Requerimientos_Sectores" FromRole="Requerimiento" ToRole="Sector" />
           <NavigationProperty Name="DetalleRequerimientos" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Requerimientos" FromRole="Requerimiento" ToRole="DetalleRequerimiento" />
        
@@ -6805,6 +6972,11 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="Pedidos" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Recepciones" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SalidasMateriales" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AproboRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" FromRole="Requerimiento" ToRole="Empleado" />
+          <NavigationProperty Name="AutorizoCumplidoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" FromRole="Requerimiento" ToRole="Empleado" />
+          <NavigationProperty Name="CompradorRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" FromRole="Requerimiento" ToRole="Empleado" />
+          <NavigationProperty Name="DioPorCumplidoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" FromRole="Requerimiento" ToRole="Empleado" />
+          <NavigationProperty Name="SolicitoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" FromRole="Requerimiento" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Sector">
           <Key>
@@ -6817,8 +6989,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="SeUsaEnPresupuestos" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
           <Property Name="OrdenPresentacion" Type="Int32" />
           <Property Name="EnviarEmail" Type="Byte" />
-          <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Sectores" ToRole="Empleados" />
           <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Sectores" FromRole="Sector" ToRole="Requerimiento" />
+          <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Sector" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Unidad">
           <Key>
@@ -6876,18 +7048,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Empleados_Sectores">
-          <End Role="Sectores" Type="DemoProntoModel.Sector" Multiplicity="0..1" />
-          <End Role="Empleados" Type="DemoProntoModel.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sectores">
-              <PropertyRef Name="IdSector" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="IdSector" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Requerimientos_Obras">
           <End Role="Obras" Type="DemoProntoModel.Obra" Multiplicity="0..1" />
           <End Role="Requerimientos" Type="DemoProntoModel.Requerimiento" Multiplicity="*" />
@@ -6909,30 +7069,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="DetalleRequerimiento">
               <PropertyRef Name="IdControlCalidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requerimientos_Empleados1">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Requerimiento">
-              <PropertyRef Name="Aprobo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requerimientos_Empleados2">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Requerimiento">
-              <PropertyRef Name="IdSolicito" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7364,8 +7500,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="DateTime" Name="FechaFinVigenciaIBDirectoCapital" Precision="3" />
           <Property Type="Int32" Name="GrupoIIBBCapital" />
           <Property Type="Int32" Name="IdBancoGestionador" />
-          <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Clientes_Empleados" FromRole="Clientes" ToRole="Empleado" />
-          <NavigationProperty Name="Empleados1" Relationship="DemoProntoModel.FK_Clientes_Empleados1" FromRole="Clientes" ToRole="Empleado" />
           <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Clientes_Cuentas" FromRole="Cliente" ToRole="Cuenta" />
           <NavigationProperty Name="IBCondicione" Relationship="DemoProntoModel.FK_Clientes_CatIIBB" FromRole="Cliente" ToRole="IBCondicion" />
           <NavigationProperty Name="VendedorCobrador" Relationship="DemoProntoModel.FK_Clientes_Cobrador" FromRole="Cliente" ToRole="Vendedor" />
@@ -7427,31 +7561,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="OperacionesMercadoInternoEntidadVinculada" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_Clientes_DescripcionIva" FromRole="Cliente" ToRole="DescripcionIva" />
           <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Cliente" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Cliente" ToRole="Empleado" />
         </EntityType>
-        <Association Name="FK_Clientes_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Cliente" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="IdUsuarioIngreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clientes_Empleados1">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Cliente" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="IdUsuarioModifico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PuntosVenta">
           <Key>
             <PropertyRef Name="IdPuntoVenta" />
@@ -7902,15 +8014,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdMonedaOriginal" />
          
           <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_Pedidos" FromRole="Pedido" ToRole="DetallePedido" />
-          <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Pedido" ToRole="Empleado" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Pedidos_Monedas" FromRole="Pedido" ToRole="Moneda" />
           <NavigationProperty Name="Proveedor" Relationship="DemoProntoModel.FK_Pedidos_Proveedores" FromRole="Pedido" ToRole="Proveedor" />
           <Property Type="Int32" Name="IdLugarEntrega_1" />
           <Property Type="String" Name="ConfirmadoPorWeb_1" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdTipoCompraRM" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Pedido" ToRole="Empleado" />
           <Property Type="DateTime" Name="FechaEnvioProveedor" Precision="3" />
           <Property Type="Int32" Name="IdUsuarioEnvioProveedor" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Pedido" ToRole="Empleado" />
+          <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Pedido" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Pedido" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -7961,10 +8074,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="Condiciones_Compra" Relationship="DemoProntoModel.FK_Presupuestos_Condiciones_Compra" FromRole="Presupuesto" ToRole="Condiciones_Compra" />
           <NavigationProperty Name="DetallePresupuestos" Relationship="DemoProntoModel.FK_DetallePresupuestos_Presupuestos" FromRole="Presupuesto" ToRole="DetallePresupuesto" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Presupuestos_Monedas" FromRole="Presupuesto" ToRole="Moneda" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Presupuesto" ToRole="Empleado" />
-          <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK_Presupuestos_Empleados2" FromRole="Presupuesto" ToRole="Empleado" />
           <NavigationProperty Name="PlazosEntrega" Relationship="DemoProntoModel.FK_Presupuestos_PlazosEntrega" FromRole="Presupuesto" ToRole="PlazosEntrega" />
           <NavigationProperty Name="Proveedor" Relationship="DemoProntoModel.FK_Presupuestos_Proveedores" FromRole="Presupuesto" ToRole="Proveedor" />
+          <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Presupuestos_Empleados" FromRole="Presupuesto" ToRole="Empleado" />
+          <NavigationProperty Name="AproboPresupuesto" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Presupuesto" ToRole="Empleado" />
         </EntityType>
         <Association Name="FK_Articulos_Cuentas">
           <End Type="DemoProntoModel.Cuenta" Role="Cuenta" Multiplicity="0..1" />
@@ -8119,18 +8232,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="DetallePresupuesto">
               <PropertyRef Name="IdUnidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pedidos_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Pedido">
-              <PropertyRef Name="IdComprador" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8771,7 +8872,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdCertificacionObraDatos" />
           <Property Type="DateTime" Name="FechaRecepcionCliente" Precision="3" />
           <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_Facturas_Clientes" FromRole="Factura" ToRole="Cliente" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Facturas_Empleados" FromRole="Factura" ToRole="Empleado" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Facturas_Monedas" FromRole="Factura" ToRole="Moneda" />
           <NavigationProperty Name="DetalleFacturas" Relationship="DemoProntoModel.FK_DetalleFacturas_Facturas" FromRole="Factura" ToRole="DetalleFactura" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_Facturas_Vendedor" FromRole="Factura" ToRole="Vendedor" />
@@ -8813,18 +8913,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="Factura">
               <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Facturas_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="IdUsuarioIngreso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8909,30 +8997,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="DetallePresupuesto">
               <PropertyRef Name="IdDetalleRequerimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Presupuestos_Empleados1">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Presupuesto">
-              <PropertyRef Name="IdComprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Presupuestos_Empleados2">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Presupuesto">
-              <PropertyRef Name="Aprobo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10525,23 +10589,11 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="DateTime" Name="FechaInicialHabilitacion" Precision="3" />
           <Property Type="DateTime" Name="FechaFinalHabilitacion" Precision="3" />
           <Property Type="Int32" Name="CantidadAccesos" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="EmpleadosAcceso" ToRole="Empleado" />
           <Property Type="DateTime" Name="FechaUltimaModificacion" Precision="3" />
           <Property Type="Int32" Name="IdUsuarioModifico" />
           <Property Type="String" Name="UsuarioNTUsuarioModifico" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="EmpleadosAcceso" ToRole="Empleado" />
         </EntityType>
-        <Association Name="FK_EmpleadosAccesos_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.EmpleadosAcceso" Role="EmpleadosAcceso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="EmpleadosAcceso">
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DetalleRecibo">
           <Key>
             <PropertyRef Name="IdDetalleRecibo" />
@@ -10970,9 +11022,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdUsuarioAnulo" />
           <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas" FromRole="Comparativa" ToRole="DetalleComparativa" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Comparativas_Empleados" FromRole="Comparativa" ToRole="Empleado" />
-          <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Comparativas_Empleados1" FromRole="Comparativa" ToRole="Empleado" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="DetalleComparativa">
           <Key>
             <PropertyRef Name="IdDetalleComparativa" />
@@ -11357,18 +11407,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pedidos_EmpleadoAprobo">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Pedido">
-              <PropertyRef Name="Aprobo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetallePedidos_ControlCalidad">
           <End Type="DemoProntoModel.ControlCalidad" Role="ControlCalidad" Multiplicity="0..1" />
           <End Type="DemoProntoModel.DetallePedido" Role="DetallePedido" Multiplicity="*" />
@@ -11520,8 +11558,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="DateTime" Name="FechaPrestacionServicio" Precision="3" />
           <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_ComprobantesProveedores_DescripcionIva" FromRole="ComprobanteProveedor" ToRole="DescripcionIva" />
           <Property Name="IdTipoOperacion" Type="Int32" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados" FromRole="ComprobanteProveedor" ToRole="Empleado" />
-          <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados1" FromRole="ComprobanteProveedor" ToRole="Empleado" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Monedas" FromRole="ComprobanteProveedor" ToRole="Moneda" />
           <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -11731,15 +11767,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdMoneda" />
           <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Cajas_Cuentas" FromRole="Caja" ToRole="Cuenta" />
         </EntityType>
-        <EntityType Name="DetalleEmpleado">
-          <Key>
-            <PropertyRef Name="IdDetalleEmpleado" />
-          </Key>
-          <Property Type="Int32" Name="IdDetalleEmpleado" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="IdEmpleado" />
-          <Property Type="DateTime" Name="FechaIngreso" Precision="3" />
-          <Property Type="DateTime" Name="FechaEgreso" Precision="3" />
-        </EntityType>
         <EntityType Name="DetalleEmpleadosCuentasBancaria">
           <Key>
             <PropertyRef Name="IdDetalleEmpleadoCuentaBancaria" />
@@ -11747,6 +11774,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdDetalleEmpleadoCuentaBancaria" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="IdEmpleado" />
           <Property Type="Int32" Name="IdCuentaBancaria" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" FromRole="DetalleEmpleadosCuentasBancaria" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="DetalleEmpleadosJornada">
           <Key>
@@ -11756,6 +11784,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdEmpleado" />
           <Property Type="DateTime" Name="FechaCambio" Precision="3" />
           <Property Type="Decimal" Name="HorasJornada" Precision="6" Scale="2" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" FromRole="DetalleEmpleadosJornada" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="DetalleEmpleadosSectore">
           <Key>
@@ -11765,6 +11794,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdEmpleado" />
           <Property Type="DateTime" Name="FechaCambio" Precision="3" />
           <Property Type="Int32" Name="IdSectorNuevo" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" FromRole="DetalleEmpleadosSectore" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="DetalleNotasCredito">
           <Key>
@@ -11967,7 +11997,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="CuentaVentaNumero" />
           <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_NotasCredito_Clientes" FromRole="NotasCredito" ToRole="Cliente" />
           <Property Name="IdTipoOperacion" Type="Int32" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_NotasCredito_Empleados" FromRole="NotasCredito" ToRole="Empleado" />
           <NavigationProperty Name="IBCondicione" Relationship="DemoProntoModel.FK_NotasCredito_IBCondiciones" FromRole="NotasCredito" ToRole="IBCondicion" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="NotasCredito" ToRole="Moneda" />
         </EntityType>
@@ -12035,7 +12064,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="DateTime" Name="FechaVencimientoORechazoCAE" Precision="3" />
           <Property Type="Int32" Name="IdIdentificacionCAE" />
           <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_NotasDebito_Clientes" FromRole="NotasDebito" ToRole="Cliente" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_NotasDebito_Empleados" FromRole="NotasDebito" ToRole="Empleado" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="NotasDebito" ToRole="Moneda" />
         </EntityType>
         <EntityType Name="TiposValore">
@@ -12278,7 +12306,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdObra" Type="Int32" />
           <Property Name="Version" Type="Int32" />
           <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_Conjuntos_Articulos" FromRole="Conjunto" ToRole="Articulo" />
-          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Conjunto" ToRole="Empleado" />
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Conjuntos_Obras" FromRole="Conjunto" ToRole="Obra" />
         </EntityType>
         <Association Name="FK_Conjuntos_Articulos">
@@ -12305,54 +12332,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comparativas_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Comparativa" Role="Comparativa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Comparativa">
-              <PropertyRef Name="IdConfecciono" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comparativas_Empleados1">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Comparativa" Role="Comparativa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Comparativa">
-              <PropertyRef Name="IdAprobo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComprobantesProveedores_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ComprobanteProveedor">
-              <PropertyRef Name="IdUsuarioIngreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComprobantesProveedores_Empleados1">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ComprobanteProveedor">
-              <PropertyRef Name="IdUsuarioModifico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ComprobantesProveedores_Monedas">
           <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
           <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
@@ -12362,18 +12341,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="ComprobanteProveedor">
               <PropertyRef Name="IdMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Conjuntos_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Conjunto" Role="Conjunto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Conjunto">
-              <PropertyRef Name="IdRealizo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12398,30 +12365,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="DetalleComparativa">
               <PropertyRef Name="IdMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NotasCredito_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="NotasCredito">
-              <PropertyRef Name="IdUsuarioIngreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NotasDebito_Empleados">
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.NotasDebito" Role="NotasDebito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="NotasDebito">
-              <PropertyRef Name="IdUsuarioIngreso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12673,6 +12616,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdDetalleEmpleadoObra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEmpleado" Type="Int32" />
           <Property Name="IdObra" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" FromRole="DetalleEmpleadosObra" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="DetalleEmpleadosUbicacione">
           <Key>
@@ -12681,6 +12625,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdDetalleEmpleadoUbicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEmpleado" Type="Int32" />
           <Property Name="IdUbicacion" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" FromRole="DetalleEmpleadosUbicacione" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Cargo">
           <Key>
@@ -12690,18 +12635,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Cargo" ToRole="Empleado" />
         </EntityType>
-        <Association Name="FK_Empleados_Cargos">
-          <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
-          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cargo">
-              <PropertyRef Name="IdCargo" />
-            </Principal>
-            <Dependent Role="Empleado">
-              <PropertyRef Name="IdCargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CuentasBancaria">
           <Key>
             <PropertyRef Name="IdCuentaBancaria" />
@@ -12730,6 +12663,332 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Principal>
             <Dependent Role="CuentasBancaria">
               <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DetalleEmpleado">
+          <Key>
+            <PropertyRef Name="IdDetalleEmpleado" />
+          </Key>
+          <Property Name="IdDetalleEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpleado" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="FechaEgreso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="DetalleEmpleado" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Legajo" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioNT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSector" Type="Int32" />
+          <Property Name="IdCargo" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Interno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Administrador" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Iniciales" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SisMan" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="HorasJornada" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdSector1" Type="Int32" />
+          <Property Name="IdCargo1" Type="Int32" />
+          <Property Name="IdSector2" Type="Int32" />
+          <Property Name="IdCargo2" Type="Int32" />
+          <Property Name="IdSector3" Type="Int32" />
+          <Property Name="IdCargo3" Type="Int32" />
+          <Property Name="IdSector4" Type="Int32" />
+          <Property Name="IdCargo4" Type="Int32" />
+          <Property Name="Dominio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SisMat" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="TipoUsuario" Type="Int32" />
+          <Property Name="GrupoDeCarga" Type="Int32" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InformacionAuxiliar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCuentaFondoFijo" Type="Int32" />
+          <Property Name="IdObraAsignada" Type="Int32" />
+          <Property Name="Activo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Idioma" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PuntoVentaAsociado" Type="Int32" />
+          <Property Name="IdLugarEntregaAsignado" Type="Int32" />
+          <Property Name="EsConductor" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaVencimientoRegistro" Type="DateTime" Precision="3" />
+          <Property Name="LimitarUbicacionesAsignadas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PermitirAccesoATodasLasObras" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
+          <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Empleado" ToRole="Cliente" />
+          <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Empleado" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleEmpleados" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
+          <NavigationProperty Name="Sectore" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleado" ToRole="Sector" />
+          <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
+          <NavigationProperty Name="Pedidos1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Empleado" ToRole="Pedido" />
+          <NavigationProperty Name="Pedidos2" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Empleado" ToRole="Pedido" />
+          <NavigationProperty Name="EmpleadosAccesos" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="Empleado" ToRole="EmpleadosAcceso" />
+          <NavigationProperty Name="Presupuestos" Relationship="DemoProntoModel.FK_Presupuestos_Empleados" FromRole="Empleado" ToRole="Presupuesto" />
+          <NavigationProperty Name="Presupuestos1" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Empleado" ToRole="Presupuesto" />
+          <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" FromRole="Empleado" ToRole="Requerimiento" />
+          <NavigationProperty Name="Requerimientos1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" FromRole="Empleado" ToRole="Requerimiento" />
+          <NavigationProperty Name="Requerimientos2" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" FromRole="Empleado" ToRole="Requerimiento" />
+          <NavigationProperty Name="Requerimientos3" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" FromRole="Empleado" ToRole="Requerimiento" />
+          <NavigationProperty Name="Requerimientos4" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" FromRole="Empleado" ToRole="Requerimiento" />
+          <NavigationProperty Name="DetalleEmpleadosCuentasBancarias" Relationship="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosCuentasBancaria" />
+          <NavigationProperty Name="DetalleEmpleadosJornadas" Relationship="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosJornada" />
+          <NavigationProperty Name="DetalleEmpleadosObras" Relationship="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosObra" />
+          <NavigationProperty Name="DetalleEmpleadosSectores" Relationship="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosSectore" />
+          <NavigationProperty Name="DetalleEmpleadosUbicaciones" Relationship="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosUbicacione" />
+        </EntityType>
+        <Association Name="FK_Empleados_Cargos">
+          <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="IdCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Empleados_Ingreso">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdUsuarioIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Empleados_Modifico">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdUsuarioModifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleados_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleado" Role="DetalleEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Sectores">
+          <End Type="DemoProntoModel.Sector" Role="Sector" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="IdSector" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_EmpleadoAprobo">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="Aprobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_EmpleadoComprador">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosAccesos_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.EmpleadosAcceso" Role="EmpleadosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadosAcceso">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuestos_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Presupuesto">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presupuestos_Empleados1">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Presupuesto">
+              <PropertyRef Name="Aprobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_Aprobo">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimiento">
+              <PropertyRef Name="Aprobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdAutorizoCumplido">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimiento">
+              <PropertyRef Name="IdAutorizoCumplido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdComprador">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimiento">
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdDioPorCumplido">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimiento">
+              <PropertyRef Name="IdDioPorCumplido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requerimientos_Empleados_IdSolicito">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="Requerimiento">
+              <PropertyRef Name="IdSolicito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosCuentasBancarias_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleadosCuentasBancaria" Role="DetalleEmpleadosCuentasBancaria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosCuentasBancaria">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosJornadas_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleadosJornada" Role="DetalleEmpleadosJornada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosJornada">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosObras_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleadosObra" Role="DetalleEmpleadosObra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosObra">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosSectores_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleadosSectore" Role="DetalleEmpleadosSectore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosSectore">
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEmpleadosUbicaciones_Empleados">
+          <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleEmpleadosUbicacione" Role="DetalleEmpleadosUbicacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="DetalleEmpleadosUbicacione">
+              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13066,46 +13325,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <ScalarProperty Name="MoP" ColumnName="MoP" />
             <ScalarProperty Name="IdDetalleObraDestino" ColumnName="IdDetalleObraDestino" />
             <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
-            </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Empleados"><EntityTypeMapping TypeName="DemoProntoModel.Empleado"><MappingFragment StoreEntitySet="Empleados">
-            <ScalarProperty Name="PermitirAccesoATodasLasObras" ColumnName="PermitirAccesoATodasLasObras" />
-                <ScalarProperty Name="LimitarUbicacionesAsignadas" ColumnName="LimitarUbicacionesAsignadas" />
-                <ScalarProperty Name="FechaVencimientoRegistro" ColumnName="FechaVencimientoRegistro" />
-                <ScalarProperty Name="EsConductor" ColumnName="EsConductor" />
-                <ScalarProperty Name="IdLugarEntregaAsignado_1" ColumnName="IdLugarEntregaAsignado" />
-                <ScalarProperty Name="PuntoVentaAsociado_1" ColumnName="PuntoVentaAsociado" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-            <ScalarProperty Name="Legajo" ColumnName="Legajo" />
-            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-            <ScalarProperty Name="UsuarioNT" ColumnName="UsuarioNT" />
-            <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-            <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-            <ScalarProperty Name="Email" ColumnName="Email" />
-            <ScalarProperty Name="Interno" ColumnName="Interno" />
-            <ScalarProperty Name="Administrador" ColumnName="Administrador" />
-            <ScalarProperty Name="Iniciales" ColumnName="Iniciales" />
-            <ScalarProperty Name="Password" ColumnName="Password" />
-            <ScalarProperty Name="SisMan" ColumnName="SisMan" />
-            <ScalarProperty Name="HorasJornada" ColumnName="HorasJornada" />
-            <ScalarProperty Name="IdSector1" ColumnName="IdSector1" />
-            <ScalarProperty Name="IdCargo1" ColumnName="IdCargo1" />
-            <ScalarProperty Name="IdSector2" ColumnName="IdSector2" />
-            <ScalarProperty Name="IdCargo2" ColumnName="IdCargo2" />
-            <ScalarProperty Name="IdSector3" ColumnName="IdSector3" />
-            <ScalarProperty Name="IdCargo3" ColumnName="IdCargo3" />
-            <ScalarProperty Name="IdSector4" ColumnName="IdSector4" />
-            <ScalarProperty Name="IdCargo4" ColumnName="IdCargo4" />
-            <ScalarProperty Name="Dominio" ColumnName="Dominio" />
-            <ScalarProperty Name="SisMat" ColumnName="SisMat" />
-            <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-            <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
-            <ScalarProperty Name="GrupoDeCarga" ColumnName="GrupoDeCarga" />
-            <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-            <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
-            <ScalarProperty Name="IdCuentaFondoFijo" ColumnName="IdCuentaFondoFijo" />
-            <ScalarProperty Name="IdObraAsignada" ColumnName="IdObraAsignada" />
-            <ScalarProperty Name="Activo" ColumnName="Activo" />
-            <ScalarProperty Name="Idioma" ColumnName="Idioma" />
             </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Obras"><EntityTypeMapping TypeName="DemoProntoModel.Obra"><MappingFragment StoreEntitySet="Obras">
             <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
@@ -16423,16 +16642,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DetalleEmpleados">
-            <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
-              <MappingFragment StoreEntitySet="DetalleEmpleados">
-                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdDetalleEmpleado" ColumnName="IdDetalleEmpleado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DetalleEmpleadosCuentasBancarias">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleadosCuentasBancaria">
               <MappingFragment StoreEntitySet="DetalleEmpleadosCuentasBancarias">
@@ -16982,6 +17191,60 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DetalleEmpleados">
+            <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
+              <MappingFragment StoreEntitySet="DetalleEmpleados">
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdDetalleEmpleado" ColumnName="IdDetalleEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="DemoProntoModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="PermitirAccesoATodasLasObras" ColumnName="PermitirAccesoATodasLasObras" />
+                <ScalarProperty Name="LimitarUbicacionesAsignadas" ColumnName="LimitarUbicacionesAsignadas" />
+                <ScalarProperty Name="FechaVencimientoRegistro" ColumnName="FechaVencimientoRegistro" />
+                <ScalarProperty Name="EsConductor" ColumnName="EsConductor" />
+                <ScalarProperty Name="IdLugarEntregaAsignado" ColumnName="IdLugarEntregaAsignado" />
+                <ScalarProperty Name="PuntoVentaAsociado" ColumnName="PuntoVentaAsociado" />
+                <ScalarProperty Name="Idioma" ColumnName="Idioma" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdObraAsignada" ColumnName="IdObraAsignada" />
+                <ScalarProperty Name="IdCuentaFondoFijo" ColumnName="IdCuentaFondoFijo" />
+                <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="GrupoDeCarga" ColumnName="GrupoDeCarga" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="SisMat" ColumnName="SisMat" />
+                <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+                <ScalarProperty Name="IdCargo4" ColumnName="IdCargo4" />
+                <ScalarProperty Name="IdSector4" ColumnName="IdSector4" />
+                <ScalarProperty Name="IdCargo3" ColumnName="IdCargo3" />
+                <ScalarProperty Name="IdSector3" ColumnName="IdSector3" />
+                <ScalarProperty Name="IdCargo2" ColumnName="IdCargo2" />
+                <ScalarProperty Name="IdSector2" ColumnName="IdSector2" />
+                <ScalarProperty Name="IdCargo1" ColumnName="IdCargo1" />
+                <ScalarProperty Name="IdSector1" ColumnName="IdSector1" />
+                <ScalarProperty Name="HorasJornada" ColumnName="HorasJornada" />
+                <ScalarProperty Name="SisMan" ColumnName="SisMan" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Iniciales" ColumnName="Iniciales" />
+                <ScalarProperty Name="Administrador" ColumnName="Administrador" />
+                <ScalarProperty Name="Interno" ColumnName="Interno" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+                <ScalarProperty Name="UsuarioNT" ColumnName="UsuarioNT" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Legajo" ColumnName="Legajo" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -17004,13 +17267,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="100">
+      <edmx:Diagram Name="Pronto" ZoomLevel="70">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Empleado" Width="2.25" PointX="7" PointY="98.375" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Obra" Width="2.5" PointX="0.75" PointY="7.5" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Requerimiento" Width="2.875" PointX="16" PointY="39.875" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Requerimiento" Width="2.875" PointX="16" PointY="39.875" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Sector" Width="2.25" PointX="4" PointY="102.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Unidad" Width="1.875" PointX="0.875" PointY="35.875" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Unidades" ManuallyRouted="false">
@@ -17082,15 +17344,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="21.4062525" PointY="36.075" />
           <edmx:ConnectorPoint PointX="21.4062525" PointY="40.625" />
         </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Sectores" ManuallyRouted="false">
-          <edmx:ConnectorPoint PointX="5.125" PointY="102.125" />
-          <edmx:ConnectorPoint PointX="5.125" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="6.416666666666667" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="6.583333333333333" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="6.6666641666666671" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="6.9895833333333321" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="7" PointY="98.575" />
-        </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Obras" ManuallyRouted="false">
           <edmx:ConnectorPoint PointX="3.25" PointY="7.7781274999999939" />
           <edmx:ConnectorPoint PointX="4.9166641666666671" PointY="7.778127499999993" />
@@ -17102,42 +17355,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="18.53125" PointY="40.9562525" />
           <edmx:ConnectorPoint PointX="18.53125" PointY="40.9562525" />
           <edmx:ConnectorPoint PointX="20" PointY="40.9562525" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados1">
-          <edmx:ConnectorPoint PointX="7.894534375000001" PointY="98.375" />
-          <edmx:ConnectorPoint PointX="7.894534375000001" PointY="94.275" />
-          <edmx:ConnectorPoint PointX="8.2994799166666677" PointY="94.275" />
-          <edmx:ConnectorPoint PointX="8.4661465833333356" PointY="94.275" />
-          <edmx:ConnectorPoint PointX="9.5" PointY="94.275" />
-          <edmx:ConnectorPoint PointX="9.875" PointY="48.150000000000006" />
-          <edmx:ConnectorPoint PointX="11.606151599522596" PointY="40.694507111389356" />
-          <edmx:ConnectorPoint PointX="11.643848400477404" PointY="40.532159555277318" />
-          <edmx:ConnectorPoint PointX="11.75" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="11.75" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="12.041664166666665" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="12.208330833333333" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="12.447916666666666" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="12.614583333333334" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="15.635416666666666" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="15.802083333333334" PointY="40.075" />
-          <edmx:ConnectorPoint PointX="16.375" PointY="40.075" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados2">
-          <edmx:ConnectorPoint PointX="8.816406125" PointY="98.375" />
-          <edmx:ConnectorPoint PointX="9.191406125" PointY="94.290625" />
-          <edmx:ConnectorPoint PointX="9.5" PointY="94.290625" />
-          <edmx:ConnectorPoint PointX="9.5" PointY="48.400000000000006" />
-          <edmx:ConnectorPoint PointX="11.625" PointY="48.400000000000006" />
-          <edmx:ConnectorPoint PointX="11.625" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="11.666666666666666" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="11.833333333333334" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="12.041664166666665" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="12.208330833333333" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="12.447916666666666" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="12.614583333333334" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="15.635416666666666" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="15.802083333333334" PointY="40.206252" />
-          <edmx:ConnectorPoint PointX="16" PointY="40.206252" />
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Sectores">
           <edmx:ConnectorPoint PointX="4.03125" PointY="102.125" />
@@ -17178,38 +17395,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Parametros2" Width="1.5" PointX="1.875" PointY="4.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Vendedor" Width="1.375" PointX="7.875" PointY="60.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cliente" Width="2.25" PointX="10" PointY="70.5" Height="0.4" IsExpanded="false" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados">
-          <edmx:ConnectorPoint PointX="9.25" PointY="98.575" />
-          <edmx:ConnectorPoint PointX="10.169246904703499" PointY="88.414804450331957" />
-          <edmx:ConnectorPoint PointX="10.1842647827965" PointY="88.248815772659782" />
-          <edmx:ConnectorPoint PointX="10.365780115641" PointY="86.242574285713417" />
-          <edmx:ConnectorPoint PointX="10.380797993734001" PointY="86.076585608041242" />
-          <edmx:ConnectorPoint PointX="10.817685404703498" PointY="81.247783350534576" />
-          <edmx:ConnectorPoint PointX="10.8327032827965" PointY="81.0817946728624" />
-          <edmx:ConnectorPoint PointX="11.163387592203499" PointY="77.426827512689314" />
-          <edmx:ConnectorPoint PointX="11.1784054702965" PointY="77.26083883501714" />
-          <edmx:ConnectorPoint PointX="11.330379748453499" PointY="75.5811068971731" />
-          <edmx:ConnectorPoint PointX="11.3453976265465" PointY="75.415118219500926" />
-          <edmx:ConnectorPoint PointX="11.594049810953498" PointY="72.666830676186223" />
-          <edmx:ConnectorPoint PointX="11.6090676890465" PointY="72.500841998514048" />
-          <edmx:ConnectorPoint PointX="11.625302310953499" PointY="72.321404969783188" />
-          <edmx:ConnectorPoint PointX="11.6403201890465" PointY="72.155416292111013" />
-          <edmx:ConnectorPoint PointX="11.753904375" PointY="70.9" />
-          <edmx:ConnectorPoint PointX="11.753904375" PointY="98.575" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados1">
-          <edmx:ConnectorPoint PointX="9.625" PointY="98.4437475" />
-          <edmx:ConnectorPoint PointX="10.171583508046895" PointY="89.654525968459055" />
-          <edmx:ConnectorPoint PointX="10.181928179453106" PointY="89.488180648262571" />
-          <edmx:ConnectorPoint PointX="10.368116718984396" PointY="86.4942148653905" />
-          <edmx:ConnectorPoint PointX="10.378461390390607" PointY="86.327869545194019" />
-          <edmx:ConnectorPoint PointX="10.820022008046895" PointY="79.227446588685453" />
-          <edmx:ConnectorPoint PointX="10.830366679453105" PointY="79.061101268488969" />
-          <edmx:ConnectorPoint PointX="11.165724195546895" PointY="73.668455025377781" />
-          <edmx:ConnectorPoint PointX="11.176068866953106" PointY="73.5021097051813" />
-          <edmx:ConnectorPoint PointX="11.3378886875" PointY="70.9" />
-          <edmx:ConnectorPoint PointX="11.3378886875" PointY="98.4437475" />
-        </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.PuntosVenta" Width="1.5" PointX="17.75" PointY="58.375" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Condiciones_Compra" Width="2.25" PointX="7" PointY="118.875" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Ganancia" Width="2" PointX="9.625" PointY="1" Height="0.4" IsExpanded="false" />
@@ -17220,8 +17405,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cuenta" Width="2.625" PointX="4" PointY="10.875" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePedido" Width="2.25" PointX="23.125" PointY="76.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePresupuesto" Width="2.125" PointX="13.375" PointY="94.5" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Pedido" Width="2.125" PointX="13.25" PointY="74" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Presupuesto" Width="2.375" PointX="4.25" PointY="86.5" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Pedido" Width="2.125" PointX="13.25" PointY="74" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Presupuesto" Width="2.375" PointX="4.25" PointY="86.5" Height="0.4" IsExpanded="true" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Cuentas">
           <edmx:ConnectorPoint PointX="4.03125" PointY="11.075" />
           <edmx:ConnectorPoint PointX="3.65625" PointY="11.075" />
@@ -17473,39 +17658,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="11.955730416666667" PointY="94.552126813151048" />
           <edmx:ConnectorPoint PointX="12.458337083333335" PointY="94.552126813151048" />
           <edmx:ConnectorPoint PointX="13.375" PointY="94.552126813151048" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_Empleados">
-          <edmx:ConnectorPoint PointX="9.25" PointY="98.7062525" />
-          <edmx:ConnectorPoint PointX="10.161891402056195" PointY="93.67597444701687" />
-          <edmx:ConnectorPoint PointX="10.191620285443802" PointY="93.511980632285031" />
-          <edmx:ConnectorPoint PointX="11.156032089556195" PointY="88.191983622415762" />
-          <edmx:ConnectorPoint PointX="11.185760972943802" PointY="88.027989807683923" />
-          <edmx:ConnectorPoint PointX="11.323024245806195" PointY="87.270802682765961" />
-          <edmx:ConnectorPoint PointX="11.352753129193802" PointY="87.106808868034122" />
-          <edmx:ConnectorPoint PointX="11.586694308306194" PointY="85.816316188396428" />
-          <edmx:ConnectorPoint PointX="11.616423191693801" PointY="85.652322373664589" />
-          <edmx:ConnectorPoint PointX="11.617946808306195" PointY="85.643917628111311" />
-          <edmx:ConnectorPoint PointX="11.647675691693802" PointY="85.479923813379472" />
-          <edmx:ConnectorPoint PointX="11.739039933306195" PointY="84.975930093980466" />
-          <edmx:ConnectorPoint PointX="11.768768816693802" PointY="84.811936279248627" />
-          <edmx:ConnectorPoint PointX="11.770292433306196" PointY="84.803531533695349" />
-          <edmx:ConnectorPoint PointX="11.800021316693803" PointY="84.63953771896351" />
-          <edmx:ConnectorPoint PointX="11.801544933306195" PointY="84.631132973410246" />
-          <edmx:ConnectorPoint PointX="11.831273816693802" PointY="84.4671391586784" />
-          <edmx:ConnectorPoint PointX="12.024199308306196" PointY="83.402901833783645" />
-          <edmx:ConnectorPoint PointX="12.053928191693803" PointY="83.2389080190518" />
-          <edmx:ConnectorPoint PointX="12.063259933306195" PointY="83.187431214990383" />
-          <edmx:ConnectorPoint PointX="12.092988816693802" PointY="83.023437400258544" />
-          <edmx:ConnectorPoint PointX="12.180450245806195" PointY="82.540972814722835" />
-          <edmx:ConnectorPoint PointX="12.210179129193802" PointY="82.376978999991" />
-          <edmx:ConnectorPoint PointX="12.328886808306196" PointY="81.72215033112407" />
-          <edmx:ConnectorPoint PointX="12.358615691693803" PointY="81.558156516392231" />
-          <edmx:ConnectorPoint PointX="12.360139308306197" PointY="81.549751770838967" />
-          <edmx:ConnectorPoint PointX="12.389868191693804" PointY="81.385757956107128" />
-          <edmx:ConnectorPoint PointX="13.625760558306196" PointY="74.5681892921177" />
-          <edmx:ConnectorPoint PointX="13.655489441693803" PointY="74.404195477385855" />
-          <edmx:ConnectorPoint PointX="13.65625" PointY="74.4" />
-          <edmx:ConnectorPoint PointX="13.65625" PointY="98.7062525" />
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Ganancias_TiposRetencionGanancia">
           <edmx:ConnectorPoint PointX="8.875" PointY="1.2" />
@@ -17823,17 +17975,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="12.25" PointY="70.6375" />
           <edmx:ConnectorPoint PointX="17" PointY="70.6375" />
         </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Empleados">
-          <edmx:ConnectorPoint PointX="9.25" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="11.518225416666665" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="11.899742708333333" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="11.955730416666667" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="12.458337083333335" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="13.572916666666666" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="13.739583333333334" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="17.171874" PointY="98.412495" />
-          <edmx:ConnectorPoint PointX="17.171874" PointY="70.775" />
-        </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Monedas">
           <edmx:ConnectorPoint PointX="2.0937475" PointY="81.875" />
           <edmx:ConnectorPoint PointX="2.0937475" PointY="70.4062505" />
@@ -17968,22 +18109,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="17.255207333333331" PointY="94.6102197265625" />
           <edmx:ConnectorPoint PointX="17.088540666666667" PointY="94.6102197265625" />
           <edmx:ConnectorPoint PointX="15.5" PointY="94.6102197265625" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados1">
-          <edmx:ConnectorPoint PointX="7.7187505000000005" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7.2916641666666662" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7.1249975" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7.1249975" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7.2916641666666662" PointY="86.7" />
-          <edmx:ConnectorPoint PointX="7.7187505000000005" PointY="86.7" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados2">
-          <edmx:ConnectorPoint PointX="7.5156232500000009" PointY="86.8312525" />
-          <edmx:ConnectorPoint PointX="7.1406232500000009" PointY="86.8312525" />
-          <edmx:ConnectorPoint PointX="7.0729166666666661" PointY="86.8312525" />
-          <edmx:ConnectorPoint PointX="6.6666641666666671" PointY="86.8312525" />
-          <edmx:ConnectorPoint PointX="6.625" PointY="86.8312525" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedor" Width="1.5" PointX="20" PointY="98.875" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedoresIB" Width="1.5" PointX="20" PointY="108.75" Height="0.4" IsExpanded="false" />
@@ -18957,11 +19082,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="10" PointY="51.687497500000006" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.EmpleadosAcceso" Width="1.5" PointX="10" PointY="102" Height="0.4" IsExpanded="false" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados">
-          <edmx:ConnectorPoint PointX="8.125" PointY="98.775" />
-          <edmx:ConnectorPoint PointX="8.125" PointY="102.2" />
-          <edmx:ConnectorPoint PointX="10" PointY="102.2" />
-        </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibo" Width="1.5" PointX="15.25" PointY="106.25" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosCuenta" Width="1.5" PointX="15.25" PointY="111.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosRubrosContable" Width="1.5" PointX="15.25" PointY="116.375" Height="0.4" IsExpanded="false" />
@@ -19043,37 +19163,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="24" PointY="76.125" />
           <edmx:ConnectorPoint PointX="23.489848095662861" PointY="76.125" />
           <edmx:ConnectorPoint PointX="23.489848095662861" PointY="76.5" />
-        </edmx:AssociationConnector>
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo">
-          <edmx:ConnectorPoint PointX="9.25" PointY="98.475" />
-          <edmx:ConnectorPoint PointX="10.161804713325136" PointY="93.475324902877674" />
-          <edmx:ConnectorPoint PointX="10.191706974174862" PointY="93.31136261278067" />
-          <edmx:ConnectorPoint PointX="11.155945400825136" PointY="88.024179097539616" />
-          <edmx:ConnectorPoint PointX="11.185847661674861" PointY="87.860216807442612" />
-          <edmx:ConnectorPoint PointX="11.322937557075136" PointY="87.108515345404371" />
-          <edmx:ConnectorPoint PointX="11.352839817924862" PointY="86.944553055307367" />
-          <edmx:ConnectorPoint PointX="11.586607619575135" PointY="85.662740141489792" />
-          <edmx:ConnectorPoint PointX="11.616509880424861" PointY="85.498777851392788" />
-          <edmx:ConnectorPoint PointX="11.617860119575136" PointY="85.491374120137465" />
-          <edmx:ConnectorPoint PointX="11.647762380424862" PointY="85.327411830040461" />
-          <edmx:ConnectorPoint PointX="11.738953244575136" PointY="84.82738733366061" />
-          <edmx:ConnectorPoint PointX="11.768855505424861" PointY="84.6634250435636" />
-          <edmx:ConnectorPoint PointX="11.770205744575137" PointY="84.656021312308283" />
-          <edmx:ConnectorPoint PointX="11.800108005424862" PointY="84.492059022211279" />
-          <edmx:ConnectorPoint PointX="11.801458244575136" PointY="84.484655290955985" />
-          <edmx:ConnectorPoint PointX="11.831360505424861" PointY="84.320693000858981" />
-          <edmx:ConnectorPoint PointX="12.024112619575137" PointY="83.263780340778041" />
-          <edmx:ConnectorPoint PointX="12.054014880424862" PointY="83.099818050681037" />
-          <edmx:ConnectorPoint PointX="12.063173244575136" PointY="83.049600230457756" />
-          <edmx:ConnectorPoint PointX="12.093075505424862" PointY="82.885637940360752" />
-          <edmx:ConnectorPoint PointX="12.180363557075136" PointY="82.407013634372348" />
-          <edmx:ConnectorPoint PointX="12.210265817924862" PointY="82.243051344275344" />
-          <edmx:ConnectorPoint PointX="12.328800119575137" PointY="81.593095287397247" />
-          <edmx:ConnectorPoint PointX="12.358702380424862" PointY="81.429132997300243" />
-          <edmx:ConnectorPoint PointX="12.360052619575138" PointY="81.421729266044935" />
-          <edmx:ConnectorPoint PointX="12.389954880424863" PointY="81.257766975947931" />
-          <edmx:ConnectorPoint PointX="13.640625" PointY="74.4" />
-          <edmx:ConnectorPoint PointX="13.640625" PointY="98.475" />
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_ControlCalidad">
           <edmx:ConnectorPoint PointX="18.875" PointY="55.325" />
@@ -19167,7 +19256,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <edmx:ConnectorPoint PointX="20" PointY="131.075" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Caja" Width="1.5" PointX="7.375" PointY="5.5" Height="0.4" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleado" Width="1.5" PointX="20.875" PointY="18.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosCuentasBancaria" Width="1.5" PointX="22.875" PointY="0.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosJornada" Width="1.5" PointX="22.875" PointY="3.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosSectore" Width="1.5" PointX="22.875" PointY="6.75" Height="0.4" IsExpanded="false" />
@@ -19411,16 +19499,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Conjunto" Width="1.5" PointX="4.375" PointY="5.75" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Conjuntos_Articulos" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_BancoChequeras" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Comparativas_Empleados" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Comparativas_Empleados1" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados1" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Monedas" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Conjuntos_Empleados" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Conjuntos_Obras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComparativas_Monedas" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_Empleados" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_Empleados" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_PuntosVenta" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_IBCondiciones" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_Monedas" />
@@ -19439,9 +19520,31 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosObra" Width="1.5" PointX="11.375" PointY="2.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="1.5" PointX="7.375" PointY="16.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="9.375" PointY="16.875" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Cargos" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="9.625" PointY="42.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasBancarias_Bancos" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleado" Width="1.5" PointX="14.875" PointY="61.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Empleado" Width="2.625" PointX="12.25" PointY="56.25" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Cargos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados_Modifico" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleados_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Sectores" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_EmpleadoComprador" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados1" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

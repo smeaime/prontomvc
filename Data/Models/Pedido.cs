@@ -114,9 +114,10 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdUsuarioEnvioProveedor { get; set; }
     
         public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
-        public virtual Empleado Comprador { get; set; }
         public virtual Moneda Moneda { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Comprador { get; set; }
+        public virtual Empleado Empleado2 { get; set; }
     }
 }
