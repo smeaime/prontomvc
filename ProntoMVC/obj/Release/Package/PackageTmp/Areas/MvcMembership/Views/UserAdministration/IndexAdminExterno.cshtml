@@ -15,10 +15,14 @@
         in your web.config file.</p>
 }
 <div class="container-fluid">
-    <legend>Administración de Usuarios Externos</legend>
+    <br />
+    <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
+        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+        Administración de Usuarios Externos
+    </div>
     <div class="row-fluid">
         <div class="span2 lightblue">
-            <button onclick="window.location.href='@Url.Action("CreateUser", new { id = -1 })'" class="btn btn-primary">
+            <button onclick="window.location.href='@Url.Action("CreateUserExterno", new { id = -1 })'" class="btn btn-primary">
                 Nuevo Usuario
             </button>
         </div>
@@ -150,7 +154,7 @@
                         </div>*@
                         <div class="span3 lightblue">
                             <div class="cc">
-                                Admin Existrador @*AdminExterno*@
+                                Admin Externo @*AdminExterno*@
                             </div>
                         </div>
                         <div class="span3 lightblue">
@@ -225,13 +229,13 @@
                                     @Html.CheckBox("EsExterno" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "Externo"))
                                 }
                             </div>
-                              <div class="span3 lightblue">
+                            <div class="span3 lightblue">
                                 @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
                                 {
                                     @Html.CheckBox("EsExternoOrdenesPagoListas" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "ExternoOrdenesPagoListas"))
                                 }
                             </div>
-                              <div class="span3 lightblue">
+                            <div class="span3 lightblue">
                                 @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
                                 {
                                     @Html.CheckBox("EsExternoCuentaCorrienteProveedor" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "ExternoCuentaCorrienteProveedor"))

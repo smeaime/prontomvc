@@ -268,7 +268,7 @@ namespace ProntoMVC.Controllers
 
                 if (ViewBag.SuperadminPass != null || this.Session["SuperadminPass"] != null)
                 {
-                    UpdateColecciones(ref o);
+                    UpdateColecciones(ref o, db);
 
                 }
                 else if (o.IdEmpleado <= 0)
@@ -301,7 +301,7 @@ namespace ProntoMVC.Controllers
                     if (o.IdEmpleado > 0)
                     {
 
-                        UpdateColecciones(ref o);
+                        UpdateColecciones(ref o, db);
 
 
                     }
@@ -500,7 +500,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        void UpdateColecciones(ref Empleado o)
+        public void UpdateColecciones(ref Empleado o, DemoProntoEntities dbcontext)
         {
 
             if (ViewBag.SuperadminPass != null || this.Session["SuperadminPass"] != null)
@@ -514,10 +514,10 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/7968598/entity-4-1-updating-an-existing-parent-entity-with-new-child-entities
 
             var id = o.IdEmpleado;
-            var EntidadOriginal = db.Empleados.Where(p => p.IdEmpleado == id)
+            var EntidadOriginal = dbcontext.Empleados.Where(p => p.IdEmpleado == id)
                                     .Include(p => p.EmpleadosAccesos)
                                     .SingleOrDefault();
-            var EntidadEntry = db.Entry(EntidadOriginal);
+            var EntidadEntry = dbcontext.Entry(EntidadOriginal);
             EntidadEntry.CurrentValues.SetValues(o);
 
 
@@ -550,7 +550,7 @@ namespace ProntoMVC.Controllers
                     if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
                     else dr.Acceso = true;
 
-                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                    var DetalleEntidadEntry = dbcontext.Entry(DetalleEntidadOriginal);
                     DetalleEntidadEntry.Entity.IdEmpleado = id;
                     DetalleEntidadEntry.Entity.Nivel = dr.Nivel;
                     DetalleEntidadEntry.Entity.Acceso = dr.Acceso;
@@ -589,7 +589,7 @@ namespace ProntoMVC.Controllers
             /////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////
 
-            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
 
 
 
@@ -690,7 +690,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult ArbolConNiveles(int IdUsuario)
         {
 
-            return Json(TreeConNiveles(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario));
+            return Json(TreeConNiveles(IdUsuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db));
         }
 
 

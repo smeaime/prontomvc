@@ -65,6 +65,9 @@
     <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="StringConection" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="ServidorSQL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="DetalleUserBD">
     <Key>
@@ -84,7 +87,7 @@
     <Property Name="PuedeLeer" Type="Boolean" />
     <Property Name="PuedeModificar" Type="Boolean" />
     <Property Name="PuedeEliminar" Type="Boolean" />
-    <Property Name="Instalado" Type="Boolean" Nullable="false" />
+    <Property Name="Instalado" Type="Boolean" />
   </EntityType>
   <EntityType Name="UserDatosExtendidos">
     <Key>

@@ -406,13 +406,15 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             try
             {
-
-                //si no hay con qué llenar .Empleados, llora la vista
-                using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase)))
+                if (nombrebase.NullSafeToString() != "")
                 {
-                    // no mostrar los que ya estan en la bdlmaster
-                    ViewBag.Empleados = new SelectList(tempdb.Empleados.ToList(), "IdEmpleado", "UsuarioNT");
-                };
+                    //si no hay con qué llenar .Empleados, llora la vista
+                    using (var tempdb = new DemoProntoEntities(Generales.sCadenaConex(nombrebase)))
+                    {
+                        // no mostrar los que ya estan en la bdlmaster
+                        ViewBag.Empleados = new SelectList(tempdb.Empleados.ToList(), "IdEmpleado", "UsuarioNT");
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -1731,7 +1733,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             Parametros parametros = db.Parametros.Find(1);
             m.ProximoComprobanteProveedorReferencia = parametros.ProximoComprobanteProveedorReferencia ?? 1;
-
+            m.ArchivoAyuda = parametros.ArchivoAyuda;
+            m.PathPlantillas = parametros.PathPlantillas;
 
 
 
@@ -1760,6 +1763,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 config.AppSettings.Settings.Remove("CartelAviso");
                 config.AppSettings.Settings.Add("CartelAviso", configuracionViewModel.CartelAviso);
 
+
+
                 config.Save();
 
                 //perdes los valores de sesion!!!!
@@ -1767,6 +1772,10 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             Parametros parametros = db.Parametros.Find(1);
             parametros.ProximoComprobanteProveedorReferencia = configuracionViewModel.ProximoComprobanteProveedorReferencia;
+            parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
+            parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
+            parametros.PathPlantillas = configuracionViewModel.PathPlantillas;
+            
             db.SaveChanges();
 
 

@@ -20,6 +20,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<bool> PuedeLeer { get; set; }
         public Nullable<bool> PuedeModificar { get; set; }
         public Nullable<bool> PuedeEliminar { get; set; }
-        public bool Instalado { get; set; }
+        public Nullable<bool> Instalado { get; set; }
     }
 }

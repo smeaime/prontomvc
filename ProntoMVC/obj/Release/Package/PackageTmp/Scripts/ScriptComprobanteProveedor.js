@@ -14,6 +14,13 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
+var UltimoIdUnidad
+var UltimoIdArticulo
+var UltimoDescUnidad
+var UltimoIdControlCalidad
+
+var inEdit
+
 var lastColIndex;
 var lastRowIndex;
 var lastSelectedId;
@@ -253,7 +260,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
 
-
+                        sacarDeEditMode(); // me salvó esto!! (porque en el caso de que aprieten TAB, no está bueno que quede una celda en edicion mientras estas grabando)
 
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
@@ -268,6 +275,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+ FinRefresco();
                     }
                     else {
 
@@ -289,6 +297,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                 function (data) {
                     if (data.length > 0) {
                         var ui = data[0];
+  sacarDeEditMode();
                         // alert(ui.value);
 
 
@@ -321,6 +330,9 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
     }
 
 
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
+    /// ojito con lo que pones acá!, que las llamadas a post son asincrónicas y se ejecutarán probablemente antes de que terminen
 
 
 
@@ -330,6 +342,12 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 }
 
 
+function FinRefresco() {
+    CalcularTodos();
+    RefrescarOrigenDescripcion();
+            AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+
+}
 
 
 
@@ -499,6 +517,7 @@ function SerializaForm() {
     return cabecera;
 
 }
+$(function () {
 
 
 
@@ -606,679 +625,8 @@ function Validar() {
 }
 
 
-function QuitarRenglones(data) {
 
-    var longitud = data.length;
-    for (var i = 0; i < data.length; i++) {
 
-        if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
-
-        var renglonrepe = parseInt(data[i]);
-        // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
-        var index = 6; // la columna esta es la que tiene el numero de item
-        var str = renglonrepe;
-        var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
-
-
-
-
-        // podemos quitarlo o pintarlo
-        if (true) {
-            // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
-            // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
-            //            
-            //              $("tr.jqgrow:odd").addClass('myAltRowClass');
-            //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
-            //                .addClass('myAltRowClass');
-
-            //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
-
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
-
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
-        } else {
-            try {
-                jQuery("#Lista").jqGrid('delRowData', reng[0].id);
-            } catch (e) {
-
-            }
-        }
-
-
-    }
-
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarRMdetalle(acceptId, ui) {
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag2").jqGrid('getRowData', acceptId);
-
-    var j = 0, dropname, IdRequerimiento;
-    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-
-    IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-    //IdRequerimiento = getdata['act'];
-
-    try {
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-            data: { IdRequerimiento: IdRequerimiento },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-                numitem = getdata['NumeroItem'] - 1;
-
-                CopiarItemRM(data, numitem);
-                Validar();
-            }
-        })
-
-
-
-
-
-    } catch (e) { }
-
-}
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-function CopiarItemRM(data, i) {
-
-    var tmpdata = {};
-
-
-
-    var longitud = data.length;
-
-
-    tmpdata['IdArticulo'] = data[i].IdArticulo;
-    tmpdata['Codigo'] = data[i].Codigo;
-    tmpdata['Descripcion'] = data[i].Descripcion;
-    tmpdata['IdUnidad'] = data[i].IdUnidad;
-    tmpdata['Unidad'] = data[i].Unidad;
-    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-    tmpdata['Cantidad'] = data[i].Cantidad;
-    tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
-    tmpdata['Observaciones'] = data[i].Observaciones;
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    if (true) {
-        // fecha de hoy
-        var now = new Date();
-        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        tmpdata['FechaEntrega'] = currentDate;
-
-
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaNecesidad'] = displayDate;
-    }
-    else {
-        // fecha del rm
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaEntrega'] = displayDate;
-    }
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-
-
-    getdata = tmpdata;
-    gridceil = Math.ceil(Math.random() * 1000000);
-    $("#Lista").jqGrid('addRowData', gridceil, getdata);
-
-
-
-    rows = $("#Lista").getGridParam("reccount");
-    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarPresupuesto(acceptId, ui) {
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        $("#IdProveedor").val(getdata['IdProveedor']);
-        $("#DescripcionProveedor").val(getdata['Proveedor']);
-
-
-
-        //me traigo los datos de detalle
-        IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
-            data: { IdPresupuesto: IdPresupuesto },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
-
-                    if (true) {
-                        // fecha de hoy
-                        var now = new Date();
-                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-                        tmpdata['FechaEntrega'] = currentDate;
-                    }
-                    else {
-                        // fecha del rm
-                        var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                        tmpdata['FechaEntrega'] = displayDate;
-                    }
-                    tmpdata['FechaNecesidad'] = displayDate;
-
-                    ///////////////////////////////////////////////////////////////////
-
-
-                    tmpdata['Importe'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                    tmpdata['Observaciones'] = data[i].Observaciones;
-
-
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                rows = $("#Lista").getGridParam("reccount");
-                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) { }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarComparativa(acceptId, ui) {
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag4").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        //me traigo los datos de detalle
-        IdComparativa = getdata['IdFactura']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Comparativa/DetComparativasSinFormato/',
-            data: { IdComparativa: IdComparativa },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length;
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Unidad;
-                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-                    tmpdata['Importe'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                rows = $("#Lista").getGridParam("reccount");
-                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) { }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarCuenta(acceptId, ui) {
-
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
-    var j = 0, tmpdata = {}, dropname;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    //var prox = ProximoNumeroItem();
-    try {
-        //					for (var key in getdata) {
-        //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
-        //							dropname = dropmodel[j].name;
-        //							tmpdata[dropname] = getdata[key];
-        //						}
-        //						j++;
-        //					}
-        tmpdata['IdDetalleComprobanteProveedor'] = 0;
-
-        tmpdata['IdCuenta'] = getdata['IdCuenta'];
-        tmpdata['Codigo'] = getdata['Codigo'];
-        tmpdata['Descripcion'] = getdata['Cuenta'];
-        //        tmpdata['OrigenDescripcion'] = 1;
-        //        var now = new Date();
-        //        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        //        tmpdata['FechaEntrega'] = currentDate;
-        //        tmpdata['IdUnidad'] = getdata['IdUnidad'];
-        //        tmpdata['Unidad'] = getdata['Unidad'];
-        //        tmpdata['IdDetalleRequerimiento'] = 0;
-        //        tmpdata['Cantidad'] = 0;
-        //        tmpdata['NumeroItem'] = prox++;
-        getdata = tmpdata;
-    } catch (e) { }
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-
-
-    // o agarrar la primera linea vacía:
-    $("#Lista").jqGrid('addRowData', grid, getdata);
-    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
-
-
-
-
-
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-
-
-
-
-    RefrescarOrigenDescripcion();
-    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-
-
-    //   var rows = $("#Lista").getGridParam("reccount");
-    //    if (rows > 4) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-    // Validar();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$(function () {
-
-
-    $('#grabar2').click(function () {
-
-
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-        var cabecera = SerializaForm();
-
-
-        $('html, body').css('cursor', 'wait');
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'ComprobanteProveedor/BatchUpdate',
-            dataType: 'json',
-            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-            success: function (result) {
-                //                    if (result) {
-                //                        $('#Lista').trigger('reloadGrid');
-                //                        window.location.replace(ROOT + "Pedido/index");
-                //                    } else {
-                //                        alert('No se pudo grabar el comprobante.');
-                //                    }
-
-                if (result) {
-                    $('html, body').css('cursor', 'auto');
-
-
-                    if (true) {
-                        //window.location = (ROOT + "Pedido/index");
-                        window.location = (ROOT + "ComprobanteProveedor/Edit/" + result.IdComprobanteProveedor);
-
-                    } else {
-
-                        var dt = new Date();
-                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-
-                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
-                        $("#mensajeAlerta").show();
-                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
-                        //si graban de nuevo, va a dar un alta!!!!
-
-
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                    }
-
-                } else {
-
-
-                    alert('No se pudo grabar el comprobante.');
-                    $('.loading').html('');
-
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                }
-
-            },
-
-            beforeSend: function () {
-                //$('.loading').html('some predefined loading img html');
-                $("#loading").show();
-                $('#grabar2').attr("disabled", true).val("Espere...");
-
-            },
-            complete: function () {
-                $("#loading").hide();
-            }
-                ,
-            error: function (xhr, textStatus, exceptionThrown) {
-                try {
-                    var errorData = $.parseJSON(xhr.responseText);
-                    var errorMessages = [];
-                    //this ugly loop is because List<> is serialized to an object instead of an array
-                    for (var key in errorData) {
-                        errorMessages.push(errorData[key]);
-                    }
-
-
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                    //alert(errorMessages.join("<br />"));
-
-                    // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
-                    //$('#result').html(errorMessages.join("<br />"));
-                    //$("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                    $("#mensajeAlerta").show();
-                } catch (e) {
-                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-
-
-                    //alert(xhr.responseText);
-
-
-                    $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show();
-                }
-
-
-            }
-
-
-
-
-
-
-        });
-    });
-
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-$(function () {     // lo mismo que $(document).ready(function () {
-
-
-    $("#loading").hide();
-
-    var inEdit
-    var dobleclic
-    var headerRow, rowHight, resizeSpanHeight;
-    var grid = $("#Lista")
-
-    //Esto es para analizar los parametros de entrada via querystring
-    var querystring = location.search.replace('?', '').split('&');
-    var queryObj = {};
-    for (var i = 0; i < querystring.length; i++) {
-        var name = querystring[i].split('=')[0];
-        var value = querystring[i].split('=')[1];
-        queryObj[name] = value;
-    }
-    if (queryObj["code"] === "1") {
-        $(":input").attr("disabled", "disabled");
-        $(".boton").hide();
-    }
-
-
-
-    //Para que haga wrap en las celdas
-    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-    //$.jgrid.formatter.integer.thousandsSeparator=',';
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1288,6 +636,9 @@ $(function () {     // lo mismo que $(document).ready(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
 
     $('#Lista').jqGrid({
         url: ROOT + 'ComprobanteProveedor/DetComprobantesProveedor/',
@@ -1914,6 +1265,705 @@ $(function () {     // lo mismo que $(document).ready(function () {
         //if (e.keyCode == 38 || e.keyCode == 40)
         // alert('hola'); // e.preventDefault();
     });
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////FIN DE DEFINICION DE GRILLALISTA   ////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+
+function QuitarRenglones(data) {
+
+    var longitud = data.length;
+    for (var i = 0; i < data.length; i++) {
+
+        if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
+
+        var renglonrepe = parseInt(data[i]);
+        // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
+        var index = 6; // la columna esta es la que tiene el numero de item
+        var str = renglonrepe;
+        var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
+
+
+
+
+        // podemos quitarlo o pintarlo
+        if (true) {
+            // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
+            // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
+            //            
+            //              $("tr.jqgrow:odd").addClass('myAltRowClass');
+            //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
+            //                .addClass('myAltRowClass');
+
+            //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
+
+            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
+            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
+
+            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
+            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
+        } else {
+            try {
+                jQuery("#Lista").jqGrid('delRowData', reng[0].id);
+            } catch (e) {
+
+            }
+        }
+
+
+    }
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarRMdetalle(acceptId, ui) {
+
+    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+    var getdata = jQuery("#ListaDrag2").jqGrid('getRowData', acceptId);
+
+    var j = 0, dropname, IdRequerimiento;
+    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    var grid;
+
+    IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+    //IdRequerimiento = getdata['act'];
+
+    try {
+
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+            data: { IdRequerimiento: IdRequerimiento },
+            dataType: "Json",
+            success: function (data) {
+
+                // agrego los items a la grilla de detalle
+                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                // venido el objeto devuelto (jsoneado) ?
+                numitem = getdata['NumeroItem'] - 1;
+
+                CopiarItemRM(data, numitem);
+                Validar();
+            }
+        })
+
+
+
+
+
+    } catch (e) { }
+
+}
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+function CopiarItemRM(data, i) {
+
+    var tmpdata = {};
+
+
+
+    var longitud = data.length;
+
+
+    tmpdata['IdArticulo'] = data[i].IdArticulo;
+    tmpdata['Codigo'] = data[i].Codigo;
+    tmpdata['Descripcion'] = data[i].Descripcion;
+    tmpdata['IdUnidad'] = data[i].IdUnidad;
+    tmpdata['Unidad'] = data[i].Unidad;
+    tmpdata['IdDetalleComprobanteProveedor'] = 0;
+    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+    tmpdata['Cantidad'] = data[i].Cantidad;
+    tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+
+
+
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+    tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
+    tmpdata['Observaciones'] = data[i].Observaciones;
+
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+    if (true) {
+        // fecha de hoy
+        var now = new Date();
+        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+        tmpdata['FechaEntrega'] = currentDate;
+
+
+        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
+        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+        tmpdata['FechaNecesidad'] = displayDate;
+    }
+    else {
+        // fecha del rm
+        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
+        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+        tmpdata['FechaEntrega'] = displayDate;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+
+
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+
+
+    getdata = tmpdata;
+    gridceil = Math.ceil(Math.random() * 1000000);
+    $("#Lista").jqGrid('addRowData', gridceil, getdata);
+
+
+
+    rows = $("#Lista").getGridParam("reccount");
+    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarPresupuesto(acceptId, ui) {
+
+    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+    var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
+
+    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    var grid;
+    try {
+
+        // estos son datos de cabecera que ya tengo en la grilla auxiliar
+        $("#Observaciones").val(getdata['Observaciones']);
+        $("#LugarEntrega").val(getdata['LugarEntrega']);
+        $("#IdObra").val(getdata['IdObra']);
+        $("#IdSector").val(getdata['IdSector']);
+
+        $("#IdProveedor").val(getdata['IdProveedor']);
+        $("#DescripcionProveedor").val(getdata['Proveedor']);
+
+
+
+        //me traigo los datos de detalle
+        IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
+            data: { IdPresupuesto: IdPresupuesto },
+            dataType: "Json",
+            success: function (data) {
+
+                // agrego los items a la grilla de detalle
+                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                // venido el objeto devuelto (jsoneado) ?
+
+                var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
+                for (var i = 0; i < data.length; i++) {
+                    tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    tmpdata['Codigo'] = data[i].Codigo;
+                    tmpdata['Descripcion'] = data[i].Descripcion;
+                    tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    tmpdata['Unidad'] = data[i].Abreviatura;
+                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
+                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                    tmpdata['Cantidad'] = data[i].Cantidad;
+                    tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+                    ///////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////
+
+                    if (true) {
+                        // fecha de hoy
+                        var now = new Date();
+                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                        tmpdata['FechaEntrega'] = currentDate;
+                    }
+                    else {
+                        // fecha del rm
+                        var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                        tmpdata['FechaEntrega'] = displayDate;
+                    }
+                    tmpdata['FechaNecesidad'] = displayDate;
+
+                    ///////////////////////////////////////////////////////////////////
+
+
+                    tmpdata['Importe'] = data[i].Precio;
+                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                    tmpdata['ImporteIva'] = data[i].ImporteIva;
+                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                    tmpdata['Observaciones'] = data[i].Observaciones;
+
+
+                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                    getdata = tmpdata;
+                    grid = Math.ceil(Math.random() * 1000000);
+                    $("#Lista").jqGrid('addRowData', grid, getdata);
+                }
+
+
+                rows = $("#Lista").getGridParam("reccount");
+                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+                Validar();
+            }
+
+        });
+
+
+
+
+    } catch (e) { }
+
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+}
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarComparativa(acceptId, ui) {
+
+    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+    var getdata = jQuery("#ListaDrag4").jqGrid('getRowData', acceptId);
+
+    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    var grid;
+    try {
+
+        // estos son datos de cabecera que ya tengo en la grilla auxiliar
+        $("#Observaciones").val(getdata['Observaciones']);
+        $("#LugarEntrega").val(getdata['LugarEntrega']);
+        $("#IdObra").val(getdata['IdObra']);
+        $("#IdSector").val(getdata['IdSector']);
+
+        //me traigo los datos de detalle
+        IdComparativa = getdata['IdFactura']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Comparativa/DetComparativasSinFormato/',
+            data: { IdComparativa: IdComparativa },
+            dataType: "Json",
+            success: function (data) {
+
+                // agrego los items a la grilla de detalle
+                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                // venido el objeto devuelto (jsoneado) ?
+
+                var longitud = data.length;
+                for (var i = 0; i < data.length; i++) {
+                    tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    tmpdata['Codigo'] = data[i].Codigo;
+                    tmpdata['Descripcion'] = data[i].Descripcion;
+                    tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    tmpdata['Unidad'] = data[i].Unidad;
+                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
+                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                    tmpdata['Cantidad'] = data[i].Cantidad;
+                    tmpdata['NumeroObra'] = data[i].NumeroObra;
+                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+
+
+                    tmpdata['Importe'] = data[i].Precio;
+                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                    tmpdata['ImporteIva'] = data[i].ImporteIva;
+                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                    getdata = tmpdata;
+                    grid = Math.ceil(Math.random() * 1000000);
+                    $("#Lista").jqGrid('addRowData', grid, getdata);
+                }
+
+
+                rows = $("#Lista").getGridParam("reccount");
+                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+                Validar();
+            }
+
+        });
+
+
+
+
+    } catch (e) { }
+
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+}
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarCuenta(acceptId, ui) {
+
+
+
+    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+    var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
+    var j = 0, tmpdata = {}, dropname;
+    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    //var prox = ProximoNumeroItem();
+    try {
+        //					for (var key in getdata) {
+        //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
+        //							dropname = dropmodel[j].name;
+        //							tmpdata[dropname] = getdata[key];
+        //						}
+        //						j++;
+        //					}
+        tmpdata['IdDetalleComprobanteProveedor'] = 0;
+
+        tmpdata['IdCuenta'] = getdata['IdCuenta'];
+        tmpdata['Codigo'] = getdata['Codigo'];
+        tmpdata['Descripcion'] = getdata['Cuenta'];
+        //        tmpdata['OrigenDescripcion'] = 1;
+        //        var now = new Date();
+        //        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+        //        tmpdata['FechaEntrega'] = currentDate;
+        //        tmpdata['IdUnidad'] = getdata['IdUnidad'];
+        //        tmpdata['Unidad'] = getdata['Unidad'];
+        //        tmpdata['IdDetalleRequerimiento'] = 0;
+        //        tmpdata['Cantidad'] = 0;
+        //        tmpdata['NumeroItem'] = prox++;
+        getdata = tmpdata;
+    } catch (e) { }
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+
+
+    // o agarrar la primera linea vacía:
+    $("#Lista").jqGrid('addRowData', grid, getdata);
+    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
+
+
+
+
+
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
+
+
+    RefrescarOrigenDescripcion();
+    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+
+
+    //   var rows = $("#Lista").getGridParam("reccount");
+    //    if (rows > 4) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+    // Validar();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    $("#grabar244").click(function () {
+        $("#grabar2").click();
+    })
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////grabar///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#grabar2').click(function () {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        var cabecera = SerializaForm();
+
+
+        $('html, body').css('cursor', 'wait');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'ComprobanteProveedor/BatchUpdate',
+            dataType: 'json',
+            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+            success: function (result) {
+                //                    if (result) {
+                //                        $('#Lista').trigger('reloadGrid');
+                //                        window.location.replace(ROOT + "Pedido/index");
+                //                    } else {
+                //                        alert('No se pudo grabar el comprobante.');
+                //                    }
+
+                if (result) {
+                    $('html, body').css('cursor', 'auto');
+
+
+                    if (true) {
+                        //window.location = (ROOT + "Pedido/index");
+                        window.location = (ROOT + "ComprobanteProveedor/Edit/" + result.IdComprobanteProveedor);
+
+                    } else {
+
+                        var dt = new Date();
+                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                        $("#mensajeAlerta").show();
+                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                        //si graban de nuevo, va a dar un alta!!!!
+
+
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                    }
+
+                } else {
+
+
+                    alert('No se pudo grabar el comprobante.');
+                    $('.loading').html('');
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                }
+
+            },
+
+            beforeSend: function () {
+                //$('.loading').html('some predefined loading img html');
+                $("#loading").show();
+                $('#grabar2').attr("disabled", true).val("Espere...");
+
+            },
+            complete: function () {
+                $("#loading").hide();
+            }
+                ,
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    //alert(errorMessages.join("<br />"));
+
+                    // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                    //$('#result').html(errorMessages.join("<br />"));
+                    //$("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+
+
+                    //alert(xhr.responseText);
+
+
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+
+
+            }
+
+
+
+
+
+
+        });
+    });
+
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+$(function () {     // lo mismo que $(document).ready(function () {
+
+
+    $("#loading").hide();
+
+    var inEdit
+    var dobleclic
+    var headerRow, rowHight, resizeSpanHeight;
+    var grid = $("#Lista")
+
+    //Esto es para analizar los parametros de entrada via querystring
+    var querystring = location.search.replace('?', '').split('&');
+    var queryObj = {};
+    for (var i = 0; i < querystring.length; i++) {
+        var name = querystring[i].split('=')[0];
+        var value = querystring[i].split('=')[1];
+        queryObj[name] = value;
+    }
+    if (queryObj["code"] === "1") {
+        $(":input").attr("disabled", "disabled");
+        $(".boton").hide();
+    }
+
+
+
+    //Para que haga wrap en las celdas
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    //$.jgrid.formatter.integer.thousandsSeparator=',';
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
