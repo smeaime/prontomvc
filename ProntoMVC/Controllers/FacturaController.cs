@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using  ProntoMVC.Data.Models;
+using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
@@ -34,7 +34,7 @@ namespace ProntoMVC.Controllers
 {
 
 
-    [Authorize(Roles = "Administrador,SuperAdmin,FacturaElectronica,Comercial,Externo,ExternoCuentaCorrienteCliente")] 
+    [Authorize(Roles = "Administrador,SuperAdmin,FacturaElectronica,Comercial,Externo,ExternoCuentaCorrienteCliente")]
     //ojo que el web.config tambien te puede bochar hacia el login (con sus location path=)
 
     public partial class FacturaController : ProntoBaseController
@@ -743,7 +743,7 @@ namespace ProntoMVC.Controllers
             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
                 ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
-            
+
 
 
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
@@ -755,18 +755,36 @@ namespace ProntoMVC.Controllers
 
             //  string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["DemoProntoConexionDirecta"].ConnectionString);
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-            string plantilla ;
+            string plantilla;
             if (db.Facturas.Find(id).TipoABC == "A")
             {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_A_Hawk_Nueva_FA.dot";
+
+
+
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_A_" + this.HttpContext.Session["BasePronto"] + "";
+
+
             }
             else
             {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_B_Hawk_Nueva.dot";
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_B_" + this.HttpContext.Session["BasePronto"] + "";
             }
+
+
+            if (db.Facturas.Find(id).CAE.NullSafeToString() != "")
+            {
+                plantilla += "_FA.dot";
+            }
+            else
+            {
+                plantilla += ".dot";
+            }
+
             /*
             string plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
             */
+
+
 
             //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
             System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
