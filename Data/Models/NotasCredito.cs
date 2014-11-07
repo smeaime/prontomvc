@@ -82,7 +82,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdTipoOperacion { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual Empleado Empleado { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }
         public virtual Moneda Moneda { get; set; }
     }
