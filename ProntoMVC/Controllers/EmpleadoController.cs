@@ -28,9 +28,141 @@ namespace ProntoMVC.Controllers
         {
 
         [HttpPost]
-        public virtual JsonResult BatchUpdate(Empleado Empleado)
+        public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleEmpleado,IdDetalleEmpleadoCuentaBancaria,IdDetalleEmpleadoJornada,IdDetalleEmpleadoObra,IdDetalleEmpleadoSector,IdDetalleEmpleadoUbicacion")] Empleado Empleado)
         {
-            return Json("");
+            try
+            {
+                string erar = "";
+                if (!Validar(Empleado, ref erar))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                        Response.TrySkipIisCustomErrors = true;
+                    }
+                    catch (Exception)
+                    {
+                        //    throw;
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    string[] words = erar.Split('\n');
+                    res.Errors = words.ToList(); 
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    if (Empleado.IdEmpleado > 0)
+                    {
+                        var EmpleadoOriginal = db.Empleados.Where(p => p.IdEmpleado == Empleado.IdEmpleado).Include(p => p.DetalleEmpleados).SingleOrDefault();
+                        var EmpleadoEntry = db.Entry(EmpleadoOriginal);
+                        EmpleadoEntry.CurrentValues.SetValues(Empleado);
+
+                        foreach (var d in Empleado.DetalleEmpleados)
+                        {
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleados.Where(c => c.IdDetalleEmpleado == d.IdDetalleEmpleado && d.IdDetalleEmpleado > 0).SingleOrDefault();
+                            // Is original child item with same ID in DB?
+                            if (DetalleEmpleadoOriginal != null)
+                            {
+                                // Yes -> Update scalar properties of child item
+                                var DetalleEmpleadoEntry = db.Entry(DetalleEmpleadoOriginal);
+                                DetalleEmpleadoEntry.CurrentValues.SetValues(d);
+                            }
+                            else
+                            {
+                                // No -> It's a new child item -> Insert
+                                EmpleadoOriginal.DetalleEmpleados.Add(d);
+                            }
+                        }
+                        // Now you must delete all entities present in parent.ChildItems but missing in modifiedParent.ChildItems
+                        // ToList should make copy of the collection because we can't modify collection iterated by foreach
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleados.Where(c => c.IdDetalleEmpleado != 0).ToList())
+                        {
+                            // Are there child items in the DB which are NOT in the new child item collection anymore?
+                            if (!Empleado.DetalleEmpleados.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
+                                // Yes -> It's a deleted child item -> Delete
+                                EmpleadoOriginal.DetalleEmpleados.Remove(DetalleEmpleadoOriginal);
+                        }
+
+                        foreach (var d2 in Empleado.DetalleEmpleadosSectores)
+                        {
+                            var DetalleEmpleadoOriginal2 = EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector == d2.IdDetalleEmpleadoSector && d2.IdDetalleEmpleadoSector > 0).SingleOrDefault();
+                            if (DetalleEmpleadoOriginal2 != null)
+                            {
+                                var DetalleEmpleadoEntry2 = db.Entry(DetalleEmpleadoOriginal2);
+                                DetalleEmpleadoEntry2.CurrentValues.SetValues(d2);
+                            }
+                            else
+                            {
+                                EmpleadoOriginal.DetalleEmpleadosSectores.Add(d2);
+                            }
+                        }
+                        foreach (var DetalleEmpleadoOriginal2 in EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector != 0).ToList())
+                        {
+                            if (!Empleado.DetalleEmpleadosSectores.Any(c => c.IdDetalleEmpleadoSector == DetalleEmpleadoOriginal2.IdDetalleEmpleadoSector))
+                                EmpleadoOriginal.DetalleEmpleadosSectores.Remove(DetalleEmpleadoOriginal2);
+                        }
+                        
+                        
+                        db.Entry(EmpleadoOriginal).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Empleados.Add(Empleado);
+                    }
+
+                    db.SaveChanges();
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdEmpleado = Empleado.IdEmpleado, ex = "" });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El empleado tiene datos invalidos";
+
+                    return Json(res);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
+            }
+            //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+        }
+                
+        public bool Validar(ProntoMVC.Data.Models.Empleado o, ref string sErrorMsg)
+        {
+            if (o.Activo == null) sErrorMsg += "\n" + "Falta el estado";
+
+            if (o.Nombre == "") sErrorMsg += "\n" + "Falta el nombre del empleado";
+
+            if ((o.Legajo ?? 0) <= 0) sErrorMsg += "\n" + "Falta el Legajo del empleado";
+
+            if (db.Empleados.Any(x => x.Legajo == o.Legajo && !(x.IdEmpleado == o.IdEmpleado)))
+            {
+                sErrorMsg += "\n" + "El legajo ya existe";
+            }
+
+            if (sErrorMsg != "") 
+                return false;
+            else 
+                return true;
         }
 
         [HttpGet]
@@ -75,10 +207,10 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             Empleado empleado = db.Empleados.Find(id);
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
-            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo);
-            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo);
-            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada);
+            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector ?? 0);
+            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo ?? 0);
+            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo ?? 0);
+            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada ?? 0);
             return View(empleado);
         }
 
@@ -197,7 +329,6 @@ namespace ProntoMVC.Controllers
                     break;
                 default: break;
             }
-
         }
 
         public virtual ActionResult DetEmpleados(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
@@ -288,7 +419,8 @@ namespace ProntoMVC.Controllers
                             a.IdDetalleEmpleadoSector,
                             a.IdEmpleado,
                             a.FechaCambio,
-                            Sector = b != null ? b.Descripcion : null
+                            Sector = b != null ? b.Descripcion : null,
+                            a.IdSectorNuevo
                         }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -304,7 +436,8 @@ namespace ProntoMVC.Controllers
                                 a.IdDetalleEmpleadoSector.ToString(), 
                                 a.IdEmpleado.ToString(), 
                                 a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Sector
+                                a.Sector,
+                                a.IdSectorNuevo.ToString()
                          }
                         }).ToArray()
             };
@@ -342,9 +475,9 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleEmpleadoJornada,
                             a.IdEmpleado,
-                            a.FechaCambio,
+                            FechaCambio1 = a.FechaCambio,
                             a.HorasJornada
-                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.FechaCambio1).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -358,7 +491,7 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdDetalleEmpleadoJornada.ToString(), 
                                 a.IdEmpleado.ToString(), 
-                                a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaCambio1.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.HorasJornada.ToString()
                          }
                         }).ToArray()
@@ -457,7 +590,8 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleEmpleadoUbicacion,
                             a.IdEmpleado,
-                            Ubicacion = b != null ? b.Descripcion : null
+                            Ubicacion = b != null ? b.Descripcion : null,
+                            a.IdUbicacion
                         }).OrderBy(x => x.Ubicacion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -472,7 +606,8 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdDetalleEmpleadoUbicacion.ToString(), 
                                 a.IdEmpleado.ToString(), 
-                                a.Ubicacion
+                                a.Ubicacion,
+                                a.IdUbicacion.ToString()
                          }
                         }).ToArray()
             };
@@ -518,7 +653,7 @@ namespace ProntoMVC.Controllers
                             a.Nombre,
                             a.Legajo,
                             a.UsuarioNT,
-                            Sector = a.Sector.Descripcion,
+                            Sector = a.Sectore.Descripcion,
                             Cargo = "", //a.Cargo.Descripcion,
                             a.Email,
                             a.Iniciales,

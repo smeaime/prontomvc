@@ -340,50 +340,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Empleados">
-      <EntityTypeMapping TypeName="DemoProntoModel.Empleado">
-        <MappingFragment StoreEntitySet="Empleados">
-          <ScalarProperty Name="PermitirAccesoATodasLasObras" ColumnName="PermitirAccesoATodasLasObras" />
-          <ScalarProperty Name="LimitarUbicacionesAsignadas" ColumnName="LimitarUbicacionesAsignadas" />
-          <ScalarProperty Name="FechaVencimientoRegistro" ColumnName="FechaVencimientoRegistro" />
-          <ScalarProperty Name="EsConductor" ColumnName="EsConductor" />
-          <ScalarProperty Name="IdLugarEntregaAsignado_1" ColumnName="IdLugarEntregaAsignado" />
-          <ScalarProperty Name="PuntoVentaAsociado_1" ColumnName="PuntoVentaAsociado" />
-          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-          <ScalarProperty Name="Legajo" ColumnName="Legajo" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="UsuarioNT" ColumnName="UsuarioNT" />
-          <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-          <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Interno" ColumnName="Interno" />
-          <ScalarProperty Name="Administrador" ColumnName="Administrador" />
-          <ScalarProperty Name="Iniciales" ColumnName="Iniciales" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="SisMan" ColumnName="SisMan" />
-          <ScalarProperty Name="HorasJornada" ColumnName="HorasJornada" />
-          <ScalarProperty Name="IdSector1" ColumnName="IdSector1" />
-          <ScalarProperty Name="IdCargo1" ColumnName="IdCargo1" />
-          <ScalarProperty Name="IdSector2" ColumnName="IdSector2" />
-          <ScalarProperty Name="IdCargo2" ColumnName="IdCargo2" />
-          <ScalarProperty Name="IdSector3" ColumnName="IdSector3" />
-          <ScalarProperty Name="IdCargo3" ColumnName="IdCargo3" />
-          <ScalarProperty Name="IdSector4" ColumnName="IdSector4" />
-          <ScalarProperty Name="IdCargo4" ColumnName="IdCargo4" />
-          <ScalarProperty Name="Dominio" ColumnName="Dominio" />
-          <ScalarProperty Name="SisMat" ColumnName="SisMat" />
-          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
-          <ScalarProperty Name="GrupoDeCarga" ColumnName="GrupoDeCarga" />
-          <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-          <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
-          <ScalarProperty Name="IdCuentaFondoFijo" ColumnName="IdCuentaFondoFijo" />
-          <ScalarProperty Name="IdObraAsignada" ColumnName="IdObraAsignada" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Idioma" ColumnName="Idioma" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Obras">
       <EntityTypeMapping TypeName="DemoProntoModel.Obra">
         <MappingFragment StoreEntitySet="Obras">
@@ -3716,16 +3672,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleEmpleados">
-      <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
-        <MappingFragment StoreEntitySet="DetalleEmpleados">
-          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
-          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-          <ScalarProperty Name="IdDetalleEmpleado" ColumnName="IdDetalleEmpleado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DetalleEmpleadosCuentasBancarias">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleadosCuentasBancaria">
         <MappingFragment StoreEntitySet="DetalleEmpleadosCuentasBancarias">
@@ -4253,6 +4199,79 @@
         <MappingFragment StoreEntitySet="Cargos">
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentasBancarias">
+      <EntityTypeMapping TypeName="DemoProntoModel.CuentasBancaria">
+        <MappingFragment StoreEntitySet="CuentasBancarias">
+          <ScalarProperty Name="DiseñoCheque" ColumnName="DiseñoCheque" />
+          <ScalarProperty Name="Activa" ColumnName="Activa" />
+          <ScalarProperty Name="CaracteresBeneficiario" ColumnName="CaracteresBeneficiario" />
+          <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
+          <ScalarProperty Name="CBU" ColumnName="CBU" />
+          <ScalarProperty Name="ChequesPorPlancha" ColumnName="ChequesPorPlancha" />
+          <ScalarProperty Name="PlantillaChequera" ColumnName="PlantillaChequera" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleEmpleados">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
+        <MappingFragment StoreEntitySet="DetalleEmpleados">
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+          <ScalarProperty Name="IdDetalleEmpleado" ColumnName="IdDetalleEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="DemoProntoModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="PermitirAccesoATodasLasObras" ColumnName="PermitirAccesoATodasLasObras" />
+          <ScalarProperty Name="LimitarUbicacionesAsignadas" ColumnName="LimitarUbicacionesAsignadas" />
+          <ScalarProperty Name="FechaVencimientoRegistro" ColumnName="FechaVencimientoRegistro" />
+          <ScalarProperty Name="EsConductor" ColumnName="EsConductor" />
+          <ScalarProperty Name="IdLugarEntregaAsignado" ColumnName="IdLugarEntregaAsignado" />
+          <ScalarProperty Name="PuntoVentaAsociado" ColumnName="PuntoVentaAsociado" />
+          <ScalarProperty Name="Idioma" ColumnName="Idioma" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdObraAsignada" ColumnName="IdObraAsignada" />
+          <ScalarProperty Name="IdCuentaFondoFijo" ColumnName="IdCuentaFondoFijo" />
+          <ScalarProperty Name="InformacionAuxiliar" ColumnName="InformacionAuxiliar" />
+          <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+          <ScalarProperty Name="GrupoDeCarga" ColumnName="GrupoDeCarga" />
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="SisMat" ColumnName="SisMat" />
+          <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+          <ScalarProperty Name="IdCargo4" ColumnName="IdCargo4" />
+          <ScalarProperty Name="IdSector4" ColumnName="IdSector4" />
+          <ScalarProperty Name="IdCargo3" ColumnName="IdCargo3" />
+          <ScalarProperty Name="IdSector3" ColumnName="IdSector3" />
+          <ScalarProperty Name="IdCargo2" ColumnName="IdCargo2" />
+          <ScalarProperty Name="IdSector2" ColumnName="IdSector2" />
+          <ScalarProperty Name="IdCargo1" ColumnName="IdCargo1" />
+          <ScalarProperty Name="IdSector1" ColumnName="IdSector1" />
+          <ScalarProperty Name="HorasJornada" ColumnName="HorasJornada" />
+          <ScalarProperty Name="SisMan" ColumnName="SisMan" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Iniciales" ColumnName="Iniciales" />
+          <ScalarProperty Name="Administrador" ColumnName="Administrador" />
+          <ScalarProperty Name="Interno" ColumnName="Interno" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+          <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+          <ScalarProperty Name="UsuarioNT" ColumnName="UsuarioNT" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Legajo" ColumnName="Legajo" />
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

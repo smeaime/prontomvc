@@ -71,7 +71,6 @@ public static partial class MVC
     public static ProntoMVC.Controllers.SubrubroController Subrubro = new ProntoMVC.Controllers.T4MVC_SubrubroController();
     public static ProntoMVC.Controllers.TestController Test = new ProntoMVC.Controllers.T4MVC_TestController();
     public static ProntoMVC.Controllers.TipoRetencionGananciaController TipoRetencionGanancia = new ProntoMVC.Controllers.T4MVC_TipoRetencionGananciaController();
-    public static ProntoMVC.Controllers.UbicacionController Ubicacion = new ProntoMVC.Controllers.T4MVC_UbicacionController();
     public static ProntoMVC.Controllers.UnidadController Unidad = new ProntoMVC.Controllers.T4MVC_UnidadController();
     public static T4MVC.ErrorPagesController ErrorPages = new T4MVC.ErrorPagesController();
     public static T4MVC.ReportesController Reportes = new T4MVC.ReportesController();

@@ -65,9 +65,9 @@ namespace ProntoMVC.Data.Models
         public virtual Condiciones_Compra Condiciones_Compra { get; set; }
         public virtual ICollection<DetallePresupuesto> DetallePresupuestos { get; set; }
         public virtual Moneda Moneda { get; set; }
-        public virtual Empleado Empleado { get; set; }
-        public virtual Empleado Empleado2 { get; set; }
         public virtual PlazosEntrega PlazosEntrega { get; set; }
         public virtual Proveedor Proveedor { get; set; }
+        public virtual Empleado Comprador { get; set; }
+        public virtual Empleado AproboPresupuesto { get; set; }
     }
 }
