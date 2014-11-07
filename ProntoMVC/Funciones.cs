@@ -12,7 +12,7 @@ using System.Web.Security;
 
 using System.Web.Mvc;
 
-using  ProntoMVC.Data.Models;
+using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 
 using System.Data.SqlClient;
@@ -271,21 +271,37 @@ public static class Generales
         return ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
     }
 
-    public static string sCadenaConexSQL(string nombreEmpresa)
+    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid())
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
         nombreEmpresa = nombreEmpresa ?? "";
         if (nombreEmpresa == "") return null;
 
-        Guid userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+        if (userGuid == Guid.Empty) userGuid = (Guid)Membership.GetUser().ProviderUserKey;
         //string us = Membership.GetUser().UserName;
         string us = userGuid.ToString();
 
         //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
         //usuario.Empresa = IdEmpresa
 
-        string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+        string sConexBDLMaster;
+        bool esSuperadmin;
+
+        if (System.Diagnostics.Debugger.IsAttached)
+        {
+            sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+            esSuperadmin = true;
+        }
+        else
+        {
+            sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+
+        }
+        sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
+
+
 
         string s;
 
@@ -302,7 +318,7 @@ public static class Generales
                 var sSQL = "SELECT * FROM BASES " +
                                                           "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
                                                           "where " +
-                                                          (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ? "UserId='" + us + "' AND" : "") +
+                                                          ((!esSuperadmin) ? "UserId='" + us + "' AND" : "") +
                                                           " Descripcion='" + nombreEmpresa + "'   ";
 
                 System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
@@ -362,7 +378,7 @@ public static class Generales
 
     }
 
-    public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid)
+    public static string sCadenaConexSQL2(string nombreEmpresa, Guid userGuid)
     {
         // string datos = HttpContext.Current.Request.Session["data"] as string;
         //var ss=ControllerContext.HttpContext.Session["{name}"];
@@ -626,11 +642,11 @@ public static class Generales
     }
 
 
-    public static void MailAlUsuarioAvisoRegistracionPendienteDeHabilitar(MembershipUser us )
+    public static void MailAlUsuarioAvisoRegistracionPendienteDeHabilitar(MembershipUser us)
     {
         string urldominio = ConfigurationManager.AppSettings["UrlDominio"]; // +"Account/Verificar";
 
-        var body = "Hola " + us.UserName+ "<br/>" +
+        var body = "Hola " + us.UserName + "<br/>" +
                 "Ya estás registrado. Cuando el admiistrador te habilite, te llegará un nuevo correo";
 
 

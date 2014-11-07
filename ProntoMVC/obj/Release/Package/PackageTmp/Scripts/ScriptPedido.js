@@ -17,12 +17,15 @@
 
 
 var UltimoIdUnidad
-var UltimoDescUnidad
 var UltimoIdArticulo
+var UltimoDescUnidad
 var UltimoIdControlCalidad
 
-var lastRowIndex;
+var inEdit
+
 var lastColIndex;
+var lastRowIndex;
+var lastSelectedId;
 
 
 ////////////////////////////////////////////////////////////////////
@@ -52,7 +55,7 @@ $(function () {
 
 function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
-//    alert('RefrescarRestoDelRenglon');
+    //    alert('RefrescarRestoDelRenglon');
     /*
 
     ok, la cuestion es que, usando celledit (es decir, la edicion inline por celda, no por renglon entero), cuando cambio el valor
@@ -108,7 +111,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
         data['IdUnidad'] = UltimoIdUnidad
-      //  data['Unidad'] = UltimoDescUnidad
+        //  data['Unidad'] = UltimoDescUnidad
 
         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -118,8 +121,11 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         //                {term: val }, // JSON.stringify(val)},
         //                function (data) {
         //                    if (data.length > 0) {
-        //                        var ui = data[0];
 
+        //                    el tema es que esta accion no es autocomplete, trae todas las unidades
+
+        //                        var ui = data[0];
+        //                        alert(ui.IdUnidad);
         //                        data['IdUnidad'] = ui.IdUnidad;
 
         //                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
@@ -147,7 +153,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
 
-
+                        sacarDeEditMode(); // me salvó esto!! (porque en el caso de que aprieten TAB, no está bueno que quede una celda en edicion mientras estas grabando)
 
                         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                         var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
@@ -156,6 +162,13 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
+
+                        //quizas el problema con el tab, es que estan pasando a un campo que recien fue modificado (desde 'codigo' hacia 'descripcion')
+                        // -Aun sin cambiarlo acá, el textbox en 'descripcion' deja de tener autocomplete. se rompe hasta la siguiente edicion
+                        // -Además, tambien pasa cuando va desde 'descripcion' a 'fecha de entrega', porque ahí te quedas sin el plugin de fecha
+                        // Sospecho un poco de cuando agrega renglones justo antes de seguir -parece que no es eso: comenté el AgregarRenglones y sigue pasando
+
+                        //alert(ui.title);
                         data['Descripcion'] = ui.title;
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
@@ -165,10 +178,30 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+
+                        FinRefresco();
+
+
+
                     }
                     else {
 
-                        // hay que cancelar la grabacion
+
+
+                        alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                        data['Descripcion'] = "";
+                        data['IdArticulo'] = 0;
+                        data['Codigo'] = "";
+                        data['Cantidad'] = 0;
+
+                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+
                     }
                 }
         );
@@ -183,11 +216,27 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
                 {term: val }, // JSON.stringify(val)},
                 function (data) {
-                    if (data.length > 0) {
+                    if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
                         var ui = data[0];
-                        //alert(ui.value);
 
 
+
+                        sacarDeEditMode();
+
+                        if (ui.value == "No se encontraron resultados") {
+
+
+                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                            data['Descripcion'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                            return;
+                        }
 
                         //var data = $('#Lista').jqGrid('getRowData', iRow);
 
@@ -200,7 +249,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
                         data['IdArticulo'] = ui.id;
                         data['Codigo'] = ui.codigo;
-                        data['Descripcion'] = ui.title;
+                        data['Descripcion'] = ui.value; // ui.title;
                         data['PorcentajeIVA'] = ui.iva;
                         data['IdUnidad'] = ui.IdUnidad;
                         data['Unidad'] = ui.Unidad;
@@ -214,6 +263,21 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
                     }
                     else {
 
+                        alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        if (true) {
+
+                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                            data['Descripcion'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
+
+                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                        } else {
+                            $('#Lista').jqGrid('restoreRow', dataIds[iRow - 1]);
+                        }
                         // hay que cancelar la grabacion
                     }
                 }
@@ -264,6 +328,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         //        );
 
     }
+    else if (colName == "Cantidad") { }
 
     else {
         FinRefresco()
@@ -293,7 +358,7 @@ function FinRefresco() {
 
 
 function RefrescarOrigenDescripcion() {
-//    return;
+    //    return;
 
     //alert('RefrescarOrigenDescripcion');
 
@@ -354,8 +419,8 @@ function RefrescarOrigenDescripcion() {
 
 function RefrescarRenglon(x) {
 
-//    alert('RefrescarRenglon');
-//    return;
+    //    alert('RefrescarRenglon');
+    //    return;
     if ($("#editmodLista").attr('aria-hidden') == undefined || $("#editmodLista").attr('aria-hidden') == 'true') {
         // modo inline
         $("#Lista [aria-selected='true'] [name='IdUnidad']").val(x.value);
@@ -365,7 +430,7 @@ function RefrescarRenglon(x) {
         $('#IdUnidad').val(x.value);
         $('#Unidad').val('asdasd');
         UltimoDescUnidad = $("#Unidad option:selected").text(); // modo form. en modo inline se llama distinta la celda
-        alert("RefrescarRenglon form " + UltimoDescUnidad);
+        //alert("RefrescarRenglon form " + UltimoDescUnidad);
     }
 
 
@@ -787,908 +852,94 @@ function SerializaForm() {
 
 
     return cabecera;
-
 }
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function DeSerializaForm() {
-    var cm, data1, data2, valor;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-function Validar() {
-
-
-
-    //quiz�s no est� esperando que vuelva la llamada.....
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    // valido el nuevo comprobante
-
-    var cabecera = SerializaForm();
-
-    $.ajax({
-
-        type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
-        contentType: 'application/json; charset=utf-8',
-        url: ROOT + 'Pedido/ValidarJson',
-
-        dataType: 'json',
-        data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-
-        beforeSend: function () {
-            $("#loading").show();
-        },
-        complete: function () {
-            $("#loading").hide();
-        },
-        error: function (xhr, textStatus, exceptionThrown) {
-
-            // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
-
-            try {
-                var errorData = $.parseJSON(xhr.responseText);
-                //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
-                //  Podría mostrar directamente el Messages?
-
-                var errorMessages = [];
-
-                //this ugly loop is because List<> is serialized to an object instead of an array
-                for (var key in errorData.Errors) {
-                    errorMessages.push(errorData[key]);
-                }
-                //      $('#result').html(errorMessages.join("<br />"));
-
-                //       $('html, body').css('cursor', 'auto');
-                //       $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                $("#textoMensajeAlerta").html(errorData.Message);
-                //$("#textoMensajeAlerta").html(errorMessages.join());
-                $("#mensajeAlerta").show();
-                QuitarRenglones(errorData.Errors);
-
-                // alert(errorMessages.join("<br />"));
-
-            } catch (e) {
-                // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                $('html, body').css('cursor', 'auto');
-                $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                $("#textoMensajeAlerta").html(xhr.responseText);
-                $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
-                //$(".alert").alert();
-                //   alert(xhr.responseText);
-            }
-        },
-        success: function (data) {
-            // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
-            // si falta uno, lo borro.
-
-            var arraydemensajes = xhr.responseText;
-            QuitarRenglones(arraydemensajes);
-
-        }
-    });
-
-}
-
-
-function QuitarRenglones(data) {
-
-    var longitud = data.length;
-    for (var i = 0; i < data.length; i++) {
-
-        if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
-
-        var renglonrepe = parseInt(data[i]);
-        // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
-        var index = 6; // la columna esta es la que tiene el numero de item
-        var str = renglonrepe;
-        var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
-
-
-
-
-        // podemos quitarlo o pintarlo
-        if (true) {
-            // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
-            // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
-            //            
-            //              $("tr.jqgrow:odd").addClass('myAltRowClass');
-            //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
-            //                .addClass('myAltRowClass');
-
-            //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
-
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
-
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
-        } else {
-            try {
-                jQuery("#Lista").jqGrid('delRowData', reng[0].id);
-            } catch (e) {
-
-            }
-        }
-
-
-    }
-
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarRM(acceptId, ui) {
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-
-    GrabarGrillaLocal()
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    // var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        //me traigo los datos de detalle
-        var IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-            data: { IdRequerimiento: IdRequerimiento },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length;
-                for (var i = 0; i < data.length; i++) {
-                    CopiarItemRM(data, i);
-                }
-
-
-                //                var rows = $("#Lista").getGridParam("reccount");
-                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) {
-
-        alert(e.message);
-
-    }
-
-
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarRMdetalle(acceptId, ui) {
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    GrabarGrillaLocal()
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag2").jqGrid('getRowData', acceptId);
-
-    var j = 0, dropname, IdRequerimiento;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-
-    var IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-    //IdRequerimiento = getdata['act'];
-
-    try {
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-            data: { IdRequerimiento: IdRequerimiento },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-                var numitem = getdata['NumeroItem'] - 1;
-
-                CopiarItemRM(data, numitem);
-                Validar();
-            }
-        })
-
-
-
-
-
-    } catch (e) {
-
-        alert(e.message);
-
-    }
-
-}
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-function CopiarItemRM(data, i) {
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    GrabarGrillaLocal()
-
-    var tmpdata = {};
-
-
-
-    var longitud = data.length;
-
-
-    tmpdata['IdArticulo'] = data[i].IdArticulo;
-    tmpdata['Codigo'] = data[i].Codigo;
-    tmpdata['Descripcion'] = data[i].Descripcion;
-    tmpdata['IdUnidad'] = data[i].IdUnidad;
-    tmpdata['Unidad'] = data[i].Unidad;
-    tmpdata['IdDetallePedido'] = 0;
-    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-    tmpdata['Cantidad'] = data[i].Cantidad;
-    tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-    tmpdata['Cumplido'] = data[i].Cumplido;
-
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
-    tmpdata['Observaciones'] = data[i].Observaciones;
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    if (tmpdata['Cumplido'] == 'AN' || tmpdata['Cumplido'] == 'AN') return;
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-
-
-    if (true) {
-        // fecha de hoy
-        var now = new Date();
-        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        tmpdata['FechaEntrega'] = currentDate;
-
-
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaNecesidad'] = displayDate;
-    }
-    else {
-        // fecha del rm
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaEntrega'] = displayDate;
-    }
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    //http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10950
-    //grabar control calidad o usar default
-
-    if (data[i].IdControlCalidad > 0) {
-        tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
-        tmpdata['ControlCalidad'] = data[i].ControlCalidad;
-    }
-    else {
-        tmpdata['IdControlCalidad'] = mIdControlCalidadDefault;
-        tmpdata['ControlCalidad'] = mDescControlCalidadDefault;
-
-    }
-
-
-
-
-
-    var getdata = tmpdata;
-    var gridceil = Math.ceil(Math.random() * 1000000);
-    $("#Lista").jqGrid('addRowData', gridceil, getdata);
-
-
-
-    //    rows = $("#Lista").getGridParam("reccount");
-    //    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-
-
-
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarPresupuesto(acceptId, ui) {
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    GrabarGrillaLocal()
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        $("#IdProveedor").val(getdata['IdProveedor']);
-        $("#DescripcionProveedor").val(getdata['Proveedor']);
-
-
-
-        //me traigo los datos de detalle
-        var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
-            data: { IdPresupuesto: IdPresupuesto },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetallePedido'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
-
-                    if (true) {
-                        // fecha de hoy
-                        var now = new Date();
-                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-                        tmpdata['FechaEntrega'] = currentDate;
-                    }
-                    else {
-                        // fecha del rm
-                        var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                        tmpdata['FechaEntrega'] = displayDate;
-                    }
-                    tmpdata['FechaNecesidad'] = displayDate;
-
-                    ///////////////////////////////////////////////////////////////////
-
-
-                    tmpdata['Precio'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                    tmpdata['Observaciones'] = data[i].Observaciones;
-
-
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                //                rows = $("#Lista").getGridParam("reccount");
-                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) {
-
-        alert(e.message);
-
-    }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarComparativa(acceptId, ui) {
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    GrabarGrillaLocal()
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag4").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        //me traigo los datos de detalle
-        var IdComparativa = getdata['IdFactura']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Comparativa/DetComparativasSinFormato/',
-            data: { IdComparativa: IdComparativa },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length;
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Unidad;
-                    tmpdata['IdDetallePedido'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-                    tmpdata['Precio'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                //                rows = $("#Lista").getGridParam("reccount");
-                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) {
-
-        alert(e.message);
-
-    }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarPedido(acceptId, ui) {
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    GrabarGrillaLocal()
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag5").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        $("#IdProveedor").val(getdata['IdProveedor']);
-        $("#Proveedor").val(getdata['IdProveedor']);
-        $("#DescripcionProveedor").val(getdata['Proveedor']);
-        $("#IdComprador").val(getdata['IdComprador']);
-
-
-        $("#NumeroPedido").val(getdata['Numero']);
-        $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
-
-
-        //me traigo los datos de detalle
-        var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-
-
-
-
-
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Pedido/DetPedidosSinFormato/',
-            data: { IdPedido: IdPedido },
-            dataType: "Json",
-            error: function (xhr, textStatus, exceptionThrown) {
-                alert('error');
-            },
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length;
-                for (var i = 0; i < data.length; i++) {
-                    var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    //tmpdata['Unidad'] = data[i].Unidad;
-                    tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['FechaEntrega'] = displayDate;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-                    tmpdata['Precio'] = data[i].Precio; ;
-
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-                //                rows = $("#Lista").getGridParam("reccount");
-                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-                Validar();
-            }
-
-        })
-
-
-
-
-    } catch (e) {
-
-        alert(e.message);
-
-    }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(function () {
+    var dobleclic
+    var headerRow, rowHight, resizeSpanHeight;
+    var grid = $("#Lista")
 
 
-    $('#grabar2').click(function () {
 
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    function DeSerializaForm() {
+        var cm, data1, data2, valor;
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    function Validar() {
+
+
+
+        //quiz�s no est� esperando que vuelva la llamada.....
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        // valido el nuevo comprobante
 
         var cabecera = SerializaForm();
 
-
-        $('html, body').css('cursor', 'wait');
         $.ajax({
-            type: 'POST',
+
+            type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
             contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Pedido/BatchUpdate',
+            url: ROOT + 'Pedido/ValidarJson',
+
             dataType: 'json',
             data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-            success: function (result) {
-                //                    if (result) {
-                //                        $('#Lista').trigger('reloadGrid');
-                //                        window.location.replace(ROOT + "Pedido/index");
-                //                    } else {
-                //                        alert('No se pudo grabar el comprobante.');
-                //                    }
-
-                if (result) {
-                    $('html, body').css('cursor', 'auto');
-
-
-                    if (true) {
-                        //window.location = (ROOT + "Pedido/index");
-                        window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
-
-                    } else {
-
-                        var dt = new Date();
-                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-
-                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
-                        $("#mensajeAlerta").show();
-                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
-                        //si graban de nuevo, va a dar un alta!!!!
-
-
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                    }
-
-                } else {
-
-
-                    alert('No se pudo grabar el comprobante.');
-                    $('.loading').html('');
-
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                }
-
-            },
 
             beforeSend: function () {
-                //$('.loading').html('some predefined loading img html');
                 $("#loading").show();
-                $('#grabar2').attr("disabled", true).val("Espere...");
-
-
-
-
             },
             complete: function () {
                 $("#loading").hide();
             },
-
-
             error: function (xhr, textStatus, exceptionThrown) {
+
+                // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
+
                 try {
                     var errorData = $.parseJSON(xhr.responseText);
+                    //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
+                    //  Podría mostrar directamente el Messages?
+
                     var errorMessages = [];
+
                     //this ugly loop is because List<> is serialized to an object instead of an array
-                    for (var key in errorData) {
+                    for (var key in errorData.Errors) {
                         errorMessages.push(errorData[key]);
                     }
+                    //      $('#result').html(errorMessages.join("<br />"));
 
+                    //       $('html, body').css('cursor', 'auto');
+                    //       $('#grabar2').attr("disabled", false).val("Aceptar");
 
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                    //alert(errorMessages.join("<br />"));
-
-                    // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
-                    //$('#result').html(errorMessages.join("<br />"));
-                    //$("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#textoMensajeAlerta").html(errorData.Message);
+                    //$("#textoMensajeAlerta").html(errorMessages.join());
                     $("#mensajeAlerta").show();
+                    QuitarRenglones(errorData.Errors);
+
+                    // alert(errorMessages.join("<br />"));
+
                 } catch (e) {
                     // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
                     // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
@@ -1696,71 +947,23 @@ $(function () {
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
 
-
-                    //alert(xhr.responseText);
-
-
                     $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show();
+                    $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
+                    //$(".alert").alert();
+                    //   alert(xhr.responseText);
                 }
+            },
+            success: function (data) {
+                // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
+                // si falta uno, lo borro.
 
-
-
-
-
-
+                var arraydemensajes = xhr.responseText;
+                QuitarRenglones(arraydemensajes);
 
             }
         });
-    });
 
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-$(function () {     // lo mismo que $(document).ready(function () {
-
-
-    $("#loading").hide();
-
-    var lastSelectedId;
-    var inEdit
-    var dobleclic
-    var headerRow, rowHight, resizeSpanHeight;
-    var grid = $("#Lista")
-
-    //Esto es para analizar los parametros de entrada via querystring
-    var querystring = location.search.replace('?', '').split('&');
-    var queryObj = {};
-    for (var i = 0; i < querystring.length; i++) {
-        var name = querystring[i].split('=')[0];
-        var value = querystring[i].split('=')[1];
-        queryObj[name] = value;
     }
-    if (queryObj["code"] === "1") {
-        $(":input").attr("disabled", "disabled");
-        $(".boton").hide();
-    }
-
-
-
-    $("#FechaIngreso").datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-
-    //Para que haga wrap en las celdas
-    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-    //$.jgrid.formatter.integer.thousandsSeparator=',';
-
-
-
-
-
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1773,6 +976,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -1837,12 +1042,12 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
                                 dataUrl: ROOT + 'Articulo/Unidades',
                                 dataEvents: [{ type: 'change', fn: function (e) {
-//                                    RefrescarRenglon(this);
-//                             
+                                    //                                    RefrescarRenglon(this);
+                                    //                             
 
-//                                    UltimoIdUnidad = this.value;
-//                                    $('#IdUnidad').val(this.value);
-                                   
+                                    //                                    UltimoIdUnidad = this.value;
+                                    //                                    $('#IdUnidad').val(this.value);
+
                                 }
                                 }]
                             }
@@ -1851,19 +1056,33 @@ $(function () {     // lo mismo que $(document).ready(function () {
                             editable: true, edittype: 'text',
                             editoptions: {
                                 dataInit: function (elem) {
+                                    var NoResultsLabel = "No se encontraron resultados"; // http://stackoverflow.com/questions/8663189/jquery-autocomplete-no-result-message
+
                                     $(elem).autocomplete({
-                                        source: ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',
-
-                                        minLength: 0,
+                                        source: ROOT + "Articulo/GetCodigosArticulosAutocomplete2", minLength: 0,
                                         select: function (event, ui) {
-                                            $("#IdArticulo").val(ui.item.id);
-                                            $("#Descripcion").val(ui.item.title);
-                                            $("#PorcentajeIva").val(ui.item.iva);
-                                            $("#IdUnidad").val(ui.item.IdUnidad);
-                                            $("#Unidad").attr("value", ui.item.IdUnidad);
+                                            if (ui.item.label === NoResultsLabel) {
+                                                event.preventDefault();
+                                            }
+                                            else {
+                                                $("#IdArticulo").val(ui.item.id);
+                                                $("#Descripcion").val(ui.item.title);
+                                                $("#PorcentajeIva").val(ui.item.iva);
+                                                $("#IdUnidad").val(ui.item.IdUnidad);
+                                                $("#Unidad").attr("value", ui.item.IdUnidad);
 
-                                            UltimoIdArticulo = ui.item.id;
-                                            UltimoIdUnidad = ui.item.IdUnidad;
+                                                UltimoIdArticulo = ui.item.id;
+                                                UltimoIdUnidad = ui.item.IdUnidad;
+
+                                                // $("#IdUnidad").val(ui.item.IdUnidad|| 1);
+                                                // $("#Unidad").attr("value", ui.item.IdUnidad|| 1);
+
+                                            }
+                                        },
+                                        focus: function (event, ui) {
+                                            if (ui.item.label === NoResultsLabel) {
+                                                event.preventDefault();
+                                            }
                                         }
                                     })
                                     .data("ui-autocomplete")._renderItem = function (ul, item) {
@@ -1873,23 +1092,83 @@ $(function () {     // lo mismo que $(document).ready(function () {
                                             .appendTo(ul);
                                     };
                                 }
+
+
+                                 ,
+
+                                dataEvents: [{
+                                    type: 'change',
+                                    fn: function (e) {
+
+
+                                        // alert('aasasd');
+
+                                        $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
+                                            {term: this.value },
+                                            function (data) {
+                                                if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    var ui = data[0];
+
+                                                    if (ui.title == "") {
+                                                        alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                                                        $("#Codigo").val("");
+                                                        return;
+                                                    }
+
+                                                    if (this.value == "No se encontraron resultados") {
+                                                        $("#Codigo").val("");
+                                                        return;
+                                                    }
+
+
+                                                    //alert('hay ' + data.length);
+
+                                                    $("#IdArticulo").val(ui.id);
+                                                    $("#Codigo").val(ui.value);
+                                                    $("#Descripcion").val(ui.title);
+                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                    $("#Unidad").val(ui.IdUnidad);
+                                                    UltimoIdArticulo = ui.id;
+                                                    UltimoIdUnidad = ui.IdUnidad;
+
+                                                }
+                                                else {
+
+                                                    alert("No existe el código"); // se está bancando que no sea identica la descripcion
+                                                }
+                                            }
+                                        );
+
+
+
+                                    }
+                                }]
+
                             },
                             editrules: { required: false }
                         },
-                            { formoptions: { rowpos: 9, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 350, hidden: true,
-                                editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
-                            },
+
+
+                        { formoptions: { rowpos: 9, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 350, hidden: true,
+                            editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
+                        },
 
                         { name: 'Descripcion', formoptions: { rowpos: 8, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 350,
                             hidden: false,
                             editable: true, edittype: 'text',
-                            editoptions: { rows: '1', cols: '1',
+                            editoptions: {
+                                rows: '1', cols: '1',
                                 dataInit: function (elem) {
-                                    $(elem).autocomplete({
-
-                                        source: ROOT + 'Articulo/GetArticulosAutocomplete2',
-                                        minLength: 0,
+                                    var NoResultsLabel = "No se encontraron resultados";
+                                    $(elem).autocomplete({ source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
                                         select: function (event, ui) {
+
+                                            //alert(ui.item.value);
+
+                                            if (ui.item.value === NoResultsLabel) {
+                                                event.preventDefault();
+                                                return;
+                                            }
 
 
                                             $("#IdArticulo").val(ui.item.id);
@@ -1900,6 +1179,14 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
                                             UltimoIdArticulo = ui.item.id;
                                             UltimoIdUnidad = ui.item.IdUnidad;
+                                            // if ($("#IdUnidad") == null) $("#Unidad").val(ui.item.IdUnidad);  mvarIdUnidadCU
+
+                                        }
+                                        ,
+                                        focus: function (event, ui) {
+                                            if (ui.item.value === NoResultsLabel) {
+                                                event.preventDefault();
+                                            }
                                         }
                                     })
                                     .data("ui-autocomplete")._renderItem = function (ul, item) {
@@ -1909,6 +1196,60 @@ $(function () {     // lo mismo que $(document).ready(function () {
                                             .appendTo(ul);
                                     };
                                 }
+                                   ,
+                                dataEvents: [{
+                                    type: 'change',
+                                    fn: function (e) {
+
+                                        //alert(this.value);
+
+                                        if (this.value == "No se encontraron resultados") {
+                                            $("#Descripcion").val("");
+                                            return;
+                                        }
+
+                                        $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
+                                            {term: this.value },
+                                            function (data) {
+                                                if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
+                                                    var ui = data[0];
+
+                                                    if (ui.codigo == "") {
+                                                        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                        $("#Descripcion").val("");
+                                                        return;
+                                                    }
+
+
+                                                    //alert('hay ' + data.length);
+
+
+
+
+                                                    $("#IdArticulo").val(ui.id);
+                                                    $("#Codigo").val(ui.codigo);
+                                                    $("#IdUnidad").val(ui.IdUnidad);
+                                                    //$("#Unidad").val(ui.item.Unidad);
+                                                    $("#Unidad").val(ui.IdUnidad); // hay que ponerle el id para elegir el item... por eso es que cuando salis del form en la celda queda con el id como texto...  no?
+
+                                                    UltimoIdArticulo = ui.id;
+                                                    UltimoIdUnidad = ui.IdUnidad;
+
+
+                                                }
+                                                else {
+
+                                                    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
+                                                }
+                                            }
+                                        );
+
+
+
+                                    }
+                                }]
+
+
                             },
                             editrules: { required: true }
                         },
@@ -2153,6 +1494,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
         },
 
 
+
         ondblClickRow: function (id) {
 
 
@@ -2169,7 +1511,10 @@ $(function () {     // lo mismo que $(document).ready(function () {
             // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:cell_editing
 
 
-            jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+            // jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+
+            sacarDeEditMode();
+
 
             //            var ids = jQuery("#Lista").getChangedCells('dirty'); // .jqGrid('getDataIDs');
             //            for (var i = 0; i < ids.length; i++) {
@@ -2316,6 +1661,1396 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////FIN DE DEFINICION DE GRILLALISTA   ////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    function QuitarRenglones(data) {
+
+        var longitud = data.length;
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
+
+            var renglonrepe = parseInt(data[i]);
+            // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
+            var index = 6; // la columna esta es la que tiene el numero de item
+            var str = renglonrepe;
+            var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
+
+
+
+
+            // podemos quitarlo o pintarlo
+            if (true) {
+                // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
+                // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
+                //            
+                //              $("tr.jqgrow:odd").addClass('myAltRowClass');
+                //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
+                //                .addClass('myAltRowClass');
+
+                //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
+
+                $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
+                $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
+
+                // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
+                // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
+            } else {
+                try {
+                    jQuery("#Lista").jqGrid('delRowData', reng[0].id);
+                } catch (e) {
+
+                }
+            }
+
+
+        }
+
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarRM(acceptId, ui) {
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+
+        sacarDeEditMode();
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            //me traigo los datos de detalle
+            var IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+                data: { IdRequerimiento: IdRequerimiento },
+                dataType: "Json",
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        CopiarItemRM(data, i);
+                    }
+
+
+                    //                var rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+                    Validar();
+                }
+
+            });
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarRMdetalle(acceptId, ui) {
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag2").jqGrid('getRowData', acceptId);
+
+        var j = 0, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+
+        var IdRequerimiento = getdata['IdRequerimiento']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+        //IdRequerimiento = getdata['act'];
+
+        try {
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+                data: { IdRequerimiento: IdRequerimiento },
+                dataType: "Json",
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+                    var numitem = getdata['NumeroItem'] - 1;
+
+                    CopiarItemRM(data, numitem);
+                    Validar();
+                }
+            })
+
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+    }
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    function CopiarItemRM(data, i) {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        GrabarGrillaLocal()
+
+        var tmpdata = {};
+
+
+
+        var longitud = data.length;
+
+
+        tmpdata['IdArticulo'] = data[i].IdArticulo;
+        tmpdata['Codigo'] = data[i].Codigo;
+        tmpdata['Descripcion'] = data[i].Descripcion;
+        tmpdata['IdUnidad'] = data[i].IdUnidad;
+        tmpdata['Unidad'] = data[i].Unidad;
+        tmpdata['IdDetallePedido'] = 0;
+        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+        tmpdata['Cantidad'] = data[i].Cantidad;
+        tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+        tmpdata['Cumplido'] = data[i].Cumplido;
+
+
+
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+
+        tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
+        tmpdata['Observaciones'] = data[i].Observaciones;
+
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+
+        if (tmpdata['Cumplido'] == 'AN' || tmpdata['Cumplido'] == 'AN') return;
+
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+
+
+
+        if (true) {
+            // fecha de hoy
+            var now = new Date();
+            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+            tmpdata['FechaEntrega'] = currentDate;
+
+            try {
+                var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
+                var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                tmpdata['FechaNecesidad'] = displayDate;
+                if (displayDate=="NaN/NaN/NaN") tmpdata['FechaNecesidad'] = currentDate;
+                // displayDate;
+
+            } catch (e) {
+                tmpdata['FechaNecesidad'] = currentDate;
+            }
+
+
+        }
+        else {
+            // fecha del rm
+            var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
+            var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+            tmpdata['FechaEntrega'] = displayDate;
+        }
+
+
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+
+        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+
+
+        tmpdata['NumeroItem'] = ProximoNumeroItem();  // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+
+
+        ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
+        //http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10950
+        //grabar control calidad o usar default
+
+        if (data[i].IdControlCalidad > 0) {
+            tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
+            tmpdata['ControlCalidad'] = data[i].ControlCalidad;
+        }
+        else {
+            tmpdata['IdControlCalidad'] = mIdControlCalidadDefault;
+            tmpdata['ControlCalidad'] = mDescControlCalidadDefault;
+
+        }
+
+
+
+
+
+
+
+
+        var getdata = tmpdata;
+        var idazar = Math.ceil(Math.random() * 1000000);
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+        ///////////////
+        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+        ///////////////
+        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+        //alert(segundorenglon);
+        if (segundorenglon.indexOf("dnd") != -1) {
+            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            $("#Lista").jqGrid('delRowData', segundorenglon);
+        }
+        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+        ///////////////
+        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+        ///////////////
+
+        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+        var pos = TraerPosicionLibre();
+        if (pos == null) {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+        }
+        else {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+        }
+        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        //    rows = $("#Lista").getGridParam("reccount");
+        //    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+        AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarPresupuesto(acceptId, ui) {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#DescripcionProveedor").val(getdata['Proveedor']);
+
+
+
+            //me traigo los datos de detalle
+            var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
+                data: { IdPresupuesto: IdPresupuesto },
+                dataType: "Json",
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
+                    for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        tmpdata['Unidad'] = data[i].Abreviatura;
+                        tmpdata['IdDetallePedido'] = 0;
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+                        if (true) {
+                            // fecha de hoy
+                            var now = new Date();
+                            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                            tmpdata['FechaEntrega'] = currentDate;
+                        }
+                        else {
+                            // fecha del rm
+                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                            var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                            tmpdata['FechaEntrega'] = displayDate;
+                        }
+                        tmpdata['FechaNecesidad'] = displayDate;
+
+                        ///////////////////////////////////////////////////////////////////
+
+
+                        tmpdata['Precio'] = data[i].Precio;
+                        tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                        tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                        tmpdata['ImporteIva'] = data[i].ImporteIva;
+                        tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                        tmpdata['Observaciones'] = data[i].Observaciones;
+
+
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                        tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                        getdata = tmpdata;
+                        grid = Math.ceil(Math.random() * 1000000);
+                        $("#Lista").jqGrid('addRowData', grid, getdata);
+                    }
+
+
+                    //                rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+
+                    Validar();
+                }
+
+            });
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+        var grid;
+        grid = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarComparativa(acceptId, ui) {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag4").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            //me traigo los datos de detalle
+            var IdComparativa = getdata['IdFactura']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Comparativa/DetComparativasSinFormato/',
+                data: { IdComparativa: IdComparativa },
+                dataType: "Json",
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        tmpdata['Unidad'] = data[i].Unidad;
+                        tmpdata['IdDetallePedido'] = 0;
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                        tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+
+
+                        tmpdata['Precio'] = data[i].Precio;
+                        tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                        tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                        tmpdata['ImporteIva'] = data[i].ImporteIva;
+                        tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                        getdata = tmpdata;
+                        grid = Math.ceil(Math.random() * 1000000);
+                        $("#Lista").jqGrid('addRowData', grid, getdata);
+                    }
+
+
+                    //                rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+
+                    Validar();
+                }
+
+            });
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+        var grid;
+        grid = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarPedido(acceptId, ui) {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        sacarDeEditMode();
+
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag5").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#Proveedor").val(getdata['IdProveedor']);
+            $("#DescripcionProveedor").val(getdata['Proveedor']);
+            $("#IdComprador").val(getdata['IdComprador']);
+
+
+            $("#NumeroPedido").val(getdata['Numero']);
+            $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
+
+
+            //me traigo los datos de detalle
+            var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+
+
+
+
+
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Pedido/DetPedidosSinFormato/',
+                data: { IdPedido: IdPedido },
+                dataType: "Json",
+                error: function (xhr, textStatus, exceptionThrown) {
+                    alert('error');
+                },
+                success: function (data) {
+
+                    var prox = ProximoNumeroItem();
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        //tmpdata['Unidad'] = data[i].Unidad;
+                        tmpdata['Unidad'] = data[i].Abreviatura;
+                        tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+                        tmpdata['FechaEntrega'] = displayDate;
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+
+                        //tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                        tmpdata['NumeroItem'] = prox;
+                        prox++;
+
+                        tmpdata['Precio'] = data[i].Precio; ;
+
+                        getdata = tmpdata;
+                        var idazar = Math.ceil(Math.random() * 1000000);
+
+
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                        ///////////////
+                        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+                        ///////////////
+                        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+                        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+                        //alert(segundorenglon);
+                        if (segundorenglon.indexOf("dnd") != -1) {
+                            // tiró el renglon en modo dragdrop, no hizo dobleclic
+                            $("#Lista").jqGrid('delRowData', segundorenglon);
+                        }
+                        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+                        ///////////////
+                        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+                        ///////////////
+
+                        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+                        var pos = TraerPosicionLibre();
+                        if (pos == null) {
+                            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+                        }
+                        else {
+                            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+                        }
+                        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+                        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+                        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    }
+
+
+                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                    //                rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+                    Validar();
+                }
+
+            })
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+        var grid;
+        grid = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////grabar///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    $('#grabar2').click(function () {
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+
+        var cabecera = SerializaForm();
+
+
+        $('html, body').css('cursor', 'wait');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'Pedido/BatchUpdate',
+            dataType: 'json',
+            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+            success: function (result) {
+                //                    if (result) {
+                //                        $('#Lista').trigger('reloadGrid');
+                //                        window.location.replace(ROOT + "Pedido/index");
+                //                    } else {
+                //                        alert('No se pudo grabar el comprobante.');
+                //                    }
+
+                if (result) {
+                    $('html, body').css('cursor', 'auto');
+
+
+                    if (true) {
+                        //window.location = (ROOT + "Pedido/index");
+                        window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
+
+                    } else {
+
+                        var dt = new Date();
+                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                        $("#mensajeAlerta").show();
+                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                        //si graban de nuevo, va a dar un alta!!!!
+
+
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                    }
+
+                } else {
+
+
+                    alert('No se pudo grabar el comprobante.');
+                    $('.loading').html('');
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                }
+
+            },
+
+            beforeSend: function () {
+                //$('.loading').html('some predefined loading img html');
+                $("#loading").show();
+                $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+
+
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+
+
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    //alert(errorMessages.join("<br />"));
+
+                    // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                    //$('#result').html(errorMessages.join("<br />"));
+                    //$("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                    pageLayout.show('east');
+
+
+
+                    alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+
+
+
+                } catch (e) {
+                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+
+
+                    //alert(xhr.responseText);
+
+
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+
+
+
+
+
+
+
+            }
+        });
+    });
+
+    //    jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    jQuery("#Lista").jqGrid('gridResize', {});
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    // get the header row which contains
+    headerRow = jQuery("#Lista").closest("div.ui-jqgrid-view")
+            .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+
+    // increase the height of the resizing span
+    resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
+    headerRow.find("span.ui-jqgrid-resize").each(function () {
+        this.style.cssText = resizeSpanHeight;
+    });
+
+    // set position of the dive with the column header text to the middle
+    rowHight = headerRow.height();
+    headerRow.find("div.ui-jqgrid-sortable").each(function () {
+        var ts = $(this);
+        ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
+    });
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    $("#loading").hide();
+
+    var lastSelectedId;
+    var inEdit
+
+    //Esto es para analizar los parametros de entrada via querystring
+    var querystring = location.search.replace('?', '').split('&');
+    var queryObj = {};
+    for (var i = 0; i < querystring.length; i++) {
+        var name = querystring[i].split('=')[0];
+        var value = querystring[i].split('=')[1];
+        queryObj[name] = value;
+    }
+    if (queryObj["code"] === "1") {
+        $(":input").attr("disabled", "disabled");
+        $(".boton").hide();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    function BorraElPrimeroAgregado() {
+
+        var grid = $("#Lista"),
+                ids = grid.jqGrid("getDataIDs");
+        if (ids && ids.length > 0)
+            grid.jqGrid("delRowData", ids[0]);
+
+    }
+
+
+    function ConectarGrillas1() {
+        // connect grid1 with grid2
+        $("#ListaDrag").jqGrid('gridDnD', {
+            connectWith: '#Lista', //drag_opts:{stop:null},
+            onstart: function (ev, ui) {
+                sacarDeEditMode();
+                //                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                //                        .addClass("ui-state-error ui-widget")
+                //                        .css({ border: "5px ridge tomato" });
+                //                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            beforedrop: function (ev, ui, getdata, $source, $target) {
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+
+                BorraElPrimeroAgregado();
+
+                CopiarRM(acceptId, ui);
+            }
+        });
+    }
+
+    function ConectarGrillas2() {
+        $("#ListaDrag2").jqGrid('gridDnD', {
+            connectWith: '#Lista',
+            onstart: function (ev, ui) {
+                sacarDeEditMode();
+                //                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                //                        .addClass("ui-state-error ui-widget")
+                //                        .css({ border: "5px ridge tomato" });
+                //                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                // El comportamiento default de las grillas conectadas es que se mueve el renglon elegido automaticamente, hermanando las columnas supongo que por nombre.
+                // Como vos te encargas manualmente de copiar los renglones , podes borrar el nuevo id creado.
+                // Fijate que en el metedo viejo directo en el ondrop, usas para getdata el creado en el drag; pero con el medodo de las llamadas a CopiarRMdetalle, esta a su vez llama 
+                //  a CopiarItemRM, que crea el renglon desde cero (y por eso te queda uno de yapa arriba de todo).
+                ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+                var acceptId = $(ui.draggable).attr("id");
+                //alert(acceptId);
+                //jQuery("#Lista").jqGrid('delRowData', acceptId);
+
+                BorraElPrimeroAgregado();
+                //                var draggedItem = ui.helper.context.id;
+                //                var dragTarget = event.target.id;
+                //                alert(draggedItem + " to " + dragTarget);
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                CopiarRMdetalle(acceptId); //, ui);
+                return;
+
+
+
+                var acceptId = $(ui.draggable).attr("id");
+                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+                // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+                var grid;
+                try {
+                    $("#Observaciones").val(getdata['Observaciones']);
+                    $("#LugarEntrega").val(getdata['LugarEntrega']);
+                    $("#IdObra").val(getdata['IdObra']);
+                    $("#IdSector").val(getdata['IdSector']);
+
+
+                    var cabecera = SerializaForm();
+
+
+
+                    IdRequerimiento = getdata['IdRequerimiento'];
+                    $.ajax({
+
+                        type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
+                        contentType: 'application/json; charset=utf-8',
+                        url: '@Url.Action("ValidarJson", "Pedido")',
+                        dataType: 'json',
+                        data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+
+
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            try {
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                //this ugly loop is because List<> is serialized to an object instead of an array
+                                for (var key in errorData) {
+                                    errorMessages.push(errorData[key]);
+                                }
+                                $('#result').html(errorMessages.join("<br />"));
+
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+
+
+                                $("#textoMensajeAlerta").text(errorMessages.join());
+                                $("#mensajeAlerta").show();
+                                alert(errorMessages.join("<br />"));
+
+                            } catch (e) {
+                                // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                                // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                                $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
+                                //$(".alert").alert();
+                                alert(xhr.responseText);
+                            }
+                        },
+                        success: function (data) {
+                            var longitud = data.length;
+                            for (var i = 0; i < data.length; i++) {
+                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
+                                tmpdata['IdArticulo'] = data[i].IdArticulo;
+                                tmpdata['Codigo'] = data[i].Codigo;
+                                tmpdata['Descripcion'] = data[i].Descripcion;
+                                tmpdata['IdUnidad'] = data[i].IdUnidad;
+                                tmpdata['Unidad'] = data[i].Unidad;
+                                tmpdata['IdDetallePedido'] = 0;
+                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                                tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                                tmpdata['Cantidad'] = data[i].Cantidad;
+                                tmpdata['NumeroObra'] = data[i].NumeroObra;
+                                tmpdata['FechaEntrega'] = displayDate;
+                                tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                                getdata = tmpdata;
+                                grid = Math.ceil(Math.random() * 1000000);
+                                $("#Lista").jqGrid('addRowData', grid, getdata);
+                            }
+                        }
+                    });
+                } catch (e) { }
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+            }
+        });
+    }
+
+    function ConectarGrillas3() {
+        $("#ListaDrag3").jqGrid('gridDnD', {
+            connectWith: '#Lista',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                        .addClass("ui-state-error ui-widget")
+                        .css({ border: "5px ridge tomato" });
+                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+
+                BorraElPrimeroAgregado();
+                CopiarPresupuesto(acceptId);
+                return;
+
+                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                var j = 0, tmpdata = {}, dropname, IdPedido;
+                // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+                var grid;
+                try {
+                    $("#Numero").val(getdata['Numero']);
+                    $("#SubNumero").val("99");
+                    IdPedido = getdata['IdPedido'];
+                    BuscarOrden(getdata['Numero']);
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: ROOT + 'Pedido/DetPedidosSinFormato/',
+                        data: { IdPedido: IdPedido },
+                        dataType: "Json",
+                        success: function (data) {
+                            var longitud = data.length;
+                            for (var i = 0; i < data.length; i++) {
+                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
+                                tmpdata['IdArticulo'] = data[i].IdArticulo;
+                                tmpdata['Codigo'] = data[i].Codigo;
+                                tmpdata['Descripcion'] = data[i].Descripcion;
+                                tmpdata['IdUnidad'] = data[i].IdUnidad;
+                                tmpdata['Unidad'] = data[i].Unidad;
+                                tmpdata['IdDetallePedido'] = 0;
+                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                                tmpdata['NumeroItemRM'] = data[i].NumeroItemRM;
+                                tmpdata['Cantidad'] = data[i].Cantidad;
+                                tmpdata['Observaciones'] = data[i].Observaciones;
+                                tmpdata['NumeroObra'] = data[i].NumeroObra;
+                                tmpdata['FechaEntrega'] = displayDate;
+                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                                getdata = tmpdata;
+                                grid = Math.ceil(Math.random() * 1000000);
+                                $("#Lista").jqGrid('addRowData', grid, getdata);
+                            }
+                        }
+                    });
+                } catch (e) { }
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+            }
+        });
+    }
+
+    function ConectarGrillas4() {
+        $("#ListaDrag4").jqGrid('gridDnD', {
+            connectWith: '#Lista',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                        .addClass("ui-state-error ui-widget")
+                        .css({ border: "5px ridge tomato" });
+                $("#gbox_grid4").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+
+                BorraElPrimeroAgregado();
+                CopiarComparativa(acceptId);
+                return;
+
+                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+                // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+                var grid;
+                try {
+                    $("#Observaciones").val(getdata['Observaciones']);
+                    $("#LugarEntrega").val(getdata['LugarEntrega']);
+                    $("#IdObra").val(getdata['IdObra']);
+                    $("#IdSector").val(getdata['IdSector']);
+
+                    IdRequerimiento = getdata['IdRequerimiento'];
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+                        data: { IdRequerimiento: IdRequerimiento },
+                        dataType: "Json",
+                        success: function (data) {
+                            var longitud = data.length;
+                            for (var i = 0; i < data.length; i++) {
+                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
+                                tmpdata['IdArticulo'] = data[i].IdArticulo;
+                                tmpdata['Codigo'] = data[i].Codigo;
+                                tmpdata['Descripcion'] = data[i].Descripcion;
+                                tmpdata['IdUnidad'] = data[i].IdUnidad;
+                                tmpdata['Unidad'] = data[i].Unidad;
+                                tmpdata['IdDetallePedido'] = 0;
+                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                                tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                                tmpdata['Cantidad'] = data[i].Cantidad;
+                                tmpdata['NumeroObra'] = data[i].NumeroObra;
+                                tmpdata['FechaEntrega'] = displayDate;
+                                tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                                getdata = tmpdata;
+                                grid = Math.ceil(Math.random() * 1000000);
+                                $("#Lista").jqGrid('addRowData', grid, getdata);
+                            }
+                        }
+                    });
+                } catch (e) { }
+                $("#gbox_grid4").css("border", "1px solid #aaaaaa");
+            }
+        });
+    }
+
+    function ConectarGrillas5() {
+        $("#ListaDrag5").jqGrid('gridDnD', {
+            connectWith: '#Lista',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                        .addClass("ui-state-error ui-widget")
+                        .css({ border: "5px ridge tomato" });
+                $("#gbox_grid5").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+
+                BorraElPrimeroAgregado();
+                CopiarPedido(acceptId);
+                return;
+
+                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+                // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+                var grid;
+                try {
+                    $("#Observaciones").val(getdata['Observaciones']);
+                    $("#LugarEntrega").val(getdata['LugarEntrega']);
+                    $("#IdObra").val(getdata['IdObra']);
+                    $("#IdSector").val(getdata['IdSector']);
+
+                    IdRequerimiento = getdata['IdRequerimiento'];
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+                        data: { IdRequerimiento: IdRequerimiento },
+                        dataType: "Json",
+                        success: function (data) {
+                            var longitud = data.length;
+                            for (var i = 0; i < data.length; i++) {
+                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
+                                tmpdata['IdArticulo'] = data[i].IdArticulo;
+                                tmpdata['Codigo'] = data[i].Codigo;
+                                tmpdata['Descripcion'] = data[i].Descripcion;
+                                tmpdata['IdUnidad'] = data[i].IdUnidad;
+                                tmpdata['Unidad'] = data[i].Unidad;
+                                tmpdata['IdDetallePedido'] = 0;
+                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                                tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                                tmpdata['Cantidad'] = data[i].Cantidad;
+                                tmpdata['NumeroObra'] = data[i].NumeroObra;
+                                tmpdata['FechaEntrega'] = displayDate;
+                                tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                                getdata = tmpdata;
+                                grid = Math.ceil(Math.random() * 1000000);
+                                $("#Lista").jqGrid('addRowData', grid, getdata);
+                            }
+                        }
+                    });
+                } catch (e) { }
+                $("#gbox_grid5").css("border", "1px solid #aaaaaa");
+            }
+        });
+    }
+
+
+
+    $("#FechaIngreso").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+
+    //Para que haga wrap en las celdas
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    //$.jgrid.formatter.integer.thousandsSeparator=',';
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2337,6 +3072,17 @@ $(function () {     // lo mismo que $(document).ready(function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function PopupCentrar() {
         var grid = $("#Lista");
 
@@ -2382,6 +3128,10 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $("#addData").click(function () {
         dobleclic = true;
         jQuery("#Lista").jqGrid('editGridRow', "new", { addCaption: "Agregar item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
@@ -2422,6 +3172,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     $("#edtData").click(function () {
 
+        sacarDeEditMode();
 
         var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
         if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, { editCaption: "Modificacion item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
@@ -2462,7 +3213,9 @@ $(function () {     // lo mismo que $(document).ready(function () {
     });
 
     $("#delData").click(function () {
-        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+        //var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+        var gr = jQuery("#Lista").jqGrid('getGridParam', 'selarrrow');
+
         if (gr != null) {
             jQuery("#Lista").jqGrid('delGridRow', gr,
             { caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar",
@@ -2486,30 +3239,80 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    jQuery("#Lista").jqGrid('gridResize', {});
 
-    // get the header row which contains
-    headerRow = grid.closest("div.ui-jqgrid-view")
-            .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+    function EditarItem(rowid) {
+        var gr = rowid; // jQuery("#Lista").jqGrid('getGridParam',  'selrow');
+        var row = jQuery("#Lista").jqGrid('getRowData', rowid);
 
-    // increase the height of the resizing span
-    resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
-    headerRow.find("span.ui-jqgrid-resize").each(function () {
-        this.style.cssText = resizeSpanHeight;
-    });
+        if (row.Cumplido == "SI") {
+            alert("El item ya está cumplido")
+            return;
+        }
 
-    // set position of the dive with the column header text to the middle
-    rowHight = headerRow.height();
-    headerRow.find("div.ui-jqgrid-sortable").each(function () {
-        var ts = $(this);
-        ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
-    });
+        if (gr != null) jQuery("#Lista")
+                                    .jqGrid('editGridRow', gr,
+                                                { editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
+                                                    , reloadAfterSubmit: false, closeOnEscape: true,
+                                                    closeAfterEdit: true, recreateForm: true, Top: 0,
+                                                    beforeShowForm: function (form) {
+                                                        GrabarGrillaLocal();
+
+                                                        PopupCentrar();
+
+                                                        $('#NumeroItem').attr('readonly', 'readonly');
+
+                                                        $('#tr_IdDetalleRequerimiento', form).hide();
+                                                        $('#tr_IdArticulo', form).hide();
+                                                        $('#tr_IdUnidad', form).hide();
+                                                    },
+                                                    beforeInitData: function () {
+                                                        inEdit = true;
+                                                    }
+                                                 ,
+                                                    onClose: function (data) {
+
+                                                        RefrescarOrigenDescripcion();
+                                                        AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+                                                        //var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                                                        //data['Unidad'] = $("#Unidad").text(); ;
+                                                        //$('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                                                        //PonerRenglonesInline();
+                                                        // jQuery('#Lista').editRow(gr, true);
+                                                    }
+                                                    ,
+                                                    beforeSubmit: function (postdata, formid) {
+
+                                                        //alert(postdata.Unidad + " " + $("#Unidad").children("option").filter(":selected").text());
+                                                        //postdata.Unidad es un numero?????
+                                                        postdata.Unidad = $("#Unidad").children("option").filter(":selected").text()
+                                                        postdata.ControlCalidad = $("#ControlCalidad").children("option").filter(":selected").text()
+
+                                                        return [true, 'no se puede'];
+                                                    }
+
+
+                                                });
+        else alert("Debe seleccionar un item!");
+
+    }
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -2623,10 +3426,13 @@ $(function () {     // lo mismo que $(document).ready(function () {
         mtype: 'POST',
         cellEdit: false,
         colNames: ['Acciones', 'IdDetalleRequerimiento',
-                         'N', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                           'N', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                            'N', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                         'Impresa', 'Detalle'
+                         'N', 'item', 'cod', 'articulo', 'cant pend.',
+                           'un.', 'Fecha', 'det req.', '', '',
+                            '', '', '', '', '',
+                             '', ''
+        //                           'Recep.', 'Entreg.',
+        //                            'N', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
+        //                         'Impresa', 'Detalle'
                       ],
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
@@ -2635,11 +3441,11 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'IdUnidad', index: '', width: 30 },
                         { name: 'NumeroItem', index: '', width: 80 },
                         { name: 'Cantidad', index: '', width: 40 },
-                        { name: 'Abreviatura', index: '', width: 40 },
-                        { name: 'Codigo', index: '', width: 40 },
+                        { name: 'Abreviatura', index: '', width: 100 },
+                        { name: 'Codigo', index: '', width: 100 },
                         { name: '', index: '', width: 40 },
 
-                           { name: 'Descripcion', index: '', width: 80 },
+                           { name: 'Descripcion', index: '', width: 200 },
                         { name: 'FechaEntrega', index: '', width: 40 },
                         { name: 'Observaciones', index: '', width: 40, hidden: true },
                         { name: 'Cumplido', index: '', width: 40 },
@@ -2675,6 +3481,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
     })
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     //jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
     $("#ListaDrag2").remapColumns([17, 16, 4, 7, 9, 5, 6, 8, 10, 11, 15], true, true); // cambiar el orden de las columnas  -parece que arruina el ancho de las columnas
 
 
@@ -2998,7 +3805,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
     $('a#a_panel_este_tab3').text('Presupuestos');
     $('a#a_panel_este_tab4').text('Comparativas');
     $('a#a_panel_este_tab4').attr('title', 'Comparativas');
-    //$('a#a_panel_este_tab5').remove();  //    
+    $('a#a_panel_este_tab4').remove();
     $('a#a_panel_este_tab5').text('Pedidos');
 
 
@@ -3115,14 +3922,18 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
+
+
+
+    function pickdates(id) {
+        jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
+    }
+
+
+
+
+
 });
-
-function pickdates(id) {
-    jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
-}
-
-
-
 
 
 
@@ -3249,303 +4060,4 @@ function processAddEdit(response, postdata) {
 
 
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-function ConectarGrillas1() {
-    // connect grid1 with grid2
-    $("#ListaDrag").jqGrid('gridDnD', {
-        connectWith: '#Lista', //drag_opts:{stop:null},
-        onstart: function (ev, ui) {
-            ui.helper.removeClass("ui-state-highlight myAltRowClass")
-                        .addClass("ui-state-error ui-widget")
-                        .css({ border: "5px ridge tomato" });
-            $("#gbox_grid2").css("border", "3px solid #aaaaaa");
-        },
-        beforedrop: function (ev, ui, getdata, $source, $target) {
-        },
-        ondrop: function (ev, ui, getdata) {
-            var acceptId = $(ui.draggable).attr("id");
-            CopiarRM(acceptId, ui);
-        }
-    });
-}
-
-function ConectarGrillas2() {
-    $("#ListaDrag2").jqGrid('gridDnD', {
-        connectWith: '#Lista',
-        onstart: function (ev, ui) {
-            ui.helper.removeClass("ui-state-highlight myAltRowClass")
-                        .addClass("ui-state-error ui-widget")
-                        .css({ border: "5px ridge tomato" });
-            $("#gbox_grid2").css("border", "3px solid #aaaaaa");
-        },
-        ondrop: function (ev, ui, getdata) {
-            var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-            // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Observaciones").val(getdata['Observaciones']);
-                $("#LugarEntrega").val(getdata['LugarEntrega']);
-                $("#IdObra").val(getdata['IdObra']);
-                $("#IdSector").val(getdata['IdSector']);
-
-
-                var cabecera = SerializaForm();
-
-
-
-                IdRequerimiento = getdata['IdRequerimiento'];
-                $.ajax({
-
-                    type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
-                    contentType: 'application/json; charset=utf-8',
-                    url: '@Url.Action("ValidarJson", "Pedido")',
-                    dataType: 'json',
-                    data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-
-
-                    error: function (xhr, textStatus, exceptionThrown) {
-                        try {
-                            var errorData = $.parseJSON(xhr.responseText);
-                            var errorMessages = [];
-                            //this ugly loop is because List<> is serialized to an object instead of an array
-                            for (var key in errorData) {
-                                errorMessages.push(errorData[key]);
-                            }
-                            $('#result').html(errorMessages.join("<br />"));
-
-                            $('html, body').css('cursor', 'auto');
-                            $('#grabar2').attr("disabled", false).val("Aceptar");
-
-
-                            $("#textoMensajeAlerta").text(errorMessages.join());
-                            $("#mensajeAlerta").show();
-                            alert(errorMessages.join("<br />"));
-
-                        } catch (e) {
-                            // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                            // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                            $('html, body').css('cursor', 'auto');
-                            $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                            $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
-                            //$(".alert").alert();
-                            alert(xhr.responseText);
-                        }
-                    },
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetallePedido'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-        }
-    });
-}
-
-function ConectarGrillas3() {
-    $("#ListaDrag3").jqGrid('gridDnD', {
-        connectWith: '#Lista',
-        onstart: function (ev, ui) {
-            ui.helper.removeClass("ui-state-highlight myAltRowClass")
-                        .addClass("ui-state-error ui-widget")
-                        .css({ border: "5px ridge tomato" });
-            $("#gbox_grid2").css("border", "3px solid #aaaaaa");
-        },
-        ondrop: function (ev, ui, getdata) {
-            var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdPedido;
-            // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Numero").val(getdata['Numero']);
-                $("#SubNumero").val("99");
-                IdPedido = getdata['IdPedido'];
-                BuscarOrden(getdata['Numero']);
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: ROOT + 'Pedido/DetPedidosSinFormato/',
-                    data: { IdPedido: IdPedido },
-                    dataType: "Json",
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetallePedido'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItemRM;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['Observaciones'] = data[i].Observaciones;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-        }
-    });
-}
-
-function ConectarGrillas4() {
-    $("#ListaDrag4").jqGrid('gridDnD', {
-        connectWith: '#Lista',
-        onstart: function (ev, ui) {
-            ui.helper.removeClass("ui-state-highlight myAltRowClass")
-                        .addClass("ui-state-error ui-widget")
-                        .css({ border: "5px ridge tomato" });
-            $("#gbox_grid4").css("border", "3px solid #aaaaaa");
-        },
-        ondrop: function (ev, ui, getdata) {
-            var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-            // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Observaciones").val(getdata['Observaciones']);
-                $("#LugarEntrega").val(getdata['LugarEntrega']);
-                $("#IdObra").val(getdata['IdObra']);
-                $("#IdSector").val(getdata['IdSector']);
-
-                IdRequerimiento = getdata['IdRequerimiento'];
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-                    data: { IdRequerimiento: IdRequerimiento },
-                    dataType: "Json",
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetallePedido'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid4").css("border", "1px solid #aaaaaa");
-        }
-    });
-}
-
-function ConectarGrillas5() {
-    $("#ListaDrag5").jqGrid('gridDnD', {
-        connectWith: '#Lista',
-        onstart: function (ev, ui) {
-            ui.helper.removeClass("ui-state-highlight myAltRowClass")
-                        .addClass("ui-state-error ui-widget")
-                        .css({ border: "5px ridge tomato" });
-            $("#gbox_grid5").css("border", "3px solid #aaaaaa");
-        },
-        ondrop: function (ev, ui, getdata) {
-            var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-            // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Observaciones").val(getdata['Observaciones']);
-                $("#LugarEntrega").val(getdata['LugarEntrega']);
-                $("#IdObra").val(getdata['IdObra']);
-                $("#IdSector").val(getdata['IdSector']);
-
-                IdRequerimiento = getdata['IdRequerimiento'];
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-                    data: { IdRequerimiento: IdRequerimiento },
-                    dataType: "Json",
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetallePedido'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid5").css("border", "1px solid #aaaaaa");
-        }
-    });
-}
 

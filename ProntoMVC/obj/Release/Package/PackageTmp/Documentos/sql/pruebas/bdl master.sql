@@ -28,11 +28,16 @@ delete from Bases where IdBD=16
 --aspnet_Membership_CreateUser to create a user and supply his membership data (password, security question and answer, and so forth)
 --aspnet_UsersInRoles_AddUsersToRoles to add an existing user to an existing role
 
+[aspnet_Roles_CreateRole] '/','ExternoCuentaCorrienteCliente'  --ejecutar en la bdlmaster
 [aspnet_Roles_CreateRole] '/','SuperAdmin'  --ejecutar en la bdlmaster
+[aspnet_Roles_CreateRole] '/','AdminExterno'  --ejecutar en la bdlmaster
+[aspnet_Roles_DeleteRole] '/','WilliamsAdmin','false'  --ejecutar en la bdlmaster
 go
 
 aspnet_UsersInRoles_AddUsersToRoles '/','Mariano','SuperAdmin',''
 aspnet_UsersInRoles_AddUsersToRoles '/','supervisor','SuperAdmin',''
+
+aspnet_UsersInRoles_AddUsersToRoles
 
  exec aspneaspnet_Membership_CreateUser '/'
 

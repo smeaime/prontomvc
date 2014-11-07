@@ -5,28 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-fluid">
-        <div class="modal" id="loading">
-            <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
-            Cargando...
-        </div>
-    <ul class="breadcrumb">
+    <div class="modal" id="loading">
+        <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
+        Cargando...
+    </div>
+    @*    <ul class="breadcrumb">
         <li><a href="#">Inicio</a> <span class="divider">/</span></li>
-        <li><a href="@Url.Content("~")MvcMembership/UserAdministration">Usuarios</a> <span class="divider">
-            /</span></li>
+        <li><a href="@Url.Content("~")MvcMembership/UserAdministration">Usuarios</a> <span
+            class="divider">/</span></li>
         <li class="active">@Model.DisplayName</li>
-    </ul>
+    </ul>*@
+    <br />
     <link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
-    
-    
-   
     <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 500;
-    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-   
-    Usuario @Model.DisplayName [@Model.Status]
-    <br /><br />
-</div>
-
-    
+        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+        Usuario @Model.DisplayName [@Model.Status]
+        <br />
+        <br />
+    </div>
     <ul class="mvcMembership-tabs">
         <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
         <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
@@ -34,18 +30,13 @@
         {
             <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
         }
+@*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
+        <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
     </ul>
     <div class="row-fluid">
         <div class="span6">
-            <h3 class="mvcMembership">
-                Cuenta</h3>
             <div class="mvcMembership-account">
                 <dl class="mvcMembership">
-                    <dt>Nombre:</dt>
-                    <dd>@Model.User.UserName</dd>
-                    <dt>Email:</dt>
-                    <dd>
-                        <a href="mailto:@Model.User.Email">@Model.User.Email</a></dd>
                     @if (Model.User.LastActivityDate == Model.User.CreationDate)
                     {
                         <dt>Ultima visita:</dt>
@@ -76,23 +67,54 @@
                 }
             </div>
         </div>
-        @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+        <div class="span3">
+            <div class="mvcMembership-emailAndComments">
+                @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+                {
+                    
+                    <fieldset>
+                        @Html.Label("Base default")
+                        @Html.DropDownList("EmpresaDefault", null, new { @class = "span12" })
+                        @{
+                    string[] listItems = { "1", "2" };
+                    SelectList selectList = new SelectList(listItems);
+@*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
+                        }
+                        @*@Html.DropDownListFor(x => x.EmpresaDefault, (IEnumerable<SelectListItem>)ViewData["Bases"], new { @style = "width: 260px", @class = "" })*@
+                        <br />
+                        <p>
+                            <label for="email">
+                                Email</label>
+                            @Html.TextBox("email", Model.User.Email)
+                        </p>
+                        <p>
+                            <label for="comments">
+                                Observaciones</label>
+                            @Html.TextArea("comments", Model.User.Comment)
+                        </p>
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
+                        {
+                            <p>
+                                <label for="grupo">
+                                    Grupo</label>
+                                @Html.TextBox("grupo", Model.Grupo)
+                            </p> 
+                        }
+                        <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
+                            Aceptar
+                        </button>
+                    </fieldset>
+                }
+            </div>
+        </div>
+            @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
         {
             <div class="span3">
-                <br />
-                Base default
-                <br />
-                @Html.DropDownList("EmpresaDefault", null, new { @class = "span12" })
-                @{
-            string[] listItems = { "1", "2" };
-            SelectList selectList = new SelectList(listItems);
-@*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
-                }
-                @*@Html.DropDownListFor(x => x.EmpresaDefault, (IEnumerable<SelectListItem>)ViewData["Bases"], new { @style = "width: 260px", @class = "" })*@
-                <br />
-                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                @if ((Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) && false)
                 {
-                    <div class="row-fluid">
+                <br />
+                    
+                                        <div class="row-fluid">
                         <div class="span12">
                             Crear base @*@Html.TextBoxFor(x => x.EmpresaNueva)*@
                         </div>
@@ -107,7 +129,7 @@
                     
                     
                     @Html.Hidden("UsuarioGuid", Model.User.ProviderUserKey)
-             @*       @Html.ActionLink("Crear base", "CrearBasePronto", "UserAdministration",
+@*       @Html.ActionLink("Crear base", "CrearBasePronto", "UserAdministration",
                             new { guid = Model.User.ProviderUserKey, basenueva = "dddd", EmpresaDefault = "Capen" }, null)
 
                     *@
@@ -191,25 +213,25 @@
                                             $('html, body').css('cursor', 'auto');
 
                                             alert(errorData.Message);
-//                                            return false;
+                                            //                                            return false;
 
                                             //this ugly loop is because List<> is serialized to an object instead of an array
-//                                            for (var key in errorData) {
-//                                                errorMessages.push(errorData[key]);
-//                                            }
+                                            //                                            for (var key in errorData) {
+                                            //                                                errorMessages.push(errorData[key]);
+                                            //                                            }
 
-                                          
-//                                            $('#grabar2').attr("disabled", false).val("Aceptar");
-//                                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-//                                            $("#mensajeAlerta").show();
+
+                                            //                                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                                            //                                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                                            //                                            $("#mensajeAlerta").show();
                                         } catch (e) {
                                             // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
                                             // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
 
                                             $('html, body').css('cursor', 'auto');
-//                                            $('#grabar2').attr("disabled", false).val("Aceptar");
-//                                            $("#textoMensajeAlerta").html(xhr.responseText);
-//                                            $("#mensajeAlerta").show();
+                                            //                                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                                            //                                            $("#textoMensajeAlerta").html(xhr.responseText);
+                                            //                                            $("#mensajeAlerta").show();
                                         }
 
                                     }
@@ -242,41 +264,6 @@
                 </script>
             </div>
         }
-        <div class="span3">
-            <div class="mvcMembership-emailAndComments">
-                @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
-                {
-                    
-                    
-                    
-                    
-                    
-                    
-                    <fieldset>
-                        <p>
-                            <label for="email">
-                                Email</label>
-                            @Html.TextBox("email", Model.User.Email)
-                        </p>
-                        <p>
-                            <label for="comments">
-                                Observaciones</label>
-                            @Html.TextArea("comments", Model.User.Comment)
-                        </p>
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
-                        {
-                            <p>
-                                <label for="grupo">
-                                    Grupo</label>
-                                @Html.TextBox("grupo", Model.Grupo)
-                            </p> 
-                        }
-                        <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
-                            Aceptar
-                        </button>
-                    </fieldset>
-                }
-            </div>
-        </div>
+    
     </div>
 </div>

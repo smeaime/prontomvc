@@ -214,8 +214,9 @@ input[type="submit"] {
 /* TABLE
 ----------------------------------------------------------*/
 
+
 table {
-    border: solid 1px  #e8eef4;  /*#C9C9C9 ;*/ /* #e8eef4; */
+    border: solid 1px  #e8eef4;  
     border-collapse: collapse;
 }
 
@@ -230,6 +231,10 @@ table th {
     background-color: #e8eef4;
     border: solid 1px #e8eef4;
 }
+
+
+
+
 
 /* MISC  
 ----------------------------------------------------------*/
@@ -511,7 +516,12 @@ scrollbar
 /*  gmail */
 
 
+::-webkit-resizer
+{
+    /* lo quito porque me arruina el textbox multiline */ /*     -webkit-border-radius:4px;     background-color:#666; */
+}
 
+/*
 ::-webkit-scrollbar
 {
     width: 10px;
@@ -522,10 +532,6 @@ scrollbar
 ::-webkit-scrollbar:hover
 {
     background-color: #eee;
-}
-::-webkit-resizer
-{
-    /* lo quito porque me arruina el textbox multiline */ /*     -webkit-border-radius:4px;     background-color:#666; */
 }
 ::-webkit-scrollbar-thumb
 {
@@ -542,6 +548,15 @@ scrollbar
 {
     background-color: #888;
 }
+
+*/
+
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+
 
 /*  asana  */
 

@@ -107,7 +107,19 @@ namespace ProntoMVC
             string lastErrorMessage = lastError.Message;
             string lastErrorStackTrace = lastError.StackTrace;
 
-            if (lastErrorStackTrace == null) lastErrorStackTrace = ""; 
+            if (lastErrorStackTrace == null) lastErrorStackTrace = "";
+
+            try
+            {
+                ErrHandler.WriteError(lastErrorMessage);
+
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+            
 
 
             //  Attach the Yellow Screen of Death for this error   

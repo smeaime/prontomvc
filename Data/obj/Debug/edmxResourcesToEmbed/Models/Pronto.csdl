@@ -783,6 +783,7 @@
       <End Role="Cargo" EntitySet="Cargos" />
       <End Role="Empleado" EntitySet="Empleados" />
     </AssociationSet>
+<<<<<<< HEAD
     <AssociationSet Name="FK_Clientes_Empleados_Ingreso" Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso">
       <End Role="Empleado" EntitySet="Empleados" />
       <End Role="Cliente" EntitySet="Clientes" />
@@ -862,6 +863,12 @@
     <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados">
       <End Role="Empleado" EntitySet="Empleados" />
       <End Role="DetalleEmpleadosUbicacione" EntitySet="DetalleEmpleadosUbicaciones" />
+=======
+    <EntitySet Name="CuentasBancarias" EntityType="DemoProntoModel.CuentasBancaria" />
+    <AssociationSet Name="FK_CuentasBancarias_Bancos" Association="DemoProntoModel.FK_CuentasBancarias_Bancos">
+      <End Role="Banco" EntitySet="Bancos" />
+      <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
+>>>>>>> 6d3260a4fb7cf3bf15dd69bc9f54e96674011352
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -7141,6 +7148,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+<<<<<<< HEAD
   <Association Name="FK_Clientes_Empleados_Ingreso">
     <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
     <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="*" />
@@ -7378,6 +7386,36 @@
       </Principal>
       <Dependent Role="DetalleEmpleadosUbicacione">
         <PropertyRef Name="IdEmpleado" />
+=======
+  <EntityType Name="CuentasBancaria">
+    <Key>
+      <PropertyRef Name="IdCuentaBancaria" />
+    </Key>
+    <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdBanco" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Detalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PlantillaChequera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChequesPorPlancha" Type="Int32" />
+    <Property Name="CBU" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="InformacionAuxiliar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CaracteresBeneficiario" Type="Int32" />
+    <Property Name="Activa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DiseñoCheque" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Banco" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="CuentasBancaria" ToRole="Banco" />
+  </EntityType>
+  <Association Name="FK_CuentasBancarias_Bancos">
+    <End Type="DemoProntoModel.Banco" Role="Banco" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CuentasBancaria" Role="CuentasBancaria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="IdBanco" />
+      </Principal>
+      <Dependent Role="CuentasBancaria">
+        <PropertyRef Name="IdBanco" />
+>>>>>>> 6d3260a4fb7cf3bf15dd69bc9f54e96674011352
       </Dependent>
     </ReferentialConstraint>
   </Association>

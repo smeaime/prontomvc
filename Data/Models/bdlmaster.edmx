@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="aspnet_Applications">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -143,6 +143,9 @@
           <Property Name="IdBD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="StringConection" Type="varchar" MaxLength="200" />
+          <Property Name="ServidorSQL" Type="varchar" MaxLength="50" />
+          <Property Name="Usr" Type="varchar" MaxLength="50" />
+          <Property Name="Pass" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DetalleUserBD">
           <Key>
@@ -162,7 +165,7 @@
           <Property Name="PuedeLeer" Type="bit" />
           <Property Name="PuedeModificar" Type="bit" />
           <Property Name="PuedeEliminar" Type="bit" />
-          <Property Name="Instalado" Type="bit" Nullable="false" />
+          <Property Name="Instalado" Type="bit" />
         </EntityType>
         <EntityType Name="dtproperties">
           <Key>
@@ -466,6 +469,9 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="StringConection" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ServidorSQL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetalleUserBD">
           <Key>
@@ -485,7 +491,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <Property Name="PuedeLeer" Type="Boolean" />
           <Property Name="PuedeModificar" Type="Boolean" />
           <Property Name="PuedeEliminar" Type="Boolean" />
-          <Property Name="Instalado" Type="Boolean" Nullable="false" />
+          <Property Name="Instalado" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserDatosExtendidos">
           <Key>
@@ -780,7 +786,10 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BDLMasterModelStoreContainer" CdmEntityContainer="BDLMasterEntities">
           <EntitySetMapping Name="Bases"><EntityTypeMapping TypeName="BDLMasterModel.Bases"><MappingFragment StoreEntitySet="Bases">
-            <ScalarProperty Name="IdBD" ColumnName="IdBD" />
+            <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Usr" ColumnName="Usr" />
+                <ScalarProperty Name="ServidorSQL" ColumnName="ServidorSQL" />
+                <ScalarProperty Name="IdBD" ColumnName="IdBD" />
             <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
             <ScalarProperty Name="StringConection" ColumnName="StringConection" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -1051,7 +1060,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <edmx:ConnectorPoint PointX="14" PointY="16.932444661458334" />
           <edmx:ConnectorPoint PointX="14" PointY="14.701396484374996" />
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="BDLMasterModel.vw_aspnet_UsersInRoles" Width="1.5" PointX="5" PointY="2.875" Height="1.4033821614583388" />
+        <edmx:EntityTypeShape EntityType="BDLMasterModel.vw_aspnet_UsersInRoles" Width="1.5" PointX="5.25" PointY="2.5" Height="1.4033821614583388" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
