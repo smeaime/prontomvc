@@ -198,6 +198,15 @@ namespace ProntoMVC
                                 ConfigurationManager.AppSettings["SmtpPass"],
                                 YSODmarkup ?? "",
                                Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+
+
+                //aca podria enviarme el ultimo log 
+                // -Cómo se cual es el ultimo Log?
+
+
+
             }
             catch (Exception ex) { };
 
