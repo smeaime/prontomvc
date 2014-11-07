@@ -8,6 +8,17 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+"use strict";
+
+
+
+
+var lastColIndex;
+var lastRowIndex;
+var lastSelectedId;
+
+
+
 
 function actualizaHijos(o) {
     //var padrenivel = $(n).attr('value');
@@ -35,119 +46,30 @@ function actualizaHijos(o) {
 
 $(document).ready(function () {
 
+    $("#btnVolver").hide();
 
 
 
-    $.post(ROOT + "Acceso/ArbolConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
+    function armarArbolDeAccesos() {
 
-// la cuestion es: si no lo ves (el superadmin te puso nivel mínimo) , tampoco lo debés poder administrar (aunque seas administrador)
+        $.post(ROOT + "Acceso/ArbolConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
 
-
-        var menu_html = '<ul id="Tablas64646" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
-        var longitud = 0
-        for (var i = 0; i < data.length; i++) {
-            if (longitud > 0) {
-                if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
-            }
+            // la cuestion es: si no lo ves (el superadmin te puso nivel mínimo) , tampoco lo debés poder administrar (aunque seas administrador)
 
 
-
-
-
-
-            var strNivelinp = '';
-            //strNivelinp += '<input  class="inputboxes"   id="' + data[i].Orden + '" name="' + data[i].Orden + '"    value="' + data[i].Link + '"  style="visibility:hidden; display: none"  >';
-            if (data[i].Orden != -999) {
-                strNivelinp += '<div name="slider" id="'
-
-                if (data[i].Orden <= 1) {
-                    // el nodo no existe en la base, es nuevo. Uso el nombre del nodo, en lugar del id
-                    strNivelinp += data[i].Clave.replace('"', " "); 
-
-                }
-                else {
-                    strNivelinp += data[i].Orden;
-                }
-                strNivelinp += '"   class="" value="' + (Number(data[i].Link) || 0) + '"  > </div>';
-            }
-
-            if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
-
-                menu_html += '<li>'
-                menu_html += ' <span class="folder " id="' + data[i].Clave + '" ';
-
-                if (data[i].Orden == -999) {
-                    menu_html += ' style="visibility:hidden" ';
-                }
-                menu_html += '>' + data[i].Descripcion + '</span>';
-
-
-                menu_html += strNivelinp;
-                menu_html += ' <ul>';
-
-
-
-            }
-            else {
-                if (data[i].Link.length > 0) {
-                    menu_html += '<li><span class="leaf country "  id="' + data[i].Clave + '">' + data[i].Descripcion + '</span>'
-                }
-                else {
-                    menu_html += '<li><span class="leaf country  " id="' + data[i].Clave + '">' + data[i].Descripcion + '</span>'
-                }
-                menu_html += strNivelinp
-                menu_html += ' </li>'
-            }
-
-
-
-
-
-
-
-
-            // http://www.techiesweb.net/asp-net-mvc3-dynamically-added-form-fields-model-binding/
-
-            longitud = data[i].IdItem.length;
-        }
-
-        if (longitud > 0) {
-            if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-            if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-            if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-            //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-            if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
-        }
-        menu_html += '</ul>';
-
-        $("#Accord233").empty().append(menu_html);
-
-
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // este post está incluido en el primer post, para que el reemplazo de treeviews se haga con los dos terminados de ejecutar
-        $.post(ROOT + "Acceso/MenuConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
-            var menu_html = '<ul id="TablasMenu" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
+            var menu_html = '<ul id="Tablas64646" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
             var longitud = 0
             for (var i = 0; i < data.length; i++) {
+
+
+
                 if (longitud > 0) {
-                    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
                     // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
                 }
-
-
 
 
 
@@ -155,7 +77,18 @@ $(document).ready(function () {
                 var strNivelinp = '';
                 //strNivelinp += '<input  class="inputboxes"   id="' + data[i].Orden + '" name="' + data[i].Orden + '"    value="' + data[i].Link + '"  style="visibility:hidden; display: none"  >';
                 if (data[i].Orden != -999) {
-                    strNivelinp += '<div name="slider" id="' + data[i].Clave + '"   class="" value="' + data[i].Orden + '"  > </div>';
+                    strNivelinp += '<div name="slider" id="'
+
+                    if (data[i].Orden <= 1) {
+                        // el nodo no existe en la base, es nuevo. Uso el nombre del nodo, en lugar del id
+                        strNivelinp += data[i].Clave.replace('"', " ");
+
+                    }
+                    else {
+                        //strNivelinp += data[i].Orden;
+                        strNivelinp += data[i].Clave.replace('"', " ");
+                    }
+                    strNivelinp += '"   class="" value="' + (Number(data[i].Link) || 0) + '"  > </div>';
                 }
 
                 if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
@@ -195,106 +128,204 @@ $(document).ready(function () {
 
                 // http://www.techiesweb.net/asp-net-mvc3-dynamically-added-form-fields-model-binding/
 
-                longitud = data[i].IdItem.length;
+                // longitud = data[i].IdItem.length;
+                longitud = data[i].IdItem.split("-").length;
             }
 
             if (longitud > 0) {
-                if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-                if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-                if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                if (longitud == 1) { menu_html += '</ul></li>' }
+                if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
+                if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
                 //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
+                if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
             }
             menu_html += '</ul>';
 
-            $("#AccordDeMenus").append(menu_html);
+            $("#Accord233").empty().append(menu_html);
+
 
 
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-            $(function () {
-                $('[name^="slider"]').slider({
-                    value: $(this).val(),
-                    min: 1,
-                    max: 9,
-                    step: 1,
-                    //                slide: function (event, ui) {
-                    //                    //       $("#amount").val("$" + ui.value);
-                    //                    actualizaHijos(this);
-                    //                },
-                    change: function (event, ui) {
-                        //       $("#amount").val("$" + ui.value);
-                        actualizaHijos(this);
+            // este post está incluido en el primer post, para que el reemplazo de treeviews se haga con los dos terminados de ejecutar
+            $.post(ROOT + "Acceso/MenuConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
+                var menu_html = '<ul id="TablasMenu" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
+                var longitud = 0
+                for (var i = 0; i < data.length; i++) {
+                    if (longitud > 0) {
+                        if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
+                        if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
+                        if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                        // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                        if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
                     }
-                });
-            });
 
 
 
-            var prueba = $.map(
-                        $('[name^="slider"]'), // $("#Tablas64646 :input"),
-                        function (n, i) {
-                            var valor = parseInt( $(n).attr('value'));
-                            $(n).slider('value', valor);
+
+
+
+                    var strNivelinp = '';
+                    //strNivelinp += '<input  class="inputboxes"   id="' + data[i].Orden + '" name="' + data[i].Orden + '"    value="' + data[i].Link + '"  style="visibility:hidden; display: none"  >';
+                    if (data[i].Orden != -999) {
+                        strNivelinp += '<div name="slider" id="' + data[i].Clave + '"   class="" value="' + data[i].Orden + '"  > </div>';
+                    }
+
+                    if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
+
+                        menu_html += '<li>'
+                        menu_html += ' <span class="folder " id="' + data[i].Clave + '" ';
+
+                        if (data[i].Orden == -999) {
+                            menu_html += ' style="visibility:hidden" ';
                         }
-                    );
+                        menu_html += '>' + data[i].Descripcion + '</span>';
+
+
+                        menu_html += strNivelinp;
+                        menu_html += ' <ul>';
+
+
+
+                    }
+                    else {
+                        if (data[i].Link.length > 0) {
+                            menu_html += '<li><span class="leaf country "  id="' + data[i].Clave + '">' + data[i].Descripcion + '</span>'
+                        }
+                        else {
+                            menu_html += '<li><span class="leaf country  " id="' + data[i].Clave + '">' + data[i].Descripcion + '</span>'
+                        }
+                        menu_html += strNivelinp
+                        menu_html += ' </li>'
+                    }
 
 
 
 
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-            $("#Tablas64646").treeview({
-                collapsed: true,
-                animated: "medium",
-                control: "#sidetreecontrol",
-                //persist: "location"
-                persist: "cookie"
+                    // http://www.techiesweb.net/asp-net-mvc3-dynamically-added-form-fields-model-binding/
+
+                    longitud = data[i].IdItem.length;
+                }
+
+                if (longitud > 0) {
+                    if (longitud - 2 == 3) { menu_html += '</ul></li>' }
+                    if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
+                    if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li>' }
+                }
+                menu_html += '</ul>';
+
+                $("#AccordDeMenus").append(menu_html);
+
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+                if (true) {
+                    //cómo optimizar la creación de tantos controlcitos??
+
+
+                    // creo los sliders
+                    $(function () {
+                        $('[name^="slider"]').slider({
+
+                            // http://stackoverflow.com/questions/3083874/is-there-a-way-to-make-the-jquery-ui-slider-start-with-0-on-top-instead-of-on-bo
+
+                            value: $(this).val(),
+                            min: 1,
+                            max: 9,
+
+                            //                        value: $(this).val() * -1,
+                            //                        min: -9,
+                            //                        max: -1,
+
+                            step: 1,
+                            //                slide: function (event, ui) {
+                            //                    //       $("#amount").val("$" + ui.value);
+                            //                    actualizaHijos(this);
+                            //                },
+                            change: function (event, ui) {
+                                //       $("#amount").val("$" + ui.value);
+                                actualizaHijos(this);
+                            }
+                        });
+                    });
+
+
+
+                    // les asigno el valor
+                    var prueba = $.map(
+                $('[name^="slider"]'), // $("#Tablas64646 :input"),
+                function (n, i) {
+                    var valor = parseInt($(n).attr('value'));
+                    $(n).slider('value', valor);
+                }
+                );
+
+                }
+
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                $("#Tablas64646").treeview({
+                    collapsed: true,
+                    animated: "medium",
+                    control: "#sidetreecontrol",
+                    //persist: "location"
+                    persist: "cookie"
+
+                });
+
+
+
+
+                $("#TablasMenu").treeview({
+                    collapsed: true,
+                    animated: "medium",
+                    control: "#sidetreecontrol",
+                    //persist: "location"
+                    persist: "cookie"
+
+                });
+
+
+
 
             });
-
-
-
-
-            $("#TablasMenu").treeview({
-                collapsed: true,
-                animated: "medium",
-                control: "#sidetreecontrol",
-                //persist: "location"
-                persist: "cookie"
-
-            });
-
-
-
 
         });
-
-    });
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,7 +340,161 @@ $(document).ready(function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    $("#grabar244").click(function () {
+        $("#grabar2").click();
+    })
+
+
+
+
+    function GrabarGrillaLocal() {
+
+
+
+        var $this = $('#Lista')
+        var ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+
+        for (i = 0; i < l; i++) {
+            try {
+                var rowdata = $('#arbolpermisos').jqGrid('saveRow', ids[i]);
+            } catch (e) {
+                $('#arbolpermisos').jqGrid('restoreRow', ids[i]);
+                continue;
+            }
+        }
+    }
+
+
     $("#grabar2").click(function () {
+
+        //jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        //sacarDeEditMode();
+        jQuery('#arbolpermisos').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+      
+        
+        GrabarGrillaLocal()
+
+        var cabecera = SerializaForm();
+        var d = JSON.stringify(cabecera)
+
+        //var count = Object.keys(d).length
+        //console.log(count);
+
+        $('html, body').css('cursor', 'wait');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'Acceso/Edit',
+            dataType: 'json',
+            data: d, // $.toJSON(cabecera),
+            success: function (result) {
+                //                    if (result) {
+                //                        $('#Lista').trigger('reloadGrid');
+                //                        window.location.replace(ROOT + "Pedido/index");
+                //                    } else {
+                //                        alert('No se pudo grabar el comprobante.');
+                //                    }
+
+                if (result) {
+                    $('html, body').css('cursor', 'auto');
+
+
+                    if (true) {
+                        //window.location = (ROOT + "Pedido/index");
+                        //window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
+                        location.reload();
+
+                    } else {
+
+                        var dt = new Date();
+                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                        $("#mensajeAlerta").show();
+                        // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                        //si graban de nuevo, va a dar un alta!!!!
+
+
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                    }
+
+                } else {
+
+
+                    alert('No se pudo grabar el comprobante.');
+                    $('.loading').html('');
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                }
+
+            },
+
+            beforeSend: function () {
+                //$('.loading').html('some predefined loading img html');
+                $("#loading").show();
+                $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+
+
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+
+
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    //alert(errorMessages.join("<br />"));
+
+                    // $("#textoMensajeAlerta").html(errorMessages.join("<br />"));
+                    //$('#result').html(errorMessages.join("<br />"));
+                    //$("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+
+
+                    //alert(xhr.responseText);
+
+
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+
+
+
+
+
+
+
+            }
+        });
+
+    })
+
+
+
+    $("#grabar3").click(function () {
         //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
         //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
 
@@ -353,7 +538,8 @@ $(document).ready(function () {
         var prueba = $.map(
                         $('[name^="slider"]'), // $("#Tablas64646 :input"),
                         function (n, i) {
-                            var a = { IdEmpleadoAcceso: parseInt($(n).attr("id")),  // $(n).attr("name"),
+                            var a = {
+                                IdEmpleadoAcceso: null, //parseInt($(n).attr("id")) ojo con pasar a int un nodo como "80-01", porque te quedará idempleadoacceso=80  ,  // $(n).attr("name"),
                                 Nivel: $(n).slider('value'), // $(n).val() ,
                                 Nodo: $(n).attr("id")
                             };
@@ -453,6 +639,27 @@ $(document).ready(function () {
 
 
 
+
+
+
+    function SerializaForm() {
+        var cm, data1, data2, valor;
+        var colModel = jQuery("#arbolpermisos").jqGrid('getGridParam', 'colModel');
+
+        var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
+
+
+
+        var grilla = jQuery("#arbolpermisos").jqGrid('getRowData')
+
+        cabecera.EmpleadosAccesos = grilla;
+
+
+
+        return cabecera;
+
+    }
+
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
@@ -473,6 +680,193 @@ $(document).ready(function () {
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+    var $grid = $('#arbolpermisos')
+
+    // creo que la posta está por acá
+    // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
+
+    var idsOfExpandedRows = []
+
+
+    $grid.jqGrid({
+
+        //columns names
+        colNames: ['descripcion', 'id', 'link', 'nivel', 'clave'],
+        //columns model
+        colModel: [
+                                    { name: 'Descripcion', index: 'Nodo', align: 'left', width: 300 },
+                                    { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
+                                    { name: 'link', index: 'link', width: 200, hidden: true },
+                                    { name: 'Nivel', index: 'Nivel', width: 200, hidden: false, editable: true
+                                        , align: 'right', edittype: 'select',
+                                        editrules: { required: false },
+                                        editoptions: {
+                                            //defaultValue: '9',
+                                            // maxlength: 5,
+
+                                            //value: " 1:1 permiso total ; 2:2 ; 3:3 ; 4:4;  5:5; 6:6 ; 9:9 permiso minimo",
+                                            // value: "-1:permiso total; 1:1; 2:2 ; 3:3 ; 4:4;  5:5; 6:6 ; 7:7; 8:8 ; 9:9 ; 10:permiso minimo",
+                                            value: "1:1; 2:2 ; 3:3 ; 4:4;  5:5; 6:6 ; 7:7; 8:8 ; 9:9 ",
+                                            size: 1,
+
+                                            dataEvents: [{ type: 'change', fn: function (e) {
+
+//                                                $('#IVAComprasPorcentaje1').val(this.value);
+//                                                CalcularItem();
+
+                                            }
+                                            }] // dataevents va ADENTRO de editoptions!!!
+                                        }
+                                    }
+
+
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240 }
+                                ],
+
+        // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
+        treeReader: {
+            level_field: "level",
+            parent_id_field: "parent", // then why does your table use "parent_id"?
+            leaf_field: "isLeaf",
+            expanded_field: "expanded",
+            loaded: "loaded",
+            icon_field: "icon"
+        },
+
+
+        postData: {
+            idsOfExpandedRows: function () {
+                // the code can by dynamic, read contain of some elements 
+                // on the page use "if"s and so on and return the value which 
+                // should be posted to the server
+                return idsOfExpandedRows;
+            },
+
+            IdEmpleado: function () {
+                // the code can by dynamic, read contain of some elements 
+                // on the page use "if"s and so on and return the value which 
+                // should be posted to the server
+                return $("#IdEmpleado").val();
+            }
+        },
+
+        ExpandColumn: 'Name',
+        //                                            colNames: ["Account", "Acc Num", "Debit", "Credit", "Balance", "Enabled"],
+        //                                            colModel: [
+        //                                        { name: "name", index: "name", width: 180 },
+        //                                        { name: "num", index: "acc_num", width: 80, formatter: "integer", sorttype: "int", align: "center" },
+        //                                        { name: "debit", index: "debit", width: 80, formatter: "number", sorttype: "number", align: "right" },
+        //                                        { name: "credit", index: "credit", width: 80, formatter: "number", sorttype: "number", align: "right" },
+        //                                        { name: "balance", index: "balance", width: 80, formatter: "number", sorttype: "number", align: "right" },
+        //                                        { name: "enbl", index: "enbl", width: 60, align: "center", formatter: "checkbox", editoptions: { value: "1:0"} }
+        //                                    ],
+
+
+
+        //        beforeProcessing: function (data) {
+        //            if (bPersisteArbol) {
+        //                var rows = data.rows, i, l = rows.length, row, index;
+        //                for (i = 0; i < l; i++) {
+        //                    row = rows[i].cell;
+        //                    // cambié los indices en los tres renglones!
+        //                    index = $.inArray(row[1], idsOfExpandedRows);
+        //                    row[7] = index >= 0; // set expanded column
+        //                    row[8] = true;       // set loaded column
+        //                }
+
+        //            }
+        //        },
+
+        beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
+            lastRowIndex = iRow;
+            lastColIndex = iCol;
+
+            // http://stackoverflow.com/questions/8333933/highlight-cell-value-on-doubleclick-for-copy
+            //selectText(e.target);
+        },
+
+
+        afterEditCell: function (rowid, cellname, value, iRow, iCol) {
+
+            var $input = $("#" + iRow + "_" + cellname);
+            $input.select(); // acá me marca el texto
+
+            //http://jsfiddle.net/ironicmuffin/7dGrp/
+            //http://fiddle.jshell.net/qLQRA/show/
+
+            // alert('hola'); 
+        },
+
+        ///////////////////////////////
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        //////////////////////////////
+
+        url: ROOT + "Home/TreeGridConNiveles_Todos",
+
+        treedatatype: 'json',
+        datatype: 'json',
+        // ajaxGridOptions: { contentType: "application/json" },
+        mtype: "POST",
+
+        viewrecords: true,
+        treeGridModel: 'adjacency',
+
+        treeIcons: { leaf: 'ui-icon-document-b' },
+        ExpandColClick: true,
+
+        sortname: 'Name',
+        sortorder: 'asc',
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
+
+        cellEdit: true,
+        cellsubmit: 'clientArray'
+        , editurl: ROOT + 'Pedido/EditGridData/', // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        col: false,
+        gridview: true,
+        height: 500, //'auto',
+        pager: "parbolpermisos", // "#parbolpermisos",
+        treeGrid: true,
+        rowNum: 10000,
+
+        caption: ""
+    });
+    // $grid.appendPostData({ 'idsOfExpandedRows': idsOfExpandedRows })
+    $grid.jqGrid('navGrid', "#parbolpermisos");
+    $grid.jqGrid('navGrid', '#arbolpermisos', { edit: false, add: false, del: false, search: false });
+    $grid.jqGrid('bindKeys');
+    // $("#arbolpermisos").css("background", "transparent");
+    // jQuery("#arbolpermisos").setCell(row, col, val, { background: '#ff0000' });
+
+
+
+
+
+
+
 
 
 });
@@ -517,6 +911,7 @@ $(document).ready(function () {
 //        validatePwd();
 //    }
 //});
+
 
 
 

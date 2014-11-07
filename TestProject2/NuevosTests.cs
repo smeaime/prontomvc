@@ -19,6 +19,9 @@ using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
 
+using System.Transactions;
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -33,6 +36,126 @@ namespace ProntoMVC.Tests
     public class FondoFijoControllerTest
     {
 
+
+
+        [TestMethod()]
+        public void El_Superadmin_Desactiva_RMs_y_PEDs()
+        {
+            //   using (TransactionScope _scope = new TransactionScope())
+            //   {
+
+            // ir a  buscar el APP compartido
+
+
+
+
+
+            //            System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+
+
+            BDLMasterEntities dbmaster = new BDLMasterEntities(scbdlmaster);
+            DemoProntoEntities db = new DemoProntoEntities(sc);
+            // Generales.sCadenaConexSQL("Autotrol", new Guid("5211110C-AF10-4D39-80CC-2542F69D3179"))
+            string glbEmpresaSegunString = "DemoProntoWeb";// "Vialagro";
+            string usuario = "Mariano";
+            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario).First().IdEmpleado;
+
+
+            Guid userGuid = dbmaster.aspnet_Users.Where(x => x.UserName == usuario).First().UserId; // me tira la bronca  por el transactionscope? "The partner transaction manager has disabled its support for remote/network transactions. 
+
+            var c = new AccesoController();
+            var Arbol = c.LeerArchivoAPP(IdUsuario, glbEmpresaSegunString, usuario, db, userGuid);
+
+
+
+            foreach (string s in Arbol)
+            {
+                bool Esta = false;
+
+
+                //mVectorAccesos.Find(x=>x.Nodo)
+
+                // For j = 0 To UBound(mVectorAccesos)
+                //   If mVectorAccesos(j) = oArbol.Nodes(i).Key Then
+                //      Esta = True
+                //      Exit For
+                //   End If
+                //Next
+
+
+
+                //With oRsAcc
+                //   .AddNew
+                //   .Fields("IdEmpleado").Value = 0
+                //   .Fields("Nodo").Value = oArbol.Nodes(i).Key
+                //   .Fields("Nivel").Value = 1
+                //   If Esta Then
+                //      Arbol.Nodes(i).Image = "Abierto_1"
+                //      .Fields("Acceso").Value = 1
+                //   Else
+                //      Arbol.Nodes(i).Image = "Cerrado"
+                //      .Fields("Acceso").Value = 0
+                //   End If
+                //   .Update
+                //End With
+            }
+
+            //For i = 1 To ArbolMenu.Nodes.Count
+            //   Esta = False
+            //   For j = 0 To UBound(mVectorAccesos)
+            //      If mVectorAccesos(j) = ArbolMenu.Nodes(i).Key Then
+            //         Esta = True
+            //         Exit For
+            //      End If
+            //   Next
+            //   With oRsAcc
+            //      .AddNew
+            //      .Fields("IdEmpleado").Value = 0
+            //      .Fields("Nodo").Value = ArbolMenu.Nodes(i).Key
+            //      .Fields("Nivel").Value = 1
+            //      If Esta Then
+            //         ArbolMenu.Nodes(i).Image = "Abierto_1"
+            //         .Fields("Acceso").Value = 1
+            //      Else
+            //         ArbolMenu.Nodes(i).Image = "Cerrado"
+            //         .Fields("Acceso").Value = 0
+            //      End If
+            //      .Update
+            //   End With
+            //Next
+
+
+
+
+            Empleado o = new Empleado();
+
+            c.UpdateColecciones(ref o, db);
+
+            //ComprobanteProveedor d = fondoFijoService.ObtenerPorId(10);
+
+            //Assert.AreNotEqual(numerooriginal, d.NumeroComprobante2);
+
+
+
+            // _scope.Complete();
+            //}
+
+        }
+
+
+
+
+
+        [TestMethod()]
+        public void Un_Admin_Comun_intenta_cambiar_su_nivel_de_RMs_pero_no_tiene_acceso_al_modulo()
+        {
+            using (TransactionScope _scope = new TransactionScope())
+            {
+
+                // _scope.Complete();
+            }
+
+        }
 
 
 
@@ -464,7 +587,9 @@ namespace ProntoMVC.Tests
 
 
 
-        const string scbdlmaster = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=BDLMaster;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
+        const string scbdlmaster =
+                         @"metadata=res://*/Models.bdlmaster.csdl|res://*/Models.bdlmaster.ssdl|res://*/Models.bdlmaster.msl;provider=System.Data.SqlClient;provider connection string=""data source=SERVERSQL3\TESTING;initial catalog=BDLMaster;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;connect timeout=8;application name=EntityFramework""";
+
         const string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=SERVERSQL3\\TESTING;initial catalog=DemoProntoWeb;User ID=sa;Password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework'";
         //string sc = "metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string='data source=MARIANO-PC\\SQLEXPRESS;initial catalog=Autotrol;integrated security=True;multipleactiveresultsets=True;App=EntityFramework'";
         //            "metadata=res://*/Entity.csdl|res://*/Entity.ssdl|res://*/Entity.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SOMESERVER;Initial Catalog=SOMECATALOG;Persist Security Info=True;User ID=Entity;Password=Entity;MultipleActiveResultSets=True&quot;" providerName="System.Data.EntityClient" 

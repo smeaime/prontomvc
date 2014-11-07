@@ -4221,6 +4221,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+<<<<<<< HEAD
     <EntitySetMapping Name="DetalleEmpleados">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
         <MappingFragment StoreEntitySet="DetalleEmpleados">
@@ -4275,5 +4276,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+=======
+>>>>>>> 6d3260a4fb7cf3bf15dd69bc9f54e96674011352
   </EntityContainerMapping>
 </Mapping>

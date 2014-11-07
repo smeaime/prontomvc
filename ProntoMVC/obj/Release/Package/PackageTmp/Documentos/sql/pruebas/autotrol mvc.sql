@@ -1,3 +1,5 @@
+exec CtasCtesA_TXPorTrs      
+
 select * from puntosventa
 
 select * from ibcondiciones

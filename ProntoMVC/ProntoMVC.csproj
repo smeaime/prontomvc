@@ -157,6 +157,7 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -215,12 +216,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccesoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AccountController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\MvcMembership.cs" />
     <Compile Include="App_Start\RegisterClientValidationExtensions.cs" />
     <Compile Include="Areas\MvcMembership\Controllers\UserAdministrationController.cs" />
@@ -231,36 +226,6 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\IndexViewModel.cs" />
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
-    <Compile Include="ArticuloController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AsientoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AutorizacionController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BDLmasterController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ClienteController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ComparativaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ComprobanteProveedorController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ConceptoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CondicionVentaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ControlCalidadController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticuloController.cs">
       <SubType>Code</SubType>
@@ -320,18 +285,6 @@
     </Compile>
     <Compile Include="Controllers\_Definiciones.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="CotizacionMonedaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CuentaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CuentaCorrienteController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DepositoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="elmah.cs" />
     <Content Include="BugTrack.aspx" />
     <Content Include="BugTrack.aspx.vb">
@@ -380,8 +333,33 @@
     <Content Include="Content\images\Default Apps\Videos.png" />
     <Content Include="Content\images\Default Apps\Weather.png" />
     <Content Include="Content\images\Default Apps\YouTube.png" />
+    <Content Include="Content\images\Empresas\Autotrol2.png" />
+    <Content Include="Content\images\Empresas\AutotrolRenovables.png" />
+    <Content Include="Content\images\Empresas\Capen - Copy.jpg" />
+    <Content Include="Content\images\Empresas\Capen.jpg" />
+    <Content Include="Content\images\Empresas\Capen.png" />
+    <Content Include="Content\images\Empresas\Copy of Decavial.png" />
+    <Content Include="Content\images\Empresas\Decavial.png" />
+    <Content Include="Content\images\Empresas\DemoPronto.png" />
+    <Content Include="Content\images\Empresas\DemoProntoWeb.png" />
     <Content Include="Content\images\Empresas\esuco.gif" />
     <Content Include="Content\images\Empresas\esuco.jpg" />
+    <Content Include="Content\images\Empresas\esuco.png" />
+    <Content Include="Content\images\Empresas\fernando6.png" />
+    <Content Include="Content\images\Empresas\fernando7.png" />
+    <Content Include="Content\images\Empresas\Hawk.png" />
+    <Content Include="Content\images\Empresas\nueva.png" />
+    <Content Include="Content\images\Empresas\Pronto.png" />
+    <Content Include="Content\images\Empresas\pruebaAutotrol.png" />
+    <Content Include="Content\images\Empresas\Prueba_VialAgro.png" />
+    <Content Include="Content\images\Empresas\Vialagro.png" />
+    <Content Include="Content\images\Empresas\wDemoWilliams.jpg" />
+    <Content Include="Content\images\Empresas\wDemoWilliams.png" />
+    <Content Include="Content\images\Empresas\wDemoWilliams2.png" />
+    <Content Include="Content\images\Empresas\williams.png" />
+    <Content Include="Content\images\favicon16.png" />
+    <Content Include="Content\images\faviconfiel.png" />
+    <Content Include="Content\images\FhHRx.gif" />
     <Content Include="Content\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\images\virtualmartiresatardecer.jpg" />
     <Content Include="Content\images\vistaareaaniacua1200px.jpg" />
@@ -460,38 +438,11 @@
     <None Include="Documentos\vb6\Recibo.aspx.vb.sss" />
     <Content Include="Documentos\shortkeys_topten.txt" />
     <Content Include="FuncionesVB.vb" />
-    <Compile Include="EmpleadoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ErrorController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ErrorPagesController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FacturaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Funciones.cs" />
-    <Compile Include="GananciaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IngresoBrutoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="jqGridPaginacionController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ListaPrecioController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModelComprobanteProveedor.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CellEditingViewModel.cs" />
@@ -518,36 +469,6 @@
     <Compile Include="Models\Tablas.cs" />
     <Compile Include="Models\TipoRetencionGanancia_Validacion.cs" />
     <Compile Include="Models\CustomSearchViewModel.cs" />
-    <Compile Include="MonedaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MvcMembership.UserAdministrationController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NotaCreditoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NotaDebitoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ObraController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrdenCompraController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrdenPagoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PaginaWebFormController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PedidoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PresupuestoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -558,18 +479,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="ProveedorController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PuntoVentaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReciboController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RemitoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Reporte.aspx.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
@@ -583,6 +492,8 @@
     <None Include="Documentos\vb6\frmDetRequerimientos.frmz" />
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
     <None Include="Documentos\RequerimientoWeb_AUTOTROL.docx" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -593,6 +504,9 @@
     <Content Include="Reportes\Proyectos de reporting\Report Project1\codigo certificados.vb" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Pronto informes.rptproj.user" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj.user" />
+    <Content Include="Scripts\jquery-grid\grid.locale-es.js" />
+    <Content Include="Scripts\jquery-layout\jquery.layout-latest.js" />
+    <Content Include="Scripts\jquery-layout\jquery.layout-latest.min.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Views\Moneda\Delete.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />
@@ -971,10 +885,6 @@
     <None Include="Reportes\Proyectos de reporting\Report Project1\Transporte de mercaderia.rdl" />
     <None Include="Reportes\Proyectos de reporting\Report Project1\Ubicaciones_TL.rsd" />
     <None Include="Reportes\Proyectos de reporting\Report Project1\Vales emitidos no retirados.rdl" />
-    <None Include="T4MVC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </None>
     <None Include="T4MVC.tt.hooks.t4" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Tests.vb" />
@@ -983,44 +893,6 @@
     <Content Include="Views\Account\favicon.png" />
     <Content Include="Views\Autorizacion\ScriptAutorizaciones.js" />
     <Content Include="Views\PaginaWebForm\InformesSoloRemoto.aspx" />
-    <Compile Include="ReportesController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RequerimientoController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RubroController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SectorController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SharedController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SubdiarioController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SubrubroController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TestController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TipoRetencionGananciaController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UbicacionController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UnidadController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Views\PaginaWebForm\InformesSoloRemoto.aspx.cs" />
     <Content Include="Views\PaginaWebForm\ViewPage1.aspx" />
     <Content Include="Views\Rubro\Edit.cshtml" />

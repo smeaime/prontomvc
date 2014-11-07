@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProntoMVC.Models.ComprobanteProveedor>
+﻿@model IEnumerable<ProntoMVC.Data.Models.ComprobanteProveedor>
 @{
     ViewBag.Title = "Compbtes de proveedor";
 }
@@ -71,14 +71,15 @@ If you want additionally remove vertical border between the cells in the grid yo
     </div>
 </div>
 <br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-prepend input-append">
-                @* <div class="btn-group ">
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid ">
+        <div class="span12 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
+                Nuevo
+            </button>
+            <div class="span4">
+                <div class="input-prepend input-append">
+                    @* <div class="btn-group ">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 En todo <span class="caret"></span>
                             </button>
@@ -89,44 +90,47 @@ If you want additionally remove vertical border between the cells in the grid yo
                                 Número
                             </ul>
                         </div>*@
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                <select id="campos " class="span4">
-                    <option>Número</option>
-                    <option>Fecha</option>
-                </select>
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    ...</button>
-                @*<div>
+                    <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                    {
+                    <select id="campos " class="span4">
+                        <option>Número</option>
+                        <option>Fecha</option>
+                    </select>
+                    <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                        ...</button> }
+                    @*<div>
                             <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
                         <div>
                             <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
                         <div>
                             <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
+                </div>
             </div>
-        </div>
-        <div class="btn-group  pull-right ">
-            <button onclick="  " class="btn">
-                <
-            </button>
-            <button onclick="  " class="btn ">
-                >
-            </button>
-        </div>
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-        {
+            @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+            {
+            <div class="btn-group  pull-right ">
+                <button onclick="  " class="btn">
+                    <
+                </button>
+                <button onclick="  " class="btn ">
+                    >
+                </button>
+            </div>
           
         
-            <div class="btn-group span2   pull-right ">
-                <button class="btn dropdown-toggle " data-toggle="dropdown">
-                    más <span class="caret "></span>
-                </button>
-                <ul class="dropdown-menu ">
-                    <li><a id="Renumerar" href='@Url.Content("~")ComprobanteProveedor/Importador'>Excel</a></li>
-                    <li><a id="DuplicarItems" href="#">Importar fondos fijos</a></li>
-                </ul>
-            </div>
+                <div class="btn-group span2   pull-right ">
+                    <button class="btn dropdown-toggle " data-toggle="dropdown">
+                        más <span class="caret "></span>
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li><a id="Renumerar" href='@Url.Content("~")ComprobanteProveedor/Importador'>Excel</a></li>
+                        <li><a id="DuplicarItems" href="#">Importar fondos fijos</a></li>
+                    </ul>
+                </div>
         
-        }
+            }
+        </div>
     </div>
     <script>
 
@@ -149,14 +153,51 @@ If you want additionally remove vertical border between the cells in the grid yo
             //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
         });
     </script>
-</div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
+    </table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
+    </div>
+    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+    {
+
+        using (Html.BeginForm("Importar", "ComprobanteProveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+@*<div class="row-fluid">
+        <div class="">
+            <input type="file" name="file" />
+           
+        </div>
+    </div>*@
+    
+@*   http://stackoverflow.com/questions/11235206/twitter-bootstrap-form-file-element-upload-button *@
+    
+        <br />
+        <div>
+            <div style="position: relative;" class="span5">
+                <a class='btn' href='javascript:;'>Elija archivo...
+                    <input type="file" name="file" style='position: absolute; z-index: 2; top: 0; left: 0;
+                        filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                        opacity: 0; background-color: transparent; color: transparent;' size="40" onchange='$("#upload-file-info").html($(this).val());'>
+                </a>&nbsp; <span class='label label-info' id="upload-file-info"></span>@*<i class="icon-user icon-white"></i>*@
+            </div>
+            <button type="submit" class="btn span1">
+                subir
+            </button>
+        </div>
+    
+    
+    
+        <a class="span1" href="@Url.Content("~")ComprobanteProveedor/Test">test importar</a>
+        <a href="@Url.Content("~")Test/FondoFijo">test alta</a>
+        <br />
+        }
+    }
 </div>
 @*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 <script type="text/javascript">
     $(document).ready(function () {
+
         var lastSelectedId;
         var inEdit;
         grid = $("#Lista");
@@ -169,44 +210,46 @@ If you want additionally remove vertical border between the cells in the grid yo
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', '','','IdPedido', 'Tipo comp', 'Nro.interno', 'Numero', 'CtaCte/FFijo',
+            colNames: ['Acciones', '', '', 'IdPedido', 'Tipo comp', 'Nro.interno', 'Numero', 'CtaCte/FFijo',
             'Fecha comp.', 'Fecha recep', 'Vence', 'Cod.Prov.', 'Proveedor',
-            // "" , // as [Proveedor FF],  
-            // "", // as [Vale],  
-            // "" , //  as [Condicion IVA],   
-            // "", //  as [Obra],  
-            // "", //  as [Cuenta contable],  
-            //  [Subtotal],  
-            // [Neto gravado],  
-            // [IVA 1],  
-            // [IVA 2],  
-            // [Aj.IVA],  
-            // [Imp.bonif.],  
-            //  [Total],  
-            // [Mon.],  
-            // [Cotiz. dolar],  
-            // [Provincia destino],  
-            // a.Observaciones, // ,  
-            // as [Ingreso],  
-            //  [Fecha ingreso],  
-            //[Modifico],  
-            //  [Fecha modif.],  
-            //as [Dest.Pago],  
-            // as [Nro.Rend.FF],  
-            //"", // as [Etapa],  
-            //"", //  as [Rubro],  
-            //as [Circuito de firmas completo],
-          '', '', '', '', '',
-             '', '', '', '', '',
-           '', '', '', '', '',
-            '', '', '', '', '',
-            '', ''
+
+            "Proveedor FF",
+            "Vale",
+             "Condicion IVA",
+            "Obra",
+            "Cuenta contable",
+
+             "Subtotal",
+            "Neto gravado",
+            "IVA 1",
+            "IVA 2",
+            "Aj.IVA",
+
+            "Imp.bonif.",
+             "Total",
+            "Mon.",
+            "Cotiz. dolar",
+            "Provincia destino",
+
+            "Observaciones",
+             "Ingreso",
+             "Fecha ingreso",
+          "Modifico",
+             "Fecha modif.",
+
+           "Dest.Pago",
+         "Nro.Rend.FF",
+         "Etapa",
+      "Rubro",
+         "Circuito de firmas completo",
+
+
 ],
 
             colModel: [
 
-                        { name: 'act', index: 'act', align: 'center', width: 220, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'act', index: 'act', align: 'center', width: 80, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'act', index: 'act', align: 'center', width: 220, hidden: true, sortable: true, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        {name: 'act', index: 'act', align: 'center', width: 80, hidden: false, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'act', index: 'act', align: 'center', width: 80, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Tipo', index: 'Numero', align: 'left', width: 230, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
@@ -217,10 +260,10 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'codProveedor', index: 'zzzzzz', align: 'left', width:60 , editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'codProveedor', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Proveedor', index: 'zzzzzz', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'ProveedorFF', index: 'ProveedorFF', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -245,7 +288,10 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
                         { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva2', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva3', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'IdCodigoIva4', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
 
 
                     ],
@@ -296,36 +342,17 @@ If you want additionally remove vertical border between the cells in the grid yo
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+
+
+
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+
     });
 
+
+
+
 </script>
-@using (Html.BeginForm("Importar", "ComprobanteProveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-@*<div class="row-fluid">
-        <div class="">
-            <input type="file" name="file" />
-           
-        </div>
-    </div>*@
-    
-@*   http://stackoverflow.com/questions/11235206/twitter-bootstrap-form-file-element-upload-button *@
-    
-    <br />
-    <div>
-        <div style="position: relative;" class="span5">
-            <a class='btn' href='javascript:;'>Elija archivo...
-                <input type="file" name="file" style='position: absolute; z-index: 2; top: 0; left: 0;
-                    filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-                    opacity: 0; background-color: transparent; color: transparent;' size="40" onchange='$("#upload-file-info").html($(this).val());'>
-            </a>&nbsp; <span class='label label-info' id="upload-file-info"></span>@*<i class="icon-user icon-white"></i>*@
-        </div>
-        <button type="submit" class="btn span1">
-            subir
-        </button>
-    </div>
-    
-    
-    
-    <a class="span1" href="@Url.Content("~")ComprobanteProveedor/Test">test</a>
-    <br />
-}
