@@ -1198,7 +1198,9 @@ namespace ProntoMVC.Controllers
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
+                // Que sea local
+                //glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
+                glbPathArchivoAPP = AppDomain.CurrentDomain.BaseDirectory + @"Documentos\Pronto.app";
 
             }
 
