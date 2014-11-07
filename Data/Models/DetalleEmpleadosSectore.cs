@@ -18,5 +18,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdEmpleado { get; set; }
         public Nullable<System.DateTime> FechaCambio { get; set; }
         public Nullable<int> IdSectorNuevo { get; set; }
+    
+        public virtual Empleado Empleado { get; set; }
     }
 }

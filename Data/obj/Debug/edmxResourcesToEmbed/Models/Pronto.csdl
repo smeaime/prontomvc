@@ -4,7 +4,6 @@
     <EntitySet Name="Articulos" EntityType="DemoProntoModel.Articulo" />
     <EntitySet Name="ControlesCalidads" EntityType="DemoProntoModel.ControlCalidad" />
     <EntitySet Name="DetalleRequerimientos" EntityType="DemoProntoModel.DetalleRequerimiento" />
-    <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
     <EntitySet Name="Obras" EntityType="DemoProntoModel.Obra" />
     <EntitySet Name="Requerimientos" EntityType="DemoProntoModel.Requerimiento" />
     <EntitySet Name="Sectores" EntityType="DemoProntoModel.Sector" />
@@ -21,10 +20,6 @@
       <End Role="Unidades" EntitySet="Unidades" />
       <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
     </AssociationSet>
-    <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
-      <End Role="Sectores" EntitySet="Sectores" />
-      <End Role="Empleados" EntitySet="Empleados" />
-    </AssociationSet>
     <AssociationSet Name="FK_Requerimientos_Obras" Association="DemoProntoModel.FK_Requerimientos_Obras">
       <End Role="Obras" EntitySet="Obras" />
       <End Role="Requerimientos" EntitySet="Requerimientos" />
@@ -32,14 +27,6 @@
     <AssociationSet Name="FK_DetalleRequerimientos_ControlesCalidad" Association="DemoProntoModel.FK_DetalleRequerimientos_ControlesCalidad">
       <End Role="ControlCalidad" EntitySet="ControlesCalidads" />
       <End Role="DetalleRequerimiento" EntitySet="DetalleRequerimientos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Requerimientos_Empleados1" Association="DemoProntoModel.FK_Requerimientos_Empleados1">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Requerimiento" EntitySet="Requerimientos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Requerimientos_Empleados2" Association="DemoProntoModel.FK_Requerimientos_Empleados2">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Requerimiento" EntitySet="Requerimientos" />
     </AssociationSet>
     <AssociationSet Name="FK_Requerimientos_Sectores" Association="DemoProntoModel.FK_Requerimientos_Sectores">
       <End Role="Sector" EntitySet="Sectores" />
@@ -57,14 +44,6 @@
       <Parameter Name="IdDetalleRequerimiento" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Clientes" EntityType="DemoProntoModel.Cliente" />
-    <AssociationSet Name="FK_Clientes_Empleados" Association="DemoProntoModel.FK_Clientes_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_Empleados1" Association="DemoProntoModel.FK_Clientes_Empleados1">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
     <EntitySet Name="PuntosVentas" EntityType="DemoProntoModel.PuntosVenta" />
     <FunctionImport Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" ReturnType="Collection(DemoProntoModel.AutorizacionesPorComprobante)">
       <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
@@ -132,10 +111,6 @@
     <AssociationSet Name="FK_DetallePresupuestos_Unidades" Association="DemoProntoModel.FK_DetallePresupuestos_Unidades">
       <End Role="Unidad" EntitySet="Unidades" />
       <End Role="DetallePresupuesto" EntitySet="DetallePresupuestos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Pedidos_Empleados" Association="DemoProntoModel.FK_Pedidos_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Pedido" EntitySet="Pedidos" />
     </AssociationSet>
     <AssociationSet Name="FK_Ganancias_TiposRetencionGanancia" Association="DemoProntoModel.FK_Ganancias_TiposRetencionGanancia">
       <End Role="TiposRetencionGanancia" EntitySet="TiposRetencionGanancias" />
@@ -253,10 +228,6 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="Factura" EntitySet="Facturas" />
     </AssociationSet>
-    <AssociationSet Name="FK_Facturas_Empleados" Association="DemoProntoModel.FK_Facturas_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Factura" EntitySet="Facturas" />
-    </AssociationSet>
     <AssociationSet Name="FK_Facturas_Monedas" Association="DemoProntoModel.FK_Facturas_Monedas">
       <End Role="Moneda" EntitySet="Monedas" />
       <End Role="Factura" EntitySet="Facturas" />
@@ -284,14 +255,6 @@
     <AssociationSet Name="FK_DetallePresupuestos_DetalleRequerimientos" Association="DemoProntoModel.FK_DetallePresupuestos_DetalleRequerimientos">
       <End Role="DetalleRequerimiento" EntitySet="DetalleRequerimientos" />
       <End Role="DetallePresupuesto" EntitySet="DetallePresupuestos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Presupuestos_Empleados1" Association="DemoProntoModel.FK_Presupuestos_Empleados1">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Presupuesto" EntitySet="Presupuestos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Presupuestos_Empleados2" Association="DemoProntoModel.FK_Presupuestos_Empleados2">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Presupuesto" EntitySet="Presupuestos" />
     </AssociationSet>
     <EntitySet Name="DetalleProveedores" EntityType="DemoProntoModel.DetalleProveedor" />
     <EntitySet Name="DetalleProveedoresIBs" EntityType="DemoProntoModel.DetalleProveedoresIB" />
@@ -533,10 +496,6 @@
       <End Role="DetalleArticulosUnidade" EntitySet="DetalleArticulosUnidades" />
     </AssociationSet>
     <EntitySet Name="EmpleadosAccesos" EntityType="DemoProntoModel.EmpleadosAcceso" />
-    <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="EmpleadosAcceso" EntitySet="EmpleadosAccesos" />
-    </AssociationSet>
     <EntitySet Name="DetalleRecibos" EntityType="DemoProntoModel.DetalleRecibo" />
     <EntitySet Name="DetalleRecibosCuentas" EntityType="DemoProntoModel.DetalleRecibosCuenta" />
     <EntitySet Name="DetalleRecibosRubrosContables" EntityType="DemoProntoModel.DetalleRecibosRubrosContable" />
@@ -615,10 +574,6 @@
       <Parameter Name="Importe" Mode="In" Type="Decimal" />
       <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
     </FunctionImport>
-    <AssociationSet Name="FK_Pedidos_EmpleadoAprobo" Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Pedido" EntitySet="Pedidos" />
-    </AssociationSet>
     <AssociationSet Name="FK_DetallePedidos_ControlCalidad" Association="DemoProntoModel.FK_DetallePedidos_ControlCalidad">
       <End Role="ControlCalidad" EntitySet="ControlesCalidads" />
       <End Role="DetallePedido" EntitySet="DetallePedidos" />
@@ -656,7 +611,6 @@
       <End Role="OrdenPago" EntitySet="OrdenesPago" />
     </AssociationSet>
     <EntitySet Name="Cajas" EntityType="DemoProntoModel.Caja" />
-    <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="DemoProntoModel.DetalleEmpleadosCuentasBancaria" />
     <EntitySet Name="DetalleEmpleadosJornadas" EntityType="DemoProntoModel.DetalleEmpleadosJornada" />
     <EntitySet Name="DetalleEmpleadosSectores" EntityType="DemoProntoModel.DetalleEmpleadosSectore" />
@@ -761,29 +715,9 @@
       <End Role="BancoChequera" EntitySet="BancoChequeras" />
       <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
-    <AssociationSet Name="FK_Comparativas_Empleados" Association="DemoProntoModel.FK_Comparativas_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Comparativa" EntitySet="Comparativas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comparativas_Empleados1" Association="DemoProntoModel.FK_Comparativas_Empleados1">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Comparativa" EntitySet="Comparativas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComprobantesProveedores_Empleados" Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ComprobantesProveedores_Empleados1" Association="DemoProntoModel.FK_ComprobantesProveedores_Empleados1">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-    </AssociationSet>
     <AssociationSet Name="FK_ComprobantesProveedores_Monedas" Association="DemoProntoModel.FK_ComprobantesProveedores_Monedas">
       <End Role="Moneda" EntitySet="Monedas" />
       <End Role="ComprobanteProveedor" EntitySet="ComprobantesProveedor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Conjuntos_Empleados" Association="DemoProntoModel.FK_Conjuntos_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="Conjunto" EntitySet="Conjuntos" />
     </AssociationSet>
     <AssociationSet Name="FK_Conjuntos_Obras" Association="DemoProntoModel.FK_Conjuntos_Obras">
       <End Role="Obra" EntitySet="Obras" />
@@ -792,14 +726,6 @@
     <AssociationSet Name="FK_DetalleComparativas_Monedas" Association="DemoProntoModel.FK_DetalleComparativas_Monedas">
       <End Role="Moneda" EntitySet="Monedas" />
       <End Role="DetalleComparativa" EntitySet="DetalleComparativas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NotasCredito_Empleados" Association="DemoProntoModel.FK_NotasCredito_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="NotasCredito" EntitySet="NotasCreditoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NotasDebito_Empleados" Association="DemoProntoModel.FK_NotasDebito_Empleados">
-      <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="NotasDebito" EntitySet="NotasDebitoes" />
     </AssociationSet>
     <AssociationSet Name="FK_Facturas_PuntosVenta" Association="DemoProntoModel.FK_Facturas_PuntosVenta">
       <End Role="PuntosVenta" EntitySet="PuntosVentas" />
@@ -846,9 +772,96 @@
     <EntitySet Name="DetalleEmpleadosObras" EntityType="DemoProntoModel.DetalleEmpleadosObra" />
     <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" />
     <EntitySet Name="Cargos" EntityType="DemoProntoModel.Cargo" />
+    <EntitySet Name="CuentasBancarias" EntityType="DemoProntoModel.CuentasBancaria" />
+    <AssociationSet Name="FK_CuentasBancarias_Bancos" Association="DemoProntoModel.FK_CuentasBancarias_Bancos">
+      <End Role="Banco" EntitySet="Bancos" />
+      <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
+    </AssociationSet>
+    <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
+    <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
     <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
       <End Role="Cargo" EntitySet="Cargos" />
       <End Role="Empleado" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Empleados_Ingreso" Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Empleados_Modifico" Association="DemoProntoModel.FK_Clientes_Empleados_Modifico">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="DemoProntoModel.FK_DetalleEmpleados_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleado" EntitySet="DetalleEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
+      <End Role="Sector" EntitySet="Sectores" />
+      <End Role="Empleado" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_EmpleadoAprobo" Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Pedido" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_EmpleadoComprador" Association="DemoProntoModel.FK_Pedidos_EmpleadoComprador">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Pedido" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_Empleados" Association="DemoProntoModel.FK_Pedidos_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Pedido" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="EmpleadosAcceso" EntitySet="EmpleadosAccesos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presupuestos_Empleados" Association="DemoProntoModel.FK_Presupuestos_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Presupuesto" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presupuestos_Empleados1" Association="DemoProntoModel.FK_Presupuestos_Empleados1">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Presupuesto" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_Aprobo" Association="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Requerimiento" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdAutorizoCumplido" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Requerimiento" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdComprador" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Requerimiento" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdDioPorCumplido" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Requerimiento" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdSolicito" Association="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="Requerimiento" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosCuentasBancarias_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosCuentasBancaria" EntitySet="DetalleEmpleadosCuentasBancarias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosJornadas_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosJornada" EntitySet="DetalleEmpleadosJornadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosObras_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosObra" EntitySet="DetalleEmpleadosObras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosSectores_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosSectore" EntitySet="DetalleEmpleadosSectores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados">
+      <End Role="Empleado" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosUbicacione" EntitySet="DetalleEmpleadosUbicaciones" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -1214,68 +1227,6 @@
     <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_DetalleRequerimientos" FromRole="DetalleRequerimiento" ToRole="DetallePedido" />
     <Property Name="IdPresupuestoObrasNodo" Type="Int32" />
   </EntityType>
-  <EntityType Name="Empleado">
-    <Key>
-      <PropertyRef Name="IdEmpleado" />
-    </Key>
-    <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Name="Legajo" Type="Int32" />
-    <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="UsuarioNT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="IdSector" Type="Int32" />
-    <Property Name="IdCargo" Type="Int32" />
-    <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="Interno" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="Administrador" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-    <Property Name="Iniciales" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
-    <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="SisMan" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-    <Property Name="HorasJornada" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IdSector1" Type="Int32" />
-    <Property Name="IdCargo1" Type="Int32" />
-    <Property Name="IdSector2" Type="Int32" />
-    <Property Name="IdCargo2" Type="Int32" />
-    <Property Name="IdSector3" Type="Int32" />
-    <Property Name="IdCargo3" Type="Int32" />
-    <Property Name="IdSector4" Type="Int32" />
-    <Property Name="IdCargo4" Type="Int32" />
-    <Property Name="Dominio" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="SisMat" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
-    <Property Name="TipoUsuario" Type="Int32" />
-    <Property Name="GrupoDeCarga" Type="Int32" />
-    <Property Name="CuentaBancaria" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="InformacionAuxiliar" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="IdCuentaFondoFijo" Type="Int32" />
-    <Property Name="IdObraAsignada" Type="Int32" />
-    <Property Name="Activo" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-    <Property Name="Idioma" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
-    <NavigationProperty Name="Sector" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleados" ToRole="Sectores" />
-    <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Empleados1" FromRole="Empleado" ToRole="Requerimiento" />
-    <NavigationProperty Name="Requerimientos1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados2" FromRole="Empleado" ToRole="Requerimiento" />
-    <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados" FromRole="Empleado" ToRole="Clientes" />
-    <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados1" FromRole="Empleado" ToRole="Clientes" />
-    <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Empleado" ToRole="Pedido" />
-    <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Empleados" FromRole="Empleado" ToRole="Factura" />
-    <NavigationProperty Name="Presupuestos" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Empleado" ToRole="Presupuesto" />
-    <NavigationProperty Name="Presupuestos1" Relationship="DemoProntoModel.FK_Presupuestos_Empleados2" FromRole="Empleado" ToRole="Presupuesto" />
-    <NavigationProperty Name="EmpleadosAccesos" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="Empleado" ToRole="EmpleadosAcceso" />
-    <Property Type="Int32" Name="PuntoVentaAsociado_1" />
-    <Property Type="Int32" Name="IdLugarEntregaAsignado_1" />
-    <Property Type="String" Name="EsConductor" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaVencimientoRegistro" Precision="3" />
-    <NavigationProperty Name="Pedidos_1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
-    <Property Type="String" Name="LimitarUbicacionesAsignadas" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="PermitirAccesoATodasLasObras" MaxLength="2" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Comparativas" Relationship="DemoProntoModel.FK_Comparativas_Empleados" FromRole="Empleado" ToRole="Comparativa" />
-    <NavigationProperty Name="Comparativas1" Relationship="DemoProntoModel.FK_Comparativas_Empleados1" FromRole="Empleado" ToRole="Comparativa" />
-    <NavigationProperty Name="ComprobantesProveedores" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados" FromRole="Empleado" ToRole="ComprobanteProveedor" />
-    <NavigationProperty Name="ComprobantesProveedores1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados1" FromRole="Empleado" ToRole="ComprobanteProveedor" />
-    <NavigationProperty Name="Conjuntos" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Empleado" ToRole="Conjunto" />
-    <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Empleados" FromRole="Empleado" ToRole="NotasCredito" />
-    <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Empleados" FromRole="Empleado" ToRole="NotasDebito" />
-    <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
-  </EntityType>
   <EntityType Name="Obra">
     <Key>
       <PropertyRef Name="IdObra" />
@@ -1408,8 +1359,6 @@
     <Property Name="NumeradorModificaciones" Type="Int32" />
     <Property Name="ParaTaller" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Requerimientos_Obras" FromRole="Requerimientos" ToRole="Obras" />
-    <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Requerimientos_Empleados1" FromRole="Requerimiento" ToRole="Empleado" />
-    <NavigationProperty Name="Empleados1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados2" FromRole="Requerimiento" ToRole="Empleado" />
     <NavigationProperty Name="Sectores" Relationship="DemoProntoModel.FK_Requerimientos_Sectores" FromRole="Requerimiento" ToRole="Sector" />
     <NavigationProperty Name="DetalleRequerimientos" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Requerimientos" FromRole="Requerimiento" ToRole="DetalleRequerimiento" />
     <Property Type="String" Name="FechasLiberacion" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1418,6 +1367,11 @@
     <Property Type="String" Name="Pedidos" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Recepciones" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="SalidasMateriales" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AproboRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" FromRole="Requerimiento" ToRole="Empleado" />
+    <NavigationProperty Name="AutorizoCumplidoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" FromRole="Requerimiento" ToRole="Empleado" />
+    <NavigationProperty Name="CompradorRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" FromRole="Requerimiento" ToRole="Empleado" />
+    <NavigationProperty Name="DioPorCumplidoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" FromRole="Requerimiento" ToRole="Empleado" />
+    <NavigationProperty Name="SolicitoRequerimiento" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" FromRole="Requerimiento" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="Sector">
     <Key>
@@ -1430,8 +1384,8 @@
     <Property Name="SeUsaEnPresupuestos" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
     <Property Name="OrdenPresentacion" Type="Int32" />
     <Property Name="EnviarEmail" Type="Byte" />
-    <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Sectores" ToRole="Empleados" />
     <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Sectores" FromRole="Sector" ToRole="Requerimiento" />
+    <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Sector" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="Unidad">
     <Key>
@@ -1489,18 +1443,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Empleados_Sectores">
-    <End Role="Sectores" Type="DemoProntoModel.Sector" Multiplicity="0..1" />
-    <End Role="Empleados" Type="DemoProntoModel.Empleado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sectores">
-        <PropertyRef Name="IdSector" />
-      </Principal>
-      <Dependent Role="Empleados">
-        <PropertyRef Name="IdSector" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Requerimientos_Obras">
     <End Role="Obras" Type="DemoProntoModel.Obra" Multiplicity="0..1" />
     <End Role="Requerimientos" Type="DemoProntoModel.Requerimiento" Multiplicity="*" />
@@ -1522,30 +1464,6 @@
       </Principal>
       <Dependent Role="DetalleRequerimiento">
         <PropertyRef Name="IdControlCalidad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Requerimientos_Empleados1">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Requerimiento">
-        <PropertyRef Name="Aprobo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Requerimientos_Empleados2">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Requerimiento">
-        <PropertyRef Name="IdSolicito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1977,8 +1895,6 @@
     <Property Type="DateTime" Name="FechaFinVigenciaIBDirectoCapital" Precision="3" />
     <Property Type="Int32" Name="GrupoIIBBCapital" />
     <Property Type="Int32" Name="IdBancoGestionador" />
-    <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Clientes_Empleados" FromRole="Clientes" ToRole="Empleado" />
-    <NavigationProperty Name="Empleados1" Relationship="DemoProntoModel.FK_Clientes_Empleados1" FromRole="Clientes" ToRole="Empleado" />
     <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Clientes_Cuentas" FromRole="Cliente" ToRole="Cuenta" />
     <NavigationProperty Name="IBCondicione" Relationship="DemoProntoModel.FK_Clientes_CatIIBB" FromRole="Cliente" ToRole="IBCondicion" />
     <NavigationProperty Name="VendedorCobrador" Relationship="DemoProntoModel.FK_Clientes_Cobrador" FromRole="Cliente" ToRole="Vendedor" />
@@ -2040,31 +1956,9 @@
     <Property Type="String" Name="OperacionesMercadoInternoEntidadVinculada" MaxLength="2" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_Clientes_DescripcionIva" FromRole="Cliente" ToRole="DescripcionIva" />
     <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="Int32" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Cliente" ToRole="Empleado" />
+    <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Cliente" ToRole="Empleado" />
   </EntityType>
-  <Association Name="FK_Clientes_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Cliente" Role="Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdUsuarioIngreso" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_Empleados1">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Cliente" Role="Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdUsuarioModifico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="PuntosVenta">
     <Key>
       <PropertyRef Name="IdPuntoVenta" />
@@ -2513,15 +2407,16 @@
     <Property Type="Int32" Name="PuntoVenta" />
     <Property Type="Int32" Name="IdMonedaOriginal" />
     <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_Pedidos" FromRole="Pedido" ToRole="DetallePedido" />
-    <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Pedido" ToRole="Empleado" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Pedidos_Monedas" FromRole="Pedido" ToRole="Moneda" />
     <NavigationProperty Name="Proveedor" Relationship="DemoProntoModel.FK_Pedidos_Proveedores" FromRole="Pedido" ToRole="Proveedor" />
     <Property Type="Int32" Name="IdLugarEntrega_1" />
     <Property Type="String" Name="ConfirmadoPorWeb_1" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="IdTipoCompraRM" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Pedido" ToRole="Empleado" />
     <Property Type="DateTime" Name="FechaEnvioProveedor" Precision="3" />
     <Property Type="Int32" Name="IdUsuarioEnvioProveedor" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Pedido" ToRole="Empleado" />
+    <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Pedido" ToRole="Empleado" />
+    <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Pedido" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="Presupuesto">
     <Key>
@@ -2572,10 +2467,10 @@
     <NavigationProperty Name="Condiciones_Compra" Relationship="DemoProntoModel.FK_Presupuestos_Condiciones_Compra" FromRole="Presupuesto" ToRole="Condiciones_Compra" />
     <NavigationProperty Name="DetallePresupuestos" Relationship="DemoProntoModel.FK_DetallePresupuestos_Presupuestos" FromRole="Presupuesto" ToRole="DetallePresupuesto" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Presupuestos_Monedas" FromRole="Presupuesto" ToRole="Moneda" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Presupuesto" ToRole="Empleado" />
-    <NavigationProperty Name="Empleado2" Relationship="DemoProntoModel.FK_Presupuestos_Empleados2" FromRole="Presupuesto" ToRole="Empleado" />
     <NavigationProperty Name="PlazosEntrega" Relationship="DemoProntoModel.FK_Presupuestos_PlazosEntrega" FromRole="Presupuesto" ToRole="PlazosEntrega" />
     <NavigationProperty Name="Proveedor" Relationship="DemoProntoModel.FK_Presupuestos_Proveedores" FromRole="Presupuesto" ToRole="Proveedor" />
+    <NavigationProperty Name="Comprador" Relationship="DemoProntoModel.FK_Presupuestos_Empleados" FromRole="Presupuesto" ToRole="Empleado" />
+    <NavigationProperty Name="AproboPresupuesto" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Presupuesto" ToRole="Empleado" />
   </EntityType>
   <Association Name="FK_Articulos_Cuentas">
     <End Type="DemoProntoModel.Cuenta" Role="Cuenta" Multiplicity="0..1" />
@@ -2730,18 +2625,6 @@
       </Principal>
       <Dependent Role="DetallePresupuesto">
         <PropertyRef Name="IdUnidad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Pedidos_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Pedido">
-        <PropertyRef Name="IdComprador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3379,7 +3262,6 @@
     <Property Type="Int32" Name="IdCertificacionObraDatos" />
     <Property Type="DateTime" Name="FechaRecepcionCliente" Precision="3" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_Facturas_Clientes" FromRole="Factura" ToRole="Cliente" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Facturas_Empleados" FromRole="Factura" ToRole="Empleado" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Facturas_Monedas" FromRole="Factura" ToRole="Moneda" />
     <NavigationProperty Name="DetalleFacturas" Relationship="DemoProntoModel.FK_DetalleFacturas_Facturas" FromRole="Factura" ToRole="DetalleFactura" />
     <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_Facturas_Vendedor" FromRole="Factura" ToRole="Vendedor" />
@@ -3421,18 +3303,6 @@
       </Principal>
       <Dependent Role="Factura">
         <PropertyRef Name="IdCliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Facturas_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Factura" Role="Factura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Factura">
-        <PropertyRef Name="IdUsuarioIngreso" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3517,30 +3387,6 @@
       </Principal>
       <Dependent Role="DetallePresupuesto">
         <PropertyRef Name="IdDetalleRequerimiento" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Presupuestos_Empleados1">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Presupuesto">
-        <PropertyRef Name="IdComprador" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Presupuestos_Empleados2">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Presupuesto">
-        <PropertyRef Name="Aprobo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4018,6 +3864,7 @@
     <NavigationProperty Name="BancoChequeras" Relationship="DemoProntoModel.FK_BancoChequeras_Bancos" FromRole="Banco" ToRole="BancoChequera" />
     <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Bancos_Cuentas" FromRole="Banco" ToRole="Cuenta" />
     <NavigationProperty Name="Cuenta1" Relationship="DemoProntoModel.FK_Bancos_Cuentas1" FromRole="Banco" ToRole="Cuenta" />
+    <NavigationProperty Name="CuentasBancarias" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="Banco" ToRole="CuentasBancaria" />
   </EntityType>
   <EntityType Name="TarjetasCredito">
     <Key>
@@ -5131,23 +4978,11 @@
     <Property Type="DateTime" Name="FechaInicialHabilitacion" Precision="3" />
     <Property Type="DateTime" Name="FechaFinalHabilitacion" Precision="3" />
     <Property Type="Int32" Name="CantidadAccesos" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="EmpleadosAcceso" ToRole="Empleado" />
     <Property Type="DateTime" Name="FechaUltimaModificacion" Precision="3" />
     <Property Type="Int32" Name="IdUsuarioModifico" />
     <Property Type="String" Name="UsuarioNTUsuarioModifico" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="EmpleadosAcceso" ToRole="Empleado" />
   </EntityType>
-  <Association Name="FK_EmpleadosAccesos_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.EmpleadosAcceso" Role="EmpleadosAcceso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="EmpleadosAcceso">
-        <PropertyRef Name="IdEmpleado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="DetalleRecibo">
     <Key>
       <PropertyRef Name="IdDetalleRecibo" />
@@ -5576,8 +5411,6 @@
     <Property Type="Int32" Name="IdUsuarioAnulo" />
     <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas" FromRole="Comparativa" ToRole="DetalleComparativa" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Comparativas_Empleados" FromRole="Comparativa" ToRole="Empleado" />
-    <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Comparativas_Empleados1" FromRole="Comparativa" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="DetalleComparativa">
     <Key>
@@ -5963,18 +5796,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Pedidos_EmpleadoAprobo">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Pedido">
-        <PropertyRef Name="Aprobo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DetallePedidos_ControlCalidad">
     <End Type="DemoProntoModel.ControlCalidad" Role="ControlCalidad" Multiplicity="0..1" />
     <End Type="DemoProntoModel.DetallePedido" Role="DetallePedido" Multiplicity="*" />
@@ -6126,8 +5947,6 @@
     <Property Type="DateTime" Name="FechaPrestacionServicio" Precision="3" />
     <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_ComprobantesProveedores_DescripcionIva" FromRole="ComprobanteProveedor" ToRole="DescripcionIva" />
     <Property Name="IdTipoOperacion" Type="Int32" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados" FromRole="ComprobanteProveedor" ToRole="Empleado" />
-    <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Empleados1" FromRole="ComprobanteProveedor" ToRole="Empleado" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Monedas" FromRole="ComprobanteProveedor" ToRole="Moneda" />
     <Property Name="ArchivoAdjunto1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ArchivoAdjunto2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -6337,15 +6156,6 @@
     <Property Type="Int32" Name="IdMoneda" />
     <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Cajas_Cuentas" FromRole="Caja" ToRole="Cuenta" />
   </EntityType>
-  <EntityType Name="DetalleEmpleado">
-    <Key>
-      <PropertyRef Name="IdDetalleEmpleado" />
-    </Key>
-    <Property Type="Int32" Name="IdDetalleEmpleado" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Type="Int32" Name="IdEmpleado" />
-    <Property Type="DateTime" Name="FechaIngreso" Precision="3" />
-    <Property Type="DateTime" Name="FechaEgreso" Precision="3" />
-  </EntityType>
   <EntityType Name="DetalleEmpleadosCuentasBancaria">
     <Key>
       <PropertyRef Name="IdDetalleEmpleadoCuentaBancaria" />
@@ -6353,6 +6163,7 @@
     <Property Type="Int32" Name="IdDetalleEmpleadoCuentaBancaria" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Type="Int32" Name="IdEmpleado" />
     <Property Type="Int32" Name="IdCuentaBancaria" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" FromRole="DetalleEmpleadosCuentasBancaria" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="DetalleEmpleadosJornada">
     <Key>
@@ -6362,6 +6173,7 @@
     <Property Type="Int32" Name="IdEmpleado" />
     <Property Type="DateTime" Name="FechaCambio" Precision="3" />
     <Property Type="Decimal" Name="HorasJornada" Precision="6" Scale="2" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" FromRole="DetalleEmpleadosJornada" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="DetalleEmpleadosSectore">
     <Key>
@@ -6371,6 +6183,7 @@
     <Property Type="Int32" Name="IdEmpleado" />
     <Property Type="DateTime" Name="FechaCambio" Precision="3" />
     <Property Type="Int32" Name="IdSectorNuevo" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" FromRole="DetalleEmpleadosSectore" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="DetalleNotasCredito">
     <Key>
@@ -6573,7 +6386,6 @@
     <Property Type="Int32" Name="CuentaVentaNumero" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_NotasCredito_Clientes" FromRole="NotasCredito" ToRole="Cliente" />
     <Property Name="IdTipoOperacion" Type="Int32" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_NotasCredito_Empleados" FromRole="NotasCredito" ToRole="Empleado" />
     <NavigationProperty Name="IBCondicione" Relationship="DemoProntoModel.FK_NotasCredito_IBCondiciones" FromRole="NotasCredito" ToRole="IBCondicion" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="NotasCredito" ToRole="Moneda" />
   </EntityType>
@@ -6641,7 +6453,6 @@
     <Property Type="DateTime" Name="FechaVencimientoORechazoCAE" Precision="3" />
     <Property Type="Int32" Name="IdIdentificacionCAE" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_NotasDebito_Clientes" FromRole="NotasDebito" ToRole="Cliente" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_NotasDebito_Empleados" FromRole="NotasDebito" ToRole="Empleado" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="NotasDebito" ToRole="Moneda" />
   </EntityType>
   <EntityType Name="TiposValore">
@@ -6884,7 +6695,6 @@
     <Property Name="IdObra" Type="Int32" />
     <Property Name="Version" Type="Int32" />
     <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_Conjuntos_Articulos" FromRole="Conjunto" ToRole="Articulo" />
-    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Conjuntos_Empleados" FromRole="Conjunto" ToRole="Empleado" />
     <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Conjuntos_Obras" FromRole="Conjunto" ToRole="Obra" />
   </EntityType>
   <Association Name="FK_Conjuntos_Articulos">
@@ -6911,54 +6721,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Comparativas_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Comparativa" Role="Comparativa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Comparativa">
-        <PropertyRef Name="IdConfecciono" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comparativas_Empleados1">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Comparativa" Role="Comparativa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Comparativa">
-        <PropertyRef Name="IdAprobo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComprobantesProveedores_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="ComprobanteProveedor">
-        <PropertyRef Name="IdUsuarioIngreso" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ComprobantesProveedores_Empleados1">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="ComprobanteProveedor">
-        <PropertyRef Name="IdUsuarioModifico" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ComprobantesProveedores_Monedas">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
     <End Type="DemoProntoModel.ComprobanteProveedor" Role="ComprobanteProveedor" Multiplicity="*" />
@@ -6968,18 +6730,6 @@
       </Principal>
       <Dependent Role="ComprobanteProveedor">
         <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Conjuntos_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.Conjunto" Role="Conjunto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Conjunto">
-        <PropertyRef Name="IdRealizo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -7004,30 +6754,6 @@
       </Principal>
       <Dependent Role="DetalleComparativa">
         <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NotasCredito_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="NotasCredito">
-        <PropertyRef Name="IdUsuarioIngreso" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NotasDebito_Empleados">
-    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-    <End Type="DemoProntoModel.NotasDebito" Role="NotasDebito" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="NotasDebito">
-        <PropertyRef Name="IdUsuarioIngreso" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -7279,6 +7005,7 @@
     <Property Name="IdDetalleEmpleadoObra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdEmpleado" Type="Int32" />
     <Property Name="IdObra" Type="Int32" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" FromRole="DetalleEmpleadosObra" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="DetalleEmpleadosUbicacione">
     <Key>
@@ -7287,6 +7014,7 @@
     <Property Name="IdDetalleEmpleadoUbicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdEmpleado" Type="Int32" />
     <Property Name="IdUbicacion" Type="Int32" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" FromRole="DetalleEmpleadosUbicacione" ToRole="Empleado" />
   </EntityType>
   <EntityType Name="Cargo">
     <Key>
@@ -7295,6 +7023,111 @@
     <Property Name="IdCargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Empleados" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Cargo" ToRole="Empleado" />
+  </EntityType>
+  <EntityType Name="CuentasBancaria">
+    <Key>
+      <PropertyRef Name="IdCuentaBancaria" />
+    </Key>
+    <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdBanco" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Detalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PlantillaChequera" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChequesPorPlancha" Type="Int32" />
+    <Property Name="CBU" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="InformacionAuxiliar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CaracteresBeneficiario" Type="Int32" />
+    <Property Name="Activa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DiseñoCheque" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Banco" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="CuentasBancaria" ToRole="Banco" />
+  </EntityType>
+  <Association Name="FK_CuentasBancarias_Bancos">
+    <End Type="DemoProntoModel.Banco" Role="Banco" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.CuentasBancaria" Role="CuentasBancaria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="IdBanco" />
+      </Principal>
+      <Dependent Role="CuentasBancaria">
+        <PropertyRef Name="IdBanco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleEmpleado">
+    <Key>
+      <PropertyRef Name="IdDetalleEmpleado" />
+    </Key>
+    <Property Name="IdDetalleEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEmpleado" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="FechaEgreso" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="DetalleEmpleado" ToRole="Empleado" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Legajo" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioNT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdSector" Type="Int32" />
+    <Property Name="IdCargo" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Interno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Administrador" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Iniciales" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SisMan" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="HorasJornada" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdSector1" Type="Int32" />
+    <Property Name="IdCargo1" Type="Int32" />
+    <Property Name="IdSector2" Type="Int32" />
+    <Property Name="IdCargo2" Type="Int32" />
+    <Property Name="IdSector3" Type="Int32" />
+    <Property Name="IdCargo3" Type="Int32" />
+    <Property Name="IdSector4" Type="Int32" />
+    <Property Name="IdCargo4" Type="Int32" />
+    <Property Name="Dominio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SisMat" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="TipoUsuario" Type="Int32" />
+    <Property Name="GrupoDeCarga" Type="Int32" />
+    <Property Name="CuentaBancaria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="InformacionAuxiliar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdCuentaFondoFijo" Type="Int32" />
+    <Property Name="IdObraAsignada" Type="Int32" />
+    <Property Name="Activo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Idioma" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoVentaAsociado" Type="Int32" />
+    <Property Name="IdLugarEntregaAsignado" Type="Int32" />
+    <Property Name="EsConductor" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaVencimientoRegistro" Type="DateTime" Precision="3" />
+    <Property Name="LimitarUbicacionesAsignadas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="PermitirAccesoATodasLasObras" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
+    <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Empleado" ToRole="Cliente" />
+    <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Empleado" ToRole="Cliente" />
+    <NavigationProperty Name="DetalleEmpleados" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
+    <NavigationProperty Name="Sectore" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleado" ToRole="Sector" />
+    <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
+    <NavigationProperty Name="Pedidos1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Empleado" ToRole="Pedido" />
+    <NavigationProperty Name="Pedidos2" Relationship="DemoProntoModel.FK_Pedidos_Empleados" FromRole="Empleado" ToRole="Pedido" />
+    <NavigationProperty Name="EmpleadosAccesos" Relationship="DemoProntoModel.FK_EmpleadosAccesos_Empleados" FromRole="Empleado" ToRole="EmpleadosAcceso" />
+    <NavigationProperty Name="Presupuestos" Relationship="DemoProntoModel.FK_Presupuestos_Empleados" FromRole="Empleado" ToRole="Presupuesto" />
+    <NavigationProperty Name="Presupuestos1" Relationship="DemoProntoModel.FK_Presupuestos_Empleados1" FromRole="Empleado" ToRole="Presupuesto" />
+    <NavigationProperty Name="Requerimientos" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" FromRole="Empleado" ToRole="Requerimiento" />
+    <NavigationProperty Name="Requerimientos1" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" FromRole="Empleado" ToRole="Requerimiento" />
+    <NavigationProperty Name="Requerimientos2" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" FromRole="Empleado" ToRole="Requerimiento" />
+    <NavigationProperty Name="Requerimientos3" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" FromRole="Empleado" ToRole="Requerimiento" />
+    <NavigationProperty Name="Requerimientos4" Relationship="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" FromRole="Empleado" ToRole="Requerimiento" />
+    <NavigationProperty Name="DetalleEmpleadosCuentasBancarias" Relationship="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosCuentasBancaria" />
+    <NavigationProperty Name="DetalleEmpleadosJornadas" Relationship="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosJornada" />
+    <NavigationProperty Name="DetalleEmpleadosObras" Relationship="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosObra" />
+    <NavigationProperty Name="DetalleEmpleadosSectores" Relationship="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosSectore" />
+    <NavigationProperty Name="DetalleEmpleadosUbicaciones" Relationship="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" FromRole="Empleado" ToRole="DetalleEmpleadosUbicacione" />
   </EntityType>
   <Association Name="FK_Empleados_Cargos">
     <End Type="DemoProntoModel.Cargo" Role="Cargo" Multiplicity="0..1" />
@@ -7305,6 +7138,246 @@
       </Principal>
       <Dependent Role="Empleado">
         <PropertyRef Name="IdCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Empleados_Ingreso">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Empleados_Modifico">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleados_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleado" Role="DetalleEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Sectores">
+    <End Type="DemoProntoModel.Sector" Role="Sector" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sector">
+        <PropertyRef Name="IdSector" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="IdSector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_EmpleadoAprobo">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="Aprobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_EmpleadoComprador">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Pedido" Role="Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpleadosAccesos_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.EmpleadosAcceso" Role="EmpleadosAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="EmpleadosAcceso">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Presupuestos_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Presupuesto">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Presupuestos_Empleados1">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Presupuesto" Role="Presupuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Presupuesto">
+        <PropertyRef Name="Aprobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_Aprobo">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="Aprobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdAutorizoCumplido">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="IdAutorizoCumplido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdComprador">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdDioPorCumplido">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="IdDioPorCumplido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdSolicito">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Requerimiento" Role="Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="IdSolicito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosCuentasBancarias_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleadosCuentasBancaria" Role="DetalleEmpleadosCuentasBancaria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosCuentasBancaria">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosJornadas_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleadosJornada" Role="DetalleEmpleadosJornada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosJornada">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosObras_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleadosObra" Role="DetalleEmpleadosObra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosObra">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosSectores_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleadosSectore" Role="DetalleEmpleadosSectore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosSectore">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosUbicaciones_Empleados">
+    <End Type="DemoProntoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleEmpleadosUbicacione" Role="DetalleEmpleadosUbicacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosUbicacione">
+        <PropertyRef Name="IdEmpleado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

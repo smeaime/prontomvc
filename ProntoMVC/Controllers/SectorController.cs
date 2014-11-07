@@ -38,9 +38,20 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetSectoresJson()
         {
-            var Sectores = db.Sectores.ToList();
+            return Json((from item in db.Sectores
+                         select new
+                         {  value = item.IdSector,
+                            title = item.Descripcion
+                         }).ToList(), JsonRequestBehavior.AllowGet); 
+        }
 
-            return Json(Sectores);
+        public virtual ActionResult GetSectores()
+        {
+            Dictionary<int, string> sectores = new Dictionary<int, string>();
+            foreach (Sector u in db.Sectores.OrderBy(x => x.Descripcion).ToList())
+                sectores.Add(u.IdSector, u.Descripcion);
+
+            return PartialView("Select", sectores);
         }
 
         public List<Sector> ListaSectores(int startIndex, int count, string sorting)

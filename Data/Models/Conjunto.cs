@@ -24,7 +24,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> Version { get; set; }
     
         public virtual Articulo Articulo { get; set; }
-        public virtual Empleado Empleado { get; set; }
         public virtual Obra Obra { get; set; }
     }
 }
