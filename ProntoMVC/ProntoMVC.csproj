@@ -72,10 +72,6 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessObject, Version=1.0.0.3495, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\BusinessObject.dll</HintPath>
-    </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ClaseMigrar.dll</HintPath>
@@ -143,10 +139,13 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
+=======
+>>>>>>> 1160658efa92e5b0d1ee51a3a7a0a79348fd3b0b
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -286,6 +285,7 @@
     <Compile Include="Controllers\_Definiciones.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="elmah.cs" />
+    <Content Include="App_Data\TextFile1.txt" />
     <Content Include="BugTrack.aspx" />
     <Content Include="BugTrack.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -379,6 +379,10 @@
     <Content Include="Content\jquery-grid\css\custom-theme\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\jquery-grid\css\custom-theme\jquery-ui-1.10.3.custom.css" />
     <Content Include="Content\jquery-grid\css\custom-theme\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.all.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.base.css" />
+    <Content Include="Content\jquery-ui-layout\jquery.ui.theme.css" />
+    <Content Include="Content\jquery-ui-layout\layout-default-latest.css" />
     <Content Include="Content\MvcMembership.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
@@ -407,9 +411,37 @@
     <None Include="Documentos\CertificadoRetencionSUSS.dot" />
     <None Include="Documentos\Comparativa.xlsx" />
     <None Include="Documentos\Comparativa.xlt" />
-    <None Include="Documentos\Pedido_Autotrol_PUNTONET.docx" />
-    <None Include="Documentos\Pedido_Esuco.dot" />
-    <None Include="Documentos\Pedido_ESUCO_PUNTONET.docx" />
+    <Content Include="Documentos\Factura A_Hawk_DOT_ORIGINAL.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_A_Hawk_FA.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_B_Hawk.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_A_VialAgro.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_A_Vialagro_FA.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_B_VialAgro.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_B_Vialagro_FA.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Documentos\Pedido_Autotrol_PUNTONET.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documentos\Pedido_Esuco.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documentos\Pedido_ESUCO_PUNTONET.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Documentos\Pronto.app" />
     <None Include="Documentos\Requerimiento1_ESUCO_PUNTONET.docx" />
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
@@ -437,6 +469,9 @@
     <None Include="Documentos\vb6\frmPedidos.frmzzz" />
     <None Include="Documentos\vb6\Recibo.aspx.vb.sss" />
     <Content Include="Documentos\shortkeys_topten.txt" />
+    <Content Include="Error\dummy.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FuncionesVB.vb" />
     <Compile Include="Funciones.cs" />
     <Compile Include="Global.asax.cs">
@@ -1218,8 +1253,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Error\" />
     <Folder Include="Novedades\" />
     <Folder Include="Views\Reportes\" />
   </ItemGroup>
@@ -1249,7 +1282,9 @@
     <Content Include="Views\Shared\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documentos\FacturaNET_Hawk.docx" />
+    <None Include="Documentos\FacturaNET_Hawk.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Documentos\vb6\frmClientes.frmzzz" />
     <None Include="Documentos\vb6\frmConceptos.frmzzz" />
     <None Include="Documentos\vb6\frmCondicionesCompra.frmzzz" />
@@ -1297,9 +1332,17 @@
     <Content Include="Views\ListaPrecio\MyViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BussinessObject\BusinessObject.vbproj">
+      <Project>{918ddc53-b568-4181-86c3-a3a44dfa6149}</Project>
+      <Name>BusinessObject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
       <Project>{AB8BB713-FFA1-4440-B49B-1857E61367C9}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
+      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
+      <Name>ProntoMVC.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositorio\ProntoMVC.Repositorio.csproj">
       <Project>{7596a08c-8f01-423e-8fd9-776075737591}</Project>
