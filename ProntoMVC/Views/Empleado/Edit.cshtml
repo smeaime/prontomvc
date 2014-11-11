@@ -191,16 +191,67 @@
         $(document).ready(function () {
             'use strict';
 
+            var $grid = "";
             var lastSelectedId;
+            var lastSelectediCol;
+            var lastSelectediRow;
+            var lastSelectediCol2;
+            var lastSelectediRow2;
             var inEdit;
             var selICol; 
             var selIRow;
-                        
+            var gridCellWasClicked = false;
+            var grillaenfoco = false;
+
             $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
             $.extend($.jgrid.inlineEdit, {
                 keys: true
             });
+            
+            window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+            document.body.onclick = saveEditedCell; // attach to current document.
+            function saveEditedCell(evt) {
+                var target = $(evt.target);
+
+                if ($grid) {
+                    var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+                    if (gridCellWasClicked && !isCellClicked) // check if a valid click
+                    {
+                        gridCellWasClicked = false;
+                        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+                    }
+                }
+
+                $grid = "";
+                gridCellWasClicked = false;
+
+                if (jQuery("#ListaIngresoEgreso").find(target).length) {
+                    $grid = $('#ListaIngresoEgreso');
+                    grillaenfoco = true;
+                }
+                if (jQuery("#ListaSectores").find(target).length) {
+                    $grid = $('#ListaSectores');
+                    grillaenfoco = true;
+                }
+                if (jQuery("#ListaJornadas").find(target).length) {
+                    $grid = $('#ListaJornadas');
+                    grillaenfoco = true;
+                }
+                if (jQuery("#ListaCuentasBancarias").find(target).length) {
+                    $grid = $('#ListaCuentasBancarias');
+                    grillaenfoco = true;
+                }
+                if (jQuery("#ListaUbicaciones").find(target).length) {
+                    $grid = $('#ListaUbicaciones');
+                    grillaenfoco = true;
+                }
+                if (grillaenfoco) {
+                    gridCellWasClicked = true; // flat to check if there is a cell been edited.
+                    lastSelectediRow2 = lastSelectediRow;
+                    lastSelectediCol2 = lastSelectediCol;
+                }
+            };
 
             $('#ListaIngresoEgreso').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleados/',
@@ -246,31 +297,54 @@
                                 formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
                             }
                 ],
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            jQuery("#ListaIngresoEgreso").jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                    }
+                //onSelectRow: function (id) {
+                //    if (id && id !== lastSelectedId) {
+                //        if (typeof lastSelectedId !== "undefined") {
+                //            jQuery("#ListaIngresoEgreso").jqGrid('restoreRow', lastSelectedId);
+                //        }
+                //        lastSelectedId = id;
+                //    }
+                //},
+                //ondblClickRow: function (rowid, iRow, iCol) {
+                //    var $this = $(this);
+                //    $this.jqGrid('setGridParam', { cellEdit: true });
+                //    $this.jqGrid('editCell', iRow, iCol, true);
+                //    $this.jqGrid('setGridParam', { cellEdit: false });
+                //},
+                onCellSelect : function(rowid, iCol, cellcontent, e){
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
+                    //$this.jqGrid('setGridParam', { cellEdit: true });
+                    //$this.jqGrid('editCell', iRow, iCol, true);
+                    //$this.jqGrid('setGridParam', { cellEdit: false });
                 },
-                afterEditCell: function (id, name, val, iRow, iCol) {
-                    if (name == 'FechaIngreso') {
+                afterEditCell: function (rowid, cellName, cellValue, iRow, iCol) {
+                    if (cellName == 'FechaIngreso') {
                         jQuery("#" + iRow + "_FechaIngreso", "#ListaIngresoEgreso").datepicker({ dateFormat: "dd/mm/yy" });
                     }
-                    if (name == 'FechaEgreso') {
+                    if (cellName == 'FechaEgreso') {
                         jQuery("#" + iRow + "_FechaEgreso", "#ListaIngresoEgreso").datepicker({ dateFormat: "dd/mm/yy" });
                     }
-                },
-                //Ejemplo de como afectar otras columnas de la grilla
-                afterSaveCell: function (rowid, name, val, iRow, iCol) {
-                    //if(name == 'amount') {
-                    //    var taxval = jQuery("#celltbl").jqGrid('getCell',rowid,iCol+1);
-                    //    jQuery("#celltbl").jqGrid('setRowData',rowid,{total:parseFloat(val)+parseFloat(taxval)});
-                    //}
-                    //if(name == 'tax') {
-                    //    var amtval = jQuery("#celltbl").jqGrid('getCell',rowid,iCol-1);
-                    //    jQuery("#celltbl").jqGrid('setRowData',rowid,{total:parseFloat(val)+parseFloat(amtval)});
+                    //var cellDOM = this.rows[iRow].cells[iCol], oldKeydown,
+                    //    $cellInput = $('input, select, textarea', cellDOM),
+                    //    events = $cellInput.data('events'),
+                    //    $this = $(this);
+                    //if (events && events.keydown && events.keydown.length) {
+                    //    oldKeydown = events.keydown[0].handler;
+                    //    $cellInput.unbind('keydown', oldKeydown);
+                    //    $cellInput.bind('keydown', function (e) {
+                    //        $this.jqGrid('setGridParam', {cellEdit: true});
+                    //        oldKeydown.call(this, e);
+                    //        $this.jqGrid('setGridParam', {cellEdit: false});
+                    //    }).bind('focusout', function (e) {
+                    //        $this.jqGrid('setGridParam', {cellEdit: true});
+                    //        $this.jqGrid('restoreCell', iRow, iCol, true);
+                    //        $this.jqGrid('setGridParam', {cellEdit: false});
+                    //        $(cellDOM).removeClass("ui-state-highlight");
+                    //    });
                     //}
                 },
                 pager: $('#ListaPager1'),
@@ -330,13 +404,12 @@
                             },
                             { name: 'IdSectorNuevo', index: 'IdSectorNuevo', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' }
                 ],
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            jQuery("#ListaSectores").jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                    }
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
                 },
                 afterEditCell: function (id, name, val, iRow, iCol) {
                     if (name == 'FechaCambio') {
@@ -363,36 +436,6 @@
             jQuery("#ListaSectores").jqGrid('inlineNav', '#ListaPager2', { addParams: { position: "last" } });
             jQuery("#ListaSectores").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-            //var filledSelects = 0, $grid = jQuery("#ListaSectores");
-            //fillSelectWithData = function (data, colName, idProp, nameProp) {
-            //    var len = data.length, i, html = '', item;
-            //    for (i = 0; i < len; i++) {
-            //        item = data[i];
-            //        if (i !== 0) {
-            //            html += ',';
-            //        }
-            //        html += "'" + item[idProp] + "':'" + item[nameProp] + "'";
-            //    }
-            //    $grid.jqGrid('setColProp', colName, {
-            //        edittype: 'select',
-            //        editoptions: {value: html},
-            //        editable: true
-            //    });
-            //};
-            //loadGridIfRequired = function () {
-            //    filledSelects++;
-            //    if (filledSelects > 0) {
-            //        $grid.jqGrid('setGridParam', {
-            //            datatype: 'json'
-            //        }).trigger('reloadGrid');
-            //    }
-            //};
-
-            //$.getJSON(ROOT + "Sector/GetSectoresJson", function (data) {
-            //    fillSelectWithData(data, 'IdSectorNuevo', 'value', 'title');
-            //    loadGridIfRequired();
-            //});
-
             $('#ListaJornadas').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleadosJornadas/',
                 postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
@@ -403,7 +446,7 @@
                 colModel: [
                             { name: 'IdDetalleEmpleadoJornada', index: 'IdDetalleEmpleadoJornada', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
-                            { name: 'FechaCambio1', index: 'FechaCambio1', width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                            { name: 'FechaCambio1', index: 'FechaCambio', width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
                                 editoptions: {
                                     size: 10,
                                     maxlengh: 10,
@@ -432,19 +475,12 @@
                                 }
                             }
                 ],
-                gridComplete: function () {
-                },
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            jQuery("#ListaJornadas").jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                    }
-                },
-                beforeEditCell: function (rowid, cellname, value, iRow, iCol) {
-                    selICol = iCol;
-                    selIRow = iRow;
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
                 },
                 afterEditCell: function (id, name, val, iRow, iCol) {
                     if (name == 'FechaCambio1') {
@@ -481,8 +517,8 @@
                 shrinkToFit: true,
                 colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Banco', 'Cuenta bancaria', 'IdCuentaBancaria'],
                 colModel: [
-                            { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
-                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' },
+                            { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
+                            { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'Banco', index: 'Banco', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                             {
                                 name: 'CuentaBancaria', formoptions: { rowpos: 8, colpos: 2, label: "CuentaBancaria" }, index: 'CuentaBancaria', align: 'left', width: 100,
@@ -522,13 +558,12 @@
                             },
                             { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true, label: 'TB' }
                 ],
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            jQuery("#ListaCuentasBancarias").jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                    }
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
                 },
                 pager: $('#ListaPager4'),
                 rowNum: 15,
@@ -556,9 +591,9 @@
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['IdDetalleEmpleadoCuentaBancaria', 'IdEmpleado', 'Ubicacion asignada', 'IdUbicacion'],
+                colNames: ['IdDetalleEmpleadoUbicacion', 'IdEmpleado', 'Ubicacion asignada', 'IdUbicacion'],
                 colModel: [
-                            { name: 'IdDetalleEmpleadoCuentaBancaria', index: 'IdDetalleEmpleadoCuentaBancaria', align: 'left', width: 100, editable: false, hidden: true },
+                            { name: 'IdDetalleEmpleadoUbicacion', index: 'IdDetalleEmpleadoUbicacion', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'IdEmpleado', index: 'IdEmpleado', align: 'left', width: 100, editable: false, hidden: true },
                             { name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 100, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                                 editoptions: {
@@ -569,15 +604,14 @@
                                     } }]
                                 },
                             },
-                            { name: 'IdUbicacion', index: 'IdUbicacion', align: 'left', width: 10, editable: false, hidden: true }
+                            { name: 'IdUbicacion', index: 'IdUbicacion', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' }
                     ],
-                onSelectRow: function (id) {
-                    if (id && id !== lastSelectedId) {
-                        if (typeof lastSelectedId !== "undefined") {
-                            jQuery("#ListaUbicaciones").jqGrid('restoreRow', lastSelectedId);
-                        }
-                        lastSelectedId = id;
-                    }
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
                 },
                 pager: $('#ListaPager5'),
                 rowNum: 15,
@@ -690,20 +724,14 @@
             cabecera.Activo = $("#Activo").val();
             cabecera.TipoUsuario = $("#TipoUsuario").val();
 
-            cabecera.DetalleEmpleados = [];
+            cabecera.DetalleEmpleadosIngresosEgresos = [];
+            $grid = $('#ListaIngresoEgreso');
             nuevo = -1;
-            colModel = jQuery("#ListaIngresoEgreso").jqGrid('getGridParam', 'colModel');
-            dataIds = $('#ListaIngresoEgreso').jqGrid('getDataIDs');
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
             for (i = 0; i < dataIds.length; i++) {
                 try {
-                    try {
-                        $('#ListaIngresoEgreso').jqGrid('saveRow', dataIds[i], false, 'clientArray');
-                    } catch (e) {
-                        $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
-                        continue;
-                    }
-
-                    data = $('#ListaIngresoEgreso').jqGrid('getRowData', dataIds[i]);
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
                     iddeta = data['IdDetalleEmpleado'];
                     if (!iddeta) {
                         iddeta = nuevo;
@@ -716,35 +744,28 @@
                         cm = colModel[j]
                         if (cm.label === 'TB') {
                             valor = data[cm.name];
-                            data1 = data1 + '"' + cm.name + '":"' + valor + '",';
+                            data1 = data1 + '"' + cm.index + '":"' + valor + '",';
                         }
                     }
                     data1 = data1.substring(0, data1.length - 1) + '}';
                     data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                     data2 = JSON.parse(data1);
-                    cabecera.DetalleEmpleados.push(data2);
+                    cabecera.DetalleEmpleadosIngresosEgresos.push(data2);
                 }
                 catch (ex) {
-                    $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
                     alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
                     return;
                 }
-            }
+            };
 
             cabecera.DetalleEmpleadosSectores = [];
+            $grid = $('#ListaSectores');
             nuevo = -1;
-            colModel = jQuery("#ListaSectores").jqGrid('getGridParam', 'colModel');
-            dataIds = $('#ListaSectores').jqGrid('getDataIDs');
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
             for (i = 0; i < dataIds.length; i++) {
                 try {
-                    try {
-                        $('#ListaSectores').jqGrid('saveRow', dataIds[i], false, 'clientArray');
-                    } catch (e) {
-                        $('#ListaSectores').jqGrid('restoreRow', dataIds[i]);
-                        continue;
-                    }
-
-                    data = $('#ListaSectores').jqGrid('getRowData', dataIds[i]);
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
                     iddeta = data['IdDetalleEmpleadoSector'];
                     if (!iddeta) {
                         iddeta = nuevo;
@@ -757,7 +778,7 @@
                         cm = colModel[j]
                         if (cm.label === 'TB') {
                             valor = data[cm.name];
-                            data1 = data1 + '"' + cm.name + '":"' + valor + '",';
+                            data1 = data1 + '"' + cm.index + '":"' + valor + '",';
                         }
                     }
                     data1 = data1.substring(0, data1.length - 1) + '}';
@@ -766,11 +787,113 @@
                     cabecera.DetalleEmpleadosSectores.push(data2);
                 }
                 catch (ex) {
-                    $('#ListaIngresoEgreso').jqGrid('restoreRow', dataIds[i]);
                     alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
                     return;
                 }
-            }
+            };
+
+            cabecera.DetalleEmpleadosJornadas = [];
+            $grid = $('#ListaJornadas');
+            nuevo = -1;
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                try {
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdDetalleEmpleadoJornada'];
+                    if (!iddeta) {
+                        iddeta = nuevo;
+                        nuevo--;
+                    }
+
+                    data1 = '{"IdDetalleEmpleadoJornada":"' + iddeta + '",';
+                    data1 = data1 + '"IdEmpleado":"' + $("#IdEmpleado").val() + '",';
+                    for (j = 0; j < colModel.length; j++) {
+                        cm = colModel[j]
+                        if (cm.label === 'TB') {
+                            valor = data[cm.name];
+                            data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                        }
+                    }
+                    data1 = data1.substring(0, data1.length - 1) + '}';
+                    data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                    data2 = JSON.parse(data1);
+                    cabecera.DetalleEmpleadosJornadas.push(data2);
+                }
+                catch (ex) {
+                    alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                    return;
+                }
+            };
+
+            cabecera.DetalleEmpleadosCuentasBancarias = [];
+            $grid = $('#ListaCuentasBancarias');
+            nuevo = -1;
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                try {
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdDetalleEmpleadoCuentaBancaria'];
+                    if (!iddeta) {
+                        iddeta = nuevo;
+                        nuevo--;
+                    }
+
+                    data1 = '{"IdDetalleEmpleadoCuentaBancaria":"' + iddeta + '",';
+                    data1 = data1 + '"IdEmpleado":"' + $("#IdEmpleado").val() + '",';
+                    for (j = 0; j < colModel.length; j++) {
+                        cm = colModel[j]
+                        if (cm.label === 'TB') {
+                            valor = data[cm.name];
+                            data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                        }
+                    }
+                    data1 = data1.substring(0, data1.length - 1) + '}';
+                    data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                    data2 = JSON.parse(data1);
+                    cabecera.DetalleEmpleadosCuentasBancarias.push(data2);
+                }
+                catch (ex) {
+                    alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                    return;
+                }
+            };
+
+            cabecera.DetalleEmpleadosUbicaciones = [];
+            $grid = $('#ListaUbicaciones');
+            nuevo = -1;
+            colModel = $grid.jqGrid('getGridParam', 'colModel');
+            dataIds = $grid.jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                try {
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdDetalleEmpleadoUbicacion'];
+                    if (!iddeta) {
+                        iddeta = nuevo;
+                        nuevo--;
+                    }
+
+                    data1 = '{"IdDetalleEmpleadoUbicacion":"' + iddeta + '",';
+                    data1 = data1 + '"IdEmpleado":"' + $("#IdEmpleado").val() + '",';
+                    for (j = 0; j < colModel.length; j++) {
+                        cm = colModel[j]
+                        if (cm.label === 'TB') {
+                            valor = data[cm.name];
+                            data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                        }
+                    }
+                    data1 = data1.substring(0, data1.length - 1) + '}';
+                    data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                    data2 = JSON.parse(data1);
+                    cabecera.DetalleEmpleadosUbicaciones.push(data2);
+                }
+                catch (ex) {
+                    alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                    return;
+                }
+            };
+
             return cabecera;
         }
 

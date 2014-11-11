@@ -6377,7 +6377,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Banco" EntitySet="Bancos" />
             <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
           </AssociationSet>
-          <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
+          <EntitySet Name="DetalleEmpleadosIngresosEgresos" EntityType="DemoProntoModel.DetalleEmpleado" />
           <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
           <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
             <End Role="Cargo" EntitySet="Cargos" />
@@ -6393,7 +6393,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           </AssociationSet>
           <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="DemoProntoModel.FK_DetalleEmpleados_Empleados">
             <End Role="Empleado" EntitySet="Empleados" />
-            <End Role="DetalleEmpleado" EntitySet="DetalleEmpleados" />
+            <End Role="DetalleEmpleado" EntitySet="DetalleEmpleadosIngresosEgresos" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
             <End Role="Sector" EntitySet="Sectores" />
@@ -12721,7 +12721,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
           <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Empleado" ToRole="Cliente" />
           <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Empleado" ToRole="Cliente" />
-          <NavigationProperty Name="DetalleEmpleados" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
+          <NavigationProperty Name="DetalleEmpleadosIngresosEgresos" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
           <NavigationProperty Name="Sectore" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleado" ToRole="Sector" />
           <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
           <NavigationProperty Name="Pedidos1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Empleado" ToRole="Pedido" />
@@ -17191,7 +17191,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DetalleEmpleados">
+          <EntitySetMapping Name="DetalleEmpleadosIngresosEgresos">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleEmpleado">
               <MappingFragment StoreEntitySet="DetalleEmpleados">
                 <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
@@ -19517,7 +19517,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Transportista" Width="1.5" PointX="10" PointY="93.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Localidades_Provincias" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Transportistas_Localidades" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosObra" Width="1.5" PointX="11.375" PointY="2.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosObra" Width="2.25" PointX="10.625" PointY="2.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="1.5" PointX="7.375" PointY="16.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="9.375" PointY="16.875" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="9.625" PointY="42.375" />
