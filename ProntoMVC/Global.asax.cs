@@ -116,10 +116,10 @@ namespace ProntoMVC
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
-            
+
 
 
             //  Attach the Yellow Screen of Death for this error   
@@ -185,8 +185,60 @@ namespace ProntoMVC
 
 
 
+
+            /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            //aca podria enviarme el ultimo log 
+            // -Cómo se cual es el ultimo Log?
+            const string DirectorioErrores = "~/Error/";
+
+            string nombre = DirectorioErrores + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+            string nombreLargo = "";
+
             try
             {
+                if (System.Web.HttpContext.Current == null)
+                {
+                    nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+                }
+                else
+                {
+                    nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre);
+                }
+
+
+            }
+            catch (Exception)
+            {
+                nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
+            }
+
+            string log="";
+            try
+            {
+                log = System.IO.File.ReadAllText(nombreLargo);
+
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+
+
+            /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+
+
+
+
+            try
+            {
+
+
 
                 // 'apgurisatti@bdlconsultores.com.ar", _
                 ProntoFuncionesGenerales.MandaEmailSimple(direccion,
@@ -196,8 +248,14 @@ namespace ProntoMVC
                                 ConfigurationManager.AppSettings["SmtpServer"],
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpPass"],
-                                YSODmarkup ?? "",
+                                   (YSODmarkup + log) ?? "",
                                Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+
+
+
+
             }
             catch (Exception ex) { };
 
@@ -374,10 +432,10 @@ namespace ProntoMVC
                         valueResult.AttemptedValue.Equals("Infinity") ||
                         string.IsNullOrEmpty(valueResult.AttemptedValue))
                     { actualValue = 0m; }
-                    else 
+                    else
                     {
                         // actualValue = Convert.ToDecimal(valueResult.AttemptedValue,                        CultureInfo.CurrentCulture);
-                        string tempResult= valueResult.AttemptedValue.Replace(",", ".");
+                        string tempResult = valueResult.AttemptedValue.Replace(",", ".");
                         double n;
                         bool isNumeric = double.TryParse(tempResult, out n);
 
