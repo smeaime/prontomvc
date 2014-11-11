@@ -143,7 +143,7 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
