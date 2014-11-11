@@ -4320,6 +4320,78 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleEmpleados_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleados" Type="Self.DetalleEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosCuentasBancarias_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleadosCuentasBancarias" Type="Self.DetalleEmpleadosCuentasBancarias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosCuentasBancarias">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosJornadas_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleadosJornadas" Type="Self.DetalleEmpleadosJornadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosJornadas">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosObras_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleadosObras" Type="Self.DetalleEmpleadosObras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosObras">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosSectores_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleadosSectores" Type="Self.DetalleEmpleadosSectores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosSectores">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleEmpleadosUbicaciones_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="DetalleEmpleadosUbicaciones" Type="Self.DetalleEmpleadosUbicaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="DetalleEmpleadosUbicaciones">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleFacturas_Facturas">
     <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
     <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="*" />
@@ -4557,6 +4629,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="Empleados">
         <PropertyRef Name="IdSector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpleadosAccesos_Empleados">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="EmpleadosAccesos" Type="Self.EmpleadosAccesos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="EmpleadosAccesos">
+        <PropertyRef Name="IdEmpleado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4800,6 +4884,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Presupuestos_Empleados_Aprobo">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="Aprobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Presupuestos_Empleados_IdComprador">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Presupuestos">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PuntosVenta_TiposComprobante">
     <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
     <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="*" />
@@ -4821,6 +4929,66 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="Recibos">
         <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_Aprobo">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="Aprobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdAutorizoCumplido">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="IdAutorizoCumplido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdComprador">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdDioPorCumplido">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="IdDioPorCumplido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requerimientos_Empleados_IdSolicito">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Requerimientos" Type="Self.Requerimientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Requerimientos">
+        <PropertyRef Name="IdSolicito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5194,6 +5362,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="Self.FK_DetalleEmpleados_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleados" EntitySet="DetalleEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosCuentasBancarias_Empleados" Association="Self.FK_DetalleEmpleadosCuentasBancarias_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosCuentasBancarias" EntitySet="DetalleEmpleadosCuentasBancarias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosJornadas_Empleados" Association="Self.FK_DetalleEmpleadosJornadas_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosJornadas" EntitySet="DetalleEmpleadosJornadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosObras_Empleados" Association="Self.FK_DetalleEmpleadosObras_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosObras" EntitySet="DetalleEmpleadosObras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosSectores_Empleados" Association="Self.FK_DetalleEmpleadosSectores_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosSectores" EntitySet="DetalleEmpleadosSectores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="Self.FK_DetalleEmpleadosUbicaciones_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="DetalleEmpleadosUbicaciones" EntitySet="DetalleEmpleadosUbicaciones" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleFacturas_Facturas" Association="Self.FK_DetalleFacturas_Facturas">
       <End Role="Facturas" EntitySet="Facturas" />
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
@@ -5273,6 +5465,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Empleados_Sectores" Association="Self.FK_Empleados_Sectores">
       <End Role="Sectores" EntitySet="Sectores" />
       <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpleadosAccesos_Empleados" Association="Self.FK_EmpleadosAccesos_Empleados">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="EmpleadosAccesos" EntitySet="EmpleadosAccesos" />
     </AssociationSet>
     <AssociationSet Name="FK_Facturas_Clientes" Association="Self.FK_Facturas_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
@@ -5354,6 +5550,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Monedas" EntitySet="Monedas" />
       <End Role="Pedidos" EntitySet="Pedidos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Presupuestos_Empleados_Aprobo" Association="Self.FK_Presupuestos_Empleados_Aprobo">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presupuestos_Empleados_IdComprador" Association="Self.FK_Presupuestos_Empleados_IdComprador">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Presupuestos" EntitySet="Presupuestos" />
+    </AssociationSet>
     <AssociationSet Name="FK_PuntosVenta_TiposComprobante" Association="Self.FK_PuntosVenta_TiposComprobante">
       <End Role="TiposComprobante" EntitySet="TiposComprobante" />
       <End Role="PuntosVenta" EntitySet="PuntosVenta" />
@@ -5361,6 +5565,26 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Recibos_Clientes" Association="Self.FK_Recibos_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_Aprobo" Association="Self.FK_Requerimientos_Empleados_Aprobo">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdAutorizoCumplido" Association="Self.FK_Requerimientos_Empleados_IdAutorizoCumplido">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdComprador" Association="Self.FK_Requerimientos_Empleados_IdComprador">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdDioPorCumplido" Association="Self.FK_Requerimientos_Empleados_IdDioPorCumplido">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requerimientos_Empleados_IdSolicito" Association="Self.FK_Requerimientos_Empleados_IdSolicito">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Requerimientos" EntitySet="Requerimientos" />
     </AssociationSet>
     <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
       <End Role="Localidades" EntitySet="Localidades" />

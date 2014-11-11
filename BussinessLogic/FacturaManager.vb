@@ -774,12 +774,12 @@ Namespace Pronto.ERP.Bll
 
             '
 
-            Dim myFactura As Factura
+            Dim myFactura As Pronto.ERP.BO.Factura
             myFactura = FacturaDB.GetItem(SC, id)
             If Not (myFactura Is Nothing) AndAlso getFacturaDetalles Then
                 myFactura.Detalles = FacturaItemDB.GetList(SC, id)
 
-
+                Debug.Print(myFactura.IdCliente)
                 myFactura.Cliente = ClienteManager.GetItem(SC, myFactura.IdCliente)
                 myFactura.CondicionVentaDescripcion = NombreCondicionVenta_y_Compra(SC, myFactura.IdCondicionVenta)
                 myFactura.CondicionIVADescripcion = NombreCondicionIVA(SC, myFactura.IdCodigoIva)
