@@ -28,7 +28,8 @@ namespace ProntoMVC.Controllers
         {
 
         [HttpPost]
-        public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleEmpleado,IdDetalleEmpleadoCuentaBancaria,IdDetalleEmpleadoJornada,IdDetalleEmpleadoObra,IdDetalleEmpleadoSector,IdDetalleEmpleadoUbicacion")] Empleado Empleado)
+        //public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleEmpleado,IdDetalleEmpleadoCuentaBancaria,IdDetalleEmpleadoJornada,IdDetalleEmpleadoObra,IdDetalleEmpleadoSector,IdDetalleEmpleadoUbicacion")] Empleado Empleado)
+        public virtual JsonResult BatchUpdate(Empleado Empleado)
         {
             try
             {
@@ -58,13 +59,13 @@ namespace ProntoMVC.Controllers
                 {
                     if (Empleado.IdEmpleado > 0)
                     {
-                        var EmpleadoOriginal = db.Empleados.Where(p => p.IdEmpleado == Empleado.IdEmpleado).Include(p => p.DetalleEmpleados).SingleOrDefault();
+                        var EmpleadoOriginal = db.Empleados.Where(p => p.IdEmpleado == Empleado.IdEmpleado).Include(p => p.DetalleEmpleadosIngresosEgresos).SingleOrDefault();
                         var EmpleadoEntry = db.Entry(EmpleadoOriginal);
                         EmpleadoEntry.CurrentValues.SetValues(Empleado);
 
-                        foreach (var d in Empleado.DetalleEmpleados)
+                        foreach (var d in Empleado.DetalleEmpleadosIngresosEgresos)
                         {
-                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleados.Where(c => c.IdDetalleEmpleado == d.IdDetalleEmpleado && d.IdDetalleEmpleado > 0).SingleOrDefault();
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Where(c => c.IdDetalleEmpleado == d.IdDetalleEmpleado && d.IdDetalleEmpleado > 0).SingleOrDefault();
                             // Is original child item with same ID in DB?
                             if (DetalleEmpleadoOriginal != null)
                             {
@@ -75,39 +76,95 @@ namespace ProntoMVC.Controllers
                             else
                             {
                                 // No -> It's a new child item -> Insert
-                                EmpleadoOriginal.DetalleEmpleados.Add(d);
+                                EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Add(d);
                             }
                         }
                         // Now you must delete all entities present in parent.ChildItems but missing in modifiedParent.ChildItems
                         // ToList should make copy of the collection because we can't modify collection iterated by foreach
-                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleados.Where(c => c.IdDetalleEmpleado != 0).ToList())
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Where(c => c.IdDetalleEmpleado != 0).ToList())
                         {
                             // Are there child items in the DB which are NOT in the new child item collection anymore?
-                            if (!Empleado.DetalleEmpleados.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
+                            if (!Empleado.DetalleEmpleadosIngresosEgresos.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
                                 // Yes -> It's a deleted child item -> Delete
-                                EmpleadoOriginal.DetalleEmpleados.Remove(DetalleEmpleadoOriginal);
+                                EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Remove(DetalleEmpleadoOriginal);
                         }
 
-                        foreach (var d2 in Empleado.DetalleEmpleadosSectores)
+                        foreach (var d in Empleado.DetalleEmpleadosSectores)
                         {
-                            var DetalleEmpleadoOriginal2 = EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector == d2.IdDetalleEmpleadoSector && d2.IdDetalleEmpleadoSector > 0).SingleOrDefault();
-                            if (DetalleEmpleadoOriginal2 != null)
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector == d.IdDetalleEmpleadoSector && d.IdDetalleEmpleadoSector > 0).SingleOrDefault();
+                            if (DetalleEmpleadoOriginal != null)
                             {
-                                var DetalleEmpleadoEntry2 = db.Entry(DetalleEmpleadoOriginal2);
-                                DetalleEmpleadoEntry2.CurrentValues.SetValues(d2);
+                                var DetalleEmpleadoEntry = db.Entry(DetalleEmpleadoOriginal);
+                                DetalleEmpleadoEntry.CurrentValues.SetValues(d);
                             }
                             else
                             {
-                                EmpleadoOriginal.DetalleEmpleadosSectores.Add(d2);
+                                EmpleadoOriginal.DetalleEmpleadosSectores.Add(d);
                             }
                         }
-                        foreach (var DetalleEmpleadoOriginal2 in EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector != 0).ToList())
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector != 0).ToList())
                         {
-                            if (!Empleado.DetalleEmpleadosSectores.Any(c => c.IdDetalleEmpleadoSector == DetalleEmpleadoOriginal2.IdDetalleEmpleadoSector))
-                                EmpleadoOriginal.DetalleEmpleadosSectores.Remove(DetalleEmpleadoOriginal2);
+                            if (!Empleado.DetalleEmpleadosSectores.Any(c => c.IdDetalleEmpleadoSector == DetalleEmpleadoOriginal.IdDetalleEmpleadoSector))
+                                EmpleadoOriginal.DetalleEmpleadosSectores.Remove(DetalleEmpleadoOriginal);
                         }
-                        
-                        
+
+                        foreach (var d in Empleado.DetalleEmpleadosJornadas)
+                        {
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleadosJornadas.Where(c => c.IdDetalleEmpleadoJornada == d.IdDetalleEmpleadoJornada && d.IdDetalleEmpleadoJornada > 0).SingleOrDefault();
+                            if (DetalleEmpleadoOriginal != null)
+                            {
+                                var DetalleEmpleadoEntry = db.Entry(DetalleEmpleadoOriginal);
+                                DetalleEmpleadoEntry.CurrentValues.SetValues(d);
+                            }
+                            else
+                            {
+                                EmpleadoOriginal.DetalleEmpleadosJornadas.Add(d);
+                            }
+                        }
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosJornadas.Where(c => c.IdDetalleEmpleadoJornada != 0).ToList())
+                        {
+                            if (!Empleado.DetalleEmpleadosJornadas.Any(c => c.IdDetalleEmpleadoJornada == DetalleEmpleadoOriginal.IdDetalleEmpleadoJornada))
+                                EmpleadoOriginal.DetalleEmpleadosJornadas.Remove(DetalleEmpleadoOriginal);
+                        }
+
+                        foreach (var d in Empleado.DetalleEmpleadosCuentasBancarias)
+                        {
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Where(c => c.IdDetalleEmpleadoCuentaBancaria == d.IdDetalleEmpleadoCuentaBancaria && d.IdDetalleEmpleadoCuentaBancaria > 0).SingleOrDefault();
+                            if (DetalleEmpleadoOriginal != null)
+                            {
+                                var DetalleEmpleadoEntry = db.Entry(DetalleEmpleadoOriginal);
+                                DetalleEmpleadoEntry.CurrentValues.SetValues(d);
+                            }
+                            else
+                            {
+                                EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Add(d);
+                            }
+                        }
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Where(c => c.IdDetalleEmpleadoCuentaBancaria != 0).ToList())
+                        {
+                            if (!Empleado.DetalleEmpleadosCuentasBancarias.Any(c => c.IdDetalleEmpleadoCuentaBancaria == DetalleEmpleadoOriginal.IdDetalleEmpleadoCuentaBancaria))
+                                EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Remove(DetalleEmpleadoOriginal);
+                        }
+
+                        foreach (var d in Empleado.DetalleEmpleadosUbicaciones)
+                        {
+                            var DetalleEmpleadoOriginal = EmpleadoOriginal.DetalleEmpleadosUbicaciones.Where(c => c.IdDetalleEmpleadoUbicacion == d.IdDetalleEmpleadoUbicacion && d.IdDetalleEmpleadoUbicacion > 0).SingleOrDefault();
+                            if (DetalleEmpleadoOriginal != null)
+                            {
+                                var DetalleEmpleadoEntry = db.Entry(DetalleEmpleadoOriginal);
+                                DetalleEmpleadoEntry.CurrentValues.SetValues(d);
+                            }
+                            else
+                            {
+                                EmpleadoOriginal.DetalleEmpleadosUbicaciones.Add(d);
+                            }
+                        }
+                        foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosUbicaciones.Where(c => c.IdDetalleEmpleadoUbicacion != 0).ToList())
+                        {
+                            if (!Empleado.DetalleEmpleadosUbicaciones.Any(c => c.IdDetalleEmpleadoUbicacion == DetalleEmpleadoOriginal.IdDetalleEmpleadoUbicacion))
+                                EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
+                        }
+
                         db.Entry(EmpleadoOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
@@ -334,7 +391,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult DetEmpleados(string sidx, string sord, int? page, int? rows, int? IdEmpleado)
         {
             int IdEmpleado1 = IdEmpleado ?? 0;
-            var Det = db.DetalleEmpleados.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
+            var Det = db.DetalleEmpleadosIngresosEgresos.Where(p => p.IdEmpleado == IdEmpleado1 || IdEmpleado1 == -1).AsQueryable();
 
             int pageSize = rows ?? 20;
             int totalRecords = Det.Count();
@@ -378,8 +435,8 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdDetalleEmpleado.ToString(), 
                                 a.IdEmpleado.ToString(), 
-                                a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.FechaEgreso.GetValueOrDefault().ToString("dd/MM/yyyy")
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaEgreso == null ? "" : a.FechaEgreso.GetValueOrDefault().ToString("dd/MM/yyyy")
                          }
                         }).ToArray()
             };
@@ -435,7 +492,7 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdDetalleEmpleadoSector.ToString(), 
                                 a.IdEmpleado.ToString(), 
-                                a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaCambio == null ? "" : a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Sector,
                                 a.IdSectorNuevo.ToString()
                          }
@@ -475,9 +532,9 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleEmpleadoJornada,
                             a.IdEmpleado,
-                            FechaCambio1 = a.FechaCambio,
+                            FechaCambio = a.FechaCambio,
                             a.HorasJornada
-                        }).OrderBy(x => x.FechaCambio1).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -491,7 +548,7 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdDetalleEmpleadoJornada.ToString(), 
                                 a.IdEmpleado.ToString(), 
-                                a.FechaCambio1.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaCambio == null ? "" : a.FechaCambio.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.HorasJornada.ToString()
                          }
                         }).ToArray()

@@ -1181,28 +1181,34 @@ namespace ProntoMVC.Controllers
             string glbPathArchivoAPP;
 
 
-            if (true)
-            {
-                // agregamos un sufijo para tener por ahora 2 app hasta que migremos todo;
-                glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + "_web.app";
-            }
-            else
-            {
+            //if (true)
+            //{
+            //    // agregamos un sufijo para tener por ahora 2 app hasta que migremos todo;
+            //    glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + "_web.app";
+            //}
+            //else
+            //{
 
                 glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
 
-            }
+            //}
 
 
 
 
+<<<<<<< HEAD
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
+=======
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Que sea local
                 //glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
                 glbPathArchivoAPP = AppDomain.CurrentDomain.BaseDirectory + @"Documentos\Pronto.app";
+>>>>>>> 1160658efa92e5b0d1ee51a3a7a0a79348fd3b0b
 
-            }
+            //}
 
 
 
