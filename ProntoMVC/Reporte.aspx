@@ -456,7 +456,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         <div class="span10" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
             <br />
             <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500;
+                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     margin-left: 0px; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                     <asp:Label ID="lblTitulo" runat="server" />
                 </div>
