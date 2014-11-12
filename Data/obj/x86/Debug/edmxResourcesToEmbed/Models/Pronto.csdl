@@ -777,7 +777,7 @@
       <End Role="Banco" EntitySet="Bancos" />
       <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
     </AssociationSet>
-    <EntitySet Name="DetalleEmpleados" EntityType="DemoProntoModel.DetalleEmpleado" />
+    <EntitySet Name="DetalleEmpleadosIngresosEgresos" EntityType="DemoProntoModel.DetalleEmpleado" />
     <EntitySet Name="Empleados" EntityType="DemoProntoModel.Empleado" />
     <AssociationSet Name="FK_Empleados_Cargos" Association="DemoProntoModel.FK_Empleados_Cargos">
       <End Role="Cargo" EntitySet="Cargos" />
@@ -793,7 +793,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="DemoProntoModel.FK_DetalleEmpleados_Empleados">
       <End Role="Empleado" EntitySet="Empleados" />
-      <End Role="DetalleEmpleado" EntitySet="DetalleEmpleados" />
+      <End Role="DetalleEmpleado" EntitySet="DetalleEmpleadosIngresosEgresos" />
     </AssociationSet>
     <AssociationSet Name="FK_Empleados_Sectores" Association="DemoProntoModel.FK_Empleados_Sectores">
       <End Role="Sector" EntitySet="Sectores" />
@@ -7110,7 +7110,7 @@
     <NavigationProperty Name="Cargo" Relationship="DemoProntoModel.FK_Empleados_Cargos" FromRole="Empleado" ToRole="Cargo" />
     <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Empleado" ToRole="Cliente" />
     <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Empleado" ToRole="Cliente" />
-    <NavigationProperty Name="DetalleEmpleados" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
+    <NavigationProperty Name="DetalleEmpleadosIngresosEgresos" Relationship="DemoProntoModel.FK_DetalleEmpleados_Empleados" FromRole="Empleado" ToRole="DetalleEmpleado" />
     <NavigationProperty Name="Sectore" Relationship="DemoProntoModel.FK_Empleados_Sectores" FromRole="Empleado" ToRole="Sector" />
     <NavigationProperty Name="Pedidos" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" FromRole="Empleado" ToRole="Pedido" />
     <NavigationProperty Name="Pedidos1" Relationship="DemoProntoModel.FK_Pedidos_EmpleadoComprador" FromRole="Empleado" ToRole="Pedido" />
