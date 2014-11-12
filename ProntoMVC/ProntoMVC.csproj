@@ -375,7 +375,9 @@
     <Content Include="Content\jquery-ui-layout\jquery.ui.all.css" />
     <Content Include="Content\jquery-ui-layout\jquery.ui.base.css" />
     <Content Include="Content\jquery-ui-layout\jquery.ui.theme.css" />
-    <Content Include="Content\jquery-ui-layout\layout-default-latest.css" />
+    <Content Include="Content\jquery-ui-layout\layout-default-latest.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MvcMembership.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
