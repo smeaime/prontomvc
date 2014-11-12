@@ -272,6 +272,8 @@ namespace ProntoMVC
             routeData.Values["action"] = "Index"; // "General";
             routeData.Values["exception"] = exception;
             Response.StatusCode = 500;
+            Response.TrySkipIisCustomErrors = true;
+            Response.ContentType = "text/html";
             if (httpException != null)
             {
                 Response.StatusCode = httpException.GetHttpCode();
