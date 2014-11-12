@@ -85,14 +85,14 @@ If you want additionally remove vertical border between the cells in the grid yo
         <div class="span12">
             <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                 @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 500;
+                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                     @*    <div class="span4  ">
                         Pedido
                     </div>*@ @*@Html.Display("Pedido" , new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "span6", @readonly = "readonly" })*@
                     @*@Html.TextBox("dummy","Pedido", new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding:0 ; background: transparent;", @class = "span4", @readonly = "readonly" })*@
                     <span class="span1" style="padding-top: 15px; width: 110px">Asiento</span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
-                    @Html.TextBoxFor(model => model.NumeroPedido, new { style = "height: 50px ;  font-weight: 500; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.NumeroPedido, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
                
                 </div>
                 <script>

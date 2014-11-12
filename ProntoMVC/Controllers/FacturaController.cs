@@ -466,6 +466,13 @@ namespace ProntoMVC.Controllers
         {
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
+            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            if (db.Facturas.Find(id).IdCliente != idcliente
+                 && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+                ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
+
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
 
@@ -740,7 +747,8 @@ namespace ProntoMVC.Controllers
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
             if (db.Facturas.Find(id).IdCliente != idcliente
                  && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
                 ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
 
