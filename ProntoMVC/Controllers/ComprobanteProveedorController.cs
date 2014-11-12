@@ -1289,7 +1289,7 @@ namespace ProntoMVC.Controllers
                         TempData["Alerta"] = "<a href='" + Url.Action("EditFF", new { id = o.IdComprobanteProveedor }) + "' target='' >" +
                                          " Grabado " + DateTime.Now.ToShortTimeString() +
                                          " Comprobante " +
-                                         o.Letra + '-' + o.NumeroComprobante1.NullSafeToString().PadLeft(4, '0') 
+                                         o.Letra + '-' + o.NumeroComprobante1.NullSafeToString().PadLeft(4, '0')
                                          + '-' + o.NumeroComprobante2.NullSafeToString().PadLeft(8, '0') +
                                          "</a>";
                     }
@@ -5023,9 +5023,16 @@ namespace ProntoMVC.Controllers
                                 //"<a href="+ Url.Action("Edit","Subdiario",new {id =    
                                 //                fondoFijoService.Subdiarios.Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdSubdiario).FirstOrDefault()  
                                 //                    } )   +  " target='' >Subdiario</>"  +  " | " +
+                                
+                                #if false 
+
                                 "<a href="+  Url.Content("~/Reporte.aspx?ReportName=Subdiario&idProveedor=" +
                                                 fondoFijoService.Subdiarios_Listado().Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdCuentaSubdiario).FirstOrDefault().NullSafeToString()  )
                                                 +  " target='' >Subdiario</>"  +  " | " +
+                                 #else
+                                    "" + 
+                                #endif
+
                                 "<a href="+ Url.Content("~/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores&idProveedor=" + ((a.IdProveedorEventual ?? 0)>0 ? a.IdProveedorEventual :  a.IdProveedor))  +  " target='' >CtaCte</>"    +  " | " + 
                                 "<a href="+ Url.Action("IncrementarRendicionFF", new {idcuentaFF = a.IdCuenta } ) +  " target='' >Cerrar rendición</>"  ,
                                 ///////
@@ -5043,9 +5050,14 @@ namespace ProntoMVC.Controllers
                                 a.IdComprobanteProveedor.ToString(), 
                   
 
+                                #if false 
+
                                 (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
                                 
-                              
+                              #else
+                                "",
+                                #endif
+
                                 a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  
                                 a.Letra  +'-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroComprobante2.NullSafeToString().PadLeft(8,'0') , //  Substring(cp.Letra+'-'+Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+   Convert(varchar,cp.NumeroComprobante1)+'-'+Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2),1,20) as [Numero],  
                                  
@@ -5068,12 +5080,25 @@ namespace ProntoMVC.Controllers
 
                             
                                 "", // as [Vale],  
-                               (a.DescripcionIva==null) ? "" :   a.DescripcionIva.Descripcion.NullSafeToString(), //  as [Condicion IVA],   
-
-                                (a.Obra ==null ) ?  (( fondoFijoService.ObrasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
 
                                 
+#if false 
+ // ineficientes 
+                                      (a.DescripcionIva==null) ? "" :   a.DescripcionIva.Descripcion.NullSafeToString(), //  as [Condicion IVA],   
+
+                                (a.Obra ==null ) ?  (( fondoFijoService.ObrasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+                              
                                 (a.Cuenta ==null || true ) ? (( fondoFijoService.CuentasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdCuenta) ??  new Cuenta()).Descripcion  )  :   a.Cuenta.Descripcion, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+
+#else
+                                "" , "" ,"",
+#endif
+
+                                
+                                
+                               
+
+                          
 
                               
                                  a.TotalBruto.NullSafeToString(),// as [Subtotal],  
@@ -5087,10 +5112,19 @@ namespace ProntoMVC.Controllers
                                  a.CotizacionDolar .NullSafeToString(), //  as [Cotiz. dolar],  
                                  "" , //  as [Provincia destino],  
                                  a.Observaciones, // ,  
-                           a.IdUsuarioIngreso>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
+
+                          
+#if false 
+                                 a.IdUsuarioIngreso>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
                                  a.FechaIngreso==null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy") , // as [Fecha ingreso],  
                            a.IdUsuarioModifico>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioModifico).Nombre : "", //   as [Modifico],  
                           a.FechaModifico==null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy")    ,  
+
+#else
+                                "" , "" ,"","" , 
+#endif
+
+
                                  a.DestinoPago=="A" ? "ADM" : "OBRA", // as [Dest.Pago],  
                                  a.NumeroRendicionFF.NullSafeToString() , // as [Nro.Rend.FF],  
                                 "", // as [Etapa],  
