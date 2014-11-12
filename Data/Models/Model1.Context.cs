@@ -155,7 +155,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleEmpleadosUbicacione> DetalleEmpleadosUbicaciones { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<CuentasBancaria> CuentasBancarias { get; set; }
-        public virtual DbSet<DetalleEmpleado> DetalleEmpleados { get; set; }
+        public virtual DbSet<DetalleEmpleado> DetalleEmpleadosIngresosEgresos { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
