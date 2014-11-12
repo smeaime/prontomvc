@@ -139,6 +139,13 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
+    </Reference>
+=======
+>>>>>>> 1160658efa92e5b0d1ee51a3a7a0a79348fd3b0b
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
