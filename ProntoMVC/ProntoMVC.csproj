@@ -72,6 +72,10 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessObject, Version=1.0.2.33688, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\BusinessObject.dll</HintPath>
+    </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ClaseMigrar.dll</HintPath>
@@ -139,13 +143,10 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
     <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
-=======
->>>>>>> 1160658efa92e5b0d1ee51a3a7a0a79348fd3b0b
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -1332,10 +1333,6 @@
     <Content Include="Views\ListaPrecio\MyViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BussinessObject\BusinessObject.vbproj">
-      <Project>{918ddc53-b568-4181-86c3-a3a44dfa6149}</Project>
-      <Name>BusinessObject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BussinessLogic\BusinessLogic.vbproj">
       <Project>{AB8BB713-FFA1-4440-B49B-1857E61367C9}</Project>
       <Name>BusinessLogic</Name>
