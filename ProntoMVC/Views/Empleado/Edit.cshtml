@@ -202,13 +202,22 @@
             var selIRow;
             var gridCellWasClicked = false;
             var grillaenfoco = false;
+            var getColumnIndexByName = function (grid, columnName) {
+                var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+                for (i = 0; i < l; i++) {
+                    if (cm[i].name === columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            }
 
             $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
             $.extend($.jgrid.inlineEdit, {
                 keys: true
             });
-            
+
             window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
             document.body.onclick = saveEditedCell; // attach to current document.
             function saveEditedCell(evt) {
@@ -253,13 +262,37 @@
                 }
             };
 
+            function EliminarSeleccionados(grid) {
+                var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+                var i;
+                for (i = selectedIds.length-1; i >= 0; i--) {
+                    grid.jqGrid('delRowData', selectedIds[i]);
+                }
+            };
+            
+            function AgregarItemVacio(grid) {
+                var colModel = grid.jqGrid('getGridParam', 'colModel');
+                var dataIds = grid.jqGrid('getDataIDs');
+                var Id = (dataIds.length + 1) * -1;
+                var data, j, cm;
+
+                data = '{';
+                for (j = 1; j < colModel.length; j++) {
+                    cm = colModel[j];
+                    data = data + '"' + cm.index + '":' + '"",';
+                    }
+                data = data.substring(0, data.length - 1) + '}';
+                data = data.replace(/(\r\n|\n|\r)/gm, "");
+                grid.jqGrid('addRowData', Id, data);
+            };
+
             $('#ListaIngresoEgreso').jqGrid({
                 url: ROOT + 'Empleado/DetEmpleados/',
                 postData: { 'IdEmpleado': function () { return $("#IdEmpleado").val(); } },
                 datatype: 'json',
                 mtype: 'POST',
                 shrinkToFit: true,
-                colNames: ['IdDetalleEmpleado', 'IdEmpleado', 'Fecha ingreso', 'Fecha egreso'],
+                colNames: [ 'IdDetalleEmpleado', 'IdEmpleado', 'Fecha ingreso', 'Fecha egreso'],
                 colModel: [
                             //{ name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false },
                             { name: 'IdDetalleEmpleado', index: 'IdDetalleEmpleado', align: 'left', width: 100, editable: false, hidden: true },
@@ -353,6 +386,7 @@
                 sortname: 'FechaIngreso',
                 sortorder: 'asc',
                 viewrecords: true,
+                multiselect: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
@@ -363,8 +397,22 @@
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-            jQuery("#ListaIngresoEgreso").jqGrid('inlineNav', '#ListaPager1', { addParams: { position: "last" } });
+            jQuery("#ListaIngresoEgreso").jqGrid('navGrid', '#ListaPager1', { search: false, refresh: false, add: false, edit: false, del: false });
+            jQuery("#ListaIngresoEgreso").jqGrid('navButtonAdd', '#ListaPager1',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                             onClickButton: function () {
+                                                 AgregarItemVacio(jQuery("#ListaIngresoEgreso"));
+                                             },
+                                         });
+            jQuery("#ListaIngresoEgreso").jqGrid('navButtonAdd', '#ListaPager1',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#ListaIngresoEgreso"));
+                                             },
+                                         });
+            //jQuery("#ListaIngresoEgreso").jqGrid('inlineNav', '#ListaPager1', { addParams: { position: "last" } });
             jQuery("#ListaIngresoEgreso").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaSectores').jqGrid({
@@ -422,6 +470,7 @@
                 sortname: 'FechaCambio',
                 sortorder: 'asc',
                 viewrecords: true,
+                multiselect: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
@@ -432,8 +481,21 @@
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-            jQuery("#ListaSectores").jqGrid('inlineNav', '#ListaPager2', { addParams: { position: "last" } });
+            jQuery("#ListaSectores").jqGrid('navGrid', '#ListaPager2', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+            jQuery("#ListaSectores").jqGrid('navButtonAdd', '#ListaPager2',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                             onClickButton: function () {
+                                                 AgregarItemVacio(jQuery("#ListaSectores"));
+                                             },
+                                         });
+            jQuery("#ListaSectores").jqGrid('navButtonAdd', '#ListaPager2',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#ListaSectores"));
+                                             },
+                                         });
             jQuery("#ListaSectores").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaJornadas').jqGrid({
@@ -495,6 +557,7 @@
                 sortname: 'FechaCambio1',
                 sortorder: 'asc',
                 viewrecords: true,
+                multiselect: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
@@ -505,8 +568,21 @@
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-            jQuery("#ListaJornadas").jqGrid('inlineNav', '#ListaPager3', { addParams: { position: "last" } });
+            jQuery("#ListaJornadas").jqGrid('navGrid', '#ListaPager3', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+            jQuery("#ListaJornadas").jqGrid('navButtonAdd', '#ListaPager3',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                             onClickButton: function () {
+                                                 AgregarItemVacio(jQuery("#ListaJornadas"));
+                                             },
+                                         });
+            jQuery("#ListaJornadas").jqGrid('navButtonAdd', '#ListaPager3',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#ListaJornadas"));
+                                             },
+                                         });
             jQuery("#ListaJornadas").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaCuentasBancarias').jqGrid({
@@ -571,6 +647,7 @@
                 sortname: 'CuentaBancaria',
                 sortorder: 'asc',
                 viewrecords: true,
+                multiselect: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
@@ -581,8 +658,21 @@
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-            jQuery("#ListaCuentasBancarias").jqGrid('inlineNav', '#ListaPager4', { addParams: { position: "last" } });
+            jQuery("#ListaCuentasBancarias").jqGrid('navGrid', '#ListaPager4', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+            jQuery("#ListaCuentasBancarias").jqGrid('navButtonAdd', '#ListaPager4',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                             onClickButton: function () {
+                                                 AgregarItemVacio(jQuery("#ListaCuentasBancarias"));
+                                             },
+                                         });
+            jQuery("#ListaCuentasBancarias").jqGrid('navButtonAdd', '#ListaPager4',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#ListaCuentasBancarias"));
+                                             },
+                                         });
             jQuery("#ListaCuentasBancarias").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
             $('#ListaUbicaciones').jqGrid({
@@ -619,6 +709,7 @@
                 sortname: 'Ubicacion',
                 sortorder: 'asc',
                 viewrecords: true,
+                multiselect: true,
                 width: '300',
                 //height: '100%',
                 altRows: false,
@@ -629,9 +720,22 @@
                 cellsubmit: 'clientArray',
                 editurl: ROOT + 'Empleado/EditGridData/'
             });
-            jQuery("#ListaUbicaciones").jqGrid('navGrid', '#ListaPager5', { search: false, refresh: false, add: false, edit: false, del: true }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+            jQuery("#ListaUbicaciones").jqGrid('navGrid', '#ListaPager5', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+            jQuery("#ListaUbicaciones").jqGrid('navButtonAdd', '#ListaPager5',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                             onClickButton: function () {
+                                                 AgregarItemVacio(jQuery("#ListaUbicaciones"));
+                                             },
+                                         });
+            jQuery("#ListaUbicaciones").jqGrid('navButtonAdd', '#ListaPager5',
+                                         {
+                                             caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                             onClickButton: function () {
+                                                 EliminarSeleccionados(jQuery("#ListaUbicaciones"));
+                                             },
+                                         });
             jQuery("#ListaUbicaciones").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-            jQuery("#ListaUbicaciones").jqGrid('inlineNav', '#ListaPager5', { addParams: { position: "last" } });
         });
 
         $('#grabar2').click(function () {
