@@ -488,6 +488,14 @@
                                                         </script>
                                                     </div>
                                                 </div>
+
+
+
+
+
+
+
+
                                                 <div class="row-fluid">
                                                     <div class="span2 lightblue">
                                                         @Html.LabelFor(model => model.IdCondicionCompra, "Cond. compra")
@@ -500,22 +508,21 @@
                                                         @Html.Label("Autoriz.")
                                                     </div>
                                                     <div class="span1 lightblue">
-                                                        <form>
-                                                            @{
-
-                                                                <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
+                                                        
+                                                            
+                                                            <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
                                                                        title="" />
 
-                                                            int ca = @ViewBag.CantidadAutorizaciones;
+                                                            @*int ca = @ViewBag.CantidadAutorizaciones;
 
                                                             int j = 1;
                                                             for (var i = 1; i <= ca; i++)
                                                             {
-                                                        <input type="checkbox" id="chk(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
-                                                            }
+                                                                <input type="checkbox" id="chk(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
+                                                            }*@
 
-                                                            }
-                                                        </form>
+                                                            
+                                                        
                                                     </div>
                                                 </div>
                                             
