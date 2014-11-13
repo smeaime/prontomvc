@@ -438,6 +438,8 @@ namespace ProntoMVC.Controllers
             string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && x.IdUsuario == IdUsuario).Select(x => x.Valor).FirstOrDefault();
 
             return idclava;
+
+         
         }
 
 
@@ -1196,19 +1198,17 @@ namespace ProntoMVC.Controllers
 
 
 
-<<<<<<< HEAD
             //if (System.Diagnostics.Debugger.IsAttached)
             //{
             //    glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
-=======
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Que sea local
                 //glbPathArchivoAPP = @"C:\Backup\BDL\Actualizacion Final Pronto\Instalacion de CERO\SistemaPronto\DocumentosPronto\APP\Pronto.app";
                 glbPathArchivoAPP = AppDomain.CurrentDomain.BaseDirectory + @"Documentos\Pronto.app";
->>>>>>> 1160658efa92e5b0d1ee51a3a7a0a79348fd3b0b
 
-            //}
+            }
 
 
 
