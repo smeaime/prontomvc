@@ -272,6 +272,8 @@ namespace ProntoMVC
             routeData.Values["action"] = "Index"; // "General";
             routeData.Values["exception"] = exception;
             Response.StatusCode = 500;
+            Response.TrySkipIisCustomErrors = true;
+            Response.ContentType = "text/html";
             if (httpException != null)
             {
                 Response.StatusCode = httpException.GetHttpCode();
@@ -401,9 +403,23 @@ namespace ProntoMVC
         }
 
 
+        /*
+        public async Task SendEmail(string toEmailAddress, string emailSubject, string emailMessage)
+        {
 
+            // necesito .NET 4.5 para esto
+            var message = new MailMessage();
+            message.To.Add(toEmailAddress);
 
+            message.Subject = emailSubject;
+            message.Body = emailMessage;
 
+            using (var smtpClient = new SmtpClient())
+            {
+                await smtpClient.SendMailAsync(message);
+            }
+        } 
+        */
 
 
 
