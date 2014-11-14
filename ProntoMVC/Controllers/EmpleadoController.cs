@@ -86,7 +86,16 @@ namespace ProntoMVC.Controllers
                             // Are there child items in the DB which are NOT in the new child item collection anymore?
                             if (!Empleado.DetalleEmpleadosIngresosEgresos.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
                                 // Yes -> It's a deleted child item -> Delete
+                         
+                                // qué mierda pasa que no lo borra?
+                                //Apparently there is a semantic difference between Remove and Delete where Remove will just orphan the row by 
+                                //    removing the foreign key, and Delete will actually take the record out of the table.
+                                http://stackoverflow.com/questions/2554696/ef-4-removing-child-object-from-collection-does-not-delete-it-why
+                                http://stackoverflow.com/questions/13070365/calling-remove-is-executing-an-update-statement-instead-of-a-delete-and-resul
+
                                 EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Remove(DetalleEmpleadoOriginal);
+                            EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.de
+
                         }
 
                         foreach (var d in Empleado.DetalleEmpleadosSectores)
@@ -163,6 +172,7 @@ namespace ProntoMVC.Controllers
                         {
                             if (!Empleado.DetalleEmpleadosUbicaciones.Any(c => c.IdDetalleEmpleadoUbicacion == DetalleEmpleadoOriginal.IdDetalleEmpleadoUbicacion))
                                 EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
+                            EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
                         }
 
                         db.Entry(EmpleadoOriginal).State = System.Data.Entity.EntityState.Modified;
