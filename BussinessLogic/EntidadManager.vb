@@ -2593,8 +2593,22 @@ Salida:
 
 
             Try
-                oW = CreateObject("Word.Application")
-                oW.Visible = False
+                Try
+                    oW = CreateObject("Word.Application")
+                    oW.Visible = False
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.Message & "Explota al crear el word.Application. Verificar permisos) " & _
+                        " 8)	Habilitar permisos para Interop Office (en IIS7 en lugar de usar la cuenta 'Network Service'  usa() 'IIS APPPOOL\DefaultAppPool') " & _
+                        "a.	1. In DCOMCNFG, right click on the My Computer and select properties.  " & _
+                        "b.	2. Choose the COM Securities tab " & _
+                        "c.	3. In Access Permissions, click 'Edit Defaults' and add 'Network Service' (o 'Servicio de red',  o la 'IIS APPPOOL\DefaultAppPool' si usa II7 ) to it and give it 'Allow local access' permission. Do the same for <Machine_name>\Users. " & _
+                        "d.	4. In launch and Activation Permissions, click 'Edit Defaults' and add Network Service to it and give it 'Local launch' and 'Local Activation' permission. Do the same for <Machine_name>\Users " & _
+                        "e.	Press OK and thats it. i can run my application now. ")
+
+                    Throw
+
+                End Try
+
 
 
                 'estaría bueno que si acá tarda mucho, salga
@@ -2619,7 +2633,17 @@ Salida:
                     'http://forums.asp.net/t/1232621.aspx
                     ErrHandler.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
                                           "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
-                                          "usuario y el pass) " & IsNothing(oW) & "  Plantilla: " & plant & "")
+                                          "usuario y el pass)  " & _
+" no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " & _
+"            NetworkService por la de Administrador para sacarte los problemas del Interop de Office  " & _
+"1 metete en el administrador del iis " & _
+"2 en los grupos de aplicaciones " & _
+"3 elegi el grupo que este usando el sitio " & _
+"4 y en configuracion avanzada " & _
+"5:                  elegi 'Identidad' " & _
+"6:                  cuenta personalizada " & _
+"7 y asignale algun usuario con permisos de administrador " & _
+ IsNothing(oW) & "  Plantilla: " & plant)
 
                     'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
                     'impersonate=true vacío, le tuve que poner el usuario!!!!!!!!!!!
