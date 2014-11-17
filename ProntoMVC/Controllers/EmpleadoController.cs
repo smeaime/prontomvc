@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using ProntoMVC.Data.Models; 
+using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
@@ -25,7 +25,7 @@ using Trirand.Web.Mvc;
 namespace ProntoMVC.Controllers
 {
     public partial class EmpleadoController : ProntoBaseController
-        {
+    {
 
         [HttpPost]
         //public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleEmpleado,IdDetalleEmpleadoCuentaBancaria,IdDetalleEmpleadoJornada,IdDetalleEmpleadoObra,IdDetalleEmpleadoSector,IdDetalleEmpleadoUbicacion")] Empleado Empleado)
@@ -49,7 +49,7 @@ namespace ProntoMVC.Controllers
                     JsonResponse res = new JsonResponse();
                     res.Status = Status.Error;
                     string[] words = erar.Split('\n');
-                    res.Errors = words.ToList(); 
+                    res.Errors = words.ToList();
                     res.Message = "Hay datos invalidos";
 
                     return Json(res);
@@ -86,15 +86,32 @@ namespace ProntoMVC.Controllers
                             // Are there child items in the DB which are NOT in the new child item collection anymore?
                             if (!Empleado.DetalleEmpleadosIngresosEgresos.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
                                 // Yes -> It's a deleted child item -> Delete
-                         
+
                                 // qué mierda pasa que no lo borra?
                                 //Apparently there is a semantic difference between Remove and Delete where Remove will just orphan the row by 
                                 //    removing the foreign key, and Delete will actually take the record out of the table.
-                                http://stackoverflow.com/questions/2554696/ef-4-removing-child-object-from-collection-does-not-delete-it-why
-                                http://stackoverflow.com/questions/13070365/calling-remove-is-executing-an-update-statement-instead-of-a-delete-and-resul
+                                // http://stackoverflow.com/questions/2554696/ef-4-removing-child-object-from-collection-does-not-delete-it-why
+                                // http://stackoverflow.com/questions/13070365/calling-remove-is-executing-an-update-statement-instead-of-a-delete-and-resul
+                                // http://stackoverflow.com/questions/17723626/entity-framework-remove-vs-deleteobject
+                                // If the relationship is required (the FK doesn't allow NULL values) and the relationship is not
+                                // identifying (which means that the foreign key is not part of the child's (composite) primary key) you have to
+                                // either add the child to another parent or you have to explicitly delete the child (with DeleteObject then).
+                                // If you don't do any of these a referential constraint is violated and EF will throw an exception when
+                                // you call SaveChanges - the infamous "The relationship could not be changed because one or more of the
+                                // foreign-key properties is non-nullable" exception or similar.
+
+                                // http://stackoverflow.com/questions/9267991/deleteobject-method-is-missing-in-entity-framework-4-1
+                                // pero, oia:
+                                // The DbContext API defines DbSets not ObjectSets. DbSet has a Remove method not DeleteObject method. 
+                                // You need to first decide which API you are going to use. If it the ObjectContext or DbContext.
+
+                                // http://stackoverflow.com/questions/24755739/entity-framework-dbcontext-removeobj-vs-entryobj-state-entitystate-delet
+                                // http://stackoverflow.com/questions/11584399/difference-between-dbset-remove-and-dbcontext-entryentity-state-entitystate
 
                                 EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Remove(DetalleEmpleadoOriginal);
-                            EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.de
+                                db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                // EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Delete
+
 
                         }
 
@@ -212,7 +229,7 @@ namespace ProntoMVC.Controllers
             }
             //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
-                
+
         public bool Validar(ProntoMVC.Data.Models.Empleado o, ref string sErrorMsg)
         {
             if (o.Activo == null) sErrorMsg += "\n" + "Falta el estado";
@@ -226,9 +243,9 @@ namespace ProntoMVC.Controllers
                 sErrorMsg += "\n" + "El legajo ya existe";
             }
 
-            if (sErrorMsg != "") 
+            if (sErrorMsg != "")
                 return false;
-            else 
+            else
                 return true;
         }
 
@@ -338,7 +355,7 @@ namespace ProntoMVC.Controllers
         public virtual JsonResult EmpleadosParaComboSectorCompras()
         {
             if (db == null) return null;
-            
+
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             DataTable dt = EntidadManager.GetStoreProcedure(nSC, "Empleados_TX_PorSector", "Compras");
             IEnumerable<DataRow> rows = dt.AsEnumerable();
@@ -348,7 +365,7 @@ namespace ProntoMVC.Controllers
 
         public string BuscarPass(int id, string pass)
         {
-            if (Roles.IsUserInRole(Membership.GetUser().UserName,"SuperAdmin"))  return id.ToString();
+            if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin")) return id.ToString();
 
             var p = db.Empleados.Where(c => c.IdEmpleado == id).Where(c => c.Password == pass).FirstOrDefault();
             if (p != null)
@@ -480,7 +497,8 @@ namespace ProntoMVC.Controllers
             }
 
             var data = (from a in Det
-                        join b in db.Sectores on a.IdSectorNuevo equals b.IdSector into ab from b in ab.DefaultIfEmpty()
+                        join b in db.Sectores on a.IdSectorNuevo equals b.IdSector into ab
+                        from b in ab.DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleEmpleadoSector,
@@ -593,8 +611,10 @@ namespace ProntoMVC.Controllers
             }
 
             var data = (from a in Det
-                        join b in db.CuentasBancarias on a.IdCuentaBancaria equals b.IdCuentaBancaria into ab from b in ab.DefaultIfEmpty()
-                        join c in db.Bancos on b.IdBanco equals c.IdBanco into ac from c in ac.DefaultIfEmpty()
+                        join b in db.CuentasBancarias on a.IdCuentaBancaria equals b.IdCuentaBancaria into ab
+                        from b in ab.DefaultIfEmpty()
+                        join c in db.Bancos on b.IdBanco equals c.IdBanco into ac
+                        from c in ac.DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleEmpleadoCuentaBancaria,
@@ -652,7 +672,8 @@ namespace ProntoMVC.Controllers
             }
 
             var data = (from a in Det
-                        join b in db.Ubicaciones on a.IdUbicacion equals b.IdUbicacion into ab from b in ab.DefaultIfEmpty()
+                        join b in db.Ubicaciones on a.IdUbicacion equals b.IdUbicacion into ab
+                        from b in ab.DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleEmpleadoUbicacion,
@@ -706,14 +727,16 @@ namespace ProntoMVC.Controllers
             }
 
             var Tabla2 = (from a in Tabla
-                          select new {Id = a.IdEmpleado}).Where(campo).ToList();
+                          select new { Id = a.IdEmpleado }).Where(campo).ToList();
 
             int totalRecords = Tabla2.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Tabla
-                        join b in db.Cuentas on a.IdCuentaFondoFijo equals b.IdCuenta into ab from b in ab.DefaultIfEmpty()
-                        join c in db.Obras on a.IdObraAsignada equals c.IdObra into ac from c in ac.DefaultIfEmpty()
+                        join b in db.Cuentas on a.IdCuentaFondoFijo equals b.IdCuenta into ab
+                        from b in ab.DefaultIfEmpty()
+                        join c in db.Obras on a.IdObraAsignada equals c.IdObra into ac
+                        from c in ac.DefaultIfEmpty()
                         select new
                         {
                             a.IdEmpleado,
