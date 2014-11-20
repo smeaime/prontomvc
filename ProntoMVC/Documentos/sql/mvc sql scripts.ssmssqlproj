@@ -92,10 +92,16 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="ALTERTABLE 2011 Modulo WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql</FullPath>
         </FileNode>
         <FileNode Name="FK_Pronto mariano manual.sql">
           <AssociatedConnectionMoniker />
@@ -103,17 +109,149 @@
           <AssociatedConnUserName />
           <FullPath>FK_Pronto mariano manual.sql</FullPath>
         </FileNode>
+        <FileNode Name="InformeResumenGastosPorRubroContable_TX_1 pruebas.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>InformeResumenGastosPorRubroContable_TX_1 pruebas.sql</FullPath>
+        </FileNode>
+        <FileNode Name="InformeResumenGastosPorRubroContable_TX_1 pruebas2.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>InformeResumenGastosPorRubroContable_TX_1 pruebas2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="InformeResumenGastosPorRubroContable_TX_1 pruebas3.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>InformeResumenGastosPorRubroContable_TX_1 pruebas3.sql</FullPath>
+        </FileNode>
+        <FileNode Name="InformeResumenGastosPorRubroContable_TX_1.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>InformeResumenGastosPorRubroContable_TX_1.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Insert into Parametros 2010 WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Insert into Parametros 2010 WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevas_Tablas WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevas_Tablas WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevas_Tablas en BdlMaster WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevas_Tablas en BdlMaster WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_Func WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_Func WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_SP WEB desarrollo.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_SP WEB desarrollo.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_SP WEB drops.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_SP WEB drops.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_SP WEB generado.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_SP WEB generado.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_SP WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_SP WEB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Nuevos_SP en BdlMaster WEB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Nuevos_SP en BdlMaster WEB.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQuery1.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>SQLQuery1.sql</FullPath>
         </FileNode>
+        <FileNode Name="SQLQuery13333.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery13333.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery1asdasd.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery1asdasd.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery2.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery3.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery3.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery4aa.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery4aa.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery7.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQLQuery7.sql</FullPath>
+        </FileNode>
         <FileNode Name="Tree_TX_Arbol Tree_TX_Generar.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>Tree_TX_Arbol Tree_TX_Generar.sql</FullPath>
+        </FileNode>
+        <FileNode Name="clienteswilliams_alter table.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>clienteswilliams_alter table.sql</FullPath>
+        </FileNode>
+        <FileNode Name="clienteswilliams_stores.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>clienteswilliams_stores.sql</FullPath>
+        </FileNode>
+        <FileNode Name="corrección a clientes williams.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>corrección a clientes williams.sql</FullPath>
         </FileNode>
         <FileNode Name="dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
@@ -127,11 +265,89 @@
           <AssociatedConnUserName />
           <FullPath>dbo.wFacturas_TX_PorIdConDatos.StoredProcedure.sql</FullPath>
         </FileNode>
+        <FileNode Name="factura mala de williams.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>factura mala de williams.sql</FullPath>
+        </FileNode>
+        <FileNode Name="fk williams.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>fk williams.sql</FullPath>
+        </FileNode>
+        <FileNode Name="funcDetalleFactura.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>funcDetalleFactura.sql</FullPath>
+        </FileNode>
+        <FileNode Name="optimizar filtro de cartas para mail informe general.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>optimizar filtro de cartas para mail informe general.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sin imputar_ problemas.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sin imputar_ problemas.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp who.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp who.sql</FullPath>
+        </FileNode>
         <FileNode Name="superbuscador  wFuncionBusqueda wBusqueda   .sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>superbuscador  wFuncionBusqueda wBusqueda   .sql</FullPath>
+        </FileNode>
+        <FileNode Name="superbuscador version vieja.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>superbuscador version vieja.sql</FullPath>
+        </FileNode>
+        <FileNode Name="superbuscador williams.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>superbuscador williams.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>wCartasDePorte_TX_FacturacionAutomatica.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wCartasDePorte_TX_InformesCorregido.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>wCartasDePorte_TX_InformesCorregido.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wCartasDePorte_TX_PorIdFactura.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>wCartasDePorte_TX_PorIdFactura.sql</FullPath>
+        </FileNode>
+        <FileNode Name="who_is_active_v11_11.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>who_is_active_v11_11.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
