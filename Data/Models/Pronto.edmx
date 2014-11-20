@@ -3179,6 +3179,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="SUSSFechaInicioVigencia" Type="datetime" />
           <Property Name="OperacionesMercadoInternoEntidadVinculada" Type="varchar" MaxLength="2" />
           <Property Name="IdCuentaAplicacion" Type="int" />
+          <Property Name="CodigoCategoriaIIBBAlternativo" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -5009,6 +5010,42 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Valores_Monedas_IdMoneda">
+          <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+          <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monedas">
+              <PropertyRef Name="IdMoneda" />
+            </Principal>
+            <Dependent Role="Valores">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valores_TiposComprobante_IdTipoComprobante">
+          <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
+          <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposComprobante">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Principal>
+            <Dependent Role="Valores">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valores_TiposComprobante_IdTipoValor">
+          <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
+          <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposComprobante">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Principal>
+            <Dependent Role="Valores">
+              <PropertyRef Name="IdTipoValor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Articulos_TX_DatosConCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdArticulo" Type="int" Mode="In" />
         </Function>
@@ -5595,6 +5632,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Localidades" EntitySet="Localidades" />
             <End Role="Transportistas" EntitySet="Transportistas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Valores_Monedas_IdMoneda" Association="Self.FK_Valores_Monedas_IdMoneda">
+            <End Role="Monedas" EntitySet="Monedas" />
+            <End Role="Valores" EntitySet="Valores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoComprobante" Association="Self.FK_Valores_TiposComprobante_IdTipoComprobante">
+            <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+            <End Role="Valores" EntitySet="Valores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoValor" Association="Self.FK_Valores_TiposComprobante_IdTipoValor">
+            <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+            <End Role="Valores" EntitySet="Valores" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -6103,7 +6152,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="Recibos" EntityType="DemoProntoModel.Recibo" />
           <EntitySet Name="RubrosContables" EntityType="DemoProntoModel.RubrosContable" />
           <EntitySet Name="RubrosValores" EntityType="DemoProntoModel.RubrosValore" />
-          <EntitySet Name="Valores" EntityType="DemoProntoModel.Valore" />
           <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas" Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
             <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
             <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompras" />
@@ -6462,6 +6510,19 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados">
             <End Role="Empleado" EntitySet="Empleados" />
             <End Role="DetalleEmpleadosUbicacione" EntitySet="DetalleEmpleadosUbicaciones" />
+          </AssociationSet>
+          <EntitySet Name="Valores" EntityType="DemoProntoModel.Valore" />
+          <AssociationSet Name="FK_Valores_Monedas_IdMoneda" Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda">
+            <End Role="Moneda" EntitySet="Monedas" />
+            <End Role="Valore" EntitySet="Valores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoComprobante" Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante">
+            <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
+            <End Role="Valore" EntitySet="Valores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoValor" Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor">
+            <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
+            <End Role="Valore" EntitySet="Valores" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -8443,6 +8504,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas_Monedas" FromRole="Moneda" ToRole="DetalleComparativa" />
           <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="Moneda" ToRole="NotasCredito" />
           <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="Moneda" ToRole="NotasDebito" />
+          <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Moneda" ToRole="Valore" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -8537,6 +8599,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="CodigoAFIP3_Letra_B" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="CodigoAFIP3_Letra_C" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="CodigoAFIP3_Letra_E" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="TiposComprobante" ToRole="Valore" />
+          <NavigationProperty Name="Valores1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="TiposComprobante" ToRole="Valore" />
         </EntityType>
         <Association Name="FK_Clientes_LocalidadEntrega">
           <End Type="DemoProntoModel.Localidad" Role="Localidade" Multiplicity="0..1" />
@@ -9179,6 +9243,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="OperacionesMercadoInternoEntidadVinculada" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_Proveedores_DescripcionIva" FromRole="Proveedor" ToRole="DescripcionIva" />
           <Property Type="Int32" Name="IdCuentaAplicacion" />
+          <Property Name="CodigoCategoriaIIBBAlternativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -10822,95 +10887,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdRubroValor" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="Codigo" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Descripcion" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Valore">
-          <Key>
-            <PropertyRef Name="IdValor" />
-          </Key>
-          <Property Type="Int32" Name="IdValor" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="IdTipoValor" />
-          <Property Type="Decimal" Name="NumeroValor" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="FechaValor" Precision="3" />
-          <Property Type="Int32" Name="NumeroInterno" />
-          <Property Type="Int32" Name="IdTipoComprobante" />
-          <Property Type="Int32" Name="NumeroComprobante" />
-          <Property Type="DateTime" Name="FechaComprobante" Precision="3" />
-          <Property Type="Int32" Name="IdCliente" />
-          <Property Type="Int32" Name="IdDetalleReciboValores" />
-          <Property Type="Int32" Name="IdBanco" />
-          <Property Type="Decimal" Name="Importe" Precision="18" Scale="2" />
-          <Property Type="String" Name="Estado" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdBancoDeposito" />
-          <Property Type="Int32" Name="NumeroDeposito" />
-          <Property Type="DateTime" Name="FechaDeposito" Precision="3" />
-          <Property Type="Int32" Name="IdProveedor" />
-          <Property Type="Int32" Name="NumeroOrdenPago" />
-          <Property Type="DateTime" Name="FechaOrdenPago" Precision="3" />
-          <Property Type="Int32" Name="IdCuenta" />
-          <Property Type="Int32" Name="NumeroSalida" />
-          <Property Type="DateTime" Name="FechaSalida" Precision="3" />
-          <Property Type="Int32" Name="IdCuentaOrigen" />
-          <Property Type="DateTime" Name="FechaEntrada" Precision="3" />
-          <Property Type="String" Name="FechaEntradaActivada" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Conciliado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdCuentaBancaria" />
-          <Property Type="Int32" Name="IdCuentaBancariaDeposito" />
-          <Property Type="Decimal" Name="Iva" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IdObra" />
-          <Property Type="Int32" Name="IdCuentaGasto" />
-          <Property Type="Int32" Name="IdCuentaContable" />
-          <Property Type="Int32" Name="IdCuentaIVA" />
-          <Property Type="Decimal" Name="PorcentajeIVA" Precision="6" Scale="2" />
-          <Property Type="Int32" Name="IdDetalleOrdenPagoCuentas" />
-          <Property Type="Int32" Name="IdCaja" />
-          <Property Type="Int32" Name="IdDetalleOrdenPagoValores" />
-          <Property Type="Int32" Name="IdMoneda" />
-          <Property Type="Decimal" Name="CotizacionMoneda" Precision="18" Scale="4" />
-          <Property Type="Int32" Name="IdDetalleComprobanteProveedor" />
-          <Property Type="Int32" Name="IdDetalleAsiento" />
-          <Property Type="String" Name="CuitLibrador" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdConciliacion" />
-          <Property Type="String" Name="Emitido" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaEmision" Precision="3" />
-          <Property Type="Int32" Name="IdEmitio" />
-          <Property Type="Int32" Name="IdDetalleReciboCuentas" />
-          <Property Type="String" Name="MovimientoConfirmadoBanco" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaConfirmacionBanco" Precision="3" />
-          <Property Type="Int32" Name="IdUsuarioConfirmacionBanco" />
-          <Property Type="Int32" Name="IdPlazoFijoInicio" />
-          <Property Type="Int32" Name="IdPlazoFijoFin" />
-          <Property Type="DateTime" Name="FechaGasto" Precision="3" />
-          <Property Type="Int32" Name="IdUsuarioIngreso" />
-          <Property Type="DateTime" Name="FechaIngreso" Precision="3" />
-          <Property Type="Int32" Name="IdUsuarioModifico" />
-          <Property Type="DateTime" Name="FechaModifico" Precision="3" />
-          <Property Type="String" Name="Detalle" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdDetalleNotaDebito" />
-          <Property Type="Int32" Name="IdDetalleNotaCredito" />
-          <Property Type="String" Name="RegistroContableChequeDiferido" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Byte" Name="EnviarEmail" />
-          <Property Type="Int32" Name="IdOrigenTransmision" />
-          <Property Type="Int32" Name="IdValorOriginal" />
-          <Property Type="DateTime" Name="FechaImportacionTransmision" Precision="3" />
-          <Property Type="Int32" Name="IdDetalleReciboValoresOriginal" />
-          <Property Type="String" Name="CuitClienteTransmision" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CertificadoRetencion" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="AsientoManual" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Anulado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdUsuarioAnulo" />
-          <Property Type="DateTime" Name="FechaAnulacion" Precision="3" />
-          <Property Type="String" Name="MotivoAnulacion" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Rechazado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdTarjetaCredito" />
-          <Property Type="String" Name="NumeroTarjetaCredito" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="NumeroAutorizacionTarjetaCredito" />
-          <Property Type="Int32" Name="CantidadCuotas" />
-          <Property Type="String" Name="FechaExpiracionTarjetaCredito" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdFactura" />
-          <Property Type="Int32" Name="IdDetallePresentacionTarjeta" />
-          <Property Type="Int32" Name="IdOrigen" />
-          <Property Type="String" Name="OrigenRegistro" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdReciboAsignado" />
         </EntityType>
         <Association Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
           <End Type="DemoProntoModel.DetalleFactura" Role="DetalleFactura" Multiplicity="0..1" />
@@ -12992,6 +12968,134 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Valore">
+          <Key>
+            <PropertyRef Name="IdValor" />
+          </Key>
+          <Property Name="IdValor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoValor" Type="Int32" />
+          <Property Name="NumeroValor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaValor" Type="DateTime" Precision="3" />
+          <Property Name="NumeroInterno" Type="Int32" />
+          <Property Name="IdTipoComprobante" Type="Int32" />
+          <Property Name="NumeroComprobante" Type="Int32" />
+          <Property Name="FechaComprobante" Type="DateTime" Precision="3" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdDetalleReciboValores" Type="Int32" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdBancoDeposito" Type="Int32" />
+          <Property Name="NumeroDeposito" Type="Int32" />
+          <Property Name="FechaDeposito" Type="DateTime" Precision="3" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="NumeroOrdenPago" Type="Int32" />
+          <Property Name="FechaOrdenPago" Type="DateTime" Precision="3" />
+          <Property Name="IdCuenta" Type="Int32" />
+          <Property Name="NumeroSalida" Type="Int32" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="IdCuentaOrigen" Type="Int32" />
+          <Property Name="FechaEntrada" Type="DateTime" Precision="3" />
+          <Property Name="FechaEntradaActivada" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Conciliado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdCuentaBancaria" Type="Int32" />
+          <Property Name="IdCuentaBancariaDeposito" Type="Int32" />
+          <Property Name="Iva" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="IdCuentaGasto" Type="Int32" />
+          <Property Name="IdCuentaContable" Type="Int32" />
+          <Property Name="IdCuentaIVA" Type="Int32" />
+          <Property Name="PorcentajeIVA" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdDetalleOrdenPagoCuentas" Type="Int32" />
+          <Property Name="IdCaja" Type="Int32" />
+          <Property Name="IdDetalleOrdenPagoValores" Type="Int32" />
+          <Property Name="IdMoneda" Type="Int32" />
+          <Property Name="CotizacionMoneda" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IdDetalleComprobanteProveedor" Type="Int32" />
+          <Property Name="IdDetalleAsiento" Type="Int32" />
+          <Property Name="CuitLibrador" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="IdConciliacion" Type="Int32" />
+          <Property Name="Emitido" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEmision" Type="DateTime" Precision="3" />
+          <Property Name="IdEmitio" Type="Int32" />
+          <Property Name="IdDetalleReciboCuentas" Type="Int32" />
+          <Property Name="MovimientoConfirmadoBanco" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaConfirmacionBanco" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioConfirmacionBanco" Type="Int32" />
+          <Property Name="IdPlazoFijoInicio" Type="Int32" />
+          <Property Name="IdPlazoFijoFin" Type="Int32" />
+          <Property Name="FechaGasto" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioIngreso" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="FechaModifico" Type="DateTime" Precision="3" />
+          <Property Name="Detalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IdDetalleNotaDebito" Type="Int32" />
+          <Property Name="IdDetalleNotaCredito" Type="Int32" />
+          <Property Name="RegistroContableChequeDiferido" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EnviarEmail" Type="Byte" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="IdValorOriginal" Type="Int32" />
+          <Property Name="FechaImportacionTransmision" Type="DateTime" Precision="3" />
+          <Property Name="IdDetalleReciboValoresOriginal" Type="Int32" />
+          <Property Name="CuitClienteTransmision" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="CertificadoRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AsientoManual" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Anulado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnulo" Type="Int32" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Rechazado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdTarjetaCredito" Type="Int32" />
+          <Property Name="NumeroTarjetaCredito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroAutorizacionTarjetaCredito" Type="Int32" />
+          <Property Name="CantidadCuotas" Type="Int32" />
+          <Property Name="FechaExpiracionTarjetaCredito" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="IdDetallePresentacionTarjeta" Type="Int32" />
+          <Property Name="IdOrigen" Type="Int32" />
+          <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IdReciboAsignado" Type="Int32" />
+          <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Valore" ToRole="Moneda" />
+          <NavigationProperty Name="TiposComprobante" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="Valore" ToRole="TiposComprobante" />
+          <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
+        </EntityType>
+        <Association Name="FK_Valores_Monedas_IdMoneda">
+          <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="IdMoneda" />
+            </Principal>
+            <Dependent Role="Valore">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valores_TiposComprobante_IdTipoComprobante">
+          <End Type="DemoProntoModel.TiposComprobante" Role="TiposComprobante" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposComprobante">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Principal>
+            <Dependent Role="Valore">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valores_TiposComprobante_IdTipoValor">
+          <End Type="DemoProntoModel.TiposComprobante" Role="TiposComprobante" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposComprobante">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Principal>
+            <Dependent Role="Valore">
+              <PropertyRef Name="IdTipoValor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14733,6 +14837,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
                 <ScalarProperty Name="IdCuentaAplicacion" ColumnName="IdCuentaAplicacion" />
                 <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
                 <ScalarProperty Name="SUSSFechaInicioVigencia" ColumnName="SUSSFechaInicioVigencia" />
@@ -15890,96 +15995,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdRubroValor" ColumnName="IdRubroValor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Valores">
-            <EntityTypeMapping TypeName="DemoProntoModel.Valore">
-              <MappingFragment StoreEntitySet="Valores">
-                <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
-                <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
-                <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
-                <ScalarProperty Name="IdDetallePresentacionTarjeta" ColumnName="IdDetallePresentacionTarjeta" />
-                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
-                <ScalarProperty Name="FechaExpiracionTarjetaCredito" ColumnName="FechaExpiracionTarjetaCredito" />
-                <ScalarProperty Name="CantidadCuotas" ColumnName="CantidadCuotas" />
-                <ScalarProperty Name="NumeroAutorizacionTarjetaCredito" ColumnName="NumeroAutorizacionTarjetaCredito" />
-                <ScalarProperty Name="NumeroTarjetaCredito" ColumnName="NumeroTarjetaCredito" />
-                <ScalarProperty Name="IdTarjetaCredito" ColumnName="IdTarjetaCredito" />
-                <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
-                <ScalarProperty Name="Anulado" ColumnName="Anulado" />
-                <ScalarProperty Name="AsientoManual" ColumnName="AsientoManual" />
-                <ScalarProperty Name="CertificadoRetencion" ColumnName="CertificadoRetencion" />
-                <ScalarProperty Name="CuitClienteTransmision" ColumnName="CuitClienteTransmision" />
-                <ScalarProperty Name="IdDetalleReciboValoresOriginal" ColumnName="IdDetalleReciboValoresOriginal" />
-                <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
-                <ScalarProperty Name="IdValorOriginal" ColumnName="IdValorOriginal" />
-                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-                <ScalarProperty Name="RegistroContableChequeDiferido" ColumnName="RegistroContableChequeDiferido" />
-                <ScalarProperty Name="IdDetalleNotaCredito" ColumnName="IdDetalleNotaCredito" />
-                <ScalarProperty Name="IdDetalleNotaDebito" ColumnName="IdDetalleNotaDebito" />
-                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-                <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
-                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
-                <ScalarProperty Name="FechaGasto" ColumnName="FechaGasto" />
-                <ScalarProperty Name="IdPlazoFijoFin" ColumnName="IdPlazoFijoFin" />
-                <ScalarProperty Name="IdPlazoFijoInicio" ColumnName="IdPlazoFijoInicio" />
-                <ScalarProperty Name="IdUsuarioConfirmacionBanco" ColumnName="IdUsuarioConfirmacionBanco" />
-                <ScalarProperty Name="FechaConfirmacionBanco" ColumnName="FechaConfirmacionBanco" />
-                <ScalarProperty Name="MovimientoConfirmadoBanco" ColumnName="MovimientoConfirmadoBanco" />
-                <ScalarProperty Name="IdDetalleReciboCuentas" ColumnName="IdDetalleReciboCuentas" />
-                <ScalarProperty Name="IdEmitio" ColumnName="IdEmitio" />
-                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
-                <ScalarProperty Name="Emitido" ColumnName="Emitido" />
-                <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
-                <ScalarProperty Name="CuitLibrador" ColumnName="CuitLibrador" />
-                <ScalarProperty Name="IdDetalleAsiento" ColumnName="IdDetalleAsiento" />
-                <ScalarProperty Name="IdDetalleComprobanteProveedor" ColumnName="IdDetalleComprobanteProveedor" />
-                <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
-                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-                <ScalarProperty Name="IdDetalleOrdenPagoValores" ColumnName="IdDetalleOrdenPagoValores" />
-                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
-                <ScalarProperty Name="IdDetalleOrdenPagoCuentas" ColumnName="IdDetalleOrdenPagoCuentas" />
-                <ScalarProperty Name="PorcentajeIVA" ColumnName="PorcentajeIVA" />
-                <ScalarProperty Name="IdCuentaIVA" ColumnName="IdCuentaIVA" />
-                <ScalarProperty Name="IdCuentaContable" ColumnName="IdCuentaContable" />
-                <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
-                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="IdCuentaBancariaDeposito" ColumnName="IdCuentaBancariaDeposito" />
-                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
-                <ScalarProperty Name="Conciliado" ColumnName="Conciliado" />
-                <ScalarProperty Name="FechaEntradaActivada" ColumnName="FechaEntradaActivada" />
-                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
-                <ScalarProperty Name="IdCuentaOrigen" ColumnName="IdCuentaOrigen" />
-                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
-                <ScalarProperty Name="NumeroSalida" ColumnName="NumeroSalida" />
-                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-                <ScalarProperty Name="FechaOrdenPago" ColumnName="FechaOrdenPago" />
-                <ScalarProperty Name="NumeroOrdenPago" ColumnName="NumeroOrdenPago" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="FechaDeposito" ColumnName="FechaDeposito" />
-                <ScalarProperty Name="NumeroDeposito" ColumnName="NumeroDeposito" />
-                <ScalarProperty Name="IdBancoDeposito" ColumnName="IdBancoDeposito" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdDetalleReciboValores" ColumnName="IdDetalleReciboValores" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
-                <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
-                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
-                <ScalarProperty Name="FechaValor" ColumnName="FechaValor" />
-                <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
-                <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
-                <ScalarProperty Name="IdValor" ColumnName="IdValor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -17245,6 +17260,96 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Valores">
+            <EntityTypeMapping TypeName="DemoProntoModel.Valore">
+              <MappingFragment StoreEntitySet="Valores">
+                <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
+                <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
+                <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
+                <ScalarProperty Name="IdDetallePresentacionTarjeta" ColumnName="IdDetallePresentacionTarjeta" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="FechaExpiracionTarjetaCredito" ColumnName="FechaExpiracionTarjetaCredito" />
+                <ScalarProperty Name="CantidadCuotas" ColumnName="CantidadCuotas" />
+                <ScalarProperty Name="NumeroAutorizacionTarjetaCredito" ColumnName="NumeroAutorizacionTarjetaCredito" />
+                <ScalarProperty Name="NumeroTarjetaCredito" ColumnName="NumeroTarjetaCredito" />
+                <ScalarProperty Name="IdTarjetaCredito" ColumnName="IdTarjetaCredito" />
+                <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
+                <ScalarProperty Name="Anulado" ColumnName="Anulado" />
+                <ScalarProperty Name="AsientoManual" ColumnName="AsientoManual" />
+                <ScalarProperty Name="CertificadoRetencion" ColumnName="CertificadoRetencion" />
+                <ScalarProperty Name="CuitClienteTransmision" ColumnName="CuitClienteTransmision" />
+                <ScalarProperty Name="IdDetalleReciboValoresOriginal" ColumnName="IdDetalleReciboValoresOriginal" />
+                <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
+                <ScalarProperty Name="IdValorOriginal" ColumnName="IdValorOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="RegistroContableChequeDiferido" ColumnName="RegistroContableChequeDiferido" />
+                <ScalarProperty Name="IdDetalleNotaCredito" ColumnName="IdDetalleNotaCredito" />
+                <ScalarProperty Name="IdDetalleNotaDebito" ColumnName="IdDetalleNotaDebito" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+                <ScalarProperty Name="FechaGasto" ColumnName="FechaGasto" />
+                <ScalarProperty Name="IdPlazoFijoFin" ColumnName="IdPlazoFijoFin" />
+                <ScalarProperty Name="IdPlazoFijoInicio" ColumnName="IdPlazoFijoInicio" />
+                <ScalarProperty Name="IdUsuarioConfirmacionBanco" ColumnName="IdUsuarioConfirmacionBanco" />
+                <ScalarProperty Name="FechaConfirmacionBanco" ColumnName="FechaConfirmacionBanco" />
+                <ScalarProperty Name="MovimientoConfirmadoBanco" ColumnName="MovimientoConfirmadoBanco" />
+                <ScalarProperty Name="IdDetalleReciboCuentas" ColumnName="IdDetalleReciboCuentas" />
+                <ScalarProperty Name="IdEmitio" ColumnName="IdEmitio" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="Emitido" ColumnName="Emitido" />
+                <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+                <ScalarProperty Name="CuitLibrador" ColumnName="CuitLibrador" />
+                <ScalarProperty Name="IdDetalleAsiento" ColumnName="IdDetalleAsiento" />
+                <ScalarProperty Name="IdDetalleComprobanteProveedor" ColumnName="IdDetalleComprobanteProveedor" />
+                <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="IdDetalleOrdenPagoValores" ColumnName="IdDetalleOrdenPagoValores" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdDetalleOrdenPagoCuentas" ColumnName="IdDetalleOrdenPagoCuentas" />
+                <ScalarProperty Name="PorcentajeIVA" ColumnName="PorcentajeIVA" />
+                <ScalarProperty Name="IdCuentaIVA" ColumnName="IdCuentaIVA" />
+                <ScalarProperty Name="IdCuentaContable" ColumnName="IdCuentaContable" />
+                <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="IdCuentaBancariaDeposito" ColumnName="IdCuentaBancariaDeposito" />
+                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+                <ScalarProperty Name="Conciliado" ColumnName="Conciliado" />
+                <ScalarProperty Name="FechaEntradaActivada" ColumnName="FechaEntradaActivada" />
+                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+                <ScalarProperty Name="IdCuentaOrigen" ColumnName="IdCuentaOrigen" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="NumeroSalida" ColumnName="NumeroSalida" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="FechaOrdenPago" ColumnName="FechaOrdenPago" />
+                <ScalarProperty Name="NumeroOrdenPago" ColumnName="NumeroOrdenPago" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="FechaDeposito" ColumnName="FechaDeposito" />
+                <ScalarProperty Name="NumeroDeposito" ColumnName="NumeroDeposito" />
+                <ScalarProperty Name="IdBancoDeposito" ColumnName="IdBancoDeposito" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdDetalleReciboValores" ColumnName="IdDetalleReciboValores" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
+                <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="FechaValor" ColumnName="FechaValor" />
+                <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
+                <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
+                <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -17267,7 +17372,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="70">
+      <edmx:Diagram Name="Pronto" ZoomLevel="15">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
@@ -18440,7 +18545,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.BancoChequera" Width="1.5" PointX="9.625" PointY="47.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Banco" Width="1.5" PointX="7.375" PointY="47" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarjetasCredito" Width="1.5" PointX="4.375" PointY="4.125" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarjetasCredito" Width="1.5" PointX="4.875" PointY="2.125" Height="0.4" IsExpanded="true" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_BancoChequeras_Bancos">
           <edmx:ConnectorPoint PointX="8.8749999999999574" PointY="47.4" />
           <edmx:ConnectorPoint PointX="9.625" PointY="47.5" />
@@ -19089,7 +19194,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Recibo" Width="1.5" PointX="13" PointY="105.25" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosContable" Width="1.5" PointX="1.375" PointY="2.625" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosValore" Width="1.5" PointX="14.875" PointY="9.75" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Valore" Width="1.5" PointX="14.875" PointY="12.75" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
           <edmx:ConnectorPoint PointX="27.749999999999996" PointY="79.525" />
           <edmx:ConnectorPoint PointX="28.5" PointY="80.375" />
@@ -19147,7 +19251,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoRendicionesFF" Width="1.5" PointX="20.875" PointY="9.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoRubrosContable" Width="1.5" PointX="3.375" PointY="0.625" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoValore" Width="1.5" PointX="17.75" PointY="33.5" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenPago" Width="1.5" PointX="20" PointY="130.875" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenPago" Width="3.875" PointX="20.25" PointY="127.375" Height="0.4" IsExpanded="true" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
           <edmx:ConnectorPoint PointX="2.125" PointY="2.625" />
           <edmx:ConnectorPoint PointX="2.125" PointY="0.825" />
@@ -19545,6 +19649,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Valore" Width="1.5" PointX="28.625" PointY="58.375" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

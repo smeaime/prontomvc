@@ -1,46 +1,46 @@
 ﻿
 
-namespace ProntoMVC.Data.Models
-{
-    public partial class  ComprobanteProveedor : IEntity
-    {
+//namespace ProntoMVC.Data.Models
+//{
+//    public partial class  ComprobanteProveedor : IEntity
+//    {
 
-        public int ID { get { return this.IdComprobanteProveedor; } }
-    }
+//        public int ID { get { return this.IdComprobanteProveedor; } }
+//    }
 
-    public partial class DetalleComprobantesProveedore : IEntity
-    {
+//    public partial class DetalleComprobantesProveedore : IEntity
+//    {
 
-        public int ID { get { return this.IdDetalleComprobanteProveedor; } }
-    }
+//        public int ID { get { return this.IdDetalleComprobanteProveedor; } }
+//    }
 
-    public partial class Parametros : IEntity
-    {
+//    public partial class Parametros : IEntity
+//    {
 
-        public int ID { get { return this.IdParametro; } }
-    }
+//        public int ID { get { return this.IdParametro; } }
+//    }
 
-    public partial class Condiciones_Compra : IEntity
-    {
+//    public partial class Condiciones_Compra : IEntity
+//    {
 
-        public int ID { get { return this.IdCondicionCompra; } }
-    }
+//        public int ID { get { return this.IdCondicionCompra; } }
+//    }
 
-    public partial class Empleado : IEntity
-    {
+//    public partial class Empleado : IEntity
+//    {
 
-        public int ID { get { return this.IdEmpleado; } }
-    }
+//        public int ID { get { return this.IdEmpleado; } }
+//    }
 
-    public partial class PlazosEntrega : IEntity
-    {
+//    public partial class PlazosEntrega : IEntity
+//    {
 
-        public int ID { get { return this.IdPlazoEntrega; } }
-    }
+//        public int ID { get { return this.IdPlazoEntrega; } }
+//    }
 
-    public partial class  Moneda : IEntity
-    {
+//    public partial class  Moneda : IEntity
+//    {
 
-        public int ID { get { return this.IdMoneda ; } }
-    }
-}
+//        public int ID { get { return this.IdMoneda ; } }
+//    }
+//}

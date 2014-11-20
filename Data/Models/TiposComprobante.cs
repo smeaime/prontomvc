@@ -18,6 +18,8 @@ namespace ProntoMVC.Data.Models
         {
             this.PuntosVentas = new HashSet<PuntosVenta>();
             this.DetalleOrdenesPagoValores = new HashSet<DetalleOrdenesPagoValore>();
+            this.Valores = new HashSet<Valore>();
+            this.Valores1 = new HashSet<Valore>();
         }
     
         public int IdTipoComprobante { get; set; }
@@ -56,5 +58,7 @@ namespace ProntoMVC.Data.Models
     
         public virtual ICollection<PuntosVenta> PuntosVentas { get; set; }
         public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
+        public virtual ICollection<Valore> Valores { get; set; }
+        public virtual ICollection<Valore> Valores1 { get; set; }
     }
 }
