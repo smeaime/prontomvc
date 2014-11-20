@@ -728,6 +728,8 @@ namespace ProntoMVC.Controllers
             //   mFechaFinalSaldo = CDate(mVectorArgs(6))
             //End If
 
+
+
             EntidadManager.ImprimirWordDOT_VersionDLL(plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output, mArgs);
 
 
