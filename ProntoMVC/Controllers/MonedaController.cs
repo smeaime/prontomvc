@@ -227,6 +227,15 @@ namespace ProntoMVC.Controllers
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetMonedas()
+        {
+            Dictionary<int, string> monedas = new Dictionary<int, string>();
+            foreach (Moneda u in db.Monedas.OrderBy(x => x.Nombre).ToList())
+                monedas.Add(u.IdMoneda, u.Nombre);
+
+            return PartialView("Select", monedas);
+        }
+        
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
