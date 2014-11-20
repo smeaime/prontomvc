@@ -1763,6 +1763,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
           <ScalarProperty Name="IdCuentaAplicacion" ColumnName="IdCuentaAplicacion" />
           <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
           <ScalarProperty Name="SUSSFechaInicioVigencia" ColumnName="SUSSFechaInicioVigencia" />
@@ -2920,96 +2921,6 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="IdRubroValor" ColumnName="IdRubroValor" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Valores">
-      <EntityTypeMapping TypeName="DemoProntoModel.Valore">
-        <MappingFragment StoreEntitySet="Valores">
-          <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
-          <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
-          <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
-          <ScalarProperty Name="IdDetallePresentacionTarjeta" ColumnName="IdDetallePresentacionTarjeta" />
-          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
-          <ScalarProperty Name="FechaExpiracionTarjetaCredito" ColumnName="FechaExpiracionTarjetaCredito" />
-          <ScalarProperty Name="CantidadCuotas" ColumnName="CantidadCuotas" />
-          <ScalarProperty Name="NumeroAutorizacionTarjetaCredito" ColumnName="NumeroAutorizacionTarjetaCredito" />
-          <ScalarProperty Name="NumeroTarjetaCredito" ColumnName="NumeroTarjetaCredito" />
-          <ScalarProperty Name="IdTarjetaCredito" ColumnName="IdTarjetaCredito" />
-          <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
-          <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-          <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
-          <ScalarProperty Name="Anulado" ColumnName="Anulado" />
-          <ScalarProperty Name="AsientoManual" ColumnName="AsientoManual" />
-          <ScalarProperty Name="CertificadoRetencion" ColumnName="CertificadoRetencion" />
-          <ScalarProperty Name="CuitClienteTransmision" ColumnName="CuitClienteTransmision" />
-          <ScalarProperty Name="IdDetalleReciboValoresOriginal" ColumnName="IdDetalleReciboValoresOriginal" />
-          <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
-          <ScalarProperty Name="IdValorOriginal" ColumnName="IdValorOriginal" />
-          <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-          <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-          <ScalarProperty Name="RegistroContableChequeDiferido" ColumnName="RegistroContableChequeDiferido" />
-          <ScalarProperty Name="IdDetalleNotaCredito" ColumnName="IdDetalleNotaCredito" />
-          <ScalarProperty Name="IdDetalleNotaDebito" ColumnName="IdDetalleNotaDebito" />
-          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-          <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
-          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
-          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-          <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
-          <ScalarProperty Name="FechaGasto" ColumnName="FechaGasto" />
-          <ScalarProperty Name="IdPlazoFijoFin" ColumnName="IdPlazoFijoFin" />
-          <ScalarProperty Name="IdPlazoFijoInicio" ColumnName="IdPlazoFijoInicio" />
-          <ScalarProperty Name="IdUsuarioConfirmacionBanco" ColumnName="IdUsuarioConfirmacionBanco" />
-          <ScalarProperty Name="FechaConfirmacionBanco" ColumnName="FechaConfirmacionBanco" />
-          <ScalarProperty Name="MovimientoConfirmadoBanco" ColumnName="MovimientoConfirmadoBanco" />
-          <ScalarProperty Name="IdDetalleReciboCuentas" ColumnName="IdDetalleReciboCuentas" />
-          <ScalarProperty Name="IdEmitio" ColumnName="IdEmitio" />
-          <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
-          <ScalarProperty Name="Emitido" ColumnName="Emitido" />
-          <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
-          <ScalarProperty Name="CuitLibrador" ColumnName="CuitLibrador" />
-          <ScalarProperty Name="IdDetalleAsiento" ColumnName="IdDetalleAsiento" />
-          <ScalarProperty Name="IdDetalleComprobanteProveedor" ColumnName="IdDetalleComprobanteProveedor" />
-          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
-          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-          <ScalarProperty Name="IdDetalleOrdenPagoValores" ColumnName="IdDetalleOrdenPagoValores" />
-          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
-          <ScalarProperty Name="IdDetalleOrdenPagoCuentas" ColumnName="IdDetalleOrdenPagoCuentas" />
-          <ScalarProperty Name="PorcentajeIVA" ColumnName="PorcentajeIVA" />
-          <ScalarProperty Name="IdCuentaIVA" ColumnName="IdCuentaIVA" />
-          <ScalarProperty Name="IdCuentaContable" ColumnName="IdCuentaContable" />
-          <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
-          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-          <ScalarProperty Name="Iva" ColumnName="Iva" />
-          <ScalarProperty Name="IdCuentaBancariaDeposito" ColumnName="IdCuentaBancariaDeposito" />
-          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
-          <ScalarProperty Name="Conciliado" ColumnName="Conciliado" />
-          <ScalarProperty Name="FechaEntradaActivada" ColumnName="FechaEntradaActivada" />
-          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
-          <ScalarProperty Name="IdCuentaOrigen" ColumnName="IdCuentaOrigen" />
-          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
-          <ScalarProperty Name="NumeroSalida" ColumnName="NumeroSalida" />
-          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-          <ScalarProperty Name="FechaOrdenPago" ColumnName="FechaOrdenPago" />
-          <ScalarProperty Name="NumeroOrdenPago" ColumnName="NumeroOrdenPago" />
-          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-          <ScalarProperty Name="FechaDeposito" ColumnName="FechaDeposito" />
-          <ScalarProperty Name="NumeroDeposito" ColumnName="NumeroDeposito" />
-          <ScalarProperty Name="IdBancoDeposito" ColumnName="IdBancoDeposito" />
-          <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Importe" ColumnName="Importe" />
-          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-          <ScalarProperty Name="IdDetalleReciboValores" ColumnName="IdDetalleReciboValores" />
-          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-          <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
-          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
-          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-          <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
-          <ScalarProperty Name="FechaValor" ColumnName="FechaValor" />
-          <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
-          <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
-          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4272,6 +4183,96 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Legajo" ColumnName="Legajo" />
           <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Valores">
+      <EntityTypeMapping TypeName="DemoProntoModel.Valore">
+        <MappingFragment StoreEntitySet="Valores">
+          <ScalarProperty Name="IdReciboAsignado" ColumnName="IdReciboAsignado" />
+          <ScalarProperty Name="OrigenRegistro" ColumnName="OrigenRegistro" />
+          <ScalarProperty Name="IdOrigen" ColumnName="IdOrigen" />
+          <ScalarProperty Name="IdDetallePresentacionTarjeta" ColumnName="IdDetallePresentacionTarjeta" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="FechaExpiracionTarjetaCredito" ColumnName="FechaExpiracionTarjetaCredito" />
+          <ScalarProperty Name="CantidadCuotas" ColumnName="CantidadCuotas" />
+          <ScalarProperty Name="NumeroAutorizacionTarjetaCredito" ColumnName="NumeroAutorizacionTarjetaCredito" />
+          <ScalarProperty Name="NumeroTarjetaCredito" ColumnName="NumeroTarjetaCredito" />
+          <ScalarProperty Name="IdTarjetaCredito" ColumnName="IdTarjetaCredito" />
+          <ScalarProperty Name="Rechazado" ColumnName="Rechazado" />
+          <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+          <ScalarProperty Name="IdUsuarioAnulo" ColumnName="IdUsuarioAnulo" />
+          <ScalarProperty Name="Anulado" ColumnName="Anulado" />
+          <ScalarProperty Name="AsientoManual" ColumnName="AsientoManual" />
+          <ScalarProperty Name="CertificadoRetencion" ColumnName="CertificadoRetencion" />
+          <ScalarProperty Name="CuitClienteTransmision" ColumnName="CuitClienteTransmision" />
+          <ScalarProperty Name="IdDetalleReciboValoresOriginal" ColumnName="IdDetalleReciboValoresOriginal" />
+          <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
+          <ScalarProperty Name="IdValorOriginal" ColumnName="IdValorOriginal" />
+          <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+          <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+          <ScalarProperty Name="RegistroContableChequeDiferido" ColumnName="RegistroContableChequeDiferido" />
+          <ScalarProperty Name="IdDetalleNotaCredito" ColumnName="IdDetalleNotaCredito" />
+          <ScalarProperty Name="IdDetalleNotaDebito" ColumnName="IdDetalleNotaDebito" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+          <ScalarProperty Name="FechaGasto" ColumnName="FechaGasto" />
+          <ScalarProperty Name="IdPlazoFijoFin" ColumnName="IdPlazoFijoFin" />
+          <ScalarProperty Name="IdPlazoFijoInicio" ColumnName="IdPlazoFijoInicio" />
+          <ScalarProperty Name="IdUsuarioConfirmacionBanco" ColumnName="IdUsuarioConfirmacionBanco" />
+          <ScalarProperty Name="FechaConfirmacionBanco" ColumnName="FechaConfirmacionBanco" />
+          <ScalarProperty Name="MovimientoConfirmadoBanco" ColumnName="MovimientoConfirmadoBanco" />
+          <ScalarProperty Name="IdDetalleReciboCuentas" ColumnName="IdDetalleReciboCuentas" />
+          <ScalarProperty Name="IdEmitio" ColumnName="IdEmitio" />
+          <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+          <ScalarProperty Name="Emitido" ColumnName="Emitido" />
+          <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+          <ScalarProperty Name="CuitLibrador" ColumnName="CuitLibrador" />
+          <ScalarProperty Name="IdDetalleAsiento" ColumnName="IdDetalleAsiento" />
+          <ScalarProperty Name="IdDetalleComprobanteProveedor" ColumnName="IdDetalleComprobanteProveedor" />
+          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdDetalleOrdenPagoValores" ColumnName="IdDetalleOrdenPagoValores" />
+          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+          <ScalarProperty Name="IdDetalleOrdenPagoCuentas" ColumnName="IdDetalleOrdenPagoCuentas" />
+          <ScalarProperty Name="PorcentajeIVA" ColumnName="PorcentajeIVA" />
+          <ScalarProperty Name="IdCuentaIVA" ColumnName="IdCuentaIVA" />
+          <ScalarProperty Name="IdCuentaContable" ColumnName="IdCuentaContable" />
+          <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="Iva" ColumnName="Iva" />
+          <ScalarProperty Name="IdCuentaBancariaDeposito" ColumnName="IdCuentaBancariaDeposito" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+          <ScalarProperty Name="Conciliado" ColumnName="Conciliado" />
+          <ScalarProperty Name="FechaEntradaActivada" ColumnName="FechaEntradaActivada" />
+          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+          <ScalarProperty Name="IdCuentaOrigen" ColumnName="IdCuentaOrigen" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+          <ScalarProperty Name="NumeroSalida" ColumnName="NumeroSalida" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="FechaOrdenPago" ColumnName="FechaOrdenPago" />
+          <ScalarProperty Name="NumeroOrdenPago" ColumnName="NumeroOrdenPago" />
+          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+          <ScalarProperty Name="FechaDeposito" ColumnName="FechaDeposito" />
+          <ScalarProperty Name="NumeroDeposito" ColumnName="NumeroDeposito" />
+          <ScalarProperty Name="IdBancoDeposito" ColumnName="IdBancoDeposito" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="IdDetalleReciboValores" ColumnName="IdDetalleReciboValores" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
+          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+          <ScalarProperty Name="FechaValor" ColumnName="FechaValor" />
+          <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
+          <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

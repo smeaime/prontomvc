@@ -143,6 +143,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> SUSSFechaInicioVigencia { get; set; }
         public string OperacionesMercadoInternoEntidadVinculada { get; set; }
         public Nullable<int> IdCuentaAplicacion { get; set; }
+        public string CodigoCategoriaIIBBAlternativo { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedores { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }

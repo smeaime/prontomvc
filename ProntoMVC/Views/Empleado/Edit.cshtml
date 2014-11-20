@@ -273,7 +273,7 @@
             function AgregarItemVacio(grid) {
                 var colModel = grid.jqGrid('getGridParam', 'colModel');
                 var dataIds = grid.jqGrid('getDataIDs');
-                var Id = (dataIds.length + 1) * -1;
+                var Id = grid.jqGrid('getGridParam', 'records') * -1;
                 var data, j, cm;
 
                 data = '{';

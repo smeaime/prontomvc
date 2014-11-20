@@ -503,7 +503,6 @@
     <EntitySet Name="Recibos" EntityType="DemoProntoModel.Recibo" />
     <EntitySet Name="RubrosContables" EntityType="DemoProntoModel.RubrosContable" />
     <EntitySet Name="RubrosValores" EntityType="DemoProntoModel.RubrosValore" />
-    <EntitySet Name="Valores" EntityType="DemoProntoModel.Valore" />
     <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas" Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
       <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
       <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompras" />
@@ -862,6 +861,19 @@
     <AssociationSet Name="FK_DetalleEmpleadosUbicaciones_Empleados" Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados">
       <End Role="Empleado" EntitySet="Empleados" />
       <End Role="DetalleEmpleadosUbicacione" EntitySet="DetalleEmpleadosUbicaciones" />
+    </AssociationSet>
+    <EntitySet Name="Valores" EntityType="DemoProntoModel.Valore" />
+    <AssociationSet Name="FK_Valores_Monedas_IdMoneda" Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda">
+      <End Role="Moneda" EntitySet="Monedas" />
+      <End Role="Valore" EntitySet="Valores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoComprobante" Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante">
+      <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
+      <End Role="Valore" EntitySet="Valores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoValor" Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor">
+      <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
+      <End Role="Valore" EntitySet="Valores" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
@@ -2834,6 +2846,7 @@
     <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas_Monedas" FromRole="Moneda" ToRole="DetalleComparativa" />
     <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="Moneda" ToRole="NotasCredito" />
     <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="Moneda" ToRole="NotasDebito" />
+    <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Moneda" ToRole="Valore" />
   </EntityType>
   <EntityType Name="Pais">
     <Key>
@@ -2927,6 +2940,8 @@
     <Property Type="String" Name="CodigoAFIP3_Letra_B" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="CodigoAFIP3_Letra_C" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="CodigoAFIP3_Letra_E" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="TiposComprobante" ToRole="Valore" />
+    <NavigationProperty Name="Valores1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="TiposComprobante" ToRole="Valore" />
   </EntityType>
   <Association Name="FK_Clientes_LocalidadEntrega">
     <End Type="DemoProntoModel.Localidad" Role="Localidade" Multiplicity="0..1" />
@@ -3568,6 +3583,7 @@
     <Property Type="String" Name="OperacionesMercadoInternoEntidadVinculada" MaxLength="2" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_Proveedores_DescripcionIva" FromRole="Proveedor" ToRole="DescripcionIva" />
     <Property Type="Int32" Name="IdCuentaAplicacion" />
+    <Property Name="CodigoCategoriaIIBBAlternativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -5211,95 +5227,6 @@
     <Property Type="Int32" Name="IdRubroValor" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Type="String" Name="Codigo" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Descripcion" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Valore">
-    <Key>
-      <PropertyRef Name="IdValor" />
-    </Key>
-    <Property Type="Int32" Name="IdValor" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Type="Int32" Name="IdTipoValor" />
-    <Property Type="Decimal" Name="NumeroValor" Precision="18" Scale="0" />
-    <Property Type="DateTime" Name="FechaValor" Precision="3" />
-    <Property Type="Int32" Name="NumeroInterno" />
-    <Property Type="Int32" Name="IdTipoComprobante" />
-    <Property Type="Int32" Name="NumeroComprobante" />
-    <Property Type="DateTime" Name="FechaComprobante" Precision="3" />
-    <Property Type="Int32" Name="IdCliente" />
-    <Property Type="Int32" Name="IdDetalleReciboValores" />
-    <Property Type="Int32" Name="IdBanco" />
-    <Property Type="Decimal" Name="Importe" Precision="18" Scale="2" />
-    <Property Type="String" Name="Estado" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdBancoDeposito" />
-    <Property Type="Int32" Name="NumeroDeposito" />
-    <Property Type="DateTime" Name="FechaDeposito" Precision="3" />
-    <Property Type="Int32" Name="IdProveedor" />
-    <Property Type="Int32" Name="NumeroOrdenPago" />
-    <Property Type="DateTime" Name="FechaOrdenPago" Precision="3" />
-    <Property Type="Int32" Name="IdCuenta" />
-    <Property Type="Int32" Name="NumeroSalida" />
-    <Property Type="DateTime" Name="FechaSalida" Precision="3" />
-    <Property Type="Int32" Name="IdCuentaOrigen" />
-    <Property Type="DateTime" Name="FechaEntrada" Precision="3" />
-    <Property Type="String" Name="FechaEntradaActivada" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Conciliado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdCuentaBancaria" />
-    <Property Type="Int32" Name="IdCuentaBancariaDeposito" />
-    <Property Type="Decimal" Name="Iva" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IdObra" />
-    <Property Type="Int32" Name="IdCuentaGasto" />
-    <Property Type="Int32" Name="IdCuentaContable" />
-    <Property Type="Int32" Name="IdCuentaIVA" />
-    <Property Type="Decimal" Name="PorcentajeIVA" Precision="6" Scale="2" />
-    <Property Type="Int32" Name="IdDetalleOrdenPagoCuentas" />
-    <Property Type="Int32" Name="IdCaja" />
-    <Property Type="Int32" Name="IdDetalleOrdenPagoValores" />
-    <Property Type="Int32" Name="IdMoneda" />
-    <Property Type="Decimal" Name="CotizacionMoneda" Precision="18" Scale="4" />
-    <Property Type="Int32" Name="IdDetalleComprobanteProveedor" />
-    <Property Type="Int32" Name="IdDetalleAsiento" />
-    <Property Type="String" Name="CuitLibrador" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdConciliacion" />
-    <Property Type="String" Name="Emitido" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaEmision" Precision="3" />
-    <Property Type="Int32" Name="IdEmitio" />
-    <Property Type="Int32" Name="IdDetalleReciboCuentas" />
-    <Property Type="String" Name="MovimientoConfirmadoBanco" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaConfirmacionBanco" Precision="3" />
-    <Property Type="Int32" Name="IdUsuarioConfirmacionBanco" />
-    <Property Type="Int32" Name="IdPlazoFijoInicio" />
-    <Property Type="Int32" Name="IdPlazoFijoFin" />
-    <Property Type="DateTime" Name="FechaGasto" Precision="3" />
-    <Property Type="Int32" Name="IdUsuarioIngreso" />
-    <Property Type="DateTime" Name="FechaIngreso" Precision="3" />
-    <Property Type="Int32" Name="IdUsuarioModifico" />
-    <Property Type="DateTime" Name="FechaModifico" Precision="3" />
-    <Property Type="String" Name="Detalle" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdDetalleNotaDebito" />
-    <Property Type="Int32" Name="IdDetalleNotaCredito" />
-    <Property Type="String" Name="RegistroContableChequeDiferido" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Byte" Name="EnviarEmail" />
-    <Property Type="Int32" Name="IdOrigenTransmision" />
-    <Property Type="Int32" Name="IdValorOriginal" />
-    <Property Type="DateTime" Name="FechaImportacionTransmision" Precision="3" />
-    <Property Type="Int32" Name="IdDetalleReciboValoresOriginal" />
-    <Property Type="String" Name="CuitClienteTransmision" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CertificadoRetencion" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="AsientoManual" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Anulado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdUsuarioAnulo" />
-    <Property Type="DateTime" Name="FechaAnulacion" Precision="3" />
-    <Property Type="String" Name="MotivoAnulacion" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Rechazado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdTarjetaCredito" />
-    <Property Type="String" Name="NumeroTarjetaCredito" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="NumeroAutorizacionTarjetaCredito" />
-    <Property Type="Int32" Name="CantidadCuotas" />
-    <Property Type="String" Name="FechaExpiracionTarjetaCredito" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdFactura" />
-    <Property Type="Int32" Name="IdDetallePresentacionTarjeta" />
-    <Property Type="Int32" Name="IdOrigen" />
-    <Property Type="String" Name="OrigenRegistro" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdReciboAsignado" />
   </EntityType>
   <Association Name="FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
     <End Type="DemoProntoModel.DetalleFactura" Role="DetalleFactura" Multiplicity="0..1" />
@@ -7378,6 +7305,134 @@
       </Principal>
       <Dependent Role="DetalleEmpleadosUbicacione">
         <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Valore">
+    <Key>
+      <PropertyRef Name="IdValor" />
+    </Key>
+    <Property Name="IdValor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoValor" Type="Int32" />
+    <Property Name="NumeroValor" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FechaValor" Type="DateTime" Precision="3" />
+    <Property Name="NumeroInterno" Type="Int32" />
+    <Property Name="IdTipoComprobante" Type="Int32" />
+    <Property Name="NumeroComprobante" Type="Int32" />
+    <Property Name="FechaComprobante" Type="DateTime" Precision="3" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="IdDetalleReciboValores" Type="Int32" />
+    <Property Name="IdBanco" Type="Int32" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="IdBancoDeposito" Type="Int32" />
+    <Property Name="NumeroDeposito" Type="Int32" />
+    <Property Name="FechaDeposito" Type="DateTime" Precision="3" />
+    <Property Name="IdProveedor" Type="Int32" />
+    <Property Name="NumeroOrdenPago" Type="Int32" />
+    <Property Name="FechaOrdenPago" Type="DateTime" Precision="3" />
+    <Property Name="IdCuenta" Type="Int32" />
+    <Property Name="NumeroSalida" Type="Int32" />
+    <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+    <Property Name="IdCuentaOrigen" Type="Int32" />
+    <Property Name="FechaEntrada" Type="DateTime" Precision="3" />
+    <Property Name="FechaEntradaActivada" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Conciliado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="IdCuentaBancariaDeposito" Type="Int32" />
+    <Property Name="Iva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdCuentaGasto" Type="Int32" />
+    <Property Name="IdCuentaContable" Type="Int32" />
+    <Property Name="IdCuentaIVA" Type="Int32" />
+    <Property Name="PorcentajeIVA" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdDetalleOrdenPagoCuentas" Type="Int32" />
+    <Property Name="IdCaja" Type="Int32" />
+    <Property Name="IdDetalleOrdenPagoValores" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="CotizacionMoneda" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="IdDetalleComprobanteProveedor" Type="Int32" />
+    <Property Name="IdDetalleAsiento" Type="Int32" />
+    <Property Name="CuitLibrador" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="IdConciliacion" Type="Int32" />
+    <Property Name="Emitido" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaEmision" Type="DateTime" Precision="3" />
+    <Property Name="IdEmitio" Type="Int32" />
+    <Property Name="IdDetalleReciboCuentas" Type="Int32" />
+    <Property Name="MovimientoConfirmadoBanco" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaConfirmacionBanco" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioConfirmacionBanco" Type="Int32" />
+    <Property Name="IdPlazoFijoInicio" Type="Int32" />
+    <Property Name="IdPlazoFijoFin" Type="Int32" />
+    <Property Name="FechaGasto" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioIngreso" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModifico" Type="Int32" />
+    <Property Name="FechaModifico" Type="DateTime" Precision="3" />
+    <Property Name="Detalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IdDetalleNotaDebito" Type="Int32" />
+    <Property Name="IdDetalleNotaCredito" Type="Int32" />
+    <Property Name="RegistroContableChequeDiferido" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="EnviarEmail" Type="Byte" />
+    <Property Name="IdOrigenTransmision" Type="Int32" />
+    <Property Name="IdValorOriginal" Type="Int32" />
+    <Property Name="FechaImportacionTransmision" Type="DateTime" Precision="3" />
+    <Property Name="IdDetalleReciboValoresOriginal" Type="Int32" />
+    <Property Name="CuitClienteTransmision" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="CertificadoRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AsientoManual" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Anulado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdUsuarioAnulo" Type="Int32" />
+    <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+    <Property Name="MotivoAnulacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Rechazado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdTarjetaCredito" Type="Int32" />
+    <Property Name="NumeroTarjetaCredito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroAutorizacionTarjetaCredito" Type="Int32" />
+    <Property Name="CantidadCuotas" Type="Int32" />
+    <Property Name="FechaExpiracionTarjetaCredito" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IdFactura" Type="Int32" />
+    <Property Name="IdDetallePresentacionTarjeta" Type="Int32" />
+    <Property Name="IdOrigen" Type="Int32" />
+    <Property Name="OrigenRegistro" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="IdReciboAsignado" Type="Int32" />
+    <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Valore" ToRole="Moneda" />
+    <NavigationProperty Name="TiposComprobante" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="Valore" ToRole="TiposComprobante" />
+    <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
+  </EntityType>
+  <Association Name="FK_Valores_Monedas_IdMoneda">
+    <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Valore">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Valores_TiposComprobante_IdTipoComprobante">
+    <End Type="DemoProntoModel.TiposComprobante" Role="TiposComprobante" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposComprobante">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Principal>
+      <Dependent Role="Valore">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Valores_TiposComprobante_IdTipoValor">
+    <End Type="DemoProntoModel.TiposComprobante" Role="TiposComprobante" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposComprobante">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Principal>
+      <Dependent Role="Valore">
+        <PropertyRef Name="IdTipoValor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
