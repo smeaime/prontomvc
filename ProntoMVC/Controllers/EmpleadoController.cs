@@ -28,7 +28,6 @@ namespace ProntoMVC.Controllers
     {
 
         [HttpPost]
-        //public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleEmpleado,IdDetalleEmpleadoCuentaBancaria,IdDetalleEmpleadoJornada,IdDetalleEmpleadoObra,IdDetalleEmpleadoSector,IdDetalleEmpleadoUbicacion")] Empleado Empleado)
         public virtual JsonResult BatchUpdate(Empleado Empleado)
         {
             try
@@ -86,7 +85,6 @@ namespace ProntoMVC.Controllers
                             // Are there child items in the DB which are NOT in the new child item collection anymore?
                             if (!Empleado.DetalleEmpleadosIngresosEgresos.Any(c => c.IdDetalleEmpleado == DetalleEmpleadoOriginal.IdDetalleEmpleado))
                                 // Yes -> It's a deleted child item -> Delete
-
                                 // qué mierda pasa que no lo borra?
                                 //Apparently there is a semantic difference between Remove and Delete where Remove will just orphan the row by 
                                 //    removing the foreign key, and Delete will actually take the record out of the table.
@@ -107,12 +105,11 @@ namespace ProntoMVC.Controllers
 
                                 // http://stackoverflow.com/questions/24755739/entity-framework-dbcontext-removeobj-vs-entryobj-state-entitystate-delet
                                 // http://stackoverflow.com/questions/11584399/difference-between-dbset-remove-and-dbcontext-entryentity-state-entitystate
-
+                            {
                                 EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Remove(DetalleEmpleadoOriginal);
                                 db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
                                 // EmpleadoOriginal.DetalleEmpleadosIngresosEgresos.Delete
-
-
+                            }
                         }
 
                         foreach (var d in Empleado.DetalleEmpleadosSectores)
@@ -131,7 +128,10 @@ namespace ProntoMVC.Controllers
                         foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosSectores.Where(c => c.IdDetalleEmpleadoSector != 0).ToList())
                         {
                             if (!Empleado.DetalleEmpleadosSectores.Any(c => c.IdDetalleEmpleadoSector == DetalleEmpleadoOriginal.IdDetalleEmpleadoSector))
+                            {
                                 EmpleadoOriginal.DetalleEmpleadosSectores.Remove(DetalleEmpleadoOriginal);
+                                db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            }
                         }
 
                         foreach (var d in Empleado.DetalleEmpleadosJornadas)
@@ -150,7 +150,10 @@ namespace ProntoMVC.Controllers
                         foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosJornadas.Where(c => c.IdDetalleEmpleadoJornada != 0).ToList())
                         {
                             if (!Empleado.DetalleEmpleadosJornadas.Any(c => c.IdDetalleEmpleadoJornada == DetalleEmpleadoOriginal.IdDetalleEmpleadoJornada))
+                            {
                                 EmpleadoOriginal.DetalleEmpleadosJornadas.Remove(DetalleEmpleadoOriginal);
+                                db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            }
                         }
 
                         foreach (var d in Empleado.DetalleEmpleadosCuentasBancarias)
@@ -169,7 +172,10 @@ namespace ProntoMVC.Controllers
                         foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Where(c => c.IdDetalleEmpleadoCuentaBancaria != 0).ToList())
                         {
                             if (!Empleado.DetalleEmpleadosCuentasBancarias.Any(c => c.IdDetalleEmpleadoCuentaBancaria == DetalleEmpleadoOriginal.IdDetalleEmpleadoCuentaBancaria))
+                            {
                                 EmpleadoOriginal.DetalleEmpleadosCuentasBancarias.Remove(DetalleEmpleadoOriginal);
+                                db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            }
                         }
 
                         foreach (var d in Empleado.DetalleEmpleadosUbicaciones)
@@ -189,7 +195,10 @@ namespace ProntoMVC.Controllers
                         {
                             if (!Empleado.DetalleEmpleadosUbicaciones.Any(c => c.IdDetalleEmpleadoUbicacion == DetalleEmpleadoOriginal.IdDetalleEmpleadoUbicacion))
                                 EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
-                            EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
+                            {
+                                EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
+                                db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            }
                         }
 
                         db.Entry(EmpleadoOriginal).State = System.Data.Entity.EntityState.Modified;
@@ -611,10 +620,8 @@ namespace ProntoMVC.Controllers
             }
 
             var data = (from a in Det
-                        join b in db.CuentasBancarias on a.IdCuentaBancaria equals b.IdCuentaBancaria into ab
-                        from b in ab.DefaultIfEmpty()
-                        join c in db.Bancos on b.IdBanco equals c.IdBanco into ac
-                        from c in ac.DefaultIfEmpty()
+                        join b in db.CuentasBancarias on a.IdCuentaBancaria equals b.IdCuentaBancaria into ab from b in ab.DefaultIfEmpty()
+                        join c in db.Bancos on b.IdBanco equals c.IdBanco into ac from c in ac.DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleEmpleadoCuentaBancaria,
