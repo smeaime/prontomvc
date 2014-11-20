@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Pronto" Class="LinqCartasPorteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=serversql3\testing;Initial Catalog=Pronto;Persist Security Info=True;User ID=sa" SettingsObjectName="My.MySettings" SettingsPropertyName="ProntoConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WilliamsEntregas" Class="LinqCartasPorteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=serversql1;Initial Catalog=WilliamsEntregas;User ID=sa" SettingsObjectName="My.MySettings" SettingsPropertyName="WilliamsEntregasConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.wTempCartasPorteFacturacionAutomatica" Member="wTempCartasPorteFacturacionAutomaticas">
     <Type Name="wTempCartasPorteFacturacionAutomatica">
       <Column Name="IdTempCartasPorteFacturacionAutomatica" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -481,7 +481,7 @@
       <Column Name="IdCertificacionObras" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdCertificacionObraDatos" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FechaRecepcionCliente" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Cliente_linqFactura" Member="linqCliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
+      <Association Name="linqCliente_linqFactura" Member="linqCliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Vendedores" Member="linqCorredors">
@@ -501,8 +501,8 @@
       <Column Name="Cuit" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
       <Association Name="linqCorredor_CartasDePorte" Member="CartasDePortes" ThisKey="IdVendedor" OtherKey="IdCorredor2" Type="CartasDePorte" />
       <Association Name="linqCorredor_CartasDePorte1" Member="CartasDePortes1" ThisKey="IdVendedor" OtherKey="Corredor" Type="CartasDePorte" />
-      <Association Name="linqCorredor_Cliente" Member="Clientes" ThisKey="IdVendedor" OtherKey="Cobrador" Type="linqCliente" />
-      <Association Name="linqCorredor_Cliente1" Member="linqClientes" ThisKey="IdVendedor" OtherKey="Vendedor1" Type="linqCliente" />
+      <Association Name="linqCorredor_linqCliente" Member="Clientes" ThisKey="IdVendedor" OtherKey="Cobrador" Type="linqCliente" />
+      <Association Name="linqCorredor_linqCliente1" Member="linqClientes" ThisKey="IdVendedor" OtherKey="Vendedor1" Type="linqCliente" />
     </Type>
   </Table>
   <Table Name="dbo.Calidades" Member="Calidades">
@@ -579,8 +579,8 @@
       <Column Name="Idioma" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
       <Column Name="PuntoVentaAsociado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdLugarEntregaAsignado" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="linqEmpleado_Cliente" Member="Clientes" ThisKey="IdEmpleado" OtherKey="IdUsuarioIngreso" Type="linqCliente" />
-      <Association Name="linqEmpleado_Cliente1" Member="linqClientes" ThisKey="IdEmpleado" OtherKey="IdUsuarioModifico" Type="linqCliente" />
+      <Association Name="linqEmpleado_linqCliente" Member="Clientes" ThisKey="IdEmpleado" OtherKey="IdUsuarioIngreso" Type="linqCliente" />
+      <Association Name="linqEmpleado_linqCliente1" Member="linqClientes" ThisKey="IdEmpleado" OtherKey="IdUsuarioModifico" Type="linqCliente" />
     </Type>
   </Table>
   <Table Name="dbo.ListasPrecios" Member="ListasPrecios">
@@ -591,7 +591,7 @@
       <Column Name="FechaVigencia" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Activa" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="IdMoneda" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ListasPrecio_Cliente" Member="linqClientes" ThisKey="IdListaPrecios" OtherKey="IdListaPrecios" Type="linqCliente" />
+      <Association Name="ListasPrecio_linqCliente" Member="linqClientes" ThisKey="IdListaPrecios" OtherKey="IdListaPrecios" Type="linqCliente" />
     </Type>
   </Table>
   <Table Name="dbo.ListasPreciosDetalle" Member="ListasPreciosDetalles">
@@ -624,7 +624,7 @@
       <Column Name="SeLeDerivaSuFacturaAlCorredorDeLaCarta" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="SeLeFacturaCartaPorteComoClienteAuxiliar" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="EsEntregador" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
-      <Association Name="Cliente_CartasDePorteReglasDeFacturacion" Member="linqCliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
+      <Association Name="linqCliente_CartasDePorteReglasDeFacturacion" Member="linqCliente" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Localidades" Member="Localidades">
@@ -642,8 +642,8 @@
       <Column Name="Codigo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdPartido" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Localidade_WilliamsDestino" Member="WilliamsDestinos" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="WilliamsDestino" />
-      <Association Name="Localidade_Cliente" Member="Clientes" ThisKey="IdLocalidad" OtherKey="IdLocalidadEntrega" Type="linqCliente" />
-      <Association Name="Localidade_Cliente1" Member="linqClientes" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="linqCliente" />
+      <Association Name="Localidade_linqCliente" Member="Clientes" ThisKey="IdLocalidad" OtherKey="IdLocalidadEntrega" Type="linqCliente" />
+      <Association Name="Localidade_linqCliente1" Member="linqClientes" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="linqCliente" />
       <Association Name="Partido_Localidade" Member="Partido1" ThisKey="IdPartido" OtherKey="IdPartido" Type="Partido" IsForeignKey="true" />
     </Type>
   </Table>
@@ -680,8 +680,8 @@
       <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Localidade_WilliamsDestino" Member="Localidade" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="Localidade" IsForeignKey="true" />
-      <Association Name="Cliente_WilliamsDestino" Member="Cliente" ThisKey="Subcontratista1" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
-      <Association Name="Cliente_WilliamsDestino1" Member="linqCliente" ThisKey="Subcontratista2" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
+      <Association Name="linqCliente_WilliamsDestino" Member="Cliente" ThisKey="Subcontratista1" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
+      <Association Name="linqCliente_WilliamsDestino1" Member="linqCliente" ThisKey="Subcontratista2" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CartasDePorte" Member="CartasDePortes">
@@ -1145,17 +1145,28 @@
       <Column Name="EsEntregador" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="OperacionesMercadoInternoEntidadVinculada" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
       <Column Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Cliente_linqFactura" Member="linqFacturas" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqFactura" />
-      <Association Name="Cliente_CartasDePorteReglasDeFacturacion" Member="CartasDePorteReglasDeFacturacions" ThisKey="IdCliente" OtherKey="IdCliente" Type="CartasDePorteReglasDeFacturacion" />
-      <Association Name="Cliente_WilliamsDestino" Member="WilliamsDestinos" ThisKey="IdCliente" OtherKey="Subcontratista1" Type="WilliamsDestino" />
-      <Association Name="Cliente_WilliamsDestino1" Member="WilliamsDestinos1" ThisKey="IdCliente" OtherKey="Subcontratista2" Type="WilliamsDestino" />
-      <Association Name="linqCorredor_Cliente" Member="linqCorredor" ThisKey="Cobrador" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
-      <Association Name="linqEmpleado_Cliente" Member="linqEmpleado" ThisKey="IdUsuarioIngreso" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
-      <Association Name="linqEmpleado_Cliente1" Member="linqEmpleado1" ThisKey="IdUsuarioModifico" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
-      <Association Name="ListasPrecio_Cliente" Member="ListasPrecio" ThisKey="IdListaPrecios" OtherKey="IdListaPrecios" Type="ListasPrecio" IsForeignKey="true" />
-      <Association Name="Localidade_Cliente" Member="Localidade" ThisKey="IdLocalidadEntrega" OtherKey="IdLocalidad" Type="Localidade" IsForeignKey="true" />
-      <Association Name="Localidade_Cliente1" Member="Localidade1" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="Localidade" IsForeignKey="true" />
-      <Association Name="linqCorredor_Cliente1" Member="linqCorredor1" ThisKey="Vendedor1" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
+      <Association Name="linqCliente_linqFactura" Member="linqFacturas" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqFactura" />
+      <Association Name="linqCliente_CartasDePorteReglasDeFacturacion" Member="CartasDePorteReglasDeFacturacions" ThisKey="IdCliente" OtherKey="IdCliente" Type="CartasDePorteReglasDeFacturacion" />
+      <Association Name="linqCliente_WilliamsDestino" Member="WilliamsDestinos" ThisKey="IdCliente" OtherKey="Subcontratista1" Type="WilliamsDestino" />
+      <Association Name="linqCliente_WilliamsDestino1" Member="WilliamsDestinos1" ThisKey="IdCliente" OtherKey="Subcontratista2" Type="WilliamsDestino" />
+      <Association Name="linqCorredor_linqCliente" Member="linqCorredor" ThisKey="Cobrador" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
+      <Association Name="linqEmpleado_linqCliente" Member="linqEmpleado" ThisKey="IdUsuarioIngreso" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
+      <Association Name="linqEmpleado_linqCliente1" Member="linqEmpleado1" ThisKey="IdUsuarioModifico" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
+      <Association Name="ListasPrecio_linqCliente" Member="ListasPrecio" ThisKey="IdListaPrecios" OtherKey="IdListaPrecios" Type="ListasPrecio" IsForeignKey="true" />
+      <Association Name="Localidade_linqCliente" Member="Localidade" ThisKey="IdLocalidadEntrega" OtherKey="IdLocalidad" Type="Localidade" IsForeignKey="true" />
+      <Association Name="Localidade_linqCliente1" Member="Localidade1" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="Localidade" IsForeignKey="true" />
+      <Association Name="linqCorredor_linqCliente1" Member="linqCorredor1" ThisKey="Vendedor1" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DetalleClientes" Member="DetalleClientes">
+    <Type Name="DetalleClientes">
+      <Column Name="IdDetalleCliente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Contacto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Puesto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Acciones" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.wTarifaWilliamsEstimada" Method="wTarifaWilliamsEstimada" IsComposable="true">

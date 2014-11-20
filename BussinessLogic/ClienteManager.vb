@@ -202,6 +202,10 @@ Namespace Pronto.ERP.Bll
 
                     .EsEntregador = myCliente.EsEntregador
                     .CartaPorteTipoDeAdjuntoDeFacturacion = myCliente.CartaPorteTipoDeAdjuntoDeFacturacion
+
+
+
+
                 End With
                 'If IsNothing(ue) Then
                 '    ue = New UserDatosExtendido
@@ -213,6 +217,51 @@ Namespace Pronto.ERP.Bll
                 'Else
                 '    ue.RazonSocial = razonsocial
                 'End If
+
+
+                'Dim oCliente As linqCliente = (From i In db.linqClientes _
+                '                               Join det In db.DetalleClientes On i.IdCliente Equals det.IdCliente _
+                '                    Where i.IdCliente = myCliente.Id).SingleOrDefault
+
+                Try
+
+                    Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                        Where i.IdCliente = myCliente.Id _
+                                                        And i.Acciones = "EmailFacturacionElectronica"
+                                                    ).SingleOrDefault
+                    If IsNothing(oDet) Then
+                        oDet = New DetalleClientes
+                        oDet.Acciones = "EmailFacturacionElectronica"
+                        oDet.Email = myCliente.EmailFacturacionElectronica
+                        db.DetalleClientes.InsertOnSubmit(oDet)
+                    Else
+                        oDet.Email = myCliente.EmailFacturacionElectronica
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+                Try
+
+                    Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                        Where i.IdCliente = myCliente.Id _
+                                                        And i.Acciones = "AutorizacionSyngenta"
+                                                    ).SingleOrDefault
+                    If IsNothing(oDet) Then
+                        oDet = New DetalleClientes
+                        oDet.Acciones = "AutorizacionSyngenta"
+                        oDet.Contacto = myCliente.AutorizacionSyngenta
+                        db.DetalleClientes.InsertOnSubmit(oDet)
+                    Else
+                        oDet.Email = myCliente.AutorizacionSyngenta
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
+
 
                 db.SubmitChanges()
 
