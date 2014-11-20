@@ -55,12 +55,10 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
-
         void enviarmailAlComprador()
         {
 
         }
-
 
         public virtual ActionResult Edit(int id)
         {
@@ -82,8 +80,6 @@ namespace ProntoMVC.Controllers
             }
             else
             {
-
-
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
                 // ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
 
@@ -93,14 +89,8 @@ namespace ProntoMVC.Controllers
             }
         }
 
-
         void inic(ref OrdenPago o)
         {
-
-
-
-
-
             Parametros parametros = db.Parametros.Find(1);
             o.NumeroOrdenPago = parametros.ProximaOrdenPago;
             //o.SubNumero = 1;
@@ -158,16 +148,13 @@ namespace ProntoMVC.Controllers
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
-
         }
-
 
         public virtual JsonResult Autorizaciones(int IdPedido)
         {
             var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, IdPedido);
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
-
 
         void CargarViewBag(OrdenPago o)
         {
@@ -179,8 +166,6 @@ namespace ProntoMVC.Controllers
             ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
 
             ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
-
-
 
             //ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
             //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
@@ -194,7 +179,6 @@ namespace ProntoMVC.Controllers
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, 0, -1).Count();
 
             //ViewBag.TotalBonificacionGlobal = o.Bonificacion;
-
 
             //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
             //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
@@ -221,26 +205,16 @@ namespace ProntoMVC.Controllers
             ////l.Add((new SelectListItem { IdIBCondicion = " ", Descripcion = "-1" }));
             //ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
 
-
-
             //ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
             //ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
 
-
-
             //Parametros parametros = db.Parametros.Find(1);
             //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
-
         }
-
 
 
         public virtual ActionResult EditExterno(int id)
         {
-
-
-
-
             if (id == -1)
             {
                 OrdenPago OrdenPago = new OrdenPago();
@@ -262,13 +236,11 @@ namespace ProntoMVC.Controllers
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-
                 int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
                 if (OrdenPago.IdProveedor != idproveedor
                      && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
                     ) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
-
 
                 //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
                 //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
@@ -289,10 +261,10 @@ namespace ProntoMVC.Controllers
                 return View(OrdenPago);
             }
         }
+
         [HttpPost]
         public virtual ActionResult Edit(OrdenPago OrdenPago)
         {
-
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
                ) throw new Exception("No tenés permisos");
@@ -370,7 +342,6 @@ namespace ProntoMVC.Controllers
             var data = (from a in Entidad
                         select new
                         {
-
                             IdOrdenesPago = a.IdOrdenPago,
                             Numero = a.NumeroOrdenPago,
                             //Orden = a.SubNumero,
@@ -443,20 +414,14 @@ namespace ProntoMVC.Controllers
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
-
-
             int idproveedor;
-
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S"; //hay que usar S para traer solo lo pendiente
 
-            //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TX_EnCaja", "CA"); // "FI", "EN", "CA"
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
 
-
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
-
 
             try
             {
@@ -474,12 +439,8 @@ namespace ProntoMVC.Controllers
 
             }
 
-
-
             int totalRecords = Entidad.Count();  // Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-
 
             var data = (from a in Entidad
                         select new
@@ -513,14 +474,10 @@ namespace ProntoMVC.Controllers
                             TextoAuxiliar1 = a[26],
                             TextoAuxiliar2 = a[27],
                             TextoAuxiliar3 = a[28]
-
-
-
                         })
                 //.Where(campo)
                         .OrderByDescending(x => x.Numero)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
 
             var jsonData = new jqGridJson()
             {
@@ -535,81 +492,48 @@ namespace ProntoMVC.Controllers
                                 "<a href="+ Url.Action("EditExterno",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>" 
                                  //+"|"+"<a href=../OrdenPago/EditExterno/" + a.IdOrdenesPago + "?code=1" + ">Detalles</a> "
                                  ,
-                                                                
-                                   "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
-                                 a.IdOPComplementariaFF.NullSafeToString(),
-                            a.Numero.NullSafeToString(),
-                            //a.IdOrdenPago.NullSafeToString(),
-                            a.Exterior.NullSafeToString(),
-                            a.FechaOrdenesPago.NullSafeToString(),
-                            a.Tipo.NullSafeToString(),
-                            a.Estado.NullSafeToString(),
-                            a.Proveedores.NullSafeToString(),  
-                             a.NombreAnterior.NullSafeToString(),  
-                            a.Monedas.NullSafeToString() ,  
-                            a.Efectivo.NullSafeToString(),
-                            a.Descuentos.NullSafeToString(),
-                            a.Valores.NullSafeToString(),
-                            a.Documentos.NullSafeToString(),
-                            a.Acreedores.NullSafeToString(),
-                            a.RetencionIVA.NullSafeToString(),
-                            a.RetencionGanancias.NullSafeToString(),
-                            a.RetencionIBrutos.NullSafeToString(),
-                            a.RetencionSUSS.NullSafeToString(),
-                            a.GastosGenerales.NullSafeToString(),
-                            a.DiferenciaBalanceo.NullSafeToString(),
-                             a.NumeroOrdenesPago .NullSafeToString(),
-                            a.CotizacionDolar.NullSafeToString(),
-                             a.Empleados.NullSafeToString() ,
-                            a.Observaciones.NullSafeToString(),
-                             a.Obras.NullSafeToString() ,
-                            a.TextoAuxiliar1.NullSafeToString(),
-                            a.TextoAuxiliar2.NullSafeToString(),
-                            a.TextoAuxiliar3.NullSafeToString()
-
-                                //a.IdOrdenPago.ToString(), 
-                                //a.Numero.ToString(), 
-                                //a.Orden.ToString(), 
-                                //a.FechaIngreso.ToString(),
-                                //a.Proveedor,
-                                //a.Validez,
-                                //a.Bonificacion.ToString(),
-                                //a.PorcentajeIva1.ToString(),
-                                //a.Moneda,
-                                //a.Subtotal.ToString(),
-                                //a.ImporteBonificacion.ToString(),
-                                //a.ImporteIva1.ToString(),
-                                //a.ImporteTotal.ToString(),
-                                //a.PlazoEntrega,
-                                //a.CondicionCompra,
-                                //a.Garantia,
-                                //a.LugarEntrega,
-                                //a.Comprador,
-                                //a.Aprobo,
-                                //a.Referencia,
-                                //a.Detalle,
-                                //a.Contacto,
-            
+                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
+                                a.IdOPComplementariaFF.NullSafeToString(),
+                                a.Numero.NullSafeToString(),
+                                //a.IdOrdenPago.NullSafeToString(),
+                                a.Exterior.NullSafeToString(),
+                                a.FechaOrdenesPago.NullSafeToString(),
+                                a.Tipo.NullSafeToString(),
+                                a.Estado.NullSafeToString(),
+                                a.Proveedores.NullSafeToString(),  
+                                a.NombreAnterior.NullSafeToString(),  
+                                a.Monedas.NullSafeToString() ,  
+                                a.Efectivo.NullSafeToString(),
+                                a.Descuentos.NullSafeToString(),
+                                a.Valores.NullSafeToString(),
+                                a.Documentos.NullSafeToString(),
+                                a.Acreedores.NullSafeToString(),
+                                a.RetencionIVA.NullSafeToString(),
+                                a.RetencionGanancias.NullSafeToString(),
+                                a.RetencionIBrutos.NullSafeToString(),
+                                a.RetencionSUSS.NullSafeToString(),
+                                a.GastosGenerales.NullSafeToString(),
+                                a.DiferenciaBalanceo.NullSafeToString(),
+                                a.NumeroOrdenesPago .NullSafeToString(),
+                                a.CotizacionDolar.NullSafeToString(),
+                                a.Empleados.NullSafeToString() ,
+                                a.Observaciones.NullSafeToString(),
+                                a.Obras.NullSafeToString() ,
+                                a.TextoAuxiliar1.NullSafeToString(),
+                                a.TextoAuxiliar2.NullSafeToString(),
+                                a.TextoAuxiliar3.NullSafeToString()
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public virtual ActionResult OrdenesPagoEnCajaUsandoDataset(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
-
-
             int idproveedor;
-
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S"; //hay que usar S para traer solo lo pendiente
@@ -617,9 +541,7 @@ namespace ProntoMVC.Controllers
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TX_EnCaja", "CA"); // "FI", "EN", "CA"
             // var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC,        "OrdenesPago_TT"); // "FI", "EN", "CA"
 
-
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
-
 
             try
             {
@@ -637,12 +559,8 @@ namespace ProntoMVC.Controllers
 
             }
 
-
-
             int totalRecords = Entidad.Count();  // Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-
 
             var data = (from a in Entidad
                         select new
@@ -676,14 +594,10 @@ namespace ProntoMVC.Controllers
                             TextoAuxiliar1 = a[26],
                             TextoAuxiliar2 = a[27],
                             TextoAuxiliar3 = a[28]
-
-
-
                         })
                 //.Where(campo)
                 //.OrderBy(sidx + " " + sord)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
 
             var jsonData = new jqGridJson()
             {
@@ -698,70 +612,41 @@ namespace ProntoMVC.Controllers
                                 "<a href="+ Url.Action("EditExterno",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>" 
                                  //+"|"+"<a href=../OrdenPago/EditExterno/" + a.IdOrdenesPago + "?code=1" + ">Detalles</a> "
                                  ,
-                                                                
-                                   "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
-                                 a.IdOPComplementariaFF.NullSafeToString(),
-                            a.Numero.NullSafeToString(),
-                            //a.IdOrdenPago.NullSafeToString(),
-                            a.Exterior.NullSafeToString(),
-                            a.FechaOrdenesPago.NullSafeToString(),
-                            a.Tipo.NullSafeToString(),
-                            a.Estado.NullSafeToString(),
-                            a.Proveedores.NullSafeToString(),  
-                             a.NombreAnterior.NullSafeToString(),  
-                            a.Monedas.NullSafeToString() ,  
-                            a.Efectivo.NullSafeToString(),
-                            a.Descuentos.NullSafeToString(),
-                            a.Valores.NullSafeToString(),
-                            a.Documentos.NullSafeToString(),
-                            a.Acreedores.NullSafeToString(),
-                            "",
-"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IVA&Id=" + a.IdOrdenesPago + "'>" + a.RetencionIVA.NullSafeToString() + " </a> ",
-"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Ganancias&Id=" + a.IdOrdenesPago + "'>" + a.RetencionGanancias.NullSafeToString() + "</a> ",
-"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IIBB&Id=" + a.IdOrdenesPago + "'>" + a.RetencionIBrutos.NullSafeToString() + "</a> ",
-"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Suss&Id=" + a.IdOrdenesPago + "'>" + a.RetencionSUSS.NullSafeToString() + "</a> ",
-                           
-           
-                            a.GastosGenerales.NullSafeToString(),
-                            a.DiferenciaBalanceo.NullSafeToString(),
-                             a.NumeroOrdenesPago .NullSafeToString(),
-                            a.CotizacionDolar.NullSafeToString(),
-                             a.Empleados.NullSafeToString() ,
-                            a.Observaciones.NullSafeToString(),
-                             a.Obras.NullSafeToString() ,
-                            a.TextoAuxiliar1.NullSafeToString(),
-                            a.TextoAuxiliar2.NullSafeToString(),
-                            // a.TextoAuxiliar3.NullSafeToString(),
-
-
+                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
+                                a.IdOPComplementariaFF.NullSafeToString(),
+                                a.Numero.NullSafeToString(),
+                                //a.IdOrdenPago.NullSafeToString(),
+                                a.Exterior.NullSafeToString(),
+                                a.FechaOrdenesPago.NullSafeToString(),
+                                a.Tipo.NullSafeToString(),
+                                a.Estado.NullSafeToString(),
+                                a.Proveedores.NullSafeToString(),  
+                                a.NombreAnterior.NullSafeToString(),  
+                                a.Monedas.NullSafeToString() ,  
+                                a.Efectivo.NullSafeToString(),
+                                a.Descuentos.NullSafeToString(),
+                                a.Valores.NullSafeToString(),
+                                a.Documentos.NullSafeToString(),
+                                a.Acreedores.NullSafeToString(),
+                                "",
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IVA&Id=" + a.IdOrdenesPago + "'>" + a.RetencionIVA.NullSafeToString() + " </a> ",
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Ganancias&Id=" + a.IdOrdenesPago + "'>" + a.RetencionGanancias.NullSafeToString() + "</a> ",
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IIBB&Id=" + a.IdOrdenesPago + "'>" + a.RetencionIBrutos.NullSafeToString() + "</a> ",
+                                "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Suss&Id=" + a.IdOrdenesPago + "'>" + a.RetencionSUSS.NullSafeToString() + "</a> ",
+                                a.GastosGenerales.NullSafeToString(),
+                                a.DiferenciaBalanceo.NullSafeToString(),
+                                a.NumeroOrdenesPago .NullSafeToString(),
+                                a.CotizacionDolar.NullSafeToString(),
+                                a.Empleados.NullSafeToString() ,
+                                a.Observaciones.NullSafeToString(),
+                                a.Obras.NullSafeToString() ,
+                                a.TextoAuxiliar1.NullSafeToString(),
+                                a.TextoAuxiliar2.NullSafeToString(),
+                                // a.TextoAuxiliar3.NullSafeToString(),
                                 "<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Suss&Id=" + a.IdOrdenesPago + "'>Cert. SUSS</a> "
                                  +"|"+"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20Ganancias&Id=" + a.IdOrdenesPago + "'>Cert. Ganancias</a> "
                                  +"|"+"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IVA&Id=" + a.IdOrdenesPago + "'>Cert. IVA</a> "
                                  +"|"+"<a href='"+ @Url.Content("~/") + "Reporte.aspx?ReportName=Certificado%20IIBB&Id=" + a.IdOrdenesPago + "'>Cert. IIBB</a> "
-
-                                //a.IdOrdenPago.ToString(), 
-                                //a.Numero.ToString(), 
-                                //a.Orden.ToString(), 
-                                //a.FechaIngreso.ToString(),
-                                //a.Proveedor,
-                                //a.Validez,
-                                //a.Bonificacion.ToString(),
-                                //a.PorcentajeIva1.ToString(),
-                                //a.Moneda,
-                                //a.Subtotal.ToString(),
-                                //a.ImporteBonificacion.ToString(),
-                                //a.ImporteIva1.ToString(),
-                                //a.ImporteTotal.ToString(),
-                                //a.PlazoEntrega,
-                                //a.CondicionCompra,
-                                //a.Garantia,
-                                //a.LugarEntrega,
-                                //a.Comprador,
-                                //a.Aprobo,
-                                //a.Referencia,
-                                //a.Detalle,
-                                //a.Contacto,
-            
                             }
                         }).ToArray()
             };
@@ -799,163 +684,93 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "CertificadoRetencionGanancias.docx");
         }
 
-
-
-
-
         public void EmisionCert()
         {
-            //   Dim oW As Word.Application
-            //   Dim oRs As ADOR.Recordset
-            //   Dim mNumeroCertificado As Long, mIdProveedor As Long
-            //   Dim mCopias As Integer
-            //   Dim mFecha As Date
-            //   Dim mComprobante As String, mNombreSujeto As String, mDomicilioSujeto As String, mCuitSujeto As String
-            //   Dim mProvincia As String, mPrinterAnt As String, mAux1 As String, mAnulada As String, mPlantilla As String
-            //   Dim mRetenido As Double, mCotMon As Double, mMontoOrigen As Double
-
-            //   On Error GoTo Mal
-
-            //   mPlantilla = glbPathPlantillas & "\CertificadoRetencionGanancias_" & glbEmpresaSegunString & ".dot"
-            //   If Len(Dir(mPlantilla)) = 0 Then
-            //      mPlantilla = glbPathPlantillas & "\CertificadoRetencionGanancias.dot"
-            //      If Len(Dir(mPlantilla)) = 0 Then
-            //         MsgBox "Plantilla " & mPlantilla & " inexistente", vbExclamation
-            //         Exit Sub
-            //      End If
-            //   End If
-
-            //   mCopias = 1
-            //   mAux1 = BuscarClaveINI("Copias retenciones en op")
-            //   If IsNumeric(mAux1) Then mCopias = Val(mAux1)
-
-            //   Set oRs = Aplicacion.OrdenPago.TraerFiltrado("_PorId", mIdOrdenesPago)
-            //   With oRs
-            //      mComprobante = Format(.Fields("NumeroOrdenesPago").Value, "00000000")
-            //      mIdProveedor = .Fields("IdProveedor").Value
-            //      mCotMon = .Fields("CotizacionMoneda").Value
-            //      mFecha = .Fields("FechaOrdenesPago").Value
-            //      If IIf(IsNull(.Fields("Anulada").Value), "", .Fields("Anulada").Value) = "SI" Then mAnulada = "ANULADA"
-            //      .Close
-            //   End With
-
-            //   Set oRs = Aplicacion.Proveedores.TraerFiltrado("_ConDatos", mIdProveedor)
-            //   If oRs.RecordCount > 0 Then
-            //      mNombreSujeto = IIf(IsNull(oRs.Fields("RazonSocial").Value), "", oRs.Fields("RazonSocial").Value)
-            //      mProvincia = IIf(IsNull(oRs.Fields("Provincia").Value), "", oRs.Fields("Provincia").Value)
-            //      If UCase(mProvincia) = "CAPITAL FEDERAL" Then mProvincia = ""
-            //      mDomicilioSujeto = Trim(IIf(IsNull(oRs.Fields("Direccion").Value), "", oRs.Fields("Direccion").Value)) & " " & _
-            //                           Trim(IIf(IsNull(oRs.Fields("Localidad").Value), "", oRs.Fields("Localidad").Value)) & " " & mProvincia
-            //      mCuitSujeto = IIf(IsNull(oRs.Fields("Cuit").Value), "", oRs.Fields("Cuit").Value)
-            //   End If
-            //   oRs.Close
-            //   Set oRs = Nothing
-
-            //   Set oW = CreateObject("Word.Application")
-
-            //   Set oRs = Aplicacion.TablasGenerales.TraerFiltrado("DetOrdenesPagoImpuestos", "OrdenPago", mIdOrdenesPago)
-            //   If oRs.Fields.Count > 0 Then
-            //      If oRs.RecordCount > 0 Then
-            //         oRs.MoveFirst
-            //         Do While Not oRs.EOF
-            //            If oRs.Fields("Tipo").Value = "Ganancias" And Not IsNull(oRs.Fields("Certif.Gan.").Value) Then
-            //               mNumeroCertificado = oRs.Fields("Certif.Gan.").Value
-            //               mMontoOrigen = oRs.Fields("Pago s/imp.").Value * mCotMon
-            //               mRetenido = oRs.Fields("Retencion").Value * mCotMon
-
-            //               With oW
-            //                  .Visible = True
-            //                  With .Documents.Add(mPlantilla)
-            //                     oW.ActiveDocument.FormFields("NumeroCertificado").Result = mNumeroCertificado
-            //                     oW.ActiveDocument.FormFields("Fecha").Result = mFecha
-            //                     oW.ActiveDocument.FormFields("NombreAgente").Result = glbEmpresa
-            //                     oW.ActiveDocument.FormFields("CuitAgente").Result = glbCuit
-            //                     oW.ActiveDocument.FormFields("DomicilioAgente").Result = glbDireccion & " " & glbLocalidad & " " & glbProvincia
-            //                     oW.ActiveDocument.FormFields("NombreSujeto").Result = mNombreSujeto
-            //                     oW.ActiveDocument.FormFields("CuitSujeto").Result = mCuitSujeto
-            //                     oW.ActiveDocument.FormFields("DomicilioSujeto").Result = mDomicilioSujeto
-            //                     oW.ActiveDocument.FormFields("Comprobante").Result = mComprobante
-            //                     oW.ActiveDocument.FormFields("Regimen").Result = oRs.Fields("Categoria").Value
-            //                     oW.ActiveDocument.FormFields("MontoOrigen").Result = Format(mMontoOrigen, "$ #,##0.00")
-            //                     oW.ActiveDocument.FormFields("Retencion").Result = Format(mRetenido, "$ #,##0.00")
-            //                     oW.ActiveDocument.FormFields("Anulada").Result = mAnulada
-            //                     mAux1 = BuscarClaveINI("Aclaracion para certificado de retencion de ganancias")
-            //                     If Len(mAux1) > 0 Then
-            //                        oW.ActiveDocument.FormFields("Aclaracion").Result = mAux1
-            //                     End If
-            //                  End With
-            //               End With
-
-            //               If mDestino = "Printer" Then
-            //                  mPrinterAnt = Printer.DeviceName & " on " & Printer.Port
-            //                  If Len(mPrinter) > 0 Then oW.ActivePrinter = mPrinter
-            //                  oW.Documents(1).PrintOut False, , , , , , , mCopias
-            //                  If Len(mPrinterAnt) > 0 Then oW.ActivePrinter = mPrinterAnt
-            //                  oW.Documents(1).Close False
-            //               End If
-
-            //            End If
-            //            oRs.MoveNext
-            //         Loop
-            //      End If
-            //   End If
-            //   oRs.Close
-
         }
-
-
-
-
-
-
-
-        //y por qué no llamar directamente al sp de detalle???????
-
-
 
         public virtual ActionResult DetOrdenesPago(string sidx, string sord, int? page, int? rows, int? IdOrdenPago)
         {
             int IdOrdenesPago1 = IdOrdenPago ?? 0;
-            var DetEntidad = db.DetalleOrdenesPagoes.Where(p => p.IdOrdenPago == IdOrdenesPago1).AsQueryable();
-
+            //var Det = db.DetalleOrdenesPagoes.Where(p => p.IdOrdenPago == IdOrdenesPago1 || IdOrdenesPago1 == -1).AsQueryable();
             int pageSize = rows ?? 20;
-            int totalRecords = DetEntidad.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             int currentPage = page ?? 1;
 
+            //var data = (from a in Det 
+            //            from b in db.CuentasCorrientesAcreedores.Where(c => c.IdCtaCte == a.IdImputacion).DefaultIfEmpty() 
+            //            from c in db.ComprobantesProveedor.Where(p => p.IdComprobanteProveedor == b.IdComprobante && b.IdTipoComp != 16 && b.IdTipoComp != 17).DefaultIfEmpty()
+            //            from d in db.TiposComprobantes.Where(t => t.IdTipoComprobante == b.IdTipoComp).DefaultIfEmpty()
+            //            from e in db.Proveedores.Where(u => u.IdProveedor == c.IdProveedor).DefaultIfEmpty()
+            //            from f in db.DetalleOrdenesPagoes.Where(v => v.IdDetalleOrdenPago == c.IdDetalleOrdenPagoRetencionIVAAplicada).DefaultIfEmpty()
+            //            from g in db.OrdenesPago.Where(w => w.IdOrdenPago == f.IdOrdenPago).DefaultIfEmpty()
+            //            from h in db.OrdenesPago.Where(x => x.IdOrdenPago == c.IdOrdenPagoRetencionIva).DefaultIfEmpty()
+            //            from i in db.IBCondiciones.Where(y => y.IdIBCondicion == c.IdIBCondicion).DefaultIfEmpty()
+            //            select new
+            //            { 
+            //                a.IdDetalleOrdenPago,
+            //                a.IdImputacion,
+            //                Tipo = d != null ? d.DescripcionAb : "PA",
+            //                Letra = c.Letra != null ? c.Letra : "",
+            //                Numero1 = c.NumeroComprobante1 != null ? c.NumeroComprobante1.ToString() : "",
+            //                Numero2 = c.NumeroComprobante2 != null ? c.NumeroComprobante2.ToString() : b.NumeroComprobante.ToString(),
+            //                b.Fecha,
+            //                b.ImporteTotal,
+            //                b.Saldo,
+            //                a.Importe,
+            //                SinImpuestos = a.IdImputacion<=0 ? a.ImportePagadoSinImpuestos : (b.ImporteTotal != 0 ? a.Importe * c.TotalBruto / b.ImporteTotal : 0),
+            //                IvaTotal = c.TotalIva1 * d.Coeficiente,
+            //                TotalComprobante = c.TotalComprobante * d.Coeficiente,
+            //                BienesYServicios = c.BienesOServicios != null ? c.BienesOServicios : e.BienesOServicios,
+            //                ImporteRetencionIVA = a.ImporteRetencionIVA,
+            //                NumeroOrdenPagoRetencionIVA = g != null ? g.NumeroOrdenPago : h.NumeroOrdenPago,
+            //                c.IdTipoRetencionGanancia,
+            //                c.IdIBCondicion,
+            //                BaseCalculoIIBB = i.BaseCalculo == null || i.BaseCalculo == "SIN IMPUESTOS" ? "SIN IMPUESTOS" : "CON IMPUESTOS",
+            //                b.FechaVencimiento,
+            //                c.FechaComprobante,
+            //                GravadoIVA = a.IdImputacion <= 0 ? a.ImportePagadoSinImpuestos : (b.ImporteTotal != 0 ? a.Importe * c.TotalBruto / b.ImporteTotal : 0),
+            //                c.CotizacionMoneda,
+            //                c.PorcentajeIVAParaMonotributistas,
+            //                b.IdTipoComp,
+            //                b.IdComprobante
+            //            }).OrderBy(x => x.IdDetalleOrdenPago).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPago_TXOrdenPago", IdOrdenesPago1);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data = (from a in DetEntidad
-                        select a
-                // {
-                // a.IdDetalleOrdenPago,
-                //a.IdArticulo,
-                //a.IdUnidad,
-                //a.NumeroItem,
-                //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                //a.Cantidad,
-                //a.Unidad.Abreviatura,
-                //a.Articulo.Codigo,
-                //a.Articulo.Descripcion,
-                //a.Precio,
-                //a.PorcentajeBonificacion,
-                //a.ImporteBonificacion,
-                //a.PorcentajeIva,
-                //a.ImporteIva,
-                //a.ImporteTotalItem,
-                //a.FechaEntrega,
-                //a.Observaciones,
-                //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                //a.Adjunto,
-                //a.ArchivoAdjunto1,
-                //a.ArchivoAdjunto2,
-                //a.ArchivoAdjunto3
-                //                }
-        )
-                .OrderBy(p => p.IdDetalleOrdenPago)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdDetalleOrdenPago = a[0],
+                            IdImputacion = (a[2].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[2].NullSafeToString()),
+                            Tipo = a[3],
+                            Numero = a[4],
+                            Fecha = a[5],
+                            ImporteTotal = a[6],
+                            Saldo = a[7],
+                            Importe = a[8],
+                            SinImpuestos = a[9],
+                            IvaTotal = a[10],
+                            TotalComprobante = a[11],
+                            BienesYServicios = a[12],
+                            ImporteRetencionIVA = a[13],
+                            NumeroOrdenPagoRetencionIVA = a[14],
+                            IdTipoRetencionGanancia = a[15],
+                            IdIBCondicion = a[16],
+                            BaseCalculoIIBB = a[17],
+                            FechaVencimiento = a[18],
+                            FechaComprobante = a[19],
+                            GravadoIVA = a[20],
+                            CotizacionMoneda = a[21],
+                            PorcentajeIVAParaMonotributistas = a[22],
+                            IdTipoComp = a[23],
+                            IdComprobante = a[24],
+                            CertificadoPoliza = a[25],
+                            NumeroEndosoPoliza = a[26]
+                        }).OrderBy(s => s.IdDetalleOrdenPago).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -970,138 +785,84 @@ namespace ProntoMVC.Controllers
                                 string.Empty, 
                                 a.IdDetalleOrdenPago.ToString(), 
                                 a.IdImputacion.ToString(), 
-                                "0",//a.IdUnidad.ToString(),
-                                "0",//a.NumeroItem.ToString(), 
-                                "0",//a.NumeroObra,
-                                "0",//a.Cantidad.ToString(),
-                                "0",//a.Abreviatura,
-                                (a.IdImputacion==-1) ? "PA" : 
-                                    (db.TiposComprobantes.Where(y=>y.IdTipoComprobante==  
-                                            (db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault()  ).IdTipoComp 
-                                         ).FirstOrDefault() )  .DescripcionAb ,
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                      (a.IdImputacion==-1) ? "" : db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().Fecha.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-
-                                 //y por qué no llamar directamente al sp de detalle??????? 
-                                 // como esta parte tiene más logica, la jqgrid podría llamar directo al store DetOrdenesPago_TXOrdenPago
-                                
-                                 (a.IdImputacion==-1) ? "" : 
-                                
-                                (
-                                 
-                                (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte== a.IdImputacion).FirstOrDefault().IdTipoComp != 16 ) ? 
-
-                                 // comprobante proveedor
-
-                                         db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == 
-                                        (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte== a.IdImputacion).FirstOrDefault().IdComprobante)  )
-                                    .FirstOrDefault().Letra.NullSafeToString() + " " +
-
-                                db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == 
-                                        (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte== a.IdImputacion).FirstOrDefault().IdComprobante)  )
-                                    .FirstOrDefault().NumeroComprobante1.NullSafeToString() + " " +
-    
-                                        db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == 
-                                        (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte== a.IdImputacion).FirstOrDefault().IdComprobante)  )
-                                    .FirstOrDefault().NumeroComprobante2.NullSafeToString()
-                                
-                                    //
-                                    :
-
-
-
-                                 // orden de pago
-                                 (a.IdImputacion==-1) ? "" : 
-                                    (db.TiposComprobantes.Where(y=>y.IdTipoComprobante==  
-                                            (db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault()  ).IdTipoComp 
-                                         ).FirstOrDefault() )  .Descripcion + " " +
-                                db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().NumeroComprobante.ToString() //a.Descripcion,
-
-                                
-
-                                ////cuenta corriente 
-                                // (a.IdImputacion==-1) ? "" : 
-                                //    (db.TiposComprobantes.Where(y=>y.IdTipoComprobante==  
-                                //            (db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault()  ).IdTipoComp 
-                                //         ).FirstOrDefault() )  .Descripcion + " " +
-                                //db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().NumeroComprobante.ToString(), //a.Descripcion,
-
-                                ) ,
- //                               idtipocomp!=16 && idtipocomp!=17 
-
- //                                Case When IsNull(cp.IdComprobanteProveedor,0)>0   
- //Then cp.Letra+'-'+Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+Convert(varchar,cp.NumeroComprobante1)+'-'+  
- //  Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2)  
- //When IsNull(OrdenesPago.IdOrdenPago,0)>0   
- //Then Substring('00000000',1,8-Len(Convert(varchar,OrdenesPago.NumeroOrdenPago)))+Convert(varchar,OrdenesPago.NumeroOrdenPago)  
- //Else Substring('00000000',1,8-Len(Convert(varchar,cc.NumeroComprobante)))+Convert(varchar,cc.NumeroComprobante)  
- //End as [Numero],  
-
- // LEFT OUTER JOIN CuentasCorrientesAcreedores cc ON cc.IdCtaCte=DetOP.IdImputacion  
-//LEFT OUTER JOIN TiposComprobante ON TiposComprobante.IdTipoComprobante=cc.IdTipoComp  
-//LEFT OUTER JOIN ComprobantesProveedores cp ON cp.IdComprobanteProveedor=cc.IdComprobante and cc.IdTipoComp<>17 and cc.IdTipoComp<>16  
-//LEFT OUTER JOIN OrdenesPago ON OrdenesPago.IdOrdenPago=cc.IdComprobante and (cc.IdTipoComp=17 or cc.IdTipoComp=16)  
- 
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                ////////////////////////////////////////////////////////////////////////////////////////////////
-                                  (a.IdImputacion==-1) ? "" :      db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().Fecha.GetValueOrDefault().ToString("dd/MM/yyyy"),  
-                                  " --",
-                                a.Importe.ToString(), //a.Precio.ToString(), 
-                                "saldo",
-                                 "" , //importe iva
-                                "s/impuesto",
-                                "iva",
-                                "totcompro",
-                                "b/s",
-                                "retiva",
-                                "retiva en op",
-                                "gravadoiva",
-                                "ivamono"
-                                //a.PorcentajeBonificacion.ToString(), 
-                                //a.ImporteBonificacion.ToString(), 
-                                //a.PorcentajeIva.ToString(), 
-                                //a.ImporteIva.ToString(), 
-                                //a.ImporteTotalItem.ToString(), 
-                                //a.FechaEntrega.ToString(),
-                                //a.Observaciones,
-                                //a.NumeroRequerimiento.ToString(),
-                                //a.NumeroItemRM.ToString(),
-                                //a.ArchivoAdjunto1
+                                a.IdTipoRetencionGanancia.ToString(), 
+                                a.IdIBCondicion.ToString(), 
+                                a.BaseCalculoIIBB.ToString(), 
+                                a.CotizacionMoneda.ToString(), 
+                                a.IdTipoComp.ToString(), 
+                                a.IdComprobante.ToString(), 
+                                a.Tipo.ToString(), 
+                                a.Numero.ToString(), 
+                                a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.ImporteTotal.ToString(),
+                                a.Saldo.ToString(),
+                                a.Importe.ToString(),
+                                a.SinImpuestos.ToString(), 
+                                a.IvaTotal.ToString(), 
+                                a.TotalComprobante.ToString(), 
+                                a.BienesYServicios.ToString(), 
+                                a.ImporteRetencionIVA.ToString(), 
+                                a.NumeroOrdenPagoRetencionIVA.ToString(), 
+                                a.GravadoIVA.ToString(), 
+                                a.PorcentajeIVAParaMonotributistas.ToString(), 
+                                a.CertificadoPoliza.ToString(), 
+                                a.NumeroEndosoPoliza.ToString(),
+                                a.FechaVencimiento == null || a.FechaVencimiento.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.FechaComprobante == null || a.FechaComprobante.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy")
+                                //(a.Letra != "" ? a.Letra + '-' : "") + (a.Numero1 != "" ? a.Numero1.PadLeft(4,'0') + '-' : "") + (a.Numero2 != "" ? a.Numero2.PadLeft(8,'0') : ""),
+                                //(a.IdImputacion==-1) ? "PA" : (db.TiposComprobantes.Where(y=>y.IdTipoComprobante==(db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte==a.IdImputacion).FirstOrDefault()).IdTipoComp).FirstOrDefault()).DescripcionAb,
+                                //(a.IdImputacion==-1) ? "" : 
+                                //    ((db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte==a.IdImputacion).FirstOrDefault().IdTipoComp!=16 && db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte==a.IdImputacion).FirstOrDefault().IdTipoComp!=17) ? 
+                                //        db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte==a.IdImputacion).FirstOrDefault().IdComprobante)).FirstOrDefault().Letra.NullSafeToString() + " " +
+                                //        db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte==a.IdImputacion).FirstOrDefault().IdComprobante)).FirstOrDefault().NumeroComprobante1.NullSafeToString() + " " +
+                                //        db.ComprobantesProveedor.Where(x=>x.IdComprobanteProveedor == (db.CuentasCorrientesAcreedores.Where(y=>y.IdCtaCte==a.IdImputacion).FirstOrDefault().IdComprobante)).FirstOrDefault().NumeroComprobante2.NullSafeToString()
+                                //    :
+                                //    (a.IdImputacion==-1) ? "" : db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().NumeroComprobante.ToString()),
+                                //(a.IdImputacion==-1) ? "" : db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte==a.IdImputacion).FirstOrDefault().Fecha.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //(a.IdImputacion==-1) ? "" : db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().ImporteTotal.ToString(),
+                                //(a.IdImputacion==-1) ? "" : db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte== a.IdImputacion).FirstOrDefault().Saldo.ToString(),
+                                //a.Importe.ToString()
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
         public virtual ActionResult DetOrdenesPagoValores(string sidx, string sord, int? page, int? rows, int? IdOrdenPago)
         {
             int IdOrdenesPago1 = IdOrdenPago ?? 0;
-            var DetEntidad = db.DetalleOrdenesPagoValores.Where(p => p.IdOrdenPago == IdOrdenesPago1).AsQueryable();
-
+            var Det = db.DetalleOrdenesPagoValores.Where(p => p.IdOrdenPago == IdOrdenesPago1).AsQueryable();
             int pageSize = rows ?? 20;
-            int totalRecords = DetEntidad.Count();
+            int totalRecords = Det.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             int currentPage = page ?? 1;
 
-            var data = (from a in DetEntidad
-                        select a
-                        )
-                        .OrderBy(p => p.IdDetalleOrdenPagoValores)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var data = (from a in Det
+                        from b in db.Bancos.Where(o => o.IdBanco == a.IdBanco).DefaultIfEmpty()
+                        from c in db.Cajas.Where(p => p.IdCaja == a.IdCaja).DefaultIfEmpty()
+                        from d in db.TarjetasCreditoes.Where(q => q.IdTarjetaCredito == a.IdTarjetaCredito).DefaultIfEmpty()
+                        from e in db.Valores.Where(r => r.IdValor == a.IdValor).DefaultIfEmpty()
+                        from f in db.TiposComprobantes.Where(s => s.IdTipoComprobante == a.IdTipoValor).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleOrdenPagoValores,
+                            a.IdTipoValor,
+                            a.IdBanco,
+                            a.IdValor,
+                            a.IdCuentaBancaria,
+                            a.IdBancoChequera,
+                            a.IdCaja,
+                            a.IdTarjetaCredito,
+                            Tipo = f.DescripcionAb != null ? f.DescripcionAb : "",
+                            a.NumeroInterno,
+                            a.NumeroValor,
+                            a.FechaVencimiento,
+                            Banco = b != null ? b.Nombre : "",
+                            Caja = c != null ? c.Descripcion : "",
+                            TarjetaCredito = d != null ? d.Nombre : "",
+                            a.Importe,
+                            a.Anulado
+                        }).OrderBy(x => x.IdDetalleOrdenPagoValores).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1113,41 +874,178 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleOrdenPagoValores.ToString(),
                             cell = new string[] { 
-                                string.Empty, 
-                                a.IdDetalleOrdenPagoValores.ToString(), 
-                                
-                                
-                                a.IdValor.NullSafeToString(),
-                                a.IdTipoValor.NullSafeToString(),
-                                
-                                db.TiposComprobantes.Find(a.IdTipoValor  ).DescripcionAb.NullSafeToString(),  //a.Codigo,,  //a.NumeroItem.ToString(), 
-                               a.NumeroInterno.NullSafeToString(),  //a.NumeroObra,
-                                a.NumeroValor.NullSafeToString(), //a.Cantidad.ToString(),
-                                   
-                             a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),  //a.Abreviatura,
-                                     a.IdCaja==null ? db.Bancos.Find(a.IdBanco).Nombre.NullSafeToString() :  db.Cajas.Find(a.IdCaja).Descripcion.NullSafeToString(),
-                                         "-- ",
-                                a.Importe.ToString(), //a.Precio.ToString(),  db.TiposComprobantes.Find(a.IdTipoValor  ).Descripcion.NullSafeToString(),  //a.Codigo,
-                               " ",
-                               db.TiposComprobantes.Find(a.IdTipoValor  ).Descripcion.NullSafeToString() + " " +  db.Valores.Find(a.IdDetalleOrdenPagoValores).NumeroValor.NullSafeToString(),   //a.Descripcio
-                                
-                       
-                                //a.PorcentajeBonificacion.ToString(), 
-                                //a.ImporteBonificacion.ToString(), 
-                                //a.PorcentajeIva.ToString(), 
-                                //a.ImporteIva.ToString(), 
-                                //a.ImporteTotalItem.ToString(), 
-                                //a.FechaEntrega.ToString(),
-                                //a.Observaciones,
-                                //a.NumeroRequerimiento.ToString(),
-                                //a.NumeroItemRM.ToString(),
-                                //a.ArchivoAdjunto1
+                            string.Empty, 
+                            a.IdDetalleOrdenPagoValores.ToString(), 
+                            a.IdTipoValor.NullSafeToString(),
+                            a.IdBanco.NullSafeToString(),
+                            a.IdValor.NullSafeToString(),
+                            a.IdCuentaBancaria.NullSafeToString(),
+                            a.IdBancoChequera.NullSafeToString(),
+                            a.IdCaja.NullSafeToString(),
+                            a.IdTarjetaCredito.NullSafeToString(),
+                            a.Tipo + (a.IdValor != null ? " (Terc.)" : "") + (a.Anulado == "SI" ? " AN" : ""),
+                            a.NumeroInterno.NullSafeToString(),
+                            a.NumeroValor.NullSafeToString(),
+                            a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            (a.IdBanco != null ? a.Banco : "") + (a.IdCaja != null ? a.Caja : "") + (a.IdTarjetaCredito != null ? a.TarjetaCredito : ""),
+                            //a.IdCaja==null ? db.Bancos.Find(a.IdBanco).Nombre.NullSafeToString() :  db.Cajas.Find(a.IdCaja).Descripcion.NullSafeToString(),
+                            a.Importe.ToString(),
+                            a.Anulado
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
 
-                             
-                               
-                              
+        public virtual ActionResult DetOrdenesPagoCuentas(string sidx, string sord, int? page, int? rows, int? IdOrdenPago)
+        {
+            int IdOrdenesPago1 = IdOrdenPago ?? 0;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
 
-                                
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoCuentas_TXOrdenPago", IdOrdenesPago1);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdDetalleOrdenPagoCuentas = a[0],
+                            IdCuenta = (a[2].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[2].NullSafeToString()),
+                            Codigo = a[3],
+                            Cuenta = a[4],
+                            Debe = a[5],
+                            Haber = a[6]
+                        }).OrderBy(s => s.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleOrdenPagoCuentas.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleOrdenPagoCuentas.ToString(), 
+                            a.IdCuenta.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.Cuenta.NullSafeToString(),
+                            a.Debe.ToString(),
+                            a.Haber.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetOrdenesPagoImpuestos(string sidx, string sord, int? page, int? rows, int? IdOrdenPago)
+        {
+            int IdOrdenesPago1 = IdOrdenPago ?? 0;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoImpuestos_TXOrdenPago", IdOrdenesPago1);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            int totalRecords = Entidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdDetalleOrdenPagoImpuestos = a[0],
+                            Tipo = a[2],
+                            IdTipoImpuesto = (a[3].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[3].NullSafeToString()),
+                            Categoria = a[4],
+                            ImportePagadoSinImpuestos = a[5],
+                            ImpuestoRetenido = a[6],
+                            PagosMes = a[7],
+                            RetencionesMes = a[8],
+                            MinimoIIBB = a[9],
+                            AlicuotaIIBB = a[10],
+                            AlicuotaConvenioIIBB = a[11],
+                            PorcentajeATomarSobreBase = a[12],
+                            PorcentajeAdicional = a[13],
+                            ImpuestoAdicional = a[14],
+                            NumeroCertificadoRetencionGanancias = a[15],
+                            NumeroCertificadoRetencionIIBB = a[16],
+                            ImporteTotalFacturasMPagadasSujetasARetencion = a[17]
+                        }).OrderBy(s => s.IdDetalleOrdenPagoImpuestos).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleOrdenPagoImpuestos.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleOrdenPagoImpuestos.ToString(), 
+                            a.IdTipoImpuesto.NullSafeToString(),
+                            a.Tipo.NullSafeToString(),
+                            a.Categoria.NullSafeToString(),
+                            a.ImportePagadoSinImpuestos.ToString(),
+                            a.ImpuestoRetenido.ToString(),
+                            a.PagosMes.ToString(),
+                            a.RetencionesMes.ToString(),
+                            a.MinimoIIBB.ToString(),
+                            a.AlicuotaIIBB.ToString(),
+                            a.AlicuotaConvenioIIBB.ToString(),
+                            a.PorcentajeAdicional.ToString(),
+                            a.ImpuestoAdicional.ToString(),
+                            a.NumeroCertificadoRetencionGanancias.ToString(),
+                            a.NumeroCertificadoRetencionIIBB.ToString(),
+                            a.ImporteTotalFacturasMPagadasSujetasARetencion.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetOrdenesPagoRubrosContables(string sidx, string sord, int? page, int? rows, int? IdOrdenPago)
+        {
+            int IdOrdenesPago1 = IdOrdenPago ?? 0;
+            var Det = db.DetalleOrdenesPagoRubrosContables.Where(p => p.IdOrdenPago == IdOrdenesPago1).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in Det
+                        from b in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroContable).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleOrdenPagoRubrosContables,
+                            a.IdRubroContable,
+                            RubroContable = b.Descripcion != null ? b.Descripcion : "",
+                            a.Importe
+                        }).OrderBy(x => x.IdDetalleOrdenPagoRubrosContables).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleOrdenPagoRubrosContables.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleOrdenPagoRubrosContables.ToString(), 
+                            a.IdRubroContable.NullSafeToString(),
+                            a.RubroContable.NullSafeToString(),
+                            a.Importe.ToString()
                             }
                         }).ToArray()
             };
@@ -1186,7 +1084,7 @@ namespace ProntoMVC.Controllers
         }
 
         [HttpPost]
-        public void EditGridData(int? IdRequerimiento, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
+        public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
             switch (oper)
             {
@@ -1198,21 +1096,7 @@ namespace ProntoMVC.Controllers
                     break;
                 default: break;
             }
-
         }
-
-
-
-        //public string BuscarOrden(int Numero)
-        //{
-        //    var OrdenesPago = db.OrdenesPago.Where(x => x.Numero == Numero).AsQueryable();
-        //    var data = (from x in OrdenesPago select new { x.SubNumero }).OrderByDescending(p => p.SubNumero).FirstOrDefault();
-        //    if (data != null)
-        //        return data.SubNumero.ToString();
-        //    else
-        //        return "1";
-
-        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -1221,338 +1105,4 @@ namespace ProntoMVC.Controllers
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Public Sub EmisionCertificadoRetencionGanancias(ByVal mIdOrdenesPago As String, _
-//                                                ByVal mDestino As String, _
-//                                                ByVal mPrinter As String)
-
-//   Dim oW As Word.Application
-//   Dim oRs As ADOR.Recordset
-//   Dim mNumeroCertificado As Long, mIdProveedor As Long
-//   Dim mCopias As Integer
-//   Dim mFecha As Date
-//   Dim mComprobante As String, mNombreSujeto As String, mDomicilioSujeto As String, mCuitSujeto As String
-//   Dim mProvincia As String, mPrinterAnt As String, mAux1 As String, mAnulada As String, mPlantilla As String
-//   Dim mRetenido As Double, mCotMon As Double, mMontoOrigen As Double
-
-//   On Error GoTo Mal
-
-//   mPlantilla = glbPathPlantillas & "\CertificadoRetencionGanancias_" & glbEmpresaSegunString & ".dot"
-//   If Len(Dir(mPlantilla)) = 0 Then
-//      mPlantilla = glbPathPlantillas & "\CertificadoRetencionGanancias.dot"
-//      If Len(Dir(mPlantilla)) = 0 Then
-//         MsgBox "Plantilla " & mPlantilla & " inexistente", vbExclamation
-//         Exit Sub
-//      End If
-//   End If
-
-//   mCopias = 1
-//   mAux1 = BuscarClaveINI("Copias retenciones en op")
-//   If IsNumeric(mAux1) Then mCopias = Val(mAux1)
-
-//   Set oRs = Aplicacion.OrdenPago.TraerFiltrado("_PorId", mIdOrdenesPago)
-//   With oRs
-//      mComprobante = Format(.Fields("NumeroOrdenesPago").Value, "00000000")
-//      mIdProveedor = .Fields("IdProveedor").Value
-//      mCotMon = .Fields("CotizacionMoneda").Value
-//      mFecha = .Fields("FechaOrdenesPago").Value
-//      If IIf(IsNull(.Fields("Anulada").Value), "", .Fields("Anulada").Value) = "SI" Then mAnulada = "ANULADA"
-//      .Close
-//   End With
-
-//   Set oRs = Aplicacion.Proveedores.TraerFiltrado("_ConDatos", mIdProveedor)
-//   If oRs.RecordCount > 0 Then
-//      mNombreSujeto = IIf(IsNull(oRs.Fields("RazonSocial").Value), "", oRs.Fields("RazonSocial").Value)
-//      mProvincia = IIf(IsNull(oRs.Fields("Provincia").Value), "", oRs.Fields("Provincia").Value)
-//      If UCase(mProvincia) = "CAPITAL FEDERAL" Then mProvincia = ""
-//      mDomicilioSujeto = Trim(IIf(IsNull(oRs.Fields("Direccion").Value), "", oRs.Fields("Direccion").Value)) & " " & _
-//                           Trim(IIf(IsNull(oRs.Fields("Localidad").Value), "", oRs.Fields("Localidad").Value)) & " " & mProvincia
-//      mCuitSujeto = IIf(IsNull(oRs.Fields("Cuit").Value), "", oRs.Fields("Cuit").Value)
-//   End If
-//   oRs.Close
-//   Set oRs = Nothing
-
-//   Set oW = CreateObject("Word.Application")
-
-//   Set oRs = Aplicacion.TablasGenerales.TraerFiltrado("DetOrdenesPagoImpuestos", "OrdenPago", mIdOrdenesPago)
-//   If oRs.Fields.Count > 0 Then
-//      If oRs.RecordCount > 0 Then
-//         oRs.MoveFirst
-//         Do While Not oRs.EOF
-//            If oRs.Fields("Tipo").Value = "Ganancias" And Not IsNull(oRs.Fields("Certif.Gan.").Value) Then
-//               mNumeroCertificado = oRs.Fields("Certif.Gan.").Value
-//               mMontoOrigen = oRs.Fields("Pago s/imp.").Value * mCotMon
-//               mRetenido = oRs.Fields("Retencion").Value * mCotMon
-
-//               With oW
-//                  .Visible = True
-//                  With .Documents.Add(mPlantilla)
-//                     oW.ActiveDocument.FormFields("NumeroCertificado").Result = mNumeroCertificado
-//                     oW.ActiveDocument.FormFields("Fecha").Result = mFecha
-//                     oW.ActiveDocument.FormFields("NombreAgente").Result = glbEmpresa
-//                     oW.ActiveDocument.FormFields("CuitAgente").Result = glbCuit
-//                     oW.ActiveDocument.FormFields("DomicilioAgente").Result = glbDireccion & " " & glbLocalidad & " " & glbProvincia
-//                     oW.ActiveDocument.FormFields("NombreSujeto").Result = mNombreSujeto
-//                     oW.ActiveDocument.FormFields("CuitSujeto").Result = mCuitSujeto
-//                     oW.ActiveDocument.FormFields("DomicilioSujeto").Result = mDomicilioSujeto
-//                     oW.ActiveDocument.FormFields("Comprobante").Result = mComprobante
-//                     oW.ActiveDocument.FormFields("Regimen").Result = oRs.Fields("Categoria").Value
-//                     oW.ActiveDocument.FormFields("MontoOrigen").Result = Format(mMontoOrigen, "$ #,##0.00")
-//                     oW.ActiveDocument.FormFields("Retencion").Result = Format(mRetenido, "$ #,##0.00")
-//                     oW.ActiveDocument.FormFields("Anulada").Result = mAnulada
-//                     mAux1 = BuscarClaveINI("Aclaracion para certificado de retencion de ganancias")
-//                     If Len(mAux1) > 0 Then
-//                        oW.ActiveDocument.FormFields("Aclaracion").Result = mAux1
-//                     End If
-//                  End With
-//               End With
-
-//               If mDestino = "Printer" Then
-//                  mPrinterAnt = Printer.DeviceName & " on " & Printer.Port
-//                  If Len(mPrinter) > 0 Then oW.ActivePrinter = mPrinter
-//                  oW.Documents(1).PrintOut False, , , , , , , mCopias
-//                  If Len(mPrinterAnt) > 0 Then oW.ActivePrinter = mPrinterAnt
-//                  oW.Documents(1).Close False
-//               End If
-
-//            End If
-//            oRs.MoveNext
-//         Loop
-//      End If
-//   End If
-//   oRs.Close
-
-//   oW.Selection.HomeKey wdStory
-
-//Mal:
-
-//   If mDestino = "Printer" Then oW.Quit
-//   Set oW = Nothing
-//   Set oRs = Nothing
-
-//End Sub
-
-//Public Sub EmisionCertificadoRetencionIIBB(ByVal mIdOrdenesPago As String, _
-//                                                ByVal mDestino As String, _
-//                                                ByVal mPrinter As String)
-
-//   Dim oW As Word.Application
-//   Dim cALetra As New clsNum2Let
-//   Dim oRs As ADOR.Recordset
-//   Dim oRsAux As ADOR.Recordset
-//   Dim mNumeroCertificado As Long, mIdProveedor As Long
-//   Dim mCopias As Integer
-//   Dim mFecha As Date
-//   Dim mComprobante As String, mNombreSujeto As String, mDomicilioSujeto As String, mCuitSujeto As String, mProvincia As String
-//   Dim mPrinterAnt As String, mIBNumeroInscripcion As String, mAux1 As String, mPlantilla As String, mPlantilla1 As String
-//   Dim mCodPos As String, mImporteLetras As String, mAnulada As String
-//   Dim mRetenido As Double, mRetencionAdicional As Double, mCotMon As Double
-
-//   On Error GoTo Mal
-
-//   mCopias = 1
-//   mAux1 = BuscarClaveINI("Copias retenciones en op")
-//   If IsNumeric(mAux1) Then mCopias = Val(mAux1)
-
-//   Set oRs = Aplicacion.OrdenPago.TraerFiltrado("_PorId", mIdOrdenesPago)
-//   With oRs
-//      mComprobante = Format(.Fields("NumeroOrdenesPago").Value, "00000000")
-//      mIdProveedor = .Fields("IdProveedor").Value
-//      mCotMon = .Fields("CotizacionMoneda").Value
-//      mFecha = .Fields("FechaOrdenesPago").Value
-//      If IIf(IsNull(.Fields("Anulada").Value), "", .Fields("Anulada").Value) = "SI" Then mAnulada = "ANULADA"
-//      .Close
-//   End With
-
-//   Set oRs = Aplicacion.Proveedores.TraerFiltrado("_ConDatos", mIdProveedor)
-//   If oRs.RecordCount > 0 Then
-//      mNombreSujeto = IIf(IsNull(oRs.Fields("RazonSocial").Value), "", oRs.Fields("RazonSocial").Value)
-//      mProvincia = IIf(IsNull(oRs.Fields("Provincia").Value), "", oRs.Fields("Provincia").Value)
-//      If UCase(mProvincia) = "CAPITAL FEDERAL" Then mProvincia = ""
-//      mDomicilioSujeto = Trim(IIf(IsNull(oRs.Fields("Direccion").Value), "", oRs.Fields("Direccion").Value)) & " " & _
-//                           Trim(IIf(IsNull(oRs.Fields("Localidad").Value), "", oRs.Fields("Localidad").Value)) & " " & mProvincia
-//      mCuitSujeto = IIf(IsNull(oRs.Fields("Cuit").Value), "", oRs.Fields("Cuit").Value)
-//      mIBNumeroInscripcion = IIf(IsNull(oRs.Fields("IBNumeroInscripcion").Value), "", oRs.Fields("IBNumeroInscripcion").Value)
-//      mCodPos = IIf(IsNull(oRs.Fields("CodigoPostal").Value), "", oRs.Fields("CodigoPostal").Value)
-//'      If Not IsNull(oRs.Fields("PlantillaRetencionIIBB").Value) Then
-//'         If Len(RTrim(oRs.Fields("PlantillaRetencionIIBB").Value)) > 0 Then
-//'            mPlantilla = oRs.Fields("PlantillaRetencionIIBB").Value
-//'         End If
-//'      End If
-//   End If
-//   oRs.Close
-//   Set oRs = Nothing
-
-//   Set oW = CreateObject("Word.Application")
-
-//   Set oRs = Aplicacion.TablasGenerales.TraerFiltrado("DetOrdenesPagoImpuestos", "OrdenPago", mIdOrdenesPago)
-//   If oRs.Fields.Count > 0 Then
-//      If oRs.RecordCount > 0 Then
-//         oRs.MoveFirst
-//         Do While Not oRs.EOF
-//            If oRs.Fields("Tipo").Value = "I.Brutos" And _
-//                  Not IsNull(oRs.Fields("Certif.IIBB").Value) Then
-
-//               mNumeroCertificado = oRs.Fields("Certif.IIBB").Value
-//               mRetenido = oRs.Fields("Retencion").Value * mCotMon
-//               mRetencionAdicional = IIf(IsNull(oRs.Fields("Impuesto adic.").Value), 0, oRs.Fields("Impuesto adic.").Value) * mCotMon
-
-//               mPlantilla = "CertificadoRetencionIIBB.dot"
-//               Set oRsAux = Aplicacion.IBCondiciones.TraerFiltrado("_IdCuentaPorProvincia", oRs.Fields("IdTipoImpuesto").Value)
-//               If oRsAux.RecordCount > 0 Then
-//                  If Not IsNull(oRsAux.Fields("PlantillaRetencionIIBB").Value) Then
-//                     If Len(RTrim(oRsAux.Fields("PlantillaRetencionIIBB").Value)) > 0 Then
-//                        mPlantilla = oRsAux.Fields("PlantillaRetencionIIBB").Value
-//                     End If
-//                  End If
-//               End If
-//               oRsAux.Close
-//               mPlantilla1 = mId(mPlantilla, 1, Len(mPlantilla) - 4)
-//               mPlantilla = glbPathPlantillas & "\" & mPlantilla1 & "_" & glbEmpresaSegunString & ".dot"
-//               If Len(Dir(mPlantilla)) = 0 Then
-//                  mPlantilla = glbPathPlantillas & "\" & mPlantilla1 & ".dot"
-//                  If Len(Dir(mPlantilla)) = 0 Then
-//                     MsgBox "Plantilla " & mPlantilla & " inexistente", vbExclamation
-//                     Exit Sub
-//                  End If
-//               End If
-
-//               With oW
-//                  .Visible = True
-//                  With .Documents.Add(mPlantilla)
-
-//                     If InStr(1, mPlantilla, "Salta") = 0 Then
-//                        oW.ActiveDocument.FormFields("NumeroCertificado").Result = Format(mNumeroCertificado, "00000000")
-//                        oW.ActiveDocument.FormFields("Fecha").Result = mFecha
-//                        oW.ActiveDocument.FormFields("NombreAgente").Result = glbEmpresa
-//                        oW.ActiveDocument.FormFields("CuitAgente").Result = glbCuit
-//                        oW.ActiveDocument.FormFields("DomicilioAgente").Result = glbDireccion & " " & glbLocalidad & " " & glbProvincia
-//                        oW.ActiveDocument.FormFields("NombreSujeto").Result = mNombreSujeto
-//                        oW.ActiveDocument.FormFields("CuitSujeto").Result = mCuitSujeto
-//                        oW.ActiveDocument.FormFields("DomicilioSujeto").Result = mDomicilioSujeto
-//                        oW.ActiveDocument.FormFields("NumeroInscripcion").Result = mIBNumeroInscripcion
-//                        oW.ActiveDocument.FormFields("Anulada").Result = mAnulada
-
-//                        oW.Selection.Goto What:=wdGoToBookmark, Name:="DetalleComprobantes"
-//                        oW.Selection.MoveDown Unit:=wdLine
-//                        oW.Selection.MoveLeft Unit:=wdCell
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & oRs.Fields("Categoria").Value
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(oRs.Fields("Pago s/imp.").Value * mCotMon, "#,##0.00")
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(oRs.Fields("Pagos mes").Value, "#,##0.00")
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(oRs.Fields("Ret. mes").Value, "#,##0.00")
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & oRs.Fields("% a tomar s/base").Value
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & oRs.Fields("Alicuota.IIBB").Value
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(mRetenido - mRetencionAdicional, "#,##0.00")
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & oRs.Fields("% adic.").Value
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(mRetencionAdicional, "#,##0.00")
-//                        oW.Selection.MoveRight Unit:=wdCell
-//                        oW.Selection.TypeText Text:="" & Format(mRetenido, "#,##0.00")
-
-//                        oW.Selection.Goto What:=wdGoToBookmark, Name:="TotalRetencion"
-//                        oW.Selection.MoveRight Unit:=wdCell, Count:=2
-//                        oW.Selection.TypeText Text:="" & Format(mRetenido, "#,##0.00")
-
-//                     ElseIf InStr(1, mPlantilla, "Salta") > 0 Then
-//                        cALetra.Numero = mRetenido
-//                        mImporteLetras = cALetra.ALetra
-//                        oW.ActiveDocument.FormFields("NombreSujeto1").Result = mNombreSujeto
-//                        oW.ActiveDocument.FormFields("CuitSujeto1").Result = mCuitSujeto
-//                        oW.ActiveDocument.FormFields("DomicilioSujeto1").Result = mDomicilioSujeto
-//                        oW.ActiveDocument.FormFields("CodigoPostal1").Result = mCodPos
-//                        oW.ActiveDocument.FormFields("Monto1").Result = Format(oRs.Fields("Pago s/imp.").Value * mCotMon, "#,##0.00")
-//                        oW.ActiveDocument.FormFields("Alicuota1").Result = oRs.Fields("Alicuota.IIBB").Value
-//                        oW.ActiveDocument.FormFields("Retencion1").Result = mRetenido
-//                        oW.ActiveDocument.FormFields("ImporteEnLetras1").Result = mImporteLetras
-//                        oW.ActiveDocument.FormFields("Fecha1").Result = mFecha
-
-//                        oW.ActiveDocument.FormFields("NombreSujeto2").Result = mNombreSujeto
-//                        oW.ActiveDocument.FormFields("CuitSujeto2").Result = mCuitSujeto
-//                        oW.ActiveDocument.FormFields("DomicilioSujeto2").Result = mDomicilioSujeto
-//                        oW.ActiveDocument.FormFields("CodigoPostal2").Result = mCodPos
-//                        oW.ActiveDocument.FormFields("Monto2").Result = Format(oRs.Fields("Pago s/imp.").Value * mCotMon, "#,##0.00")
-//                        oW.ActiveDocument.FormFields("Alicuota2").Result = oRs.Fields("Alicuota.IIBB").Value
-//                        oW.ActiveDocument.FormFields("Retencion2").Result = mRetenido
-//                        oW.ActiveDocument.FormFields("ImporteEnLetras2").Result = mImporteLetras
-//                        oW.ActiveDocument.FormFields("Fecha2").Result = mFecha
-
-//                        oW.ActiveDocument.FormFields("NombreSujeto3").Result = mNombreSujeto
-//                        oW.ActiveDocument.FormFields("CuitSujeto3").Result = mCuitSujeto
-//                        oW.ActiveDocument.FormFields("DomicilioSujeto3").Result = mDomicilioSujeto
-//                        oW.ActiveDocument.FormFields("CodigoPostal3").Result = mCodPos
-//                        oW.ActiveDocument.FormFields("Monto3").Result = Format(oRs.Fields("Pago s/imp.").Value * mCotMon, "#,##0.00")
-//                        oW.ActiveDocument.FormFields("Alicuota3").Result = oRs.Fields("Alicuota.IIBB").Value
-//                        oW.ActiveDocument.FormFields("Retencion3").Result = mRetenido
-//                        oW.ActiveDocument.FormFields("ImporteEnLetras3").Result = mImporteLetras
-//                        oW.ActiveDocument.FormFields("Fecha3").Result = mFecha
-
-//                     End If
-
-//                  End With
-//               End With
-
-//               If mDestino = "Printer" Then
-//                  mPrinterAnt = Printer.DeviceName & " on " & Printer.Port
-//                  If Len(mPrinter) > 0 Then oW.ActivePrinter = mPrinter
-//                  oW.Documents(1).PrintOut False, , , , , , , mCopias
-//                  If Len(mPrinterAnt) > 0 Then oW.ActivePrinter = mPrinterAnt
-//                  oW.Documents(1).Close False
-//               End If
-
-//            End If
-//            oRs.MoveNext
-//         Loop
-//      End If
-//   End If
-//   oRs.Close
-
-//   oW.Selection.HomeKey wdStory
-
-//Mal:
-
-//   If mDestino = "Printer" Then oW.Quit
-//   Set oW = Nothing
-//   Set oRs = Nothing
-//   Set oRsAux = Nothing
-//   Set cALetra = Nothing
-
-//End Sub

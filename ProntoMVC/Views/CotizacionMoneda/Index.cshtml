@@ -3,314 +3,270 @@
     ViewBag.Title = "Cotizaciones";
 }
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
+
 <br />
+
 <div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary span2"  >
-            Nueva
-        </button>
-        <div class="span4">
-            <div class="input-append ">
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                @*<div class="btn-group append ">
-                    <button class="btn dropdown-toggle append" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" id="CampoParaBuscar">
-                        <li><a href="#">Código</a></li>
-                        <li><a href="#">Descripción</a></li>
-                    </ul>
-                </div>*@
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    avanzada</button>
-            </div>
-        </div>
-        <button onclick=" exportExcel($('#Lista')) " class="btn span1">
-            Excel
-        </button>
-        @*  <div class="input-prepend ">
-            <input id="BuscarProximoNoFiltra" type="text" class="" placeholder="Buscar" style="" />
-            <div class="btn-group  ">
-                <button onclick="  " class="btn">
-                    <
-                </button>
-                <button onclick="  " class="btn ">
-                    >
-                </button>
-            </div>
-        </div>*@
-      @*  <div class="btn-group  span1 pull-right ">
-            <button onclick="  " class="btn">
-                <
-            </button>
-            <button onclick="  " class="btn ">
-                >
-            </button>
-        </div>*@
-        <br />
-        @*<p>@Html.ActionLink("Create New", "Create")</p>
-*@
+    <div class="span6 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
 </div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center;">
-</div>
-<script type="text/javascript">
-    $().ready(function () {
 
-        $('#BuscadorListado').focus();
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style >
 
-        $("#Lista").jqGrid({
-            url: ROOT + 'CotizacionMoneda/Cotizaciones', // '@Url.Action("ArticulosGridData", "Articulo")',
+ <script type="text/javascript" > $().ready(function () {
+        //$('#BuscadorListado').focus();
+
+        'use strict';
+
+        var $grid = "";
+        var lastSelectedId;
+        var lastSelectediCol;
+        var lastSelectediRow;
+        var lastSelectediCol2;
+        var lastSelectediRow2;
+        var inEdit;
+        var selICol;
+        var selIRow;
+        var gridCellWasClicked = false;
+        var grillaenfoco = false;
+        var getColumnIndexByName = function (grid, columnName) {
+            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+            for (i = 0; i < l; i++) {
+                if (cm[i].name === columnName) {
+                    return i; // return the index
+                }
+            }
+            return -1;
+        };
+        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $.extend($.jgrid.inlineEdit, {
+            keys: true
+        });
+
+        window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+        document.body.onclick = saveEditedCell; // attach to current document.
+        function saveEditedCell(evt) {
+            var target = $(evt.target);
+
+            if ($grid) {
+                var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+                if (gridCellWasClicked && !isCellClicked) // check if a valid click
+                {
+                    gridCellWasClicked = false;
+                    $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+                }
+            }
+
+            $grid = "";
+            gridCellWasClicked = false;
+
+            if (jQuery("#Lista").find(target).length) {
+                $grid = $('#Lista');
+                grillaenfoco = true;
+            }
+            if (grillaenfoco) {
+                gridCellWasClicked = true;
+                lastSelectediRow2 = lastSelectediRow;
+                lastSelectediCol2 = lastSelectediCol;
+            }
+        };
+
+        function EliminarSeleccionados(grid) {
+            var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+            var i;
+            for (i = selectedIds.length - 1; i >= 0; i--) {
+                grid.jqGrid('delRowData', selectedIds[i]);
+            }
+        };
+
+        function AgregarItemVacio(grid) {
+            var colModel = grid.jqGrid('getGridParam', 'colModel');
+            var dataIds = grid.jqGrid('getDataIDs');
+            var Id = grid.jqGrid('getGridParam', 'records') * -1;
+            var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+            var data, j, cm;
+
+            data = '{';
+            for (j = 1; j < colModel.length; j++) {
+                cm = colModel[j];
+                data = data + '"' + cm.index + '":' + '"",';
+            }
+            data = data.substring(0, data.length - 1) + '}';
+            data = data.replace(/(\r\n|\n|\r)/gm, "");
+            grid.jqGrid('addRowData', Id, data, "first");
+            grid.jqGrid('setRowData', Id, { act: se });
+        };
+
+        function GrabarFila(gridId) {
+            var dataFromTheRow = grid.jqGrid('getRowData', gridId);
+
+            //var checkIn = "<input style='height:22px;width:75px;' type='button' " +
+            //           "value='Check In' " +
+            //           "onclick=\"MyCheckIn(jQuery('" + gridId + "')," +
+            //           rowId + "); \"  />";
+            //jQuery(gridId).jqGrid('setRowData', rowId, { action: checkIn });
+
+            //var datos = $("#formid").serializeObject();
+            //datos.IdCotizacion = $("#IdCotizacion").val();
+
+
+            //$('html, body').css('cursor', 'wait');
+            //$.ajax({
+            //    type: 'POST',
+            //    contentType: 'application/json; charset=utf-8',
+            //    url: ROOT + 'CotizacionMoneda/BatchUpdate',
+            //    dataType: 'json',
+            //    data: JSON.stringify(cabecera),
+            //    success: function (result) {
+            //        if (result) {
+
+            //        } else {
+            //            alert('No se pudo grabar el comprobante.');
+            //        }
+            //    },
+            //});
+        };
+
+        $('#Lista').jqGrid({
+            url: ROOT + 'CotizacionMoneda/Cotizaciones/',
+            postData: {  },
             datatype: 'json',
             mtype: 'POST',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); },
-                'FechaFinal': function () { return $("#FechaFinal").val(); },
-                'IdObra': function () { return $("#IdObra").val(); }
-            },
-            //            cellEdit: true,
-            //            cellurl: '@Url.Action("UpdateArticuloProperty")',
-            colNames: ['', '', 'Codigo', 'Descripcion'
-
-            , 'Rubro'
-
-            , 'Subrubro'
-            , 'Nro.inv.'
-            , '% IVA'
-            , 'CostoPPP'
-            , 'CostoPPP u$s'
-            , 'Costo Rep.'
-            , 'Costo Rep u$s'
-            , 'Stock Min.'
-            , 'Stock Rep.'
-            , 'Stock actual'
-            , 'En'
-            , 'Ubicacion'
-            , 'Fecha alta'
-            , 'Usuario alta'
-            , 'Fecha ult.modif.'
-            , 'p/mant.'
-              , 'NMC'
-
-
-            ],
+            colNames: [' ', 'IdCotizacion', 'Fecha', 'Moneda', 'IdMoneda', 'Cotizacion', 'Cotizacion libre'],
             colModel: [
-            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-            { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
-            { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-
-                , search: true, searchoptions: { sopt: ['cn'] }
-            },
-            { name: '', index: '', width: 80, align: 'left', editable: true, edittype: 'select',
-                editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
-                , search: true, searchoptions: { sopt: ['cn'] }
-            },
-
-
-            { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: 'Ubicacion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' }
-
+                        {
+                            name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",
+                            //formatter: function (cellValue, options, rowObject) {
+                            //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
+                            //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
+                            //    var IdCotizacion = $(rowObject)[1]
+                            //    return (IdCotizacion >= 0 ? convertIcon : ""); // + "<span>" + cellValue + "</span>";
+                            //},
+                            //cellattr: function () {
+                            //    return " title=\"Graba el registro\"";
+                            //}
+                        },
+                        { name: 'IdCotizacion', index: 'IdCotizacion', align: 'left', width: 100, editable: false, hidden: true },
+                        {
+                            name: 'Fecha', index: 'Fecha', width: 120, sortable: false, align: 'right', editable: true,
+                            editoptions: {
+                                size: 10,
+                                maxlengh: 10,
+                                dataInit: function (element) {
+                                    $(element).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        constrainInput: false,
+                                        showOn: 'button',
+                                        buttonText: '...'
+                                    });
+                                }
+                            },
+                            formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                        },
+                        {
+                            name: 'Moneda', index: 'Moneda', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Moneda/GetMonedas',
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdMoneda', this.value);
+                                    }
+                                }]
+                            },
+                        },
+                        { name: 'IdMoneda', index: 'IdMoneda', align: 'left', width: 10, editable: false, hidden: true, label: 'TB' },
+                        {
+                            name: 'Cotizacion', index: 'Cotizacion', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            editoptions: {
+                                maxlength: 20, defaultValue: '0.00',
+                                dataEvents: [
+                                {   type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                }]
+                            }
+                        },
+                        {
+                            name: 'CotizacionLibre', index: 'CotizacionLibre', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            editoptions: {
+                                maxlength: 20, defaultValue: '0.00',
+                                dataEvents: [
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                }]
+                            }
+                        }
             ],
-
-
-
-            ondblClickRow: function (idrow) {
-                window.location.href = ROOT + 'Articulo/Edit/' + idrow;
-
-
-                // $("#edtData").click();
-
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){ 
-                //                    jQuery('#Lista').restoreRow(lastSel); 
-                //                    lastSel=id; 
-                //                }
-                //                jQuery('#Lista').editRow(id, true); 
-                //   
-
+            gridComplete: function () {
+                var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var cl = ids[i];
+                    var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                    jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                }
             },
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
+            },
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                if (name == 'Fecha') {
+                    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                }
+            },
+            //beforeSelectRow: function (rowid, e) {
+            //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+            //    if (this.p.colModel[iCol].name === 'act') {
+            //        GrabarFila(rowid);
+            //        return false;
+            //    }
+            //},
             pager: $('#ListaPager'),
-            rowNum: 50,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdArticulo',
-            sortorder: "desc",
+            sortname: 'Fecha',
+            sortorder: 'desc',
             viewrecords: true,
-            //toppager: true,
-
-            emptyrecords: 'No hay registros para mostrar',
-
-
-
-            ///////////////////////////////
-            width: 'auto', // 'auto',
-            autowidth: true,
-            shrinkToFit: false,
-            //////////////////////////////
-
-            height: $(window).height() - ALTOLISTADO, // '100%'
+            multiselect: false,
+            shrinkToFit: true,
+            width: 'auto',
+            height: '100%',
             altRows: false,
-            footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
-
-
-              , multiboxonly: true
-        })
-        //        .navGrid("#ListaPager",
-        //            { refresh: true, add: false, edit: false, del: false },
-        //                {}, // settings for edit
-        //                {}, // settings for add
-        //                {}, // settings for delete
-        //                {closeAfterSearch: true, closeOnEscape: true },
-        //                { sopt: ["cn"]} // Search options. Some options can be set on column level
-        //         );
-
-
-
-
-
-
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
-            );
-
-        //$("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
-        //$("#Lista").setFrozenColumns();
-
-
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-
-
-
-
-        $("#BuscadorListado").keyup(function () {
-
-
-            filtrar()
-
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>COTIZACIONES MONEDA</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
         });
-
-
-        $("#BuscadorListado").change(function () {
-
-            filtrar()
-
-
-        });
-
-
-
-        $("#BuscarProximoNoFiltra").change(function () {
-
-            buscar()
-
-
-        });
-
-
-
-        function filtrar() {
-            var grid = jQuery("#Lista");
-            var postdata = grid.jqGrid('getGridParam', 'postData');
-            jQuery.extend(postdata,
-               { filters: '',
-                   searchField: 'Descripcion', // $("#CampoParaBuscar").val(), // 'Descripcion',   // Codigo
-                   searchOper: 'contains',
-                   searchString: $("#BuscadorListado").val()
-               });
-            grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1}]);
-
-
-            // http: //stackoverflow.com/questions/8501679/jqgrid-auto-filter-highlighting-search-result
-//            $("'>tbody>tr.jqgrow>td  [id*='" + $("#BuscadorListado").val() + "']").show().effect('highlight');
-//                               
-//                $('>tbody>tr.jqgrow>td:nth-child(' + (iCol + 1) +
-//                        ')', this).highlight(rule.data);
-
-        }
-
-
-        function RefrescaAnchoGrillaDetalle() {
-            // $("#Lista").setGridWidth($(window).width());
-            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
-
-            $("#Lista").setGridWidth($("#divGrilla").width());
-
-            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
-            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
-        }
-
-
-
-    });
-
-
-
-
-
-
-
-
-
-
-    function exportExcel($id) {
-        var keys = [], ii = 0, rows = "";
-        var ids = $id.getDataIDs();  // Get All IDs
-        var row = $id.getRowData(ids[0]);     // Get First row to get the labels
-        for (var k in row) {
-            keys[ii++] = k;    // capture col names
-            rows = rows + k + "\t";     // output each Column as tab delimited
-        }
-        rows = rows + "\n";   // Output header with end of line
-        for (i = 0; i < ids.length; i++) {
-            row = $id.getRowData(ids[i]); // get each row
-            for (j = 0; j < keys.length; j++) rows = rows + row[keys[j]] + "\t"; // output each Row as tab delimited
-            rows = rows + "\n";  // output each row with end of line
-        }
-        rows = rows + "\n";  // end of line at the end
-        var form = "<form name='csvexportform' action='" + php_path + "csvexport.php' method='post'>";
-        form = form + "<input type='hidden' name='csvBuffer' value='" + rows + "'>";
-        form = form + "</form><script>document.csvexportform.submit();</sc" + "ript>";
-        OpenWindow = window.open('', '');
-        OpenWindow.document.write(form);
-        OpenWindow.document.close();
-    }
-
-    function gridcsvexport(id) {
-        $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
-            caption: '',
-            title: 'export',
-            buttonicon: 'ui-icon-newwin',
-            position: 'last',
-            onClickButton: function () {
-                exportExcel($(this));
-            }
-        });
-    }
-
-</script>
-@*</div>*@
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                     {
+                                         caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                                         onClickButton: function () {
+                                             AgregarItemVacio(jQuery("#Lista"));
+                                         },
+                                     });
+    }); </script >
