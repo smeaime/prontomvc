@@ -98,5 +98,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdOrigen { get; set; }
         public string OrigenRegistro { get; set; }
         public Nullable<int> IdReciboAsignado { get; set; }
+    
+        public virtual Moneda Moneda { get; set; }
+        public virtual TiposComprobante TiposComprobante { get; set; }
+        public virtual TiposComprobante TiposComprobante1 { get; set; }
     }
 }
