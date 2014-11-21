@@ -94,9 +94,38 @@ Namespace Pronto.ERP.Bll
 
                         .CartaPorteTipoDeAdjuntoDeFacturacion = If(oCliente.CartaPorteTipoDeAdjuntoDeFacturacion, -1)
 
+
+                        
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
+
+
+
+                    Try
+
+                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                            Where i.IdCliente = myCliente.Id _
+                                                            And i.Acciones = "EmailFacturacionElectronica"
+                                                        ).SingleOrDefault
+                        .EmailFacturacionElectronica = oDet.Email
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+
+                    Try
+
+                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                            Where i.IdCliente = myCliente.Id _
+                                                            And i.Acciones = "AutorizacionSyngenta"
+                                                        ).SingleOrDefault
+                        
+                        .AutorizacionSyngenta = oDet.Contacto
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+
+
 
                 End With
             Catch ex As Exception
@@ -231,6 +260,7 @@ Namespace Pronto.ERP.Bll
                                                     ).SingleOrDefault
                     If IsNothing(oDet) Then
                         oDet = New DetalleClientes
+                        oDet.IdCliente = myCliente.Id
                         oDet.Acciones = "EmailFacturacionElectronica"
                         oDet.Email = myCliente.EmailFacturacionElectronica
                         db.DetalleClientes.InsertOnSubmit(oDet)
@@ -249,11 +279,12 @@ Namespace Pronto.ERP.Bll
                                                     ).SingleOrDefault
                     If IsNothing(oDet) Then
                         oDet = New DetalleClientes
+                        oDet.IdCliente = myCliente.Id
                         oDet.Acciones = "AutorizacionSyngenta"
                         oDet.Contacto = myCliente.AutorizacionSyngenta
                         db.DetalleClientes.InsertOnSubmit(oDet)
                     Else
-                        oDet.Email = myCliente.AutorizacionSyngenta
+                        oDet.Contacto = myCliente.AutorizacionSyngenta
                     End If
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
