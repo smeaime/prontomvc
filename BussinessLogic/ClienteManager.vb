@@ -42,29 +42,29 @@ Namespace Pronto.ERP.Bll
             'End If
 
 
+            If False Then
+                Try
+                    myCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores = EntidadManager.TablaSelect(SC, "ExpresionRegularNoAgruparFacturasConEstosVendedores", "Clientes", "IdCliente", id)
+                    myCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse = EntidadManager.TablaSelect(SC, "ExigeDatosCompletosEnCartaDePorteQueLoUse", "Clientes", "IdCliente", id)
+                    myCliente.IncluyeTarifaEnFactura = EntidadManager.TablaSelect(SC, "IncluyeTarifaEnFactura ", "Clientes", "IdCliente", id)
 
-            Try
-                myCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores = EntidadManager.TablaSelect(SC, "ExpresionRegularNoAgruparFacturasConEstosVendedores", "Clientes", "IdCliente", id)
-                myCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse = EntidadManager.TablaSelect(SC, "ExigeDatosCompletosEnCartaDePorteQueLoUse", "Clientes", "IdCliente", id)
-                myCliente.IncluyeTarifaEnFactura = EntidadManager.TablaSelect(SC, "IncluyeTarifaEnFactura ", "Clientes", "IdCliente", id)
+
+                    myCliente.DireccionDeCorreos = EntidadManager.TablaSelect(SC, "DireccionDeCorreos ", "Clientes", "IdCliente", id)
+                    myCliente.IdLocalidadDeCorreos = Val(EntidadManager.TablaSelect(SC, "IdLocalidadDeCorreos ", "Clientes", "IdCliente", id))
+                    myCliente.IdProvinciaDeCorreos = Val(EntidadManager.TablaSelect(SC, "IdProvinciaDeCorreos ", "Clientes", "IdCliente", id))
+                    myCliente.CodigoPostalDeCorreos = EntidadManager.TablaSelect(SC, "CodigoPostalDeCorreos ", "Clientes", "IdCliente", id)
+                    myCliente.ObservacionesDeCorreos = EntidadManager.TablaSelect(SC, "ObservacionesDeCorreos ", "Clientes", "IdCliente", id)
 
 
-                myCliente.DireccionDeCorreos = EntidadManager.TablaSelect(SC, "DireccionDeCorreos ", "Clientes", "IdCliente", id)
-                myCliente.IdLocalidadDeCorreos = Val(EntidadManager.TablaSelect(SC, "IdLocalidadDeCorreos ", "Clientes", "IdCliente", id))
-                myCliente.IdProvinciaDeCorreos = Val(EntidadManager.TablaSelect(SC, "IdProvinciaDeCorreos ", "Clientes", "IdCliente", id))
-                myCliente.CodigoPostalDeCorreos = EntidadManager.TablaSelect(SC, "CodigoPostalDeCorreos ", "Clientes", "IdCliente", id)
-                myCliente.ObservacionesDeCorreos = EntidadManager.TablaSelect(SC, "ObservacionesDeCorreos ", "Clientes", "IdCliente", id)
+                    myCliente.SeLeFacturaCartaPorteComoTitular = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoTitular ", "Clientes", "IdCliente", id)
+                    myCliente.SeLeFacturaCartaPorteComoIntermediario = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoIntermediario ", "Clientes", "IdCliente", id)
+                    myCliente.SeLeFacturaCartaPorteComoRemcomercial = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoRemcomercial ", "Clientes", "IdCliente", id)
+                    myCliente.SeLeFacturaCartaPorteComoCorredor = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoCorredor ", "Clientes", "IdCliente", id)
 
-              
-                myCliente.SeLeFacturaCartaPorteComoTitular = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoTitular ", "Clientes", "IdCliente", id)
-                myCliente.SeLeFacturaCartaPorteComoIntermediario = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoIntermediario ", "Clientes", "IdCliente", id)
-                myCliente.SeLeFacturaCartaPorteComoRemcomercial = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoRemcomercial ", "Clientes", "IdCliente", id)
-                myCliente.SeLeFacturaCartaPorteComoCorredor = EntidadManager.TablaSelect(SC, "SeLeFacturaCartaPorteComoCorredor ", "Clientes", "IdCliente", id)
-
-            Catch ex As Exception
-                ErrHandler.WriteError(ex)
-            End Try
-
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+            End If
 
             Try
 
@@ -72,6 +72,31 @@ Namespace Pronto.ERP.Bll
 
                     Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
                     Dim oCliente As linqCliente = (From i In db.linqClientes Where i.IdCliente = id).SingleOrDefault
+
+                    Try
+
+
+                        .ExpresionRegularNoAgruparFacturasConEstosVendedores = oCliente.ExpresionRegularNoAgruparFacturasConEstosVendedores
+                        .ExigeDatosCompletosEnCartaDePorteQueLoUse = oCliente.ExigeDatosCompletosEnCartaDePorteQueLoUse
+                        .IncluyeTarifaEnFactura = oCliente.IncluyeTarifaEnFactura
+
+
+                        .DireccionDeCorreos = oCliente.DireccionDeCorreos
+                        .IdLocalidadDeCorreos = oCliente.IdLocalidadDeCorreos
+                        .IdProvinciaDeCorreos = oCliente.IdProvinciaDeCorreos
+                        .CodigoPostalDeCorreos = oCliente.CodigoPostalDeCorreos
+                        .ObservacionesDeCorreos = oCliente.ObservacionesDeCorreos
+
+
+                        .SeLeFacturaCartaPorteComoTitular = oCliente.SeLeFacturaCartaPorteComoTitular
+                        .SeLeFacturaCartaPorteComoIntermediario = oCliente.SeLeFacturaCartaPorteComoIntermediario
+                        .SeLeFacturaCartaPorteComoRemcomercial = oCliente.SeLeFacturaCartaPorteComoRemcomercial
+                        .SeLeFacturaCartaPorteComoCorredor = oCliente.SeLeFacturaCartaPorteComoCorredor
+
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+
 
                     Try
                         .SeLeFacturaCartaPorteComoDestinatarioLocal = oCliente.SeLeFacturaCartaPorteComoDestinatario
@@ -95,7 +120,7 @@ Namespace Pronto.ERP.Bll
                         .CartaPorteTipoDeAdjuntoDeFacturacion = If(oCliente.CartaPorteTipoDeAdjuntoDeFacturacion, -1)
 
 
-                        
+
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
