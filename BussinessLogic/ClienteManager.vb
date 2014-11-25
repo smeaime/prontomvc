@@ -108,7 +108,8 @@ Namespace Pronto.ERP.Bll
                                                             Where i.IdCliente = myCliente.Id _
                                                             And i.Acciones = "EmailFacturacionElectronica"
                                                         ).SingleOrDefault
-                        .EmailFacturacionElectronica = oDet.Email
+
+                        If oDet IsNot Nothing Then .EmailFacturacionElectronica = oDet.Email
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
@@ -119,8 +120,8 @@ Namespace Pronto.ERP.Bll
                                                             Where i.IdCliente = myCliente.Id _
                                                             And i.Acciones = "AutorizacionSyngenta"
                                                         ).SingleOrDefault
-                        
-                        .AutorizacionSyngenta = oDet.Contacto
+
+                        If oDet IsNot Nothing Then .AutorizacionSyngenta = oDet.Contacto
                     Catch ex As Exception
                         ErrHandler.WriteError(ex)
                     End Try
