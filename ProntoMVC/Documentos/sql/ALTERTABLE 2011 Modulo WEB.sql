@@ -1065,6 +1065,10 @@ go
 
 
 
+alter table ExcelImportador ADD
+        Exporta VARCHAR (10)	NULL,
+        SubnumeroDeFacturacion VARCHAR (10)	NULL
+go
 
 
 
