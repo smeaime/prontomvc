@@ -1702,4 +1702,4 @@ public static class ErrorLog2
             // uh oh! just keep going
         }
     }
-}
+};

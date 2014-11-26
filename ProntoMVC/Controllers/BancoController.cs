@@ -25,6 +25,29 @@ namespace ProntoMVC.Controllers
 {
     public partial class BancoController : ProntoBaseController
     {
+        public virtual ActionResult GetBancosPropios(int? TipoEntidad)
+        {
+            int TipoEntidad1 = TipoEntidad ?? 0;
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            if (TipoEntidad == 1)
+            {
+                foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => x.Activa == "SI").OrderBy(x => x.Banco.Nombre).ToList())
+                    Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre + " " + u.Cuenta);
+            }
+            if (TipoEntidad == 2)
+            {
+                foreach (Caja u in db.Cajas.OrderBy(x => x.Descripcion).ToList())
+                    Datacombo.Add(u.IdCaja, u.Descripcion);
+            }
+            if (TipoEntidad == 3)
+            {
+                foreach (TarjetasCredito u in db.TarjetasCreditoes.OrderBy(x => x.Nombre).ToList())
+                    Datacombo.Add(u.IdTarjetaCredito, u.Nombre);
+            }
+            return PartialView("Select", Datacombo);
+        }
+
         public virtual JsonResult GetCuentasBancariasAutocomplete(string term, int obra = 0)
         {
             var ci = new System.Globalization.CultureInfo("en-US");
