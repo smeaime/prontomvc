@@ -1,47 +1,16 @@
 function SerializaForm() {
     var cm, data1, data2, valor;
     var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
-    //            var cabecera = { "IdPedido": "", "Numero": "", "SubNumero": "", "FechaIngreso": "", "IdProveedor": "", "Validez": "", "Bonificacion": "", "PorcentajeIva1": "", "IdMoneda": "",
-    //                "ImporteBonificacion": "", "ImporteIva1": "", "ImporteTotal": "", "IdPlazoEntrega": "", "IdCondicionCompra": "", "Garantia": "", "LugarEntrega": "",
-    //                "IdComprador": "", "Aprobo": "", "Referencia": "", "Detalle": "", "Contacto": "", "Observaciones": "", "DetallePedidos": []
-    //            };
-
     var ImporteBonificacion = $("#TotalBonificacionGlobal").val();
-    //            ImporteBonificacion = ImporteBonificacion.replace(".", ",");
-
-    //////////////////////////////////////////////////////////////////////////////////////////////
     var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
     cabecera.DetallePedidos = [];
     cabecera.IdProveedor = $("#IdProveedor").val();
-    // como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
-    // como no le encontre la vuelta a automatizar la serializacion de inputs disableados, los pongo manualmente
-    //cabecera.NumeroFactura = $("#NumeroFactura").val();
-
-    //            cabecera.IdPedido = $("#IdPedido").val();
     cabecera.NumeroPedido = $("#NumeroPedido").val();
-    // cabecera.FechaPedido = $("#FechaPedido").datepicker("getDate");
     cabecera.FechaPedido = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", $("#FechaPedido").val()));
-    //            cabecera.SubNumero = $("#SubNumero").val();
-    //            cabecera.FechaIngreso = $("#FechaIngreso").val();
-    //            cabecera.IdProveedor = $("#IdProveedor").val();
-    //            cabecera.Validez = $("#Validez").val();
     cabecera.DetalleCondicionCompra = $("#DetalleCondicionCompra").val();
     cabecera.Bonificacion = $("#TotalBonificacionGlobal").val().replace(".", ",");
-    ////            cabecera.PorcentajeIva1 = 21;
-    //            cabecera.IdMoneda = $("#IdMoneda").val();
-    //            cabecera.ImporteBonificacion = ImporteBonificacion;
     cabecera.TotalIva1 = $("#TotalIva").val().replace(".", ",");
     cabecera.TotalPedido = $("#Total").val().replace(".", ",");
-    //            cabecera.IdPlazoEntrega = $("#IdPlazoEntrega").val();
-    //            cabecera.IdCondicionCompra = $("#IdCondicionCompra").val();
-    //            cabecera.Garantia = $("#Garantia").val();
-    //            cabecera.LugarEntrega = $("#LugarEntrega").val();
-    //            cabecera.IdComprador = $("#IdComprador").val();
-    //            cabecera.Aprobo = $("#Aprobo").val();
-    //            cabecera.Referencia = $("#Referencia").val();
-    //            cabecera.Detalle = $("#Detalle").val();
-    //            cabecera.Contacto = $("#Contacto").val();
-    //            cabecera.Observaciones = $("#Observaciones").val();
 
     var dataIds = $('#Lista').jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
@@ -140,9 +109,6 @@ function Validar() {
             $("#loading").hide();
         },
         error: function (xhr, textStatus, exceptionThrown) {
-
-            // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
-
             try {
                 var errorData = $.parseJSON(xhr.responseText);
                 //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
@@ -258,19 +224,9 @@ $(function () {
 
     'use strict';
 
-    var $grid = "";
-    var lastSelectedId;
-    var lastSelectediCol;
-    var lastSelectediRow;
-    var lastSelectediCol2;
-    var lastSelectediRow2;
-    var inEdit;
-    var selICol;
-    var selIRow;
-    var gridCellWasClicked = false;
-    var grillaenfoco = false;
-    var dobleclic
+    var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
     var headerRow, rowHight, resizeSpanHeight;
+
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
         for (i = 0; i < l; i++) {
@@ -316,6 +272,15 @@ $(function () {
             $grid = $('#ListaValores');
             grillaenfoco = true;
         }
+        if (jQuery("#ListaImpuestos").find(target).length) {
+            $grid = $('#ListaImpuestos');
+            grillaenfoco = true;
+        }
+        if (jQuery("#ListaRubrosContables").find(target).length) {
+            $grid = $('#ListaRubrosContables');
+            grillaenfoco = true;
+        }
+
         if (grillaenfoco) {
             gridCellWasClicked = true; // flat to check if there is a cell been edited.
             lastSelectediRow2 = lastSelectediRow;
@@ -360,8 +325,31 @@ $(function () {
         $(".boton").hide();
     }
 
+    var ControlImportes = function (value, colname) {
+        
+        if (colname === "A pagar") {
+            var rowid = $('#Lista').getGridParam('selrow');
+            var SinImpuestos = $("#Lista").getCell(rowid, "SinImpuestos");
+            SinImpuestos = Number(SinImpuestos.replace(",", "."));
+            value = Number(value);
+            if (value < SinImpuestos) {
+                return [false, "El monto a pagar no puede ser inferior al importe sin impuestos"];
+            }
+        }
+        if (colname === "Imp.s/Impuestos") {
+            var rowid = $('#Lista').getGridParam('selrow');
+            var Importe = $("#Lista").getCell(rowid, "Importe")
+            Importe = Number(Importe.replace(",", "."));
+            value = Number(value);
+            if (value > Importe) {
+                return [false, "El importe sin impuestos no puede ser superior al monto a pagar"];
+            }
+        }
+        return [true];
+    };
+        
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////DEFINICION DE GRILLAS   ///////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////DEFINICION DE GRILLAS   //////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $('#Lista').jqGrid({
@@ -371,36 +359,111 @@ $(function () {
         datatype: 'json',
         mtype: 'POST',
         colNames: ['Acciones', 'IdDetalleOrdenPago', 'IdImputacion', 'IdTipoRetencionGanancia', 'IdIBCondicion', 'BaseCalculoIIBB', 'CotizacionMoneda', 'IdTipoComp', 'IdComprobante',
-                   'Tipo', 'Numero ', 'Fecha', 'Imp. Original', 'Saldo', 'Importe', 'Imp.s/Impuestos', 'Iva total', 'Total comp.', 'B/S', 'Imp.Ret.Iva', 'Nro.OP Ret.Iva', 'Imp.Gravado',
-                   '% Iva Mono', 'Certif.Poliza', 'Nro.Endoso Poliza', 'Fecha Vto.', 'Fecha Comp.'],
+                   'Tipo', 'Numero ', 'Fecha', 'Imp. Original', 'Saldo', 'A pagar', 'Imp.s/Impuestos', 'Iva total', 'Total comp.', 'B/S', 'Imp.Ret.Iva', 'Nro.OP Ret.Iva', 'Imp.Gravado',
+                   '% Iva Mono', 'Certif.Poliza', 'Nro.Endoso Poliza', 'Fecha Vto.', 'Fecha Comp.', 'Categoria IIBB', 'Categoria ganancias'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPago', index: 'IdDetalleOrdenPago', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdImputacion', index: 'IdImputacion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
                     { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
                     { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'BaseCalculoIIBB', index: 'BaseCalculoIIBB', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'CotizacionMoneda', index: 'CotizacionMoneda', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'IdTipoComp', index: 'IdTipoComp', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'IdComprobante', index: 'IdComprobante', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'Tipo', index: 'Tipo', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Numero', index: 'Numero', width: 120, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Fecha', index: 'Fecha', width: 85, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImporteOriginal', index: 'ImporteOriginal', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Saldo', index: 'Saldo', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Importe', index: 'Importe', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'SinImpuestos', index: 'SinImpuestos', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'IvaTotal', index: 'IvaTotal', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'TotalComprobante', index: 'TotalComprobante', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'BienesYServicios', index: 'BienesYServicios', width: 30, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImporteRetencionIVA', index: 'ImporteRetencionIVA', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'NumeroOrdenPagoRetencionIVA', index: 'NumeroOrdenPagoRetencionIVA', width: 100, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'GravadoIVA', index: 'GravadoIVA', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'PorcentajeIVAParaMonotributistas', index: 'PorcentajeIVAParaMonotributistas', width: 85, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'CertificadoPoliza', index: 'CertificadoPoliza', width: 120, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'NumeroEndosoPoliza', index: 'NumeroEndosoPoliza', width: 120, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 85, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'FechaComprobante', index: 'FechaComprobante', width: 85, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } }
+                    { name: 'BaseCalculoIIBB', index: 'BaseCalculoIIBB', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'CotizacionMoneda', index: 'CotizacionMoneda', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'IdTipoComp', index: 'IdTipoComp', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'IdComprobante', index: 'IdComprobante', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'Tipo', index: 'Tipo', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Numero', index: 'Numero', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Fecha', index: 'Fecha', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'ImporteOriginal', index: 'ImporteOriginal', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Saldo', index: 'Saldo', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    {
+                        name: 'Importe', index: 'Importe', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {   type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) {setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100);}
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'SinImpuestos', index: 'SinImpuestos', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    { name: 'IvaTotal', index: 'IvaTotal', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'TotalComprobante', index: 'TotalComprobante', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'BienesYServicios', index: 'BienesYServicios', width: 30, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'ImporteRetencionIVA', index: 'ImporteRetencionIVA', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'NumeroOrdenPagoRetencionIVA', index: 'NumeroOrdenPagoRetencionIVA', width: 100, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'GravadoIVA', index: 'GravadoIVA', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'PorcentajeIVAParaMonotributistas', index: 'PorcentajeIVAParaMonotributistas', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'CertificadoPoliza', index: 'CertificadoPoliza', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'NumeroEndosoPoliza', index: 'NumeroEndosoPoliza', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'FechaComprobante', index: 'FechaComprobante', width: 85, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    {
+                        name: 'CategoriaIIBB', index: 'CategoriaIIBB', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'IBCondicion/GetCategoriasIIBB',
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    //if ($this.hasClass("FormElement")) {
+                                    //    // form editing
+                                    //    $('#IdIBCondicion').val(this.value);
+                                    //} else {
+                                    //    $td = $this.closest("td");
+                                    //    if ($td.hasClass("edit-cell")) {
+                                    //        // cell editing
+                                    //        var rowid = $('#Lista').getGridParam('selrow');
+                                    //        $('#Lista').jqGrid('setCell', rowid, 'IdIBCondicion', this.value);
+                                    //    } else {
+                                    //        // inline editing
+                                    //    }
+                                    //}
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'CategoriaGanancias', index: 'CategoriaGanancias', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'TipoRetencionGanancia/GetCategoriasGanancia',
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    //if ($this.hasClass("FormElement")) {
+                                    //    // form editing
+                                    //    $('#IdTipoRetencionGanancia').val(this.value);
+                                    //} else {
+                                    //    $td = $this.closest("td");
+                                    //    if ($td.hasClass("edit-cell")) {
+                                    //        // cell editing
+                                    //        var rowid = $('#Lista').getGridParam('selrow');
+                                    //        $('#Lista').jqGrid('setCell', rowid, 'IdTipoRetencionGanancia', this.value);
+                                    //    } else {
+                                    //        // inline editing
+                                    //    }
+                                    //}
+                                }
+                            }]
+                        },
+                    }
         ],
         gridComplete: function () {
             calculaTotalImputaciones();
@@ -412,6 +475,10 @@ $(function () {
             lastSelectedId = rowid;
             lastSelectediCol = iCol;
             lastSelectediRow = iRow;
+            if (jQuery("#Lista").jqGrid('getCell', rowid, 'Tipo') != 'PA') {
+                jQuery("#Lista").jqGrid('setCell', rowid, 'CategoriaIIBB', '', 'not-editable-cell');
+                jQuery("#Lista").jqGrid('setCell', rowid, 'CategoriaGanancias', '', 'not-editable-cell');
+            }
         },
         pager: $('#ListaPager1'),
         rowNum: 100,
@@ -432,113 +499,221 @@ $(function () {
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
-    jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#Lista").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-plus", title: "Agregar anticipo",
+                                     onClickButton: function () {
+                                         AgregarAnticipo(jQuery("#Lista"));
+                                     },
+                                 });
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                     onClickButton: function () {
+                                         EliminarSeleccionados(jQuery("#Lista"));
+                                     },
+                                 });
+    
 
-
-    $(function () {
-        $('#ListaValores').jqGrid({
-            url: ROOT + 'OrdenPago/DetOrdenesPagoValores/',
-            postData: { 'IdOrdenPago': function () { return $("#IdOrdenPago").val(); } },
-            editurl: ROOT + 'OrdenPago/EditGridData/',
-            datatype: 'json',
-            mtype: 'POST',
-            colNames: ['Acciones', 'IdDetalleOrdenPagoValores', 'IdTipoValor', 'IdBanco', 'IdValor ', 'IdCuentaBancaria', 'IdBancoChequera', 'IdCaja', 'IdTarjetaCredito',
-                       'Tipo', 'Nro.Int.', 'Nro.Valor', 'Fecha Vto.', 'Banco / Caja', 'Importe', 'Anulado'],
-            colModel: [
-                        { name: 'act', formoptions: { rowpos: 1, colpos: 1 }, index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                        {
-                            name: 'IdDetalleOrdenPagoValores', formoptions: { rowpos: 2, colpos: 1 }, index: 'IdDetalleOrdenPagoValores', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }
+    $('#ListaValores').jqGrid({
+        url: ROOT + 'OrdenPago/DetOrdenesPagoValores/',
+        postData: { 'IdOrdenPago': function () { return $("#IdOrdenPago").val(); } },
+        editurl: ROOT + 'OrdenPago/EditGridData/',
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['Acciones', 'IdDetalleOrdenPagoValores', 'IdTipoValor', 'IdBanco', 'IdValor ', 'IdCuentaBancaria', 'IdBancoChequera', 'IdCaja', 'IdTarjetaCredito',
+                    'Tipo', 'Nro.Int.', 'Nro.Valor', 'Fecha Vto.', 'Banco / Caja', 'Importe', 'Anulado', 'Cheque a la orden de', 'No a la orden'],
+        colModel: [
+                    { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
+                    { name: 'IdDetalleOrdenPagoValores', index: 'IdDetalleOrdenPagoValores', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdTipoValor', index: 'IdTipoValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdBanco', index: 'IdBanco', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdValor', index: 'IdValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdBancoChequera', index: 'IdBancoChequera', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdCaja', index: 'IdCaja', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdTarjetaCredito', index: 'IdTarjetaCredito', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    {
+                        name: 'Tipo', index: 'Tipo', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Valor/GetTiposValores',
+                            dataInit: function(elem) {
+                                $(elem).width(40);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdTipoValor').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaValores').getGridParam('selrow');
+                                            $('#ListaValores').jqGrid('setCell', rowid, 'IdTipoValor', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
                         },
-                        {
-                            name: 'IdTipoValor', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdTipoValor', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdBanco', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdBanco', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdValor', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdValor', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdCuentaBancaria', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdCuentaBancaria', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdBancoChequera', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdBancoChequera', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdCaja', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdCaja', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'IdTarjetaCredito', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdTarjetaCredito', width: 85, editable: true,
-                            hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }
-                        },
-                        {
-                            name: 'Tipo', formoptions: { rowpos: 4, colpos: 1 }, index: 'Tipo', width: 50, align: 'center', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'NumeroInterno', formoptions: { rowpos: 5, colpos: 1 }, index: 'NumeroInterno', width: 60, align: 'center', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'NumeroValor', formoptions: { rowpos: 5, colpos: 1 }, index: 'NumeroValor', width: 100, align: 'center', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'FechaVencimiento', formoptions: { rowpos: 6, colpos: 1 }, index: 'FechaVencimiento', width: 85, align: 'center', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'Entidad', formoptions: { rowpos: 4, colpos: 1 }, index: 'Entidad', width: 250, align: 'left', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'Importe', formoptions: { rowpos: 9, colpos: 1 }, index: 'Importe', width: 85, align: 'right', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                        },
-                        {
-                            name: 'Anulado', formoptions: { rowpos: 4, colpos: 1 }, index: 'Anulado', width: 50, align: 'center', editable: true,
-                            hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
+                    },
+                    {
+                        name: 'NumeroInterno', index: 'NumeroInterno', formoptions: { rowpos: 2, colpos: 1 }, width: 70, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaValores').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
                         }
-            ],
-            gridComplete: function () {
-                calculaTotalValores();
-            },
-            onCellSelect: function (rowid, iCol, cellcontent, e) {
-                var $this = $(this);
-                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                lastSelectedId = rowid;
-                lastSelectediCol = iCol;
-                lastSelectediRow = iRow;
-            },
-            pager: $('#ListaPager3'),
-            rowNum: 100,
-            rowList: [10, 20, 50, 100],
-            sortname: 'IdDetalleOrdenPagoValores',
-            sortorder: 'asc',
-            viewrecords: true,
-            width: 'auto', 
-            autowidth: true,
-            shrinkToFit: false,
-            height: '200px',
-            rownumbers: true,
-            multiselect: true,
-            altRows: false,
-            footerrow: true,
-            userDataOnFooter: true,
-            caption: '<b>DETALLE VALORES</b>',
-            cellEdit: true,
-            cellsubmit: 'clientArray'
-        });
-        jQuery("#ListaValores").jqGrid('navGrid', '#ListaPager3', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        $("#ListaValores").setFrozenColumns();
-    })
+                    },
+                    {
+                        name: 'NumeroValor', index: 'NumeroValor', formoptions: { rowpos: 2, colpos: 2 }, width: 100, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', 
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0',
+                            dataEvents: [
+                            {   type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaValores').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 3, colpos: 2 }, width: 120, sortable: false, align: 'right', editable: true,
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (elem) {
+                                $(elem).width(110);
+                            },
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+
+                    {
+                        name: 'Entidad', index: 'Entidad', formoptions: { rowpos: 4, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Banco/GetBancosPropios',
+                            dataInit: function (elem) {
+                                $(elem).width(290);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaValores').getGridParam('selrow');
+                                    var idcaja = $("#ListaValores").getRowData(rowid)['IdCaja'];
+                                    if (idcaja == "") {
+                                        $('#ListaValores').jqGrid('setCell', rowid, 'IdCuentaBancaria', this.value);
+                                    } else {
+                                        $('#ListaValores').jqGrid('setCell', rowid, 'IdCaja', this.value);
+                                    };
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'Importe', index: 'Importe', formoptions: { rowpos: 4, colpos: 2 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaValores').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'Anulado', index: 'Anulado', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
+                    },
+                    { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 5, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false, number: true }, edittype: 'text'},
+                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 5, colpos: 2 }, width: 40, align: 'left', editable: true, editrules: { required: false, number: true }, edittype: 'text' }
+        ],
+        gridComplete: function () {
+            calculaTotalValores();
+        },
+        onCellSelect: function (rowid, iCol, cellcontent, e) {
+            var $this = $(this);
+            var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+            lastSelectedId = rowid;
+            lastSelectediCol = iCol;
+            lastSelectediRow = iRow;
+            if (jQuery("#ListaValores").jqGrid('getCell', rowid, 'Tipo') == 'CE') {
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'Tipo', '', 'not-editable-cell');
+            }
+            var cm = jQuery("#ListaValores").jqGrid("getGridParam", "colModel");
+            if (cm[iCol].name == "Entidad") {
+                var TipoEntidad, TipoEntidad1;
+                TipoEntidad = $("#ListaValores").getRowData(rowid)['IdCaja'];
+                TipoEntidad1 = 1
+                if (TipoEntidad != "") { TipoEntidad1 = 2 }
+                $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=' + TipoEntidad1 } });
+            }
+        },
+        pager: $('#ListaPager3'),
+        rowNum: 100,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdDetalleOrdenPagoValores',
+        sortorder: 'asc',
+        viewrecords: true,
+        width: 'auto', 
+        autowidth: true,
+        shrinkToFit: false,
+        height: '200px',
+        rownumbers: true,
+        multiselect: true,
+        altRows: false,
+        footerrow: true,
+        userDataOnFooter: true,
+        caption: '<b>DETALLE VALORES</b>',
+        cellEdit: true,
+        cellsubmit: 'clientArray'
+    });
+    jQuery("#ListaValores").jqGrid('navGrid', '#ListaPager3', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    //$("#ListaValores").setFrozenColumns();
+    jQuery("#ListaValores").jqGrid('navButtonAdd', '#ListaPager3',
+                                    {
+                                        caption: "", buttonicon: "ui-icon-home", title: "Agregar valor",
+                                        onClickButton: function () {
+                                            AgregarValor(jQuery("#ListaValores"));
+                                        },
+                                    });
+    jQuery("#ListaValores").jqGrid('navButtonAdd', '#ListaPager3',
+                                    {
+                                        caption: "", buttonicon: "ui-icon-clipboard", title: "Agregar caja",
+                                        onClickButton: function () {
+                                            AgregarCaja(jQuery("#ListaValores"));
+                                        },
+                                    });
+    jQuery("#ListaValores").jqGrid('navButtonAdd', '#ListaPager3',
+                                    {
+                                        caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                        onClickButton: function () {
+                                            EliminarSeleccionados(jQuery("#ListaValores"));
+                                        },
+                                    });
 
 
     $('#ListaContable').jqGrid({
@@ -719,7 +894,7 @@ $(function () {
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
                     ],
         ondblClickRow: function (id) {
-            CopiarCtaCte(id);
+            CopiarCtaCte(id, "Dbl");
         },
         loadComplete: function () {
             grid = $(this);
@@ -764,7 +939,7 @@ $(function () {
                         { name: 'Cliente', index: 'Cliente', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
         ],
         ondblClickRow: function (id) {
-            CopiarValorTercero(id);
+            CopiarValorTercero(id, "Dbl");
         },
         loadComplete: function () {
             grid = $(this);
@@ -811,46 +986,9 @@ $(function () {
                 $("#gbox_grid2").css("border", "3px solid #aaaaaa");
             },
             ondrop: function (ev, ui, getdata) {
-                var acceptId = $(ui.draggable).attr("id");
-                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-                var j = 0, tmpdata = {}, dropname, IdValor;
-                var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-                var grid;
-                try {
-                    IdValor = getdata['IdValor'];
-                    $.ajax({
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        url: ROOT + 'Valor/TraerUnValor/',
-                        data: { IdValor: IdValor },
-                        dataType: "Json",
-                        success: function (data) {
-                            var longitud = data.length;
-                            for (var i = 0; i < data.length; i++) {
-                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                                tmpdata['IdArticulo'] = data[i].IdArticulo;
-                                tmpdata['Codigo'] = data[i].Codigo;
-                                tmpdata['Descripcion'] = data[i].Descripcion;
-                                tmpdata['IdUnidad'] = data[i].IdUnidad;
-                                tmpdata['Unidad'] = data[i].Unidad;
-                                tmpdata['IdDetallePedido'] = 0;
-                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                                tmpdata['NumeroItemRM'] = data[i].NumeroItemRM;
-                                tmpdata['Cantidad'] = data[i].Cantidad;
-                                tmpdata['Observaciones'] = data[i].Observaciones;
-                                tmpdata['NumeroObra'] = data[i].NumeroObra;
-                                tmpdata['FechaEntrega'] = displayDate;
-                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                                getdata = tmpdata;
-                                grid = Math.ceil(Math.random() * 1000000);
-                                $("#Lista").jqGrid('addRowData', grid, getdata);
-                            }
-                        }
-                    });
-                } catch (e) { }
-                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+                CopiarCtaCte($(ui.draggable).attr("id"), "DnD");
+                //var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                //var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
             }
         });
     }
@@ -865,48 +1003,129 @@ $(function () {
                 $("#gbox_grid2").css("border", "3px solid #aaaaaa");
             },
             ondrop: function (ev, ui, getdata) {
-                var acceptId = $(ui.draggable).attr("id");
-                var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-                var j = 0, tmpdata = {}, dropname, IdValor;
-                var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-                var grid;
-                try {
-                    IdValor = getdata['IdValor'];
-                    $.ajax({
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        url: ROOT + 'Valor/TraerUnValor/',
-                        data: { IdValor: IdValor },
-                        dataType: "Json",
-                        success: function (data) {
-                            var longitud = data.length;
-                            for (var i = 0; i < data.length; i++) {
-                                var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                                var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                                tmpdata['IdArticulo'] = data[i].IdArticulo;
-                                tmpdata['Codigo'] = data[i].Codigo;
-                                tmpdata['Descripcion'] = data[i].Descripcion;
-                                tmpdata['IdUnidad'] = data[i].IdUnidad;
-                                tmpdata['Unidad'] = data[i].Unidad;
-                                tmpdata['IdDetallePedido'] = 0;
-                                tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                                tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                                tmpdata['NumeroItemRM'] = data[i].NumeroItemRM;
-                                tmpdata['Cantidad'] = data[i].Cantidad;
-                                tmpdata['Observaciones'] = data[i].Observaciones;
-                                tmpdata['NumeroObra'] = data[i].NumeroObra;
-                                tmpdata['FechaEntrega'] = displayDate;
-                                tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                                getdata = tmpdata;
-                                grid = Math.ceil(Math.random() * 1000000);
-                                $("#Lista").jqGrid('addRowData', grid, getdata);
-                            }
-                        }
-                    });
-                } catch (e) { }
-                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+                CopiarValorTercero($(ui.draggable).attr("id"), "DnD");
             }
         });
+    }
+
+    function CopiarCtaCte(IdCtaCte, Origen) {
+        var acceptId = IdCtaCte;
+        var $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
+
+        var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
+        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+        //var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
+
+        dataIds = $gridDestino.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            data2 = $gridDestino.jqGrid('getRowData', dataIds[i]);
+            if (data2.IdImputacion == IdCtaCte) {
+                if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
+                alert("Ya existe el registro");
+                return;
+            }
+        };
+        Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+        try {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'CuentaCorriente/TraerUno/',
+                data: { IdCtaCte: IdCtaCte },
+                dataType: "Json",
+                success: function (data) {
+                    for (i = 0; i < data.length; i++) {
+                        data2 = data[i]
+                        data2.IdDetalleOrdenPago = Id2;
+
+                        date = new Date(parseInt(data[i].Fecha.substr(6)));
+                        displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                        data2.Fecha = displayDate;
+                        date = new Date(parseInt(data[i].FechaVencimiento.substr(6)));
+                        displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                        data2.FechaVencimiento = displayDate;
+                        date = new Date(parseInt(data[i].FechaComprobante.substr(6)));
+                        displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                        data2.FechaComprobante = displayDate;
+
+                        if (Origen == "DnD") {
+                            Id = dataIds[0];
+                            $gridDestino.jqGrid('setRowData', Id, data2);
+                        } else {
+                            Id = Id2
+                            $gridDestino.jqGrid('addRowData', Id, data2, "first");
+                        };
+
+                        //ar new_id = 39; //for example
+                        //aftersavefunc: function( old_id ) {
+
+                        //    //get data param
+                        //    var row = grid.jqGrid('getLocalRow', old_id);
+                        //    console.log(row); //use for firefox test
+                        //    row._id_ = new_id;
+
+                        //    grid.jqGrid('setRowData',old_id,{my_id:new_id});
+                        //    $("#"+response).attr("id", new_id); //change TR element in DOM
+
+                        //    //very important to change the _index, some functions using the                  
+                        //    var _index = grid.jqGrid('getGridParam', '_index');
+                        //    var valueTemp = _index[old_id];
+                        //    delete _index[old_id];
+                        //    _index[new_id] = valueTemp;
+                        //}
+                    }
+                }
+            });
+        } catch (e) { }
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+    function CopiarValorTercero(IdValor, Origen) {
+        var acceptId = IdValor;
+        var $gridOrigen = $("#ListaDrag2"), $gridDestino = $("#ListaValores");
+
+        var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
+        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+        //var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
+
+        dataIds = $gridDestino.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            data2 = $gridDestino.jqGrid('getRowData', dataIds[i]);
+            if (data2.IdValor == IdValor) {
+                if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
+                alert("Ya existe el registro");
+                return;
+            }
+        };
+        Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+        try {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Valor/TraerUno/',
+                data: { IdValor: IdValor },
+                dataType: "Json",
+                success: function (data) {
+                    for (i = 0; i < data.length; i++) {
+                        data2 = data[i]
+                        data2.IdDetalleOrdenPagoValores = Id2;
+
+                        date = new Date(parseInt(data[i].FechaValor.substr(6)));
+                        displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                        data2.FechaValor = displayDate;
+
+                        if (Origen == "DnD") {
+                            Id = dataIds[0];
+                            $gridDestino.jqGrid('setRowData', Id, data2);
+                        } else {
+                            Id = Id2
+                            $gridDestino.jqGrid('addRowData', Id, data2, "first");
+                        };
+                    }
+                }
+            });
+        } catch (e) { }
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
     }
 
     $("#BuscadorPanelDerecho").change(function () {
@@ -926,16 +1145,6 @@ $(function () {
 function pickdates(id) {
     jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
 }
-
-getColumnIndexByName = function (grid, columnName) {
-    var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
-    for (i = 0; i < l; i++) {
-        if (cm[i].name === columnName) {
-            return i; // return the index
-        }
-    }
-    return -1;
-},
 
 function unformatNumber(cellvalue, options, rowObject) {
     return cellvalue.replace(",", ".");
@@ -1070,3 +1279,155 @@ function CheckValidationErrorResponse(response, form, summaryElement) {
             $(form).find("*[name='" + item.Name + "']").addClass("ui-state-error");
     });
 }
+
+function AgregarAnticipo(grid) {
+    grid.jqGrid('editGridRow', "new",
+            {
+                addCaption: "Datos anticipo", bSubmit: "Aceptar", bCancel: "Cancelar", width: 400, reloadAfterSubmit: false,
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                closeAfterEdit: true,
+                recreateForm: true,
+                beforeShowForm: function (form) {
+                    PopupCentrar(grid);
+                    $('#tr_IdDetalleOrdenPago', form).hide();
+                    $('#tr_IdImputacion', form).hide();
+                    $('#tr_IdTipoRetencionGanancia', form).hide();
+                    $('#tr_IdIBCondicion', form).hide();
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    $('#IdDetalleOrdenPago', form).val(0);
+                    $('#Importe', form).val(0);
+                    $('#SinImpuestos', form).val(0);
+                },
+                onClose: function (data) {
+                },
+                beforeSubmit: function (postdata, formid) {
+                    postdata.CategoriaIIBB = $("#CategoriaIIBB").children("option").filter(":selected").text()
+                    postdata.CategoriaGanancias = $("#CategoriaGanancias").children("option").filter(":selected").text()
+                    postdata.Tipo = "PA"
+                    postdata.IdImputacion = -1
+                    return [true, ''];
+                }
+            });
+};
+
+function AgregarValor(grid) {
+    $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=1' }, formoptions: { label: 'Banco - Cuenta' } });
+    grid.jqGrid('editGridRow', "new",
+            {
+                addCaption: "Ingreso de valores", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                recreateForm: true,
+                beforeShowForm: function (form) {
+                    PopupCentrar(grid);
+                    $('#tr_IdDetalleOrdenPagoValores', form).hide();
+                    $('#tr_IdTipoValor', form).hide();
+                    $('#tr_IdBanco', form).hide();
+                    $('#tr_IdValor', form).hide();
+                    $('#tr_IdCuentaBancaria', form).hide();
+                    $('#tr_IdBancoChequera', form).hide();
+                    $('#tr_IdCaja', form).hide();
+                    $('#tr_IdTarjetaCredito', form).hide();
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    $('#IdDetalleOrdenPagoValores', form).val(0);
+                    $('#NumeroValor', form).val(0);
+                    $('#Importe', form).val(0);
+                },
+                onClose: function (data) {
+                },
+                beforeSubmit: function (postdata, formid) {
+                    postdata.Tipo = $("#Tipo").children("option").filter(":selected").text();
+                    postdata.Entidad = $("#Entidad").children("option").filter(":selected").text();
+                    return [true, ''];
+                }
+            });
+};
+
+function AgregarCaja(grid) {
+    $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=2' }, formoptions: { label: 'Caja' } });
+    grid.jqGrid('editGridRow', "new",
+            {
+                addCaption: "Pago con caja", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                recreateForm: true,
+                beforeShowForm: function (form) {
+                    PopupCentrar(grid);
+                    $('#tr_IdDetalleOrdenPagoValores', form).hide();
+                    $('#tr_IdTipoValor', form).hide();
+                    $('#tr_IdBanco', form).hide();
+                    $('#tr_IdValor', form).hide();
+                    $('#tr_IdCuentaBancaria', form).hide();
+                    $('#tr_IdBancoChequera', form).hide();
+                    $('#tr_IdCaja', form).hide();
+                    $('#tr_IdTarjetaCredito', form).hide();
+
+                    $('#tr_Tipo', form).hide();
+                    $('#tr_NumeroInterno', form).hide();
+                    $('#tr_NumeroValor', form).hide();
+                    $('#tr_FechaValor', form).hide();
+                    $('#tr_ChequesALaOrdenDe', form).hide();
+                    $('#tr_NoALaOrden', form).hide();
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    $('#IdDetalleOrdenPagoValores', form).val(0);
+                    $('#Importe', form).val(0);
+
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: ROOT + 'Parametro/Parametros/',
+                        dataType: "Json",
+                        success: function (data) {
+                            var data2 = data[0]
+                            $('#IdTipoValor', form).val(data2.IdTipoComprobanteCajaEgresos);
+                        }
+                    });
+
+                },
+                onClose: function (data) {
+                },
+                beforeSubmit: function (postdata, formid) {
+                    postdata.Tipo = "CE";
+                    postdata.Entidad = $("#Entidad").children("option").filter(":selected").text();
+                    postdata.NumeroInterno = "";
+                    postdata.NumeroValor = "";
+                    return [true, ''];
+                }
+            });
+};
+
+function PopupCentrar(grid) {
+    var dlgDiv = $("#editmod" + grid[0].id);
+
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    $("#editmod" + grid[0].id).find('#FechaPosible').width(160);
+    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    $("#sData").attr("class", "btn btn-primary");
+    $("#sData").css("color", "white");
+    $("#sData").css("margin-right", "20px");
+    $("#cData").attr("class", "btn");
+    $("#editmod" + grid[0].id).find('.ui-icon-disk').remove();
+    $("#editmod" + grid[0].id).find('.ui-icon-close').remove();
+    var parentDiv = dlgDiv.parent();
+    var dlgWidth = dlgDiv.width();
+    var parentWidth = parentDiv.width();
+    var dlgHeight = dlgDiv.height();
+    var parentHeight = parentDiv.height();
+    var left = (screen.width / 2) - (dlgWidth / 2) + "px";
+    var top = (screen.height / 2) - (dlgHeight / 2) + "px";
+    dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+    dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+};

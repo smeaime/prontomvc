@@ -41,7 +41,7 @@ namespace ProntoMVC.Controllers
                             a.NumeroInterno,
                             a.NumeroValor,
                             a.FechaValor,
-                            Banco = b != null ? b.Nombre : "",
+                            Entidad = b != null ? b.Nombre : "",
                             a.Importe,
                             TipoComprobante = a.TiposComprobante1.DescripcionAb,
                             a.NumeroComprobante,
@@ -68,7 +68,7 @@ namespace ProntoMVC.Controllers
                                 a.NumeroInterno.ToString(),
                                 a.NumeroValor.ToString(),
                                 a.FechaValor == null ? "" : a.FechaValor.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Banco,
+                                a.Entidad,
                                 a.Importe.ToString(),
                                 a.TipoComprobante,
                                 a.NumeroComprobante.ToString(),
@@ -79,6 +79,37 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-    }
 
+        public virtual JsonResult TraerUno(int IdValor)
+        {
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Valores_TX_PorIdConDatos", IdValor);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdValor = a["IdValor"],
+                            Tipo = a["Tipo"],
+                            NumeroInterno = a["NumeroInterno"],
+                            NumeroValor = a["NumeroValor"],
+                            FechaValor = a["FechaValor"],
+                            Entidad = a["Banco"],
+                            Importe = a["Importe"],
+                            TipoComprobante = a["TipoComprobante"],
+                            NumeroComprobante = a["NumeroComprobante"],
+                            FechaComprobante = a["FechaComprobante"],
+                            Cliente = a["Entidad"]
+                        }).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult GetTiposValores()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+            foreach (TiposComprobante u in db.TiposComprobantes.Where(x => x.EsValor == "SI").OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdTipoComprobante, u.DescripcionAb);
+            return PartialView("Select", Datacombo);
+        }
+    }
 }

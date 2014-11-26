@@ -82,6 +82,15 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        [HttpPost]
+        public virtual JsonResult Delete(int Id)
+        {
+            Cotizacione Cotizacion = db.Cotizaciones.Find(Id);
+            db.Cotizaciones.Remove(Cotizacion);
+            db.SaveChanges();
+            return Json(new { Success = 1, IdCotizacion = Id, ex = "" });
+        }
+
         public virtual ActionResult Cotizaciones(string sidx, string sord, int? page, int? rows)
         {
             var Det = db.Cotizaciones.AsQueryable();
@@ -99,7 +108,6 @@ namespace ProntoMVC.Controllers
                             a.IdMoneda,
                             a.Fecha,
                             Moneda = b != null ? b.Nombre : null,
-                            a.Cotizacion,
                             a.CotizacionLibre
                         }).OrderByDescending(x => x.Fecha).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
@@ -118,7 +126,6 @@ namespace ProntoMVC.Controllers
                                 a.Fecha == null ? "" : a.Fecha.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Moneda,
                                 a.IdMoneda.ToString(),
-                                a.Cotizacion.ToString(),
                                 a.CotizacionLibre.ToString()
                          }
                         }).ToArray()

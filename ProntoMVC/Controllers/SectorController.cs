@@ -13,12 +13,7 @@ namespace ProntoMVC.Controllers
 {
     public partial class SectorController : ProntoBaseController
     {
- 
-
         const int pageSize = 10;
-
-        //
-        // GET: /Sector/
 
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
@@ -95,25 +90,16 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        //
-        // GET: /Sector/Details/5
-
         public virtual ViewResult Details(int id)
         {
             Sector sector = db.Sectores.Find(id);
             return View(sector);
         }
 
-        //
-        // GET: /Sector/Create
-
         public virtual ActionResult Create()
         {
             return View();
         } 
-
-        //
-        // POST: /Sector/Create
 
         [HttpPost]
         public virtual ActionResult Create(Sector sector)
@@ -128,17 +114,11 @@ namespace ProntoMVC.Controllers
             return View(sector);
         }
         
-        //
-        // GET: /Sector/Edit/5
-
         public virtual ActionResult Edit(int id)
         {
             Sector sector = db.Sectores.Find(id);
             return View(sector);
         }
-
-        //
-        // POST: /Sector/Edit/5
 
         [HttpPost]
         public virtual ActionResult Edit(Sector sector)
@@ -152,17 +132,11 @@ namespace ProntoMVC.Controllers
             return View(sector);
         }
 
-        //
-        // GET: /Sector/Delete/5
-
         public virtual ActionResult Delete(int id)
         {
             Sector sector = db.Sectores.Find(id);
             return View(sector);
         }
-
-        //
-        // POST: /Sector/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public virtual ActionResult DeleteConfirmed(int id)

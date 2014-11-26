@@ -71,192 +71,16 @@ namespace ProntoMVC.Controllers
             if (id == -1)
             {
                 OrdenPago OrdenPago = new OrdenPago();
+
                 inic(ref OrdenPago);
-
                 CargarViewBag(OrdenPago);
-
-
-                return View(OrdenPago);
-            }
-            else
-            {
-                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
-                // ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
-
-                CargarViewBag(OrdenPago);
-                Session.Add("OrdenPago", OrdenPago);
-                return View(OrdenPago);
-            }
-        }
-
-        void inic(ref OrdenPago o)
-        {
-            Parametros parametros = db.Parametros.Find(1);
-            o.NumeroOrdenPago = parametros.ProximaOrdenPago;
-            //o.SubNumero = 1;
-            //o.FechaComprobanteProveedor = DateTime.Today;
-            o.IdMoneda = 1;
-            o.CotizacionMoneda = 1;
-
-            o.FechaIngreso = DateTime.Today;
-
-
-            //o.PorcentajeIva1 = 21;                  //  mvarP_IVA1_Tomado
-            //o.FechaFactura = DateTime.Now;
-
-            //Parametros parametros = db.Parametros.Find(1);
-            //o.OtrasPercepciones1 = 0;
-            //o.OtrasPercepciones1Desc = ((parametros.OtrasPercepciones1 ?? "NO") == "SI") ? parametros.OtrasPercepciones1Desc : "";
-            //o.OtrasPercepciones2 = 0;
-            //o.OtrasPercepciones2Desc = ((parametros.OtrasPercepciones2 ?? "NO") == "SI") ? parametros.OtrasPercepciones2Desc : "";
-            //o.OtrasPercepciones3 = 0;
-            //o.OtrasPercepciones3Desc = ((parametros.OtrasPercepciones3 ?? "NO") == "SI") ? parametros.OtrasPercepciones3Desc : "";
-
-            //o.IdMoneda = 1;
-
-            //mvarP_IVA1 = .Fields("Iva1").Value
-            //mvarP_IVA2 = .Fields("Iva2").Value
-            //mvarPorc_IBrutos_Cap = .Fields("Porc_IBrutos_Cap").Value
-            //mvarTope_IBrutos_Cap = .Fields("Tope_IBrutos_Cap").Value
-            //mvarPorc_IBrutos_BsAs = .Fields("Porc_IBrutos_BsAs").Value
-            //mvarTope_IBrutos_BsAs = .Fields("Tope_IBrutos_BsAs").Value
-            //mvarPorc_IBrutos_BsAsM = .Fields("Porc_IBrutos_BsAsM").Value
-            //mvarTope_IBrutos_BsAsM = .Fields("Tope_IBrutos_BsAsM").Value
-            //mvarDecimales = .Fields("Decimales").Value
-            //mvarAclaracionAlPie = .Fields("AclaracionAlPieDeFactura").Value
-            //mvarIdMonedaPesos = .Fields("IdMoneda").Value
-            //mvarIdMonedaDolar = .Fields("IdMonedaDolar").Value
-            //mvarPercepcionIIBB = IIf(IsNull(.Fields("PercepcionIIBB").Value), "NO", .Fields("PercepcionIIBB").Value)
-            //mvarOtrasPercepciones1 = IIf(IsNull(.Fields("OtrasPercepciones1").Value), "NO", .Fields("OtrasPercepciones1").Value)
-            //mvarOtrasPercepciones1Desc = IIf(IsNull(.Fields("OtrasPercepciones1Desc").Value), "", .Fields("OtrasPercepciones1Desc").Value)
-            //mvarOtrasPercepciones2 = IIf(IsNull(.Fields("OtrasPercepciones2").Value), "NO", .Fields("OtrasPercepciones2").Value)
-            //mvarOtrasPercepciones2Desc = IIf(IsNull(.Fields("OtrasPercepciones2Desc").Value), "", .Fields("OtrasPercepciones2Desc").Value)
-            //mvarOtrasPercepciones3 = IIf(IsNull(.Fields("OtrasPercepciones3").Value), "NO", .Fields("OtrasPercepciones3").Value)
-            //mvarOtrasPercepciones3Desc = IIf(IsNull(.Fields("OtrasPercepciones3Desc").Value), "", .Fields("OtrasPercepciones3Desc").Value)
-            //mvarConfirmarClausulaDolar = IIf(IsNull(.Fields("ConfirmarClausulaDolar").Value), "NO", .Fields("ConfirmarClausulaDolar").Value)
-            //mvarNumeracionUnica = False
-            //If .Fields("NumeracionUnica").Value = "SI" Then mvarNumeracionUnica = True
-            //gblFechaUltimoCierre = IIf(IsNull(.Fields("FechaUltimoCierre").Value), DateSerial(1980, 1, 1), .Fields("FechaUltimoCierre").Value)
-
-
-            // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
-            o.CotizacionMoneda = 1;
-            //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)mvarCotizacion;
-
-            //o.DetalleFacturas.Add(new DetalleFactura());
-            //o.DetalleFacturas.Add(new DetalleFactura());
-            //o.DetalleFacturas.Add(new DetalleFactura());
-        }
-
-        public virtual JsonResult Autorizaciones(int IdPedido)
-        {
-            var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, IdPedido);
-            return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
-        }
-
-        void CargarViewBag(OrdenPago o)
-        {
-
-            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
-            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
-            ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-
-            ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
-
-            //ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
-            //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
-            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", o.PlazoEntrega);
-            //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdComprador);
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.Aprobo);
-            //ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
-
-            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
-            ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, 0, -1).Count();
-
-            //ViewBag.TotalBonificacionGlobal = o.Bonificacion;
-
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
-            //ViewBag.PuntoVenta = new SelectList((from i in db.PuntosVentas
-            //                                     where i.IdTipoComprobante == (int)Pronto.ERP.Bll.EntidadManager.IdTipoComprobante.Factura
-            //                                     select new { PuntoVenta = i.PuntoVenta })
-            //    // http://stackoverflow.com/questions/2135666/databinding-system-string-does-not-contain-a-property-with-the-name-dbmake
-            //                                     .Distinct(), "PuntoVenta", "PuntoVenta"); //traer solo el Numero de PuntoVenta, no el Id
-
-
-            //ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
-            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
-            //ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
-            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            //ViewBag.IdCondicionVenta = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionVenta);
-
-            ////http://stackoverflow.com/questions/942262/add-empty-value-to-a-dropdownlist-in-asp-net-mvc
-            //// http://stackoverflow.com/questions/7659612/mvc3-dropdownlist-and-viewbag-how-add-new-items-to-collection
-            ////List<SelectListItem>  l = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-            ////l.ad
-            ////l.Add((new SelectListItem { IdIBCondicion = " ", Descripcion = "-1" }));
-            //ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-
-            //ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
-            //ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
-
-            //Parametros parametros = db.Parametros.Find(1);
-            //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
-        }
-
-
-        public virtual ActionResult EditExterno(int id)
-        {
-            if (id == -1)
-            {
-                OrdenPago OrdenPago = new OrdenPago();
-                Parametros parametros = db.Parametros.Find(1);
-                //OrdenPago.Numero = parametros.ProximoOrdenesPago;
-                //OrdenPago.SubNumero = 1;
-                OrdenPago.FechaIngreso = DateTime.Today;
-                OrdenPago.IdMoneda = 1;
-                OrdenPago.CotizacionMoneda = 1;
-                ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
-                ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-                ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
-                ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-                ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-                ViewBag.Proveedor = "";
                 return View(OrdenPago);
             }
             else
             {
                 OrdenPago OrdenPago = db.OrdenesPago.Find(id);
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-                if (OrdenPago.IdProveedor != idproveedor
-                     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
-                    ) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
-
-                //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
-                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
-                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
-                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
-                try
-                {
-                    ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
-                }
-                catch (Exception e)
-                {
-
-                    ErrHandler.WriteError(e);
-                }
-
+                CargarViewBag(OrdenPago);
                 Session.Add("OrdenPago", OrdenPago);
                 return View(OrdenPago);
             }
@@ -275,14 +99,130 @@ namespace ProntoMVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            // ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
             ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-            //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
-            //ViewBag.RazonSocial = OrdenPago.Proveedor.RazonSocial;
-            //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
             ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
             return View(OrdenPago);
+        }
+
+        public virtual ActionResult EditExterno(int id)
+        {
+            if (id == -1)
+            {
+                OrdenPago OrdenPago = new OrdenPago();
+
+                inic(ref OrdenPago);
+                CargarViewBag(OrdenPago);
+                //Parametros parametros = db.Parametros.Find(1);
+                ////OrdenPago.Numero = parametros.ProximoOrdenesPago;
+                ////OrdenPago.SubNumero = 1;
+                //OrdenPago.FechaIngreso = DateTime.Today;
+                //OrdenPago.IdMoneda = 1;
+                //OrdenPago.CotizacionMoneda = 1;
+                //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
+                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
+                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
+                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+                //ViewBag.Proveedor = "";
+                return View(OrdenPago);
+            }
+            else
+            {
+                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                if (OrdenPago.IdProveedor != idproveedor && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
+
+                //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
+                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
+                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
+                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
+                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
+                try
+                {
+                    ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
+                    CargarViewBag(OrdenPago);
+                }
+                catch (Exception e)
+                {
+                    ErrHandler.WriteError(e);
+                }
+
+                Session.Add("OrdenPago", OrdenPago);
+                return View(OrdenPago);
+            }
+        }
+
+        void inic(ref OrdenPago o)
+        {
+            Parametros parametros = db.Parametros.Find(1);
+
+            o.NumeroOrdenPago = parametros.ProximaOrdenPago;
+            o.IdMoneda = 1;
+            o.CotizacionMoneda = 1;
+            o.FechaIngreso = DateTime.Today;
+            o.FechaOrdenPago = DateTime.Today;
+            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
+            o.CotizacionMoneda = 1;
+            o.CotizacionDolar = mvarCotizacion == null ? 0 : (decimal)mvarCotizacion;
+        }
+
+        public virtual JsonResult Autorizaciones(int IdPedido)
+        {
+            var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, IdPedido);
+            return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
+        }
+
+        void CargarViewBag(OrdenPago o)
+        {
+            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
+            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
+            ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
+            ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
+            ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion");
+            ViewBag.IdIBCondicion = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion");
+            ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, 0, -1).Count();
+
+            Parametros parametros = db.Parametros.Find(1);
+            ViewBag.IdTipoComprobanteCajaEgresos = parametros.IdTipoComprobanteCajaEgresos;
+
+            //ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
+            //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
+            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
+            //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", o.PlazoEntrega);
+            //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdComprador);
+            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.Aprobo);
+            //ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
+            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
+            //ViewBag.TotalBonificacionGlobal = o.Bonificacion;
+            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            //ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
+            //ViewBag.PuntoVenta = new SelectList((from i in db.PuntosVentas
+            //                                     where i.IdTipoComprobante == (int)Pronto.ERP.Bll.EntidadManager.IdTipoComprobante.Factura
+            //                                     select new { PuntoVenta = i.PuntoVenta })
+            //    // http://stackoverflow.com/questions/2135666/databinding-system-string-does-not-contain-a-property-with-the-name-dbmake
+            //                                     .Distinct(), "PuntoVenta", "PuntoVenta"); //traer solo el Numero de PuntoVenta, no el Id
+            //ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
+            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
+            //ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", o.IdCodigoIva);
+            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", o.IdCodigoIva);
+            //ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
+            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
+            //ViewBag.IdCondicionVenta = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionVenta);
+            ////http://stackoverflow.com/questions/942262/add-empty-value-to-a-dropdownlist-in-asp-net-mvc
+            //// http://stackoverflow.com/questions/7659612/mvc3-dropdownlist-and-viewbag-how-add-new-items-to-collection
+            ////List<SelectListItem>  l = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
+            ////l.ad
+            ////l.Add((new SelectListItem { IdIBCondicion = " ", Descripcion = "-1" }));
+            //ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
+            //ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
+            //ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
+            //Parametros parametros = db.Parametros.Find(1);
+            //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
         }
 
         public virtual ActionResult Delete(int id)
@@ -752,7 +692,7 @@ namespace ProntoMVC.Controllers
                             ImporteTotal = a[6],
                             Saldo = a[7],
                             Importe = a[8],
-                            SinImpuestos = a[9],
+                            SinImpuestos = (a[9].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[9].NullSafeToString()),
                             IvaTotal = a[10],
                             TotalComprobante = a[11],
                             BienesYServicios = a[12],
@@ -763,13 +703,15 @@ namespace ProntoMVC.Controllers
                             BaseCalculoIIBB = a[17],
                             FechaVencimiento = a[18],
                             FechaComprobante = a[19],
-                            GravadoIVA = a[20],
+                            GravadoIVA = (a[20].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[20].NullSafeToString()),
                             CotizacionMoneda = a[21],
                             PorcentajeIVAParaMonotributistas = a[22],
                             IdTipoComp = a[23],
                             IdComprobante = a[24],
                             CertificadoPoliza = a[25],
-                            NumeroEndosoPoliza = a[26]
+                            NumeroEndosoPoliza = a[26],
+                            CategoriaIIBB = a[27],
+                            CategoriaGanancias = a[28]
                         }).OrderBy(s => s.IdDetalleOrdenPago).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -797,18 +739,20 @@ namespace ProntoMVC.Controllers
                                 a.ImporteTotal.ToString(),
                                 a.Saldo.ToString(),
                                 a.Importe.ToString(),
-                                a.SinImpuestos.ToString(), 
+                                Math.Round(a.SinImpuestos, 2).ToString(), 
                                 a.IvaTotal.ToString(), 
                                 a.TotalComprobante.ToString(), 
                                 a.BienesYServicios.ToString(), 
                                 a.ImporteRetencionIVA.ToString(), 
                                 a.NumeroOrdenPagoRetencionIVA.ToString(), 
-                                a.GravadoIVA.ToString(), 
+                                Math.Round(a.GravadoIVA, 2).ToString(), 
                                 a.PorcentajeIVAParaMonotributistas.ToString(), 
                                 a.CertificadoPoliza.ToString(), 
                                 a.NumeroEndosoPoliza.ToString(),
                                 a.FechaVencimiento == null || a.FechaVencimiento.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.FechaComprobante == null || a.FechaComprobante.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy")
+                                a.FechaComprobante == null || a.FechaComprobante.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.CategoriaIIBB.ToString(), 
+                                a.CategoriaGanancias.ToString()
                                 //(a.Letra != "" ? a.Letra + '-' : "") + (a.Numero1 != "" ? a.Numero1.PadLeft(4,'0') + '-' : "") + (a.Numero2 != "" ? a.Numero2.PadLeft(8,'0') : ""),
                                 //(a.IdImputacion==-1) ? "PA" : (db.TiposComprobantes.Where(y=>y.IdTipoComprobante==(db.CuentasCorrientesAcreedores.Where(x=>x.IdCtaCte==a.IdImputacion).FirstOrDefault()).IdTipoComp).FirstOrDefault()).DescripcionAb,
                                 //(a.IdImputacion==-1) ? "" : 
@@ -843,6 +787,7 @@ namespace ProntoMVC.Controllers
                         from d in db.TarjetasCreditoes.Where(q => q.IdTarjetaCredito == a.IdTarjetaCredito).DefaultIfEmpty()
                         from e in db.Valores.Where(r => r.IdValor == a.IdValor).DefaultIfEmpty()
                         from f in db.TiposComprobantes.Where(s => s.IdTipoComprobante == a.IdTipoValor).DefaultIfEmpty()
+                        from g in db.CuentasBancarias.Where(t => t.IdCuentaBancaria == a.IdCuentaBancaria).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleOrdenPagoValores,
@@ -861,7 +806,10 @@ namespace ProntoMVC.Controllers
                             Caja = c != null ? c.Descripcion : "",
                             TarjetaCredito = d != null ? d.Nombre : "",
                             a.Importe,
-                            a.Anulado
+                            a.Anulado,
+                            CuentaBancaria = g != null ? g.Cuenta : "",
+                            a.ChequesALaOrdenDe,
+                            a.NoALaOrden
                         }).OrderBy(x => x.IdDetalleOrdenPagoValores).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -887,10 +835,12 @@ namespace ProntoMVC.Controllers
                             a.NumeroInterno.NullSafeToString(),
                             a.NumeroValor.NullSafeToString(),
                             a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                            (a.IdBanco != null ? a.Banco : "") + (a.IdCaja != null ? a.Caja : "") + (a.IdTarjetaCredito != null ? a.TarjetaCredito : ""),
+                            (a.IdBanco != null ? a.Banco + " " + a.CuentaBancaria : "") + (a.IdCaja != null ? a.Caja : "") + (a.IdTarjetaCredito != null ? a.TarjetaCredito : ""),
                             //a.IdCaja==null ? db.Bancos.Find(a.IdBanco).Nombre.NullSafeToString() :  db.Cajas.Find(a.IdCaja).Descripcion.NullSafeToString(),
                             a.Importe.ToString(),
-                            a.Anulado
+                            a.Anulado,
+                            a.ChequesALaOrdenDe,
+                            a.NoALaOrden
                             }
                         }).ToArray()
             };
