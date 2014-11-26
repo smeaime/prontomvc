@@ -240,8 +240,10 @@
     <Compile Include="Controllers\AutorizacionController.cs" />
     <Compile Include="Controllers\ComprobanteProveedorController.cs" />
     <Compile Include="Controllers\ControlCalidadController.cs" />
+    <Compile Include="Controllers\IBCondicionController.cs" />
     <Compile Include="Controllers\jqGridPaginacionController.cs" />
     <Compile Include="Controllers\ObraController.cs" />
+    <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProntoBaseController2.cs" />
     <Compile Include="Controllers\SubdiarioController.cs" />
     <Compile Include="Controllers\RemitoController.cs" />
