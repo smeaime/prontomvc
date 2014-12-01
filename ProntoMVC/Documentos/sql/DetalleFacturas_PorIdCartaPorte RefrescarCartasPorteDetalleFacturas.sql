@@ -812,3 +812,11 @@ go
 --select * from iddetallefactura=66690 -- hay varios buques que apuntan a este item
 
 
+            
+
+select iddetallefactura from cartasdeporte where iddetallefactura=   117517         
+
+select iddetallefactura,idfacturaimputada, * from cartasdeporte where idfacturaimputada= 66132
+update cartasdeporte set iddetallefactura=null where idfacturaimputada= 66132
+
+select  * from detallefacturas where idfactura=66132           
