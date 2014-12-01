@@ -92,6 +92,161 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        public virtual ActionResult Menu()
+        {
+
+            string usuario = ViewBag.NombreUsuario;
+            if (Roles.IsUserInRole(usuario, "Firmas") && Roles.GetRolesForUser(usuario).Count() == 1) // Generales.TienePermisosDeFirma(SC, IdUsuario))
+            {
+                return null;
+            }
+
+            if ((Roles.IsUserInRole(usuario, "Externo") || Roles.IsUserInRole(usuario, "AdminExterno")) && !Roles.IsUserInRole(usuario, "Administrador") && !Roles.IsUserInRole(usuario, "SuperAdmin")) // Generales.TienePermisosDeFirma(SC, IdUsuario))
+            {
+                return null;
+            }
+
+
+            List<Tablas.Tree> Tree;
+            List<Tablas.Tree> TreeDest;
+            try
+            {
+                Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
+                TreeDest = new List<Tablas.Tree>();
+            }
+            catch (Exception)
+            {
+                return Json("");
+            }
+
+
+            if (System.Diagnostics.Debugger.IsAttached) return Json(TreeDest);
+
+
+            int IdUsuario = 0;
+            Empleado empleado = new Empleado();
+
+
+            try
+            {
+                empleado = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).FirstOrDefault();
+                if (empleado != null) IdUsuario = empleado.IdEmpleado;
+            }
+            catch (Exception e)
+            {
+                ErrHandler.WriteError(e);
+                // throw; // Exception("No se encuentra el usuario");
+            }
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+
+
+            TreeDest = new List<Tablas.Tree>(Tree); //la duplico
+
+
+            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+            bool esadmin = Roles.IsUserInRole(usuario, "Administrador"); // || (empleado ?? new Empleado()).Administrador == "SI";
+            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
+            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
+            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
+
+            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
+            bool esfirma = Generales.TienePermisosDeFirma(SC, IdUsuario);
+
+            foreach (Tablas.Tree o in Tree)
+            {
+                int? nivel = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
+
+
+                nivel = 9;
+
+                if (nivel == null)
+                {
+                    if (!essuperadmin) nivel = 9; //por ahora desactivo los menuses 
+                    else nivel = 1;
+                }
+
+
+                if (essuperadmin) nivel = 1;
+
+                if ((esfirma || esadmin) && (o.Descripcion.Contains("Autorizaci") || o.Descripcion.Contains("Seguridad"))) nivel = 1;
+
+                if (o.Descripcion.Contains("ccesos"))
+                {
+                    if (esadmin || essuperadmin) nivel = 1;
+                    else nivel = 9;
+                }
+
+                if ((escomercial || esadmin) && (o.Descripcion.Contains("Contabilidad") || o.Descripcion == "Consultas"))
+                    nivel = 1;
+                if ((escomercial || esadmin) && (o.Descripcion.Contains("Mayor") || o.Descripcion == "Consultas")) nivel = 1;
+                if ((escomercial || esadmin) && (o.Descripcion.Contains("Balance") || o.Descripcion == "Consultas")) nivel = 1;
+
+
+
+                if ((esreq || esadmin) && (o.Descripcion.Contains("Requerimiento") || o.Descripcion.Contains("Articulo")))
+                {
+                    nivel = 1;
+                }
+
+
+                if (nivel >= 9)
+                {
+                    o.Descripcion = "Bloqueado!";
+
+                    eliminarNodoySusHijos(o, ref TreeDest);
+                }
+                else
+                {
+                    //estoy un duplicado y voy eliminando nodos, no uso el .add
+                    //TreeDest.Add(o);
+                }
+            }
+
+            foreach (Tablas.Tree n in TreeDest)
+            {
+                n.Link = n.Link.Replace("Pronto2", ROOT);
+            }
+
+
+            return Json(TreeDest);
+
+        }
 
 
         List<Tablas.Tree> TablaTree()
@@ -101,6 +256,10 @@ namespace ProntoMVC.Controllers
             List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString()); //esta llamada tarda
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
             List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
+
+
+            if (System.Diagnostics.Debugger.IsAttached) return Tree;
+
 
             string usuario = ViewBag.NombreUsuario;
             int IdUsuario;
@@ -132,8 +291,12 @@ namespace ProntoMVC.Controllers
             bool escompras = Roles.IsUserInRole(usuario, "Compras");
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
+
+
             foreach (Tablas.Tree o in Tree)
             {
+            
+
                 int? nivel;
 
 
@@ -434,6 +597,20 @@ namespace ProntoMVC.Controllers
 
 
 
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -551,7 +728,7 @@ namespace ProntoMVC.Controllers
             q = TablaTree();
 
 
-            
+
 
 
             // If we found out a level, we enter the if
@@ -1103,125 +1280,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual ActionResult Menu()
-        {
-
-            string usuario = ViewBag.NombreUsuario;
-            if (Roles.IsUserInRole(usuario, "Firmas") && Roles.GetRolesForUser(usuario).Count() == 1) // Generales.TienePermisosDeFirma(SC, IdUsuario))
-            {
-                return null;
-            }
-
-            if ((Roles.IsUserInRole(usuario, "Externo") || Roles.IsUserInRole(usuario, "AdminExterno")) && !Roles.IsUserInRole(usuario, "Administrador") && !Roles.IsUserInRole(usuario, "SuperAdmin")) // Generales.TienePermisosDeFirma(SC, IdUsuario))
-            {
-                return null;
-            }
-
-
-            List<Tablas.Tree> Tree;
-            List<Tablas.Tree> TreeDest;
-            try
-            {
-                Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
-                TreeDest = new List<Tablas.Tree>();
-            }
-            catch (Exception)
-            {
-                return Json("");
-            }
-
-
-            int IdUsuario = 0;
-            Empleado empleado = new Empleado();
-
-
-            try
-            {
-                empleado = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).FirstOrDefault();
-                if (empleado != null) IdUsuario = empleado.IdEmpleado;
-            }
-            catch (Exception e)
-            {
-                ErrHandler.WriteError(e);
-                // throw; // Exception("No se encuentra el usuario");
-            }
-
-            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
-
-
-            TreeDest = new List<Tablas.Tree>(Tree); //la duplico
-
-
-            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
-            bool esadmin = Roles.IsUserInRole(usuario, "Administrador"); // || (empleado ?? new Empleado()).Administrador == "SI";
-            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
-            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
-            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
-
-            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
-            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
-            bool esfirma = Generales.TienePermisosDeFirma(SC, IdUsuario);
-
-            foreach (Tablas.Tree o in Tree)
-            {
-                int? nivel = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
-
-
-                nivel = 9;
-
-                if (nivel == null)
-                {
-                    if (!essuperadmin) nivel = 9; //por ahora desactivo los menuses 
-                    else nivel = 1;
-                }
-
-
-                if (essuperadmin) nivel = 1;
-
-                if ((esfirma || esadmin) && (o.Descripcion.Contains("Autorizaci") || o.Descripcion.Contains("Seguridad"))) nivel = 1;
-
-                if (o.Descripcion.Contains("ccesos"))
-                {
-                    if (esadmin || essuperadmin) nivel = 1;
-                    else nivel = 9;
-                }
-
-                if ((escomercial || esadmin) && (o.Descripcion.Contains("Contabilidad") || o.Descripcion == "Consultas"))
-                    nivel = 1;
-                if ((escomercial || esadmin) && (o.Descripcion.Contains("Mayor") || o.Descripcion == "Consultas")) nivel = 1;
-                if ((escomercial || esadmin) && (o.Descripcion.Contains("Balance") || o.Descripcion == "Consultas")) nivel = 1;
-
-
-
-                if ((esreq || esadmin) && (o.Descripcion.Contains("Requerimiento") || o.Descripcion.Contains("Articulo")))
-                {
-                    nivel = 1;
-                }
-
-
-                if (nivel >= 9)
-                {
-                    o.Descripcion = "Bloqueado!";
-
-                    eliminarNodoySusHijos(o, ref TreeDest);
-                }
-                else
-                {
-                    //estoy un duplicado y voy eliminando nodos, no uso el .add
-                    //TreeDest.Add(o);
-                }
-            }
-
-            foreach (Tablas.Tree n in TreeDest)
-            {
-                n.Link = n.Link.Replace("Pronto2", ROOT);
-            }
-
-
-            return Json(TreeDest);
-
-        }
-
+      
         public virtual ActionResult Reporte1()
         {
             return Redirect("../Reportes/Reporte.aspx");
