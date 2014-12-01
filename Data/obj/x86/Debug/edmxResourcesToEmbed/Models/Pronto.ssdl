@@ -3174,6 +3174,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="SUSSFechaInicioVigencia" Type="datetime" />
     <Property Name="OperacionesMercadoInternoEntidadVinculada" Type="varchar" MaxLength="2" />
     <Property Name="IdCuentaAplicacion" Type="int" />
+    <Property Name="CodigoCategoriaIIBBAlternativo" Type="varchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -5004,6 +5005,42 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Valores_Monedas_IdMoneda">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Valores">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Valores_TiposComprobante_IdTipoComprobante">
+    <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
+    <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposComprobante">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Principal>
+      <Dependent Role="Valores">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Valores_TiposComprobante_IdTipoValor">
+    <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
+    <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposComprobante">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Principal>
+      <Dependent Role="Valores">
+        <PropertyRef Name="IdTipoValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Articulos_TX_DatosConCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdArticulo" Type="int" Mode="In" />
   </Function>
@@ -5589,6 +5626,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
       <End Role="Localidades" EntitySet="Localidades" />
       <End Role="Transportistas" EntitySet="Transportistas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Valores_Monedas_IdMoneda" Association="Self.FK_Valores_Monedas_IdMoneda">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Valores" EntitySet="Valores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoComprobante" Association="Self.FK_Valores_TiposComprobante_IdTipoComprobante">
+      <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+      <End Role="Valores" EntitySet="Valores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Valores_TiposComprobante_IdTipoValor" Association="Self.FK_Valores_TiposComprobante_IdTipoValor">
+      <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+      <End Role="Valores" EntitySet="Valores" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
