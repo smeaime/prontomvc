@@ -36,5 +36,6 @@ namespace ProntoMVC.Data.Models
     
         public virtual TiposComprobante TiposComprobante { get; set; }
         public virtual BancoChequera BancoChequera { get; set; }
+        public virtual OrdenPago OrdenesPago { get; set; }
     }
 }
