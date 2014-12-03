@@ -3127,14 +3127,15 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Cuentas');
+    $('a#a_panel_este_tab1').remove();
     $('a#a_panel_este_tab2').text('RMDet');
     $('a#a_panel_este_tab2').remove();  //    
-    $('a#a_panel_este_tab3').text('Presup');
-    $('a#a_panel_este_tab3').remove();  //    
-    $('a#a_panel_este_tab4').text('Comp');
-    $('a#a_panel_este_tab4').remove();  //    
-    $('a#a_panel_este_tab5').text('Ped');
-    $('a#a_panel_este_tab5').remove();  //    
+    $('a#a_panel_este_tab3').text('Items de presup de obra');
+    //$('a#a_panel_este_tab3').remove();  //    
+    $('a#a_panel_este_tab4').text('Recepciones');
+    //$('a#a_panel_este_tab4').remove();  //    
+    $('a#a_panel_este_tab5').text('Pedidos');
+    //$('a#a_panel_este_tab5').remove();  //    
 
 
     ConectarGrillas1();
