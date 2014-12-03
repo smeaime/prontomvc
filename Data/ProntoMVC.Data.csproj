@@ -529,6 +529,9 @@
     <Compile Include="Models\Transportista.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tree.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ubicacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

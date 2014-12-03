@@ -144,6 +144,7 @@ namespace ProntoMVC.Data.Models
         public string OperacionesMercadoInternoEntidadVinculada { get; set; }
         public Nullable<int> IdCuentaAplicacion { get; set; }
         public string CodigoCategoriaIIBBAlternativo { get; set; }
+        public Nullable<System.DateTime> FechaInicialControlComprobantes { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedores { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }

@@ -249,16 +249,46 @@ namespace ProntoMVC.Controllers
         }
 
 
+        IQueryable<Tablas.Tree> TablaTree(string parentId)
+        {
+            var q = from n in db.Trees
+                    where (n.ParentId==parentId)
+                    select new Tablas.Tree()
+                    {
+                        IdItem = n.IdItem,
+                        Clave = n.Clave,
+                        Descripcion = n.Descripcion,
+                        ParentId = n.ParentId,
+                        Orden = n.Orden ?? 0,
+                        Parametros =n.Parametros,
+                        Link = n.Link,
+                        Imagen = n.Imagen,
+                        EsPadre = n.EsPadre,
+                        nivel = 1
+                        
+                        // , Orden = n.Orden
+                    };
+
+
+
+
+
+            return q;
+        }
+
         List<Tablas.Tree> TablaTree()
         {
             // return RedirectToAction("Arbol", "Acceso");
 
-            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString()); //esta llamada tarda
+            //esta llamada tarda // y no se puede usar linqtosql acá??????
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString());
+
             List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
             List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
 
 
             if (System.Diagnostics.Debugger.IsAttached) return Tree;
+
 
 
             string usuario = ViewBag.NombreUsuario;
@@ -273,7 +303,7 @@ namespace ProntoMVC.Controllers
             }
 
             var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
-            var z = from n in Tree
+            var z = from n in db.Trees
                     join p in permisos on n.Clave equals p.Nodo
                     select new { n, p };
 
@@ -295,7 +325,7 @@ namespace ProntoMVC.Controllers
 
             foreach (Tablas.Tree o in Tree)
             {
-            
+
 
                 int? nivel;
 
@@ -725,7 +755,6 @@ namespace ProntoMVC.Controllers
             List<Tablas.Tree> q;
             List<string> v = new List<string>();
 
-            q = TablaTree();
 
 
 
@@ -744,13 +773,18 @@ namespace ProntoMVC.Controllers
             //    // so we are at root level.
             if (collection["idsOfExpandedRows"].NullSafeToString() == "" && collection["nodeid"].NullSafeToString() == "")
             {
-                q = q.Where(x => x.ParentId == "01").ToList();
+                // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
+                //q = q.Where(x => x.ParentId == "01").ToList();
+                q = TablaTree("01").ToList(); 
+
+
             }
             else if (collection.AllKeys.Contains("idsOfExpandedRows"))
             {
                 // recbo los nodos por postdata
                 // List<string> v = collection["idsOfExpandedRows"].ToList();
 
+                q = TablaTree(); //podrias devolver un queryable
 
 
                 if (collection["nodeid"].NullSafeToString() == "")
@@ -770,6 +804,10 @@ namespace ProntoMVC.Controllers
             }
             else if (collection.AllKeys.Contains("nodeid"))
             {
+
+
+                q = TablaTree(); //podrias devolver un queryable
+
                 //In case we are expanding a level, we retrieve the level we are right now
                 //In this example i'll explain the 
                 //Tree with id's so you can imagine the way i'm concatenating the id's:
@@ -794,6 +832,7 @@ namespace ProntoMVC.Controllers
             else
             {
 
+                q = TablaTree();// podrias devolver un queryable
 
             }
 
@@ -1280,7 +1319,7 @@ namespace ProntoMVC.Controllers
 
 
 
-      
+
         public virtual ActionResult Reporte1()
         {
             return Redirect("../Reportes/Reporte.aspx");

@@ -20,5 +20,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> Importe { get; set; }
     
         public virtual RubrosContable RubrosContable { get; set; }
+        public virtual OrdenPago OrdenesPago { get; set; }
     }
 }
