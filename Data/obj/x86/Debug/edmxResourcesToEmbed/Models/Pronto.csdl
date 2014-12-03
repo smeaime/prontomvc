@@ -875,6 +875,27 @@
       <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
       <End Role="Valore" EntitySet="Valores" />
     </AssociationSet>
+    <EntitySet Name="Trees" EntityType="DemoProntoModel.Tree" />
+    <AssociationSet Name="FK_DetalleOrdenesPago_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago">
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPago" EntitySet="DetalleOrdenesPagoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoCuentas_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago">
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoCuenta" EntitySet="DetalleOrdenesPagoCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoImpuestos_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago">
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoImpuesto" EntitySet="DetalleOrdenesPagoImpuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago">
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoRubrosContable" EntitySet="DetalleOrdenesPagoRubrosContables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoValores_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago">
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -3584,6 +3605,7 @@
     <NavigationProperty Name="DescripcionIva" Relationship="DemoProntoModel.FK_Proveedores_DescripcionIva" FromRole="Proveedor" ToRole="DescripcionIva" />
     <Property Type="Int32" Name="IdCuentaAplicacion" />
     <Property Name="CodigoCategoriaIIBBAlternativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInicialControlComprobantes" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -3778,7 +3800,7 @@
     <Property Type="String" Name="Contacto" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Puesto" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Telefono" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_DetalleClientes_Clientes" FromRole="DetalleCliente" ToRole="Cliente" />
     <Property Name="Acciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
@@ -5524,6 +5546,7 @@
     <Property Type="Decimal" Name="ImportePagadoSinImpuestos" Precision="18" Scale="2" />
     <Property Type="Int32" Name="IdTipoRetencionGanancia" />
     <Property Type="Int32" Name="IdIBCondicion" />
+    <NavigationProperty Name="OrdenesPago" Relationship="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago" FromRole="DetalleOrdenesPago" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoCuenta">
     <Key>
@@ -5542,6 +5565,7 @@
     <Property Type="Int32" Name="IdMoneda" />
     <Property Type="Decimal" Name="CotizacionMonedaDestino" Precision="18" Scale="4" />
     <Property Type="Int32" Name="IdTarjetaCredito" />
+    <NavigationProperty Name="OrdenesPago" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago" FromRole="DetalleOrdenesPagoCuenta" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoRendicionesFF">
     <Key>
@@ -5560,6 +5584,7 @@
     <Property Type="Int32" Name="IdRubroContable" />
     <Property Type="Decimal" Name="Importe" Precision="18" Scale="2" />
     <NavigationProperty Name="RubrosContable" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_RubrosContables" FromRole="DetalleOrdenesPagoRubrosContable" ToRole="RubrosContable" />
+    <NavigationProperty Name="OrdenesPago" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" FromRole="DetalleOrdenesPagoRubrosContable" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoValore">
     <Key>
@@ -5586,6 +5611,7 @@
     <Property Type="Int32" Name="IdTarjetaCredito" />
     <NavigationProperty Name="TiposComprobante" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoValores_IdTipoValor" FromRole="DetalleOrdenesPagoValore" ToRole="TiposComprobante" />
     <NavigationProperty Name="BancoChequera" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoValores_BancoChequeras" FromRole="DetalleOrdenesPagoValore" ToRole="BancoChequera" />
+    <NavigationProperty Name="OrdenesPago" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" FromRole="DetalleOrdenesPagoValore" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="OrdenPago">
     <Key>
@@ -5664,6 +5690,11 @@
     <Property Type="String" Name="IdsComprobanteProveedorRetenidosIva" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="TotalesImportesRetenidosIva" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Proveedore" Relationship="DemoProntoModel.FK_OrdenesPago_Proveedor" FromRole="OrdenPago" ToRole="Proveedor" />
+    <NavigationProperty Name="DetalleOrdenesPagoes" Relationship="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPago" />
+    <NavigationProperty Name="DetalleOrdenesPagoCuentas" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoCuenta" />
+    <NavigationProperty Name="DetalleOrdenesPagoImpuestos" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoImpuesto" />
+    <NavigationProperty Name="DetalleOrdenesPagoRubrosContables" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoRubrosContable" />
+    <NavigationProperty Name="DetalleOrdenesPagoValores" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoValore" />
   </EntityType>
   <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
     <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -6776,6 +6807,7 @@
     <Property Name="LeyendaPorcentajeAdicional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ImporteTotalFacturasMPagadasSujetasARetencion" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="IdDetalleImpuesto" Type="Int32" />
+    <NavigationProperty Name="OrdenesPago" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" FromRole="DetalleOrdenesPagoImpuesto" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="Subdiario">
     <Key>
@@ -7433,6 +7465,81 @@
       </Principal>
       <Dependent Role="Valore">
         <PropertyRef Name="IdTipoValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tree">
+    <Key>
+      <PropertyRef Name="IdItem" />
+    </Key>
+    <Property Name="IdItem" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Parametros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_DetalleOrdenesPago_OrdenesPago">
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleOrdenesPago" Role="DetalleOrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoCuentas_OrdenesPago">
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleOrdenesPagoCuenta" Role="DetalleOrdenesPagoCuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoCuenta">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoImpuestos_OrdenesPago">
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleOrdenesPagoImpuesto" Role="DetalleOrdenesPagoImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoImpuesto">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoRubrosContables_OrdenesPago">
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleOrdenesPagoRubrosContable" Role="DetalleOrdenesPagoRubrosContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoRubrosContable">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoValores_OrdenesPago">
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleOrdenesPagoValore" Role="DetalleOrdenesPagoValore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoValore">
+        <PropertyRef Name="IdOrdenPago" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

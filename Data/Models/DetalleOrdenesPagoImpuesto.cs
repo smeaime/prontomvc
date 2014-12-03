@@ -31,5 +31,7 @@ namespace ProntoMVC.Data.Models
         public string LeyendaPorcentajeAdicional { get; set; }
         public Nullable<decimal> ImporteTotalFacturasMPagadasSujetasARetencion { get; set; }
         public Nullable<int> IdDetalleImpuesto { get; set; }
+    
+        public virtual OrdenPago OrdenesPago { get; set; }
     }
 }

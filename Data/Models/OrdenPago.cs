@@ -14,6 +14,15 @@ namespace ProntoMVC.Data.Models
     
     public partial class OrdenPago
     {
+        public OrdenPago()
+        {
+            this.DetalleOrdenesPagoes = new HashSet<DetalleOrdenesPago>();
+            this.DetalleOrdenesPagoCuentas = new HashSet<DetalleOrdenesPagoCuenta>();
+            this.DetalleOrdenesPagoImpuestos = new HashSet<DetalleOrdenesPagoImpuesto>();
+            this.DetalleOrdenesPagoRubrosContables = new HashSet<DetalleOrdenesPagoRubrosContable>();
+            this.DetalleOrdenesPagoValores = new HashSet<DetalleOrdenesPagoValore>();
+        }
+    
         public int IdOrdenPago { get; set; }
         public Nullable<int> NumeroOrdenPago { get; set; }
         public Nullable<System.DateTime> FechaOrdenPago { get; set; }
@@ -88,5 +97,10 @@ namespace ProntoMVC.Data.Models
         public string TotalesImportesRetenidosIva { get; set; }
     
         public virtual Proveedor Proveedore { get; set; }
+        public virtual ICollection<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }
+        public virtual ICollection<DetalleOrdenesPagoCuenta> DetalleOrdenesPagoCuentas { get; set; }
+        public virtual ICollection<DetalleOrdenesPagoImpuesto> DetalleOrdenesPagoImpuestos { get; set; }
+        public virtual ICollection<DetalleOrdenesPagoRubrosContable> DetalleOrdenesPagoRubrosContables { get; set; }
+        public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
     }
 }

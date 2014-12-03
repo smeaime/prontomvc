@@ -1763,6 +1763,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="FechaInicialControlComprobantes" ColumnName="FechaInicialControlComprobantes" />
           <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
           <ScalarProperty Name="IdCuentaAplicacion" ColumnName="IdCuentaAplicacion" />
           <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
@@ -4273,6 +4274,22 @@
           <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
           <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
           <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trees">
+      <EntityTypeMapping TypeName="DemoProntoModel.Tree">
+        <MappingFragment StoreEntitySet="Tree">
+          <ScalarProperty Name="GrupoMenu" ColumnName="GrupoMenu" />
+          <ScalarProperty Name="EsPadre" ColumnName="EsPadre" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
