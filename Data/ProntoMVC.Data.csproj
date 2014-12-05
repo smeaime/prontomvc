@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="mIEntity.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Models\Actividades_Proveedore.cs">
       <DependentUpon>Model1.tt</DependentUpon>

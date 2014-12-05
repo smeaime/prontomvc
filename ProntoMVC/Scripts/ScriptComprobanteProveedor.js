@@ -2689,66 +2689,66 @@ $(function () {     // lo mismo que $(document).ready(function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    $("#ListaDrag2").jqGrid({
-        url: ROOT + 'Requerimiento/DetRequerimientos',
-        postData: { 'IdRequerimiento': function () { return "-1"; } },
-        datatype: 'json',
-        mtype: 'POST',
-        cellEdit: false,
-        colNames: ['Acciones', 'IdDetalleRequerimiento',
-                         'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                           'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                            'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
-                         'Impresa', 'Detalle'
-                      ],
-        colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdDetalleRequerimiento', index: 'IdRequerimiento', align: 'left', width: 40, editable: false, hidden: true },
-                        { name: 'IdArticulo', index: 'NumeroRequerimiento', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'IdUnidad', index: '', width: 30 },
-                        { name: 'NumeroItem', index: '', width: 80 },
-                        { name: 'Cantidad', index: '', width: 40 },
-                        { name: 'Abreviatura', index: '', width: 40 },
-                        { name: 'Codigo', index: '', width: 40 },
-                        { name: '', index: '', width: 40 },
+    //$("#ListaDrag2").jqGrid({
+    //    url: ROOT + 'Requerimiento/DetRequerimientos',
+    //    postData: { 'IdRequerimiento': function () { return "-1"; } },
+    //    datatype: 'json',
+    //    mtype: 'POST',
+    //    cellEdit: false,
+    //    colNames: ['Acciones', 'IdDetalleRequerimiento',
+    //                     'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
+    //                       'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
+    //                        'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
+    //                     'Impresa', 'Detalle'
+    //                  ],
+    //    colModel: [
+    //                    { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                    {name: 'IdDetalleRequerimiento', index: 'IdRequerimiento', align: 'left', width: 40, editable: false, hidden: true },
+    //                    { name: 'IdArticulo', index: 'NumeroRequerimiento', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+    //                    { name: 'IdUnidad', index: '', width: 30 },
+    //                    { name: 'NumeroItem', index: '', width: 80 },
+    //                    { name: 'Cantidad', index: '', width: 40 },
+    //                    { name: 'Abreviatura', index: '', width: 40 },
+    //                    { name: 'Codigo', index: '', width: 40 },
+    //                    { name: '', index: '', width: 40 },
 
-                           { name: 'Descripcion', index: '', width: 80 },
-                        { name: 'FechaEntrega', index: '', width: 40 },
-                        { name: 'Observaciones', index: '', width: 40 },
-                        { name: 'Cumplido', index: '', width: 40 },
-                        { name: 'ArchivoAdjunto1', index: '', width: 40 },
+    //                       { name: 'Descripcion', index: '', width: 80 },
+    //                    { name: 'FechaEntrega', index: '', width: 40 },
+    //                    { name: 'Observaciones', index: '', width: 40 },
+    //                    { name: 'Cumplido', index: '', width: 40 },
+    //                    { name: 'ArchivoAdjunto1', index: '', width: 40 },
 
-                         { name: 'OrigenDescripcion', index: '', width: 40 },
-                        { name: 'IdRequerimiento', index: '', width: 40 },
-                        { name: '', index: '' },
-                        { name: '', index: '' },
-                        { name: '', index: '' }
+    //                     { name: 'OrigenDescripcion', index: '', width: 40 },
+    //                    { name: 'IdRequerimiento', index: '', width: 40 },
+    //                    { name: '', index: '' },
+    //                    { name: '', index: '' },
+    //                    { name: '', index: '' }
 
 
 
-                    ],
-        ondblClickRow: function (id) {
-            CopiarRMdetalle(id);
-        },
-        pager: $('#ListaDragPager2'),
-        rowNum: 15,
-        rowList: [10, 20, 50],
-        sortname: 'NumeroRequerimiento',
-        sortorder: "desc",
-        viewrecords: true,
-        ///////////////////////////////
-        //width: 'auto', // 'auto',
-        autowidth: true,
-        shrinkToFit: false,
-        //////////////////////////////
-        height: '100%',
-        altRows: false,
-        emptyrecords: 'No hay registros para mostrar' //,
-        //caption: '<b>REQUERIMIENTOS DETALLADO</b>'
-    })
-    jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-    $("#ListaDrag2").remapColumns([15, 4, 7, 9, 5, 6, 8, 10, 11], true, true); // cambiar el orden de las columnas  -parece que arruina el ancho de las columnas
+    //                ],
+    //    ondblClickRow: function (id) {
+    //        CopiarRMdetalle(id);
+    //    },
+    //    pager: $('#ListaDragPager2'),
+    //    rowNum: 15,
+    //    rowList: [10, 20, 50],
+    //    sortname: 'NumeroRequerimiento',
+    //    sortorder: "desc",
+    //    viewrecords: true,
+    //    ///////////////////////////////
+    //    //width: 'auto', // 'auto',
+    //    autowidth: true,
+    //    shrinkToFit: false,
+    //    //////////////////////////////
+    //    height: '100%',
+    //    altRows: false,
+    //    emptyrecords: 'No hay registros para mostrar' //,
+    //    //caption: '<b>REQUERIMIENTOS DETALLADO</b>'
+    //})
+    //jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    ////jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    //$("#ListaDrag2").remapColumns([15, 4, 7, 9, 5, 6, 8, 10, 11], true, true); // cambiar el orden de las columnas  -parece que arruina el ancho de las columnas
 
 
 
@@ -2826,90 +2826,90 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
-    $("#ListaDrag4").jqGrid({
-        url: ROOT + 'Comparativa/Comparativas',
+    //$("#ListaDrag4").jqGrid({
+    //    url: ROOT + 'Comparativa/Comparativas',
 
-        postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
-        datatype: 'json',
-        mtype: 'POST',
-        cellEdit: false,
-        colNames: ['', '', '', 'Circuito Firmas Completo', 'IdComparativa', 'Numero', 'Fecha Comparativa',
+    //    postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+    //    datatype: 'json',
+    //    mtype: 'POST',
+    //    cellEdit: false,
+    //    colNames: ['', '', '', 'Circuito Firmas Completo', 'IdComparativa', 'Numero', 'Fecha Comparativa',
 
-            'Tipo seleccion',
-                            'Confecciono',
-                            'Aprobo',
-                             'Monto previsto',
-             'Monto p/cpra',
+    //        'Tipo seleccion',
+    //                        'Confecciono',
+    //                        'Aprobo',
+    //                         'Monto previsto',
+    //         'Monto p/cpra',
 
-             'Cant.Sol.',
-             'Archivo adjunto 1',
-             'Archivo adjunto 2',
-             'Anulada',
-             'Fecha anulacion',
+    //         'Cant.Sol.',
+    //         'Archivo adjunto 1',
+    //         'Archivo adjunto 2',
+    //         'Anulada',
+    //         'Fecha anulacion',
 
-             'Anulo',
-             'Motivo anulacion'
-
-
-            ],
+    //         'Anulo',
+    //         'Motivo anulacion'
 
 
-
-
-        colModel: [
-                    { name: 'editar', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                    {name: 'Imprimir', index: 'Imprimir', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
-                    {name: 'firmar', index: 'Imprimir', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
-
-                    {name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'left', width: 0, hidden: true,
-                    editable: false, search: true, searchoptions: { sopt: ['cn'] }
-                },
-
-                    { name: 'IdFactura', index: 'IdFactura', align: 'left', width: 0, editable: false, hidden: true },
-                    { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                    { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-
-                    { name: '', index: '', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                    { name: '', index: '', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-
-
-                    { name: '', index: '', align: 'left', width: 500, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                    { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+    //        ],
 
 
 
 
-                    ],
-        ondblClickRow: function (id) {
-            CopiarComparativa(id);
-        },
-        pager: $('#ListaDragPager4'),
-        rowNum: 15,
-        rowList: [10, 20, 50],
-        sortname: 'Numero',
-        sortorder: "desc",
-        viewrecords: true,
-        ///////////////////////////////
-        // width: 'auto', // 'auto',
-        //autowidth: true,
-        shrinkToFit: false,
-        //////////////////////////////
-        height: '100%',
-        altRows: false,
-        emptyrecords: 'No hay registros para mostrar' //,
-        //caption: '<b>COMPARATIVAS</b>'
-    })
-    jQuery("#ListaDrag4").jqGrid('navGrid', '#ListaDragPager4', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    //    colModel: [
+    //                { name: 'editar', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                {name: 'Imprimir', index: 'Imprimir', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
+    //                {name: 'firmar', index: 'Imprimir', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
+
+    //                {name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'left', width: 0, hidden: true,
+    //                editable: false, search: true, searchoptions: { sopt: ['cn'] }
+    //            },
+
+    //                { name: 'IdFactura', index: 'IdFactura', align: 'left', width: 0, editable: false, hidden: true },
+    //                { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+    //                { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+
+    //                { name: '', index: '', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+    //                { name: '', index: '', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+
+    //                { name: '', index: '', align: 'left', width: 500, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+
+
+
+
+    //                ],
+    //    ondblClickRow: function (id) {
+    //        CopiarComparativa(id);
+    //    },
+    //    pager: $('#ListaDragPager4'),
+    //    rowNum: 15,
+    //    rowList: [10, 20, 50],
+    //    sortname: 'Numero',
+    //    sortorder: "desc",
+    //    viewrecords: true,
+    //    ///////////////////////////////
+    //    // width: 'auto', // 'auto',
+    //    //autowidth: true,
+    //    shrinkToFit: false,
+    //    //////////////////////////////
+    //    height: '100%',
+    //    altRows: false,
+    //    emptyrecords: 'No hay registros para mostrar' //,
+    //    //caption: '<b>COMPARATIVAS</b>'
+    //})
+    //jQuery("#ListaDrag4").jqGrid('navGrid', '#ListaDragPager4', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     //jQuery("#ListaDrag4").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
 
@@ -3127,14 +3127,15 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Cuentas');
+    $('a#a_panel_este_tab1').remove();
     $('a#a_panel_este_tab2').text('RMDet');
     $('a#a_panel_este_tab2').remove();  //    
-    $('a#a_panel_este_tab3').text('Presup');
-    $('a#a_panel_este_tab3').remove();  //    
-    $('a#a_panel_este_tab4').text('Comp');
-    $('a#a_panel_este_tab4').remove();  //    
-    $('a#a_panel_este_tab5').text('Ped');
-    $('a#a_panel_este_tab5').remove();  //    
+    $('a#a_panel_este_tab3').text('Items de presup de obra');
+    //$('a#a_panel_este_tab3').remove();  //    
+    $('a#a_panel_este_tab4').text('Recepciones');
+    //$('a#a_panel_este_tab4').remove();  //    
+    $('a#a_panel_este_tab5').text('Pedidos');
+    //$('a#a_panel_este_tab5').remove();  //    
 
 
     ConectarGrillas1();
