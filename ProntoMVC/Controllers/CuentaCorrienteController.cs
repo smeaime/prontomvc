@@ -255,7 +255,7 @@ namespace ProntoMVC.Controllers
                             Fecha = a["Fecha"],
                             ImporteOriginal = a["ImporteTotal"],
                             Saldo = a["Saldo"],
-                            SinImpuestos = a["SinImpuestos"],
+                            ImportePagadoSinImpuestos = a["SinImpuestos"],
                             IvaTotal = a["TotalIva"],
                             TotalComprobante = a["TotalComprobante"],
                             BienesYServicios = a["BoS"],

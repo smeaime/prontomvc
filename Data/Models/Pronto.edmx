@@ -23,6 +23,14 @@
           <Property Name="Fecha" Type="datetime" />
           <Property Name="IdTempAutorizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="Actividades Proveedores">
+          <Key>
+            <PropertyRef Name="IdActividad" />
+          </Key>
+          <Property Name="IdActividad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Agrupacion1" Type="int" />
+        </EntityType>
         <EntityType Name="Articulos">
           <Key>
             <PropertyRef Name="IdArticulo" />
@@ -883,6 +891,17 @@
           <Property Name="CodigoDestino" Type="varchar" MaxLength="10" />
           <Property Name="Titulo" Type="varchar" MaxLength="2" />
           <Property Name="Nivel" Type="int" />
+        </EntityType>
+        <EntityType Name="CurvasTalles">
+          <Key>
+            <PropertyRef Name="IdCurvaTalle" />
+          </Key>
+          <Property Name="IdCurvaTalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Curva" Type="varchar" MaxLength="50" />
+          <Property Name="CurvaCodigos" Type="varchar" MaxLength="50" />
+          <Property Name="MostrarCurvaEnInformes" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="DefinicionArticulos">
           <Key>
@@ -2173,6 +2192,24 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdIGCondicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ImpuestosDirectos">
+          <Key>
+            <PropertyRef Name="IdImpuestoDirecto" />
+          </Key>
+          <Property Name="IdImpuestoDirecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Tasa" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="IdTipoImpuesto" Type="int" />
+          <Property Name="IdCuenta" Type="int" />
+          <Property Name="BaseMinima" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ProximoNumeroCertificado" Type="int" />
+          <Property Name="Grupo" Type="int" />
+          <Property Name="ActivaNumeracionPorGrupo" Type="varchar" MaxLength="2" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" />
+          <Property Name="TopeAnual" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="varchar" MaxLength="2" />
+          <Property Name="CodigoRegimen" Type="int" />
+        </EntityType>
         <EntityType Name="ListasPrecios">
           <Key>
             <PropertyRef Name="IdListaPrecios" />
@@ -2233,6 +2270,28 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Codigo" Type="int" />
           <Property Name="Partido" Type="varchar" MaxLength="60" />
           <Property Name="IdPartido" Type="int" />
+        </EntityType>
+        <EntityType Name="Marcas">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Codigo" Type="int" />
+        </EntityType>
+        <EntityType Name="Materiales">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Modelos">
+          <Key>
+            <PropertyRef Name="IdModelo" />
+          </Key>
+          <Property Name="IdModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Monedas">
           <Key>
@@ -5184,6 +5243,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         </Function>
         <EntityContainer Name="DemoProntoModelStoreContainer">
           <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Actividades Proveedores" EntityType="Self.Actividades Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AutorizacionesCompra" EntityType="Self.AutorizacionesCompra" Schema="dbo" store:Type="Tables" />
@@ -5207,6 +5267,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="CuentasCorrientesDeudores" EntityType="Self.CuentasCorrientesDeudores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasEjerciciosContables" EntityType="Self.CuentasEjerciciosContables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurvasTalles" EntityType="Self.CurvasTalles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DefinicionArticulos" EntityType="Self.DefinicionArticulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depositos" EntityType="Self.Depositos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DescripcionIva" EntityType="Self.DescripcionIva" Schema="dbo" store:Type="Tables" />
@@ -5270,9 +5331,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImpuestosDirectos" EntityType="Self.ImpuestosDirectos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListasPrecios" EntityType="Self.ListasPrecios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotasCredito" EntityType="Self.NotasCredito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotasDebito" EntityType="Self.NotasDebito" Schema="dbo" store:Type="Tables" />
@@ -6642,6 +6707,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="OrdenPago" EntitySet="OrdenesPago" />
             <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
           </AssociationSet>
+          <EntitySet Name="CurvasTalles" EntityType="DemoProntoModel.CurvasTalle" />
+          <EntitySet Name="ImpuestosDirectos" EntityType="DemoProntoModel.ImpuestosDirecto" />
+          <EntitySet Name="Marcas" EntityType="DemoProntoModel.Marca" />
+          <EntitySet Name="Materiales" EntityType="DemoProntoModel.Materiale" />
+          <EntitySet Name="Modelos" EntityType="DemoProntoModel.Modelo" />
+          <EntitySet Name="Actividades_Proveedores" EntityType="DemoProntoModel.Actividades_Proveedore" />
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -13225,6 +13296,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -13240,6 +13312,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
+=======
+>>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         <Association Name="FK_DetalleOrdenesPago_OrdenesPago">
           <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
           <End Type="DemoProntoModel.DetalleOrdenesPago" Role="DetalleOrdenesPago" Multiplicity="*" />
@@ -13300,6 +13374,66 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CurvasTalle">
+          <Key>
+            <PropertyRef Name="IdCurvaTalle" />
+          </Key>
+          <Property Name="IdCurvaTalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Curva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurvaCodigos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MostrarCurvaEnInformes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ImpuestosDirecto">
+          <Key>
+            <PropertyRef Name="IdImpuestoDirecto" />
+          </Key>
+          <Property Name="IdImpuestoDirecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tasa" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IdTipoImpuesto" Type="Int32" />
+          <Property Name="IdCuenta" Type="Int32" />
+          <Property Name="BaseMinima" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProximoNumeroCertificado" Type="Int32" />
+          <Property Name="Grupo" Type="Int32" />
+          <Property Name="ActivaNumeracionPorGrupo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TopeAnual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoRegimen" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Materiale">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="IdModelo" />
+          </Key>
+          <Property Name="IdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Actividades_Proveedore">
+          <Key>
+            <PropertyRef Name="IdActividad" />
+          </Key>
+          <Property Name="IdActividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agrupacion1" Type="Int32" />
+        </EntityType>
+>>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17555,6 +17689,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="Trees">
             <EntityTypeMapping TypeName="DemoProntoModel.Tree">
               <MappingFragment StoreEntitySet="Tree">
@@ -17568,6 +17703,70 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+=======
+          <EntitySetMapping Name="CurvasTalles">
+            <EntityTypeMapping TypeName="DemoProntoModel.CurvasTalle">
+              <MappingFragment StoreEntitySet="CurvasTalles">
+                <ScalarProperty Name="MostrarCurvaEnInformes" ColumnName="MostrarCurvaEnInformes" />
+                <ScalarProperty Name="CurvaCodigos" ColumnName="CurvaCodigos" />
+                <ScalarProperty Name="Curva" ColumnName="Curva" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCurvaTalle" ColumnName="IdCurvaTalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImpuestosDirectos">
+            <EntityTypeMapping TypeName="DemoProntoModel.ImpuestosDirecto">
+              <MappingFragment StoreEntitySet="ImpuestosDirectos">
+                <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
+                <ScalarProperty Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" ColumnName="ParaInscriptosEnRegistroFiscalOperadoresGranos" />
+                <ScalarProperty Name="TopeAnual" ColumnName="TopeAnual" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ActivaNumeracionPorGrupo" ColumnName="ActivaNumeracionPorGrupo" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="ProximoNumeroCertificado" ColumnName="ProximoNumeroCertificado" />
+                <ScalarProperty Name="BaseMinima" ColumnName="BaseMinima" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+                <ScalarProperty Name="Tasa" ColumnName="Tasa" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdImpuestoDirecto" ColumnName="IdImpuestoDirecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcas">
+            <EntityTypeMapping TypeName="DemoProntoModel.Marca">
+              <MappingFragment StoreEntitySet="Marcas">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materiales">
+            <EntityTypeMapping TypeName="DemoProntoModel.Materiale">
+              <MappingFragment StoreEntitySet="Materiales">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelos">
+            <EntityTypeMapping TypeName="DemoProntoModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actividades_Proveedores">
+            <EntityTypeMapping TypeName="DemoProntoModel.Actividades_Proveedore">
+              <MappingFragment StoreEntitySet="Actividades Proveedores">
+                <ScalarProperty Name="Agrupacion1" ColumnName="Agrupacion1" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdActividad" ColumnName="IdActividad" />
+>>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -19874,12 +20073,24 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" />
+<<<<<<< HEAD
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Tree" Width="1.5" PointX="14.375" PointY="18.75" />
+=======
+>>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" />
+<<<<<<< HEAD
+=======
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="12.75" PointY="11.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ImpuestosDirecto" Width="1.5" PointX="14.75" PointY="18.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Marca" Width="1.5" PointX="17.75" PointY="5.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Materiale" Width="1.5" PointX="0.75" PointY="18.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Modelo" Width="1.5" PointX="2.75" PointY="18.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Actividades_Proveedore" Width="1.5" PointX="17.375" PointY="18.75" />
+>>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
