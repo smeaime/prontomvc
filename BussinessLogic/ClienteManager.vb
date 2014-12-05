@@ -82,8 +82,8 @@ Namespace Pronto.ERP.Bll
 
 
                         .DireccionDeCorreos = oCliente.DireccionDeCorreos
-                        .IdLocalidadDeCorreos = oCliente.IdLocalidadDeCorreos
-                        .IdProvinciaDeCorreos = oCliente.IdProvinciaDeCorreos
+                        .IdLocalidadDeCorreos = If(oCliente.IdLocalidadDeCorreos, -1)
+                        .IdProvinciaDeCorreos = If(oCliente.IdProvinciaDeCorreos, -1)
                         .CodigoPostalDeCorreos = oCliente.CodigoPostalDeCorreos
                         .ObservacionesDeCorreos = oCliente.ObservacionesDeCorreos
 

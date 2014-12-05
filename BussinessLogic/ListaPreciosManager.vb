@@ -370,6 +370,8 @@ Namespace Pronto.ERP.Bll
             If myCliente.IdLocalidad = 0 Then myCliente.IdLocalidad = BuscaIdLocalidadPreciso("CIUDAD AUTONOMA BUENOS AIRES", SC) 'le fuerzo una localidad para que no me aborte la lista de precios
             If myCliente.IdProvincia = 0 Then myCliente.IdProvincia = 2 'BuscaIdProvinciaNET("BUENOS AIRES", SC)
             myCliente.IdListaPrecios = CrearLista(SC, myCliente.RazonSocial & " - Precios", 1)
+            If myCliente.Direccion = "" Then myCliente.Direccion = ".."
+            If myCliente.CodigoPostal = "" Then myCliente.CodigoPostal = "0"
 
             ClienteManager.Save(SC, myCliente)
             Return myCliente.IdListaPrecios
