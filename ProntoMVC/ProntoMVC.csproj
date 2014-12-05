@@ -245,6 +245,7 @@
     <Compile Include="Controllers\ObraController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProntoBaseController2.cs" />
+    <Compile Include="Controllers\RubroContableController.cs" />
     <Compile Include="Controllers\SubdiarioController.cs" />
     <Compile Include="Controllers\RemitoController.cs" />
     <Compile Include="Controllers\NotaCreditoController.cs" />
