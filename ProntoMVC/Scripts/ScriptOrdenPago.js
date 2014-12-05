@@ -1,96 +1,3 @@
-function SerializaForm() {
-    var cm, data1, data2, valor;
-    var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
-    var ImporteBonificacion = $("#TotalBonificacionGlobal").val();
-    var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
-    cabecera.DetallePedidos = [];
-    cabecera.IdProveedor = $("#IdProveedor").val();
-    cabecera.NumeroPedido = $("#NumeroPedido").val();
-    cabecera.FechaPedido = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", $("#FechaPedido").val()));
-    cabecera.DetalleCondicionCompra = $("#DetalleCondicionCompra").val();
-    cabecera.Bonificacion = $("#TotalBonificacionGlobal").val().replace(".", ",");
-    cabecera.TotalIva1 = $("#TotalIva").val().replace(".", ",");
-    cabecera.TotalPedido = $("#Total").val().replace(".", ",");
-
-    var dataIds = $('#Lista').jqGrid('getDataIDs');
-    for (var i = 0; i < dataIds.length; i++) {
-        try {
-            saveparameters = {
-                "successfunc": null,
-                "url": 'clientArray',
-                "extraparam": {},
-                //                "aftersavefunc": function (response) {
-                //                    alert('saved');
-                //                },
-                "errorfunc": null,
-                "afterrestorefunc": null,
-                "restoreAfterError": true,
-                "mtype": "POST"
-            }
-
-            $('#Lista').jqGrid('saveRow', dataIds[i], saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
-
-            var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-
-            data1 = '{"IdPedido":"' + $("#IdPedido").val() + '",'
-            for (var j = 0; j < colModel.length; j++) {
-                cm = colModel[j]
-                if (cm.label === 'TB') {
-                    valor = data[cm.name];
-                    if (cm.name === 'Cantidad') valor = valor.replace(".", ",")
-                    if (cm.name === 'Precio') valor = valor.replace(".", ",")
-                    if (cm.name === 'PorcentajeBonificacion') valor = valor.replace(".", ",")  // parseFloat(valor) || 0;
-                    if (cm.name === 'ImporteBonificacion') valor = valor.replace(".", ",")
-                    if (cm.name === 'PorcentajeIva') valor = valor.replace(".", ",")
-                    if (cm.name === 'ImporteIva') valor = valor.replace(".", ",")
-                    if (cm.name === 'ImporteTotalItem') valor = valor.replace(".", ",")
-                    if (cm.name === 'IdDetalleRequerimiento') valor = valor.replace(".", ",")
-                    //if (cm.name === 'Observaciones') {
-                    valor = valor.replace('"', '\\"');
-                    //}
-                    if (cm.name === 'Adj. 1') {
-                        valor = '';
-                    }
-
-                    if (cm.name.indexOf("Fecha") !== -1) valor = $.datepicker.formatDate("yy/mm/dd", $.datepicker.parseDate("dd/mm/yy", valor));
-
-                    if (cm.name === 'Cumplido' && cabecera.Cumplido === 'AN') valor = 'AN'
-
-                    if (cm.name === 'OrigenDescripcion') {
-                        if (valor == 'Solo el material') {
-                            valor = 1;
-                        }
-                        else if (valor == 'Solo las observaciones') {
-                            valor = 2;
-                        }
-                        else if (valor == 'Material mas observaciones') {
-                            valor = 3;
-                        }
-                        else {
-                            //valor = 0;
-                        }
-                    }
-                    data1 = data1 + '"' + cm.name + '":"' + valor + '",';
-                }
-            }
-            data1 = data1.substring(0, data1.length - 1) + '}';
-            data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
-            data2 = JSON.parse(data1);
-            cabecera.DetallePedidos.push(data2);
-        }
-        catch (ex) {
-            $('#Lista').jqGrid('restoreRow', dataIds[i]);
-            alert("No se pudo grabar el comprobante. " + ex);
-            return;
-        }
-    }
-    return cabecera;
-}
-
-function DeSerializaForm() {
-    var cm, data1, data2, valor;
-}
-
 function Validar() {
     var cabecera = SerializaForm();
 
@@ -156,76 +63,12 @@ function Validar() {
 }
 
 $(function () {
-    $('#grabar2').click(function () {
-
-        var cabecera = SerializaForm();
-
-        $('html, body').css('cursor', 'wait');
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Pedido/BatchUpdate',
-            dataType: 'json',
-            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-            success: function (result) {
-                if (result) {
-                    $('html, body').css('cursor', 'auto');
-                    if (true) {
-                        //window.location = (ROOT + "Pedido/index");
-                        window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
-
-                    } else {
-
-                        var dt = new Date();
-                        var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-
-                        $("#textoMensajeAlerta").html("Grabado " + currentTime);
-                        $("#mensajeAlerta").show();
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                    }
-                } else {
-                    alert('No se pudo grabar el comprobante.');
-                    $('.loading').html('');
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                }
-            },
-
-            beforeSend: function () {
-                //$('.loading').html('some predefined loading img html');
-                $('#grabar2').attr("disabled", true).val("Espere...");
-            },
-            error: function (xhr, textStatus, exceptionThrown) {
-                try {
-                    var errorData = $.parseJSON(xhr.responseText);
-                    var errorMessages = [];
-                    //this ugly loop is because List<> is serialized to an object instead of an array
-                    for (var key in errorData) {
-                        errorMessages.push(errorData[key]);
-                    }
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                    $("#mensajeAlerta").show();
-                } catch (e) {
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-                    $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show();
-                }
-            }
-        });
-    });
-});
-
-$(function () {
     $("#loading").hide();
 
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
-    var headerRow, rowHight, resizeSpanHeight;
+    var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo;
 
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -326,26 +169,27 @@ $(function () {
     }
 
     var ControlImportes = function (value, colname) {
-        
         if (colname === "A pagar") {
             var rowid = $('#Lista').getGridParam('selrow');
-            var SinImpuestos = $("#Lista").getCell(rowid, "SinImpuestos");
-            SinImpuestos = Number(SinImpuestos.replace(",", "."));
             value = Number(value);
-            if (value < SinImpuestos) {
-                return [false, "El monto a pagar no puede ser inferior al importe sin impuestos"];
-            }
-        }
-        if (colname === "Imp.s/Impuestos") {
-            var rowid = $('#Lista').getGridParam('selrow');
-            var Importe = $("#Lista").getCell(rowid, "Importe")
-            Importe = Number(Importe.replace(",", "."));
-            value = Number(value);
-            if (value > Importe) {
-                return [false, "El importe sin impuestos no puede ser superior al monto a pagar"];
-            }
+            var IdTipoComprobante = $("#Lista").getCell(rowid, "IdTipoComp");
+            if (IdTipoComprobante == false) { IdTipoComprobante = 0; }
+            var IdComprobante = $("#Lista").getCell(rowid, "IdComprobante");
+            if (IdComprobante == false) { IdComprobante = 0; }
+            var ImportePagadoSinImpuestos = CalcularImportePagadoSinImpuestos(IdTipoComprobante, IdComprobante, value);
+            //$('#ImportePagadoSinImpuestos').val(ImportePagadoSinImpuestos.toFixed(2));
+            $('#Lista').jqGrid('setCell', rowid, 'ImportePagadoSinImpuestos', ImportePagadoSinImpuestos[0].toFixed(2));
         }
         return [true];
+        //if (colname === "A pagar") {
+        //    var rowid = $('#Lista').getGridParam('selrow');
+        //    var SinImpuestos = $("#Lista").getCell(rowid, "SinImpuestos");
+        //    SinImpuestos = Number(SinImpuestos.replace(",", "."));
+        //    value = Number(value);
+        //    if (value < SinImpuestos) {
+        //        return [false, "El monto a pagar no puede ser inferior al importe sin impuestos"];
+        //    }
+        //}
     };
         
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,9 +208,9 @@ $(function () {
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPago', index: 'IdDetalleOrdenPago', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdImputacion', index: 'IdImputacion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'IdImputacion', index: 'IdImputacion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
                     { name: 'BaseCalculoIIBB', index: 'BaseCalculoIIBB', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
                     { name: 'CotizacionMoneda', index: 'CotizacionMoneda', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
                     { name: 'IdTipoComp', index: 'IdTipoComp', editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
@@ -377,21 +221,39 @@ $(function () {
                     { name: 'ImporteOriginal', index: 'ImporteOriginal', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'Saldo', index: 'Saldo', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     {
-                        name: 'Importe', index: 'Importe', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text',
+                        name: 'Importe', index: 'Importe', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
-                            {   type: 'keypress',
+                            {
+                                type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) {setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100);}
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            },
+                            {
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        var ImportePagadoSinImpuestos = CalcularImportePagadoSinImpuestos(0, 0, this.value);
+                                        $('#ImportePagadoSinImpuestos').val(ImportePagadoSinImpuestos[0].toFixed(2));
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
                                 }
                             }]
                         }
                     },
                     {
-                        name: 'SinImpuestos', index: 'SinImpuestos', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text',
+                        name: 'ImportePagadoSinImpuestos', index: 'ImportePagadoSinImpuestos', width: 85, align: 'right', editable: true, editrules: { custom: true, custom_func: ControlImportes, required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
@@ -408,8 +270,8 @@ $(function () {
                     { name: 'IvaTotal', index: 'IvaTotal', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'TotalComprobante', index: 'TotalComprobante', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'BienesYServicios', index: 'BienesYServicios', width: 30, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImporteRetencionIVA', index: 'ImporteRetencionIVA', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'NumeroOrdenPagoRetencionIVA', index: 'NumeroOrdenPagoRetencionIVA', width: 100, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'ImporteRetencionIVA', index: 'ImporteRetencionIVA', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'NumeroOrdenPagoRetencionIVA', index: 'NumeroOrdenPagoRetencionIVA', width: 100, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'GravadoIVA', index: 'GravadoIVA', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'PorcentajeIVAParaMonotributistas', index: 'PorcentajeIVAParaMonotributistas', width: 85, align: 'right', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'CertificadoPoliza', index: 'CertificadoPoliza', width: 120, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
@@ -423,19 +285,19 @@ $(function () {
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
                                     var $this = $(e.target), $td;
-                                    //if ($this.hasClass("FormElement")) {
-                                    //    // form editing
-                                    //    $('#IdIBCondicion').val(this.value);
-                                    //} else {
-                                    //    $td = $this.closest("td");
-                                    //    if ($td.hasClass("edit-cell")) {
-                                    //        // cell editing
-                                    //        var rowid = $('#Lista').getGridParam('selrow');
-                                    //        $('#Lista').jqGrid('setCell', rowid, 'IdIBCondicion', this.value);
-                                    //    } else {
-                                    //        // inline editing
-                                    //    }
-                                    //}
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdIBCondicion').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#Lista').getGridParam('selrow');
+                                            $('#Lista').jqGrid('setCell', rowid, 'IdIBCondicion', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
                                 }
                             }]
                         },
@@ -447,19 +309,19 @@ $(function () {
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
                                     var $this = $(e.target), $td;
-                                    //if ($this.hasClass("FormElement")) {
-                                    //    // form editing
-                                    //    $('#IdTipoRetencionGanancia').val(this.value);
-                                    //} else {
-                                    //    $td = $this.closest("td");
-                                    //    if ($td.hasClass("edit-cell")) {
-                                    //        // cell editing
-                                    //        var rowid = $('#Lista').getGridParam('selrow');
-                                    //        $('#Lista').jqGrid('setCell', rowid, 'IdTipoRetencionGanancia', this.value);
-                                    //    } else {
-                                    //        // inline editing
-                                    //    }
-                                    //}
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdTipoRetencionGanancia').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#Lista').getGridParam('selrow');
+                                            $('#Lista').jqGrid('setCell', rowid, 'IdTipoRetencionGanancia', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
                                 }
                             }]
                         },
@@ -467,7 +329,7 @@ $(function () {
         ],
         gridComplete: function () {
             calculaTotalImputaciones();
-            CalcularTotales()
+            //CalcularTotales()
         },
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
@@ -479,6 +341,9 @@ $(function () {
                 jQuery("#Lista").jqGrid('setCell', rowid, 'CategoriaIIBB', '', 'not-editable-cell');
                 jQuery("#Lista").jqGrid('setCell', rowid, 'CategoriaGanancias', '', 'not-editable-cell');
             }
+        },
+        afterSaveCell: function (rowid) {
+            calculaTotalImputaciones();
         },
         pager: $('#ListaPager1'),
         rowNum: 100,
@@ -527,13 +392,13 @@ $(function () {
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPagoValores', index: 'IdDetalleOrdenPagoValores', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdTipoValor', index: 'IdTipoValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdBanco', index: 'IdBanco', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
-                    { name: 'IdValor', index: 'IdValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
-                    { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
-                    { name: 'IdBancoChequera', index: 'IdBancoChequera', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
-                    { name: 'IdCaja', index: 'IdCaja', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
-                    { name: 'IdTarjetaCredito', index: 'IdTarjetaCredito', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false } },
+                    { name: 'IdTipoValor', index: 'IdTipoValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'IdBanco', index: 'IdBanco', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
+                    { name: 'IdValor', index: 'IdValor', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
+                    { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
+                    { name: 'IdBancoChequera', index: 'IdBancoChequera', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
+                    { name: 'IdCaja', index: 'IdCaja', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
+                    { name: 'IdTarjetaCredito', index: 'IdTarjetaCredito', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
                     {
                         name: 'Tipo', index: 'Tipo', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
@@ -562,7 +427,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'NumeroInterno', index: 'NumeroInterno', formoptions: { rowpos: 2, colpos: 1 }, width: 70, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text',
+                        name: 'NumeroInterno', index: 'NumeroInterno', formoptions: { rowpos: 2, colpos: 1 }, width: 70, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0',
                             dataEvents: [
@@ -577,7 +442,7 @@ $(function () {
                         }
                     },
                     {
-                        name: 'NumeroValor', index: 'NumeroValor', formoptions: { rowpos: 2, colpos: 2 }, width: 100, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', 
+                        name: 'NumeroValor', index: 'NumeroValor', formoptions: { rowpos: 2, colpos: 2 }, width: 100, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0',
                             dataEvents: [
@@ -591,7 +456,7 @@ $(function () {
                         }
                     },
                     {
-                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 3, colpos: 2 }, width: 120, sortable: false, align: 'right', editable: true,
+                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 3, colpos: 2 }, width: 120, sortable: false, align: 'right', editable: true, label: 'TB',
                         editoptions: {
                             size: 10,
                             maxlengh: 10,
@@ -631,7 +496,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'Importe', index: 'Importe', formoptions: { rowpos: 4, colpos: 2 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text',
+                        name: 'Importe', index: 'Importe', formoptions: { rowpos: 4, colpos: 2 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
@@ -645,11 +510,9 @@ $(function () {
                             }]
                         }
                     },
-                    {
-                        name: 'Anulado', index: 'Anulado', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }
-                    },
-                    { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 5, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false, number: true }, edittype: 'text'},
-                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 5, colpos: 2 }, width: 40, align: 'left', editable: true, editrules: { required: false, number: true }, edittype: 'text' }
+                    { name: 'Anulado', index: 'Anulado', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 5, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 5, colpos: 2 }, width: 90, align: 'left', editable: true, editrules: { required: false }, edittype: "checkbox", editoptions: { value: "SI:NO" }, formatter: "checkbox", formatoptions: { disabled: false }, label: 'TB' }
         ],
         gridComplete: function () {
             calculaTotalValores();
@@ -662,6 +525,11 @@ $(function () {
             lastSelectediRow = iRow;
             if (jQuery("#ListaValores").jqGrid('getCell', rowid, 'Tipo') == 'CE') {
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'Tipo', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'NumeroInterno', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'NumeroValor', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'FechaValor', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'ChequesALaOrdenDe', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'NoALaOrden', '', 'not-editable-cell');
             }
             var cm = jQuery("#ListaValores").jqGrid("getGridParam", "colModel");
             if (cm[iCol].name == "Entidad") {
@@ -671,6 +539,9 @@ $(function () {
                 if (TipoEntidad != "") { TipoEntidad1 = 2 }
                 $("#ListaValores").setColProp('Entidad', { editoptions: { dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=' + TipoEntidad1 } });
             }
+        },
+        afterSaveCell: function (rowid) {
+            calculaTotalValores();
         },
         pager: $('#ListaPager3'),
         rowNum: 100,
@@ -726,11 +597,11 @@ $(function () {
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPagoCuentas', index: 'IdDetalleOrdenPagoCuentas', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdCuenta', index: 'IdCuenta', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    { name: 'IdCuenta', index: 'IdCuenta', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
                     { name: 'Codigo', index: 'Codigo', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'Cuenta', index: 'Cuenta', width: 200, align: 'left', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Debe', index: 'Debe', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Haber', index: 'Haber', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } }
+                    { name: 'Debe', index: 'Debe', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'Haber', index: 'Haber', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' }
         ],
         gridComplete: function () {
             calculaTotalContable();
@@ -759,9 +630,10 @@ $(function () {
         userDataOnFooter: true,
         caption: '<b>REGISTRO CONTABLE</b>',
         cellEdit: true,
-        cellsubmit: 'clientArray'
+        cellsubmit: 'clientArray',
+        loadonce: true
     });
-    jQuery("#ListaContable").jqGrid('navGrid', '#ListaPager2', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaContable").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 
 
     $('#ListaImpuestos').jqGrid({
@@ -770,26 +642,28 @@ $(function () {
         editurl: ROOT + 'OrdenPago/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleOrdenPagoImpuestos', 'IdTipoImpuesto', 'Tipo', 'Categoria', 'Imp.Pag.S/Imp.', 'Imp.Retenido', 'Pagos mes', 'Retenc.Mes',
-                   'Minimo IIBB', 'Alic.IIBB', 'Alic.Conv.IIBB', '% Adic.', 'Impuesto ad.', 'Cert.Ret.Gan.', 'Cert.Ret.IIBB', 'Fact.M a Ret.'],
+        colNames: ['Acciones', 'IdDetalleOrdenPagoImpuestos', 'IdTipoRetencionGanancia', 'IdIBCondicion', 'IdTipoImpuesto', 'Tipo', 'Categoria', 'Imp.Pag.S/Imp.', 'Imp.Retenido', 'Pagos mes', 'Retenc.Mes',
+                   'Minimo IIBB', 'Alicuota', 'Alic.Conv.', '% Adic.', 'Impuesto ad.', 'Cert.Ret.Gan.', 'Cert.Ret.IIBB', 'Fact.M a Ret.'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPagoImpuestos', index: 'IdDetalleOrdenPagoImpuestos', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdTipoImpuesto', index: 'IdTipoImpuesto', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'Tipo', index: 'Tipo', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdTipoImpuesto', index: 'IdTipoImpuesto', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'Tipo', index: 'Tipo', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'Categoria', index: 'Categoria', width: 200, align: 'left', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImportePagadoSinImpuestos', index: 'ImportePagadoSinImpuestos', width: 100, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImpuestoRetenido', index: 'ImpuestoRetenido', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'ImportePagadoSinImpuestos', index: 'ImportePagadoSinImpuestos', width: 100, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'ImpuestoRetenido', index: 'ImpuestoRetenido', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'PagosMes', index: 'PagosMes', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'RetencionesMes', index: 'RetencionesMes', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'MinimoIIBB', index: 'MinimoIIBB', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'AlicuotaIIBB', index: 'AlicuotaIIBB', width: 60, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'AlicuotaConvenioIIBB', index: 'AlicuotaConvenioIIBB', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'PorcentajeAdicional', index: 'PorcentajeAdicional', width: 50, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImpuestoAdicional', index: 'ImpuestoAdicional', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'NumeroCertificadoRetencionGanancias', index: 'NumeroCertificadoRetencionGanancias', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'NumeroCertificadoRetencionIIBB', index: 'NumeroCertificadoRetencionIIBB', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImporteTotalFacturasMPagadasSujetasARetencion', index: 'ImporteTotalFacturasMPagadasSujetasARetencion', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } }
+                    { name: 'AlicuotaAplicada', index: 'AlicuotaAplicada', width: 60, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'AlicuotaConvenioAplicada', index: 'AlicuotaConvenioAplicada', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'PorcentajeAdicional', index: 'PorcentajeAdicional', width: 50, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'ImpuestoAdicional', index: 'ImpuestoAdicional', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'NumeroCertificadoRetencionGanancias', index: 'NumeroCertificadoRetencionGanancias', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'NumeroCertificadoRetencionIIBB', index: 'NumeroCertificadoRetencionIIBB', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'ImporteTotalFacturasMPagadasSujetasARetencion', index: 'ImporteTotalFacturasMPagadasSujetasARetencion', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' }
         ],
         gridComplete: function () {
             //calculaTotalContable();
@@ -818,8 +692,9 @@ $(function () {
         userDataOnFooter: true,
         caption: '<b>DETALLE IMPUESTOS CALCULADOS</b>',
         cellEdit: true,
-        cellsubmit: 'clientArray'
-    });
+        cellsubmit: 'clientArray',
+        loadonce: true
+});
     jQuery("#ListaImpuestos").jqGrid('navGrid', '#ListaPager4', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 
 
@@ -833,9 +708,37 @@ $(function () {
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPagoRubrosContables', index: 'IdDetalleOrdenPagoRubrosContables', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdRubroContable', index: 'IdRubroContable', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
-                    { name: 'RubroContable', index: 'RubroContable', width: 120, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Importe', index: 'Importe', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } }
+                    { name: 'IdRubroContable', index: 'IdRubroContable', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    {
+                        name: 'RubroContable', index: 'RubroContable', align: 'left', width: 180, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        editoptions: {
+                            dataUrl: ROOT + 'RubroContable/GetRubrosContables',
+                            dataInit: function (elem) {
+                                $(elem).width(170);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaRubrosContables').getGridParam('selrow');
+                                    $('#ListaRubrosContables').jqGrid('setCell', rowid, 'IdRubroContable', this.value);
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'Importe', index: 'Importe', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaRubrosContables').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    }
         ],
         gridComplete: function () {
             calculaTotalRubroContable();
@@ -846,6 +749,9 @@ $(function () {
             lastSelectedId = rowid;
             lastSelectediCol = iCol;
             lastSelectediRow = iRow;
+        },
+        afterSaveCell: function (rowid) {
+            calculaTotalRubroContable();
         },
         pager: $('#ListaPager5'),
         rowNum: 100,
@@ -867,6 +773,20 @@ $(function () {
         cellsubmit: 'clientArray'
     });
     jQuery("#ListaRubrosContables").jqGrid('navGrid', '#ListaPager5', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaRubrosContables").jqGrid('navButtonAdd', '#ListaPager5',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-plus", title: "Agregar rubro contable",
+                                     onClickButton: function () {
+                                         AgregarItemVacio(jQuery("#ListaRubrosContables"));
+                                     },
+                                 });
+    jQuery("#ListaRubrosContables").jqGrid('navButtonAdd', '#ListaPager5',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                     onClickButton: function () {
+                                         EliminarSeleccionados(jQuery("#ListaRubrosContables"));
+                                     },
+                                 });
 
 
     $("#ListaDrag").jqGrid({
@@ -1055,7 +975,7 @@ $(function () {
                             Id = Id2
                             $gridDestino.jqGrid('addRowData', Id, data2, "first");
                         };
-
+                        calculaTotalImputaciones();
                         //ar new_id = 39; //for example
                         //aftersavefunc: function( old_id ) {
 
@@ -1140,6 +1060,321 @@ $(function () {
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
         grid.trigger("reloadGrid", [{ page: 1}]);
     });
+
+    $('#ActualizarDatos').click(function () {
+        $('#ActualizarDatos').attr("disabled", true).val("Espere...");
+        $('html, body').css('cursor', 'wait');
+
+        ActualizarDatosRetenciones();
+
+        var importe = 0, totalganancias = 0, totaliibb = 0, i;
+        var dataIds = $('#ListaImpuestos').jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            var data = $('#ListaImpuestos').jqGrid('getRowData', dataIds[i]);
+            importe = parseFloat(data['ImpuestoRetenido'].replace(",", ".") || 0) || 0;
+            if (data['Tipo'] == "Ganancias") {
+                totalganancias = totalganancias + importe;
+            } else {
+                totaliibb = totaliibb + importe;
+            }
+        }
+        $("#RetencionGanancias").val(totalganancias.toFixed(2));
+        $("#RetencionIBrutos").val(totaliibb.toFixed(2));
+
+        CalcularRetencionSUSS();
+        CalcularRetencionIva();
+
+        ActualizarDatosContables();
+
+        CalcularTotales()
+
+        $('html, body').css('cursor', 'auto');
+        $('#ActualizarDatos').attr("disabled", false).val("Recalcular");
+    });
+
+    function ActualizarDatosRetenciones() {
+        var datos = "";
+        var cabecera = SerializaForm();
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/CalcularRetenciones',
+            dataType: 'json',
+            async: false,
+            data: JSON.stringify(cabecera),
+            success: function (result) {
+                if (result) {
+                    datos = JSON.parse(result);
+                    $("#ListaImpuestos").jqGrid("clearGridData", true)
+                    $("#ListaImpuestos").jqGrid().setGridParam({ data: datos }).trigger("reloadGrid");
+                } else { alert('No se pudo calcular el comprobante.'); }
+            },
+            beforeSend: function () {
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    };
+
+    function CalcularRetencionSUSS() {
+        var datos = "", imp;
+        var cabecera = SerializaForm();
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/CalcularRetencionSUSS',
+            dataType: 'json',
+            async: false,
+            data: JSON.stringify(cabecera),
+            success: function (result) {
+                if (result) {
+                    datos = JSON.parse(result);
+                    imp = parseFloat(datos.replace(",", ".") || 0) || 0;
+                    $("#RetencionSUSS").val(imp.toFixed(2));
+                } else { alert('No se pudo calcular el comprobante.'); }
+            },
+            beforeSend: function () {
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    };
+
+    function CalcularRetencionIva() {
+        var datos = "", imp;
+        var cabecera = SerializaForm();
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/CalcularRetencionIva',
+            dataType: 'json',
+            async: false,
+            data: JSON.stringify(cabecera),
+            success: function (result) {
+                if (result) {
+                    datos = JSON.parse(result);
+                    imp = parseFloat(datos.replace(",", ".") || 0) || 0;
+                    $("#RetencionIVA").val(imp.toFixed(2));
+                } else { alert('No se pudo calcular el comprobante.'); }
+            },
+            beforeSend: function () {
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    };
+
+    function ActualizarDatosContables() {
+        var datos = "";
+        var cabecera = SerializaForm();
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/CalcularAsiento',
+            dataType: 'json',
+            async: false,
+            data: JSON.stringify(cabecera),
+            success: function (result) {
+                if (result) {
+                    datos = JSON.parse(result);
+                    $("#ListaContable").jqGrid("clearGridData", true)
+                    $("#ListaContable").jqGrid().setGridParam({ data: datos }).trigger("reloadGrid");
+                } else { alert('No se pudo calcular el comprobante.'); }
+            },
+            beforeSend: function () {
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    };
+
+    function SerializaForm() {
+        var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
+        var cabecera = $("#formid").serializeObject();
+        cabecera.IdProveedor = $("#IdProveedor").val();
+
+        cabecera.DetalleOrdenesPagoes = [];
+        $grid = $('#Lista');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleOrdenPago'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleOrdenPago":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenPago":"' + $("#IdOrdenPago").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleOrdenesPagoes.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
+        cabecera.DetalleOrdenesPagoValores = [];
+        $grid = $('#ListaValores');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleOrdenPagoValores'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleOrdenPagoValores":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenPago":"' + $("#IdOrdenPago").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleOrdenesPagoValores.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
+        cabecera.DetalleOrdenesPagoImpuestos = [];
+        $grid = $('#ListaImpuestos');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleOrdenPagoImpuestos'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleOrdenPagoImpuestos":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenPago":"' + $("#IdOrdenPago").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleOrdenesPagoImpuestos.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
+        cabecera.DetalleOrdenesPagoCuentas = [];
+        $grid = $('#ListaContable');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleOrdenPagoCuentas'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleOrdenPagoCuentas":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenPago":"' + $("#IdOrdenPago").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleOrdenesPagoCuentas.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
+        return cabecera;
+    }
 });
 
 function pickdates(id) {
@@ -1155,8 +1390,7 @@ function formatNumber(cellvalue, options, rowObject) {
 }
 
 calculaTotalImputaciones = function () {
-    var totalCantidad = $('#Lista').jqGrid('getCol', 'Importe', false, 'sum')
-
+    //var totalCantidad = $('#Lista').jqGrid('getCol', 'Importe', false, 'sum')
     var imp = 0, imp2 = 0;
     var dataIds = $('#Lista').jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
@@ -1165,43 +1399,85 @@ calculaTotalImputaciones = function () {
         imp2 = imp2 + imp;
     }
     imp2 = Math.round((imp2) * 10000) / 10000;
-    $("#Lista").jqGrid('footerData', 'set', {
-        Fecha: 'TOTALES',
-        Importe: imp2.toFixed(2)
-    });
+    mTotalImputaciones = imp2;
+    $("#Lista").jqGrid('footerData', 'set', { Fecha: 'TOTALES', Importe: imp2.toFixed(2) });
+    CalcularTotales()
 };
 
 calculaTotalValores = function () {
-    var total = $('#ListaValores').jqGrid('getCol', 'Importe', false, 'sum')
-    $("#ListaValores").jqGrid('footerData', 'set', {
-        Entidad: 'TOTALES',
-        Importe: total.toFixed(2)
-    });
+    var imp = 0, imp2 = 0;
+    var dataIds = $('#ListaValores').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#ListaValores').jqGrid('getRowData', dataIds[i]);
+        imp = parseFloat(data['Importe'].replace(",", ".") || 0) || 0;
+        imp2 = imp2 + imp;
+    }
+    imp2 = Math.round((imp2) * 10000) / 10000;
+    mTotalValores = imp2;
+    $("#ListaValores").jqGrid('footerData', 'set', { Entidad: 'TOTALES', Importe: imp2.toFixed(2) });
+    CalcularTotales()
 };
 
 calculaTotalContable = function () {
-    var debe = $('#ListaContable').jqGrid('getCol', 'Debe', false, 'sum')
-    var haber = $('#ListaContable').jqGrid('getCol', 'Haber', false, 'sum')
-    $("#ListaContable").jqGrid('footerData', 'set', {
-        Cuenta: 'TOTALES',
-        Debe: debe.toFixed(2),
-        Haber: haber.toFixed(2)
-    });
+    var imp = 0, imp2 = 0, imp3 = 0;
+    var dataIds = $('#ListaContable').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#ListaContable').jqGrid('getRowData', dataIds[i]);
+        imp = parseFloat(data['Debe'].replace(",", ".") || 0) || 0;
+        imp2 = imp2 + imp;
+        imp = parseFloat(data['Haber'].replace(",", ".") || 0) || 0;
+        imp3 = imp3 + imp;
+    }
+    imp2 = Math.round((imp2) * 10000) / 10000;
+    $("#ListaContable").jqGrid('footerData', 'set', { Cuenta: 'TOTALES', Debe: imp2.toFixed(2), Haber: imp3.toFixed(2) });
 };
 
 calculaTotalRubroContable = function () {
-    var total = $('#ListaRubrosContables').jqGrid('getCol', 'Importe', false, 'sum')
-    $("#ListaRubrosContables").jqGrid('footerData', 'set', {
-        RubroContable: 'TOTAL',
-        Importe: total.toFixed(2)
-    });
+    var imp = 0, imp2 = 0;
+    var dataIds = $('#ListaRubrosContables').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#ListaRubrosContables').jqGrid('getRowData', dataIds[i]);
+        imp = parseFloat(data['Importe'].replace(",", ".") || 0) || 0;
+        imp2 = imp2 + imp;
+    }
+    imp2 = Math.round((imp2) * 10000) / 10000;
+    $("#ListaRubrosContables").jqGrid('footerData', 'set', { RubroContable: 'TOTAL', Importe: imp2.toFixed(2) });
 };
 
 function CalcularTotales() {
-    var DECIMALES = 2;
-    var subtotal = $('#Lista').jqGrid('getCol', 'Importe', false, 'sum')
+    if (typeof mTotalImputaciones == "undefined") { mTotalImputaciones = 0; }
+    if (typeof mTotalValores == "undefined") { mTotalValores = 0; }
 
-    $("#Subtotal").val(subtotal.toFixed(DECIMALES));
+    mRetencionGanancias = parseFloat($("#RetencionGanancias").val().replace(",", ".") || 0) || 0;
+    mRetencionIIBB = parseFloat($("#RetencionIBrutos").val().replace(",", ".") || 0) || 0;
+    mRetencionIva = parseFloat($("#RetencionIVA").val().replace(",", ".") || 0) || 0;
+    mRetencionSUSS = parseFloat($("#RetencionSUSS").val().replace(",", ".") || 0) || 0;
+
+    $("#Subtotal").val(mTotalImputaciones.toFixed(2));
+    mTotalDiferenciaBalanceo = mTotalImputaciones - (mTotalValores + mRetencionIva + mRetencionGanancias + mRetencionIIBB + mRetencionSUSS);
+    $("#Diferencia").val(mTotalDiferenciaBalanceo.toFixed(2));
+};
+
+function CalcularImportePagadoSinImpuestos(IdTipoComprobante, IdComprobante, Pagado) {
+    var respuesta;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'OrdenPago/CalcularImportePagadoSinImpuestos',
+        data: { IdTipoComprobante: IdTipoComprobante, IdComprobante: IdComprobante, Pagado: Pagado },
+        dataType: "json",
+        async: false,
+        success: function (result) {
+            if (result) {
+                datos = JSON.parse(result);
+                respuesta = parseFloat(datos.replace(",", ".") || 0) || 0;
+            } else { alert('No se pudo calcular el comprobante.'); }
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+            respuesta = "0";
+        }
+    });
+    return [respuesta];
 };
 
 // Para usar en la edicion de una fila afterSubmit:processAddEdit,
@@ -1389,6 +1665,7 @@ function AgregarCaja(grid) {
                         type: "GET",
                         contentType: "application/json; charset=utf-8",
                         url: ROOT + 'Parametro/Parametros/',
+                        //async: false,
                         dataType: "Json",
                         success: function (data) {
                             var data2 = data[0]
@@ -1411,10 +1688,9 @@ function AgregarCaja(grid) {
 
 function PopupCentrar(grid) {
     var dlgDiv = $("#editmod" + grid[0].id);
-
-    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
-    $("#editmod" + grid[0].id).find('#FechaPosible').width(160);
-    $("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    //$("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
+    //$("#editmod" + grid[0].id).find('#FechaPosible').width(160);
+    //$("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
     $("#sData").attr("class", "btn btn-primary");
     $("#sData").css("color", "white");
     $("#sData").css("margin-right", "20px");
