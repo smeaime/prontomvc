@@ -12,14 +12,13 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleOrdenesPagoRubrosContable
+    public partial class CurvasTalle
     {
-        public int IdDetalleOrdenPagoRubrosContables { get; set; }
-        public Nullable<int> IdOrdenPago { get; set; }
-        public Nullable<int> IdRubroContable { get; set; }
-        public Nullable<decimal> Importe { get; set; }
-    
-        public virtual RubrosContable RubrosContable { get; set; }
-        public virtual OrdenPago OrdenesPago { get; set; }
+        public int IdCurvaTalle { get; set; }
+        public Nullable<int> Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string Curva { get; set; }
+        public string CurvaCodigos { get; set; }
+        public string MostrarCurvaEnInformes { get; set; }
     }
 }

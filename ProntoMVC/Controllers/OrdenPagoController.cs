@@ -18,6 +18,7 @@ using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
+using Newtonsoft.Json;
 
 namespace ProntoMVC.Controllers
 {
@@ -185,7 +186,7 @@ namespace ProntoMVC.Controllers
             ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion");
             ViewBag.IdIBCondicion = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion");
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, 0, -1).Count();
-
+            
             Parametros parametros = db.Parametros.Find(1);
             ViewBag.IdTipoComprobanteCajaEgresos = parametros.IdTipoComprobanteCajaEgresos;
 
@@ -692,7 +693,7 @@ namespace ProntoMVC.Controllers
                             ImporteTotal = a[6],
                             Saldo = a[7],
                             Importe = a[8],
-                            SinImpuestos = (a[9].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[9].NullSafeToString()),
+                            ImportePagadoSinImpuestos = (a[9].NullSafeToString() == "") ? 0 : Convert.ToDecimal(a[9].NullSafeToString()),
                             IvaTotal = a[10],
                             TotalComprobante = a[11],
                             BienesYServicios = a[12],
@@ -739,7 +740,7 @@ namespace ProntoMVC.Controllers
                                 a.ImporteTotal.ToString(),
                                 a.Saldo.ToString(),
                                 a.Importe.ToString(),
-                                Math.Round(a.SinImpuestos, 2).ToString(), 
+                                Math.Round(a.ImportePagadoSinImpuestos, 2).ToString(), 
                                 a.IvaTotal.ToString(), 
                                 a.TotalComprobante.ToString(), 
                                 a.BienesYServicios.ToString(), 
@@ -912,6 +913,8 @@ namespace ProntoMVC.Controllers
                         {
                             IdDetalleOrdenPagoImpuestos = a[0],
                             Tipo = a[2],
+                            IdTipoRetencionGanancia = (a[2].NullSafeToString() == "Ganancias") ? Convert.ToInt32(a[3].NullSafeToString()) : 0,
+                            IdIBCondicion = (a[2].NullSafeToString() == "I.Brutos") ? Convert.ToInt32(a[3].NullSafeToString()) : 0,
                             IdTipoImpuesto = (a[3].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[3].NullSafeToString()),
                             Categoria = a[4],
                             ImportePagadoSinImpuestos = a[5],
@@ -919,8 +922,8 @@ namespace ProntoMVC.Controllers
                             PagosMes = a[7],
                             RetencionesMes = a[8],
                             MinimoIIBB = a[9],
-                            AlicuotaIIBB = a[10],
-                            AlicuotaConvenioIIBB = a[11],
+                            AlicuotaAplicada = a[10],
+                            AlicuotaConvenioAplicada = a[11],
                             PorcentajeATomarSobreBase = a[12],
                             PorcentajeAdicional = a[13],
                             ImpuestoAdicional = a[14],
@@ -941,6 +944,8 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                             string.Empty, 
                             a.IdDetalleOrdenPagoImpuestos.ToString(), 
+                            a.IdTipoRetencionGanancia.NullSafeToString(),
+                            a.IdIBCondicion.NullSafeToString(),
                             a.IdTipoImpuesto.NullSafeToString(),
                             a.Tipo.NullSafeToString(),
                             a.Categoria.NullSafeToString(),
@@ -949,8 +954,8 @@ namespace ProntoMVC.Controllers
                             a.PagosMes.ToString(),
                             a.RetencionesMes.ToString(),
                             a.MinimoIIBB.ToString(),
-                            a.AlicuotaIIBB.ToString(),
-                            a.AlicuotaConvenioIIBB.ToString(),
+                            a.AlicuotaAplicada.ToString(),
+                            a.AlicuotaConvenioAplicada.ToString(),
                             a.PorcentajeAdicional.ToString(),
                             a.ImpuestoAdicional.ToString(),
                             a.NumeroCertificadoRetencionGanancias.ToString(),
@@ -1010,25 +1015,7 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             a.IdDetalleOrdenPago,
-                            //a.IdArticulo,
-                            //a.IdUnidad,
-                            //a.IdDetalleRequerimiento,
-                            //a.NumeroItem,
-                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            //a.Cantidad,
-                            //a.Unidad.Abreviatura,
-                            //a.Articulo.Codigo,
-                            //a.Articulo.Descripcion,
-                            //a.FechaEntrega,
-                            //a.Observaciones,
-                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            //a.Adjunto,
-                            //a.ArchivoAdjunto1,
-                            //a.ArchivoAdjunto2,
-                            //a.ArchivoAdjunto3
                         })
-                //.OrderBy(p => p.NumeroItem)
                         .ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -1053,6 +1040,894 @@ namespace ProntoMVC.Controllers
             if (db != null) db.Dispose();
             base.Dispose(disposing);
         }
-    }
 
+        [HttpPost]
+        public virtual JsonResult CalcularRetenciones(OrdenPago OrdenPago)
+        {
+            List<DetalleOrdenesPagoImpuesto> impuestos = new List<DetalleOrdenesPagoImpuesto>();
+            List<DetalleOrdenesPagoImpuesto> impuestos2 = new List<DetalleOrdenesPagoImpuesto>();
+            DetalleOrdenesPagoImpuesto ri;
+
+            Int32 mIdProveedor = 0;
+            Int32 mIdOrdenPago = 0;
+            Int32 mIdMoneda = 0;
+            Int32 mIdMonedaPesos = 0;
+            Int32 mIdTipoRetencionGanancia = 0;
+            Int32 mIdIBCondicion = 0;
+            Int32 mIBCondicionProveedor = 0;
+            Int32 mIdProvinciaRealIIBB = 0;
+            
+            decimal mImporteComprobantesMParaRetencionGanancias = 0;
+            decimal mPorcentajeRetencionGananciasComprobantesM = 0;
+            decimal mCoeficienteUnificado = 0;
+            decimal mAlicuota = 0;
+            decimal mAlicuotaDirecta = 0;
+            decimal mAlicuotaDirectaCapital = 0;
+            decimal mAlicuotaConvenio = 0;
+            decimal mPorcentajeATomarSobreBase = 0;
+            decimal mPorcentajeAdicional = 0;
+            decimal mImporteTopeMinimo = 0;
+            decimal mBaseIIBB = 0;
+            decimal mImpuestoRetenido = 0;
+            decimal mImpuestoAdicional = 0;
+            decimal mImporte = 0;
+            decimal mAuxD1 = 0;
+            decimal mAuxD2 = 0;
+            decimal[] ganancias_pagosmes = new decimal[100];
+            decimal[] ganancias_retencionesmes = new decimal[100];
+            decimal[] iibb_pagosmes = new decimal[100];
+            decimal[] iibb_retencionesmes = new decimal[100];
+
+            string mGeneraImpuestos = "SI";
+            string mBaseCalculoIIBB = "";
+            string mRegimenEspecialConstruccionIIBB = "";
+            string mLeyendaPorcentajeAdicional = "";
+            string mCodigoProvincia = "";
+            string mAcumulaMensualmente = "";
+            
+            DateTime mFecha = DateTime.Now;
+            DateTime mFechaInicioVigenciaIBDirecto = DateTime.Now;
+            DateTime mFechaFinVigenciaIBDirecto = DateTime.Now;
+            DateTime mFechaInicioVigenciaIBDirectoCapital = DateTime.Now;
+            DateTime mFechaFinVigenciaIBDirectoCapital = DateTime.Now;
+
+            bool mAplicarAlicuotaConvenio = false;
+            bool mAplicarAlicuotaDirecta = false;
+            
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mImporteComprobantesMParaRetencionGanancias = parametros.ImporteComprobantesMParaRetencionGanancias ?? 0;
+            mPorcentajeRetencionGananciasComprobantesM = parametros.PorcentajeRetencionGananciasComprobantesM ?? 0;
+            mIdMonedaPesos = parametros.IdMoneda ?? 0;
+
+            mFecha = OrdenPago.FechaOrdenPago ?? mFecha;
+            mIdOrdenPago = OrdenPago.IdOrdenPago;
+
+            mIdProveedor = OrdenPago.IdProveedor ?? 0;
+            var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
+            if (Proveedores != null)
+            {
+                mCoeficienteUnificado = Proveedores.CoeficienteIIBBUnificado ?? 0;
+                mAlicuotaDirecta = Proveedores.PorcentajeIBDirecto ?? 0;
+                mFechaInicioVigenciaIBDirecto = Proveedores.FechaInicioVigenciaIBDirecto ?? DateTime.MinValue;
+                mFechaFinVigenciaIBDirecto = Proveedores.FechaFinVigenciaIBDirecto ?? DateTime.MinValue;
+                mAlicuotaDirectaCapital = Proveedores.PorcentajeIBDirectoCapital ?? 0;
+                mFechaInicioVigenciaIBDirectoCapital = Proveedores.FechaInicioVigenciaIBDirectoCapital ?? DateTime.MinValue;
+                mFechaFinVigenciaIBDirectoCapital = Proveedores.FechaFinVigenciaIBDirectoCapital ?? DateTime.MinValue;
+                mRegimenEspecialConstruccionIIBB = Proveedores.RegimenEspecialConstruccionIIBB ?? "";
+                mIBCondicionProveedor = Proveedores.IBCondicion ?? 0;
+            };
+
+            mIdMoneda = OrdenPago.IdMoneda ?? mIdMonedaPesos;
+            var Monedas = db.Monedas.Where(p => p.IdMoneda == mIdMoneda).FirstOrDefault();
+            if (Monedas != null) { mGeneraImpuestos = Monedas.GeneraImpuestos ?? "NO"; }
+
+            if (mGeneraImpuestos == "SI")
+            {
+                foreach (var a in OrdenPago.DetalleOrdenesPagoes)
+                {
+                    mImporte = a.ImportePagadoSinImpuestos ?? 0;
+                    mIdTipoRetencionGanancia = a.IdTipoRetencionGanancia ?? 0;
+                    mIdIBCondicion = a.IdIBCondicion ?? 0;
+
+                    if (mIdTipoRetencionGanancia > 0)
+                    {
+                        ri = impuestos.Find(p => p.IdTipoRetencionGanancia == mIdTipoRetencionGanancia);
+                        if (ri != null)
+                        {
+                            ri.ImportePagado += mImporte;
+                            impuestos.Remove(ri);
+                        }
+                        else
+                        {
+                            ri = new DetalleOrdenesPagoImpuesto();
+                            ri.IdTipoRetencionGanancia = mIdTipoRetencionGanancia;
+                            ri.ImportePagado = mImporte;
+                        }
+                        ri.TipoImpuesto = "Ganancias";
+                        impuestos.Add(ri);
+                    };
+                    if (mIdIBCondicion > 0)
+                    {
+                        var IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == mIdIBCondicion).FirstOrDefault();
+                        if (IBCondiciones != null) { mBaseCalculoIIBB = IBCondiciones.BaseCalculo ?? "SIN IMPUESTOS"; }
+                        if (mBaseCalculoIIBB != "SIN IMPUESTOS") { mImporte = a.Importe ?? 0; }
+                        ri = impuestos.Find(p => p.IdIBCondicion == mIdIBCondicion);
+                        if (ri != null)
+                        {
+                            ri.ImportePagado += mImporte;
+                            impuestos.Remove(ri);
+                        }
+                        else
+                        {
+                            ri = new DetalleOrdenesPagoImpuesto();
+                            ri.IdIBCondicion = mIdIBCondicion;
+                            ri.ImportePagado = mImporte;
+                        }
+                        ri.TipoImpuesto = "I.Brutos";
+                        impuestos.Add(ri);
+                    };
+                };
+                foreach (var a in impuestos)
+                {
+                    mImporte = a.ImportePagado ?? 0;
+                    mIdTipoRetencionGanancia = a.IdTipoRetencionGanancia ?? 0;
+                    mIdIBCondicion = a.IdIBCondicion ?? 0;
+
+                    if (mIdTipoRetencionGanancia > 0)
+                    {
+                        mAuxD1 = 0;
+                        var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Ganancias_TX_ImpuestoPorIdTipoRetencionGanancia", mIdProveedor, mFecha, mIdTipoRetencionGanancia, mImporte, mIdOrdenPago).AsEnumerable().FirstOrDefault();
+                        if (dt != null)
+                        {
+                            mAuxD1 = (decimal)dt[0];
+                            ganancias_pagosmes[mIdTipoRetencionGanancia] = (decimal)dt[1];
+                            ganancias_retencionesmes[mIdTipoRetencionGanancia] = (decimal)dt[2];
+                        }
+                        mAuxD2 = (a.ImporteTotalFacturasMPagadasSujetasARetencion ?? 0);
+                        if (mAuxD2 != 0) { mAuxD1 = mAuxD1 + decimal.Round((mAuxD2 * mPorcentajeRetencionGananciasComprobantesM / 100),2); }
+                        a.ImpuestoRetenido = mAuxD1;
+                    }
+
+                    if (mIdIBCondicion > 0)
+                    {
+                        mImpuestoRetenido = 0;
+                        mAplicarAlicuotaConvenio = false;
+                        mAplicarAlicuotaDirecta = false;
+
+                        var IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == mIdIBCondicion).FirstOrDefault();
+                        if (IBCondiciones != null)
+                        {
+                            mPorcentajeATomarSobreBase = IBCondiciones.PorcentajeATomarSobreBase ?? 0;
+                            mPorcentajeAdicional = IBCondiciones.PorcentajeAdicional ?? 0;
+                            mLeyendaPorcentajeAdicional = IBCondiciones.LeyendaPorcentajeAdicional ?? "";
+                            mIdProvinciaRealIIBB = IBCondiciones.IdProvinciaReal ?? 0;
+                            mAlicuota = IBCondiciones.Alicuota ?? 0;
+                            mAcumulaMensualmente = IBCondiciones.AcumulaMensualmente ?? "";
+                            mImporteTopeMinimo = IBCondiciones.ImporteTopeMinimo ?? 0;
+                        }
+
+                        if (mIBCondicionProveedor == 2)
+                        {
+                            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetProveedoresIB_TX_PorIdProveedorIdIBCondicion", mIdProveedor, mIBCondicionProveedor).AsEnumerable().FirstOrDefault();
+                            if (dt != null)
+                            {
+                                mAlicuotaConvenio = (decimal)dt[3];
+                                mAplicarAlicuotaConvenio = true;
+                            }
+                        }
+                        
+                        var Provincias = db.Provincias.Where(p => p.IdProvincia == mIdProvinciaRealIIBB).FirstOrDefault();
+                        if (Provincias != null) { mCodigoProvincia = Provincias.InformacionAuxiliar ?? ""; }
+
+                        if (mCodigoProvincia=="902" && mFecha >= mFechaInicioVigenciaIBDirecto && mFecha <= mFechaFinVigenciaIBDirecto && mRegimenEspecialConstruccionIIBB != "SI" ) {
+                            mAuxD1 = mAlicuotaDirecta;
+                            mAplicarAlicuotaDirecta = true;
+                        }
+                        else {
+                            if (mCodigoProvincia == "901" && mFecha >= mFechaInicioVigenciaIBDirectoCapital && mFecha <= mFechaFinVigenciaIBDirectoCapital && mRegimenEspecialConstruccionIIBB != "SI")
+                            {
+                                mAuxD1 = mAlicuotaDirectaCapital;
+                                mAplicarAlicuotaDirecta = true;
+                            }
+                            else { mAuxD1 = mAlicuota; }
+                        }
+                        a.AlicuotaAplicada = mAuxD1;
+                        a.AlicuotaConvenioAplicada = mAlicuotaConvenio;
+                        a.PorcentajeATomarSobreBase = 100;
+                        mAuxD1 = 0;
+                        mAuxD2 = 0;
+                        if (mAcumulaMensualmente == "SI")
+                        {
+                            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "IBCondiciones_TX_AcumuladosPorIdProveedorIdIBCondicion", mIdProveedor, mFecha, mIdIBCondicion, mIdOrdenPago).AsEnumerable().FirstOrDefault();
+                            if (dt != null)
+                            {
+                                mAuxD1 = (decimal)dt[0];
+                                mAuxD2 = (decimal)dt[1];
+                            }
+                            iibb_pagosmes[mIdIBCondicion] = mAuxD1;
+                            iibb_retencionesmes[mIdIBCondicion] = mAuxD2;
+                        }
+                        if (mImporte > mImporteTopeMinimo)
+                        {
+                            mBaseIIBB = mImporte + (mAuxD1 * mPorcentajeATomarSobreBase / 100);
+                            if (mCoeficienteUnificado > 0 && mCoeficienteUnificado <= 100) { mBaseIIBB = mBaseIIBB * mCoeficienteUnificado / 100; }
+                            if (mAplicarAlicuotaConvenio && mAplicarAlicuotaDirecta == false) { mImpuestoRetenido = decimal.Round(mBaseIIBB * mAlicuotaConvenio / 100, 2); }
+                            else { mImpuestoRetenido = decimal.Round(mBaseIIBB * mAlicuota / 100, 2); }
+                            mImpuestoAdicional = decimal.Round(mImpuestoRetenido * mPorcentajeAdicional / 100, 2);
+                            mImpuestoRetenido += mImpuestoAdicional;
+                            mImpuestoRetenido -= mAuxD2;
+                            if (mImpuestoRetenido < 0) { mImpuestoRetenido = 0; }
+                        }
+                        a.ImpuestoRetenido = mImpuestoRetenido;
+                        if (mCoeficienteUnificado > 0 && mCoeficienteUnificado <= 100) { mAuxD1 = mCoeficienteUnificado; }
+                        else { mAuxD1 = mPorcentajeATomarSobreBase; }
+                        a.PorcentajeATomarSobreBase = mAuxD1;
+                        a.PorcentajeAdicional = mPorcentajeAdicional;
+                        a.ImpuestoAdicional = mImpuestoAdicional;
+                        a.LeyendaPorcentajeAdicional = mLeyendaPorcentajeAdicional;
+                        if (mAplicarAlicuotaConvenio && mAplicarAlicuotaDirecta == false) {
+                            a.AlicuotaAplicada = 0;
+                            a.AlicuotaConvenioAplicada = mAlicuotaConvenio;
+                        }
+                        else
+                        {
+                            a.AlicuotaAplicada = mAlicuota;
+                            a.AlicuotaConvenioAplicada = 0;
+                        }
+                    };
+                    impuestos2.Add(a);
+                }
+            }
+
+            var data = (from a in impuestos2.ToList()
+                        from b in db.TiposRetencionGanancias.Where(o => o.IdTipoRetencionGanancia == a.IdTipoRetencionGanancia).DefaultIfEmpty()
+                        from c in db.IBCondiciones.Where(p => p.IdIBCondicion == a.IdIBCondicion).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleOrdenPagoImpuestos,
+                            a.IdTipoRetencionGanancia,
+                            a.IdIBCondicion,
+                            IdTipoImpuesto = (a.IdTipoRetencionGanancia != null ? a.IdTipoRetencionGanancia : (a.IdIBCondicion != null ? a.IdIBCondicion : 0)),
+                            Tipo = a.TipoImpuesto,
+                            Categoria = (b != null ? b.Descripcion : (c != null ? c.Descripcion : "")),
+                            ImportePagadoSinImpuestos = a.ImportePagado,
+                            a.ImpuestoRetenido,
+                            PagosMes = ganancias_pagosmes[(a.IdTipoRetencionGanancia ?? 0)],
+                            RetencionesMes = ganancias_retencionesmes[(a.IdTipoRetencionGanancia ?? 0)],
+                            MinimoIIBB = c != null ? c.ImporteTopeMinimo : 0,
+                            a.AlicuotaAplicada,
+                            a.AlicuotaConvenioAplicada,
+                            a.PorcentajeAdicional,
+                            a.ImpuestoAdicional,
+                            a.NumeroCertificadoRetencionGanancias,
+                            a.NumeroCertificadoRetencionIIBB,
+                            a.ImporteTotalFacturasMPagadasSujetasARetencion
+                        }).OrderBy(x => x.Categoria).ToList();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult CalcularRetencionSUSS(OrdenPago OrdenPago)
+        {
+            Int32 mIdProveedor = 0;
+            Int32 mIdOrdenPago = 0;
+            Int32 mIdMoneda = 0;
+            Int32 mIdMonedaPesos = 0;
+            Int32 mIdImpuestoDirectoSUSS = 0;
+
+            decimal mRetencionSUSS = 0;
+            decimal mRetencionSUSSIndividual = 0;
+            decimal mPorcentajeRetencionSUSS = 0;
+            decimal mPorcentajeRetencionSUSS1 = 0;
+            decimal mImporteMinimoBaseRetencionSUSS = 0;
+            decimal mTopeAnualSUSS = 0;
+            decimal mTotalGravado = 0;
+            decimal mImporteAcumulado = 0;
+            decimal mRetenidoAño = 0;
+            decimal mBaseOperacion = 0;
+            decimal mBaseCalculoSUSS = 0;
+
+            string mAgenteRetencionSUSS = "NO";
+            string mRetenerSUSSAProveedor = "NO";
+
+            DateTime mFecha = DateTime.Now;
+
+            bool mProcesarSUSS = false;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mIdMonedaPesos = parametros.IdMoneda ?? 0;
+            mAgenteRetencionSUSS = parametros.AgenteRetencionSUSS ?? "NO";
+            mPorcentajeRetencionSUSS = parametros.PorcentajeRetencionSUSS ?? 0;
+
+            mFecha = OrdenPago.FechaOrdenPago ?? mFecha;
+            mIdOrdenPago = OrdenPago.IdOrdenPago;
+            mIdProveedor = OrdenPago.IdProveedor ?? 0;
+            mIdMoneda = OrdenPago.IdMoneda ?? mIdMonedaPesos;
+
+            if (mAgenteRetencionSUSS == "SI" && mIdProveedor > 0)
+            {
+                //If mvarSUSSFechaCaducidadExencion < Date And Me.Visible And IsNumeric(dcfields(0).BoundText) And Option1.Value Then 'And mvarAgenteRetencionIVA = "SI" Then
+                //MsgBox "El proveedor tiene la fecha de excencion al SUSS vencida," & vbCrLf & "se requerira la categoria para realizar la retencion", vbExclamation
+
+                var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
+                if (Proveedores != null)
+                {
+                    mRetenerSUSSAProveedor = Proveedores.RetenerSUSS ?? "NO";
+                    mIdImpuestoDirectoSUSS = Proveedores.IdImpuestoDirectoSUSS ?? 0;
+                }
+
+                if (mRetenerSUSSAProveedor == "SI")
+                {
+                    mPorcentajeRetencionSUSS1 = -1;
+                    if (mIdImpuestoDirectoSUSS > 0)
+                    {
+                        var ImpuestosDirectos = db.ImpuestosDirectos.Where(p => p.IdImpuestoDirecto == mIdImpuestoDirectoSUSS).FirstOrDefault();
+                        if (ImpuestosDirectos != null)
+                        {
+                            mPorcentajeRetencionSUSS1 = ImpuestosDirectos.Tasa ?? 0;
+                            mImporteMinimoBaseRetencionSUSS = ImpuestosDirectos.BaseMinima ?? 0;
+                            mTopeAnualSUSS = ImpuestosDirectos.TopeAnual ?? 0;
+                        }
+                    }
+                    foreach (var a in OrdenPago.DetalleOrdenesPagoes)
+                    { mTotalGravado += a.ImportePagadoSinImpuestos ?? 0; };
+                    if (mTopeAnualSUSS > 0)
+                    {
+                        var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TX_PagosAcumuladoAnual", mIdProveedor, mFecha, mIdOrdenPago, mIdImpuestoDirectoSUSS).AsEnumerable().FirstOrDefault();
+                        if (dt != null)
+                        {
+                            mImporteAcumulado = (decimal)dt[0];
+                            mRetenidoAño = (decimal)dt[1];
+                        }
+                    }
+                    if (mTotalGravado >= mImporteMinimoBaseRetencionSUSS)
+                    {
+                        foreach (var a in OrdenPago.DetalleOrdenesPagoes)
+                        {
+                            mRetencionSUSSIndividual = 0;
+                            mBaseOperacion = a.ImportePagadoSinImpuestos ?? 0;
+                            if (mBaseOperacion != 0)
+                            {
+                                mBaseCalculoSUSS += mBaseOperacion;
+                                if (mTopeAnualSUSS > 0 && mImporteAcumulado + mBaseCalculoSUSS >= mTopeAnualSUSS) { mProcesarSUSS = true; }
+                                if (mPorcentajeRetencionSUSS1 == -1) { mRetencionSUSSIndividual = decimal.Round(mBaseOperacion * mPorcentajeRetencionSUSS / 100, 2); }
+                                else { mRetencionSUSSIndividual = decimal.Round(mBaseOperacion * mPorcentajeRetencionSUSS1 / 100, 2); }
+                            }
+                            mRetencionSUSS += mRetencionSUSSIndividual;
+                        }
+                        if (mTopeAnualSUSS > 0)
+                        {
+                            if (mProcesarSUSS)
+                            {
+                                if (mPorcentajeRetencionSUSS1 == -1) { mRetencionSUSS += decimal.Round(mImporteAcumulado * mPorcentajeRetencionSUSS / 100, 2); }
+                                else { mRetencionSUSS += decimal.Round(mImporteAcumulado * mPorcentajeRetencionSUSS1 / 100, 2); }
+                                mRetencionSUSS -= mRetenidoAño;
+                                if (mRetencionSUSS < 0) { mRetencionSUSS = 0; }
+                            }
+                            else
+                            {
+                                mRetencionSUSS = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            var data = mRetencionSUSS.ToString();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult CalcularRetencionIva(OrdenPago OrdenPago)
+        {
+            Int32 mIdProveedor = 0;
+            Int32 mIdOrdenPago = 0;
+            Int32 mNumeroOrdenPago = 0;
+            Int32 mIdMoneda = 0;
+            Int32 mIdMonedaPesos = 0;
+            Int32 mTipoIVA = 0;
+            Int32 mIdImputacion = 0;
+            Int32 mIdTipoComprobante = 0;
+            Int32 mIdComprobante = 0;
+            Int32 mNumeroOrdenPagoRetencionIVA = 0;
+            Int32 mIdDetalleOrdenPagoRetencionIVAAplicada = 0;
+            Int32 mIdOrdenPagoRetencionIva = 0;
+            Int32 mIdActividad = 0;
+            Int32 mActividadPrincipalGrupo = 0;
+            Int32 mIdImpuestoDirecto = 0;
+            
+            decimal mRetencionIva = 0;
+            decimal mRetencionIVAIndividual = 0;
+            decimal mRetencionIVAComprobantesM = 0;
+            decimal mBienesUltimoAño = 0;
+            decimal mServiciosUltimoAño = 0;
+            decimal mImporteComprobantesMParaRetencionIVA = 0;
+            decimal mPorcentajeRetencionIVA = 0;
+            decimal mPorcentajeRetencionIVAComprobantesM = 0;
+            decimal mTopeMinimoRetencionIVA = 0;
+            decimal mTopeMinimoRetencionIVAServicios = 0;
+            decimal mPorcentajeBaseRetencionIVABienes = 0;
+            decimal mPorcentajeBaseRetencionIVAServicios = 0;
+            decimal mImporteMinimoRetencionIVA = 0;
+            decimal mImporteMinimoRetencionIVAServicios = 0;
+            decimal mTotalComprobante = 0;
+            decimal mTotalIva1 = 0;
+            decimal mImportePagadoSinImpuestos = 0;
+            decimal mBase = 0;
+            decimal mImporteTotalMinimoAplicacionRetencionIVA = 0;
+            decimal mExceptuadoRetencionIVA = 0;
+            decimal mIvaPorcentajeExencion = 0;
+            decimal mTopeMonotributoAnual_Bienes = 0;
+            decimal mTopeMonotributoAnual_Servicios = 0;
+            decimal mPorcentajeRetencionIVAMonotributistas = 0;
+            decimal mAuxD1 = 0;
+
+            DateTime mFecha = DateTime.Now;
+            DateTime mIvaFechaInicioExencion = DateTime.MinValue;
+            DateTime mIvaFechaCaducidadExencion = DateTime.MinValue;
+
+            string mLetra = "";
+            string mImputacionesOrdenPago = "";
+            string mAgenteRetencionIVA = "";
+            string mBienesOServicios = "B";
+            string mCodigoSituacionRetencionIVA = "0";
+            string mIvaExencionRetencion = "";
+
+            bool mActividadComercializacionGranos = false;
+
+            //If mvarCodigoSituacionRetencionIVA = 3 And mvarTipoIVA = 1 Then
+            //   MsgBox "El codigo de situacion del proveedor para retencion IVA es 3," & vbCrLf & "en consecuencia no puede ser registrado este comprobante", vbExclamation
+            //   GoTo Salida
+            //End If
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var Empresas = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
+            if ((Empresas.ActividadComercializacionGranos ?? "") == "SI") { mActividadComercializacionGranos = true; }
+            
+            var Parametros2 = db.Parametros2.Where(p => p.Campo == "TopeMonotributoAnual_Bienes").FirstOrDefault();
+            if (Parametros2 != null) { mTopeMonotributoAnual_Bienes = Convert.ToDecimal(Parametros2.Valor ?? "0"); }
+            Parametros2 = db.Parametros2.Where(p => p.Campo == "TopeMonotributoAnual_Servicios").FirstOrDefault();
+            if (Parametros2 != null) { mTopeMonotributoAnual_Servicios = Convert.ToDecimal(Parametros2.Valor ?? "0"); }
+            Parametros2 = db.Parametros2.Where(p => p.Campo == "PorcentajeRetencionIVAMonotributistas").FirstOrDefault();
+            if (Parametros2 != null) { mPorcentajeRetencionIVAMonotributistas = Convert.ToDecimal(Parametros2.Valor ?? "0"); }
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mIdMonedaPesos = parametros.IdMoneda ?? 0;
+            mImporteComprobantesMParaRetencionIVA = parametros.ImporteComprobantesMParaRetencionIVA ?? 0;
+            mPorcentajeRetencionIVAComprobantesM = parametros.PorcentajeRetencionIVAComprobantesM ?? 0;
+            mTopeMinimoRetencionIVA = parametros.TopeMinimoRetencionIVA ?? 0;
+            mTopeMinimoRetencionIVAServicios = parametros.TopeMinimoRetencionIVAServicios ?? 0;
+            mAgenteRetencionIVA = parametros.AgenteRetencionIVA ?? "NO";
+            mImporteTotalMinimoAplicacionRetencionIVA = parametros.ImporteTotalMinimoAplicacionRetencionIVA ?? 0;
+            mPorcentajeBaseRetencionIVABienes = parametros.PorcentajeBaseRetencionIVABienes ?? 0;
+            mPorcentajeBaseRetencionIVAServicios = parametros.PorcentajeBaseRetencionIVAServicios ?? 0;
+            mImporteMinimoRetencionIVA = parametros.ImporteMinimoRetencionIVA ?? 0;
+            mImporteMinimoRetencionIVAServicios = parametros.ImporteMinimoRetencionIVAServicios ?? 0;
+
+            mFecha = OrdenPago.FechaOrdenPago ?? mFecha;
+            mIdOrdenPago = OrdenPago.IdOrdenPago;
+            mIdProveedor = OrdenPago.IdProveedor ?? 0;
+            mNumeroOrdenPago = OrdenPago.NumeroOrdenPago ?? 0;
+            mIdMoneda = OrdenPago.IdMoneda ?? mIdMonedaPesos;
+
+            if (mIdOrdenPago <= 0)
+            {
+                var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
+                if (Proveedores != null)
+                {
+                    mTipoIVA = Proveedores.IdCodigoIva ?? 0;
+                    mIdActividad = Proveedores.IdActividad ?? 0;
+                    mCodigoSituacionRetencionIVA = Proveedores.CodigoSituacionRetencionIVA ?? "0";
+                    mIvaExencionRetencion = Proveedores.IvaExencionRetencion ?? "";
+                    mIvaFechaInicioExencion = Proveedores.IvaFechaInicioExencion ?? DateTime.MinValue;
+                    mIvaFechaCaducidadExencion = Proveedores.IvaFechaCaducidadExencion ?? DateTime.MinValue;
+                    mIvaPorcentajeExencion = Proveedores.IvaPorcentajeExencion ?? 0;
+                    if (mIvaExencionRetencion == "SI") { mExceptuadoRetencionIVA = 100; }
+                    else { if (mIvaFechaInicioExencion <= mFecha) { if (mIvaFechaCaducidadExencion >= mFecha) { mExceptuadoRetencionIVA = mIvaPorcentajeExencion; } } }
+
+                }
+
+                if (mIdActividad > 0)
+                {
+                    var Actividades_Proveedores = db.Actividades_Proveedores.Where(p => p.IdActividad == mIdActividad).FirstOrDefault();
+                    if (Actividades_Proveedores != null) { mActividadPrincipalGrupo = Actividades_Proveedores.Agrupacion1 ?? 0; }
+                }
+
+                if (mTipoIVA == 6)
+                {
+                    var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "ComprobantesProveedores_TX_TotalBSUltimoAño", mIdProveedor, mFecha, mTipoIVA).AsEnumerable().FirstOrDefault();
+                    if (dt != null)
+                    {
+                        mBienesUltimoAño = (decimal)dt[0];
+                        mServiciosUltimoAño = (decimal)dt[1];
+                    }
+                }
+                foreach (var a in OrdenPago.DetalleOrdenesPagoes)
+                {
+                    mRetencionIVAIndividual = 0;
+                    mNumeroOrdenPagoRetencionIVA = 0;
+                    mLetra = "";
+                    mTotalComprobante = 0;
+                    mTotalIva1 = 0;
+                    mAuxD1 = 0;
+
+                    mIdImputacion = a.IdImputacion ?? 0;
+                    mImportePagadoSinImpuestos = a.ImportePagadoSinImpuestos ?? 0;
+                    
+
+                    var CuentasCorrientesAcreedores = db.CuentasCorrientesAcreedores.Where(p => p.IdCtaCte == mIdImputacion).FirstOrDefault();
+                    if (CuentasCorrientesAcreedores != null)
+                    {
+                        mIdTipoComprobante = CuentasCorrientesAcreedores.IdTipoComp ?? 0;
+                        mIdComprobante = CuentasCorrientesAcreedores.IdComprobante ?? 0;
+                    }
+
+                    if (mIdTipoComprobante != 17 && mIdTipoComprobante != 16)
+                    {
+                        var ComprobantesProveedor = db.ComprobantesProveedor.Where(p => p.IdComprobanteProveedor == mIdComprobante && p.IdTipoComprobante == mIdTipoComprobante).FirstOrDefault();
+                        if (ComprobantesProveedor != null)
+                        {
+                            mIdDetalleOrdenPagoRetencionIVAAplicada = ComprobantesProveedor.IdDetalleOrdenPagoRetencionIVAAplicada ?? 0;
+                            mIdOrdenPagoRetencionIva = ComprobantesProveedor.IdOrdenPagoRetencionIva ?? 0;
+                            mLetra = ComprobantesProveedor.Letra ?? "";
+                            mTotalComprobante = ComprobantesProveedor.TotalComprobante ?? 0;
+                            mTotalIva1 = ComprobantesProveedor.TotalIva1 ?? 0;
+                            mIdImpuestoDirecto = ComprobantesProveedor.IdImpuestoDirecto ?? 0;
+                            mBienesOServicios = ComprobantesProveedor.BienesOServicios ?? (Proveedores.BienesOServicios ?? "B");
+                        }
+
+                        if (mIdImpuestoDirecto > 0)
+                        {
+                            var ImpuestosDirectos = db.ImpuestosDirectos.Where(p => p.IdImpuestoDirecto == mIdImpuestoDirecto).FirstOrDefault();
+                            if (ImpuestosDirectos != null) { mAuxD1 = ImpuestosDirectos.Tasa ?? 0; }
+                        }
+                    }
+                    if (mIdDetalleOrdenPagoRetencionIVAAplicada != 0)
+                    {
+                        var DetalleOrdenesPagoes = db.DetalleOrdenesPagoes.Where(p => p.IdDetalleOrdenPago == mIdDetalleOrdenPagoRetencionIVAAplicada).FirstOrDefault();
+                        if (DetalleOrdenesPagoes != null) { mNumeroOrdenPagoRetencionIVA = DetalleOrdenesPagoes.OrdenesPago.NumeroOrdenPago ?? 0; }
+                    }
+                    if (mIdOrdenPagoRetencionIva != 0 && mNumeroOrdenPagoRetencionIVA == 0)
+                    {
+                        var OrdenesPago = db.OrdenesPago.Where(p => p.IdOrdenPago == mIdOrdenPagoRetencionIva).FirstOrDefault();
+                        if (OrdenesPago != null) { mNumeroOrdenPagoRetencionIVA = OrdenesPago.NumeroOrdenPago ?? 0; }
+                    }
+
+                    if (mNumeroOrdenPagoRetencionIVA == 0 || mNumeroOrdenPago==mNumeroOrdenPagoRetencionIVA)
+                    {
+                        mBase = mTotalIva1;
+                        if (mLetra == "M")
+                        {
+                            if (mTotalComprobante - mTotalIva1 >= mImporteComprobantesMParaRetencionIVA)
+                            {
+                                mRetencionIVAIndividual = decimal.Round(mBase * mPorcentajeRetencionIVAComprobantesM / 100, 2);
+                                mRetencionIVAComprobantesM += mRetencionIVAIndividual;
+                            }
+                        }
+                        else
+                        {
+                            if (mTipoIVA == 1 && mActividadPrincipalGrupo == 1)
+                            { if (mIdImputacion != 0) { mImputacionesOrdenPago = mImputacionesOrdenPago + '(' + mIdImputacion.ToString() + ')'; } }
+                            else
+                            {
+                                if (mRetencionIVAIndividual == 0 && mAgenteRetencionIVA == "SI")
+                                {
+                                    if (mActividadComercializacionGranos)
+                                    {
+                                        if (mTipoIVA == 1)
+                                        {
+                                            mPorcentajeRetencionIVA = mAuxD1;
+                                            mRetencionIVAIndividual = decimal.Round(mImportePagadoSinImpuestos * mPorcentajeRetencionIVA / 100, 2);
+                                        }
+                                    }
+                                    if (mRetencionIVAIndividual == 0 && mTotalComprobante > mImporteTotalMinimoAplicacionRetencionIVA)
+                                    {
+                                        if (mBienesOServicios == "B")
+                                        {
+                                            if (mBase > mTopeMinimoRetencionIVA)
+                                            {
+                                                mBase = mBase * mPorcentajeBaseRetencionIVABienes / 100;
+                                                if (mCodigoSituacionRetencionIVA == "2") { mRetencionIVAIndividual = mBase; }
+                                                if (mExceptuadoRetencionIVA != 0) { 
+                                                    mRetencionIVAIndividual = decimal.Round(mBase * (100 - mExceptuadoRetencionIVA) / 100, 2); 
+                                                }
+                                                else {
+                                                    mRetencionIVAIndividual = mBase;
+                                                    if (mRetencionIVAIndividual < mImporteMinimoRetencionIVA) { mRetencionIVAIndividual = 0; }
+                                                }
+                                                if (mTipoIVA != 1) { mRetencionIVAIndividual = 0; }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (mBienesOServicios == "S")
+                                            {
+                                                if (mBase > mTopeMinimoRetencionIVAServicios)
+                                                {
+                                                    mBase = mBase * mPorcentajeBaseRetencionIVAServicios / 100;
+                                                    if (mCodigoSituacionRetencionIVA == "2") { mRetencionIVAIndividual = mBase; }
+                                                    if (mExceptuadoRetencionIVA != 0)
+                                                    {
+                                                        mRetencionIVAIndividual = decimal.Round(mBase * (100 - mExceptuadoRetencionIVA) / 100, 2);
+                                                    }
+                                                    else
+                                                    {
+                                                        mRetencionIVAIndividual = mBase;
+                                                        if (mRetencionIVAIndividual < mImporteMinimoRetencionIVAServicios) { mRetencionIVAIndividual = 0; }
+                                                    }
+                                                    if (mTipoIVA != 1) { mRetencionIVAIndividual = 0; }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                mBase = 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (mTipoIVA == 6)
+                        {
+                            if (mBienesUltimoAño > mTopeMonotributoAnual_Bienes || mServiciosUltimoAño > mTopeMonotributoAnual_Servicios)
+                            {
+                                mBase = mImportePagadoSinImpuestos;
+                                mRetencionIVAIndividual = decimal.Round(mBase * mPorcentajeRetencionIVAMonotributistas / 100, 2);
+                            }
+                        }
+                    }
+                    mRetencionIva += mRetencionIVAIndividual;
+                }
+                if (mImputacionesOrdenPago.Length > 0)
+                {
+                    var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TX_ImpuestosPorGrupo", mIdOrdenPago, mIdProveedor, mImputacionesOrdenPago);
+                    IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+                    if (Entidad.Count() > 0) { mRetencionIva = 0; }
+                    foreach (DataRow dr in Entidad)
+                    {
+                        mRetencionIVAIndividual = Convert.ToDecimal(dr["ImporteRetencionIva"]);
+                        mRetencionIva += mRetencionIVAIndividual;
+                    }
+                }
+            }
+            else
+            {
+                mRetencionIva = OrdenPago.RetencionIVA ?? 0;
+            }
+            
+            var data = mRetencionIva.ToString();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public virtual JsonResult CalcularAsiento(OrdenPago OrdenPago)
+        {
+            List<DetalleOrdenesPagoCuenta> asiento = new List<DetalleOrdenesPagoCuenta>();
+            DetalleOrdenesPagoCuenta rc;
+
+            Int32 IdProveedor = 0;
+            Int32 mIdCuenta = 0;
+            Int32 mIdCuentaRetencionGanancias = 0;
+            Int32 mIdCuentaRetencionIBrutos = 0;
+            Int32 mIdCuentaRetencionIVA = 0;
+            Int32 mIdCuentaRetencionIVAComprobantesM = 0;
+            Int32 mIdCuentaRetencionSUSS = 0;
+            Int32 mIdImpuestoDirectoSUSS = 0;
+            Int32 mIdIBCondicionPorDefecto = 0;
+            Int32 mIdAux = 0;
+            Int32 mIdCuentaCaja = 0;
+            Int32 mIdCuentaValores = 0;
+            Int32 mIdCuentaValores1 = 0;
+            Int32 mIdIBCondicion = 0;
+            
+            decimal mDebeHaber = 0;
+            decimal mRetencionGanancias = 0;
+            decimal mRetencionIVA = 0;
+            decimal mRetencionIVAComprobantesM = 0;
+            decimal mImporte = 0;
+            decimal mRetencionIBrutos = 0;
+            decimal mRetencionSUSS = 0;
+            decimal mTotalValores = 0;
+
+            string mChequeraPagoDiferido = "";
+            string mActivarCircuitoChequesDiferidos = "";
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mIdCuentaRetencionGanancias = parametros.IdCuentaRetencionGanancias ?? 0;
+            mIdCuentaRetencionIBrutos = parametros.IdCuentaRetencionIBrutos ?? 0;
+            mIdCuentaRetencionIVA = parametros.IdCuentaRetencionIva ?? 0;
+            mIdCuentaRetencionIVAComprobantesM = parametros.IdCuentaRetencionIvaComprobantesM ?? 0;
+            mIdCuentaRetencionSUSS = parametros.IdCuentaRetencionSUSS ?? 0;
+            mIdCuentaCaja = parametros.IdCuentaCaja ?? 0;
+            mActivarCircuitoChequesDiferidos = parametros.ActivarCircuitoChequesDiferidos ?? "NO";
+
+            IdProveedor = OrdenPago.IdProveedor ?? 0;
+            var proveedor = db.Proveedores.Where(p => p.IdProveedor == IdProveedor).FirstOrDefault();
+            if (proveedor != null)
+            {
+                mIdImpuestoDirectoSUSS = proveedor.IdImpuestoDirectoSUSS ?? 0;
+                if (mIdImpuestoDirectoSUSS > 0)
+                {
+                    var ImpuestosDirectos = db.ImpuestosDirectos.Where(p => p.IdImpuestoDirecto == mIdImpuestoDirectoSUSS).FirstOrDefault();
+                    mIdAux = ImpuestosDirectos.IdCuenta ?? 0;
+                    if (mIdAux > 0) { mIdCuentaRetencionSUSS = mIdAux; }
+                }
+                mIdIBCondicionPorDefecto = proveedor.IdIBCondicionPorDefecto ?? 0;
+                if (mIdIBCondicionPorDefecto > 0)
+                {
+                    var IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == mIdIBCondicionPorDefecto).FirstOrDefault();
+                    mIdAux = IBCondiciones.Provincia.IdCuentaRetencionIBrutos ?? 0;
+                    if (mIdAux > 0) { mIdCuentaRetencionIBrutos = mIdAux; }
+                }
+            };
+
+            mRetencionGanancias = OrdenPago.RetencionGanancias ?? 0;
+            if (mRetencionGanancias != 0)
+            {
+                rc = new DetalleOrdenesPagoCuenta();
+                rc.IdCuenta = mIdCuentaRetencionGanancias;
+                if (mRetencionGanancias >= 0) { rc.Haber = mRetencionGanancias; } else { rc.Debe = mRetencionGanancias * -1; };
+                mDebeHaber += mRetencionGanancias;
+                asiento.Add(rc);
+            };
+
+            mRetencionIVA = OrdenPago.RetencionIVA ?? 0;
+            mRetencionIVAComprobantesM = OrdenPago.RetencionIVAComprobantesM ?? 0;
+            mImporte = mRetencionIVA - mRetencionIVAComprobantesM;
+            if (mImporte != 0)
+            {
+                rc = new DetalleOrdenesPagoCuenta();
+                rc.IdCuenta = mIdCuentaRetencionIVA;
+                if (mImporte >= 0) { rc.Haber = mImporte; } else { rc.Debe = mImporte * -1; };
+                mDebeHaber += mImporte;
+                asiento.Add(rc);
+            };
+
+            if (mRetencionIVAComprobantesM != 0)
+            {
+                rc = new DetalleOrdenesPagoCuenta();
+                rc.IdCuenta = mIdCuentaRetencionIVAComprobantesM;
+                if (mRetencionIVAComprobantesM >= 0) { rc.Haber = mRetencionIVAComprobantesM; } else { rc.Debe = mRetencionIVAComprobantesM * -1; };
+                mDebeHaber += mRetencionIVAComprobantesM;
+                asiento.Add(rc);
+            };
+
+            mRetencionIBrutos = OrdenPago.RetencionIBrutos ?? 0;
+            if (mRetencionIBrutos != 0)
+            {
+                foreach (var a in OrdenPago.DetalleOrdenesPagoImpuestos)
+                {
+                    mIdIBCondicion = a.IdIBCondicion ?? 0;
+                    if (mIdIBCondicion > 0)
+                    {
+                        mImporte = a.ImpuestoRetenido ?? 0;
+                        if (mImporte > 0)
+                        {
+                            mIdCuenta = mIdCuentaRetencionIBrutos;
+                            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "IBCondiciones_TX_IdCuentaPorProvincia", mIdIBCondicion).AsEnumerable().FirstOrDefault();
+                            if (dt != null) { mIdCuenta = (Int32)dt["IdCuentaRetencionIBrutos"]; }
+
+                            rc = new DetalleOrdenesPagoCuenta();
+                            rc.IdCuenta = mIdCuenta;
+                            if (mImporte >= 0) { rc.Haber = mImporte; } else { rc.Debe = mImporte * -1; };
+                            asiento.Add(rc);
+                            mDebeHaber += mImporte;
+                        }
+                    }
+                }
+            };
+
+            mRetencionSUSS = OrdenPago.RetencionSUSS ?? 0;
+            if (mRetencionSUSS != 0)
+            {
+                rc = new DetalleOrdenesPagoCuenta();
+                rc.IdCuenta = mIdCuentaRetencionSUSS;
+                if (mRetencionSUSS >= 0) { rc.Haber = mRetencionSUSS; } else { rc.Debe = mRetencionSUSS * -1; };
+                mDebeHaber += mRetencionSUSS;
+                asiento.Add(rc);
+            };
+
+            mTotalValores = 0;
+            foreach (var a in OrdenPago.DetalleOrdenesPagoValores)
+            {
+                if ((a.Anulado ?? "") != "SI")
+                {
+                    mIdCuentaValores1 = mIdCuentaValores;
+                    mTotalValores += a.Importe ?? 0;
+                    if (a.IdBanco != null)
+                    {
+                        mChequeraPagoDiferido = "NO";
+                        if (a.IdBancoChequera != null)
+                        {
+                            var BancoChequeras = db.BancoChequeras.Where(p => p.IdBancoChequera == a.IdBancoChequera).FirstOrDefault();
+                            if (BancoChequeras != null) { mChequeraPagoDiferido = BancoChequeras.ChequeraPagoDiferido ?? "NO"; }
+                        };
+                        var Bancos = db.Bancos.Where(p => p.IdBanco == a.IdBanco).FirstOrDefault();
+                        if (Bancos != null)
+                        {
+                            if (mActivarCircuitoChequesDiferidos == "NO" || mChequeraPagoDiferido == "NO" || Bancos.IdCuentaParaChequesDiferidos == null)
+                            { mIdCuentaValores1 = Bancos.IdCuenta ?? 0; }
+                            else { mIdCuentaValores1 = Bancos.IdCuentaParaChequesDiferidos ?? 0; };
+                        }
+                    };
+                    if (a.IdTarjetaCredito != null)
+                    {
+                        var TarjetasCreditoes = db.TarjetasCreditoes.Where(p => p.IdTarjetaCredito == a.IdTarjetaCredito).FirstOrDefault();
+                        if (TarjetasCreditoes != null) { if (TarjetasCreditoes.IdCuenta != null) { mIdCuentaValores1 = TarjetasCreditoes.IdCuenta ?? 0; } }
+                    };
+                    if (a.IdCaja != null)
+                    {
+                        var Cajas = db.Cajas.Where(p => p.IdCaja == a.IdCaja).FirstOrDefault();
+                        if (Cajas != null) { if (Cajas.IdCuenta != null) { mIdCuentaValores1 = Cajas.IdCuenta ?? 0; } }
+                    };
+                    rc = new DetalleOrdenesPagoCuenta();
+                    rc.IdCuenta = mIdCuentaValores1;
+                    rc.Haber = a.Importe ?? 0;
+                    mDebeHaber -= a.Importe ?? 0;
+                    asiento.Add(rc);
+                };
+            };
+
+            if (IdProveedor > 0)
+            { mIdCuenta = proveedor.IdCuenta ?? 0; }
+            else
+            { mIdCuenta = OrdenPago.IdCuenta ?? 0; };
+
+            rc = new DetalleOrdenesPagoCuenta();
+            rc.IdCuenta = mIdCuenta;
+            if (mDebeHaber <= 0) { rc.Debe = mDebeHaber * -1; } else { rc.Haber = mDebeHaber; };
+            asiento.Add(rc);
+
+            var data = (from a in asiento.ToList()
+                        from b in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleOrdenPagoCuentas,
+                            a.IdCuenta,
+                            Codigo = b != null ? b.Codigo : 0,
+                            Cuenta = b != null ? b.Descripcion : "",
+                            a.Debe,
+                            a.Haber
+                        }).OrderBy(x => x.IdDetalleOrdenPagoCuentas).ToList();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult CalcularImportePagadoSinImpuestos(Int32 IdTipoComprobante, Int32 IdComprobante, decimal Pagado)
+        {
+            decimal mImportePagadoSinImpuestos = 0;
+            decimal mTotalBruto = 0;
+            decimal mTotalComprobante = 0;
+            decimal mCotizacionMoneda = 1;
+
+            var ComprobantesProveedor = db.ComprobantesProveedor.Where(p => p.IdComprobanteProveedor == IdComprobante && p.IdTipoComprobante == IdTipoComprobante).FirstOrDefault();
+            if (ComprobantesProveedor != null)
+            {
+                mTotalBruto = ComprobantesProveedor.TotalBruto ?? 0;
+                mTotalComprobante = ComprobantesProveedor.TotalComprobante ?? 0;
+                mCotizacionMoneda = ComprobantesProveedor.CotizacionMoneda ?? 1;
+            }
+            else
+            {
+                mImportePagadoSinImpuestos = Pagado;
+            }
+            if (mTotalComprobante != 0)
+            {
+                mImportePagadoSinImpuestos = decimal.Round(Pagado * mTotalBruto * mCotizacionMoneda / mTotalComprobante, 2);
+            }
+
+            var data = mImportePagadoSinImpuestos.ToString();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+    }
 }

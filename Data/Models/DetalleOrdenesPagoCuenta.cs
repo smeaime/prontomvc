@@ -27,5 +27,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdMoneda { get; set; }
         public Nullable<decimal> CotizacionMonedaDestino { get; set; }
         public Nullable<int> IdTarjetaCredito { get; set; }
+    
+        public virtual OrdenPago OrdenesPago { get; set; }
     }
 }
