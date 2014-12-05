@@ -98,9 +98,9 @@
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql</FullPath>
         </FileNode>
         <FileNode Name="FK_Pronto mariano manual.sql">
@@ -128,9 +128,9 @@
           <FullPath>InformeResumenGastosPorRubroContable_TX_1 pruebas3.sql</FullPath>
         </FileNode>
         <FileNode Name="InformeResumenGastosPorRubroContable_TX_1.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>InformeResumenGastosPorRubroContable_TX_1.sql</FullPath>
         </FileNode>
         <FileNode Name="Insert into Parametros 2010 WEB.sql">
