@@ -88,6 +88,7 @@
                             $('#Proveedor_IBCondicionCat3_AlicuotaPercepcion').val(item.AlicuotaPercepcion3);
 
                             ActualizarPercepcionIIBB();
+                            $("#ListaDrag").trigger("reloadGrid");
                             // ActualizarListaPuntoVenta();
                             // ActualizarPuntoVenta();
                         }
@@ -136,6 +137,9 @@
                             // '@Url.Action("GetCodigosProveedorAutocomplete", "Proveedor")'
                         };
                     </script>
+                </div>
+                <div class="span1 lightblue">
+                    <input type="button" id="ActualizarDatos" value="Recalcular" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                 </div>
             </div>
 
@@ -188,7 +192,8 @@
                             border-color: transparent;
                         }
                     </style>
-                    <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0" style="margin: 0px 0px 0px 0px; height: ; padding: 0px; border-style: none; border-width: thin; border-spacing: 0px; font-size: xx-small">
+                    <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0" 
+                           style="margin: 0px 0px 0px 0px; height:; padding: 20px; border-style: groove; border-width: 4px; border-spacing: 0px; font-size: xx-small; background-color: #E0ECFF; ">
                         <tr class="">
                             <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">SUBTOTAL</td>
                             <td width="100"><input type="text" name="Subtotal" id="Subtotal" style="width: 83%; text-align: right; font-size: 12px; font-weight: bold; background-color: #e8eef4; " readonly="readonly" /></td>
@@ -202,19 +207,19 @@
                             <td width="100">@Html.TextBoxFor(model => model.CotizacionMoneda, new { @class = "span8 subtotales" })</td>
                         </tr>
                         <tr>
-                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCON GANANCIAS</td>
+                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCION GANANCIAS</td>
                             <td width="100">@Html.TextBoxFor(model => model.RetencionGanancias, new { @class = "span10 subtotales" })</td>
                             <td width="100">COTIZ DOLAR</td>
                             <td width="100">@Html.TextBoxFor(model => model.CotizacionDolar, new { @class = "span8 subtotales" })</td>
                         </tr>
                         <tr>
-                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCON IIBB</td>
+                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCION IIBB</td>
                             <td width="100">@Html.TextBoxFor(model => model.RetencionIBrutos, new { @class = "span10 subtotales" })</td>
                             <td width="100">COTIZ EURO</td>
                             <td width="100">@Html.TextBoxFor(model => model.CotizacionEuro, new { @class = "span8 subtotales" })</td>
                         </tr>
                         <tr>
-                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCON SUSS</td>
+                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCION SUSS</td>
                             <td width="100">@Html.TextBoxFor(model => model.RetencionSUSS, new { @class = "span10 subtotales" })</td>
                             <td width="100"></td>
                             <td width="100"></td>
@@ -271,7 +276,6 @@
             <br />
             @if (Model.FechaAnulacion == null)
             {
-            
             }
             else
             {
