@@ -115,6 +115,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\ProntoWeb\Bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClaseMigrar\obj\x86\Debug\ClaseMigrar.dll</HintPath>
@@ -131,6 +134,8 @@
     <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="OpenXmlPowerTools">
       <HintPath>bin\Debug\OpenXmlPowerTools.dll</HintPath>
     </Reference>
@@ -149,6 +154,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
@@ -212,6 +218,15 @@
       <DependentUpon>LinqBDLmaster.dbml</DependentUpon>
     </Compile>
     <Compile Include="ListaPreciosManager.vb" />
+    <Compile Include="ManagerDebug\CartaDePorteManager.vb" />
+    <Compile Include="ManagerDebug\CDPStockMovimientoManager.vb" />
+    <Compile Include="ManagerDebug\ConsultasLinq.vb" />
+    <Compile Include="ManagerDebug\Dynamic.vb" />
+    <Compile Include="ManagerDebug\FuncionesInterop.vb" />
+    <Compile Include="ManagerDebug\Numalet.vb" />
+    <Compile Include="ManagerDebug\PedidoItemManager.vb" />
+    <Compile Include="ManagerDebug\PedidoManager.vb" />
+    <Compile Include="ManagerDebug\Tests.vb" />
     <Compile Include="Model1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -335,6 +350,8 @@
       <LastGenOutput>LinqBDLmaster.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="ManagerDebug\nppBackup\CartaDePorteManager.vb.2014-09-10_171139.bak" />
+    <None Include="ManagerDebug\nppBackup\FiltroMailManager.vb.2013-06-11_023039.bak" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
