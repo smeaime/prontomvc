@@ -20,6 +20,7 @@ Imports System.IO
 
 Imports System.Data.SqlClient
 
+Imports System.Web.Security
 Imports System.Security
 
 Imports Pronto.ERP.Bll
@@ -43,6 +44,8 @@ Imports DocumentFormat.OpenXml.Drawing.Wordprocessing
 Imports System.Web.UI.WebControls
 
 Imports Word = Microsoft.Office.Interop.Word
+Imports Excel = Microsoft.Office.Interop.Excel
+
 
 Imports CartaDePorteManager
 
@@ -5406,7 +5409,7 @@ Public Class CartaDePorteManager
 
 
     Shared Function AdjuntarImagen(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, _
-                                   forzarID As Long = -1,  ByRef sError As String = "", DirApp,NameOnlyFromFullPath ) As String
+                                   forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
 
 
         Dim DIRFTP = DirApp & "\DataBackupear\"
@@ -5458,14 +5461,14 @@ Public Class CartaDePorteManager
 
 
 
-        GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError)
+        GrabarImagen(forzarID, SC, numeroCarta, vagon, nombrenuevo, sError, DirApp)
 
 
         Return nombrenuevo
     End Function
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, nombrenuevo As String, ByRef sError As String) As String
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, nombrenuevo As String, ByRef sError As String, DirApp As String) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
 
@@ -5516,7 +5519,7 @@ Public Class CartaDePorteManager
             If oCarta.PathImagen2 <> "" Then
                 'qué hago con el archivo anterior? -por ahora lo conservo
                 If True Then
-                    Dim DIRFTP = DirApp() & "\DataBackupear\"
+                    Dim DIRFTP = DirApp & "\DataBackupear\"
                     Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen2)
                     Try
                         If MyFile1.Exists Then
@@ -5531,7 +5534,7 @@ Public Class CartaDePorteManager
             If oCarta.PathImagen <> "" Then
                 'qué hago con el archivo anterior? -por ahora lo conservo 
                 If True Then
-                    Dim DIRFTP = DirApp() & "\DataBackupear\"
+                    Dim DIRFTP = DirApp & "\DataBackupear\"
                     Dim MyFile1 As New FileInfo(DIRFTP + oCarta.PathImagen)
                     Try
                         If MyFile1.Exists Then
@@ -5564,10 +5567,10 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, Optional forzarID As Long = -1, Optional ByRef sError As String = "") As String
+    Shared Function AdjuntarImagen2(SC As String, AsyncFileUpload1 As AjaxControlToolkit.AsyncFileUpload, forzarID As Long, ByRef sError As String, DirApp As String, NameOnlyFromFullPath As String) As String
 
-        Dim DIRFTP = DirApp() & "\DataBackupear\"
-        Dim nombre = NameOnlyFromFullPath(AsyncFileUpload1.PostedFile.FileName)
+        Dim DIRFTP = DirApp & "\DataBackupear\"
+        Dim nombre = NameOnlyFromFullPath ' (AsyncFileUpload1.PostedFile.FileName)
         Randomize()
         Dim nombrenuevo = Int(Rnd(100000) * 100000).ToString.Replace(".", "") + Now.ToString("ddMMMyyyy_HHmmss") + "_" + nombre
 
@@ -5740,23 +5743,13 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function AdjuntosFacturacionCartasImputadas_Excel(IdFactura As Long, SC As String, ByRef ReportViewer2 As ReportViewer) As String
-        Dim q = EntidadManager.CartasLINQlocalSimplificadoTipadoConCalada_Todos(SC)
-        Dim l = q.Where(Function(x) x.IdFacturaImputada = IdFactura).ToList()
-        Dim rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-        Dim sExcelFileName = Path.GetTempPath & "Listado general " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
-        Dim output = ProntoFuncionesUIWeb.RebindReportViewerExcel(SC, _
-                                 rdl, _
-                                l.ToDataTable, sExcelFileName)
-        Return output
-    End Function
 
 
 
 
 
 
-    Public Shared Function ImprimirFacturaElectronica(IdFactura As Integer, bMostrarPDF As Boolean, SC As String) As String
+    Public Shared Function ImprimirFacturaElectronica(IdFactura As Integer, bMostrarPDF As Boolean, SC As String, DirApp As String) As String
 
         ErrHandler.WriteError("ImprimirFacturaElectronica idfac " & IdFactura) ' & " " & Encriptar(SC))
 
@@ -5764,7 +5757,7 @@ Public Class CartaDePorteManager
         Dim output As String
         Randomize()
         Dim prefijo As String = Int(Rnd() * 10000)
-        Dim p = DirApp() & "\Documentos\" & "FactElec_Williams.docx"
+        Dim p = DirApp & "\Documentos\" & "FactElec_Williams.docx"
 
 
         output = System.IO.Path.GetTempPath() & "\" & prefijo & "FacturaElectronica_Numero" & ofac.Numero & ".docx"
@@ -5780,8 +5773,8 @@ Public Class CartaDePorteManager
             System.IO.File.Copy(p, output) 'http://stackoverflow.com/questions/1233228/saving-an-openxml-document-word-generated-from-a-template 
 
         Catch ex As Exception
-            MsgBoxAlert("Problema de acceso en el directorio de plantillas. Verificar permisos" & ex.ToString)
-            Exit Function
+            ErrHandler.WriteError("Problema de acceso en el directorio de plantillas. Verificar permisos. " & ex.ToString)
+            Throw
         End Try
 
         ErrHandler.WriteError("Creando docx")
@@ -8830,6 +8823,32 @@ Public Class LogicaFacturacion
     End Function
 
 
+    '/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    'http://stackoverflow.com/a/9405173/1054200 la idea era usar el truco de los genericos, y terminé haciendo una grasada
+    ' http://www.elguille.info/net/revistas/dotnetmania/pdf/dotnetmania_8.pdf
+    Public Shared Function ToDataTableNull(Of T)(ByVal data As Generic.IList(Of T)) As DataTable
+
+
+        Dim props As System.ComponentModel.PropertyDescriptorCollection = System.ComponentModel.TypeDescriptor.GetProperties(GetType(T))
+        Dim table As New DataTable()
+        For i As Integer = 0 To props.Count - 1
+            Dim prop As System.ComponentModel.PropertyDescriptor = props(i)
+            table.Columns.Add(prop.Name, If(Nullable.GetUnderlyingType(prop.PropertyType), prop.PropertyType))
+        Next
+        Dim values As Object() = New Object(props.Count - 1) {}
+        For Each item As T In data
+            For i As Integer = 0 To values.Length - 1
+                values(i) = If(props(i).GetValue(item), DBNull.Value)
+            Next
+            table.Rows.Add(values)
+        Next
+        Return table
+    End Function
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     Shared Function GetIQueryableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
@@ -10373,7 +10392,7 @@ Public Class LogicaFacturacion
 
     Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String, ByRef ViewState As System.Web.UI.StateBag, ByVal optFacturarA As Long, _
                                          ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
-                                         ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As HttpSessionState, _
+                                         ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState, _
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable, _
                                          ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
                                          ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String, _
@@ -11389,7 +11408,7 @@ Public Class LogicaFacturacion
     Shared Function CreaFacturaCOMpronto(ByVal oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte), _
                                          ByVal IdClienteAFacturarle As Long, ByVal sucursalWilliams As Long, _
                                          ByVal dtRenglonesManuales As DataTable, ByVal SC As String, _
-                                         ByVal Session As System.Web.HttpSessionState, ByVal optFacturarA As Integer, _
+                                         ByVal Session As System.Web.SessionState.HttpSessionState, ByVal optFacturarA As Integer, _
                                          ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
                                          ByVal txtTarifaGastoAdministrativo As String, _
                                          ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String, _
@@ -12509,7 +12528,7 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Sub CalculaFacturaSimplificado(ByRef oFac As Object, ByVal sc As String, ByRef session As HttpSessionState, puntoventa As Long, IdPuntoVenta As Long) 'As ComPronto.Factura )
+    Shared Sub CalculaFacturaSimplificado(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, puntoventa As Long, IdPuntoVenta As Long) 'As ComPronto.Factura )
         '//////////////////////////////////////////////////////////////////////
         '//////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////
@@ -12740,7 +12759,7 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As HttpSessionState, cli As Cliente, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
+    Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, cli As Cliente, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
 
         'origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = Null
 
@@ -14580,3 +14599,1336 @@ End Class
 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Public Class ImpresoraMatrizDePuntosEPSONTexto
+
+    Public Const TAB As String = Chr(9)
+    Public Const PAGEFEED As String = Chr(12) 'http://www.lprng.com/DISTRIB/RESOURCES/PPD/epson.htm
+    Public Const DRAFT As String = Chr(27) + Chr(120) + Chr(48)
+    Public Const CONDENSED As String = Chr(27) + Chr(15) + Chr(15)
+    Public Const CANCELCONDENSED As String = Chr(18)
+    Public Const RESETEAR As String = Chr(27) + Chr(64)  'para que una impresion con el sistema anterior no me descajete la configuracion
+
+
+
+    Public Const RENGLONES_POR_PAGINA = 72
+    Public Const RENGLONES_POR_PAGINA_FACTURA = 72 '???
+
+
+
+    Public Sub WilliamsFacturaWordToTxtMasMergeOpcional(Optional ByVal fileDirectory As String = "C:\documents\", Optional ByVal output As String = "Merged Document.doc", Optional ByVal plantillaDOT As Object = "", Optional sc As String = "", Optional DesdeIdFactura As Long = 0)
+        Dim wdPageBreak = 7
+        Dim wdStory = 6
+        Dim oMissing = System.Reflection.Missing.Value
+        Dim oFalse = False
+        Dim oTrue = True
+        Dim stringMerge As String = ""
+
+        Const RENGLON_PIE = 61
+        Const RENGLON_ANCHO = 93
+
+
+        Const margenizquierdo = 3
+        Const anchosegundacolumna = 30
+        Const anchoprimeracolumna = RENGLON_ANCHO - margenizquierdo - anchosegundacolumna
+
+
+        If plantillaDOT = "" Then plantillaDOT = System.Reflection.Missing.Value
+
+        Try
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+            'la mitad de la normal, naturalmente los 80 clasicos)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+            '//////////////Leo los txt
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+
+            Dim wordFiles As String() = Directory.GetFiles(fileDirectory, "Fact*.doc.txt")
+
+            'stringMerge = RESETEAR & CANCELCONDENSED
+
+            For i = 0 To wordFiles.Length - 1
+
+                Dim FILENAME As String = wordFiles(i)
+
+
+
+                Dim incluirtarifa As Boolean = False
+                Try
+                    'pero y si es una tanda de clientes distintos???????
+                    incluirtarifa = IIf(ClienteManager.GetItem(sc, ClaseMigrar.GetItemComProntoFactura(sc, DesdeIdFactura + i, False).IdCliente).IncluyeTarifaEnFactura = "SI", True, False)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+                'Get a StreamReader class that can be used to read the file
+                Dim objStreamReader As StreamReader
+                objStreamReader = File.OpenText(FILENAME)
+
+                'Now, read the entire file into a string
+                Dim contents As String = objStreamReader.ReadToEnd()
+
+                'Set the text of the file to a Web control
+                objStreamReader.Close()
+
+
+                '//////////////////////////////
+                '//////////////////////////////
+                '//////////////////////////////
+                'proceso un toque el txt leido
+
+                contents = contents.Replace(vbCr, "")
+                contents = contents.Replace(vbLf, vbCrLf)
+                contents = contents.Replace("<CR>", vbCrLf)
+                contents = contents.Replace("<TAB>", TAB)
+
+                Dim renglonesorig = Split(contents, vbCrLf)
+                Dim renglonesdest(RENGLONES_POR_PAGINA_FACTURA - 1) As String
+
+                Dim leyendaBuquesYaPuesta As Boolean = False
+
+                Dim n = 0
+                Dim desplazamiento = 0
+                For n = 0 To renglonesorig.Length - 1
+                    If InStr(renglonesorig(n), "<PIE>") Then
+                        desplazamiento = RENGLON_PIE - n
+                        renglonesorig(n) = renglonesorig(n).Replace("<PIE>", "")
+                    End If
+
+                    If n + desplazamiento >= RENGLONES_POR_PAGINA_FACTURA Then Exit For
+
+                    renglonesorig(n) = renglonesorig(n).Replace("�", "n")
+
+                    Dim posTab = InStr(renglonesorig(n), "<COLUMNA2>") 'busco el separador de columna en el renglon de la factura
+                    If posTab > 0 Then
+                        'consulta 7971: imprimir Tarifa en factura para algunos clientes/ No está saliendo la tarifa para los clientes que tienen la opcion de Imprimir Tarifa
+                        If incluirtarifa Then
+                            renglonesorig(n) = renglonesorig(n).Replace("<PU>", "")
+                            renglonesorig(n) = renglonesorig(n).Replace("</PU>", "")
+                        Else
+                            SacarTagsDePrecioUnitario(renglonesorig(n))
+                        End If
+
+
+                        'si está, lo de la izquierda lo justifico a la izquierda, y el pedazo de la derecha con justificado a derecha
+                        Dim s1 = Left(renglonesorig(n), posTab - 1)
+                        Dim s2 = Mid(renglonesorig(n), posTab + 10) 'me salto los caracteres del tag columna2
+
+                        s1 = Left(s1.PadRight(anchoprimeracolumna), anchoprimeracolumna)
+                        s2 = s2.Trim.PadLeft(anchosegundacolumna)
+
+
+                        If InStr(s1.ToLower, " buque ") Then
+                            'si es un buque, quieren que aparezca primero el nombre del buque, y recien despues el nombre del articulo
+                            Dim x = InStr(s1, "BUQUE")
+                            Dim arti = Left(s1, x - 1)
+                            s1 = Space(11) + Mid(s1, x + 5).Replace(";", " " & arti & "  ")
+                            s1 = Left(s1.PadRight(anchoprimeracolumna), anchoprimeracolumna)
+                        End If
+
+
+
+
+                        renglonesdest(n + desplazamiento) = Space(margenizquierdo) + s1 + s2
+                    Else
+                        'no tiene la etiqueta <COLUMNA2>
+
+                        'si está, lo de la izquierda lo justifico a la izquierda, y el pedazo de la derecha con justificado a derecha
+                        Dim s1 = renglonesorig(n)
+
+                        If InStr(s1.ToLower, " buque ") Then
+                            'si es un buque, quieren que aparezca primero el nombre del buque, y recien despues el nombre del articulo
+                            Dim x = InStr(s1, "BUQUE")
+                            Dim arti = Left(s1, x - 1)
+                            s1 = Space(11) + Mid(s1, x + 5).Replace(";", " " & arti & "  ")
+                            s1 = Left(s1.PadRight(anchoprimeracolumna), anchoprimeracolumna)
+                        End If
+
+                        renglonesdest(n + desplazamiento) = Space(margenizquierdo) + s1  ' renglonesorig(n)
+                    End If
+
+
+                    renglonesdest(n + desplazamiento) = Left(renglonesdest(n + desplazamiento), RENGLON_ANCHO)
+
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
+                    If InStr(renglonesorig(n).ToLower, " buque ") And Not leyendaBuquesYaPuesta Then
+                        'renglonesdest(n + desplazamiento - 1) &= vbCrLf & Space(15) & "ATENCION BUQUES"
+                        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?&recordid=9182
+                        'aca hay que avisar que aumente si usas un salto de linea
+                        'lo dejo harcodeado 
+                        renglonesdest(21) &= Space(15) & "ATENCION BUQUES"
+                        leyendaBuquesYaPuesta = True
+                    End If
+                    'consulta 7971 : para algunos clientes (que ellos puedan definir cuales 
+                    'desde el abm de clientes) quieren que en el detalle de la factura impresa vaya a parte del grano-destinatario-destino la tarifa facturada en esa linea
+                Next
+
+                contents = Join(renglonesdest, vbCrLf)
+
+
+                Dim CANTIDAD_COPIAS As Integer = ConfigurationManager.AppSettings("Debug_CantidadCopiasCartaPorte")  'BuscarClaveINI("CantidadCopiasCartaPorte", sc, )
+                For n = 1 To CANTIDAD_COPIAS
+                    stringMerge &= RESETEAR & CANCELCONDENSED & vbCrLf & contents
+                Next
+
+            Next
+
+
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+            '/////////// Escribo el rejunte 
+            '////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////
+
+
+
+            Dim objStreamWriter As StreamWriter
+            objStreamWriter = File.CreateText(output)
+            objStreamWriter.Write(stringMerge)
+            objStreamWriter.Close()
+
+
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex.ToString & " Error al hacer el merge de docs")
+            Throw
+            'MsgBoxAjax(Me, ex.ToString & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro.    Emision """ & DebugCadenaImprimible(Encriptar(HFSC.Value)) & "," & ID)
+        Finally
+        End Try
+
+    End Sub
+
+    Sub SacarTagsDePrecioUnitario(ByRef s As String)
+        Dim regex As New System.Text.RegularExpressions.Regex("(<PU.*?)(?:()+)(.*?)(</PU>)")
+
+        'Dim newString = regex.Replace(s, "$1<a href=""$3"">$3</a>$4$5")
+        s = regex.Replace(s, "")
+    End Sub
+
+
+
+    Public Function ExcelToText(ByVal fileExcelName As String) As String
+        'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+        Dim oXL As Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Dim oRng As Excel.Range
+        Dim oWBs As Excel.Workbooks
+
+
+
+
+        'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+        'la mitad de la normal, naturalmente los 80 clasicos)
+        'Notas de Entrega: 160 ancho x 36 alt
+        'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+        Const MAXCOLS = 20
+        Const MAXFILAS = 500
+        Const MAXSHEETS = 50
+
+        Try
+            '  creat a Application object
+            oXL = New Excel.ApplicationClass()
+            '   get   WorkBook  object
+            oWBs = oXL.Workbooks
+
+
+
+            Try
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                    Reflection.Missing.Value, Reflection.Missing.Value)
+            Catch ex As Exception
+
+                'problemas al abrir T6
+
+                ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+            End Try
+
+            Dim nf = FreeFile()
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            Dim output As String = fileExcelName + ".prontotxt" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            FileOpen(nf, output, OpenMode.Output)
+
+            Print(nf, CONDENSED)
+
+
+
+
+            Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+            For sht = 1 To maxsht
+
+                'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                Dim dt As New Data.DataTable("dtExcel")
+
+                '  creo las columnas
+                For j As Integer = 1 To MAXCOLS
+                    dt.Columns.Add("column" & j, _
+                                   System.Type.GetType("System.String"))
+                Next j
+
+
+                Dim ds As New DataSet()
+                ds.Tables.Add(dt)
+                Dim dr As DataRow
+
+                Dim iValue As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+
+
+
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '  get data in cell
+                'copio los datos nomás
+
+                For i As Integer = 1 To iValue
+                    dr = ds.Tables("dtExcel").NewRow()
+                    Dim sb As String = ""
+
+                    For j As Integer = 1 To MAXCOLS
+
+                        'traigo la celda y la pongo en una variable Range (no sé por qué)
+                        oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                        'Range.Text << Formatted value - datatype is always "string"
+                        'Range.Value << actual datatype ex: double, datetime etc
+                        'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                        If IsNumeric(oRng.Value) Then 'me fijo si es numerica, por el asuntillo de la coma
+                            sb &= oRng.Value.ToString & TAB
+                        Else
+
+                            Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                            sb &= Left(strValue, 50) & TAB
+                        End If
+
+
+
+                    Next j
+
+                    PrintLine(nf, sb)
+                Next i
+
+                For i As Integer = iValue To RENGLONES_POR_PAGINA
+                    PrintLine(nf, "")
+                Next i
+
+
+                'PrintLine(nf, PAGEFEED) 'poner un page feed?
+            Next sht
+
+            FileClose(nf)
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+
+
+            Return output
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Return Nothing
+
+
+            '            1. In DCOMCNFG, right click on the My Computer and select properties.
+            '2. Choose the COM Securities tab
+            '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+            '  \Users.
+            '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+            '    \Users
+            '   Press OK and thats it. i can run my application now
+        Finally
+            Try
+                'The service (excel.exe) will continue to run
+                If Not oWB Is Nothing Then oWB.Close(False)
+                NAR(oWB)
+                oWBs.Close()
+                NAR(oWBs)
+                'quit and dispose app
+                oXL.Quit()
+                NAR(oXL)
+                'VERY IMPORTANT
+                GC.Collect()
+
+                'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+            End Try
+        End Try
+    End Function
+
+
+
+    Public Shared Function ExcelToTextWilliamsAdjunto(ByVal fileExcelName As String) As String
+        'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+        Dim oXL As Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Dim oRng As Excel.Range
+        Dim oWBs As Excel.Workbooks
+
+
+
+
+        'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+        'la mitad de la normal, naturalmente los 80 clasicos)
+        'Notas de Entrega: 160 ancho x 36 alt
+        'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+        Const MAXCOLS = 15
+        Const MAXFILAS = 300
+        Const MAXSHEETS = 15
+
+        Try
+            '  creat a Application object
+            oXL = New Excel.ApplicationClass()
+            '   get   WorkBook  object
+            oWBs = oXL.Workbooks
+
+
+
+            Try
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value)
+            Catch ex As Exception
+
+                'problemas al abrir T6
+
+                ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+            End Try
+
+            Dim nf = FreeFile()
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            Dim output As String = fileExcelName + ".prontotxt" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            FileOpen(nf, output, OpenMode.Output)
+
+            Print(nf, CONDENSED)
+
+
+
+
+            Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+            For sht = 1 To maxsht
+
+                Dim bGastoCambio As Boolean = False
+
+                PrintLine(nf, "")
+                PrintLine(nf, "")
+                PrintLine(nf, "")
+                PrintLine(nf, "")
+                PrintLine(nf, "_______________________________________________________________________________________")
+                Dim rg = 5
+
+
+
+                'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                Dim dt As New Data.DataTable("dtExcel")
+
+                '  creo las columnas
+                For j As Integer = 1 To MAXCOLS
+                    dt.Columns.Add("column" & j, _
+                                   System.Type.GetType("System.String"))
+                Next j
+
+
+                Dim ds As New DataSet()
+                ds.Tables.Add(dt)
+                Dim dr As DataRow
+
+                Dim iRowsValue As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '  get data in cell
+                'copio los datos nomás
+                Dim rengloncdp = 0
+                Dim sb As String = ""
+
+
+                For iRow As Integer = 1 To iRowsValue
+
+
+                    dr = ds.Tables("dtExcel").NewRow()
+
+                    For j As Integer = 1 To MAXCOLS
+
+                        'traigo la celda y la pongo en una variable Range (no sé por qué)
+                        oRng = CType(oSheet.Cells(iRow, j), Microsoft.Office.Interop.Excel.Range)
+
+
+                        ' La info de las cdp debería ir en dos columnas (para no hacer tan larga la impresión) 
+
+                        'Range.Text << Formatted value - datatype is always "string"
+                        'Range.Value << actual datatype ex: double, datetime etc
+                        'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+
+
+
+                        If IsNumeric(oRng.Value) Then 'me fijo si es numerica, por el asuntillo de la coma
+                            sb &= oRng.Value.ToString & TAB
+                        Else
+                            Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+
+                            If strValue = "<CDP>" Or strValue = "TOTAL" Then
+                                rengloncdp += 1 'llevo el conteo para la doble columna
+
+                                If strValue = "TOTAL" And sb <> "" Then
+                                    'para que la columna de total sea siempre la izquierda
+                                    sb &= vbCrLf & TAB & TAB & TAB & TAB
+                                    rg += 1
+                                    rengloncdp = 0
+                                End If
+
+                            End If
+                            sb &= Left(strValue, 50) & TAB
+                        End If
+                    Next j
+
+
+                    If InStr(sb, "*Los asteriscos indican Gastos de Cambio") Then
+                        sb = sb.Replace("*Los asteriscos indican Gastos de Cambio", "")
+                        bGastoCambio = True
+                    End If
+
+                    If InStr(sb, "<CDP>") = 0 Or (rengloncdp Mod 3 = 0) Then 'no es un renglon de doble columna o no 
+                        sb = sb.Replace("<CDP>", "").Replace(TAB, " ")
+                        PrintLine(nf, sb)
+                        rg += 1
+                        rengloncdp = 0
+                        sb = ""
+                    End If
+                Next iRow
+
+
+                If bGastoCambio Then
+                    PrintLine(nf, "    *Los asteriscos indican Gastos de Cambio")
+                    rg += 1
+                End If
+
+                For i As Integer = rg To RENGLONES_POR_PAGINA
+                    PrintLine(nf, "")
+                Next i
+
+
+                sb = ""
+
+                'PrintLine(nf, PAGEFEED) 'poner un page feed?
+            Next sht
+
+
+            FileClose(nf)
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+
+
+            Return output
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Return Nothing
+
+
+            '            1. In DCOMCNFG, right click on the My Computer and select properties.
+            '2. Choose the COM Securities tab
+            '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+            '  \Users.
+            '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+            '    \Users
+            '   Press OK and thats it. i can run my application now
+        Finally
+            Try
+                'The service (excel.exe) will continue to run
+                If Not oWB Is Nothing Then oWB.Close(False)
+                NAR(oWB)
+                oWBs.Close()
+                NAR(oWBs)
+                'quit and dispose app
+                oXL.Quit()
+                NAR(oXL)
+                'VERY IMPORTANT
+                GC.Collect()
+
+                'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+            End Try
+        End Try
+    End Function
+
+
+
+    Public Shared Function ExcelToTextWilliamsAdjunto_A4(ByVal fileExcelName As String) As String
+        'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+        Dim oXL As Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Dim oRng As Excel.Range
+        Dim oWBs As Excel.Workbooks
+
+
+
+
+        'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+        'la mitad de la normal, naturalmente los 80 clasicos)
+        'Notas de Entrega: 160 ancho x 36 alt
+        'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+        Const MAXCOLS = 15
+        Const MAXFILAS = 300
+        Const MAXSHEETS = 15
+
+        Try
+            '  creat a Application object
+            If True Then
+                oXL = New Excel.ApplicationClass() 'y si uso createobject?
+            Else
+                oXL = CreateObject("Excel.Application")
+            End If
+
+            '   get   WorkBook  object
+            oWBs = oXL.Workbooks
+
+
+
+            Try
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value)
+            Catch ex As Exception
+
+                'problemas al abrir T6
+
+                ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+            End Try
+
+            Dim nf = FreeFile()
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            Dim sufijo As String = Int(Rnd() * 10000)
+            Dim output As String = fileExcelName + sufijo + ".txt" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            FileOpen(nf, output, OpenMode.Output)
+
+            Print(nf, CONDENSED)
+
+
+            Const columnas = 2
+
+            Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+            For sht = 1 To maxsht
+
+                '/////////////////////////////////////////////////////////////
+                PrintLine(nf, "")
+                PrintLine(nf, "")
+                PrintLine(nf, "__________________________________________________________________________________")
+                Dim rg = 3
+                '/////////////////////////////////////////////////////////////
+
+
+                Dim bGastoCambio As Boolean = False
+
+                'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                Dim dt As New Data.DataTable("dtExcel")
+
+                '  creo las columnas
+                For j As Integer = 1 To MAXCOLS
+                    dt.Columns.Add("column" & j, _
+                                   System.Type.GetType("System.String"))
+                Next j
+
+
+                Dim ds As New DataSet()
+                ds.Tables.Add(dt)
+                Dim dr As DataRow
+
+                Dim iRowsValue As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '  get data in cell
+                'copio los datos nomás
+                Dim rengloncdp = 0
+                Dim sb As String = ""
+
+
+                For iRow As Integer = 1 To iRowsValue
+
+
+                    dr = ds.Tables("dtExcel").NewRow()
+
+                    For j As Integer = 1 To MAXCOLS
+
+                        'traigo la celda y la pongo en una variable Range (no sé por qué)
+                        oRng = CType(oSheet.Cells(iRow, j), Microsoft.Office.Interop.Excel.Range)
+
+
+                        ' La info de las cdp debería ir en dos columnas (para no hacer tan larga la impresión) 
+
+                        'Range.Text << Formatted value - datatype is always "string"
+                        'Range.Value << actual datatype ex: double, datetime etc
+                        'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+
+
+                        'If primeracelda.Contains("<CAB>") Then
+                        '    builder.AppendFormat(COLS_ENCABEZADO, _
+                        '                    s(0), _
+                        '                    s(1), _
+                        '                    s(2), _
+                        '                    s(3), _
+                        '                    s(4), _
+                        '                    s(5), _
+                        '                    s(6), _
+                        '                    s(7), _
+                        '                    s(8), _
+                        '                    s(8), _
+                        '                    s(9), _
+                        '                    s(10), _
+                        '                    s(11), _
+                        '                    s(12), _
+                        '                    s(13))
+                        'End If
+
+
+
+
+
+                        If IsNumeric(oRng.Value) Then 'me fijo si es numerica, por el asuntillo de la coma
+                            sb &= oRng.Value.ToString & TAB
+                        Else
+                            Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+
+                            If strValue = "<CDP>" Or strValue = "TOTAL" Then
+                                rengloncdp += 1 'llevo el conteo para la doble columna
+
+                                If strValue = "TOTAL" And sb <> "" Then
+                                    'para que la columna de total sea siempre la izquierda
+                                    sb &= vbCrLf & TAB & TAB & TAB & TAB
+                                    rg += 1
+                                    rengloncdp = 0
+                                End If
+
+                            End If
+                            sb &= Left(strValue, 50) & TAB
+                        End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Next j
+
+                    '////////////////////////////////
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8624
+                    '* Titulo de agrupamiento en dos renglones: el producto y el contrato van en el segundo renglon
+                    sb = sb.Replace("Prod:", vbCrLf & " Prod:")
+                    '////////////////////////////////
+
+
+                    If InStr(sb, "*Los asteriscos indican Gastos de Cambio") Then
+                        sb = sb.Replace("*Los asteriscos indican Gastos de Cambio", "")
+                        bGastoCambio = True
+                    End If
+
+                    If InStr(sb, "<CDP>") = 0 Or (rengloncdp Mod columnas = 0) Then 'no es un renglon de doble columna o no 
+                        sb = sb.Replace("<CDP>", "").Replace(TAB, " ")
+                        PrintLine(nf, sb)
+                        rg += 1
+                        rengloncdp = 0
+                        sb = ""
+                    End If
+                Next iRow
+
+
+
+                If bGastoCambio Then
+                    PrintLine(nf, "    *Los asteriscos indican Gastos de Cambio")
+                    rg += 1
+                End If
+
+                For i As Integer = rg To RENGLONES_POR_PAGINA - 25 '- 10 'le quitamos un poco de renglones en a4
+                    PrintLine(nf, "")
+                Next i
+
+
+
+
+                sb = ""
+
+
+
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+                PrintLine(nf, PAGEFEED) 'poner un page feed?
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+                'en el caso de la impresion a A4 sí usamos un pagefeed
+
+            Next sht
+
+
+            FileClose(nf)
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+
+
+            Return output
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Return Nothing
+
+
+            '            1. In DCOMCNFG, right click on the My Computer and select properties.
+            '2. Choose the COM Securities tab
+            '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+            '  \Users.
+            '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+            '    \Users
+            '   Press OK and thats it. i can run my application now
+        Finally
+            Try
+                'The service (excel.exe) will continue to run
+                If Not oWB Is Nothing Then oWB.Close(False)
+                NAR(oWB)
+                oWBs.Close()
+                NAR(oWBs)
+                'quit and dispose app
+                oXL.Quit()
+                NAR(oXL)
+                'VERY IMPORTANT
+                GC.Collect()
+
+                'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+            End Try
+        End Try
+    End Function
+
+
+
+    Public Function ExcelToTextNotasDeEntrega(ByVal fileExcelName As String) As String
+        'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+        Dim oXL As Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Dim oRng As Excel.Range
+        Dim oWBs As Excel.Workbooks
+
+        'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+        'la mitad de la normal, naturalmente los 80 clasicos)
+        'Notas de Entrega: 160 ancho x 36 alt
+        'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        ' ParametroManager.TraerValorParametro2(HFSC.Value, "NotasDeEntregaMatrizDePuntosMargen1")
+
+        Const COLS_ENCABEZADO = "{0,-11}{1,-27}{2,-7}{3,10}{4,-22}{5,10}{6,10}{11,10}{12,10}{13,10}"
+        Const COLS_DETALLE = "{0,12}{1,18}     {2,-5}{3,-3}{4,8}{5,9}{6,22}{7,7}{8,13}{9,15}{10,10}{11,4}{12,10}{13,10}"
+        Const COLS_DETALLEOBSERVACIONES = "{0,-100}{11,10}{12,10}{13,30}"
+
+        'los renglones por nota son 36 (72/2)
+        'los renglones por nota son 36 (72/2)
+        'los renglones por nota son 36 (72/2)
+        'los renglones por nota son 36 (72/2)
+        Const RENGLON_ANCHO = 157
+
+        Const RENGLON_ENCABEZADO = 7
+        Const SEPARACION_ENCAB_DETALLE = 3
+        Const RENGLON_PIE = 20
+        'Const OFFSETFINAL = 12
+
+
+
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        Const MAXCOLS = 20
+        Const MAXFILAS = 500
+        Const MAXSHEETS = 500
+
+        Try
+            '  creat a Application object
+            oXL = New Excel.ApplicationClass()
+            '   get   WorkBook  object
+            oWBs = oXL.Workbooks
+
+
+
+            Try
+                oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+    Reflection.Missing.Value, Reflection.Missing.Value)
+            Catch ex As Exception
+
+                'problemas al abrir T6
+
+                ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+            End Try
+
+            Dim nf = FreeFile()
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            Dim output As String = fileExcelName + ".prontotxt" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+            FileOpen(nf, output, OpenMode.Output)
+
+            Print(nf, "" & RESETEAR & "" & CONDENSED)
+
+
+
+
+
+
+
+
+            Dim bpuesto As Boolean
+
+            Dim maxsht = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+            If oWB.Worksheets.Count > MAXSHEETS Then
+                ErrHandler.WriteError("Limite de Notas de entrega " & oWB.Worksheets.Count)
+            End If
+
+            Dim iCuentaRenglones = 0
+
+            For sht = 1 To maxsht
+
+
+
+                bpuesto = False
+
+                'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+                Dim dt As New Data.DataTable("dtExcel")
+
+                '  creo las columnas
+                For j As Integer = 1 To MAXCOLS
+                    dt.Columns.Add("column" & j, _
+                                   System.Type.GetType("System.String"))
+                Next j
+
+                Dim ds As New DataSet()
+                ds.Tables.Add(dt)
+                Dim dr As DataRow
+
+                Dim cantFilas As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+
+
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '  get data in cell
+                'copio los datos nomás
+
+
+
+                '            salio todo desde la primera linea, para que encuadre yo le tuve que poner 6 enter antes del primer caracter impreso (antes del Titular)
+                'despues de la ultima carta de porte hasta los totales tuve que agregar 11 lineas en blanco para que los totales peguen bien
+                'los totales los acomode para que cada uno quede abajo de la columna que totaliza
+                'y el ultimo total para que quede abajo de las fechas de descarga
+                'el destinatario quedo bien, el destino debe quedar alineado
+                'lo mismo con el Contrato, debe queda alineado con el corredor
+                'y lo ultimo que veo es que le puse una linea vacia entre la que empieza con el titular y la siguiente (que empieza con el producto)
+
+                PrintLine(nf, "...")
+                iCuentaRenglones += 1
+
+                For n = 1 To RENGLON_ENCABEZADO
+                    PrintLine(nf, "")
+                    iCuentaRenglones += 1
+                Next
+
+
+
+                Dim s(MAXCOLS) As String
+
+                Dim desplaz As Integer = 0
+
+                For fila As Integer = 1 To cantFilas
+                    dr = ds.Tables("dtExcel").NewRow()
+                    Dim sb As String = ""
+
+
+                    'ver si este renglon es el pie, entonces agrego tantos renglones en blanco como corresponda
+
+
+                    Dim primeracelda = CType(oSheet.Cells(fila, 1), Microsoft.Office.Interop.Excel.Range).Text.ToString
+                    If primeracelda.Contains("<PIE>") Then
+                        For auxfila = fila To RENGLON_PIE
+                            PrintLine(nf, "")
+                            desplaz += 1
+                            iCuentaRenglones += 1
+
+                            'si es el segundo pie que aparece, van a haber renglones de mas -no es el caso, el informe no agrega un segundo pie
+                            'agregar los renglones en blanco, pero despues no agregarlos en el salto de pagina
+                        Next
+                    End If
+
+
+
+
+                    For col As Integer = 1 To MAXCOLS
+
+                        'traigo la celda y la pongo en una variable Range (no sé por qué)
+                        oRng = CType(oSheet.Cells(fila, col), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                        'Range.Text << Formatted value - datatype is always "string"
+                        'Range.Value << actual datatype ex: double, datetime etc
+                        'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                        If IsNumeric(oRng.Value) Then 'me fijo si es numerica, por el asuntillo de la coma -y si es la hora?????
+                            s(col - 1) = oRng.Value.ToString '& TAB
+                        Else
+
+                            Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                            s(col - 1) = Left(strValue, 50) '& TAB
+                        End If
+
+
+                        s(col - 1) = s(col - 1).Replace("<CAB>", "")
+                        s(col - 1) = s(col - 1).Replace("<DET2>", "")
+                        s(col - 1) = s(col - 1).Replace("<PIE>", "")
+
+                        'sb&= anchocols(
+
+
+
+                    Next col
+
+                    'http://msmvps.com/blogs/deborahk/archive/2009/07/21/formatting-text-files.aspx
+                    Dim builder As New System.Text.StringBuilder
+
+                    'tenes 150 caracteres de ancho para usar
+                    'tenes 150 caracteres de ancho para usar
+                    'tenes 150 caracteres de ancho para usar
+                    'tenes 150 caracteres de ancho para usar
+                    'tenes 150 caracteres de ancho para usar
+                    'tenes 150 caracteres de ancho para usar
+
+                    If primeracelda.Contains("<CAB>") Then
+                        builder.AppendFormat(COLS_ENCABEZADO, _
+                                        s(0), _
+                                        s(1), _
+                                        s(2), _
+                                        s(3), _
+                                        s(4), _
+                                        s(5), _
+                                        s(6), _
+                                        s(7), _
+                                        s(8), _
+                                        s(8), _
+                                        s(9), _
+                                        s(10), _
+                                        s(11), _
+                                        s(12), _
+                                        s(13))
+
+                    ElseIf primeracelda.Contains("<DET2>") Then
+
+                        'Const COLS_DETALLEOBSERVACIONES = "{0,-100}{11,10}{12,10}{13,30}"
+
+                        builder.AppendFormat(COLS_DETALLEOBSERVACIONES, _
+                                        s(0), _
+                                        s(1), _
+                                        s(2), _
+                                        s(3), _
+                                        s(4), _
+                                        s(5), _
+                                        s(6), _
+                                        s(7), _
+                                        s(8), _
+                                        s(9), _
+                                        Left(s(10), 10), _
+                                        Left(s(11), 10), _
+                                        Left(s(12), 10), _
+                                        Left(s(13), 30))
+                    Else
+
+                        'Const COLS_DETALLE = "{0,12}{1,18}     {2,-5}{3,-3}{4,8}{5,9}{6,22}{7,7}{8,13}{9,15}{10,10}{11,4}{12,10}{13,10}"
+
+                        builder.AppendFormat(COLS_DETALLE, _
+                                       Left(s(0), 12), _
+                                       Left(s(1), 18), _
+                                       Left(s(2), 5), _
+                                       Left(s(3), 3), _
+                                       Left(s(4), 8), _
+                                       Left(s(5), 9), _
+                                       Left(s(6), 22), _
+                                       Left(s(7), 7), _
+                                       Left(s(8), 13), _
+                                       Left(s(9), 15), _
+                                       Left(s(10), 10), _
+                                       Left(s(11), 4), _
+                                       Left(s(12), 10), _
+                                        Left(s(13), 10))
+
+                    End If
+
+
+                    sb = builder.ToString
+
+
+                    '/////////////////////////////////////
+                    'hacer un rtrim de los tabs 
+                    For n = sb.Length - 1 To 0 Step -1
+                        If sb(n) = vbCr Then Continue For
+                        If sb(n) = vbCrLf Then Continue For
+                        If sb(n) = vbLf Then Continue For
+                        If sb(n) = TAB Then
+                            Dim p = New StringBuilder(sb)
+                            p(n) = " "
+                            sb = p.ToString
+                            Continue For
+                        End If
+
+                        Exit For 'encontré otro caracter, entonces rajo
+                    Next
+
+                    sb = Left(sb, RENGLON_ANCHO)
+                    '/////////////////////////////////////
+
+
+
+                    PrintLine(nf, sb)
+                    iCuentaRenglones += 1
+
+
+
+                    If primeracelda.Contains("<CAB>") And bpuesto Then
+                        bpuesto = False
+                        For n = 1 To SEPARACION_ENCAB_DETALLE
+                            PrintLine(nf, "")
+                            iCuentaRenglones += 1
+
+                        Next
+                    Else
+                        bpuesto = True
+                    End If
+
+
+
+                    If desplaz > 1 Then Exit For 'si es el pie, sale del for
+
+                Next fila
+
+
+
+
+                'For i As Integer = cantFilas + desplaz To RENGLONES_POR_PAGINA / 2 - OFFSETFINAL 'las notas de entrega son 2 por pagina. -6 por los renglones en blanco del principio
+                '    PrintLine(nf, "")
+                '    iCuentaRenglones += 1
+
+                'Next i
+
+                Do While iCuentaRenglones < RENGLONES_POR_PAGINA / 2
+                    PrintLine(nf, "")
+                    iCuentaRenglones += 1
+                Loop
+
+
+
+
+
+
+
+
+                'como verificar que hay 36 renglones por notita? ¿me estoy pasando siempre, 
+                'o en alguna me quedo corto?
+
+
+
+
+                'PrintLine(nf, PAGEFEED) 'poner un page feed?
+                Debug.Assert(iCuentaRenglones = RENGLONES_POR_PAGINA / 2)
+
+                iCuentaRenglones = 0
+
+            Next sht
+
+
+
+            FileClose(nf)
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+
+
+            Return output
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Return Nothing
+
+
+            '            1. In DCOMCNFG, right click on the My Computer and select properties.
+            '2. Choose the COM Securities tab
+            '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+            '  \Users.
+            '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+            '    \Users
+            '   Press OK and thats it. i can run my application now
+        Finally
+            Try
+                'The service (excel.exe) will continue to run
+                If Not oWB Is Nothing Then oWB.Close(False)
+                NAR(oWB)
+                oWBs.Close()
+                NAR(oWBs)
+                'quit and dispose app
+                oXL.Quit()
+                NAR(oXL)
+                'VERY IMPORTANT
+                GC.Collect()
+
+                'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+            End Try
+        End Try
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+    Public Shared Sub CopyTreeview(treeview1 As TreeView, treeview2 As TreeView)
+
+        Dim newTn As TreeNode
+        For Each tn As TreeNode In treeview1.Nodes
+
+            newTn = New TreeNode(tn.Text, tn.Value, tn.ImageUrl, tn.NavigateUrl, tn.Target)
+            newTn.SelectAction = TreeNodeSelectAction.Expand
+            newTn.Selected = tn.Selected
+            newTn.Expanded = tn.Selected
+
+            CopyChildsTreeview(newTn, tn)
+            treeview2.Nodes.Add(newTn)
+        Next
+    End Sub
+
+    Public Shared Sub CopyChildsTreeview(parent As TreeNode, willCopied As TreeNode)
+        Dim newTn As TreeNode
+        For Each tn As TreeNode In willCopied.ChildNodes
+            newTn = New TreeNode(tn.Text, tn.Value, tn.ImageUrl, tn.NavigateUrl, tn.Target)
+            newTn.Selected = tn.Selected
+            newTn.Expanded = tn.Selected
+
+            parent.ChildNodes.Add(newTn)
+        Next
+    End Sub
+
+
+
+End Class
