@@ -14617,7 +14617,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
 
-    Public Sub WilliamsFacturaWordToTxtMasMergeOpcional(Optional ByVal fileDirectory As String = "C:\documents\", Optional ByVal output As String = "Merged Document.doc", Optional ByVal plantillaDOT As Object = "", Optional sc As String = "", Optional DesdeIdFactura As Long = 0)
+    Public Shared Sub WilliamsFacturaWordToTxtMasMergeOpcional(Optional ByVal fileDirectory As String = "C:\documents\", Optional ByVal output As String = "Merged Document.doc", Optional ByVal plantillaDOT As Object = "", Optional sc As String = "", Optional DesdeIdFactura As Long = 0)
         Dim wdPageBreak = 7
         Dim wdStory = 6
         Dim oMissing = System.Reflection.Missing.Value
@@ -14715,9 +14715,8 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
                             renglonesorig(n) = renglonesorig(n).Replace("<PU>", "")
                             renglonesorig(n) = renglonesorig(n).Replace("</PU>", "")
                         Else
-                            SacarTagsDePrecioUnitario(renglonesorig(n))
+                            ImpresoraMatrizDePuntosEPSONTexto.SacarTagsDePrecioUnitario(renglonesorig(n))
                         End If
-
 
                         'si está, lo de la izquierda lo justifico a la izquierda, y el pedazo de la derecha con justificado a derecha
                         Dim s1 = Left(renglonesorig(n), posTab - 1)
@@ -14809,7 +14808,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
     End Sub
 
-    Sub SacarTagsDePrecioUnitario(ByRef s As String)
+    Shared Sub SacarTagsDePrecioUnitario(ByRef s As String)
         Dim regex As New System.Text.RegularExpressions.Regex("(<PU.*?)(?:()+)(.*?)(</PU>)")
 
         'Dim newString = regex.Replace(s, "$1<a href=""$3"">$3</a>$4$5")
@@ -14818,7 +14817,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
 
-    Public Function ExcelToText(ByVal fileExcelName As String) As String
+    Public Shared Function ExcelToText(ByVal fileExcelName As String) As String
         'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
         Dim oXL As Excel.Application
@@ -15482,7 +15481,7 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
 
-    Public Function ExcelToTextNotasDeEntrega(ByVal fileExcelName As String) As String
+    Public Shared Function ExcelToTextNotasDeEntrega(ByVal fileExcelName As String) As String
         'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
         Dim oXL As Excel.Application
