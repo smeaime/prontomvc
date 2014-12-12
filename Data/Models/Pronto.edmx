@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -5379,12 +5379,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
-    [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
-    [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
-    [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
-    FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
+            <DefiningQuery>
+              SELECT
+              [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo],
+              [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio],
+              [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio],
+              [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
+              FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]
+            </DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
             <End Role="Rubros" EntitySet="Rubros" />
@@ -5807,7 +5809,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="Valores" EntitySet="Valores" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DemoProntoModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -6248,7 +6251,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
           </AssociationSet>
           <FunctionImport Name="Articulos_TX_DatosConCuenta" ReturnType="Collection(DemoProntoModel.Articulos_TX_DatosConCuenta_Result)">
-          <Parameter Name="IdArticulo" Mode="In" Type="Int32" />
+            <Parameter Name="IdArticulo" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="DetalleFacturasClientesPRESTOes" EntityType="DemoProntoModel.DetalleFacturasClientesPRESTO" />
           <EntitySet Name="DetalleFacturasOrdenesCompras" EntityType="DemoProntoModel.DetalleFacturasOrdenesCompra" />
@@ -6713,7 +6716,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <EntitySet Name="Materiales" EntityType="DemoProntoModel.Materiale" />
           <EntitySet Name="Modelos" EntityType="DemoProntoModel.Modelo" />
           <EntitySet Name="Actividades_Proveedores" EntityType="DemoProntoModel.Actividades_Proveedore" />
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
             <PropertyRef Name="IdArticulo" />
@@ -6955,7 +6958,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdTipoArticulo" Type="Int32" />
           <Property Name="FechaUltimoCostoReposicion" Type="DateTime" Precision="3" />
           <Property Name="ADistribuirEnPresupuestoDeObra" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
-      
+
 
           <NavigationProperty Name="Unidad" Relationship="DemoProntoModel.FK_Articulos_Unidades" FromRole="Articulos" ToRole="Unidades" />
           <NavigationProperty Name="DetalleRequerimientos" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Articulos" FromRole="Articulos" ToRole="DetalleRequerimientos" />
@@ -6972,7 +6975,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="DetalleArticulosDocumentos" Relationship="DemoProntoModel.FK_DetalleArticulosDocumentos_Articulos" FromRole="Articulo" ToRole="DetalleArticulosDocumento" />
           <NavigationProperty Name="DetalleArticulosImagenes" Relationship="DemoProntoModel.FK_DetalleArticulosImagenes_Articulos" FromRole="Articulo" ToRole="DetalleArticulosImagene" />
           <NavigationProperty Name="DetalleArticulosUnidades" Relationship="DemoProntoModel.FK_DetalleArticulosUnidades_Articulos" FromRole="Articulo" ToRole="DetalleArticulosUnidade" />
-             
+
           <Property Type="Int32" Name="IdCurvaTalle" />
           <Property Type="String" Name="Curva" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="GenerarConsumosAutomaticamente" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -7069,7 +7072,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="MoP" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
           <Property Name="IdDetalleObraDestino" Type="Int32" />
           <Property Name="IdPresupuestoObraRubro" Type="Int32" />
-         
+
           <NavigationProperty Name="Articulo" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Articulos" FromRole="DetalleRequerimientos" ToRole="Articulos" />
           <NavigationProperty Name="Unidad" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Unidades" FromRole="DetalleRequerimientos" ToRole="Unidades" />
           <NavigationProperty Name="ControlCalidad" Relationship="DemoProntoModel.FK_DetalleRequerimientos_ControlesCalidad" FromRole="DetalleRequerimiento" ToRole="ControlCalidad" />
@@ -7080,7 +7083,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="DateTime" Name="FechaUltimaObservacionFirmante_1" Precision="3" />
           <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_DetalleRequerimientos" FromRole="DetalleRequerimiento" ToRole="DetallePedido" />
           <Property Name="IdPresupuestoObrasNodo" Type="Int32" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="Obra">
           <Key>
             <PropertyRef Name="IdObra" />
@@ -7215,7 +7218,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Requerimientos_Obras" FromRole="Requerimientos" ToRole="Obras" />
           <NavigationProperty Name="Sectores" Relationship="DemoProntoModel.FK_Requerimientos_Sectores" FromRole="Requerimiento" ToRole="Sector" />
           <NavigationProperty Name="DetalleRequerimientos" Relationship="DemoProntoModel.FK_DetalleRequerimientos_Requerimientos" FromRole="Requerimiento" ToRole="DetalleRequerimiento" />
-       
+
           <Property Type="String" Name="FechasLiberacion" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Presupuestos" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Comparativas" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -7980,7 +7983,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="GravadoDefault" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Grupo" />
           <Property Type="String" Name="CodigoAFIP" MaxLength="20" FixedLength="false" Unicode="false" />
-          
+
           <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_Conceptos_Cuentas" FromRole="Concepto" ToRole="Cuenta" />
           <Property Type="Decimal" Name="CoeficienteAuxiliar_1" Precision="18" Scale="2" />
           <Property Type="String" Name="GeneraComision" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -8262,7 +8265,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdPuntoVenta" />
           <Property Type="Int32" Name="PuntoVenta" />
           <Property Type="Int32" Name="IdMonedaOriginal" />
-         
+
           <NavigationProperty Name="DetallePedidos" Relationship="DemoProntoModel.FK_DetallePedidos_Pedidos" FromRole="Pedido" ToRole="DetallePedido" />
           <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Pedidos_Monedas" FromRole="Pedido" ToRole="Moneda" />
           <NavigationProperty Name="Proveedor" Relationship="DemoProntoModel.FK_Pedidos_Proveedores" FromRole="Pedido" ToRole="Proveedor" />
@@ -8525,7 +8528,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="CodigoNormaRetencion" />
           <Property Type="Int32" Name="CodigoNormaPercepcion" />
           <Property Type="Int32" Name="CodigoActividad" />
-          
+
           <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_CatIIBB" FromRole="IBCondicion" ToRole="Cliente" />
           <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_CondicionIIBB" FromRole="IBCondicion" ToRole="Cliente" />
           <NavigationProperty Name="CuentaIIBBnormal" Relationship="DemoProntoModel.FK_IBCondiciones_Cuentas_IIBB" FromRole="IBCondicion" ToRole="Cuenta" />
@@ -8656,7 +8659,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="CodigoPostal" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdProvincia" />
           <Property Type="Byte" Name="EnviarEmail" />
-         
+
           <NavigationProperty Name="Clientes" Relationship="DemoProntoModel.FK_Clientes_LocalidadEntrega" FromRole="Localidade" ToRole="Cliente" />
           <NavigationProperty Name="Clientes1" Relationship="DemoProntoModel.FK_Clientes_Localidades" FromRole="Localidade" ToRole="Cliente" />
           <NavigationProperty Name="Proveedores" Relationship="DemoProntoModel.FK_Proveedores_Localidades" FromRole="Localidade" ToRole="Proveedor" />
@@ -8742,7 +8745,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <NavigationProperty Name="IBCondiciones1" Relationship="DemoProntoModel.FK_IBCondiciones_Provincias_Real" FromRole="Provincia" ToRole="IBCondicion" />
           <NavigationProperty Name="Pais" Relationship="DemoProntoModel.FK_Provincias_Paises" FromRole="Provincia" ToRole="Pais" />
           <NavigationProperty Name="Proveedores" Relationship="DemoProntoModel.FK_Proveedores_Provincias" FromRole="Provincia" ToRole="Proveedor" />
-         
+
           <NavigationProperty Name="DetalleClientesLugaresEntregas" Relationship="DemoProntoModel.FK_DetalleClientesLugaresEntrega_Provincias" FromRole="Provincia" ToRole="DetalleClientesLugaresEntrega" />
           <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Provincia" FromRole="Provincia" ToRole="Factura" />
           <Property Type="String" Name="CodigoESRI_1" MaxLength="2" FixedLength="false" Unicode="false" />
@@ -9405,7 +9408,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="String" Name="TextoAuxiliar1" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="TextoAuxiliar2" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="TextoAuxiliar3" MaxLength="100" FixedLength="false" Unicode="false" />
-        
+
           <NavigationProperty Name="DetalleProveedores" Relationship="DemoProntoModel.FK_DetalleProveedores_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedore" />
           <NavigationProperty Name="DetalleProveedoresIBs" Relationship="DemoProntoModel.FK_DetalleProveedoresIB_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedoresIB" />
           <NavigationProperty Name="DetalleProveedoresRubros" Relationship="DemoProntoModel.FK_DetalleProveedoresRubros_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedoresRubro" />
@@ -11188,7 +11191,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Type="Int32" Name="IdUsuarioAnulo" />
           <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DetalleComparativas" Relationship="DemoProntoModel.FK_DetalleComparativas" FromRole="Comparativa" ToRole="DetalleComparativa" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="DetalleComparativa">
           <Key>
             <PropertyRef Name="IdDetalleComparativa" />
@@ -13296,7 +13299,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-<<<<<<< HEAD
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -13312,8 +13314,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
-=======
->>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         <Association Name="FK_DetalleOrdenesPago_OrdenesPago">
           <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
           <End Type="DemoProntoModel.DetalleOrdenesPago" Role="DetalleOrdenesPago" Multiplicity="*" />
@@ -13433,401 +13433,419 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Agrupacion1" Type="Int32" />
         </EntityType>
->>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
-        </Schema>
+        >>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DemoProntoModelStoreContainer" CdmEntityContainer="DemoProntoEntities">
-          <EntitySetMapping Name="Articulos"><EntityTypeMapping TypeName="DemoProntoModel.Articulo"><MappingFragment StoreEntitySet="Articulos">
-            <ScalarProperty Name="TalleCambioPrecio2" ColumnName="TalleCambioPrecio2" />
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="DemoProntoModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="TalleCambioPrecio2" ColumnName="TalleCambioPrecio2" />
                 <ScalarProperty Name="TalleCambioPrecio" ColumnName="TalleCambioPrecio" />
                 <ScalarProperty Name="GenerarConsumosAutomaticamente" ColumnName="GenerarConsumosAutomaticamente" />
                 <ScalarProperty Name="Curva" ColumnName="Curva" />
                 <ScalarProperty Name="IdCurvaTalle" ColumnName="IdCurvaTalle" />
                 <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-            <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-            <ScalarProperty Name="IdSubrubro" ColumnName="IdSubrubro" />
-            <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
-            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-            <ScalarProperty Name="Productivo" ColumnName="Productivo" />
-            <ScalarProperty Name="Ancho" ColumnName="Ancho" />
-            <ScalarProperty Name="IdCalidad" ColumnName="IdCalidad" />
-            <ScalarProperty Name="Diametro" ColumnName="Diametro" />
-            <ScalarProperty Name="Espesor" ColumnName="Espesor" />
-            <ScalarProperty Name="IdGrado" ColumnName="IdGrado" />
-            <ScalarProperty Name="Largo" ColumnName="Largo" />
-            <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
-            <ScalarProperty Name="IdAcabado" ColumnName="IdAcabado" />
-            <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
-            <ScalarProperty Name="Serie" ColumnName="Serie" />
-            <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
-            <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-            <ScalarProperty Name="Autorizacion" ColumnName="Autorizacion" />
-            <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
-            <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-            <ScalarProperty Name="IdScheduler" ColumnName="IdScheduler" />
-            <ScalarProperty Name="Unidad1" ColumnName="Unidad1" />
-            <ScalarProperty Name="Unidad2" ColumnName="Unidad2" />
-            <ScalarProperty Name="Unidad3" ColumnName="Unidad3" />
-            <ScalarProperty Name="Unidad4" ColumnName="Unidad4" />
-            <ScalarProperty Name="Unidad5" ColumnName="Unidad5" />
-            <ScalarProperty Name="Unidad6" ColumnName="Unidad6" />
-            <ScalarProperty Name="Unidad7" ColumnName="Unidad7" />
-            <ScalarProperty Name="Unidad8" ColumnName="Unidad8" />
-            <ScalarProperty Name="Unidad9" ColumnName="Unidad9" />
-            <ScalarProperty Name="Unidad10" ColumnName="Unidad10" />
-            <ScalarProperty Name="Peso" ColumnName="Peso" />
-            <ScalarProperty Name="DiametroInterno" ColumnName="DiametroInterno" />
-            <ScalarProperty Name="IdCodigoUniversal" ColumnName="IdCodigoUniversal" />
-            <ScalarProperty Name="IdRelacion" ColumnName="IdRelacion" />
-            <ScalarProperty Name="IdForma" ColumnName="IdForma" />
-            <ScalarProperty Name="IdSerie" ColumnName="IdSerie" />
-            <ScalarProperty Name="Altura" ColumnName="Altura" />
-            <ScalarProperty Name="Diametro2" ColumnName="Diametro2" />
-            <ScalarProperty Name="IdColor" ColumnName="IdColor" />
-            <ScalarProperty Name="IdNorma" ColumnName="IdNorma" />
-            <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
-            <ScalarProperty Name="Potencia" ColumnName="Potencia" />
-            <ScalarProperty Name="IdRango" ColumnName="IdRango" />
-            <ScalarProperty Name="IdAlimentacionElectrica" ColumnName="IdAlimentacionElectrica" />
-            <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
-            <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
-            <ScalarProperty Name="IdAnioNorma" ColumnName="IdAnioNorma" />
-            <ScalarProperty Name="Unidad11" ColumnName="Unidad11" />
-            <ScalarProperty Name="Unidad12" ColumnName="Unidad12" />
-            <ScalarProperty Name="Unidad13" ColumnName="Unidad13" />
-            <ScalarProperty Name="Unidad14" ColumnName="Unidad14" />
-            <ScalarProperty Name="Unidad15" ColumnName="Unidad15" />
-            <ScalarProperty Name="IdCuantificacion" ColumnName="IdCuantificacion" />
-            <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
-            <ScalarProperty Name="IdCodigo" ColumnName="IdCodigo" />
-            <ScalarProperty Name="Charpy" ColumnName="Charpy" />
-            <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-            <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
-            <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-            <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
-            <ScalarProperty Name="EspesorBase" ColumnName="EspesorBase" />
-            <ScalarProperty Name="EspesorRevestimiento" ColumnName="EspesorRevestimiento" />
-            <ScalarProperty Name="IdCalidadBase" ColumnName="IdCalidadBase" />
-            <ScalarProperty Name="IdCalidadRevestimiento" ColumnName="IdCalidadRevestimiento" />
-            <ScalarProperty Name="IdGradoBase" ColumnName="IdGradoBase" />
-            <ScalarProperty Name="IdGradoRevestimiento" ColumnName="IdGradoRevestimiento" />
-            <ScalarProperty Name="IdBiselado" ColumnName="IdBiselado" />
-            <ScalarProperty Name="IdCalidadClad" ColumnName="IdCalidadClad" />
-            <ScalarProperty Name="IdTipoRosca" ColumnName="IdTipoRosca" />
-            <ScalarProperty Name="IdDensidad" ColumnName="IdDensidad" />
-            <ScalarProperty Name="Rpm" ColumnName="Rpm" />
-            <ScalarProperty Name="Datos1" ColumnName="Datos1" />
-            <ScalarProperty Name="Datos2" ColumnName="Datos2" />
-            <ScalarProperty Name="Datos3" ColumnName="Datos3" />
-            <ScalarProperty Name="Datos4" ColumnName="Datos4" />
-            <ScalarProperty Name="Datos5" ColumnName="Datos5" />
-            <ScalarProperty Name="Datos6" ColumnName="Datos6" />
-            <ScalarProperty Name="Datos7" ColumnName="Datos7" />
-            <ScalarProperty Name="Datos8" ColumnName="Datos8" />
-            <ScalarProperty Name="Datos9" ColumnName="Datos9" />
-            <ScalarProperty Name="Datos10" ColumnName="Datos10" />
-            <ScalarProperty Name="Unidad16" ColumnName="Unidad16" />
-            <ScalarProperty Name="Unidad17" ColumnName="Unidad17" />
-            <ScalarProperty Name="Unidad18" ColumnName="Unidad18" />
-            <ScalarProperty Name="Unidad19" ColumnName="Unidad19" />
-            <ScalarProperty Name="Unidad20" ColumnName="Unidad20" />
-            <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-            <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-            <ScalarProperty Name="RegistrarStock" ColumnName="RegistrarStock" />
-            <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
-            <ScalarProperty Name="DefineKit" ColumnName="DefineKit" />
-            <ScalarProperty Name="CostoPPP" ColumnName="CostoPPP" />
-            <ScalarProperty Name="AlicuotaIVA" ColumnName="AlicuotaIVA" />
-            <ScalarProperty Name="CostoPPPDolar" ColumnName="CostoPPPDolar" />
-            <ScalarProperty Name="IdUbicacionStandar" ColumnName="IdUbicacionStandar" />
-            <ScalarProperty Name="CostoReposicion" ColumnName="CostoReposicion" />
-            <ScalarProperty Name="CostoReposicionDolar" ColumnName="CostoReposicionDolar" />
-            <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-            <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
-            <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-            <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-            <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-            <ScalarProperty Name="NumeroManzana" ColumnName="NumeroManzana" />
-            <ScalarProperty Name="NumeroLote" ColumnName="NumeroLote" />
-            <ScalarProperty Name="ActivoFijo" ColumnName="ActivoFijo" />
-            <ScalarProperty Name="EstadoActivoFijo" ColumnName="EstadoActivoFijo" />
-            <ScalarProperty Name="NumeroActivoFijo" ColumnName="NumeroActivoFijo" />
-            <ScalarProperty Name="IdGrupoActivoFijo" ColumnName="IdGrupoActivoFijo" />
-            <ScalarProperty Name="BienImpositivo" ColumnName="BienImpositivo" />
-            <ScalarProperty Name="BienContable" ColumnName="BienContable" />
-            <ScalarProperty Name="Amortiza" ColumnName="Amortiza" />
-            <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
-            <ScalarProperty Name="IdCuentaAmortizacion" ColumnName="IdCuentaAmortizacion" />
-            <ScalarProperty Name="VidaUtilImpositiva" ColumnName="VidaUtilImpositiva" />
-            <ScalarProperty Name="VidaUtilContable" ColumnName="VidaUtilContable" />
-            <ScalarProperty Name="ValorOrigenContable" ColumnName="ValorOrigenContable" />
-            <ScalarProperty Name="ValorOrigenImpositivo" ColumnName="ValorOrigenImpositivo" />
-            <ScalarProperty Name="ValorActualizado" ColumnName="ValorActualizado" />
-            <ScalarProperty Name="ValorResidual" ColumnName="ValorResidual" />
-            <ScalarProperty Name="ValorResidualActualizado" ColumnName="ValorResidualActualizado" />
-            <ScalarProperty Name="AmortizacionEjercicio" ColumnName="AmortizacionEjercicio" />
-            <ScalarProperty Name="AmortizacionEjercicioActualizada" ColumnName="AmortizacionEjercicioActualizada" />
-            <ScalarProperty Name="AmortizacionesAcumuladas" ColumnName="AmortizacionesAcumuladas" />
-            <ScalarProperty Name="AmortizacionesAcumuladasActualizada" ColumnName="AmortizacionesAcumuladasActualizada" />
-            <ScalarProperty Name="VidaUtilImpositivaRestante" ColumnName="VidaUtilImpositivaRestante" />
-            <ScalarProperty Name="VidaUtilContableRestante" ColumnName="VidaUtilContableRestante" />
-            <ScalarProperty Name="FechaPrimeraAmortizacionImpositiva" ColumnName="FechaPrimeraAmortizacionImpositiva" />
-            <ScalarProperty Name="FechaPrimeraAmortizacionContable" ColumnName="FechaPrimeraAmortizacionContable" />
-            <ScalarProperty Name="IdUbicacionActivoFijo" ColumnName="IdUbicacionActivoFijo" />
-            <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-            <ScalarProperty Name="FechaBajaAmortizacion" ColumnName="FechaBajaAmortizacion" />
-            <ScalarProperty Name="ParaMantenimiento" ColumnName="ParaMantenimiento" />
-            <ScalarProperty Name="IdUnidadLecturaMantenimiento" ColumnName="IdUnidadLecturaMantenimiento" />
-            <ScalarProperty Name="LecturaAcumulada" ColumnName="LecturaAcumulada" />
-            <ScalarProperty Name="LecturaBase" ColumnName="LecturaBase" />
-            <ScalarProperty Name="UltimaLectura" ColumnName="UltimaLectura" />
-            <ScalarProperty Name="FechaUltimaLectura" ColumnName="FechaUltimaLectura" />
-            <ScalarProperty Name="EstimadoAnual" ColumnName="EstimadoAnual" />
-            <ScalarProperty Name="NumeroInventario" ColumnName="NumeroInventario" />
-            <ScalarProperty Name="ModeloMotor" ColumnName="ModeloMotor" />
-            <ScalarProperty Name="EquipoEnObra" ColumnName="EquipoEnObra" />
-            <ScalarProperty Name="EstadoEquipo" ColumnName="EstadoEquipo" />
-            <ScalarProperty Name="EsConsumible" ColumnName="EsConsumible" />
-            <ScalarProperty Name="FechaUltimaModificacionArticulo" ColumnName="FechaUltimaModificacionArticulo" />
-            <ScalarProperty Name="EntidadOrigen" ColumnName="EntidadOrigen" />
-            <ScalarProperty Name="ComprobanteCompra" ColumnName="ComprobanteCompra" />
-            <ScalarProperty Name="ModeloEspecifico" ColumnName="ModeloEspecifico" />
-            <ScalarProperty Name="NumeroPatente" ColumnName="NumeroPatente" />
-            <ScalarProperty Name="NumeroMotor" ColumnName="NumeroMotor" />
-            <ScalarProperty Name="NumeroChasis" ColumnName="NumeroChasis" />
-            <ScalarProperty Name="AñoFabricacion" ColumnName="AñoFabricacion" />
-            <ScalarProperty Name="AñosAmortizacion" ColumnName="AñosAmortizacion" />
-            <ScalarProperty Name="AñoAlta" ColumnName="AñoAlta" />
-            <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
-            <ScalarProperty Name="NumeroGarantia" ColumnName="NumeroGarantia" />
-            <ScalarProperty Name="FechaCaducidadGarantia" ColumnName="FechaCaducidadGarantia" />
-            <ScalarProperty Name="TipoCoberturaSeguro" ColumnName="TipoCoberturaSeguro" />
-            <ScalarProperty Name="NumeroPolizaSeguro" ColumnName="NumeroPolizaSeguro" />
-            <ScalarProperty Name="CompañiaSeguro" ColumnName="CompañiaSeguro" />
-            <ScalarProperty Name="FechaVigenciaSeguro" ColumnName="FechaVigenciaSeguro" />
-            <ScalarProperty Name="FechaVencimientoVerificacionTecnica" ColumnName="FechaVencimientoVerificacionTecnica" />
-            <ScalarProperty Name="CalculaAmortizacion" ColumnName="CalculaAmortizacion" />
-            <ScalarProperty Name="UltimoRevaluoContable" ColumnName="UltimoRevaluoContable" />
-            <ScalarProperty Name="FechaUltimoRevaluo" ColumnName="FechaUltimoRevaluo" />
-            <ScalarProperty Name="CodigoLoteo" ColumnName="CodigoLoteo" />
-            <ScalarProperty Name="Adrema" ColumnName="Adrema" />
-            <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-            <ScalarProperty Name="ConsumoStandarCombustible" ColumnName="ConsumoStandarCombustible" />
-            <ScalarProperty Name="UbicacionActivoFijo" ColumnName="UbicacionActivoFijo" />
-            <ScalarProperty Name="CalculaValorActualizado" ColumnName="CalculaValorActualizado" />
-            <ScalarProperty Name="ParaPRONTO_MANTENIMIENTO" ColumnName="ParaPRONTO_MANTENIMIENTO" />
-            <ScalarProperty Name="PosicionAduana" ColumnName="PosicionAduana" />
-            <ScalarProperty Name="Alquilado" ColumnName="Alquilado" />
-            <ScalarProperty Name="IdMarcaMotor" ColumnName="IdMarcaMotor" />
-            <ScalarProperty Name="NumeroSerieMotor" ColumnName="NumeroSerieMotor" />
-            <ScalarProperty Name="VidaUtilTecnica" ColumnName="VidaUtilTecnica" />
-            <ScalarProperty Name="ValorCompra" ColumnName="ValorCompra" />
-            <ScalarProperty Name="IdMonedaCompra" ColumnName="IdMonedaCompra" />
-            <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
-            <ScalarProperty Name="DocumentoAlta" ColumnName="DocumentoAlta" />
-            <ScalarProperty Name="DocumentoBaja" ColumnName="DocumentoBaja" />
-            <ScalarProperty Name="IdArticuloAsociado" ColumnName="IdArticuloAsociado" />
-            <ScalarProperty Name="RegistroUnicoTransporteAutomotor" ColumnName="RegistroUnicoTransporteAutomotor" />
-            <ScalarProperty Name="TieneGPS" ColumnName="TieneGPS" />
-            <ScalarProperty Name="CondicionActual" ColumnName="CondicionActual" />
-            <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
-            <ScalarProperty Name="Activo" ColumnName="Activo" />
-            <ScalarProperty Name="Auxiliar1" ColumnName="Auxiliar1" />
-            <ScalarProperty Name="Auxiliar2" ColumnName="Auxiliar2" />
-            <ScalarProperty Name="Auxiliar3" ColumnName="Auxiliar3" />
-            <ScalarProperty Name="Auxiliar4" ColumnName="Auxiliar4" />
-            <ScalarProperty Name="Auxiliar5" ColumnName="Auxiliar5" />
-            <ScalarProperty Name="Auxiliar6" ColumnName="Auxiliar6" />
-            <ScalarProperty Name="Auxiliar7" ColumnName="Auxiliar7" />
-            <ScalarProperty Name="Auxiliar8" ColumnName="Auxiliar8" />
-            <ScalarProperty Name="Auxiliar9" ColumnName="Auxiliar9" />
-            <ScalarProperty Name="Auxiliar10" ColumnName="Auxiliar10" />
-            <ScalarProperty Name="Auxiliar11" ColumnName="Auxiliar11" />
-            <ScalarProperty Name="Auxiliar12" ColumnName="Auxiliar12" />
-            <ScalarProperty Name="Auxiliar13" ColumnName="Auxiliar13" />
-            <ScalarProperty Name="Auxiliar14" ColumnName="Auxiliar14" />
-            <ScalarProperty Name="Auxiliar15" ColumnName="Auxiliar15" />
-            <ScalarProperty Name="Auxiliar16" ColumnName="Auxiliar16" />
-            <ScalarProperty Name="Auxiliar17" ColumnName="Auxiliar17" />
-            <ScalarProperty Name="Auxiliar18" ColumnName="Auxiliar18" />
-            <ScalarProperty Name="Auxiliar19" ColumnName="Auxiliar19" />
-            <ScalarProperty Name="Auxiliar20" ColumnName="Auxiliar20" />
-            <ScalarProperty Name="Auxiliar21" ColumnName="Auxiliar21" />
-            <ScalarProperty Name="Auxiliar22" ColumnName="Auxiliar22" />
-            <ScalarProperty Name="Auxiliar23" ColumnName="Auxiliar23" />
-            <ScalarProperty Name="Auxiliar24" ColumnName="Auxiliar24" />
-            <ScalarProperty Name="Auxiliar25" ColumnName="Auxiliar25" />
-            <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
-            <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
-            <ScalarProperty Name="AuxiliarString3" ColumnName="AuxiliarString3" />
-            <ScalarProperty Name="AuxiliarString4" ColumnName="AuxiliarString4" />
-            <ScalarProperty Name="AuxiliarString5" ColumnName="AuxiliarString5" />
-            <ScalarProperty Name="AuxiliarString6" ColumnName="AuxiliarString6" />
-            <ScalarProperty Name="AuxiliarString7" ColumnName="AuxiliarString7" />
-            <ScalarProperty Name="AuxiliarString8" ColumnName="AuxiliarString8" />
-            <ScalarProperty Name="AuxiliarString9" ColumnName="AuxiliarString9" />
-            <ScalarProperty Name="AuxiliarString10" ColumnName="AuxiliarString10" />
-            <ScalarProperty Name="CodigoAlternativo" ColumnName="CodigoAlternativo" />
-            <ScalarProperty Name="IdCuentaCompras" ColumnName="IdCuentaCompras" />
-            <ScalarProperty Name="StockReposicion" ColumnName="StockReposicion" />
-            <ScalarProperty Name="MarcaStock" ColumnName="MarcaStock" />
-            <ScalarProperty Name="CostoInicial" ColumnName="CostoInicial" />
-            <ScalarProperty Name="ConsumirPorOT" ColumnName="ConsumirPorOT" />
-            <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
-            <ScalarProperty Name="IdTipoEquipo" ColumnName="IdTipoEquipo" />
-            <ScalarProperty Name="Replica" ColumnName="Replica" />
-            <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
-            <ScalarProperty Name="IdTipoArticulo" ColumnName="IdTipoArticulo" />
-            <ScalarProperty Name="FechaUltimoCostoReposicion" ColumnName="FechaUltimoCostoReposicion" />
-            <ScalarProperty Name="ADistribuirEnPresupuestoDeObra" ColumnName="ADistribuirEnPresupuestoDeObra" />
-            </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="ControlesCalidads"><EntityTypeMapping TypeName="DemoProntoModel.ControlCalidad"><MappingFragment StoreEntitySet="ControlesCalidad">
-            <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
-            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-            <ScalarProperty Name="Inspeccion" ColumnName="Inspeccion" />
-            <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
-            <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="DetalleRequerimientos"><EntityTypeMapping TypeName="DemoProntoModel.DetalleRequerimiento"><MappingFragment StoreEntitySet="DetalleRequerimientos">
-		  
-                                <ScalarProperty Name="IdPresupuestoObrasNodo" ColumnName="IdPresupuestoObrasNodo" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdSubrubro" ColumnName="IdSubrubro" />
+                <ScalarProperty Name="IdFamilia" ColumnName="IdFamilia" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Productivo" ColumnName="Productivo" />
+                <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+                <ScalarProperty Name="IdCalidad" ColumnName="IdCalidad" />
+                <ScalarProperty Name="Diametro" ColumnName="Diametro" />
+                <ScalarProperty Name="Espesor" ColumnName="Espesor" />
+                <ScalarProperty Name="IdGrado" ColumnName="IdGrado" />
+                <ScalarProperty Name="Largo" ColumnName="Largo" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="IdAcabado" ColumnName="IdAcabado" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="Autorizacion" ColumnName="Autorizacion" />
+                <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="IdScheduler" ColumnName="IdScheduler" />
+                <ScalarProperty Name="Unidad1" ColumnName="Unidad1" />
+                <ScalarProperty Name="Unidad2" ColumnName="Unidad2" />
+                <ScalarProperty Name="Unidad3" ColumnName="Unidad3" />
+                <ScalarProperty Name="Unidad4" ColumnName="Unidad4" />
+                <ScalarProperty Name="Unidad5" ColumnName="Unidad5" />
+                <ScalarProperty Name="Unidad6" ColumnName="Unidad6" />
+                <ScalarProperty Name="Unidad7" ColumnName="Unidad7" />
+                <ScalarProperty Name="Unidad8" ColumnName="Unidad8" />
+                <ScalarProperty Name="Unidad9" ColumnName="Unidad9" />
+                <ScalarProperty Name="Unidad10" ColumnName="Unidad10" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="DiametroInterno" ColumnName="DiametroInterno" />
+                <ScalarProperty Name="IdCodigoUniversal" ColumnName="IdCodigoUniversal" />
+                <ScalarProperty Name="IdRelacion" ColumnName="IdRelacion" />
+                <ScalarProperty Name="IdForma" ColumnName="IdForma" />
+                <ScalarProperty Name="IdSerie" ColumnName="IdSerie" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Diametro2" ColumnName="Diametro2" />
+                <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+                <ScalarProperty Name="IdNorma" ColumnName="IdNorma" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="IdRango" ColumnName="IdRango" />
+                <ScalarProperty Name="IdAlimentacionElectrica" ColumnName="IdAlimentacionElectrica" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdAnioNorma" ColumnName="IdAnioNorma" />
+                <ScalarProperty Name="Unidad11" ColumnName="Unidad11" />
+                <ScalarProperty Name="Unidad12" ColumnName="Unidad12" />
+                <ScalarProperty Name="Unidad13" ColumnName="Unidad13" />
+                <ScalarProperty Name="Unidad14" ColumnName="Unidad14" />
+                <ScalarProperty Name="Unidad15" ColumnName="Unidad15" />
+                <ScalarProperty Name="IdCuantificacion" ColumnName="IdCuantificacion" />
+                <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
+                <ScalarProperty Name="IdCodigo" ColumnName="IdCodigo" />
+                <ScalarProperty Name="Charpy" ColumnName="Charpy" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="EspesorBase" ColumnName="EspesorBase" />
+                <ScalarProperty Name="EspesorRevestimiento" ColumnName="EspesorRevestimiento" />
+                <ScalarProperty Name="IdCalidadBase" ColumnName="IdCalidadBase" />
+                <ScalarProperty Name="IdCalidadRevestimiento" ColumnName="IdCalidadRevestimiento" />
+                <ScalarProperty Name="IdGradoBase" ColumnName="IdGradoBase" />
+                <ScalarProperty Name="IdGradoRevestimiento" ColumnName="IdGradoRevestimiento" />
+                <ScalarProperty Name="IdBiselado" ColumnName="IdBiselado" />
+                <ScalarProperty Name="IdCalidadClad" ColumnName="IdCalidadClad" />
+                <ScalarProperty Name="IdTipoRosca" ColumnName="IdTipoRosca" />
+                <ScalarProperty Name="IdDensidad" ColumnName="IdDensidad" />
+                <ScalarProperty Name="Rpm" ColumnName="Rpm" />
+                <ScalarProperty Name="Datos1" ColumnName="Datos1" />
+                <ScalarProperty Name="Datos2" ColumnName="Datos2" />
+                <ScalarProperty Name="Datos3" ColumnName="Datos3" />
+                <ScalarProperty Name="Datos4" ColumnName="Datos4" />
+                <ScalarProperty Name="Datos5" ColumnName="Datos5" />
+                <ScalarProperty Name="Datos6" ColumnName="Datos6" />
+                <ScalarProperty Name="Datos7" ColumnName="Datos7" />
+                <ScalarProperty Name="Datos8" ColumnName="Datos8" />
+                <ScalarProperty Name="Datos9" ColumnName="Datos9" />
+                <ScalarProperty Name="Datos10" ColumnName="Datos10" />
+                <ScalarProperty Name="Unidad16" ColumnName="Unidad16" />
+                <ScalarProperty Name="Unidad17" ColumnName="Unidad17" />
+                <ScalarProperty Name="Unidad18" ColumnName="Unidad18" />
+                <ScalarProperty Name="Unidad19" ColumnName="Unidad19" />
+                <ScalarProperty Name="Unidad20" ColumnName="Unidad20" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="RegistrarStock" ColumnName="RegistrarStock" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="DefineKit" ColumnName="DefineKit" />
+                <ScalarProperty Name="CostoPPP" ColumnName="CostoPPP" />
+                <ScalarProperty Name="AlicuotaIVA" ColumnName="AlicuotaIVA" />
+                <ScalarProperty Name="CostoPPPDolar" ColumnName="CostoPPPDolar" />
+                <ScalarProperty Name="IdUbicacionStandar" ColumnName="IdUbicacionStandar" />
+                <ScalarProperty Name="CostoReposicion" ColumnName="CostoReposicion" />
+                <ScalarProperty Name="CostoReposicionDolar" ColumnName="CostoReposicionDolar" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="NumeroManzana" ColumnName="NumeroManzana" />
+                <ScalarProperty Name="NumeroLote" ColumnName="NumeroLote" />
+                <ScalarProperty Name="ActivoFijo" ColumnName="ActivoFijo" />
+                <ScalarProperty Name="EstadoActivoFijo" ColumnName="EstadoActivoFijo" />
+                <ScalarProperty Name="NumeroActivoFijo" ColumnName="NumeroActivoFijo" />
+                <ScalarProperty Name="IdGrupoActivoFijo" ColumnName="IdGrupoActivoFijo" />
+                <ScalarProperty Name="BienImpositivo" ColumnName="BienImpositivo" />
+                <ScalarProperty Name="BienContable" ColumnName="BienContable" />
+                <ScalarProperty Name="Amortiza" ColumnName="Amortiza" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="IdCuentaAmortizacion" ColumnName="IdCuentaAmortizacion" />
+                <ScalarProperty Name="VidaUtilImpositiva" ColumnName="VidaUtilImpositiva" />
+                <ScalarProperty Name="VidaUtilContable" ColumnName="VidaUtilContable" />
+                <ScalarProperty Name="ValorOrigenContable" ColumnName="ValorOrigenContable" />
+                <ScalarProperty Name="ValorOrigenImpositivo" ColumnName="ValorOrigenImpositivo" />
+                <ScalarProperty Name="ValorActualizado" ColumnName="ValorActualizado" />
+                <ScalarProperty Name="ValorResidual" ColumnName="ValorResidual" />
+                <ScalarProperty Name="ValorResidualActualizado" ColumnName="ValorResidualActualizado" />
+                <ScalarProperty Name="AmortizacionEjercicio" ColumnName="AmortizacionEjercicio" />
+                <ScalarProperty Name="AmortizacionEjercicioActualizada" ColumnName="AmortizacionEjercicioActualizada" />
+                <ScalarProperty Name="AmortizacionesAcumuladas" ColumnName="AmortizacionesAcumuladas" />
+                <ScalarProperty Name="AmortizacionesAcumuladasActualizada" ColumnName="AmortizacionesAcumuladasActualizada" />
+                <ScalarProperty Name="VidaUtilImpositivaRestante" ColumnName="VidaUtilImpositivaRestante" />
+                <ScalarProperty Name="VidaUtilContableRestante" ColumnName="VidaUtilContableRestante" />
+                <ScalarProperty Name="FechaPrimeraAmortizacionImpositiva" ColumnName="FechaPrimeraAmortizacionImpositiva" />
+                <ScalarProperty Name="FechaPrimeraAmortizacionContable" ColumnName="FechaPrimeraAmortizacionContable" />
+                <ScalarProperty Name="IdUbicacionActivoFijo" ColumnName="IdUbicacionActivoFijo" />
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+                <ScalarProperty Name="FechaBajaAmortizacion" ColumnName="FechaBajaAmortizacion" />
+                <ScalarProperty Name="ParaMantenimiento" ColumnName="ParaMantenimiento" />
+                <ScalarProperty Name="IdUnidadLecturaMantenimiento" ColumnName="IdUnidadLecturaMantenimiento" />
+                <ScalarProperty Name="LecturaAcumulada" ColumnName="LecturaAcumulada" />
+                <ScalarProperty Name="LecturaBase" ColumnName="LecturaBase" />
+                <ScalarProperty Name="UltimaLectura" ColumnName="UltimaLectura" />
+                <ScalarProperty Name="FechaUltimaLectura" ColumnName="FechaUltimaLectura" />
+                <ScalarProperty Name="EstimadoAnual" ColumnName="EstimadoAnual" />
+                <ScalarProperty Name="NumeroInventario" ColumnName="NumeroInventario" />
+                <ScalarProperty Name="ModeloMotor" ColumnName="ModeloMotor" />
+                <ScalarProperty Name="EquipoEnObra" ColumnName="EquipoEnObra" />
+                <ScalarProperty Name="EstadoEquipo" ColumnName="EstadoEquipo" />
+                <ScalarProperty Name="EsConsumible" ColumnName="EsConsumible" />
+                <ScalarProperty Name="FechaUltimaModificacionArticulo" ColumnName="FechaUltimaModificacionArticulo" />
+                <ScalarProperty Name="EntidadOrigen" ColumnName="EntidadOrigen" />
+                <ScalarProperty Name="ComprobanteCompra" ColumnName="ComprobanteCompra" />
+                <ScalarProperty Name="ModeloEspecifico" ColumnName="ModeloEspecifico" />
+                <ScalarProperty Name="NumeroPatente" ColumnName="NumeroPatente" />
+                <ScalarProperty Name="NumeroMotor" ColumnName="NumeroMotor" />
+                <ScalarProperty Name="NumeroChasis" ColumnName="NumeroChasis" />
+                <ScalarProperty Name="AñoFabricacion" ColumnName="AñoFabricacion" />
+                <ScalarProperty Name="AñosAmortizacion" ColumnName="AñosAmortizacion" />
+                <ScalarProperty Name="AñoAlta" ColumnName="AñoAlta" />
+                <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
+                <ScalarProperty Name="NumeroGarantia" ColumnName="NumeroGarantia" />
+                <ScalarProperty Name="FechaCaducidadGarantia" ColumnName="FechaCaducidadGarantia" />
+                <ScalarProperty Name="TipoCoberturaSeguro" ColumnName="TipoCoberturaSeguro" />
+                <ScalarProperty Name="NumeroPolizaSeguro" ColumnName="NumeroPolizaSeguro" />
+                <ScalarProperty Name="CompañiaSeguro" ColumnName="CompañiaSeguro" />
+                <ScalarProperty Name="FechaVigenciaSeguro" ColumnName="FechaVigenciaSeguro" />
+                <ScalarProperty Name="FechaVencimientoVerificacionTecnica" ColumnName="FechaVencimientoVerificacionTecnica" />
+                <ScalarProperty Name="CalculaAmortizacion" ColumnName="CalculaAmortizacion" />
+                <ScalarProperty Name="UltimoRevaluoContable" ColumnName="UltimoRevaluoContable" />
+                <ScalarProperty Name="FechaUltimoRevaluo" ColumnName="FechaUltimoRevaluo" />
+                <ScalarProperty Name="CodigoLoteo" ColumnName="CodigoLoteo" />
+                <ScalarProperty Name="Adrema" ColumnName="Adrema" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="ConsumoStandarCombustible" ColumnName="ConsumoStandarCombustible" />
+                <ScalarProperty Name="UbicacionActivoFijo" ColumnName="UbicacionActivoFijo" />
+                <ScalarProperty Name="CalculaValorActualizado" ColumnName="CalculaValorActualizado" />
+                <ScalarProperty Name="ParaPRONTO_MANTENIMIENTO" ColumnName="ParaPRONTO_MANTENIMIENTO" />
+                <ScalarProperty Name="PosicionAduana" ColumnName="PosicionAduana" />
+                <ScalarProperty Name="Alquilado" ColumnName="Alquilado" />
+                <ScalarProperty Name="IdMarcaMotor" ColumnName="IdMarcaMotor" />
+                <ScalarProperty Name="NumeroSerieMotor" ColumnName="NumeroSerieMotor" />
+                <ScalarProperty Name="VidaUtilTecnica" ColumnName="VidaUtilTecnica" />
+                <ScalarProperty Name="ValorCompra" ColumnName="ValorCompra" />
+                <ScalarProperty Name="IdMonedaCompra" ColumnName="IdMonedaCompra" />
+                <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+                <ScalarProperty Name="DocumentoAlta" ColumnName="DocumentoAlta" />
+                <ScalarProperty Name="DocumentoBaja" ColumnName="DocumentoBaja" />
+                <ScalarProperty Name="IdArticuloAsociado" ColumnName="IdArticuloAsociado" />
+                <ScalarProperty Name="RegistroUnicoTransporteAutomotor" ColumnName="RegistroUnicoTransporteAutomotor" />
+                <ScalarProperty Name="TieneGPS" ColumnName="TieneGPS" />
+                <ScalarProperty Name="CondicionActual" ColumnName="CondicionActual" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Auxiliar1" ColumnName="Auxiliar1" />
+                <ScalarProperty Name="Auxiliar2" ColumnName="Auxiliar2" />
+                <ScalarProperty Name="Auxiliar3" ColumnName="Auxiliar3" />
+                <ScalarProperty Name="Auxiliar4" ColumnName="Auxiliar4" />
+                <ScalarProperty Name="Auxiliar5" ColumnName="Auxiliar5" />
+                <ScalarProperty Name="Auxiliar6" ColumnName="Auxiliar6" />
+                <ScalarProperty Name="Auxiliar7" ColumnName="Auxiliar7" />
+                <ScalarProperty Name="Auxiliar8" ColumnName="Auxiliar8" />
+                <ScalarProperty Name="Auxiliar9" ColumnName="Auxiliar9" />
+                <ScalarProperty Name="Auxiliar10" ColumnName="Auxiliar10" />
+                <ScalarProperty Name="Auxiliar11" ColumnName="Auxiliar11" />
+                <ScalarProperty Name="Auxiliar12" ColumnName="Auxiliar12" />
+                <ScalarProperty Name="Auxiliar13" ColumnName="Auxiliar13" />
+                <ScalarProperty Name="Auxiliar14" ColumnName="Auxiliar14" />
+                <ScalarProperty Name="Auxiliar15" ColumnName="Auxiliar15" />
+                <ScalarProperty Name="Auxiliar16" ColumnName="Auxiliar16" />
+                <ScalarProperty Name="Auxiliar17" ColumnName="Auxiliar17" />
+                <ScalarProperty Name="Auxiliar18" ColumnName="Auxiliar18" />
+                <ScalarProperty Name="Auxiliar19" ColumnName="Auxiliar19" />
+                <ScalarProperty Name="Auxiliar20" ColumnName="Auxiliar20" />
+                <ScalarProperty Name="Auxiliar21" ColumnName="Auxiliar21" />
+                <ScalarProperty Name="Auxiliar22" ColumnName="Auxiliar22" />
+                <ScalarProperty Name="Auxiliar23" ColumnName="Auxiliar23" />
+                <ScalarProperty Name="Auxiliar24" ColumnName="Auxiliar24" />
+                <ScalarProperty Name="Auxiliar25" ColumnName="Auxiliar25" />
+                <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
+                <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
+                <ScalarProperty Name="AuxiliarString3" ColumnName="AuxiliarString3" />
+                <ScalarProperty Name="AuxiliarString4" ColumnName="AuxiliarString4" />
+                <ScalarProperty Name="AuxiliarString5" ColumnName="AuxiliarString5" />
+                <ScalarProperty Name="AuxiliarString6" ColumnName="AuxiliarString6" />
+                <ScalarProperty Name="AuxiliarString7" ColumnName="AuxiliarString7" />
+                <ScalarProperty Name="AuxiliarString8" ColumnName="AuxiliarString8" />
+                <ScalarProperty Name="AuxiliarString9" ColumnName="AuxiliarString9" />
+                <ScalarProperty Name="AuxiliarString10" ColumnName="AuxiliarString10" />
+                <ScalarProperty Name="CodigoAlternativo" ColumnName="CodigoAlternativo" />
+                <ScalarProperty Name="IdCuentaCompras" ColumnName="IdCuentaCompras" />
+                <ScalarProperty Name="StockReposicion" ColumnName="StockReposicion" />
+                <ScalarProperty Name="MarcaStock" ColumnName="MarcaStock" />
+                <ScalarProperty Name="CostoInicial" ColumnName="CostoInicial" />
+                <ScalarProperty Name="ConsumirPorOT" ColumnName="ConsumirPorOT" />
+                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="IdTipoEquipo" ColumnName="IdTipoEquipo" />
+                <ScalarProperty Name="Replica" ColumnName="Replica" />
+                <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
+                <ScalarProperty Name="IdTipoArticulo" ColumnName="IdTipoArticulo" />
+                <ScalarProperty Name="FechaUltimoCostoReposicion" ColumnName="FechaUltimoCostoReposicion" />
+                <ScalarProperty Name="ADistribuirEnPresupuestoDeObra" ColumnName="ADistribuirEnPresupuestoDeObra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlesCalidads">
+            <EntityTypeMapping TypeName="DemoProntoModel.ControlCalidad">
+              <MappingFragment StoreEntitySet="ControlesCalidad">
+                <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Inspeccion" ColumnName="Inspeccion" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleRequerimientos">
+            <EntityTypeMapping TypeName="DemoProntoModel.DetalleRequerimiento">
+              <MappingFragment StoreEntitySet="DetalleRequerimientos">
+
+                <ScalarProperty Name="IdPresupuestoObrasNodo" ColumnName="IdPresupuestoObrasNodo" />
                 <ScalarProperty Name="FechaUltimaObservacionFirmante_1" ColumnName="FechaUltimaObservacionFirmante" />
                 <ScalarProperty Name="IdFirmanteObservo_1" ColumnName="IdFirmanteObservo" />
                 <ScalarProperty Name="ObservacionesFirmante_1" ColumnName="ObservacionesFirmante" />
                 <ScalarProperty Name="IdDetalleRequerimiento" ColumnName="IdDetalleRequerimiento" />
-            <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-            <ScalarProperty Name="NumeroItem" ColumnName="NumeroItem" />
-            <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-            <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-            <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-            <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-            <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-            <ScalarProperty Name="Cantidad1" ColumnName="Cantidad1" />
-            <ScalarProperty Name="Cantidad2" ColumnName="Cantidad2" />
-            <ScalarProperty Name="IdDetalleLMateriales" ColumnName="IdDetalleLMateriales" />
-            <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
-            <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
-            <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
-            <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-            <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-            <ScalarProperty Name="NumeroFacturaCompra1" ColumnName="NumeroFacturaCompra1" />
-            <ScalarProperty Name="FechaFacturaCompra" ColumnName="FechaFacturaCompra" />
-            <ScalarProperty Name="ImporteFacturaCompra" ColumnName="ImporteFacturaCompra" />
-            <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-            <ScalarProperty Name="NumeroFacturaCompra2" ColumnName="NumeroFacturaCompra2" />
-            <ScalarProperty Name="EsBienDeUso" ColumnName="EsBienDeUso" />
-            <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-            <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
-            <ScalarProperty Name="Usuario1" ColumnName="Usuario1" />
-            <ScalarProperty Name="FechaIngreso1" ColumnName="FechaIngreso1" />
-            <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
-            <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
-            <ScalarProperty Name="ArchivoAdjunto3" ColumnName="ArchivoAdjunto3" />
-            <ScalarProperty Name="ArchivoAdjunto4" ColumnName="ArchivoAdjunto4" />
-            <ScalarProperty Name="ArchivoAdjunto5" ColumnName="ArchivoAdjunto5" />
-            <ScalarProperty Name="ArchivoAdjunto6" ColumnName="ArchivoAdjunto6" />
-            <ScalarProperty Name="ArchivoAdjunto7" ColumnName="ArchivoAdjunto7" />
-            <ScalarProperty Name="ArchivoAdjunto8" ColumnName="ArchivoAdjunto8" />
-            <ScalarProperty Name="ArchivoAdjunto9" ColumnName="ArchivoAdjunto9" />
-            <ScalarProperty Name="ArchivoAdjunto10" ColumnName="ArchivoAdjunto10" />
-            <ScalarProperty Name="Descripcionmanual" ColumnName="Descripcionmanual" />
-            <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-            <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
-            <ScalarProperty Name="IdDetalleRequerimientoOriginal" ColumnName="IdDetalleRequerimientoOriginal" />
-            <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-            <ScalarProperty Name="IdLlamadoAProveedor" ColumnName="IdLlamadoAProveedor" />
-            <ScalarProperty Name="FechaLlamadoAProveedor" ColumnName="FechaLlamadoAProveedor" />
-            <ScalarProperty Name="IdLlamadoRegistradoPor" ColumnName="IdLlamadoRegistradoPor" />
-            <ScalarProperty Name="FechaRegistracionLlamada" ColumnName="FechaRegistracionLlamada" />
-            <ScalarProperty Name="ObservacionesLlamada" ColumnName="ObservacionesLlamada" />
-            <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
-            <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
-            <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
-            <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
-            <ScalarProperty Name="IdAproboAlmacen" ColumnName="IdAproboAlmacen" />
-            <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-            <ScalarProperty Name="FechaEntrega_Tel" ColumnName="FechaEntrega_Tel" />
-            <ScalarProperty Name="PRESTOConcepto" ColumnName="PRESTOConcepto" />
-            <ScalarProperty Name="Costo" ColumnName="Costo" />
-            <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
-            <ScalarProperty Name="TipoDesignacion" ColumnName="TipoDesignacion" />
-            <ScalarProperty Name="IdLiberoParaCompras" ColumnName="IdLiberoParaCompras" />
-            <ScalarProperty Name="FechaLiberacionParaCompras" ColumnName="FechaLiberacionParaCompras" />
-            <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
-            <ScalarProperty Name="Pagina" ColumnName="Pagina" />
-            <ScalarProperty Name="Item" ColumnName="Item" />
-            <ScalarProperty Name="Figura" ColumnName="Figura" />
-            <ScalarProperty Name="CodigoDistribucion" ColumnName="CodigoDistribucion" />
-            <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
-            <ScalarProperty Name="Entregado" ColumnName="Entregado" />
-            <ScalarProperty Name="FechaAsignacionComprador" ColumnName="FechaAsignacionComprador" />
-            <ScalarProperty Name="MoP" ColumnName="MoP" />
-            <ScalarProperty Name="IdDetalleObraDestino" ColumnName="IdDetalleObraDestino" />
-            <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
-            </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Obras"><EntityTypeMapping TypeName="DemoProntoModel.Obra"><MappingFragment StoreEntitySet="Obras">
-            <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
+                <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
+                <ScalarProperty Name="NumeroItem" ColumnName="NumeroItem" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Cantidad1" ColumnName="Cantidad1" />
+                <ScalarProperty Name="Cantidad2" ColumnName="Cantidad2" />
+                <ScalarProperty Name="IdDetalleLMateriales" ColumnName="IdDetalleLMateriales" />
+                <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
+                <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+                <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+                <ScalarProperty Name="NumeroFacturaCompra1" ColumnName="NumeroFacturaCompra1" />
+                <ScalarProperty Name="FechaFacturaCompra" ColumnName="FechaFacturaCompra" />
+                <ScalarProperty Name="ImporteFacturaCompra" ColumnName="ImporteFacturaCompra" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NumeroFacturaCompra2" ColumnName="NumeroFacturaCompra2" />
+                <ScalarProperty Name="EsBienDeUso" ColumnName="EsBienDeUso" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
+                <ScalarProperty Name="Usuario1" ColumnName="Usuario1" />
+                <ScalarProperty Name="FechaIngreso1" ColumnName="FechaIngreso1" />
+                <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
+                <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
+                <ScalarProperty Name="ArchivoAdjunto3" ColumnName="ArchivoAdjunto3" />
+                <ScalarProperty Name="ArchivoAdjunto4" ColumnName="ArchivoAdjunto4" />
+                <ScalarProperty Name="ArchivoAdjunto5" ColumnName="ArchivoAdjunto5" />
+                <ScalarProperty Name="ArchivoAdjunto6" ColumnName="ArchivoAdjunto6" />
+                <ScalarProperty Name="ArchivoAdjunto7" ColumnName="ArchivoAdjunto7" />
+                <ScalarProperty Name="ArchivoAdjunto8" ColumnName="ArchivoAdjunto8" />
+                <ScalarProperty Name="ArchivoAdjunto9" ColumnName="ArchivoAdjunto9" />
+                <ScalarProperty Name="ArchivoAdjunto10" ColumnName="ArchivoAdjunto10" />
+                <ScalarProperty Name="Descripcionmanual" ColumnName="Descripcionmanual" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
+                <ScalarProperty Name="IdDetalleRequerimientoOriginal" ColumnName="IdDetalleRequerimientoOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="IdLlamadoAProveedor" ColumnName="IdLlamadoAProveedor" />
+                <ScalarProperty Name="FechaLlamadoAProveedor" ColumnName="FechaLlamadoAProveedor" />
+                <ScalarProperty Name="IdLlamadoRegistradoPor" ColumnName="IdLlamadoRegistradoPor" />
+                <ScalarProperty Name="FechaRegistracionLlamada" ColumnName="FechaRegistracionLlamada" />
+                <ScalarProperty Name="ObservacionesLlamada" ColumnName="ObservacionesLlamada" />
+                <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
+                <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
+                <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
+                <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
+                <ScalarProperty Name="IdAproboAlmacen" ColumnName="IdAproboAlmacen" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="FechaEntrega_Tel" ColumnName="FechaEntrega_Tel" />
+                <ScalarProperty Name="PRESTOConcepto" ColumnName="PRESTOConcepto" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
+                <ScalarProperty Name="TipoDesignacion" ColumnName="TipoDesignacion" />
+                <ScalarProperty Name="IdLiberoParaCompras" ColumnName="IdLiberoParaCompras" />
+                <ScalarProperty Name="FechaLiberacionParaCompras" ColumnName="FechaLiberacionParaCompras" />
+                <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
+                <ScalarProperty Name="Pagina" ColumnName="Pagina" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Figura" ColumnName="Figura" />
+                <ScalarProperty Name="CodigoDistribucion" ColumnName="CodigoDistribucion" />
+                <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
+                <ScalarProperty Name="Entregado" ColumnName="Entregado" />
+                <ScalarProperty Name="FechaAsignacionComprador" ColumnName="FechaAsignacionComprador" />
+                <ScalarProperty Name="MoP" ColumnName="MoP" />
+                <ScalarProperty Name="IdDetalleObraDestino" ColumnName="IdDetalleObraDestino" />
+                <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obras">
+            <EntityTypeMapping TypeName="DemoProntoModel.Obra">
+              <MappingFragment StoreEntitySet="Obras">
+                <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
                 <ScalarProperty Name="IdObraRelacionada" ColumnName="IdObraRelacionada" />
                 <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-            <ScalarProperty Name="NumeroObra" ColumnName="NumeroObra" />
-            <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-            <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-            <ScalarProperty Name="FechaFinalizacion" ColumnName="FechaFinalizacion" />
-            <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-            <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-            <ScalarProperty Name="IdJefe" ColumnName="IdJefe" />
-            <ScalarProperty Name="TipoObra" ColumnName="TipoObra" />
-            <ScalarProperty Name="HorasEstimadas" ColumnName="HorasEstimadas" />
-            <ScalarProperty Name="Consorcial" ColumnName="Consorcial" />
-            <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-            <ScalarProperty Name="Activa" ColumnName="Activa" />
-            <ScalarProperty Name="ParaInformes" ColumnName="ParaInformes" />
-            <ScalarProperty Name="IdUnidadOperativa" ColumnName="IdUnidadOperativa" />
-            <ScalarProperty Name="Jerarquia" ColumnName="Jerarquia" />
-            <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
-            <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
-            <ScalarProperty Name="ArchivoAdjunto3" ColumnName="ArchivoAdjunto3" />
-            <ScalarProperty Name="ArchivoAdjunto4" ColumnName="ArchivoAdjunto4" />
-            <ScalarProperty Name="ArchivoAdjunto5" ColumnName="ArchivoAdjunto5" />
-            <ScalarProperty Name="ArchivoAdjunto6" ColumnName="ArchivoAdjunto6" />
-            <ScalarProperty Name="ArchivoAdjunto7" ColumnName="ArchivoAdjunto7" />
-            <ScalarProperty Name="ArchivoAdjunto8" ColumnName="ArchivoAdjunto8" />
-            <ScalarProperty Name="ArchivoAdjunto9" ColumnName="ArchivoAdjunto9" />
-            <ScalarProperty Name="ArchivoAdjunto10" ColumnName="ArchivoAdjunto10" />
-            <ScalarProperty Name="GeneraReservaStock" ColumnName="GeneraReservaStock" />
-            <ScalarProperty Name="IdGrupoObra" ColumnName="IdGrupoObra" />
-            <ScalarProperty Name="IdArticuloAsociado" ColumnName="IdArticuloAsociado" />
-            <ScalarProperty Name="Observaciones2" ColumnName="Observaciones2" />
-            <ScalarProperty Name="Observaciones3" ColumnName="Observaciones3" />
-            <ScalarProperty Name="IdSubjefe" ColumnName="IdSubjefe" />
-            <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-            <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
-            <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-            <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-            <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-            <ScalarProperty Name="LugarPago" ColumnName="LugarPago" />
-            <ScalarProperty Name="Responsable" ColumnName="Responsable" />
-            <ScalarProperty Name="Horario" ColumnName="Horario" />
-            <ScalarProperty Name="Turnos" ColumnName="Turnos" />
-            <ScalarProperty Name="Operarios" ColumnName="Operarios" />
-            <ScalarProperty Name="Zona" ColumnName="Zona" />
-            <ScalarProperty Name="Jurisdiccion" ColumnName="Jurisdiccion" />
-            <ScalarProperty Name="IdCuentaContableFF" ColumnName="IdCuentaContableFF" />
-            <ScalarProperty Name="ValorObra" ColumnName="ValorObra" />
-            <ScalarProperty Name="IdMonedaValorObra" ColumnName="IdMonedaValorObra" />
-            <ScalarProperty Name="IdJefeRegional" ColumnName="IdJefeRegional" />
-            <ScalarProperty Name="EsPlantaDeProduccionInterna" ColumnName="EsPlantaDeProduccionInterna" />
-            <ScalarProperty Name="ActivarPresupuestoObra" ColumnName="ActivarPresupuestoObra" />
-            <ScalarProperty Name="ProximoNumeroAutorizacionCompra" ColumnName="ProximoNumeroAutorizacionCompra" />
-            <ScalarProperty Name="AuxiliarDeMateriales" ColumnName="AuxiliarDeMateriales" />
-            <ScalarProperty Name="DiasLiquidacionCertificados" ColumnName="DiasLiquidacionCertificados" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Requerimientos"><EntityTypeMapping TypeName="DemoProntoModel.Requerimiento"><MappingFragment StoreEntitySet="Requerimientos">
+                <ScalarProperty Name="NumeroObra" ColumnName="NumeroObra" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFinalizacion" ColumnName="FechaFinalizacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdJefe" ColumnName="IdJefe" />
+                <ScalarProperty Name="TipoObra" ColumnName="TipoObra" />
+                <ScalarProperty Name="HorasEstimadas" ColumnName="HorasEstimadas" />
+                <ScalarProperty Name="Consorcial" ColumnName="Consorcial" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="ParaInformes" ColumnName="ParaInformes" />
+                <ScalarProperty Name="IdUnidadOperativa" ColumnName="IdUnidadOperativa" />
+                <ScalarProperty Name="Jerarquia" ColumnName="Jerarquia" />
+                <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
+                <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
+                <ScalarProperty Name="ArchivoAdjunto3" ColumnName="ArchivoAdjunto3" />
+                <ScalarProperty Name="ArchivoAdjunto4" ColumnName="ArchivoAdjunto4" />
+                <ScalarProperty Name="ArchivoAdjunto5" ColumnName="ArchivoAdjunto5" />
+                <ScalarProperty Name="ArchivoAdjunto6" ColumnName="ArchivoAdjunto6" />
+                <ScalarProperty Name="ArchivoAdjunto7" ColumnName="ArchivoAdjunto7" />
+                <ScalarProperty Name="ArchivoAdjunto8" ColumnName="ArchivoAdjunto8" />
+                <ScalarProperty Name="ArchivoAdjunto9" ColumnName="ArchivoAdjunto9" />
+                <ScalarProperty Name="ArchivoAdjunto10" ColumnName="ArchivoAdjunto10" />
+                <ScalarProperty Name="GeneraReservaStock" ColumnName="GeneraReservaStock" />
+                <ScalarProperty Name="IdGrupoObra" ColumnName="IdGrupoObra" />
+                <ScalarProperty Name="IdArticuloAsociado" ColumnName="IdArticuloAsociado" />
+                <ScalarProperty Name="Observaciones2" ColumnName="Observaciones2" />
+                <ScalarProperty Name="Observaciones3" ColumnName="Observaciones3" />
+                <ScalarProperty Name="IdSubjefe" ColumnName="IdSubjefe" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="LugarPago" ColumnName="LugarPago" />
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Turnos" ColumnName="Turnos" />
+                <ScalarProperty Name="Operarios" ColumnName="Operarios" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="Jurisdiccion" ColumnName="Jurisdiccion" />
+                <ScalarProperty Name="IdCuentaContableFF" ColumnName="IdCuentaContableFF" />
+                <ScalarProperty Name="ValorObra" ColumnName="ValorObra" />
+                <ScalarProperty Name="IdMonedaValorObra" ColumnName="IdMonedaValorObra" />
+                <ScalarProperty Name="IdJefeRegional" ColumnName="IdJefeRegional" />
+                <ScalarProperty Name="EsPlantaDeProduccionInterna" ColumnName="EsPlantaDeProduccionInterna" />
+                <ScalarProperty Name="ActivarPresupuestoObra" ColumnName="ActivarPresupuestoObra" />
+                <ScalarProperty Name="ProximoNumeroAutorizacionCompra" ColumnName="ProximoNumeroAutorizacionCompra" />
+                <ScalarProperty Name="AuxiliarDeMateriales" ColumnName="AuxiliarDeMateriales" />
+                <ScalarProperty Name="DiasLiquidacionCertificados" ColumnName="DiasLiquidacionCertificados" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requerimientos">
+            <EntityTypeMapping TypeName="DemoProntoModel.Requerimiento">
+              <MappingFragment StoreEntitySet="Requerimientos">
                 <ScalarProperty Name="SalidasMateriales" ColumnName="SalidasMateriales" />
                 <ScalarProperty Name="Recepciones" ColumnName="Recepciones" />
                 <ScalarProperty Name="Pedidos" ColumnName="Pedidos" />
@@ -13835,82 +13853,92 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
                 <ScalarProperty Name="Presupuestos" ColumnName="Presupuestos" />
                 <ScalarProperty Name="FechasLiberacion" ColumnName="FechasLiberacion" />
                 <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-            <ScalarProperty Name="NumeroRequerimiento" ColumnName="NumeroRequerimiento" />
-            <ScalarProperty Name="FechaRequerimiento" ColumnName="FechaRequerimiento" />
-            <ScalarProperty Name="LugarEntrega" ColumnName="LugarEntrega" />
-            <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-            <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-            <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-            <ScalarProperty Name="IdSolicito" ColumnName="IdSolicito" />
-            <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-            <ScalarProperty Name="MontoPrevisto" ColumnName="MontoPrevisto" />
-            <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-            <ScalarProperty Name="Aprobo" ColumnName="Aprobo" />
-            <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
-            <ScalarProperty Name="MontoParaCompra" ColumnName="MontoParaCompra" />
-            <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
-            <ScalarProperty Name="Consorcial" ColumnName="Consorcial" />
-            <ScalarProperty Name="UsuarioAnulacion" ColumnName="UsuarioAnulacion" />
-            <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-            <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-            <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-            <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
-            <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-            <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
-            <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
-            <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
-            <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
-            <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-            <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-            <ScalarProperty Name="DirectoACompras" ColumnName="DirectoACompras" />
-            <ScalarProperty Name="IdAutorizoDirectoACompras" ColumnName="IdAutorizoDirectoACompras" />
-            <ScalarProperty Name="PRESTOContrato" ColumnName="PRESTOContrato" />
-            <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-            <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
-            <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
-            <ScalarProperty Name="Impresa" ColumnName="Impresa" />
-            <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
-            <ScalarProperty Name="Entregado" ColumnName="Entregado" />
-            <ScalarProperty Name="TipoRequerimiento" ColumnName="TipoRequerimiento" />
-            <ScalarProperty Name="IdOrdenTrabajo" ColumnName="IdOrdenTrabajo" />
-            <ScalarProperty Name="Aprobo2" ColumnName="Aprobo2" />
-            <ScalarProperty Name="FechaAprobacion2" ColumnName="FechaAprobacion2" />
-            <ScalarProperty Name="IdTipoCompra" ColumnName="IdTipoCompra" />
-            <ScalarProperty Name="IdImporto" ColumnName="IdImporto" />
-            <ScalarProperty Name="FechaLlegadaImportacion" ColumnName="FechaLlegadaImportacion" />
-            <ScalarProperty Name="CircuitoFirmasCompleto" ColumnName="CircuitoFirmasCompleto" />
-            <ScalarProperty Name="IdCuentaPresupuesto" ColumnName="IdCuentaPresupuesto" />
-            <ScalarProperty Name="MesPresupuesto" ColumnName="MesPresupuesto" />
-            <ScalarProperty Name="RequisitosSeguridad" ColumnName="RequisitosSeguridad" />
-            <ScalarProperty Name="Adjuntos" ColumnName="Adjuntos" />
-            <ScalarProperty Name="ConfirmadoPorWeb" ColumnName="ConfirmadoPorWeb" />
-            <ScalarProperty Name="DetalleImputacion" ColumnName="DetalleImputacion" />
-            <ScalarProperty Name="IdUsuarioDeslibero" ColumnName="IdUsuarioDeslibero" />
-            <ScalarProperty Name="FechaDesliberacion" ColumnName="FechaDesliberacion" />
-            <ScalarProperty Name="NumeradorDesliberaciones" ColumnName="NumeradorDesliberaciones" />
-            <ScalarProperty Name="IdUsuarioEliminoFirmas" ColumnName="IdUsuarioEliminoFirmas" />
-            <ScalarProperty Name="FechaEliminacionFirmas" ColumnName="FechaEliminacionFirmas" />
-            <ScalarProperty Name="NumeradorEliminacionesFirmas" ColumnName="NumeradorEliminacionesFirmas" />
-            <ScalarProperty Name="NumeradorModificaciones" ColumnName="NumeradorModificaciones" />
-            <ScalarProperty Name="ParaTaller" ColumnName="ParaTaller" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Sectores"><EntityTypeMapping TypeName="DemoProntoModel.Sector"><MappingFragment StoreEntitySet="Sectores">
-            <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-            <ScalarProperty Name="SectorDeObra" ColumnName="SectorDeObra" />
-            <ScalarProperty Name="IdEncargado" ColumnName="IdEncargado" />
-            <ScalarProperty Name="SeUsaEnPresupuestos" ColumnName="SeUsaEnPresupuestos" />
-            <ScalarProperty Name="OrdenPresentacion" ColumnName="OrdenPresentacion" />
-            <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Unidades"><EntityTypeMapping TypeName="DemoProntoModel.Unidad"><MappingFragment StoreEntitySet="Unidades">
-            <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-            <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
-            <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
-            <ScalarProperty Name="UnidadesPorPack" ColumnName="UnidadesPorPack" />
-            <ScalarProperty Name="TaraEnKg" ColumnName="TaraEnKg" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+                <ScalarProperty Name="NumeroRequerimiento" ColumnName="NumeroRequerimiento" />
+                <ScalarProperty Name="FechaRequerimiento" ColumnName="FechaRequerimiento" />
+                <ScalarProperty Name="LugarEntrega" ColumnName="LugarEntrega" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdSolicito" ColumnName="IdSolicito" />
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+                <ScalarProperty Name="MontoPrevisto" ColumnName="MontoPrevisto" />
+                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+                <ScalarProperty Name="Aprobo" ColumnName="Aprobo" />
+                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+                <ScalarProperty Name="MontoParaCompra" ColumnName="MontoParaCompra" />
+                <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
+                <ScalarProperty Name="Consorcial" ColumnName="Consorcial" />
+                <ScalarProperty Name="UsuarioAnulacion" ColumnName="UsuarioAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
+                <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
+                <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
+                <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="DirectoACompras" ColumnName="DirectoACompras" />
+                <ScalarProperty Name="IdAutorizoDirectoACompras" ColumnName="IdAutorizoDirectoACompras" />
+                <ScalarProperty Name="PRESTOContrato" ColumnName="PRESTOContrato" />
+                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
+                <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
+                <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
+                <ScalarProperty Name="Impresa" ColumnName="Impresa" />
+                <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
+                <ScalarProperty Name="Entregado" ColumnName="Entregado" />
+                <ScalarProperty Name="TipoRequerimiento" ColumnName="TipoRequerimiento" />
+                <ScalarProperty Name="IdOrdenTrabajo" ColumnName="IdOrdenTrabajo" />
+                <ScalarProperty Name="Aprobo2" ColumnName="Aprobo2" />
+                <ScalarProperty Name="FechaAprobacion2" ColumnName="FechaAprobacion2" />
+                <ScalarProperty Name="IdTipoCompra" ColumnName="IdTipoCompra" />
+                <ScalarProperty Name="IdImporto" ColumnName="IdImporto" />
+                <ScalarProperty Name="FechaLlegadaImportacion" ColumnName="FechaLlegadaImportacion" />
+                <ScalarProperty Name="CircuitoFirmasCompleto" ColumnName="CircuitoFirmasCompleto" />
+                <ScalarProperty Name="IdCuentaPresupuesto" ColumnName="IdCuentaPresupuesto" />
+                <ScalarProperty Name="MesPresupuesto" ColumnName="MesPresupuesto" />
+                <ScalarProperty Name="RequisitosSeguridad" ColumnName="RequisitosSeguridad" />
+                <ScalarProperty Name="Adjuntos" ColumnName="Adjuntos" />
+                <ScalarProperty Name="ConfirmadoPorWeb" ColumnName="ConfirmadoPorWeb" />
+                <ScalarProperty Name="DetalleImputacion" ColumnName="DetalleImputacion" />
+                <ScalarProperty Name="IdUsuarioDeslibero" ColumnName="IdUsuarioDeslibero" />
+                <ScalarProperty Name="FechaDesliberacion" ColumnName="FechaDesliberacion" />
+                <ScalarProperty Name="NumeradorDesliberaciones" ColumnName="NumeradorDesliberaciones" />
+                <ScalarProperty Name="IdUsuarioEliminoFirmas" ColumnName="IdUsuarioEliminoFirmas" />
+                <ScalarProperty Name="FechaEliminacionFirmas" ColumnName="FechaEliminacionFirmas" />
+                <ScalarProperty Name="NumeradorEliminacionesFirmas" ColumnName="NumeradorEliminacionesFirmas" />
+                <ScalarProperty Name="NumeradorModificaciones" ColumnName="NumeradorModificaciones" />
+                <ScalarProperty Name="ParaTaller" ColumnName="ParaTaller" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectores">
+            <EntityTypeMapping TypeName="DemoProntoModel.Sector">
+              <MappingFragment StoreEntitySet="Sectores">
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="SectorDeObra" ColumnName="SectorDeObra" />
+                <ScalarProperty Name="IdEncargado" ColumnName="IdEncargado" />
+                <ScalarProperty Name="SeUsaEnPresupuestos" ColumnName="SeUsaEnPresupuestos" />
+                <ScalarProperty Name="OrdenPresentacion" ColumnName="OrdenPresentacion" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unidades">
+            <EntityTypeMapping TypeName="DemoProntoModel.Unidad">
+              <MappingFragment StoreEntitySet="Unidades">
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="CodigoAFIP" ColumnName="CodigoAFIP" />
+                <ScalarProperty Name="UnidadesPorPack" ColumnName="UnidadesPorPack" />
+                <ScalarProperty Name="TaraEnKg" ColumnName="TaraEnKg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Parametros">
             <EntityTypeMapping TypeName="DemoProntoModel.Parametros">
               <MappingFragment StoreEntitySet="Parametros">
@@ -17689,7 +17717,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-<<<<<<< HEAD
           <EntitySetMapping Name="Trees">
             <EntityTypeMapping TypeName="DemoProntoModel.Tree">
               <MappingFragment StoreEntitySet="Tree">
@@ -17703,7 +17730,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="IdItem" ColumnName="IdItem" />
-=======
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CurvasTalles">
             <EntityTypeMapping TypeName="DemoProntoModel.CurvasTalle">
               <MappingFragment StoreEntitySet="CurvasTalles">
@@ -17766,7 +17795,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
                 <ScalarProperty Name="Agrupacion1" ColumnName="Agrupacion1" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdActividad" ColumnName="IdActividad" />
->>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -20073,25 +20101,19 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" />
-<<<<<<< HEAD
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Tree" Width="1.5" PointX="14.375" PointY="18.75" />
-=======
->>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" />
-<<<<<<< HEAD
-=======
         <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="12.75" PointY="11.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ImpuestosDirecto" Width="1.5" PointX="14.75" PointY="18.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Marca" Width="1.5" PointX="17.75" PointY="5.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Materiale" Width="1.5" PointX="0.75" PointY="18.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Modelo" Width="1.5" PointX="2.75" PointY="18.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Actividades_Proveedore" Width="1.5" PointX="17.375" PointY="18.75" />
->>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
-        </edmx:Diagram>
+      </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
