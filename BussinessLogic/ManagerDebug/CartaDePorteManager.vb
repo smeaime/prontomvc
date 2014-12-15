@@ -2874,6 +2874,86 @@ Public Class CartaDePorteManager
 
 
 
+    Public Shared Function EsUnoDeLosClientesExportador(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte) As Boolean
+        '        * La magia quedaría así: el usuario llena la carta, y pone grabar...
+        '*Si la carta usa un cliente exportador en Destinatario, Intermediario o Rte Comercial,
+        '*entonces te hago de prepo una duplicacion de la carta
+        '*La que queda como exportacion, tendrá el A Facturar con el dichoso cliente exportador
+        '*Y la otra carta, la local, quedará para que le rellenen el A Facturar, por las fuerzas superiores
+
+        Try
+
+
+            If myCartaDePorte.Entregador > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI" Then
+                Return True
+            End If
+            If myCartaDePorte.CuentaOrden1 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI" Then
+                Return True
+            End If
+            If myCartaDePorte.CuentaOrden2 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI" Then
+                Return True
+            End If
+
+
+
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+        Return False
+    End Function
+
+    Public Shared Sub CrearleDuplicadaConEl_FacturarA_Indicado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte)
+        '        * La magia quedaría así: el usuario llena la carta, y pone grabar...
+        '*Si la carta usa un cliente exportador en Destinatario, Intermediario o Rte Comercial,
+        '*entonces te hago de prepo una duplicacion de la carta
+        '*La que queda como exportacion, tendrá el A Facturar con el dichoso cliente exportador
+        '*Y la otra carta, la local, quedará para que le rellenen el A Facturar, por las fuerzas superiores
+        ' efasdfasdf()
+
+        Dim idclienteexportador As Integer
+
+        If myCartaDePorte.Entregador > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI" Then
+            idclienteexportador = myCartaDePorte.Entregador
+        End If
+        If myCartaDePorte.CuentaOrden1 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI" Then
+            idclienteexportador = myCartaDePorte.CuentaOrden1
+        End If
+        If myCartaDePorte.CuentaOrden2 > 0 AndAlso ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI" Then
+            idclienteexportador = myCartaDePorte.CuentaOrden2
+        End If
+
+
+
+
+        'por más que pongas ByVal, un objeto se pasa por referencia creo. -Tendrías que sobrecargar el igual, o hacer un constructor que use una carta existente
+
+        Dim tempid = myCartaDePorte.Id
+        Dim tempidcli = IIf(myCartaDePorte.IdClienteAFacturarle = idclienteexportador, -1, myCartaDePorte.IdClienteAFacturarle)
+
+
+        myCartaDePorte.Id = -1
+        myCartaDePorte.IdClienteAFacturarle = idclienteexportador
+        myCartaDePorte.Exporta = True
+        myCartaDePorte.SubnumeroDeFacturacion = 1
+
+        'como evitar la recursion?
+        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+
+
+        myCartaDePorte.Id = tempid
+        myCartaDePorte.IdClienteAFacturarle = tempidcli
+        myCartaDePorte.Exporta = False
+        myCartaDePorte.SubnumeroDeFacturacion = 0
+
+        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+
+
+    End Sub
+
+
+
     Shared Function DuplicarCartaporteConOtroSubnumeroDeFacturacion(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte) As CartaDePorte
 
         Dim copiaocdp = GetItem(SC, myCartaDePorte.Id)
@@ -3640,78 +3720,6 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Public Shared Function EsUnoDeLosClientesExportador(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte) As Boolean
-        '        * La magia quedaría así: el usuario llena la carta, y pone grabar...
-        '*Si la carta usa un cliente exportador en Destinatario, Intermediario o Rte Comercial,
-        '*entonces te hago de prepo una duplicacion de la carta
-        '*La que queda como exportacion, tendrá el A Facturar con el dichoso cliente exportador
-        '*Y la otra carta, la local, quedará para que le rellenen el A Facturar, por las fuerzas superiores
-
-        Try
-
-            If _
-              IIf(myCartaDePorte.Entregador <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI") Or _
-              IIf(myCartaDePorte.CuentaOrden1 <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI") Or _
-              IIf(myCartaDePorte.CuentaOrden2 <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI") Then
-
-                Return True
-
-
-            End If
-
-
-        Catch ex As Exception
-            ErrHandler.WriteError(ex)
-        End Try
-        Return False
-    End Function
-
-    Public Shared Sub CrearleDuplicadaConEl_FacturarA_Indicado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte)
-        '        * La magia quedaría así: el usuario llena la carta, y pone grabar...
-        '*Si la carta usa un cliente exportador en Destinatario, Intermediario o Rte Comercial,
-        '*entonces te hago de prepo una duplicacion de la carta
-        '*La que queda como exportacion, tendrá el A Facturar con el dichoso cliente exportador
-        '*Y la otra carta, la local, quedará para que le rellenen el A Facturar, por las fuerzas superiores
-        ' efasdfasdf()
-
-        Dim idclienteexportador As Integer
-
-        If IIf(myCartaDePorte.Entregador <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.Entregador).EsClienteExportador = "SI") Then
-            idclienteexportador = myCartaDePorte.Entregador
-        End If
-        If IIf(myCartaDePorte.CuentaOrden1 <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1).EsClienteExportador = "SI") Then
-            idclienteexportador = myCartaDePorte.CuentaOrden1
-        End If
-        If IIf(myCartaDePorte.CuentaOrden2 <= 0, False, ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2).EsClienteExportador = "SI") Then
-            idclienteexportador = myCartaDePorte.CuentaOrden2
-        End If
-   
-
-
-
-        'por más que pongas ByVal, un objeto se pasa por referencia creo. -Tendrías que sobrecargar el igual, o hacer un constructor que use una carta existente
-
-        Dim tempid = myCartaDePorte.Id
-        Dim tempidcli = IIf(myCartaDePorte.IdClienteAFacturarle = idclienteexportador, -1, myCartaDePorte.IdClienteAFacturarle)
-
-
-        myCartaDePorte.Id = -1
-        myCartaDePorte.IdClienteAFacturarle = idclienteexportador
-        myCartaDePorte.Exporta = "SI"
-
-        'como evitar la recursion?
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
-
-
-        myCartaDePorte.Id = tempid
-        myCartaDePorte.IdClienteAFacturarle = tempidcli
-        myCartaDePorte.Exporta = "NO"
-
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
-
-
-    End Sub
-
 
 
 
@@ -4232,6 +4240,15 @@ Public Class CartaDePorteManager
                     Return False
                 End If
             End If
+
+
+
+
+            If EsUnoDeLosClientesExportador(SC, myCartaDePorte) Then
+
+                sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
+            End If
+
 
 
 
@@ -14224,7 +14241,7 @@ Public Class barras
             Dim fac = FacturaManager.GetItem(SC, idfac)
 
             If fac Is Nothing Then
-                MandarMailDeError("idfac " & idfac & " no existe")
+                ErrHandler.WriteError("idfac " & idfac & " no existe")
                 Continue For
             End If
 
