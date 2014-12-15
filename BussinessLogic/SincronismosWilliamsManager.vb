@@ -6157,8 +6157,13 @@ Namespace Pronto.ERP.Bll
             'Dim a = pDataTable(1)
 
 
+            Dim selec As DataRow() = pDataTable.Select(sWHERE)
+
+            ErrHandler.WriteError("Syngenta renglones sincro " & selec.Count)
+
+
             'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
-            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In pDataTable.Select(sWHERE)
+            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In selec
                 With cdp
 
                     i = 0 : sb = ""
