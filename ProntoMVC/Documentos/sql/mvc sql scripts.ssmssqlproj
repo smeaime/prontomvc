@@ -134,9 +134,9 @@
           <FullPath>InformeResumenGastosPorRubroContable_TX_1.sql</FullPath>
         </FileNode>
         <FileNode Name="Insert into Parametros 2010 WEB.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Insert into Parametros 2010 WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevas_Tablas WEB.sql">

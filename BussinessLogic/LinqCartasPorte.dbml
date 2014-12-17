@@ -1169,6 +1169,13 @@
       <Column Name="Acciones" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.CartasPorteAcopios" Member="CartasPorteAcopios1">
+    <Type Name="CartasPorteAcopios">
+      <Column Name="IdAcopio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="IdCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.wTarifaWilliamsEstimada" Method="wTarifaWilliamsEstimada" IsComposable="true">
     <Parameter Name="idCliente" Type="System.Int32" DbType="Int" />
     <Parameter Name="IdArticulo" Parameter="idArticulo" Type="System.Int32" DbType="Int" />
