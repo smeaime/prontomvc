@@ -5057,8 +5057,8 @@
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
-        <Top>43.05329mm</Top>
-        <Left>3.12769mm</Left>
+        <Top>53.37204mm</Top>
+        <Left>3.12767mm</Left>
         <Height>17.47089mm</Height>
         <Width>1088.88378mm</Width>
         <Style>
@@ -5162,11 +5162,35 @@
             </TextRuns>
             <Style />
           </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!sServidor.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1522</rd:DefaultName>
         <Top>24.05887mm</Top>
         <Left>3.12769mm</Left>
-        <Height>15.95919mm</Height>
+        <Height>23.63211mm</Height>
         <Width>364.56758mm</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -5285,7 +5309,7 @@
     <DataSource Name="DataSource1">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>http://190.2.243.16/ProntoTesting/ProntoWeb/WebServiceCartas.asmx</ConnectString>
+        <ConnectString>=Parameters!sServidor.Value</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
@@ -5590,7 +5614,7 @@
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>http:\\prontoclientes.williamsentregas.com.ar</Value>
+          <Value>http://190.2.243.16/ProntoTesting/ProntoWeb/WebServiceCartas.asmx</Value>
         </Values>
       </DefaultValue>
       <AllowBlank>true</AllowBlank>
