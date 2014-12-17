@@ -1177,7 +1177,8 @@ Public Class CartaDePorteManager
                     ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
                     ByVal puntoventa As Integer, _
                     Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "" _
+                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+                    Optional ByVal optCamionVagon As String = "Ambas" _
                 ) As String
 
 
@@ -7884,7 +7885,81 @@ Public Class LogicaFacturacion
 
     End Function
 
+    Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), SC As String, desde As String, hasta As String, puntoVenta As String, ViewState As System.Web.UI.StateBag)
 
+        '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
+        'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
+
+        AgregarEmbarques(lista, SC, desde, hasta, -1, puntoVenta)
+
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+
+        'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(lista, SC, dt, dtViewstateRenglonesManuales)
+
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
+        ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, SC)
+
+
+        'hay que hacer un update de la lista por si se derivó a un corredor?
+
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        'Para la facturación automática, de haber cartas de porte Agro y cartas de Porte Seeds, armar dos facturas separadas.
+        'Como las cartas de porte duplicadas solamente se pueden facturar mediante la facturación automática, entran en el automático. Para que no se pase la facturación separada, armar dos facturas distintas automaticamente.
+        CasosSyngenta(lista, SC)
+
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+        Dim slinks As String
+        lista = LinksDeCartasConflictivasDelAutomatico(lista, slinks, SC)
+
+        slinks &= VerificarClientesFacturables(lista)
+
+        ViewState("sLinks") = slinks
+
+
+
+
+    End Sub
+
+    Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), optFacturarA As String, agruparArticulosPor As String, sc As String)
+        EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
+        EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
+
+        SepararAcopiosLDCyACA(lista, sc)
+
+        PostProcesoFacturacion_ReglaExportadores(lista, sc)
+
+    End Sub
 
 
 
@@ -8117,53 +8192,14 @@ Public Class LogicaFacturacion
             'dtAutomatico = DataTableUNION(dtAutomatico, dtForzadasAlTitular)
 
 
+            PreProcesos(lista, sc, txtFechaDesde, txtFechaHasta, cmbPuntoVenta, ViewState)
 
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
-            'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
+            PostProcesos(lista, optFacturarA, agruparArticulosPor, sc)
 
-            'AgregarEmbarques(lista, sc, desde, hasta, -1)
+            'EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
+            'EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
 
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-            'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(lista, SC, dt, dtViewstateRenglonesManuales)
-
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-            '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
-
-            ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, sc)
-
-
-
-            'hay que hacer un update de la lista por si se derivó a un corredor?
-            '-parece ser que, al derivar al corredor, no viene la tarifa.
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-
-
-            Dim slinks As String
-            lista = LinksDeCartasConflictivasDelAutomatico(lista, slinks, sc)
-
-            slinks &= VerificarClientesFacturables(lista)
-
-            ViewState("sLinks") = slinks
-
-
-            EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
-            EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
-
-            PostProcesoFacturacion_ReglaExportadores(lista, sc)
+            'PostProcesoFacturacion_ReglaExportadores(lista, sc)
 
 
 
@@ -8537,75 +8573,19 @@ Public Class LogicaFacturacion
 
             '///////////////////////////////////////////////////////////////////////////////
             '///////////////////////////////////////////////////////////////////////////////
-            '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
-            'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
 
             ErrHandler.WriteError("punto 5. tanda " & sesionId)
-            AgregarEmbarques(lista, SC, desde, hasta, -1, puntoVenta)
-
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-            'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(lista, SC, dt, dtViewstateRenglonesManuales)
-
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
 
 
 
 
-
-            '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
-            ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, SC)
+            PreProcesos(lista, SC, desde, hasta, puntoVenta, ViewState)
 
 
+            PostProcesos(lista, optFacturarA, "", SC)
 
-
-
-
-            'hay que hacer un update de la lista por si se derivó a un corredor?
-
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-            'Para la facturación automática, de haber cartas de porte Agro y cartas de Porte Seeds, armar dos facturas separadas.
-            'Como las cartas de porte duplicadas solamente se pueden facturar mediante la facturación automática, entran en el automático. Para que no se pase la facturación separada, armar dos facturas distintas automaticamente.
-            CasosSyngenta(lista, SC)
-
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-            '///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-            Dim slinks As String
-            lista = LinksDeCartasConflictivasDelAutomatico(lista, slinks, SC)
-
-            slinks &= VerificarClientesFacturables(lista)
-
-            ViewState("sLinks") = slinks
-
-
-
-            EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, SC)
-
-            PostProcesoFacturacion_ReglaExportadores(lista, SC)
+            'EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, SC)
+            'PostProcesoFacturacion_ReglaExportadores(lista, SC)
 
 
 
@@ -9117,6 +9097,105 @@ Public Class LogicaFacturacion
         'Esto no debería hacerse cuando se hace la duplicancion
 
         'ssss()
+    End Sub
+
+
+    Shared Sub SepararAcopiosLDCyACA(ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal SC As String)
+
+        Return
+
+        'esto es porque para syngenta querrían separar 
+        'Buen día Andrés, como te adelanté por teléfono, necesito que en el caso del cliente Syngenta, Agro y Seeds, 
+        '    cada factura corte en $ 8.000 final. Ësto podré tenerlo para esta facturación?
+        'Aguardo(respuesta.Gracias)
+        'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=12878
+
+        '-recordemos que para facturar, agrupo por [IdFacturarselaA , ClienteSeparado]
+
+        'revisá el metodo CasosSyngenta()
+
+        'no me pisará ActualizarCampoClienteSeparador()?
+
+        Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
+        Dim idSyngentaSEEDS = BuscaIdClientePreciso("NO USAR !!!SYNGENTA SEEDS S.A.", SC)
+
+        Dim montomax As Decimal
+        Try
+            montomax = ParametroManager.TraerValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte")
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+        If montomax = 0 Then
+            ParametroManager.GuardarValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte", "150")
+            montomax = ParametroManager.TraerValorParametro2(SC, "MontoMaximoFacturaDeCartaPorte")
+        End If
+
+
+
+        Dim clientescontrolados As New List(Of Integer)
+        'clientescontrolados.Add(idSyngentaAGRO)
+        'clientescontrolados.Add(idSyngentaSEEDS)
+        'clientescontrolados.Add(2871) ' grobo
+
+
+
+        Dim q = (From i In listaDeCartasPorteAFacturar _
+              Group By i.IdFacturarselaA, i.ClienteSeparado _
+              Into g = Group _
+                Select New With { _
+                    IdFacturarselaA, _
+                    ClienteSeparado, _
+                    .Monto = g.Sum(Function(x) x.KgNetos * x.TarifaFacturada / 1000 * 1.21) _
+                } _
+            ).ToList()
+
+        Dim q2 = q.Where(Function(x) x.Monto > montomax And (clientescontrolados.Contains(x.IdFacturarselaA) Or True)).ToList()
+
+
+
+
+        'Dim l As String = iisNull(EntidadManager.ExecDinamico(SC, "SELECT ExpresionRegularNoAgruparFacturasConEstosVendedores FROM Clientes WHERE IdCliente=" & IdClienteEquivalenteAlCorredor).Rows(0).Item(0), "")
+        'ParametroManager.GuardarValorParametro2(SC, "MontoMaximoCartaPorteClientes", "SYNGENTA AGRO S.A.|SYNGENTA SEEDS S.A.")
+        Dim l As String = ParametroManager.TraerValorParametro2(SC, "MontoMaximoCartaPorteClientes").ToString()
+
+        Dim a() As String = Split(l, "|")
+
+        For Each s In a
+            If s = "" Then Continue For
+            Dim idcliente As Long = BuscaIdClientePreciso(s, SC)
+            clientescontrolados.Add(idcliente)
+        Next
+
+
+
+        'se debe ejecutar despues del filtro de cartas conflictivas
+        Dim total As Decimal = 0
+        Dim reasignador As Integer = 0
+        Dim ClienteSeparadoanterior As String
+        listaDeCartasPorteAFacturar = listaDeCartasPorteAFacturar.OrderBy(Function(x) x.FacturarselaA).ThenBy(Function(x) x.ClienteSeparado).ToList()
+        For n = 0 To listaDeCartasPorteAFacturar.Count - 1
+            Dim x = listaDeCartasPorteAFacturar(n)
+            Dim xant = listaDeCartasPorteAFacturar(IIf(n > 0, n - 1, 0))
+
+
+            If x.ClienteSeparado <> ClienteSeparadoanterior Or x.IdFacturarselaA <> xant.IdFacturarselaA Then
+                total = 0
+            End If
+
+            total += x.KgNetos * x.TarifaFacturada / 1000 * 1.21
+
+            If total > montomax And clientescontrolados.Contains(x.IdFacturarselaA) Then
+                reasignador += 1
+                total = x.KgNetos * x.TarifaFacturada / 1000 * 1.21 'reinicia el total
+            End If
+
+            ClienteSeparadoanterior = x.ClienteSeparado
+
+            If reasignador > 0 And clientescontrolados.Contains(x.IdFacturarselaA) Then
+                x.ClienteSeparado = (reasignador).ToString() + "° montomaximo" + " " + x.ClienteSeparado + "" 'le reasigno un clienteseparador de fantasía, ya que no tengo un tempIdFacturaAgenerar"
+            End If
+        Next
+
     End Sub
 
 
