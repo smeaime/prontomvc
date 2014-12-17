@@ -388,6 +388,12 @@ Partial Public Class LinqCartasPorteDataContext
 		End Get
 	End Property
 	
+	Public ReadOnly Property CartasPorteAcopios1() As System.Data.Linq.Table(Of CartasPorteAcopios)
+		Get
+			Return Me.GetTable(Of CartasPorteAcopios)
+		End Get
+	End Property
+	
 	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.wTarifaWilliamsEstimada", IsComposable:=true)>  _
 	Public Function wTarifaWilliamsEstimada(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal idCliente As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdArticulo", DbType:="Int")> ByVal idArticulo As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdDestino", DbType:="Int")> ByVal idDestino As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="TipoTarifa", DbType:="Int")> ByVal tipoTarifa As System.Nullable(Of Integer)) As System.Nullable(Of Decimal)
 		Return CType(Me.ExecuteMethodCall(Me, CType(MethodInfo.GetCurrentMethod,MethodInfo), idCliente, idArticulo, idDestino, tipoTarifa).ReturnValue,System.Nullable(Of Decimal))
@@ -24711,6 +24717,57 @@ Partial Public Class DetalleClientes
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios")>  _
+Partial Public Class CartasPorteAcopios
+	
+	Private _IdAcopio As Integer
+	
+	Private _Descripcion As String
+	
+	Private _IdCliente As System.Nullable(Of Integer)
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcopio", DbType:="Int NOT NULL")>  _
+	Public Property IdAcopio() As Integer
+		Get
+			Return Me._IdAcopio
+		End Get
+		Set
+			If ((Me._IdAcopio = value)  _
+						= false) Then
+				Me._IdAcopio = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(60) NOT NULL", CanBeNull:=false)>  _
+	Public Property Descripcion() As String
+		Get
+			Return Me._Descripcion
+		End Get
+		Set
+			If (String.Equals(Me._Descripcion, value) = false) Then
+				Me._Descripcion = value
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	Public Property IdCliente() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdCliente
+		End Get
+		Set
+			If (Me._IdCliente.Equals(value) = false) Then
+				Me._IdCliente = value
+			End If
+		End Set
+	End Property
 End Class
 
 Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
