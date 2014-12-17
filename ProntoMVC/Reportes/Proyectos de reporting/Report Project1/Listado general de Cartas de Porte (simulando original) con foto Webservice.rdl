@@ -1789,14 +1789,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox132">
+                    <Textbox Name="Textbox23">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!NumeroCartaDePorte.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>SemiBold</FontWeight>
@@ -1809,7 +1809,14 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox132</rd:DefaultName>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <ActionInfo>
+                        <Actions>
+                          <Action>
+                            <Hyperlink>=Parameters!sServidor.Value &amp; "/ProntoWeb/CartaDePorte.aspx?Id=" &amp; Fields!IdCartaDePorte.Value</Hyperlink>
+                          </Action>
+                        </Actions>
+                      </ActionInfo>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -1826,7 +1833,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox133">
+                    <Textbox Name="Textbox275">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1842,7 +1849,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox133</rd:DefaultName>
+                      <rd:DefaultName>Textbox275</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -1858,7 +1865,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox14">
+                    <Textbox Name="Textbox27">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1880,7 +1887,7 @@
                       </Paragraphs>
                       <rd:DefaultName>Textbox14</rd:DefaultName>
                       <Visibility>
-                        <Hidden>=(Fields!SubnumeroVagon.Value=0)</Hidden>
+                        <Hidden>=(Fields!SubnumeroVagon.Value = 0)</Hidden>
                       </Visibility>
                       <Style>
                         <Border>
@@ -5309,7 +5316,7 @@
     <DataSource Name="DataSource1">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>=Parameters!sServidor.Value</ConnectString>
+        <ConnectString>=Parameters!ReportParameter1.Value</ConnectString>
         <IntegratedSecurity>true</IntegratedSecurity>
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
