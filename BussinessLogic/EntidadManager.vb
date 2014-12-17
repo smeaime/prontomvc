@@ -138,6 +138,8 @@ Namespace Pronto.ERP.Bll
 
             Public ClienteFacturado As String
             'y si devolves directamente el objeto pulenta?
+
+            Public PathImagen As String
         End Class
 
         Enum FiltroANDOR
@@ -362,7 +364,9 @@ Namespace Pronto.ERP.Bll
                 .IdClienteAFacturarle = If(cdp.IdClienteAFacturarle, -1), _
                 .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
                 .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0), _
-                .ClienteFacturado = clifac.RazonSocial _
+                .ClienteFacturado = clifac.RazonSocial, _
+                .PathImagen = cdp.PathImagen _
+ _
                 })
 
             If False Then
