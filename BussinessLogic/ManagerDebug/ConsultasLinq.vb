@@ -48,7 +48,7 @@ Public Class ConsultasLinq
           ByVal sortExpression As String, _
           ByVal startRowIndex As Long, _
           ByVal maximumRows As Long, _
-          ByVal estado As EntidadManager.enumCDPestado, _
+          ByVal estado As CartaDePorteManager.enumCDPestado, _
           ByVal QueContenga As String, _
           ByVal idVendedor As Integer, _
           ByVal idCorredor As Integer, _
@@ -58,7 +58,7 @@ Public Class ConsultasLinq
           ByVal idArticulo As Integer, _
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
           ByVal ModoExportacion As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
@@ -232,7 +232,7 @@ Public Class ConsultasLinq
           ByVal sortExpression As String, _
           ByVal startRowIndex As Long, _
           ByVal maximumRows As Long, _
-          ByVal estado As EntidadManager.enumCDPestado, _
+          ByVal estado As CartaDePorteManager.enumCDPestado, _
           ByVal QueContenga As String, _
           ByVal idVendedor As Integer, _
           ByVal idCorredor As Integer, _
@@ -242,7 +242,7 @@ Public Class ConsultasLinq
           ByVal idArticulo As Integer, _
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
           ByVal ModoExportacion As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
@@ -447,7 +447,7 @@ Public Class ConsultasLinq
           ByVal sortExpression As String, _
           ByVal startRowIndex As Long, _
           ByVal maximumRows As Long, _
-          ByVal estado As EntidadManager.enumCDPestado, _
+          ByVal estado As CartaDePorteManager.enumCDPestado, _
           ByVal QueContenga As String, _
           ByVal idVendedor As Integer, _
           ByVal idCorredor As Integer, _
@@ -457,7 +457,7 @@ Public Class ConsultasLinq
           ByVal idArticulo As Integer, _
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
           ByVal ModoExportacion As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
@@ -682,7 +682,7 @@ Public Class ConsultasLinq
         ByVal sortExpression As String, _
         ByVal startRowIndex As Long, _
         ByVal maximumRows As Long, _
-        ByVal estado As EntidadManager.enumCDPestado, _
+        ByVal estado As CartaDePorteManager.enumCDPestado, _
         ByVal QueContenga As String, _
         ByVal idVendedor As Integer, _
         ByVal idCorredor As Integer, _
@@ -692,7 +692,7 @@ Public Class ConsultasLinq
         ByVal idArticulo As Integer, _
         ByVal idProcedencia As Integer, _
         ByVal idDestino As Integer, _
-        ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+        ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
         ByVal ModoExportacion As String, _
         ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
         ByVal puntoventa As Integer, _
@@ -778,7 +778,7 @@ Public Class ConsultasLinq
           ByVal sortExpression As String, _
           ByVal startRowIndex As Long, _
           ByVal maximumRows As Long, _
-          ByVal estado As EntidadManager.enumCDPestado, _
+          ByVal estado As CartaDePorteManager.enumCDPestado, _
           ByVal QueContenga As String, _
           ByVal idVendedor As Integer, _
           ByVal idCorredor As Integer, _
@@ -788,7 +788,7 @@ Public Class ConsultasLinq
           ByVal idArticulo As Integer, _
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
           ByVal ModoExportacion As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
@@ -892,7 +892,7 @@ Public Class ConsultasLinq
           ByVal sortExpression As String, _
           ByVal startRowIndex As Long, _
           ByVal maximumRows As Long, _
-          ByVal estado As EntidadManager.enumCDPestado, _
+          ByVal estado As CartaDePorteManager.enumCDPestado, _
           ByVal QueContenga As String, _
           ByVal idVendedor As Integer, _
           ByVal idCorredor As Integer, _
@@ -902,7 +902,7 @@ Public Class ConsultasLinq
           ByVal idArticulo As Integer, _
           ByVal idProcedencia As Integer, _
           ByVal idDestino As Integer, _
-          ByVal AplicarANDuORalFiltro As EntidadManager.FiltroANDOR, _
+          ByVal AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR, _
           ByVal ModoExportacion As String, _
           ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
           ByVal puntoventa As Integer, _
