@@ -9305,7 +9305,7 @@ Public Class LogicaFacturacion
                                                     "", "", 0, _
                                                     "", "", "", "", _
                                                     "", "", "", "", _
-                                                    "", "", "", "", "", "", "", "", "", sesionId, 0, 0, "", sErrores, "", AgruparArticulosPor)
+                                                    "", "", "", "", "", "", sesionId, 0, 0, "", sErrores, "", AgruparArticulosPor)
 
 
     End Function
@@ -9316,7 +9316,7 @@ Public Class LogicaFacturacion
                         ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
-                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
+                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
                          ByVal sesionId As String, ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String) As DataTable
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
@@ -9344,8 +9344,8 @@ Public Class LogicaFacturacion
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
-                                                        cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
-                                                        cmbPuntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor)
+                                                        cmbmodo, optDivisionSyngenta, desde, hasta, _
+                                                         puntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor)
                 End If
                 ids = ViewState("IdTanda")
             End If
