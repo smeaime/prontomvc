@@ -6647,7 +6647,7 @@ Public Class CartaDePorteManager
             'Si tiene ese dato, no hay que darle importancia al de la CP propiamente dicha, tanto para filtrar la carta, como para la impresión.
             'Con respecto al "cruce" de acopios, yo les pregunte y me dijeron que no es posible, que las cartas de un cliente nunca van a otro.
             Dim LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            regexReplace(docText, "#LeyendaAcopio#", LeyendaAcopio)
+            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
 
 
@@ -9310,7 +9310,8 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
+    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, _
+                        ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
                         ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
                         ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
@@ -12075,8 +12076,21 @@ Public Class LogicaFacturacion
 
         Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.AcopioFacturarleA}).Distinct
 
+
+        'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
+        'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
+        'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio2
+        'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio3
+        'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio4
+        'If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio5
+
+        'If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & nombreacopio(acopioseparado)
+
+
+
+
         If acopios.Count > 1 Then
-            Return vbCrLf + "Acopios id" + acopios(0).ToString()
+            Return vbCrLf + "Acopios id" + nombreacopio(acopios(0), SC)
         Else
             Return ""
         End If
@@ -12084,6 +12098,18 @@ Public Class LogicaFacturacion
 
 
     End Function
+
+
+    Shared Function nombreacopio(idacopio As Integer, SC As String) As String
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim o = db.CartasPorteAcopios1.Where(Function(x) x.IdAcopio = idacopio).First
+
+        Return o.Descripcion
+    End Function
+
+
 
     Shared Function LeyendaSyngenta(idfactura As Long, SC As String) As String
 
