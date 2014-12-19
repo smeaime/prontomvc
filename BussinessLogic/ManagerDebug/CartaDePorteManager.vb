@@ -9982,10 +9982,10 @@ Public Class LogicaFacturacion
             Dim lotecito As List(Of CartaDePorte) = (From c In listaDeCartasPorteAFacturar _
                         Where c.IdFacturarselaA = cli And c.ClienteSeparado = clisep _
                         Select New CartaDePorte With { _
-                            .IdArticulo = c.IdArticulo _
-                             , .Destino = c.IdDestino, _
-                       .Titular = c.IdTitular, _
-                   .Entregador = c.IdDestinatario, _
+                            .IdArticulo = If(c.IdArticulo, -1) _
+                             , .Destino = If(c.IdDestino, -1), _
+                       .Titular = If(c.IdTitular, -1), _
+                   .Entregador = If(c.IdDestinatario, -1), _
                    .NetoFinalIncluyendoMermas = c.KgNetos, _
                .TarifaCobradaAlCliente = c.TarifaFacturada _
                         } _
