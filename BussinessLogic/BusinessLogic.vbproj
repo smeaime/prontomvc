@@ -199,6 +199,9 @@
     <Compile Include="ExAppCode\CStd.vb" />
     <Compile Include="ExAppCode\InterfazProntoABM.vb" />
     <Compile Include="FacturaManager.vb" />
+    <Compile Include="LinqCartasPorte.vb">
+      <DependentUpon>LinqCartasPorte.dbml</DependentUpon>
+    </Compile>
     <Compile Include="LinqCartasPorte1.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

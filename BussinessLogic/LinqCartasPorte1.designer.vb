@@ -133,12 +133,6 @@ Partial Public Class LinqCartasPorteDataContext
     End Sub
   Partial Private Sub DeleteWilliamsDestino(instance As WilliamsDestino)
     End Sub
-  Partial Private Sub InsertCartasDePorte(instance As CartasDePorte)
-    End Sub
-  Partial Private Sub UpdateCartasDePorte(instance As CartasDePorte)
-    End Sub
-  Partial Private Sub DeleteCartasDePorte(instance As CartasDePorte)
-    End Sub
   Partial Private Sub InsertlinqDetalleFacturas(instance As linqDetalleFacturas)
     End Sub
   Partial Private Sub UpdatelinqDetalleFacturas(instance As linqDetalleFacturas)
@@ -186,6 +180,12 @@ Partial Public Class LinqCartasPorteDataContext
   Partial Private Sub UpdateDetalleClientes(instance As DetalleClientes)
     End Sub
   Partial Private Sub DeleteDetalleClientes(instance As DetalleClientes)
+    End Sub
+  Partial Private Sub InsertCartasDePorte(instance As CartasDePorte)
+    End Sub
+  Partial Private Sub UpdateCartasDePorte(instance As CartasDePorte)
+    End Sub
+  Partial Private Sub DeleteCartasDePorte(instance As CartasDePorte)
     End Sub
   #End Region
 	
@@ -328,12 +328,6 @@ Partial Public Class LinqCartasPorteDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property CartasDePortes() As System.Data.Linq.Table(Of CartasDePorte)
-		Get
-			Return Me.GetTable(Of CartasDePorte)
-		End Get
-	End Property
-	
 	Public ReadOnly Property CartasPorteAcopios() As System.Data.Linq.Table(Of CartasPorteAcopio)
 		Get
 			Return Me.GetTable(Of CartasPorteAcopio)
@@ -393,6 +387,12 @@ Partial Public Class LinqCartasPorteDataContext
 			Return Me.GetTable(Of CartasPorteAcopios)
 		End Get
 	End Property
+	
+    Public ReadOnly Property CartasDePortes() As System.Data.Linq.Table(Of CartasDePorte)
+        Get
+            Return Me.GetTable(Of CartasDePorte)()
+        End Get
+    End Property
 	
 	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.wTarifaWilliamsEstimada", IsComposable:=true)>  _
 	Public Function wTarifaWilliamsEstimada(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal idCliente As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdArticulo", DbType:="Int")> ByVal idArticulo As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdDestino", DbType:="Int")> ByVal idDestino As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="TipoTarifa", DbType:="Int")> ByVal tipoTarifa As System.Nullable(Of Integer)) As System.Nullable(Of Decimal)
@@ -1935,12 +1935,12 @@ Partial Public Class CartasPorteMovimiento
 				If ((previousValue Is Nothing)  _
 							= false) Then
 					Me._CartasDePorte.Entity = Nothing
-					previousValue.CartasPorteMovimientos.Remove(Me)
+					previousValue.CartasPorteMovimiento.Remove(Me)
 				End If
 				Me._CartasDePorte.Entity = value
 				If ((value Is Nothing)  _
 							= false) Then
-					value.CartasPorteMovimientos.Add(Me)
+					value.CartasPorteMovimiento.Add(Me)
 					Me._IdCartaDePorte = value.IdCartaDePorte
 				Else
 					Me._IdCartaDePorte = CType(Nothing, Nullable(Of Integer))
@@ -2463,9 +2463,9 @@ Partial Public Class linqArticulo
 	
 	Private _CartasPorteMovimientos As EntitySet(Of CartasPorteMovimiento)
 	
-	Private _CartasDePortes As EntitySet(Of CartasDePorte)
-	
 	Private _linqDetalleFacturas As EntitySet(Of linqDetalleFacturas)
+	
+	Private _CartasDePorte As EntitySet(Of CartasDePorte)
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -3451,8 +3451,8 @@ Partial Public Class linqArticulo
 	Public Sub New()
 		MyBase.New
 		Me._CartasPorteMovimientos = New EntitySet(Of CartasPorteMovimiento)(AddressOf Me.attach_CartasPorteMovimientos, AddressOf Me.detach_CartasPorteMovimientos)
-		Me._CartasDePortes = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePortes, AddressOf Me.detach_CartasDePortes)
 		Me._linqDetalleFacturas = New EntitySet(Of linqDetalleFacturas)(AddressOf Me.attach_linqDetalleFacturas, AddressOf Me.detach_linqDetalleFacturas)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
 		OnCreated
 	End Sub
 	
@@ -7357,16 +7357,6 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasDePorte", Storage:="_CartasDePortes", ThisKey:="IdArticulo", OtherKey:="IdArticulo")>  _
-	Public Property CartasDePortes() As EntitySet(Of CartasDePorte)
-		Get
-			Return Me._CartasDePortes
-		End Get
-		Set
-			Me._CartasDePortes.Assign(value)
-		End Set
-	End Property
-	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_linqDetalleFacturas", Storage:="_linqDetalleFacturas", ThisKey:="IdArticulo", OtherKey:="IdArticulo")>  _
 	Public Property linqDetalleFacturas() As EntitySet(Of linqDetalleFacturas)
 		Get
@@ -7374,6 +7364,16 @@ Partial Public Class linqArticulo
 		End Get
 		Set
 			Me._linqDetalleFacturas.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdArticulo", OtherKey:="IdArticulo")>  _
+	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte
+		End Get
+		Set
+			Me._CartasDePorte.Assign(value)
 		End Set
 	End Property
 	
@@ -7405,22 +7405,22 @@ Partial Public Class linqArticulo
 		entity.linqArticulo = Nothing
 	End Sub
 	
-	Private Sub attach_CartasDePortes(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqArticulo = Me
-	End Sub
-	
-	Private Sub detach_CartasDePortes(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqArticulo = Nothing
-	End Sub
-	
 	Private Sub attach_linqDetalleFacturas(ByVal entity As linqDetalleFacturas)
 		Me.SendPropertyChanging
 		entity.linqArticulo = Me
 	End Sub
 	
 	Private Sub detach_linqDetalleFacturas(ByVal entity As linqDetalleFacturas)
+		Me.SendPropertyChanging
+		entity.linqArticulo = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqArticulo = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte(ByVal entity As CartasDePorte)
 		Me.SendPropertyChanging
 		entity.linqArticulo = Nothing
 	End Sub
@@ -10500,13 +10500,13 @@ Partial Public Class linqCorredor
 	
 	Private _Cuit As String
 	
-	Private _CartasDePortes As EntitySet(Of CartasDePorte)
-	
-	Private _CartasDePortes1 As EntitySet(Of CartasDePorte)
-	
 	Private _Clientes As EntitySet(Of linqCliente)
 	
 	Private _linqClientes As EntitySet(Of linqCliente)
+	
+	Private _CartasDePorte As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte1 As EntitySet(Of CartasDePorte)
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -10571,10 +10571,10 @@ Partial Public Class linqCorredor
 	
 	Public Sub New()
 		MyBase.New
-		Me._CartasDePortes = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePortes, AddressOf Me.detach_CartasDePortes)
-		Me._CartasDePortes1 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePortes1, AddressOf Me.detach_CartasDePortes1)
 		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
 		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
+		Me._CartasDePorte1 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte1, AddressOf Me.detach_CartasDePorte1)
 		OnCreated
 	End Sub
 	
@@ -10789,26 +10789,6 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_CartasDePortes", ThisKey:="IdVendedor", OtherKey:="IdCorredor2")>  _
-	Public Property CartasDePortes() As EntitySet(Of CartasDePorte)
-		Get
-			Return Me._CartasDePortes
-		End Get
-		Set
-			Me._CartasDePortes.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte1", Storage:="_CartasDePortes1", ThisKey:="IdVendedor", OtherKey:="Corredor")>  _
-	Public Property CartasDePortes1() As EntitySet(Of CartasDePorte)
-		Get
-			Return Me._CartasDePortes1
-		End Get
-		Set
-			Me._CartasDePortes1.Assign(value)
-		End Set
-	End Property
-	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente", Storage:="_Clientes", ThisKey:="IdVendedor", OtherKey:="Cobrador")>  _
 	Public Property Clientes() As EntitySet(Of linqCliente)
 		Get
@@ -10826,6 +10806,26 @@ Partial Public Class linqCorredor
 		End Get
 		Set
 			Me._linqClientes.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdVendedor", OtherKey:="IdCorredor2")>  _
+	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte
+		End Get
+		Set
+			Me._CartasDePorte.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte1", Storage:="_CartasDePorte1", ThisKey:="IdVendedor", OtherKey:="Corredor")>  _
+	Public Property CartasDePorte1() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte1
+		End Get
+		Set
+			Me._CartasDePorte1.Assign(value)
 		End Set
 	End Property
 	
@@ -10847,26 +10847,6 @@ Partial Public Class linqCorredor
 		End If
 	End Sub
 	
-	Private Sub attach_CartasDePortes(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqCorredor = Me
-	End Sub
-	
-	Private Sub detach_CartasDePortes(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqCorredor = Nothing
-	End Sub
-	
-	Private Sub attach_CartasDePortes1(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqCorredor1 = Me
-	End Sub
-	
-	Private Sub detach_CartasDePortes1(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqCorredor1 = Nothing
-	End Sub
-	
 	Private Sub attach_Clientes(ByVal entity As linqCliente)
 		Me.SendPropertyChanging
 		entity.linqCorredor = Me
@@ -10883,6 +10863,26 @@ Partial Public Class linqCorredor
 	End Sub
 	
 	Private Sub detach_linqClientes(ByVal entity As linqCliente)
+		Me.SendPropertyChanging
+		entity.linqCorredor1 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCorredor = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCorredor = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte1(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCorredor1 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte1(ByVal entity As CartasDePorte)
 		Me.SendPropertyChanging
 		entity.linqCorredor1 = Nothing
 	End Sub
@@ -11014,7 +11014,7 @@ Partial Public Class Transportista
 	
 	Private _IdProveedor As System.Nullable(Of Integer)
 	
-	Private _CartasDePortes As EntitySet(Of CartasDePorte)
+	Private _CartasDePorte As EntitySet(Of CartasDePorte)
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -11099,7 +11099,7 @@ Partial Public Class Transportista
 	
 	Public Sub New()
 		MyBase.New
-		Me._CartasDePortes = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePortes, AddressOf Me.detach_CartasDePortes)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
 		OnCreated
 	End Sub
 	
@@ -11392,13 +11392,13 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Transportista_CartasDePorte", Storage:="_CartasDePortes", ThisKey:="IdTransportista", OtherKey:="IdTransportista")>  _
-	Public Property CartasDePortes() As EntitySet(Of CartasDePorte)
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Transportista_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdTransportista", OtherKey:="IdTransportista")>  _
+	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
 		Get
-			Return Me._CartasDePortes
+			Return Me._CartasDePorte
 		End Get
 		Set
-			Me._CartasDePortes.Assign(value)
+			Me._CartasDePorte.Assign(value)
 		End Set
 	End Property
 	
@@ -11420,12 +11420,12 @@ Partial Public Class Transportista
 		End If
 	End Sub
 	
-	Private Sub attach_CartasDePortes(ByVal entity As CartasDePorte)
+	Private Sub attach_CartasDePorte(ByVal entity As CartasDePorte)
 		Me.SendPropertyChanging
 		entity.Transportista = Me
 	End Sub
 	
-	Private Sub detach_CartasDePortes(ByVal entity As CartasDePorte)
+	Private Sub detach_CartasDePorte(ByVal entity As CartasDePorte)
 		Me.SendPropertyChanging
 		entity.Transportista = Nothing
 	End Sub
@@ -14414,3165 +14414,6 @@ Partial Public Class WilliamsDestino
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorte")>  _
-Partial Public Class CartasDePorte
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _IdCartaDePorte As Integer
-	
-	Private _NumeroCartaDePorte As System.Nullable(Of Long)
-	
-	Private _IdUsuarioIngreso As System.Nullable(Of Integer)
-	
-	Private _FechaIngreso As System.Nullable(Of Date)
-	
-	Private _Anulada As String
-	
-	Private _IdUsuarioAnulo As System.Nullable(Of Integer)
-	
-	Private _FechaAnulacion As System.Nullable(Of Date)
-	
-	Private _Observaciones As String
-	
-	Private _FechaTimeStamp As System.Data.Linq.Binary
-	
-	Private _Vendedor As System.Nullable(Of Integer)
-	
-	Private _CuentaOrden1 As System.Nullable(Of Integer)
-	
-	Private _CuentaOrden2 As System.Nullable(Of Integer)
-	
-	Private _Corredor As System.Nullable(Of Integer)
-	
-	Private _Entregador As System.Nullable(Of Integer)
-	
-	Private _Procedencia As String
-	
-	Private _Patente As String
-	
-	Private _IdArticulo As System.Nullable(Of Integer)
-	
-	Private _IdStock As System.Nullable(Of Integer)
-	
-	Private _Partida As String
-	
-	Private _IdUnidad As System.Nullable(Of Integer)
-	
-	Private _IdUbicacion As System.Nullable(Of Integer)
-	
-	Private _Cantidad As System.Nullable(Of Decimal)
-	
-	Private _Cupo As String
-	
-	Private _NetoProc As System.Nullable(Of Decimal)
-	
-	Private _Calidad As String
-	
-	Private _BrutoPto As System.Nullable(Of Decimal)
-	
-	Private _TaraPto As System.Nullable(Of Decimal)
-	
-	Private _NetoPto As System.Nullable(Of Decimal)
-	
-	Private _Acoplado As String
-	
-	Private _Humedad As System.Nullable(Of Decimal)
-	
-	Private _Merma As System.Nullable(Of Decimal)
-	
-	Private _NetoFinal As System.Nullable(Of Decimal)
-	
-	Private _FechaDeCarga As System.Nullable(Of Date)
-	
-	Private _FechaVencimiento As System.Nullable(Of Date)
-	
-	Private _CEE As String
-	
-	Private _IdTransportista As System.Nullable(Of Integer)
-	
-	Private _TransportistaCUITdesnormalizado As String
-	
-	Private _IdChofer As System.Nullable(Of Integer)
-	
-	Private _ChoferCUITdesnormalizado As String
-	
-	Private _CTG As System.Nullable(Of Integer)
-	
-	Private _Contrato As String
-	
-	Private _Destino As System.Nullable(Of Integer)
-	
-	Private _Subcontr1 As System.Nullable(Of Integer)
-	
-	Private _Subcontr2 As System.Nullable(Of Integer)
-	
-	Private _Contrato1 As System.Nullable(Of Integer)
-	
-	Private _contrato2 As System.Nullable(Of Integer)
-	
-	Private _KmARecorrer As System.Nullable(Of Decimal)
-	
-	Private _Tarifa As System.Nullable(Of Decimal)
-	
-	Private _FechaDescarga As System.Nullable(Of Date)
-	
-	Private _Hora As System.Nullable(Of Date)
-	
-	Private _NRecibo As System.Nullable(Of Integer)
-	
-	Private _CalidadDe As System.Nullable(Of Integer)
-	
-	Private _TaraFinal As System.Nullable(Of Decimal)
-	
-	Private _BrutoFinal As System.Nullable(Of Decimal)
-	
-	Private _Fumigada As System.Nullable(Of Decimal)
-	
-	Private _Secada As System.Nullable(Of Decimal)
-	
-	Private _Exporta As String
-	
-	Private _NobleExtranos As System.Nullable(Of Decimal)
-	
-	Private _NobleNegros As System.Nullable(Of Decimal)
-	
-	Private _NobleQuebrados As System.Nullable(Of Decimal)
-	
-	Private _NobleDaniados As System.Nullable(Of Decimal)
-	
-	Private _NobleChamico As System.Nullable(Of Decimal)
-	
-	Private _NobleChamico2 As System.Nullable(Of Decimal)
-	
-	Private _NobleRevolcado As System.Nullable(Of Decimal)
-	
-	Private _NobleObjetables As System.Nullable(Of Decimal)
-	
-	Private _NobleAmohosados As System.Nullable(Of Decimal)
-	
-	Private _NobleHectolitrico As System.Nullable(Of Decimal)
-	
-	Private _NobleCarbon As System.Nullable(Of Decimal)
-	
-	Private _NoblePanzaBlanca As System.Nullable(Of Decimal)
-	
-	Private _NoblePicados As System.Nullable(Of Decimal)
-	
-	Private _NobleMGrasa As System.Nullable(Of Decimal)
-	
-	Private _NobleAcidezGrasa As System.Nullable(Of Decimal)
-	
-	Private _NobleVerdes As System.Nullable(Of Decimal)
-	
-	Private _NobleGrado As System.Nullable(Of Integer)
-	
-	Private _NobleConforme As String
-	
-	Private _NobleACamara As String
-	
-	Private _Cosecha As String
-	
-	Private _HumedadDesnormalizada As System.Nullable(Of Decimal)
-	
-	Private _Factor As System.Nullable(Of Decimal)
-	
-	Private _IdFacturaImputada As System.Nullable(Of Integer)
-	
-	Private _PuntoVenta As System.Nullable(Of Integer)
-	
-	Private _SubnumeroVagon As System.Nullable(Of Integer)
-	
-	Private _TarifaFacturada As System.Nullable(Of Decimal)
-	
-	Private _TarifaSubcontratista1 As System.Nullable(Of Decimal)
-	
-	Private _TarifaSubcontratista2 As System.Nullable(Of Decimal)
-	
-	Private _FechaArribo As System.Nullable(Of Date)
-	
-	Private _Version As System.Nullable(Of Integer)
-	
-	Private _MotivoAnulacion As String
-	
-	Private _NumeroSubfijo As System.Nullable(Of Integer)
-	
-	Private _IdEstablecimiento As System.Nullable(Of Integer)
-	
-	Private _EnumSyngentaDivision As String
-	
-	Private _Corredor2 As System.Nullable(Of Integer)
-	
-	Private _IdUsuarioModifico As System.Nullable(Of Integer)
-	
-	Private _FechaModificacion As System.Nullable(Of Date)
-	
-	Private _FechaEmision As System.Nullable(Of Date)
-	
-	Private _EstaArchivada As String
-	
-	Private _ExcluirDeSubcontratistas As String
-	
-	Private _IdTipoMovimiento As System.Nullable(Of Integer)
-	
-	Private _IdClienteAFacturarle As System.Nullable(Of Integer)
-	
-	Private _SubnumeroDeFacturacion As System.Nullable(Of Integer)
-	
-	Private _AgregaItemDeGastosAdministrativos As String
-	
-	Private _CalidadGranosQuemados As System.Nullable(Of Decimal)
-	
-	Private _CalidadGranosQuemadosBonifica_o_Rebaja As String
-	
-	Private _CalidadTierra As System.Nullable(Of Decimal)
-	
-	Private _CalidadTierraBonifica_o_Rebaja As String
-	
-	Private _CalidadMermaChamico As System.Nullable(Of Decimal)
-	
-	Private _CalidadMermaChamicoBonifica_o_Rebaja As String
-	
-	Private _CalidadMermaZarandeo As System.Nullable(Of Decimal)
-	
-	Private _CalidadMermaZarandeoBonifica_o_Rebaja As String
-	
-	Private _FueraDeEstandar As String
-	
-	Private _CalidadPuntaSombreada As System.Nullable(Of Decimal)
-	
-	Private _CobraAcarreo As String
-	
-	Private _LiquidaViaje As String
-	
-	Private _IdClienteAuxiliar As System.Nullable(Of Integer)
-	
-	Private _CalidadDescuentoFinal As System.Nullable(Of Decimal)
-	
-	Private _PathImagen As String
-	
-	Private _PathImagen2 As String
-	
-	Private _AgrupadorDeTandaPeriodos As System.Nullable(Of Integer)
-	
-	Private _ClaveEncriptada As String
-	
-	Private _NumeroCartaEnTextoParaBusqueda As String
-	
-	Private _IdClienteEntregador As System.Nullable(Of Integer)
-	
-	Private _SojaSustentableCodCondicion As String
-	
-	Private _SojaSustentableCondicion As String
-	
-	Private _SojaSustentableNroEstablecimientoDeProduccion As String
-	
-	Private _IdClientePagadorFlete As System.Nullable(Of Integer)
-	
-	Private _IdDetalleFactura As System.Nullable(Of Integer)
-	
-	Private _SubnumeroVagonEnTextoParaBusqueda As String
-	
-	Private _IdCorredor2 As System.Nullable(Of Integer)
-	
-	Private _Acopio1 As System.Nullable(Of Integer)
-	
-	Private _Acopio2 As System.Nullable(Of Integer)
-	
-	Private _Acopio3 As System.Nullable(Of Integer)
-	
-	Private _Acopio4 As System.Nullable(Of Integer)
-	
-	Private _Acopio5 As System.Nullable(Of Integer)
-	
-	Private _CartasPorteMovimientos As EntitySet(Of CartasPorteMovimiento)
-	
-	Private _linqArticulo As EntityRef(Of linqArticulo)
-	
-	Private _linqCorredor As EntityRef(Of linqCorredor)
-	
-	Private _Transportista As EntityRef(Of Transportista)
-	
-	Private _linqCorredor1 As EntityRef(Of linqCorredor)
-	
-	Private _linqDetalleFacturas As EntityRef(Of linqDetalleFacturas)
-	
-    #Region "Definiciones de métodos de extensibilidad"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIdCartaDePorteChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIdCartaDePorteChanged()
-    End Sub
-    Partial Private Sub OnNumeroCartaDePorteChanging(value As System.Nullable(Of Long))
-    End Sub
-    Partial Private Sub OnNumeroCartaDePorteChanged()
-    End Sub
-    Partial Private Sub OnIdUsuarioIngresoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdUsuarioIngresoChanged()
-    End Sub
-    Partial Private Sub OnFechaIngresoChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaIngresoChanged()
-    End Sub
-    Partial Private Sub OnAnuladaChanging(value As String)
-    End Sub
-    Partial Private Sub OnAnuladaChanged()
-    End Sub
-    Partial Private Sub OnIdUsuarioAnuloChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdUsuarioAnuloChanged()
-    End Sub
-    Partial Private Sub OnFechaAnulacionChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaAnulacionChanged()
-    End Sub
-    Partial Private Sub OnObservacionesChanging(value As String)
-    End Sub
-    Partial Private Sub OnObservacionesChanged()
-    End Sub
-    Partial Private Sub OnFechaTimeStampChanging(value As System.Data.Linq.Binary)
-    End Sub
-    Partial Private Sub OnFechaTimeStampChanged()
-    End Sub
-    Partial Private Sub OnVendedorChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnVendedorChanged()
-    End Sub
-    Partial Private Sub OnCuentaOrden1Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCuentaOrden1Changed()
-    End Sub
-    Partial Private Sub OnCuentaOrden2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCuentaOrden2Changed()
-    End Sub
-    Partial Private Sub OnCorredorChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCorredorChanged()
-    End Sub
-    Partial Private Sub OnEntregadorChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnEntregadorChanged()
-    End Sub
-    Partial Private Sub OnProcedenciaChanging(value As String)
-    End Sub
-    Partial Private Sub OnProcedenciaChanged()
-    End Sub
-    Partial Private Sub OnPatenteChanging(value As String)
-    End Sub
-    Partial Private Sub OnPatenteChanged()
-    End Sub
-    Partial Private Sub OnIdArticuloChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdArticuloChanged()
-    End Sub
-    Partial Private Sub OnIdStockChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdStockChanged()
-    End Sub
-    Partial Private Sub OnPartidaChanging(value As String)
-    End Sub
-    Partial Private Sub OnPartidaChanged()
-    End Sub
-    Partial Private Sub OnIdUnidadChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdUnidadChanged()
-    End Sub
-    Partial Private Sub OnIdUbicacionChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdUbicacionChanged()
-    End Sub
-    Partial Private Sub OnCantidadChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCantidadChanged()
-    End Sub
-    Partial Private Sub OnCupoChanging(value As String)
-    End Sub
-    Partial Private Sub OnCupoChanged()
-    End Sub
-    Partial Private Sub OnNetoProcChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNetoProcChanged()
-    End Sub
-    Partial Private Sub OnCalidadChanging(value As String)
-    End Sub
-    Partial Private Sub OnCalidadChanged()
-    End Sub
-    Partial Private Sub OnBrutoPtoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnBrutoPtoChanged()
-    End Sub
-    Partial Private Sub OnTaraPtoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTaraPtoChanged()
-    End Sub
-    Partial Private Sub OnNetoPtoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNetoPtoChanged()
-    End Sub
-    Partial Private Sub OnAcopladoChanging(value As String)
-    End Sub
-    Partial Private Sub OnAcopladoChanged()
-    End Sub
-    Partial Private Sub OnHumedadChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnHumedadChanged()
-    End Sub
-    Partial Private Sub OnMermaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnMermaChanged()
-    End Sub
-    Partial Private Sub OnNetoFinalChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNetoFinalChanged()
-    End Sub
-    Partial Private Sub OnFechaDeCargaChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaDeCargaChanged()
-    End Sub
-    Partial Private Sub OnFechaVencimientoChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaVencimientoChanged()
-    End Sub
-    Partial Private Sub OnCEEChanging(value As String)
-    End Sub
-    Partial Private Sub OnCEEChanged()
-    End Sub
-    Partial Private Sub OnIdTransportistaChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdTransportistaChanged()
-    End Sub
-    Partial Private Sub OnTransportistaCUITdesnormalizadoChanging(value As String)
-    End Sub
-    Partial Private Sub OnTransportistaCUITdesnormalizadoChanged()
-    End Sub
-    Partial Private Sub OnIdChoferChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdChoferChanged()
-    End Sub
-    Partial Private Sub OnChoferCUITdesnormalizadoChanging(value As String)
-    End Sub
-    Partial Private Sub OnChoferCUITdesnormalizadoChanged()
-    End Sub
-    Partial Private Sub OnCTGChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCTGChanged()
-    End Sub
-    Partial Private Sub OnContratoChanging(value As String)
-    End Sub
-    Partial Private Sub OnContratoChanged()
-    End Sub
-    Partial Private Sub OnDestinoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnDestinoChanged()
-    End Sub
-    Partial Private Sub OnSubcontr1Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnSubcontr1Changed()
-    End Sub
-    Partial Private Sub OnSubcontr2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnSubcontr2Changed()
-    End Sub
-    Partial Private Sub OnContrato1Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnContrato1Changed()
-    End Sub
-    Partial Private Sub Oncontrato2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub Oncontrato2Changed()
-    End Sub
-    Partial Private Sub OnKmARecorrerChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnKmARecorrerChanged()
-    End Sub
-    Partial Private Sub OnTarifaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTarifaChanged()
-    End Sub
-    Partial Private Sub OnFechaDescargaChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaDescargaChanged()
-    End Sub
-    Partial Private Sub OnHoraChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnHoraChanged()
-    End Sub
-    Partial Private Sub OnNReciboChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnNReciboChanged()
-    End Sub
-    Partial Private Sub OnCalidadDeChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCalidadDeChanged()
-    End Sub
-    Partial Private Sub OnTaraFinalChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTaraFinalChanged()
-    End Sub
-    Partial Private Sub OnBrutoFinalChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnBrutoFinalChanged()
-    End Sub
-    Partial Private Sub OnFumigadaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnFumigadaChanged()
-    End Sub
-    Partial Private Sub OnSecadaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnSecadaChanged()
-    End Sub
-    Partial Private Sub OnExportaChanging(value As String)
-    End Sub
-    Partial Private Sub OnExportaChanged()
-    End Sub
-    Partial Private Sub OnNobleExtranosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleExtranosChanged()
-    End Sub
-    Partial Private Sub OnNobleNegrosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleNegrosChanged()
-    End Sub
-    Partial Private Sub OnNobleQuebradosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleQuebradosChanged()
-    End Sub
-    Partial Private Sub OnNobleDaniadosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleDaniadosChanged()
-    End Sub
-    Partial Private Sub OnNobleChamicoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleChamicoChanged()
-    End Sub
-    Partial Private Sub OnNobleChamico2Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleChamico2Changed()
-    End Sub
-    Partial Private Sub OnNobleRevolcadoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleRevolcadoChanged()
-    End Sub
-    Partial Private Sub OnNobleObjetablesChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleObjetablesChanged()
-    End Sub
-    Partial Private Sub OnNobleAmohosadosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleAmohosadosChanged()
-    End Sub
-    Partial Private Sub OnNobleHectolitricoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleHectolitricoChanged()
-    End Sub
-    Partial Private Sub OnNobleCarbonChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleCarbonChanged()
-    End Sub
-    Partial Private Sub OnNoblePanzaBlancaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNoblePanzaBlancaChanged()
-    End Sub
-    Partial Private Sub OnNoblePicadosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNoblePicadosChanged()
-    End Sub
-    Partial Private Sub OnNobleMGrasaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleMGrasaChanged()
-    End Sub
-    Partial Private Sub OnNobleAcidezGrasaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleAcidezGrasaChanged()
-    End Sub
-    Partial Private Sub OnNobleVerdesChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnNobleVerdesChanged()
-    End Sub
-    Partial Private Sub OnNobleGradoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnNobleGradoChanged()
-    End Sub
-    Partial Private Sub OnNobleConformeChanging(value As String)
-    End Sub
-    Partial Private Sub OnNobleConformeChanged()
-    End Sub
-    Partial Private Sub OnNobleACamaraChanging(value As String)
-    End Sub
-    Partial Private Sub OnNobleACamaraChanged()
-    End Sub
-    Partial Private Sub OnCosechaChanging(value As String)
-    End Sub
-    Partial Private Sub OnCosechaChanged()
-    End Sub
-    Partial Private Sub OnHumedadDesnormalizadaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnHumedadDesnormalizadaChanged()
-    End Sub
-    Partial Private Sub OnFactorChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnFactorChanged()
-    End Sub
-    Partial Private Sub OnIdFacturaImputadaChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdFacturaImputadaChanged()
-    End Sub
-    Partial Private Sub OnPuntoVentaChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnPuntoVentaChanged()
-    End Sub
-    Partial Private Sub OnSubnumeroVagonChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnSubnumeroVagonChanged()
-    End Sub
-    Partial Private Sub OnTarifaFacturadaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTarifaFacturadaChanged()
-    End Sub
-    Partial Private Sub OnTarifaSubcontratista1Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTarifaSubcontratista1Changed()
-    End Sub
-    Partial Private Sub OnTarifaSubcontratista2Changing(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnTarifaSubcontratista2Changed()
-    End Sub
-    Partial Private Sub OnFechaArriboChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaArriboChanged()
-    End Sub
-    Partial Private Sub OnVersionChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnVersionChanged()
-    End Sub
-    Partial Private Sub OnMotivoAnulacionChanging(value As String)
-    End Sub
-    Partial Private Sub OnMotivoAnulacionChanged()
-    End Sub
-    Partial Private Sub OnNumeroSubfijoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnNumeroSubfijoChanged()
-    End Sub
-    Partial Private Sub OnIdEstablecimientoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdEstablecimientoChanged()
-    End Sub
-    Partial Private Sub OnEnumSyngentaDivisionChanging(value As String)
-    End Sub
-    Partial Private Sub OnEnumSyngentaDivisionChanged()
-    End Sub
-    Partial Private Sub OnCorredor2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCorredor2Changed()
-    End Sub
-    Partial Private Sub OnIdUsuarioModificoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdUsuarioModificoChanged()
-    End Sub
-    Partial Private Sub OnFechaModificacionChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaModificacionChanged()
-    End Sub
-    Partial Private Sub OnFechaEmisionChanging(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnFechaEmisionChanged()
-    End Sub
-    Partial Private Sub OnEstaArchivadaChanging(value As String)
-    End Sub
-    Partial Private Sub OnEstaArchivadaChanged()
-    End Sub
-    Partial Private Sub OnExcluirDeSubcontratistasChanging(value As String)
-    End Sub
-    Partial Private Sub OnExcluirDeSubcontratistasChanged()
-    End Sub
-    Partial Private Sub OnIdTipoMovimientoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdTipoMovimientoChanged()
-    End Sub
-    Partial Private Sub OnIdClienteAFacturarleChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdClienteAFacturarleChanged()
-    End Sub
-    Partial Private Sub OnSubnumeroDeFacturacionChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnSubnumeroDeFacturacionChanged()
-    End Sub
-    Partial Private Sub OnAgregaItemDeGastosAdministrativosChanging(value As String)
-    End Sub
-    Partial Private Sub OnAgregaItemDeGastosAdministrativosChanged()
-    End Sub
-    Partial Private Sub OnCalidadGranosQuemadosChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadGranosQuemadosChanged()
-    End Sub
-    Partial Private Sub OnCalidadGranosQuemadosBonifica_o_RebajaChanging(value As String)
-    End Sub
-    Partial Private Sub OnCalidadGranosQuemadosBonifica_o_RebajaChanged()
-    End Sub
-    Partial Private Sub OnCalidadTierraChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadTierraChanged()
-    End Sub
-    Partial Private Sub OnCalidadTierraBonifica_o_RebajaChanging(value As String)
-    End Sub
-    Partial Private Sub OnCalidadTierraBonifica_o_RebajaChanged()
-    End Sub
-    Partial Private Sub OnCalidadMermaChamicoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadMermaChamicoChanged()
-    End Sub
-    Partial Private Sub OnCalidadMermaChamicoBonifica_o_RebajaChanging(value As String)
-    End Sub
-    Partial Private Sub OnCalidadMermaChamicoBonifica_o_RebajaChanged()
-    End Sub
-    Partial Private Sub OnCalidadMermaZarandeoChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadMermaZarandeoChanged()
-    End Sub
-    Partial Private Sub OnCalidadMermaZarandeoBonifica_o_RebajaChanging(value As String)
-    End Sub
-    Partial Private Sub OnCalidadMermaZarandeoBonifica_o_RebajaChanged()
-    End Sub
-    Partial Private Sub OnFueraDeEstandarChanging(value As String)
-    End Sub
-    Partial Private Sub OnFueraDeEstandarChanged()
-    End Sub
-    Partial Private Sub OnCalidadPuntaSombreadaChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadPuntaSombreadaChanged()
-    End Sub
-    Partial Private Sub OnCobraAcarreoChanging(value As String)
-    End Sub
-    Partial Private Sub OnCobraAcarreoChanged()
-    End Sub
-    Partial Private Sub OnLiquidaViajeChanging(value As String)
-    End Sub
-    Partial Private Sub OnLiquidaViajeChanged()
-    End Sub
-    Partial Private Sub OnIdClienteAuxiliarChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdClienteAuxiliarChanged()
-    End Sub
-    Partial Private Sub OnCalidadDescuentoFinalChanging(value As System.Nullable(Of Decimal))
-    End Sub
-    Partial Private Sub OnCalidadDescuentoFinalChanged()
-    End Sub
-    Partial Private Sub OnPathImagenChanging(value As String)
-    End Sub
-    Partial Private Sub OnPathImagenChanged()
-    End Sub
-    Partial Private Sub OnPathImagen2Changing(value As String)
-    End Sub
-    Partial Private Sub OnPathImagen2Changed()
-    End Sub
-    Partial Private Sub OnAgrupadorDeTandaPeriodosChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAgrupadorDeTandaPeriodosChanged()
-    End Sub
-    Partial Private Sub OnClaveEncriptadaChanging(value As String)
-    End Sub
-    Partial Private Sub OnClaveEncriptadaChanged()
-    End Sub
-    Partial Private Sub OnNumeroCartaEnTextoParaBusquedaChanging(value As String)
-    End Sub
-    Partial Private Sub OnNumeroCartaEnTextoParaBusquedaChanged()
-    End Sub
-    Partial Private Sub OnIdClienteEntregadorChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdClienteEntregadorChanged()
-    End Sub
-    Partial Private Sub OnSojaSustentableCodCondicionChanging(value As String)
-    End Sub
-    Partial Private Sub OnSojaSustentableCodCondicionChanged()
-    End Sub
-    Partial Private Sub OnSojaSustentableCondicionChanging(value As String)
-    End Sub
-    Partial Private Sub OnSojaSustentableCondicionChanged()
-    End Sub
-    Partial Private Sub OnSojaSustentableNroEstablecimientoDeProduccionChanging(value As String)
-    End Sub
-    Partial Private Sub OnSojaSustentableNroEstablecimientoDeProduccionChanged()
-    End Sub
-    Partial Private Sub OnIdClientePagadorFleteChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdClientePagadorFleteChanged()
-    End Sub
-    Partial Private Sub OnIdDetalleFacturaChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdDetalleFacturaChanged()
-    End Sub
-    Partial Private Sub OnSubnumeroVagonEnTextoParaBusquedaChanging(value As String)
-    End Sub
-    Partial Private Sub OnSubnumeroVagonEnTextoParaBusquedaChanged()
-    End Sub
-    Partial Private Sub OnIdCorredor2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdCorredor2Changed()
-    End Sub
-    Partial Private Sub OnAcopio1Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAcopio1Changed()
-    End Sub
-    Partial Private Sub OnAcopio2Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAcopio2Changed()
-    End Sub
-    Partial Private Sub OnAcopio3Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAcopio3Changed()
-    End Sub
-    Partial Private Sub OnAcopio4Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAcopio4Changed()
-    End Sub
-    Partial Private Sub OnAcopio5Changing(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnAcopio5Changed()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._CartasPorteMovimientos = New EntitySet(Of CartasPorteMovimiento)(AddressOf Me.attach_CartasPorteMovimientos, AddressOf Me.detach_CartasPorteMovimientos)
-		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
-		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
-		Me._Transportista = CType(Nothing, EntityRef(Of Transportista))
-		Me._linqCorredor1 = CType(Nothing, EntityRef(Of linqCorredor))
-		Me._linqDetalleFacturas = CType(Nothing, EntityRef(Of linqDetalleFacturas))
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdCartaDePorte() As Integer
-		Get
-			Return Me._IdCartaDePorte
-		End Get
-		Set
-			If ((Me._IdCartaDePorte = value)  _
-						= false) Then
-				Me.OnIdCartaDePorteChanging(value)
-				Me.SendPropertyChanging
-				Me._IdCartaDePorte = value
-				Me.SendPropertyChanged("IdCartaDePorte")
-				Me.OnIdCartaDePorteChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NumeroCartaDePorte() As System.Nullable(Of Long)
-		Get
-			Return Me._NumeroCartaDePorte
-		End Get
-		Set
-			If (Me._NumeroCartaDePorte.Equals(value) = false) Then
-				Me.OnNumeroCartaDePorteChanging(value)
-				Me.SendPropertyChanging
-				Me._NumeroCartaDePorte = value
-				Me.SendPropertyChanged("NumeroCartaDePorte")
-				Me.OnNumeroCartaDePorteChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdUsuarioIngreso
-		End Get
-		Set
-			If (Me._IdUsuarioIngreso.Equals(value) = false) Then
-				Me.OnIdUsuarioIngresoChanging(value)
-				Me.SendPropertyChanging
-				Me._IdUsuarioIngreso = value
-				Me.SendPropertyChanged("IdUsuarioIngreso")
-				Me.OnIdUsuarioIngresoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaIngreso() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaIngreso
-		End Get
-		Set
-			If (Me._FechaIngreso.Equals(value) = false) Then
-				Me.OnFechaIngresoChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaIngreso = value
-				Me.SendPropertyChanged("FechaIngreso")
-				Me.OnFechaIngresoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Anulada() As String
-		Get
-			Return Me._Anulada
-		End Get
-		Set
-			If (String.Equals(Me._Anulada, value) = false) Then
-				Me.OnAnuladaChanging(value)
-				Me.SendPropertyChanging
-				Me._Anulada = value
-				Me.SendPropertyChanged("Anulada")
-				Me.OnAnuladaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdUsuarioAnulo() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdUsuarioAnulo
-		End Get
-		Set
-			If (Me._IdUsuarioAnulo.Equals(value) = false) Then
-				Me.OnIdUsuarioAnuloChanging(value)
-				Me.SendPropertyChanging
-				Me._IdUsuarioAnulo = value
-				Me.SendPropertyChanged("IdUsuarioAnulo")
-				Me.OnIdUsuarioAnuloChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaAnulacion() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaAnulacion
-		End Get
-		Set
-			If (Me._FechaAnulacion.Equals(value) = false) Then
-				Me.OnFechaAnulacionChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaAnulacion = value
-				Me.SendPropertyChanged("FechaAnulacion")
-				Me.OnFechaAnulacionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Observaciones() As String
-		Get
-			Return Me._Observaciones
-		End Get
-		Set
-			If (String.Equals(Me._Observaciones, value) = false) Then
-				Me.OnObservacionesChanging(value)
-				Me.SendPropertyChanging
-				Me._Observaciones = value
-				Me.SendPropertyChanged("Observaciones")
-				Me.OnObservacionesChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaTimeStamp() As System.Data.Linq.Binary
-		Get
-			Return Me._FechaTimeStamp
-		End Get
-		Set
-			If (Object.Equals(Me._FechaTimeStamp, value) = false) Then
-				Me.OnFechaTimeStampChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaTimeStamp = value
-				Me.SendPropertyChanged("FechaTimeStamp")
-				Me.OnFechaTimeStampChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Vendedor() As System.Nullable(Of Integer)
-		Get
-			Return Me._Vendedor
-		End Get
-		Set
-			If (Me._Vendedor.Equals(value) = false) Then
-				Me.OnVendedorChanging(value)
-				Me.SendPropertyChanging
-				Me._Vendedor = value
-				Me.SendPropertyChanged("Vendedor")
-				Me.OnVendedorChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CuentaOrden1() As System.Nullable(Of Integer)
-		Get
-			Return Me._CuentaOrden1
-		End Get
-		Set
-			If (Me._CuentaOrden1.Equals(value) = false) Then
-				Me.OnCuentaOrden1Changing(value)
-				Me.SendPropertyChanging
-				Me._CuentaOrden1 = value
-				Me.SendPropertyChanged("CuentaOrden1")
-				Me.OnCuentaOrden1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CuentaOrden2() As System.Nullable(Of Integer)
-		Get
-			Return Me._CuentaOrden2
-		End Get
-		Set
-			If (Me._CuentaOrden2.Equals(value) = false) Then
-				Me.OnCuentaOrden2Changing(value)
-				Me.SendPropertyChanging
-				Me._CuentaOrden2 = value
-				Me.SendPropertyChanged("CuentaOrden2")
-				Me.OnCuentaOrden2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Corredor() As System.Nullable(Of Integer)
-		Get
-			Return Me._Corredor
-		End Get
-		Set
-			If (Me._Corredor.Equals(value) = false) Then
-				If Me._linqCorredor1.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnCorredorChanging(value)
-				Me.SendPropertyChanging
-				Me._Corredor = value
-				Me.SendPropertyChanged("Corredor")
-				Me.OnCorredorChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Entregador() As System.Nullable(Of Integer)
-		Get
-			Return Me._Entregador
-		End Get
-		Set
-			If (Me._Entregador.Equals(value) = false) Then
-				Me.OnEntregadorChanging(value)
-				Me.SendPropertyChanging
-				Me._Entregador = value
-				Me.SendPropertyChanged("Entregador")
-				Me.OnEntregadorChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedencia", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Procedencia() As String
-		Get
-			Return Me._Procedencia
-		End Get
-		Set
-			If (String.Equals(Me._Procedencia, value) = false) Then
-				Me.OnProcedenciaChanging(value)
-				Me.SendPropertyChanging
-				Me._Procedencia = value
-				Me.SendPropertyChanged("Procedencia")
-				Me.OnProcedenciaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Patente", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Patente() As String
-		Get
-			Return Me._Patente
-		End Get
-		Set
-			If (String.Equals(Me._Patente, value) = false) Then
-				Me.OnPatenteChanging(value)
-				Me.SendPropertyChanging
-				Me._Patente = value
-				Me.SendPropertyChanged("Patente")
-				Me.OnPatenteChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdArticulo() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdArticulo
-		End Get
-		Set
-			If (Me._IdArticulo.Equals(value) = false) Then
-				If Me._linqArticulo.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIdArticuloChanging(value)
-				Me.SendPropertyChanging
-				Me._IdArticulo = value
-				Me.SendPropertyChanged("IdArticulo")
-				Me.OnIdArticuloChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdStock() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdStock
-		End Get
-		Set
-			If (Me._IdStock.Equals(value) = false) Then
-				Me.OnIdStockChanging(value)
-				Me.SendPropertyChanging
-				Me._IdStock = value
-				Me.SendPropertyChanged("IdStock")
-				Me.OnIdStockChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Partida() As String
-		Get
-			Return Me._Partida
-		End Get
-		Set
-			If (String.Equals(Me._Partida, value) = false) Then
-				Me.OnPartidaChanging(value)
-				Me.SendPropertyChanging
-				Me._Partida = value
-				Me.SendPropertyChanged("Partida")
-				Me.OnPartidaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdUnidad() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdUnidad
-		End Get
-		Set
-			If (Me._IdUnidad.Equals(value) = false) Then
-				Me.OnIdUnidadChanging(value)
-				Me.SendPropertyChanging
-				Me._IdUnidad = value
-				Me.SendPropertyChanged("IdUnidad")
-				Me.OnIdUnidadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdUbicacion() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdUbicacion
-		End Get
-		Set
-			If (Me._IdUbicacion.Equals(value) = false) Then
-				Me.OnIdUbicacionChanging(value)
-				Me.SendPropertyChanging
-				Me._IdUbicacion = value
-				Me.SendPropertyChanged("IdUbicacion")
-				Me.OnIdUbicacionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Cantidad() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Cantidad
-		End Get
-		Set
-			If (Me._Cantidad.Equals(value) = false) Then
-				Me.OnCantidadChanging(value)
-				Me.SendPropertyChanging
-				Me._Cantidad = value
-				Me.SendPropertyChanged("Cantidad")
-				Me.OnCantidadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cupo", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Cupo() As String
-		Get
-			Return Me._Cupo
-		End Get
-		Set
-			If (String.Equals(Me._Cupo, value) = false) Then
-				Me.OnCupoChanging(value)
-				Me.SendPropertyChanging
-				Me._Cupo = value
-				Me.SendPropertyChanged("Cupo")
-				Me.OnCupoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoProc", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NetoProc() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NetoProc
-		End Get
-		Set
-			If (Me._NetoProc.Equals(value) = false) Then
-				Me.OnNetoProcChanging(value)
-				Me.SendPropertyChanging
-				Me._NetoProc = value
-				Me.SendPropertyChanged("NetoProc")
-				Me.OnNetoProcChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Calidad", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Calidad() As String
-		Get
-			Return Me._Calidad
-		End Get
-		Set
-			If (String.Equals(Me._Calidad, value) = false) Then
-				Me.OnCalidadChanging(value)
-				Me.SendPropertyChanging
-				Me._Calidad = value
-				Me.SendPropertyChanged("Calidad")
-				Me.OnCalidadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property BrutoPto() As System.Nullable(Of Decimal)
-		Get
-			Return Me._BrutoPto
-		End Get
-		Set
-			If (Me._BrutoPto.Equals(value) = false) Then
-				Me.OnBrutoPtoChanging(value)
-				Me.SendPropertyChanging
-				Me._BrutoPto = value
-				Me.SendPropertyChanged("BrutoPto")
-				Me.OnBrutoPtoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TaraPto() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TaraPto
-		End Get
-		Set
-			If (Me._TaraPto.Equals(value) = false) Then
-				Me.OnTaraPtoChanging(value)
-				Me.SendPropertyChanging
-				Me._TaraPto = value
-				Me.SendPropertyChanged("TaraPto")
-				Me.OnTaraPtoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NetoPto() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NetoPto
-		End Get
-		Set
-			If (Me._NetoPto.Equals(value) = false) Then
-				Me.OnNetoPtoChanging(value)
-				Me.SendPropertyChanging
-				Me._NetoPto = value
-				Me.SendPropertyChanged("NetoPto")
-				Me.OnNetoPtoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acoplado", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acoplado() As String
-		Get
-			Return Me._Acoplado
-		End Get
-		Set
-			If (String.Equals(Me._Acoplado, value) = false) Then
-				Me.OnAcopladoChanging(value)
-				Me.SendPropertyChanging
-				Me._Acoplado = value
-				Me.SendPropertyChanged("Acoplado")
-				Me.OnAcopladoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Humedad", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Humedad() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Humedad
-		End Get
-		Set
-			If (Me._Humedad.Equals(value) = false) Then
-				Me.OnHumedadChanging(value)
-				Me.SendPropertyChanging
-				Me._Humedad = value
-				Me.SendPropertyChanged("Humedad")
-				Me.OnHumedadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Merma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Merma() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Merma
-		End Get
-		Set
-			If (Me._Merma.Equals(value) = false) Then
-				Me.OnMermaChanging(value)
-				Me.SendPropertyChanging
-				Me._Merma = value
-				Me.SendPropertyChanged("Merma")
-				Me.OnMermaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NetoFinal() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NetoFinal
-		End Get
-		Set
-			If (Me._NetoFinal.Equals(value) = false) Then
-				Me.OnNetoFinalChanging(value)
-				Me.SendPropertyChanging
-				Me._NetoFinal = value
-				Me.SendPropertyChanged("NetoFinal")
-				Me.OnNetoFinalChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDeCarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaDeCarga() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaDeCarga
-		End Get
-		Set
-			If (Me._FechaDeCarga.Equals(value) = false) Then
-				Me.OnFechaDeCargaChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaDeCarga = value
-				Me.SendPropertyChanged("FechaDeCarga")
-				Me.OnFechaDeCargaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaVencimiento() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaVencimiento
-		End Get
-		Set
-			If (Me._FechaVencimiento.Equals(value) = false) Then
-				Me.OnFechaVencimientoChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaVencimiento = value
-				Me.SendPropertyChanged("FechaVencimiento")
-				Me.OnFechaVencimientoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CEE", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CEE() As String
-		Get
-			Return Me._CEE
-		End Get
-		Set
-			If (String.Equals(Me._CEE, value) = false) Then
-				Me.OnCEEChanging(value)
-				Me.SendPropertyChanging
-				Me._CEE = value
-				Me.SendPropertyChanged("CEE")
-				Me.OnCEEChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdTransportista() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdTransportista
-		End Get
-		Set
-			If (Me._IdTransportista.Equals(value) = false) Then
-				If Me._Transportista.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIdTransportistaChanging(value)
-				Me.SendPropertyChanging
-				Me._IdTransportista = value
-				Me.SendPropertyChanged("IdTransportista")
-				Me.OnIdTransportistaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TransportistaCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TransportistaCUITdesnormalizado() As String
-		Get
-			Return Me._TransportistaCUITdesnormalizado
-		End Get
-		Set
-			If (String.Equals(Me._TransportistaCUITdesnormalizado, value) = false) Then
-				Me.OnTransportistaCUITdesnormalizadoChanging(value)
-				Me.SendPropertyChanging
-				Me._TransportistaCUITdesnormalizado = value
-				Me.SendPropertyChanged("TransportistaCUITdesnormalizado")
-				Me.OnTransportistaCUITdesnormalizadoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdChofer() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdChofer
-		End Get
-		Set
-			If (Me._IdChofer.Equals(value) = false) Then
-				Me.OnIdChoferChanging(value)
-				Me.SendPropertyChanging
-				Me._IdChofer = value
-				Me.SendPropertyChanged("IdChofer")
-				Me.OnIdChoferChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChoferCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property ChoferCUITdesnormalizado() As String
-		Get
-			Return Me._ChoferCUITdesnormalizado
-		End Get
-		Set
-			If (String.Equals(Me._ChoferCUITdesnormalizado, value) = false) Then
-				Me.OnChoferCUITdesnormalizadoChanging(value)
-				Me.SendPropertyChanging
-				Me._ChoferCUITdesnormalizado = value
-				Me.SendPropertyChanged("ChoferCUITdesnormalizado")
-				Me.OnChoferCUITdesnormalizadoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CTG", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CTG() As System.Nullable(Of Integer)
-		Get
-			Return Me._CTG
-		End Get
-		Set
-			If (Me._CTG.Equals(value) = false) Then
-				Me.OnCTGChanging(value)
-				Me.SendPropertyChanging
-				Me._CTG = value
-				Me.SendPropertyChanged("CTG")
-				Me.OnCTGChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Contrato() As String
-		Get
-			Return Me._Contrato
-		End Get
-		Set
-			If (String.Equals(Me._Contrato, value) = false) Then
-				Me.OnContratoChanging(value)
-				Me.SendPropertyChanging
-				Me._Contrato = value
-				Me.SendPropertyChanged("Contrato")
-				Me.OnContratoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destino", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Destino() As System.Nullable(Of Integer)
-		Get
-			Return Me._Destino
-		End Get
-		Set
-			If (Me._Destino.Equals(value) = false) Then
-				Me.OnDestinoChanging(value)
-				Me.SendPropertyChanging
-				Me._Destino = value
-				Me.SendPropertyChanged("Destino")
-				Me.OnDestinoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Subcontr1() As System.Nullable(Of Integer)
-		Get
-			Return Me._Subcontr1
-		End Get
-		Set
-			If (Me._Subcontr1.Equals(value) = false) Then
-				Me.OnSubcontr1Changing(value)
-				Me.SendPropertyChanging
-				Me._Subcontr1 = value
-				Me.SendPropertyChanged("Subcontr1")
-				Me.OnSubcontr1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Subcontr2() As System.Nullable(Of Integer)
-		Get
-			Return Me._Subcontr2
-		End Get
-		Set
-			If (Me._Subcontr2.Equals(value) = false) Then
-				Me.OnSubcontr2Changing(value)
-				Me.SendPropertyChanging
-				Me._Subcontr2 = value
-				Me.SendPropertyChanged("Subcontr2")
-				Me.OnSubcontr2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Contrato1() As System.Nullable(Of Integer)
-		Get
-			Return Me._Contrato1
-		End Get
-		Set
-			If (Me._Contrato1.Equals(value) = false) Then
-				Me.OnContrato1Changing(value)
-				Me.SendPropertyChanging
-				Me._Contrato1 = value
-				Me.SendPropertyChanged("Contrato1")
-				Me.OnContrato1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contrato2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property contrato2() As System.Nullable(Of Integer)
-		Get
-			Return Me._contrato2
-		End Get
-		Set
-			If (Me._contrato2.Equals(value) = false) Then
-				Me.Oncontrato2Changing(value)
-				Me.SendPropertyChanging
-				Me._contrato2 = value
-				Me.SendPropertyChanged("contrato2")
-				Me.Oncontrato2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KmARecorrer", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property KmARecorrer() As System.Nullable(Of Decimal)
-		Get
-			Return Me._KmARecorrer
-		End Get
-		Set
-			If (Me._KmARecorrer.Equals(value) = false) Then
-				Me.OnKmARecorrerChanging(value)
-				Me.SendPropertyChanging
-				Me._KmARecorrer = value
-				Me.SendPropertyChanged("KmARecorrer")
-				Me.OnKmARecorrerChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarifa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Tarifa() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Tarifa
-		End Get
-		Set
-			If (Me._Tarifa.Equals(value) = false) Then
-				Me.OnTarifaChanging(value)
-				Me.SendPropertyChanging
-				Me._Tarifa = value
-				Me.SendPropertyChanged("Tarifa")
-				Me.OnTarifaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaDescarga() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaDescarga
-		End Get
-		Set
-			If (Me._FechaDescarga.Equals(value) = false) Then
-				Me.OnFechaDescargaChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaDescarga = value
-				Me.SendPropertyChanged("FechaDescarga")
-				Me.OnFechaDescargaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Hora", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Hora() As System.Nullable(Of Date)
-		Get
-			Return Me._Hora
-		End Get
-		Set
-			If (Me._Hora.Equals(value) = false) Then
-				Me.OnHoraChanging(value)
-				Me.SendPropertyChanging
-				Me._Hora = value
-				Me.SendPropertyChanged("Hora")
-				Me.OnHoraChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NRecibo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NRecibo() As System.Nullable(Of Integer)
-		Get
-			Return Me._NRecibo
-		End Get
-		Set
-			If (Me._NRecibo.Equals(value) = false) Then
-				Me.OnNReciboChanging(value)
-				Me.SendPropertyChanging
-				Me._NRecibo = value
-				Me.SendPropertyChanged("NRecibo")
-				Me.OnNReciboChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDe", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadDe() As System.Nullable(Of Integer)
-		Get
-			Return Me._CalidadDe
-		End Get
-		Set
-			If (Me._CalidadDe.Equals(value) = false) Then
-				Me.OnCalidadDeChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadDe = value
-				Me.SendPropertyChanged("CalidadDe")
-				Me.OnCalidadDeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TaraFinal() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TaraFinal
-		End Get
-		Set
-			If (Me._TaraFinal.Equals(value) = false) Then
-				Me.OnTaraFinalChanging(value)
-				Me.SendPropertyChanging
-				Me._TaraFinal = value
-				Me.SendPropertyChanged("TaraFinal")
-				Me.OnTaraFinalChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property BrutoFinal() As System.Nullable(Of Decimal)
-		Get
-			Return Me._BrutoFinal
-		End Get
-		Set
-			If (Me._BrutoFinal.Equals(value) = false) Then
-				Me.OnBrutoFinalChanging(value)
-				Me.SendPropertyChanging
-				Me._BrutoFinal = value
-				Me.SendPropertyChanged("BrutoFinal")
-				Me.OnBrutoFinalChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fumigada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Fumigada() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Fumigada
-		End Get
-		Set
-			If (Me._Fumigada.Equals(value) = false) Then
-				Me.OnFumigadaChanging(value)
-				Me.SendPropertyChanging
-				Me._Fumigada = value
-				Me.SendPropertyChanged("Fumigada")
-				Me.OnFumigadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Secada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Secada() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Secada
-		End Get
-		Set
-			If (Me._Secada.Equals(value) = false) Then
-				Me.OnSecadaChanging(value)
-				Me.SendPropertyChanging
-				Me._Secada = value
-				Me.SendPropertyChanged("Secada")
-				Me.OnSecadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exporta", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Exporta() As String
-		Get
-			Return Me._Exporta
-		End Get
-		Set
-			If (String.Equals(Me._Exporta, value) = false) Then
-				Me.OnExportaChanging(value)
-				Me.SendPropertyChanging
-				Me._Exporta = value
-				Me.SendPropertyChanged("Exporta")
-				Me.OnExportaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleExtranos", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleExtranos() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleExtranos
-		End Get
-		Set
-			If (Me._NobleExtranos.Equals(value) = false) Then
-				Me.OnNobleExtranosChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleExtranos = value
-				Me.SendPropertyChanged("NobleExtranos")
-				Me.OnNobleExtranosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleNegros", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleNegros() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleNegros
-		End Get
-		Set
-			If (Me._NobleNegros.Equals(value) = false) Then
-				Me.OnNobleNegrosChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleNegros = value
-				Me.SendPropertyChanged("NobleNegros")
-				Me.OnNobleNegrosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleQuebrados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleQuebrados() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleQuebrados
-		End Get
-		Set
-			If (Me._NobleQuebrados.Equals(value) = false) Then
-				Me.OnNobleQuebradosChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleQuebrados = value
-				Me.SendPropertyChanged("NobleQuebrados")
-				Me.OnNobleQuebradosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleDaniados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleDaniados() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleDaniados
-		End Get
-		Set
-			If (Me._NobleDaniados.Equals(value) = false) Then
-				Me.OnNobleDaniadosChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleDaniados = value
-				Me.SendPropertyChanged("NobleDaniados")
-				Me.OnNobleDaniadosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleChamico() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleChamico
-		End Get
-		Set
-			If (Me._NobleChamico.Equals(value) = false) Then
-				Me.OnNobleChamicoChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleChamico = value
-				Me.SendPropertyChanged("NobleChamico")
-				Me.OnNobleChamicoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleChamico2() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleChamico2
-		End Get
-		Set
-			If (Me._NobleChamico2.Equals(value) = false) Then
-				Me.OnNobleChamico2Changing(value)
-				Me.SendPropertyChanging
-				Me._NobleChamico2 = value
-				Me.SendPropertyChanged("NobleChamico2")
-				Me.OnNobleChamico2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleRevolcado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleRevolcado() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleRevolcado
-		End Get
-		Set
-			If (Me._NobleRevolcado.Equals(value) = false) Then
-				Me.OnNobleRevolcadoChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleRevolcado = value
-				Me.SendPropertyChanged("NobleRevolcado")
-				Me.OnNobleRevolcadoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleObjetables", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleObjetables() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleObjetables
-		End Get
-		Set
-			If (Me._NobleObjetables.Equals(value) = false) Then
-				Me.OnNobleObjetablesChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleObjetables = value
-				Me.SendPropertyChanged("NobleObjetables")
-				Me.OnNobleObjetablesChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAmohosados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleAmohosados() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleAmohosados
-		End Get
-		Set
-			If (Me._NobleAmohosados.Equals(value) = false) Then
-				Me.OnNobleAmohosadosChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleAmohosados = value
-				Me.SendPropertyChanged("NobleAmohosados")
-				Me.OnNobleAmohosadosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleHectolitrico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleHectolitrico() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleHectolitrico
-		End Get
-		Set
-			If (Me._NobleHectolitrico.Equals(value) = false) Then
-				Me.OnNobleHectolitricoChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleHectolitrico = value
-				Me.SendPropertyChanged("NobleHectolitrico")
-				Me.OnNobleHectolitricoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleCarbon", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleCarbon() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleCarbon
-		End Get
-		Set
-			If (Me._NobleCarbon.Equals(value) = false) Then
-				Me.OnNobleCarbonChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleCarbon = value
-				Me.SendPropertyChanged("NobleCarbon")
-				Me.OnNobleCarbonChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePanzaBlanca", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NoblePanzaBlanca() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NoblePanzaBlanca
-		End Get
-		Set
-			If (Me._NoblePanzaBlanca.Equals(value) = false) Then
-				Me.OnNoblePanzaBlancaChanging(value)
-				Me.SendPropertyChanging
-				Me._NoblePanzaBlanca = value
-				Me.SendPropertyChanged("NoblePanzaBlanca")
-				Me.OnNoblePanzaBlancaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePicados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NoblePicados() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NoblePicados
-		End Get
-		Set
-			If (Me._NoblePicados.Equals(value) = false) Then
-				Me.OnNoblePicadosChanging(value)
-				Me.SendPropertyChanging
-				Me._NoblePicados = value
-				Me.SendPropertyChanged("NoblePicados")
-				Me.OnNoblePicadosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleMGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleMGrasa() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleMGrasa
-		End Get
-		Set
-			If (Me._NobleMGrasa.Equals(value) = false) Then
-				Me.OnNobleMGrasaChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleMGrasa = value
-				Me.SendPropertyChanged("NobleMGrasa")
-				Me.OnNobleMGrasaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAcidezGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleAcidezGrasa() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleAcidezGrasa
-		End Get
-		Set
-			If (Me._NobleAcidezGrasa.Equals(value) = false) Then
-				Me.OnNobleAcidezGrasaChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleAcidezGrasa = value
-				Me.SendPropertyChanged("NobleAcidezGrasa")
-				Me.OnNobleAcidezGrasaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleVerdes", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleVerdes() As System.Nullable(Of Decimal)
-		Get
-			Return Me._NobleVerdes
-		End Get
-		Set
-			If (Me._NobleVerdes.Equals(value) = false) Then
-				Me.OnNobleVerdesChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleVerdes = value
-				Me.SendPropertyChanged("NobleVerdes")
-				Me.OnNobleVerdesChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleGrado", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleGrado() As System.Nullable(Of Integer)
-		Get
-			Return Me._NobleGrado
-		End Get
-		Set
-			If (Me._NobleGrado.Equals(value) = false) Then
-				Me.OnNobleGradoChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleGrado = value
-				Me.SendPropertyChanged("NobleGrado")
-				Me.OnNobleGradoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleConforme", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleConforme() As String
-		Get
-			Return Me._NobleConforme
-		End Get
-		Set
-			If (String.Equals(Me._NobleConforme, value) = false) Then
-				Me.OnNobleConformeChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleConforme = value
-				Me.SendPropertyChanged("NobleConforme")
-				Me.OnNobleConformeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleACamara", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NobleACamara() As String
-		Get
-			Return Me._NobleACamara
-		End Get
-		Set
-			If (String.Equals(Me._NobleACamara, value) = false) Then
-				Me.OnNobleACamaraChanging(value)
-				Me.SendPropertyChanging
-				Me._NobleACamara = value
-				Me.SendPropertyChanged("NobleACamara")
-				Me.OnNobleACamaraChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cosecha", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Cosecha() As String
-		Get
-			Return Me._Cosecha
-		End Get
-		Set
-			If (String.Equals(Me._Cosecha, value) = false) Then
-				Me.OnCosechaChanging(value)
-				Me.SendPropertyChanging
-				Me._Cosecha = value
-				Me.SendPropertyChanged("Cosecha")
-				Me.OnCosechaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HumedadDesnormalizada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property HumedadDesnormalizada() As System.Nullable(Of Decimal)
-		Get
-			Return Me._HumedadDesnormalizada
-		End Get
-		Set
-			If (Me._HumedadDesnormalizada.Equals(value) = false) Then
-				Me.OnHumedadDesnormalizadaChanging(value)
-				Me.SendPropertyChanging
-				Me._HumedadDesnormalizada = value
-				Me.SendPropertyChanged("HumedadDesnormalizada")
-				Me.OnHumedadDesnormalizadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Factor", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Factor() As System.Nullable(Of Decimal)
-		Get
-			Return Me._Factor
-		End Get
-		Set
-			If (Me._Factor.Equals(value) = false) Then
-				Me.OnFactorChanging(value)
-				Me.SendPropertyChanging
-				Me._Factor = value
-				Me.SendPropertyChanged("Factor")
-				Me.OnFactorChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdFacturaImputada() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdFacturaImputada
-		End Get
-		Set
-			If (Me._IdFacturaImputada.Equals(value) = false) Then
-				Me.OnIdFacturaImputadaChanging(value)
-				Me.SendPropertyChanging
-				Me._IdFacturaImputada = value
-				Me.SendPropertyChanged("IdFacturaImputada")
-				Me.OnIdFacturaImputadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property PuntoVenta() As System.Nullable(Of Integer)
-		Get
-			Return Me._PuntoVenta
-		End Get
-		Set
-			If (Me._PuntoVenta.Equals(value) = false) Then
-				Me.OnPuntoVentaChanging(value)
-				Me.SendPropertyChanging
-				Me._PuntoVenta = value
-				Me.SendPropertyChanged("PuntoVenta")
-				Me.OnPuntoVentaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagon", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SubnumeroVagon() As System.Nullable(Of Integer)
-		Get
-			Return Me._SubnumeroVagon
-		End Get
-		Set
-			If (Me._SubnumeroVagon.Equals(value) = false) Then
-				Me.OnSubnumeroVagonChanging(value)
-				Me.SendPropertyChanging
-				Me._SubnumeroVagon = value
-				Me.SendPropertyChanged("SubnumeroVagon")
-				Me.OnSubnumeroVagonChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TarifaFacturada() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TarifaFacturada
-		End Get
-		Set
-			If (Me._TarifaFacturada.Equals(value) = false) Then
-				Me.OnTarifaFacturadaChanging(value)
-				Me.SendPropertyChanging
-				Me._TarifaFacturada = value
-				Me.SendPropertyChanged("TarifaFacturada")
-				Me.OnTarifaFacturadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista1", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TarifaSubcontratista1() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TarifaSubcontratista1
-		End Get
-		Set
-			If (Me._TarifaSubcontratista1.Equals(value) = false) Then
-				Me.OnTarifaSubcontratista1Changing(value)
-				Me.SendPropertyChanging
-				Me._TarifaSubcontratista1 = value
-				Me.SendPropertyChanged("TarifaSubcontratista1")
-				Me.OnTarifaSubcontratista1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property TarifaSubcontratista2() As System.Nullable(Of Decimal)
-		Get
-			Return Me._TarifaSubcontratista2
-		End Get
-		Set
-			If (Me._TarifaSubcontratista2.Equals(value) = false) Then
-				Me.OnTarifaSubcontratista2Changing(value)
-				Me.SendPropertyChanging
-				Me._TarifaSubcontratista2 = value
-				Me.SendPropertyChanged("TarifaSubcontratista2")
-				Me.OnTarifaSubcontratista2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaArribo() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaArribo
-		End Get
-		Set
-			If (Me._FechaArribo.Equals(value) = false) Then
-				Me.OnFechaArriboChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaArribo = value
-				Me.SendPropertyChanged("FechaArribo")
-				Me.OnFechaArriboChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Version", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Version() As System.Nullable(Of Integer)
-		Get
-			Return Me._Version
-		End Get
-		Set
-			If (Me._Version.Equals(value) = false) Then
-				Me.OnVersionChanging(value)
-				Me.SendPropertyChanging
-				Me._Version = value
-				Me.SendPropertyChanged("Version")
-				Me.OnVersionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MotivoAnulacion", DbType:="VarChar(100)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property MotivoAnulacion() As String
-		Get
-			Return Me._MotivoAnulacion
-		End Get
-		Set
-			If (String.Equals(Me._MotivoAnulacion, value) = false) Then
-				Me.OnMotivoAnulacionChanging(value)
-				Me.SendPropertyChanging
-				Me._MotivoAnulacion = value
-				Me.SendPropertyChanged("MotivoAnulacion")
-				Me.OnMotivoAnulacionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSubfijo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NumeroSubfijo() As System.Nullable(Of Integer)
-		Get
-			Return Me._NumeroSubfijo
-		End Get
-		Set
-			If (Me._NumeroSubfijo.Equals(value) = false) Then
-				Me.OnNumeroSubfijoChanging(value)
-				Me.SendPropertyChanging
-				Me._NumeroSubfijo = value
-				Me.SendPropertyChanged("NumeroSubfijo")
-				Me.OnNumeroSubfijoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdEstablecimiento() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdEstablecimiento
-		End Get
-		Set
-			If (Me._IdEstablecimiento.Equals(value) = false) Then
-				Me.OnIdEstablecimientoChanging(value)
-				Me.SendPropertyChanging
-				Me._IdEstablecimiento = value
-				Me.SendPropertyChanged("IdEstablecimiento")
-				Me.OnIdEstablecimientoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnumSyngentaDivision", DbType:="VarChar(10)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property EnumSyngentaDivision() As String
-		Get
-			Return Me._EnumSyngentaDivision
-		End Get
-		Set
-			If (String.Equals(Me._EnumSyngentaDivision, value) = false) Then
-				Me.OnEnumSyngentaDivisionChanging(value)
-				Me.SendPropertyChanging
-				Me._EnumSyngentaDivision = value
-				Me.SendPropertyChanged("EnumSyngentaDivision")
-				Me.OnEnumSyngentaDivisionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Corredor2() As System.Nullable(Of Integer)
-		Get
-			Return Me._Corredor2
-		End Get
-		Set
-			If (Me._Corredor2.Equals(value) = false) Then
-				Me.OnCorredor2Changing(value)
-				Me.SendPropertyChanging
-				Me._Corredor2 = value
-				Me.SendPropertyChanged("Corredor2")
-				Me.OnCorredor2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdUsuarioModifico() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdUsuarioModifico
-		End Get
-		Set
-			If (Me._IdUsuarioModifico.Equals(value) = false) Then
-				Me.OnIdUsuarioModificoChanging(value)
-				Me.SendPropertyChanging
-				Me._IdUsuarioModifico = value
-				Me.SendPropertyChanged("IdUsuarioModifico")
-				Me.OnIdUsuarioModificoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModificacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaModificacion() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaModificacion
-		End Get
-		Set
-			If (Me._FechaModificacion.Equals(value) = false) Then
-				Me.OnFechaModificacionChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaModificacion = value
-				Me.SendPropertyChanged("FechaModificacion")
-				Me.OnFechaModificacionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEmision", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FechaEmision() As System.Nullable(Of Date)
-		Get
-			Return Me._FechaEmision
-		End Get
-		Set
-			If (Me._FechaEmision.Equals(value) = false) Then
-				Me.OnFechaEmisionChanging(value)
-				Me.SendPropertyChanging
-				Me._FechaEmision = value
-				Me.SendPropertyChanged("FechaEmision")
-				Me.OnFechaEmisionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstaArchivada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property EstaArchivada() As String
-		Get
-			Return Me._EstaArchivada
-		End Get
-		Set
-			If (String.Equals(Me._EstaArchivada, value) = false) Then
-				Me.OnEstaArchivadaChanging(value)
-				Me.SendPropertyChanging
-				Me._EstaArchivada = value
-				Me.SendPropertyChanged("EstaArchivada")
-				Me.OnEstaArchivadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExcluirDeSubcontratistas", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property ExcluirDeSubcontratistas() As String
-		Get
-			Return Me._ExcluirDeSubcontratistas
-		End Get
-		Set
-			If (String.Equals(Me._ExcluirDeSubcontratistas, value) = false) Then
-				Me.OnExcluirDeSubcontratistasChanging(value)
-				Me.SendPropertyChanging
-				Me._ExcluirDeSubcontratistas = value
-				Me.SendPropertyChanged("ExcluirDeSubcontratistas")
-				Me.OnExcluirDeSubcontratistasChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdTipoMovimiento() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdTipoMovimiento
-		End Get
-		Set
-			If (Me._IdTipoMovimiento.Equals(value) = false) Then
-				Me.OnIdTipoMovimientoChanging(value)
-				Me.SendPropertyChanging
-				Me._IdTipoMovimiento = value
-				Me.SendPropertyChanged("IdTipoMovimiento")
-				Me.OnIdTipoMovimientoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAFacturarle", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdClienteAFacturarle() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdClienteAFacturarle
-		End Get
-		Set
-			If (Me._IdClienteAFacturarle.Equals(value) = false) Then
-				Me.OnIdClienteAFacturarleChanging(value)
-				Me.SendPropertyChanging
-				Me._IdClienteAFacturarle = value
-				Me.SendPropertyChanged("IdClienteAFacturarle")
-				Me.OnIdClienteAFacturarleChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
-		Get
-			Return Me._SubnumeroDeFacturacion
-		End Get
-		Set
-			If (Me._SubnumeroDeFacturacion.Equals(value) = false) Then
-				Me.OnSubnumeroDeFacturacionChanging(value)
-				Me.SendPropertyChanging
-				Me._SubnumeroDeFacturacion = value
-				Me.SendPropertyChanged("SubnumeroDeFacturacion")
-				Me.OnSubnumeroDeFacturacionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property AgregaItemDeGastosAdministrativos() As String
-		Get
-			Return Me._AgregaItemDeGastosAdministrativos
-		End Get
-		Set
-			If (String.Equals(Me._AgregaItemDeGastosAdministrativos, value) = false) Then
-				Me.OnAgregaItemDeGastosAdministrativosChanging(value)
-				Me.SendPropertyChanging
-				Me._AgregaItemDeGastosAdministrativos = value
-				Me.SendPropertyChanged("AgregaItemDeGastosAdministrativos")
-				Me.OnAgregaItemDeGastosAdministrativosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadGranosQuemados() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadGranosQuemados
-		End Get
-		Set
-			If (Me._CalidadGranosQuemados.Equals(value) = false) Then
-				Me.OnCalidadGranosQuemadosChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadGranosQuemados = value
-				Me.SendPropertyChanged("CalidadGranosQuemados")
-				Me.OnCalidadGranosQuemadosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemadosBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadGranosQuemadosBonifica_o_Rebaja() As String
-		Get
-			Return Me._CalidadGranosQuemadosBonifica_o_Rebaja
-		End Get
-		Set
-			If (String.Equals(Me._CalidadGranosQuemadosBonifica_o_Rebaja, value) = false) Then
-				Me.OnCalidadGranosQuemadosBonifica_o_RebajaChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadGranosQuemadosBonifica_o_Rebaja = value
-				Me.SendPropertyChanged("CalidadGranosQuemadosBonifica_o_Rebaja")
-				Me.OnCalidadGranosQuemadosBonifica_o_RebajaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierra", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadTierra() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadTierra
-		End Get
-		Set
-			If (Me._CalidadTierra.Equals(value) = false) Then
-				Me.OnCalidadTierraChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadTierra = value
-				Me.SendPropertyChanged("CalidadTierra")
-				Me.OnCalidadTierraChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadTierraBonifica_o_Rebaja() As String
-		Get
-			Return Me._CalidadTierraBonifica_o_Rebaja
-		End Get
-		Set
-			If (String.Equals(Me._CalidadTierraBonifica_o_Rebaja, value) = false) Then
-				Me.OnCalidadTierraBonifica_o_RebajaChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadTierraBonifica_o_Rebaja = value
-				Me.SendPropertyChanged("CalidadTierraBonifica_o_Rebaja")
-				Me.OnCalidadTierraBonifica_o_RebajaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadMermaChamico() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadMermaChamico
-		End Get
-		Set
-			If (Me._CalidadMermaChamico.Equals(value) = false) Then
-				Me.OnCalidadMermaChamicoChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadMermaChamico = value
-				Me.SendPropertyChanged("CalidadMermaChamico")
-				Me.OnCalidadMermaChamicoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamicoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadMermaChamicoBonifica_o_Rebaja() As String
-		Get
-			Return Me._CalidadMermaChamicoBonifica_o_Rebaja
-		End Get
-		Set
-			If (String.Equals(Me._CalidadMermaChamicoBonifica_o_Rebaja, value) = false) Then
-				Me.OnCalidadMermaChamicoBonifica_o_RebajaChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadMermaChamicoBonifica_o_Rebaja = value
-				Me.SendPropertyChanged("CalidadMermaChamicoBonifica_o_Rebaja")
-				Me.OnCalidadMermaChamicoBonifica_o_RebajaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeo", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadMermaZarandeo() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadMermaZarandeo
-		End Get
-		Set
-			If (Me._CalidadMermaZarandeo.Equals(value) = false) Then
-				Me.OnCalidadMermaZarandeoChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadMermaZarandeo = value
-				Me.SendPropertyChanged("CalidadMermaZarandeo")
-				Me.OnCalidadMermaZarandeoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadMermaZarandeoBonifica_o_Rebaja() As String
-		Get
-			Return Me._CalidadMermaZarandeoBonifica_o_Rebaja
-		End Get
-		Set
-			If (String.Equals(Me._CalidadMermaZarandeoBonifica_o_Rebaja, value) = false) Then
-				Me.OnCalidadMermaZarandeoBonifica_o_RebajaChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadMermaZarandeoBonifica_o_Rebaja = value
-				Me.SendPropertyChanged("CalidadMermaZarandeoBonifica_o_Rebaja")
-				Me.OnCalidadMermaZarandeoBonifica_o_RebajaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FueraDeEstandar", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property FueraDeEstandar() As String
-		Get
-			Return Me._FueraDeEstandar
-		End Get
-		Set
-			If (String.Equals(Me._FueraDeEstandar, value) = false) Then
-				Me.OnFueraDeEstandarChanging(value)
-				Me.SendPropertyChanging
-				Me._FueraDeEstandar = value
-				Me.SendPropertyChanged("FueraDeEstandar")
-				Me.OnFueraDeEstandarChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadPuntaSombreada() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadPuntaSombreada
-		End Get
-		Set
-			If (Me._CalidadPuntaSombreada.Equals(value) = false) Then
-				Me.OnCalidadPuntaSombreadaChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadPuntaSombreada = value
-				Me.SendPropertyChanged("CalidadPuntaSombreada")
-				Me.OnCalidadPuntaSombreadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CobraAcarreo", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CobraAcarreo() As String
-		Get
-			Return Me._CobraAcarreo
-		End Get
-		Set
-			If (String.Equals(Me._CobraAcarreo, value) = false) Then
-				Me.OnCobraAcarreoChanging(value)
-				Me.SendPropertyChanging
-				Me._CobraAcarreo = value
-				Me.SendPropertyChanged("CobraAcarreo")
-				Me.OnCobraAcarreoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LiquidaViaje", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property LiquidaViaje() As String
-		Get
-			Return Me._LiquidaViaje
-		End Get
-		Set
-			If (String.Equals(Me._LiquidaViaje, value) = false) Then
-				Me.OnLiquidaViajeChanging(value)
-				Me.SendPropertyChanging
-				Me._LiquidaViaje = value
-				Me.SendPropertyChanged("LiquidaViaje")
-				Me.OnLiquidaViajeChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAuxiliar", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdClienteAuxiliar() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdClienteAuxiliar
-		End Get
-		Set
-			If (Me._IdClienteAuxiliar.Equals(value) = false) Then
-				Me.OnIdClienteAuxiliarChanging(value)
-				Me.SendPropertyChanging
-				Me._IdClienteAuxiliar = value
-				Me.SendPropertyChanged("IdClienteAuxiliar")
-				Me.OnIdClienteAuxiliarChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property CalidadDescuentoFinal() As System.Nullable(Of Decimal)
-		Get
-			Return Me._CalidadDescuentoFinal
-		End Get
-		Set
-			If (Me._CalidadDescuentoFinal.Equals(value) = false) Then
-				Me.OnCalidadDescuentoFinalChanging(value)
-				Me.SendPropertyChanging
-				Me._CalidadDescuentoFinal = value
-				Me.SendPropertyChanged("CalidadDescuentoFinal")
-				Me.OnCalidadDescuentoFinalChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property PathImagen() As String
-		Get
-			Return Me._PathImagen
-		End Get
-		Set
-			If (String.Equals(Me._PathImagen, value) = false) Then
-				Me.OnPathImagenChanging(value)
-				Me.SendPropertyChanging
-				Me._PathImagen = value
-				Me.SendPropertyChanged("PathImagen")
-				Me.OnPathImagenChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen2", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property PathImagen2() As String
-		Get
-			Return Me._PathImagen2
-		End Get
-		Set
-			If (String.Equals(Me._PathImagen2, value) = false) Then
-				Me.OnPathImagen2Changing(value)
-				Me.SendPropertyChanging
-				Me._PathImagen2 = value
-				Me.SendPropertyChanged("PathImagen2")
-				Me.OnPathImagen2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgrupadorDeTandaPeriodos", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property AgrupadorDeTandaPeriodos() As System.Nullable(Of Integer)
-		Get
-			Return Me._AgrupadorDeTandaPeriodos
-		End Get
-		Set
-			If (Me._AgrupadorDeTandaPeriodos.Equals(value) = false) Then
-				Me.OnAgrupadorDeTandaPeriodosChanging(value)
-				Me.SendPropertyChanging
-				Me._AgrupadorDeTandaPeriodos = value
-				Me.SendPropertyChanged("AgrupadorDeTandaPeriodos")
-				Me.OnAgrupadorDeTandaPeriodosChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClaveEncriptada", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property ClaveEncriptada() As String
-		Get
-			Return Me._ClaveEncriptada
-		End Get
-		Set
-			If (String.Equals(Me._ClaveEncriptada, value) = false) Then
-				Me.OnClaveEncriptadaChanging(value)
-				Me.SendPropertyChanging
-				Me._ClaveEncriptada = value
-				Me.SendPropertyChanged("ClaveEncriptada")
-				Me.OnClaveEncriptadaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaEnTextoParaBusqueda", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property NumeroCartaEnTextoParaBusqueda() As String
-		Get
-			Return Me._NumeroCartaEnTextoParaBusqueda
-		End Get
-		Set
-			If (String.Equals(Me._NumeroCartaEnTextoParaBusqueda, value) = false) Then
-				Me.OnNumeroCartaEnTextoParaBusquedaChanging(value)
-				Me.SendPropertyChanging
-				Me._NumeroCartaEnTextoParaBusqueda = value
-				Me.SendPropertyChanged("NumeroCartaEnTextoParaBusqueda")
-				Me.OnNumeroCartaEnTextoParaBusquedaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteEntregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdClienteEntregador() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdClienteEntregador
-		End Get
-		Set
-			If (Me._IdClienteEntregador.Equals(value) = false) Then
-				Me.OnIdClienteEntregadorChanging(value)
-				Me.SendPropertyChanging
-				Me._IdClienteEntregador = value
-				Me.SendPropertyChanged("IdClienteEntregador")
-				Me.OnIdClienteEntregadorChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCodCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SojaSustentableCodCondicion() As String
-		Get
-			Return Me._SojaSustentableCodCondicion
-		End Get
-		Set
-			If (String.Equals(Me._SojaSustentableCodCondicion, value) = false) Then
-				Me.OnSojaSustentableCodCondicionChanging(value)
-				Me.SendPropertyChanging
-				Me._SojaSustentableCodCondicion = value
-				Me.SendPropertyChanged("SojaSustentableCodCondicion")
-				Me.OnSojaSustentableCodCondicionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SojaSustentableCondicion() As String
-		Get
-			Return Me._SojaSustentableCondicion
-		End Get
-		Set
-			If (String.Equals(Me._SojaSustentableCondicion, value) = false) Then
-				Me.OnSojaSustentableCondicionChanging(value)
-				Me.SendPropertyChanging
-				Me._SojaSustentableCondicion = value
-				Me.SendPropertyChanged("SojaSustentableCondicion")
-				Me.OnSojaSustentableCondicionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableNroEstablecimientoDeProduccion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SojaSustentableNroEstablecimientoDeProduccion() As String
-		Get
-			Return Me._SojaSustentableNroEstablecimientoDeProduccion
-		End Get
-		Set
-			If (String.Equals(Me._SojaSustentableNroEstablecimientoDeProduccion, value) = false) Then
-				Me.OnSojaSustentableNroEstablecimientoDeProduccionChanging(value)
-				Me.SendPropertyChanging
-				Me._SojaSustentableNroEstablecimientoDeProduccion = value
-				Me.SendPropertyChanged("SojaSustentableNroEstablecimientoDeProduccion")
-				Me.OnSojaSustentableNroEstablecimientoDeProduccionChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClientePagadorFlete", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdClientePagadorFlete() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdClientePagadorFlete
-		End Get
-		Set
-			If (Me._IdClientePagadorFlete.Equals(value) = false) Then
-				Me.OnIdClientePagadorFleteChanging(value)
-				Me.SendPropertyChanging
-				Me._IdClientePagadorFlete = value
-				Me.SendPropertyChanged("IdClientePagadorFlete")
-				Me.OnIdClientePagadorFleteChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdDetalleFactura() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdDetalleFactura
-		End Get
-		Set
-			If (Me._IdDetalleFactura.Equals(value) = false) Then
-				If Me._linqDetalleFacturas.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIdDetalleFacturaChanging(value)
-				Me.SendPropertyChanging
-				Me._IdDetalleFactura = value
-				Me.SendPropertyChanged("IdDetalleFactura")
-				Me.OnIdDetalleFacturaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagonEnTextoParaBusqueda", DbType:="VarChar(10)", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property SubnumeroVagonEnTextoParaBusqueda() As String
-		Get
-			Return Me._SubnumeroVagonEnTextoParaBusqueda
-		End Get
-		Set
-			If (String.Equals(Me._SubnumeroVagonEnTextoParaBusqueda, value) = false) Then
-				Me.OnSubnumeroVagonEnTextoParaBusquedaChanging(value)
-				Me.SendPropertyChanging
-				Me._SubnumeroVagonEnTextoParaBusqueda = value
-				Me.SendPropertyChanged("SubnumeroVagonEnTextoParaBusqueda")
-				Me.OnSubnumeroVagonEnTextoParaBusquedaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property IdCorredor2() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdCorredor2
-		End Get
-		Set
-			If (Me._IdCorredor2.Equals(value) = false) Then
-				If Me._linqCorredor.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIdCorredor2Changing(value)
-				Me.SendPropertyChanging
-				Me._IdCorredor2 = value
-				Me.SendPropertyChanged("IdCorredor2")
-				Me.OnIdCorredor2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acopio1() As System.Nullable(Of Integer)
-		Get
-			Return Me._Acopio1
-		End Get
-		Set
-			If (Me._Acopio1.Equals(value) = false) Then
-				Me.OnAcopio1Changing(value)
-				Me.SendPropertyChanging
-				Me._Acopio1 = value
-				Me.SendPropertyChanged("Acopio1")
-				Me.OnAcopio1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acopio2() As System.Nullable(Of Integer)
-		Get
-			Return Me._Acopio2
-		End Get
-		Set
-			If (Me._Acopio2.Equals(value) = false) Then
-				Me.OnAcopio2Changing(value)
-				Me.SendPropertyChanging
-				Me._Acopio2 = value
-				Me.SendPropertyChanged("Acopio2")
-				Me.OnAcopio2Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio3", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acopio3() As System.Nullable(Of Integer)
-		Get
-			Return Me._Acopio3
-		End Get
-		Set
-			If (Me._Acopio3.Equals(value) = false) Then
-				Me.OnAcopio3Changing(value)
-				Me.SendPropertyChanging
-				Me._Acopio3 = value
-				Me.SendPropertyChanged("Acopio3")
-				Me.OnAcopio3Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio4", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acopio4() As System.Nullable(Of Integer)
-		Get
-			Return Me._Acopio4
-		End Get
-		Set
-			If (Me._Acopio4.Equals(value) = false) Then
-				Me.OnAcopio4Changing(value)
-				Me.SendPropertyChanging
-				Me._Acopio4 = value
-				Me.SendPropertyChanged("Acopio4")
-				Me.OnAcopio4Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio5", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
-	Public Property Acopio5() As System.Nullable(Of Integer)
-		Get
-			Return Me._Acopio5
-		End Get
-		Set
-			If (Me._Acopio5.Equals(value) = false) Then
-				Me.OnAcopio5Changing(value)
-				Me.SendPropertyChanging
-				Me._Acopio5 = value
-				Me.SendPropertyChanged("Acopio5")
-				Me.OnAcopio5Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="CartasDePorte_CartasPorteMovimiento", Storage:="_CartasPorteMovimientos", ThisKey:="IdCartaDePorte", OtherKey:="IdCartaDePorte")>  _
-	Public Property CartasPorteMovimientos() As EntitySet(Of CartasPorteMovimiento)
-		Get
-			Return Me._CartasPorteMovimientos
-		End Get
-		Set
-			Me._CartasPorteMovimientos.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasDePorte", Storage:="_linqArticulo", ThisKey:="IdArticulo", OtherKey:="IdArticulo", IsForeignKey:=true)>  _
-	Public Property linqArticulo() As linqArticulo
-		Get
-			Return Me._linqArticulo.Entity
-		End Get
-		Set
-			Dim previousValue As linqArticulo = Me._linqArticulo.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._linqArticulo.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._linqArticulo.Entity = Nothing
-					previousValue.CartasDePortes.Remove(Me)
-				End If
-				Me._linqArticulo.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.CartasDePortes.Add(Me)
-					Me._IdArticulo = value.IdArticulo
-				Else
-					Me._IdArticulo = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("linqArticulo")
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_linqCorredor", ThisKey:="IdCorredor2", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
-	Public Property linqCorredor() As linqCorredor
-		Get
-			Return Me._linqCorredor.Entity
-		End Get
-		Set
-			Dim previousValue As linqCorredor = Me._linqCorredor.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._linqCorredor.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._linqCorredor.Entity = Nothing
-					previousValue.CartasDePortes.Remove(Me)
-				End If
-				Me._linqCorredor.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.CartasDePortes.Add(Me)
-					Me._IdCorredor2 = value.IdVendedor
-				Else
-					Me._IdCorredor2 = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("linqCorredor")
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Transportista_CartasDePorte", Storage:="_Transportista", ThisKey:="IdTransportista", OtherKey:="IdTransportista", IsForeignKey:=true)>  _
-	Public Property Transportista() As Transportista
-		Get
-			Return Me._Transportista.Entity
-		End Get
-		Set
-			Dim previousValue As Transportista = Me._Transportista.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Transportista.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Transportista.Entity = Nothing
-					previousValue.CartasDePortes.Remove(Me)
-				End If
-				Me._Transportista.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.CartasDePortes.Add(Me)
-					Me._IdTransportista = value.IdTransportista
-				Else
-					Me._IdTransportista = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("Transportista")
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte1", Storage:="_linqCorredor1", ThisKey:="Corredor", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
-	Public Property linqCorredor1() As linqCorredor
-		Get
-			Return Me._linqCorredor1.Entity
-		End Get
-		Set
-			Dim previousValue As linqCorredor = Me._linqCorredor1.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._linqCorredor1.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._linqCorredor1.Entity = Nothing
-					previousValue.CartasDePortes1.Remove(Me)
-				End If
-				Me._linqCorredor1.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.CartasDePortes1.Add(Me)
-					Me._Corredor = value.IdVendedor
-				Else
-					Me._Corredor = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("linqCorredor1")
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqDetalleFacturas_CartasDePorte", Storage:="_linqDetalleFacturas", ThisKey:="IdDetalleFactura", OtherKey:="IdDetalleFactura", IsForeignKey:=true)>  _
-	Public Property linqDetalleFacturas() As linqDetalleFacturas
-		Get
-			Return Me._linqDetalleFacturas.Entity
-		End Get
-		Set
-			Dim previousValue As linqDetalleFacturas = Me._linqDetalleFacturas.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._linqDetalleFacturas.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._linqDetalleFacturas.Entity = Nothing
-					previousValue.CartasDePorte.Remove(Me)
-				End If
-				Me._linqDetalleFacturas.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.CartasDePorte.Add(Me)
-					Me._IdDetalleFactura = value.IdDetalleFactura
-				Else
-					Me._IdDetalleFactura = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("linqDetalleFacturas")
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_CartasPorteMovimientos(ByVal entity As CartasPorteMovimiento)
-		Me.SendPropertyChanging
-		entity.CartasDePorte = Me
-	End Sub
-	
-	Private Sub detach_CartasPorteMovimientos(ByVal entity As CartasPorteMovimiento)
-		Me.SendPropertyChanging
-		entity.CartasDePorte = Nothing
-	End Sub
-End Class
-
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios")>  _
 Partial Public Class CartasPorteAcopio
 	
@@ -17675,8 +14516,6 @@ Partial Public Class linqDetalleFacturas
 	Private _IdDetallePresupuestoVenta As System.Nullable(Of Integer)
 	
 	Private _OrigenRegistro As String
-	
-	Private _CartasDePorte As EntitySet(Of CartasDePorte)
 	
 	Private _linqArticulo As EntityRef(Of linqArticulo)
 	
@@ -17811,7 +14650,6 @@ Partial Public Class linqDetalleFacturas
 	
 	Public Sub New()
 		MyBase.New
-		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
 		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
 		OnCreated
 	End Sub
@@ -18300,16 +15138,6 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqDetalleFacturas_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdDetalleFactura", OtherKey:="IdDetalleFactura")>  _
-	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
-		Get
-			Return Me._CartasDePorte
-		End Get
-		Set
-			Me._CartasDePorte.Assign(value)
-		End Set
-	End Property
-	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_linqDetalleFacturas", Storage:="_linqArticulo", ThisKey:="IdArticulo", OtherKey:="IdArticulo", IsForeignKey:=true)>  _
 	Public Property linqArticulo() As linqArticulo
 		Get
@@ -18354,16 +15182,6 @@ Partial Public Class linqDetalleFacturas
 					= false) Then
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
-	End Sub
-	
-	Private Sub attach_CartasDePorte(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqDetalleFacturas = Me
-	End Sub
-	
-	Private Sub detach_CartasDePorte(ByVal entity As CartasDePorte)
-		Me.SendPropertyChanging
-		entity.linqDetalleFacturas = Nothing
 	End Sub
 End Class
 
@@ -22269,6 +19087,60 @@ Partial Public Class linqCliente
 	
 	Private _WilliamsDestinos1 As EntitySet(Of WilliamsDestino)
 	
+	Private _CartasDePorte As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte1 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte2 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte3 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte4 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte5 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte6 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte7 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte8 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte9 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte10 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte11 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte12 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte13 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte14 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte15 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte16 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte17 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte18 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte19 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte20 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte21 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte22 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte23 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte24 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte25 As EntitySet(Of CartasDePorte)
+	
+	Private _CartasDePorte26 As EntitySet(Of CartasDePorte)
+	
 	Private _linqCorredor As EntityRef(Of linqCorredor)
 	
 	Private _linqEmpleado As EntityRef(Of linqEmpleado)
@@ -22678,6 +19550,33 @@ Partial Public Class linqCliente
 		Me._CartasDePorteReglasDeFacturacions = New EntitySet(Of CartasDePorteReglasDeFacturacion)(AddressOf Me.attach_CartasDePorteReglasDeFacturacions, AddressOf Me.detach_CartasDePorteReglasDeFacturacions)
 		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
 		Me._WilliamsDestinos1 = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos1, AddressOf Me.detach_WilliamsDestinos1)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
+		Me._CartasDePorte1 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte1, AddressOf Me.detach_CartasDePorte1)
+		Me._CartasDePorte2 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte2, AddressOf Me.detach_CartasDePorte2)
+		Me._CartasDePorte3 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte3, AddressOf Me.detach_CartasDePorte3)
+		Me._CartasDePorte4 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte4, AddressOf Me.detach_CartasDePorte4)
+		Me._CartasDePorte5 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte5, AddressOf Me.detach_CartasDePorte5)
+		Me._CartasDePorte6 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte6, AddressOf Me.detach_CartasDePorte6)
+		Me._CartasDePorte7 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte7, AddressOf Me.detach_CartasDePorte7)
+		Me._CartasDePorte8 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte8, AddressOf Me.detach_CartasDePorte8)
+		Me._CartasDePorte9 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte9, AddressOf Me.detach_CartasDePorte9)
+		Me._CartasDePorte10 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte10, AddressOf Me.detach_CartasDePorte10)
+		Me._CartasDePorte11 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte11, AddressOf Me.detach_CartasDePorte11)
+		Me._CartasDePorte12 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte12, AddressOf Me.detach_CartasDePorte12)
+		Me._CartasDePorte13 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte13, AddressOf Me.detach_CartasDePorte13)
+		Me._CartasDePorte14 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte14, AddressOf Me.detach_CartasDePorte14)
+		Me._CartasDePorte15 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte15, AddressOf Me.detach_CartasDePorte15)
+		Me._CartasDePorte16 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte16, AddressOf Me.detach_CartasDePorte16)
+		Me._CartasDePorte17 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte17, AddressOf Me.detach_CartasDePorte17)
+		Me._CartasDePorte18 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte18, AddressOf Me.detach_CartasDePorte18)
+		Me._CartasDePorte19 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte19, AddressOf Me.detach_CartasDePorte19)
+		Me._CartasDePorte20 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte20, AddressOf Me.detach_CartasDePorte20)
+		Me._CartasDePorte21 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte21, AddressOf Me.detach_CartasDePorte21)
+		Me._CartasDePorte22 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte22, AddressOf Me.detach_CartasDePorte22)
+		Me._CartasDePorte23 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte23, AddressOf Me.detach_CartasDePorte23)
+		Me._CartasDePorte24 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte24, AddressOf Me.detach_CartasDePorte24)
+		Me._CartasDePorte25 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte25, AddressOf Me.detach_CartasDePorte25)
+		Me._CartasDePorte26 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte26, AddressOf Me.detach_CartasDePorte26)
 		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
 		Me._linqEmpleado = CType(Nothing, EntityRef(Of linqEmpleado))
 		Me._linqEmpleado1 = CType(Nothing, EntityRef(Of linqEmpleado))
@@ -24270,6 +21169,276 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdCliente", OtherKey:="IdClienteEntregador")>  _
+	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte
+		End Get
+		Set
+			Me._CartasDePorte.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte1", Storage:="_CartasDePorte1", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte1() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte1
+		End Get
+		Set
+			Me._CartasDePorte1.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte2", Storage:="_CartasDePorte2", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte2() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte2
+		End Get
+		Set
+			Me._CartasDePorte2.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte3", Storage:="_CartasDePorte3", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte3() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte3
+		End Get
+		Set
+			Me._CartasDePorte3.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte4", Storage:="_CartasDePorte4", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte4() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte4
+		End Get
+		Set
+			Me._CartasDePorte4.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte5", Storage:="_CartasDePorte5", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte5() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte5
+		End Get
+		Set
+			Me._CartasDePorte5.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte6", Storage:="_CartasDePorte6", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte6() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte6
+		End Get
+		Set
+			Me._CartasDePorte6.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte7", Storage:="_CartasDePorte7", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte7() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte7
+		End Get
+		Set
+			Me._CartasDePorte7.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte8", Storage:="_CartasDePorte8", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte8() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte8
+		End Get
+		Set
+			Me._CartasDePorte8.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte9", Storage:="_CartasDePorte9", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte9() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte9
+		End Get
+		Set
+			Me._CartasDePorte9.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte10", Storage:="_CartasDePorte10", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte10() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte10
+		End Get
+		Set
+			Me._CartasDePorte10.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte11", Storage:="_CartasDePorte11", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte11() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte11
+		End Get
+		Set
+			Me._CartasDePorte11.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte12", Storage:="_CartasDePorte12", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte12() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte12
+		End Get
+		Set
+			Me._CartasDePorte12.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte13", Storage:="_CartasDePorte13", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte13() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte13
+		End Get
+		Set
+			Me._CartasDePorte13.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte14", Storage:="_CartasDePorte14", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte14() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte14
+		End Get
+		Set
+			Me._CartasDePorte14.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte15", Storage:="_CartasDePorte15", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte15() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte15
+		End Get
+		Set
+			Me._CartasDePorte15.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte16", Storage:="_CartasDePorte16", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte16() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte16
+		End Get
+		Set
+			Me._CartasDePorte16.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte17", Storage:="_CartasDePorte17", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte17() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte17
+		End Get
+		Set
+			Me._CartasDePorte17.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte18", Storage:="_CartasDePorte18", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte18() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte18
+		End Get
+		Set
+			Me._CartasDePorte18.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte19", Storage:="_CartasDePorte19", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte19() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte19
+		End Get
+		Set
+			Me._CartasDePorte19.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte20", Storage:="_CartasDePorte20", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte20() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte20
+		End Get
+		Set
+			Me._CartasDePorte20.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte21", Storage:="_CartasDePorte21", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte21() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte21
+		End Get
+		Set
+			Me._CartasDePorte21.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte22", Storage:="_CartasDePorte22", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte22() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte22
+		End Get
+		Set
+			Me._CartasDePorte22.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte23", Storage:="_CartasDePorte23", ThisKey:="IdCliente", OtherKey:="CuentaOrden1")>  _
+	Public Property CartasDePorte23() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte23
+		End Get
+		Set
+			Me._CartasDePorte23.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte24", Storage:="_CartasDePorte24", ThisKey:="IdCliente", OtherKey:="CuentaOrden2")>  _
+	Public Property CartasDePorte24() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte24
+		End Get
+		Set
+			Me._CartasDePorte24.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte25", Storage:="_CartasDePorte25", ThisKey:="IdCliente", OtherKey:="Entregador")>  _
+	Public Property CartasDePorte25() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte25
+		End Get
+		Set
+			Me._CartasDePorte25.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte26", Storage:="_CartasDePorte26", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	Public Property CartasDePorte26() As EntitySet(Of CartasDePorte)
+		Get
+			Return Me._CartasDePorte26
+		End Get
+		Set
+			Me._CartasDePorte26.Assign(value)
+		End Set
+	End Property
+	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente", Storage:="_linqCorredor", ThisKey:="Cobrador", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
 	Public Property linqCorredor() As linqCorredor
 		Get
@@ -24523,6 +21692,276 @@ Partial Public Class linqCliente
 		Me.SendPropertyChanging
 		entity.linqCliente = Nothing
 	End Sub
+	
+	Private Sub attach_CartasDePorte(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte1(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente1 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte1(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente1 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte2(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente2 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte2(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente2 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte3(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente3 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte3(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente3 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte4(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente4 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte4(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente4 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte5(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente5 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte5(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente5 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte6(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente6 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte6(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente6 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte7(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente7 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte7(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente7 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte8(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente8 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte8(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente8 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte9(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente9 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte9(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente9 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte10(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente10 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte10(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente10 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte11(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente11 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte11(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente11 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte12(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente12 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte12(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente12 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte13(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente13 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte13(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente13 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte14(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente14 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte14(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente14 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte15(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente15 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte15(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente15 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte16(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente16 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte16(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente16 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte17(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente17 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte17(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente17 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte18(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente18 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte18(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente18 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte19(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente19 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte19(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente19 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte20(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente20 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte20(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente20 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte21(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente21 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte21(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente21 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte22(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente22 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte22(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente22 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte23(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente23 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte23(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente23 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte24(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente24 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte24(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente24 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte25(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente25 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte25(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente25 = Nothing
+	End Sub
+	
+	Private Sub attach_CartasDePorte26(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente26 = Me
+	End Sub
+	
+	Private Sub detach_CartasDePorte26(ByVal entity As CartasDePorte)
+		Me.SendPropertyChanging
+		entity.linqCliente26 = Nothing
+	End Sub
 End Class
 
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.DetalleClientes")>  _
@@ -24768,6 +22207,4026 @@ Partial Public Class CartasPorteAcopios
 			End If
 		End Set
 	End Property
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorte")>  _
+Partial Public Class CartasDePorte
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _IdCartaDePorte As Integer
+	
+	Private _NumeroCartaDePorte As System.Nullable(Of Long)
+	
+	Private _IdUsuarioIngreso As System.Nullable(Of Integer)
+	
+	Private _FechaIngreso As System.Nullable(Of Date)
+	
+	Private _Anulada As String
+	
+	Private _IdUsuarioAnulo As System.Nullable(Of Integer)
+	
+	Private _FechaAnulacion As System.Nullable(Of Date)
+	
+	Private _Observaciones As String
+	
+	Private _FechaTimeStamp As System.Data.Linq.Binary
+	
+	Private _Vendedor As System.Nullable(Of Integer)
+	
+	Private _CuentaOrden1 As System.Nullable(Of Integer)
+	
+	Private _CuentaOrden2 As System.Nullable(Of Integer)
+	
+	Private _Corredor As System.Nullable(Of Integer)
+	
+	Private _Entregador As System.Nullable(Of Integer)
+	
+	Private _Procedencia As String
+	
+	Private _Patente As String
+	
+	Private _IdArticulo As System.Nullable(Of Integer)
+	
+	Private _IdStock As System.Nullable(Of Integer)
+	
+	Private _Partida As String
+	
+	Private _IdUnidad As System.Nullable(Of Integer)
+	
+	Private _IdUbicacion As System.Nullable(Of Integer)
+	
+	Private _Cantidad As System.Nullable(Of Decimal)
+	
+	Private _Cupo As String
+	
+	Private _NetoProc As System.Nullable(Of Decimal)
+	
+	Private _Calidad As String
+	
+	Private _BrutoPto As System.Nullable(Of Decimal)
+	
+	Private _TaraPto As System.Nullable(Of Decimal)
+	
+	Private _NetoPto As System.Nullable(Of Decimal)
+	
+	Private _Acoplado As String
+	
+	Private _Humedad As System.Nullable(Of Decimal)
+	
+	Private _Merma As System.Nullable(Of Decimal)
+	
+	Private _NetoFinal As System.Nullable(Of Decimal)
+	
+	Private _FechaDeCarga As System.Nullable(Of Date)
+	
+	Private _FechaVencimiento As System.Nullable(Of Date)
+	
+	Private _CEE As String
+	
+	Private _IdTransportista As System.Nullable(Of Integer)
+	
+	Private _TransportistaCUITdesnormalizado As String
+	
+	Private _IdChofer As System.Nullable(Of Integer)
+	
+	Private _ChoferCUITdesnormalizado As String
+	
+	Private _CTG As System.Nullable(Of Integer)
+	
+	Private _Contrato As String
+	
+	Private _Destino As System.Nullable(Of Integer)
+	
+	Private _Subcontr1 As System.Nullable(Of Integer)
+	
+	Private _Subcontr2 As System.Nullable(Of Integer)
+	
+	Private _Contrato1 As System.Nullable(Of Integer)
+	
+	Private _contrato2 As System.Nullable(Of Integer)
+	
+	Private _KmARecorrer As System.Nullable(Of Decimal)
+	
+	Private _Tarifa As System.Nullable(Of Decimal)
+	
+	Private _FechaDescarga As System.Nullable(Of Date)
+	
+	Private _Hora As System.Nullable(Of Date)
+	
+	Private _NRecibo As System.Nullable(Of Integer)
+	
+	Private _CalidadDe As System.Nullable(Of Integer)
+	
+	Private _TaraFinal As System.Nullable(Of Decimal)
+	
+	Private _BrutoFinal As System.Nullable(Of Decimal)
+	
+	Private _Fumigada As System.Nullable(Of Decimal)
+	
+	Private _Secada As System.Nullable(Of Decimal)
+	
+	Private _Exporta As String
+	
+	Private _NobleExtranos As System.Nullable(Of Decimal)
+	
+	Private _NobleNegros As System.Nullable(Of Decimal)
+	
+	Private _NobleQuebrados As System.Nullable(Of Decimal)
+	
+	Private _NobleDaniados As System.Nullable(Of Decimal)
+	
+	Private _NobleChamico As System.Nullable(Of Decimal)
+	
+	Private _NobleChamico2 As System.Nullable(Of Decimal)
+	
+	Private _NobleRevolcado As System.Nullable(Of Decimal)
+	
+	Private _NobleObjetables As System.Nullable(Of Decimal)
+	
+	Private _NobleAmohosados As System.Nullable(Of Decimal)
+	
+	Private _NobleHectolitrico As System.Nullable(Of Decimal)
+	
+	Private _NobleCarbon As System.Nullable(Of Decimal)
+	
+	Private _NoblePanzaBlanca As System.Nullable(Of Decimal)
+	
+	Private _NoblePicados As System.Nullable(Of Decimal)
+	
+	Private _NobleMGrasa As System.Nullable(Of Decimal)
+	
+	Private _NobleAcidezGrasa As System.Nullable(Of Decimal)
+	
+	Private _NobleVerdes As System.Nullable(Of Decimal)
+	
+	Private _NobleGrado As System.Nullable(Of Integer)
+	
+	Private _NobleConforme As String
+	
+	Private _NobleACamara As String
+	
+	Private _Cosecha As String
+	
+	Private _HumedadDesnormalizada As System.Nullable(Of Decimal)
+	
+	Private _Factor As System.Nullable(Of Decimal)
+	
+	Private _IdFacturaImputada As System.Nullable(Of Integer)
+	
+	Private _PuntoVenta As System.Nullable(Of Integer)
+	
+	Private _SubnumeroVagon As System.Nullable(Of Integer)
+	
+	Private _TarifaFacturada As System.Nullable(Of Decimal)
+	
+	Private _TarifaSubcontratista1 As System.Nullable(Of Decimal)
+	
+	Private _TarifaSubcontratista2 As System.Nullable(Of Decimal)
+	
+	Private _FechaArribo As System.Nullable(Of Date)
+	
+	Private _Version As System.Nullable(Of Integer)
+	
+	Private _MotivoAnulacion As String
+	
+	Private _NumeroSubfijo As System.Nullable(Of Integer)
+	
+	Private _IdEstablecimiento As System.Nullable(Of Integer)
+	
+	Private _EnumSyngentaDivision As String
+	
+	Private _Corredor2 As System.Nullable(Of Integer)
+	
+	Private _IdUsuarioModifico As System.Nullable(Of Integer)
+	
+	Private _FechaModificacion As System.Nullable(Of Date)
+	
+	Private _FechaEmision As System.Nullable(Of Date)
+	
+	Private _EstaArchivada As String
+	
+	Private _ExcluirDeSubcontratistas As String
+	
+	Private _IdTipoMovimiento As System.Nullable(Of Integer)
+	
+	Private _IdClienteAFacturarle As System.Nullable(Of Integer)
+	
+	Private _SubnumeroDeFacturacion As System.Nullable(Of Integer)
+	
+	Private _AgregaItemDeGastosAdministrativos As String
+	
+	Private _CalidadGranosQuemados As System.Nullable(Of Decimal)
+	
+	Private _CalidadGranosQuemadosBonifica_o_Rebaja As String
+	
+	Private _CalidadTierra As System.Nullable(Of Decimal)
+	
+	Private _CalidadTierraBonifica_o_Rebaja As String
+	
+	Private _CalidadMermaChamico As System.Nullable(Of Decimal)
+	
+	Private _CalidadMermaChamicoBonifica_o_Rebaja As String
+	
+	Private _CalidadMermaZarandeo As System.Nullable(Of Decimal)
+	
+	Private _CalidadMermaZarandeoBonifica_o_Rebaja As String
+	
+	Private _FueraDeEstandar As String
+	
+	Private _CalidadPuntaSombreada As System.Nullable(Of Decimal)
+	
+	Private _CobraAcarreo As String
+	
+	Private _LiquidaViaje As String
+	
+	Private _IdClienteAuxiliar As System.Nullable(Of Integer)
+	
+	Private _CalidadDescuentoFinal As System.Nullable(Of Decimal)
+	
+	Private _PathImagen As String
+	
+	Private _PathImagen2 As String
+	
+	Private _AgrupadorDeTandaPeriodos As System.Nullable(Of Integer)
+	
+	Private _ClaveEncriptada As String
+	
+	Private _NumeroCartaEnTextoParaBusqueda As String
+	
+	Private _IdClienteEntregador As System.Nullable(Of Integer)
+	
+	Private _IdDetalleFactura As System.Nullable(Of Integer)
+	
+	Private _SojaSustentableCodCondicion As String
+	
+	Private _SojaSustentableCondicion As String
+	
+	Private _SojaSustentableNroEstablecimientoDeProduccion As String
+	
+	Private _IdClientePagadorFlete As System.Nullable(Of Integer)
+	
+	Private _SubnumeroVagonEnTextoParaBusqueda As String
+	
+	Private _IdCorredor2 As System.Nullable(Of Integer)
+	
+	Private _Acopio1 As System.Nullable(Of Integer)
+	
+	Private _Acopio2 As System.Nullable(Of Integer)
+	
+	Private _Acopio3 As System.Nullable(Of Integer)
+	
+	Private _Acopio4 As System.Nullable(Of Integer)
+	
+	Private _Acopio5 As System.Nullable(Of Integer)
+	
+	Private _AcopioFacturarleA As System.Nullable(Of Integer)
+	
+	Private _CartasPorteMovimiento As EntitySet(Of CartasPorteMovimiento)
+	
+	Private _linqArticulo As EntityRef(Of linqArticulo)
+	
+	Private _linqCliente As EntityRef(Of linqCliente)
+	
+	Private _linqCorredor As EntityRef(Of linqCorredor)
+	
+	Private _Transportista As EntityRef(Of Transportista)
+	
+	Private _linqCliente1 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente2 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente3 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente4 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente5 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente6 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente7 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente8 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente9 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente10 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente11 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente12 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente13 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente14 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente15 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente16 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente17 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente18 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente19 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente20 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente21 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente22 As EntityRef(Of linqCliente)
+	
+	Private _linqCorredor1 As EntityRef(Of linqCorredor)
+	
+	Private _linqCliente23 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente24 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente25 As EntityRef(Of linqCliente)
+	
+	Private _linqCliente26 As EntityRef(Of linqCliente)
+	
+    #Region "Definiciones de métodos de extensibilidad"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIdCartaDePorteChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIdCartaDePorteChanged()
+    End Sub
+    Partial Private Sub OnNumeroCartaDePorteChanging(value As System.Nullable(Of Long))
+    End Sub
+    Partial Private Sub OnNumeroCartaDePorteChanged()
+    End Sub
+    Partial Private Sub OnIdUsuarioIngresoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdUsuarioIngresoChanged()
+    End Sub
+    Partial Private Sub OnFechaIngresoChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaIngresoChanged()
+    End Sub
+    Partial Private Sub OnAnuladaChanging(value As String)
+    End Sub
+    Partial Private Sub OnAnuladaChanged()
+    End Sub
+    Partial Private Sub OnIdUsuarioAnuloChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdUsuarioAnuloChanged()
+    End Sub
+    Partial Private Sub OnFechaAnulacionChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaAnulacionChanged()
+    End Sub
+    Partial Private Sub OnObservacionesChanging(value As String)
+    End Sub
+    Partial Private Sub OnObservacionesChanged()
+    End Sub
+    Partial Private Sub OnFechaTimeStampChanging(value As System.Data.Linq.Binary)
+    End Sub
+    Partial Private Sub OnFechaTimeStampChanged()
+    End Sub
+    Partial Private Sub OnVendedorChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnVendedorChanged()
+    End Sub
+    Partial Private Sub OnCuentaOrden1Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCuentaOrden1Changed()
+    End Sub
+    Partial Private Sub OnCuentaOrden2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCuentaOrden2Changed()
+    End Sub
+    Partial Private Sub OnCorredorChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCorredorChanged()
+    End Sub
+    Partial Private Sub OnEntregadorChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnEntregadorChanged()
+    End Sub
+    Partial Private Sub OnProcedenciaChanging(value As String)
+    End Sub
+    Partial Private Sub OnProcedenciaChanged()
+    End Sub
+    Partial Private Sub OnPatenteChanging(value As String)
+    End Sub
+    Partial Private Sub OnPatenteChanged()
+    End Sub
+    Partial Private Sub OnIdArticuloChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdArticuloChanged()
+    End Sub
+    Partial Private Sub OnIdStockChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdStockChanged()
+    End Sub
+    Partial Private Sub OnPartidaChanging(value As String)
+    End Sub
+    Partial Private Sub OnPartidaChanged()
+    End Sub
+    Partial Private Sub OnIdUnidadChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdUnidadChanged()
+    End Sub
+    Partial Private Sub OnIdUbicacionChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdUbicacionChanged()
+    End Sub
+    Partial Private Sub OnCantidadChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCantidadChanged()
+    End Sub
+    Partial Private Sub OnCupoChanging(value As String)
+    End Sub
+    Partial Private Sub OnCupoChanged()
+    End Sub
+    Partial Private Sub OnNetoProcChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNetoProcChanged()
+    End Sub
+    Partial Private Sub OnCalidadChanging(value As String)
+    End Sub
+    Partial Private Sub OnCalidadChanged()
+    End Sub
+    Partial Private Sub OnBrutoPtoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnBrutoPtoChanged()
+    End Sub
+    Partial Private Sub OnTaraPtoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTaraPtoChanged()
+    End Sub
+    Partial Private Sub OnNetoPtoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNetoPtoChanged()
+    End Sub
+    Partial Private Sub OnAcopladoChanging(value As String)
+    End Sub
+    Partial Private Sub OnAcopladoChanged()
+    End Sub
+    Partial Private Sub OnHumedadChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnHumedadChanged()
+    End Sub
+    Partial Private Sub OnMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnMermaChanged()
+    End Sub
+    Partial Private Sub OnNetoFinalChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNetoFinalChanged()
+    End Sub
+    Partial Private Sub OnFechaDeCargaChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaDeCargaChanged()
+    End Sub
+    Partial Private Sub OnFechaVencimientoChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaVencimientoChanged()
+    End Sub
+    Partial Private Sub OnCEEChanging(value As String)
+    End Sub
+    Partial Private Sub OnCEEChanged()
+    End Sub
+    Partial Private Sub OnIdTransportistaChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdTransportistaChanged()
+    End Sub
+    Partial Private Sub OnTransportistaCUITdesnormalizadoChanging(value As String)
+    End Sub
+    Partial Private Sub OnTransportistaCUITdesnormalizadoChanged()
+    End Sub
+    Partial Private Sub OnIdChoferChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdChoferChanged()
+    End Sub
+    Partial Private Sub OnChoferCUITdesnormalizadoChanging(value As String)
+    End Sub
+    Partial Private Sub OnChoferCUITdesnormalizadoChanged()
+    End Sub
+    Partial Private Sub OnCTGChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCTGChanged()
+    End Sub
+    Partial Private Sub OnContratoChanging(value As String)
+    End Sub
+    Partial Private Sub OnContratoChanged()
+    End Sub
+    Partial Private Sub OnDestinoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnDestinoChanged()
+    End Sub
+    Partial Private Sub OnSubcontr1Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnSubcontr1Changed()
+    End Sub
+    Partial Private Sub OnSubcontr2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnSubcontr2Changed()
+    End Sub
+    Partial Private Sub OnContrato1Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnContrato1Changed()
+    End Sub
+    Partial Private Sub Oncontrato2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub Oncontrato2Changed()
+    End Sub
+    Partial Private Sub OnKmARecorrerChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnKmARecorrerChanged()
+    End Sub
+    Partial Private Sub OnTarifaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTarifaChanged()
+    End Sub
+    Partial Private Sub OnFechaDescargaChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaDescargaChanged()
+    End Sub
+    Partial Private Sub OnHoraChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnHoraChanged()
+    End Sub
+    Partial Private Sub OnNReciboChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnNReciboChanged()
+    End Sub
+    Partial Private Sub OnCalidadDeChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCalidadDeChanged()
+    End Sub
+    Partial Private Sub OnTaraFinalChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTaraFinalChanged()
+    End Sub
+    Partial Private Sub OnBrutoFinalChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnBrutoFinalChanged()
+    End Sub
+    Partial Private Sub OnFumigadaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnFumigadaChanged()
+    End Sub
+    Partial Private Sub OnSecadaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnSecadaChanged()
+    End Sub
+    Partial Private Sub OnExportaChanging(value As String)
+    End Sub
+    Partial Private Sub OnExportaChanged()
+    End Sub
+    Partial Private Sub OnNobleExtranosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleExtranosChanged()
+    End Sub
+    Partial Private Sub OnNobleNegrosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleNegrosChanged()
+    End Sub
+    Partial Private Sub OnNobleQuebradosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleQuebradosChanged()
+    End Sub
+    Partial Private Sub OnNobleDaniadosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleDaniadosChanged()
+    End Sub
+    Partial Private Sub OnNobleChamicoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleChamicoChanged()
+    End Sub
+    Partial Private Sub OnNobleChamico2Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleChamico2Changed()
+    End Sub
+    Partial Private Sub OnNobleRevolcadoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleRevolcadoChanged()
+    End Sub
+    Partial Private Sub OnNobleObjetablesChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleObjetablesChanged()
+    End Sub
+    Partial Private Sub OnNobleAmohosadosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleAmohosadosChanged()
+    End Sub
+    Partial Private Sub OnNobleHectolitricoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleHectolitricoChanged()
+    End Sub
+    Partial Private Sub OnNobleCarbonChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleCarbonChanged()
+    End Sub
+    Partial Private Sub OnNoblePanzaBlancaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNoblePanzaBlancaChanged()
+    End Sub
+    Partial Private Sub OnNoblePicadosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNoblePicadosChanged()
+    End Sub
+    Partial Private Sub OnNobleMGrasaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleMGrasaChanged()
+    End Sub
+    Partial Private Sub OnNobleAcidezGrasaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleAcidezGrasaChanged()
+    End Sub
+    Partial Private Sub OnNobleVerdesChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnNobleVerdesChanged()
+    End Sub
+    Partial Private Sub OnNobleGradoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnNobleGradoChanged()
+    End Sub
+    Partial Private Sub OnNobleConformeChanging(value As String)
+    End Sub
+    Partial Private Sub OnNobleConformeChanged()
+    End Sub
+    Partial Private Sub OnNobleACamaraChanging(value As String)
+    End Sub
+    Partial Private Sub OnNobleACamaraChanged()
+    End Sub
+    Partial Private Sub OnCosechaChanging(value As String)
+    End Sub
+    Partial Private Sub OnCosechaChanged()
+    End Sub
+    Partial Private Sub OnHumedadDesnormalizadaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnHumedadDesnormalizadaChanged()
+    End Sub
+    Partial Private Sub OnFactorChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnFactorChanged()
+    End Sub
+    Partial Private Sub OnIdFacturaImputadaChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdFacturaImputadaChanged()
+    End Sub
+    Partial Private Sub OnPuntoVentaChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnPuntoVentaChanged()
+    End Sub
+    Partial Private Sub OnSubnumeroVagonChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnSubnumeroVagonChanged()
+    End Sub
+    Partial Private Sub OnTarifaFacturadaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTarifaFacturadaChanged()
+    End Sub
+    Partial Private Sub OnTarifaSubcontratista1Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTarifaSubcontratista1Changed()
+    End Sub
+    Partial Private Sub OnTarifaSubcontratista2Changing(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnTarifaSubcontratista2Changed()
+    End Sub
+    Partial Private Sub OnFechaArriboChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaArriboChanged()
+    End Sub
+    Partial Private Sub OnVersionChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnVersionChanged()
+    End Sub
+    Partial Private Sub OnMotivoAnulacionChanging(value As String)
+    End Sub
+    Partial Private Sub OnMotivoAnulacionChanged()
+    End Sub
+    Partial Private Sub OnNumeroSubfijoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnNumeroSubfijoChanged()
+    End Sub
+    Partial Private Sub OnIdEstablecimientoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdEstablecimientoChanged()
+    End Sub
+    Partial Private Sub OnEnumSyngentaDivisionChanging(value As String)
+    End Sub
+    Partial Private Sub OnEnumSyngentaDivisionChanged()
+    End Sub
+    Partial Private Sub OnCorredor2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCorredor2Changed()
+    End Sub
+    Partial Private Sub OnIdUsuarioModificoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdUsuarioModificoChanged()
+    End Sub
+    Partial Private Sub OnFechaModificacionChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaModificacionChanged()
+    End Sub
+    Partial Private Sub OnFechaEmisionChanging(value As System.Nullable(Of Date))
+    End Sub
+    Partial Private Sub OnFechaEmisionChanged()
+    End Sub
+    Partial Private Sub OnEstaArchivadaChanging(value As String)
+    End Sub
+    Partial Private Sub OnEstaArchivadaChanged()
+    End Sub
+    Partial Private Sub OnExcluirDeSubcontratistasChanging(value As String)
+    End Sub
+    Partial Private Sub OnExcluirDeSubcontratistasChanged()
+    End Sub
+    Partial Private Sub OnIdTipoMovimientoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdTipoMovimientoChanged()
+    End Sub
+    Partial Private Sub OnIdClienteAFacturarleChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdClienteAFacturarleChanged()
+    End Sub
+    Partial Private Sub OnSubnumeroDeFacturacionChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnSubnumeroDeFacturacionChanged()
+    End Sub
+    Partial Private Sub OnAgregaItemDeGastosAdministrativosChanging(value As String)
+    End Sub
+    Partial Private Sub OnAgregaItemDeGastosAdministrativosChanged()
+    End Sub
+    Partial Private Sub OnCalidadGranosQuemadosChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGranosQuemadosChanged()
+    End Sub
+    Partial Private Sub OnCalidadGranosQuemadosBonifica_o_RebajaChanging(value As String)
+    End Sub
+    Partial Private Sub OnCalidadGranosQuemadosBonifica_o_RebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadTierraChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadTierraChanged()
+    End Sub
+    Partial Private Sub OnCalidadTierraBonifica_o_RebajaChanging(value As String)
+    End Sub
+    Partial Private Sub OnCalidadTierraBonifica_o_RebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadMermaChamicoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadMermaChamicoChanged()
+    End Sub
+    Partial Private Sub OnCalidadMermaChamicoBonifica_o_RebajaChanging(value As String)
+    End Sub
+    Partial Private Sub OnCalidadMermaChamicoBonifica_o_RebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadMermaZarandeoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadMermaZarandeoChanged()
+    End Sub
+    Partial Private Sub OnCalidadMermaZarandeoBonifica_o_RebajaChanging(value As String)
+    End Sub
+    Partial Private Sub OnCalidadMermaZarandeoBonifica_o_RebajaChanged()
+    End Sub
+    Partial Private Sub OnFueraDeEstandarChanging(value As String)
+    End Sub
+    Partial Private Sub OnFueraDeEstandarChanged()
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaChanged()
+    End Sub
+    Partial Private Sub OnCobraAcarreoChanging(value As String)
+    End Sub
+    Partial Private Sub OnCobraAcarreoChanged()
+    End Sub
+    Partial Private Sub OnLiquidaViajeChanging(value As String)
+    End Sub
+    Partial Private Sub OnLiquidaViajeChanged()
+    End Sub
+    Partial Private Sub OnIdClienteAuxiliarChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdClienteAuxiliarChanged()
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalChanged()
+    End Sub
+    Partial Private Sub OnPathImagenChanging(value As String)
+    End Sub
+    Partial Private Sub OnPathImagenChanged()
+    End Sub
+    Partial Private Sub OnPathImagen2Changing(value As String)
+    End Sub
+    Partial Private Sub OnPathImagen2Changed()
+    End Sub
+    Partial Private Sub OnAgrupadorDeTandaPeriodosChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAgrupadorDeTandaPeriodosChanged()
+    End Sub
+    Partial Private Sub OnClaveEncriptadaChanging(value As String)
+    End Sub
+    Partial Private Sub OnClaveEncriptadaChanged()
+    End Sub
+    Partial Private Sub OnNumeroCartaEnTextoParaBusquedaChanging(value As String)
+    End Sub
+    Partial Private Sub OnNumeroCartaEnTextoParaBusquedaChanged()
+    End Sub
+    Partial Private Sub OnIdClienteEntregadorChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdClienteEntregadorChanged()
+    End Sub
+    Partial Private Sub OnIdDetalleFacturaChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdDetalleFacturaChanged()
+    End Sub
+    Partial Private Sub OnSojaSustentableCodCondicionChanging(value As String)
+    End Sub
+    Partial Private Sub OnSojaSustentableCodCondicionChanged()
+    End Sub
+    Partial Private Sub OnSojaSustentableCondicionChanging(value As String)
+    End Sub
+    Partial Private Sub OnSojaSustentableCondicionChanged()
+    End Sub
+    Partial Private Sub OnSojaSustentableNroEstablecimientoDeProduccionChanging(value As String)
+    End Sub
+    Partial Private Sub OnSojaSustentableNroEstablecimientoDeProduccionChanged()
+    End Sub
+    Partial Private Sub OnIdClientePagadorFleteChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdClientePagadorFleteChanged()
+    End Sub
+    Partial Private Sub OnSubnumeroVagonEnTextoParaBusquedaChanging(value As String)
+    End Sub
+    Partial Private Sub OnSubnumeroVagonEnTextoParaBusquedaChanged()
+    End Sub
+    Partial Private Sub OnIdCorredor2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdCorredor2Changed()
+    End Sub
+    Partial Private Sub OnAcopio1Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopio1Changed()
+    End Sub
+    Partial Private Sub OnAcopio2Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopio2Changed()
+    End Sub
+    Partial Private Sub OnAcopio3Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopio3Changed()
+    End Sub
+    Partial Private Sub OnAcopio4Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopio4Changed()
+    End Sub
+    Partial Private Sub OnAcopio5Changing(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopio5Changed()
+    End Sub
+    Partial Private Sub OnAcopioFacturarleAChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnAcopioFacturarleAChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._CartasPorteMovimiento = New EntitySet(Of CartasPorteMovimiento)(AddressOf Me.attach_CartasPorteMovimiento, AddressOf Me.detach_CartasPorteMovimiento)
+		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
+		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
+		Me._Transportista = CType(Nothing, EntityRef(Of Transportista))
+		Me._linqCliente1 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente2 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente3 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente4 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente5 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente6 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente7 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente8 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente9 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente10 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente11 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente12 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente13 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente14 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente15 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente16 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente17 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente18 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente19 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente20 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente21 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente22 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCorredor1 = CType(Nothing, EntityRef(Of linqCorredor))
+		Me._linqCliente23 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente24 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente25 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente26 = CType(Nothing, EntityRef(Of linqCliente))
+		OnCreated
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdCartaDePorte() As Integer
+		Get
+			Return Me._IdCartaDePorte
+		End Get
+		Set
+			If ((Me._IdCartaDePorte = value)  _
+						= false) Then
+				Me.OnIdCartaDePorteChanging(value)
+				Me.SendPropertyChanging
+				Me._IdCartaDePorte = value
+				Me.SendPropertyChanged("IdCartaDePorte")
+				Me.OnIdCartaDePorteChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NumeroCartaDePorte() As System.Nullable(Of Long)
+		Get
+			Return Me._NumeroCartaDePorte
+		End Get
+		Set
+			If (Me._NumeroCartaDePorte.Equals(value) = false) Then
+				Me.OnNumeroCartaDePorteChanging(value)
+				Me.SendPropertyChanging
+				Me._NumeroCartaDePorte = value
+				Me.SendPropertyChanged("NumeroCartaDePorte")
+				Me.OnNumeroCartaDePorteChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdUsuarioIngreso
+		End Get
+		Set
+			If (Me._IdUsuarioIngreso.Equals(value) = false) Then
+				Me.OnIdUsuarioIngresoChanging(value)
+				Me.SendPropertyChanging
+				Me._IdUsuarioIngreso = value
+				Me.SendPropertyChanged("IdUsuarioIngreso")
+				Me.OnIdUsuarioIngresoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaIngreso() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaIngreso
+		End Get
+		Set
+			If (Me._FechaIngreso.Equals(value) = false) Then
+				Me.OnFechaIngresoChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaIngreso = value
+				Me.SendPropertyChanged("FechaIngreso")
+				Me.OnFechaIngresoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Anulada() As String
+		Get
+			Return Me._Anulada
+		End Get
+		Set
+			If (String.Equals(Me._Anulada, value) = false) Then
+				Me.OnAnuladaChanging(value)
+				Me.SendPropertyChanging
+				Me._Anulada = value
+				Me.SendPropertyChanged("Anulada")
+				Me.OnAnuladaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdUsuarioAnulo() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdUsuarioAnulo
+		End Get
+		Set
+			If (Me._IdUsuarioAnulo.Equals(value) = false) Then
+				Me.OnIdUsuarioAnuloChanging(value)
+				Me.SendPropertyChanging
+				Me._IdUsuarioAnulo = value
+				Me.SendPropertyChanged("IdUsuarioAnulo")
+				Me.OnIdUsuarioAnuloChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaAnulacion() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaAnulacion
+		End Get
+		Set
+			If (Me._FechaAnulacion.Equals(value) = false) Then
+				Me.OnFechaAnulacionChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaAnulacion = value
+				Me.SendPropertyChanged("FechaAnulacion")
+				Me.OnFechaAnulacionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Observaciones() As String
+		Get
+			Return Me._Observaciones
+		End Get
+		Set
+			If (String.Equals(Me._Observaciones, value) = false) Then
+				Me.OnObservacionesChanging(value)
+				Me.SendPropertyChanging
+				Me._Observaciones = value
+				Me.SendPropertyChanged("Observaciones")
+				Me.OnObservacionesChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaTimeStamp() As System.Data.Linq.Binary
+		Get
+			Return Me._FechaTimeStamp
+		End Get
+		Set
+			If (Object.Equals(Me._FechaTimeStamp, value) = false) Then
+				Me.OnFechaTimeStampChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaTimeStamp = value
+				Me.SendPropertyChanged("FechaTimeStamp")
+				Me.OnFechaTimeStampChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Vendedor() As System.Nullable(Of Integer)
+		Get
+			Return Me._Vendedor
+		End Get
+		Set
+			If (Me._Vendedor.Equals(value) = false) Then
+				If ((((((((((((((((((((((Me._linqCliente1.HasLoadedOrAssignedValue OrElse Me._linqCliente2.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente3.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente4.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente5.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente6.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente7.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente8.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente9.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente10.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente11.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente12.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente13.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente14.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente15.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente16.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente17.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente18.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente19.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente20.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente21.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente22.HasLoadedOrAssignedValue)  _
+							OrElse Me._linqCliente26.HasLoadedOrAssignedValue) Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnVendedorChanging(value)
+				Me.SendPropertyChanging
+				Me._Vendedor = value
+				Me.SendPropertyChanged("Vendedor")
+				Me.OnVendedorChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CuentaOrden1() As System.Nullable(Of Integer)
+		Get
+			Return Me._CuentaOrden1
+		End Get
+		Set
+			If (Me._CuentaOrden1.Equals(value) = false) Then
+				If Me._linqCliente23.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnCuentaOrden1Changing(value)
+				Me.SendPropertyChanging
+				Me._CuentaOrden1 = value
+				Me.SendPropertyChanged("CuentaOrden1")
+				Me.OnCuentaOrden1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CuentaOrden2() As System.Nullable(Of Integer)
+		Get
+			Return Me._CuentaOrden2
+		End Get
+		Set
+			If (Me._CuentaOrden2.Equals(value) = false) Then
+				If Me._linqCliente24.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnCuentaOrden2Changing(value)
+				Me.SendPropertyChanging
+				Me._CuentaOrden2 = value
+				Me.SendPropertyChanged("CuentaOrden2")
+				Me.OnCuentaOrden2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Corredor() As System.Nullable(Of Integer)
+		Get
+			Return Me._Corredor
+		End Get
+		Set
+			If (Me._Corredor.Equals(value) = false) Then
+				If Me._linqCorredor1.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnCorredorChanging(value)
+				Me.SendPropertyChanging
+				Me._Corredor = value
+				Me.SendPropertyChanged("Corredor")
+				Me.OnCorredorChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Entregador() As System.Nullable(Of Integer)
+		Get
+			Return Me._Entregador
+		End Get
+		Set
+			If (Me._Entregador.Equals(value) = false) Then
+				If Me._linqCliente25.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnEntregadorChanging(value)
+				Me.SendPropertyChanging
+				Me._Entregador = value
+				Me.SendPropertyChanged("Entregador")
+				Me.OnEntregadorChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedencia", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Procedencia() As String
+		Get
+			Return Me._Procedencia
+		End Get
+		Set
+			If (String.Equals(Me._Procedencia, value) = false) Then
+				Me.OnProcedenciaChanging(value)
+				Me.SendPropertyChanging
+				Me._Procedencia = value
+				Me.SendPropertyChanged("Procedencia")
+				Me.OnProcedenciaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Patente", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Patente() As String
+		Get
+			Return Me._Patente
+		End Get
+		Set
+			If (String.Equals(Me._Patente, value) = false) Then
+				Me.OnPatenteChanging(value)
+				Me.SendPropertyChanging
+				Me._Patente = value
+				Me.SendPropertyChanged("Patente")
+				Me.OnPatenteChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdArticulo() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdArticulo
+		End Get
+		Set
+			If (Me._IdArticulo.Equals(value) = false) Then
+				If Me._linqArticulo.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIdArticuloChanging(value)
+				Me.SendPropertyChanging
+				Me._IdArticulo = value
+				Me.SendPropertyChanged("IdArticulo")
+				Me.OnIdArticuloChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdStock() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdStock
+		End Get
+		Set
+			If (Me._IdStock.Equals(value) = false) Then
+				Me.OnIdStockChanging(value)
+				Me.SendPropertyChanging
+				Me._IdStock = value
+				Me.SendPropertyChanged("IdStock")
+				Me.OnIdStockChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Partida() As String
+		Get
+			Return Me._Partida
+		End Get
+		Set
+			If (String.Equals(Me._Partida, value) = false) Then
+				Me.OnPartidaChanging(value)
+				Me.SendPropertyChanging
+				Me._Partida = value
+				Me.SendPropertyChanged("Partida")
+				Me.OnPartidaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdUnidad() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdUnidad
+		End Get
+		Set
+			If (Me._IdUnidad.Equals(value) = false) Then
+				Me.OnIdUnidadChanging(value)
+				Me.SendPropertyChanging
+				Me._IdUnidad = value
+				Me.SendPropertyChanged("IdUnidad")
+				Me.OnIdUnidadChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdUbicacion() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdUbicacion
+		End Get
+		Set
+			If (Me._IdUbicacion.Equals(value) = false) Then
+				Me.OnIdUbicacionChanging(value)
+				Me.SendPropertyChanging
+				Me._IdUbicacion = value
+				Me.SendPropertyChanged("IdUbicacion")
+				Me.OnIdUbicacionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Cantidad() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Cantidad
+		End Get
+		Set
+			If (Me._Cantidad.Equals(value) = false) Then
+				Me.OnCantidadChanging(value)
+				Me.SendPropertyChanging
+				Me._Cantidad = value
+				Me.SendPropertyChanged("Cantidad")
+				Me.OnCantidadChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cupo", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Cupo() As String
+		Get
+			Return Me._Cupo
+		End Get
+		Set
+			If (String.Equals(Me._Cupo, value) = false) Then
+				Me.OnCupoChanging(value)
+				Me.SendPropertyChanging
+				Me._Cupo = value
+				Me.SendPropertyChanged("Cupo")
+				Me.OnCupoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoProc", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NetoProc() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NetoProc
+		End Get
+		Set
+			If (Me._NetoProc.Equals(value) = false) Then
+				Me.OnNetoProcChanging(value)
+				Me.SendPropertyChanging
+				Me._NetoProc = value
+				Me.SendPropertyChanged("NetoProc")
+				Me.OnNetoProcChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Calidad", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Calidad() As String
+		Get
+			Return Me._Calidad
+		End Get
+		Set
+			If (String.Equals(Me._Calidad, value) = false) Then
+				Me.OnCalidadChanging(value)
+				Me.SendPropertyChanging
+				Me._Calidad = value
+				Me.SendPropertyChanged("Calidad")
+				Me.OnCalidadChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property BrutoPto() As System.Nullable(Of Decimal)
+		Get
+			Return Me._BrutoPto
+		End Get
+		Set
+			If (Me._BrutoPto.Equals(value) = false) Then
+				Me.OnBrutoPtoChanging(value)
+				Me.SendPropertyChanging
+				Me._BrutoPto = value
+				Me.SendPropertyChanged("BrutoPto")
+				Me.OnBrutoPtoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TaraPto() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TaraPto
+		End Get
+		Set
+			If (Me._TaraPto.Equals(value) = false) Then
+				Me.OnTaraPtoChanging(value)
+				Me.SendPropertyChanging
+				Me._TaraPto = value
+				Me.SendPropertyChanged("TaraPto")
+				Me.OnTaraPtoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NetoPto() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NetoPto
+		End Get
+		Set
+			If (Me._NetoPto.Equals(value) = false) Then
+				Me.OnNetoPtoChanging(value)
+				Me.SendPropertyChanging
+				Me._NetoPto = value
+				Me.SendPropertyChanged("NetoPto")
+				Me.OnNetoPtoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acoplado", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acoplado() As String
+		Get
+			Return Me._Acoplado
+		End Get
+		Set
+			If (String.Equals(Me._Acoplado, value) = false) Then
+				Me.OnAcopladoChanging(value)
+				Me.SendPropertyChanging
+				Me._Acoplado = value
+				Me.SendPropertyChanged("Acoplado")
+				Me.OnAcopladoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Humedad", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Humedad() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Humedad
+		End Get
+		Set
+			If (Me._Humedad.Equals(value) = false) Then
+				Me.OnHumedadChanging(value)
+				Me.SendPropertyChanging
+				Me._Humedad = value
+				Me.SendPropertyChanged("Humedad")
+				Me.OnHumedadChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Merma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Merma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Merma
+		End Get
+		Set
+			If (Me._Merma.Equals(value) = false) Then
+				Me.OnMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._Merma = value
+				Me.SendPropertyChanged("Merma")
+				Me.OnMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NetoFinal() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NetoFinal
+		End Get
+		Set
+			If (Me._NetoFinal.Equals(value) = false) Then
+				Me.OnNetoFinalChanging(value)
+				Me.SendPropertyChanging
+				Me._NetoFinal = value
+				Me.SendPropertyChanged("NetoFinal")
+				Me.OnNetoFinalChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDeCarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaDeCarga() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaDeCarga
+		End Get
+		Set
+			If (Me._FechaDeCarga.Equals(value) = false) Then
+				Me.OnFechaDeCargaChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaDeCarga = value
+				Me.SendPropertyChanged("FechaDeCarga")
+				Me.OnFechaDeCargaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaVencimiento() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaVencimiento
+		End Get
+		Set
+			If (Me._FechaVencimiento.Equals(value) = false) Then
+				Me.OnFechaVencimientoChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaVencimiento = value
+				Me.SendPropertyChanged("FechaVencimiento")
+				Me.OnFechaVencimientoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CEE", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CEE() As String
+		Get
+			Return Me._CEE
+		End Get
+		Set
+			If (String.Equals(Me._CEE, value) = false) Then
+				Me.OnCEEChanging(value)
+				Me.SendPropertyChanging
+				Me._CEE = value
+				Me.SendPropertyChanged("CEE")
+				Me.OnCEEChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdTransportista() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdTransportista
+		End Get
+		Set
+			If (Me._IdTransportista.Equals(value) = false) Then
+				If Me._Transportista.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIdTransportistaChanging(value)
+				Me.SendPropertyChanging
+				Me._IdTransportista = value
+				Me.SendPropertyChanged("IdTransportista")
+				Me.OnIdTransportistaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TransportistaCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TransportistaCUITdesnormalizado() As String
+		Get
+			Return Me._TransportistaCUITdesnormalizado
+		End Get
+		Set
+			If (String.Equals(Me._TransportistaCUITdesnormalizado, value) = false) Then
+				Me.OnTransportistaCUITdesnormalizadoChanging(value)
+				Me.SendPropertyChanging
+				Me._TransportistaCUITdesnormalizado = value
+				Me.SendPropertyChanged("TransportistaCUITdesnormalizado")
+				Me.OnTransportistaCUITdesnormalizadoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdChofer() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdChofer
+		End Get
+		Set
+			If (Me._IdChofer.Equals(value) = false) Then
+				Me.OnIdChoferChanging(value)
+				Me.SendPropertyChanging
+				Me._IdChofer = value
+				Me.SendPropertyChanged("IdChofer")
+				Me.OnIdChoferChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChoferCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property ChoferCUITdesnormalizado() As String
+		Get
+			Return Me._ChoferCUITdesnormalizado
+		End Get
+		Set
+			If (String.Equals(Me._ChoferCUITdesnormalizado, value) = false) Then
+				Me.OnChoferCUITdesnormalizadoChanging(value)
+				Me.SendPropertyChanging
+				Me._ChoferCUITdesnormalizado = value
+				Me.SendPropertyChanged("ChoferCUITdesnormalizado")
+				Me.OnChoferCUITdesnormalizadoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CTG", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CTG() As System.Nullable(Of Integer)
+		Get
+			Return Me._CTG
+		End Get
+		Set
+			If (Me._CTG.Equals(value) = false) Then
+				Me.OnCTGChanging(value)
+				Me.SendPropertyChanging
+				Me._CTG = value
+				Me.SendPropertyChanged("CTG")
+				Me.OnCTGChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Contrato() As String
+		Get
+			Return Me._Contrato
+		End Get
+		Set
+			If (String.Equals(Me._Contrato, value) = false) Then
+				Me.OnContratoChanging(value)
+				Me.SendPropertyChanging
+				Me._Contrato = value
+				Me.SendPropertyChanged("Contrato")
+				Me.OnContratoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destino", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Destino() As System.Nullable(Of Integer)
+		Get
+			Return Me._Destino
+		End Get
+		Set
+			If (Me._Destino.Equals(value) = false) Then
+				Me.OnDestinoChanging(value)
+				Me.SendPropertyChanging
+				Me._Destino = value
+				Me.SendPropertyChanged("Destino")
+				Me.OnDestinoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Subcontr1() As System.Nullable(Of Integer)
+		Get
+			Return Me._Subcontr1
+		End Get
+		Set
+			If (Me._Subcontr1.Equals(value) = false) Then
+				Me.OnSubcontr1Changing(value)
+				Me.SendPropertyChanging
+				Me._Subcontr1 = value
+				Me.SendPropertyChanged("Subcontr1")
+				Me.OnSubcontr1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Subcontr2() As System.Nullable(Of Integer)
+		Get
+			Return Me._Subcontr2
+		End Get
+		Set
+			If (Me._Subcontr2.Equals(value) = false) Then
+				Me.OnSubcontr2Changing(value)
+				Me.SendPropertyChanging
+				Me._Subcontr2 = value
+				Me.SendPropertyChanged("Subcontr2")
+				Me.OnSubcontr2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Contrato1() As System.Nullable(Of Integer)
+		Get
+			Return Me._Contrato1
+		End Get
+		Set
+			If (Me._Contrato1.Equals(value) = false) Then
+				Me.OnContrato1Changing(value)
+				Me.SendPropertyChanging
+				Me._Contrato1 = value
+				Me.SendPropertyChanged("Contrato1")
+				Me.OnContrato1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contrato2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property contrato2() As System.Nullable(Of Integer)
+		Get
+			Return Me._contrato2
+		End Get
+		Set
+			If (Me._contrato2.Equals(value) = false) Then
+				Me.Oncontrato2Changing(value)
+				Me.SendPropertyChanging
+				Me._contrato2 = value
+				Me.SendPropertyChanged("contrato2")
+				Me.Oncontrato2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KmARecorrer", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property KmARecorrer() As System.Nullable(Of Decimal)
+		Get
+			Return Me._KmARecorrer
+		End Get
+		Set
+			If (Me._KmARecorrer.Equals(value) = false) Then
+				Me.OnKmARecorrerChanging(value)
+				Me.SendPropertyChanging
+				Me._KmARecorrer = value
+				Me.SendPropertyChanged("KmARecorrer")
+				Me.OnKmARecorrerChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarifa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Tarifa() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Tarifa
+		End Get
+		Set
+			If (Me._Tarifa.Equals(value) = false) Then
+				Me.OnTarifaChanging(value)
+				Me.SendPropertyChanging
+				Me._Tarifa = value
+				Me.SendPropertyChanged("Tarifa")
+				Me.OnTarifaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaDescarga() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaDescarga
+		End Get
+		Set
+			If (Me._FechaDescarga.Equals(value) = false) Then
+				Me.OnFechaDescargaChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaDescarga = value
+				Me.SendPropertyChanged("FechaDescarga")
+				Me.OnFechaDescargaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Hora", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Hora() As System.Nullable(Of Date)
+		Get
+			Return Me._Hora
+		End Get
+		Set
+			If (Me._Hora.Equals(value) = false) Then
+				Me.OnHoraChanging(value)
+				Me.SendPropertyChanging
+				Me._Hora = value
+				Me.SendPropertyChanged("Hora")
+				Me.OnHoraChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NRecibo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NRecibo() As System.Nullable(Of Integer)
+		Get
+			Return Me._NRecibo
+		End Get
+		Set
+			If (Me._NRecibo.Equals(value) = false) Then
+				Me.OnNReciboChanging(value)
+				Me.SendPropertyChanging
+				Me._NRecibo = value
+				Me.SendPropertyChanged("NRecibo")
+				Me.OnNReciboChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDe", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadDe() As System.Nullable(Of Integer)
+		Get
+			Return Me._CalidadDe
+		End Get
+		Set
+			If (Me._CalidadDe.Equals(value) = false) Then
+				Me.OnCalidadDeChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDe = value
+				Me.SendPropertyChanged("CalidadDe")
+				Me.OnCalidadDeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TaraFinal() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TaraFinal
+		End Get
+		Set
+			If (Me._TaraFinal.Equals(value) = false) Then
+				Me.OnTaraFinalChanging(value)
+				Me.SendPropertyChanging
+				Me._TaraFinal = value
+				Me.SendPropertyChanged("TaraFinal")
+				Me.OnTaraFinalChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property BrutoFinal() As System.Nullable(Of Decimal)
+		Get
+			Return Me._BrutoFinal
+		End Get
+		Set
+			If (Me._BrutoFinal.Equals(value) = false) Then
+				Me.OnBrutoFinalChanging(value)
+				Me.SendPropertyChanging
+				Me._BrutoFinal = value
+				Me.SendPropertyChanged("BrutoFinal")
+				Me.OnBrutoFinalChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fumigada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Fumigada() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Fumigada
+		End Get
+		Set
+			If (Me._Fumigada.Equals(value) = false) Then
+				Me.OnFumigadaChanging(value)
+				Me.SendPropertyChanging
+				Me._Fumigada = value
+				Me.SendPropertyChanged("Fumigada")
+				Me.OnFumigadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Secada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Secada() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Secada
+		End Get
+		Set
+			If (Me._Secada.Equals(value) = false) Then
+				Me.OnSecadaChanging(value)
+				Me.SendPropertyChanging
+				Me._Secada = value
+				Me.SendPropertyChanged("Secada")
+				Me.OnSecadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exporta", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Exporta() As String
+		Get
+			Return Me._Exporta
+		End Get
+		Set
+			If (String.Equals(Me._Exporta, value) = false) Then
+				Me.OnExportaChanging(value)
+				Me.SendPropertyChanging
+				Me._Exporta = value
+				Me.SendPropertyChanged("Exporta")
+				Me.OnExportaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleExtranos", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleExtranos() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleExtranos
+		End Get
+		Set
+			If (Me._NobleExtranos.Equals(value) = false) Then
+				Me.OnNobleExtranosChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleExtranos = value
+				Me.SendPropertyChanged("NobleExtranos")
+				Me.OnNobleExtranosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleNegros", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleNegros() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleNegros
+		End Get
+		Set
+			If (Me._NobleNegros.Equals(value) = false) Then
+				Me.OnNobleNegrosChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleNegros = value
+				Me.SendPropertyChanged("NobleNegros")
+				Me.OnNobleNegrosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleQuebrados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleQuebrados() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleQuebrados
+		End Get
+		Set
+			If (Me._NobleQuebrados.Equals(value) = false) Then
+				Me.OnNobleQuebradosChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleQuebrados = value
+				Me.SendPropertyChanged("NobleQuebrados")
+				Me.OnNobleQuebradosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleDaniados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleDaniados() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleDaniados
+		End Get
+		Set
+			If (Me._NobleDaniados.Equals(value) = false) Then
+				Me.OnNobleDaniadosChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleDaniados = value
+				Me.SendPropertyChanged("NobleDaniados")
+				Me.OnNobleDaniadosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleChamico() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleChamico
+		End Get
+		Set
+			If (Me._NobleChamico.Equals(value) = false) Then
+				Me.OnNobleChamicoChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleChamico = value
+				Me.SendPropertyChanged("NobleChamico")
+				Me.OnNobleChamicoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleChamico2() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleChamico2
+		End Get
+		Set
+			If (Me._NobleChamico2.Equals(value) = false) Then
+				Me.OnNobleChamico2Changing(value)
+				Me.SendPropertyChanging
+				Me._NobleChamico2 = value
+				Me.SendPropertyChanged("NobleChamico2")
+				Me.OnNobleChamico2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleRevolcado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleRevolcado() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleRevolcado
+		End Get
+		Set
+			If (Me._NobleRevolcado.Equals(value) = false) Then
+				Me.OnNobleRevolcadoChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleRevolcado = value
+				Me.SendPropertyChanged("NobleRevolcado")
+				Me.OnNobleRevolcadoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleObjetables", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleObjetables() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleObjetables
+		End Get
+		Set
+			If (Me._NobleObjetables.Equals(value) = false) Then
+				Me.OnNobleObjetablesChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleObjetables = value
+				Me.SendPropertyChanged("NobleObjetables")
+				Me.OnNobleObjetablesChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAmohosados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleAmohosados() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleAmohosados
+		End Get
+		Set
+			If (Me._NobleAmohosados.Equals(value) = false) Then
+				Me.OnNobleAmohosadosChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleAmohosados = value
+				Me.SendPropertyChanged("NobleAmohosados")
+				Me.OnNobleAmohosadosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleHectolitrico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleHectolitrico() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleHectolitrico
+		End Get
+		Set
+			If (Me._NobleHectolitrico.Equals(value) = false) Then
+				Me.OnNobleHectolitricoChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleHectolitrico = value
+				Me.SendPropertyChanged("NobleHectolitrico")
+				Me.OnNobleHectolitricoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleCarbon", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleCarbon() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleCarbon
+		End Get
+		Set
+			If (Me._NobleCarbon.Equals(value) = false) Then
+				Me.OnNobleCarbonChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleCarbon = value
+				Me.SendPropertyChanged("NobleCarbon")
+				Me.OnNobleCarbonChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePanzaBlanca", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NoblePanzaBlanca() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NoblePanzaBlanca
+		End Get
+		Set
+			If (Me._NoblePanzaBlanca.Equals(value) = false) Then
+				Me.OnNoblePanzaBlancaChanging(value)
+				Me.SendPropertyChanging
+				Me._NoblePanzaBlanca = value
+				Me.SendPropertyChanged("NoblePanzaBlanca")
+				Me.OnNoblePanzaBlancaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePicados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NoblePicados() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NoblePicados
+		End Get
+		Set
+			If (Me._NoblePicados.Equals(value) = false) Then
+				Me.OnNoblePicadosChanging(value)
+				Me.SendPropertyChanging
+				Me._NoblePicados = value
+				Me.SendPropertyChanged("NoblePicados")
+				Me.OnNoblePicadosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleMGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleMGrasa() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleMGrasa
+		End Get
+		Set
+			If (Me._NobleMGrasa.Equals(value) = false) Then
+				Me.OnNobleMGrasaChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleMGrasa = value
+				Me.SendPropertyChanged("NobleMGrasa")
+				Me.OnNobleMGrasaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAcidezGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleAcidezGrasa() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleAcidezGrasa
+		End Get
+		Set
+			If (Me._NobleAcidezGrasa.Equals(value) = false) Then
+				Me.OnNobleAcidezGrasaChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleAcidezGrasa = value
+				Me.SendPropertyChanged("NobleAcidezGrasa")
+				Me.OnNobleAcidezGrasaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleVerdes", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleVerdes() As System.Nullable(Of Decimal)
+		Get
+			Return Me._NobleVerdes
+		End Get
+		Set
+			If (Me._NobleVerdes.Equals(value) = false) Then
+				Me.OnNobleVerdesChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleVerdes = value
+				Me.SendPropertyChanged("NobleVerdes")
+				Me.OnNobleVerdesChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleGrado", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleGrado() As System.Nullable(Of Integer)
+		Get
+			Return Me._NobleGrado
+		End Get
+		Set
+			If (Me._NobleGrado.Equals(value) = false) Then
+				Me.OnNobleGradoChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleGrado = value
+				Me.SendPropertyChanged("NobleGrado")
+				Me.OnNobleGradoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleConforme", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleConforme() As String
+		Get
+			Return Me._NobleConforme
+		End Get
+		Set
+			If (String.Equals(Me._NobleConforme, value) = false) Then
+				Me.OnNobleConformeChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleConforme = value
+				Me.SendPropertyChanged("NobleConforme")
+				Me.OnNobleConformeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleACamara", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NobleACamara() As String
+		Get
+			Return Me._NobleACamara
+		End Get
+		Set
+			If (String.Equals(Me._NobleACamara, value) = false) Then
+				Me.OnNobleACamaraChanging(value)
+				Me.SendPropertyChanging
+				Me._NobleACamara = value
+				Me.SendPropertyChanged("NobleACamara")
+				Me.OnNobleACamaraChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cosecha", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Cosecha() As String
+		Get
+			Return Me._Cosecha
+		End Get
+		Set
+			If (String.Equals(Me._Cosecha, value) = false) Then
+				Me.OnCosechaChanging(value)
+				Me.SendPropertyChanging
+				Me._Cosecha = value
+				Me.SendPropertyChanged("Cosecha")
+				Me.OnCosechaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HumedadDesnormalizada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property HumedadDesnormalizada() As System.Nullable(Of Decimal)
+		Get
+			Return Me._HumedadDesnormalizada
+		End Get
+		Set
+			If (Me._HumedadDesnormalizada.Equals(value) = false) Then
+				Me.OnHumedadDesnormalizadaChanging(value)
+				Me.SendPropertyChanging
+				Me._HumedadDesnormalizada = value
+				Me.SendPropertyChanged("HumedadDesnormalizada")
+				Me.OnHumedadDesnormalizadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Factor", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Factor() As System.Nullable(Of Decimal)
+		Get
+			Return Me._Factor
+		End Get
+		Set
+			If (Me._Factor.Equals(value) = false) Then
+				Me.OnFactorChanging(value)
+				Me.SendPropertyChanging
+				Me._Factor = value
+				Me.SendPropertyChanged("Factor")
+				Me.OnFactorChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdFacturaImputada() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdFacturaImputada
+		End Get
+		Set
+			If (Me._IdFacturaImputada.Equals(value) = false) Then
+				Me.OnIdFacturaImputadaChanging(value)
+				Me.SendPropertyChanging
+				Me._IdFacturaImputada = value
+				Me.SendPropertyChanged("IdFacturaImputada")
+				Me.OnIdFacturaImputadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property PuntoVenta() As System.Nullable(Of Integer)
+		Get
+			Return Me._PuntoVenta
+		End Get
+		Set
+			If (Me._PuntoVenta.Equals(value) = false) Then
+				Me.OnPuntoVentaChanging(value)
+				Me.SendPropertyChanging
+				Me._PuntoVenta = value
+				Me.SendPropertyChanged("PuntoVenta")
+				Me.OnPuntoVentaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagon", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SubnumeroVagon() As System.Nullable(Of Integer)
+		Get
+			Return Me._SubnumeroVagon
+		End Get
+		Set
+			If (Me._SubnumeroVagon.Equals(value) = false) Then
+				Me.OnSubnumeroVagonChanging(value)
+				Me.SendPropertyChanging
+				Me._SubnumeroVagon = value
+				Me.SendPropertyChanged("SubnumeroVagon")
+				Me.OnSubnumeroVagonChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TarifaFacturada() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TarifaFacturada
+		End Get
+		Set
+			If (Me._TarifaFacturada.Equals(value) = false) Then
+				Me.OnTarifaFacturadaChanging(value)
+				Me.SendPropertyChanging
+				Me._TarifaFacturada = value
+				Me.SendPropertyChanged("TarifaFacturada")
+				Me.OnTarifaFacturadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista1", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TarifaSubcontratista1() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TarifaSubcontratista1
+		End Get
+		Set
+			If (Me._TarifaSubcontratista1.Equals(value) = false) Then
+				Me.OnTarifaSubcontratista1Changing(value)
+				Me.SendPropertyChanging
+				Me._TarifaSubcontratista1 = value
+				Me.SendPropertyChanged("TarifaSubcontratista1")
+				Me.OnTarifaSubcontratista1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property TarifaSubcontratista2() As System.Nullable(Of Decimal)
+		Get
+			Return Me._TarifaSubcontratista2
+		End Get
+		Set
+			If (Me._TarifaSubcontratista2.Equals(value) = false) Then
+				Me.OnTarifaSubcontratista2Changing(value)
+				Me.SendPropertyChanging
+				Me._TarifaSubcontratista2 = value
+				Me.SendPropertyChanged("TarifaSubcontratista2")
+				Me.OnTarifaSubcontratista2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaArribo() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaArribo
+		End Get
+		Set
+			If (Me._FechaArribo.Equals(value) = false) Then
+				Me.OnFechaArriboChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaArribo = value
+				Me.SendPropertyChanged("FechaArribo")
+				Me.OnFechaArriboChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Version", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Version() As System.Nullable(Of Integer)
+		Get
+			Return Me._Version
+		End Get
+		Set
+			If (Me._Version.Equals(value) = false) Then
+				Me.OnVersionChanging(value)
+				Me.SendPropertyChanging
+				Me._Version = value
+				Me.SendPropertyChanged("Version")
+				Me.OnVersionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MotivoAnulacion", DbType:="VarChar(100)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property MotivoAnulacion() As String
+		Get
+			Return Me._MotivoAnulacion
+		End Get
+		Set
+			If (String.Equals(Me._MotivoAnulacion, value) = false) Then
+				Me.OnMotivoAnulacionChanging(value)
+				Me.SendPropertyChanging
+				Me._MotivoAnulacion = value
+				Me.SendPropertyChanged("MotivoAnulacion")
+				Me.OnMotivoAnulacionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSubfijo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NumeroSubfijo() As System.Nullable(Of Integer)
+		Get
+			Return Me._NumeroSubfijo
+		End Get
+		Set
+			If (Me._NumeroSubfijo.Equals(value) = false) Then
+				Me.OnNumeroSubfijoChanging(value)
+				Me.SendPropertyChanging
+				Me._NumeroSubfijo = value
+				Me.SendPropertyChanged("NumeroSubfijo")
+				Me.OnNumeroSubfijoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdEstablecimiento() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdEstablecimiento
+		End Get
+		Set
+			If (Me._IdEstablecimiento.Equals(value) = false) Then
+				Me.OnIdEstablecimientoChanging(value)
+				Me.SendPropertyChanging
+				Me._IdEstablecimiento = value
+				Me.SendPropertyChanged("IdEstablecimiento")
+				Me.OnIdEstablecimientoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnumSyngentaDivision", DbType:="VarChar(10)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property EnumSyngentaDivision() As String
+		Get
+			Return Me._EnumSyngentaDivision
+		End Get
+		Set
+			If (String.Equals(Me._EnumSyngentaDivision, value) = false) Then
+				Me.OnEnumSyngentaDivisionChanging(value)
+				Me.SendPropertyChanging
+				Me._EnumSyngentaDivision = value
+				Me.SendPropertyChanged("EnumSyngentaDivision")
+				Me.OnEnumSyngentaDivisionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Corredor2() As System.Nullable(Of Integer)
+		Get
+			Return Me._Corredor2
+		End Get
+		Set
+			If (Me._Corredor2.Equals(value) = false) Then
+				Me.OnCorredor2Changing(value)
+				Me.SendPropertyChanging
+				Me._Corredor2 = value
+				Me.SendPropertyChanged("Corredor2")
+				Me.OnCorredor2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdUsuarioModifico() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdUsuarioModifico
+		End Get
+		Set
+			If (Me._IdUsuarioModifico.Equals(value) = false) Then
+				Me.OnIdUsuarioModificoChanging(value)
+				Me.SendPropertyChanging
+				Me._IdUsuarioModifico = value
+				Me.SendPropertyChanged("IdUsuarioModifico")
+				Me.OnIdUsuarioModificoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModificacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaModificacion() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaModificacion
+		End Get
+		Set
+			If (Me._FechaModificacion.Equals(value) = false) Then
+				Me.OnFechaModificacionChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaModificacion = value
+				Me.SendPropertyChanged("FechaModificacion")
+				Me.OnFechaModificacionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEmision", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FechaEmision() As System.Nullable(Of Date)
+		Get
+			Return Me._FechaEmision
+		End Get
+		Set
+			If (Me._FechaEmision.Equals(value) = false) Then
+				Me.OnFechaEmisionChanging(value)
+				Me.SendPropertyChanging
+				Me._FechaEmision = value
+				Me.SendPropertyChanged("FechaEmision")
+				Me.OnFechaEmisionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstaArchivada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property EstaArchivada() As String
+		Get
+			Return Me._EstaArchivada
+		End Get
+		Set
+			If (String.Equals(Me._EstaArchivada, value) = false) Then
+				Me.OnEstaArchivadaChanging(value)
+				Me.SendPropertyChanging
+				Me._EstaArchivada = value
+				Me.SendPropertyChanged("EstaArchivada")
+				Me.OnEstaArchivadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExcluirDeSubcontratistas", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property ExcluirDeSubcontratistas() As String
+		Get
+			Return Me._ExcluirDeSubcontratistas
+		End Get
+		Set
+			If (String.Equals(Me._ExcluirDeSubcontratistas, value) = false) Then
+				Me.OnExcluirDeSubcontratistasChanging(value)
+				Me.SendPropertyChanging
+				Me._ExcluirDeSubcontratistas = value
+				Me.SendPropertyChanged("ExcluirDeSubcontratistas")
+				Me.OnExcluirDeSubcontratistasChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdTipoMovimiento() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdTipoMovimiento
+		End Get
+		Set
+			If (Me._IdTipoMovimiento.Equals(value) = false) Then
+				Me.OnIdTipoMovimientoChanging(value)
+				Me.SendPropertyChanging
+				Me._IdTipoMovimiento = value
+				Me.SendPropertyChanged("IdTipoMovimiento")
+				Me.OnIdTipoMovimientoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAFacturarle", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdClienteAFacturarle() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdClienteAFacturarle
+		End Get
+		Set
+			If (Me._IdClienteAFacturarle.Equals(value) = false) Then
+				Me.OnIdClienteAFacturarleChanging(value)
+				Me.SendPropertyChanging
+				Me._IdClienteAFacturarle = value
+				Me.SendPropertyChanged("IdClienteAFacturarle")
+				Me.OnIdClienteAFacturarleChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
+		Get
+			Return Me._SubnumeroDeFacturacion
+		End Get
+		Set
+			If (Me._SubnumeroDeFacturacion.Equals(value) = false) Then
+				Me.OnSubnumeroDeFacturacionChanging(value)
+				Me.SendPropertyChanging
+				Me._SubnumeroDeFacturacion = value
+				Me.SendPropertyChanged("SubnumeroDeFacturacion")
+				Me.OnSubnumeroDeFacturacionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property AgregaItemDeGastosAdministrativos() As String
+		Get
+			Return Me._AgregaItemDeGastosAdministrativos
+		End Get
+		Set
+			If (String.Equals(Me._AgregaItemDeGastosAdministrativos, value) = false) Then
+				Me.OnAgregaItemDeGastosAdministrativosChanging(value)
+				Me.SendPropertyChanging
+				Me._AgregaItemDeGastosAdministrativos = value
+				Me.SendPropertyChanged("AgregaItemDeGastosAdministrativos")
+				Me.OnAgregaItemDeGastosAdministrativosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadGranosQuemados() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGranosQuemados
+		End Get
+		Set
+			If (Me._CalidadGranosQuemados.Equals(value) = false) Then
+				Me.OnCalidadGranosQuemadosChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGranosQuemados = value
+				Me.SendPropertyChanged("CalidadGranosQuemados")
+				Me.OnCalidadGranosQuemadosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemadosBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadGranosQuemadosBonifica_o_Rebaja() As String
+		Get
+			Return Me._CalidadGranosQuemadosBonifica_o_Rebaja
+		End Get
+		Set
+			If (String.Equals(Me._CalidadGranosQuemadosBonifica_o_Rebaja, value) = false) Then
+				Me.OnCalidadGranosQuemadosBonifica_o_RebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGranosQuemadosBonifica_o_Rebaja = value
+				Me.SendPropertyChanged("CalidadGranosQuemadosBonifica_o_Rebaja")
+				Me.OnCalidadGranosQuemadosBonifica_o_RebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierra", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadTierra() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadTierra
+		End Get
+		Set
+			If (Me._CalidadTierra.Equals(value) = false) Then
+				Me.OnCalidadTierraChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadTierra = value
+				Me.SendPropertyChanged("CalidadTierra")
+				Me.OnCalidadTierraChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadTierraBonifica_o_Rebaja() As String
+		Get
+			Return Me._CalidadTierraBonifica_o_Rebaja
+		End Get
+		Set
+			If (String.Equals(Me._CalidadTierraBonifica_o_Rebaja, value) = false) Then
+				Me.OnCalidadTierraBonifica_o_RebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadTierraBonifica_o_Rebaja = value
+				Me.SendPropertyChanged("CalidadTierraBonifica_o_Rebaja")
+				Me.OnCalidadTierraBonifica_o_RebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadMermaChamico() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadMermaChamico
+		End Get
+		Set
+			If (Me._CalidadMermaChamico.Equals(value) = false) Then
+				Me.OnCalidadMermaChamicoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadMermaChamico = value
+				Me.SendPropertyChanged("CalidadMermaChamico")
+				Me.OnCalidadMermaChamicoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamicoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadMermaChamicoBonifica_o_Rebaja() As String
+		Get
+			Return Me._CalidadMermaChamicoBonifica_o_Rebaja
+		End Get
+		Set
+			If (String.Equals(Me._CalidadMermaChamicoBonifica_o_Rebaja, value) = false) Then
+				Me.OnCalidadMermaChamicoBonifica_o_RebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadMermaChamicoBonifica_o_Rebaja = value
+				Me.SendPropertyChanged("CalidadMermaChamicoBonifica_o_Rebaja")
+				Me.OnCalidadMermaChamicoBonifica_o_RebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeo", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadMermaZarandeo() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadMermaZarandeo
+		End Get
+		Set
+			If (Me._CalidadMermaZarandeo.Equals(value) = false) Then
+				Me.OnCalidadMermaZarandeoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadMermaZarandeo = value
+				Me.SendPropertyChanged("CalidadMermaZarandeo")
+				Me.OnCalidadMermaZarandeoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadMermaZarandeoBonifica_o_Rebaja() As String
+		Get
+			Return Me._CalidadMermaZarandeoBonifica_o_Rebaja
+		End Get
+		Set
+			If (String.Equals(Me._CalidadMermaZarandeoBonifica_o_Rebaja, value) = false) Then
+				Me.OnCalidadMermaZarandeoBonifica_o_RebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadMermaZarandeoBonifica_o_Rebaja = value
+				Me.SendPropertyChanged("CalidadMermaZarandeoBonifica_o_Rebaja")
+				Me.OnCalidadMermaZarandeoBonifica_o_RebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FueraDeEstandar", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property FueraDeEstandar() As String
+		Get
+			Return Me._FueraDeEstandar
+		End Get
+		Set
+			If (String.Equals(Me._FueraDeEstandar, value) = false) Then
+				Me.OnFueraDeEstandarChanging(value)
+				Me.SendPropertyChanging
+				Me._FueraDeEstandar = value
+				Me.SendPropertyChanged("FueraDeEstandar")
+				Me.OnFueraDeEstandarChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadPuntaSombreada() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPuntaSombreada
+		End Get
+		Set
+			If (Me._CalidadPuntaSombreada.Equals(value) = false) Then
+				Me.OnCalidadPuntaSombreadaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPuntaSombreada = value
+				Me.SendPropertyChanged("CalidadPuntaSombreada")
+				Me.OnCalidadPuntaSombreadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CobraAcarreo", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CobraAcarreo() As String
+		Get
+			Return Me._CobraAcarreo
+		End Get
+		Set
+			If (String.Equals(Me._CobraAcarreo, value) = false) Then
+				Me.OnCobraAcarreoChanging(value)
+				Me.SendPropertyChanging
+				Me._CobraAcarreo = value
+				Me.SendPropertyChanged("CobraAcarreo")
+				Me.OnCobraAcarreoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LiquidaViaje", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property LiquidaViaje() As String
+		Get
+			Return Me._LiquidaViaje
+		End Get
+		Set
+			If (String.Equals(Me._LiquidaViaje, value) = false) Then
+				Me.OnLiquidaViajeChanging(value)
+				Me.SendPropertyChanging
+				Me._LiquidaViaje = value
+				Me.SendPropertyChanged("LiquidaViaje")
+				Me.OnLiquidaViajeChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAuxiliar", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdClienteAuxiliar() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdClienteAuxiliar
+		End Get
+		Set
+			If (Me._IdClienteAuxiliar.Equals(value) = false) Then
+				Me.OnIdClienteAuxiliarChanging(value)
+				Me.SendPropertyChanging
+				Me._IdClienteAuxiliar = value
+				Me.SendPropertyChanged("IdClienteAuxiliar")
+				Me.OnIdClienteAuxiliarChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property CalidadDescuentoFinal() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadDescuentoFinal
+		End Get
+		Set
+			If (Me._CalidadDescuentoFinal.Equals(value) = false) Then
+				Me.OnCalidadDescuentoFinalChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDescuentoFinal = value
+				Me.SendPropertyChanged("CalidadDescuentoFinal")
+				Me.OnCalidadDescuentoFinalChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property PathImagen() As String
+		Get
+			Return Me._PathImagen
+		End Get
+		Set
+			If (String.Equals(Me._PathImagen, value) = false) Then
+				Me.OnPathImagenChanging(value)
+				Me.SendPropertyChanging
+				Me._PathImagen = value
+				Me.SendPropertyChanged("PathImagen")
+				Me.OnPathImagenChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen2", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property PathImagen2() As String
+		Get
+			Return Me._PathImagen2
+		End Get
+		Set
+			If (String.Equals(Me._PathImagen2, value) = false) Then
+				Me.OnPathImagen2Changing(value)
+				Me.SendPropertyChanging
+				Me._PathImagen2 = value
+				Me.SendPropertyChanged("PathImagen2")
+				Me.OnPathImagen2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgrupadorDeTandaPeriodos", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property AgrupadorDeTandaPeriodos() As System.Nullable(Of Integer)
+		Get
+			Return Me._AgrupadorDeTandaPeriodos
+		End Get
+		Set
+			If (Me._AgrupadorDeTandaPeriodos.Equals(value) = false) Then
+				Me.OnAgrupadorDeTandaPeriodosChanging(value)
+				Me.SendPropertyChanging
+				Me._AgrupadorDeTandaPeriodos = value
+				Me.SendPropertyChanged("AgrupadorDeTandaPeriodos")
+				Me.OnAgrupadorDeTandaPeriodosChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClaveEncriptada", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property ClaveEncriptada() As String
+		Get
+			Return Me._ClaveEncriptada
+		End Get
+		Set
+			If (String.Equals(Me._ClaveEncriptada, value) = false) Then
+				Me.OnClaveEncriptadaChanging(value)
+				Me.SendPropertyChanging
+				Me._ClaveEncriptada = value
+				Me.SendPropertyChanged("ClaveEncriptada")
+				Me.OnClaveEncriptadaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaEnTextoParaBusqueda", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property NumeroCartaEnTextoParaBusqueda() As String
+		Get
+			Return Me._NumeroCartaEnTextoParaBusqueda
+		End Get
+		Set
+			If (String.Equals(Me._NumeroCartaEnTextoParaBusqueda, value) = false) Then
+				Me.OnNumeroCartaEnTextoParaBusquedaChanging(value)
+				Me.SendPropertyChanging
+				Me._NumeroCartaEnTextoParaBusqueda = value
+				Me.SendPropertyChanged("NumeroCartaEnTextoParaBusqueda")
+				Me.OnNumeroCartaEnTextoParaBusquedaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteEntregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdClienteEntregador() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdClienteEntregador
+		End Get
+		Set
+			If (Me._IdClienteEntregador.Equals(value) = false) Then
+				If Me._linqCliente.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIdClienteEntregadorChanging(value)
+				Me.SendPropertyChanging
+				Me._IdClienteEntregador = value
+				Me.SendPropertyChanged("IdClienteEntregador")
+				Me.OnIdClienteEntregadorChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdDetalleFactura() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdDetalleFactura
+		End Get
+		Set
+			If (Me._IdDetalleFactura.Equals(value) = false) Then
+				Me.OnIdDetalleFacturaChanging(value)
+				Me.SendPropertyChanging
+				Me._IdDetalleFactura = value
+				Me.SendPropertyChanged("IdDetalleFactura")
+				Me.OnIdDetalleFacturaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCodCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SojaSustentableCodCondicion() As String
+		Get
+			Return Me._SojaSustentableCodCondicion
+		End Get
+		Set
+			If (String.Equals(Me._SojaSustentableCodCondicion, value) = false) Then
+				Me.OnSojaSustentableCodCondicionChanging(value)
+				Me.SendPropertyChanging
+				Me._SojaSustentableCodCondicion = value
+				Me.SendPropertyChanged("SojaSustentableCodCondicion")
+				Me.OnSojaSustentableCodCondicionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SojaSustentableCondicion() As String
+		Get
+			Return Me._SojaSustentableCondicion
+		End Get
+		Set
+			If (String.Equals(Me._SojaSustentableCondicion, value) = false) Then
+				Me.OnSojaSustentableCondicionChanging(value)
+				Me.SendPropertyChanging
+				Me._SojaSustentableCondicion = value
+				Me.SendPropertyChanged("SojaSustentableCondicion")
+				Me.OnSojaSustentableCondicionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableNroEstablecimientoDeProduccion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SojaSustentableNroEstablecimientoDeProduccion() As String
+		Get
+			Return Me._SojaSustentableNroEstablecimientoDeProduccion
+		End Get
+		Set
+			If (String.Equals(Me._SojaSustentableNroEstablecimientoDeProduccion, value) = false) Then
+				Me.OnSojaSustentableNroEstablecimientoDeProduccionChanging(value)
+				Me.SendPropertyChanging
+				Me._SojaSustentableNroEstablecimientoDeProduccion = value
+				Me.SendPropertyChanged("SojaSustentableNroEstablecimientoDeProduccion")
+				Me.OnSojaSustentableNroEstablecimientoDeProduccionChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClientePagadorFlete", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdClientePagadorFlete() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdClientePagadorFlete
+		End Get
+		Set
+			If (Me._IdClientePagadorFlete.Equals(value) = false) Then
+				Me.OnIdClientePagadorFleteChanging(value)
+				Me.SendPropertyChanging
+				Me._IdClientePagadorFlete = value
+				Me.SendPropertyChanged("IdClientePagadorFlete")
+				Me.OnIdClientePagadorFleteChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagonEnTextoParaBusqueda", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property SubnumeroVagonEnTextoParaBusqueda() As String
+		Get
+			Return Me._SubnumeroVagonEnTextoParaBusqueda
+		End Get
+		Set
+			If (String.Equals(Me._SubnumeroVagonEnTextoParaBusqueda, value) = false) Then
+				Me.OnSubnumeroVagonEnTextoParaBusquedaChanging(value)
+				Me.SendPropertyChanging
+				Me._SubnumeroVagonEnTextoParaBusqueda = value
+				Me.SendPropertyChanged("SubnumeroVagonEnTextoParaBusqueda")
+				Me.OnSubnumeroVagonEnTextoParaBusquedaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property IdCorredor2() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdCorredor2
+		End Get
+		Set
+			If (Me._IdCorredor2.Equals(value) = false) Then
+				If Me._linqCorredor.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIdCorredor2Changing(value)
+				Me.SendPropertyChanging
+				Me._IdCorredor2 = value
+				Me.SendPropertyChanged("IdCorredor2")
+				Me.OnIdCorredor2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acopio1() As System.Nullable(Of Integer)
+		Get
+			Return Me._Acopio1
+		End Get
+		Set
+			If (Me._Acopio1.Equals(value) = false) Then
+				Me.OnAcopio1Changing(value)
+				Me.SendPropertyChanging
+				Me._Acopio1 = value
+				Me.SendPropertyChanged("Acopio1")
+				Me.OnAcopio1Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acopio2() As System.Nullable(Of Integer)
+		Get
+			Return Me._Acopio2
+		End Get
+		Set
+			If (Me._Acopio2.Equals(value) = false) Then
+				Me.OnAcopio2Changing(value)
+				Me.SendPropertyChanging
+				Me._Acopio2 = value
+				Me.SendPropertyChanged("Acopio2")
+				Me.OnAcopio2Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio3", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acopio3() As System.Nullable(Of Integer)
+		Get
+			Return Me._Acopio3
+		End Get
+		Set
+			If (Me._Acopio3.Equals(value) = false) Then
+				Me.OnAcopio3Changing(value)
+				Me.SendPropertyChanging
+				Me._Acopio3 = value
+				Me.SendPropertyChanged("Acopio3")
+				Me.OnAcopio3Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio4", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acopio4() As System.Nullable(Of Integer)
+		Get
+			Return Me._Acopio4
+		End Get
+		Set
+			If (Me._Acopio4.Equals(value) = false) Then
+				Me.OnAcopio4Changing(value)
+				Me.SendPropertyChanging
+				Me._Acopio4 = value
+				Me.SendPropertyChanged("Acopio4")
+				Me.OnAcopio4Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio5", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property Acopio5() As System.Nullable(Of Integer)
+		Get
+			Return Me._Acopio5
+		End Get
+		Set
+			If (Me._Acopio5.Equals(value) = false) Then
+				Me.OnAcopio5Changing(value)
+				Me.SendPropertyChanging
+				Me._Acopio5 = value
+				Me.SendPropertyChanged("Acopio5")
+				Me.OnAcopio5Changed
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AcopioFacturarleA", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	Public Property AcopioFacturarleA() As System.Nullable(Of Integer)
+		Get
+			Return Me._AcopioFacturarleA
+		End Get
+		Set
+			If (Me._AcopioFacturarleA.Equals(value) = false) Then
+				Me.OnAcopioFacturarleAChanging(value)
+				Me.SendPropertyChanging
+				Me._AcopioFacturarleA = value
+				Me.SendPropertyChanged("AcopioFacturarleA")
+				Me.OnAcopioFacturarleAChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="CartasDePorte_CartasPorteMovimiento", Storage:="_CartasPorteMovimiento", ThisKey:="IdCartaDePorte", OtherKey:="IdCartaDePorte")>  _
+	Public Property CartasPorteMovimiento() As EntitySet(Of CartasPorteMovimiento)
+		Get
+			Return Me._CartasPorteMovimiento
+		End Get
+		Set
+			Me._CartasPorteMovimiento.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasDePorte", Storage:="_linqArticulo", ThisKey:="IdArticulo", OtherKey:="IdArticulo", IsForeignKey:=true)>  _
+	Public Property linqArticulo() As linqArticulo
+		Get
+			Return Me._linqArticulo.Entity
+		End Get
+		Set
+			Dim previousValue As linqArticulo = Me._linqArticulo.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqArticulo.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqArticulo.Entity = Nothing
+					previousValue.CartasDePorte.Remove(Me)
+				End If
+				Me._linqArticulo.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte.Add(Me)
+					Me._IdArticulo = value.IdArticulo
+				Else
+					Me._IdArticulo = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqArticulo")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte", Storage:="_linqCliente", ThisKey:="IdClienteEntregador", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente() As linqCliente
+		Get
+			Return Me._linqCliente.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente.Entity = Nothing
+					previousValue.CartasDePorte.Remove(Me)
+				End If
+				Me._linqCliente.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte.Add(Me)
+					Me._IdClienteEntregador = value.IdCliente
+				Else
+					Me._IdClienteEntregador = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_linqCorredor", ThisKey:="IdCorredor2", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
+	Public Property linqCorredor() As linqCorredor
+		Get
+			Return Me._linqCorredor.Entity
+		End Get
+		Set
+			Dim previousValue As linqCorredor = Me._linqCorredor.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCorredor.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCorredor.Entity = Nothing
+					previousValue.CartasDePorte.Remove(Me)
+				End If
+				Me._linqCorredor.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte.Add(Me)
+					Me._IdCorredor2 = value.IdVendedor
+				Else
+					Me._IdCorredor2 = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCorredor")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Transportista_CartasDePorte", Storage:="_Transportista", ThisKey:="IdTransportista", OtherKey:="IdTransportista", IsForeignKey:=true)>  _
+	Public Property Transportista() As Transportista
+		Get
+			Return Me._Transportista.Entity
+		End Get
+		Set
+			Dim previousValue As Transportista = Me._Transportista.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._Transportista.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._Transportista.Entity = Nothing
+					previousValue.CartasDePorte.Remove(Me)
+				End If
+				Me._Transportista.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte.Add(Me)
+					Me._IdTransportista = value.IdTransportista
+				Else
+					Me._IdTransportista = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("Transportista")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte1", Storage:="_linqCliente1", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente1() As linqCliente
+		Get
+			Return Me._linqCliente1.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente1.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente1.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente1.Entity = Nothing
+					previousValue.CartasDePorte1.Remove(Me)
+				End If
+				Me._linqCliente1.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte1.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente1")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte2", Storage:="_linqCliente2", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente2() As linqCliente
+		Get
+			Return Me._linqCliente2.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente2.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente2.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente2.Entity = Nothing
+					previousValue.CartasDePorte2.Remove(Me)
+				End If
+				Me._linqCliente2.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte2.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente2")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte3", Storage:="_linqCliente3", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente3() As linqCliente
+		Get
+			Return Me._linqCliente3.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente3.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente3.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente3.Entity = Nothing
+					previousValue.CartasDePorte3.Remove(Me)
+				End If
+				Me._linqCliente3.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte3.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente3")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte4", Storage:="_linqCliente4", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente4() As linqCliente
+		Get
+			Return Me._linqCliente4.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente4.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente4.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente4.Entity = Nothing
+					previousValue.CartasDePorte4.Remove(Me)
+				End If
+				Me._linqCliente4.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte4.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente4")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte5", Storage:="_linqCliente5", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente5() As linqCliente
+		Get
+			Return Me._linqCliente5.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente5.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente5.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente5.Entity = Nothing
+					previousValue.CartasDePorte5.Remove(Me)
+				End If
+				Me._linqCliente5.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte5.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente5")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte6", Storage:="_linqCliente6", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente6() As linqCliente
+		Get
+			Return Me._linqCliente6.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente6.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente6.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente6.Entity = Nothing
+					previousValue.CartasDePorte6.Remove(Me)
+				End If
+				Me._linqCliente6.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte6.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente6")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte7", Storage:="_linqCliente7", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente7() As linqCliente
+		Get
+			Return Me._linqCliente7.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente7.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente7.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente7.Entity = Nothing
+					previousValue.CartasDePorte7.Remove(Me)
+				End If
+				Me._linqCliente7.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte7.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente7")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte8", Storage:="_linqCliente8", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente8() As linqCliente
+		Get
+			Return Me._linqCliente8.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente8.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente8.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente8.Entity = Nothing
+					previousValue.CartasDePorte8.Remove(Me)
+				End If
+				Me._linqCliente8.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte8.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente8")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte9", Storage:="_linqCliente9", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente9() As linqCliente
+		Get
+			Return Me._linqCliente9.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente9.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente9.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente9.Entity = Nothing
+					previousValue.CartasDePorte9.Remove(Me)
+				End If
+				Me._linqCliente9.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte9.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente9")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte10", Storage:="_linqCliente10", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente10() As linqCliente
+		Get
+			Return Me._linqCliente10.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente10.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente10.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente10.Entity = Nothing
+					previousValue.CartasDePorte10.Remove(Me)
+				End If
+				Me._linqCliente10.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte10.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente10")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte11", Storage:="_linqCliente11", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente11() As linqCliente
+		Get
+			Return Me._linqCliente11.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente11.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente11.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente11.Entity = Nothing
+					previousValue.CartasDePorte11.Remove(Me)
+				End If
+				Me._linqCliente11.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte11.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente11")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte12", Storage:="_linqCliente12", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente12() As linqCliente
+		Get
+			Return Me._linqCliente12.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente12.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente12.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente12.Entity = Nothing
+					previousValue.CartasDePorte12.Remove(Me)
+				End If
+				Me._linqCliente12.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte12.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente12")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte13", Storage:="_linqCliente13", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente13() As linqCliente
+		Get
+			Return Me._linqCliente13.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente13.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente13.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente13.Entity = Nothing
+					previousValue.CartasDePorte13.Remove(Me)
+				End If
+				Me._linqCliente13.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte13.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente13")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte14", Storage:="_linqCliente14", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente14() As linqCliente
+		Get
+			Return Me._linqCliente14.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente14.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente14.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente14.Entity = Nothing
+					previousValue.CartasDePorte14.Remove(Me)
+				End If
+				Me._linqCliente14.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte14.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente14")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte15", Storage:="_linqCliente15", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente15() As linqCliente
+		Get
+			Return Me._linqCliente15.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente15.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente15.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente15.Entity = Nothing
+					previousValue.CartasDePorte15.Remove(Me)
+				End If
+				Me._linqCliente15.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte15.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente15")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte16", Storage:="_linqCliente16", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente16() As linqCliente
+		Get
+			Return Me._linqCliente16.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente16.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente16.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente16.Entity = Nothing
+					previousValue.CartasDePorte16.Remove(Me)
+				End If
+				Me._linqCliente16.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte16.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente16")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte17", Storage:="_linqCliente17", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente17() As linqCliente
+		Get
+			Return Me._linqCliente17.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente17.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente17.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente17.Entity = Nothing
+					previousValue.CartasDePorte17.Remove(Me)
+				End If
+				Me._linqCliente17.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte17.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente17")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte18", Storage:="_linqCliente18", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente18() As linqCliente
+		Get
+			Return Me._linqCliente18.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente18.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente18.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente18.Entity = Nothing
+					previousValue.CartasDePorte18.Remove(Me)
+				End If
+				Me._linqCliente18.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte18.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente18")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte19", Storage:="_linqCliente19", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente19() As linqCliente
+		Get
+			Return Me._linqCliente19.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente19.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente19.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente19.Entity = Nothing
+					previousValue.CartasDePorte19.Remove(Me)
+				End If
+				Me._linqCliente19.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte19.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente19")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte20", Storage:="_linqCliente20", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente20() As linqCliente
+		Get
+			Return Me._linqCliente20.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente20.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente20.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente20.Entity = Nothing
+					previousValue.CartasDePorte20.Remove(Me)
+				End If
+				Me._linqCliente20.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte20.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente20")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte21", Storage:="_linqCliente21", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente21() As linqCliente
+		Get
+			Return Me._linqCliente21.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente21.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente21.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente21.Entity = Nothing
+					previousValue.CartasDePorte21.Remove(Me)
+				End If
+				Me._linqCliente21.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte21.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente21")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte22", Storage:="_linqCliente22", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente22() As linqCliente
+		Get
+			Return Me._linqCliente22.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente22.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente22.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente22.Entity = Nothing
+					previousValue.CartasDePorte22.Remove(Me)
+				End If
+				Me._linqCliente22.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte22.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente22")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte1", Storage:="_linqCorredor1", ThisKey:="Corredor", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
+	Public Property linqCorredor1() As linqCorredor
+		Get
+			Return Me._linqCorredor1.Entity
+		End Get
+		Set
+			Dim previousValue As linqCorredor = Me._linqCorredor1.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCorredor1.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCorredor1.Entity = Nothing
+					previousValue.CartasDePorte1.Remove(Me)
+				End If
+				Me._linqCorredor1.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte1.Add(Me)
+					Me._Corredor = value.IdVendedor
+				Else
+					Me._Corredor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCorredor1")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte23", Storage:="_linqCliente23", ThisKey:="CuentaOrden1", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente23() As linqCliente
+		Get
+			Return Me._linqCliente23.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente23.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente23.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente23.Entity = Nothing
+					previousValue.CartasDePorte23.Remove(Me)
+				End If
+				Me._linqCliente23.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte23.Add(Me)
+					Me._CuentaOrden1 = value.IdCliente
+				Else
+					Me._CuentaOrden1 = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente23")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte24", Storage:="_linqCliente24", ThisKey:="CuentaOrden2", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente24() As linqCliente
+		Get
+			Return Me._linqCliente24.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente24.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente24.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente24.Entity = Nothing
+					previousValue.CartasDePorte24.Remove(Me)
+				End If
+				Me._linqCliente24.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte24.Add(Me)
+					Me._CuentaOrden2 = value.IdCliente
+				Else
+					Me._CuentaOrden2 = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente24")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte25", Storage:="_linqCliente25", ThisKey:="Entregador", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente25() As linqCliente
+		Get
+			Return Me._linqCliente25.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente25.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente25.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente25.Entity = Nothing
+					previousValue.CartasDePorte25.Remove(Me)
+				End If
+				Me._linqCliente25.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte25.Add(Me)
+					Me._Entregador = value.IdCliente
+				Else
+					Me._Entregador = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente25")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte26", Storage:="_linqCliente26", ThisKey:="Vendedor", OtherKey:="IdCliente", IsForeignKey:=true)>  _
+	Public Property linqCliente26() As linqCliente
+		Get
+			Return Me._linqCliente26.Entity
+		End Get
+		Set
+			Dim previousValue As linqCliente = Me._linqCliente26.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqCliente26.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqCliente26.Entity = Nothing
+					previousValue.CartasDePorte26.Remove(Me)
+				End If
+				Me._linqCliente26.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.CartasDePorte26.Add(Me)
+					Me._Vendedor = value.IdCliente
+				Else
+					Me._Vendedor = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqCliente26")
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+	
+	Private Sub attach_CartasPorteMovimiento(ByVal entity As CartasPorteMovimiento)
+		Me.SendPropertyChanging
+		entity.CartasDePorte = Me
+	End Sub
+	
+	Private Sub detach_CartasPorteMovimiento(ByVal entity As CartasPorteMovimiento)
+		Me.SendPropertyChanging
+		entity.CartasDePorte = Nothing
+	End Sub
 End Class
 
 Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
