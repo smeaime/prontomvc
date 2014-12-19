@@ -271,7 +271,27 @@ Public Class CartaDePorteManager
 
     Public Shared Property excepciones As String()
         Get
+
+            If False Then
+                Dim SC As String = ""
+                Dim cli As Integer
+
+
+                Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+                Dim q = From i In db.CartasPorteAcopios1 _
+                        Where (True Or i.IdCliente = cli)
+                        Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
+
+
+                Return q.Select(Function(x) x.Descripcion).ToArray
+
+            End If
+
             Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
+
+
+
+
         End Get
         Set(ByVal excepciones As String())
             'newPropertyValue = value
@@ -1807,7 +1827,7 @@ Public Class CartaDePorteManager
 
 
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////will/////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4125,6 +4145,9 @@ Public Class CartaDePorteManager
                 .Acopio4 = If(oCarta.Acopio4, -1)
                 .Acopio5 = If(oCarta.Acopio5, -1)
 
+                .AcopioFacturarleA = If(oCarta.AcopioFacturarleA, -1)
+
+
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
@@ -4378,7 +4401,7 @@ Public Class CartaDePorteManager
                     oCarta.Acopio3 = .Acopio3
                     oCarta.Acopio4 = .Acopio4
                     oCarta.Acopio5 = .Acopio5
-
+                    oCarta.AcopioFacturarleA = .AcopioFacturarleA
 
                     oCarta.ClaveEncriptada = EntidadManager.encryptQueryString(CartaDePorteId)
 
@@ -6618,6 +6641,17 @@ Public Class CartaDePorteManager
             Dim SyngentaLeyenda = LogicaFacturacion.LeyendaSyngenta(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
             regexReplace(docText, "#LeyendaSyngenta#", SyngentaLeyenda)
 
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13220
+            '            - Generar Facturas separadas por acopio automáticamente y en la impresión agregar una leyenda luego del detalle con el nombre del mismo
+            '            Con respecto a la impresión, prevalece siempre la del facturar a.
+            'Si tiene ese dato, no hay que darle importancia al de la CP propiamente dicha, tanto para filtrar la carta, como para la impresión.
+            'Con respecto al "cruce" de acopios, yo les pregunte y me dijeron que no es posible, que las cartas de un cliente nunca van a otro.
+            Dim LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
+            regexReplace(docText, "#LeyendaAcopio#", LeyendaAcopio)
+
+
+
+
             'si se hizo por Pronto, mostrar las observaciones al final
             'pero cómo sé? -mostrar si no tiene periodo
             'If posObs <= 0 Then Selection.TypeText(Text:=oRs.Fields("Observaciones").Value)
@@ -8467,7 +8501,7 @@ Public Class LogicaFacturacion
 
         'Para la facturación automática, de haber cartas de porte Agro y cartas de Porte Seeds, armar dos facturas separadas.
         'Como las cartas de porte duplicadas solamente se pueden facturar mediante la facturación automática, entran en el automático. Para que no se pase la facturación separada, armar dos facturas distintas automaticamente.
-        CasosSyngenta(lista, SC)
+        CasosSyngenta_y_Acopios(lista, SC)
 
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
@@ -8917,7 +8951,7 @@ Public Class LogicaFacturacion
 
     Shared Sub generarTabla(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
-                            ByVal sLista As String, ByVal sesionId As String, Optional bNoUsarLista As Boolean = False)
+                            ByVal sLista As String, ByVal sesionId As String, bNoUsarLista As Boolean, optFacturarA As Long, agruparArticulosPor As String)
 
         ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
 
@@ -9125,7 +9159,7 @@ Public Class LogicaFacturacion
             PreProcesos(lista, SC, desde, hasta, puntoVenta, ViewState)
 
 
-            PostProcesos(lista, optFacturarA, "", SC)
+            PostProcesos(lista, optFacturarA, agruparArticulosPor, SC)
 
             'EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, SC)
             'PostProcesoFacturacion_ReglaExportadores(lista, SC)
@@ -9303,7 +9337,7 @@ Public Class LogicaFacturacion
             Dim ids As Integer = Val(ViewState("IdTanda"))
             If ids <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId)
+                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, False, optFacturarA, agruparArticulosPor)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, ViewState, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
@@ -9421,7 +9455,7 @@ Public Class LogicaFacturacion
             Dim ids As Integer = Val(ViewState("IdTanda"))
             If ids <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, bNoUsarLista)
+                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, bNoUsarLista, optFacturarA, agruparArticulosPor)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, ViewState, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
@@ -9512,6 +9546,7 @@ Public Class LogicaFacturacion
         For Each row In dt.Rows
             If row("ClienteSeparado").ToString.Contains("montomax") Then Continue For
             If row("ClienteSeparado").ToString.Contains("renglones maximos") Then Continue For
+            If row("ClienteSeparado").ToString.Contains("acopiosepara") Then Continue For
 
             row("ClienteSeparado") = 0
 
@@ -9547,7 +9582,7 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Sub CasosSyngenta(ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal SC As String)
+    Shared Sub CasosSyngenta_y_Acopios(ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal SC As String)
 
 
         'Para la facturación automática, de haber cartas de porte Agro y cartas de Porte Seeds, armar dos facturas separadas.
@@ -9584,21 +9619,45 @@ Public Class LogicaFacturacion
         Try
             Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
             Dim idSyngentaSEEDS = BuscaIdClientePreciso("NO USAR !!!SYNGENTA SEEDS S.A.", SC)
+            Dim idLDC = 2775 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
+            Dim idA_C_A = 10 'BuscaIdClientePreciso("A.C.A", SC)
 
-            Dim q = (From i In listaDeCartasPorteAFacturar Where i.IdFacturarselaA = idSyngentaAGRO Select i.IdCartaDePorte, i.IdFacturarselaA)
+            Dim q = (From i In listaDeCartasPorteAFacturar _
+                     Where i.IdFacturarselaA = idSyngentaAGRO Or i.IdFacturarselaA = idLDC Or i.IdFacturarselaA = idA_C_A _
+                     Select i.IdCartaDePorte, i.IdFacturarselaA)
 
             For Each c In q
 
-
-                Dim tiposyng As String = (From x In db.CartasDePortes Where x.IdCartaDePorte = c.IdCartaDePorte Select x.EnumSyngentaDivision).First
+                Dim cartamapeada = (From x In db.CartasDePortes Where x.IdCartaDePorte = c.IdCartaDePorte).First
+                Dim tiposyng As String = cartamapeada.EnumSyngentaDivision
 
                 Dim lambdaTemp = c
                 Dim carta = listaDeCartasPorteAFacturar.Find(Function(o) o.IdCartaDePorte = lambdaTemp.IdCartaDePorte)
-                If tiposyng = "Seeds" Then
-                    carta.ClienteSeparado = idSyngentaSEEDS
+
+                If c.IdFacturarselaA = idSyngentaAGRO Then
+                    If tiposyng = "Seeds" Then
+                        carta.ClienteSeparado = idSyngentaSEEDS
+                    Else
+                        carta.ClienteSeparado = idSyngentaAGRO
+                    End If
                 Else
-                    carta.ClienteSeparado = idSyngentaAGRO
+
+                    'revisar agrupadores de acopio
+
+                    'Dim acopioseparado As Integer? = If(If(If(If(If(cartamapeada.AcopioFacturarleA, cartamapeada.Acopio1), cartamapeada.Acopio2), cartamapeada.Acopio3), cartamapeada.Acopio4), cartamapeada.Acopio5)
+
+
+                    Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
+                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
+                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio2
+                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio3
+                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio4
+                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio5
+
+                    If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & acopioseparado
+
                 End If
+
             Next
 
         Catch ex As OutOfMemoryException
@@ -9610,8 +9669,33 @@ Public Class LogicaFacturacion
         End Try
 
 
+        'CasosAcopio(listaDeCartasPorteAFacturar, SC, db)
+
+
+
+
+
 
     End Sub
+
+    Shared Sub CasosAcopio(ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal SC As String, db As LinqCartasPorteDataContext)
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        'refrescar ClienteSeparado con el acopio correspondiente
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+
+        Dim cartas = From i In listaDeCartasPorteAFacturar Select i.IdCartaDePorte
+        Dim q = db.CartasDePortes.Where(Function(x) cartas.Contains(x.IdCartaDePorte))
+        Dim acopioseparado = q.Select(Function(x) If(If(If(If(If(x.AcopioFacturarleA, x.Acopio1), x.Acopio2), x.Acopio3), x.Acopio4), x.Acopio5))
+
+        'carta.ClienteSeparado = "acopiosepara " & acopioseparado
+
+    End Sub
+
+
 
 
     Shared Sub PostProcesoFacturacion_ReglaExportadores(ByRef listaDeCartasPorteAFacturar As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal SC As String)
@@ -11749,6 +11833,9 @@ Public Class LogicaFacturacion
 
 
 
+        '-qué pasa si hay acopios????? -eso agrupa en distintas facturas, no en items de la misma factura
+
+
         '        Log Entry
         '09/18/2014 09:22:42
         'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. 
@@ -11959,6 +12046,44 @@ Public Class LogicaFacturacion
 
     Const IdAcopioAgro = 1
     Const IdAcopioSeeds = 2
+
+
+    Shared Function LeyendaAcopio(idfactura As Long, SC As String) As String
+
+        '        Log Entry
+        '12/09/2014 15:38:31
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=66871. Error Message:System.InvalidOperationException
+        'Nullable object must have a value.
+        '   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+        '   at LogicaFacturacion._Lambda$__167(CartasDePorte c)
+        '   at System.Collections.Generic.List`1.FindIndex(Int32 startIndex, Int32 count, Predicate`1 match)
+        '   at LogicaFacturacion.LeyendaSyngenta(Int64 idfactura, String SC)
+        '   at CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC)
+        '   at CartaDePorteManager.ImprimirFacturaElectronica(Int32 IdFactura, Boolean bMostrarPDF, String SC)
+        '   at FacturaABM.LinkImprimirXMLFactElectronica_Click(Object sender, EventArgs e)
+        '        mscorlib()
+
+
+        '()
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
+        Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
+
+
+        Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.AcopioFacturarleA}).Distinct
+
+        If acopios.Count > 1 Then
+            Return vbCrLf + "Acopios id" + acopios(0).ToString()
+        Else
+            Return ""
+        End If
+
+
+
+    End Function
 
     Shared Function LeyendaSyngenta(idfactura As Long, SC As String) As String
 
@@ -14509,9 +14634,6 @@ Public Class LogicaFacturacion
 
     '    End Function
 
-    Private Shared Function optFacturarA() As Integer
-        Throw New NotImplementedException
-    End Function
 
 
 End Class

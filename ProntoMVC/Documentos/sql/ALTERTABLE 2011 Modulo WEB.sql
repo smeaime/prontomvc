@@ -1113,5 +1113,14 @@ VALUES  (  15, 'OTROS', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  16, 'CDC Eduardo Castex', 10) --A.C.A. LTDA   id10
 
---select * from clientes where razonsocial like '%a.c.a%'
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  17, 'LDC acopio1', 2775) --ldc   id2775
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  18, 'LDC acopio2', 2775) --ldc   id2775
+--select * from clientes where razonsocial like '%ldc%'
+
+
+alter table CartasDePorte add
+		 AcopioFacturarleA int null
+go
 
