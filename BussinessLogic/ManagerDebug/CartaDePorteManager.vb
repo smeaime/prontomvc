@@ -8464,7 +8464,7 @@ Public Class LogicaFacturacion
 
     Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                            SC As String, desde As String, hasta As String, _
-                           puntoVenta As String, ByRef slinks, ByRef nada)
+                           puntoVenta As String, ByRef slinks As Object)
 
         '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
         'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
@@ -8553,7 +8553,7 @@ Public Class LogicaFacturacion
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
-                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String)
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object)
 
 
         Try
@@ -8940,8 +8940,8 @@ Public Class LogicaFacturacion
 
 
 
-
-            ViewState("filas") = dtlista.Rows.Count
+            filas = dtlista.Rows.Count
+            'ViewState("filas") = dtlista.Rows.Count
 
         Catch ex As Exception
             ErrHandler.WriteError("GenerarTablaparamodosnoautomaticos")
@@ -8964,8 +8964,8 @@ Public Class LogicaFacturacion
                             ByRef sesionId As Object, _
                             ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
-                            ByVal sLista As String, ByVal sesionId As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String)
+                            ByVal sLista As String, bNoUsarLista As Boolean, _
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef slinks As Object)
 
         ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
 
@@ -9170,7 +9170,7 @@ Public Class LogicaFacturacion
 
 
 
-            PreProcesos(lista, SC, desde, hasta, puntoVenta)
+            PreProcesos(lista, SC, desde, hasta, puntoVenta, slinks)
 
 
             PostProcesos(lista, optFacturarA, agruparArticulosPor, SC)
@@ -9315,13 +9315,13 @@ Public Class LogicaFacturacion
 
     Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object, _
                                                      ByRef sesionId As Object, _
-                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByVal sesionId As String, ByRef sErrores As String, AgruparArticulosPor As String) As DataTable
+                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object) As DataTable
 
         Return GetDatatableAsignacionAutomatica(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
-                                                    "", "", 0, _
+                                                     "", "", 0, _
                                                     "", "", "", "", _
                                                     "", "", "", "", _
-                                                    "", "", "", "", "", "", sesionId, 0, 0, "", sErrores, "", AgruparArticulosPor)
+                                                    "", "", "", "", "", "", 0, 0, "", sErrores, "", AgruparArticulosPor, filas, slinks)
 
 
     End Function
@@ -9336,7 +9336,7 @@ Public Class LogicaFacturacion
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
-                         ByVal sesionId As String, ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String) As DataTable
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object) As DataTable
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
         'esa posición se le debe facturar, entonces se le facturará al 
@@ -9354,19 +9354,19 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
 
-            'Dim sesionId As Integer = Val(ViewState("sesionId"))
+            Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
                     generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
-                                 sLista, sesionId, False, optFacturarA, agruparArticulosPor)
+                                 sLista, False, optFacturarA, agruparArticulosPor, slinks)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, desde, hasta, _
-                                                         puntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
-                                                         txtFacturarA, agruparArticulosPor)
+                                                         puntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
+                                                          txtFacturarA, agruparArticulosPor, filas)
                 End If
                 'sesionId = ViewState("sesionId")
             End If
@@ -9378,7 +9378,7 @@ Public Class LogicaFacturacion
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
             Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-                        Where i.IdSesion = sesionId _
+                        Where i.IdSesion = ids _
                         Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending _
                         Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion, _
                                 i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA, _
@@ -9447,13 +9447,16 @@ Public Class LogicaFacturacion
     '/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function GetIQueryableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
+    Shared Function GetIQueryableAsignacionAutomatica(ByVal SC As String, _
+                                                     ByRef pag As Object, _
+                                                     ByRef sesionId As Object,
+                                    ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
                        ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
                        ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
-                        ByVal sesionId As String, ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String _
+                        ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String _
                         , Optional bNoUsarLista As Boolean = False, _
                         Optional referenciaDB As LinqCartasPorteDataContext = Nothing _
                             , Optional agruparArticulosPor As String = "" _
@@ -9466,7 +9469,7 @@ Public Class LogicaFacturacion
         Try
 
 
-            Dim pag As Integer = Val(ViewState("pagina"))
+            'Dim pag As Integer = Val(ViewState("pagina"))
             If pag <= 0 Then pag = 1
 
 
@@ -9474,19 +9477,19 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
 
-            Dim ids As Integer = Val(ViewState("sesionId"))
-            If ids <= 0 Then
+            Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
+            If sesionId <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, bNoUsarLista, optFacturarA, agruparArticulosPor)
+                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, bNoUsarLista, optFacturarA, agruparArticulosPor)
                 Else
-                    generarTablaParaModosNoAutomaticos(SC, ViewState, sLista, "", optFacturarA, _
+                    generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
                                                         cmbPuntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor)
                 End If
-                ids = ViewState("sesionId")
+                'ids = ViewState("sesionId")
             End If
 
             Dim db As New LinqCartasPorteDataContext
@@ -11135,14 +11138,16 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String, ByRef ViewState As System.Web.UI.StateBag, _
+    Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String,
+                                                         ByRef pag As Object, _
+                                            ByRef sesionId As Object, _
                                          ByVal optFacturarA As Long, _
                                          ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
                                          ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState, _
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable, _
                                          ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
                                          ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String, _
-                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String)
+                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, ByRef UltimaIdFacturaGenerada As Object)
 
         Dim idFactura As Long
         Dim ultimo = 0
