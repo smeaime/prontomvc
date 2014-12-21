@@ -8462,7 +8462,9 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), SC As String, desde As String, hasta As String, puntoVenta As String, ViewState As System.Web.UI.StateBag)
+    Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+                           SC As String, desde As String, hasta As String, _
+                           puntoVenta As String, ByRef slinks, ByRef nada)
 
         '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
         'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
@@ -8516,19 +8518,21 @@ Public Class LogicaFacturacion
 
 
 
-        Dim slinks As String
+        'Dim slinks As String
         lista = LinksDeCartasConflictivasDelAutomatico(lista, slinks, SC)
 
         slinks &= VerificarClientesFacturables(lista)
 
-        ViewState("sLinks") = slinks
+        'ViewState("sLinks") = slinks
 
 
 
 
     End Sub
 
-    Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), optFacturarA As String, agruparArticulosPor As String, sc As String)
+    Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+                                        optFacturarA As String, agruparArticulosPor As String, sc As String)
+
         EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
         EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
 
@@ -8540,7 +8544,10 @@ Public Class LogicaFacturacion
 
 
 
-    Shared Sub generarTablaParaModosNoAutomaticos(ByVal sc As String, ByVal ViewState As System.Web.UI.StateBag, ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
+    Shared Sub generarTablaParaModosNoAutomaticos(ByVal sc As String,
+                                                  ByVal ViewState As System.Web.UI.StateBag, _
+                                                  ByVal sLista As String, _
+                                                  ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
                         ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
@@ -8949,9 +8956,13 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Shared Sub generarTabla(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, _
+    Shared Sub generarTabla(ByVal SC As String, _
+                            ByRef pag As Object, _
+                            ByRef idTanda As Object, _
+                            ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
-                            ByVal sLista As String, ByVal sesionId As String, bNoUsarLista As Boolean, optFacturarA As Long, agruparArticulosPor As String)
+                            ByVal sLista As String, ByVal sesionId As String, bNoUsarLista As Boolean, _
+                            optFacturarA As Long, agruparArticulosPor As String)
 
         ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
 
@@ -9156,7 +9167,7 @@ Public Class LogicaFacturacion
 
 
 
-            PreProcesos(lista, SC, desde, hasta, puntoVenta, ViewState)
+            PreProcesos(lista, SC, desde, hasta, puntoVenta)
 
 
             PostProcesos(lista, optFacturarA, agruparArticulosPor, SC)
@@ -9273,7 +9284,7 @@ Public Class LogicaFacturacion
             With dc
                 .ColumnName = "IdSesion"
                 .DataType = System.Type.GetType("System.Int32")
-                .DefaultValue = ViewState("IdTanda")
+                .DefaultValue = idTanda ' ViewState("IdTanda")
             End With
             dtlista.Columns.Add(dc)
             'For Each r In dtlista
@@ -9299,9 +9310,11 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByVal sesionId As String, ByRef sErrores As String, AgruparArticulosPor As String) As DataTable
+    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object, _
+                                                     ByRef idTanda As Object, _
+                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByVal sesionId As String, ByRef sErrores As String, AgruparArticulosPor As String) As DataTable
 
-        Return GetDatatableAsignacionAutomatica(SC, ViewState, iPageSize, puntoVenta, desde, hasta, _
+        Return GetDatatableAsignacionAutomatica(SC, pag, idTanda, iPageSize, puntoVenta, desde, hasta, _
                                                     "", "", 0, _
                                                     "", "", "", "", _
                                                     "", "", "", "", _
@@ -9310,7 +9323,10 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByVal ViewState As System.Web.UI.StateBag, ByVal iPageSize As Long, _
+    Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String,
+                                                     ByRef pag As Object, _
+                                                     ByRef idTanda As Object,
+                                                     ByVal iPageSize As Long, _
                         ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, _
                         ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
                         ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
@@ -9327,7 +9343,7 @@ Public Class LogicaFacturacion
         Try
 
 
-            Dim pag As Integer = Val(ViewState("pagina"))
+            'Dim pag As Integer = Val(ViewState("pagina"))
             If pag <= 0 Then pag = 1
 
 
@@ -9335,19 +9351,21 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
 
-            Dim ids As Integer = Val(ViewState("IdTanda"))
-            If ids <= 0 Then
+            'Dim idTanda As Integer = Val(ViewState("IdTanda"))
+            If idTanda <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, ViewState, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, False, optFacturarA, agruparArticulosPor)
+                    generarTabla(SC, pag, idTanda, iPageSize, puntoVenta, desde, hasta, _
+                                 sLista, sesionId, False, optFacturarA, agruparArticulosPor)
                 Else
-                    generarTablaParaModosNoAutomaticos(SC, ViewState, sLista, "", optFacturarA, _
+                    generarTablaParaModosNoAutomaticos(SC, pag, idTanda, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, desde, hasta, _
-                                                         puntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor)
+                                                         puntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
+                                                         txtFacturarA, agruparArticulosPor)
                 End If
-                ids = ViewState("IdTanda")
+                'idTanda = ViewState("IdTanda")
             End If
 
 
@@ -9357,7 +9375,7 @@ Public Class LogicaFacturacion
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
             Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas _
-                        Where i.IdSesion = ids _
+                        Where i.IdSesion = idTanda _
                         Order By CStr(IIf(i.TarifaFacturada = 0, " ", "")) & CStr(i.FacturarselaA) & CStr(i.NumeroCartaDePorte.ToString) Ascending _
                         Select i.ColumnaTilde, i.IdCartaDePorte, i.IdArticulo, i.NumeroCartaDePorte, i.SubNumeroVagon, i.SubnumeroDeFacturacion, _
                                 i.FechaArribo, i.FechaDescarga, i.FacturarselaA, i.IdFacturarselaA, i.Confirmado, i.IdCodigoIVA, _
@@ -11114,7 +11132,8 @@ Public Class LogicaFacturacion
     End Function
 
 
-    Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String, ByRef ViewState As System.Web.UI.StateBag, ByVal optFacturarA As Long, _
+    Shared Sub GenerarLoteFacturas_NUEVO(ByRef grilla As DataTable, ByVal SC As String, ByRef ViewState As System.Web.UI.StateBag, _
+                                         ByVal optFacturarA As Long, _
                                          ByRef gvFacturasGeneradas As GridView, ByVal txtFacturarATerceros As String, _
                                          ByVal SeEstaSeparandoPorCorredor As Boolean, ByRef Session As System.Web.SessionState.HttpSessionState, _
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable, _
