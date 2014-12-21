@@ -8553,7 +8553,7 @@ Public Class LogicaFacturacion
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
-                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object)
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object)
 
 
         Try
@@ -8777,7 +8777,7 @@ Public Class LogicaFacturacion
             'dtAutomatico = DataTableUNION(dtAutomatico, dtForzadasAlTitular)
 
 
-            PreProcesos(lista, sc, txtFechaDesde, txtFechaHasta, cmbPuntoVenta, ViewState)
+            PreProcesos(lista, sc, txtFechaDesde, txtFechaHasta, cmbPuntoVenta, slinks)
 
             PostProcesos(lista, optFacturarA, agruparArticulosPor, sc)
 
@@ -8915,7 +8915,7 @@ Public Class LogicaFacturacion
             With dc
                 .ColumnName = "IdSesion"
                 .DataType = System.Type.GetType("System.Int32")
-                .DefaultValue = ViewState("sesionId")
+                .DefaultValue = sesionId
             End With
             dtlista.Columns.Add(dc)
             'For Each r In dtlista
@@ -8929,7 +8929,7 @@ Public Class LogicaFacturacion
             '-podrías hacer el refresco cuando todavía tenes en memoria la tarifa, no?, en lugar de ir a hacer en la base
             If optFacturarA = 4 Then
                 'no llega el sesionId....
-                RefrescaTarifaTablaTemporal(dtNoAutomatico, sc, optFacturarA, txtFacturarATerceros, Val(ViewState("sesionId")), , , , cmbmodo <> "Entregas")
+                RefrescaTarifaTablaTemporal(dtNoAutomatico, sc, optFacturarA, txtFacturarATerceros, Val(sesionId), , , , cmbmodo <> "Entregas")
             End If
 
             If optFacturarA = 3 Then
@@ -8965,7 +8965,7 @@ Public Class LogicaFacturacion
                             ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
                             ByVal sLista As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String, ByRef slinks As Object)
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object)
 
         ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
 
@@ -9190,8 +9190,8 @@ Public Class LogicaFacturacion
 
             ErrHandler.WriteError("punto 6. tanda " & sesionId)
             Randomize()
-            ViewState("pagina") = 1
-            ViewState("sesionId") = CInt(Rnd() * 10000)
+            pag = 1
+            sesionId = CInt(Rnd() * 10000)
 
 
             Dim c = ExecDinamico(SC, "select count(*) from wTempCartasPorteFacturacionAutomatica")
@@ -9205,7 +9205,7 @@ Public Class LogicaFacturacion
             Dim l As New Generic.List(Of wTempCartasPorteFacturacionAutomatica)
             For Each x In lista
                 Dim a = New wTempCartasPorteFacturacionAutomatica
-                a.IdSesion = ViewState("sesionId")
+                a.IdSesion = sesionId
 
                 a.IdCartaDePorte = x.IdCartaDePorte
                 a.IdFacturarselaA = x.IdFacturarselaA
@@ -9299,7 +9299,7 @@ Public Class LogicaFacturacion
             BulkCopy(dtlista, SC)
 
 
-            ViewState("filas") = dtlista.Rows.Count
+            filas = dtlista.Rows.Count
 
 
             ErrHandler.WriteError("salgo. tanda " & sesionId)
@@ -9358,7 +9358,7 @@ Public Class LogicaFacturacion
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
                     generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
-                                 sLista, False, optFacturarA, agruparArticulosPor, slinks)
+                                 sLista, False, optFacturarA, agruparArticulosPor, filas, slinks)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
@@ -9366,7 +9366,7 @@ Public Class LogicaFacturacion
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, desde, hasta, _
                                                          puntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
-                                                          txtFacturarA, agruparArticulosPor, filas)
+                                                          txtFacturarA, agruparArticulosPor, filas, slinks)
                 End If
                 'sesionId = ViewState("sesionId")
             End If
@@ -9456,7 +9456,7 @@ Public Class LogicaFacturacion
                        ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
-                        ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String _
+                        ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, ByRef filas As Object, ByRef slinks As Object _
                         , Optional bNoUsarLista As Boolean = False, _
                         Optional referenciaDB As LinqCartasPorteDataContext = Nothing _
                             , Optional agruparArticulosPor As String = "" _
@@ -9480,14 +9480,14 @@ Public Class LogicaFacturacion
             Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, sesionId, bNoUsarLista, optFacturarA, agruparArticulosPor)
+                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, bNoUsarLista, optFacturarA, agruparArticulosPor, filas, slinks)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
-                                                        cmbPuntoVenta, sesionId, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor)
+                                                        cmbPuntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor, filas, slinks)
                 End If
                 'ids = ViewState("sesionId")
             End If
@@ -11758,8 +11758,8 @@ Public Class LogicaFacturacion
 
 
         Try
-            ViewState("PrimeraIdFacturaGenerada") = primera
-            ViewState("UltimaIdFacturaGenerada") = ultima
+            PrimeraIdFacturaGenerada = primera
+            UltimaIdFacturaGenerada = ultima
 
             primera = iisNull(EntidadManager.ExecDinamico(SC, _
                                                              "SELECT NumeroFactura FROM Facturas WHERE idFactura= " & primera).Rows(0).Item("NumeroFactura"), 1)
@@ -11772,7 +11772,7 @@ Public Class LogicaFacturacion
             ErrHandler.WriteError("Fin facturacion." & primera & " " & ultima & "  Tiempo usado: " & DateDiff(DateInterval.Second, tHoraEmpieza, tHoraTermina) & " segundos. ")
 
 
-            MarcarFacturasConOrdenDeCompra(Val(numeroOrdenCompra), ViewState("PrimeraIdFacturaGenerada"), ViewState("UltimaIdFacturaGenerada"), SC)
+            MarcarFacturasConOrdenDeCompra(Val(numeroOrdenCompra), PrimeraIdFacturaGenerada, UltimaIdFacturaGenerada, SC)
 
 
 
