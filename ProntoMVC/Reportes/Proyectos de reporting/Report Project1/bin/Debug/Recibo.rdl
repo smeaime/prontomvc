@@ -978,6 +978,9 @@
         <Height>2.25542cm</Height>
         <Width>15.20346cm</Width>
         <ZIndex>4</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(First(Fields!Valor.Value, "DataSet2")="SI", false, true)</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1463,6 +1466,20 @@
         <Field Name="Obra">
           <DataField>Obra</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT valor
+FROM Parametros2
+where Campo = 'EmiteAsientoEnRECIBO'</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Valor">
+          <DataField>Valor</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
         </Field>
       </Fields>
     </DataSet>

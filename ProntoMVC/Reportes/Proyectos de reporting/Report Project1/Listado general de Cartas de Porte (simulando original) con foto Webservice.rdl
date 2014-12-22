@@ -5613,6 +5613,11 @@
     <ReportParameter Name="ReportParameter1">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>http://localhost:48391/ProntoWeb/WebServiceCartas.asmx?op=GetCartas&amp;partedelnumero=&amp;desde=&amp;hasta=&amp;quecontenga=&amp;iddestino=-1&amp;idproducto=-1</Value>
+        </Values>
+      </DefaultValue>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
