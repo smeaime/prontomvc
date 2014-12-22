@@ -9353,7 +9353,7 @@ Public Class LogicaFacturacion
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
             '/////////////////////////////////////////////////////////////////////////////////
-
+            sesionId = Val(sesionId)
             Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
@@ -9369,6 +9369,7 @@ Public Class LogicaFacturacion
                                                           txtFacturarA, agruparArticulosPor, filas, slinks)
                 End If
                 'sesionId = ViewState("sesionId")
+                ids = sesionId
             End If
 
 
