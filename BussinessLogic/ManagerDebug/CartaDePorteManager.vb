@@ -9671,12 +9671,13 @@ Public Class LogicaFacturacion
 
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
-        Dim o = (From i In db.wTempCartasPorteFacturacionAutomaticas _
+
+        Dim u = (From i In db.wTempCartasPorteFacturacionAutomaticas _
                  Join c In db.linqClientes On i.IdFacturarselaA Equals c.IdCliente _
                  Where i.IdSesion = sesion _
                 Select i.IdCartaDePorte, c.RazonSocial, c.ExpresionRegularNoAgruparFacturasConEstosVendedores _
-                ).ToList _
-                .ToDictionary(Function(x) x.IdCartaDePorte, Function(x) x.ExpresionRegularNoAgruparFacturasConEstosVendedores)
+                ).ToList
+        Dim o = u.ToDictionary(Function(x) x.IdCartaDePorte, Function(x) x.ExpresionRegularNoAgruparFacturasConEstosVendedores)
 
 
 
@@ -9758,7 +9759,7 @@ Public Class LogicaFacturacion
         Try
             Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
             Dim idSyngentaSEEDS = BuscaIdClientePreciso("NO USAR !!!SYNGENTA SEEDS S.A.", SC)
-            Dim idLDC = 2775 no deberia usar ldc argentina? 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
+            Dim idLDC = 2775 ' ldc argentina? 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
             Dim idA_C_A = 10 'BuscaIdClientePreciso("A.C.A", SC)
 
             Dim q = (From i In listaDeCartasPorteAFacturar _
