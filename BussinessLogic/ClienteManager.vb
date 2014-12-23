@@ -163,6 +163,22 @@ Namespace Pronto.ERP.Bll
                         ErrHandler.WriteError(ex)
                     End Try
 
+
+
+                    Try
+
+                        Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                            Where i.IdCliente = myCliente.Id _
+                                                            And i.Acciones = "UsaGastosAdmin"
+                                                        ).SingleOrDefault
+
+                        If oDet IsNot Nothing Then .UsaGastosAdmin = oDet.Contacto Else .UsaGastosAdmin = "SI"
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
+
+
+
                 End With
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
@@ -344,6 +360,30 @@ Namespace Pronto.ERP.Bll
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
+
+
+
+                Try
+
+                    Dim oDet As DetalleClientes = (From i In db.DetalleClientes _
+                                                        Where i.IdCliente = myCliente.Id _
+                                                        And i.Acciones = "UsaGastosAdmin"
+                                                    ).SingleOrDefault
+                    If IsNothing(oDet) Then
+                        oDet = New DetalleClientes
+                        oDet.IdCliente = myCliente.Id
+                        oDet.Acciones = "UsaGastosAdmin"
+                        oDet.Contacto = myCliente.UsaGastosAdmin
+                        db.DetalleClientes.InsertOnSubmit(oDet)
+                    Else
+                        oDet.Contacto = myCliente.UsaGastosAdmin
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
 
 
 
