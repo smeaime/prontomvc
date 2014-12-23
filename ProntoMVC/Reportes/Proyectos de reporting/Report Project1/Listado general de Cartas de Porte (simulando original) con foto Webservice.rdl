@@ -5322,6 +5322,14 @@
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>e9e4095a-349d-42c1-ab0f-15d7faaff1dd</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="DataSource2">
+      <ConnectionProperties>
+        <DataProvider>XML</DataProvider>
+        <ConnectString>http://localhost:48391/ProntoWeb/WebServiceCartas.asmx?op=GetCartas&amp;partedelnumero=&amp;desde=1/1/2013&amp;hasta=1/1/2014&amp;quecontenga=&amp;iddestino=-1&amp;idproducto=-1</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>d27e6b94-1df5-4c72-81bc-996788baaeff</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">

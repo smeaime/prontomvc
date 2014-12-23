@@ -6646,9 +6646,14 @@ Public Class CartaDePorteManager
             '            Con respecto a la impresión, prevalece siempre la del facturar a.
             'Si tiene ese dato, no hay que darle importancia al de la CP propiamente dicha, tanto para filtrar la carta, como para la impresión.
             'Con respecto al "cruce" de acopios, yo les pregunte y me dijeron que no es posible, que las cartas de un cliente nunca van a otro.
-            Dim LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
-            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
+            Dim LeyendaAcopio = ""
+            Try
+                LeyendaAcopio = LogicaFacturacion.LeyendaAcopio(oFac.Id, SC) 'oFac.Cliente.AutorizacionSyngenta
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+            regexReplace(docText, "#LeyendaAcopios#", LeyendaAcopio)
 
 
 
@@ -8104,7 +8109,11 @@ Public Class LogicaFacturacion
         If dtRenglonesManuales Is Nothing Then dtRenglonesManuales = dtCartas.Clone
         dtGastosAdmin = dtCartas.Clone
 
+
         For Each r In GastoAdmin
+
+            If EsClienteExcluidoDeGastosAdmin(db, r.IdFacturarselaA) Then Continue For
+
 
             Dim PrecioArticuloGastoAdministrativo = ListaPreciosManager.Tarifa(hfsc, r.IdFacturarselaA, IdArticuloGastoAdministrativo)
             '¿http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8526
@@ -8112,7 +8121,6 @@ Public Class LogicaFacturacion
 
             'y si ya existen? -borralos todos 'dtRenglonesManuales = DataTableWHERE(dtRenglonesManuales, "Producto<>" & IdArticuloGastoAdministrativo)
             'dtRenglonesManuales.Rows.Find("Id )
-
 
 
 
@@ -8190,13 +8198,14 @@ Public Class LogicaFacturacion
 
         For Each r In GastoAdmin
 
+            If EsClienteExcluidoDeGastosAdmin(hfsc, r.IdFacturarselaA) Then Continue For
+
             Dim PrecioArticuloGastoAdministrativo = ListaPreciosManager.Tarifa(hfsc, r.IdFacturarselaA, IdArticuloGastoAdministrativo)
             '¿http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8526
 
 
             'y si ya existen? -borralos todos 'dtRenglonesManuales = DataTableWHERE(dtRenglonesManuales, "Producto<>" & IdArticuloGastoAdministrativo)
             'dtRenglonesManuales.Rows.Find("Id )
-
 
 
 
@@ -8239,6 +8248,53 @@ Public Class LogicaFacturacion
 
     End Function
 
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Shared Sub ExcluirDeGastosAdministrativos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal sc As String)
+
+        '        En el formulario de cliente agregar un parámetro que indique a qué clientes no se les debe cobrar gastos administrativos.
+
+        'En la facturación, si el cliente tiene esta marca, no tener en cuenta si en las Cartas de Porte está marcado el tilde de gastos administrativos y nunca facturarlo
+
+        '        http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13219
+
+        'EsClienteExcluidoDeGastosAdmin()
+        'Por ahora lo hago en la facturacion. resolverlo en el paso 2
+    End Sub
+
+    Shared Function EsClienteExcluidoDeGastosAdmin(SC As String, idcliente As Integer) As Boolean
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim q = (From i In db.DetalleClientes Where i.IdCliente = idcliente _
+                                                And i.Acciones = "UsaGastosAdmin" _
+                                                And i.Contacto = "NO" _
+                                                    ).SingleOrDefault
+
+        If q Is Nothing Then Return False
+
+        Return True
+    End Function
+
+    Shared Function EsClienteExcluidoDeGastosAdmin(db As LinqCartasPorteDataContext, idcliente As Integer) As Boolean
+
+        Dim q = (From i In db.DetalleClientes Where i.IdCliente = idcliente _
+                                                And i.Acciones = "UsaGastosAdmin" _
+                                                And i.Contacto = "NO" _
+                                                    ).SingleOrDefault
+
+        If q Is Nothing Then Return False
+
+        Return True
+    End Function
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     Shared Function ListadoManualConTablaTemporal( _
                         ByVal sc As String, ByVal sLista As String, ByVal sWHEREadicional As String, ByVal optFacturarA As Long, _
                         ByVal txtFacturarATerceros As String, ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
@@ -8246,7 +8302,7 @@ Public Class LogicaFacturacion
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
                         ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, ByVal sesionId As String, _
-                        ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtClienteAuxiliar As String, ByRef ms As String, ByVal txtFacturarA As String) As DataTable
+                        ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtClienteAuxiliar As String, ByRef ms As String, ByVal txtFacturarA As String, sesionIdposta As String) As DataTable
 
         Dim dt As DataTable
 
@@ -8330,7 +8386,7 @@ Public Class LogicaFacturacion
                                                  txtIntermediario, txtRcomercial, txt_AC_Articulo, txtProcedencia, txtDestino, txtBuscar, _
                                                  cmbCriterioWHERE, cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, cmbPuntoVenta, _
                                                   " JOIN wGrillaPersistencia as TEMPORAL ON (CDP.IdCartaDePorte = TEMPORAL.IdRenglon) " & _
-                                                  "             AND TEMPORAL.Sesion=" & _c(sesionId), txtClienteAuxiliar, txtFacturarA)
+                                                  "             AND TEMPORAL.Sesion=" & _c(sesionIdposta), txtClienteAuxiliar, txtFacturarA)
 
 
 
@@ -8476,6 +8532,9 @@ Public Class LogicaFacturacion
 
         'RecalcGastosAdminDeCambioDeCartaUsandoTablaTemporal(lista, SC, dt, dtViewstateRenglonesManuales)
 
+
+        ExcluirDeGastosAdministrativos(lista, SC)
+
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
@@ -8553,7 +8612,7 @@ Public Class LogicaFacturacion
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
-                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object)
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtclienteauxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String)
 
 
         Try
@@ -8584,7 +8643,7 @@ Public Class LogicaFacturacion
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
-                                                        cmbPuntoVenta, sesionId, 0, 1012012, txtclienteauxiliar, sErrores, txtFacturarA)
+                                                        cmbPuntoVenta, sesionId, 0, 1012012, txtclienteauxiliar, sErrores, txtFacturarA, sesionIdposta)
 
 
 
@@ -8958,6 +9017,60 @@ Public Class LogicaFacturacion
         'en los casos que se pone facturar a corredor
     End Function
 
+    Shared Function GridCheckboxPersistenciaBulk(ByVal g As GridView, ByVal sc As String, ByVal sesionIdentificador As String, l As List(Of Integer))
+
+
+
+        If l.Count = 0 And False Then Throw New Exception("No hay cartas seleccionadas")
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
+
+        Dim a As wGrillaPersistencia
+
+
+        ExecDinamico(sc, "delete wGrillaPersistencia where Sesion='" & sesionIdentificador & "'") 'cómo refrescar?
+
+
+        Dim dt = ExecDinamico(sc, "SELECT * from  wGrillaPersistencia where 1=0")
+
+
+
+        For Each i In l
+            Dim r = dt.NewRow
+            r("IdRenglon") = i
+            r("Sesion") = sesionIdentificador
+            r("Tilde") = True
+            dt.Rows.Add(r)
+        Next
+
+        Using destinationConnection As SqlConnection = New SqlConnection(Encriptar(sc))
+            destinationConnection.Open()
+
+            ' Set up the bulk copy object. 
+            ' The column positions in the source data reader 
+            ' match the column positions in the destination table, 
+            ' so there is no need to map columns.
+            Using bulkCopy As SqlBulkCopy = New SqlBulkCopy(destinationConnection)
+                bulkCopy.DestinationTableName = "dbo.wGrillaPersistencia"
+
+                bulkCopy.ColumnMappings.Add(New SqlBulkCopyColumnMapping("IdRenglon", "IdRenglon"))
+                bulkCopy.ColumnMappings.Add(New SqlBulkCopyColumnMapping("Sesion", "Sesion"))
+                bulkCopy.ColumnMappings.Add(New SqlBulkCopyColumnMapping("Tilde", "Tilde"))
+
+                Try
+                    ' Write from the source to the destination.
+                    bulkCopy.WriteToServer(dt)
+                Catch ex As Exception
+                    Console.WriteLine(ex.ToString)  'que no te confunda el orden de los colid. Por ejemplo, Titular era el 11. Es decir, depende del datatable. No?
+                    ErrHandler.WriteError(ex)
+                    Throw
+                End Try
+
+            End Using
+        End Using
+
+
+    End Function
 
     Shared Sub generarTabla(ByVal SC As String, _
                             ByRef pag As Object, _
@@ -8965,7 +9078,7 @@ Public Class LogicaFacturacion
                             ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
                             ByVal sLista As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object)
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String)
 
         ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
 
@@ -8991,7 +9104,7 @@ Public Class LogicaFacturacion
 
             If False Then
                 'como antes ocultaba los hijos en el primer paso, en el segundo los incluia dependiendo del padre original
-                lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionId) _
+                lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
                           Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
                                 Or (cdp.SubnumeroDeFacturacion > 0 And tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaOriginal, -1))) _
                           ).ToList
@@ -8999,11 +9112,11 @@ Public Class LogicaFacturacion
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9281
                 'ahora solo incluyo lo que se tildó explícitamente en el primer paso
                 If bNoUsarLista Then
-                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionId) _
+                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
                             Where If(cdp.IdCartaOriginal, -1) <= 0 _
                           ).ToList
                 Else
-                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionId) _
+                    lista = (From cdp In db.wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia(CInt(puntoVenta), sesionIdposta) _
                               Where tildadosEnPrimerPasoLongs.Contains(If(cdp.IdCartaDePorte, -1)) _
                               And If(cdp.IdCartaOriginal, -1) <= 0 _
                             ).ToList
@@ -9315,13 +9428,13 @@ Public Class LogicaFacturacion
 
     Shared Function GetDatatableAsignacionAutomatica(ByVal SC As String, ByRef pag As Object, _
                                                      ByRef sesionId As Object, _
-                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object) As DataTable
+                                                     ByVal iPageSize As Long, ByVal puntoVenta As Integer, ByVal desde As Date, ByVal hasta As Date, ByRef sErrores As String, AgruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
         Return GetDatatableAsignacionAutomatica(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
                                                      "", "", 0, _
                                                     "", "", "", "", _
                                                     "", "", "", "", _
-                                                    "", "", "", "", "", "", 0, 0, "", sErrores, "", AgruparArticulosPor, filas, slinks)
+                                                    "", "", "", "", "", "", 0, 0, "", sErrores, "", AgruparArticulosPor, filas, slinks, sesionIdposta)
 
 
     End Function
@@ -9336,7 +9449,7 @@ Public Class LogicaFacturacion
                         ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
                         ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                         ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, _
-                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object) As DataTable
+                          ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String) As DataTable
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
         'esa posición se le debe facturar, entonces se le facturará al 
@@ -9358,7 +9471,7 @@ Public Class LogicaFacturacion
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
                     generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, _
-                                 sLista, False, optFacturarA, agruparArticulosPor, filas, slinks)
+                                 sLista, False, optFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
@@ -9366,7 +9479,7 @@ Public Class LogicaFacturacion
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, desde, hasta, _
                                                          puntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, _
-                                                          txtFacturarA, agruparArticulosPor, filas, slinks)
+                                                          txtFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 End If
                 'sesionId = ViewState("sesionId")
                 ids = sesionId
@@ -9458,9 +9571,9 @@ Public Class LogicaFacturacion
                        ByVal txt_AC_Articulo As String, ByVal txtProcedencia As String, ByVal txtDestino As String, ByVal txtBuscar As String, _
                        ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, ByVal cmbPuntoVenta As String, _
                         ByVal startRowIndex As Long, ByVal maximumRows As Long, ByVal txtPopClienteAuxiliar As String, ByRef sErrores As String, txtFacturarA As String, ByRef filas As Object, ByRef slinks As Object _
-                        , Optional bNoUsarLista As Boolean = False, _
-                        Optional referenciaDB As LinqCartasPorteDataContext = Nothing _
-                            , Optional agruparArticulosPor As String = "" _
+                        , bNoUsarLista As Boolean, _
+                         referenciaDB As LinqCartasPorteDataContext _
+                            , agruparArticulosPor As String, sesionIdposta As String _
                         ) As IQueryable(Of wTempCartasPorteFacturacionAutomatica)
 
         'Si una Carta de Porte no tiene ningún cliente que tenga marcado en que si aparece en 
@@ -9481,14 +9594,14 @@ Public Class LogicaFacturacion
             Dim ids As Integer = sesionId ' Val(ViewState("sesionId"))
             If sesionId <= 0 Then
                 If optFacturarA = 5 Then
-                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, bNoUsarLista, optFacturarA, agruparArticulosPor, filas, slinks)
+                    generarTabla(SC, pag, sesionId, iPageSize, puntoVenta, desde, hasta, sLista, bNoUsarLista, optFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 Else
                     generarTablaParaModosNoAutomaticos(SC, pag, sesionId, sLista, "", optFacturarA, _
                                                         txtFacturarATerceros, HFSC, txtTitular, txtCorredor, _
                                                         txtDestinatario, txtIntermediario, txtRcomercial, txt_AC_Articulo, _
                                                         txtProcedencia, txtDestino, txtBuscar, cmbCriterioWHERE, _
                                                         cmbmodo, optDivisionSyngenta, txtFechaDesde, txtFechaHasta, _
-                                                        cmbPuntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor, filas, slinks)
+                                                        cmbPuntoVenta, startRowIndex, maximumRows, txtPopClienteAuxiliar, sErrores, txtFacturarA, agruparArticulosPor, filas, slinks, sesionIdposta)
                 End If
                 'ids = ViewState("sesionId")
             End If
@@ -9645,7 +9758,7 @@ Public Class LogicaFacturacion
         Try
             Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
             Dim idSyngentaSEEDS = BuscaIdClientePreciso("NO USAR !!!SYNGENTA SEEDS S.A.", SC)
-            Dim idLDC = 2775 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
+            Dim idLDC = 2775 no deberia usar ldc argentina? 'BuscaIdClientePreciso("LDC SEMILLAS", SC)
             Dim idA_C_A = 10 'BuscaIdClientePreciso("A.C.A", SC)
 
             Dim q = (From i In listaDeCartasPorteAFacturar _
@@ -12811,10 +12924,13 @@ Public Class LogicaFacturacion
 
                         Dim cantidadGastosAdministrativos = 0
 
+                        If Not EsClienteExcluidoDeGastosAdmin(SC, IdClienteAFacturarle) Then
 
-                        For Each cdp In oListaCDP
-                            If cdp.AgregaItemDeGastosAdministrativos Then cantidadGastosAdministrativos += 1
-                        Next
+                            For Each cdp In oListaCDP
+                                If cdp.AgregaItemDeGastosAdministrativos Then cantidadGastosAdministrativos += 1
+                            Next
+                        End If
+
 
                         If cantidadGastosAdministrativos > 0 Then
 

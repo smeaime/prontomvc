@@ -183,12 +183,19 @@ Namespace Pronto.ERP.Bll
             End With
 
 
-            If idMov = -1 Then
-                With nr
-                    .IdAjusteStock = ClaseMigrar.GrabarAjusteStockConCompronto(SC, -1, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
-                    mov.CartasPorteMovimientos.AddCartasPorteMovimientosRow(nr)
-                End With
-            End If
+            Try
+
+                If idMov = -1 Then
+                    With nr
+                        .IdAjusteStock = ClaseMigrar.GrabarAjusteStockConCompronto(SC, -1, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
+                        mov.CartasPorteMovimientos.AddCartasPorteMovimientosRow(nr)
+                    End With
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+            End Try
+
 
             If Save(SC, mov) = -1 Then ErrHandler.WriteAndRaiseError("No es valido el movimiento que genera la carta")
 
@@ -224,7 +231,11 @@ Namespace Pronto.ERP.Bll
 
                     '///////////////////////////////////////////////////////////////////////////////////////////
 
-                    ClaseMigrar.GrabarAjusteStockConCompronto(SC, .IdAjusteStock, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
+                    Try
+                        ClaseMigrar.GrabarAjusteStockConCompronto(SC, .IdAjusteStock, .IdArticulo, IIf(.Entrada_o_Salida = 1, .Cantidad, .Cantidad * -1))
+                    Catch ex As Exception
+                        ErrHandler.WriteError(ex)
+                    End Try
 
                 End With
 
