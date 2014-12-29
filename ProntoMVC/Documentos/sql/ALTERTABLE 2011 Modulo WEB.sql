@@ -1124,3 +1124,13 @@ alter table CartasDePorte add
 		 AcopioFacturarleA int null
 go
 
+
+
+
+ALTER TABLE  Facturas ADD
+	 FueEnviadoCorreoConFacturaElectronica VARCHAR(2) NULL
+GO
+
+
+
+

@@ -15259,6 +15259,9 @@ Public Class barras
         Next
 
 
+        FueEnviadoCorreoConFacturaElectronica()
+
+
         'If sErr <> "" Then Throw New Exception(serr)
         sErr = "Envío Terminado " + Environment.NewLine + Environment.NewLine + sErr
         Return sErr
