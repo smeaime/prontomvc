@@ -5325,7 +5325,7 @@
     <DataSource Name="DataSource2">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>http://localhost:48391/ProntoWeb/WebServiceCartas.asmx?op=GetCartas&amp;partedelnumero=&amp;desde=1/1/2013&amp;hasta=1/1/2014&amp;quecontenga=&amp;iddestino=-1&amp;idproducto=-1</ConnectString>
+        <ConnectString>http://localhost:48391/ProntoWeb/WebServiceCartas.asmx?op=GetCartasSinParametros</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>d27e6b94-1df5-4c72-81bc-996788baaeff</rd:DataSourceID>
@@ -5336,8 +5336,8 @@
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
         <CommandText>&lt;Query&gt;
-&lt;Method Namespace="http://microsoft.com/webservices" Name="GetCartas"&gt;&lt;/Method&gt;
-&lt;SoapAction&gt;http://microsoft.com/webservices/GetCartas&lt;/SoapAction&gt;
+&lt;Method Namespace="http://microsoft.com/webservices" Name="GetCartasSinParametros"&gt;&lt;/Method&gt;
+&lt;SoapAction&gt;http://microsoft.com/webservices/GetCartasSinParametros&lt;/SoapAction&gt;
 &lt;/Query&gt;</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
