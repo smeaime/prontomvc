@@ -12276,26 +12276,35 @@ Public Class LogicaFacturacion
         Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura).ToList()
         Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
+
+        Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
+
+
         'LeyendaSyngenta(oListaCDP, oFac.IdCliente, SC)
 
-        If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro Or If(c.Acopio5, -1) = IdAcopioAgro) Then
+        If oFac.IdCliente = idSyngentaAGRO Then
 
-            'quienautoriza()
-            ErrHandler.WriteError("LeyendaSyngenta Agro")
+            If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro Or If(c.Acopio5, -1) = IdAcopioAgro) Then
 
-            Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
-            Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
+                'quienautoriza()
+                ErrHandler.WriteError("LeyendaSyngenta Agro")
 
-        ElseIf oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioSeeds Or If(c.Acopio2, -1) = IdAcopioSeeds Or If(c.Acopio3, -1) = IdAcopioSeeds Or If(c.Acopio4, -1) = IdAcopioSeeds Or If(c.Acopio5, -1) = IdAcopioSeeds) Then
+                Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
-            ErrHandler.WriteError("LeyendaSyngenta Seeds")
+            ElseIf oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioSeeds Or If(c.Acopio2, -1) = IdAcopioSeeds Or If(c.Acopio3, -1) = IdAcopioSeeds Or If(c.Acopio4, -1) = IdAcopioSeeds Or If(c.Acopio5, -1) = IdAcopioSeeds) Then
 
-            'quienautoriza()
-            Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
-            Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
-        Else
-            ErrHandler.WriteError("LeyendaSyngenta Nada")
+                ErrHandler.WriteError("LeyendaSyngenta Seeds")
 
+                'quienautoriza()
+                Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
+            Else
+
+            End If
+
+
+            'ErrHandler.WriteError("LeyendaSyngenta Nada")
             Return ""
 
 
@@ -12306,26 +12315,29 @@ Public Class LogicaFacturacion
     Shared Function LeyendaSyngenta(ByRef oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte), ByVal IdClienteAFacturarle As Long, SC As String) As String
 
 
-        If oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioAgro Or c.Acopio2 = IdAcopioAgro Or c.Acopio3 = IdAcopioAgro Or c.Acopio4 = IdAcopioAgro Or c.Acopio5 = IdAcopioAgro) Then
-            ErrHandler.WriteError("LeyendaSyngenta Agro")
-            'quienautoriza()
-            Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
-            Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
+        Dim idSyngentaAGRO = BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC)
 
-        ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds) Then
-            ErrHandler.WriteError("LeyendaSyngenta Seeds")
-            'quienautoriza()
-            Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
-            Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
-        Else
 
-            ErrHandler.WriteError("LeyendaSyngenta Nada")
-            Return ""
+        If IdClienteAFacturarle = idSyngentaAGRO Then
+            If oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioAgro Or c.Acopio2 = IdAcopioAgro Or c.Acopio3 = IdAcopioAgro Or c.Acopio4 = IdAcopioAgro Or c.Acopio5 = IdAcopioAgro) Then
+                ErrHandler.WriteError("LeyendaSyngenta Agro")
+                'quienautoriza()
+                Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+                Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
 
+            ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds) Then
+                ErrHandler.WriteError("LeyendaSyngenta Seeds")
+                'quienautoriza()
+                Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+                Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
+
+            End If
 
         End If
 
 
+        'ErrHandler.WriteError("LeyendaSyngenta Nada")
+        Return ""
 
     End Function
 
@@ -15256,10 +15268,14 @@ Public Class barras
                   pass, _
                          "", _
                     ConfigurationManager.AppSettings("SmtpPort"), , "", "", "Factura Electrónica Williams Entregas", "", True)
+
+
+            MarcarEnviada(SC, idfac)
+
         Next
 
 
-        FueEnviadoCorreoConFacturaElectronica()
+
 
 
         'If sErr <> "" Then Throw New Exception(serr)
@@ -15267,6 +15283,14 @@ Public Class barras
         Return sErr
 
     End Function
+
+    Shared Function MarcarEnviada(SC As String, idfactura As Integer)
+
+        ExecDinamico(SC, "update facturas set FueEnviadoCorreoConFacturaElectronica='SI' where idfactura=" & idfactura)
+
+    End Function
+
+
 
     Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
         Dim listaf = New Generic.List(Of Integer)
