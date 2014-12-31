@@ -217,6 +217,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
         </FileNode>
+        <FileNode Name="wFacturas_TXFecha.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>wFacturas_TXFecha.sql</FullPath>
+        </FileNode>
         <FileNode Name="SQLQuery4aa.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
@@ -332,9 +338,9 @@
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_InformesCorregido.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_InformesCorregido.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_PorIdFactura.sql">
