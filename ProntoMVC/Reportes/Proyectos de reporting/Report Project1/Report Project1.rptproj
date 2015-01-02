@@ -126,6 +126,10 @@
       <FullPath>Factura Venta.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto .rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto .rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl</FullPath>
     </ProjectItem>
@@ -170,8 +174,8 @@
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto .rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto .rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
