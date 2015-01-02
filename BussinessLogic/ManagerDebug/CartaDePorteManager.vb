@@ -15174,6 +15174,7 @@ Public Class barras
 
 
 
+            
 
             Dim destinatario As String
 
@@ -15223,6 +15224,15 @@ Public Class barras
 
 
             Dim numerodefactura As String = fac.TipoABC + "-" + JustificadoDerecha(fac.PuntoVenta.ToString(), 4, "0") + "-" + JustificadoDerecha(fac.Numero.ToString, 8, "0")
+
+
+            If Not bVistaPrevia And VerificarEnviada(SC, idfac) Then
+                sErr += "La factura " & numerodefactura & " ya fue enviada antes" + Environment.NewLine
+                Continue For
+            End If
+
+
+
             Dim idfacEncrip As String = EntidadManager.encryptQueryString(idfac)
             Dim linkalafacturaelectronica As String = _
                     "<a  href='" + ConfigurationManager.AppSettings("UrlDominio") + "ProntoWeb/FacturaElectronicaEncriptada.aspx?Modo=DescargaFactura&Id=" & idfacEncrip + "'>que puede descargar desde AQUÍ " + "</a>"
@@ -15284,12 +15294,20 @@ Public Class barras
 
     End Function
 
-    Shared Function MarcarEnviada(SC As String, idfactura As Integer)
+    Shared Sub MarcarEnviada(SC As String, idfactura As Integer)
 
         ExecDinamico(SC, "update facturas set FueEnviadoCorreoConFacturaElectronica='SI' where idfactura=" & idfactura)
 
-    End Function
+    End Sub
 
+
+    Shared Function VerificarEnviada(SC As String, idfactura As Integer) As Boolean
+
+        Dim dt = ExecDinamico(SC, "select FueEnviadoCorreoConFacturaElectronica from  facturas where idfactura=" & idfactura)
+
+        If dt(0).Item("FueEnviadoCorreoConFacturaElectronica") = "SI" Then Return True Else Return False
+
+    End Function
 
 
     Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
