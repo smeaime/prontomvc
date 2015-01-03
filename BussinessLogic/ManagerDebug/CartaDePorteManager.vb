@@ -503,6 +503,155 @@ Public Class CartaDePorteManager
 
 
 
+
+
+    ''' <summary>
+    ''' el SQL de la funcion estrella
+    ''' </summary>
+    ''' <param name="SC"></param>
+    ''' <param name="ColumnaParaFiltrar"></param>
+    ''' <param name="TextoParaFiltrar"></param>
+    ''' <param name="sortExpression"></param>
+    ''' <param name="startRowIndex"></param>
+    ''' <param name="maximumRows"></param>
+    ''' <param name="estado"></param>
+    ''' <param name="QueContenga"> este cual es?????</param>
+    ''' <param name="idVendedor"></param>
+    ''' <param name="idCorredor"></param>
+    ''' <param name="idDestinatario"></param>
+    ''' <param name="idIntermediario"></param>
+    ''' <param name="idRemComercial"></param>
+    ''' <param name="idArticulo"></param>
+    ''' <param name="idProcedencia"></param>
+    ''' <param name="idDestino"></param>
+    ''' <param name="AplicarANDuORalFiltro"></param>
+    ''' <param name="ModoExportacion"></param>
+    ''' <param name="fechadesde"></param>
+    ''' <param name="fechahasta"></param>
+    ''' <param name="puntoventa"></param>
+    ''' <param name="sTituloFiltroUsado"></param>
+    ''' <param name="optDivisionSyngenta"></param>
+    ''' <param name="bTraerDuplicados"></param>
+    ''' <param name="Contrato"></param>
+    ''' <param name="QueContenga2">y este?????</param>
+    ''' <param name="idClienteAuxiliar"></param>
+    ''' <param name="AgrupadorDeTandaPeriodos"></param>
+    ''' <param name="Vagon"></param>
+    ''' <param name="Patente"></param>
+    ''' <param name="bInsertarEnTablaTemporal"></param>
+    ''' <param name="optCamionVagon"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function GetDataTableFiltradoYPaginado_CadenaSQL( _
+            ByVal SC As String, _
+            ByVal ColumnaParaFiltrar As String, _
+            ByVal TextoParaFiltrar As String, _
+            ByVal sortExpression As String, _
+            ByVal startRowIndex As Long, _
+            ByVal maximumRows As Long, _
+            ByVal estado As CartaDePorteManager.enumCDPestado, _
+            ByVal QueContenga As String, _
+            ByVal idVendedor As Integer, _
+            ByVal idCorredor As Integer, _
+            ByVal idDestinatario As Integer, _
+            ByVal idIntermediario As Integer, _
+            ByVal idRemComercial As Integer, _
+            ByVal idArticulo As Integer, _
+            ByVal idProcedencia As Integer, _
+            ByVal idDestino As Integer, _
+            ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+            ByVal ModoExportacion As String, _
+            ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+            ByVal puntoventa As Integer, Optional ByRef sTituloFiltroUsado As String = "", _
+            Optional ByVal optDivisionSyngenta As String = "Ambas", _
+            Optional ByVal bTraerDuplicados As Boolean = False, _
+            Optional ByVal Contrato As String = "", _
+            Optional ByVal QueContenga2 As String = "", _
+            Optional ByVal idClienteAuxiliar As Integer = -1, _
+            Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
+            Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+            Optional bInsertarEnTablaTemporal As Boolean = False, _
+            Optional ByVal optCamionVagon As String = "Ambas" _
+                    ) As String
+
+        'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
+        'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
+        'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
+        'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
+        'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
+
+
+        sTituloFiltroUsado = ""
+
+
+
+
+
+        Dim sWHERE As String = CartaDePorteManager.generarWHEREparaDatasetParametrizado(SC, _
+                              sTituloFiltroUsado, _
+                              estado, QueContenga, idVendedor, idCorredor, _
+                              idDestinatario, idIntermediario, _
+                              idRemComercial, idArticulo, idProcedencia, idDestino, _
+                              AplicarANDuORalFiltro, ModoExportacion, _
+                              fechadesde, fechahasta, _
+                               puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar, Vagon, Patente, optCamionVagon)
+
+
+
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '        metodo 1 
+        '       If AgrupadorDeTandaPeriodos <> -1 Then sWHERE &= " AND AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos
+        '
+        '     metodo 2
+        If AgrupadorDeTandaPeriodos <> -1 Then
+
+            'cómo puede ser que este dt traiga informacion repetida
+            'https://mail.google.com/mail/u/0/#inbox/13f5c9dc24580285
+            'gran sospecha de que haya sido por este inner join
+            'lo que podría poner es un indice unique en CartasDePorteMailClusters que impida que se dupliquen
+
+
+            sWHERE = " INNER JOIN CartasDePorteMailClusters CLUST " & _
+                     "       ON CDP.IdCartaDePorte = CLUST.IdCartaDePorte AND   " & _
+                     "       CLUST.AgrupadorDeTandaPeriodos=" & AgrupadorDeTandaPeriodos & "        WHERE " & sWHERE
+
+
+
+        Else
+            sWHERE = " WHERE " & sWHERE
+
+        End If
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////
+
+
+        Dim sqlString As String = GetListDataTableDinamicoConWHERE_2_CadenaSQL(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+
+
+        Return sqlString
+
+
+
+
+
+    End Function
+
+
+
+
     'ReadOnly s_compQuery = CompiledQuery.Compile(Of CartasDePortes, Decimal, IQueryable(Of CartasDePorte))( _
     '        Function(cdp, mySearchParams) _
     '            From sale In cdp.CartasDePortes _
@@ -3054,6 +3203,124 @@ Public Class CartaDePorteManager
 
 
 
+    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                       ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+                                                       Optional maxrows As Integer = 0) As String
+
+        'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
+
+        If maxrows > 0 Then
+            maxrows = Min(maxrows, _CONST_MAXROWS)
+        Else
+            maxrows = _CONST_MAXROWS
+        End If
+
+        'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
+
+
+        Dim strSQL = String.Format("  SELECT TOP " & maxrows & "  CDP.*, " & _
+"			cast (cdp.NumeroCartaDePorte as varchar) +" & _
+"					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
+"           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
+"					ELSE " & _
+"            ''" & _
+"            End" & _
+"				as NumeroCompleto," & _
+"			datediff(minute,cdp.FechaModificacion,GETDATE()) as MinutosModifico, " & _
+" 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	 " & _
+" 			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	 " & _
+" 			ISNULL(Articulos.AuxiliarString7,'') AS txtCodigoZeni,	 " & _
+"			isnull(CLIVEN.Razonsocial,'') AS TitularDesc, " & _
+"            isnull(CLIVEN.cuit,'') AS TitularCUIT, " & _
+"			isnull(CLICO1.Razonsocial,'') AS IntermediarioDesc, " & _
+"            isnull(CLICO1.cuit,'') AS IntermediarioCUIT, " & _
+"			isnull(CLICO2.Razonsocial,'') AS RComercialDesc, " & _
+"            isnull(CLICO2.cuit,'') AS RComercialCUIT, " & _
+"			isnull(CLICOR.Nombre,'') AS CorredorDesc, " & _
+"            isnull(CLICOR.cuit,'') AS CorredorCUIT, " & _
+"			isnull(CLIENT.Razonsocial,'') AS DestinatarioDesc, " & _
+"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
+"            isnull(CLIENT.cuit,'') AS DestinatarioCUIT, " & _
+"			isnull(CLIAUX.Razonsocial,'') AS ClienteAuxiliarDesc, " & _
+"			isnull(CLIAUX.cuit,'') AS ClienteAuxiliarCUIT, " & _
+"			isnull(CLISC1.Razonsocial,'') AS Subcontr1Desc, " & _
+"            isnull(CLISC2.Razonsocial,'') AS Subcontr2Desc, " & _
+"             isnull(Articulos.Descripcion,'') AS Producto, " & _
+"			 Transportistas.cuit as  TransportistaCUIT, " & _
+"            isnull(Transportistas.RazonSocial,'') AS TransportistaDesc, " & _
+"			choferes.cuil as  ChoferCUIT, " & _
+"			choferes.Nombre as  ChoferDesc, " & _
+"           isnull(LOCORI.Nombre,'') AS ProcedenciaDesc, " & _
+"		isnull(LOCORI.CodigoPostal,'') AS ProcedenciaCodigoPostal, " & _
+"		isnull(LOCORI.CodigoONCAA,'') AS ProcedenciaCodigoONCAA, " & _
+"           isnull(PROVORI.Nombre,'') AS ProcedenciaProvinciaDesc, " & _
+"       isnull(LOCDES.Descripcion,'') AS DestinoDesc, " & _
+"            '' AS  DestinoCodigoPostal, " & _
+"			isnull(LOCDES.codigoONCAA,'') AS  DestinoCodigoONCAA, " & _
+"           DATENAME(month, FechaDescarga) AS Mes, " & _
+"          DATEPART(year, FechaDescarga) AS Ano,  " & _
+"      	FAC.TipoABC + '-' + CAST(FAC.PuntoVenta AS VARCHAR) + '-' + CAST(FAC.NumeroFactura AS VARCHAR) AS Factura, " & _
+"           FAC.FechaFactura, " & _
+"          isnull(CLIFAC.RazonSocial,'') AS ClienteFacturado, " & _
+"         isnull(CLIFAC.cuit,'') AS ClienteFacturadoCUIT, " & _
+"		Calidades.Descripcion AS CalidadDesc, " & _
+"	    E1.Nombre as UsuarioIngreso,isnull(ESTAB.Descripcion,'') COLLATE SQL_Latin1_General_CP1_CI_AS +' '+ isnull(ESTAB.AuxiliarString1,'') COLLATE SQL_Latin1_General_CP1_CI_AS+ ' '+ isnull(ESTAB.AuxiliarString2,'') COLLATE SQL_Latin1_General_CP1_CI_AS  " & _
+"                                                                                               as EstablecimientoDesc, " & _
+"			isnull(CLIENTFLET.Razonsocial,'') AS ClientePagadorFleteDesc ,        " & _
+"   isnull(LOCORI.Partido,'') AS ProcedenciaProvinciaPartido,   " & _
+"   isnull(PARTORI.Codigo,'') AS ProcedenciaPartidoNormalizadaCodigo, " & _
+"   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
+"  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
+"			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2 " _
+        )
+
+
+        Dim strFROM = _
+        "   FROM    CartasDePorte CDP " & _
+        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
+        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
+        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
+        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
+        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
+        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
+        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
+        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
+        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
+        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
+
+
+
+
+        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
+
+
+        strSQL += strFROM + strWHERE
+        Debug.Print(strWHERE)
+
+
+        Return strSQL
+
+
+
+
+
+        
+    End Function
     '/////////////////////////////////////////////////////////////////////////////////////////////////
     '/////////////////////////////////////////////////////////////////////////////////////////////////
     '/////////////////////////////////////////////////////////////////////////////////////////////////
