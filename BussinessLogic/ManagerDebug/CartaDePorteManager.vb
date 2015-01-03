@@ -1859,7 +1859,7 @@ Public Class CartaDePorteManager
 
             '  strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga & "%'" & ") "
 
-            If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
+            If idVendedorQueContiene <> -1 Then
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
@@ -1868,11 +1868,17 @@ Public Class CartaDePorteManager
                  "           AND (Vendedor = " & idVendedorQueContiene & _
                 "           OR CuentaOrden1 = " & idVendedorQueContiene & _
                 "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Corredor=" & idCorredorQueContiene & _
-                "             OR Corredor2=" & idCorredorQueContiene & _
                 "             OR Entregador=" & idVendedorQueContiene & _
                 "           OR idClienteAuxiliar = " & idVendedorQueContiene & _
                 "           )"
+            End If
+
+            If idCorredorQueContiene <> -1 Then
+                strWHERE += "  " & _
+                "    AND (   Corredor=" & idCorredorQueContiene & _
+                "             OR Corredor2=" & idCorredorQueContiene & _
+                "           )"
+
             End If
 
 
@@ -3319,7 +3325,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
     End Function
     '/////////////////////////////////////////////////////////////////////////////////////////////////
     '/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15450,7 +15456,7 @@ Public Class barras
 
 
 
-            
+
 
             Dim destinatario As String
 
@@ -17315,7 +17321,7 @@ Public Class LogicaImportador
 
 
 
-            
+
 
 
 
