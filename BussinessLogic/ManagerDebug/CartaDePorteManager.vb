@@ -49,7 +49,7 @@ Imports Excel = Microsoft.Office.Interop.Excel
 
 Imports CartaDePorteManager
 
-
+Imports LogicaImportador.FormatosDeExcel
 
 <DataObjectAttribute()> _
 <Transaction(TransactionOption.Required)> _
@@ -16923,3 +16923,1355 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
 
 End Class
+
+
+Public Class LogicaImportador
+
+
+
+
+    Public Enum FormatosDeExcel
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        Autodetectar
+        PuertoACA
+        BungeRamallo
+        CargillPlantaQuebracho
+        CargillPtaAlvear
+        LDCGralLagos
+        LDCPlantaTimbues
+        MuellePampa
+        NobleLima
+        Renova
+        Terminal6
+        ToepferPtoElTransito
+        Toepfer
+        VICENTIN
+        VICENTIN_ExcepcionTagRemitenteConflictivo
+        Reyser
+        ReyserAnalisis
+        Unidad6
+        Unidad6Prefijo_NroCarta
+        Unidad6Analisis
+        AdmServPortuarios
+
+        Nidera
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+        'esta enumeracion debe tener el mismo orden que el combo
+    End Enum
+
+
+
+    Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
+                                    txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
+                                    chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
+                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList _
+        ) As String 'devuelve la columna del error si es que hubo
+        'Dim dt = ViewstateToDatatable()
+
+        'Dim dr = dt.Rows(row)
+
+        Dim myCartaDePorte As New Pronto.ERP.BO.CartaDePorte
+
+
+        'If existeLaCarta Then
+        Dim numeroCarta As Long = Val(Replace(dr.Item("NumeroCDP"), "-", ""))
+        Dim vagon As Long = 0 'por ahora, las cdp importadas tendran subnumero 0
+        Dim subfijo As Long = 0 'por ahora, las cdp importadas tendran subnumero 0
+
+
+        Dim subnumerodefac As Long = Val(iisNull(dr.Item("SUBNUMERODEFACTURACION"), -1))
+        If subnumerodefac <= 0 Then subnumerodefac = -1
+
+
+        'Tomar como regla que cuando se haga la pegatina siempre se PEGUE con el prefijo 5 adelante. (ESTO TOMARLO COMO REGLA PARA TODAS LAS PEGATINAS DE TODOS LOS PUERTOS)
+        If numeroCarta < 100000000 Then numeroCarta += 500000000
+
+
+
+        myCartaDePorte = CartaDePorteManager.GetItemPorNumero(SC, numeroCarta, vagon, subnumerodefac)
+
+        'y si tiene duplicados, como sabes?
+
+
+        'End If
+
+        With myCartaDePorte
+
+            If .IdFacturaImputada > 0 Then
+                'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
+                ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque ya existe como facturada")
+                Return 0
+            End If
+
+
+            If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
+                'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
+                ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
+                Return 0
+            End If
+
+
+            If .Anulada = "SI" Then
+                ErrHandler.WriteError("La Carta " & numeroCarta & " estaba anulada. Se reestablece")
+                LogPronto(SC, .Id, "IMPANU", Session(SESSIONPRONTO_UserName))
+                CartaDePorteManager.CopiarEnHistorico(SC, .Id)    'hacer historico siempre en las modificaciones de cartas y clientes?
+
+                .Anulada = "NO"
+            End If
+
+
+
+
+            If .Id > 0 And .SubnumeroDeFacturacion > -1 Then
+
+                Dim q As IQueryable(Of CartasDePorte) = CartaDePorteManager.FamiliaDeDuplicadosDeCartasPorte(SC, myCartaDePorte)
+
+                If q.Count > 1 Then
+                    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+                    ErrHandler.WriteAndRaiseError("La Carta " & numeroCarta & " no puede ser importada porque está duplicada para facturarsele a varios clientes")
+                    Return 0
+                End If
+
+            ElseIf .Id <= 0 Then
+                .SubnumeroDeFacturacion = -1
+            End If
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+            'Pinta que no hay otra manera de actualizar un dataset suelto http://forums.asp.net/p/755961/1012665.aspx
+            .NumeroCartaDePorte = numeroCarta
+            .SubnumeroVagon = vagon
+            .SubnumeroDeFacturacion = subnumerodefac
+
+            If .NumeroCartaDePorte <= 0 Then
+                'Debug.Print(r.Item("Carta Porte"))
+                'renglonControl(r, "Carta Porte").BackColor = System.Drawing.Color.Red
+                Stop
+                Return 0
+            End If
+
+
+
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+
+            dr.Item("Producto") = iisNull(dr.Item("Producto"))
+            If dr.Item("Producto") <> "NO_VALIDAR" Then
+                .IdArticulo = BuscaIdArticuloPreciso(dr.Item("Producto"), SC)
+                If .IdArticulo = -1 Then .IdArticulo = BuscaIdArticuloPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Producto")), SC)
+                'dt.Rows(row).Item("IdArticulo") = .IdArticulo
+                If .IdArticulo = -1 Then Return "Producto"
+            End If
+
+            '/////////////////////////////////////////
+
+            dr.Item("Titular") = iisNull(dr.Item("Titular"))
+            If dr.Item("Titular") <> "NO_VALIDAR" Then
+                .Titular = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
+                If .Titular = -1 Then .Titular = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
+                dr.Item("IdTitular") = .Titular
+                If .Titular = -1 Then Return "Titular"
+            End If
+
+
+            dr.Item("Intermediario") = iisNull(dr.Item("Intermediario"))
+            If dr.Item("Intermediario") <> "NO_VALIDAR" And Trim(dr.Item("Intermediario")) <> "" Then
+                .CuentaOrden1 = BuscaIdClientePrecisoConCUIT(dr.Item("Intermediario"), SC)
+                If .CuentaOrden1 = -1 Then .CuentaOrden1 = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Intermediario")), SC)
+                dr.Item("IdIntermediario") = .CuentaOrden1
+                If .CuentaOrden1 = -1 Then Return "Intermediario"
+            End If
+
+
+            dr.Item("RComercial") = iisNull(dr.Item("RComercial"))
+            If dr.Item("RComercial") <> "NO_VALIDAR" And Trim(dr.Item("RComercial")) <> "" Then
+                .CuentaOrden2 = BuscaIdClientePrecisoConCUIT(dr.Item("RComercial"), SC)
+                If .CuentaOrden2 = -1 Then .CuentaOrden2 = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("RComercial")), SC)
+                dr.Item("IdRComercial") = .CuentaOrden2
+                If .CuentaOrden2 = -1 Then Return "RComercial"
+            End If
+
+
+
+            dr.Item("Corredor") = iisNull(dr.Item("Corredor"))
+            If dr.Item("Corredor") <> "NO_VALIDAR" Then
+                .Corredor = BuscaIdVendedorPrecisoConCUIT(dr.Item("Corredor"), SC)
+                If .Corredor = -1 Then .Corredor = BuscaIdVendedorPrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Corredor")), SC)
+                dr.Item("IdCorredor") = .Corredor
+                If .Corredor = -1 Then Return "Corredor"
+            End If
+
+
+
+
+
+            dr.Item("Comprador") = iisNull(dr.Item("Comprador"))
+            If dr.Item("Comprador") <> "NO_VALIDAR" Then
+                .Entregador = BuscaIdClientePrecisoConCUIT(dr.Item("Comprador"), SC)
+                If .Entregador = -1 Then .Entregador = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Comprador")), SC)
+                dr.Item("IdDestinatario") = .Entregador
+                If .Entregador = -1 Then
+                    'solo uso el default si está vacío el texto
+                    If dr.Item("Comprador") = "" Then .Entregador = BuscaIdClientePrecisoConCUIT(txtDestinatario.Text, SC)
+
+                    'si sigue con problemas, pido la equivalencia al usuario
+                    If .Entregador = -1 Then Return "Comprador"
+                End If
+            End If
+
+
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+            Try
+
+                If (.Titular > 0 AndAlso InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0) _
+                    Or _
+                    (.CuentaOrden1 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0) _
+                    Or _
+                    (.CuentaOrden2 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) Then
+                    Dim excep = CartaDePorteManager.excepciones
+                    Const otros = 15
+                    .EnumSyngentaDivision = excep(otros) 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
+                    .Acopio1 = otros
+                    .Acopio2 = otros
+                    .Acopio3 = otros
+                    .Acopio4 = otros
+                    .Acopio5 = otros
+
+
+                End If
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+                ErrHandler.WriteError("Falta el titular, o cuentaorden1 o cuentaorden2")
+            End Try
+
+
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+            '/////////////////////////////////////////
+
+
+
+            dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
+            If dr.Item("Procedencia") <> "NO_VALIDAR" Then
+                .Procedencia = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
+                If .Procedencia = -1 Then .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
+                'dt.Rows(row).Item("IdProcedencia") = .Procedencia
+                If .Procedencia = -1 Then Return "Procedencia"
+            End If
+
+
+
+            dr.Item("Destino") = iisNull(dr.Item("Destino"))
+            If dr.Item("Destino") <> "NO_VALIDAR" Then
+                .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
+                If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
+                'dt.Rows(row).Item("IdDestino") = .Destino
+                If .Destino = -1 And dr.Item("Destino") = "" Then
+                    'solo uso el default si está vacío el texto
+                    .Destino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, SC)
+                End If
+                If .Destino = -1 Then
+                    Return "Destino"
+                Else
+                    AsignarContratistasSegunDestino(dr, SC)
+                End If
+            End If
+
+
+
+            '/////////////////////////////////////////
+
+
+
+            dr.Item("Subcontratista1") = iisNull(dr.Item("Subcontratista1"))
+            If dr.Item("Subcontratista1") <> "NO_VALIDAR" And dr.Item("Subcontratista1") <> "" Then
+                .Subcontr1 = BuscaIdClientePrecisoConCUIT(dr.Item("Subcontratista1"), SC)
+                If .Subcontr1 = -1 Then .Subcontr1 = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Subcontratista1")), SC)
+                If .Subcontr1 = -1 Then Return "Subcontratista1"
+            End If
+
+
+            dr.Item("Subcontratista2") = iisNull(dr.Item("Subcontratista2"))
+            If dr.Item("Subcontratista2") <> "NO_VALIDAR" And dr.Item("Subcontratista2") <> "" Then
+                .Subcontr2 = BuscaIdClientePrecisoConCUIT(dr.Item("Subcontratista2"), SC)
+                If .Subcontr2 = -1 Then .Subcontr2 = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Subcontratista2")), SC)
+                If .Subcontr2 = -1 Then Return "Subcontratista2"
+            End If
+
+            CartaDePorteManager.ReasignoTarifaSubcontratistas(SC, myCartaDePorte)
+
+            '/////////////////////////////////////////
+
+
+
+            dr.Item("column21") = iisNull(dr.Item("column21"))
+            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" Then
+                .IdTransportista = BuscaIdTransportistaPreciso(dr.Item("column21"), SC)
+                If .IdTransportista = -1 Then .IdTransportista = BuscaIdTransportistaPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column21")), SC)
+                If .IdTransportista = -1 Then Return "column21"
+            End If
+
+
+            dr.Item("column23") = iisNull(dr.Item("column23"))
+            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" Then
+                .IdChofer = BuscaIdChoferPreciso(dr.Item("column23"), SC)
+                If .IdChofer = -1 Then .IdChofer = BuscaIdChoferPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column23")), SC)
+                If .IdChofer = -1 Then Return "column23"
+            End If
+
+
+
+            '/////////////////////////////////////////
+
+            dr.Item("Calidad") = iisNull(dr.Item("Calidad"))
+            If dr.Item("Calidad") <> "NO_VALIDAR" And dr.Item("Calidad") <> "" Then
+                .CalidadDe = BuscaIdCalidadPreciso(RTrim(iisNull(dr.Item("Calidad"))), SC)
+                If .CalidadDe = -1 Then .CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Calidad")), SC)
+                If .CalidadDe = -1 Then Return "Calidad"
+            End If
+
+
+
+
+
+            .Patente = iisNull(dr.Item("Patente"))
+            .Acoplado = iisNull(dr.Item("Acoplado"))
+
+
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            'Persistencia de las pesadas
+            '//////////////////////////////////////////////////////////////////////////////
+
+            ' http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
+
+            actualizar(.NetoPto, dr.Item("NetoProc"))
+
+            '.NetoPto = IIf( StringToDecimal(iisNull(dr.Item("NetoProc"))) 
+
+            actualizar(.BrutoFinal, dr.Item("column12"))
+            actualizar(.TaraFinal, dr.Item("column13"))
+            actualizar(.NetoFinalIncluyendoMermas, dr.Item("column14"))
+
+
+
+            actualizar(.Humedad, dr.Item("column15"))
+
+            actualizar(.HumedadDesnormalizada, dr.Item("column16"))
+            If .HumedadDesnormalizada = 0 And .Humedad <> 0 And .IdArticulo > 0 Then
+                Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, .IdArticulo, .Humedad)
+                .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalIncluyendoMermas
+            End If
+
+            '.Merma = 0 'la piso, por si ya se importó antes
+
+            If Val(dr.Item("Auxiliar5").ToString) > 0 Then
+                If .Merma = 0 Then
+                    .Merma = Val(dr.Item("Auxiliar5").ToString)
+                End If
+            End If
+
+
+
+            actualizar(.NetoFinalSinMermas, dr.Item("column17"))
+            If .NetoFinalSinMermas = 0 Then
+                'recalcular()
+                .NetoFinalSinMermas = .NetoFinalIncluyendoMermas - .HumedadDesnormalizada
+            Else
+                'que pasa si lo que viene en el excel es distinto de lo calculado?
+            End If
+
+
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+
+            If Val(iisNull(dr.Item("column20"))) > 0 Then .CEE = Val(iisNull(dr.Item("column20")))
+
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+
+
+            actualizar(.FechaDeCarga, dr.Item("column18"))
+            actualizar(.FechaVencimiento, (dr.Item("column19")))
+
+
+
+
+
+
+            'PEGATINA PLAYA PEREZ: (POSICION)
+            '•	Cuando hacemos la pegatina de Playa Perez , Posición pega los KILOS de procedencia en 
+            '           la solapa de descarga, lo tiene que pegar en la primer solapa en KILOS NETOS de procedencia.
+            '•	Pega la fecha de descarga y no LA TIENE QUE PEGAR (segunda solapa), porque cuando se genera la posición si esta esa fecha puesta no sale.
+
+            ' no actualizar fechadescarga si es posicion
+            'con el chkAyer tambien debo modificar la fecha de arribo???
+            actualizar(.FechaDescarga,
+                       iisValidSqlDate(TextoAFecha(
+                                                iisNull(dr.Item("FechaDescarga"), _
+                                                    IIf(.NetoFinalIncluyendoMermas > 0, _
+                                                        IIf(chkAyer.Checked, _
+                                                            DateAdd(DateInterval.Day, -1, Today), _
+                                                            Today) _
+                                                        , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalIncluyendoMermas
+
+
+
+
+
+
+
+            'If iisNull(.FechaArribo, #12:00:00 AM#) = #12:00:00 AM# Then
+            actualizar(.FechaArribo, IIf(chkAyer.Checked, DateAdd(DateInterval.Day, -1, Today), txtFechaArribo.Text))
+            'End If
+            '.Merma = StringToDecimal(dr.Item("column16")) 'este es el otras mermas
+
+
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////
+
+
+
+            actualizar(.Observaciones, dr.Item("column25"))
+
+            If .NetoFinalSinMermas <> .NetoFinalIncluyendoMermas - .HumedadDesnormalizada And iisNull(dr.Item("column17"), 0) <> 0 Then
+                .Observaciones &= " (AVISO: renglon importado con incoherencias entre la merma y los netos -->  Neto importado: " & .NetoFinalSinMermas & "     Neto calculado:" & .NetoFinalIncluyendoMermas - .HumedadDesnormalizada & " =" & .NetoFinalIncluyendoMermas & "-" & .HumedadDesnormalizada & "   )"
+            End If
+
+
+            If Val(iisNull(dr.Item("CTG"))) > 0 Then .CTG = Val(iisNull(dr.Item("CTG")))
+
+            actualizar(.TarifaTransportista, dr.Item("TarifaTransportista"))
+            actualizar(.KmARecorrer, dr.Item("KmARecorrer"))
+
+
+
+            .PuntoVenta = cmbPuntoVenta.SelectedValue ' Val(iisNull(EmpleadoManager.GetItem(SC, session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado, 1))
+
+            actualizar(.Cosecha, (Year(.FechaArribo) - 1) & "/" & Right(Year(.FechaArribo), 2))
+
+
+
+            .Exporta = (dr.Item("Exporta").ToString() = "SI")
+
+
+
+            'sector del confeccionó
+
+
+
+            Dim ms As String
+            If CartaDePorteManager.IsValid(SC, myCartaDePorte, ms) Then
+                '                Try
+
+
+                Try
+                    'EntidadManager.LogPronto(HFSC.Value, id, "CartaPorte Anulacion de posiciones ", Session(SESSIONPRONTO_UserName))
+
+                    'loguear el formato usado   y el nombre del archivo importado
+                    Dim nombre = Session("NombreArchivoSubido")
+                    Dim formato = FormatoDelArchivo(nombre, cmbFormato)
+                    Dim s = " F:" + formato.ToString + " " + nombre
+
+
+                    EntidadManager.Tarea(SC, "Log_InsertarRegistro", "IMPORT", _
+                                              .Id, 0, Now, 0, "Tabla : CartaPorte", "", Session(SESSIONPRONTO_UserName), _
+                                             s, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                                            DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                                            DBNull.Value, DBNull.Value, DBNull.Value)
+
+
+
+                    'GetStoreProcedure(SC, enumSPs.Log_InsertarRegistro, IIf(myCartaDePorte.Id <= 0, "ALTA", "MODIF"), _
+                    '                          CartaDePorteId, 0, Now, 0, "Tabla : CartaPorte", "", NombreUsuario)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+                If CartaDePorteManager.Save(SC, myCartaDePorte, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
+                    Debug.Print("No se pudo grabar el renglon n° " & myCartaDePorte.NumeroCartaDePorte)
+                    ErrHandler.WriteError("Error al grabar CDP importada")
+                Else
+                    'poner url hacia el ABM
+                    'Response.Redirect(String.Format("CartaDePorte.aspx?Id={0}", IdCartaDePorte.ToString))
+
+                    'Dim hl As WebControls.HyperLink = CType(r.Cells(getGridIDcolbyHeader("Ir a", gvExcel)).Controls(1), WebControls.HyperLink)
+                    'hl.NavigateUrl = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
+                    dr.Item("URLgenerada") = String.Format("CartaDePorte.aspx?Id={0}", myCartaDePorte.Id.ToString)
+
+                End If
+
+            Else
+                Dim sError = "Error al validar CDP importada: " & myCartaDePorte.NumeroCartaDePorte & " " & ms
+                ErrHandler.WriteError(sError)
+                txtLogErrores.Visible = True
+                If txtLogErrores.Text = "" Then txtLogErrores.Text = "Errores: " & vbCrLf
+                txtLogErrores.Text &= sError & vbCrLf
+            End If
+
+        End With
+
+        Return 0
+    End Function
+
+
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+
+    Shared Sub actualizar(ByRef Destino As Date, ByVal OrigenDataRowItem As Object)
+
+        'todas estas volteretas para no pisar si ya hay dato 
+
+        'If Destino = 0 Then
+
+        Dim temp As Object = iisValidSqlDate(TextoAFecha(iisNull(OrigenDataRowItem)))
+        If Not temp Is Nothing Then
+            Destino = temp
+        End If
+
+
+        'End If
+
+    End Sub
+
+
+
+
+    Shared Sub actualizar(ByRef Destino As Double, ByVal OrigenDataRowItem As Object)
+
+        'todas estas volteretas para no pisar si ya hay dato 
+
+        'If Destino = 0 Then
+
+        Dim temp As Double = StringToDecimal(iisNull(OrigenDataRowItem))
+        If temp <> 0 Then
+            Destino = temp
+        End If
+
+
+        'End If
+
+    End Sub
+
+
+
+    Shared Sub actualizar(ByRef Destino As String, ByVal OrigenDataRowItem As Object)
+
+        'todas estas volteretas para no pisar si ya hay dato 
+
+        'If Destino = 0 Then
+
+        Dim temp As String = iisNull(OrigenDataRowItem)
+        If temp <> "" Then
+            Destino = temp
+        End If
+
+
+        'End If
+
+    End Sub
+
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////
+
+    Shared Sub AsignarContratistasSegunDestino(ByVal dr As DataRow, SC As String)
+        With dr
+            Dim iddest = BuscaIdWilliamsDestinoPreciso(.Item("Destino"), SC)
+
+            If iddest <> -1 Then
+                If iisNull(.Item("Subcontratista1"), "") = "" Then
+                    Dim idcli1 = EntidadManager.ExecDinamico(SC, "select * from WilliamsDestinos where IdWilliamsDestino=" & iddest).Rows(0).Item("Subcontratista1")
+                    If IsNumeric(idcli1) Then
+                        .Item("Subcontratista1") = EntidadManager.GetItem(SC, "Clientes", idcli1).Item("RazonSocial")
+                    End If
+                End If
+
+
+                If iisNull(.Item("Subcontratista2"), "") = "" Then
+                    Dim idcli2 = EntidadManager.ExecDinamico(SC, "select * from WilliamsDestinos where IdWilliamsDestino=" & iddest).Rows(0).Item("Subcontratista2")
+                    If IsNumeric(idcli2) Then
+                        .Item("Subcontratista2") = EntidadManager.GetItem(SC, "Clientes", idcli2).Item("RazonSocial")
+                    End If
+                End If
+
+            End If
+        End With
+    End Sub
+
+
+
+
+    Shared Function FormatoDelArchivo(ByVal sNombreArchivoImportado As String, cmbFormato As System.Web.UI.WebControls.DropDownList) As FormatosDeExcel
+        '"Bunge Ramallo" 
+        '"Cargill Planta Quebracho"
+        '"Cargill Pta Alvear"
+        '"LDC Gral Lagos" 
+        '"LDC Planta Timbues"
+        '"Muelle Pampa"
+        '"Terminal 6"
+        '"Toepfer Pto El Transito"
+        '"Toepfer Destino"
+        '"VICENTIN"
+
+
+        If cmbFormato.SelectedIndex <> FormatosDeExcel.Autodetectar Then Return [Enum].Parse(GetType(FormatosDeExcel), cmbFormato.SelectedItem.Value.ToString)
+
+
+
+
+        If InStr(sNombreArchivoImportado.ToString.ToUpper, ".TXT") > 0 Then
+            If InStr(sNombreArchivoImportado.ToString.ToUpper, "DESCAR") = 0 Then
+                cmbFormato.SelectedIndex = FormatosDeExcel.PuertoACA
+            Else
+                cmbFormato.SelectedIndex = FormatosDeExcel.Reyser
+            End If
+        ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, ".RTF") > 0 Then
+            cmbFormato.SelectedIndex = FormatosDeExcel.Nidera
+        ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "BUNGE") > 0 Then
+            cmbFormato.SelectedIndex = FormatosDeExcel.BungeRamallo
+        ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "PAMPA") > 0 Then
+            cmbFormato.SelectedIndex = FormatosDeExcel.MuellePampa
+        ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "TIMBUES") > 0 Or InStr(sNombreArchivoImportado.ToString.ToUpper, "LDC") > 0 Then
+            cmbFormato.SelectedIndex = FormatosDeExcel.LDCPlantaTimbues
+        ElseIf InStr(sNombreArchivoImportado.ToString.ToUpper, "VICENT") > 0 Then
+            cmbFormato.SelectedIndex = FormatosDeExcel.VICENTIN
+        End If
+
+
+        Return cmbFormato.SelectedIndex
+
+
+        'http://stackoverflow.com/questions/1061228/c-sharp-explicit-cast-string-to-enum
+        'http://stackoverflow.com/questions/424366/c-sharp-string-enums
+        'return (T)Enum.Parse(typeof(T), str)
+
+        'If cmbFormato.SelectedValue = "PuertoACA" Then 'formato CSV
+        '    Return PuertoACA
+        'ElseIf cmbFormato.SelectedValue = "AdmServPortuarios" Then
+
+        '    Return -1
+
+        'ElseIf cmbFormato.SelectedValue = "Toepfer Transito" Or InStr(nombre.ToUpper, "TRANSITO") Then
+
+        '    ds = GetExcel(DIRFTP + nombre, 3) 'hoja 3
+
+        'ElseIf InStr(nombre.ToUpper, "TOEPFER") Then
+
+        '    ds = GetExcel(DIRFTP + nombre, 1)
+
+        'ElseIf cmbFormato.SelectedValue = "Cargill" Or InStr(nombre.ToUpper, "CARGILL") Then
+
+        '    ds = GetExcel(DIRFTP + nombre, 1) 'hoja 1
+
+        'Else
+
+        '    ds = GetExcel(DIRFTP + nombre)
+
+        'End If
+    End Function
+
+
+
+    Shared Function TraerExcelDeBase(SC, m_IdMaestro) As Data.DataTable
+
+
+        'Dim dtBase = ExcelImportadorManager.TraerMetadata(SC)
+        Dim dtBase As Data.DataTable
+
+        Try
+            dtBase = ExcelImportadorManager.TraerMetadataPorIdMaestro(SC, m_IdMaestro)
+        Catch ex As Exception
+            ErrHandler.WriteError("Problemas con IdMaestro? Quizas no pude importar filas. " & ex.ToString)
+            'esta explotando porque no encuentra el idmaestro? por qué?
+            '-en el unico lugar donde se asigna el IdMaestro es al final de FormatearExcel. Quizas 
+            'no llega a ejecutarse porque no se pudieron importar filas
+        End Try
+
+
+
+
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        'OPTIMIZAR
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        'METODO 1: formateo dtExcel y le copio dtBase
+
+        'Dim dtExcel = TablaFormato()
+
+        'For Each drBase As DataRow In dtBase.Rows
+
+        '    Dim drExcel = dtExcel.NewRow()
+
+        '    For c As Integer = 0 To dtExcel.Columns.Count - 1
+        '        Try
+        '            drExcel(c) = drBase("Excel" & (c + 1))
+        '        Catch ex As Exception
+        '        End Try
+        '    Next
+
+
+        '    drExcel("IdExcelImportador") = drBase("IdExcelImportador")
+
+        '    dtExcel.Rows.Add(drExcel)
+        'Next
+
+
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+
+        'Metodo 2: modifico directamente dtBase, para que no tarde tanto
+        Dim dtExcel = dtBase
+
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////
+
+
+
+
+        'Pongo los nombres de columna que figuran serializados en Observaciones
+
+        'Dim nombres = Split(dtBase.Rows(0).Item("Observaciones"), "|")
+        ''For c As Integer = 0 To dtExcel.Columns.Count - 1
+        ''    dtExcel.Columns(c).ColumnName = "col" & c
+        ''Next
+
+        'For c As Integer = 0 To nombres.Length - 2
+        '    Try
+        '        dtExcel.Columns("Excel" & (c + 1)).ColumnName = nombres(c)
+        '    Catch ex As Exception
+
+        '    End Try
+        'Next
+
+        'For c As Integer = 0 To 50 ' (dtExcel.Columns.Count - 1)
+        '    If Left(dtExcel.Columns(c).ColumnName, 5) = "Excel" Then dtExcel.Columns.RemoveAt(c)
+        'Next
+
+
+
+        Return dtExcel
+    End Function
+
+End Class
+
+
+
+Public Class ExcelImportadorManager
+
+    Const Tabla = "ExcelImportador"
+    Const IdTabla = "IdExcelImportador"
+
+    '    http://www.aspdotnetcodes.com/GridView_Insert_Edit_Update_Delete.aspx
+
+
+
+
+
+
+
+
+
+
+    Private Shared Function HermanarLeyendaConColumna_aCadena(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As LogicaImportador.FormatosDeExcel = Nothing) As String
+        s = Trim(s)
+
+        Dim excep = ExcepcionHermanado(s, sNombreArchivoImportado, LetraColumna, formato)
+        If excep <> enumColumnasDeGrillaFinal._Desconocido Then
+            Return excep.ToString
+        End If
+
+        Select Case s
+            Case "PRODUCTO", "PROD.", "MERC.", "MER", "GRANO", "MERCADERIA", "PROD"
+                Return "Producto"
+
+            Case "VENDEDOR", "CARGADOR", "TITULAR DE CARTA DE PORTE", "REMITENTE", "TITULAR CP", "TITULAR"
+                Return "Titular" 'fijate que si está "remitente" solito, se usa Titular
+
+            Case "CUENTA ORDEN 1", "1º CTA./ORDEN", "1º CTA./ORD.", "CY O 1", "C Y O 1", "CYO 1", "C/ORDEN 1", "C/O 1", "INTERMEDIARIO"
+                Return "Intermediario"
+
+            Case "CUENTA ORDEN 2", "2º CTA./ORDEN", "2º CTA./ORD.", "CY O 2", "C Y O 2", "CYO 2", "C/ORDEN 2", "C/O 2", "REMITENTE COMERCIAL", "REMIT COMERC", "RTE. COMERCIAL", "RTE.COMERCIAL", "R.COMERCIAL", "REMIT COMERCIAL"
+
+                Return "RComercial"
+
+            Case "CORREDOR"
+                Return "Corredor"
+
+            Case "ENTREGADOR", "REPRESENTANTE", "ENTREG"
+                Return "EntregadorFiltrarPorWilliams" 'el entregador es el mismísimo Williams
+
+            Case "DESTINATARIO", "EXPORTADOR", "EXPORT.", "COMPRADOR", "EXP", "EXP.", "DEST."
+                Return "Comprador"
+
+            Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP"
+                Return "NumeroCDP"
+
+
+
+            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC."
+
+                Return "Procedencia"
+
+
+            Case "DESTINO"
+                Return "Destino"
+
+            Case "SUBCONTRATISTAS"
+
+                Return "Subcontratistas"
+
+            Case "CALIDAD", "CALID."
+                Return "Calidad"
+
+            Case "F. DE CARGA"
+                Return "column18"
+
+            Case "F. DE DESCARGA", "FECHA"
+                Return "FechaDescarga"
+
+
+
+
+            Case "CONTRATO"
+                'no lo estas importando.....
+
+
+            Case "TURNO"
+                'return  
+            Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
+                Return "Patente"
+            Case "ACOPLADO", "ACOPL", "PAT.ACOP."
+
+                Return "Acoplado"
+
+
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '   Pesajes en la procedencia/origen (ficha de posicion)
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+
+            Case "NETO PROC", "KG", "KG. PROC.", "KG,PROC", "KG P", _
+                    "KGS", "KGS ORIGEN" '"KGS." qué va a ser? Neto proc o Neto Pto???
+
+                'conflicto "PROC": lo usa "Las Palmas" para "Procedencia"
+                Return "NetoProc"
+
+
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '   Pesajes en el destino/puerto (se ven en la ficha de descarga)
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE"
+                Return "column12"
+            Case "TARA PTO", "TARA", "TARA BUNGE"
+                Return "column13"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC"
+                Return "column14"
+
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                'mermas y neto total final
+                '/////////////////////////////////////////////////////////////////////////
+
+            Case "HUMEDAD", "H", "GDO/HUM", "HUM"
+                Return "column15"
+            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA"
+                Return "column16"
+
+            Case "OTRASMERMAS"
+                Return "Auxiliar5" '"OtrasMermas"
+
+            Case "NETO FINAL", "FINAL"
+                Return "column17"
+
+
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+                '/////////////////////////////////////////////////////////////////////////
+
+            Case "F. DE CARGA", "FEC.CARGA"
+                Return "column18"
+            Case "FECHA VTO.", "FEC.VTO."
+                Return "column19"
+            Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE"
+                Return "column20"
+            Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
+                Return "column21"
+            Case "CUIT TRANS"
+                Return "column22"
+            Case "CHOFER", "NOMBRE CHOFER"
+                Return "column23"
+            Case "CUIT CHOFER"
+                Return "column24"
+            Case "OBSERVACIONES.", "OBSERVACIONES", "OBSERVACION", "OBSERV.", "MER/REB", "ANÁLISIS"
+                Return "column25"
+
+
+
+            Case "NRO. CTG", "CTG"
+                Return "CTG"
+            Case "KM"
+                Return "KmARecorrer"
+            Case "TAR.FLETE", "TARIFA"
+                Return "TarifaTransportista"
+
+            Case "EXPORTA"
+                Return "Exporta"
+            Case "SUBNUMERODEFACTURACION"
+                Return "SubnumeroDeFacturacion"
+
+            Case Else
+                Debug.Print(s)
+                Return ""
+
+
+
+                'qué tendría que hacer para agregar nuevas columnas? (ctg, tarifa, 
+                '-agregarlas en:
+                '   la tabla temporal
+                '   acá en el HermanarViejo
+                '   a la enumeracion
+                '   a la grilla
+                '   a la GrabaRenglonEnTablaCDP
+                'tambien sería bueno que estuviesen las columnas tipadas....
+
+
+        End Select
+    End Function
+
+
+
+
+    Enum enumColumnasDeGrillaFinal As Integer
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+
+
+        Producto
+        Titular
+        Intermediario
+        RComercial
+        Corredor
+        Comprador
+        NumeroCDP
+        Procedencia
+        Destino
+        Subcontratistas
+        Calidad
+        column18
+        FechaDescarga
+        Patente
+        Acoplado
+        NetoProc
+        column12
+        column13
+        column14
+        column15
+        column16
+        column17
+        column19
+        column20
+        column21
+        column22
+        column23
+        column24
+        column25
+
+        Auxiliar5
+
+        CTG
+        KmARecorrer
+        TarifaTransportista
+
+        EntregadorFiltrarPorWilliams 'columna que se debe filtrar en el excel para quedarnos solamente con las cartas de williams
+
+        Exporta
+        SubnumeroDeFacturacion
+
+
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+        'Tenés que agregar el campo en la tabla "ExcelImportador"
+
+
+        _Desconocido
+    End Enum
+
+
+
+    Shared Function HermanarLeyendaConColumna(ByVal s As String, Optional ByVal sNombreArchivoImportado As String = "", Optional ByVal LetraColumna As Integer = -1, Optional ByVal formato As LogicaImportador.FormatosDeExcel = Nothing) As String
+        Dim sRet As String = HermanarLeyendaConColumna_aCadena(s, sNombreArchivoImportado, LetraColumna, formato)
+
+        If sRet = "" Then sRet = "_Desconocido" 'trucheo. arreglar
+
+        Dim enumEntidad As enumColumnasDeGrillaFinal = [Enum].Parse(GetType(enumColumnasDeGrillaFinal), sRet)
+
+        Dim reconversion As String = enumEntidad.ToString
+        If reconversion = "_Desconocido" Then reconversion = "" 'trucheo. arreglar
+
+
+        Return reconversion
+    End Function
+
+
+
+
+
+    Shared Function RenglonTitulos(ByRef dtOrigen As Data.DataTable, ByVal nombre As String, ByVal fa As LogicaImportador.FormatosDeExcel) As Integer
+        Dim renglonDeTitulos As Integer = -1
+        Dim row As DataRow
+
+
+        'busco el renglon (desde ABAJO para ARRIBA!!) con los titulos para despues hacer el macheo
+        For j = dtOrigen.Rows.Count - 1 To 0 Step -1
+            row = dtOrigen.Rows(j)
+            If row.Item("column1").ToString.ToUpper = "PRODUCTO" _
+            Or row.Item("column1").ToString.ToUpper = "ENTREGADOR" _
+            Or row.Item("column1").ToString.ToUpper = "EXPORT." _
+            Or row.Item("column1").ToString.ToUpper = "PROCENDECIA." _
+            Or row.Item("column1").ToString.ToUpper = "MER" _
+            Or row.Item("column1").ToString.ToUpper = "MERCADERIA" _
+            Or row.Item("column1").ToString.ToUpper = "CARGADOR" _
+            Or row.Item("column1").ToString.ToUpper = "F. DE CARGA" _
+            Or row.Item("column2").ToString.ToUpper = "VENDEDOR" _
+            Or row.Item("column2").ToString.ToUpper = "GRANO" _
+            Or row.Item("column2").ToString.ToUpper = "TURNO" Then
+                renglonDeTitulos = j
+            End If
+        Next
+
+
+
+        Try
+            If renglonDeTitulos = -1 Then
+                'probar siendo mas flexible, solo en los primeros 3 renglones
+                For j = Min(2, dtOrigen.Rows.Count - 1) To 0 Step -1
+                    row = dtOrigen.Rows(j)
+                    Dim s = row.Item("column1").ToString.ToUpper
+                    If HermanarLeyendaConColumna(s, nombre, , fa) <> "" Then
+                        renglonDeTitulos = j
+                    End If
+                Next
+
+
+                If renglonDeTitulos = -1 Then
+                    'probar en la segunda columna
+                    For j = Min(5, dtOrigen.Rows.Count - 1) To 0 Step -1
+                        row = dtOrigen.Rows(j)
+                        Dim s = row.Item("column2").ToString.ToUpper
+                        If HermanarLeyendaConColumna(s, nombre, , fa) <> "" Then
+                            renglonDeTitulos = j
+                        End If
+                    Next
+                End If
+
+
+                'Stop
+                If renglonDeTitulos = -1 Then
+
+                    ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
+
+
+                    Stop
+                    Return -1 'me rindo
+                End If
+            End If
+
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError("No se encontró el renglon de titulos. Renglones totales:" & dtOrigen.Rows.Count)
+            Stop
+            Return -1 'me rindo
+        End Try
+
+
+        Return renglonDeTitulos
+    End Function
+
+
+
+    Shared Function ExcepcionHermanado(ByVal s As String, ByVal sNombreArchivoImportado As String, ByVal LetraColumna As Integer, ByVal FormatoDelArchivo As LogicaImportador.FormatosDeExcel) As enumColumnasDeGrillaFinal
+        'Consulta 5784
+        '        Bunge
+        'VENDEDOR es Destinatario (generalmente es Titular)
+        'NETO es Neto proc (generalmente es Neto Pto)
+
+        '        Timbues
+        'KGS. es Neto Proc (generalmente es Neto Pto)
+
+
+
+
+        'If cmbFormato.SelectedValue = "Toepfer Transito" Then
+
+
+        Select Case FormatoDelArchivo
+            Case BungeRamallo
+                'cargador ----> titular
+                'vendedor ----> remitcomer
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultas1.php?recordid=11790
+                'CUANDO HAY CARGADOR Y VENDEDOR -> TITULAR, INTERMEDIARIO
+                'CUANDO HAY CARGADOR, VENDEDOR Y C/ORDEN -> TITULAR, REMITENTE E INTERMEDIARIO
+
+                'los reacomodo en FormatearColumnasDeCalidadesRamallo()
+                If s = "CARGADOR" Then
+                    Return enumColumnasDeGrillaFinal.Titular 'en lugar de vendedor/titular
+                ElseIf s = "VENDEDOR" Then
+                    Return enumColumnasDeGrillaFinal.Intermediario 'en lugar de intermediario
+                ElseIf s = "C/ORDEN 1" Then
+                    Return enumColumnasDeGrillaFinal.RComercial 'en lugar de intermediario
+                ElseIf s = "NETO" Then
+                    'en bunge muelle pampa usa "neto" para el netoproc
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                ElseIf s = "RUBROS" Then
+                    Return enumColumnasDeGrillaFinal.column15
+                ElseIf LetraColumna = 19 Then '"U" Then
+                    'Return enumColumnasDeGrillaFinal.column25
+                End If
+            Case MuellePampa, Terminal6, NobleLima
+                If s = "NETO" Then
+                    'en bunge muelle pampa usa "neto" para el netoproc
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                End If
+            Case LDCPlantaTimbues, LDCGralLagos
+                If s = "KGS." Then
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                ElseIf s = "PROC" Then
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                ElseIf LetraColumna = 13 Then ' "N" Then
+                    'columna N en timbues (columna sin titulo) es OBSERVACIONES
+                    Return enumColumnasDeGrillaFinal.column25
+                End If
+            Case VICENTIN
+
+                If s = "DESC" Or s = "KILOS" Then
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                End If
+            Case VICENTIN_ExcepcionTagRemitenteConflictivo
+
+                If s = "REMITENTE" Then
+                    Return enumColumnasDeGrillaFinal.Titular
+                End If
+                If s = "REMITENTE COMERCIAL" Then
+                    Return enumColumnasDeGrillaFinal.RComercial
+                End If
+
+            Case Renova
+                If s = "FECHA" Then
+                    Return enumColumnasDeGrillaFinal.column18
+                End If
+                If s = "NETO" Then
+                    Return enumColumnasDeGrillaFinal.NetoProc
+                End If
+                If s = "ACOPLADO" Then
+                    Return enumColumnasDeGrillaFinal.column24 'no te sirve poner _desconocido:  HermanarLeyenda() en ese caso se fija qué pasa. Lo mando entonces a una columna sin consecuencias (CUIT CHOFER)
+                End If
+                If s = "PATENTE" Then
+                    Return enumColumnasDeGrillaFinal.column24
+                End If
+
+
+        End Select
+
+
+
+
+
+        Return enumColumnasDeGrillaFinal._Desconocido
+    End Function
+
+
+
+
+
+
+
+    Public Shared Function TraerMetadataPorIdMaestro(ByVal SC As String, Optional ByVal id As Integer = -1) As Data.DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from " & Tabla & " where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from " & Tabla & " where " & "IdTanda" & "=" & id)
+        End If
+    End Function
+
+
+    Public Shared Function TraerMetadataPorIdDetalle(ByVal SC As String, Optional ByVal id As Integer = -1) As Data.DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from " & Tabla & " where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from " & Tabla & " where " & IdTabla & "=" & id)
+        End If
+    End Function
+
+    Public Shared Function Insert(ByVal SC As String, ByVal dt As Data.DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+
+        Try
+            adapterForTable1.Update(dt)
+        Catch ex As Exception
+            ErrHandler.WriteError("ExcelImportadorManager.Insert()  " & ex.ToString)
+            Stop
+            Throw
+        End Try
+
+
+
+        'Dim r = ExecDinamico(SC, "SELECT TOP 1 idListaPrecios from  " & Tabla & " order by idListaPrecios DESC")
+        'Return r.Rows(0).Item(0)
+
+    End Function
+
+
+
+
+
+    Public Shared Function Fetch(ByVal SC As String) As Data.DataTable
+
+        'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT") 
+
+        'el Trasnportistas_TT esta usando INNER JOIN
+        Dim s = "Select " & _
+     "Transportistas.IdTransportista, " & _
+     "Transportistas.RazonSocial,  " & _
+     "Transportistas.Direccion,  " & _
+     "Localidades.Nombre AS [Localidad],  " & _
+     "Transportistas.CodigoPostal,  " & _
+     "Provincias.Nombre AS [Provincia],  " & _
+     "Paises.Descripcion AS [Pais],  " & _
+     "Transportistas.Telefono,  " & _
+     "Transportistas.Fax,  " & _
+     "Transportistas.Email,  " & _
+     "Transportistas.Cuit,  " & _
+     "DescripcionIva.Descripcion AS [Condicion IVA],  " & _
+     "Transportistas.Contacto, " & _
+     "Transportistas.Horario, " & _
+        "    Transportistas.Celular " & _
+        "    FROM Transportistas " & _
+     "LEFT JOIN DescripcionIva ON Transportistas.IdCodigoIva = DescripcionIva.IdCodigoIva  " & _
+     "LEFT JOIN Localidades ON Transportistas.IdLocalidad = Localidades.IdLocalidad  " & _
+     "LEFT JOIN Provincias ON Transportistas.IdProvincia = Provincias.IdProvincia " & _
+     "LEFT JOIN Paises ON Transportistas.IdPais = Paises.IdPais " & _
+        "ORDER BY Transportistas.RazonSocial "
+
+        Return EntidadManager.ExecDinamico(SC, s)
+
+
+    End Function
+
+
+    Public Shared Function Update(ByVal SC As String, ByVal dt As Data.DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+        'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+        'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+        adapterForTable1.Update(dt)
+
+    End Function
+
+
+    Public Shared Function Delete(ByVal SC As String, ByVal Id As Long)
+        '// Write your own Delete statement blocks. 
+        ExecDinamico(SC, String.Format("DELETE  " & Tabla & "  WHERE {1}={0}", Id, IdTabla))
+    End Function
+
+End Class
+
