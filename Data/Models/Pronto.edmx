@@ -13433,7 +13433,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Agrupacion1" Type="Int32" />
         </EntityType>
-        >>>>>>> 74db4545244bc9ed62560c78eb8bd879cb9652d5
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
