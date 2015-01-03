@@ -9672,12 +9672,21 @@ Public Class LogicaFacturacion
 
         Dim db As New LinqCartasPorteDataContext(Encriptar(sc))
 
-        Dim u = (From i In db.wTempCartasPorteFacturacionAutomaticas _
+        Dim oo = (From i In db.wTempCartasPorteFacturacionAutomaticas _
                  Join c In db.linqClientes On i.IdFacturarselaA Equals c.IdCliente _
                  Where i.IdSesion = sesion _
-                Select i.IdCartaDePorte, c.RazonSocial, c.ExpresionRegularNoAgruparFacturasConEstosVendedores _
-                ).ToList
-        Dim o = u.ToDictionary(Function(x) x.IdCartaDePorte, Function(x) x.ExpresionRegularNoAgruparFacturasConEstosVendedores)
+                 Select If(i.IdCartaDePorte, -1) _
+               ).ToList
+        '                Select i.IdCartaDePorte, c.RazonSocial, c.ExpresionRegularNoAgruparFacturasConEstosVendedores _
+
+        Dim u = oo.Distinct()
+        If u.Count <> oo.Count Then
+            MandarMailDeError("da distinta la agrupacion en ActualizarCampoClienteSeparador. Ver cómo agrupar")
+
+        End If
+
+        Dim o = u.ToDictionary(Function(x) x, Function(x) x.ToString())
+        'Dim o = u.ToDictionary(Function(x) x.IdCartaDePorte, Function(x) x.ExpresionRegularNoAgruparFacturasConEstosVendedores)
 
 
 
@@ -15305,7 +15314,13 @@ Public Class barras
 
         Dim dt = ExecDinamico(SC, "select FueEnviadoCorreoConFacturaElectronica from  facturas where idfactura=" & idfactura)
 
-        If dt(0).Item("FueEnviadoCorreoConFacturaElectronica") = "SI" Then Return True Else Return False
+        Try
+            If iisNull(dt(0).Item("FueEnviadoCorreoConFacturaElectronica")) = "SI" Then Return True Else Return False
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            Return False
+        End Try
+
 
     End Function
 
