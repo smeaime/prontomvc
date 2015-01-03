@@ -896,6 +896,12 @@
       <End Role="OrdenPago" EntitySet="OrdenesPago" />
       <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
+    <EntitySet Name="CurvasTalles" EntityType="DemoProntoModel.CurvasTalle" />
+    <EntitySet Name="ImpuestosDirectos" EntityType="DemoProntoModel.ImpuestosDirecto" />
+    <EntitySet Name="Marcas" EntityType="DemoProntoModel.Marca" />
+    <EntitySet Name="Materiales" EntityType="DemoProntoModel.Materiale" />
+    <EntitySet Name="Modelos" EntityType="DemoProntoModel.Modelo" />
+    <EntitySet Name="Actividades_Proveedores" EntityType="DemoProntoModel.Actividades_Proveedore" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -7543,4 +7549,63 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="CurvasTalle">
+    <Key>
+      <PropertyRef Name="IdCurvaTalle" />
+    </Key>
+    <Property Name="IdCurvaTalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Curva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CurvaCodigos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MostrarCurvaEnInformes" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ImpuestosDirecto">
+    <Key>
+      <PropertyRef Name="IdImpuestoDirecto" />
+    </Key>
+    <Property Name="IdImpuestoDirecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tasa" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="IdTipoImpuesto" Type="Int32" />
+    <Property Name="IdCuenta" Type="Int32" />
+    <Property Name="BaseMinima" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProximoNumeroCertificado" Type="Int32" />
+    <Property Name="Grupo" Type="Int32" />
+    <Property Name="ActivaNumeracionPorGrupo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TopeAnual" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoRegimen" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Marca">
+    <Key>
+      <PropertyRef Name="IdMarca" />
+    </Key>
+    <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Materiale">
+    <Key>
+      <PropertyRef Name="IdMaterial" />
+    </Key>
+    <Property Name="IdMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Modelo">
+    <Key>
+      <PropertyRef Name="IdModelo" />
+    </Key>
+    <Property Name="IdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Actividades_Proveedore">
+    <Key>
+      <PropertyRef Name="IdActividad" />
+    </Key>
+    <Property Name="IdActividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Agrupacion1" Type="Int32" />
+  </EntityType>
 </Schema>
