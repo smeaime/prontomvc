@@ -92,8 +92,8 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="ALTERTABLE 2011 Modulo WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
@@ -134,8 +134,8 @@
           <FullPath>InformeResumenGastosPorRubroContable_TX_1.sql</FullPath>
         </FileNode>
         <FileNode Name="Insert into Parametros 2010 WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Insert into Parametros 2010 WEB.sql</FullPath>
         </FileNode>
