@@ -1796,6 +1796,13 @@ Public Class CartaDePorteManager
                                 IIf(sTituloFiltroUsado = "", sEst, sTituloFiltroUsado) _
                             )
 
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13222
+            s.Replace("Descargas de Hoy + Todas las Posiciones", "Posición y Descargas de Hoy")
+
+
+
             'String.Format("{11} - {13} de Williams Entregas - {0} {1}", _
 
 
@@ -3042,6 +3049,10 @@ Public Class CartaDePorteManager
                 "")
 
 
+
+        '"			isnull(CLIENTREG.Razonsocial,'') AS EntregadorDesc, " & _
+        '"       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
+
         Return strSQL
     End Function
 
@@ -3116,7 +3127,8 @@ Public Class CartaDePorteManager
 "   isnull(PROVDEST.Nombre,'') AS DestinoProvinciaDesc, " & _
 "  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
-"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2 " _
+"            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT " _
         )
 
 
@@ -15558,8 +15570,8 @@ Public Class barras
                     ConfigurationManager.AppSettings("SmtpServer"), _
                     Usuario, _
                   pass, _
-                         "", _
-                    ConfigurationManager.AppSettings("SmtpPort"), , "", "", "Factura Electrónica Williams Entregas", "", True)
+                            "", _
+                     ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", "Factura Electrónica Williams Entregas", "", True)
 
 
             MarcarEnviada(SC, idfac)
