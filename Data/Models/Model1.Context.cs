@@ -157,6 +157,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleEmpleado> DetalleEmpleadosIngresosEgresos { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Valore> Valores { get; set; }
+        public virtual DbSet<Tree> Trees { get; set; }
         public virtual DbSet<CurvasTalle> CurvasTalles { get; set; }
         public virtual DbSet<ImpuestosDirecto> ImpuestosDirectos { get; set; }
         public virtual DbSet<Marca> Marcas { get; set; }

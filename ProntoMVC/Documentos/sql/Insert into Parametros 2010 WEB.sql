@@ -34,6 +34,13 @@
 --exec [aspnet_Roles_CreateRole] '/','WilliamsClientes'  --ejecutar en la bdlmaster
 --go
 
+
+
+--use BDLMASTER
+--exec [aspnet_Roles_CreateRole] '/','WilliamsFacturacion'  --ejecutar en la bdlmaster
+--go
+
+
 --use BDLMASTER
 --exec [aspnet_Roles_CreateRole] '/','WilliamsComercial'  --ejecutar en la bdlmaster
 --go

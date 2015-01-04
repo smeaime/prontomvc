@@ -46,6 +46,14 @@ namespace ProntoMVC.Tests
 
 
 
+        
+
+        [TestMethod()]
+        public void UsandoItemdeprespuestodeObra()
+        {
+
+        }
+
 
         [TestMethod()]
         public void ProbarGrabacionDelServicioDeComprobanteProveedor()
@@ -61,7 +69,7 @@ namespace ProntoMVC.Tests
 
 
             Repo.UnitOfWork unitOfWork = new Repo.UnitOfWork(sc);
-            Servicio.FondoFijoService fondoFijoService = new Servicio.FondoFijoService(unitOfWork);
+            Servicio.ComprobanteProveedorService comprobanteproveedorService = new Servicio.ComprobanteProveedorService(unitOfWork);
             ComprobanteProveedor o = new ComprobanteProveedor();
             int? numerooriginal;
 
@@ -71,10 +79,10 @@ namespace ProntoMVC.Tests
             o.NumeroComprobante2 += 14; // para que de distinto
             o.IdComprobanteProveedor = 0;
 
-            fondoFijoService.Guardar(o);
+            comprobanteproveedorService.Guardar(o);
             unitOfWork.Save();
 
-            ComprobanteProveedor d = fondoFijoService.ObtenerPorId(10);
+            ComprobanteProveedor d = comprobanteproveedorService.ObtenerPorId(10);
 
             Assert.AreNotEqual(numerooriginal, d.NumeroComprobante2);
             //Assert.AreEqual(o, d);
