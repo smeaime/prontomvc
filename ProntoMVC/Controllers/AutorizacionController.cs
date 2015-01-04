@@ -969,14 +969,16 @@ namespace ProntoMVC.Controllers
             ObjectParameter o = new ObjectParameter("IdAutorizacionPorComprobante", typeof(int)); // el molestísimo output....
 
 
-            db.AutorizacionesPorComprobante_A(IdFormulario,   //@IdFormulario int,  
-                                                            IdComprobante,//                                                                        @IdComprobante int,
-                                                                 OrdenAutorizacion, //       @OrdenAutorizacion int,
-                                                                   IdAutorizo, //     @IdAutorizo int,
-                                                      DateTime.Now,           //    @FechaAutorizacion datetime,
-                                                                   "SI"     // @Visto varchar(2)
-                                                                 , o
-                                                        );
+            db.AutorizacionesPorComprobante_A(OrdenAutorizacion, IdAutorizo, DateTime.Now, "SI", IdFormulario, IdComprobante, o);
+
+            //db.AutorizacionesPorComprobante_A( IdFormulario,   //@IdFormulario int,  
+            //                                                IdComprobante,//                                                                        @IdComprobante int,
+            //                                                     OrdenAutorizacion, //       @OrdenAutorizacion int,
+            //                                                       IdAutorizo, //     @IdAutorizo int,
+            //                                          DateTime.Now,           //    @FechaAutorizacion datetime,
+            //                                                       "SI"     // @Visto varchar(2)
+            //                                                     , o
+            //                                            );
 
             //try
             //{
