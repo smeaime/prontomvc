@@ -46,6 +46,9 @@ Imports System.Web.UI.WebControls
 Imports Word = Microsoft.Office.Interop.Word
 Imports Excel = Microsoft.Office.Interop.Excel
 
+Imports System.Net
+'Imports System.Configuration
+'Imports System.Web.Security
 
 
 Imports CartaDePorteManager
@@ -3165,7 +3168,7 @@ Public Class CartaDePorteManager
 
             strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
                         rdl, _
-                          strSQL, True, sExcelFileName, titulo, bDescargaHtml)
+                          strSQL, SC, True, sExcelFileName, titulo, bDescargaHtml)
 
 
 
@@ -3221,10 +3224,22 @@ Public Class CartaDePorteManager
 
 
 
+            'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
+            .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
+            .ProcessingMode = ProcessingMode.Remote
+            ' IReportServerCredentials irsc = new CustomReportCredentials("administrador", ".xza2190lkm.", "");
+            Dim irsc As IReportServerCredentials = New CustomReportCredentials(ConfigurationManager.AppSettings("ReportUser"), ConfigurationManager.AppSettings("ReportPass"), ConfigurationManager.AppSettings("ReportDomain"))
+            .ServerReport.ReportServerCredentials = irsc
+            .ShowCredentialPrompts = False
+
+
 
 
             'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
-            rdlFile = "/Pronto informes/" + "Listado general de Cartas de Porte (simulando original) con foto - Desde SQL"
+            Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            rdlFile = "/Pronto informes/" & reportName
+
+
 
             With .ServerReport
                 .ReportPath = rdlFile
@@ -3242,6 +3257,12 @@ Public Class CartaDePorteManager
                 yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
                 yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
                 yourParams(6) = New ReportParameter("quecontenga", "")
+                yourParams(7) = New ReportParameter("Consulta", strSQL)
+                
+                If Diagnostics.Debugger.IsAttached Then
+                    SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
+                    'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                End If
                 yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
 
 
@@ -3407,7 +3428,40 @@ Public Class CartaDePorteManager
 
 
 
+    Public NotInheritable Class CustomReportCredentials
+        Implements IReportServerCredentials
+        Private _UserName As String
+        Private _PassWord As String
+        Private _DomainName As String
 
+        Public Sub New(UserName As String, PassWord As String, DomainName As String)
+            _UserName = UserName
+            _PassWord = PassWord
+            _DomainName = DomainName
+        End Sub
+
+        Public ReadOnly Property ImpersonationUser() As System.Security.Principal.WindowsIdentity Implements IReportServerCredentials.ImpersonationUser
+            Get
+                Return Nothing
+            End Get
+        End Property
+
+        Public ReadOnly Property NetworkCredentials() As ICredentials Implements IReportServerCredentials.NetworkCredentials
+            Get
+                Return New NetworkCredential(_UserName, _PassWord, _DomainName)
+            End Get
+        End Property
+
+        Public Function GetFormsCredentials(ByRef authCookie As Cookie, ByRef user As String, ByRef password As String, ByRef authority As String) As Boolean Implements IReportServerCredentials.GetFormsCredentials
+            authCookie = Nothing
+            user = InlineAssignHelper(password, InlineAssignHelper(authority, Nothing))
+            Return False
+        End Function
+        Private Shared Function InlineAssignHelper(Of T)(ByRef target As T, value As T) As T
+            target = value
+            Return value
+        End Function
+    End Class
 
 
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
