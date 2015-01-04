@@ -2,118 +2,25 @@
 @{
     ViewBag.Title = "Ordenes de Pago";
 }
-<div>
-    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div>
-    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-@if (false)
-{
-    <style>
-        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-        
-        
-        
-        .ui-widget-content
-        {
-            border: 0px solid #aaaaaa;
-        }
-        
-        .ui-jqgrid
-        {
-            border-right-width: 0px;
-            border-left-width: 0px;
-        }
-        /* If you need to remove all grid's borders you can use
 
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-        
-        .ui-jqgrid tr.ui-row-ltr td
-        {
-            border-right-color: #E4E4E4;
-        }
-        
-        
-        .ui-jqgrid tr.footrow-ltr td
-        {
-            border-right-color: #E4E4E4 !important;
-        }
-        
-        /*To remove horizontal border between the rows you can use */
-        
-        .ui-jqgrid tr.ui-row-ltr td
-        {
-            border-bottom-color: #E4E4E4;
-        }
-        /*To remove vertical borders between the column headers you can use */
-        
-        th.ui-th-column
-        {
-            border-right-color: #E4E4E4 !important;
-        }
-        /* or alternatively (without the usage of !important) */
-        
-        .ui-jqgrid-labels .ui-th-column
-        {
-            border-right-color: #E4E4E4;
-        }
-    </style>
-}
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
 <br />
+
 <div style="padding-left: 15px; padding-right: 15px;">
     <div class="row-fluid">
-        <div class="span12 lightblue">
-            <button onclick="window.location.href='@Url.Action("EditExterno", new { id = -1 })'" class="btn btn-primary span2">
-                Nueva Orden de Pago
-            </button>
-            <div class="span10">
-                @* <div class="input-prepend ">
-            <div class="btn-group ">
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                    En todo <span class="caret"></span>
-                </button>
-                <div class="dropdown-menu">
-                    Requerimientos
-                </div>
-                <ul class="dropdown-menu">
-                Número
-                </ul>
-            </div>
-            <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="
-              ; background: ;" />
-        </div>*@
-            </div>
-            <script>
-
-                $("#BuscadorListado").change(function () {
-
-
-
-                    var grid = jQuery("#Lista");
-                    var postdata = grid.jqGrid('getGridParam', 'postData');
-                    jQuery.extend(postdata,
-               { filters: '',
-                   searchField: 'NumeroOrdenPago',
-                   searchOper: 'eq',
-                   searchString: parseInt($("#BuscadorListado").val(), 10) || 0
-               });
-                    grid.jqGrid('setGridParam', { search: true, postData: postdata });
-                    grid.trigger("reloadGrid", [{ page: 1}]);
-
-
-                    //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-                });
-            </script>
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("EditCC", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Proveedores)</button>
+            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Fondo fijo)</button>
+            <button onclick="window.location.href='@Url.Action("EditOT", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Otros)</button>
         </div>
     </div>
     <br />
-    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
-        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
-    </table>
-    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
-    </div>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
 </div>
-@*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
+
 <script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
@@ -124,73 +31,58 @@ If you want additionally remove vertical border between the cells in the grid yo
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            //url: '@Url.Action("OrdenesPagoEnCaja", "OrdenPago")',
             url: '@Url.Action("OrdenesPago", "OrdenPago")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: [
-            'ver', 'Emitir cert.',
-                   'IdOPComplementariaFF', 'Orden en caja', 'IdOP', 'Cod',
-
-
-                       'Fecha Pago', 'Tipo', 'Estado', 'Proveedor', 'Cuenta',
-                       'Mon.', 'Efectivo', 'Descuentos', 'Valores', 'Documentos',
-
-                       'Acreedores', 'Ret.IVA', 'Ret.gan', 'Ret.ing.b.', 'Ret.SUSS',
-                       'Dev.F.F.', 'Dif. Balanceo', 'OP complem. FF', 'Cotiz. dolar', 'Destinatario fondo fijo',
-                       'Observaciones', 'Obra', 'Modalidad', 'Enviar a', 'Auxiliar',
-                       '', ''
-                       ],
-
+            colNames: ['', 'Emitir cert.', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
+                       'Ret.iva', 'Ret.gan', 'Ret.iibb', 'Ret.SUSS', 'Dev.FF', 'Dif. Balanceo', 'OP compl.FF', 'Destinatario FF', 'Nro.Rend.FF', 'Conf.Acred.FF', 'Conc. OP Otros', 'Clasificacion', 'Detalle',
+                       'Modalidad', 'Enviar a', 'Auxiliar', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Observaciones', 'Cotiz.dolar', 'Cotiz.euro'
+            ],
             colModel: [
-
-              { name: 'ver', index: 'ver', hidden: false, width: 50 },
-              { name: 'Emitir', index: '', hidden: true, width: 50 },
-          { name: 'IdOPComplementariaFF', index: '', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-
-                        {name: 'Orden en caja', index: 'IdPresupuesto', align: 'left', width: 80, editable: false, hidden: false },
-
-                        { name: 'IdOP', index: 'Numero', align: 'right', width: 80, editable: false, hidden: true, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Cod', index: 'Orden', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq']} },
-
-                        { name: 'Fecha', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
-                        { name: 'Tipo', index: 'Proveedor', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Estado', index: 'Validez', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'Bonificacion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Cuenta', index: 'PorcentajeIva1', align: 'left', width: 300, editable: false },
-                        { name: 'Mon', index: 'Moneda', align: 'center', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Documentos', index: 'PlazoEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Acreedores', index: 'CondicionCompra', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Garantia', index: 'Garantia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Comprador', index: 'Comprador', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'Aprobo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Dev', index: 'Referencia', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Detalle', index: 'Detalle', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Contacto', index: 'Contacto', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: '', index: '', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                         { name: '', index: '', width: 200 },
-                           { name: 'Observaciones', index: '', width: 300 },
-
-
-                               { name: '', index: '' },
-                               { name: '', index: '' },
-
-                         { name: '', index: '' },
-                         { name: '', index: '' },
-                         { name: '', index: '' },
-
-                            { name: '', index: '', hidden: true }
-                    ],
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
+                        { name: 'IdOrdenPago', index: 'IdOrdenPago', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdOPComplementariaFF', index: 'IdOPComplementariaFF', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'NumeroOrdenPago', index: 'NumeroOrdenPago', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Exterior', index: 'Exterior', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'FechaOrdenPago', index: 'FechaOrdenPago', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Estado', index: 'Estado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false },
+                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Acreedores', index: 'Acreedores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionSUSS', index: 'RetencionSUSS', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'DevolucionFF', index: 'DevolucionFF', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'DiferenciaBalanceo', index: 'DiferenciaBalanceo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'OPComplementariaFF', index: 'OPComplementariaFF', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'DestinatarioFF', index: 'DestinatarioFF', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'ConfirmacionAcreditacionFF', index: 'ConfirmacionAcreditacionFF', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ConceptoOPOtros', index: 'ConceptoOPOtros', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Clasificacion', index: 'Clasificacion', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'Modalidad', index: 'Modalidad', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'EnviarA', index: 'EnviarA', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Auxiliar', index: 'Auxiliar', align: 'left', width: 80, editable: false, hidden: false },
+                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'FechaModifico', index: 'FechaModifico', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'CotizacionDolar', index: 'CotizacionDolar', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CotizacionEuro', index: 'CotizacionEuro', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+            ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
                     if (typeof lastSelectedId !== "undefined") {
@@ -205,35 +97,25 @@ If you want additionally remove vertical border between the cells in the grid yo
             sortname: 'Numero',
             sortorder: 'asc',
             viewrecords: true,
-
-
-            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
             height: '100%',
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '' //'<b>Ordenes de Pago en Caja</b>'
+            caption: '<b>ORDENES DE PAGO</b>'
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //jQuery("#Lista").jqGrid('setFrozenColumns');
 
-
-
-
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
         });
 
-
-
         pageLayout.hide('east');
         pageLayout.hide('south');
-
     });
 
 </script>

@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
+using System.Transactions;
 using System.Reflection;
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
@@ -19,6 +20,7 @@ using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
 using Newtonsoft.Json;
+using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
@@ -90,41 +92,26 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(OrdenPago OrdenPago)
         {
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
-               ) throw new Exception("No tenés permisos");
-
+            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") && !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("No tenés permisos");
             if (ModelState.IsValid)
             {
                 db.Entry(OrdenPago).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-            ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
+            CargarViewBag(OrdenPago);
             return View(OrdenPago);
         }
 
-        public virtual ActionResult EditExterno(int id)
+        public virtual ActionResult EditCC(int id)
         {
             if (id == -1)
             {
                 OrdenPago OrdenPago = new OrdenPago();
 
                 inic(ref OrdenPago);
+                OrdenPago.Tipo = "CC";
                 CargarViewBag(OrdenPago);
-                //Parametros parametros = db.Parametros.Find(1);
-                ////OrdenPago.Numero = parametros.ProximoOrdenesPago;
-                ////OrdenPago.SubNumero = 1;
-                //OrdenPago.FechaIngreso = DateTime.Today;
-                //OrdenPago.IdMoneda = 1;
-                //OrdenPago.CotizacionMoneda = 1;
-                //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
-                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
-                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-                //ViewBag.Proveedor = "";
                 return View(OrdenPago);
             }
             else
@@ -134,12 +121,6 @@ namespace ProntoMVC.Controllers
                 int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
                 if (OrdenPago.IdProveedor != idproveedor && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                     !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("Sólo podes acceder a OrdenesPago tuyos");
-
-                //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
-                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
-                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
-                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
-                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
                 try
                 {
                     ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
@@ -155,20 +136,79 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual ActionResult EditFF(int id)
+        {
+            if (id == -1)
+            {
+                OrdenPago OrdenPago = new OrdenPago();
+
+                inic(ref OrdenPago);
+                OrdenPago.Tipo = "FF";
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+            else
+            {
+                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+        }
+
+        public virtual ActionResult EditOT(int id)
+        {
+            if (id == -1)
+            {
+                OrdenPago OrdenPago = new OrdenPago();
+
+                inic(ref OrdenPago);
+                OrdenPago.Tipo = "OT";
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+            else
+            {
+                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+        }
+
         void inic(ref OrdenPago o)
         {
             Parametros parametros = db.Parametros.Find(1);
+
+            Int32 mIdMonedaDolar;
+            Int32 mIdMonedaEuro;
+
+            mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
+            mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
 
             o.NumeroOrdenPago = parametros.ProximaOrdenPago;
             o.IdMoneda = 1;
             o.CotizacionMoneda = 1;
             o.FechaIngreso = DateTime.Today;
             o.FechaOrdenPago = DateTime.Today;
-            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
-            o.CotizacionDolar = mvarCotizacion == null ? 0 : (decimal)mvarCotizacion;
+
+            Cotizacione Cotizaciones = db.Cotizaciones.Where(x => x.IdMoneda == mIdMonedaDolar && x.Fecha == DateTime.Today).FirstOrDefault();
+            if (Cotizaciones != null) { o.CotizacionDolar = Cotizaciones.Cotizacion ?? 0; }
+
+            Cotizaciones = db.Cotizaciones.Where(x => x.IdMoneda == mIdMonedaEuro && x.Fecha == DateTime.Today).FirstOrDefault();
+            if (Cotizaciones != null) { o.CotizacionEuro = Cotizaciones.Cotizacion ?? 0; }
         }
 
+        class DatosJson
+        {
+            public string campo1 { get; set; }
+            public string campo2 { get; set; }
+            public string campo3 { get; set; }
+            public string campo4 { get; set; }
+            public string campo5 { get; set; }
+        }
+        
         public virtual JsonResult Autorizaciones(int IdPedido)
         {
             var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, IdPedido);
@@ -177,53 +217,40 @@ namespace ProntoMVC.Controllers
 
         void CargarViewBag(OrdenPago o)
         {
+            Int32 mIdTipoCuentaGrupoFF = 0;
+
+            Parametros parametros = db.Parametros.Find(1);
+            ViewBag.IdTipoComprobanteCajaEgresos = parametros.IdTipoComprobanteCajaEgresos;
+            mIdTipoCuentaGrupoFF = parametros.IdTipoCuentaGrupoFF ?? 0;
+
             ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
             ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
             ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
             ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
             ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            ViewBag.IdEmpleadoFF = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdEmpleadoFF);
             ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
             ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion");
             ViewBag.IdIBCondicion = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion");
+            ViewBag.IdObra = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra);
+            ViewBag.IdCuentaGasto = new SelectList(db.CuentasGastos.OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto);
+            ViewBag.IdTipoCuentaGrupo = new SelectList(db.TiposCuentaGrupos.OrderBy(x => x.Descripcion), "IdTipoCuentaGrupo", "Descripcion");
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.OrdenesPago, 0, -1).Count();
-            
-            Parametros parametros = db.Parametros.Find(1);
-            ViewBag.IdTipoComprobanteCajaEgresos = parametros.IdTipoComprobanteCajaEgresos;
 
-            //ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
-            //ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
-            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", o.PlazoEntrega);
-            //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdComprador);
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.Aprobo);
-            //ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
-            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
-            //ViewBag.TotalBonificacionGlobal = o.Bonificacion;
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
-            //ViewBag.PuntoVenta = new SelectList((from i in db.PuntosVentas
-            //                                     where i.IdTipoComprobante == (int)Pronto.ERP.Bll.EntidadManager.IdTipoComprobante.Factura
-            //                                     select new { PuntoVenta = i.PuntoVenta })
-            //    // http://stackoverflow.com/questions/2135666/databinding-system-string-does-not-contain-a-property-with-the-name-dbmake
-            //                                     .Distinct(), "PuntoVenta", "PuntoVenta"); //traer solo el Numero de PuntoVenta, no el Id
-            //ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
-            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
-            //ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
-            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            //ViewBag.IdCondicionVenta = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionVenta);
-            ////http://stackoverflow.com/questions/942262/add-empty-value-to-a-dropdownlist-in-asp-net-mvc
-            //// http://stackoverflow.com/questions/7659612/mvc3-dropdownlist-and-viewbag-how-add-new-items-to-collection
-            ////List<SelectListItem>  l = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-            ////l.ad
-            ////l.Add((new SelectListItem { IdIBCondicion = " ", Descripcion = "-1" }));
-            //ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-            //ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
-            //ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
-            //Parametros parametros = db.Parametros.Find(1);
-            //ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
+            IEnumerable<SelectListItem> Cuentas;
+            if (o.Tipo == "CC") { 
+                Cuentas = (from x in db.Cuentas where x.IdCuenta == 0 select x).AsEnumerable().Select(x => new SelectListItem() { Text = x.Descripcion + " " + x.Codigo.ToString(), Value = x.IdCuenta.ToString() }); 
+            }
+            else
+            {
+                if (o.Tipo == "FF") {
+                    Cuentas = (from x in db.Cuentas where x.IdTipoCuentaGrupo == mIdTipoCuentaGrupoFF select x).AsEnumerable().Select(x => new SelectListItem() { Text = x.Descripcion + " " + x.Codigo.ToString(), Value = x.IdCuenta.ToString() }); 
+                }
+                else { 
+                    Cuentas = (from x in db.Cuentas where x.IdTipoCuenta == 2 select x).AsEnumerable().Select(x => new SelectListItem() { Text = x.Descripcion + " " + x.Codigo.ToString(), Value = x.IdCuenta.ToString() }); 
+                }
+            }
+            ViewBag.IdCuenta = new SelectList(Cuentas, "Value", "Text", o.IdCuenta);
         }
 
         public virtual ActionResult Delete(int id)
@@ -241,113 +268,15 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public virtual ActionResult OrdenesPago_obsoleta(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+        public virtual ActionResult Anular(int id)
         {
-            string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
-
-            var Entidad = db.OrdenesPago.AsQueryable();
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                Entidad = (from a in Entidad where a.FechaIngreso >= FechaDesde && a.FechaIngreso <= FechaHasta select a).AsQueryable();
-            }
-            if (_search)
-            {
-                switch (searchField.ToLower())
-                {
-                    case "numero":
-                        campo = String.Format("{0} = {1}", searchField, searchString);
-                        break;
-                    case "fechaingreso":
-                        //No anda
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                    default:
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                }
-            }
-            else
-            {
-                campo = "true";
-            }
-
-            var Entidad1 = (from a in Entidad select new { IdOrdenesPago = a.IdOrdenPago }).Where(campo);
-
-            int totalRecords = Entidad1.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-            var data = (from a in Entidad
-                        select new
-                        {
-                            IdOrdenesPago = a.IdOrdenPago,
-                            Numero = a.NumeroOrdenPago,
-                            //Orden = a.SubNumero,
-                            FechaIngreso = a.FechaIngreso,
-                            //Proveedor = a.Proveedor.RazonSocial,
-                            //Validez = a.Validez,
-                            //Bonificacion = a.Bonificacion,
-                            //PorcentajeIva1 = a.PorcentajeIva1,
-                            //Moneda = a.Moneda.Abreviatura,
-                            //Subtotal = (a.ImporteTotal - a.ImporteIva1 + a.ImporteBonificacion),
-                            //ImporteBonificacion = a.ImporteBonificacion,
-                            //ImporteIva1 = a.ImporteIva1,
-                            //ImporteTotal = a.ImporteTotal,
-                            //PlazoEntrega = a.PlazosEntrega.Descripcion,
-                            //CondicionCompra = a.Condiciones_Compra.Descripcion,
-                            //Garantia = a.Garantia,
-                            //LugarEntrega = a.LugarEntrega,
-                            //Comprador = a.Empleado.Nombre,
-                            //Aprobo = a.Empleado2.Nombre,
-                            //Referencia = a.Referencia,
-                            Detalle = a.Detalle,
-                            //Contacto = a.Contacto,
-                            Observaciones = a.Observaciones
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-                            id = a.IdOrdenesPago.ToString(),
-                            cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>" 
-								 +"|"+"<a href=../OrdenPago/Edit/" + a.IdOrdenesPago + "?code=1" + ">Detalles</a> ",
-                                a.IdOrdenesPago.ToString(), 
-                                a.Numero.ToString(), 
-                               // a.Orden.ToString(), 
-                                a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.Proveedor,
-                                //a.Validez,
-                                //a.Bonificacion.ToString(),
-                                //a.PorcentajeIva1.ToString(),
-                                //a.Moneda,
-                                //a.Subtotal.ToString(),
-                                //a.ImporteBonificacion.ToString(),
-                                //a.ImporteIva1.ToString(),
-                                //a.ImporteTotal.ToString(),
-                                //a.PlazoEntrega,
-                                //a.CondicionCompra,
-                                //a.Garantia,
-                                //a.LugarEntrega,
-                                //a.Comprador,
-                                //a.Aprobo,
-                                //a.Referencia,
-                                a.Detalle,
-                                //a.Contacto,
-                                a.Observaciones
-                            }
-                        }).ToArray()
-            };
-
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
+            OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+            OrdenPago.Anulada = "OK";
+            OrdenPago.FechaAnulacion = DateTime.Now;
+            OrdenPago.IdUsuarioAnulo = 0;
+            OrdenPago.MotivoAnulacion = "";
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public virtual ActionResult OrdenesPago(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
@@ -357,67 +286,88 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             int idproveedor;
 
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
-            var pendiente = "S"; //hay que usar S para traer solo lo pendiente
+            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
+            //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
-
-            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
-
-            try
-            {
-                idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-                if (idproveedor > 0)
-                {
-                    string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
-                    Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
-                }
-
-            }
-            catch (Exception)
-            {
-
-
-            }
-
-            int totalRecords = Entidad.Count();  // Entidad1.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-            var data = (from a in Entidad
+            var data = (from a in db.OrdenesPago
+                        from b in db.Proveedores.Where(o => o.IdProveedor == a.IdProveedor).DefaultIfEmpty()
+                        from c in db.Cuentas.Where(p => p.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from d in db.Monedas.Where(q => q.IdMoneda == a.IdMoneda).DefaultIfEmpty()
+                        from e in db.Conceptos.Where(r => r.IdConcepto == a.IdConcepto).DefaultIfEmpty()
+                        from f in db.Conceptos.Where(s => s.IdConcepto == a.IdConcepto2).DefaultIfEmpty()
+                        from g in db.Obras.Where(u => u.IdObra == a.IdObra).DefaultIfEmpty()
+                        from h in db.Empleados.Where(v => v.IdEmpleado == a.IdEmpleadoFF).DefaultIfEmpty()
+                        from i in db.Empleados.Where(w => w.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        from j in db.Empleados.Where(x => x.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        from k in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
+                        from l in db.OrdenesPago.Where(z => z.IdOrdenPago == a.IdOPComplementariaFF).DefaultIfEmpty()
                         select new
                         {
-                            IdOrdenesPago = a[0],
-                            IdOPComplementariaFF = a[1],
-                            Numero = a[2],
-                            Exterior = a[3],
-                            FechaOrdenesPago = a[4],
-                            Tipo = a[5],
-                            Estado = a[6],
-                            Proveedores = a[7],
-                            NombreAnterior = a[8],
-                            Monedas = a[9],
-                            Efectivo = a[10],
-                            Descuentos = a[11],
-                            Valores = a[12],
-                            Documentos = a[13],
-                            Acreedores = a[14],
-                            RetencionIVA = a[15],
-                            RetencionGanancias = a[16],
-                            RetencionIBrutos = a[17],
-                            RetencionSUSS = a[18],
-                            GastosGenerales = a[19],
-                            DiferenciaBalanceo = a[20],
-                            NumeroOrdenesPago = a[21],
-                            CotizacionDolar = a[22],
-                            Empleados = a[23],
-                            Observaciones = a[24],
-                            Obras = a[25],
-                            TextoAuxiliar1 = a[26],
-                            TextoAuxiliar2 = a[27],
-                            TextoAuxiliar3 = a[28]
-                        })
-                //.Where(campo)
-                        .OrderByDescending(x => x.Numero)
+                            a.IdOrdenPago,
+                            a.IdOPComplementariaFF,
+                            a.NumeroOrdenPago,
+                            a.Exterior,
+                            FechaOrdenPago = a.FechaOrdenPago ?? DateTime.MinValue,
+                            a.Tipo,
+                            a.Anulada,
+                            Estado = a.Estado == "CA" ? "En Caja" : (a.Estado == "FI" ? "A la firma" : (a.Estado == "EN" ? "Entregado" : (a.Estado == "CO" ? "Caja obra" : ""))),
+                            Proveedor = b != null ? b.RazonSocial : "",
+                            Cuenta = c != null ? c.Descripcion : "",
+                            Moneda = d != null ? d.Abreviatura : "",
+                            Obra = g != null ? g.NumeroObra : "",
+                            a.Valores,
+                            a.Acreedores,
+                            a.RetencionIVA,
+                            a.RetencionGanancias,
+                            a.RetencionIBrutos,
+                            a.RetencionSUSS,
+                            DevolucionFF = a.GastosGenerales,
+                            DiferenciaBalanceo = a.Tipo == "OT" ? "" : (a.Anulada == "SI" ? "" : a.DiferenciaBalanceo.ToString()),
+                            OPComplementariaFF = l != null ? l.NumeroOrdenPago.ToString() : "",
+                            DestinatarioFF = h != null ? h.Nombre : "",
+                            a.NumeroRendicionFF,
+                            a.ConfirmacionAcreditacionFF,
+                            ConceptoOPOtros = e != null ? e.Descripcion : "",
+                            Clasificacion = f != null ? f.Descripcion : "",
+                            a.Detalle,
+                            Modalidad = a.TextoAuxiliar1,
+                            EnviarA = a.TextoAuxiliar2,
+                            Auxiliar = a.TextoAuxiliar3,
+                            Ingreso = i != null ? i.Nombre : "",
+                            a.FechaIngreso,
+                            Modifico = j != null ? j.Nombre : "",
+                            a.FechaModifico,
+                            Anulo = k != null ? k.Nombre : "",
+                            a.FechaAnulacion,
+                            a.MotivoAnulacion,
+                            a.Observaciones,
+                            a.CotizacionDolar,
+                            a.CotizacionEuro
+                        }).AsQueryable(); 
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
+            }
+            
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            if (idproveedor > 0)
+            {
+                string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
+                data = (from a in data where a.Proveedor.NullSafeToString() == razonsocial select a).AsQueryable();
+                //Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
+            }
+
+
+            int totalRecords = data.Count();  // Entidad1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .OrderByDescending(x => x.FechaOrdenPago)
+                        //.OrderByDescending(x => x.NumeroOrdenPago)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -425,44 +375,53 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in data1
                         select new jqGridRowJson
                         {
-                            id = a.IdOrdenesPago.ToString(),
+                            id = a.IdOrdenPago.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("EditExterno",new {id = a.IdOrdenesPago} ) + " target='' >Editar</>" 
-                                 //+"|"+"<a href=../OrdenPago/EditExterno/" + a.IdOrdenesPago + "?code=1" + ">Detalles</a> "
-                                 ,
-                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenesPago} ) + ">Emitir</a> ",
+                                a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : (a.Tipo=="FF" ? "<a href="+ Url.Action("EditFF",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdOrdenPago} ) + " target='' >Editar</>"),
+                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
+                                a.IdOrdenPago.NullSafeToString(),
                                 a.IdOPComplementariaFF.NullSafeToString(),
-                                a.Numero.NullSafeToString(),
-                                //a.IdOrdenPago.NullSafeToString(),
+                                a.NumeroOrdenPago.NullSafeToString(),
                                 a.Exterior.NullSafeToString(),
-                                a.FechaOrdenesPago.NullSafeToString(),
+                                a.FechaOrdenPago.NullSafeToString(),
                                 a.Tipo.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
                                 a.Estado.NullSafeToString(),
-                                a.Proveedores.NullSafeToString(),  
-                                a.NombreAnterior.NullSafeToString(),  
-                                a.Monedas.NullSafeToString() ,  
-                                a.Efectivo.NullSafeToString(),
-                                a.Descuentos.NullSafeToString(),
+                                a.Proveedor.NullSafeToString(),  
+                                a.Cuenta.NullSafeToString(),  
+                                a.Moneda.NullSafeToString() ,  
+                                a.Obra.NullSafeToString() ,  
                                 a.Valores.NullSafeToString(),
-                                a.Documentos.NullSafeToString(),
                                 a.Acreedores.NullSafeToString(),
                                 a.RetencionIVA.NullSafeToString(),
                                 a.RetencionGanancias.NullSafeToString(),
                                 a.RetencionIBrutos.NullSafeToString(),
                                 a.RetencionSUSS.NullSafeToString(),
-                                a.GastosGenerales.NullSafeToString(),
+                                a.DevolucionFF.NullSafeToString(),
                                 a.DiferenciaBalanceo.NullSafeToString(),
-                                a.NumeroOrdenesPago .NullSafeToString(),
-                                a.CotizacionDolar.NullSafeToString(),
-                                a.Empleados.NullSafeToString() ,
+                                a.OPComplementariaFF.NullSafeToString(),
+                                a.DestinatarioFF.NullSafeToString(),
+                                a.NumeroRendicionFF.NullSafeToString(),
+                                a.ConfirmacionAcreditacionFF.NullSafeToString(),
+                                a.ConceptoOPOtros.NullSafeToString(),
+                                a.Clasificacion.NullSafeToString(),
+                                a.Detalle.NullSafeToString(),
+                                a.Modalidad.NullSafeToString(),
+                                a.EnviarA.NullSafeToString(),
+                                a.Auxiliar.NullSafeToString(),
+                                a.Ingreso.NullSafeToString(),
+                                a.FechaIngreso.NullSafeToString(),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion.NullSafeToString(),
+                                a.MotivoAnulacion.NullSafeToString(),
                                 a.Observaciones.NullSafeToString(),
-                                a.Obras.NullSafeToString() ,
-                                a.TextoAuxiliar1.NullSafeToString(),
-                                a.TextoAuxiliar2.NullSafeToString(),
-                                a.TextoAuxiliar3.NullSafeToString()
+                                a.CotizacionDolar.NullSafeToString(),
+                                a.CotizacionEuro.NullSafeToString()
                             }
                         }).ToArray()
             };
@@ -789,6 +748,7 @@ namespace ProntoMVC.Controllers
                         from e in db.Valores.Where(r => r.IdValor == a.IdValor).DefaultIfEmpty()
                         from f in db.TiposComprobantes.Where(s => s.IdTipoComprobante == a.IdTipoValor).DefaultIfEmpty()
                         from g in db.CuentasBancarias.Where(t => t.IdCuentaBancaria == a.IdCuentaBancaria).DefaultIfEmpty()
+                        from h in db.BancoChequeras.Where(u => u.IdBancoChequera == a.IdBancoChequera).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleOrdenPagoValores,
@@ -809,6 +769,7 @@ namespace ProntoMVC.Controllers
                             a.Importe,
                             a.Anulado,
                             CuentaBancaria = g != null ? g.Cuenta : "",
+                            Chequera = h != null ? h.NumeroChequera.ToString() : "",
                             a.ChequesALaOrdenDe,
                             a.NoALaOrden
                         }).OrderBy(x => x.IdDetalleOrdenPagoValores).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
@@ -839,6 +800,7 @@ namespace ProntoMVC.Controllers
                             (a.IdBanco != null ? a.Banco + " " + a.CuentaBancaria : "") + (a.IdCaja != null ? a.Caja : "") + (a.IdTarjetaCredito != null ? a.TarjetaCredito : ""),
                             //a.IdCaja==null ? db.Bancos.Find(a.IdBanco).Nombre.NullSafeToString() :  db.Cajas.Find(a.IdCaja).Descripcion.NullSafeToString(),
                             a.Importe.ToString(),
+                            a.Chequera,
                             a.Anulado,
                             a.ChequesALaOrdenDe,
                             a.NoALaOrden
@@ -855,22 +817,57 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoCuentas_TXOrdenPago", IdOrdenesPago1);
-            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+            //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPagoCuentas_TXOrdenPago", IdOrdenesPago1);
+            //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
-            int totalRecords = Entidad.Count();
+            var Det = db.DetalleOrdenesPagoCuentas.Where(p => p.IdOrdenPago == IdOrdenesPago1).AsQueryable();
+
+            int totalRecords = Det.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data = (from a in Entidad
+            var data = (from a in Det.AsEnumerable()
+                        from b in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from c in db.DetalleCuentas.Where(o => o.IdCuenta == a.IdCuenta && o.FechaCambio > a.OrdenesPago.FechaOrdenPago).OrderByDescending(o => o.FechaCambio).DefaultIfEmpty()
+                        from d in db.Cajas.Where(t => t.IdCaja == a.IdCaja).DefaultIfEmpty()
+                        from e in db.TarjetasCreditoes.Where(t => t.IdTarjetaCredito == a.IdTarjetaCredito).DefaultIfEmpty()
+                        from f in db.Obras.Where(t => t.IdObra == a.IdObra).DefaultIfEmpty()
+                        from g in db.CuentasBancarias.Where(t => t.IdCuentaBancaria == a.IdCuentaBancaria).DefaultIfEmpty()
+                        from h in db.CuentasGastos.Where(t => t.IdCuentaGasto == a.IdCuentaGasto).DefaultIfEmpty()
                         select new
                         {
-                            IdDetalleOrdenPagoCuentas = a[0],
-                            IdCuenta = (a[2].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[2].NullSafeToString()),
-                            Codigo = a[3],
-                            Cuenta = a[4],
-                            Debe = a[5],
-                            Haber = a[6]
-                        }).OrderBy(s => s.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                            a.IdDetalleOrdenPagoCuentas,
+                            a.IdCuenta,
+                            a.IdObra,
+                            a.IdCuentaGasto,
+                            a.IdCuentaBancaria,
+                            a.IdCaja,
+                            a.IdTarjetaCredito,
+                            a.IdMoneda,
+                            a.CotizacionMonedaDestino,
+                            IdTipoCuentaGrupo = 0,
+                            Codigo = b != null ? b.Codigo : 0,
+                            Cuenta = b != null ? b.Descripcion : "",
+                            CuentaBancaria = g != null ? g.Banco.Nombre + " " + g.Cuenta : "",
+                            Caja = d != null ? d.Descripcion : "",
+                            TarjetaCredito = e != null ? e.Nombre : "",
+                            Obra = f != null ? f.Descripcion : "",
+                            CuentaGasto = h != null ? h.Descripcion : "",
+                            TipoCuentaGrupo = "",
+                            a.Debe,
+                            a.Haber
+                        }).OrderBy(x => x.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+
+            //var data = (from a in Entidad
+            //            select new
+            //            {
+            //                IdDetalleOrdenPagoCuentas = a[0],
+            //                IdCuenta = (a[2].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[2].NullSafeToString()),
+            //                Codigo = a[3],
+            //                Cuenta = a[4],
+            //                Debe = a[5],
+            //                Haber = a[6]
+            //            }).OrderBy(s => s.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -885,10 +882,24 @@ namespace ProntoMVC.Controllers
                             string.Empty, 
                             a.IdDetalleOrdenPagoCuentas.ToString(), 
                             a.IdCuenta.NullSafeToString(),
+                            a.IdObra.ToString(),
+                            a.IdCuentaGasto.ToString(),
+                            a.IdCuentaBancaria.ToString(),
+                            a.IdCaja.ToString(),
+                            a.IdTarjetaCredito.ToString(),
+                            a.IdMoneda.ToString(),
+                            a.CotizacionMonedaDestino.ToString(),
+                            a.IdTipoCuentaGrupo.ToString(),
                             a.Codigo.NullSafeToString(),
                             a.Cuenta.NullSafeToString(),
                             a.Debe.ToString(),
-                            a.Haber.ToString()
+                            a.Haber.ToString(),
+                            a.CuentaBancaria.NullSafeToString(),
+                            a.Caja.NullSafeToString(),
+                            a.TarjetaCredito.NullSafeToString(),
+                            a.Obra.NullSafeToString(),
+                            a.CuentaGasto.NullSafeToString(),
+                            a.TipoCuentaGrupo.NullSafeToString()
                             }
                         }).ToArray()
             };
@@ -912,12 +923,12 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             IdDetalleOrdenPagoImpuestos = a[0],
-                            Tipo = a[2],
+                            TipoImpuesto = a[2],
                             IdTipoRetencionGanancia = (a[2].NullSafeToString() == "Ganancias") ? Convert.ToInt32(a[3].NullSafeToString()) : 0,
                             IdIBCondicion = (a[2].NullSafeToString() == "I.Brutos") ? Convert.ToInt32(a[3].NullSafeToString()) : 0,
                             IdTipoImpuesto = (a[3].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[3].NullSafeToString()),
                             Categoria = a[4],
-                            ImportePagadoSinImpuestos = a[5],
+                            ImportePagado = a[5],
                             ImpuestoRetenido = a[6],
                             PagosMes = a[7],
                             RetencionesMes = a[8],
@@ -947,9 +958,9 @@ namespace ProntoMVC.Controllers
                             a.IdTipoRetencionGanancia.NullSafeToString(),
                             a.IdIBCondicion.NullSafeToString(),
                             a.IdTipoImpuesto.NullSafeToString(),
-                            a.Tipo.NullSafeToString(),
+                            a.TipoImpuesto.NullSafeToString(),
                             a.Categoria.NullSafeToString(),
-                            a.ImportePagadoSinImpuestos.ToString(),
+                            a.ImportePagado.ToString(),
                             a.ImpuestoRetenido.ToString(),
                             a.PagosMes.ToString(),
                             a.RetencionesMes.ToString(),
@@ -1005,6 +1016,119 @@ namespace ProntoMVC.Controllers
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetOrdenesPagoGastosFF(string sidx, string sord, int? page, int? rows, int? IdOrdenPago, int? IdOPComplementariaFF, int? IdMonedaOP)
+        {
+            int IdOrdenesPago1 = IdOrdenPago ?? 0;
+            int IdOPComplementariaFF1 = IdOPComplementariaFF ?? 0;
+            int IdMonedaOP1 = IdMonedaOP ?? 1;
+            var Det = db.ComprobantesProveedor.Where(p => (p.IdProveedor ?? 0) == 0 && (p.IdOrdenPago == IdOrdenesPago1 || p.IdOrdenPago == IdOPComplementariaFF1)).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+            int mIdMonedaPesos = 1;
+            int mIdMonedaDolar = 0;
+            int mIdMonedaEuro = 0;
+
+            Parametros parametros = db.Parametros.Find(1);
+            mIdMonedaPesos = parametros.IdMoneda ?? 1;
+            mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
+            mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            var data = (from a in Det
+                        from b in db.TiposComprobantes.Where(o => o.IdTipoComprobante == a.IdTipoComprobante).DefaultIfEmpty()
+                        from c in db.Obras.Where(p => p.IdObra == (a.IdObra ?? 0)).DefaultIfEmpty()
+                        from d in db.Cuentas.Where(q => q.IdCuenta == (a.IdCuenta ?? 0)).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdComprobanteProveedor,
+                            TipoComprobante = b != null ? b.DescripcionAb : "",
+                            a.NumeroReferencia,
+                            a.Letra,
+                            a.NumeroComprobante1,
+                            a.NumeroComprobante2,
+                            Cuenta = d != null ? d.Descripcion : "",
+                            a.FechaComprobante,
+                            a.FechaVencimiento,
+                            Obra = d != null ? c.NumeroObra : "",
+                            a.NumeroRendicionFF,
+                            Subtotal = a.IdMoneda == IdMonedaOP1 ? a.TotalBruto * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
+                            Iva = a.IdMoneda == IdMonedaOP1 ? a.TotalIva1 * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
+                            Total = a.IdMoneda == IdMonedaOP1 ? a.TotalComprobante * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0))
+                        }).OrderBy(x => x.IdComprobanteProveedor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdComprobanteProveedor.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdComprobanteProveedor.ToString(), 
+                            a.TipoComprobante.NullSafeToString(),
+                            a.NumeroReferencia.ToString(),
+                            a.Letra + '-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-' + a.NumeroComprobante2.NullSafeToString().PadLeft(8,'0'),
+                            a.FechaComprobante == null ? "" : a.FechaComprobante.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            a.NumeroRendicionFF.ToString(),
+                            a.Subtotal.ToString(),
+                            a.Iva.ToString(),
+                            a.Total.ToString(),
+                            a.Cuenta.NullSafeToString(),
+                            a.Obra.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public virtual JsonResult GastosFFPendientes(int? IdOrdenPago, int? IdOPComplementariaFF, int? IdMonedaOP, int? NumeroRendicionFF, int? IdCuentaFF)
+        {
+            int IdOrdenesPago1 = IdOrdenPago ?? 0;
+            int IdOPComplementariaFF1 = IdOPComplementariaFF ?? 0;
+            int IdMonedaOP1 = IdMonedaOP ?? 1;
+            int NumeroRendicionFF1 = NumeroRendicionFF ?? 0;
+            int IdCuentaFF1 = IdCuentaFF ?? 0;
+            
+            int mIdMonedaPesos = 1;
+            int mIdMonedaDolar = 0;
+            int mIdMonedaEuro = 0;
+
+            Parametros parametros = db.Parametros.Find(1);
+            mIdMonedaPesos = parametros.IdMoneda ?? 1;
+            mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
+            mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            var Det = db.ComprobantesProveedor.Where(p => (p.IdProveedor ?? 0) == 0 && (p.Confirmado ?? "") != "NO" && (p.IdCuenta ?? 0) != 0 && (p.IdOrdenPago == IdOrdenesPago1 || p.IdOrdenPago == IdOPComplementariaFF1 || (p.IdOrdenPago ?? 0) == 0) && (NumeroRendicionFF1 <= 0 || p.NumeroRendicionFF == NumeroRendicionFF1) && (IdCuentaFF1 <= 0 || p.IdCuenta == IdCuentaFF1)).AsQueryable();
+
+            var data = (from a in Det.ToList()
+                        from b in db.TiposComprobantes.Where(o => o.IdTipoComprobante == a.IdTipoComprobante).DefaultIfEmpty()
+                        from c in db.Obras.Where(p => p.IdObra == (a.IdObra ?? 0)).DefaultIfEmpty()
+                        from d in db.Cuentas.Where(q => q.IdCuenta == (a.IdCuenta ?? 0)).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdComprobanteProveedor,
+                            TipoComprobante = b != null ? b.DescripcionAb : "",
+                            a.NumeroReferencia,
+                            Numero = a.Letra + '-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-' + a.NumeroComprobante2.NullSafeToString().PadLeft(8,'0'),
+                            Cuenta = d != null ? d.Descripcion : "",
+                            FechaComprobante = a.FechaComprobante.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            FechaVencimiento = a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                            Obra = d != null ? c.NumeroObra : "",
+                            a.NumeroRendicionFF,
+                            Subtotal = a.IdMoneda == IdMonedaOP1 ? a.TotalBruto * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
+                            Iva = a.IdMoneda == IdMonedaOP1 ? a.TotalIva1 * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
+                            Total = a.IdMoneda == IdMonedaOP1 ? a.TotalComprobante * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0))
+                        }).OrderBy(x => x.IdComprobanteProveedor).ToList();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult DetOrdenesPagoesSinFormato(int IdOrdenesPago)
@@ -1137,16 +1261,16 @@ namespace ProntoMVC.Controllers
                         if (ri != null)
                         {
                             ri.ImportePagado += mImporte;
-                            impuestos.Remove(ri);
+                            //impuestos.Remove(ri);
                         }
                         else
                         {
                             ri = new DetalleOrdenesPagoImpuesto();
                             ri.IdTipoRetencionGanancia = mIdTipoRetencionGanancia;
                             ri.ImportePagado = mImporte;
+                            ri.TipoImpuesto = "Ganancias";
+                            impuestos.Add(ri);
                         }
-                        ri.TipoImpuesto = "Ganancias";
-                        impuestos.Add(ri);
                     };
                     if (mIdIBCondicion > 0)
                     {
@@ -1157,16 +1281,16 @@ namespace ProntoMVC.Controllers
                         if (ri != null)
                         {
                             ri.ImportePagado += mImporte;
-                            impuestos.Remove(ri);
+                            //impuestos.Remove(ri);
                         }
                         else
                         {
                             ri = new DetalleOrdenesPagoImpuesto();
                             ri.IdIBCondicion = mIdIBCondicion;
                             ri.ImportePagado = mImporte;
+                            ri.TipoImpuesto = "I.Brutos";
+                            impuestos.Add(ri);
                         }
-                        ri.TipoImpuesto = "I.Brutos";
-                        impuestos.Add(ri);
                     };
                 };
                 foreach (var a in impuestos)
@@ -1290,9 +1414,9 @@ namespace ProntoMVC.Controllers
                             a.IdTipoRetencionGanancia,
                             a.IdIBCondicion,
                             IdTipoImpuesto = (a.IdTipoRetencionGanancia != null ? a.IdTipoRetencionGanancia : (a.IdIBCondicion != null ? a.IdIBCondicion : 0)),
-                            Tipo = a.TipoImpuesto,
+                            TipoImpuesto = a.TipoImpuesto,
                             Categoria = (b != null ? b.Descripcion : (c != null ? c.Descripcion : "")),
-                            ImportePagadoSinImpuestos = a.ImportePagado,
+                            ImportePagado = a.ImportePagado,
                             a.ImpuestoRetenido,
                             PagosMes = ganancias_pagosmes[(a.IdTipoRetencionGanancia ?? 0)],
                             RetencionesMes = ganancias_retencionesmes[(a.IdTipoRetencionGanancia ?? 0)],
@@ -1476,6 +1600,8 @@ namespace ProntoMVC.Controllers
             string mBienesOServicios = "B";
             string mCodigoSituacionRetencionIVA = "0";
             string mIvaExencionRetencion = "";
+            string mIdsComprobanteProveedorRetenidosIva = "";
+            string mTotalesImportesRetenidosIva = "";
 
             bool mActividadComercializacionGranos = false;
 
@@ -1692,6 +1818,11 @@ namespace ProntoMVC.Controllers
                     {
                         mRetencionIVAIndividual = Convert.ToDecimal(dr["ImporteRetencionIva"]);
                         mRetencionIva += mRetencionIVAIndividual;
+                        if (dr["ImputacionEnOPActual"].NullSafeToString() != "SI")
+                        {
+                            mIdsComprobanteProveedorRetenidosIva = mIdsComprobanteProveedorRetenidosIva + Convert.ToString(dr["IdComprobanteProveedor"]) + "|";
+                            mTotalesImportesRetenidosIva = mTotalesImportesRetenidosIva + mRetencionIVAIndividual.ToString() + "|";
+                        }
                     }
                 }
             }
@@ -1699,8 +1830,12 @@ namespace ProntoMVC.Controllers
             {
                 mRetencionIva = OrdenPago.RetencionIVA ?? 0;
             }
-            
-            var data = mRetencionIva.ToString();
+
+            //var data = "[{\"RetencionIva\": \"" + mRetencionIva.ToString() + "\", \"IdsComprobanteProveedorRetenidosIva\": \"" + mIdsComprobanteProveedorRetenidosIva + "\", \"TotalesImportesRetenidosIva\": \"" + mTotalesImportesRetenidosIva + "\"}]";
+            DatosJson data = new DatosJson();
+            data.campo1=mRetencionIva.ToString();
+            data.campo2=mIdsComprobanteProveedorRetenidosIva;
+            data.campo3=mTotalesImportesRetenidosIva;
 
             return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
         }
@@ -1775,7 +1910,7 @@ namespace ProntoMVC.Controllers
                 rc = new DetalleOrdenesPagoCuenta();
                 rc.IdCuenta = mIdCuentaRetencionGanancias;
                 if (mRetencionGanancias >= 0) { rc.Haber = mRetencionGanancias; } else { rc.Debe = mRetencionGanancias * -1; };
-                mDebeHaber += mRetencionGanancias;
+                mDebeHaber -= mRetencionGanancias;
                 asiento.Add(rc);
             };
 
@@ -1787,7 +1922,7 @@ namespace ProntoMVC.Controllers
                 rc = new DetalleOrdenesPagoCuenta();
                 rc.IdCuenta = mIdCuentaRetencionIVA;
                 if (mImporte >= 0) { rc.Haber = mImporte; } else { rc.Debe = mImporte * -1; };
-                mDebeHaber += mImporte;
+                mDebeHaber -= mImporte;
                 asiento.Add(rc);
             };
 
@@ -1796,7 +1931,7 @@ namespace ProntoMVC.Controllers
                 rc = new DetalleOrdenesPagoCuenta();
                 rc.IdCuenta = mIdCuentaRetencionIVAComprobantesM;
                 if (mRetencionIVAComprobantesM >= 0) { rc.Haber = mRetencionIVAComprobantesM; } else { rc.Debe = mRetencionIVAComprobantesM * -1; };
-                mDebeHaber += mRetencionIVAComprobantesM;
+                mDebeHaber -= mRetencionIVAComprobantesM;
                 asiento.Add(rc);
             };
 
@@ -1819,7 +1954,7 @@ namespace ProntoMVC.Controllers
                             rc.IdCuenta = mIdCuenta;
                             if (mImporte >= 0) { rc.Haber = mImporte; } else { rc.Debe = mImporte * -1; };
                             asiento.Add(rc);
-                            mDebeHaber += mImporte;
+                            mDebeHaber -= mImporte;
                         }
                     }
                 }
@@ -1831,7 +1966,7 @@ namespace ProntoMVC.Controllers
                 rc = new DetalleOrdenesPagoCuenta();
                 rc.IdCuenta = mIdCuentaRetencionSUSS;
                 if (mRetencionSUSS >= 0) { rc.Haber = mRetencionSUSS; } else { rc.Debe = mRetencionSUSS * -1; };
-                mDebeHaber += mRetencionSUSS;
+                mDebeHaber -= mRetencionSUSS;
                 asiento.Add(rc);
             };
 
@@ -1927,6 +2062,1136 @@ namespace ProntoMVC.Controllers
             var data = mImportePagadoSinImpuestos.ToString();
 
             return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public virtual JsonResult BatchUpdate(OrdenPago OrdenPago, string IdsGastosFF = "")
+        {
+            try
+            {
+                decimal mCotizacionMoneda = 0;
+                decimal mCotizacionDolar = 0; 
+                decimal mCotizacionEuro = 0;
+                decimal mCotizacionMonedaAnterior = 0;
+                decimal mImporte = 0;
+                decimal mImportePesos = 0;
+                decimal mImporteDolares = 0;
+                decimal mImporteEuros = 0;
+                decimal mSaldoPesos = 0;
+                decimal mSaldoDolares = 0;
+                decimal mSaldoEuros = 0;
+                decimal mNumeroValor = 0;
+                decimal mDebe = 0;
+                decimal mHaber = 0;
+                decimal mDiferencia = 0;
+
+                Int32 mIdOrdenPago = 0;
+                Int32 mNumeroOP = 0;
+                Int32 mNumeroOP1 = 0;
+                Int32 mNumeroOP2 = 0;
+                Int32 mNumeroOP3 = 0;
+                Int32 mNumeroOP4 = 0;
+                Int32 mIdProveedor = 0;
+                Int32 mIdImputacion = 0;
+                Int32 mIdValor = 0;
+                Int32 mIdBanco = 0;
+                Int32 mIdCuentaCajaTitulo = 0;
+                Int32 mIdMonedaPesos = 1;
+                Int32 mIdEjercicioContableControlNumeracion = 1;
+                Int32 mIdAux1 = 0;
+                Int32 i = 0;
+                
+                string mIdsComprobanteProveedorRetenidosIva = "";
+                string mTotalesImportesRetenidosIva = "";
+                string mExterior = "";
+                string mTipo = "";
+                string mFormaAnulacionCheques = "";
+                string mEsCajaBanco = "";
+                string[] mAux1;
+                string[] mAux2;
+                string errs = "";
+                string warnings = "";
+                string mNumeracionAutomaticaDeOrdenesDePago = "";
+                string mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE = "";
+                string mNumeracionUnicaDeOrdenesDePago = "";
+                
+                bool mAnulada = false;
+                bool mAsientoManual = false;
+                bool mGrabarRegistrosEnCuentaCorriente = true;
+                bool mGrabarRegistrosRetenciones = true;
+                bool mBorrarEnValores = true;
+                bool mExiste = false;
+
+                DateTime mFechaInicioControl;
+                
+                var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+                Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+                mIdCuentaCajaTitulo = parametros.IdCuentaCajaTitulo ?? 0;
+                mIdMonedaPesos = parametros.IdMoneda ?? 0;
+                mNumeroOP1 = parametros.ProximaOrdenPago ?? 1;
+                mNumeroOP2 = parametros.ProximaOrdenPagoOtros ?? 1;
+                mNumeroOP3 = parametros.ProximaOrdenPagoFF ?? 1;
+                mNumeroOP4 = parametros.ProximaOrdenPagoExterior ?? 1;
+
+                string usuario = ViewBag.NombreUsuario;
+                int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+                if (OrdenPago.IdOrdenPago > 0)
+                {
+                    OrdenPago.IdUsuarioModifico = IdUsuario;
+                    OrdenPago.FechaModifico = DateTime.Now;
+                }
+                else
+                {
+                    OrdenPago.IdUsuarioIngreso = IdUsuario;
+                    OrdenPago.FechaIngreso = DateTime.Now;
+                }
+
+                if (!Validar(OrdenPago, ref errs, ref warnings))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        mIdOrdenPago = OrdenPago.IdOrdenPago;
+                        mIdProveedor = OrdenPago.IdProveedor ?? 0;
+                        mCotizacionMoneda = OrdenPago.CotizacionMoneda ?? 1;
+                        mCotizacionDolar = OrdenPago.CotizacionDolar ?? 0;
+                        mCotizacionEuro = OrdenPago.CotizacionEuro ?? 0;
+                        mFormaAnulacionCheques = OrdenPago.FormaAnulacionCheques ?? "";
+                        if ((OrdenPago.AsientoManual ?? "") == "SI") { mAsientoManual = true; }
+                        mTipo = OrdenPago.Tipo ?? "";
+
+                        if (OrdenPago.Anulada == "OK")
+                        {
+                            mAnulada = true;
+                            OrdenPago.Anulada = "SI";
+                        }
+
+                        if (mIdProveedor > 0) {
+                            var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
+                            if (Proveedores != null) {
+                                if ((Proveedores.RegistrarMovimientosEnCuentaCorriente ?? "SI") == "NO") { mGrabarRegistrosEnCuentaCorriente = false; }
+                            }
+                        }
+
+                        if (mIdOrdenPago > 0)
+                        {
+                            var OrdenPagoOriginal = db.OrdenesPago.Where(p => p.IdOrdenPago == mIdOrdenPago).SingleOrDefault();
+
+                            mCotizacionMonedaAnterior = OrdenPagoOriginal.CotizacionMoneda ?? 1;
+                            if ((OrdenPago.RecalculoRetencionesUltimaModificacion ?? "SI") == "NO") { mGrabarRegistrosRetenciones = false; }
+                            mIdsComprobanteProveedorRetenidosIva = OrdenPagoOriginal.IdsComprobanteProveedorRetenidosIva ?? "";
+                            if (mIdsComprobanteProveedorRetenidosIva.Length > 0)
+                            {
+                                mAux1 = mIdsComprobanteProveedorRetenidosIva.Split('|');
+                                foreach (string mIdAux0 in mAux1)
+                                {
+                                    if (mIdAux0.Length > 0)
+                                    {
+                                        mIdAux1 = Convert.ToInt32(mIdAux0);
+                                        ComprobanteProveedor ComprobantesProveedor = db.ComprobantesProveedor.Where(c => c.IdComprobanteProveedor == mIdAux1).SingleOrDefault();
+                                        if (ComprobantesProveedor != null)
+                                        {
+                                            ComprobantesProveedor.IdOrdenPagoRetencionIva = 0;
+                                            ComprobantesProveedor.ImporteRetencionIvaEnOrdenPago = 0;
+                                            db.Entry(ComprobantesProveedor).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (!mAnulada)
+                            {
+                                mIdsComprobanteProveedorRetenidosIva = OrdenPago.IdsComprobanteProveedorRetenidosIva ?? "";
+                                if (mIdsComprobanteProveedorRetenidosIva.Length > 0)
+                                {
+                                    mAux1 = mIdsComprobanteProveedorRetenidosIva.Split('|');
+                                    mAux2 = OrdenPago.TotalesImportesRetenidosIva.Split('|');
+                                    foreach (string mIdAux0 in mAux1)
+                                    {
+                                        if (mIdAux0.Length > 0)
+                                        {
+                                            mIdAux1 = Convert.ToInt32(mIdAux0);
+                                            mImporte = Convert.ToDecimal(mAux2[i].Replace(".", ","));
+
+                                            ComprobanteProveedor ComprobantesProveedor = db.ComprobantesProveedor.Where(c => c.IdComprobanteProveedor == mIdAux1).SingleOrDefault();
+                                            if (ComprobantesProveedor != null)
+                                            {
+                                                ComprobantesProveedor.IdOrdenPagoRetencionIva = mIdOrdenPago;
+                                                ComprobantesProveedor.ImporteRetencionIvaEnOrdenPago = mImporte;
+                                                db.Entry(ComprobantesProveedor).State = System.Data.Entity.EntityState.Modified;
+                                            }
+                                        }
+                                        i += 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var d in OrdenPagoOriginal.DetalleOrdenesPagoValores)
+                                {
+                                    if (d.IdValor != null)
+                                    {
+                                        Valore Valores = db.Valores.Where(c => c.IdValor == d.IdValor).SingleOrDefault();
+                                        if (Valores != null)
+                                        {
+                                            Valores.Estado = null;
+                                            Valores.IdProveedor = null;
+                                            Valores.NumeroOrdenPago = null;
+                                            Valores.FechaOrdenPago = null;
+                                            db.Entry(Valores).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                    //Pronto.ERP.Bll.EntidadManager.Tarea(SC, "Valores_BorrarPorIdDetalleOrdenPagoValores", d.IdDetalleOrdenPagoValores);
+                                    db.Valores_BorrarPorIdDetalleOrdenPagoValores(d.IdDetalleOrdenPagoValores);
+                                }
+                                foreach (var d in OrdenPagoOriginal.DetalleOrdenesPagoCuentas)
+                                {
+                                    db.Valores_BorrarPorIdDetalleOrdenPagoCuentas(d.IdDetalleOrdenPagoCuentas);
+                                }
+                            }
+                            
+                            var OrdenPagoEntry = db.Entry(OrdenPagoOriginal);
+                            OrdenPagoEntry.CurrentValues.SetValues(OrdenPago);
+
+                            // Restiruir los saldos de las imputaciones ya registradas
+                            foreach (var d in OrdenPagoOriginal.DetalleOrdenesPagoes.Where(c => c.IdDetalleOrdenPago != 0).ToList())
+                            {
+                                CuentasCorrientesAcreedor CtaCteAnterior = db.CuentasCorrientesAcreedores.Where(c => c.IdDetalleOrdenPago == d.IdDetalleOrdenPago).FirstOrDefault();
+                                if (CtaCteAnterior != null)
+                                {
+                                    mImportePesos = (CtaCteAnterior.ImporteTotal ?? 0) - (CtaCteAnterior.Saldo ?? 0);
+                                    mImporteDolares = (CtaCteAnterior.ImporteTotalDolar ?? 0) - (CtaCteAnterior.SaldoDolar ?? 0);
+                                    mImporteEuros = (CtaCteAnterior.ImporteTotalEuro ?? 0) - (CtaCteAnterior.SaldoEuro ?? 0);
+                                    mIdImputacion = d.IdImputacion ?? 0;
+
+                                    if (mIdImputacion > 0)
+                                    {
+                                        CuentasCorrientesAcreedor CtaCteImputadaAnterior = db.CuentasCorrientesAcreedores.Where(c => c.IdCtaCte == mIdImputacion).SingleOrDefault();
+                                        if (CtaCteImputadaAnterior != null)
+                                        {
+                                            CtaCteImputadaAnterior.Saldo += mImportePesos;
+                                            CtaCteImputadaAnterior.SaldoDolar += mImporteDolares;
+                                            CtaCteImputadaAnterior.SaldoEuro += mImporteEuros;
+
+                                            db.Entry(CtaCteImputadaAnterior).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                    db.Entry(CtaCteAnterior).State = System.Data.Entity.EntityState.Deleted;
+                                }
+
+                                var DiferenciasCambios = db.DiferenciasCambios.Where(c => c.IdTipoComprobante == 17 && c.IdRegistroOrigen == d.IdDetalleOrdenPago).ToList();
+                                if (DiferenciasCambios != null)
+                                {
+                                    foreach (DiferenciasCambio dc in DiferenciasCambios)
+                                    {
+                                        db.Entry(dc).State = System.Data.Entity.EntityState.Deleted;
+                                    }
+                                }
+                            }
+
+                            ////////////////////////////////////////////// IMPUTACIONES //////////////////////////////////////////////
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoes)
+                            {
+                                var DetalleOrdenPagoOriginal = OrdenPagoOriginal.DetalleOrdenesPagoes.Where(c => c.IdDetalleOrdenPago == d.IdDetalleOrdenPago && d.IdDetalleOrdenPago > 0).SingleOrDefault();
+                                if (DetalleOrdenPagoOriginal != null)
+                                {
+                                    var DetalleOrdenPagoEntry = db.Entry(DetalleOrdenPagoOriginal);
+                                    DetalleOrdenPagoEntry.CurrentValues.SetValues(d);
+                                }
+                                else
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoes.Add(d);
+                                }
+                            }
+                            foreach (var DetalleOrdenPagoOriginal in OrdenPagoOriginal.DetalleOrdenesPagoes.Where(c => c.IdDetalleOrdenPago != 0).ToList())
+                            {
+                                if (!OrdenPago.DetalleOrdenesPagoes.Any(c => c.IdDetalleOrdenPago == DetalleOrdenPagoOriginal.IdDetalleOrdenPago))
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoes.Remove(DetalleOrdenPagoOriginal);
+                                    db.Entry(DetalleOrdenPagoOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                }
+                            }
+
+                            ////////////////////////////////////////////// VALORES //////////////////////////////////////////////
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoValores)
+                            {
+                                var DetalleOrdenPagoValoresOriginal = OrdenPagoOriginal.DetalleOrdenesPagoValores.Where(c => c.IdDetalleOrdenPagoValores == d.IdDetalleOrdenPagoValores && d.IdDetalleOrdenPagoValores > 0).SingleOrDefault();
+                                if (DetalleOrdenPagoValoresOriginal != null)
+                                {
+                                    var DetalleOrdenPagoValoresEntry = db.Entry(DetalleOrdenPagoValoresOriginal);
+                                    DetalleOrdenPagoValoresEntry.CurrentValues.SetValues(d);
+                                }
+                                else
+                                {
+                                    //CONTROLAR QUE EL NUMERO DE VALOR DE LA CHEQUERA SEA EL QUE SIGUE. PORQUE EL NUMERO SE ASIGNA EN LA CARGA Y OTRO USUARIO PODRIA HABERLO UTILIZADO.
+                                    OrdenPagoOriginal.DetalleOrdenesPagoValores.Add(d);
+                                }
+                            }
+                            foreach (var DetalleOrdenPagoValoresOriginal in OrdenPagoOriginal.DetalleOrdenesPagoValores.Where(c => c.IdDetalleOrdenPagoValores != 0).ToList())
+                            {
+                                if (!OrdenPago.DetalleOrdenesPagoValores.Any(c => c.IdDetalleOrdenPagoValores == DetalleOrdenPagoValoresOriginal.IdDetalleOrdenPagoValores))
+                                {
+                                    // Estos son los valores que se eliminaron en la modificacion de la orden de pago.
+                                    if (DetalleOrdenPagoValoresOriginal.IdValor != null)
+                                    {
+                                        Valore Valores = db.Valores.Where(c => c.IdValor == DetalleOrdenPagoValoresOriginal.IdValor).SingleOrDefault();
+                                        if (Valores != null)
+                                        {
+                                            Valores.Estado = null;
+                                            Valores.IdProveedor = null;
+                                            Valores.NumeroOrdenPago = null;
+                                            Valores.FechaOrdenPago = null;
+                                            db.Entry(Valores).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                    db.Valores_BorrarPorIdDetalleOrdenPagoValores(DetalleOrdenPagoValoresOriginal.IdDetalleOrdenPagoValores);
+                                    
+                                    OrdenPagoOriginal.DetalleOrdenesPagoValores.Remove(DetalleOrdenPagoValoresOriginal);
+                                    db.Entry(DetalleOrdenPagoValoresOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                }
+                            }
+
+                            ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoCuentas)
+                            {
+                                var DetalleOrdenPagoCuentasOriginal = OrdenPagoOriginal.DetalleOrdenesPagoCuentas.Where(c => c.IdDetalleOrdenPagoCuentas == d.IdDetalleOrdenPagoCuentas && d.IdDetalleOrdenPagoCuentas > 0).SingleOrDefault();
+                                if (DetalleOrdenPagoCuentasOriginal != null)
+                                {
+                                    var DetalleOrdenPagoCuentasEntry = db.Entry(DetalleOrdenPagoCuentasOriginal);
+                                    DetalleOrdenPagoCuentasEntry.CurrentValues.SetValues(d);
+                                }
+                                else
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoCuentas.Add(d);
+                                }
+                            }
+                            foreach (var DetalleOrdenPagoCuentasOriginal in OrdenPagoOriginal.DetalleOrdenesPagoCuentas.Where(c => c.IdDetalleOrdenPagoCuentas != 0).ToList())
+                            {
+                                if (!OrdenPago.DetalleOrdenesPagoCuentas.Any(c => c.IdDetalleOrdenPagoCuentas == DetalleOrdenPagoCuentasOriginal.IdDetalleOrdenPagoCuentas))
+                                {
+                                    // Estos son los valores que se eliminaron en la modificacion de la orden de pago.
+                                    db.Valores_BorrarPorIdDetalleOrdenPagoCuentas(DetalleOrdenPagoCuentasOriginal.IdDetalleOrdenPagoCuentas);
+
+                                    OrdenPagoOriginal.DetalleOrdenesPagoCuentas.Remove(DetalleOrdenPagoCuentasOriginal);
+                                    db.Entry(DetalleOrdenPagoCuentasOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                }
+                            }
+
+                            ////////////////////////////////////////////// IMPUESTOS //////////////////////////////////////////////
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoImpuestos)
+                            {
+                                var DetalleOrdenPagoImpuestosOriginal = OrdenPagoOriginal.DetalleOrdenesPagoImpuestos.Where(c => c.IdDetalleOrdenPagoImpuestos == d.IdDetalleOrdenPagoImpuestos && d.IdDetalleOrdenPagoImpuestos > 0).SingleOrDefault();
+                                if (DetalleOrdenPagoImpuestosOriginal != null)
+                                {
+                                    var DetalleOrdenPagoImpuestosEntry = db.Entry(DetalleOrdenPagoImpuestosOriginal);
+                                    DetalleOrdenPagoImpuestosEntry.CurrentValues.SetValues(d);
+                                }
+                                else
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoImpuestos.Add(d);
+                                }
+                            }
+                            foreach (var DetalleOrdenPagoImpuestosOriginal in OrdenPagoOriginal.DetalleOrdenesPagoImpuestos.Where(c => c.IdDetalleOrdenPagoImpuestos != 0).ToList())
+                            {
+                                if (!OrdenPago.DetalleOrdenesPagoImpuestos.Any(c => c.IdDetalleOrdenPagoImpuestos == DetalleOrdenPagoImpuestosOriginal.IdDetalleOrdenPagoImpuestos))
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoImpuestos.Remove(DetalleOrdenPagoImpuestosOriginal);
+                                    db.Entry(DetalleOrdenPagoImpuestosOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                }
+                            }
+
+                            ////////////////////////////////////////////// RUBROS CONTABLES //////////////////////////////////////////////
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoRubrosContables)
+                            {
+                                var DetalleOrdenPagoRubrosContablesOriginal = OrdenPagoOriginal.DetalleOrdenesPagoRubrosContables.Where(c => c.IdDetalleOrdenPagoRubrosContables == d.IdDetalleOrdenPagoRubrosContables && d.IdDetalleOrdenPagoRubrosContables > 0).SingleOrDefault();
+                                if (DetalleOrdenPagoRubrosContablesOriginal != null)
+                                {
+                                    var DetalleOrdenPagoRubrosContablesEntry = db.Entry(DetalleOrdenPagoRubrosContablesOriginal);
+                                    DetalleOrdenPagoRubrosContablesEntry.CurrentValues.SetValues(d);
+                                }
+                                else
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoRubrosContables.Add(d);
+                                }
+                            }
+                            foreach (var DetalleOrdenPagoRubrosContablesOriginal in OrdenPagoOriginal.DetalleOrdenesPagoRubrosContables.Where(c => c.IdDetalleOrdenPagoRubrosContables != 0).ToList())
+                            {
+                                if (!OrdenPago.DetalleOrdenesPagoRubrosContables.Any(c => c.IdDetalleOrdenPagoRubrosContables == DetalleOrdenPagoRubrosContablesOriginal.IdDetalleOrdenPagoRubrosContables))
+                                {
+                                    OrdenPagoOriginal.DetalleOrdenesPagoRubrosContables.Remove(DetalleOrdenPagoRubrosContablesOriginal);
+                                    db.Entry(DetalleOrdenPagoRubrosContablesOriginal).State = System.Data.Entity.EntityState.Deleted;
+                                }
+                            }
+
+                            ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
+                            db.Entry(OrdenPagoOriginal).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            mExterior = OrdenPago.Exterior ?? "";
+                            
+                            var Parametros2 = db.Parametros2.Where(p => p.Campo == "NumeracionAutomaticaDeOrdenesDePago").FirstOrDefault();
+                            if (Parametros2 != null) { mNumeracionAutomaticaDeOrdenesDePago = Parametros2.Valor ?? ""; }
+
+                            Parametros2 = db.Parametros2.Where(p => p.Campo == "NumeracionIndependienteDeOrdenesDePagoFFyCTACTE").FirstOrDefault();
+                            if (Parametros2 != null) { mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE = Parametros2.Valor ?? ""; }
+                            
+                            Parametros2 = db.Parametros2.Where(p => p.Campo == "NumeracionUnicaDeOrdenesDePago").FirstOrDefault();
+                            if (Parametros2 != null) { mNumeracionUnicaDeOrdenesDePago = Parametros2.Valor ?? ""; }
+
+                            Parametros2 = db.Parametros2.Where(p => p.Campo == "IdEjercicioContableControlNumeracion").FirstOrDefault();
+                            if (Parametros2 != null) { if (Parametros2.Valor.Length > 0) { mIdEjercicioContableControlNumeracion = Convert.ToInt32(Parametros2.Valor); } }
+                            mFechaInicioControl = Convert.ToDateTime("01/01/2000");
+                            if (mIdEjercicioContableControlNumeracion != 0)
+                            {
+                                EjerciciosContable EjerciciosContable = db.EjerciciosContables.Where(x => x.IdEjercicioContable == mIdEjercicioContableControlNumeracion).SingleOrDefault();
+                                if (EjerciciosContable != null) { mFechaInicioControl = EjerciciosContable.FechaInicio ?? Convert.ToDateTime("01/01/2000"); }
+                            }
+
+                            if (mNumeracionUnicaDeOrdenesDePago == "SI")
+                            {
+                                mNumeroOP = mNumeroOP1;
+                            }
+                            else
+                            {
+                                if (mExterior == "SI")
+                                {
+                                    mNumeroOP = mNumeroOP4;
+                                }
+                                else
+                                {
+                                    if (mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE == "SI")
+                                    {
+                                        if (mTipo == "CC") { mNumeroOP = mNumeroOP1; }
+                                        if (mTipo == "FF") { mNumeroOP = mNumeroOP3; }
+                                        if (mTipo == "OT") { mNumeroOP = mNumeroOP2; }
+                                    }
+                                    else
+                                    {
+                                        if (mTipo == "CC" || mTipo == "FF") { mNumeroOP = mNumeroOP1; }
+                                        else { mNumeroOP = mNumeroOP2; }
+                                    }
+                                }
+                            }
+
+                            mExiste = true;
+                            for (int n = 1; mExiste; n++)
+                            {
+                                OrdenPago mAux = db.OrdenesPago.Where(x => x.NumeroOrdenPago == mNumeroOP && x.FechaOrdenPago >= mFechaInicioControl && 
+                                                                        (mNumeracionUnicaDeOrdenesDePago=="SI" || 
+                                                                         (((mExterior=="SI" && (x.Exterior ?? "")=="SI") || 
+                                                                           (mExterior!="SI" &&  (x.Exterior ?? "")!="SI" && 
+                                                                            ((mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE=="SI" && x.Tipo==mTipo) || 
+                                                                             (mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE!="SI" && 
+                                                                              ((mTipo=="CC" && (x.Tipo=="CC" || x.Tipo=="FF")) ||
+                                                                               (mTipo=="FF" && (x.Tipo=="CC" || x.Tipo=="FF")) || mTipo==x.Tipo)))))))).FirstOrDefault();
+                                if (mAux != null) { mNumeroOP += 1; }
+                                else { mExiste = false; }
+                            }
+
+                            mExiste = false;
+                            if (mNumeracionAutomaticaDeOrdenesDePago == "NO")
+                            {
+                                OrdenPago mAux = db.OrdenesPago.Where(x => x.NumeroOrdenPago == mNumeroOP && x.FechaOrdenPago >= mFechaInicioControl).FirstOrDefault();
+                                if (mAux != null) { mExiste = true; }
+                            }
+
+                            if (mNumeracionAutomaticaDeOrdenesDePago == "SI" || mExiste || OrdenPago.NumeroOrdenPago == mNumeroOP)
+                            {
+                                OrdenPago.NumeroOrdenPago = mNumeroOP;
+                                Parametros parametros2 = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+                                if (mNumeracionUnicaDeOrdenesDePago == "SI")
+                                {
+                                    parametros2.ProximaOrdenPago = mNumeroOP + 1;
+                                }
+                                else
+                                {
+                                    if (OrdenPago.Exterior == "SI") { parametros2.ProximaOrdenPagoExterior = mNumeroOP + 1; }
+                                    else
+                                    {
+                                        if (mNumeracionIndependienteDeOrdenesDePagoFFyCTACTE == "SI")
+                                        {
+                                            if (mTipo == "CC") { parametros2.ProximaOrdenPago = mNumeroOP + 1; }
+                                            if (mTipo == "FF") { parametros2.ProximaOrdenPagoFF = mNumeroOP + 1; }
+                                            if (mTipo == "OT") { parametros2.ProximaOrdenPagoOtros = mNumeroOP + 1; }
+                                        }
+                                        else
+                                        {
+                                            if (mTipo == "CC" || mTipo == "FF") { parametros2.ProximaOrdenPago = mNumeroOP + 1; }
+                                            else { parametros2.ProximaOrdenPagoOtros = mNumeroOP + 1; }
+                                        }
+                                    }
+                                }
+                                db.Entry(parametros2).State = System.Data.Entity.EntityState.Modified;
+                            }
+                            db.OrdenesPago.Add(OrdenPago);
+                            db.SaveChanges();
+                        }
+
+                        ////////////////////////////////////////////// IMPUTACIONES //////////////////////////////////////////////
+                        if (!mAnulada && mGrabarRegistrosEnCuentaCorriente)
+                        {
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoes)
+                            {
+                                mImporte = d.Importe ?? 0;
+                                mImportePesos = mImporte * mCotizacionMoneda;
+                                mImporteDolares = 0;
+                                if (mCotizacionDolar != 0) { mImporteDolares = decimal.Round(mImporte * mCotizacionMoneda / mCotizacionDolar, 2); }
+                                mImporteEuros = 0;
+                                if (mCotizacionEuro != 0) { mImporteEuros = decimal.Round(mImporte * mCotizacionMoneda / mCotizacionEuro, 2); }
+                                mIdImputacion = d.IdImputacion ?? 0;
+
+                                CuentasCorrientesAcreedor CtaCte = new CuentasCorrientesAcreedor();
+                                CtaCte.IdProveedor = OrdenPago.IdProveedor;
+                                CtaCte.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                CtaCte.Fecha = OrdenPago.FechaOrdenPago;
+                                CtaCte.FechaVencimiento = OrdenPago.FechaOrdenPago;
+                                CtaCte.CotizacionDolar = OrdenPago.CotizacionDolar;
+                                CtaCte.CotizacionEuro = OrdenPago.CotizacionEuro;
+                                CtaCte.CotizacionMoneda = OrdenPago.CotizacionMoneda;
+                                if (d.IdImputacion != -2) { CtaCte.IdTipoComp = 17; } else { CtaCte.IdTipoComp = 16; }
+                                CtaCte.IdComprobante = mIdOrdenPago;
+                                if (d.IdImputacion > 0) { CtaCte.IdImputacion = d.IdImputacion; }
+                                CtaCte.ImporteTotal = mImportePesos;
+                                CtaCte.Saldo = mImportePesos;
+                                CtaCte.ImporteTotalDolar = mImporteDolares;
+                                CtaCte.SaldoDolar = mImporteDolares;
+                                CtaCte.ImporteTotalEuro = mImporteEuros;
+                                CtaCte.SaldoEuro = mImporteEuros;
+                                CtaCte.IdMoneda = OrdenPago.IdMoneda;
+                                CtaCte.IdDetalleOrdenPago = d.IdDetalleOrdenPago;
+                                CtaCte.IdCtaCte = 0;
+
+                                if (mIdImputacion > 0)
+                                {
+                                    CuentasCorrientesAcreedor CtaCteImputada = db.CuentasCorrientesAcreedores.Where(c => c.IdCtaCte == mIdImputacion).SingleOrDefault();
+                                    if (CtaCteImputada != null)
+                                    {
+                                        mSaldoPesos = CtaCteImputada.Saldo ?? 0;
+                                        mSaldoDolares = CtaCteImputada.SaldoDolar ?? 0;
+                                        mSaldoEuros = CtaCteImputada.SaldoEuro ?? 0;
+                                    }
+                                    else
+                                    {
+                                        mSaldoPesos = 0;
+                                        mSaldoDolares = 0;
+                                        mSaldoEuros = 0;
+                                    }
+
+                                    if ((OrdenPago.Dolarizada ?? "NO") == "NO")
+                                    {
+                                        mImporteDolares = 0;
+                                        if ((CtaCteImputada.CotizacionDolar ?? 0) != 0) { mImporteDolares = decimal.Round(mImporte * mCotizacionMoneda / (CtaCteImputada.CotizacionDolar ?? 0), 2); }
+                                        CtaCte.CotizacionDolar = CtaCteImputada.CotizacionDolar;
+                                        CtaCte.ImporteTotalDolar = mImporteDolares;
+                                        CtaCte.SaldoDolar = mImporteDolares;
+
+                                        mImporteEuros = 0;
+                                        if ((CtaCteImputada.CotizacionEuro ?? 0) != 0) { mImporteEuros = decimal.Round(mImporte * mCotizacionMoneda / (CtaCteImputada.CotizacionEuro ?? 0), 2); }
+                                        CtaCte.CotizacionEuro = CtaCteImputada.CotizacionEuro;
+                                        CtaCte.ImporteTotalEuro = mImporteEuros;
+                                        CtaCte.SaldoEuro = mImporteEuros;
+                                    }
+
+                                    if (mImportePesos > mSaldoPesos)
+                                    {
+                                        mImportePesos = decimal.Round(mImportePesos - mSaldoPesos, 2);
+                                        CtaCteImputada.Saldo = 0;
+                                        CtaCte.Saldo = mImportePesos;
+                                    }
+                                    else
+                                    {
+                                        mSaldoPesos = decimal.Round(mSaldoPesos - mImportePesos, 2);
+                                        CtaCteImputada.Saldo = mSaldoPesos;
+                                        CtaCte.Saldo = 0;
+                                    }
+                                    if (mImporteDolares > mSaldoDolares)
+                                    {
+                                        mImporteDolares = decimal.Round(mImporteDolares - mSaldoDolares, 2);
+                                        CtaCteImputada.SaldoDolar = 0;
+                                        CtaCte.SaldoDolar = mImporteDolares;
+                                    }
+                                    else
+                                    {
+                                        mSaldoDolares = decimal.Round(mSaldoDolares - mImporteDolares, 2);
+                                        CtaCteImputada.SaldoDolar = mSaldoDolares;
+                                        CtaCte.SaldoDolar = 0;
+                                    }
+                                    if (mImporteEuros > mSaldoEuros)
+                                    {
+                                        mImporteEuros = decimal.Round(mImporteEuros - mSaldoEuros, 2);
+                                        CtaCteImputada.SaldoEuro = 0;
+                                        CtaCte.SaldoEuro = mImporteEuros;
+                                    }
+                                    else
+                                    {
+                                        mSaldoEuros = decimal.Round(mSaldoEuros - mImporteEuros, 2);
+                                        CtaCteImputada.SaldoEuro = mSaldoEuros;
+                                        CtaCte.SaldoEuro = 0;
+                                    }
+                                    CtaCte.IdImputacion = CtaCteImputada.IdImputacion;
+
+                                    var TiposComprobantes = db.TiposComprobantes.Where(t => t.IdTipoComprobante == CtaCteImputada.IdTipoComp).SingleOrDefault();
+                                    if (TiposComprobantes != null)
+                                    {
+                                        if (TiposComprobantes.Coeficiente == -1) { CtaCte.IdTipoComp = 16; }
+                                    }
+
+                                    if (CtaCteImputada.IdTipoComp != 16 && CtaCteImputada.IdTipoComp != 17 && (d.ImporteRetencionIVA ?? 0) != 0)
+                                    {
+                                        ComprobanteProveedor ComprobantesProveedor = db.ComprobantesProveedor.Where(c => c.IdComprobanteProveedor == CtaCteImputada.IdComprobante).SingleOrDefault();
+                                        if (ComprobantesProveedor != null)
+                                        {
+                                            ComprobantesProveedor.IdDetalleOrdenPagoRetencionIVAAplicada = d.IdDetalleOrdenPago;
+                                            db.Entry(ComprobantesProveedor).State = System.Data.Entity.EntityState.Modified;
+                                        }
+                                    }
+                                    db.Entry(CtaCteImputada).State = System.Data.Entity.EntityState.Modified;
+                                }
+
+                                db.CuentasCorrientesAcreedores.Add(CtaCte);
+                                if ((CtaCte.IdImputacion ?? 0) == 0)
+                                {
+                                    db.SaveChanges();
+                                    CtaCte.IdImputacion = CtaCte.IdCtaCte;
+                                    db.Entry(CtaCte).State = System.Data.Entity.EntityState.Modified;
+                                }
+
+                                if ((OrdenPago.Dolarizada ?? "NO") == "SI")
+                                {
+                                    DiferenciasCambio dc = new DiferenciasCambio();
+                                    dc.IdDiferenciaCambio = -1;
+                                    dc.IdTipoComprobante = 17;
+                                    dc.IdRegistroOrigen = d.IdDetalleOrdenPago;
+                                    db.DiferenciasCambios.Add(dc);
+                                }
+                            }
+                            db.SaveChanges();
+                        }
+
+                        ////////////////////////////////////////////// VALORES //////////////////////////////////////////////
+                        if (!mAnulada)
+                        {
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoValores)
+                            {
+                                mBorrarEnValores = true;
+
+                                mIdValor = -1;
+                                Valore valor = db.Valores.Where(c => c.IdDetalleOrdenPagoValores == d.IdDetalleOrdenPagoValores).SingleOrDefault();
+                                if (valor != null) { mIdValor = valor.IdValor; }
+
+                                if ((d.IdCaja ?? 0) > 0)
+                                {
+                                    Valore v;
+                                    if (mIdValor <= 0) { v = new Valore(); } else { v = db.Valores.Where(c => c.IdValor == mIdValor).SingleOrDefault(); }
+
+                                    v.IdTipoValor = d.IdTipoValor;
+                                    v.Importe = d.Importe;
+                                    v.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                    v.FechaComprobante = OrdenPago.FechaOrdenPago;
+                                    if ((OrdenPago.IdProveedor ?? 0) > 0) { v.IdProveedor = OrdenPago.IdProveedor; }
+                                    v.IdTipoComprobante = 17;
+                                    v.IdDetalleOrdenPagoValores = d.IdDetalleOrdenPagoValores;
+                                    v.IdCaja = d.IdCaja;
+                                    v.IdMoneda = OrdenPago.IdMoneda;
+                                    v.IdValor = mIdValor;
+                                    if (mIdValor <= 0) { db.Valores.Add(v); } else { db.Entry(v).State = System.Data.Entity.EntityState.Modified; }
+                                    mBorrarEnValores = false;
+                                }
+                                else
+                                {
+                                    if ((d.IdValor ?? 0) > 0)
+                                    {
+                                        Valore v = db.Valores.Where(c => c.IdValor == d.IdValor).SingleOrDefault();
+
+                                        v.Estado = "E";
+                                        if ((OrdenPago.IdProveedor ?? 0) > 0) { v.IdProveedor = OrdenPago.IdProveedor; }
+                                        v.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                        v.FechaComprobante = OrdenPago.FechaOrdenPago;
+                                        db.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                                    }
+                                    else
+                                    {
+                                        mNumeroValor = d.NumeroValor ?? 0;
+                                        var dopv = db.DetalleOrdenesPagoValores.Where(c => c.IdDetalleOrdenPagoValores == d.IdDetalleOrdenPagoValores).SingleOrDefault();
+                                        if (dopv != null) { mNumeroValor = dopv.NumeroValor ?? 0; }
+
+                                        Valore v;
+                                        if (mIdValor <= 0) { v = new Valore(); } else { v = db.Valores.Where(c => c.IdValor == mIdValor).SingleOrDefault(); }
+
+                                        v.IdTipoValor = d.IdTipoValor;
+                                        v.NumeroValor = mNumeroValor;
+                                        v.NumeroInterno = d.NumeroInterno;
+                                        v.FechaValor = d.FechaVencimiento;
+                                        v.IdCuentaBancaria = d.IdCuentaBancaria;
+                                        v.IdBanco = d.IdBanco;
+                                        v.Importe = d.Importe;
+                                        v.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                        v.FechaComprobante = OrdenPago.FechaOrdenPago;
+                                        if ((OrdenPago.IdProveedor ?? 0) > 0) { v.IdProveedor = OrdenPago.IdProveedor; }
+                                        v.IdTipoComprobante = 17;
+                                        v.IdDetalleOrdenPagoValores = d.IdDetalleOrdenPagoValores;
+                                        v.IdMoneda = OrdenPago.IdMoneda;
+                                        v.CotizacionMoneda = OrdenPago.CotizacionMoneda;
+                                        v.IdUsuarioAnulo = d.IdUsuarioAnulo;
+                                        v.FechaAnulacion = d.FechaAnulacion;
+                                        v.MotivoAnulacion = d.MotivoAnulacion;
+                                        v.IdTarjetaCredito = d.IdTarjetaCredito;
+                                        v.Anulado = d.Anulado;
+                                        v.IdValor = mIdValor;
+                                        if (mIdValor <= 0) { db.Valores.Add(v); } else { db.Entry(v).State = System.Data.Entity.EntityState.Modified; }
+
+                                        if (mFormaAnulacionCheques != "E") { mBorrarEnValores = false; }
+
+                                        if (mIdValor > 0 && (d.Anulado ?? "") != "SI")
+                                        {
+                                            var DetalleAsientos = db.DetalleAsientos.Where(c => c.IdValor == mIdValor).ToList();
+                                            if (DetalleAsientos != null)
+                                            {
+                                                foreach (DetalleAsiento da in DetalleAsientos)
+                                                {
+                                                    da.Debe = null;
+                                                    da.Haber = null;
+                                                    db.Entry(da).State = System.Data.Entity.EntityState.Modified;
+                                                }
+                                            }
+
+                                            var DetalleConciliaciones = db.DetalleConciliaciones.Where(c => c.IdValor == mIdValor).ToList();
+                                            if (DetalleConciliaciones != null)
+                                            {
+                                                foreach (DetalleConciliacione dc in DetalleConciliaciones)
+                                                {
+                                                    db.Entry(dc).State = System.Data.Entity.EntityState.Deleted;
+                                                }
+                                            }
+                                        }
+
+                                        if (d.IdDetalleOrdenPagoValores <= 0 && (d.IdBancoChequera ?? 0) > 0)
+                                        {
+                                            BancoChequera BancoChequera = db.BancoChequeras.Where(c => c.IdBancoChequera == d.IdBancoChequera).SingleOrDefault();
+                                            if (BancoChequera != null)
+                                            {
+                                                if (mNumeroValor >= BancoChequera.ProximoNumeroCheque)
+                                                {
+                                                    BancoChequera.ProximoNumeroCheque = Convert.ToInt32(mNumeroValor) + 1;
+                                                    if (BancoChequera.ProximoNumeroCheque >= BancoChequera.HastaCheque) { BancoChequera.Activa = "NO"; }
+                                                    db.Entry(BancoChequera).State = System.Data.Entity.EntityState.Modified;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                if (mBorrarEnValores) { db.Valores_BorrarPorIdDetalleOrdenPagoValores(d.IdDetalleOrdenPagoValores); }
+                            }
+                            db.SaveChanges();
+                        }
+
+                        ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
+                        if (mIdOrdenPago > 0 || mAnulada)
+                        {
+                            var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == 17 && c.IdComprobante == mIdOrdenPago).ToList();
+                            if (Subdiarios != null) { foreach (Subdiario s in Subdiarios) { db.Entry(s).State = System.Data.Entity.EntityState.Deleted; } }
+                        }
+
+                        if (!mAnulada)
+                        {
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoCuentas)
+                            {
+                                mDebe += (d.Debe ?? 0) * mCotizacionMoneda;
+                                mHaber += (d.Haber ?? 0) * mCotizacionMoneda;
+                            }
+                            mDiferencia = decimal.Round(mDebe - mHaber, 2);
+                            foreach (var d in OrdenPago.DetalleOrdenesPagoCuentas)
+                            {
+                                mBorrarEnValores = true;
+
+                                if (mDiferencia != 0) {
+                                    if ((d.Debe ?? 0) != 0) { 
+                                        d.Debe += mDiferencia;
+                                        mDiferencia = 0;
+                                    }
+                                    else if ((d.Haber ?? 0) != 0)
+                                    {
+                                        d.Haber += mDiferencia;
+                                        mDiferencia = 0;
+                                    }
+                                }
+                                Subdiario s = new Subdiario();
+                                s.IdCuentaSubdiario = mIdCuentaCajaTitulo;
+                                s.IdCuenta = d.IdCuenta;
+                                s.IdTipoComprobante = 17;
+                                s.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                s.FechaComprobante = OrdenPago.FechaOrdenPago;
+                                s.IdComprobante = OrdenPago.IdOrdenPago;
+                                s.Debe = d.Debe==0 ? null : d.Debe;
+                                s.Haber = d.Haber == 0 ? null : d.Haber;
+                                s.IdMoneda = mIdMonedaPesos;
+                                s.CotizacionMoneda = 1;
+                                s.IdDetalleComprobante = d.IdDetalleOrdenPagoCuentas;
+                                db.Subdiarios.Add(s);
+
+                                mEsCajaBanco = "";
+                                var data = (from a in db.Cuentas
+                                            from b in db.TiposCuentaGrupos.Where(o => o.IdTipoCuentaGrupo == a.IdTipoCuentaGrupo).DefaultIfEmpty()
+                                            select new { a.IdCuenta, EsCajaBanco = b != null ? b.EsCajaBanco : "" }).Where(x => x.IdCuenta == d.IdCuenta).AsQueryable().FirstOrDefault();
+                                if (data != null)
+                                {
+                                    mEsCajaBanco = data.EsCajaBanco ?? "";
+                                }
+                                //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_CuentaCajaBanco", d.IdCuenta).AsEnumerable().FirstOrDefault();
+                                //if (dt != null)
+                                //{
+                                //    mEsCajaBanco = (string)dt["EsCajaBanco"] ?? "";
+                                //}
+                                if (mEsCajaBanco != "BA" && mEsCajaBanco != "CA" && mEsCajaBanco != "TC") { mEsCajaBanco = ""; }
+
+                                if (mEsCajaBanco.Length > 0)
+                                {
+                                    mIdValor = -1;
+                                    Valore valor = db.Valores.Where(c => c.IdDetalleOrdenPagoCuentas == d.IdDetalleOrdenPagoCuentas).SingleOrDefault();
+                                    if (valor != null) { mIdValor = valor.IdValor; }
+
+                                    mIdBanco = 0;
+                                    if (mEsCajaBanco == "BA" && (d.IdCuentaBancaria ?? 0) > 0)
+                                    {
+                                        CuentasBancaria CuentasBancaria = db.CuentasBancarias.Where(c => c.IdCuentaBancaria == d.IdCuentaBancaria).SingleOrDefault();
+                                        if (CuentasBancaria != null) { mIdBanco = CuentasBancaria.IdBanco ?? 0; }
+                                    }
+
+                                    Valore v;
+                                    if (mIdValor <= 0) { v = new Valore(); } else { v = db.Valores.Where(c => c.IdValor == mIdValor).SingleOrDefault(); }
+
+                                    if (mEsCajaBanco == "BA")
+                                    {
+                                        v.IdTipoValor = 21;
+                                        v.IdBanco = mIdBanco;
+                                        v.IdCuentaBancaria = d.IdCuentaBancaria;
+                                    }
+                                    if (mEsCajaBanco == "CA")
+                                    {
+                                        v.IdTipoValor = 32;
+                                        v.IdCaja = d.IdCaja;
+                                    }
+                                    if (mEsCajaBanco == "TC")
+                                    {
+                                        v.IdTipoValor = 43;
+                                        v.IdTarjetaCredito = d.IdTarjetaCredito;
+                                    }
+                                    v.NumeroValor = 0;
+                                    v.NumeroInterno = 0;
+                                    v.FechaValor = OrdenPago.FechaOrdenPago;
+                                    v.NumeroComprobante = OrdenPago.NumeroOrdenPago;
+                                    v.FechaComprobante = OrdenPago.FechaOrdenPago;
+                                    if ((OrdenPago.IdProveedor ?? 0) > 0) { v.IdProveedor = OrdenPago.IdProveedor; }
+                                    v.IdTipoComprobante = 17;
+                                    v.IdDetalleOrdenPagoCuentas = d.IdDetalleOrdenPagoCuentas;
+                                    v.IdMoneda = d.IdMoneda;
+                                    if ((d.CotizacionMonedaDestino ?? 0) != 0)
+                                    {
+                                        if ((d.Debe ?? 0) != 0)
+                                        { v.Importe = d.Debe * mCotizacionMoneda / d.CotizacionMonedaDestino * -1; }
+                                        else if ((d.Haber ?? 0) != 0)
+                                        { v.Importe = d.Haber * mCotizacionMoneda / d.CotizacionMonedaDestino; }
+                                        v.CotizacionMoneda = d.CotizacionMonedaDestino;
+                                    }
+                                    else
+                                    {
+                                        if ((d.Debe ?? 0) != 0)
+                                        { v.Importe = d.Debe * -1; }
+                                        else if ((d.Haber ?? 0) != 0)
+                                        { v.Importe = d.Haber; }
+                                        v.CotizacionMoneda = mCotizacionMoneda;
+                                    }
+                                    if (mIdValor <= 0) { db.Valores.Add(v); } else { db.Entry(v).State = System.Data.Entity.EntityState.Modified; }
+                                    mBorrarEnValores = false;
+                                }
+                                if (mBorrarEnValores) { db.Valores_BorrarPorIdDetalleOrdenPagoCuentas(d.IdDetalleOrdenPagoCuentas); }
+                            }
+                            db.SaveChanges();
+                        }
+
+                        ///////////////////////////////////////////// GASTOS FF /////////////////////////////////////////////
+                        if (mIdOrdenPago > 0 || mAnulada)
+                        {
+                            var ComprobantesProveedores = db.ComprobantesProveedor.Where(c => c.IdOrdenPago == mIdOrdenPago).ToList();
+                            if (ComprobantesProveedores != null)
+                            {
+                                foreach (ComprobanteProveedor cp in ComprobantesProveedores)
+                                {
+                                    cp.IdOrdenPago = null;
+                                    db.Entry(cp).State = System.Data.Entity.EntityState.Modified;
+                                }
+                            }
+                        }
+
+                        if (!mAnulada && IdsGastosFF.Length > 0)
+                        {
+                            char[] delimiterChars = { ',', '.', ':', '\t' };
+                            string[] vector = IdsGastosFF.Split(delimiterChars);
+                            foreach (string s in vector)
+                            {
+                                mIdAux1 = Convert.ToInt32(s);
+                                ComprobanteProveedor ComprobantesProveedor = db.ComprobantesProveedor.Where(c => c.IdComprobanteProveedor == mIdAux1).SingleOrDefault();
+                                if (ComprobantesProveedor != null)
+                                {
+                                    ComprobantesProveedor.IdOrdenPago = OrdenPago.IdOrdenPago;
+                                    db.Entry(ComprobantesProveedor).State = System.Data.Entity.EntityState.Modified;
+                                }
+                            }
+                        }
+                        db.SaveChanges();
+
+                        scope.Complete();
+                        scope.Dispose();
+                    }                    
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdOrdenPago = OrdenPago.IdOrdenPago, ex = "" });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "La orden de pago tiene datos invalidos";
+
+                    return Json(res);
+                }
+            }
+
+            catch (TransactionAbortedException ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+                return Json("TransactionAbortedException Message: {0}", ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
+            }
+        }
+
+        private bool Validar(ProntoMVC.Data.Models.OrdenPago o, ref string sErrorMsg, ref string sWarningMsg)
+        {
+            Int32 mIdOrdenPago = 0;
+            Int32 mNumeroOrdenPago = 0;
+            Int32 mNumeroOrdenPagoAux = 0;
+            Int32 mIdMoneda = 1;
+            Int32 mIdProveedor = 1;
+            Int32 mIdEstado = 0;
+
+            decimal mTotalRubrosContables = 0;
+            decimal mTotalValores = 0;
+
+            string mTipo = "";
+            string mObservaciones = "";
+            string mOrdenPagoExterior = "";
+
+            DateTime mFechaOrdenPago = DateTime.Today;
+            DateTime mFechaUltimoCierre = DateTime.Today;
+
+            DataRow oRsAux1;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            
+
+            mIdOrdenPago = o.IdOrdenPago;
+            mNumeroOrdenPago = o.NumeroOrdenPago ?? 0;
+            mTipo = o.Tipo;
+            mIdMoneda = o.IdMoneda ?? 1;
+            mIdProveedor = o.IdProveedor ?? 0;
+            mObservaciones = o.Observaciones ?? "";
+            mOrdenPagoExterior = o.Exterior ?? "NO";
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mFechaUltimoCierre = parametros.FechaUltimoCierre ?? DateTime.Today;
+
+            if ((o.NumeroOrdenPago ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de orden de pago"; }
+            if (o.FechaOrdenPago < mFechaUltimoCierre) { sErrorMsg += "\n" + "La fecha de la orden no puede ser anterior a la del ultimo cierre contable"; }
+            if (BuscarClaveINI("Requerir obra en OP", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
+            if ((o.CotizacionMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización de equivalencia a pesos"; }
+            if ((o.CotizacionDolar ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización dolar"; }
+            if ((o.CotizacionEuro ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización euro"; }
+            if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
+
+            if (mTipo == "CC")
+            {
+                if (o.DetalleOrdenesPagoes.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene imputaciones a cuenta corriente";
+                if (mIdProveedor <= 0)
+                {
+                    sErrorMsg += "\n" + "Falta el proveedor";
+                }
+                else
+                {
+                    Proveedor Proveedor = db.Proveedores.Where(c => c.IdProveedor == mIdProveedor).SingleOrDefault();
+                    if (Proveedor != null)
+                    {
+                        mIdEstado = Proveedor.IdEstado ?? 0;
+                        if ((Proveedor.CodigoSituacionRetencionIVA ?? "") == "3" && (Proveedor.IdCodigoIva ?? 0) == 1) { sErrorMsg += "\n" + "El codigo de situacion del proveedor para retencion IVA es 3, no puede registrar la orden de pago"; }
+                        if ((Proveedor.SujetoEmbargado ?? "") == "SI") { sWarningMsg += "\n" + "Proveedor embargado, revise su situacion en el maestro y proceda en consecuencia"; }
+                        
+                        Estados_Proveedore EstadoProveedor = db.Estados_Proveedores.Where(c => c.IdEstado == mIdEstado).SingleOrDefault();
+                        if (EstadoProveedor != null)
+                        {
+                            if ((EstadoProveedor.Activo ?? "") == "NO") { sErrorMsg += "\n" + "El proveedor esta inactivo"; }
+                        }
+                    }
+                }
+                if ((o.DiferenciaBalanceo ?? 0) != 0) { sErrorMsg += "\n" + "La orden de pago no balancea"; }
+            }
+            else
+            {
+                if (mTipo == "FF")
+                {
+                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio";  }
+                    if ((o.IdEmpleadoFF ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el destinatario del fondo"; }
+                }
+                else
+                {
+                    if ((o.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cuenta contable"; }
+                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio"; }
+                }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPago x in o.DetalleOrdenesPagoes)
+            {
+                if (mIdOrdenPago > 0)
+                {
+                    if (x.IdDetalleOrdenPago > 0 && (x.IdImputacion ?? 0) == -1)
+                    {
+                        CuentasCorrientesAcreedor CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdDetalleOrdenPago == x.IdDetalleOrdenPago).SingleOrDefault();
+                        if (CtaCte != null)
+                        {
+                            if ((CtaCte.ImporteTotal ?? 0) != (CtaCte.Saldo ?? 0)) { sErrorMsg += "\n" + "Hay anticipos que en cuenta corriente tienen aplicado el saldo, no puede modificar esta orden de pago"; }
+                        }
+                    }
+                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "OrdenesPago_TX_ValidarNumero", mNumeroOrdenPago,mIdOrdenPago,mTipo,mOrdenPagoExterior);
+                    if (oRsAux1 != null)
+                    {
+                        mFechaOrdenPago = (DateTime)oRsAux1["FechaOrdenPago"];
+                        sErrorMsg += "\n" + "El numero de orden de pago ya fue utilizado por una OP del dia " + mFechaOrdenPago.ToString() + ".";
+                    }
+                }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoValore x in o.DetalleOrdenesPagoValores)
+            {
+                if ((x.IdCuentaBancaria ?? 0) > 0)
+                {
+                    CuentasBancaria CuentasBancaria = db.CuentasBancarias.Where(c => c.IdCuentaBancaria == x.IdCuentaBancaria).SingleOrDefault();
+                    if (CuentasBancaria != null)
+                    {
+                        if (mIdMoneda != (CuentasBancaria.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay valores con una moneda distinta a la de la orden de pago"; }
+                    }
+                    else
+                    {
+                        sErrorMsg += "\n" + "Hay valores que apuntan a cuentas bancarias inexistentes";
+                    }
+                    if ((x.IdBancoChequera ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con cuenta bancaria que no tiene chequera asignada"; }
+                }
+                if ((x.IdBancoChequera ?? 0) > 0)
+                {
+                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "DetOrdenesPagoValores_TX_Control", mIdOrdenPago, x.IdBancoChequera, x.NumeroValor);
+                    if (oRsAux1 != null)
+                    {
+                        mNumeroOrdenPagoAux = (Int32)oRsAux1["Numero"];
+                        sErrorMsg += "\n" + "El cheque  " + x.NumeroValor.ToString() + " ya existe en la orden de pago " + mNumeroOrdenPagoAux.ToString() + ".";
+                    }
+                    else
+                    {
+                        BancoChequera BancoChequera = db.BancoChequeras.Where(c => c.IdBancoChequera == x.IdBancoChequera).SingleOrDefault();
+                        if (BancoChequera != null)
+                        {
+                            if ((x.IdCuentaBancaria ?? 0) != BancoChequera.IdCuentaBancaria) { sErrorMsg += "\n" + "Hay valores que tienen cuentas bancarias con chequeras de otra cuenta"; }
+                        }
+                        else
+                        {
+                            sErrorMsg += "\n" + "Hay valores que apuntan a chequeras inexistentes";
+                        }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con chequera asignada y sin cuenta bancaria"; }
+                }
+                if ((x.IdCaja ?? 0) > 0)
+                {
+                    Caja Caja = db.Cajas.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
+                    if (Caja != null)
+                    {
+                        if (mIdMoneda != (Caja.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay una caja con una moneda distinta a la de la orden de pago"; }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay movimientos de caja que tienen cuenta bancaria o chequera asignada y no deberia"; }
+                }
+                if ((x.IdValor ?? 0) > 0)
+                {
+                    Valore Valor = db.Valores.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
+                    if (Valor != null)
+                    {
+                        if (mIdMoneda != (Valor.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay un valor de terceros con una moneda distinta a la de la orden de pago"; }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay endosos de cheques que tienen cuenta bancaria o chequera asignada y no deberia"; }
+                }
+                mTotalValores += x.Importe ?? 0;
+            }
+
+            if (o.DetalleOrdenesPagoCuentas.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene registro contable";
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoCuenta x in o.DetalleOrdenesPagoCuentas)
+            {
+                if ((x.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items de registro contable sin cuenta"; }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoRubrosContable x in o.DetalleOrdenesPagoRubrosContables)
+            {
+                mTotalRubrosContables += x.Importe ?? 0;
+            }
+            if (mTotalRubrosContables != mTotalValores) { sErrorMsg += "\n" + "El total de rubros contables asignados debe ser igual al total de valores"; }
+
+            sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
+            if (sErrorMsg != "") return false;
+            return true;
+        }
+
+        public virtual JsonResult GetIdOrdenPagoPorNumero(int NumeroOrdenPago = 0)
+        {
+            var filtereditems = (from a in db.OrdenesPago
+                                 where (a.NumeroOrdenPago == NumeroOrdenPago)
+                                 select new
+                                 {
+                                     id = a.IdOrdenPago,
+                                     a.Tipo,
+                                     a.Valores
+                                 }).ToList();
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
     }
