@@ -427,19 +427,24 @@ namespace ProntoMVC.Controllers
 
 
 
-        public string BuscarClaveINI(string clave)
+        public string BuscarClaveINI(string clave, Int32 IdUsuario2 = 0)
         {
-
-            string usuario = ViewBag.NombreUsuario;
-            int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            int IdUsuario = 0;
+            if (IdUsuario2 == 0)
+            {
+                string usuario = ViewBag.NombreUsuario;
+                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+                string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            }
+            else
+            {
+                IdUsuario = IdUsuario2;
+            }
 
             var idclav = db.ProntoIniClaves.Where(x => x.Clave == clave).Select(x => x.IdProntoIniClave).FirstOrDefault();
-            string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && x.IdUsuario == IdUsuario).Select(x => x.Valor).FirstOrDefault();
+            string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && (IdUsuario==-1 || x.IdUsuario == IdUsuario)).Select(x => x.Valor).FirstOrDefault();
 
             return idclava;
-
-         
         }
 
 

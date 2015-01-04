@@ -1608,9 +1608,35 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetObras()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
+            foreach (Obra u in db.Obras.Where(x => x.Activa == "SI").OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdObra, u.Descripcion);
 
+            return PartialView("Select", Datacombo);
+        }
 
+        public virtual ActionResult GetCuentasGasto()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (CuentasGasto u in db.CuentasGastos.Where(x => x.Activa == "SI").OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdCuentaGasto, u.Descripcion);
+
+            return PartialView("Select", Datacombo);
+        }
+
+        public virtual ActionResult GetTiposCuentaGrupos()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (TiposCuentaGrupos u in db.TiposCuentaGrupos.OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdTipoCuentaGrupo, u.Descripcion);
+
+            return PartialView("Select", Datacombo);
+        }
 
     }
 }

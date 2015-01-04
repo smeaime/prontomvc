@@ -102,5 +102,6 @@ namespace ProntoMVC.Data.Models
         public virtual Moneda Moneda { get; set; }
         public virtual TiposComprobante TiposComprobante { get; set; }
         public virtual TiposComprobante TiposComprobante1 { get; set; }
+        public virtual Moneda Moneda1 { get; set; }
     }
 }

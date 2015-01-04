@@ -20,6 +20,7 @@ using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
+using System.Collections;
 
 namespace ProntoMVC.Controllers
 {
@@ -115,6 +116,24 @@ namespace ProntoMVC.Controllers
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetCodigosCuentasAutocomplete(string term)
+        {
+            int term2 = Generales.Val(term);
+
+            var q = (from item in db.Cuentas
+                     where (item.Codigo == term2)
+                     orderby item.Codigo
+                     select new
+                     {
+                         id = item.IdCuenta,
+                         value = item.Descripcion + " " + item.Codigo.ToString(),
+                         codigo = item.Codigo,
+                         title = item.Descripcion
+                     }).Take(10).ToList();
+
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult GetCodigosCuentasAutocomplete2(string term)
@@ -218,7 +237,6 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetCuentasAutocomplete2(string term)
         {
-
             var idCuentaGrupo = 2;
 
             var s = "SELECT  TOP 100  IdCuenta,Descripcion,Codigo " +
@@ -229,16 +247,11 @@ namespace ProntoMVC.Controllers
             string sc = "";
             var lista = EntidadManager.ExecDinamico(sc, s);
 
-
             foreach (DataRow cuenta in lista.Rows)
             {
-
-
                 //var cod = cuenta.Item("IdCuenta") // & "^" & proveedor.Item("Cuit");
                 //var texto = cuenta.Item("Descripcion") + " " + cuenta.Item("Codigo");
                 //items.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(texto, cod));
-
-
             }
 
             return null;
@@ -269,6 +282,21 @@ namespace ProntoMVC.Controllers
             return null;
         }
 
+        public virtual JsonResult TraerUna(int IdCuenta)
+        {
+            var q = (from a in db.Cuentas
+                     from b in db.TiposCuentaGrupos.Where(o => o.IdTipoCuentaGrupo == a.IdTipoCuentaGrupo).DefaultIfEmpty()
+                     where (a.IdCuenta == IdCuenta)
+                     select new
+                     {
+                         IdCuenta = a.IdCuenta,
+                         codigo = a.Codigo,
+                         Descripcion = a.Descripcion + " " + a.Codigo.ToString(),
+                         EsCajaBanco = b != null ? b.EsCajaBanco : ""
+                     }).ToList();
+
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
 
         public virtual ActionResult Cuentas(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                            string FechaInicial, string FechaFinal, string IdObra)
@@ -322,7 +350,6 @@ namespace ProntoMVC.Controllers
             {
                 campo = "true";
             }
-
 
             try
             {
@@ -391,47 +418,8 @@ namespace ProntoMVC.Controllers
             //}
 
             var data = (from a in Req
-
                         select a
-                //new
-                //        {
-                //            IdRequerimiento = a.IdCuenta,
-                //            NumeroRequerimiento = a.Codigo,
-                //            //FechaRequerimiento = a.FechaRequerimiento,
-                //            //Cumplido = a.Cumplido,
-                //            //Recepcionado = a.Recepcionado,
-                //            //Entregado = a.Entregado,
-                //            //Impresa = a.Impresa,
-                //            //Detalle = a.Detalle,
-                //            //NumeroObra = a.Obra.NumeroObra,
-                //            //Presupuestos = a.Presupuestos,
-                //            //Comparativas = a.Comparativas,
-                //            //Pedidos = a.Pedidos,
-                //            //Recepciones = a.Recepciones,
-                //            //Salidas = a.SalidasMateriales,
-                //            //Libero = a.Empleados.Nombre,
-                //            //Solicito = a.Empleados1.Nombre,
-                //            //Sector = a.Sectores.Descripcion,
-                //            //Usuario_anulo = a.UsuarioAnulacion,
-                //            //Fecha_anulacion = a.FechaAnulacion,
-                //            //Motivo_anulacion = a.MotivoAnulacion,
-                //            //Fechas_liberacion = a.FechasLiberacion,
-                //            //Observaciones = a.Observaciones,
-                //            //LugarEntrega = a.LugarEntrega,
-                //            //IdObra = a.IdObra,
-                //            //IdSector = a.IdSector,
-                //            //a.ConfirmadoPorWeb
-
-                //        }
-
             ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-
-
-
-
-
-
 
             var jsonData = new jqGridJson()
             {
@@ -443,63 +431,26 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdCuenta.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
-                                a.IdCuenta.ToString(), 
-                                a.Descripcion.NullSafeToString(),
-                                a.Codigo.NullSafeToString(),
-
-                                
-
-                            
-                             a.IdTipoCuenta==null ? "" :  db.TiposCuentas.Find(a.IdTipoCuenta).Descripcion,  
-                             a.Jerarquia.NullSafeToString(),  
-                             a.IdRubroContable==null  ? "" :  db.RubrosContables.Find(a.IdRubroContable).Descripcion,  
-                             a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
-                             a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
- 
-                             a.AjustaPorInflacion .NullSafeToString(),
-                             a.CodigoSecundario   .NullSafeToString(),
-
-
-                                
-                                a.IdCuentaGasto.NullSafeToString(),
-                                a.IdObra.NullSafeToString()
-                                
-                                //a.NumeroRequerimiento.ToString(), 
-                                //a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                //a.Cumplido,
-                                //a.Recepcionado,
-                                //a.Entregado,
-                                //a.Impresa,
-                                //a.Detalle,
-                                //a.NumeroObra, 
-                                //a.Presupuestos,
-                                //a.Comparativas,
-                                //a.Pedidos,
-                                //a.Recepciones,
-                                //a.Salidas,
-                                //a.Libero,
-                                //a.Solicito,
-                                //a.Sector,
-                                //a.Usuario_anulo,
-                                //a.Fecha_anulacion.ToString(),
-                                //a.Motivo_anulacion,
-                                //a.Fechas_liberacion,
-                                //a.Observaciones,
-                                //a.LugarEntrega,
-                                //a.IdObra.ToString(),
-                                //a.IdSector.ToString(),
-                                //a.ConfirmadoPorWeb.NullSafeToString()
+                            "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
+							"<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
+                            a.IdCuenta.ToString(), 
+                            a.Descripcion.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.IdTipoCuenta==null ? "" :  db.TiposCuentas.Find(a.IdTipoCuenta).Descripcion,  
+                            a.Jerarquia.NullSafeToString(),  
+                            a.IdRubroContable==null  ? "" :  db.RubrosContables.Find(a.IdRubroContable).Descripcion,  
+                            a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
+                            a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
+                            a.AjustaPorInflacion .NullSafeToString(),
+                            a.CodigoSecundario   .NullSafeToString(),
+                            a.IdCuentaGasto.NullSafeToString(),
+                            a.IdObra.NullSafeToString()
                             }
                         }).ToArray()
             };
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
 
         public virtual ViewResult Index()
         {
@@ -523,6 +474,87 @@ namespace ProntoMVC.Controllers
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
+        }
+
+        public virtual ActionResult GetCuentas(int? TipoEntidad)
+        {
+            int TipoEntidad1 = TipoEntidad ?? 0;
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2).OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdCuenta, u.Descripcion + " " + u.Codigo.ToString());
+
+            return PartialView("Select", Datacombo);
+        }
+
+        public virtual JsonResult GetCuentasPorIdObraIdCuentaGasto(int IdObra = 0, int IdCuentaGasto = 0)
+        {
+            var filtereditems = (from a in db.Cuentas
+                                 where (a.IdTipoCuenta == 2)
+                                 orderby a.Descripcion
+                                 select new
+                                 {
+                                     id = a.IdCuenta,
+                                     Cuenta = a.Descripcion.Trim(),
+                                     value = a.Descripcion + " " + a.Codigo.ToString(),
+                                     IdObra = a.IdObra ?? 0,
+                                     a.IdCuentaGasto
+                                 }).ToList();
+
+            if (IdObra != 0 && IdCuentaGasto != 0)
+            {
+                filtereditems = (from a in filtereditems
+                                 where (a.IdObra == IdObra && a.IdCuentaGasto == IdCuentaGasto)
+                                 orderby a.Cuenta select a).ToList();
+            }
+            if (IdObra != 0 && IdCuentaGasto == 0)
+            {
+                filtereditems = (from a in filtereditems
+                                 where (a.IdObra == IdObra || a.IdObra == 0)
+                                 orderby a.Cuenta
+                                 select a).ToList();
+            }
+            if (IdObra == 0 && IdCuentaGasto  != 0)
+            {
+                filtereditems = (from a in filtereditems
+                                 where (a.IdCuentaGasto == IdCuentaGasto)
+                                 orderby a.Cuenta
+                                 select a).ToList();
+            }
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetCuentasPorIdTipoCuentaGrupo(int IdTipoCuentaGrupo = 0)
+        {
+            var filtereditems = (from a in db.Cuentas
+                                 where ((a.IdTipoCuentaGrupo == IdTipoCuentaGrupo || IdTipoCuentaGrupo == 0))
+                                 orderby a.Descripcion
+                                 select new
+                                 {
+                                     id = a.IdCuenta,
+                                     Cuenta = a.Descripcion.Trim(),
+                                     value = a.Descripcion + " " + a.Codigo.ToString()
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetCuentaPorCodigo(int CodigoCuenta = 0)
+        {
+            var filtereditems = (from a in db.Cuentas
+                                 where (a.Codigo == CodigoCuenta)
+                                 orderby a.Descripcion
+                                 select new
+                                 {
+                                     id = a.IdCuenta
+                                 }).ToList();
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
     }
 }
