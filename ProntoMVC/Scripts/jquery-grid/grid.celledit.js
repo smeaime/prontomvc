@@ -408,7 +408,7 @@ $.jgrid.extend({
 			}
 
 			$(selection).insertBefore($t.grid.cDiv);
-			$("#"+$t.p.knv)
+		    $("#" + $t.p.knv)
 			.focus()
 			.keydown(function (e){
 				kdir = e.keyCode;

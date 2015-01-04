@@ -34,6 +34,7 @@ namespace ProntoMVC.Controllers
                             a.IdMonedaDolar,
                             a.IdMonedaEuro,
                             a.IdTipoComprobanteCajaEgresos,
+                            a.ProximoNumeroInternoChequeEmitido
                         }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
