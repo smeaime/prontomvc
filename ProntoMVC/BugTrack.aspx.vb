@@ -259,15 +259,15 @@ Namespace ProntoMVC.Reportes
             '///////////////////////////////////////////////////
             '///////////////////////////////////////////////////
             'ordeno
-            Dim b As Data.DataView = DataTableORDER(dt, "IdPrioridad ASC")
-            ViewState("Sort") = b.Sort
+           ' Dim b As Data.DataView = DataTableORDER(dt, "IdPrioridad ASC")
+           ' ViewState("Sort") = b.Sort
 
 
             '///////////////////////////////////////////////////
             '///////////////////////////////////////////////////
             '///////////////////////////////////////////////////
             GridView1.DataSourceID = ""
-            GridView1.DataSource = b
+            GridView1.DataSource = dt
             GridView1.DataBind()
             GridView1.PageIndex = pageIndex
 

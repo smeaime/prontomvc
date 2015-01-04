@@ -733,13 +733,13 @@ go
 --GO
 
 
-
 create table CartasDePorteMailClusters
 (	
 	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
 	AgrupadorDeTandaPeriodos  int 
 )
 go
+
 
 
 
@@ -1069,6 +1069,67 @@ alter table ExcelImportador ADD
         Exporta VARCHAR (10)	NULL,
         SubnumeroDeFacturacion VARCHAR (10)	NULL
 go
+
+
+
+
+--//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ALTER TABLE  CartasPorteAcopios  ADD
+	IdCliente int null references Clientes(IdCliente)
+GO
+
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  1, 'AGRO', 4333              ) --syngenta 4333
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  2, 'SEEDS', 4333              ) --syngenta 4333
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  3, 'PEHUA', 10              ) --syngenta 4333
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  4, 'OLAVARR', 10              ) --syngenta 4333
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  5, 'NAON', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  6, 'G.VILL', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  7, 'IRIARTE', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  8, 'WRIGHT', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  9, 'CDC ACA', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  10, 'GUALEGUAY', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  11, 'GLGUAYCHU', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  12, 'RUFINO', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  13, 'BRAGADO', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  14, ',LAS FLORES', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  15, 'OTROS', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  16, 'CDC Eduardo Castex', 10) --A.C.A. LTDA   id10
+
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  17, 'LDC acopio1', 2775) --ldc   id2775
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  18, 'LDC acopio2', 2775) --ldc   id2775
+--select * from clientes where razonsocial like '%ldc%'
+
+
+alter table CartasDePorte add
+		 AcopioFacturarleA int null
+go
+
+
+
+
+ALTER TABLE  Facturas ADD
+	 FueEnviadoCorreoConFacturaElectronica VARCHAR(2) NULL
+GO
 
 
 

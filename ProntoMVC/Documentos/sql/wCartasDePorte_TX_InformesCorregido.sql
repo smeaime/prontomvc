@@ -50,7 +50,10 @@ AS
 	-- Also note that SET ROWCOUNT doesn't affect the execution plan, so using TOP is preferred in SQL 2005. 
 
       
-    SELECT  top 4000	CDP.*,
+    SELECT  top 4000	
+    
+			CDP.*
+			,
 
 			ISNULL(Articulos.AuxiliarString5,'') AS EspecieONCAA,	
  			ISNULL(Articulos.AuxiliarString6,'') AS CodigoSAJPYA,	
@@ -179,7 +182,7 @@ and
 
 --solo incluir las descargas (tambien las descargas facturadas
     ORDER BY IdCartaDePorte DESC
-
+OPTION (RECOMPILE)
 
 --set rowcount 0
 
@@ -190,12 +193,17 @@ GO
 --incluir a destino en el indice SelectDinamico ?
 
 
-exec wCartasDePorte_TX_InformesCorregido   -1,'03/31/2014' ,'03/31/2014',-1,-1,-1,-1,-1,-1,-1,38
-exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,-1
+exec wCartasDePorte_TX_InformesCorregido   -1,'31/03/2014' ,'31/03/2014',-1,43,-1,-1,-1,-1,-1,-1
 
-exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,38--,15000,4
+--exec wCartasDePorte_TX_InformesCorregido   -1,'03/31/2014' ,'03/31/2014',-1,-1,-1,-1,-1,-1,-1,38
+ 
+ 
+ 
+--exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,-1
 
-exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+--exec wCartasDePorte_TX_InformesCorregido   -1,null ,null,-1,-1,-1,-1,-1,-1,-1,38--,15000,4
+
+--exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 --exec wCartasDePorte_TX_InformesCorregido @IdCartaDePorte = -1
 --exec wCartasDePorte_TX_Informes @IdCartaDePorte = -1, @FechaDesde = 'Ene  1 1753 12:00AM', @FechaHasta = 'Ene  1 2100 12:00AM'
 
@@ -213,4 +221,4 @@ exec wCartasDePorte_TX_InformesCorregido   -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 --/////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////
 
-select * from CartasDePorte where destino=38
+--select * from CartasDePorte where destino=38

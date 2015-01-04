@@ -216,6 +216,7 @@ Namespace Pronto.ERP.BO
         Public Acopio4 As Integer
         Public Acopio5 As Integer
 
+        Public AcopioFacturarleA As Integer
 
 
         Public Property Id() As Integer
