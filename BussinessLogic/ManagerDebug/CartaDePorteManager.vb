@@ -47,7 +47,9 @@ Imports Word = Microsoft.Office.Interop.Word
 Imports Excel = Microsoft.Office.Interop.Excel
 
 
+
 Imports CartaDePorteManager
+Imports CDPMailFiltrosManager2
 
 Imports LogicaImportador.FormatosDeExcel
 
@@ -2611,6 +2613,803 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    Public Shared Function EnviarMailFiltroPorId_DLL(ByVal SC As String, ByVal fechadesde As Date, _
+                                                     ByVal fechahasta As Date, ByVal puntoventa As Integer, _
+                                                     ByVal id As Long, ByVal titulo As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                     ByRef sError As String, ByVal bVistaPrevia As Boolean, _
+                                                     ByVal SmtpServer As String, ByVal SmtpUser As String, _
+                                                     ByVal SmtpPass As String, ByVal SmtpPort As Integer, ByVal CCOaddress As String, _
+                                                     ByRef sError2 As String _
+                                                        ) As String
+
+
+
+
+
+
+        'Dim Id = GridView1.DataKeys(fila.RowIndex).Values(0).ToString()
+        Dim dt = CDPMailFiltrosManager2.TraerMetadata(SC, id)
+        Dim dr = dt.Rows(0)
+
+
+
+        Dim output As String
+        'output = generarNotasDeEntrega(#1/1/1753#, #1/1/2020#, Nothing, Nothing, Nothing, Nothing, Nothing, BuscaIdClientePreciso(Entregador.Text, sc), Nothing)
+        With dr
+            Dim l As Long
+
+
+
+            'If Not chkConLocalReport.Checked Then
+            '    Dim sWHERE = generarWHEREparaSQL(sc, dr, titulo, estado, _
+            '                                iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#), _
+            '                                iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#), cmbPuntoVenta.SelectedValue)
+            '    output = generarNotasDeEntrega(sc, dr, estado, l, titulo, sWHERE, Server.MapPath("~/Imagenes/Williams.bmp"))
+            'Else
+
+
+
+
+            If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
+                fechadesde = #1/1/1753#
+                fechahasta = #1/1/2100#
+
+            ElseIf estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha Then
+                fechadesde = #1/1/1753#
+                fechahasta = #1/1/2100#
+
+            End If
+
+
+            Try
+                Dim sWHERE = CDPMailFiltrosManager2.generarWHEREparaDataset(SC, dr, titulo, estado, _
+                                            iisValidSqlDate(fechadesde, #1/1/1753#), _
+                                            iisValidSqlDate(fechahasta, #1/1/2100#), puntoventa)
+
+            Catch ex As Exception
+                'logear el idfiltro con problemas
+
+                ErrHandler.WriteError(ex.ToString)
+                ErrHandler.WriteError("Error en llamada a generarWHEREparaDataset().   IdFiltro " + id.ToString())
+                'dddd()
+                dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
+                Throw
+            End Try
+
+
+            ' Dim bDescargaHtml =        CartaDePorteManager.CONSTANTE_HTML
+            Dim bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+
+            Dim tiempoinforme, tiemposql As Integer
+
+            If Debugger.IsAttached Then
+                output = generarNotasDeEntregaConReportViewer_ConServidorDeInformes(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            Else
+                'output = generarNotasDeEntregaConReportViewer(SC, fechadesde, fechahasta, dr, estado, l, titulo, "", puntoventa, tiemposql, tiempoinforme, bDescargaHtml)
+            End If
+
+
+            'End If
+
+
+
+
+
+            If output <> "-1" And output <> "-2" Then
+                'MandaEmail("mscalella911@gmail.com", "Mailing Williams", "", , , , , "C:\ProntoWeb\doc\williams\Excels de salida\NE Descargas para el corredor Intagro.xls")
+
+                'Dim mails() As String = Split(.Item("EMails"), ",")
+                'For Each s As String In mails
+                'ErrHandler.WriteError("asdasde")
+                Dim De As String
+
+                Select Case puntoventa
+                    Case 1
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                    Case 2
+                        De = "sanlorenzo@williamsentregas.com.ar"
+                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+                    Case 3
+                        De = "arroyoseco@williamsentregas.com.ar"
+                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+                    Case 4
+                        De = "bahiablanca@williamsentregas.com.ar"
+                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+                    Case Else
+                        De = "buenosaires@williamsentregas.com.ar"
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                End Select
+
+                Try
+                    Dim destinatario As String
+                    Dim truquito As String '= "    <img src =""http://" & HttpContext.Current.Request.ServerVariables("HTTP_HOST") & "/Pronto/mailPage.aspx?q=" & iisNull(UsuarioSesion.Mail(sc, Session)) & "&e=" & .Item("EMails") & "_" & tit & """/>" 'imagen para que llegue respuesta cuando sea leido
+                    Dim cuerpo As String
+
+                    If bVistaPrevia Then ' chkVistaPrevia.Checked Then
+                        'lo manda a la casilla del usuario
+                        'ver cómo crear una regla en Outlook para forwardearlo a la casilla correspondiente
+                        'http://www.eggheadcafe.com/software/aspnet/34183421/question-on-rules-on-unattended-mailbox.aspx
+                        destinatario = .Item("AuxiliarString2") ' UsuarioSesion.Mail(sc, Session)
+                        cuerpo = .Item("EMails") & truquito
+                    Else
+                        'lo manda a la casilla del destino
+                        destinatario = .Item("EMails")
+
+                        'destinatario &= "," & De
+
+                        cuerpo = truquito
+                    End If
+
+
+                    Dim stopWatch As New Stopwatch()
+                    stopWatch.Start()
+
+
+
+
+
+                    Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
+                    Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
+                    Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
+                    Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
+                    Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
+                    Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
+                    Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
+                    Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
+
+
+
+                    Dim AplicarANDuORalFiltro As CartaDePorteManager.FiltroANDOR = iisNull(.Item("AplicarANDuORalFiltro"), 0)
+                    Dim ModoExportacion As String = .Item("modo").ToString
+                    Dim optDivisionSyngenta As String = "Ambas"
+
+
+                    Dim asunto As String
+
+                    Try
+
+                        'Dim fechadesde As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaDesde.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/1753#)
+                        'Dim fechahasta As DateTime = iisValidSqlDate(DateTime.ParseExact(txtFechaHasta.Text, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture), #1/1/2100#)
+
+
+                        asunto = CartaDePorteManager.FormatearAsunto(SC, _
+                             "", _
+                           estado, "", idVendedor, idCorredor, _
+                          idDestinatario, idIntermediario, _
+                          idRemComercial, idArticulo, idProcedencia, idDestino, _
+                           AplicarANDuORalFiltro, ModoExportacion, _
+                          fechadesde, fechahasta, _
+                           puntoventa, optDivisionSyngenta, False, "", "", -1)
+                    Catch ex As Exception
+                        asunto = "mal formateado"
+                        ErrHandler.WriteError(ex.ToString + " asunto mal formateado")
+                    End Try
+
+
+
+                    If bDescargaHtml Then
+
+
+
+                        MandaEmailSimple(destinatario, _
+                                    asunto, _
+                                  cuerpo + output, _
+                               De, _
+                               SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                         "", _
+                                        SmtpPort, _
+                                , _
+                                CCOaddress, )
+
+
+                        'MandaEmail(destinatario, _
+                        '                    asunto, _
+                        '                  cuerpo + output, _
+                        '                   De, _
+                        '                 SmtpServer, _
+                        '                SmtpUser, _
+                        '                SmtpPass, _
+                        '                "", _
+                        '                SmtpPort, _
+                        '                 , _
+                        '                 CCOaddress, _
+                        '                    truquito _
+                        '                    , "Williams Entregas" _
+                        '               )
+                    Else
+
+                        MandaEmail(destinatario, _
+                                            asunto, _
+                                          cuerpo, _
+                                           De, _
+                                         SmtpServer, _
+                                        SmtpUser, _
+                                        SmtpPass, _
+                                        output, _
+                                        SmtpPort, _
+                                         , _
+                                         CCOaddress, _
+                                            truquito _
+                                            , "Williams Entregas" _
+                                       )
+
+                    End If
+
+
+                    stopWatch.Stop()
+                    Dim tiempomail = stopWatch.Elapsed.Milliseconds
+
+
+                    Dim s = "Enviado con éxito a las " & Now.ToString(" hh:mm") & ". CDPs filtradas: " & l & " sql:" & tiemposql & " rs:" & tiempoinforme & " mail:" & tiempomail
+
+                    If False Then
+                        ErrHandler.WriteError("IdFiltro(no de cola)=" & id & " Enviado con éxito a las " & Now.ToString & ". CDPs filtradas: " & l)
+                    End If
+
+                    dr.Item("UltimoResultado") = s
+
+                    CDPMailFiltrosManager2.Update(SC, dt)
+
+                Catch ex As Exception
+                    'Verificar Mails rechazados en la cuenta que los envió
+                    '        http://www.experts-exchange.com/Programming/Languages/C_Sharp/Q_23268068.html
+                    'TheLearnedOne:
+                    'The only way that I know of is to look in the Inbox for rejected messages.
+
+                    '        Bob
+
+
+
+                    ErrHandler.WriteError("Error en EnviarMailFiltroPorId() " + ex.ToString)
+                    'dddd()
+                    dr.Item("UltimoResultado") = Left(Now.ToString("hh:mm") & " Fallo al enviar. Tope de filas? " & ex.ToString, 100)
+                    CDPMailFiltrosManager2.Update(SC, dt)
+                    'MsgBoxAjax(Me, "Fallo al enviar. " & ex.ToString)
+                End Try
+
+                'Next
+            ElseIf output = "-1" Then
+                sError += "El filtro " & id & " genera un informe vacío." & vbCrLf
+
+                dr.Item("UltimoResultado") = "Generó un informe vacío a las " & Now.ToString("hh:mm")
+                CDPMailFiltrosManager2.Update(SC, dt)
+            ElseIf output = "-2" Then
+
+                sError += "Modo IDE. Mail muy grande. No se enviará." & vbCrLf
+
+                dr.Item("UltimoResultado") = Now.ToString("hh:mm") & " Modo IDE. Mail muy grande. No se enviará"
+                CDPMailFiltrosManager2.Update(SC, dt)
+            End If
+
+
+
+
+        End With
+
+        Try
+            sError2 = dr.Item("UltimoResultado")
+        Catch ex As Exception
+
+        End Try
+
+        Return output
+
+    End Function
+
+
+
+
+
+
+    Shared Function generarNotasDeEntregaConReportViewer_ConServidorDeInformes(ByVal SC As String, ByVal fechadesde As Date, _
+                                                         ByVal fechahasta As Date, ByVal dr As DataRow, _
+                                                         ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                         ByRef lineasGeneradas As Long, ByRef titulo As String, _
+                                                         ByVal logo As String, ByVal puntoventa As Integer, _
+                                                         Optional ByRef tiemposql As Integer = 0, _
+                                                         Optional ByRef tiempoinforme As Integer = 0, _
+                                                         Optional ByVal bDescargaHtml As Boolean = False, _
+                                                         Optional grid As GridView = Nothing) As String
+
+
+        Dim sExcelFileName As String
+
+        Dim stopWatch As New Stopwatch()
+
+        Dim rdl As String
+
+        Dim strRet As String
+
+
+        Dim strSQL As String
+
+        Dim ReportViewerEscondido As Microsoft.Reporting.WebForms.ReportViewer   'con WebForms
+
+        'Using ReportViewerEscondido As New Microsoft.Reporting.WebForms.ReportViewer
+        Try
+
+
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            ' la llamada a wCartasDePorte_TX_Todas con DescargasDeHoyMasTodasLasPosiciones es
+            ' ineficiente, porque no filtra por fecha. Esta ineficiencia se la banca el mail manual, pero
+            ' el automático explota. -Ok, pero con las Posiciones tambien deberias
+            ' tener problemas..., puesto que tampoco filtra por fecha. Necesito DE UNA BUENA VEZ, un 
+            ' datasource de las cartas de porte pero YA FILTRADAS EN SQL
+
+
+            With dr
+                Dim idVendedor As Long = iisNull(.Item("Vendedor"), -1)
+                Dim idCorredor As Long = iisNull(.Item("Corredor"), -1)
+                Dim idDestinatario As Long = iisNull(.Item("Entregador"), -1)
+                Dim idIntermediario As Long = iisNull(.Item("CuentaOrden1"), -1)
+                Dim idRemComercial As Long = iisNull(.Item("CuentaOrden2"), -1)
+                Dim IdClienteAuxiliar As Long = iisNull(.Item("IdClienteAuxiliar"), -1)
+                Dim idArticulo As Long = iisNull(.Item("IdArticulo"), -1)
+                Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
+                Dim idDestino As Long = iisNull(.Item("Destino"), -1)
+
+                Dim contrato As String = iisNull(.Item("Contrato"), -1)
+
+                Dim EnumSyngentaDivision As String = iisNull(.Item("EnumSyngentaDivision"), "")
+
+                Dim AgrupadorDeTandaPeriodos As String = iisNull(.Item("AgrupadorDeTandaPeriodos"), -1)
+
+
+                bDescargaHtml = (iisNull(.Item("ModoImpresion"), "Excel") = "Html" Or iisNull(.Item("ModoImpresion"), "Excel") = "HtmlIm")
+
+                'antes se filtraba con generarWHEREparaDataset
+
+
+
+
+                ' Get the elapsed time as a TimeSpan value.
+                'Dim ts As TimeSpan = stopWatch.Elapsed
+
+                stopWatch.Start()
+
+
+                'usar agrupador de fechas para marcar los filtros que usen el mismo periodo
+
+                'cómo puede ser que este dt traiga informacion repetida
+                'https://mail.google.com/mail/u/0/#inbox/13f5c9dc24580285
+
+
+
+
+                'ya te digo si saben. deberiamos poner alguna marca en los mails aunque no se vea 
+                '(quizas en blanco en una celda perdida) para control nuestro
+
+
+                strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                               "", "", "", 1, 10000, _
+                               estado, "", idVendedor, idCorredor, _
+                               idDestinatario, idIntermediario, _
+                               idRemComercial, idArticulo, idProcedencia, idDestino, _
+                               iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
+                               iisValidSqlDate(fechadesde, #1/1/1753#), _
+                              iisValidSqlDate(fechahasta, #1/1/2100#), _
+                               puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos)
+
+
+                stopWatch.Stop()
+                tiemposql = stopWatch.Elapsed.Milliseconds
+
+
+
+
+
+
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                'tengo que diferenciar si se le envía a un corredor, para mandarle los links o no. Pero no tengo otra manera
+                'de diferenciarlo que viendo los filtros...
+                'Dim IdClienteEquivalenteAlCorredor = BuscaIdVendedorPreciso(EntidadManager.NombreVendedor(SC, drCDP("Corredor")), SC)
+                'If IdClienteEquivalenteAlCorredor < 1 Then Return 0
+                If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
+                ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                    'formato para corredores (menos BLD)
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
+
+                ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
+                ElseIf NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
+
+                ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
+                    'este era el tradicional
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+                ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
+                    'este era el tradicional
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+                ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
+                    'formato normal para clientes (incluye la foto)
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+                Else
+                    'formato normal para clientes (incluye la foto)
+                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+                End If
+
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            End With
+
+            'If estado = CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones Then
+            '    dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_DescargasDeHoyMasTodasLasPosiciones", Today)
+            'ElseIf estado = CartaDePorteManager.enumCDPestado.Posicion Then
+            '    dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_Posiciones", iisValidSqlDate(fechadesde, #1/1/1753#), iisValidSqlDate(fechahasta, #1/1/2100#))
+            'Else
+            '    dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_Todas", -1, iisValidSqlDate(fechadesde, #1/1/1753#), iisValidSqlDate(fechahasta, #1/1/2100#))
+            'End If
+
+
+            ' dejar de usar el strWHERE que recibo, y usar un datasource fijo
+
+            'dt = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, _
+            '                CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
+            '                idDestinatario, idIntermediario, _
+            '                idRComercial, idArticulo, idProcedencia, idDestino, _
+            '                "1", DropDownList2.Text, _
+            '                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+            '                Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            '                cmbPuntoVenta.SelectedValue)
+
+
+
+            'Dim sWHERE As String = CDPMailFiltrosManager.generarWHEREparaDatasetParametrizado(HFSC.Value, _
+            '                sTitulo, _
+            '                CartaDePorteManager.enumCDPestado.Todas, "", idVendedor, idCorredor, _
+            '                idDestinatario, idIntermediario, _
+            '                idRComercial, idArticulo, idProcedencia, idDestino, _
+            '                "1", DropDownList2.Text, _
+            '                Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
+            '                Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            '                cmbPuntoVenta.SelectedValue)
+
+
+
+
+
+
+            'strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.")
+            'strWHERE = strWHERE.Replace("CDP.", "")
+            'dt = DataTableWHERE(dt, strWHERE)
+
+
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+            '/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Try
+
+                sExcelFileName = Path.GetTempPath & "Listado general " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+
+                lineasGeneradas = 0 ' dt.Rows.Count
+
+                'If System.Diagnostics.Debugger.IsAttached() And dt.Rows.Count > 50000 Then
+                '    'Err.Raise(32434, "generarNotasDeEntrega", "Modo IDE. Mail muy grande. No se enviará")
+                '    Return -2 'si estoy en modo IDE, no mandar mail grande
+                'End If
+
+
+
+
+                Dim logtexto As String = "" ' = Date.Now.ToString() + " cant cdps " + dt.Rows.Count.ToString + " " + _
+                'idfiltro: " + dr.Item(0).ToString + " " + _
+                ' titulo(+" " + Space(300))
+
+
+
+                EntidadManager.Tarea(SC, "Log_InsertarRegistro", "ALTAINF", _
+                                  dr.Item(0), 0, Now, 0, Mid(logtexto, 1, 100), _
+                               Mid(logtexto, 101, 50), Mid(logtexto, 151, 50), Mid(logtexto, 201, 50), _
+                               Mid(logtexto, 251, 50), Mid(logtexto, 301, 50), DBNull.Value, DBNull.Value, _
+                                DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, _
+                                99990, DBNull.Value, DBNull.Value)
+
+
+
+                ' LogPronto(SC, dr.Item(0), Mid(logtexto), , , , "logMails")
+
+            Catch ex As Exception
+                ErrHandlerWriteErrorLogPronto("no se pudo hacer log del informe", SC, "")
+            End Try
+
+
+            Dim bServidor = False
+
+
+
+            ReportViewerEscondido = New Microsoft.Reporting.WebForms.ReportViewer
+
+            strRet = RebindReportViewer_ServidorExcel(ReportViewerEscondido, _
+                        rdl, _
+                          strSQL, True, sExcelFileName, titulo, bDescargaHtml)
+
+
+
+
+
+            stopWatch.Stop()
+            tiempoinforme = stopWatch.Elapsed.Milliseconds
+            '  Return sExcelFileName
+
+
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+
+        End Try
+
+
+        'Return -1
+        'End Using
+
+
+
+        Return sExcelFileName
+
+        Return -1
+
+    End Function
+
+
+
+    Public Shared Function GenerarSufijoRand() As String
+        Randomize()
+        Dim cadena = "_" & Chr(Rnd() * 25 + 97) & Chr(Rnd() * 25 + 97) & Chr(Rnd() * 25 + 97)
+
+        Return cadena.ToUpper
+    End Function
+
+
+
+
+
+    Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+                                                                ByVal rdlFile As String, strSQL As String, SC As String, _
+                                     Optional ByVal bDescargaExcel As Boolean = False, _
+                                    Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
+                                    Optional ByVal bDescargaHtml As Boolean = False) As String
+        'http://forums.asp.net/t/1183208.aspx
+
+        With oReportViewer
+            .Reset()
+            .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
+            .Visible = False
+
+
+
+
+
+            'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
+            rdlFile = "/Pronto informes/" + "Listado general de Cartas de Porte (simulando original) con foto - Desde SQL"
+
+            With .ServerReport
+                .ReportPath = rdlFile
+
+
+
+
+
+                Dim yourParams As ReportParameter() = New ReportParameter(8) {}
+
+                yourParams(0) = New ReportParameter("webservice", "")
+                yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+                yourParams(2) = New ReportParameter("idArticulo", -1)
+                yourParams(3) = New ReportParameter("idDestino", -1)
+                yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+                yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+                yourParams(6) = New ReportParameter("quecontenga", "")
+                yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
+
+
+                Try
+
+                    oReportViewer.ServerReport.SetParameters(yourParams)
+
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex.ToString)
+                    Dim inner As Exception = ex.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ErrHandler.WriteError("Error al buscar los parametros.  " & inner.Message)
+                        inner = inner.InnerException
+                    End While
+                End Try
+
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+                '/////////////////////
+
+            End With
+
+
+            .DocumentMapCollapsed = True
+
+
+
+            '/////////////////////
+            '/////////////////////
+
+            .Visible = False
+
+            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+            Dim warnings As Warning()
+            Dim streamids As String()
+            Dim mimeType, encoding, extension As String
+            Dim bytes As Byte()
+
+            'http://pareshjagatia.blogspot.com.ar/2008/05/export-reportviewer-report-to-pdf-excel.html
+            '             string mimeType;
+            '2 string encoding;
+            '3 Warning[] warnings;
+            '4 string[] streamids;
+            '5 string fileNameExtension;
+            '6 byte[] htmlBytes = MyReportViewer.ServerReport.Render("HTML4.0", null, out mimeType, out encoding, out fileNameExtension, out streamids, out warnings);
+            '7 string reportHtml = System.Text.Encoding.UTF8.GetString(htmlBytes);
+            '8 return reportHtml;
+
+            If False Then
+
+
+                Try
+                    bytes = .ServerReport.Render( _
+                          "HTML4.0", Nothing, mimeType, encoding, _
+                            extension, _
+                           streamids, warnings)
+
+                Catch e As System.Exception
+                    Dim inner As Exception = e.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            'MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        'ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        inner = inner.InnerException
+                    End While
+                    Throw
+                End Try
+
+                Dim reportHtml As String = System.Text.Encoding.UTF8.GetString(bytes)
+                'Return bytes
+                Return reportHtml
+
+            Else
+
+                .Visible = False
+
+                Try
+                    bytes = .ServerReport.Render( _
+                          "Excel", Nothing, mimeType, encoding, _
+                            extension, _
+                           streamids, warnings)
+
+                Catch e As System.Exception
+                    Dim inner As Exception = e.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            'MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ' ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        inner = inner.InnerException
+                    End While
+                    Throw
+                End Try
+
+
+                ErrHandler.WriteError("Por generar el archivo " + ArchivoExcelDestino)
+                Try
+                    Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
+                    fs.Write(bytes, 0, bytes.Length)
+                    fs.Close()
+
+                Catch ex As Exception
+
+                    ErrHandler.WriteAndRaiseError(ex)
+                End Try
+
+
+
+
+                '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ErrHandler.WriteError("Archivo generado " + ArchivoExcelDestino)
+
+
+
+
+
+
+
+
+
+                Dim sHtml As String
+
+                If False Then
+                    'ExcelToHtml(ArchivoExcelDestino)
+                Else
+                    sHtml = ArchivoExcelDestino
+                End If
+
+
+
+                Return sHtml
+
+
+
+
+                'Dim ArchivoCSVDestino = ExcelToCSV(ArchivoExcelDestino)
+                ''ExcelToCSV_SincroBLD
+
+                'Return ArchivoCSVDestino
+
+
+
+            End If
+
+
+        End With
+
+        '////////////////////////////////////////////
+
+        'este me salvo! http://social.msdn.microsoft.com/Forums/en-US/winformsdatacontrols/thread/bd60c434-f61a-4252-a7f9-1606fdca6b41
+
+        'http://social.msdn.microsoft.com/Forums/en-US/vsreportcontrols/thread/505ffb1c-324e-4623-9cce-d84662d92b1a
+    End Function
+
+
+
+
+
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18560,3 +19359,831 @@ Public Class ExcelImportadorManager
 
 End Class
 
+
+
+
+
+Public Class CDPMailFiltrosManager2
+
+
+
+
+    Const Tabla = "WilliamsMailFiltros"
+    Const IdTabla = "IdWilliamsMailFiltro"
+    Shared tipofiltro As Object
+
+    '    http://www.aspdotnetcodes.com/GridView_Insert_Edit_Update_Delete.aspx
+
+
+    Public Shared Function TraerMetadata(ByVal SC As String, Optional ByVal id As Integer = -1) As DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltros where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from WilliamsMailFiltros where idWilliamsMailFiltro=" & id)
+        End If
+    End Function
+
+    Public Shared Function Insert(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+        Try
+            myConnection.Open()
+
+            Dim adapterForTable1 = New SqlDataAdapter("select * from WilliamsMailFiltros", myConnection)
+            Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+            adapterForTable1.Update(dt)
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        Finally
+            myConnection.Close()
+
+        End Try
+
+
+    End Function
+
+
+    Public Shared Function Insert(ByVal SC As String, ByVal o As CDPMailFiltro) As Integer
+        '// Write your own Insert statement blocks 
+
+        With o
+            ExecDinamico(SC, String.Format("INSERT INTO " & Tabla & " (Emails, IdArticulo, FechaDesde, FechaHasta,    Orden, Modo,  Vendedor,   CuentaOrden1,   CuentaOrden2,  Corredor,  Entregador,  Contrato,  Destino,  Procedencia,  EsPosicion,  AplicarANDuORalFiltro) " & _
+                                                             "VALUES ( '{0}',      {1}    ,'{2}'      ,'{3}'        ,{4}    ,'{5}'    ,{6}        ,{7}            ,{8}            ,{9}        ,{10}       ,'{11}'      ,{12}   ,{13}       ,'{14}'           ,'{15}' ) ", _
+                                                                      .Emails, .IdArticulo, .FechaDesde, .FechaHasta, .Orden, .Modo, .Vendedor, .CuentaOrden1, .CuentaOrden2, .Corredor, .Entregador, .Contrato, .Destino, .Procedencia, .EsPosicion, .AplicarANDuORalFiltro))
+        End With
+    End Function
+
+
+
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    'Public Shared Function generarWHEREparaSQL(ByVal sc As String, ByVal dr As Data.DataRow, ByRef sTituloFiltroUsado As String, ByVal estado As CartaDePorteManager.enumCDPestado, ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, ByVal puntoventa As Integer) As String
+
+    '    Dim strWHERE As String = "    WHERE 1=1 "
+
+    '    With dr
+
+
+
+    '        Dim idVendedor = .Item("Vendedor")
+    '        Dim idCorredor = .Item("Corredor")
+    '        Dim idDestinatario = .Item("Entregador")
+    '        Dim idIntermediario = .Item("CuentaOrden1")
+    '        Dim idRemComercial = .Item("CuentaOrden2")
+    '        Dim idArticulo = .Item("IdArticulo")
+    '        Dim idProcedencia = .Item("Procedencia")
+    '        Dim idDestino = .Item("Destino")
+
+
+
+
+
+
+
+
+
+    '        If iisNull(.Item("QueContenga")) <> "" Then
+    '            Dim idVendedorQueContiene = BuscaIdClientePreciso(.Item("QueContenga"), sc)
+    '            Dim idCorredorQueContiene = BuscaIdVendedorPreciso(.Item("QueContenga"), sc)
+
+    '            If idVendedor <> -1 Or idCorredor <> -1 Then
+    '                strWHERE += "  " & _
+    '                 "           AND (Vendedor = " & idVendedor & _
+    '                "           OR CuentaOrden1 = " & idVendedor & _
+    '                "           OR CuentaOrden2 = " & idVendedor & _
+    '                "             OR Corredor=" & idCorredor & _
+    '                "             OR Entregador=" & idVendedor & ")"
+    '            End If
+
+
+    '        End If
+
+
+
+    '        If iisNull(.Item("AplicarANDuORalFiltro")) = "1" Then
+    '            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
+    '                    iisIdValido(idCorredor, "             AND CDP.Corredor=" & idCorredor, "") & _
+    '                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
+    '                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+    '                    iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+    '        Else
+    '            Dim s = " AND (1=0 " & _
+    '                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+    '                    iisIdValido(idCorredor, "             OR CDP.Corredor=" & idCorredor, "") & _
+    '                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
+    '                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+    '                    iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+    '                    "  )  "
+
+    '            If s <> " AND (1=0   )  " Then strWHERE += s
+    '        End If
+
+
+    '        strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
+    '        strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
+    '        strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+
+
+
+
+
+    '        If estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
+    '            strWHERE += "    AND (isnull(FechaDescarga,'1/1/1753') Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+    '        Else
+    '            strWHERE += "    AND (isnull(FechaArribo,'1/1/1753') Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+    '        End If
+
+    '        If iisNull(.Item("modo")) = "Local" Then
+    '            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='NO'  "
+    '        ElseIf iisNull(.Item("modo")) = "Export" Then
+    '            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='SI'  "
+    '        End If
+
+
+    '        If puntoventa > 0 Then
+    '            strWHERE += "AND (PuntoVenta=" & puntoventa & ")"  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
+    '        End If
+
+    '        Dim desde As String = iisValidSqlDate(fechadesde.ToString)
+    '        Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
+    '        'no se por qué no está andando el formateaFecha
+    '        'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
+    '        'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
+
+    '        sTituloFiltroUsado &= String.Format(" {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12}", _
+    '                        IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "desde el " & FechaChica(desde), ""), _
+    '                        IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "hasta el " & FechaChica(hasta), ""), _
+    '                        "EXPORTA: " & iisNull(.Item("modo"), "NO"), _
+    '                        "Punto de venta: " & IIf(puntoventa < 0, "Todos", puntoventa), _
+    '                        "Criterio: " & IIf(iisNull(.Item("AplicarANDuORalFiltro")) = "1", "TODOS", "ALGUNOS"), _
+    '                        IIf(Not IsDBNull(dr.Item("Vendedor")), "Titular: " & NombreCliente(sc, dr.Item("Vendedor")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("CuentaOrden1")), "Intermediario " & NombreCliente(sc, dr.Item("CuentaOrden1")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("CuentaOrden2")), "R.Comercial: " & NombreCliente(sc, dr.Item("CuentaOrden2")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("Corredor")), "Corredor: " & NombreVendedor(sc, dr.Item("Corredor")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("Entregador")), "Destinatario: " & NombreCliente(sc, dr.Item("Entregador")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("Procedencia")), "Origen: " & NombreLocalidad(sc, dr.Item("Procedencia")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("Destino")), "Destino: " & NombreDestino(sc, dr.Item("Destino")), ""), _
+    '                        IIf(Not IsDBNull(dr.Item("IdArticulo")), "Producto: " & NombreArticulo(sc, dr.Item("IdArticulo")), "") _
+    '                        )
+
+    '        If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
+
+    '    End With
+
+    '    Return strWHERE
+    'End Function
+
+
+
+
+
+    Public Shared Function generarWHEREparaDataset(ByVal sc As String, ByVal dr As Data.DataRow, ByRef sTituloFiltroUsado As String, _
+                                                   ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                   ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, ByVal puntoventa As Integer) As String
+
+
+
+        Dim strWHERE As String = "1=1 "
+
+        With dr
+
+
+
+            Dim idVendedor As Integer = iisNull(.Item("Vendedor"), -1)
+            Dim idCorredor As Integer = iisNull(.Item("Corredor"), -1)
+            Dim idDestinatario As Integer = iisNull(.Item("Entregador"), -1)
+            Dim idIntermediario As Integer = iisNull(.Item("CuentaOrden1"), -1)
+            Dim idRemComercial As Integer = iisNull(.Item("CuentaOrden2"), -1)
+            Dim idArticulo As Integer = iisNull(.Item("IdArticulo"), -1)
+            Dim idProcedencia As Integer = iisNull(.Item("Procedencia"), -1)
+            Dim idDestino As Integer = iisNull(.Item("Destino"), -1)
+
+
+
+
+
+
+
+            Try
+
+
+
+
+                If iisNull(.Item("QueContenga")) <> "" Then
+                    Dim idVendedorQueContiene = BuscaIdClientePreciso(.Item("QueContenga"), sc)
+                    Dim idCorredorQueContiene = BuscaIdVendedorPreciso(.Item("QueContenga"), sc)
+
+                    If idVendedor <> -1 Or idCorredor <> -1 Then
+                        strWHERE += "  " & _
+                         "           AND (Vendedor = " & idVendedor & _
+                        "           OR CuentaOrden1 = " & idVendedor & _
+                        "           OR CuentaOrden2 = " & idVendedor & _
+                        "             OR Corredor=" & idCorredor & _
+                        "             OR Entregador=" & idVendedor & ")"
+                    End If
+
+
+                End If
+
+
+
+
+
+                If iisNull(.Item("AplicarANDuORalFiltro")) = "1" Then
+                    strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
+                            iisIdValido(idCorredor, "             AND CDP.Corredor=" & idCorredor, "") & _
+                            iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
+                            iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                            iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+                Else
+                    Dim s = " AND (1=0 " & _
+                             iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+                            iisIdValido(idCorredor, "             OR CDP.Corredor=" & idCorredor, "") & _
+                            iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
+                            iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+                            iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+                            "  )  "
+
+                    If s <> " AND (1=0   )  " Then strWHERE += s
+                End If
+
+
+                strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
+                strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
+                strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+
+
+
+                'If estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
+                '    strWHERE += "    AND (isnull(FechaDescarga,'1/1/1753') Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+                'Else
+                '    strWHERE += "    AND (isnull(FechaArribo,'1/1/1753') Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+                'End If
+
+                If iisNull(.Item("modo")) = "Entregas" Then
+                    strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='NO'  "
+                ElseIf iisNull(.Item("modo")) = "Export" Then
+                    strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='SI'  "
+                End If
+
+
+                If puntoventa > 0 Then
+                    strWHERE += "AND (PuntoVenta=" & puntoventa & ")"  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError("Sector 1")
+                Throw
+            End Try
+
+
+            Dim desde As String = iisValidSqlDate(fechadesde.ToString)
+            Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
+            'no se por qué no está andando el formateaFecha
+            'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
+            'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
+
+
+
+
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            'Descargas, desde el 03/06/2013 hasta el 03/06/2013 . (Exporta: Entregas, Punto de venta: BuenosAires, Criterio: TODOS).
+            'por este formato:
+            'Buenos Aires - Descargas de Williams Entregas - Desde el 03/06/2013 al 03/06.
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Try
+
+                If sTituloFiltroUsado = "" Then
+                    Select Case estado
+                        Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+                            sTituloFiltroUsado &= "Descargas + Todas las Posiciones"
+                        Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
+                            sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones"
+                        Case CartaDePorteManager.enumCDPestado.Posicion
+                            sTituloFiltroUsado &= "Posiciones"
+                        Case CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
+                            sTituloFiltroUsado &= "Descargas"
+                        Case CartaDePorteManager.enumCDPestado.Rechazadas
+                            sTituloFiltroUsado &= "Rechazos"
+                    End Select
+                End If
+
+                'antes era así:   "{11} - de Williams Entregas - {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}.   ({10},{12})"
+                'sTituloFiltroUsado = String.Format(" {11} - {13} de Williams Entregas - {0} {1} ", _
+
+
+
+
+                sTituloFiltroUsado = CartaDePorteManager.FormatearTitulo(sc, _
+                                       sTituloFiltroUsado, _
+                                      estado, "", idVendedor, idCorredor, _
+                                      idDestinatario, idIntermediario, _
+                                      idRemComercial, idArticulo, idProcedencia, idDestino, _
+                                         iisNull(.Item("AplicarANDuORalFiltro"), 0), _
+                                         .Item("modo").ToString, _
+                                      fechadesde, fechahasta, _
+                                      puntoventa, "Ambas", False, "", "", -1)
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("Sector 2")
+                Throw
+            End Try
+
+
+            'sTituloFiltroUsado = String.Format("{15} {13} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}.   ({10}, {11}, {12})", _
+            '                IIf(IsDate(fechadesde) AndAlso fechadesde >= #1/1/1800#, "Desde el " & FechaChica(desde), ""), _
+            '                IIf(IsDate(fechahasta) AndAlso fechahasta <= #1/1/2099#, "al " & FechaChica(hasta), ""), _
+            '                IIf(Not IsDBNull(dr.Item("Vendedor")), "Titular: " & No mbreCliente(sc, dr.Item("Vendedor")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("CuentaOrden1")), "Intermediario " & NombreCliente(sc, dr.Item("CuentaOrden1")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("CuentaOrden2")), "R.Comercial: " & NombreCliente(sc, dr.Item("CuentaOrden2")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("Corredor")), "Corredor: " & NombreVendedor(sc, dr.Item("Corredor")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("Entregador")), "Destinatario: " & NombreCliente(sc, dr.Item("Entregador")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("Procedencia")), "Origen: " & NombreLocalidad(sc, dr.Item("Procedencia")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("Destino")), "Destino: " & NombreDestino(sc, dr.Item("Destino")), ""), _
+            '                IIf(Not IsDBNull(dr.Item("IdArticulo")), "Producto: " & NombreArticulo(sc, dr.Item("IdArticulo")), ""), _
+            '                "Exporta: " & iisNull(.Item("modo"), "NO"), _
+            '                "" & IIf(puntoventa < 0, "Todos", CartaDePorteManager.NombrePuntoVentaWilliams(puntoventa)), _
+            '                "Criterio: " & IIf(iisNull(.Item("AplicarANDuORalFiltro")) = "1", "TODOS", "ALGUNOS"), _
+            '                 " ", _
+            '                 " ", _
+            '                sTituloFiltroUsado _
+            '                )
+            If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
+
+
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        End With
+
+
+        strWHERE = strWHERE.Replace("CDP.", "")
+        strWHERE = strWHERE.Replace("WHERE", "")
+
+        Return strWHERE
+    End Function
+
+    Public Shared Function GenerarWHEREparaFiltrarFiltros_ODS(ByVal SC As String, ByVal textoBusqueda As String, ByVal cmbBuscarEsteCampoValue As String, ByVal puntoventa As Integer) As String
+        'Esta filtra los filtros, no las cartas de porte, ojo
+        'Esta filtra los filtros, no las cartas de porte, ojo
+        'Esta filtra los filtros, no las cartas de porte, ojo
+
+        Dim strWHERE As String
+
+        strWHERE = "1=1 "
+
+        strWHERE += " AND (PuntoVenta IS NULL OR PuntoVenta=" & puntoventa & " OR " & puntoventa & "<1)"
+
+
+        If textoBusqueda <> "" Then
+
+
+            If cmbBuscarEsteCampoValue = "Todos los clientes" Then
+
+
+                'Dim idVendedor = BuscaIdClientePreciso(textoBusqueda, SC)
+                'Dim idCorredor = BuscaIdVendedorPreciso(textoBusqueda, SC)
+
+                'If idVendedor <> -1 Or idCorredor <> -1 Then
+                '    strWHERE += "  " & _
+                '     "           AND (Vendedor = " & idVendedor & _
+                '    "           OR CuentaOrden1 = " & idVendedor & _
+                '    "           OR CuentaOrden2 = " & idVendedor & _
+                '    "             OR Corredor=" & idCorredor & _
+                '    "             OR Entregador=" & idVendedor & ")"
+                'End If
+
+
+                strWHERE += " AND ( " & _
+                                "Convert(VendedorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                                " OR Convert(CuentaOrden1Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                                " OR Convert(CuentaOrden2Desc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                                " OR Convert(CorredorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                                " OR Convert(EntregadorDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                                " OR Convert(ClienteAuxiliarDesc, 'System.String') LIKE '*" & textoBusqueda & "*' " & _
+                            ")" '_
+
+                '"Convert(CuentaOrden1, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+                '& " OR " & _
+                '"Convert(CuentaOrden1, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+                '& " OR " & _
+                '"Convert(Vendedor, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+                '& " OR " & _
+                '"Convert(Corredor, 'System.String') LIKE '*" & txtBuscar.Text & "*'"
+
+            Else
+
+                strWHERE += " AND ( " & _
+                            "Convert(" & cmbBuscarEsteCampoValue & ", 'System.String') LIKE '*" & textoBusqueda & "*' )" '_
+
+            End If
+
+
+        End If
+
+        '& " OR " & _
+        '" DestinoDesc LIKE '*" & txtBuscar.Text & "*'    )" ' _
+
+        '& " OR " & _
+        '"Convert(CuentaOrden1, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+        '& " OR " & _
+        '"Convert(CuentaOrden1, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+        '& " OR " & _
+        '"Convert(Vendedor, 'System.String') LIKE '*" & txtBuscar.Text & "*'" _
+        '& " OR " & _
+        '"Convert(Corredor, 'System.String') LIKE '*" & txtBuscar.Text & "*'"
+
+
+
+        ''si es un usuario proveedor, filtro sus comprobantes
+        'If IsNumeric(Session("glbWebIdProveedor")) Then
+        '    GenerarWHERE += " AND  IdProveedor=" & Session("glbWebIdProveedor")
+        'End If
+
+
+        'Select Case HFTipoFiltro.Value.ToString  '
+        '    Case "", "AConfirmarEnObra"
+        '        s += " AND (Aprobo IS NULL OR Aprobo=0)"
+        '        's += " AND (ConfirmadoPorWeb='NO' OR ConfirmadoPorWeb IS NULL)"
+
+        '    Case "AConfirmarEnCentral"
+        '        s += " AND ( (ConfirmadoPorWeb='SI' AND ConfirmadoPorWeb NOT IS NULL)  AND  (Aprobo IS NULL OR Aprobo=0) ) "
+
+        '    Case "Confirmados"
+        '        s += " AND (Aprobo NOT IS NULL AND Aprobo>0)"
+        '        's += " AND (ConfirmadoPorWeb='SI' AND ConfirmadoPorWeb NOT IS NULL)"
+        'End Select
+
+
+        Return strWHERE
+    End Function
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Public Shared Function Update(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(Encriptar(SC))
+
+        Try
+            myConnection.Open()
+
+            Dim adapterForTable1 = New SqlDataAdapter("select * from WilliamsMailFiltros", myConnection)
+            Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+            'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+            'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+            adapterForTable1.Update(dt)
+
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        Finally
+            myConnection.Close()
+        End Try
+
+    End Function
+
+    Public Shared Function Update(ByVal SC As String, ByVal Id As Long, ByVal dr As DataRow)
+
+        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " & _
+                "HumedadDesnormalizada={1}, " & _
+                "Factor={2}  " & _
+                "WHERE IdCartaDePorte={0} ", dr.Item(""), DecimalToString(dr.Item(2)))
+
+        ExecDinamico(SC, comandoSQLdinamico)
+    End Function
+
+    Public Shared Function Update(ByVal SC As String, ByVal Id As Long, ByVal Emails As String, ByVal idEntregador As Integer, ByVal idArticulo As Integer)
+
+        '// Write your own Update statement blocks. 
+
+        Dim comandoSQLdinamico As String = String.Format("UPDATE " & Tabla & " SET " & _
+                "Emails='{1}', " & _
+                "Entregador={2},  " & _
+                "IdArticulo={3}  " & _
+                "WHERE IdWilliamsMailFiltro={0} ", Id, Emails, idEntregador, idArticulo)
+
+        ExecDinamico(SC, comandoSQLdinamico)
+    End Function
+
+
+
+    Public Shared Function Delete(ByVal SC As String, ByVal Id As Long)
+        '// Write your own Delete statement blocks. 
+        ExecDinamico(SC, String.Format("DELETE  " & Tabla & "  WHERE {1}={0}", Id, IdTabla))
+    End Function
+
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    Public Function RebindReportViewerExcel(ByVal SC As String, ByVal rdlFile As String, ByVal dt As DataTable, ByVal ArchivoExcelDestino As String) As String
+
+        If ArchivoExcelDestino = "" Then
+            ArchivoExcelDestino = IO.Path.GetTempPath & "Excel" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+        End If
+
+        ''Dim vFileName As String = "c:\archivo.txt"
+        '' FileOpen(1, ArchivoExcelDestino, OpenMode.Output)
+
+
+
+        'ErrHandler.WriteError("Este reportviewer EXPORTA a excel, pueden andar los mails y esto no. " & _
+        '                      "-Eh? la otra función RebindReportViewer tambien exporta a EXCEL con un flag. Quizas lo hace con otro usuario... " & _
+        '                      "-En fin. Puede llegar a explotar sin rastro. Fijate en los permisos de NETWORK SERVICE para " & _
+        '                      "usar el com de EXCEL. Revisá el visor de eventos si no se loguean errores")
+
+        Using ReportViewer2 As New ReportViewer
+            With ReportViewer2
+                .ProcessingMode = ProcessingMode.Local
+
+                .Visible = False
+
+                With .LocalReport
+
+                    .ReportPath = rdlFile
+                    .EnableHyperlinks = True
+                    .DataSources.Clear()
+
+                    .EnableExternalImages = True
+
+                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                    .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+                End With
+
+                .DocumentMapCollapsed = True
+
+                '.LocalReport.Refresh()
+                '.DataBind()
+
+                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+                Dim warnings As Warning()
+                Dim streamids As String()
+                Dim mimeType, encoding, extension As String
+
+                Dim format = "Excel"
+
+                Dim bytes As Byte()
+
+                Try
+                    bytes = ReportViewer2.LocalReport.Render( _
+                               format, Nothing, mimeType, encoding, _
+                                 extension, _
+                                streamids, warnings)
+
+
+
+                Catch e As System.Exception
+                    Dim inner As Exception = e.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            'MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        inner = inner.InnerException
+                    End While
+                    Throw
+                End Try
+
+
+
+                Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+
+
+
+
+                'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
+                'Notas de Entrega: 160 ancho x 36 alt
+                'Facturas y Adjuntos: 160 ancho x 78 alto
+
+                'ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto(ArchivoExcelDestino)
+
+            End With
+        End Using
+
+
+        Return ArchivoExcelDestino
+
+    End Function
+
+
+
+    <Serializable()> Public Class CDPMailFiltro
+        Public Descripcion As String
+        Public Emails As String
+
+        Public FechaDesde As Date
+        Public FechaHasta As Date
+
+        Public EsPosicion As String
+
+        Public Enviar As String
+        Public EsMailOesFax As String
+
+        Public Orden As Integer
+        Public Modo As String
+
+        Public AplicarANDuORalFiltro As String
+        Public Vendedor As Integer
+        Public CuentaOrden1 As Integer
+        Public CuentaOrden2 As Integer
+        Public Corredor As Integer
+        Public Entregador As Integer
+
+        Public IdArticulo As Integer
+        Public Contrato As Integer
+
+        Public Destino As Integer
+        Public Procedencia As Integer
+    End Class
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    Public Shared Function GetListDatasetPaginadoConWHERE(ByVal SC As String, ByVal ColumnaParaFiltrar As String, ByVal TextoParaFiltrar As String, ByVal puntoVenta As Integer, ByVal sortExpression As String, ByVal startRowIndex As Long, ByVal maximumRows As Long) As System.Data.DataSet
+
+
+
+        'En realidad lo que hace esta funcion es devolverme un dataset en lugar de un list, y le ensoqueta una
+        ' variable para guardar el valor del checkbox            'If Parametros Is Nothing Then Parametros = New String() {""}
+        Dim ds As Data.DataSet
+        'Dim dc As New DataColumn 'le agrego una columna para los checks de las grillas de consulta http://msdn.microsoft.com/en-us/library/system.data.datacolumn.datatype(VS.71).aspx
+        'With dc
+        '    .ColumnName = "ColumnaTilde"
+        '    .DataType = System.Type.GetType("System.Int32")
+        '    .DefaultValue = 0
+        'End With
+
+        ds = EntidadManager.TraerDatos(SC, "wMailsFiltros_TTpaginadoYfiltrado", ColumnaParaFiltrar, TextoParaFiltrar, puntoVenta, sortExpression, startRowIndex, maximumRows)
+        'ds = GetStoreProcedure(SC, "wMailsFiltros_TTpaginadoYfiltrado", ColumnaParaFiltrar, TextoParaFiltrar, sortExpression, startRowIndex, maximumRows)
+
+        'Try
+        '    ds = EntidadManager.TraerDatos(SC, "wClientes_T", -1)
+        'Catch ex As Exception
+        '    ds = EntidadManager.TraerDatos(SC, "wClientes_TT")
+        '    'ds = EntidadManager.TraerDatos(SC, "Clientes_TT")
+        'End Try
+
+
+        'acá hago que los nombres de columna del dataset coincidan con los del objeto, así
+        'la gridview puede enlazarse a GetListDataset o a GetList sin tener que cambiar los nombres
+        With ds.Tables(0)
+            '.Columns("IdWilliamsMailFiltro").ColumnName = "Id"
+            '.Columns("NumeroRequerimiento").ColumnName = "Numero"
+            '.Columns("FechaRequerimiento").ColumnName = "Fecha"
+        End With
+
+        'ds.Tables(0).Columns.Add(dc)
+        Return ds
+
+    End Function
+
+    Public Shared Function FetchPrimeraPagina(ByVal SC As String, ByVal puntoventa As Integer) As DataTable
+
+        'se está trayenda la tabla de filtros, no la de cartas de porte, ojo. Es un asqueroso select *, hay
+        'que cambiarlo, pero por lo menos no te asustes, no es la tabla de cartas de porte
+
+        Return ExecDinamico(SC, String.Format("SELECT TOP 120 CDP.*, " & _
+                            " CLIVEN.Razonsocial as VendedorDesc, " & _
+                            " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
+                            " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
+                            " CLICOR.Nombre as CorredorDesc, " & _
+                            " CLIENT.Razonsocial as EntregadorDesc, " & _
+                            " Articulos.Descripcion as Producto, " & _
+                            " LOCORI.Nombre as ProcedenciaDesc, " & _
+                            " LOCDES.Descripcion as DestinoDesc " & _
+                            " FROM " & Tabla & " CDP " & _
+                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+                            " WHERE isnull(PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
+                            " ORDER BY IdWilliamsMailFiltro DESC " _
+                                        ))
+
+    End Function
+
+    Public Shared Function Fetch(ByVal SC As String, ByVal puntoventa As Integer) As DataTable
+
+        'se está trayenda la tabla de filtros, no la de cartas de porte, ojo. Es un asqueroso select *, hay
+        'que cambiarlo, pero por lo menos no te asustes, no es la tabla de cartas de porte
+
+        'TODO: ineficiente, y a este se lo llama seguido...
+
+
+
+        Return ExecDinamico(SC, String.Format("SELECT CDP.*, " & _
+                            " CLIVEN.Razonsocial as VendedorDesc, " & _
+                            " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
+                            " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
+                            " CLICOR.Nombre as CorredorDesc, " & _
+                            " CLIENT.Razonsocial as EntregadorDesc, " & _
+                            " CLIAUX.Razonsocial as ClienteAuxiliarDesc, " & _
+                            " Articulos.Descripcion as Producto, " & _
+                            " LOCORI.Nombre as ProcedenciaDesc, " & _
+                            " LOCDES.Descripcion as DestinoDesc " & _
+                            " FROM " & Tabla & " CDP " & _
+                            " LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+                            " LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+                            " LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+                            " LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+                            " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+                            " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+                            " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+                            " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+                            " WHERE isnull(PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
+                            " ORDER BY IdWilliamsMailFiltro DESC " _
+                                        ))
+
+    End Function
+
+
+
+
+
+
+
+
+
+
+End Class
