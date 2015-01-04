@@ -733,13 +733,13 @@ go
 --GO
 
 
-
 create table CartasDePorteMailClusters
 (	
 	IdCartaDePorte  int REFERENCES CartasDePorte(IdCartaDePorte),
 	AgrupadorDeTandaPeriodos  int 
 )
 go
+
 
 
 
