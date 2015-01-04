@@ -102,5 +102,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleOrdenesPagoImpuesto> DetalleOrdenesPagoImpuestos { get; set; }
         public virtual ICollection<DetalleOrdenesPagoRubrosContable> DetalleOrdenesPagoRubrosContables { get; set; }
         public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
     }
 }
