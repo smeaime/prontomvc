@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class CuentasBancaria
     {
+        public CuentasBancaria()
+        {
+            this.Conciliaciones = new HashSet<Conciliacione>();
+        }
+    
         public int IdCuentaBancaria { get; set; }
         public string Cuenta { get; set; }
         public Nullable<int> IdBanco { get; set; }
@@ -29,5 +34,6 @@ namespace ProntoMVC.Data.Models
         public string DiseñoCheque { get; set; }
     
         public virtual Banco Banco { get; set; }
+        public virtual ICollection<Conciliacione> Conciliaciones { get; set; }
     }
 }

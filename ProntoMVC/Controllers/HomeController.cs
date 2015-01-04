@@ -287,7 +287,7 @@ namespace ProntoMVC.Controllers
             List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
 
 
-            if (System.Diagnostics.Debugger.IsAttached) return Tree;
+            // if (System.Diagnostics.Debugger.IsAttached) return Tree;
 
 
 

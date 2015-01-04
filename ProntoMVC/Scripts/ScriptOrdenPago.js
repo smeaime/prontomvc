@@ -1,74 +1,10 @@
-function Validar() {
-    var cabecera = SerializaForm();
-
-    $.ajax({
-        type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
-        contentType: 'application/json; charset=utf-8',
-        url: ROOT + 'Pedido/ValidarJson',
-
-        dataType: 'json',
-        data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-
-        beforeSend: function () {
-            $("#loading").show();
-        },
-        complete: function () {
-            $("#loading").hide();
-        },
-        error: function (xhr, textStatus, exceptionThrown) {
-            try {
-                var errorData = $.parseJSON(xhr.responseText);
-                //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
-                //  Podría mostrar directamente el Messages?
-
-                var errorMessages = [];
-
-                //this ugly loop is because List<> is serialized to an object instead of an array
-                for (var key in errorData.Errors) {
-                    errorMessages.push(errorData[key]);
-                }
-                //      $('#result').html(errorMessages.join("<br />"));
-
-                //       $('html, body').css('cursor', 'auto');
-                //       $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                $("#textoMensajeAlerta").html(errorData.Message);
-                //$("#textoMensajeAlerta").html(errorMessages.join());
-                $("#mensajeAlerta").show();
-                QuitarRenglones(errorData.Errors);
-
-                // alert(errorMessages.join("<br />"));
-
-            } catch (e) {
-                // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                $('html, body').css('cursor', 'auto');
-                $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                $("#textoMensajeAlerta").html(xhr.responseText);
-                $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
-                //$(".alert").alert();
-                //   alert(xhr.responseText);
-            }
-        },
-        success: function (data) {
-            // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
-            // si falta uno, lo borro.
-
-            var arraydemensajes = xhr.responseText;
-            QuitarRenglones(arraydemensajes);
-        }
-    });
-}
-
 $(function () {
     $("#loading").hide();
 
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
-    var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo;
+    var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo, mTotalGastosFF;
 
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -82,9 +18,7 @@ $(function () {
 
     $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
-    $.extend($.jgrid.inlineEdit, {
-        keys: true
-    });
+    $.extend($.jgrid.inlineEdit, { keys: true });
 
     window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
     document.body.onclick = saveEditedCell; // attach to current document.
@@ -360,6 +294,11 @@ $(function () {
         altRows: false,
         footerrow: true,
         userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
         caption: '<b>DETALLE IMPUTACIONES</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
@@ -388,7 +327,7 @@ $(function () {
         datatype: 'json',
         mtype: 'POST',
         colNames: ['Acciones', 'IdDetalleOrdenPagoValores', 'IdTipoValor', 'IdBanco', 'IdValor ', 'IdCuentaBancaria', 'IdBancoChequera', 'IdCaja', 'IdTarjetaCredito',
-                    'Tipo', 'Nro.Int.', 'Nro.Valor', 'Fecha Vto.', 'Banco / Caja', 'Importe', 'Anulado', 'Cheque a la orden de', 'No a la orden'],
+                    'Tipo', 'Nro.Int.', 'Nro.Valor', 'Fecha Vto.', 'Banco / Caja', 'Importe', 'Chequera', 'Anulado', 'Cheque a la orden de', 'No a la orden'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleOrdenPagoValores', index: 'IdDetalleOrdenPagoValores', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
@@ -456,12 +395,12 @@ $(function () {
                         }
                     },
                     {
-                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 3, colpos: 2 }, width: 120, sortable: false, align: 'right', editable: true, label: 'TB',
+                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 3, colpos: 2 }, width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
                         editoptions: {
                             size: 10,
                             maxlengh: 10,
                             dataInit: function (elem) {
-                                $(elem).width(110);
+                                $(elem).width(90);
                             },
                             dataInit: function (element) {
                                 $(element).datepicker({
@@ -484,13 +423,52 @@ $(function () {
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaValores').getGridParam('selrow');
-                                    var idcaja = $("#ListaValores").getRowData(rowid)['IdCaja'];
-                                    if (idcaja == "") {
-                                        $('#ListaValores').jqGrid('setCell', rowid, 'IdCuentaBancaria', this.value);
+                                    var $this = $(e.target), $td, IdCaja, IdCuentaBancaria, SelectOpcional;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        IdCaja = $('#IdCaja').val();
+                                        IdCuentaBancaria = 0;
+                                        if (IdCaja == -1 || IdCaja > 0) {
+                                            IdCaja = this.value;
+                                            $('#IdCaja').val(IdCaja);
+                                            $('#IdBanco').val("");
+                                            $('#IdCuentaBancaria').val("");
+                                            $('#IdBancoChequera').val("");
+                                        } else {
+                                            IdCuentaBancaria = this.value;
+                                            $('#IdCuentaBancaria').val(IdCuentaBancaria);
+                                            AsignarBancoPorIdCuentaBancaria(IdCuentaBancaria);
+                                            $('#IdCaja').val("");
+
+                                            newOptions = TraerChequerasPorIdCuentaBancaria(IdCuentaBancaria);
+                                            if (newOptions.length > 0) {
+                                                var form = $(e.target).closest('form.FormGrid');
+                                                $("select#Chequera.FormElement", form[0]).html(newOptions);
+
+                                                SelectOpcional = $("#Chequera").children("option").filter(":selected");
+                                                if (SelectOpcional.length > 0) {
+                                                    AsignarNumeroValor(SelectOpcional.val());
+                                                }
+                                            }
+                                        }
                                     } else {
-                                        $('#ListaValores').jqGrid('setCell', rowid, 'IdCaja', this.value);
-                                    };
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaValores').getGridParam('selrow');
+                                            var idcaja = $("#ListaValores").getRowData(rowid)['IdCaja'];
+                                            IdCuentaBancaria = 0;
+                                            if (idcaja == "") {
+                                                IdCaja = this.value;
+                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCuentaBancaria', IdCaja);
+                                            } else {
+                                                IdCuentaBancaria = this.value;
+                                                $('#ListaValores').jqGrid('setCell', rowid, 'IdCaja', IdCuentaBancaria);
+                                            };
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
                                 }
                             }]
                         },
@@ -510,9 +488,39 @@ $(function () {
                             }]
                         }
                     },
+                    {
+                        name: 'Chequera', index: 'Chequera', formoptions: { rowpos: 5, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Banco/GetChequerasPorIdCuentaBancaria2?IdCuentaBancaria=0',
+                            dataInit: function (elem) {
+                                $(elem).width(290);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td, IdBancoChequera, newOptions;
+                                    IdBancoChequera = this.value;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdBancoChequera').val(IdBancoChequera);
+                                        IdCuentaGasto = $('#IdCuentaGasto').val();
+                                        AsignarNumeroValor(IdBancoChequera);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdBancoChequera', IdBancoChequera);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
                     { name: 'Anulado', index: 'Anulado', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
-                    { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 5, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 5, colpos: 2 }, width: 90, align: 'left', editable: true, editrules: { required: false }, edittype: "checkbox", editoptions: { value: "SI:NO" }, formatter: "checkbox", formatoptions: { disabled: false }, label: 'TB' }
+                    { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 6, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 6, colpos: 2 }, width: 90, align: 'left', editable: true, editrules: { required: false }, edittype: "checkbox", editoptions: { value: "SI:NO" }, formatter: "checkbox", formatoptions: { disabled: false }, label: 'TB' }
         ],
         gridComplete: function () {
             calculaTotalValores();
@@ -530,6 +538,7 @@ $(function () {
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'FechaValor', '', 'not-editable-cell');
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'ChequesALaOrdenDe', '', 'not-editable-cell');
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'NoALaOrden', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'Chequera', '', 'not-editable-cell');
             }
             var cm = jQuery("#ListaValores").jqGrid("getGridParam", "colModel");
             if (cm[iCol].name == "Entidad") {
@@ -558,6 +567,11 @@ $(function () {
         altRows: false,
         footerrow: true,
         userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
         caption: '<b>DETALLE VALORES</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
@@ -566,7 +580,7 @@ $(function () {
     //$("#ListaValores").setFrozenColumns();
     jQuery("#ListaValores").jqGrid('navButtonAdd', '#ListaPager3',
                                     {
-                                        caption: "", buttonicon: "ui-icon-home", title: "Agregar valor",
+                                        caption: "", buttonicon: "ui-icon-home", title: "Agregar valor", 
                                         onClickButton: function () {
                                             AgregarValor(jQuery("#ListaValores"));
                                         },
@@ -593,15 +607,345 @@ $(function () {
         editurl: ROOT + 'OrdenPago/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleOrdenPagoCuentas', 'IdCuenta', 'Codigo', 'Cuenta', 'Debe', 'Haber'],
+        colNames: ['Acciones', 'IdDetalleOrdenPagoCuentas', 'IdCuenta', 'IdObra', 'IdCuentaGasto', 'IdCuentaBancaria', 'IdCaja', 'IdTarjetaCredito', 'IdMoneda', 'CotizacionMonedaDestino', 'IdTipoCuentaGrupo',
+                   'Codigo', 'Cuenta', 'Debe', 'Haber', 'Cuenta bancaria', 'Caja', 'Tarjeta credito', 'Obra', 'Cuenta de gasto', 'Grupo cuenta'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                    { name: 'IdDetalleOrdenPagoCuentas', index: 'IdDetalleOrdenPagoCuentas', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdCuenta', index: 'IdCuenta', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
-                    { name: 'Codigo', index: 'Codigo', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Cuenta', index: 'Cuenta', width: 200, align: 'left', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'Debe', index: 'Debe', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
-                    { name: 'Haber', index: 'Haber', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' }
+                    { name: 'IdDetalleOrdenPagoCuentas', index: 'IdDetalleOrdenPagoCuentas', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdCuenta', index: 'IdCuenta', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdObra', index: 'IdObra', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdCuentaGasto', index: 'IdCuentaGasto', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdCuentaBancaria', index: 'IdCuentaBancaria', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdCaja', index: 'IdCaja', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdTarjetaCredito', index: 'IdTarjetaCredito', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdMoneda', index: 'IdMoneda', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'CotizacionMonedaDestino', index: 'CotizacionMonedaDestino', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
+                    { name: 'IdTipoCuentaGrupo', index: 'IdTipoCuentaGrupo', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true } },
+                    {
+                        name: 'Codigo', index: 'Codigo', formoptions: { rowpos: 5, colpos: 1 }, align: 'center', width: 100, editable: true, hidden: false, edittype: 'text', editrules: { edithidden: false, required: true },
+                        editoptions: {
+                            dataInit: function (elem) {
+                                $(elem).width(95);
+                            },
+                            dataEvents: [{
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaContable').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                },
+                                type: 'change',
+                                fn: function (e) {
+                                    $.post(ROOT + 'Cuenta/GetCodigosCuentasAutocomplete',
+                                    { term: this.value },
+                                    function (data) {
+                                        if (data.length == 1 || data.length > 1) { 
+                                            var ui = data[0];
+                                            var $this = $(e.target), $td, newOptions;
+                                            var IdCuenta = ui.id;
+
+                                            if ($this.hasClass("FormElement")) {
+                                                // form editing
+                                                $("#IdCuenta").val(IdCuenta);
+                                                $("#Cuenta").val(IdCuenta);
+
+                                                newOptions = TraerCuentasBancarias(IdCuenta);
+                                                var form = $(e.target).closest('form.FormGrid');
+                                                $("select#CuentaBancaria.FormElement", form[0]).html(newOptions);
+
+                                                newOptions = TraerCajas(IdCuenta);
+                                                var form = $(e.target).closest('form.FormGrid');
+                                                $("select#Caja.FormElement", form[0]).html(newOptions);
+
+                                                newOptions = TraerTarjetasCredito(IdCuenta);
+                                                var form = $(e.target).closest('form.FormGrid');
+                                                $("select#TarjetaCredito.FormElement", form[0]).html(newOptions);
+
+                                                DatosCuenta(IdCuenta, "f", "0", "Codigo");
+                                            } else {
+                                                $td = $this.closest("td");
+                                                if ($td.hasClass("edit-cell")) {
+                                                    // cell editing
+                                                    var rowid = $('#ListaContable').getGridParam('selrow');
+                                                    $('#ListaContable').jqGrid('setCell', rowid, 'IdCuenta', IdCuenta);
+                                                    $('#ListaContable').jqGrid('setCell', rowid, 'Cuenta', ui.value);
+                                                    DatosCuenta(IdCuenta, "c", rowid, "Codigo");
+                                                } else {
+                                                    // inline editing
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            alert("No existe el código");
+                                            $("#Codigo").val("");
+                                            $("#Cuenta").val("");
+                                            return false;
+                                        }
+                                    }
+                                    );
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'Cuenta', index: 'Cuenta', formoptions: { rowpos: 5, colpos: 2 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: true },
+                        editoptions: {
+                            dataUrl: ROOT + 'Cuenta/GetCuentas',
+                            dataInit: function (elem) {
+                                $(elem).width(190);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td, newOptions;
+                                    var IdCuenta = this.value;
+
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdCuenta').val(IdCuenta);
+
+                                        newOptions = TraerCuentasBancarias(IdCuenta);
+                                        var form = $(e.target).closest('form.FormGrid');
+                                        $("select#CuentaBancaria.FormElement", form[0]).html(newOptions);
+
+                                        newOptions = TraerCajas(IdCuenta);
+                                        var form = $(e.target).closest('form.FormGrid');
+                                        $("select#Caja.FormElement", form[0]).html(newOptions);
+
+                                        newOptions = TraerTarjetasCredito(IdCuenta);
+                                        var form = $(e.target).closest('form.FormGrid');
+                                        $("select#TarjetaCredito.FormElement", form[0]).html(newOptions);
+
+                                        DatosCuenta(IdCuenta, "f", "0", "Codigo");
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdCuenta', IdCuenta);
+                                            DatosCuenta(IdCuenta, "c", rowid, "Codigo");
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'Debe', index: 'Debe', formoptions: { rowpos: 8, colpos: 1 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaContable').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'Haber', index: 'Haber', formoptions: { rowpos: 8, colpos: 2 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaContable').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'CuentaBancaria', index: 'CuentaBancaria', formoptions: { rowpos: 6, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=0',
+                            dataInit: function (elem) {
+                                $(elem).width(290);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdCuentaBancaria').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdCuentaBancaria', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'Caja', index: 'Caja', formoptions: { rowpos: 7, colpos: 1 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=0',
+                            dataInit: function (elem) {
+                                $(elem).width(190);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdCaja').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdCaja', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'TarjetaCredito', index: 'TarjetaCredito', formoptions: { rowpos: 7, colpos: 2 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Banco/GetBancosPropios?TipoEntidad=0',
+                            dataInit: function (elem) {
+                                $(elem).width(190);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdTarjetaCredito').val(this.value);
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdTarjetaCredito', this.value);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'Obra', index: 'Obra', formoptions: { rowpos: 2, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Obra/GetObras',
+                            dataInit: function (elem) {
+                                $(elem).width(290);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td, IdObra, IdCuentaGasto, newOptions;
+                                    IdObra = this.value;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdObra').val(IdObra);
+                                        IdCuentaGasto = $('#IdCuentaGasto').val();
+
+                                        newOptions = TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, "f");
+                                        if (newOptions.length > 0) {
+                                            var form = $(e.target).closest('form.FormGrid');
+                                            $("select#Cuenta.FormElement", form[0]).html(newOptions);
+                                        }
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdObra', IdObra);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'CuentaGasto', index: 'CuentaGasto', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Obra/GetCuentasGasto',
+                            dataInit: function (elem) {
+                                $(elem).width(190);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td, IdObra, IdCuentaGasto, newOptions;
+                                    IdCuentaGasto = this.value;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdCuentaGasto').val(IdCuentaGasto);
+                                        IdObra = $('#IdObra').val();
+
+                                        newOptions = TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, "f");
+                                        if (newOptions.length > 0) {
+                                            var form = $(e.target).closest('form.FormGrid');
+                                            $("select#Cuenta.FormElement", form[0]).html(newOptions);
+                                        }
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdCuentaGasto', IdCuentaGasto);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'TipoCuentaGrupo', index: 'TipoCuentaGrupo', formoptions: { rowpos: 3, colpos: 2 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Obra/GetTiposCuentaGrupos',
+                            dataInit: function (elem) {
+                                $(elem).width(190);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var $this = $(e.target), $td, IdTipoCuentaGrupo, newOptions;
+                                    IdTipoCuentaGrupo = this.value;
+                                    if ($this.hasClass("FormElement")) {
+                                        // form editing
+                                        $('#IdTipoCuentaGrupo').val(IdTipoCuentaGrupo);
+
+                                        newOptions = TraerCuentasPorIdTipoCuentaGrupo(IdTipoCuentaGrupo, "f");
+                                        if (newOptions.length > 0) {
+                                            var form = $(e.target).closest('form.FormGrid');
+                                            $("select#Cuenta.FormElement", form[0]).html(newOptions);
+                                        }
+                                    } else {
+                                        $td = $this.closest("td");
+                                        if ($td.hasClass("edit-cell")) {
+                                            // cell editing
+                                            var rowid = $('#ListaContable').getGridParam('selrow');
+                                            $('#ListaContable').jqGrid('setCell', rowid, 'IdTipoCuentaGrupo', IdTipoCuentaGrupo);
+                                        } else {
+                                            // inline editing
+                                        }
+                                    }
+                                }
+                            }]
+                        },
+                    }
         ],
         gridComplete: function () {
             calculaTotalContable();
@@ -612,6 +956,9 @@ $(function () {
             lastSelectedId = rowid;
             lastSelectediCol = iCol;
             lastSelectediRow = iRow;
+        },
+        afterSaveCell: function (rowid) {
+            calculaTotalContable();
         },
         pager: $('#ListaPager2'),
         rowNum: 100,
@@ -628,12 +975,31 @@ $(function () {
         altRows: false,
         footerrow: true,
         userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
         caption: '<b>REGISTRO CONTABLE</b>',
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
     });
-    jQuery("#ListaContable").jqGrid('navGrid', '#ListaPager2', { refresh: true, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaContable").jqGrid('navGrid', '#ListaPager2', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaContable").jqGrid('navButtonAdd', '#ListaPager2',
+                                    {
+                                        caption: "", buttonicon: "ui-icon-home", title: "Agregar item",
+                                        onClickButton: function () {
+                                            AgregarCuenta(jQuery("#ListaContable"));
+                                        },
+                                    });
+    jQuery("#ListaContable").jqGrid('navButtonAdd', '#ListaPager2',
+                                    {
+                                        caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                        onClickButton: function () {
+                                            EliminarSeleccionados(jQuery("#ListaContable"));
+                                        },
+                                    });
 
 
     $('#ListaImpuestos').jqGrid({
@@ -650,9 +1016,9 @@ $(function () {
                     { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
                     { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
                     { name: 'IdTipoImpuesto', index: 'IdTipoImpuesto', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
-                    { name: 'Tipo', index: 'Tipo', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'TipoImpuesto', index: 'TipoImpuesto', width: 70, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'Categoria', index: 'Categoria', width: 200, align: 'left', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
-                    { name: 'ImportePagadoSinImpuestos', index: 'ImportePagadoSinImpuestos', width: 100, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'ImportePagado', index: 'ImportePagado', width: 100, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'ImpuestoRetenido', index: 'ImpuestoRetenido', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'PagosMes', index: 'PagosMes', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
                     { name: 'RetencionesMes', index: 'RetencionesMes', width: 90, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
@@ -690,12 +1056,18 @@ $(function () {
         altRows: false,
         footerrow: true,
         userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
         caption: '<b>DETALLE IMPUESTOS CALCULADOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray',
         loadonce: true
 });
     jQuery("#ListaImpuestos").jqGrid('navGrid', '#ListaPager4', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    $("#ListaPager4").find("table.navtable").hide();
 
 
     $('#ListaRubrosContables').jqGrid({
@@ -768,6 +1140,11 @@ $(function () {
         altRows: false,
         footerrow: true,
         userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
         caption: '<b>DETALLE RUBROS CONTABLES</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
@@ -785,6 +1162,82 @@ $(function () {
                                      caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
                                      onClickButton: function () {
                                          EliminarSeleccionados(jQuery("#ListaRubrosContables"));
+                                     },
+                                 });
+
+
+    $('#ListaGastos').jqGrid({
+        url: ROOT + 'OrdenPago/DetOrdenesPagoGastosFF/',
+        postData: { 'IdOrdenPago': function () { return $("#IdOrdenPago").val(); }, 'IdOPComplementariaFF': function () { return $("#IdOPComplementariaFF").val(); }, 'IdMonedaOP': function () { return $("#IdMoneda").val(); } },
+        editurl: ROOT + 'OrdenPago/EditGridData/',
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['Acciones', 'IdComprobanteProveedor', 'Tipo', 'Ref.', 'Numero', 'Fecha', 'Vto.', 'Nro.Rend.', 'Subtotal', 'Iva', 'Total', 'Cuenta', 'Obra'],
+        colModel: [
+                    { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
+                    { name: 'IdComprobanteProveedor', index: 'IdComprobanteProveedor', editable: false, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'TipoComprobante', index: 'TipoComprobante', width: 30, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'NumeroReferencia', index: 'NumeroReferencia', width: 50, align: 'left', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Numero', index: 'Numero', width: 110, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'FechaComprobante', index: 'FechaComprobante', width: 75, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 75, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', width: 70, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Iva', index: 'Iva', align: 'right', width: 70, editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Total', index: 'Total', align: 'right', width: 70, editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Cuenta', index: 'Cuenta', width: 120, align: 'left', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } },
+                    { name: 'Obra', index: 'Obra', width: 100, align: 'left', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false } }
+        ],
+        gridComplete: function () {
+            calculaTotalGastosFF();
+        },
+        onCellSelect: function (rowid, iCol, cellcontent, e) {
+            var $this = $(this);
+            var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+            lastSelectedId = rowid;
+            lastSelectediCol = iCol;
+            lastSelectediRow = iRow;
+        },
+        afterSaveCell: function (rowid) {
+            calculaTotalGastosFF();
+        },
+        pager: $('#ListaPager6'),
+        rowNum: 10000,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdComprobanteProveedor',
+        sortorder: 'asc',
+        viewrecords: true,
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: '200px', // 'auto',
+        rownumbers: true,
+        multiselect: true,
+        altRows: false,
+        footerrow: true,
+        userDataOnFooter: true,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
+        caption: '<b>DETALLE COMPROBANTES DE GASTOS FONDO FIJO</b>',
+        cellEdit: true,
+        cellsubmit: 'clientArray'
+    });
+    jQuery("#ListaGastos").jqGrid('navGrid', '#ListaPager6', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, {});
+    jQuery("#ListaGastos").jqGrid('navButtonAdd', '#ListaPager6',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-circle-arrow-s", title: "Traer gastos pendientes",
+                                     onClickButton: function () {
+                                         TraerGastosPendientes(jQuery("#ListaGastos"));
+                                     },
+                                 });
+    jQuery("#ListaGastos").jqGrid('navButtonAdd', '#ListaPager6',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                     onClickButton: function () {
+                                         EliminarSeleccionados(jQuery("#ListaGastos"));
                                      },
                                  });
 
@@ -1048,6 +1501,12 @@ $(function () {
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
     }
 
+    //////////////////////////////////// CHANGES ///////////////////////////////////////////////
+
+    $("#AsientoManual").change(function () {
+        ActivarAsientoManual($("#AsientoManual").is(':checked'));
+    });
+
     $("#BuscadorPanelDerecho").change(function () {
         var grid = jQuery("#ListaDrag");
         var postdata = grid.jqGrid('getGridParam', 'postData');
@@ -1061,11 +1520,18 @@ $(function () {
         grid.trigger("reloadGrid", [{ page: 1}]);
     });
 
+    //No se usa
+    $("input[name=Tipo]:radio").change(function () {
+        var tipo = $(this).val();
+    });
+
     $('#ActualizarDatos').click(function () {
         $('#ActualizarDatos').attr("disabled", true).val("Espere...");
         $('html, body').css('cursor', 'wait');
 
-        ActualizarDatosRetenciones();
+        var cabecera = SerializaForm();
+
+        ActualizarDatosRetenciones(cabecera);
 
         var importe = 0, totalganancias = 0, totaliibb = 0, i;
         var dataIds = $('#ListaImpuestos').jqGrid('getDataIDs');
@@ -1081,8 +1547,8 @@ $(function () {
         $("#RetencionGanancias").val(totalganancias.toFixed(2));
         $("#RetencionIBrutos").val(totaliibb.toFixed(2));
 
-        CalcularRetencionSUSS();
-        CalcularRetencionIva();
+        CalcularRetencionSUSS(cabecera);
+        CalcularRetencionIva(cabecera);
 
         ActualizarDatosContables();
 
@@ -1092,10 +1558,8 @@ $(function () {
         $('#ActualizarDatos').attr("disabled", false).val("Recalcular");
     });
 
-    function ActualizarDatosRetenciones() {
+    function ActualizarDatosRetenciones(cabecera) {
         var datos = "";
-        var cabecera = SerializaForm();
-
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -1127,10 +1591,51 @@ $(function () {
         });
     };
 
-    function CalcularRetencionSUSS() {
-        var datos = "", imp;
-        var cabecera = SerializaForm();
+    function TraerGastosPendientes(grid) {
+        var datos = "", IdOrdenPago = 0, IdOPComplementariaFF = 0, IdMoneda = 0, NumeroRendicionFF = 0, IdCuentaFF = 0;
+        IdOrdenPago = $("#IdOrdenPago").val();
+        IdOPComplementariaFF = $("#IdOPComplementariaFF").val();
+        IdMoneda = $("#IdMoneda").val();
+        NumeroRendicionFF = $("#NumeroRendicionFF").val();
+        IdCuentaFF = $('select#IdCuenta').val();
+        if (IdCuentaFF.length == 0) {
+            alert("Debe ingresar la cuenta de fondo fijo")
+            return
+        }
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/GastosFFPendientes',
+            data: JSON.stringify({ IdOrdenPago: IdOrdenPago, IdOPComplementariaFF: IdOPComplementariaFF, IdMonedaOP: IdMoneda, NumeroRendicionFF: NumeroRendicionFF, IdCuentaFF: IdCuentaFF }),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result) {
+                    datos = JSON.parse(result);
+                    $("#ListaGastos").jqGrid("clearGridData", true)
+                    $("#ListaGastos").jqGrid().setGridParam({ datatype: "local" });
+                    $("#ListaGastos").jqGrid().setGridParam({ data: datos }).trigger("reloadGrid");
+                } else { alert('No se pudo calcular el comprobante.'); }
+            },
+            beforeSend: function () {
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                } catch (e) {
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    };
 
+    function CalcularRetencionSUSS(cabecera) {
+        var datos = "", imp;
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -1162,10 +1667,8 @@ $(function () {
         });
     };
 
-    function CalcularRetencionIva() {
+    function CalcularRetencionIva(cabecera) {
         var datos = "", imp;
-        var cabecera = SerializaForm();
-
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -1176,8 +1679,11 @@ $(function () {
             success: function (result) {
                 if (result) {
                     datos = JSON.parse(result);
-                    imp = parseFloat(datos.replace(",", ".") || 0) || 0;
+                    var datos1 = datos.campo1;
+                    imp = parseFloat(datos1.replace(",", ".") || 0) || 0;
                     $("#RetencionIVA").val(imp.toFixed(2));
+                    $("#IdsComprobanteProveedorRetenidosIva").val(datos.campo2);
+                    $("#TotalesImportesRetenidosIva").val(datos.campo3);
                 } else { alert('No se pudo calcular el comprobante.'); }
             },
             beforeSend: function () {
@@ -1200,7 +1706,6 @@ $(function () {
     function ActualizarDatosContables() {
         var datos = "";
         var cabecera = SerializaForm();
-
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
@@ -1232,10 +1737,28 @@ $(function () {
         });
     };
 
+    ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
+
     function SerializaForm() {
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
         var cabecera = $("#formid").serializeObject();
         cabecera.IdProveedor = $("#IdProveedor").val();
+        cabecera.IdCuenta = $("#IdCuenta").val();
+        cabecera.DiferenciaBalanceo = $("#Diferencia").val();
+        cabecera.IdEmpleadoFF = $("#IdEmpleadoFF").val();
+
+        var chk = $('#AsientoManual').is(':checked');
+        if (chk) {
+            cabecera.AsientoManual = "SI";
+        } else {
+            cabecera.AsientoManual = "NO";
+        };
+        var chk = $('#OPInicialFF').is(':checked');
+        if (chk) {
+            cabecera.OPInicialFF = "SI";
+        } else {
+            cabecera.OPInicialFF = "NO";
+        };
 
         cabecera.DetalleOrdenesPagoes = [];
         $grid = $('#Lista');
@@ -1373,8 +1896,110 @@ $(function () {
             }
         };
 
+        cabecera.DetalleOrdenesPagoRubrosContables = [];
+        $grid = $('#ListaRubrosContables');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleOrdenPagoRubrosContables'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleOrdenPagoRubrosContables":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenPago":"' + $("#IdOrdenPago").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleOrdenesPagoRubrosContables.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
         return cabecera;
     }
+
+    $('#grabar2').click(function () {
+        var cabecera = SerializaForm();
+
+        var IdsGastosFF, colModel, dataIds, data, data1, iddeta, i;
+        $grid = $('#ListaGastos');
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        data1 = "";
+        for (i = 0; i < dataIds.length; i++) {
+            data = $grid.jqGrid('getRowData', dataIds[i]);
+            iddeta = data['IdComprobanteProveedor'];
+            data1 = data1 + iddeta + ',';
+        };
+        data1 = data1.substring(0, data1.length - 1);
+        data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+
+        $('html, body').css('cursor', 'wait');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'OrdenPago/BatchUpdate',
+            dataType: 'json',
+            data: JSON.stringify({ OrdenPago: cabecera, IdsGastosFF: data1 }),
+            success: function (result) {
+                if (result) {
+                    $('html, body').css('cursor', 'auto');
+                    if ($('#Anulada').val() != "") {
+                        window.location = (ROOT + "OrdenPago/index");
+                    } else {
+                        if ($('#Tipo').val() == "CC") { window.location = (ROOT + "OrdenPago/EditCC/" + result.IdOrdenPago); }
+                        if ($('#Tipo').val() == "FF") { window.location = (ROOT + "OrdenPago/EditFF/" + result.IdOrdenPago); }
+                        if ($('#Tipo').val() == "OT") { window.location = (ROOT + "OrdenPago/EditOT/" + result.IdOrdenPago); }
+                    }
+                } else {
+                    alert('No se pudo grabar el comprobante.');
+                    $('.loading').html('');
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                }
+            },
+            beforeSend: function () {
+                $("#loading").show();
+                $('#grabar2').attr("disabled", true).val("Espere...");
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    for (var key in errorData) { errorMessages.push(errorData[key]); }
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    $("#mensajeAlerta").show();
+                    alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                } catch (e) {
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show();
+                }
+            }
+        });
+    });
+
 });
 
 function pickdates(id) {
@@ -1429,6 +2054,7 @@ calculaTotalContable = function () {
         imp3 = imp3 + imp;
     }
     imp2 = Math.round((imp2) * 10000) / 10000;
+    imp3 = Math.round((imp3) * 10000) / 10000;
     $("#ListaContable").jqGrid('footerData', 'set', { Cuenta: 'TOTALES', Debe: imp2.toFixed(2), Haber: imp3.toFixed(2) });
 };
 
@@ -1444,17 +2070,43 @@ calculaTotalRubroContable = function () {
     $("#ListaRubrosContables").jqGrid('footerData', 'set', { RubroContable: 'TOTAL', Importe: imp2.toFixed(2) });
 };
 
+calculaTotalGastosFF = function () {
+    var imp = 0, imp2 = 0, imp3 = 0, imp4 = 0;
+    var dataIds = $('#ListaGastos').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#ListaGastos').jqGrid('getRowData', dataIds[i]);
+        imp = parseFloat(data['Subtotal'].replace(",", ".") || 0) || 0;
+        imp2 = imp2 + imp;
+        imp = parseFloat(data['Iva'].replace(",", ".") || 0) || 0;
+        imp3 = imp3 + imp;
+        imp = parseFloat(data['Total'].replace(",", ".") || 0) || 0;
+        imp4 = imp4 + imp;
+    }
+    imp2 = Math.round((imp2) * 10000) / 10000;
+    imp3 = Math.round((imp3) * 10000) / 10000;
+    imp4 = Math.round((imp4) * 10000) / 10000;
+    mTotalGastosFF = imp4;
+    $("#ListaGastos").jqGrid('footerData', 'set', { NumeroRendicionFF: 'TOTALES', Subtotal: imp2.toFixed(2), Iva: imp3.toFixed(2), Total: imp4.toFixed(2) });
+    CalcularTotales()
+};
+
 function CalcularTotales() {
     if (typeof mTotalImputaciones == "undefined") { mTotalImputaciones = 0; }
     if (typeof mTotalValores == "undefined") { mTotalValores = 0; }
+    if (typeof mTotalGastosFF == "undefined") { mTotalGastosFF = 0; }
 
+    var mSubtotal = 0, mTotalOPComplementaria = 0;
     mRetencionGanancias = parseFloat($("#RetencionGanancias").val().replace(",", ".") || 0) || 0;
     mRetencionIIBB = parseFloat($("#RetencionIBrutos").val().replace(",", ".") || 0) || 0;
     mRetencionIva = parseFloat($("#RetencionIVA").val().replace(",", ".") || 0) || 0;
     mRetencionSUSS = parseFloat($("#RetencionSUSS").val().replace(",", ".") || 0) || 0;
+    mTotalOPComplementaria = parseFloat($("#TotalOPComplementaria").val().replace(",", ".") || 0) || 0;
+    mSubtotal = mTotalImputaciones + mTotalGastosFF;
 
-    $("#Subtotal").val(mTotalImputaciones.toFixed(2));
-    mTotalDiferenciaBalanceo = mTotalImputaciones - (mTotalValores + mRetencionIva + mRetencionGanancias + mRetencionIIBB + mRetencionSUSS);
+    $("#Valores").val(mTotalValores.toFixed(2));
+    $("#Acreedores").val(mTotalImputaciones.toFixed(2));
+    $("#Subtotal").val(mSubtotal.toFixed(2));
+    mTotalDiferenciaBalanceo = (mSubtotal + mTotalOPComplementaria) - (mTotalValores + mRetencionIva + mRetencionGanancias + mRetencionIIBB + mRetencionSUSS);
     $("#Diferencia").val(mTotalDiferenciaBalanceo.toFixed(2));
 };
 
@@ -1510,22 +2162,192 @@ initDateEdit = function (elem) {
     }, 100);
 };
 
-function BuscarOrden(Numero) {
+function DatosCuenta(IdCuenta, origen, rowid, campo) {
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: ROOT + 'Pedido/BuscarOrden/',
-        data: { Numero: Numero },
-        dataType: "text",
+        url: ROOT + 'Cuenta/TraerUna/',
+        data: { IdCuenta: IdCuenta },
+        dataType: "json",
         success: function (data) {
-            var sn;
             if (data.length > 0) {
-                sn = parseInt(data) + 1;
-                $("#SubNumero").val(sn);
+                var EsCajaBanco = data[0].EsCajaBanco;
+                if (origen == "p") {
+                    $("#IdCuenta").val(IdCuenta);
+                    if (campo == "Codigo") { $("#CodigoCuenta").val(data[0].codigo); }
+                } else {
+                    $("#ListaContable").setColProp('CuentaBancaria', { editoptions: { dataUrl: ROOT + 'Banco/GetCuentasBancariasPorIdCuenta2?IdCuenta=' + IdCuenta } });
+                    $("#ListaContable").setColProp('Caja', { editoptions: { dataUrl: ROOT + 'Banco/GetCajasPorIdCuenta2?IdCuenta=' + IdCuenta } });
+                    $("#ListaContable").setColProp('TarjetaCredito', { editoptions: { dataUrl: ROOT + 'Banco/GetTarjetasCreditoPorIdCuenta2?IdCuenta=' + IdCuenta } });
+
+                    if (origen == "f") {
+                        if (campo == "Codigo") { $("#Codigo").val(data[0].codigo); }
+                        if (campo == "Cuenta") { $("#Cuenta").val(data[0].descripcion); }
+                    } else {
+                        if (campo == "Codigo") { $('#ListaContable').jqGrid('setCell', rowid, 'Codigo', data[0].codigo); }
+                        if (campo == "Cuenta") { $('#ListaContable').jqGrid('setCell', rowid, 'Cuenta', data[0].descripcion); }
+                    }
+                }
             }
-            else { $("#SubNumero").val("1"); }
+            else {
+                if (origen == "p") {
+                    if (campo == "Codigo") { $("#CodigoCuenta").val(""); }
+                } else {
+                    if (origen == "f") {
+                        if (campo == "Codigo") { $("#Codigo").val(""); }
+                        if (campo == "Cuenta") { $("#Cuenta").val(""); }
+                    } else {
+                        if (campo == "Codigo") { $('#ListaContable').jqGrid('setCell', rowid, 'Codigo', ""); }
+                        if (campo == "Cuenta") { $('#ListaContable').jqGrid('setCell', rowid, 'Cuenta', ""); }
+                    }
+                }
+            }
         }
     });
+}
+
+function TraerCuentaPorCodigo(CodigoCuenta) {
+    var IdCuenta = 0;
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Cuenta/GetCuentaPorCodigo/',
+        data: { CodigoCuenta: CodigoCuenta },
+        success: function (result) {
+            if (result.length > 0) {
+                datos = result[0].id;
+            }
+        }
+    });
+    return IdCuenta;
+}
+
+function TraerIdOrdenPagoPorNumero(NumeroOrdenPago) {
+    var datos, IdOrdenPago = 0, Tipo = "", Valores = 0;
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'OrdenPago/GetIdOrdenPagoPorNumero/',
+        data: { NumeroOrdenPago: NumeroOrdenPago },
+        success: function (result) {
+            if (result.length > 0) {
+                datos = result[0]
+                //datos = result[0].id;
+                //Tipo = result[0].Tipo;
+                //Valores = result[0].Valores;
+                //IdOrdenPago = parseInt(datos || 0) || 0;
+            }
+        }
+    });
+    return datos;
+}
+
+function TraerCuentasBancarias(IdCuenta) {
+    var OpcionesSelect = "";
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Banco/GetCuentasBancariasPorIdCuenta/?IdCuenta=' + IdCuenta + '&Filler="' + IdCuenta + '"',
+        success: function (result) {
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+            }
+        }
+    });
+    return OpcionesSelect;
+}
+
+function TraerCajas(IdCuenta) {
+    var OpcionesSelect = "";
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Banco/GetCajasPorIdCuenta/?IdCuenta=' + IdCuenta + '&Filler="' + IdCuenta + '"',
+        success: function (result) {
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+            }
+        }
+    });
+    return OpcionesSelect;
+}
+
+function TraerTarjetasCredito(IdCuenta) {
+    var OpcionesSelect = "";
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Banco/GetTarjetasCreditoPorIdCuenta/?IdCuenta=' + IdCuenta + '&Filler="' + IdCuenta + '"',
+        success: function (result) {
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+            }
+        }
+    });
+    return OpcionesSelect;
+}
+
+function TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, Origen) {
+    var OpcionesSelect = "", IdCuenta = 0;
+    if (IdObra.length == 0) { IdObra = 0 };
+    if (IdCuentaGasto.length == 0) { IdCuentaGasto = 0 };
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Cuenta/GetCuentasPorIdObraIdCuentaGasto/', 
+        data: { IdObra: IdObra, IdCuentaGasto: IdCuentaGasto },
+        success: function (result) {
+            var a = result;
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+                if (IdCuenta == 0) { IdCuenta = data.id };
+            }
+            DatosCuenta(IdCuenta, Origen, 0, "Codigo");
+        }
+    });
+    return OpcionesSelect;
+}
+
+function TraerCuentasPorIdTipoCuentaGrupo(IdTipoCuentaGrupo, Origen) {
+    var OpcionesSelect = "", IdCuenta = 0;
+    if (IdTipoCuentaGrupo.length == 0) { IdTipoCuentaGrupo = 0 };
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Cuenta/GetCuentasPorIdTipoCuentaGrupo/', 
+        data: { IdTipoCuentaGrupo: IdTipoCuentaGrupo },
+        success: function (result) {
+            var a = result;
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+                if (IdCuenta == 0) { IdCuenta = data.id };
+            }
+            DatosCuenta(IdCuenta, Origen, 0, "Codigo");
+        }
+    });
+    return OpcionesSelect;
+}
+
+function TraerChequerasPorIdCuentaBancaria(IdCuentaBancaria) {
+    var OpcionesSelect = "";
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Banco/GetChequerasPorIdCuentaBancaria/',
+        data: { IdCuentaBancaria: IdCuentaBancaria },
+        success: function (result) {
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i]
+                OpcionesSelect += '<option value="' + data.id + '">' + data.value + '</option>';
+            }
+        }
+    });
+    return OpcionesSelect;
 }
 
 function getValidationSummary() {
@@ -1564,6 +2386,12 @@ function AgregarAnticipo(grid) {
                 closeAfterAdd: true,
                 closeAfterEdit: true,
                 recreateForm: true,
+                afterShowForm: function (form) {
+                    $("#sData").attr("class", "btn btn-primary");
+                    $("#sData").css("color", "white");
+                    $("#sData").css("margin-right", "20px");
+                    $("#cData").attr("class", "btn");
+                },
                 beforeShowForm: function (form) {
                     PopupCentrar(grid);
                     $('#tr_IdDetalleOrdenPago', form).hide();
@@ -1599,6 +2427,12 @@ function AgregarValor(grid) {
                 closeOnEscape: true,
                 closeAfterAdd: true,
                 recreateForm: true,
+                afterShowForm: function (form) {
+                    $("#sData").attr("class", "btn btn-primary");
+                    $("#sData").css("color", "white");
+                    $("#sData").css("margin-right", "20px");
+                    $("#cData").attr("class", "btn");
+                },
                 beforeShowForm: function (form) {
                     PopupCentrar(grid);
                     $('#tr_IdDetalleOrdenPagoValores', form).hide();
@@ -1617,12 +2451,31 @@ function AgregarValor(grid) {
                     $('#IdDetalleOrdenPagoValores', form).val(0);
                     $('#NumeroValor', form).val(0);
                     $('#Importe', form).val(0);
+                    var now = new Date();
+                    var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                    $('#FechaValor', form).val(currentDate);
+                    AsignarNumeroInterno(form);
                 },
                 onClose: function (data) {
                 },
                 beforeSubmit: function (postdata, formid) {
-                    postdata.Tipo = $("#Tipo").children("option").filter(":selected").text();
-                    postdata.Entidad = $("#Entidad").children("option").filter(":selected").text();
+                    var SelectOpcional;
+
+                    SelectOpcional = $("#Tipo").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.Tipo = SelectOpcional.text();
+                    }
+
+                    SelectOpcional = $("#Entidad").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.Entidad = SelectOpcional.text();
+                    }
+
+                    SelectOpcional = $("#Chequera").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.Chequera = SelectOpcional.text();
+                        postdata.IdBancoChequera = SelectOpcional.val();
+                    }
                     return [true, ''];
                 }
             });
@@ -1636,6 +2489,12 @@ function AgregarCaja(grid) {
                 closeOnEscape: true,
                 closeAfterAdd: true,
                 recreateForm: true,
+                afterShowForm: function (form) {
+                    $("#sData").attr("class", "btn btn-primary");
+                    $("#sData").css("color", "white");
+                    $("#sData").css("margin-right", "20px");
+                    $("#cData").attr("class", "btn");
+                },
                 beforeShowForm: function (form) {
                     PopupCentrar(grid);
                     $('#tr_IdDetalleOrdenPagoValores', form).hide();
@@ -1652,6 +2511,7 @@ function AgregarCaja(grid) {
                     $('#tr_NumeroValor', form).hide();
                     $('#tr_FechaValor', form).hide();
                     $('#tr_ChequesALaOrdenDe', form).hide();
+                    $('#tr_Chequera', form).hide();
                     $('#tr_NoALaOrden', form).hide();
                 },
                 beforeInitData: function () {
@@ -1660,12 +2520,13 @@ function AgregarCaja(grid) {
                 onInitializeForm: function (form) {
                     $('#IdDetalleOrdenPagoValores', form).val(0);
                     $('#Importe', form).val(0);
+                    $('#IdCaja').val(-1);
 
                     $.ajax({
                         type: "GET",
                         contentType: "application/json; charset=utf-8",
                         url: ROOT + 'Parametro/Parametros/',
-                        //async: false,
+                        async: false,
                         dataType: "Json",
                         success: function (data) {
                             var data2 = data[0]
@@ -1685,6 +2546,150 @@ function AgregarCaja(grid) {
                 }
             });
 };
+
+function AgregarCuenta(grid) {
+    //grid.setColProp('Cuenta', { editoptions: { dataUrl: ROOT + 'Cuenta/GetCuentas2' }, formoptions: { label: 'Cuenta' } });
+    grid.jqGrid('editGridRow', "new",
+            {
+                addCaption: "Ingreso de item contable", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
+                closeOnEscape: true,
+                closeAfterAdd: true,
+                recreateForm: true,
+                afterShowForm: function (form) {
+                    $("#sData").attr("class", "btn btn-primary");
+                    $("#sData").css("color", "white");
+                    $("#sData").css("margin-right", "20px");
+                    $("#cData").attr("class", "btn");
+                },
+                beforeShowForm: function (form) {
+                    PopupCentrar(grid);
+                    $('#tr_IdDetalleOrdenPagoCuentas', form).hide();
+                    $('#tr_IdCuenta', form).hide();
+                    $('#tr_IdObra', form).hide();
+                    $('#tr_IdCuentaGasto', form).hide();
+                    $('#tr_IdCuentaBancaria', form).hide();
+                    $('#tr_IdTarjetaCredito', form).hide();
+                    $('#tr_IdMoneda', form).hide();
+                    $('#tr_CotizacionMonedaDestino', form).hide();
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    $('#IdDetalleOrdenPagoCuentas', form).val(0);
+                    $('#Debe', form).val(0);
+                    $('#Haber', form).val(0);
+                },
+                onClose: function (data) {
+                },
+                beforeSubmit: function (postdata, formid) {
+                    var SelectOpcional;
+                    postdata.Cuenta = $("#Cuenta").children("option").filter(":selected").text();
+
+                    SelectOpcional = $("#CuentaBancaria").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.CuentaBancaria = SelectOpcional.text();
+                        postdata.IdCuentaBancaria = SelectOpcional.val();
+                    }
+
+                    SelectOpcional = $("#Caja").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.Caja = SelectOpcional.text();
+                        postdata.IdCaja = SelectOpcional.val();
+                    }
+
+                    SelectOpcional = $("#TarjetaCredito").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.TarjetaCredito = SelectOpcional.text();
+                        postdata.IdTarjetaCredito = SelectOpcional.val();
+                    }
+
+                    SelectOpcional = $("#Obra").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.Obra = SelectOpcional.text();
+                        postdata.IdObra = SelectOpcional.val();
+                    }
+
+                    SelectOpcional = $("#CuentaGasto").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.CuentaGasto = SelectOpcional.text();
+                        postdata.IdCuentaGasto = SelectOpcional.val();
+                    }
+
+                    SelectOpcional = $("#TipoCuentaGrupo").children("option").filter(":selected");
+                    if (SelectOpcional.length > 0) {
+                        postdata.TipoCuentaGrupo = SelectOpcional.text();
+                        postdata.IdTipoCuentaGrupo = SelectOpcional.val();
+                    }
+                    return [true, ''];
+                }
+            });
+};
+
+function AsignarNumeroInterno(form) {
+    var NumeroInterno, $grid, dataIds, data, valor, i;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'Parametro/Parametros/',
+        async: false,
+        dataType: "Json",
+        success: function (data) {
+            var data2 = data[0]
+            NumeroInterno = data2.ProximoNumeroInternoChequeEmitido;
+            $grid = $('#ListaValores');
+            dataIds = $grid.jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                valor = data["NumeroInterno"];
+                if (valor >= NumeroInterno) { NumeroInterno = parseInt(valor) + 1; }
+            };
+            $('#NumeroInterno', form).val(NumeroInterno);
+        }
+    });
+}
+
+function AsignarNumeroValor(IdBancoChequera) {
+    var NumeroValor, $grid, dataIds, data, valor, valor2, i;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'Banco/GetChequerasPorId/',
+        data: { IdBancoChequera: IdBancoChequera },
+        async: false,
+        dataType: "Json",
+        success: function (data) {
+            var data2 = data[0]
+            NumeroValor = data2.value;
+            $grid = $('#ListaValores');
+            dataIds = $grid.jqGrid('getDataIDs');
+            for (i = 0; i < dataIds.length; i++) {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                valor = data["NumeroValor"];
+                valor2 = data["IdBancoChequera"];
+                if (valor >= NumeroValor && valor2 == IdBancoChequera) { NumeroValor = parseInt(valor) + 1; }
+            };
+            $('#NumeroValor').val(NumeroValor);
+        }
+    });
+}
+
+function AsignarBancoPorIdCuentaBancaria(IdCuentaBancaria) {
+    var IdBanco, $grid, dataIds, data, valor, i;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'Banco/GetCuentasBancariasPorId/',
+        data: { IdCuentaBancaria: IdCuentaBancaria },
+        async: false,
+        dataType: "Json",
+        success: function (data) {
+            var data2 = data[0]
+            IdBanco = data2.IdBanco;
+            $('#IdBanco').val(IdBanco);
+        }
+    });
+}
 
 function PopupCentrar(grid) {
     var dlgDiv = $("#editmod" + grid[0].id);
@@ -1706,4 +2711,66 @@ function PopupCentrar(grid) {
     var top = (screen.height / 2) - (dlgHeight / 2) + "px";
     dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
     dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
+};
+
+function deshabilitar() {
+    $("#formid *").not("#Lista").not(".ui-jqgrid").attr("disabled", "disabled");
+    $.blockUI.defaults.css.cursor = 'default';
+    $.blockUI.defaults.overlayCSS.cursor = 'default';
+
+    $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+        message: "",
+        theme: true,
+        themedCSS: {
+            width: "35%",
+            left: "30%"
+        }
+    });
+    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar anticipo"]');    $td.hide();    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    $("#ListaContable").block({
+        message: "",
+        theme: true,
+    });
+
+    $("#ListaValores").block({
+        message: "",
+        theme: true,
+    });
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar valor"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar caja"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    $("#ListaRubrosContables").block({
+        message: "",
+        theme: true,
+    });
+    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Agregar rubro contable"]');    $td.hide();    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    $("#ListaImpuestos").block({
+        message: "",
+        theme: true,
+    });
+
+    $("#ListaDrag").block({
+        message: "",
+        theme: true,
+    });
+
+    $("#ListaDrag2").block({
+        message: "",
+        theme: true,
+    });
+};
+
+function ActivarAsientoManual(Activar) {
+    var $td;
+    if (Activar) {
+        $("#ListaContable").unblock({
+            message: "",
+            theme: true,
+        });
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.show();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+    } else {
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.hide();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+        $("#ListaContable").block({
+            message: "",
+            theme: true,
+        });
+    }
 };

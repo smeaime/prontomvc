@@ -4342,5 +4342,119 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Valores_BorrarPorIdDetalleOrdenPagoValores" FunctionName="DemoProntoModel.Store.Valores_BorrarPorIdDetalleOrdenPagoValores" />
+    <EntitySetMapping Name="DiferenciasCambios">
+      <EntityTypeMapping TypeName="DemoProntoModel.DiferenciasCambio">
+        <MappingFragment StoreEntitySet="DiferenciasCambio">
+          <ScalarProperty Name="IdComprobanteGenerado" ColumnName="IdComprobanteGenerado" />
+          <ScalarProperty Name="IdTipoComprobanteGenerado" ColumnName="IdTipoComprobanteGenerado" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdRegistroOrigen" ColumnName="IdRegistroOrigen" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="IdDiferenciaCambio" ColumnName="IdDiferenciaCambio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Asientos">
+      <EntityTypeMapping TypeName="DemoProntoModel.Asiento">
+        <MappingFragment StoreEntitySet="Asientos">
+          <ScalarProperty Name="AsignarAPresupuestoObra" ColumnName="AsignarAPresupuestoObra" />
+          <ScalarProperty Name="ArchivoImportacion" ColumnName="ArchivoImportacion" />
+          <ScalarProperty Name="FechaGeneracionConsolidado" ColumnName="FechaGeneracionConsolidado" />
+          <ScalarProperty Name="BaseConsolidadaHija" ColumnName="BaseConsolidadaHija" />
+          <ScalarProperty Name="AsientoApertura" ColumnName="AsientoApertura" />
+          <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+          <ScalarProperty Name="IdModifico" ColumnName="IdModifico" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="IdIngreso" ColumnName="IdIngreso" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+          <ScalarProperty Name="IdCuentaSubdiario" ColumnName="IdCuentaSubdiario" />
+          <ScalarProperty Name="Ejercicio" ColumnName="Ejercicio" />
+          <ScalarProperty Name="FechaAsiento" ColumnName="FechaAsiento" />
+          <ScalarProperty Name="NumeroAsiento" ColumnName="NumeroAsiento" />
+          <ScalarProperty Name="IdAsiento" ColumnName="IdAsiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleAsientos">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleAsiento">
+        <MappingFragment StoreEntitySet="DetalleAsientos">
+          <ScalarProperty Name="IdDetalleComprobanteProveedor" ColumnName="IdDetalleComprobanteProveedor" />
+          <ScalarProperty Name="IdProvinciaDestino" ColumnName="IdProvinciaDestino" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="RegistrarEnAnalitico" ColumnName="RegistrarEnAnalitico" />
+          <ScalarProperty Name="PorcentajeIVA" ColumnName="PorcentajeIVA" />
+          <ScalarProperty Name="ImporteEnMonedaDestino" ColumnName="ImporteEnMonedaDestino" />
+          <ScalarProperty Name="CotizacionMonedaDestino" ColumnName="CotizacionMonedaDestino" />
+          <ScalarProperty Name="IdMonedaDestino" ColumnName="IdMonedaDestino" />
+          <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IdCuentaGasto" ColumnName="IdCuentaGasto" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="Haber" ColumnName="Haber" />
+          <ScalarProperty Name="Debe" ColumnName="Debe" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="TipoImporte" ColumnName="TipoImporte" />
+          <ScalarProperty Name="Signo" ColumnName="Signo" />
+          <ScalarProperty Name="Libro" ColumnName="Libro" />
+          <ScalarProperty Name="FechaComprobante" ColumnName="FechaComprobante" />
+          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="IdAsiento" ColumnName="IdAsiento" />
+          <ScalarProperty Name="IdDetalleAsiento" ColumnName="IdDetalleAsiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conciliaciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.Conciliacione">
+        <MappingFragment StoreEntitySet="Conciliaciones">
+          <ScalarProperty Name="IdAprobo" ColumnName="IdAprobo" />
+          <ScalarProperty Name="IdRealizo" ColumnName="IdRealizo" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="ImporteAjuste" ColumnName="ImporteAjuste" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+          <ScalarProperty Name="SaldoFinalResumen" ColumnName="SaldoFinalResumen" />
+          <ScalarProperty Name="SaldoInicialResumen" ColumnName="SaldoInicialResumen" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+          <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleConciliaciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleConciliacione">
+        <MappingFragment StoreEntitySet="DetalleConciliaciones">
+          <ScalarProperty Name="ControladoNoConciliado" ColumnName="ControladoNoConciliado" />
+          <ScalarProperty Name="Controlado" ColumnName="Controlado" />
+          <ScalarProperty Name="Conciliado" ColumnName="Conciliado" />
+          <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+          <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+          <ScalarProperty Name="IdDetalleConciliacion" ColumnName="IdDetalleConciliacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleConciliacionesNoContables">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleConciliacionesNoContable">
+        <MappingFragment StoreEntitySet="DetalleConciliacionesNoContables">
+          <ScalarProperty Name="Egresos" ColumnName="Egresos" />
+          <ScalarProperty Name="Ingresos" ColumnName="Ingresos" />
+          <ScalarProperty Name="FechaRegistroContable" ColumnName="FechaRegistroContable" />
+          <ScalarProperty Name="FechaCaducidad" ColumnName="FechaCaducidad" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+          <ScalarProperty Name="IdDetalleConciliacionNoContable" ColumnName="IdDetalleConciliacionNoContable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Valores_BorrarPorIdDetalleOrdenPagoCuentas" FunctionName="DemoProntoModel.Store.Valores_BorrarPorIdDetalleOrdenPagoCuentas" />
   </EntityContainerMapping>
 </Mapping>

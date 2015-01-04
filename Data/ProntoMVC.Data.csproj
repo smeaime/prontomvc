@@ -78,6 +78,9 @@
     <Compile Include="Models\Articulos_TX_DatosConCuenta_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Asiento.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\aspnet_Applications.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
     <Compile Include="Models\Concepto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Conciliacione.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Condiciones_Compra.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -223,6 +229,9 @@
     <Compile Include="Models\DetalleArticulosUnidade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleAsiento.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleAutorizacione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -248,6 +257,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleComprobantesProveedoresProvincia.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleConciliacione.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleConciliacionesNoContable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleCuenta.cs">
@@ -363,6 +378,9 @@
     </Compile>
     <Compile Include="Models\DetalleUserPermisos.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiferenciasCambio.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dtproperties.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
