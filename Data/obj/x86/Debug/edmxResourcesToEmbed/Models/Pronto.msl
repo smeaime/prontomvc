@@ -1763,6 +1763,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="FechaInicialControlComprobantes" ColumnName="FechaInicialControlComprobantes" />
           <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
           <ScalarProperty Name="IdCuentaAplicacion" ColumnName="IdCuentaAplicacion" />
           <ScalarProperty Name="OperacionesMercadoInternoEntidadVinculada" ColumnName="OperacionesMercadoInternoEntidadVinculada" />
@@ -4273,6 +4274,87 @@
           <ScalarProperty Name="NumeroValor" ColumnName="NumeroValor" />
           <ScalarProperty Name="IdTipoValor" ColumnName="IdTipoValor" />
           <ScalarProperty Name="IdValor" ColumnName="IdValor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trees">
+      <EntityTypeMapping TypeName="DemoProntoModel.Tree">
+        <MappingFragment StoreEntitySet="Tree">
+          <ScalarProperty Name="GrupoMenu" ColumnName="GrupoMenu" />
+          <ScalarProperty Name="EsPadre" ColumnName="EsPadre" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurvasTalles">
+      <EntityTypeMapping TypeName="DemoProntoModel.CurvasTalle">
+        <MappingFragment StoreEntitySet="CurvasTalles">
+          <ScalarProperty Name="MostrarCurvaEnInformes" ColumnName="MostrarCurvaEnInformes" />
+          <ScalarProperty Name="CurvaCodigos" ColumnName="CurvaCodigos" />
+          <ScalarProperty Name="Curva" ColumnName="Curva" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="IdCurvaTalle" ColumnName="IdCurvaTalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImpuestosDirectos">
+      <EntityTypeMapping TypeName="DemoProntoModel.ImpuestosDirecto">
+        <MappingFragment StoreEntitySet="ImpuestosDirectos">
+          <ScalarProperty Name="CodigoRegimen" ColumnName="CodigoRegimen" />
+          <ScalarProperty Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" ColumnName="ParaInscriptosEnRegistroFiscalOperadoresGranos" />
+          <ScalarProperty Name="TopeAnual" ColumnName="TopeAnual" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="ActivaNumeracionPorGrupo" ColumnName="ActivaNumeracionPorGrupo" />
+          <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+          <ScalarProperty Name="ProximoNumeroCertificado" ColumnName="ProximoNumeroCertificado" />
+          <ScalarProperty Name="BaseMinima" ColumnName="BaseMinima" />
+          <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+          <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+          <ScalarProperty Name="Tasa" ColumnName="Tasa" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdImpuestoDirecto" ColumnName="IdImpuestoDirecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marcas">
+      <EntityTypeMapping TypeName="DemoProntoModel.Marca">
+        <MappingFragment StoreEntitySet="Marcas">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materiales">
+      <EntityTypeMapping TypeName="DemoProntoModel.Materiale">
+        <MappingFragment StoreEntitySet="Materiales">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modelos">
+      <EntityTypeMapping TypeName="DemoProntoModel.Modelo">
+        <MappingFragment StoreEntitySet="Modelos">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actividades_Proveedores">
+      <EntityTypeMapping TypeName="DemoProntoModel.Actividades_Proveedore">
+        <MappingFragment StoreEntitySet="Actividades Proveedores">
+          <ScalarProperty Name="Agrupacion1" ColumnName="Agrupacion1" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdActividad" ColumnName="IdActividad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

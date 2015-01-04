@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -17,6 +17,14 @@
     <Property Name="IdLibero" Type="int" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="IdTempAutorizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Actividades Proveedores">
+    <Key>
+      <PropertyRef Name="IdActividad" />
+    </Key>
+    <Property Name="IdActividad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Agrupacion1" Type="int" />
   </EntityType>
   <EntityType Name="Articulos">
     <Key>
@@ -879,6 +887,17 @@
     <Property Name="Titulo" Type="varchar" MaxLength="2" />
     <Property Name="Nivel" Type="int" />
   </EntityType>
+  <EntityType Name="CurvasTalles">
+    <Key>
+      <PropertyRef Name="IdCurvaTalle" />
+    </Key>
+    <Property Name="IdCurvaTalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Curva" Type="varchar" MaxLength="50" />
+    <Property Name="CurvaCodigos" Type="varchar" MaxLength="50" />
+    <Property Name="MostrarCurvaEnInformes" Type="varchar" MaxLength="2" />
+  </EntityType>
   <EntityType Name="DefinicionArticulos">
     <Key>
       <PropertyRef Name="IdDef" />
@@ -1056,7 +1075,7 @@
     <Property Name="Contacto" Type="varchar" MaxLength="50" />
     <Property Name="Puesto" Type="varchar" MaxLength="50" />
     <Property Name="Telefono" Type="varchar" MaxLength="50" />
-    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="200" />
     <Property Name="Acciones" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="DetalleClientesLugaresEntrega">
@@ -2168,6 +2187,24 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdIGCondicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="ImpuestosDirectos">
+    <Key>
+      <PropertyRef Name="IdImpuestoDirecto" />
+    </Key>
+    <Property Name="IdImpuestoDirecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Tasa" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="IdTipoImpuesto" Type="int" />
+    <Property Name="IdCuenta" Type="int" />
+    <Property Name="BaseMinima" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="ProximoNumeroCertificado" Type="int" />
+    <Property Name="Grupo" Type="int" />
+    <Property Name="ActivaNumeracionPorGrupo" Type="varchar" MaxLength="2" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+    <Property Name="TopeAnual" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="ParaInscriptosEnRegistroFiscalOperadoresGranos" Type="varchar" MaxLength="2" />
+    <Property Name="CodigoRegimen" Type="int" />
+  </EntityType>
   <EntityType Name="ListasPrecios">
     <Key>
       <PropertyRef Name="IdListaPrecios" />
@@ -2228,6 +2265,28 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Codigo" Type="int" />
     <Property Name="Partido" Type="varchar" MaxLength="60" />
     <Property Name="IdPartido" Type="int" />
+  </EntityType>
+  <EntityType Name="Marcas">
+    <Key>
+      <PropertyRef Name="IdMarca" />
+    </Key>
+    <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+  </EntityType>
+  <EntityType Name="Materiales">
+    <Key>
+      <PropertyRef Name="IdMaterial" />
+    </Key>
+    <Property Name="IdMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Modelos">
+    <Key>
+      <PropertyRef Name="IdModelo" />
+    </Key>
+    <Property Name="IdModelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Monedas">
     <Key>
@@ -3175,6 +3234,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="OperacionesMercadoInternoEntidadVinculada" Type="varchar" MaxLength="2" />
     <Property Name="IdCuentaAplicacion" Type="int" />
     <Property Name="CodigoCategoriaIIBBAlternativo" Type="varchar" MaxLength="1" />
+    <Property Name="FechaInicialControlComprobantes" Type="datetime" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -3708,6 +3768,21 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="EnviarEmail" Type="tinyint" />
     <Property Name="IdProveedor" Type="int" />
     <Property Name="Codigo" Type="int" />
+  </EntityType>
+  <EntityType Name="Tree">
+    <Key>
+      <PropertyRef Name="IdItem" />
+    </Key>
+    <Property Name="IdItem" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="ParentId" Type="varchar" MaxLength="30" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Parametros" Type="varchar" MaxLength="50" />
+    <Property Name="Link" Type="varchar" MaxLength="200" />
+    <Property Name="Imagen" Type="varchar" MaxLength="100" />
+    <Property Name="EsPadre" Type="varchar" MaxLength="2" />
+    <Property Name="GrupoMenu" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Ubicaciones">
     <Key>
@@ -4501,6 +4576,54 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleOrdenesPago_OrdenesPago">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPago" Type="Self.DetalleOrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoCuentas_OrdenesPago">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPagoCuentas" Type="Self.DetalleOrdenesPagoCuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoCuentas">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoImpuestos_OrdenesPago">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPagoImpuestos" Type="Self.DetalleOrdenesPagoImpuestos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoImpuestos">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoRubrosContables_OrdenesPago">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPagoRubrosContables" Type="Self.DetalleOrdenesPagoRubrosContables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoRubrosContables">
+        <PropertyRef Name="IdOrdenPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleOrdenesPagoValores_IdTipoValor">
     <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
     <End Role="DetalleOrdenesPagoValores" Type="Self.DetalleOrdenesPagoValores" Multiplicity="*" />
@@ -4510,6 +4633,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="DetalleOrdenesPagoValores">
         <PropertyRef Name="IdTipoValor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleOrdenesPagoValores_OrdenesPago">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="DetalleOrdenesPagoValores" Type="Self.DetalleOrdenesPagoValores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="DetalleOrdenesPagoValores">
+        <PropertyRef Name="IdOrdenPago" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5103,6 +5238,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
   </Function>
   <EntityContainer Name="DemoProntoModelStoreContainer">
     <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Actividades Proveedores" EntityType="Self.Actividades Proveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AutorizacionesCompra" EntityType="Self.AutorizacionesCompra" Schema="dbo" store:Type="Tables" />
@@ -5126,6 +5262,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="CuentasCorrientesDeudores" EntityType="Self.CuentasCorrientesDeudores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CuentasEjerciciosContables" EntityType="Self.CuentasEjerciciosContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurvasTalles" EntityType="Self.CurvasTalles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DefinicionArticulos" EntityType="Self.DefinicionArticulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Depositos" EntityType="Self.Depositos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DescripcionIva" EntityType="Self.DescripcionIva" Schema="dbo" store:Type="Tables" />
@@ -5189,9 +5326,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImpuestosDirectos" EntityType="Self.ImpuestosDirectos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListasPrecios" EntityType="Self.ListasPrecios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotasCredito" EntityType="Self.NotasCredito" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotasDebito" EntityType="Self.NotasDebito" Schema="dbo" store:Type="Tables" />
@@ -5227,17 +5368,20 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
-    [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
-    [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
-    [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
-    FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
+      <DefiningQuery>
+              SELECT
+              [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo],
+              [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio],
+              [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio],
+              [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
+              FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]
+            </DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
       <End Role="Rubros" EntitySet="Rubros" />
@@ -5459,8 +5603,28 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Unidades" EntitySet="Unidades" />
       <End Role="DetalleOrdenesCompra" EntitySet="DetalleOrdenesCompra" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPago_OrdenesPago" Association="Self.FK_DetalleOrdenesPago_OrdenesPago">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPago" EntitySet="DetalleOrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoCuentas_OrdenesPago" Association="Self.FK_DetalleOrdenesPagoCuentas_OrdenesPago">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoCuentas" EntitySet="DetalleOrdenesPagoCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoImpuestos_OrdenesPago" Association="Self.FK_DetalleOrdenesPagoImpuestos_OrdenesPago">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoImpuestos" EntitySet="DetalleOrdenesPagoImpuestos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" Association="Self.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+      <End Role="DetalleOrdenesPagoRubrosContables" EntitySet="DetalleOrdenesPagoRubrosContables" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleOrdenesPagoValores_IdTipoValor" Association="Self.FK_DetalleOrdenesPagoValores_IdTipoValor">
       <End Role="TiposComprobante" EntitySet="TiposComprobante" />
+      <End Role="DetalleOrdenesPagoValores" EntitySet="DetalleOrdenesPagoValores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleOrdenesPagoValores_OrdenesPago" Association="Self.FK_DetalleOrdenesPagoValores_OrdenesPago">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
       <End Role="DetalleOrdenesPagoValores" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
     <AssociationSet Name="FK_DetallePedidos_ControlCalidad" Association="Self.FK_DetallePedidos_ControlCalidad">

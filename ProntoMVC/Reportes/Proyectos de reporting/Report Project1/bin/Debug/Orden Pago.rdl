@@ -9,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Orden de Pago</Value>
+                <Value>Orden de Pago </Value>
                 <Style>
                   <FontFamily>Tahoma</FontFamily>
                   <FontSize>20pt</FontSize>
@@ -104,13 +104,13 @@
             <Value>=First(Fields!IdOrdenPago.Value, "OrdenPago")</Value>
           </Parameter>
         </Parameters>
-        <Top>12.04706cm</Top>
-        <Left>0.41011cm</Left>
+        <Top>12.01178cm</Top>
+        <Left>0.41014cm</Left>
         <Height>1.87cm</Height>
         <Width>8.05562cm</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
-          <Hidden>=(First(Fields!Valor.Value, "DataSet1")='SI')</Hidden>
+          <Hidden>=IIF(First(Fields!EmiteAsientoEnOP.Value, "DataSet1")="SI", false, true)</Hidden>
         </Visibility>
         <Style>
           <Border>
@@ -1174,6 +1174,46 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox19">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>5646</Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!EmiteAsientoEnOP.Value, "DataSet1")</Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>211</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox19</rd:DefaultName>
+        <Left>7.88141cm</Left>
+        <Height>1.11125cm</Height>
+        <Width>3.36021cm</Width>
+        <ZIndex>7</ZIndex>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>5.63671in</Height>
     <Style />
@@ -1199,14 +1239,6 @@
       </ConnectionProperties>
       <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>746e45ba-66c8-47f4-aa4f-f8f2ebc0177c</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="Test">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=serversql3\Testing;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;</ConnectString>
-      </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>66dd4ae9-4f72-4902-8318-f63304dfd4ff</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1551,14 +1583,13 @@
     </DataSet>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>Test</DataSourceName>
-        <CommandText>SELECT        Valor
-FROM            Parametros2
-WHERE        (Campo = 'EmiteAsientoEnRECIBO')</CommandText>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT EmiteAsientoEnOP
+FROM Parametros</CommandText>
       </Query>
       <Fields>
-        <Field Name="Valor">
-          <DataField>Valor</DataField>
+        <Field Name="EmiteAsientoEnOP">
+          <DataField>EmiteAsientoEnOP</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
