@@ -12846,8 +12846,11 @@ Public Class LogicaFacturacion
                             Dim r As DataRow = dtaa.Rows(0)
                             dtRenglonesAgregados.ImportRow(r)
 
-                            'es capaz de traer dos veces el mismo, porque un "CAMBIO CARTA PORTE" y un "GASTOS ANALISIS" pueden tener el mismo FacturarselaA y  FacturarselaA
+                            'es capaz de traer dos veces el mismo, porque un "CAMBIO CARTA PORTE" y un
+                            '  "GASTOS ANALISIS" pueden tener el mismo FacturarselaA y  FacturarselaA
                             '-pero no tengo el articulo en el "oWhere"!!!!
+
+                            pero lo tenes en el dtaa
 
                         Catch ex As Exception
                             ErrHandler.WriteError("No se pudo incrustar el renglon manual")
