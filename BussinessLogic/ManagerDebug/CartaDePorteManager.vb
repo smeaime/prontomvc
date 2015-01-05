@@ -1804,7 +1804,7 @@ Public Class CartaDePorteManager
 
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13222
-            s.Replace("Descargas de Hoy + Todas las Posiciones", "Posición y Descargas de Hoy")
+            s = s.Replace("Descargas de Hoy + Todas las Posiciones", "Posición y Descargas de Hoy")
 
 
 
