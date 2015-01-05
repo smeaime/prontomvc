@@ -656,26 +656,12 @@ namespace ProntoMVC.Controllers
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows,
-                                       bool _search, string searchField, string searchOper, string searchString,
-                                       string FechaInicial, string FechaFinal, string IdObra)
+        public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Fac = db.Proveedores.AsQueryable();
-            //if (IdObra != string.Empty)
-            //{
-            //    int IdObra1 = Convert.ToInt32(IdObra);
-            //    Fac = (from a in Fac where a.IdObra == IdObra1 select a).AsQueryable();
-            //}
-            //if (FechaInicial != string.Empty)
-            //{
-            //    DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-            //    DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-            //    Fac = (from a in Fac where a.FechaProveedor >= FechaDesde && a.FechaProveedor <= FechaHasta select a).AsQueryable();
-            //}
             if (_search)
             {
                 switch (searchField.ToLower())
@@ -697,138 +683,136 @@ namespace ProntoMVC.Controllers
                 campo = "true";
             }
 
-            var Req1 = (from a in Fac
+            var data = (from a in db.Proveedores
+                        from b in db.Estados_Proveedores.Where(o => o.IdEstado == a.IdEstado).DefaultIfEmpty()
+                        from c in db.Actividades_Proveedores.Where(o => o.IdActividad == a.IdActividad).DefaultIfEmpty()
+                        from d in db.Condiciones_Compras.Where(o => o.IdCondicionCompra == a.IdCondicionCompra).DefaultIfEmpty()
+                        from e in db.TiposRetencionGanancias.Where(o => o.IdTipoRetencionGanancia == a.IdTipoRetencionGanancia).DefaultIfEmpty()
+                        from f in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from g in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaProvision).DefaultIfEmpty()
+                        from h in db.IBCondiciones.Where(o => o.IdIBCondicion == a.IdIBCondicionPorDefecto).DefaultIfEmpty()
+                        from i in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        from j in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
                         select new
                         {
-                            IdIBCondicion = a.IdProveedor,
-                            //FechaProveedor = ,
-                            //NumeroObra=a.Obra.NumeroObra,
-                            //Libero=a.Empleados.Nombre,
-                            //Aprobo = a.Empleados1.Nombre,
-                            //Sector=a.Sectores.Descripcion,
-                            //Detalle=a.Detalle
-                        }).Where(campo).ToList();
-
-            int totalRecords = Req1.Count();
+                            a.IdProveedor,
+                            a.RazonSocial,
+                            a.CodigoEmpresa,
+                            a.Direccion,
+                            Localidad = a.Localidad.Nombre,
+                            a.CodigoPostal,
+                            Provincia = a.Provincia.Nombre,
+                            Pais = a.Pais.Descripcion,
+                            a.Telefono1,
+                            a.Telefono2,
+                            a.Fax,
+                            a.Email,
+                            a.Cuit,
+                            DescripcionIva = a.DescripcionIva.Descripcion,
+                            a.Contacto,
+                            a.FechaAlta,
+                            a.FechaUltimaCompra,
+                            Estado = b != null ? b.Descripcion : "",
+                            Actividad = c != null ? c.Descripcion : "",
+                            CondicionCompra = d != null ? d.Descripcion : "",
+                            a.PaginaWeb,
+                            a.Habitual,
+                            NombreComercial = a.NombreFantasia,
+                            DatosAdicionales1 = a.Nombre1,
+                            DatosAdicionales2 = a.Nombre2,
+                            a.Observaciones,
+                            InscriptoGanancias = (a.IGCondicion ?? 1) == 1 ? "NO" : "SI",
+                            CategoriaGanancias = (a.IGCondicion ?? 1) == 1 ? "" : (e != null ? e.Descripcion : ""),
+                            CuentaContable = f != null ? f.Descripcion : "",
+                            CategoriaIIBB = (a.IBCondicion ?? 1) == 1 ? "Exento" : ((a.IBCondicion ?? 1) == 2 ? "Conv.Mult." : ((a.IBCondicion ?? 1) == 3 ? "Juris.Local" : ((a.IBCondicion ?? 1) == 4 ? "No alcanzado" : ""))),
+                            a.FechaLimiteExentoIIBB,
+                            a.IBNumeroInscripcion,
+                            CondicionIIBB = h != null ? h.Descripcion : "",
+                            a.FechaUltimaPresentacionDocumentacion,
+                            a.CodigoSituacionRetencionIVA,
+                            Ingreso = i != null ? i.Nombre : "",
+                            a.FechaIngreso,
+                            Modifico = j != null ? j.Nombre : "",
+                            a.FechaModifico,
+                            a.SujetoEmbargado,
+                            a.SaldoEmbargo,
+                            a.Calificacion,
+                            CuentaContableProvision = g != null ? g.Descripcion : "",
+                            a.ArchivoAdjunto1,
+                            a.ArchivoAdjunto2,
+                            a.ArchivoAdjunto3,
+                            a.ArchivoAdjunto4
+                        }).Where(campo).AsQueryable();
+            
+            int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            //switch (sidx.ToLower())
-            //{
-            //    case "numeroProveedor":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.NumeroProveedor);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.NumeroProveedor);
-            //        break;
-            //    case "fechaProveedor":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.FechaProveedor);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.FechaProveedor);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Fac = Fac.OrderByDescending(a => a.NumeroProveedor);
-            //        else
-            //            Fac = Fac.OrderBy(a => a.NumeroProveedor);
-            //        break;
-            //}
-
-            var data = (from a in Fac
-                        //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var data1 = (from a in data select a)
+                        .OrderBy(x => x.RazonSocial)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in data1
                         select new jqGridRowJson
                         {
                             id = a.IdProveedor.ToString(),
                             cell = new string[] { 
-                                
-                                "<a href="+ Url.Action("Edit",new {id = a.IdProveedor} )  +" target='_blank' >Editar</>" 
-                                ,
+                                "<a href="+ Url.Action("Edit",new {id = a.IdProveedor} )  +" target='_blank' >Editar</>",
                                 a.IdProveedor.NullSafeToString(),
-
                                 a.RazonSocial.NullSafeToString(),
-                                //a.Codigo.NullSafeToString(),
-                                //a.Direccion.NullSafeToString(),                                
-                                //(a.Localidad==null ? string.Empty : a.Localidad.Nombre ).ToString(),
-                                //a.CodigoPostal.NullSafeToString(),
-                                // (a.Provincia==null ? string.Empty : a.Provincia.Nombre ).ToString(),
-                                // (a.Pais==null ? string.Empty : a.Pais.Descripcion ).ToString(),
-                                //a.Telefono.NullSafeToString(),
-                                
-                                //a.Fax.NullSafeToString(),
-                                //a.Email,a.Cuit,
-                                //(a.DescripcionIva==null ? string.Empty : a.DescripcionIva.Descripcion ).ToString(), //espantoso
-                                //a.FechaAlta.NullSafeToString(),a.Contacto,a.DireccionEntrega
-                                //,(a.LocalidadEntrega==null ? string.Empty : a.LocalidadEntrega.Nombre ).ToString(), //espantoso
-                                //(a.ProvinciaEntrega==null ? string.Empty : a.ProvinciaEntrega.Nombre ).ToString(), //espantoso
-                                a.CodigoPresto,
-
-                                //(a.Vendedor==null ? string.Empty : a.Vendedor.Nombre ).ToString(), //espantoso
-                                //(a.VendedorCobrador==null ? string.Empty : a.VendedorCobrador.Nombre ).ToString(), //espantoso
-                                //(a.Estados_Proveedores==null ? string.Empty : a.Estados_Proveedores.Descripcion ).ToString(), //espantoso
-                                //a.NombreFantasia.NullSafeToString(),
+                                a.CodigoEmpresa.NullSafeToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.Pais.NullSafeToString(),
+                                a.Telefono1.NullSafeToString(),
+                                a.Telefono2.NullSafeToString(),
+                                a.Fax.NullSafeToString(),
+                                a.Email.NullSafeToString(),
+                                a.Cuit.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.Contacto.NullSafeToString(),
+                                a.FechaAlta == null ? "" : a.FechaAlta.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaUltimaCompra == null ? "" : a.FechaUltimaCompra.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Estado.NullSafeToString(),
+                                a.Actividad.NullSafeToString(),
+                                a.CondicionCompra.NullSafeToString(),
+                                a.PaginaWeb.NullSafeToString(),
+                                a.Habitual.NullSafeToString(),
+                                a.NombreComercial.NullSafeToString(),
+                                a.DatosAdicionales1.NullSafeToString(),
+                                a.DatosAdicionales2.NullSafeToString(),
                                 a.Observaciones.NullSafeToString(),
-                                a.IdUsuarioIngreso.NullSafeToString(),
-                                a.FechaIngreso.NullSafeToString(),
-                                a.IdUsuarioModifico.NullSafeToString(),
-                                a.FechaModifico.NullSafeToString(),
-                                // CondIIBB harcodea usando  IBCondicion
-                            // IBCondiciones.Descripcion as [Cat.IIBB],  este usa la descricion el IdIBcondicionpordefecto
-                                "",
-                                
-                                
-                                
-                                  //(a.IBCondicione==null ? string.Empty : a.IBCondicione.Descripcion ).ToString(), //espantoso
-                                  //a.IBNumeroInscripcion,
-                                  //(a.Cuenta==null ? string.Empty : a.Cuenta.Descripcion ).ToString(), //espantoso
-                                  //(a.CuentaMonedaExt==null ? string.Empty : a.CuentaMonedaExt.Descripcion ).ToString(), //espantoso
-                              
- 
-                                
-                            
+                                a.InscriptoGanancias.NullSafeToString(),
+                                a.CategoriaGanancias.NullSafeToString(),
+                                a.CuentaContable.NullSafeToString(),
+                                a.CategoriaIIBB.NullSafeToString(),
+                                a.FechaLimiteExentoIIBB.NullSafeToString(),
+                                a.IBNumeroInscripcion.NullSafeToString(),
+                                a.CondicionIIBB.NullSafeToString(),
+                                a.FechaUltimaPresentacionDocumentacion == null ? "" : a.FechaUltimaPresentacionDocumentacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.CodigoSituacionRetencionIVA.NullSafeToString(),
+                                a.Ingreso.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.SujetoEmbargado.NullSafeToString(),
+                                a.SaldoEmbargo.NullSafeToString(),
+                                a.Calificacion.NullSafeToString(),
+                                a.CuentaContableProvision.NullSafeToString(),
+                                a.ArchivoAdjunto1.NullSafeToString(),
+                                a.ArchivoAdjunto2.NullSafeToString(),
+                                a.ArchivoAdjunto3.NullSafeToString(),
+                                a.ArchivoAdjunto4.NullSafeToString()
                             }
                         }).ToArray()
             };
-
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
     }
 }

@@ -361,7 +361,6 @@ namespace ProntoMVC.Controllers
                 //Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
             }
 
-
             int totalRecords = data.Count();  // Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 

@@ -1592,6 +1592,7 @@
     <EntitySetMapping Name="Facturas">
       <EntityTypeMapping TypeName="DemoProntoModel.Factura">
         <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="FueEnviadoCorreoConFacturaElectronica" ColumnName="FueEnviadoCorreoConFacturaElectronica" />
           <ScalarProperty Name="IdTipoOperacion" ColumnName="IdTipoOperacion" />
           <ScalarProperty Name="NumeroOrdenCompraExterna" ColumnName="NumeroOrdenCompraExterna" />
           <ScalarProperty Name="IdTipoNegocioVentas" ColumnName="IdTipoNegocioVentas" />
@@ -1763,6 +1764,7 @@
     <EntitySetMapping Name="Proveedores">
       <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="ResolucionAfip3668" ColumnName="ResolucionAfip3668" />
           <ScalarProperty Name="FechaInicialControlComprobantes" ColumnName="FechaInicialControlComprobantes" />
           <ScalarProperty Name="CodigoCategoriaIIBBAlternativo" ColumnName="CodigoCategoriaIIBBAlternativo" />
           <ScalarProperty Name="IdCuentaAplicacion" ColumnName="IdCuentaAplicacion" />
@@ -4456,5 +4458,21 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Valores_BorrarPorIdDetalleOrdenPagoCuentas" FunctionName="DemoProntoModel.Store.Valores_BorrarPorIdDetalleOrdenPagoCuentas" />
+    <EntitySetMapping Name="Trees">
+      <EntityTypeMapping TypeName="DemoProntoModel.Tree">
+        <MappingFragment StoreEntitySet="Tree">
+          <ScalarProperty Name="GrupoMenu" ColumnName="GrupoMenu" />
+          <ScalarProperty Name="EsPadre" ColumnName="EsPadre" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

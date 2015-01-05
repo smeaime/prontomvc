@@ -937,6 +937,7 @@
       <End Role="Cuenta" EntitySet="Cuentas" />
       <End Role="OrdenPago" EntitySet="OrdenesPago" />
     </AssociationSet>
+    <EntitySet Name="Trees" EntityType="DemoProntoModel.Tree" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -3360,6 +3361,7 @@
     <Property Type="Int32" Name="NumeroOrdenCompraExterna" />
     <Property Name="IdTipoOperacion" Type="Int32" />
     <NavigationProperty Name="PuntosVenta" Relationship="DemoProntoModel.FK_Facturas_PuntosVenta" FromRole="Factura" ToRole="PuntosVenta" />
+    <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_DetalleFacturas_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -3649,6 +3651,7 @@
     <Property Type="Int32" Name="IdCuentaAplicacion" />
     <Property Name="CodigoCategoriaIIBBAlternativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="FechaInicialControlComprobantes" Type="DateTime" Precision="3" />
+    <Property Name="ResolucionAfip3668" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -7818,4 +7821,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Tree">
+    <Key>
+      <PropertyRef Name="IdItem" />
+    </Key>
+    <Property Name="IdItem" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Parametros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

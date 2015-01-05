@@ -91,13 +91,16 @@
                                 $('#TotalOPComplementaria').val(valores);
                                 CalcularTotales()
                             });
-
-                            
-
-
                         });
                     </script>
-                    @if (Model.IdCuenta > 0) { <script>$(function () { DatosCuenta(Model.IdCuenta, "p", 0, "Codigo"); })</script> }
+                    @if (Model.IdCuenta > 0) { 
+                        <script>
+                            $(function () {
+                                var IdCuenta = @Html.Raw(Json.Encode(Model.IdCuenta));
+                                DatosCuenta(IdCuenta, "p", 0, "Codigo");
+                            })
+                        </script> 
+                    }
                 </div>
                 <div class="span2 lightblue">
                     @Html.LabelFor(model => model.IdObra, "Obra")
