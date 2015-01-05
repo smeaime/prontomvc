@@ -2235,6 +2235,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdTipoNegocioVentas" Type="int" />
     <Property Name="NumeroOrdenCompraExterna" Type="bigint" />
     <Property Name="IdTipoOperacion" Type="int" />
+    <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Formularios">
     <Key>
@@ -3341,6 +3342,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdCuentaAplicacion" Type="int" />
     <Property Name="CodigoCategoriaIIBBAlternativo" Type="varchar" MaxLength="1" />
     <Property Name="FechaInicialControlComprobantes" Type="datetime" />
+    <Property Name="ResolucionAfip3668" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Provincias">
     <Key>
@@ -3874,6 +3876,21 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="EnviarEmail" Type="tinyint" />
     <Property Name="IdProveedor" Type="int" />
     <Property Name="Codigo" Type="int" />
+  </EntityType>
+  <EntityType Name="Tree">
+    <Key>
+      <PropertyRef Name="IdItem" />
+    </Key>
+    <Property Name="IdItem" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="ParentId" Type="varchar" MaxLength="30" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Parametros" Type="varchar" MaxLength="50" />
+    <Property Name="Link" Type="varchar" MaxLength="200" />
+    <Property Name="Imagen" Type="varchar" MaxLength="100" />
+    <Property Name="EsPadre" Type="varchar" MaxLength="2" />
+    <Property Name="GrupoMenu" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Ubicaciones">
     <Key>
@@ -5543,6 +5560,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
