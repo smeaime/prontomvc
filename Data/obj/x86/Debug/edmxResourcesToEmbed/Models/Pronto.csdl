@@ -553,12 +553,12 @@
       <End Role="DetalleOrdenesPagoRubrosContable" EntitySet="DetalleOrdenesPagoRubrosContables" />
     </AssociationSet>
     <FunctionImport Name="CtasCtesA_TXPorTrs">
+      <Parameter Name="Pendiente" Mode="In" Type="String" />
       <Parameter Name="IdProveedor" Mode="In" Type="Int32" />
       <Parameter Name="Todo" Mode="In" Type="Int32" />
       <Parameter Name="FechaLimite" Mode="In" Type="DateTime" />
       <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
       <Parameter Name="Consolidar" Mode="In" Type="Int32" />
-      <Parameter Name="Pendiente" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="OrdenesPago_TX_EnCaja" ReturnType="Collection(DemoProntoModel.OrdenesPago_TX_EnCaja_Result)">
       <Parameter Name="Estado" Mode="In" Type="String" />
@@ -662,12 +662,12 @@
       <End Role="DetalleOrdenesPagoValore" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
     <FunctionImport Name="AutorizacionesPorComprobante_A">
-      <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
-      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
       <Parameter Name="OrdenAutorizacion" Mode="In" Type="Int32" />
       <Parameter Name="IdAutorizo" Mode="In" Type="Int32" />
       <Parameter Name="FechaAutorizacion" Mode="In" Type="DateTime" />
       <Parameter Name="Visto" Mode="In" Type="String" />
+      <Parameter Name="IdFormulario" Mode="In" Type="Int32" />
+      <Parameter Name="IdComprobante" Mode="In" Type="Int32" />
       <Parameter Name="IdAutorizacionPorComprobante" Mode="InOut" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="wActualizacionesVariasPorComprobante">
@@ -875,7 +875,6 @@
       <End Role="TiposComprobante" EntitySet="TiposComprobantes" />
       <End Role="Valore" EntitySet="Valores" />
     </AssociationSet>
-    <EntitySet Name="Trees" EntityType="DemoProntoModel.Tree" />
     <AssociationSet Name="FK_DetalleOrdenesPago_OrdenesPago" Association="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago">
       <End Role="OrdenPago" EntitySet="OrdenesPago" />
       <End Role="DetalleOrdenesPago" EntitySet="DetalleOrdenesPagoes" />
@@ -902,6 +901,43 @@
     <EntitySet Name="Materiales" EntityType="DemoProntoModel.Materiale" />
     <EntitySet Name="Modelos" EntityType="DemoProntoModel.Modelo" />
     <EntitySet Name="Actividades_Proveedores" EntityType="DemoProntoModel.Actividades_Proveedore" />
+    <FunctionImport Name="Valores_BorrarPorIdDetalleOrdenPagoValores">
+      <Parameter Name="IdDetalleOrdenPagoValores" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="DiferenciasCambios" EntityType="DemoProntoModel.DiferenciasCambio" />
+    <EntitySet Name="Asientos" EntityType="DemoProntoModel.Asiento" />
+    <EntitySet Name="DetalleAsientos" EntityType="DemoProntoModel.DetalleAsiento" />
+    <AssociationSet Name="FK_DetalleAsientos_Asientos" Association="DemoProntoModel.FK_DetalleAsientos_Asientos">
+      <End Role="Asiento" EntitySet="Asientos" />
+      <End Role="DetalleAsiento" EntitySet="DetalleAsientos" />
+    </AssociationSet>
+    <EntitySet Name="Conciliaciones" EntityType="DemoProntoModel.Conciliacione" />
+    <EntitySet Name="DetalleConciliaciones" EntityType="DemoProntoModel.DetalleConciliacione" />
+    <EntitySet Name="DetalleConciliacionesNoContables" EntityType="DemoProntoModel.DetalleConciliacionesNoContable" />
+    <AssociationSet Name="FK_Conciliaciones_CuentasBancarias" Association="DemoProntoModel.FK_Conciliaciones_CuentasBancarias">
+      <End Role="CuentasBancaria" EntitySet="CuentasBancarias" />
+      <End Role="Conciliacione" EntitySet="Conciliaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleConciliaciones_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones">
+      <End Role="Conciliacione" EntitySet="Conciliaciones" />
+      <End Role="DetalleConciliacione" EntitySet="DetalleConciliaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleConciliacionesNoContables_Conciliaciones" Association="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones">
+      <End Role="Conciliacione" EntitySet="Conciliaciones" />
+      <End Role="DetalleConciliacionesNoContable" EntitySet="DetalleConciliacionesNoContables" />
+    </AssociationSet>
+    <FunctionImport Name="Valores_BorrarPorIdDetalleOrdenPagoCuentas">
+      <Parameter Name="IdDetalleOrdenPagoCuentas" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="FK_Valores_Monedas_IdMoneda1" Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda1">
+      <End Role="Moneda" EntitySet="Monedas" />
+      <End Role="Valore" EntitySet="Valores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_Cuentas" Association="DemoProntoModel.FK_OrdenesPago_Cuentas">
+      <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="OrdenPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <EntitySet Name="Trees" EntityType="DemoProntoModel.Tree" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -2234,6 +2270,7 @@
     <NavigationProperty Name="ComprobantesProveedores" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Cuenta" FromRole="Cuenta" ToRole="ComprobanteProveedor" />
     <NavigationProperty Name="TiposCuentaGrupos" Relationship="DemoProntoModel.FK_Cuentas_TipoCuentaGrupos" FromRole="Cuenta" ToRole="TiposCuentaGrupos" />
     <NavigationProperty Name="CuentasGasto" Relationship="DemoProntoModel.FK_Cuentas_CuentasGastos" FromRole="Cuenta" ToRole="CuentasGasto" />
+    <NavigationProperty Name="OrdenesPagoes" Relationship="DemoProntoModel.FK_OrdenesPago_Cuentas" FromRole="Cuenta" ToRole="OrdenPago" />
   </EntityType>
   <EntityType Name="DetallePedido">
     <Key>
@@ -2874,6 +2911,7 @@
     <NavigationProperty Name="NotasCreditoes" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="Moneda" ToRole="NotasCredito" />
     <NavigationProperty Name="NotasDebitoes" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="Moneda" ToRole="NotasDebito" />
     <NavigationProperty Name="Valores" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Moneda" ToRole="Valore" />
+    <NavigationProperty Name="Valores1" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" FromRole="Moneda" ToRole="Valore" />
   </EntityType>
   <EntityType Name="Pais">
     <Key>
@@ -3323,6 +3361,7 @@
     <Property Type="Int32" Name="NumeroOrdenCompraExterna" />
     <Property Name="IdTipoOperacion" Type="Int32" />
     <NavigationProperty Name="PuntosVenta" Relationship="DemoProntoModel.FK_Facturas_PuntosVenta" FromRole="Factura" ToRole="PuntosVenta" />
+    <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_DetalleFacturas_Articulos">
     <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -3612,6 +3651,7 @@
     <Property Type="Int32" Name="IdCuentaAplicacion" />
     <Property Name="CodigoCategoriaIIBBAlternativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="FechaInicialControlComprobantes" Type="DateTime" Precision="3" />
+    <Property Name="ResolucionAfip3668" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Rubro">
     <Key>
@@ -5701,6 +5741,7 @@
     <NavigationProperty Name="DetalleOrdenesPagoImpuestos" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoImpuesto" />
     <NavigationProperty Name="DetalleOrdenesPagoRubrosContables" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoRubrosContable" />
     <NavigationProperty Name="DetalleOrdenesPagoValores" Relationship="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" FromRole="OrdenPago" ToRole="DetalleOrdenesPagoValore" />
+    <NavigationProperty Name="Cuenta" Relationship="DemoProntoModel.FK_OrdenesPago_Cuentas" FromRole="OrdenPago" ToRole="Cuenta" />
   </EntityType>
   <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
     <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -7007,6 +7048,7 @@
     <Property Name="Activa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="DiseñoCheque" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Banco" Relationship="DemoProntoModel.FK_CuentasBancarias_Bancos" FromRole="CuentasBancaria" ToRole="Banco" />
+    <NavigationProperty Name="Conciliaciones" Relationship="DemoProntoModel.FK_Conciliaciones_CuentasBancarias" FromRole="CuentasBancaria" ToRole="Conciliacione" />
   </EntityType>
   <Association Name="FK_CuentasBancarias_Bancos">
     <End Type="DemoProntoModel.Banco" Role="Banco" Multiplicity="0..1" />
@@ -7437,6 +7479,7 @@
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda" FromRole="Valore" ToRole="Moneda" />
     <NavigationProperty Name="TiposComprobante" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" FromRole="Valore" ToRole="TiposComprobante" />
     <NavigationProperty Name="TiposComprobante1" Relationship="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" FromRole="Valore" ToRole="TiposComprobante" />
+    <NavigationProperty Name="Moneda1" Relationship="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" FromRole="Valore" ToRole="Moneda" />
   </EntityType>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
@@ -7474,21 +7517,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Tree">
-    <Key>
-      <PropertyRef Name="IdItem" />
-    </Key>
-    <Property Name="IdItem" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ParentId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Orden" Type="Int32" />
-    <Property Name="Parametros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-  </EntityType>
   <Association Name="FK_DetalleOrdenesPago_OrdenesPago">
     <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="0..1" />
     <End Type="DemoProntoModel.DetalleOrdenesPago" Role="DetalleOrdenesPago" Multiplicity="*" />
@@ -7607,5 +7635,205 @@
     <Property Name="IdActividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Agrupacion1" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DiferenciasCambio">
+    <Key>
+      <PropertyRef Name="IdDiferenciaCambio" />
+    </Key>
+    <Property Name="IdDiferenciaCambio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoComprobante" Type="Int32" />
+    <Property Name="IdRegistroOrigen" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdTipoComprobanteGenerado" Type="Int32" />
+    <Property Name="IdComprobanteGenerado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Asiento">
+    <Key>
+      <PropertyRef Name="IdAsiento" />
+    </Key>
+    <Property Name="IdAsiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroAsiento" Type="Int32" />
+    <Property Name="FechaAsiento" Type="DateTime" Precision="3" />
+    <Property Name="Ejercicio" Type="Int32" />
+    <Property Name="IdCuentaSubdiario" Type="Int32" />
+    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Tipo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IdIngreso" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="IdModifico" Type="Int32" />
+    <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="AsientoApertura" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="BaseConsolidadaHija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaGeneracionConsolidado" Type="DateTime" Precision="3" />
+    <Property Name="ArchivoImportacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="AsignarAPresupuestoObra" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetalleAsientos" Relationship="DemoProntoModel.FK_DetalleAsientos_Asientos" FromRole="Asiento" ToRole="DetalleAsiento" />
+  </EntityType>
+  <EntityType Name="DetalleAsiento">
+    <Key>
+      <PropertyRef Name="IdDetalleAsiento" />
+    </Key>
+    <Property Name="IdDetalleAsiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdAsiento" Type="Int32" />
+    <Property Name="IdCuenta" Type="Int32" />
+    <Property Name="IdTipoComprobante" Type="Int32" />
+    <Property Name="NumeroComprobante" Type="Int32" />
+    <Property Name="FechaComprobante" Type="DateTime" Precision="3" />
+    <Property Name="Libro" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Signo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TipoImporte" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Cuit" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="Detalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Debe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Haber" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdCuentaGasto" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="CotizacionMoneda" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="IdCaja" Type="Int32" />
+    <Property Name="IdMonedaDestino" Type="Int32" />
+    <Property Name="CotizacionMonedaDestino" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ImporteEnMonedaDestino" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIVA" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="RegistrarEnAnalitico" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Item" Type="Int32" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="IdProvinciaDestino" Type="Int32" />
+    <Property Name="IdDetalleComprobanteProveedor" Type="Int32" />
+    <NavigationProperty Name="Asiento" Relationship="DemoProntoModel.FK_DetalleAsientos_Asientos" FromRole="DetalleAsiento" ToRole="Asiento" />
+  </EntityType>
+  <Association Name="FK_DetalleAsientos_Asientos">
+    <End Type="DemoProntoModel.Asiento" Role="Asiento" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleAsiento" Role="DetalleAsiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asiento">
+        <PropertyRef Name="IdAsiento" />
+      </Principal>
+      <Dependent Role="DetalleAsiento">
+        <PropertyRef Name="IdAsiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Conciliacione">
+    <Key>
+      <PropertyRef Name="IdConciliacion" />
+    </Key>
+    <Property Name="IdConciliacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCuentaBancaria" Type="Int32" />
+    <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="SaldoInicialResumen" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SaldoFinalResumen" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+    <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+    <Property Name="ImporteAjuste" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdRealizo" Type="Int32" />
+    <Property Name="IdAprobo" Type="Int32" />
+    <NavigationProperty Name="CuentasBancaria" Relationship="DemoProntoModel.FK_Conciliaciones_CuentasBancarias" FromRole="Conciliacione" ToRole="CuentasBancaria" />
+    <NavigationProperty Name="DetalleConciliaciones" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacione" />
+    <NavigationProperty Name="DetalleConciliacionesNoContables" Relationship="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones" FromRole="Conciliacione" ToRole="DetalleConciliacionesNoContable" />
+  </EntityType>
+  <EntityType Name="DetalleConciliacione">
+    <Key>
+      <PropertyRef Name="IdDetalleConciliacion" />
+    </Key>
+    <Property Name="IdDetalleConciliacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdConciliacion" Type="Int32" />
+    <Property Name="IdValor" Type="Int32" />
+    <Property Name="Conciliado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Controlado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="ControladoNoConciliado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Conciliacione" Relationship="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" FromRole="DetalleConciliacione" ToRole="Conciliacione" />
+  </EntityType>
+  <EntityType Name="DetalleConciliacionesNoContable">
+    <Key>
+      <PropertyRef Name="IdDetalleConciliacionNoContable" />
+    </Key>
+    <Property Name="IdDetalleConciliacionNoContable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdConciliacion" Type="Int32" />
+    <Property Name="Detalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="FechaCaducidad" Type="DateTime" Precision="3" />
+    <Property Name="FechaRegistroContable" Type="DateTime" Precision="3" />
+    <Property Name="Ingresos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Egresos" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Conciliacione" Relationship="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones" FromRole="DetalleConciliacionesNoContable" ToRole="Conciliacione" />
+  </EntityType>
+  <Association Name="FK_Conciliaciones_CuentasBancarias">
+    <End Type="DemoProntoModel.CuentasBancaria" Role="CuentasBancaria" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Conciliacione" Role="Conciliacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CuentasBancaria">
+        <PropertyRef Name="IdCuentaBancaria" />
+      </Principal>
+      <Dependent Role="Conciliacione">
+        <PropertyRef Name="IdCuentaBancaria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleConciliaciones_Conciliaciones">
+    <End Type="DemoProntoModel.Conciliacione" Role="Conciliacione" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleConciliacione" Role="DetalleConciliacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conciliacione">
+        <PropertyRef Name="IdConciliacion" />
+      </Principal>
+      <Dependent Role="DetalleConciliacione">
+        <PropertyRef Name="IdConciliacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleConciliacionesNoContables_Conciliaciones">
+    <End Type="DemoProntoModel.Conciliacione" Role="Conciliacione" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleConciliacionesNoContable" Role="DetalleConciliacionesNoContable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conciliacione">
+        <PropertyRef Name="IdConciliacion" />
+      </Principal>
+      <Dependent Role="DetalleConciliacionesNoContable">
+        <PropertyRef Name="IdConciliacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Valores_Monedas_IdMoneda1">
+    <End Type="DemoProntoModel.Moneda" Role="Moneda" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.Valore" Role="Valore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Valore">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_Cuentas">
+    <End Type="DemoProntoModel.Cuenta" Role="Cuenta" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.OrdenPago" Role="OrdenPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="OrdenPago">
+        <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tree">
+    <Key>
+      <PropertyRef Name="IdItem" />
+    </Key>
+    <Property Name="IdItem" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ParentId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Parametros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>
