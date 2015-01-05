@@ -642,7 +642,6 @@
     <Content Include="Default2.aspx" />
     <Content Include="Default1.aspx" />
     <Content Include="Documentos\bitacora.txt" />
-    <Content Include="Areas\MvcMembership\Views\Web.config" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\UsersRoles.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\Role.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\Password.cshtml" />
@@ -653,6 +652,7 @@
     <Content Include="Areas\MvcMembership\Views\UserAdministration\Configuracion.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\IndexAdminExterno.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\CreateUserExterno.cshtml" />
+    <Content Include="Areas\MvcMembership\Views\Web.config" />
     <None Include="Documentos\CertificadoRetencionGanancias.dot" />
     <None Include="Documentos\CertificadoRetencionIIBB.dot" />
     <None Include="Documentos\CertificadoRetencionIIBB_StaFe.dot" />

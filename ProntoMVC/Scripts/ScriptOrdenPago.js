@@ -1525,10 +1525,7 @@ $(function () {
         var tipo = $(this).val();
     });
 
-    $('#ActualizarDatos').click(function () {
-        $('#ActualizarDatos').attr("disabled", true).val("Espere...");
-        $('html, body').css('cursor', 'wait');
-
+    function ActualizarTodo() {
         var cabecera = SerializaForm();
 
         ActualizarDatosRetenciones(cabecera);
@@ -1553,7 +1550,12 @@ $(function () {
         ActualizarDatosContables();
 
         CalcularTotales()
+    }
 
+    $('#ActualizarDatos').click(function () {
+        $('#ActualizarDatos').attr("disabled", true).val("Espere...");
+        $('html, body').css('cursor', 'wait');
+        ActualizarTodo();
         $('html, body').css('cursor', 'auto');
         $('#ActualizarDatos').attr("disabled", false).val("Recalcular");
     });
@@ -1934,6 +1936,8 @@ $(function () {
     }
 
     $('#grabar2').click(function () {
+        ActualizarTodo();
+
         var cabecera = SerializaForm();
 
         var IdsGastosFF, colModel, dataIds, data, data1, iddeta, i;
