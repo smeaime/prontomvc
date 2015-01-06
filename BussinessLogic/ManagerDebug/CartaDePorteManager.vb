@@ -12534,7 +12534,7 @@ Public Class LogicaFacturacion
                                         TarifaFacturada = CDbl(i("TarifaFacturada")), _
                                         FechaDescarga = CDate(iisNull(i("FechaDescarga"), Today)), _
                                         Destino = CInt(iisNull(i("IdDestino"), -1)), _
-                                        IdArticulo = CInt(iisNull(i("IdArticulo"), -1)), _
+                                        IdArticulo = CInt(iisNull(i("IdArticulo"), BuscaIdArticuloPreciso(i.Item("Producto"), SC))), _
                                         NetoFinal = CInt(iisNull(i("KgNetos"), -1)), _
                                         Titular = CInt(iisNull(i("IdTitular"), -1)), _
                                         CuentaOrden1 = CInt(iisNull(i("IdIntermediario"), -1)), _
@@ -12836,21 +12836,29 @@ Public Class LogicaFacturacion
                     Else
                         'es un renglon agregado a mano
                         Try
-                            Dim strwhere = "IdCartaDePorte IS NULL AND FacturarselaA=" & _c(owhere.Cliente) & " AND [ClienteSeparado]=" & _c(owhere.IdClienteSeparado) & " AND KgNetos= " & i.NetoFinal & " AND  TarifaFacturada= " & i.TarifaFacturada
+                            Dim strwhere = "IdCartaDePorte IS NULL AND FacturarselaA=" & _c(owhere.Cliente) & _
+                                            " AND [ClienteSeparado]=" & _c(owhere.IdClienteSeparado) & _
+                                            " AND KgNetos= " & i.NetoFinal & " AND  TarifaFacturada= " & i.TarifaFacturada & _
+                                            " AND Producto='" & NombreArticulo(SC, i.IdArticulo) & "'"
 
 
                             Dim dtaa = DataTableWHERE(tablaEditadaDeFacturasParaGenerar, strwhere)
-                            If dtaa.Rows.Count <> 1 Then
-                                ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro")
-                            End If
-                            Dim r As DataRow = dtaa.Rows(0)
-                            dtRenglonesAgregados.ImportRow(r)
-
                             'es capaz de traer dos veces el mismo, porque un "CAMBIO CARTA PORTE" y un
                             '  "GASTOS ANALISIS" pueden tener el mismo FacturarselaA y  FacturarselaA
                             '-pero no tengo el articulo en el "oWhere"!!!!
+                            'pero lo tenes en el dtaa, no? -no! Tengo el IdArticulo en -1!!!!
+                            '-y cómo sabés entonces qué artículo facturar despues?????
 
-                            pero lo tenes en el dtaa
+
+                            If dtaa.Rows.Count > 1 Then
+                                ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro. " & strwhere)
+                            ElseIf dtaa.Rows.Count < 1 Then
+                                ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Ningún renglon cumple el filtro. " & strwhere)
+                            End If
+
+                            Dim r As DataRow = dtaa.Rows(0)
+                            dtRenglonesAgregados.ImportRow(r)
+
 
                         Catch ex As Exception
                             ErrHandler.WriteError("No se pudo incrustar el renglon manual")
