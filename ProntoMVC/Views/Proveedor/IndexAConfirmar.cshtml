@@ -25,7 +25,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Proveedores", "Proveedor")',
+            url: '@Url.Action("ProveedoresAConfirmar", "Proveedor")',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdProveedor', 'Razon social', 'Codigo', 'Direccion', 'Localidad', 'Cod. postal', 'Provincia', 'Pais', 'Telefono', 'Telefono adic.', 'Fax', 'Email', 'Cuit',
@@ -106,7 +106,7 @@
             footerrow: false, //true,
             userDataOnFooter: true,
             multiboxonly: true,
-            caption: '<b>PROVEEDORES</b>'
+            caption: '<b>PROVEEDORES A CONFIRMAR</b>'
     });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
