@@ -2,7 +2,6 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
-<<<<<<< HEAD
       <edmx:Diagram Name="Pronto" ZoomLevel="53">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
@@ -2646,7 +2645,6 @@
       <edmx:Diagram DiagramId="9aeb5bb8ae134b6480bf8c5703054258" Name="Diagram3">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="1.5" PointX="7.25" PointY="1.625" />
       </edmx:Diagram>
->>>>>>> 39a28d6667ad86cf078e21842633ea7f0846a563
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
