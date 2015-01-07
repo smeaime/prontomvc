@@ -1134,3 +1134,8 @@ GO
 
 
 
+CREATE NONCLUSTERED INDEX CartasDePorte_TarifaFacturada
+ON [dbo].[CartasDePorte] ([TarifaFacturada],[IdFacturaImputada])
+INCLUDE ([IdCartaDePorte],[Anulada],[Vendedor],[IdArticulo],[Destino],[Exporta])
+GO
+
