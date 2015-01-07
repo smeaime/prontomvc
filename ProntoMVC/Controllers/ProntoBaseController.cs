@@ -15,9 +15,6 @@ using System.Data.Entity.Core.Objects; // using System.Data.Objects;
 
 using Pronto.ERP.Bll;
 
-using ProntoMVC.Data.Models;
-using ProntoMVC.Models;
-
 using Elmah;
 
 
