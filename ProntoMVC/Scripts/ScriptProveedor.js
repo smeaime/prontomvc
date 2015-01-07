@@ -156,6 +156,10 @@
                                      },
                                  });
     jQuery("#ListaContactos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
+    // solo está reaccionando a los min y max una vez que cambias el tamaño a mano o llamas por ejemplo a setGridWidth
+    $("#ListaContactos").jqGrid('setGridWidth', 500);
+    
+
 
 
     $('#ListaRubros').jqGrid({
