@@ -58,7 +58,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -493,9 +492,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pronto.Designer.cs">
+      <DependentUpon>Pronto.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Pronto.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProntoIni.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -596,6 +595,10 @@
       <LastGenOutput>bdlmaster.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="ClassDiagram1.cd" />
+    <EntityDeploy Include="Models\Pronto.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Pronto.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Models\bdlmaster.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>bdlmaster.Context.cs</LastGenOutput>
@@ -606,10 +609,6 @@
       <LastGenOutput>bdlmaster.cs</LastGenOutput>
       <DependentUpon>bdlmaster.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Models\Pronto.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Pronto.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -618,9 +617,6 @@
     <None Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
-      <DependentUpon>Pronto.edmx</DependentUpon>
-    </None>
-    <None Include="Models\Pronto.edmx.diagram">
       <DependentUpon>Pronto.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
