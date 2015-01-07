@@ -283,7 +283,20 @@ namespace ProntoMVC.Tests
             //si llamás prepo a BatchFactura, el initialize no se corrió, el controlador no tiene el contexto inicializado (db es null)
             // http://stackoverflow.com/questions/5507505/why-does-my-asp-net-mvc-controller-not-call-its-base-class-initialize-method-d
             //target.db = db;
-            actual = target.BatchUpdate(o);
+
+
+            using (TransactionScope _scope = new TransactionScope())
+            {
+
+
+                actual = target.BatchUpdate(o);
+                
+                
+                _scope.Complete();  
+                // funciona barbaro, pero te bloquea hasta la lectura de la tabla
+                // http://stackoverflow.com/questions/3886319/transactionscope-causing-blocking
+                //If you are using a Database then you are not doing Unit testing, and the problems you are experiencing are one of the reason why true Unit testing uses Mocks and Stubs.
+            }
 
 
             /////////////////////////////////////////////////////
