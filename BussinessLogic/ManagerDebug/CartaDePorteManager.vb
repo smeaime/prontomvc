@@ -1612,7 +1612,22 @@ Public Class CartaDePorteManager
         'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
 
 
-        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+
+        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+            strWHERE += " AND ("
+
+            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+            strWHERE += " OR CDP.Acopio1=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio2=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio3=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio4=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio5=" & IdAcopio & ""
+
+            strWHERE += " )"
+        End If
 
 
         If sTituloFiltroUsado = "" Then
@@ -3709,7 +3724,23 @@ Public Class CartaDePorteManager
 
 
 
-        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+
+        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+            strWHERE += " AND ("
+
+            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+            strWHERE += " OR CDP.Acopio1=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio2=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio3=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio4=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio5=" & IdAcopio & ""
+
+            strWHERE += " )"
+        End If
+
         'strWHERE += " and isnull(CDP.EnumSyngentaDivision,'Agro')='" & optDivisionSyngenta & "'"
 
 
