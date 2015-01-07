@@ -147,6 +147,16 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Repositorio">
+      <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
+    </Reference>
+    <Reference Include="Servicio">
+      <HintPath>..\Servicio\bin\Debug\Servicio.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -793,6 +803,7 @@
     <Content Include="Scripts\jquery-layout\jquery.layout-latest.min.js" />
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
+    <Content Include="Scripts\ScriptProveedor.js" />
     <Content Include="Views\Moneda\Delete.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />
     <Content Include="Views\Moneda\Index.cshtml" />
@@ -801,6 +812,8 @@
     <Content Include="Views\Transportista\Index.cshtml" />
     <Content Include="Views\OrdenPago\EditOT.cshtml" />
     <Content Include="Views\OrdenPago\EditFF.cshtml" />
+    <Content Include="Views\Proveedor\IndexEventuales.cshtml" />
+    <Content Include="Views\Proveedor\IndexAConfirmar.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\jsProveedor.js" />
@@ -1585,18 +1598,6 @@
     <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
       <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
       <Name>ProntoMVC.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data\ProntoMVC.Data.csproj">
-      <Project>{2f9b9020-304c-44a6-bcc4-9e434c687d31}</Project>
-      <Name>ProntoMVC.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repositorio\ProntoMVC.Repositorio.csproj">
-      <Project>{7596a08c-8f01-423e-8fd9-776075737591}</Project>
-      <Name>ProntoMVC.Repositorio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Servicio\ProntoMVC.Servicio.csproj">
-      <Project>{562fc343-b9f1-4418-a862-2d4f2097ddc1}</Project>
-      <Name>ProntoMVC.Servicio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
