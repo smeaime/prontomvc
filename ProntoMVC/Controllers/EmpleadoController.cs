@@ -299,12 +299,18 @@ namespace ProntoMVC.Controllers
         // GET: /Empleado/Edit
         public virtual ActionResult Edit(int id)
         {
-            Empleado empleado = db.Empleados.Find(id);
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector ?? 0);
-            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo ?? 0);
-            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo ?? 0);
-            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada ?? 0);
-            return View(empleado);
+            if (id == -1)
+            {
+                Empleado empleado = new Empleado();
+                CargarViewBag(empleado);
+                return View(empleado);
+            }
+            else
+            {
+                Empleado empleado = db.Empleados.Find(id);
+                CargarViewBag(empleado);
+                return View(empleado);
+            }
         }
 
         // POST: /Empleado/Edit
@@ -339,6 +345,14 @@ namespace ProntoMVC.Controllers
             db.Empleados.Remove(empleado);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        void CargarViewBag(Empleado o)
+        {
+            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", o.IdSector ?? 0);
+            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", o.IdCargo ?? 0);
+            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", o.IdCuentaFondoFijo ?? 0);
+            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", o.IdObraAsignada ?? 0);
         }
 
         public virtual JsonResult GetEmpleado(int id)
