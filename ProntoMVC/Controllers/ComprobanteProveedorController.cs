@@ -1283,23 +1283,24 @@ namespace ProntoMVC.Controllers
                     unitOfWork.Save();
 
 
-
-                    try
+                    if (!System.Diagnostics.Debugger.IsAttached)
                     {
-                        TempData["Alerta"] = "<a href='" + Url.Action("EditFF", new { id = o.IdComprobanteProveedor }) + "' target='' >" +
-                                         " Grabado " + DateTime.Now.ToShortTimeString() +
-                                         " Comprobante " +
-                                         o.Letra + '-' + o.NumeroComprobante1.NullSafeToString().PadLeft(4, '0')
-                                         + '-' + o.NumeroComprobante2.NullSafeToString().PadLeft(8, '0') +
-                                         "</a>";
+                        try
+                        {
+                            TempData["Alerta"] = "<a href='" + Url.Action("EditFF", new { id = o.IdComprobanteProveedor }) + "' target='' >" +
+                                             " Grabado " + DateTime.Now.ToShortTimeString() +
+                                             " Comprobante " +
+                                             o.Letra + '-' + o.NumeroComprobante1.NullSafeToString().PadLeft(4, '0')
+                                             + '-' + o.NumeroComprobante2.NullSafeToString().PadLeft(8, '0') +
+                                             "</a>";
+                        }
+                        catch (Exception e)
+                        {
+
+                            ErrHandler.WriteError(e);
+                        }
+
                     }
-                    catch (Exception e)
-                    {
-
-                        ErrHandler.WriteError(e);
-                    }
-
-
 
 
 
@@ -3858,7 +3859,7 @@ namespace ProntoMVC.Controllers
             var mvarCotizacion = fondoFijoService.Cotizaciones_Listado().OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)mvarCotizacion;
+            o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
 
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
