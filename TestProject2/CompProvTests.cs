@@ -425,5 +425,132 @@ namespace ProntoMVC.Tests
 
             return c;
         }
+
+
+
+
+
+
+        [TestMethod()]
+        public void BatchUpdatePedidoTest()
+        {
+            /*
+                //http://msdn.microsoft.com/en-us/library/gg416511(v=vs.98).aspx
+
+
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                ComprobanteProveedor c = PreparoObjeto();
+
+                ViewModels.ViewModelComprobanteProveedor o = new ViewModels.ViewModelComprobanteProveedor();
+                AutoMapper.Mapper.CreateMap<ComprobanteProveedor, ViewModels.ViewModelComprobanteProveedor>();
+                AutoMapper.Mapper.Map(c, o);
+
+
+
+
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                JsonResult expected = null;            // TODO: Initialize to an appropriate value
+                expected = new JsonResult();
+
+                //FacturaController.JsonResponse res = new FacturaController.JsonResponse();
+
+                // res.Status = Status.Error;
+                // res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                //res.Message = "Error al obtener CAE : El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado. - Ultimo numero 974";
+                //expected = Controller.Json(res);
+                JsonResult actual;
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                // -no entiendo: cómo es que MOCKEAS el controller, si el controller es el SUT! ( es decir, estás fingiendo lo mismo 
+                // que estas probando!!) 
+                // -Es que no mockeas el controller: mockeas su ControllerContext +  HttpContextBase + IPrincipal
+                // ComprobanteProveedorController target = new ComprobanteProveedorController(); // TODO: Initialize to an appropriate value
+                PedidoController target = GetMockedComprobanteProveedorController();
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+
+
+
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+
+
+
+                //si llamás prepo a BatchFactura, el initialize no se corrió, el controlador no tiene el contexto inicializado (db es null)
+                // http://stackoverflow.com/questions/5507505/why-does-my-asp-net-mvc-controller-not-call-its-base-class-initialize-method-d
+                //target.db = db;
+
+
+                using (TransactionScope _scope = new TransactionScope())
+                {
+
+
+                    actual = target.BatchUpdate(o);
+
+
+                    _scope.Complete();
+                    // funciona barbaro, pero te bloquea hasta la lectura de la tabla
+                    // http://stackoverflow.com/questions/3886319/transactionscope-causing-blocking
+                    //If you are using a Database then you are not doing Unit testing, and the problems you are experiencing are one of the reason why true Unit testing uses Mocks and Stubs.
+                }
+
+
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////
+                //  http://www.seankenny.me/blog/2013/05/02/unit-testing-asp-dot-net-mvc-jsonresults/
+                var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                var obj = serializer.Serialize(actual.Data) as dynamic;
+                var customer = serializer.Deserialize<dynamic>(obj);
+
+                //Assert.AreEqual(1, customer["Id"]);
+                //Assert.AreEqual("John", customer["Name"]);
+
+                Console.Write(customer["Errors"]);
+                //Assert.Inconclusive(customer["Errors"].ToString());
+                //Console.Write(customer["Warnings"]);
+                //Assert.AreEqual("John", customer["Success"].ToString());
+                //Assert.AreEqual("John", customer["Errors"].ToString());
+                //Assert.AreEqual(4544, customer["IdComprobanteProveedor"].ToString());
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+                // Assert.AreEqual(expected, actual);
+                // Assert.Inconclusive("Verify the correctness of this test method.");
+               */
+
+        }
+          
+          
+        
     }
 }
