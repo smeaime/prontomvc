@@ -1611,7 +1611,7 @@ Public Class CartaDePorteManager
         'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
         'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
 
-
+        asd()
         'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
         Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
 
@@ -2012,7 +2012,7 @@ Public Class CartaDePorteManager
         '//////////////////////////////////////////////////////////////////////will/////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        sadf()
 
         Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
 
@@ -3723,7 +3723,7 @@ Public Class CartaDePorteManager
 
 
 
-
+        asdf()
         'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
         Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
 
