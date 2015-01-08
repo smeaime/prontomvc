@@ -619,6 +619,9 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
       <DependentUpon>Pronto.edmx</DependentUpon>
     </None>
+    <None Include="Models\Pronto.edmx.diagram">
+      <DependentUpon>Pronto.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

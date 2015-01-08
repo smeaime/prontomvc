@@ -295,7 +295,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                         <li class="pull-right "><a href="MvcMembership\UserAdministration\Configuracion\"
                             class="pull-right" onclick="" title="Configuración"><i class="icon-cog"></i></a>
                         </li>
-                        <li class="pull-right "><a runat="server" href="~/Account/Logoff">Salir</a></li>
+                        <%--<li class="pull-right "><a runat="server" href="~/Account/Logoff">Salir</a></li>--%>
                     </div>
                 </ul>
             </div>
