@@ -707,7 +707,7 @@ $(document).ready(function () {
     $grid.jqGrid({
 
         //columns names
-        colNames: ['descripcion', 'id', 'link', 'nivel', 'clave'],
+        colNames: ['descripcion', 'id', 'link', 'nivel (1 max ... 9 min)', 'clave'],
         //columns model
         colModel: [
                                     { name: 'Descripcion', index: 'Nodo', align: 'left', width: 300 },
@@ -736,7 +736,7 @@ $(document).ready(function () {
                                     }
 
 
-                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240 }
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden:true }
                                 ],
 
         // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
@@ -819,7 +819,7 @@ $(document).ready(function () {
         shrinkToFit: false,
         //////////////////////////////
 
-        url: ROOT + "Home/TreeGridConNiveles_Todos",
+        url: ROOT + "Home/TreeGridConNiveles_Todos_ParaEdicionEnAccesos",
 
         treedatatype: 'json',
         datatype: 'json',
