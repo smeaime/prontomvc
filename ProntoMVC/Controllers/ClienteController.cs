@@ -959,7 +959,7 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("_GrillaContactos", new { id = 1 }); // ViewBag.IdCliente });
         }
 
-        private void SetUpGrid(JQGrid DetalleClientesGrid)
+        private void SetUpGrid( JQGrid DetalleClientesGrid)
         {
             // al principio se la llama dos veces seguidas, desde _GrillaContactos() y SearchGridDataRequested()
             // NOTE: you need to call this method in the action that fetches the data as well,
