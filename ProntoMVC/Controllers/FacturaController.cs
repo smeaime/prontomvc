@@ -1032,8 +1032,16 @@ namespace ProntoMVC.Controllers
 
             Factura o;
 
-
-            MercadoPago();
+            try
+            {
+                MercadoPago();
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+            
 
             try
             {
@@ -1070,7 +1078,7 @@ namespace ProntoMVC.Controllers
                     o.NumeroFactura = (int)Pronto.ERP.Bll.FacturaManager.ProximoNumeroFacturaPorIdCodigoIvaYNumeroDePuntoVenta(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(connectionString), 1, 6);
                     if (o.NumeroFactura == -1) o.NumeroFactura = null;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     // usando el dbcontext como corresponde, en lugar de tomar el nombre de la base de la session
                     o.IdCodigoIva = 1;
@@ -1085,7 +1093,7 @@ namespace ProntoMVC.Controllers
                 }
 
 
-
+    
 
 
                 inic(ref o);
