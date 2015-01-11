@@ -20,7 +20,7 @@ using System.Data.Objects;
 using System.Reflection;
 using System.Configuration;
 using Pronto.ERP.Bll;
-using Trirand.Web.Mvc;
+//using Trirand.Web.Mvc;
 
 namespace ProntoMVC.Controllers
 {
