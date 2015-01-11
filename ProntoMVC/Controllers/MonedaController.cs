@@ -4,7 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+
 using System.Linq.Dynamic;
+
+
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +22,7 @@ using System.Data.Objects;
 using System.Reflection;
 using System.Configuration;
 using Pronto.ERP.Bll;
-using Trirand.Web.Mvc;
+//using Trirand.Web.Mvc;
 
 namespace ProntoMVC.Controllers
 {
