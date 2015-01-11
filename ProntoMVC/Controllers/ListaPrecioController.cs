@@ -20,7 +20,7 @@ using System.Configuration;
 
 
 // using JQGridMVCExamples.Models;
-using Trirand.Web.Mvc; //  http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
+//using Trirand.Web.Mvc; //  http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
 
 
 
@@ -721,121 +721,121 @@ namespace ProntoMVC.Controllers
         //    return RedirectToAction("GridDemo", "Grid");
         //}
 
-        private void SetUpGrid(JQGrid ordersGrid)
-        {
-            // Customize/change some of the default settings for this model
-            // ID is a mandatory field. Must by unique if you have several grids on one page.
-            ordersGrid.ID = "OrdersGrid";
-            // Setting the DataUrl to an action (method) in the controller is required.
-            // This action will return the data needed by the grid
-            ordersGrid.DataUrl = Url.Action("SearchGridDataRequested");
-            ordersGrid.EditUrl = Url.Action("EditRows");
-            // show the search toolbar
-            ordersGrid.ToolBarSettings.ShowSearchToolBar = true;
-            ordersGrid.Columns.Find(c => c.DataField == "IdListaPrecios").Searchable = false;
-            // ordersGrid.Columns.Find(c => c.DataField == "FechaVigencia").Searchable = false;
+        //private void SetUpGrid(JQGrid ordersGrid)
+        //{
+        //    // Customize/change some of the default settings for this model
+        //    // ID is a mandatory field. Must by unique if you have several grids on one page.
+        //    ordersGrid.ID = "OrdersGrid";
+        //    // Setting the DataUrl to an action (method) in the controller is required.
+        //    // This action will return the data needed by the grid
+        //    ordersGrid.DataUrl = Url.Action("SearchGridDataRequested");
+        //    ordersGrid.EditUrl = Url.Action("EditRows");
+        //    // show the search toolbar
+        //    ordersGrid.ToolBarSettings.ShowSearchToolBar = true;
+        //    ordersGrid.Columns.Find(c => c.DataField == "IdListaPrecios").Searchable = false;
+        //    // ordersGrid.Columns.Find(c => c.DataField == "FechaVigencia").Searchable = false;
 
-            SetUpCustomerIDSearchDropDown(ordersGrid);
-            SetUpFreightSearchDropDown(ordersGrid);
-            SetShipNameSearchDropDown(ordersGrid);
+        //    SetUpCustomerIDSearchDropDown(ordersGrid);
+        //    SetUpFreightSearchDropDown(ordersGrid);
+        //    SetShipNameSearchDropDown(ordersGrid);
 
-            ordersGrid.ToolBarSettings.ShowEditButton = true;
-            ordersGrid.ToolBarSettings.ShowAddButton = true;
-            ordersGrid.ToolBarSettings.ShowDeleteButton = true;
-            ordersGrid.EditDialogSettings.CloseAfterEditing = true;
-            ordersGrid.AddDialogSettings.CloseAfterAdding = true;
+        //    ordersGrid.ToolBarSettings.ShowEditButton = true;
+        //    ordersGrid.ToolBarSettings.ShowAddButton = true;
+        //    ordersGrid.ToolBarSettings.ShowDeleteButton = true;
+        //    ordersGrid.EditDialogSettings.CloseAfterEditing = true;
+        //    ordersGrid.AddDialogSettings.CloseAfterAdding = true;
 
-            // setup the dropdown values for the CustomerID editing dropdown
-            SetUpCustomerIDEditDropDown(ordersGrid);
-        }
+        //    // setup the dropdown values for the CustomerID editing dropdown
+        //    SetUpCustomerIDEditDropDown(ordersGrid);
+        //}
 
-        private void SetUpCustomerIDSearchDropDown(JQGrid ordersGrid)
-        {
-            // setup the grid search criteria for the columns
-            JQGridColumn customersColumn = ordersGrid.Columns.Find(c => c.DataField == "IdListaPrecios");
-            customersColumn.Searchable = true;
+        //private void SetUpCustomerIDSearchDropDown(JQGrid ordersGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn customersColumn = ordersGrid.Columns.Find(c => c.DataField == "IdListaPrecios");
+        //    customersColumn.Searchable = true;
 
-            // DataType must be set in order to use searching
-            customersColumn.DataType = typeof(string);
-            customersColumn.SearchToolBarOperation = SearchOperation.IsEqualTo;
-            customersColumn.SearchType = SearchType.DropDown;
+        //    // DataType must be set in order to use searching
+        //    customersColumn.DataType = typeof(string);
+        //    customersColumn.SearchToolBarOperation = SearchOperation.IsEqualTo;
+        //    customersColumn.SearchType = SearchType.DropDown;
 
-            // Populate the search dropdown only on initial request, in order to optimize performance
-            if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
-            {
-                // var northWindModel = new NorthwindDataContext();
-                // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+        //        // var northWindModel = new NorthwindDataContext();
+        //        // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
 
-                var searchList = (from customers in db.ListasPrecios
-                                  select customers.IdListaPrecios)
-                                  .AsEnumerable()
-                                  .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
-
-
+        //        var searchList = (from customers in db.ListasPrecios
+        //                          select customers.IdListaPrecios)
+        //                          .AsEnumerable()
+        //                          .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
 
 
 
-                customersColumn.SearchList = searchList.ToList<SelectListItem>();
-                customersColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
-            }
-        }
-
-        private void SetUpFreightSearchDropDown(JQGrid ordersGrid)
-        {
-            // setup the grid search criteria for the columns
-            JQGridColumn freightColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
-            freightColumn.Searchable = true;
-
-            // DataType must be set in order to use searching
-            freightColumn.DataType = typeof(decimal);
-            freightColumn.SearchToolBarOperation = SearchOperation.IsGreaterOrEqualTo;
-            freightColumn.SearchType = SearchType.DropDown;
-
-            // Populate the search dropdown only on initial request, in order to optimize performance
-            if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
-            {
-                List<SelectListItem> searchList = new List<SelectListItem>();
-                searchList.Add(new SelectListItem { Text = "> 10", Value = "10" });
-                searchList.Add(new SelectListItem { Text = "> 30", Value = "30" });
-                searchList.Add(new SelectListItem { Text = "> 50", Value = "50" });
-                searchList.Add(new SelectListItem { Text = "> 100", Value = "100" });
-
-                freightColumn.SearchList = searchList.ToList<SelectListItem>();
-                freightColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
-            }
-        }
-
-        private void SetShipNameSearchDropDown(JQGrid ordersGrid)
-        {
-            JQGridColumn freightColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
-            freightColumn.Searchable = true;
-            freightColumn.DataType = typeof(string);
-            freightColumn.SearchToolBarOperation = SearchOperation.Contains;
-            freightColumn.SearchType = SearchType.TextBox;
-        }
-
-        private void SetUpCustomerIDEditDropDown(JQGrid ordersGrid)
-        {
-            // setup the grid search criteria for the columns
-            JQGridColumn customersColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
-            customersColumn.Editable = true;
-            customersColumn.EditType = EditType.DropDown;
-
-            // Populate the search dropdown only on initial request, in order to optimize performance
-            if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
-            {
-
-                // var northWindModel = new NorthwindDataContext();
-
-                var editList = (from customers in db.ListasPrecios
-                                select customers.IdListaPrecios)
-                               .AsEnumerable()
-                               .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
 
 
-                customersColumn.EditList = editList.ToList<SelectListItem>();
-            }
-        }
+        //        customersColumn.SearchList = searchList.ToList<SelectListItem>();
+        //        customersColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
+        //    }
+        //}
+
+        //private void SetUpFreightSearchDropDown(JQGrid ordersGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn freightColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
+        //    freightColumn.Searchable = true;
+
+        //    // DataType must be set in order to use searching
+        //    freightColumn.DataType = typeof(decimal);
+        //    freightColumn.SearchToolBarOperation = SearchOperation.IsGreaterOrEqualTo;
+        //    freightColumn.SearchType = SearchType.DropDown;
+
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+        //        List<SelectListItem> searchList = new List<SelectListItem>();
+        //        searchList.Add(new SelectListItem { Text = "> 10", Value = "10" });
+        //        searchList.Add(new SelectListItem { Text = "> 30", Value = "30" });
+        //        searchList.Add(new SelectListItem { Text = "> 50", Value = "50" });
+        //        searchList.Add(new SelectListItem { Text = "> 100", Value = "100" });
+
+        //        freightColumn.SearchList = searchList.ToList<SelectListItem>();
+        //        freightColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
+        //    }
+        //}
+
+        //private void SetShipNameSearchDropDown(JQGrid ordersGrid)
+        //{
+        //    JQGridColumn freightColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
+        //    freightColumn.Searchable = true;
+        //    freightColumn.DataType = typeof(string);
+        //    freightColumn.SearchToolBarOperation = SearchOperation.Contains;
+        //    freightColumn.SearchType = SearchType.TextBox;
+        //}
+
+        //private void SetUpCustomerIDEditDropDown(JQGrid ordersGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn customersColumn = ordersGrid.Columns.Find(c => c.DataField == "Descripcion");
+        //    customersColumn.Editable = true;
+        //    customersColumn.EditType = EditType.DropDown;
+
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (ordersGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+
+        //        // var northWindModel = new NorthwindDataContext();
+
+        //        var editList = (from customers in db.ListasPrecios
+        //                        select customers.IdListaPrecios)
+        //                       .AsEnumerable()
+        //                       .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+
+
+        //        customersColumn.EditList = editList.ToList<SelectListItem>();
+        //    }
+        //}
 
 
     }
