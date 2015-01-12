@@ -115,8 +115,8 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit">
-      <HintPath>..\..\ProntoWeb\Bin\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="BusinessObject">
+      <HintPath>..\ProntoMVC\bin\BusinessObject.dll</HintPath>
     </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -468,12 +468,6 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BussinessObject\BusinessObject.vbproj">
-      <Project>{918ddc53-b568-4181-86c3-a3a44dfa6149}</Project>
-      <Name>BusinessObject</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
