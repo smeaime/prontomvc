@@ -252,7 +252,7 @@ namespace ProntoMVC.Controllers
         IQueryable<Tablas.Tree> TablaTree(string parentId)
         {
             var q = from n in db.Trees
-                    where (n.ParentId==parentId)
+                    where (n.ParentId == parentId)
                     select new Tablas.Tree()
                     {
                         IdItem = n.IdItem,
@@ -260,12 +260,12 @@ namespace ProntoMVC.Controllers
                         Descripcion = n.Descripcion,
                         ParentId = n.ParentId,
                         Orden = n.Orden ?? 0,
-                        Parametros =n.Parametros,
+                        Parametros = n.Parametros,
                         Link = n.Link,
                         Imagen = n.Imagen,
                         EsPadre = n.EsPadre,
                         nivel = 1
-                        
+
                         // , Orden = n.Orden
                     };
 
@@ -775,7 +775,7 @@ namespace ProntoMVC.Controllers
             {
                 // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
                 //q = q.Where(x => x.ParentId == "01").ToList();
-                q = TablaTree("01").ToList(); 
+                q = TablaTree("01").ToList();
 
 
             }
@@ -948,7 +948,7 @@ namespace ProntoMVC.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult TreeGridConNiveles_Todos(FormCollection collection)
+        public virtual ActionResult TreeGridConNiveles_Todos_ParaEdicionEnAccesos(FormCollection collection)
         {
             //http://stackoverflow.com/questions/3672041/how-to-use-jqgrid-treegrid-in-mvc-net-2
             // http://stackoverflow.com/questions/9715697/jqgrid-treegrid-setup-to-load-child-on-demandon-expansion-for-json-data
@@ -1018,7 +1018,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            q = TreeConNiveles(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db);
+            q = ArbolConNiveles_Tree(idusuario, this.Session["BasePronto"].ToString(), ViewBag.NombreUsuario, db);
 
             //var l = q.Where(n => n.Descripcion == "Bloqueado!" || n.Descripcion == "NO MOSTRAR" || n.Descripcion.StartsWith("por ")).ToList();
 
@@ -1028,6 +1028,10 @@ namespace ProntoMVC.Controllers
             //}
 
 
+            List<Tablas.Tree> m = MenuConNiveles_Tree(idusuario);
+
+
+            q.AddRange(m);
 
 
 

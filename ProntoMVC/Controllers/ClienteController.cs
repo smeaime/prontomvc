@@ -21,7 +21,19 @@ using Pronto.ERP.Bll;
 
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
+<<<<<<< HEAD
 using Trirand.Web.Mvc;
+=======
+using System.Text;
+using System.Data.Entity.SqlServer;
+using System.Data.Objects;
+using System.Reflection;
+using System.Configuration;
+using Pronto.ERP.Bll;
+//using Trirand.Web.Mvc;
+using jqGrid.Models;
+
+>>>>>>> 377393e46d5295ca8321c1142a8f42fc770d60a1
 
 using System.Data.Metadata.Edm;
 using System.Data.Entity.Infrastructure;
@@ -474,6 +486,7 @@ namespace ProntoMVC.Controllers
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
+<<<<<<< HEAD
                 StringBuilder sb = new StringBuilder();
 
                 foreach (var failure in ex.EntityValidationErrors)
@@ -485,6 +498,193 @@ namespace ProntoMVC.Controllers
                         sb.AppendLine();
                     }
                 }
+=======
+                o = db.Clientes
+                        .Include(x => x.Cuenta).Include(x => x.CuentaMonedaExt)
+                        .Include(x => x.Localidad).Include(x => x.LocalidadEntrega)
+                        .SingleOrDefault(x => x.IdCliente == id);
+
+            }
+            CargarViewBag(o);
+
+            // o.grilla = new DetalleClientesJqGridModel();
+
+
+            return View(o);
+        }
+
+
+        void CargarViewBag(Cliente o)
+        {
+            ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", o.IdCodigoIva);
+            ViewBag.IdEstado = new SelectList(db.Estados_Proveedores, "IdEstado", "Descripcion", o.IdEstado);
+            ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvincia);
+            ViewBag.IdLocalidad = new SelectList(db.Localidades, "IdLocalidad", "Nombre", o.IdLocalidad);
+            ViewBag.IdPais = new SelectList(db.Paises, "IdPais", "Descripcion", o.IdPais);
+            ViewBag.Vendedor1 = new SelectList(db.Vendedores, "IdVendedor", "Nombre", o.Vendedor1);
+            ViewBag.Cobrador = new SelectList(db.Vendedores, "IdVendedor", "Nombre", o.Cobrador);
+            ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", o.IdCodigoIva);
+            ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
+            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
+            ViewBag.IdCondicionVenta = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionVenta);
+            ViewBag.IdBancoDebito = new SelectList(db.Bancos, "IdBanco", "Nombre", o.IdBancoDebito);
+            ViewBag.IdBancoGestionador = new SelectList(db.Bancos, "IdBanco", "Nombre", o.IdBancoGestionador);
+            ViewBag.IGCondicion = new SelectList(db.IGCondiciones, "IdIGCondicion", "Descripcion", o.IGCondicion);
+            ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicionPorDefecto);
+            ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicionPorDefecto2);
+            ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicionPorDefecto3);
+            ViewBag.IdProvinciaEntrega = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvinciaEntrega);
+            ViewBag.IdLocalidadEntrega = new SelectList(db.Localidades, "IdLocalidad", "Nombre", o.IdLocalidadEntrega);
+        }
+
+
+        //
+        // POST: /Cliente/Edit/5
+
+        //[HttpPost]
+        //public ActionResult Edit(Cliente o)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        //    if (o.IdCliente <= 0)
+        //        //    {
+        //        //        db.Clientes.Add(o);
+        //        //        db.SaveChanges();
+        //        //        return RedirectToAction("Index");
+        //        //    }
+        //        //    else
+        //        //    {
+        //        //        db.Entry(o).State = System.Data.Entity.EntityState.Modified;
+        //        //        db.SaveChanges();
+        //        // return RedirectToAction("Index");
+        //        //    }
+        //    }
+        //    else
+        //    {
+        //        // el IsValid se quejaba en las altas     
+        //        // http://stackoverflow.com/questions/2397563/asp-net-mvc-modelstate-isvalid-is-false-how-to-bypass
+        //        // Try:
+        //        //public ActionResult CreateCustomer([Bind(Exclude = "Id")]GWCustomer customer)
+        //        //This will exclude Id from binding and validation.
+
+        //        var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+        //        var mensajes = string.Join("; ", from i in allErrors select (i.ErrorMessage + (i.Exception == null ? "" : i.Exception.Message)));
+
+        //        ViewBag.Errores = mensajes;
+
+        //    }
+
+        //    CargarViewBag(o);
+        //    return View(o);
+        //}
+
+        //
+
+
+        public string DescripcionIIBB(int? IdIBCondicion)
+        {
+
+            // no tiene mas sentido que ponga esto en una tabla aparte? estas son las modalidades.
+
+            //           Case When IsNull(Clientes.IBCondicion,0)=1 Then 'Exento'  
+            //When IsNull(Clientes.IBCondicion,0)=2 Then 'Inscr.Multi'  
+            //When IsNull(Clientes.IBCondicion,0)=3 Then 'Inscr.local'  
+            //When IsNull(Clientes.IBCondicion,0)=4 Then 'No alcanzado'  
+            //Else ''  
+
+            return "Exento";
+        }
+
+
+        // GET: /Cliente/Delete/5
+        public virtual ActionResult Delete(int id)
+        {
+            Cliente Cliente = db.Clientes.Find(id);
+            return View(Cliente);
+        }
+
+        //
+        // POST: /Cliente/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public virtual ActionResult DeleteConfirmed(int id)
+        {
+            Cliente Cliente = db.Clientes.Find(id);
+            db.Clientes.Remove(Cliente);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        //public virtual ActionResult _GrillaContactos(int id)
+        //{
+        //    // Get the model (setup) of the grid defined in the /Models folder.
+        //    var gridModel = new Models.DetalleClientesJqGridModel();
+        //    var DetalleClientesGrid = gridModel.DetalleClientesGrid;
+
+        //    // customize the default DetalleClientes grid model with custom settings
+        //    // NOTE: you need to call this method in the action that fetches the data as well,
+        //    // so that the models match
+        //    SetUpGrid(DetalleClientesGrid);
+
+        //    // Pass the custmomized grid model to the View
+        //    return PartialView(gridModel);
+        //}
+
+
+
+
+        //// This method is called when the grid requests data
+        //public virtual JsonResult SearchGridDataRequested()
+        //{
+        //    // Get both the grid Model and the data Model
+        //    // The data model in our case is an autogenerated linq2sql database based on Northwind.
+        //    var gridModel = new ProntoMVC.Models.DetalleClientesJqGridModel();
+        //    // var northWindModel = new NorthwindDataContext();
+
+        //    // customize the default DetalleClientes grid model with our custom settings
+        //    SetUpGrid(gridModel.DetalleClientesGrid);
+>>>>>>> 377393e46d5295ca8321c1142a8f42fc770d60a1
 
                 throw new System.Data.Entity.Validation.DbEntityValidationException(
                     "Entity Validation Failed - errors follow:\n" +
@@ -492,12 +692,20 @@ namespace ProntoMVC.Controllers
                 );
             }
 
+<<<<<<< HEAD
             catch (Exception ex)
             {
                 return Json(new { Success = 0, ex = ex.Message.ToString() });
             }
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
+=======
+        //    // return the result of the DataBind method, passing the datasource as a parameter
+        //    // jqGrid for ASP.NET MVC automatically takes care of paging, sorting, filtering/searching, etc
+        //    int id = 1;  // ViewBag.IdCliente;
+        //    return gridModel.DetalleClientesGrid.DataBind(db.DetalleClientes.Where(x => x.IdCliente == id));
+        //}
+>>>>>>> 377393e46d5295ca8321c1142a8f42fc770d60a1
 
         public virtual ActionResult Clientes(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
@@ -505,6 +713,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
+<<<<<<< HEAD
             if (_search)
             {
                 switch (searchField.ToLower())
@@ -680,6 +889,223 @@ namespace ProntoMVC.Controllers
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+=======
+
+
+
+        }
+
+
+
+
+
+
+        //public virtual ActionResult EditRows(ProntoMVC.Data.Models.DetalleCliente editedOrder)
+        //{
+        //    // Get the grid and database (northwind) models
+        //    var gridModel = new Models.DetalleClientesJqGridModel();
+        //    // var northWindModel = new NorthwindDataContext();
+
+        //    // If we are in "Edit" mode
+        //    if (gridModel.DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.EditRow)
+        //    {
+        //        // Get the data from and find the Order corresponding to the edited row
+        //        ProntoMVC.Data.Models.DetalleCliente order = (from o in db.DetalleClientes
+        //                                       where o.IdDetalleCliente == editedOrder.IdDetalleCliente
+        //                                       select o).First<ProntoMVC.Data.Models.DetalleCliente>();
+
+        //        // update the Order information
+        //        order.Contacto = editedOrder.Contacto;
+        //        order.IdCliente = 1; // editedOrder.IdCliente;
+        //        order.Email = editedOrder.Email;
+        //        order.Puesto = editedOrder.Puesto;
+
+        //        db.SaveChanges();
+
+
+        //    }
+        //    // add
+        //    if (gridModel.DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.AddRow)
+        //    {
+        //        // since we are adding a new Order, create a new istance
+        //        ProntoMVC.Data.Models.DetalleCliente order = new ProntoMVC.Data.Models.DetalleCliente();
+        //        // set the new Order information
+        //        order.IdDetalleCliente = (from o in db.DetalleClientes
+        //                                  select o)
+        //                        .Max<ProntoMVC.Data.Models.DetalleCliente>(o => o.IdDetalleCliente) + 1;
+
+        //        order.Contacto = editedOrder.Contacto;
+        //        order.IdCliente = 1;  // editedOrder.IdCliente;
+        //        order.Email = editedOrder.Email;
+        //        order.Puesto = editedOrder.Puesto;
+
+        //        db.DetalleClientes.Add(order);
+        //        db.SaveChanges();
+
+        //        List<ProntoMVC.Data.Models.DetalleCliente> lista = ViewBag.GrillaBag;
+        //        if (lista == null) lista = new List<ProntoMVC.Data.Models.DetalleCliente>();
+        //        lista.Add(order);
+        //        ViewBag.GrillaBag = lista;
+        //    }
+        //    //borrar
+        //    if (gridModel.DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.DeleteRow)
+        //    {
+        //        ProntoMVC.Data.Models.DetalleCliente order = (from o in db.DetalleClientes
+        //                                       where o.IdDetalleCliente == editedOrder.IdDetalleCliente
+        //                                       select o)
+        //                       .First<ProntoMVC.Data.Models.DetalleCliente>();
+
+        //        // delete the record                
+        //        db.DetalleClientes.Remove(order);
+        //        db.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("_GrillaContactos", new { id = 1 }); // ViewBag.IdCliente });
+        //}
+
+        //private void SetUpGrid( JQGrid DetalleClientesGrid)
+        //{
+        //    // al principio se la llama dos veces seguidas, desde _GrillaContactos() y SearchGridDataRequested()
+        //    // NOTE: you need to call this method in the action that fetches the data as well,
+        //    // so that the models match
+
+        //    // Customize/change some of the default settings for this model
+        //    // ID is a mandatory field. Must by unique if you have several grids on one page.
+        //    DetalleClientesGrid.ID = "DetalleClientesGrid";
+        //    // Setting the DataUrl to an action (method) in the controller is required.
+        //    // This action will return the data needed by the grid
+        //    DetalleClientesGrid.DataUrl = Url.Action("SearchGridDataRequested");
+        //    DetalleClientesGrid.EditUrl = Url.Action("EditRows");
+        //    // show the search toolbar
+        //    DetalleClientesGrid.ToolBarSettings.ShowSearchToolBar = true;
+        //    DetalleClientesGrid.Columns.Find(c => c.DataField == "IdDetalleCliente").Searchable = false;
+        //    // DetalleClientesGrid.Columns.Find(c => c.DataField == "FechaVigencia").Searchable = false;
+
+        //    SetUpCustomerIDSearchDropDown(DetalleClientesGrid);
+        //    SetUpFreightSearchDropDown(DetalleClientesGrid);
+        //    SetShipNameSearchDropDown(DetalleClientesGrid);
+
+        //    DetalleClientesGrid.ToolBarSettings.ShowEditButton = true;
+        //    DetalleClientesGrid.ToolBarSettings.ShowAddButton = true;
+        //    DetalleClientesGrid.ToolBarSettings.ShowDeleteButton = true;
+        //    DetalleClientesGrid.EditDialogSettings.CloseAfterEditing = true;
+        //    DetalleClientesGrid.AddDialogSettings.CloseAfterAdding = true;
+
+        //    // setup the dropdown values for the CustomerID editing dropdown
+        //    SetUpCustomerIDEditDropDown(DetalleClientesGrid);
+        //}
+
+        //private void SetUpCustomerIDSearchDropDown(JQGrid DetalleClientesGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn customersColumn = DetalleClientesGrid.Columns.Find(c => c.DataField == "IdDetalleCliente");
+        //    customersColumn.Searchable = true;
+
+        //    // DataType must be set in order to use searching
+        //    customersColumn.DataType = typeof(string);
+        //    customersColumn.SearchToolBarOperation = SearchOperation.IsEqualTo;
+        //    customersColumn.SearchType = SearchType.DropDown;
+
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+        //        // var northWindModel = new NorthwindDataContext();
+        //        // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
+
+        //        var searchList = (from customers in db.DetalleClientes
+        //                          select customers.IdDetalleCliente)
+        //                          .AsEnumerable()
+        //                          .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+
+
+
+
+
+        //        customersColumn.SearchList = searchList.ToList<SelectListItem>();
+        //        customersColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
+        //    }
+        //}
+
+        //private void SetUpFreightSearchDropDown(JQGrid DetalleClientesGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn freightColumn = DetalleClientesGrid.Columns.Find(c => c.DataField == "Contacto");
+        //    freightColumn.Searchable = true;
+
+        //    // DataType must be set in order to use searching
+        //    freightColumn.DataType = typeof(decimal);
+        //    freightColumn.SearchToolBarOperation = SearchOperation.IsGreaterOrEqualTo;
+        //    freightColumn.SearchType = SearchType.DropDown;
+
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+        //        List<SelectListItem> searchList = new List<SelectListItem>();
+        //        searchList.Add(new SelectListItem { Text = "> 10", Value = "10" });
+        //        searchList.Add(new SelectListItem { Text = "> 30", Value = "30" });
+        //        searchList.Add(new SelectListItem { Text = "> 50", Value = "50" });
+        //        searchList.Add(new SelectListItem { Text = "> 100", Value = "100" });
+
+        //        freightColumn.SearchList = searchList.ToList<SelectListItem>();
+        //        freightColumn.SearchList.Insert(0, new SelectListItem { Text = "All", Value = "" });
+        //    }
+        //}
+
+        //private void SetShipNameSearchDropDown(JQGrid DetalleClientesGrid)
+        //{
+        //    JQGridColumn freightColumn = DetalleClientesGrid.Columns.Find(c => c.DataField == "Contacto");
+        //    freightColumn.Searchable = true;
+        //    freightColumn.DataType = typeof(string);
+        //    freightColumn.SearchToolBarOperation = SearchOperation.Contains;
+        //    freightColumn.SearchType = SearchType.TextBox;
+        //}
+
+        //private void SetUpCustomerIDEditDropDown(JQGrid DetalleClientesGrid)
+        //{
+        //    // setup the grid search criteria for the columns
+        //    JQGridColumn customersColumn = DetalleClientesGrid.Columns.Find(c => c.DataField == "Contacto");
+        //    customersColumn.Editable = true;
+        //    customersColumn.EditType = EditType.DropDown;
+
+        //    // Populate the search dropdown only on initial request, in order to optimize performance
+        //    if (DetalleClientesGrid.AjaxCallBackMode == AjaxCallBackMode.RequestData)
+        //    {
+
+        //        // var northWindModel = new NorthwindDataContext();
+
+        //        var editList = (from customers in db.DetalleClientes
+        //                        select customers.IdDetalleCliente)
+        //                       .AsEnumerable()
+        //                       .Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+
+
+        //        customersColumn.EditList = editList.ToList<SelectListItem>();
+        //    }
+        //}
+
+
+
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult OrderDetailsSubgrid(int id)
+        {
+            JqGridResponse response = new JqGridResponse(true);
+            response.Records.AddRange(from orderDetails in db.DetalleClientes.Where(x => x.IdCliente == id)
+                                      select new JqGridRecord<OrderDetailViewModel>(null, new OrderDetailViewModel(orderDetails)));
+
+            return new JqGridJsonResult() { Data = response };
+>>>>>>> 377393e46d5295ca8321c1142a8f42fc770d60a1
         }
 
         public virtual ActionResult DetLugaresEntrega(string sidx, string sord, int? page, int? rows, int? IdCliente)
