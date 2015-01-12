@@ -535,11 +535,11 @@ Public Class ConsultasLinq
 
 
         Dim sSQL = "update cartasdeporte " & _
-                     " set tarifafacturada=dbo.wTarifaWilliams (Vendedor,IdArticulo,Destino,  case when isnull(Exporta,'NO')='SI' then 1 else 0 end   ,0)" & _
-                    " from cartasdeporte " & _
-                    " where (idfacturaimputada=0 or idfacturaimputada=-1 or idfacturaimputada is null )" & _
-                    " and isnull(Anulada,'')<>'SI'" & _
-                    " and tarifafacturada=0"
+            " set tarifafacturada=dbo.wTarifaWilliams (Vendedor,IdArticulo,Destino,  case when isnull(Exporta,'NO')='SI' then 1 else 0 end   ,0)" & _
+            " from cartasdeporte " & _
+            " where (idfacturaimputada=0 or idfacturaimputada=-1 or idfacturaimputada is null )" & _
+            " and isnull(Anulada,'')<>'SI'" & _
+            " and tarifafacturada=0"
 
         ExecDinamico(SC, sSQL) ', 300) si le pongo 300 me chifla que no está preparada la cadena de conexion para ese timeout
 

@@ -18532,6 +18532,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </edmx:DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
+<<<<<<< HEAD
     <edmx:Diagrams>
       <edmx:Diagram Name="Pronto" ZoomLevel="97">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
@@ -20846,5 +20847,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" />
         </edmx:Diagram>
     </edmx:Diagrams>
+=======
+    <edmx:Diagrams></edmx:Diagrams>
+>>>>>>> 377393e46d5295ca8321c1142a8f42fc770d60a1
   </edmx:Designer>
 </edmx:Edmx>

@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by Free CSS Templates
 http://www.freecsstemplates.org
@@ -13,7 +13,7 @@ Released   : 20120723
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     @*    <link rel="SHORTCUT ICON" href="../../Content/images/favicon.png" />*@
-    <link rel="SHORTCUT ICON" href="@Url.Content("~/Content/images/favicon.png")"  />
+    <link rel="SHORTCUT ICON" href="@Url.Content("~/Content/images/favicon.png")" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -29,8 +29,8 @@ Released   : 20120723
     @*//////////////////////////////// JQUERY  ////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>*@
-    
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>*@
+
     @*en cdn google puedo usar croosorigin para poder traerme el error de javascript *@
     <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -45,7 +45,7 @@ Released   : 20120723
     @if (false)
     {
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet"
-            type="text/css" />
+              type="text/css" />
     }
     else
     {
@@ -61,27 +61,27 @@ Released   : 20120723
     @if (false)
     {
         <!-- Latest compiled and minified CSS -->
-        
+
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Latest compiled and minified JavaScript -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <!-- Latest Glyphicons minified CSS -->
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-glyphicons.css"
-            rel="stylesheet" />
+              rel="stylesheet" />
     }
     else
     {
         <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
-@*      <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"
+        @*      <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"
             rel="stylesheet" type="text/css" />*@
-        
-        
-@*<script     onload="alert('joya')"   src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>*@
+
+
+        @*<script     onload="alert('joya')"   src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>*@
         //cómo saber si cargó ????? http://stackoverflow.com/questions/538745/how-to-tell-if-a-script-tag-failed-to-load
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-                
-@*  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-transition.js"></script>*@
-@*<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-collapse.js"></script>*@
+
+        @*  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-transition.js"></script>*@
+        @*<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-collapse.js"></script>*@
     }
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////  JQUERY-UI ESTILOS////////////////////////////////////////////////////////*@
@@ -103,12 +103,12 @@ Released   : 20120723
 
         if (true)
         {
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.locale-es.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.locale-es.js")" type="text/javascript"></script>
         }
         else
         {
-        
-        <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" type="text/javascript" /> 
+
+            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" type="text/javascript" />
         }
         //It's important to include grid.locale-en.js before jquery.jqGrid.min.js to make jqGrid working.
         //It's important to include grid.locale-en.js before jquery.jqGrid.min.js to make jqGrid working.
@@ -117,20 +117,20 @@ Released   : 20120723
 
         if (false)
         {
-        <link href="@Url.Content("~/Scripts/jquery-grid/css/ui.jqgrid.css")" rel="stylesheet"            type="text/css" />
+            <link href="@Url.Content("~/Scripts/jquery-grid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
         }
         else
         {
-        <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet"
-            type="text/css" /> 
-                
+            <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet"
+                  type="text/css" />
+
         }
-        
-        
+
+
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
-     
-        
-     
+
+
+
 
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.addons.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.postext.js"></script>
@@ -139,30 +139,30 @@ Released   : 20120723
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
-        
-                
-       
-        
+
+
+
+
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet"
-            type="text/css" />
+              type="text/css" />
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet"
-            type="text/css" />
-      
+              type="text/css" />
 
-        
-        
-        
 
-       
-@*  <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>*@
-    
-@*    <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.common.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.formedit.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.inlinedit.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/grid.jqueryui.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery-grid/jqModal.js")" type="text/javascript"></script>*@
+
+
+
+
+
+        @*  <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>*@
+
+        @*    <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.common.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.formedit.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.inlinedit.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/grid.jqueryui.js")" type="text/javascript"></script>
+            <script src="@Url.Content("~/Scripts/jquery-grid/jqModal.js")" type="text/javascript"></script>*@
     }
     else
     {
@@ -175,16 +175,16 @@ Released   : 20120723
         //It's important to include grid.locale-en.js before jquery.jqGrid.min.js to make jqGrid working.
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.locale-es.js")" type="text/javascript"></script>
 
-                
-        
-        
-        <link href="@Url.Content("~/Scripts/jquery-grid/css/ui.jqgrid.css")" rel="stylesheet"            type="text/css" />
-        
-        
-        <script src="@Url.Content("~/Scripts/jquery-grid/jquery.jqGrid.js")" type="text/javascript"></script> 
+
+
+
+        <link href="@Url.Content("~/Scripts/jquery-grid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+
+
+        <script src="@Url.Content("~/Scripts/jquery-grid/jquery.jqGrid.js")" type="text/javascript"></script>
         // version 4.5.1
 
-       
+
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.celledit.js")" type="text/javascript"></script>
@@ -193,23 +193,23 @@ Released   : 20120723
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.inlinedit.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-grid/grid.jqueryui.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery-grid/jqModal.js")" type="text/javascript"></script>
-        
-        
-        
-        
-    
-    
-    
-        
-        
+
+
+
+
+
+
+
+
+
     }
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*<script src="@Url.Content("~/Scripts/json/jquery.json-2.3.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>*@
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>*@
     @*<script src="@Url.Content("~/Scripts/jquery.ui.datepicker-es.js")" type="text/javascript"></script>*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
@@ -230,9 +230,9 @@ Released   : 20120723
     <script src="@Url.Content("~/Scripts/jquery-layout/jquery.layout.resizeTabLayout.min-1.1.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery-layout/jquery.layout.state.js")" type="text/javascript"></script>
     @*<script src="http://layout.jquery-dev.net/download/jquery.layout-1.2.0.js" type="text/javascript"></script>
-    <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.resizePaneAccordions-1.2.min.js" type="text/javascript"></script>
-    <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.resizeTabLayout-1.3.min.js" type="text/javascript"></script>
-    <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.state.js" type="text/javascript"></script>*@
+        <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.resizePaneAccordions-1.2.min.js" type="text/javascript"></script>
+        <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.resizeTabLayout-1.3.min.js" type="text/javascript"></script>
+        <script src="http://layout.jquery-dev.net/lib/js/jquery.layout.state.js" type="text/javascript"></script>*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
     @*////////////////////////////////////////////////////////////////////////////////*@
@@ -240,7 +240,7 @@ Released   : 20120723
     @* <script src="@Url.Content("~/Scripts/jquery.alerts.js")" type="text/javascript"></script>*@
     <script src="@Url.Content("~/Scripts/js/jquery.alerts.js")" type="text/javascript"></script>
     @*<script src="@Url.Content("~/Scripts/Superfish/superfish.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/Superfish/hoverIntent.js")" type="text/javascript"></script>*@
+        <script src="@Url.Content("~/Scripts/Superfish/hoverIntent.js")" type="text/javascript"></script>*@
     @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
     @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
     @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
@@ -253,22 +253,21 @@ Released   : 20120723
     @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
     @*http://stackoverflow.com/questions/32414/how-can-i-force-clients-to-refresh-javascript-files*@
     @*
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // http://stackoverflow.com/questions/1195374/jqgrid-change-theme
-    ////////cómo hacer para tener más de un theme para varias jqgrid en pantalla?///////
-    ///////////////////////////////////////////////////////////////////////////////////
-   *@
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // http://stackoverflow.com/questions/1195374/jqgrid-change-theme
+        ////////cómo hacer para tener más de un theme para varias jqgrid en pantalla?///////
+        ///////////////////////////////////////////////////////////////////////////////////
+    *@
     <style>
         /* http://stackoverflow.com/questions/1195374/jqgrid-change-theme */
         /* estilos de grilla transparentes para el arbol. se asignan por jquery en el jsLayout.js */
         /*.jqgrid-widget { ... override widget styles ... }*/
         /* .jqgrid-widget input, .jqgrid-widget select ... */
-        .jqgrid-widget-content
-        {
+        .jqgrid-widget-content {
             /*  uso este estilo a traves de la funcion estiloArbol()  */
             background: transparent !important;
             color: Gray;
@@ -276,16 +275,15 @@ Released   : 20120723
     </style>
     @*
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*@
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    *@
     <style type="text/css">
         /* cambiazos al bootstrap para copiar gui del tango*/
-        
-        select
-        {
+
+        select {
             -webkit-appearance: none;
             -webkit-box-shadow: 1px 1px 1px #fff;
             background-image: url('https://tanguitofactura.blob.core.windows.net/siteresourcesv3/content/img/clearimg/16/img-dropdown-gray.png') !important;
@@ -298,30 +296,27 @@ Released   : 20120723
             text-indent: 0.01px;
             text-overflow: '';
         }
-        
-        
-        
-        input[type="text"]
-        {
+
+
+
+        input[type="text"] {
             border-color: #e2e2e2;
         }
-        textarea
-        {
+
+        textarea {
             border-color: #e2e2e2;
         }
-        
-        label
-        {
+
+        label {
             /* font-size: 10pt; */
             font-size: 10pt;
             line-height: 14px;
-            font-family: 'Helvetica Narrow' , 'Arial Narrow' ,Tahoma,Arial,Helvetica,sans-serif;
+            font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
             color: #9C0000 !important;
         }
     </style>
     <style>
-        .ui-widget-header
-        {
+        .ui-widget-header {
             border: none;
             background: none;
             font-weight: bold;
@@ -330,61 +325,56 @@ Released   : 20120723
     <style>
         /* el asunto de que se va el contenido del popup de la grilla para la derecha */
         /* http://stackoverflow.com/questions/5377929/in-jqgrid-is-there-anyway-to-have-an-auto-calculated-width-of-editgridrow-pop */
-        
-        
-        form.FormGrid
-        {
+
+
+        form.FormGrid {
             float: left;
             width: auto;
         }
-        
+
         /* botones  */
-        
-        
-        div.ui-jqdialog-content table.EditTable
-        {
+
+
+        div.ui-jqdialog-content table.EditTable {
             /*  width: auto;
-            float: left; */
+                    float: left; */
         }
-        div.ui-jqdialog-content > span > table.EditTable
-        {
+
+        div.ui-jqdialog-content > span > table.EditTable {
             /* width: auto;
-            clear: left;
-            float: right;*/
+                    clear: left;
+                    float: right;*/
         }
-        
-        div.ui-jqdialog-titlebar
-        {
+
+        div.ui-jqdialog-titlebar {
             padding-bottom: 13px !important;
         }
-        
-        
-        div.ui-jqdialog
-        {
+
+
+        div.ui-jqdialog {
             padding: 12px !important;
         }
         /*.ui-widget-content {
-padding: 8px;
-}*/
+        padding: 8px;
+        }*/
     </style>
     <style>
         /* estilos del autocomplete
-        
-       http://stackoverflow.com/questions/8395074/customizing-the-drop-down-autocomplete-box
-       http://stackoverflow.com/questions/9317380/how-can-i-style-jquery-ui-autocomplete-differently-than-jquery-ui-tabs
-       */
-       /*
-       .ui-widget-content {
-            padding: 1px;
-            border: 1px solid #000000 !important;
-        }
 
-        ul.ui-autocomplete {
-color: red !important;
-}
-*/
-        .ui-autocomplete
-        {
+               http://stackoverflow.com/questions/8395074/customizing-the-drop-down-autocomplete-box
+               http://stackoverflow.com/questions/9317380/how-can-i-style-jquery-ui-autocomplete-differently-than-jquery-ui-tabs
+               */
+        /*
+               .ui-widget-content {
+                    padding: 1px;
+                    border: 1px solid #000000 !important;
+                }
+
+                ul.ui-autocomplete {
+        color: red !important;
+        }
+        */
+        .ui-autocomplete {
             border: 1px black !important;
             color: gray;
             border-bottom: none;
@@ -398,85 +388,83 @@ color: red !important;
             padding-right: 20px;
         }
         /* IE 6 doesn't support max-height
- * we use height instead, but this forces the menu to always be this tall
- */
-        * html .ui-autocomplete
-        {
+         * we use height instead, but this forces the menu to always be this tall
+         */
+        * html .ui-autocomplete {
             height: 200px;
         }
-        
-        
-        
 
-        
-/*        https://gist.github.com/daz/2168334 */
 
-       
-    .ui-autocomplete {
-  position: absolute;
-/*   top: 100%; */
-  left: 0;
-  z-index: 1000;
-  float: left;
-  display: none;
-  min-width: 160px;
-  _width: 160px;
-  padding: 4px 0;
-  margin: 2px 0 0 0;
-  list-style: none;
-  background-color: #ffffff;
-  border-color: #ccc;
-  border-color: black !important; /*  rgba(0, 0, 0, 0.2); */
-  border-style: solid;
-  border-width: 1px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
- 
-  .ui-menu-item > a.ui-corner-all {
-    display: block;
-    padding: 3px 15px;
-    clear: both;
-    font-weight: normal;
-    line-height: 18px;
-    color: #555555;
-    white-space: nowrap;
- 
-    &.ui-state-hover, &.ui-state-active {
-      color: #ffffff;
-      text-decoration: none;
-      background-color: #0088cc;
-      border-radius: 0px;
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      background-image: none;
-    }
-  }
-  
-  
-}
 
-</style>
+
+
+        /*        https://gist.github.com/daz/2168334 */
+
+
+        .ui-autocomplete {
+            position: absolute;
+            /*   top: 100%; */
+            left: 0;
+            z-index: 1000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            _width: 160px;
+            padding: 4px 0;
+            margin: 2px 0 0 0;
+            list-style: none;
+            background-color: #ffffff;
+            border-color: #ccc;
+            border-color: black !important; /*  rgba(0, 0, 0, 0.2); */
+            border-style: solid;
+            border-width: 1px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+            .ui-menu-item > a.ui-corner-all;
+
+        {
+            display: block;
+            padding: 3px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+            &.ui-state-hover, &.ui-state-active;
+
+        {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: #0088cc;
+            border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            background-image: none;
+        }
+
+        }
+        }
+    </style>
     <style>
         /*  emparchando lo de los renglones editables, que no se me mueva con justificado a la izquierda */
-        
-        .ui-jqgrid td input
-        {
+
+        .ui-jqgrid td input {
             text-align: inherit;
             padding: 0;
             margin: 0;
             height: 30px;
         }
-        .ui-jqgrid td select
-        {
+
+        .ui-jqgrid td select {
             text-align: inherit;
             padding: 0;
             margin: 0;
@@ -486,7 +474,7 @@ color: red !important;
     <style>
         /******************************************************************************************/
         /* resetear estilo del scrollbar del webkit*/
-        
+
         /*
         .viewDialogLabel::-webkit-scrollbar
         {
@@ -508,106 +496,89 @@ color: red !important;
             background-color: initial;
             width: initial;
         }
-        
+
         ::-webkit-scrollbar
         {
             width: 16px;
             height: 16px;
-            background: transparent; 
+            background: transparent;
             box-shadow: none;
         }
         */
-        
-        
+
+
         /************/
-        .ui-jqgrid ::-webkit-scrollbar-thumb
-        {
+        .ui-jqgrid ::-webkit-scrollbar-thumb {
             background-color: white;
         }
-        
-        .ui-jqgrid:hover ::-webkit-scrollbar-thumb
-        {
+
+        .ui-jqgrid:hover ::-webkit-scrollbar-thumb {
             background-color: #BBB;
         }
-        
-        
-        
+
+
+
         /******************************************************************************************/
     </style>
     <style>
         /* fix the size of the pager */
-        input.ui-pg-input
-        {
+        input.ui-pg-input {
             width: auto;
         }
         /* Este es para hacer wrap en los encabezados del jqgrid */
-        th.ui-th-column div
-        {
+        th.ui-th-column div {
             white-space: normal !important;
             height: auto !important;
             padding: 2px;
         }
-        
-        
-        
+
+
+
         /* para sacar el wrap en los renglones comunes    */
-        .ui-jqgrid tr.jqgrow td
-        {
+        .ui-jqgrid tr.jqgrow td {
             white-space: nowrap;
             padding-left: 8px;
             padding-right: 8px;
         }
-        
-        
-        
-        
+
+
+
+
         /* http://www.trirand.com/blog/?page_id=393/bugs/jquery-ui-1-10-2-autocomplete-drop-down-renders-behind-jqgird-form */
-        
-        .ui-front
-        {
+
+        .ui-front {
             z-index: 1000;
         }
-        
-        .ui-layout-west
-        {
+
+        .ui-layout-west {
             z-index: 1 !important;
         }
-        
-        
+
+
         /* http://stackoverflow.com/questions/4305223/selected-row-background-color */
-        
-        
-        .ui-jqgrid-btable .ui-state-highlight
-        {
+
+
+        .ui-jqgrid-btable .ui-state-highlight {
             background: #33333;
         }
-        .ui-jqgrid-btable .ui-state-hover
-        {
+
+        .ui-jqgrid-btable .ui-state-hover {
             background: rgb(234, 234, 234);
         }
     </style>
     <style>
-        @*las columnas congeladas*@
-        
-       @* encabezado*@
-        .frozen-div @* .ui-state-default .ui-jqgrid-hdiv*@
-    {
+        @*las columnas congeladas*@ @* encabezado*@ .frozen-div @* .ui-state-default .ui-jqgrid-hdiv*@ {
+            background: white !important;
+            ;
+            overflow: hidden;
+        }
 
-    background: white !important;;
-        overflow: hidden;
-                }
-                
-      @* contenido*@
-    .frozen-bdiv @*.ui-jqgrid-bdiv *@
-    {
-
-    background: white !important;
-        
-                }
+        @* contenido*@ .frozen-bdiv @*.ui-jqgrid-bdiv *@ {
+            background: white !important;
+        }
     </style>
     <style>
-        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
-        {
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
             border: 1px solid #d3d3d3;
             background: transparent;
             font-weight: normal;
@@ -617,8 +588,7 @@ color: red !important;
     <style>
         /************************************/
         /* http://stackoverflow.com/questions/8878033/how-to-make-twitter-bootstrap-menu-dropdown-on-hover-rather-than-click?rq=1 */
-        ul.nav li.dropdown:hover > ul.dropdown-menu
-        {
+        ul.nav li.dropdown:hover > ul.dropdown-menu {
             display: block;
             margin: 0;
         }
@@ -626,60 +596,53 @@ color: red !important;
     </style>
     <style>
         /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-        
-        
-        
-        .ui-widget-content
-        {
+
+
+
+        .ui-widget-content {
             border: 1px solid #E4E4E4; /*padding: 2px;*/
         }
-        
-        
-        .ui-jqgrid
-        {
+
+
+        .ui-jqgrid {
             border-width: 1px;
         }
-        
-        
-        /* If you need to remove all grid's borders you can use
 
-If you want additionally remove vertical border between the cells in the grid you can use */
-        
-        
-        
-        /* el pie *//* el pie */
-        .ui-jqgrid tr.footrow-ltr
-        {
-            border: 0;
-        }
-        
-        .ui-jqgrid tr.footrow-ltr td
-        {
-            border-right-color: #E4E4E4 !important;
-        }
-        
-        /*To remove horizontal border between the rows you can use */
-        
-        .ui-jqgrid tr.ui-row-ltr td
-        {
-            border-bottom-color: #E4E4E4;
-            border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
-        }
-        
+
+            /* If you need to remove all grid's borders you can use
+
+        If you want additionally remove vertical border between the cells in the grid you can use */
+
+
+
+            /* el pie */ /* el pie */
+            .ui-jqgrid tr.footrow-ltr {
+                border: 0;
+            }
+
+                .ui-jqgrid tr.footrow-ltr td {
+                    border-right-color: #E4E4E4 !important;
+                }
+
+            /*To remove horizontal border between the rows you can use */
+
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-bottom-color: #E4E4E4;
+                border-color: rgb(234, 234, 234) /* para zafar del borde del arbol de la izquierda  -no me funciona*/;
+            }
+
         /*To remove vertical borders between the column headers you can use */
-        
-        th.ui-th-column
-        {
+
+        th.ui-th-column {
             border-right-color: #E4E4E4 !important;
         }
         /* or alternatively (without the usage of !important) */
-        
-        .ui-jqgrid-labels .ui-th-column
-        {
+
+        .ui-jqgrid-labels .ui-th-column {
             border-right-color: #E4E4E4;
         }
     </style>
-    @{ 
+    @{
         ViewBag.MenuYoutube = false;
     }
     <style>
@@ -699,21 +662,21 @@ If you want additionally remove vertical border between the cells in the grid yo
                 width: 100%;
                 background: rgba( 255, 255, 255, .8 ) url('@Url.Content("~/Content/images/fhhrx.gif")') 50% 50% no-repeat;
             }
-            
+
             /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
             body.loading
             {
                 overflow: hidden;
             }
-            
+
             /* Anytime the body has the loading class, our
    modal element will be visible */
             body.loading .modal
             {
                 display: block;
             }
-        </style>
+    </style>
     <script type="text/javascript">
 
 
@@ -799,10 +762,10 @@ If you want additionally remove vertical border between the cells in the grid yo
                     persist: "cookie",
 
                     //////////////////////////////////////////////////////////////////////////
-                    // dejar de usar este treeview y pasar al jsTree o a lo nuevo que salga de jqueryUI 
-                    //http://bassistance.de/jquery-plugins/jquery-plugin-treeview/ 
+                    // dejar de usar este treeview y pasar al jsTree o a lo nuevo que salga de jqueryUI
+                    //http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
                     //////////////////////////////////////////////////////////////////////////
-                    cookieOptions: { path: ROOT}   // ahi funcionó!!! poniendo el ROOT (de hecho, el tipo decía de usar una constante)
+                    cookieOptions: { path: ROOT }   // ahi funcionó!!! poniendo el ROOT (de hecho, el tipo decía de usar una constante)
                     // cookieOptions: { path: '/'}, // http://forum.jquery.com/topic/jquery-treeview-plugin-for-navigation-solution
                     //////////////////////////////////////////////////////////////////////////
                     //////////////////////////////////////////////////////////////////////////
@@ -1054,7 +1017,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             });
 
             // $('#SuperBuscador').focus();
-            //$('#SuperBuscador2').focus();
+            $('#SuperBuscador2').focus();
 
             $("#SuperBuscador").autocomplete({
                 source: '@Url.Action("Superbuscador", "Home")',
@@ -1300,81 +1263,75 @@ If you want additionally remove vertical border between the cells in the grid yo
 </head>
 <body>
     <style>
-        .nav .dropdown-toggle .caret
-        {
+        .nav .dropdown-toggle .caret {
             margin-top: 11px;
             border-top-color: #0088cc;
             border-bottom-color: #0088cc;
         }
-        
-        .navbar-inner
-        {
+
+        .navbar-inner {
             padding-left: 0px;
         }
-        
-        
+
+
         /*********************************************************************/
-        
-        .ui-layout-resizer
-        {
+
+        .ui-layout-resizer {
             /* background: rgb(235, 238, 241); */
             background: rgb(234, 234, 234);
             width: 1px;
         }
-        .ui-layout-toggler
-        {
+
+        .ui-layout-toggler {
             /* background: transparent; */ /* background: rgb(235, 238, 241); */ /*background: rgb(235, 238, 225);*/
             background: rgb(222, 223, 221);
         }
-        
-        
-        
-        .ui-layout-resizer-hover
-        {
+
+
+
+        .ui-layout-resizer-hover {
             background: #FCC;
         }
-        .ui-layout-resizer-west-hover
-        {
+
+        .ui-layout-resizer-west-hover {
             background: #FCC;
         }
-        .ui-layout-resizer:hover
-        {
+
+        .ui-layout-resizer:hover {
             background: #FCC;
         }
-        .ui-layout-resizer-west:hover
-        {
+
+        .ui-layout-resizer-west:hover {
             background: #FCC;
         }
         /*********************************************************************/
-        
-        .thumbnail
-        {
+
+        .thumbnail {
             border: 0;
         }
     </style>
     <style>
         /* para sacarle la sombra */
-        .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner
-        {
+        .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
             /*
-            -webkit-box-shadow: 0 ;
-            -moz-box-shadow: 0;
-            box-shadow: 0; */
+                    -webkit-box-shadow: 0 ;
+                    -moz-box-shadow: 0;
+                    box-shadow: 0; */
         }
-        
-        
-        
+
+
+
         /*        .navbar-inner {
-border: 1px solid #d4d4d4;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
--webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
--moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-}*
-*/
+        border: 1px solid #d4d4d4;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+        -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+        }*
+        */
     </style>
     <div class="navbar navbar-fixed-top ">
         @* navbar-fixed-top*@ @* navbar-static-top*@
@@ -1384,32 +1341,31 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                 <ul class="nav nav-pills   row-fluid " id="navigation2" style="vertical-align: middle;
                     background: rgb(234, 234, 234); border-bottom: 1px solid #e2e2e2; height: 49px;">
                     @*height: 50px; overflow: hidden !important; *@ @*background: rgb(248, 248, 248);
-                    background:  rgb(234, 234, 234)  
-                    background:  transparent;
-                    border-bottom: 1px solid lightgray; 
+                        background:  rgb(234, 234, 234)
+                        background:  transparent;
+                        border-bottom: 1px solid lightgray;
                     *@
                     <style>
-                        .nav
-                        {
+                        .nav {
                             font-size: 12px;
                         }
-                        .navbar .nav .dropdown-toggle .caret
-                        {
+
+                        .navbar .nav .dropdown-toggle .caret {
                             margin-top: 10px;
                         }
-                        
-                        .nav-tabs > li > a, .nav-pills > li > a
-                        {
+
+                        .nav-tabs > li > a, .nav-pills > li > a {
                             line-height: 25px; /*  font-size: 12px; */
                         }
                     </style>
                     <a style="width: 7px; height: 47px; border: 0; margin-top: 1px; padding: 0;" id="botonizq "
-                        class="pull-left btn btn-small " onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
-                    </a><a style="width: 7px; height: 47px; border: 0; margin-top: 0px; padding: 0;"
-                        id="botonder " class="btn btn-small pull-right " onclick="conmutarPanelesDerecho();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
+                       class="pull-left btn btn-small " onclick="conmutarPanelesIzq();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
+                    </a>
+                    <a style="width: 7px; height: 47px; border: 0; margin-top: 0px; padding: 0;"
+                       id="botonder " class="btn btn-small pull-right " onclick="conmutarPanelesDerecho();   pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();">
                     </a>@*http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar
-            http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar
-            http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar*@
+                        http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar
+                        http://stackoverflow.com/questions/11851820/twitter-bootstrap-how-to-span-links-in-the-navbar*@
                     @{
                         string s = Url.Content("~/Content/Images/Empresas/" + ViewBag.BasePronto + ".png");
                         string s2 = Url.Content("~/Content/Images/Empresas/DemoPronto" + ".png");
@@ -1418,121 +1374,180 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 
                             if (true)
                             {
-                            
-                            
-                        <button class="btn btn-link pull-left" style="padding: 0px; margin-top: 2px; margin-left: 7px;
+
+
+                                <button class="btn btn-link pull-left" style="padding: 0px; margin-top: 2px; margin-left: 7px;
                             max-width: ; vertical-align: middle" id="LogoEmpresa">
-                            <li class="dropdown "><a href="#" id="ssssss" data-toggle="dropdown" class="dropdown-toggle  pull-left "
-                                onclick="conmutarPanelesNorte()  " style="padding: 0px">
-                                <img src="@s" alt="" style="text-align: left; margin-top: 1px; margin-left: 12px; 
+                                    <li class="dropdown ">
+                                        <a href="#" id="ssssss" data-toggle="dropdown" class="dropdown-toggle  pull-left "
+                                           onclick="conmutarPanelesNorte()  " style="padding: 0px">
+                                            <img src="@s" alt="" style="text-align: left; margin-top: 1px; margin-left: 12px;
                                 width: ; height: 42px;" />
-                                @* @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                                                         {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
-                                                             class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@ </a>
-                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                                {
-                                    <ul class="dropdown-menu pull-right" id="333311111" style="left: 60px; width: 900px;
+                                            @* @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                                {<span style="margin-left: 5px; text-align: right; margin-top: 20px; margin-right: 5px;"
+                                                    class="caret"></span>}</img> si pongo el span con el caret anidandolo en el img, me tira la bronca*@
+                                        </a>
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                        {
+                                            <ul class="dropdown-menu pull-right" id="333311111" style="left: 60px; width: 900px;
                                         top: 42px">
-                                        <li style="line-height: 40px;">
-                                            <div class="row-fluid" style="width: 100%x; font-size: 26px; padding: 12px">
-                                                <ul class="unstyled span3" style="line-height: 30px;">
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Home/">Inicio</a></li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Articulo/Index/-1">Artículos</a><a  class="pull-right" href="@Url.Content("~")Articulo/Edit/-1">
-                                                        + </a></li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")MvcMembership/UserAdministration">
-                                                        Usuarios</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Empleado">Empleados</a>
-                                                    </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")CotizacionMoneda">Cotiz Dolar</a></li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Cuenta">Cuentas</a></li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Subdiario">Subdiarios</a></li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Asiento">Asientos</a></li>
-                                                </ul>
-                                                <ul class="span1">
-                                                </ul>
-                                                <ul class="unstyled span3" style="line-height: 30px;">
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Obra/Index/">Obras</a><a class="pull-right"  href="@Url.Content("~")Requerimiento/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a class="" href="@Url.Content("~")Requerimiento/Index/">
-                                                        Requerimientos</a> <a   class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
-                                                            +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Proveedor/Index/-1">Proveedores</a><a class="pull-right"  href="@Url.Content("~")Proveedor/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Presupuesto/Index/-1">Presupuestos</a><a  class="pull-right" href="@Url.Content("~")Presupuesto/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Comparativa/Index/-1">Comparativas</a><a  class="pull-right" href="@Url.Content("~")Comparativa/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Pedido/Index/-1">Pedidos</a>
-                                                        <a  class="pull-right" href="@Url.Content("~")Pedido/Edit/-1">+</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")ComprobanteProveedor/Index/-1">
-                                                        Comp prov</a><a class="pull-right"  href="@Url.Content("~")ComprobanteProveedor/Edit/-1">
-                                                            +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")ComprobanteProveedor/IndexFF/-1">
-                                                        Fondo fijo</a><a class="pull-right"  href="@Url.Content("~")ComprobanteProveedor/EditFF/-1">
-                                                            +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")OrdenPago/Index/-1">Orden de
-                                                        pago</a><a  class="pull-right" href="@Url.Content("~")OrdenPago/Edit/-1"> +</a>
-                                                    </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
-                                                        Cta corr Acreed </a></li>
-                                                </ul>
-                                                <ul class="span1">
-                                                </ul>
-                                                <ul class="unstyled span3" style="line-height: 30px;">
-                                                    @* http://stackoverflow.com/questions/13562658/twitter-bootstrap-multi-column-dropdown*@
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Cliente/Index/-1">Clientes</a><a  class="pull-right" href="@Url.Content("~")Cliente/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")OrdenCompra/Index/-1">O de
-                                                        compra</a><a  class="pull-right" href="@Url.Content("~")OrdenCompra/Edit/-1"> +</a>
-                                                    </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Remito/Index/-1">Remito</a><a class="pull-right"  href="@Url.Content("~")Remito/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Factura/Index/-1">Factura</a><a class="pull-right"  href="@Url.Content("~")Factura/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~")Recibo/Index/-1">Recibo</a><a  class="pull-right" href="@Url.Content("~")Recibo/Edit/-1">
-                                                        +</a> </li>
-                                                    <li style="line-height: 30px;"><a href="#">...</a> </li>
-                                                    <li style="line-height: 30px;"><a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
-                                                        Cta Corr Deudor </a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                }
-                            </li>
-                        </button>
-                        
+                                                <li style="line-height: 40px;">
+                                                    <div class="row-fluid" style="width: 100%x; font-size: 26px; padding: 12px">
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Home/">Inicio</a></li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Articulo/Index/-1">Artículos</a><a class="pull-right" href="@Url.Content("~")Articulo/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")MvcMembership/UserAdministration">
+                                                                    Usuarios
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Empleado">Empleados</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")CotizacionMoneda">Cotiz Dolar</a></li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Cuenta">Cuentas</a></li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Subdiario">Subdiarios</a></li>
+                                                            <li style="line-height: 30px;"><a href="@Url.Content("~")Asiento">Asientos</a></li>
+                                                        </ul>
+                                                        <ul class="span1"></ul>
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Obra/Index/">Obras</a><a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a class="" href="@Url.Content("~")Requerimiento/Index/">
+                                                                    Requerimientos
+                                                                </a> <a class="pull-right" href="@Url.Content("~")Requerimiento/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Proveedor/Index/-1">Proveedores</a><a class="pull-right" href="@Url.Content("~")Proveedor/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Presupuesto/Index/-1">Presupuestos</a><a class="pull-right" href="@Url.Content("~")Presupuesto/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Comparativa/Index/-1">Comparativas</a><a class="pull-right" href="@Url.Content("~")Comparativa/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Pedido/Index/-1">Pedidos</a>
+                                                                <a class="pull-right" href="@Url.Content("~")Pedido/Edit/-1">+</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")ComprobanteProveedor/Index/-1">
+                                                                    Comp prov
+                                                                </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")ComprobanteProveedor/IndexFF/-1">
+                                                                    Fondo fijo
+                                                                </a><a class="pull-right" href="@Url.Content("~")ComprobanteProveedor/EditFF/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")OrdenPago/Index/-1">
+                                                                    Orden de
+                                                                    pago
+                                                                </a><a class="pull-right" href="@Url.Content("~")OrdenPago/Edit/-1"> +</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores")">
+                                                                    Cta corr Acreed
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="span1"></ul>
+                                                        <ul class="unstyled span3" style="line-height: 30px;">
+                                                            @* http://stackoverflow.com/questions/13562658/twitter-bootstrap-multi-column-dropdown*@
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Cliente/Index/-1">Clientes</a><a class="pull-right" href="@Url.Content("~")Cliente/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")OrdenCompra/Index/-1">
+                                                                    O de
+                                                                    compra
+                                                                </a><a class="pull-right" href="@Url.Content("~")OrdenCompra/Edit/-1"> +</a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Remito/Index/-1">Remito</a><a class="pull-right" href="@Url.Content("~")Remito/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Factura/Index/-1">Factura</a><a class="pull-right" href="@Url.Content("~")Factura/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")Recibo/Index/-1">Recibo</a><a class="pull-right" href="@Url.Content("~")Recibo/Edit/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
+                                                                    Cta Corr Deudor
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </button>
+
                             }
 
                         }
                         else
                         {
-                        <li class="" style="padding: 0px; margin: 0; max-width: ;" id="LogoEmpresa"><a href="@Url.Content("~")" class="pull-left"
-                            style="padding: 0px">
-                            <img src="@s2" alt="" style="text-align: left; margin-top: 3px; margin-left: 16px;
+                            <li class="" style="padding: 0px; margin: 0; max-width: ;" id="LogoEmpresa">
+                                <a href="@Url.Content("~")" class="pull-left"
+                                   style="padding: 0px">
+                                    <img src="@s2" alt="" style="text-align: left; margin-top: 3px; margin-left: 16px;
                                 width: ; height: 42px;" />
-                        </a></li>
+                                </a>
+                            </li>
                         }
                     }
-                    <div id="spanDelSuperbuscador" class="span3 "@*"padding: 0px; margin: 0;"  *@>
+                    <div id="spanDelSuperbuscador" class="span3 ">
                         <div class="span10" style="margin-top: 9px; width: 100%;">
                             <div class="input-prepend input-append" style="width: 100%">
                                 <input id="SuperBuscador2" type="text" class="span12" placeholder="" />
                                 @*<select id="campos " class="span4  " data-toggle="dropdown">
-                                    <option>Requerimientos</option>
-                                    <option>Pedidos</option>
-                                </select>*@
+                                        <option>Requerimientos</option>
+                                        <option>Pedidos</option>
+                                    </select>*@
                             </div>
                         </div>
                         <script>
@@ -1542,7 +1557,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                                 select: function (event, ui) {
                                     //                        $("#IdArticulo").val(ui.item.id);
                                     //                        $("#Codigo").val(ui.item.codigo);
-                                    //                    
+                                    //
                                     //                                window.location.href = ROOT + ui.item.value;
                                     window.location.href = ROOT + ui.item.id;
                                 },
@@ -1557,7 +1572,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                                 // http://layout.jquery-dev.net/demos/complex.html#
                                 //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
 
-                                //pageLayout.toggle('east'); 
+                                //pageLayout.toggle('east');
                                 //return;
 
                                 if (pageLayout.state.east.isHidden) {
@@ -1569,7 +1584,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                                 }
                             }
 
-                
+
                         </script>
                     </div>
                     <li class="span1"><a href=""></a></li>
@@ -1577,15 +1592,15 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                     </div>
                     <li class=""><a href=""></a></li>
                     @*http://stackoverflow.com/questions/9405610/how-to-change-navbar-collapse-threshold-using-twitter-bootstrap-responsive
-                    http://stackoverflow.com/questions/9405610/how-to-change-navbar-collapse-threshold-using-twitter-bootstrap-responsive
-                    http://stackoverflow.com/questions/9405610/how-to-change-navbar-collapse-threshold-using-twitter-bootstrap-responsive*@
+                        http://stackoverflow.com/questions/9405610/how-to-change-navbar-collapse-threshold-using-twitter-bootstrap-responsive
+                        http://stackoverflow.com/questions/9405610/how-to-change-navbar-collapse-threshold-using-twitter-bootstrap-responsive*@
                     @*<div class="nav-collapse collapse"></div> no anda*@
                     <div class="pull-right nav nav-pills nav-collapse collapse ">
                         @*nav-collapse collapse">*@
                         @if (false)
                         {
                             <a style="width: 50px; height: 47px; border: 0; margin-top: 1px; padding: 0;" id="botonnorte "
-                                title="herramientas" class="pull-left btn btn-small  btn-link" onclick="   if (pageLayout.state.north.isHidden) { pageLayout.sizePane('north', 300); pageLayout.show('north'); } else {pageLayout.hide('north');  } ">
+                               title="herramientas" class="pull-left btn btn-small  btn-link" onclick="   if (pageLayout.state.north.isHidden) { pageLayout.sizePane('north', 300); pageLayout.show('north'); } else {pageLayout.hide('north');  } ">
                             </a>
                             <script>
                                 $('#botonnorte').mouseover(function () {
@@ -1599,63 +1614,85 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                                     //else { pageLayout.hide('north'); }
                                 });
                             </script>
-                          
+
                         }
-                        <li class="pull-right "><a href="@Url.Content("~")Account\ElegirBase" >@ViewBag.BasePronto</a>
+                        <li class="pull-right ">
+                            <a href="@Url.Content("~")Account\ElegirBase">@ViewBag.BasePronto</a>
                         </li>
-                        <li class="dropdown pull-right"><a href="#" id="botonusuario" data-toggle="dropdown"
-                            class="dropdown-toggle  pull-left " onclick="   if (pageLayout.state.north.isHidden) { pageLayout.sizePane('north', 300); pageLayout.show('north'); } else {pageLayout.hide('north');  } ">
-                            <i class="icon-user "></i>&nbsp;@ViewBag.NombreUsuario </a>
+                        <li class="dropdown pull-right">
+                            <a href="#" id="botonusuario" data-toggle="dropdown"
+                               class="dropdown-toggle  pull-left " onclick="   if (pageLayout.state.north.isHidden) { pageLayout.sizePane('north', 300); pageLayout.show('north'); } else {pageLayout.hide('north');  } ">
+                                <i class="icon-user "></i>&nbsp;@ViewBag.NombreUsuario
+                            </a>
                             @{
                                 try
                                 {
                                     //este <ul> tira la bronca porque dice que está incluido en un <a>
-                                         
-                                <ul class="dropdown-menu" id="3333">
-                                    <li><a href="@Url.Content("~")Account/Logoff" >Salir</a></li>
-                                    <li><a href='   @( Url.Content("~") + "Account\\CambiarPassword\\" + Membership.GetUser().ProviderUserKey.ToString()) ' >
-                                        Cambiar contraseña</a></li>
-                                    <li><a  href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">Notificaciones
-                                        y firmas</a></li>
-                                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                                    {
-                                        <li class="divider"></li>
-                                        
-                                         
-                                        <li><a href="#">Administrador</a></li>
-                                        <li><a href='   @( Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString()) ' >
-                                            Mi cuenta</a></li>
 
-                                        <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Enviar comentario/captura </a></li>
-                                        <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Chat / TeamViewer @*http://stackoverflow.com/questions/6194127/a-web-site-with-embedded-remote-control-capabilities*@
-                                        </a></li>
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Wiki</a></li>
-                                        
-                                        <li><a href="https://groups.google.com/forum/#!forum/prontoweb">Foro</a></li>
-                                        
-                                    }
-                                    else { }
-                                    @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-                                    {
-                                        <li class="divider"></li>
-                                        <li><a href="#">Super Admin BDL</a></li>
-                                       
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Copiar base para test</a></li>
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Visualizar como</a></li>
-                                        <li><a href="@Url.Content("~")BugTrack.aspx">Reclamos</a></li>
-                                        <li><a href="http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultasPorSector.php?CSector=13">
-                                            Reclamos prog web</a></li>
-                                        <li><a href="@Url.Content("~")elmah.axd">Log</a></li>
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Actualizar scripts / sincronizar</a></li> 
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Rollback</a></li> 
-                                        //esto es FKs, altertables, nuevastablas y stores, tree.sql, ....
-                                        <li><a href="@Url.Content("~")Acceso/Edit/-1">Backup</a></li>
-                                        <li><a href="@Url.Content("~")Home/Index">Tests</a></li>
-                                        <li><a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
-                                            Mails enviados</a></li>   
-                                    }
-                                </ul>
-                                
+                                    <ul class="dropdown-menu" id="3333">
+                                        <li><a href="@Url.Content("~")Account/Logoff">Salir</a></li>
+                                        <li>
+                                            <a href=' @( Url.Content("~") + "Account\\CambiarPassword\\" + Membership.GetUser().ProviderUserKey.ToString())=) ='>
+                                                Cambiar contraseña
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">
+                                                Notificaciones
+                                                y firmas
+                                            </a>
+                                        </li>
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                        {
+                                            <li class="divider"></li>
+
+
+                                            <li><a href="#">Administrador</a></li>
+                                            <li>
+                                                <a href=' @( Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())=) ='>
+                                                    Mi cuenta
+                                                </a>
+                                            </li>
+
+                                            <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Enviar comentario/captura </a></li>
+                                            <li>
+                                                <a href="@Url.Content("~")Acceso\\Edit\\-1">
+                                                    Chat / TeamViewer @*http://stackoverflow.com/questions/6194127/a-web-site-with-embedded-remote-control-capabilities*@
+                                                </a>
+                                            </li>
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Wiki</a></li>
+
+                                            <li><a href="https://groups.google.com/forum/#!forum/prontoweb">Foro</a></li>
+
+                                        }
+                                        else { }
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                        {
+                                            <li class="divider"></li>
+                                            <li><a href="#">Super Admin BDL</a></li>
+
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Copiar base para test</a></li>
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Visualizar como</a></li>
+                                            <li><a href="@Url.Content("~")BugTrack.aspx">Reclamos</a></li>
+                                            <li>
+                                                <a href="http://bdlconsultores.dyndns.org/Consultas/Admin/VerConsultasPorSector.php?CSector=13">
+                                                    Reclamos prog web
+                                                </a>
+                                            </li>
+                                            <li><a href="@Url.Content("~")elmah.axd">Log</a></li>
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Actualizar scripts / sincronizar</a></li>
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Rollback</a></li>
+                                            //esto es FKs, altertables, nuevastablas y stores, tree.sql, ....
+                                            <li><a href="@Url.Content("~")Acceso/Edit/-1">Backup</a></li>
+                                            <li><a href="@Url.Content("~")Home/Index">Tests</a></li>
+                                            <li>
+                                                <a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
+                                                    Mails enviados
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+
                                 }
                                 catch (Exception e)
                                 {
@@ -1665,20 +1702,26 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                             }
                         </li>
                         @if (false)
-                        { 
-                            <li class="pull-right "><a  href="@Url.Content("~")" class="pull-right"  onclick="" title="Inicio" >
-                                Inicio</a></li> 
+                        {
+                            <li class="pull-right ">
+                                <a href="@Url.Content("~")" class="pull-right" onclick="" title="Inicio">
+                                    Inicio
+                                </a>
+                            </li>
                         }
                         @if (ViewBag.NombreUsuario != null)
                         {
                             if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
                             {
-                            <li class="pull-right ">@*<a  href="@Url.Content("~")Acceso\Edit\-1" class="pull-right"  onclick="" title="Seguridad" >*@
-                                <a  href="@Url.Content("~")MvcMembership\UserAdministration" class="pull-right"  onclick="" title="Seguridad" >
-                                    <i class="icon-lock"></i></a></li>
-                              
-                            
-                       
+                                <li class="pull-right ">
+                                    @*<a  href="@Url.Content("~")Acceso\Edit\-1" class="pull-right"  onclick="" title="Seguridad" >*@
+                                    <a href="@Url.Content("~")MvcMembership\UserAdministration" class="pull-right" onclick="" title="Seguridad">
+                                        <i class="icon-lock"></i>
+                                    </a>
+                                </li>
+
+
+
                             }
 
 
@@ -1686,17 +1729,25 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                             {
                                 if (false)
                                 {
-                            <li class="pull-right "><a  href="@Url.Content("~")Autorizacion\" class="pull-right"  onclick=""  title="Notificaciones y Firmas">
-                                <i class="icon-bell"></i><span class="badge badge-info" title="Notificaciones y Firmas">
-                                    8</span></a></li>
+                                    <li class="pull-right ">
+                                        <a href="@Url.Content("~")Autorizacion\" class="pull-right" onclick="" title="Notificaciones y Firmas">
+                                            <i class="icon-bell"></i><span class="badge badge-info" title="Notificaciones y Firmas">
+                                                8
+                                            </span>
+                                        </a>
+                                    </li>
                                 }
-                            <li class="pull-right "><a  href="@Url.Content("~")MvcMembership\UserAdministration\Configuracion\" class="pull-right" @*btn btn-mini  *@ onclick=""  title="Configuración">
-                                <i class="icon-cog"></i></a></li>
+                                <li class="pull-right ">
+                                    <a href="@Url.Content("~")MvcMembership\UserAdministration\Configuracion\" class="pull-right" onclick="" title="Configuración">
+                                        <i class="icon-cog"></i>
+                                    </a>
+                                </li>
                             }
                         }
-@*<li class="pull-right "><a href="@Url.Content("~")Account/Logoff" >Salir</a></li>*@
+                        @*<li class="pull-right "><a href="@Url.Content("~")Account/Logoff" >Salir</a></li>*@
                     </div>
                     <!-- Be sure to leave the brand out there if you want it shown -->
+                </ul>
             </div>
             </ul>
         </div>
@@ -1704,44 +1755,38 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     </div>
     <div class="ui-layout-north ui-widget-content add-padding" style="background: rgb(235, 235, 235);
         height: 300px; display: none">
-        @*   @Html.RenderPartial( "Home",Model)*@ @*ViewBag.NombreUsuario*@ @*        <button type="button" onclick="           pageLayout.hide('north'); " class="btn span1 "
-            style="float: none; margin-left: 20px;">
-            x 
 
-        </button>
-*@
         <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;"
-            onclick="           pageLayout.hide('north'); ">
-            &times;</button>
+                onclick="           pageLayout.hide('north'); ">
+            &times;
+        </button>
+
+
         @if (Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin"))
         {
-      
-         
             <div class="row-fluid">
                 <div class="span2">
-                    @*    <br />
-                    <a href="@Url.Content("~")Account\ElegirBase" >@ViewBag.BasePronto</a>*@ <a class=""   style="height: 20px;" href="@Url.Content("~")" >
-                        Inicio</a>
+                    <a class="" style="height: 20px;" href="@Url.Content("~")">
+                        Inicio
+                    </a>
                     <br />
                     <br />
                     @if (ViewBag.Bases != null)
                     {
-@*@Html.ListBox("Bases", null, new { @style = "width: 260px", @class = "span12" }) *@
-                        
-                       
                         foreach (var item in ViewBag.Bases)
                         {
-                        
-                        <div class="row-fluid">
-                            <span><a href="@Url.Content("~/Account/BaseElegida/" + "?sBase=" + item.Text)" class="pull-left"
-                            style="padding: 0px">
-                                <img title= "@item.Text"  src="@Url.Content("~/Content/Images/Empresas/" + item.Text + ".png") "
-                        
-                        style="height: 20px;"
-                         />
-                                @item.Text</a> </span>
-                        </div>
-                        
+
+                            <div class="row-fluid">
+                                <span>
+                                    <a href="@Url.Content("~/Account/BaseElegida/" + "?sBase=" + item.Text)" class="pull-left"
+                                       style="padding: 0px">
+                                        <img title="@item.Text" src="@Url.Content("~/Content/Images/Empresas/" + item.Text + ".png") "
+                                             style="height: 20px;" />
+                                        @item.Text
+                                    </a>
+                                </span>
+                            </div>
+
                         }
                     }
                 </div>
@@ -1751,66 +1796,90 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                             <div class="row-fluid">
                                 <ul class="thumbnails">
                                     <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Requerimiento")">
-                                            <h3>
-                                                Requerimientos</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "Requerimiento", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "Requerimiento")">
+                                                <h3>
+                                                    Requerimientos
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "Requerimiento", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
                                     </div>
                                     <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Presupuesto")">
-                                            <h3>
-                                                Presupuestos</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "Presupuesto", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="row-fluid">
-                                <ul class="thumbnails">
-                                    <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Comparativa")">
-                                            <h3>
-                                                Comparativas</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "Comparativa", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
-                                    </div>
-                                    <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "Pedido")">
-                                            <h3>
-                                                Pedidos</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "Pedido", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "Presupuesto")">
+                                                <h3>
+                                                    Presupuestos
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "Presupuesto", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
                                     </div>
                                 </ul>
                             </div>
                             <div class="row-fluid">
                                 <ul class="thumbnails">
                                     <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "ComprobanteProveedor")">
-                                            <h3>
-                                                Ing Comprobantes</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "ComprobanteProveedor", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "Comparativa")">
+                                                <h3>
+                                                    Comparativas
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "Comparativa", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
                                     </div>
                                     <div class="btn-group span4">
-                                        <li class="span4 tile tile-teal"><a  class="btn" href=" @Url.Action("Index", "OrdenPago")">
-                                            <h3>
-                                                Ordenes de Pago</h3>
-                                        </a><a class="btn"  href=" @Url.Action("Edit", "OrdenPago", new { id = -1 })">
-                                            <h3>
-                                                +</h3>
-                                        </a></li>
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "Pedido")">
+                                                <h3>
+                                                    Pedidos
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "Pedido", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div class="row-fluid">
+                                <ul class="thumbnails">
+                                    <div class="btn-group span4">
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "ComprobanteProveedor")">
+                                                <h3>
+                                                    Ing Comprobantes
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "ComprobanteProveedor", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <div class="btn-group span4">
+                                        <li class="span4 tile tile-teal">
+                                            <a class="btn" href="@Url.Action("Index", "OrdenPago")">
+                                                <h3>
+                                                    Ordenes de Pago
+                                                </h3>
+                                            </a><a class="btn" href="@Url.Action("Edit", "OrdenPago", new { id = -1 })">
+                                                <h3>
+                                                    +
+                                                </h3>
+                                            </a>
+                                        </li>
                                     </div>
                                 </ul>
                             </div>
@@ -1821,32 +1890,39 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                     otras cuentas
                 </div>
                 <div class="span2">
-                    <li><a href="@Url.Content("~")Account/Logoff" >Salir</a></li>
+                    <li><a href="@Url.Content("~")Account/Logoff">Salir</a></li>
                     @if (Roles.IsUserInRole(ViewBag.NombreUsuario ?? "", "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario ?? "", "Administrador"))
                     {
                         <li><a href="@Url.Content("~")Acceso/Edit/-1">Enviar comentario/captura </a></li>
                         <li><a href="@Url.Content("~")Acceso/Edit/-1">Visualizar como</a></li>
                         <li><a href="@Url.Content("~")Acceso/Edit/-1">Log</a></li>
-                        <li><a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
-                            Mails enviados</a></li>
+                        <li>
+                            <a target="_blank" href="https://www.google.com/accounts/ServiceLoginAuth?continue=http%3A//mail.google.com/gmail&service=mail&Email=prontowebmail@gmail.com&Passwd=50TriplesdJQ&null=Sign+in">
+                                Mails enviados
+                            </a>
+                        </li>
                     }
                 </div>
-            </div>       
+            </div>
         }
+
+
+
+
+        @*/////////////////////////////////////////////////////////////////////*@
+
         @if (true)
         {
-            
+
             <div id="nav" style="width: 100%; overflow: hidden; background: transparent; height: 0;
-                box-shadow: none; border: none; padding: 0">
+            box-shadow: none; border: none; padding: 0">
                 <table style="width: 100%; color: Blue">
                     <tr>
                         <td>
                             @* es por el id=superbuscador que se trula.*@
-                            <input type="text" id="SuperBuscador" style="margin-top: 3px; background-image:  
-                                                url('  @Url.Content("~/Content/Images/lupita.jpg")      ');
-                                                background-position: right;
-                                                background-repeat: no-repeat;" 
-                                                />
+                            <input type="text" id="SuperBuscador" style="margin-top: 3px; background-image:url('@Url.Content("~/Content/Images/lupita.jpg")')"
+                                   background-position="right"
+                                   background-repeat="no-repeat" />
                         </td>
                     </tr>
                 </table>
@@ -1860,20 +1936,20 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
         }
     </div>
     @*        <div style="vertical-align: middle">
-            <table width="100%" style="border: 0; padding: 0;">
-                <tr style="border: 0; padding: 0; vertical-align: middle">
-                    <td style="border: 0; width: 170px">
-                        http://stackoverflow.com/questions/3711450/correct-way-to-reference-content-in-mvc*@
+        <table width="100%" style="border: 0; padding: 0;">
+            <tr style="border: 0; padding: 0; vertical-align: middle">
+                <td style="border: 0; width: 170px">
+                    http://stackoverflow.com/questions/3711450/correct-way-to-reference-content-in-mvc*@
     @* http://stackoverflow.com/questions/6066002/how-to-include-an-mvc-razor-variable-within-url-content*@
     @* <img   src="@Url.Content("~/Content/Images/bdl.gif")" alt="" style="text-align: left; width: 150px; height: 50px;" />
-                    </td>
-                    <td style="border: 0; padding: 0;">
-                        <input type="text" style="width: 250px; margin-top: 5px;" />*@
+        </td>
+        <td style="border: 0; padding: 0;">
+            <input type="text" style="width: 250px; margin-top: 5px;" />*@
     @*<input type="button" style="width: 30px; background-image: url('../../Content/images/lupita.jpg');
-                            background-repeat: no-repeat; background-color: white" />*@
+        background-repeat: no-repeat; background-color: white" />*@
     @* <img src="../../Content/images/lupita.jpg" alt="" style="text-align: left; " />*@
     @* </td>
-                    <td style="text-align: right; border: 0;">*@ @* @Html.ActionLink("Inicio", "Index", "Home")
+        <td style="text-align: right; border: 0;">*@ @* @Html.ActionLink("Inicio", "Index", "Home")
                         @Html.DropDownList("Bases", Enumerable.Empty<SelectListItem>(), new { style = "width: 50px;" })
                         @Html.ActionLink("Facturas", "Index", "Factura")
                         <a href="http://localhost:8433/Pronto/ProntoWeb/Facturas.aspx">IraProntoWeb1</a>
@@ -1883,173 +1959,173 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                 </tr>
             </table>
         </div>
-*@
-    <div class="ui-layout-south ui-widget-content add-padding" style="background: rgb(235, 235, 235);
+        *@
+        <div class="ui-layout-south ui-widget-content add-padding" style="background: rgb(235, 235, 235);
         height: 60px; display: none">
-        <div class="row-fluid " style="height: 48px; padding-top: 6px">
-            <div class="span6 pull-left">
-            </div>
-            <div class="span6 pull-right">
-                @if (true)
-                {
-                    if (true)
+            <div class="row-fluid " style="height: 48px; padding-top: 6px">
+                <div class="span6 pull-left">
+                </div>
+                <div class="span6 pull-right">
+                    @if (true)
                     {
-                        
+                        if (true)
+                        {
+
                     <input type="button" id="grabar244" value="Aceptar" class="btn  btn-large btn-primary " />
+                        }
+                        else
+                        {
+                    <span class="label label-info">Liberado</span>
+
+                        }
+
+
+
+
+                    @*
+                        <a class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdComprobanteProveedor })">
+                            <i class="icon-print"></i>&nbsp;Imprimir</a>
+
+
+
+                        <a class="btn btn-link" style="color: Black" href="@Url.Action("Anular", new { @id = Model.IdComprobanteProveedor })">
+                            <i class=""></i>&nbsp;Anular</a>*@
+
                     }
                     else
                     {
-                    <span class="label label-info">Liberado</span>
-
-                    }
-
-               
-                     
-      
-@*       
-                    <a class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdComprobanteProveedor })">
-                        <i class="icon-print"></i>&nbsp;Imprimir</a>
-                        
-                        
-                        
-                    <a class="btn btn-link" style="color: Black" href="@Url.Action("Anular", new { @id = Model.IdComprobanteProveedor })">
-                        <i class=""></i>&nbsp;Anular</a>*@
-                   
-                }
-                else
-                {
                     <span class="label error-info">ANULADA</span>
-                }
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link ", id = "btnVolver" })
+                    }
+                    @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link ", id = "btnVolver" })
+                </div>
             </div>
         </div>
-    </div>
-    <style>
-        div.test
-        {
-            margin-left: 0px;
-            margin-right: 20px;
-            overflow: hidden !important;
-            overflow-y: hidden !important;
-            text-overflow: ellipsis;
-        }
-        
-        div.test:hover
-        {
-            margin-left: 0px;
-            text-overflow: ellipsis; /*            overflow: auto !important; */
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-        }
-    </style>
-    <div class="ui-layout-west no-scrollbar add-padding grey test link-class" id="panelOeste"
-        style="background-color: rgb(234, 234, 234); overflow-y: scroll; display: none">
-        @*  rgb(234, 234, 234) rgb(235, 238, 241)*@ @* <a  href=@Url.Content("~")  class="pull-left span2" style="padding: 0px; display: none; "  >
-            <img src="@Url.Content("~/Content/Images/Empresas/" + (@ViewBag.BasePronto ?? "DemoPronto") + ".png")"
-              
-                 alt="" style="text-align: left ; margin-top:3px;  margin-left: 0px;  width: ; height: 42px;" />
+        <style>
+            div.test {
+                margin-left: 0px;
+                margin-right: 20px;
+                overflow: hidden !important;
+                overflow-y: hidden !important;
+                text-overflow: ellipsis;
+            }
 
-        </a>*@
-        @if (false)
-        {
+                div.test:hover {
+                    margin-left: 0px;
+                    text-overflow: ellipsis; /*            overflow: auto !important; */
+                    overflow-y: auto !important;
+                    overflow-x: hidden !important;
+                }
+        </style>
+        <div class="ui-layout-west no-scrollbar add-padding grey test link-class" id="panelOeste"
+             style="background-color: rgb(234, 234, 234); overflow-y: scroll; display: none">
+            @*  rgb(234, 234, 234) rgb(235, 238, 241)*@ @* <a  href=@Url.Content("~")  class="pull-left span2" style="padding: 0px; display: none; "  >
+                    <img src="@Url.Content("~/Content/Images/Empresas/" + (@ViewBag.BasePronto ?? "DemoPronto") + ".png")"
+
+                         alt="" style="text-align: left ; margin-top:3px;  margin-left: 0px;  width: ; height: 42px;" />
+
+                </a>*@
+            @if (false)
+            {
             <br />
             <button onclick=" pageLayout.sizePane('north', 300); pageLayout.toggle('north');  "
-                class="btn span2" style="">
-                <i class="icon-th"></i>Panel</button>
+                    class="btn span2" style="">
+                <i class="icon-th"></i>Panel
+            </button>
             <br />
-            <br /> 
-        }
-        <button onclick="pageLayout.hide('west'); " class="btn btn-link pull-right" style="display: none;">
-            x</button>
-        @if (false)
-        {
-            <input id="BuscadorPanelIzquierdo" type="text" class="span8  pull-left" placeholder="Filtrar"
-                style="width: 100%; margin-left: 14px; background: transparent; border: 0" />
-        }
-
-
-@*   <a href="#">ADMINISTRACION</a></h6>*@
-        @if (!ViewBag.MenuYoutube)
-        {
             <br />
-            if (false)
+            }
+            <button onclick="pageLayout.hide('west'); " class="btn btn-link pull-right" style="display: none;">
+                x
+            </button>
+            @if (false)
             {
-            <div class="row-fluid" @*style="display: none"*@>
+            <input id="BuscadorPanelIzquierdo" type="text" class="span8  pull-left" placeholder="Filtrar"
+                   style="width: 100%; margin-left: 14px; background: transparent; border: 0" />
+            }
+
+
+            @*   <a href="#">ADMINISTRACION</a></h6>*@
+            @if (!ViewBag.MenuYoutube)
+            {
+            <br />
+                if (false)
+                {
+            <div class="row-fluid">
                 <div class="test link-class span12 " style="width: ; overflow-y: hidden; visibility: ;
                     display: ">
                     @if (true)
-                    {
-                        
-                        <input id="BuscadorPanelIzquierdo" type="text" class="span8  pull-left" placeholder="Filtrar"
-                            style="width: 90%; margin-left: 5px; background: transparent; border: 0;" />
-                        
-                    }
+                            {
+
+                            <input id="BuscadorPanelIzquierdo" type="text" class="span8  pull-left" placeholder="Filtrar"
+                                   style="width: 90%; margin-left: 5px; background: transparent; border: 0;" />
+
+                            }
                     @if (false)
-                    {
-                        <div class="span2">
-                            <div class="span10">
-                            </div>
+                            {
                             <div class="span2">
-                                <button type="button" onclick="           pageLayout.close('west'); " class="close pull-right"
-                                    style="float: none; margin-left: 20px;">
-                                    &times;
-                                </button>
+                                <div class="span10">
+                                </div>
+                                <div class="span2">
+                                    <button type="button" onclick="           pageLayout.close('west'); " class="close pull-right"
+                                            style="float: none; margin-left: 20px;">
+                                        &times;
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    }
+                            }
                     <script>
-                        $(document).ready(function () {
+                                $(document).ready(function () {
 
-                            $("#BuscadorPanelIzquierdo").keypress(function () {
+                                    $("#BuscadorPanelIzquierdo").keypress(function () {
 
-                                //$("#Accord1 [id*='" + $("#BuscadorPanelIzquierdo").val() + "']").toggle("highlight");
-                                $("#Accord1 [id*='" + $("#BuscadorPanelIzquierdo").val() + "']").show().effect('highlight');
-                                //                                $("#Accord1").show();
-                                $("#Accord1").not("[id*='" + $("#BuscadorPanelIzquierdo").val() + "']").hide();
-                                $("#Accord1").find("[id*='" + $("#BuscadorPanelIzquierdo").val() + "']").show();
-                                //$("#Accord1 [id*!='" + $("#BuscadorPanelIzquierdo").val() + "']").effect("shake");
-                                //$("#Accord1 [id*='bras']").toggle("highlight");
-                            })
+                                        //$("#Accord1 [id*='" + $("#BuscadorPanelIzquierdo").val() + "']").toggle("highlight");
+                                        $("#Accord1 [id*='" + $("#BuscadorPanelIzquierdo").val() + "']").show().effect('highlight');
+                                        //                                $("#Accord1").show();
+                                        $("#Accord1").not("[id*='" + $("#BuscadorPanelIzquierdo").val() + "']").hide();
+                                        $("#Accord1").find("[id*='" + $("#BuscadorPanelIzquierdo").val() + "']").show();
+                                        //$("#Accord1 [id*!='" + $("#BuscadorPanelIzquierdo").val() + "']").effect("shake");
+                                        //$("#Accord1 [id*='bras']").toggle("highlight");
+                                    })
 
 
-                            $("#SuperBuscador2").keypress(function () {
+                                    $("#SuperBuscador2").keypress(function () {
 
-                                //  $("#Accord1 [id*='" + $("#SuperBuscador2").val() + "']").show().effect('highlight');
-                                // $("#Accord1").not("[id*='" + $("#SuperBuscador2").val() + "']").hide();
-                                //$("#Accord1").find("[id*='" + $("#SuperBuscador2").val() + "']").show();
+                                        //  $("#Accord1 [id*='" + $("#SuperBuscador2").val() + "']").show().effect('highlight');
+                                        // $("#Accord1").not("[id*='" + $("#SuperBuscador2").val() + "']").hide();
+                                        //$("#Accord1").find("[id*='" + $("#SuperBuscador2").val() + "']").show();
 
-                                $('#Accord1 [id]').each(function () {
+                                        $('#Accord1 [id]').each(function () {
 
-                                    // $(this).show().effect('highlight', { color: "yellow" }, 200); // muy lento
+                                            // $(this).show().effect('highlight', { color: "yellow" }, 200); // muy lento
 
-                                    //$(this).addClass('.ui-state-highlight ');
-                                    $(this).css("background", "transparent");
-                                    //var repl = '<span class="myClass">' + $(this).id + '</span>';
-                                    //http://stackoverflow.com/questions/119441/highlight-a-word-with-jquery
+                                            //$(this).addClass('.ui-state-highlight ');
+                                            $(this).css("background", "transparent");
+                                            //var repl = '<span class="myClass">' + $(this).id + '</span>';
+                                            //http://stackoverflow.com/questions/119441/highlight-a-word-with-jquery
+                                        });
+
+
+                                        var videoTitle = $("#SuperBuscador2").val();
+                                        var re = RegExp(videoTitle, "i"); // el "i" es para el case insensitive. http://stackoverflow.com/questions/7853851/jquery-how-can-i-write-a-case-insensitive-attribute-contains-selector
+                                        $('#Accord1 [id]').filter(function () {
+                                            return re.test(this.id);
+                                        }).each(function () {
+
+                                            // $(this).show().effect('highlight', { color: "yellow" }, 200); // muy lento
+
+                                            //$(this).addClass('.ui-state-highlight ');
+                                            $(this).css("background", "yellow");
+                                            //var repl = '<span class="myClass">' + $(this).id + '</span>';
+                                            //http://stackoverflow.com/questions/119441/highlight-a-word-with-jquery
+                                        });
+
+                                    })
                                 });
-
-
-                                var videoTitle = $("#SuperBuscador2").val();
-                                var re = RegExp(videoTitle, "i"); // el "i" es para el case insensitive. http://stackoverflow.com/questions/7853851/jquery-how-can-i-write-a-case-insensitive-attribute-contains-selector
-                                $('#Accord1 [id]').filter(function () {
-                                    return re.test(this.id);
-                                }).each(function () {
-
-                                    // $(this).show().effect('highlight', { color: "yellow" }, 200); // muy lento
-
-                                    //$(this).addClass('.ui-state-highlight ');
-                                    $(this).css("background", "yellow");
-                                    //var repl = '<span class="myClass">' + $(this).id + '</span>';
-                                    //http://stackoverflow.com/questions/119441/highlight-a-word-with-jquery
-                                });
-
-                            })
-                        });
 
                     </script>
                 </div>
             </div>
-            }
+                }
             <div class="row-fluid">
                 <div>
                     <style>
@@ -2060,35 +2136,32 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                             /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                             /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                             /* http://stackoverflow.com/questions/1395746/jqgrid-how-do-i-removed-the-annoying-horizontal-scrollbar-when-autowidth-true */
-                        /*table-layout: auto;*//* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                        /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                         }
-                        
+
                         .ui-icon ui-icon-document-b tree-leaf treeclick
                         {
                             background: transparent;
                         }
-</style>
+                    </style>
                     <table id="addtree" class="test link-class" style="background: transparent; font-size: 16px;
                         margin-bottom: 15px; color: Gray; overflow-y: scroll; overflow-x: hidden; background: rgb(234, 234, 234);
                         font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
-                        border: 0">
-                    </table>
+                        border: 0"></table>
                     <div id="paddtree">
                     </div>
-                    <table id="addtree2">
-                    </table>
+                    <table id="addtree2"></table>
                     <br />
                     <br />
                     <a id="lnkBDL" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
-                        style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 12px;
+                       style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 12px;
                         font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none;
                         margin-left: 60px">©2014 BDL</a>
                 </div>
                 <br />
                 <br />
                 <style>
-                    .filetree li
-                    {
+                    .filetree li {
                         padding: 2px 0 2px 10px;
                     }
                 </style>
@@ -2096,163 +2169,162 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                     color: Gray; overflow-y: scroll">
                 </div>
             </div>
+            }
+            else
+            {
+            <script>
+                    $(document).ready(function () {
+
+
+
+
+                        pageLayout.hide('west');
+
+                        $.jgrid.defaults.loadtext = 'Cargando';
+                    })
+            </script>
+            }
+            <div id="accordion-west" style="font-size: 12px;">
+                @*    <h6>
+                        <a href="#">SUELDOS Y JORNALES</a></h6>
+                    <div>
+                        <p>
+                            SyJ
+                        </p>
+                    </div>
+                    <h6>
+                        <a href="#">MANTENIMIENTO DE EQUIPOS</a></h6>
+                    <div>
+                        <p>
+                            Mantenimiento de equipos
+                        </p>
+                    </div>
+                    <h6>
+                        <a href="#">HERRAMIENTAS</a></h6>
+                    <div>
+                        <p>
+                            Herramientas
+                        </p>
+                    </div>*@
+            </div>
+        </div>
+        @if (!ViewBag.MenuYoutube)
+        {
+
+            <script>
+
+
+
+                function conmutarPanelesIzq() {
+
+                    //pageLayout.toggle('east');
+                    //return;
+
+                    if (pageLayout.state.west.isHidden || pageLayout.state.west.isClosed) {
+                        // http://layout.jquery-dev.net/demos/complex.html#
+                        //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
+                        pageLayout.open('west');
+                        pageLayout.show('west', true);
+                        pageLayout.open('west');
+
+                    }
+                    else {
+
+                        pageLayout.hide('west');
+
+                    }
+                }
+
+
+                function conmutarPanelesDerecho() {
+
+                    //pageLayout.toggle('east');
+                    //return;
+
+                    if (pageLayout.state.east.isHidden || pageLayout.state.east.isClosed) {
+                        // http://layout.jquery-dev.net/demos/complex.html#
+                        //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
+
+                        pageLayout.show('east', true);
+                        pageLayout.open('east');
+                    }
+                    else {
+
+                        pageLayout.hide('east');
+
+                    }
+                }
+
+                function conmutarPanelesNorte() {
+
+                    if (true) {
+                        // por ahora desactivo el panel norte
+
+                        pageLayout.hide('north');
+                        return;
+                    }
+
+                    //pageLayout.toggle('east');
+                    //return;
+
+                    pageLayout.sizePane('north', 300);
+
+                    if (pageLayout.state.north.isHidden || pageLayout.state.north.isClosed) {
+                        // http://layout.jquery-dev.net/demos/complex.html#
+                        //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
+
+                        pageLayout.show('north', true);
+                        pageLayout.open('north');
+                    }
+                    else {
+
+                        pageLayout.hide('north');
+
+                    }
+                }
+
+            </script>
         }
         else
         {
             <script>
-                $(document).ready(function () {
 
 
 
+                function conmutarPanelesIzq() {
+                    // http://layout.jquery-dev.net/demos/complex.html#
+                    //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
 
-                    pageLayout.hide('west');
+                    //pageLayout.toggle('east');
+                    //return;
 
-                    $.jgrid.defaults.loadtext = 'Cargando';
-                })
-            </script>   
+                    if ($("#AccordInterno").is(":visible")) {
+
+
+
+                        $("#AccordInterno").hide();
+
+                    }
+                    else {
+
+                        $("#AccordInterno").show();
+                    }
+                }
+
+
+            </script>
+
         }
-        <div id="accordion-west" style="font-size: 12px;">
-            @*    <h6>
-                <a href="#">SUELDOS Y JORNALES</a></h6>
-            <div>
-                <p>
-                    SyJ
-                </p>
-            </div>
-            <h6>
-                <a href="#">MANTENIMIENTO DE EQUIPOS</a></h6>
-            <div>
-                <p>
-                    Mantenimiento de equipos
-                </p>
-            </div>
-            <h6>
-                <a href="#">HERRAMIENTAS</a></h6>
-            <div>
-                <p>
-                    Herramientas
-                </p>
-            </div>*@
-        </div>
-    </div>
-    @if (!ViewBag.MenuYoutube)
-    {
-
-        <script>
-
-
-
-            function conmutarPanelesIzq() {
-
-                //pageLayout.toggle('east'); 
-                //return;
-
-                if (pageLayout.state.west.isHidden || pageLayout.state.west.isClosed) {
-                    // http://layout.jquery-dev.net/demos/complex.html#
-                    //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
-                    pageLayout.open('west');
-                    pageLayout.show('west', true);
-                    pageLayout.open('west');
-
-                }
-                else {
-
-                    pageLayout.hide('west');
-
-                }
+        <style>
+            .ui-layout-center {
+                border-left-width: 1px;
+                border-right-width: 1px;
+                border-left-color: #e2e2e2; /* lightgray; */
+                border-right-color: #e2e2e2; /* lightgray; */
+                background-color: rgb(250, 250, 250); /* rgb(247, 247, 247); */
             }
-
-
-            function conmutarPanelesDerecho() {
-
-                //pageLayout.toggle('east'); 
-                //return;
-
-                if (pageLayout.state.east.isHidden || pageLayout.state.east.isClosed) {
-                    // http://layout.jquery-dev.net/demos/complex.html#
-                    //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
-
-                    pageLayout.show('east', true);
-                    pageLayout.open('east');
-                }
-                else {
-
-                    pageLayout.hide('east');
-
-                }
-            }
-
-            function conmutarPanelesNorte() {
-
-                if (true) {
-                    // por ahora desactivo el panel norte
-
-                    pageLayout.hide('north');
-                    return;
-                }
-
-                //pageLayout.toggle('east'); 
-                //return;
-
-                pageLayout.sizePane('north', 300);
-
-                if (pageLayout.state.north.isHidden || pageLayout.state.north.isClosed) {
-                    // http://layout.jquery-dev.net/demos/complex.html#
-                    //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
-
-                    pageLayout.show('north', true);
-                    pageLayout.open('north');
-                }
-                else {
-
-                    pageLayout.hide('north');
-
-                }
-            }
-
-        </script>
-    }
-    else
-    {
-        <script>
-
-
-
-            function conmutarPanelesIzq() {
-                // http://layout.jquery-dev.net/demos/complex.html#
-                //http://layout.jquery-dev.net/documentation.cfm#Properties_Methods
-
-                //pageLayout.toggle('east'); 
-                //return;
-
-                if ($("#AccordInterno").is(":visible")) {
-
-
-
-                    $("#AccordInterno").hide();
-
-                }
-                else {
-
-                    $("#AccordInterno").show();
-                }
-            }
-
-            
-        </script>
-                
-    }
-    <style>
-        .ui-layout-center
-        {
-            border-left-width: 1px;
-            border-right-width: 1px;
-            border-left-color: #e2e2e2; /* lightgray; */
-            border-right-color: #e2e2e2; /* lightgray; */
-            background-color: rgb(250, 250, 250); /* rgb(247, 247, 247); */
-        }
-    </style>
-    <div id="tabs-center" class="ui-layout-center no-scrollbar add-padding grey" style="display: none;
+        </style>
+        <div id="tabs-center" class="ui-layout-center no-scrollbar add-padding grey" style="display: none;
         padding: 0px; background-image: /*  url('http://4.bp.blogspot.com/-PG5lMJZOpd0/UIiNh4vSjgI/AAAAAAAAAKg/6pd3vxCUmtA/s1600/floorboard+texture.jpg');
         */
     /*     url('http://www.ipadwallpapersonly.com/images/wallpapers/tcfgjo4jr.jpg');
@@ -2263,122 +2335,122 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
         */
           /* url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */; background-repeat: repeat;
         width: 75%">
-        @*background-color: rgb(235, 238, 241);*@ @*    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*@ @*<div class="container">*@ @* http://stackoverflow.com/questions/14735274/bootstrap-css-hides-portion-of-container-below-navbar-navbar-fixed-top *@
-        @*   if (pageLayout.state.west.isHidden || pageLayout.state.west.isClosed) {*@
-        <style>
-            .margen body
-            {
-                /*
-                padding-top: 60px; 
-                */
-            }
-            
-            body
-            {
-                padding-top: 50px;
-            }
-            
-            .container-fluid
-            {
-                /* padding-left: 0px; */ /* padding-top: 60px;  */ /*
-                padding-right: 0px;
-                
-                */
-            }
-        </style>
-        <div class="container-fluid" style="padding: 0px;">
-            <div class="row-fluid margen" style="">
-                @if (ViewBag.MenuYoutube)
-                { <span class="span2 lightblue">
-                    <div class="span12 lightblue">
-                        <a class="pull-left btn " onclick="conmutarPanelesIzq();" style="margin-left: 20px;">
-                            <i class=" icon-align-justify"></i></a>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                </span>
+            @*background-color: rgb(235, 238, 241);*@ @*    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            *@ @*<div class="container">*@ @* http://stackoverflow.com/questions/14735274/bootstrap-css-hides-portion-of-container-below-navbar-navbar-fixed-top *@
+            @*   if (pageLayout.state.west.isHidden || pageLayout.state.west.isClosed) {*@
+            <style>
+                .margen body {
+                    /*
+                    padding-top: 60px;
+                    */
+                }
+
+                body {
+                    padding-top: 50px;
+                }
+
+                .container-fluid {
+                    /* padding-left: 0px; */ /* padding-top: 60px;  */ /*
+                    padding-right: 0px;
+
+                    */
+                }
+            </style>
+            <div class="container-fluid" style="padding: 0px;">
+                <div class="row-fluid margen" style="">
+                    @if (ViewBag.MenuYoutube)
+                    { <span class="span2 lightblue">
+                        <div class="span12 lightblue">
+                            <a class="pull-left btn " onclick="conmutarPanelesIzq();" style="margin-left: 20px;">
+                                <i class=" icon-align-justify"></i>
+                            </a>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                    </span>
                     <script>
-                        $(document).ready(function () {
-                            pageLayout.hide('west');
-                        });
+                            $(document).ready(function () {
+                                pageLayout.hide('west');
+                            });
                     </script>
-                    
+
                     <input id="asdasd" title="2asdasd" />
                     <div id="AccordInterno" class="span12 lightblue link-class" style="">
                         <div id="Accord1" class="test" style="background: none; font-family: arial, sans-serif;
                             font-size: 11px; max-height: 600px;">
                         </div>
                     </div>
-                }
-                else
-                {
-
-@*    <script>
-                        $(document).ready(function () {
-                            pageLayout.show('west');
-                        });
-                    </script>*@
-                }
-                @*http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1*@
-                <span class="span12 lightblue">@*layoutState.load('pageLayout').west__size*@ @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-                    @if (false)
-                    {
-                        <div class="row-fluid ">
-                            @* navbar-fixed-top*@ @* navbar-static-top*@
-                            <div class="alert alert-error fade in span12 " id="mensajeAlerta" style="display: none;">
-                                <button type="button" class="close">
-                                    &times;</button>
-                                <p id="textoMensajeAlerta">
-                                    @(System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "")
-                                    @TempData["Alerta"]
-                                </p>
-                            </div>
-                        </div>
-                        if ((@TempData["Alerta"] ?? "") != "" || (@System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "") != "")
-                        {
-                        <script>
-                            $("#mensajeAlerta").show();
-                        </script>
-                        }
                     }
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
-@*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    else
+                    {
+
+                    @*    <script>
+                            $(document).ready(function () {
+                                pageLayout.show('west');
+                            });
+                        </script>*@
+                    }
+                    @*http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1*@
+                    <span class="span12 lightblue">
+                        @*layoutState.load('pageLayout').west__size*@ @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                        @if (false)
+                        {
+                    <div class="row-fluid ">
+                        @* navbar-fixed-top*@ @* navbar-static-top*@
+                        <div class="alert alert-error fade in span12 " id="mensajeAlerta" style="display: none;">
+                            <button type="button" class="close">
+                                &times;
+                            </button>
+                            <p id="textoMensajeAlerta">
+                                @(System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "")
+                                @TempData["Alerta"]
+                            </p>
+                        </div>
+                    </div>
+                            if ((@TempData["Alerta"] ?? "") != "" || (@System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "") != "")
+                            {
+                    <script>
+                                    $("#mensajeAlerta").show();
+                    </script>
+                            }
+                        }
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
+                    @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
                     <div class="row-fluid" style="width: ">
                         @RenderBody()
                     </div>
                     @*<span class="span1 lightblue"></span>*@
                     <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                        style="display: none;">
+                            style="display: none;"></button>
                 </span>></button>
                 <script>
-                    $('.alert .close').live("click", function (e) {
-                        $(this).parent().hide();
-                    });</script>
+                            $('.alert .close').live("click", function (e) {
+                                $(this).parent().hide();
+                            });</script>
             </div>
         </div>
         @*    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*@ @*     <br />*@
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        *@ @*     <br />*@
         <div id="test">
         </div>
         <div id="dialog-password" class="aaa" style="display: none;">
@@ -2410,19 +2482,26 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
         <div>
             @*estos se usan en las llamadas a dialogs de passwords etc. ojo con borrar! *@
             <div>
-                <input id="Aux0" name="Aux0" type="hidden" /></div>
+                <input id="Aux0" name="Aux0" type="hidden" />
+            </div>
             <div>
-                <input id="Aux1" name="Aux1" type="hidden" /></div>
+                <input id="Aux1" name="Aux1" type="hidden" />
+            </div>
             <div>
-                <input id="Aux2" name="Aux2" type="hidden" /></div>
+                <input id="Aux2" name="Aux2" type="hidden" />
+            </div>
             <div>
-                <input id="Aux3" name="Aux3" type="hidden" /></div>
+                <input id="Aux3" name="Aux3" type="hidden" />
+            </div>
             <div>
-                <input id="Aux4" name="Aux4" type="hidden" /></div>
+                <input id="Aux4" name="Aux4" type="hidden" />
+            </div>
             <div>
-                <input id="Aux5" name="Aux5" type="hidden" /></div>
+                <input id="Aux5" name="Aux5" type="hidden" />
+            </div>
             <div>
-                <input id="Aux10" name="Aux10" type="hidden" /></div>
+                <input id="Aux10" name="Aux10" type="hidden" />
+            </div>
         </div>
         @*</div>*@
     </div>
@@ -2430,267 +2509,276 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
         background-color: rgb(234, 234, 234); display: none">
         @* (235, 238, 241)  (235, 238, 241);*@
         @if (false)
-        {
-            <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;"
-                onclick="           pageLayout.hide('east'); ">
-                &times;</button>
-        }
+                {
+                <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;"
+                        onclick="           pageLayout.hide('east'); ">
+                    &times;
+                </button>
+                }
         <div class="container-fluid" style="margin-left: 15px;">
             <div>
                 <div class="row-fluid ">
                     @if ((TempData["Alerta"] ?? "").ToString().Contains("Grabado"))
-                    {
-@*<p id="textoMensajeAlerta">
-                            @TempData["Alerta"].NullSafeToString()
-                        </p>*@
-                        <div class="alert fade in span12  alert-success" id="mensajeAlerta" style="display: none;
+                            {
+                            @*<p id="textoMensajeAlerta">
+                                    @TempData["Alerta"].NullSafeToString()
+                                </p>*@
+                            <div class="alert fade in span12  alert-success" id="mensajeAlerta" style="display: none;
                             font-size: small;">
-                            <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;">
-                                &times;</button>
-                            <p id="textoMensajeAlerta">
-                                @Html.Raw(TempData["Alerta"].NullSafeToString())
-                            </p>
-                        </div>
-                        <script>
-                            //                            $(function () {
-                            //                                $("#mensajeAlerta").show();
-                            //                                pageLayout.show('east');
-                            //                            });
-                        </script>
-                    }
-                    else
-                    {
-                        <div class="alert  alert-error fade in span12 " id="mensajeAlerta" style="display: none;
+                                <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;">
+                                    &times;
+                                </button>
+                                <p id="textoMensajeAlerta">
+                                    @Html.Raw(TempData["Alerta"].NullSafeToString())
+                                </p>
+                            </div>
+                            <script>
+                                    //                            $(function () {
+                                    //                                $("#mensajeAlerta").show();
+                                    //                                pageLayout.show('east');
+                                    //                            });
+                            </script>
+                            }
+                            else
+                            {
+                            <div class="alert  alert-error fade in span12 " id="mensajeAlerta" style="display: none;
                             font-size: small;">
-                            <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;">
-                                &times;</button>
-                            <p id="textoMensajeAlerta">
-                                @(System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "")
-                                @Html.Raw(TempData["Alerta"].NullSafeToString())
-                            </p>
-                        </div>
-                        <script>
-                            //                            $(function () {
-                            //                                $("#mensajeAlerta").show();
-                            //                                pageLayout.show('east');
+                                <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;">
+                                    &times;
+                                </button>
+                                <p id="textoMensajeAlerta">
+                                    @(System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "")
+                                    @Html.Raw(TempData["Alerta"].NullSafeToString())
+                                </p>
+                            </div>
+                            <script>
+                                    //                            $(function () {
+                                    //                                $("#mensajeAlerta").show();
+                                    //                                pageLayout.show('east');
 
-                            //                            });
+                                    //                            });
 
-                        </script>
-                    }
+                            </script>
+                            }
                 </div>
                 @if ((@TempData["Alerta"] ?? "") != "" || (@System.Configuration.ConfigurationManager.AppSettings["CartelAviso"] ?? "") != "")
-                {
-                    <script>
-                        $(function () {
-                            $("#mensajeAlerta").show();
-                            pageLayout.show('east');
+                        {
+                        <script>
+                                $(function () {
+                                    $("#mensajeAlerta").show();
+                                    pageLayout.show('east');
 
-                        });
+                                });
 
-                    </script>
-                }
+                        </script>
+                        }
             </div>
             <div class="span2">
                 <button type="button" class="close " onclick="
             pageLayout.close('east'); " style="display: none">
-                    &times;</button>
+                    &times;
+                </button>
             </div>
             @*            <br />
-            <br />
-*@
+                <br />
+            *@
             <div class="row-fluid margen" style="margin-top: 10px;">
                 <div class="span12">
                     <div class="input-prepend input-append span12">
                         <input id="BuscadorPanelDerecho" type="text" class="span12" placeholder="Filtrar"
-                            style="background: ; border: " />
+                               style="background: ; border: " />
                         @*  <select id="campos " class="span2" style="background: ; border: ">
-                            <option>ssss</option>
-                            <option>aaa</option>
-                        </select>*@ @*        <div class="input-prepend ">
-                        <div class="btn-group ">
-                           <button class="btn dropdown-toggle  " data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">Requerimientos</a></li>
-                                <li><a tabindex="-1" href="#">Pedidos</a></li>
-                            </ul>  <ul class="dropdown-menu">
-                                
-                            </ul> en cuanto pongo el <ul>, se mezcla el bootstrap con los tabs del jqueryUI 
+                                <option>ssss</option>
+                                <option>aaa</option>
+                            </select>*@ @*        <div class="input-prepend ">
+                                <div class="btn-group ">
+                                   <button class="btn dropdown-toggle  " data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a tabindex="-1" href="#">Requerimientos</a></li>
+                                        <li><a tabindex="-1" href="#">Pedidos</a></li>
+                                    </ul>  <ul class="dropdown-menu">
+
+                                    </ul> en cuanto pongo el <ul>, se mezcla el bootstrap con los tabs del jqueryUI
+                                </div>
+
+                            </div>*@
                         </div>
-                        
-                    </div>*@
                     </div>
                 </div>
-            </div>
-            <div class="row-fluid margen" style="">
-                <script>
-                    //                http://www.ok-soft-gmbh.com/jqGrid/SingleSearchFilter.htm
+                <div class="row-fluid margen" style="">
+                    <script>
+                                //                http://www.ok-soft-gmbh.com/jqGrid/SingleSearchFilter.htm
 
 
-                    $("#BuscadorPanelDerecho").change(function () {
+                                $("#BuscadorPanelDerecho").change(function () {
 
-                        /*
-                        var grid = jQuery("#ListaDrag");
-                        var postdata = grid.jqGrid('getGridParam', 'postData');
-                        jQuery.extend(postdata,
-                        { filters: '',
-                        searchField: 'Descripcion', // Codigo
-                        searchOper: 'contains',
-                        searchString: $("#BuscadorPanelDerecho").val()
-                        });
-                        grid.jqGrid('setGridParam', { search: true, postData: postdata });
-                        grid.trigger("reloadGrid", [{ page: 1}]);
-
-
-                        var grid = jQuery("#ListaDrag2");
-                        var postdata = grid.jqGrid('getGridParam', 'postData');
-                        jQuery.extend(postdata,
-                        { filters: '',
-                        searchField: 'NumeroRequerimiento',
-                        searchOper: 'eq',
-                        searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
-                        });
-                        grid.jqGrid('setGridParam', { search: true, postData: postdata });
-                        grid.trigger("reloadGrid", [{ page: 1}]);
+                                    /*
+                                    var grid = jQuery("#ListaDrag");
+                                    var postdata = grid.jqGrid('getGridParam', 'postData');
+                                    jQuery.extend(postdata,
+                                    { filters: '',
+                                    searchField: 'Descripcion', // Codigo
+                                    searchOper: 'contains',
+                                    searchString: $("#BuscadorPanelDerecho").val()
+                                    });
+                                    grid.jqGrid('setGridParam', { search: true, postData: postdata });
+                                    grid.trigger("reloadGrid", [{ page: 1}]);
 
 
-
-
-                        */
+                                    var grid = jQuery("#ListaDrag2");
+                                    var postdata = grid.jqGrid('getGridParam', 'postData');
+                                    jQuery.extend(postdata,
+                                    { filters: '',
+                                    searchField: 'NumeroRequerimiento',
+                                    searchOper: 'eq',
+                                    searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
+                                    });
+                                    grid.jqGrid('setGridParam', { search: true, postData: postdata });
+                                    grid.trigger("reloadGrid", [{ page: 1}]);
 
 
 
 
+                                    */
 
-                        //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-                    });
-            
-                </script>
-                <style>
-                    ocultardefacebook
-                    {
-                        background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/y5/r/5tkBKMdVC9X.png);
-                        background-repeat: no-repeat;
-                        background-size: auto;
-                        background-position: -443px -20px;
-                    }
-                    .ui-tabs .ui-tabs-nav li a
-                    {
-                        padding: 2px;
-                    }
-                </style>
-                @*  <button onclick="pageLayout.hide('east'); " class="btn btn-mini pull-right" style="margin-top: 9px; display: none">
-            x</button>*@
-                <div id="tabsDelPanel" class="span12" style="padding: 0px !important; margin: 0 0 0 0;
-                    border: 0 !important; background-color: rgb(234, 234, 234);">@* rgb(235, 238, 241)*@
-                    <div class="ui-widget-header no-scrollbar add-padding" style="margin: 0 1px; font-size: 20px;
-                        line-height: 25px; background: none; border: 0 !important; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
-                    </div>
-                    <ul class="allow-overflow" style="margin: 0 1px; font-size: 12px; background: none;
-                        border: 0 !important; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif !important;">
-                        <li style="font-size: 12px; border: 0 !important; padding-right: 10px;"><a id="a_panel_este_tab1"
-                            href="#tab-panel-east-1" style="font-size: 12px;"></a></li>
-                        <li style="font-size: 12px; border: 0 !important; padding-right: 10px;"><a id="a_panel_este_tab2"
-                            href="#tab-panel-east-2" style="font-size: 12px;"></a></li>
-                        <li style="font-size: 12px; border: 0 !important; padding-right: 10px;"><a id="a_panel_este_tab3"
-                            href="#tab-panel-east-3" style="font-size: 12px;"></a></li>
-                        <li style="font-size: 12px; border: 0 !important; padding-right: 10px;"><a id="a_panel_este_tab4"
-                            href="#tab-panel-east-4" style="font-size: 12px;"></a></li>
-                        <li style="font-size: 12px; border: 0 !important; padding-right: 10px;"><a id="a_panel_este_tab5"
-                            href="#tab-panel-east-5" style="font-size: 12px;"></a></li>
-                    </ul>
+
+
+
+
+                                    //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
+                                });
+
+                    </script>
                     <style>
-                        .ui-tabs .ui-tabs-panel
-                        {
-                            padding: 0px;
+                        ocultardefacebook {
+                            background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/y5/r/5tkBKMdVC9X.png);
+                            background-repeat: no-repeat;
+                            background-size: auto;
+                            background-position: -443px -20px;
                         }
-                        
-                        /* .ui-pager-control 
-                        {
-                            height: 30px;
+
+                        .ui-tabs .ui-tabs-nav li a {
+                            padding: 2px;
                         }
-                        */
                     </style>
-                    <div class="ui-layout-content ui-widget-content no-scrollbar" id="contenedor" style="border-top: 0;
+                    @*  <button onclick="pageLayout.hide('east'); " class="btn btn-mini pull-right" style="margin-top: 9px; display: none">
+                        x</button>*@
+                    <div id="tabsDelPanel" class="span12" style="padding: 0px !important; margin: 0 0 0 0;
+                    border: 0 !important; background-color: rgb(234, 234, 234);">
+                        @* rgb(235, 238, 241)*@
+                        <div class="ui-widget-header no-scrollbar add-padding" style="margin: 0 1px; font-size: 20px;
+                        line-height: 25px; background: none; border: 0 !important; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
+                        </div>
+                        <ul class="allow-overflow" style="margin: 0 1px; font-size: 12px; background: none;
+                        border: 0 !important; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif !important;">
+                            <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
+                                <a id="a_panel_este_tab1"
+                                   href="#tab-panel-east-1" style="font-size: 12px;"></a>
+                            </li>
+                            <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
+                                <a id="a_panel_este_tab2"
+                                   href="#tab-panel-east-2" style="font-size: 12px;"></a>
+                            </li>
+                            <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
+                                <a id="a_panel_este_tab3"
+                                   href="#tab-panel-east-3" style="font-size: 12px;"></a>
+                            </li>
+                            <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
+                                <a id="a_panel_este_tab4"
+                                   href="#tab-panel-east-4" style="font-size: 12px;"></a>
+                            </li>
+                            <li style="font-size: 12px; border: 0 !important; padding-right: 10px;">
+                                <a id="a_panel_este_tab5"
+                                   href="#tab-panel-east-5" style="font-size: 12px;"></a>
+                            </li>
+                        </ul>
+                        <style>
+                            .ui-tabs .ui-tabs-panel {
+                                padding: 0px;
+                            }
+
+                            /* .ui-pager-control
+                                {
+                                    height: 30px;
+                                }
+                                */
+                        </style>
+                        <div class="ui-layout-content ui-widget-content no-scrollbar" id="contenedor" style="border-top: 0;
                         border: 0; padding: 0; margin: 0; overflow: hidden">
-                        <div id="tab-panel-east-1" class="full-height no-padding add-scrollbar" style="border-top: 0;
+                            <div id="tab-panel-east-1" class="full-height no-padding add-scrollbar" style="border-top: 0;
                             background: rgb(234, 234, 234); border: 0;">
-                            <div class="ui-tabs-panel outline" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
+                                <div class="ui-tabs-panel outline" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
                                 font-size: 14px; line-height: 29px; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
-                                <div class="row-fluid">
-                                    <div id="tabs" class="ui-jqgrid" style="">
-                                        <table id="ListaDrag" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
-                                            font-size: 14px;" cellpadding="0" cellspacing="0">
-                                        </table>
-                                        <div id="ListaDragPager" class="" style="line-height: 15px;">
+                                    <div class="row-fluid">
+                                        <div id="tabs" class="ui-jqgrid" style="">
+                                            <table id="ListaDrag" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+                                            font-size: 14px;" cellpadding="0" cellspacing="0"></table>
+                                            <div id="ListaDragPager" class="" style="line-height: 15px;">
+                                            </div>
+                                            <p>
+                                            </p>
                                         </div>
-                                        <p>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="tab-panel-east-2" class="full-height no-padding no-scrollbar" style="border-top: 0;
+                            <div id="tab-panel-east-2" class="full-height no-padding no-scrollbar" style="border-top: 0;
                             border: 0;">
-                            <div class="ui-tabs-panel outline" style="border-top: 0; padding: 0; margin: 0;">
-                                <div id="tabs2" class="ui-jqgrid" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
+                                <div class="ui-tabs-panel outline" style="border-top: 0; padding: 0; margin: 0;">
+                                    <div id="tabs2" class="ui-jqgrid" style="border-top: 0; padding: 0; margin: 0; background: rgb(234, 234, 234);
                                     font-size: 14px; line-height: 29px; font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;">
-                                    <div class="row-fluid">
-                                        <table id="ListaDrag2" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
-                                            font-size: 14px;" cellpadding="0" cellspacing="0">
-                                        </table>
-                                        <div id="ListaDragPager2" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                        <div class="row-fluid">
+                                            <table id="ListaDrag2" class="scroll" style="background: rgb(234, 234, 234); font-family: 'Helvetica Narrow','Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+                                            font-size: 14px;" cellpadding="0" cellspacing="0"></table>
+                                            <div id="ListaDragPager2" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                            </div>
+                                            <p>
+                                            </p>
                                         </div>
-                                        <p>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="tab-panel-east-3" class="full-height no-padding add-scrollbar" style="border-top: 0;
+                            <div id="tab-panel-east-3" class="full-height no-padding add-scrollbar" style="border-top: 0;
                             border: 0;">
-                            <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;
+                                <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;
                                 background: rgb(234, 234, 234)">
-                                <div id="tabs3" class="ui-jqgrid" style="background: rgb(234, 234, 234)">
-                                    <div class="row-fluid">
-                                        <table id="ListaDrag3" class="scroll" cellpadding="0" cellspacing="0" style="background: rgb(234, 234, 234)">
-                                        </table>
-                                        <div id="ListaDragPager3" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                    <div id="tabs3" class="ui-jqgrid" style="background: rgb(234, 234, 234)">
+                                        <div class="row-fluid">
+                                            <table id="ListaDrag3" class="scroll" cellpadding="0" cellspacing="0" style="background: rgb(234, 234, 234)"></table>
+                                            <div id="ListaDragPager3" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                            </div>
+                                            <p>
+                                            </p>
                                         </div>
-                                        <p>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="tab-panel-east-4" class="full-height no-padding add-scrollbar" style="border-top: 0;
+                            <div id="tab-panel-east-4" class="full-height no-padding add-scrollbar" style="border-top: 0;
                             border: 0;">
-                            <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;">
-                                <div id="tabs4" class="ui-jqgrid">
-                                    <div class="row-fluid">
-                                        <table id="ListaDrag4" class="scroll" cellpadding="0" cellspacing="0">
-                                        </table>
-                                        <div id="ListaDragPager4" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;">
+                                    <div id="tabs4" class="ui-jqgrid">
+                                        <div class="row-fluid">
+                                            <table id="ListaDrag4" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                            <div id="ListaDragPager4" class="scroll" style="text-align: center; background: rgb(234, 234, 234);">
+                                            </div>
+                                            <p>
+                                            </p>
                                         </div>
-                                        <p>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="tab-panel-east-5" class="full-height no-padding add-scrollbar" style="border-top: 0;
+                            <div id="tab-panel-east-5" class="full-height no-padding add-scrollbar" style="border-top: 0;
                             border: 0;">
-                            <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;">
-                                <div id="tabs5" class="ui-jqgrid">
-                                    <div class="row-fluid">
-                                        <table id="ListaDrag5" class="scroll" cellpadding="0" cellspacing="0">
-                                        </table>
-                                        <div id="ListaDragPager5" class="scroll" style="text-align: center; background: rgb(235, 238, 241);">
+                                <div class="ui-tabs-panel outline  " style="border-top: 0; padding: 0; margin: 0;">
+                                    <div id="tabs5" class="ui-jqgrid">
+                                        <div class="row-fluid">
+                                            <table id="ListaDrag5" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                            <div id="ListaDragPager5" class="scroll" style="text-align: center; background: rgb(235, 238, 241);">
+                                            </div>
+                                            <p>
+                                            </p>
                                         </div>
-                                        <p>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -2698,90 +2786,162 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
                     </div>
                 </div>
             </div>
+            @*(System.Diagnostics.Debug.att.IsAttached())*@
+            @if (ViewBag.NombreUsuario == "Mariano" && System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANO-PC" && false)
+                    {
+                        //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
+                        //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
+                        var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
+
+                <img src=@aas
+                     alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
+    bottom: -8px; position: fixed; right: 0; left: ; z-index: 1030; margin-bottom: 0;" />
+                    }
         </div>
-        @*(System.Diagnostics.Debug.att.IsAttached())*@
-        @if (ViewBag.NombreUsuario == "Mariano" && System.Diagnostics.Debugger.IsAttached & System.Environment.MachineName == "MARIANO-PC" && false)
-        {
-            //var s=Url.Content("~/Content/images/Wizard-Resource-Arcane-Power.gif");
-            //var aas = "http://trolr.com/wp-content/uploads/2012/05/Witch-Doctor-Resource-Mana.gif";
-            var aas = "http://trolr.com/wp-content/uploads/2012/05/Monk-Resource-Spirit.gif";
-            
-            <img src=@aas
-    alt="" style="text-align: ; margin-top: ; margin-left: ; width: ; height: 150px;
-    bottom: -8px; position: fixed; right: 0; left: ; z-index: 1030; margin-bottom: 0;"
-    />
-        }
-    </div>
-    <div class="modal">
-        <!-- Place at bottom of page -->
-        @*http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation*@
-    </div>
-</body>
+        <div class="modal">
+            <!-- Place at bottom of page -->
+            @*http://stackoverflow.com/questions/1964839/jquery-please-wait-loading-animation*@
+        </div>
+    </body>
 </html>
 <style>
     /*  .ui-layout-west
-        {
-            background: #F8F8FF !important;
-            width: 300px !important;
-        }*/
-    
-    
-    .ui-layout-resizer
-    {
+                    {
+                        background: #F8F8FF !important;
+                        width: 300px !important;
+                    }*/
+
+
+    .ui-layout-resizer {
         z-index: 30 !important; /* width: 1px !important;*/ /* background:    rgb(235, 238, 241); */ /* background: transparent; */
     }
 </style>
 <script>
 
-    function armarMenu() {
+            function armarMenu() {
 
-        // https: //github.com/twitter/bootstrap/issues/160
-        //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
-        // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
-        $.post(ROOT + "Home/Menu", null, function (data) {
-            var menu_html = '';
+                // https: //github.com/twitter/bootstrap/issues/160
+                //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
+                // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
+                $.post(ROOT + "Home/Menu", null, function (data) {
+                    var menu_html = '';
 
-            // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
+                    // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
 
-            var longitud = 0
-            for (var i = 0; i < data.length; i++) {
-                if (longitud > 0) {
-                    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                }
-                if (data[i].EsPadre == "SI") {
-                    if (data[i].ParentId == "") {
-                        menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
-                        // + ' <b class="caret"></b>' 
-                        + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                    var longitud = 0
+                    for (var i = 0; i < data.length; i++) {
+                        if (longitud > 0) {
+                            if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
+                            if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
+                            if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                            if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                        }
+                        if (data[i].EsPadre == "SI") {
+                            if (data[i].ParentId == "") {
+                                menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
+                                // + ' <b class="caret"></b>'
+                                + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                            }
+                            else {
+                                menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                            }
+                        }
+                        else {
+                            if (data[i].Link.length > 0) {
+                                menu_html += '<li>' + data[i].Link + '</li>'
+                            }
+                            else {
+                                menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+                            }
+                        }
+                        longitud = data[i].IdItem.length;
                     }
-                    else {
-                        menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                    if (longitud > 0) {
+                        if (longitud - 2 == 3) { menu_html += '</ul></li>' }
+                        if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
+                        if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                        if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
                     }
-                }
-                else {
-                    if (data[i].Link.length > 0) {
-                        menu_html += '<li>' + data[i].Link + '</li>'
-                    }
-                    else {
-                        menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
-                    }
-                }
-                longitud = data[i].IdItem.length;
+                    menu_html += ''
+                    //                    $("#navigation2").empty().append(menu_html);
+                    //$("#navigation2").append(menu_html);
+                    //$("#navigation3").empty().append(menu_html);
+                    $("#navigation3").empty().replaceWith(menu_html);
+
+
+
+
+
+
+
+                    estiloArbol();
+
+
+                });
             }
-            if (longitud > 0) {
-                if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-                if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-                if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+
+
+
+
+
+            function ReestableceScroll() {
+                //////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////
+                //    http: //browse-tutorials.com/tutorial/save-window-scroll-position-jquery
+                $.cookies.get('myCookie')
+
+                //set window scroll position if cookie is set
+                //window.scroll(0, $.cookies.get('myCookie'));
+                $("#panelOeste").scrollTop($.cookies.get('myCookie'));
+
+                //unset cookie after setting scroll position
+                $.cookies.del('myCookie');
+
+                //make this class objects keep page scroll position
+                $('.link-class').each(function () {
+                    $(this).click(function () {
+                        $.cookies.set('myCookie', getPageScroll());
+                    });
+                });
+
+                $('a[href!=""]').each(function () {
+                    $(this).click(function () {
+                        $.cookies.set('myCookie', getPageScroll());
+                    });
+                });
+
+                $(':input').each(function () {
+                    $(this).click(function () {
+                        $.cookies.set('myCookie', getPageScroll());
+                    });
+                });
+                //////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////
+
             }
-            menu_html += ''
-            //                    $("#navigation2").empty().append(menu_html);
-            //$("#navigation2").append(menu_html);
-            //$("#navigation3").empty().append(menu_html);
-            $("#navigation3").empty().replaceWith(menu_html);
+
+
+
+
+            //    http: //browse-tutorials.com/tutorial/save-window-scroll-position-jquery
+            //this function simply gets the window scroll position, works in all browsers
+            function getPageScroll() {
+
+                var yScroll;
+
+                return $("#panelOeste").scrollTop();
+
+                if (self.pageYOffset) {
+                    yScroll = self.pageYOffset;
+                } else if (document.documentElement && document.documentElement.scrollTop) {
+                    yScroll = document.documentElement.scrollTop;
+                } else if (document.body) {
+                    yScroll = document.body.scrollTop;
+                }
+                return yScroll
+            }
 
 
 
@@ -2789,82 +2949,8 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 
 
 
-            estiloArbol();
-
-
-        });
-    }
-
-
-
-
-
-    function ReestableceScroll() {
-        //////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
-        //    http: //browse-tutorials.com/tutorial/save-window-scroll-position-jquery
-        $.cookies.get('myCookie')
-
-        //set window scroll position if cookie is set
-        //window.scroll(0, $.cookies.get('myCookie'));
-        $("#panelOeste").scrollTop($.cookies.get('myCookie'));
-
-        //unset cookie after setting scroll position
-        $.cookies.del('myCookie');
-
-        //make this class objects keep page scroll position
-        $('.link-class').each(function () {
-            $(this).click(function () {
-                $.cookies.set('myCookie', getPageScroll());
-            });
-        });
-
-        $('a[href!=""]').each(function () {
-            $(this).click(function () {
-                $.cookies.set('myCookie', getPageScroll());
-            });
-        });
-
-        $(':input').each(function () {
-            $(this).click(function () {
-                $.cookies.set('myCookie', getPageScroll());
-            });
-        });
-        //////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
-
-    }
-
-
-
-
-    //    http: //browse-tutorials.com/tutorial/save-window-scroll-position-jquery
-    //this function simply gets the window scroll position, works in all browsers
-    function getPageScroll() {
-
-        var yScroll;
-
-        return $("#panelOeste").scrollTop();
-
-        if (self.pageYOffset) {
-            yScroll = self.pageYOffset;
-        } else if (document.documentElement && document.documentElement.scrollTop) {
-            yScroll = document.documentElement.scrollTop;
-        } else if (document.body) {
-            yScroll = document.body.scrollTop;
-        }
-        return yScroll
-    }
-
-
-
-
-
-
-  
 </script>
+
 @if (true || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
 {
     <script>
@@ -2877,7 +2963,7 @@ box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
             //                conmutarPanelesIzq();
         });
 
-    </script> 
+    </script>
 }
 <script src="@Url.Content("~/Scripts/jsLayout.js?1611")" type="text/javascript"></script>
 <script>

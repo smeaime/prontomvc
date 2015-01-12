@@ -1473,188 +1473,14 @@ Public Class CartaDePorteManager
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
-    'Este filtro lo uso en los sincronismos, porque ahí está el dataset tipado
-    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas" _
-                ) As String
-
-
-        Dim strWHERE As String = "1=1 "
-
-
-
-
-        If QueContenga <> "" Then
-            Dim idVendedorQueContiene = BuscaIdClientePreciso(QueContenga, sc)
-            Dim idCorredorQueContiene = BuscaIdVendedorPreciso(QueContenga, sc)
-
-            If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
-                strWHERE += "  " & _
-                 "           AND (Vendedor = " & idVendedorQueContiene & _
-                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Corredor=" & idCorredorQueContiene & _
-                "             OR Corredor2=" & idCorredorQueContiene & _
-                "             OR Entregador=" & idVendedorQueContiene & ")"
-            End If
-
-
-        End If
-
-
-
-
-
-        If AplicarANDuORalFiltro = 1 Then
-            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
-        Else
-            Dim s = " AND (1=0 " & _
-                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
-                    "  )  "
-
-            If s <> " AND (1=0   )  " Then strWHERE += s
-        End If
-
-
-        strWHERE += iisIdValido(idCorredor, "             AND (CDP.Corredor=" & idCorredor & " OR CDP.Corredor2=" & idCorredor & ") ", "")
-        strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
-        strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
-        strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
-
-
-
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        'como hacer cuando hay periodo y es descarga+posicion?
-        'sWHERE += "    AND (isnull(FechaDescarga, FechaArribo) Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
-
-
-        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
-
-        '
-
-        'dddd()
-        ' no debo filtrar por fecha las posiciones....
-
-
-
-        If True Then 'estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
-
-            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
-                        "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
-        Else
-            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
-                        "    AND isnull(FechaArribo,'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
-        End If
-
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        If Vagon > 0 Then
-            strWHERE += "AND (CDP.SubnumeroVagon=" & Vagon & ")"
-        End If
-        If Patente <> "" Then
-            strWHERE += "AND (CDP.Patente='" & puntoventa & "')"
-        End If
-
-
-
-
-        If ModoExportacion = "Local" Or ModoExportacion = "Entregas" Then
-            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='NO'  "
-        ElseIf ModoExportacion = "Export" Then
-            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='SI'  "
-        Else
-        End If
-
-
-        If puntoventa > 0 Then
-            strWHERE += "AND (CDP.PuntoVenta=" & puntoventa & ")"  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
-        End If
-
-        Dim desde As String = iisValidSqlDate(fechadesde.ToString)
-        Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
-        'no se por qué no está andando el formateaFecha
-        'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
-        'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
-
-
-        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
-
-
-        If sTituloFiltroUsado = "" Then
-            Select Case estado
-                Case CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
-                    sTituloFiltroUsado &= "Todas (menos las rechazadas), "
-                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
-                    sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones, "
-                Case CartaDePorteManager.enumCDPestado.Posicion
-                    sTituloFiltroUsado &= "Posición, "
-                Case enumCDPestado.DescargasMasFacturadas
-                    sTituloFiltroUsado &= "Descargas, "
-                Case CartaDePorteManager.enumCDPestado.Rechazadas
-                    sTituloFiltroUsado &= "Rechazadas, "
-                Case Else
-                    sTituloFiltroUsado &= estado.ToString
-            End Select
-        End If
-
-
-
-
-
-        sTituloFiltroUsado &= FormatearTitulo(sc, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
-                              puntoventa, optDivisionSyngenta, False, "", "", -1)
-
-
-        If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
-
-
-
-        'strWHERE = strWHERE.Replace("CDP.", "")
-        strWHERE = strWHERE.Replace("WHERE", "")
-
-        Return strWHERE
-    End Function
 
 
     Shared Function FormatearTitulo( _
@@ -1722,6 +1548,9 @@ Public Class CartaDePorteManager
 
         Return s
     End Function
+
+
+
 
     Public Shared Function FormatearAsunto( _
                     ByVal sc As String, ByRef sTituloFiltroUsado As String, _
@@ -1832,330 +1661,6 @@ Public Class CartaDePorteManager
         Return s
     End Function
 
-
-
-    Public Shared Function generarWHEREparaDatasetParametrizado( _
-                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
-                    ByVal estado As CartaDePorteManager.enumCDPestado, _
-                    ByVal QueContenga As String, _
-                    ByVal idVendedor As Integer, _
-                    ByVal idCorredor As Integer, _
-                    ByVal idDestinatario As Integer, _
-                    ByVal idIntermediario As Integer, _
-                    ByVal idRemComercial As Integer, _
-                    ByVal idArticulo As Integer, _
-                    ByVal idProcedencia As Integer, _
-                    ByVal idDestino As Integer, _
-                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
-                    ByVal ModoExportacion As String, _
-                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
-                    ByVal puntoventa As Integer, _
-                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
-                    Optional ByVal bTraerDuplicados As Boolean = False, _
-                    Optional ByVal Contrato As String = "", _
-                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, _
-                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
-                    Optional ByVal optCamionVagon As String = "Ambas" _
-                ) As String
-
-
-        Dim strWHERE As String = "1=1 "
-
-
-
-
-        If QueContenga <> "" Then
-            Dim idVendedorQueContiene = BuscaIdClientePreciso(QueContenga, sc)
-            Dim idCorredorQueContiene = BuscaIdVendedorPreciso(QueContenga, sc)
-
-
-            '  strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga & "%'" & ") "
-
-            If idVendedorQueContiene <> -1 Then
-                'no hay que agregar el prefijo .CDP acá para que funcione?????
-                'no hay que agregar el prefijo .CDP acá para que funcione?????
-                'no hay que agregar el prefijo .CDP acá para que funcione?????
-                'no hay que agregar el prefijo .CDP acá para que funcione?????
-                strWHERE += "  " & _
-                 "           AND (Vendedor = " & idVendedorQueContiene & _
-                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
-                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
-                "             OR Entregador=" & idVendedorQueContiene & _
-                "           OR idClienteAuxiliar = " & idVendedorQueContiene & _
-                "           )"
-            End If
-
-            If idCorredorQueContiene <> -1 Then
-                strWHERE += "  " & _
-                "    AND (   Corredor=" & idCorredorQueContiene & _
-                "             OR Corredor2=" & idCorredorQueContiene & _
-                "           )"
-
-            End If
-
-
-        End If
-
-
-        If QueContenga2 <> "" Then
-            strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga2 & "%'" & ") "
-        End If
-
-
-
-
-
-
-
-
-
-        If AplicarANDuORalFiltro = 1 Then
-            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
-                    ""
-            'iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
-        Else
-            Dim s = " AND (1=0 " & _
-                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
-                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
-                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
-                                                       "  )  "
-
-            'iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
-
-            If s <> " AND (1=0   )  " Then strWHERE += s
-        End If
-
-
-
-
-        'Estos son excluyentes:
-        strWHERE += iisIdValido(idCorredor, "             AND (CDP.Corredor=" & idCorredor & " OR CDP.Corredor2=" & idCorredor & ") ", "")
-        strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
-        strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
-        strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
-        strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
-        strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
-
-
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        'como hacer cuando hay periodo y es descarga+posicion?
-        'sWHERE += "    AND (isnull(FechaDescarga, FechaArribo) Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
-
-
-        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
-
-        '
-
-        'dddd()
-
-
-        If True Then '            If estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
-
-            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
-                        "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
-        Else
-            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
-                        "    AND isnull(FechaArribo,'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
-        End If
-
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        If Vagon > 0 Then
-            strWHERE += " AND (CDP.SubnumeroVagon=" & Vagon & ") "
-        End If
-        If Patente <> "" Then
-            strWHERE += " AND (Patente='" & Patente.ToUpper & "') "
-        End If
-
-
-
-        If Contrato <> "" And Contrato <> "0" Then
-            strWHERE += "  AND Contrato='" & Contrato & "' "
-        End If
-
-
-        If puntoventa > 0 Then
-            strWHERE += " AND (CDP.PuntoVenta=" & puntoventa & ") "  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
-        End If
-
-        Dim desde As String = iisValidSqlDate(fechadesde.ToString)
-        Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
-        'no se por qué no está andando el formateaFecha
-        'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
-        'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
-
-
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '//////////////////////////////////////////////////////////////////////will/////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
-
-
-        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
-            strWHERE += " AND ("
-
-            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
-
-            strWHERE += " OR Acopio1=" & IdAcopio & ""
-            strWHERE += " OR Acopio2=" & IdAcopio & ""
-            strWHERE += " OR Acopio3=" & IdAcopio & ""
-            strWHERE += " OR Acopio4=" & IdAcopio & ""
-            strWHERE += " OR Acopio5=" & IdAcopio & ""
-
-            strWHERE += " )"
-        End If
-        '            strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'Agro')='" & optDivisionSyngenta & "'"
-
-
-
-
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        If optCamionVagon = "Camiones" Then
-            strWHERE += " AND ( isnull(CDP.SubNumeroVagon,'')='') "
-        ElseIf optCamionVagon = "Vagones" Then
-            strWHERE += " AND ( isnull(CDP.SubNumeroVagon,'')<>'') "
-        End If
-
-
-
-
-
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '/////////////      Cuestiones con las copias de cartas   //////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10268
-        'acá como hacemos para lo del tilde de exportacion en las copias????
-        '    -Si una carta de porte original tiene el tilde de exportacion y alguna de las copias no (o viceversa) la 
-        'carta de porte debe salir una vez en las planillas que tengan el tilde de exportacion y una vez en las planillas de descargas.
-
-
-
-        Dim strWHEREexportacion = ""
-
-        If ModoExportacion = "Local" Or ModoExportacion = "Entregas" Then
-            strWHEREexportacion += "  AND ISNULL(COPIAS.Exporta,'NO')='NO'  "   'fijate que hace el where sobre COPIAS, ojito
-        ElseIf ModoExportacion = "Export" Then
-            strWHEREexportacion += "  AND ISNULL(COPIAS.Exporta,'NO')='SI'  " 'fijate que hace el where sobre COPIAS, ojito
-        ElseIf ModoExportacion = "Ambos" Or ModoExportacion = "Ambas" Or ModoExportacion = "Buques" Or ModoExportacion = "" Then
-            'pasan todos
-        Else
-            Throw New Exception("ModoExportacion desconocido: " & ModoExportacion)
-
-
-        End If
-
-
-        If estado <> enumCDPestado.Rechazadas Then
-            strWHEREexportacion += " AND ISNULL(COPIAS.Anulada,'NO')<>'SI'"
-        End If
-
-
-        If True Then
-            strWHERE += " and EXISTS ( SELECT * FROM CartasDePorte COPIAS " & _
-                        " where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon  " & _
-                           strWHEREexportacion & "  ) "
-        End If
-
-
-
-
-        If Not bTraerDuplicados Then
-            strWHERE += " AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0 "
-        End If
-
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-        '///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        If sTituloFiltroUsado = "" Then
-            Select Case estado
-                Case CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
-                    sTituloFiltroUsado &= "Todas (menos las rechazadas), "
-                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
-                    sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones, "
-                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
-                    sTituloFiltroUsado &= "Descargas de Hoy + Posiciones filtradas, "
-                Case CartaDePorteManager.enumCDPestado.Posicion
-                    sTituloFiltroUsado &= "Posición, "
-                Case CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
-                    sTituloFiltroUsado &= "Descargas, "
-                Case CartaDePorteManager.enumCDPestado.Rechazadas
-                    sTituloFiltroUsado &= "Rechazadas, "
-                Case Else
-                    sTituloFiltroUsado &= estado.ToString
-            End Select
-        End If
-
-
-
-        'String.Format("{13} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}.   ({10}, {11}, {12})", _
-        'String.Format("{11} - {13} de Williams Entregas - {0} {1}", _
-
-        sTituloFiltroUsado = FormatearTitulo(sc, _
-                              sTituloFiltroUsado, _
-                              estado, QueContenga, idVendedor, idCorredor, _
-                              idDestinatario, idIntermediario, _
-                              idRemComercial, idArticulo, idProcedencia, idDestino, _
-                              AplicarANDuORalFiltro, ModoExportacion, _
-                              fechadesde, fechahasta, _
-                              puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar)
-
-
-        If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
-
-
-
-        'strWHERE = strWHERE.Replace("CDP.", "")
-        strWHERE = strWHERE.Replace("WHERE", "")
-
-        Return strWHERE
-    End Function
-
-
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3479,6 +2984,547 @@ Public Class CartaDePorteManager
 
 
 
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    'Este filtro lo uso en los sincronismos, porque ahí está el dataset tipado
+    Public Shared Function generarWHEREparaDatasetParametrizadoConFechaEnNumerales( _
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
+                    ByVal estado As CartaDePorteManager.enumCDPestado, _
+                    ByVal QueContenga As String, _
+                    ByVal idVendedor As Integer, _
+                    ByVal idCorredor As Integer, _
+                    ByVal idDestinatario As Integer, _
+                    ByVal idIntermediario As Integer, _
+                    ByVal idRemComercial As Integer, _
+                    ByVal idArticulo As Integer, _
+                    ByVal idProcedencia As Integer, _
+                    ByVal idDestino As Integer, _
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+                    ByVal ModoExportacion As String, _
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+                    ByVal puntoventa As Integer, _
+                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
+                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+                    Optional ByVal optCamionVagon As String = "Ambas" _
+                ) As String
+
+
+        Dim strWHERE As String = "1=1 "
+
+
+
+
+        If QueContenga <> "" Then
+            Dim idVendedorQueContiene = BuscaIdClientePreciso(QueContenga, sc)
+            Dim idCorredorQueContiene = BuscaIdVendedorPreciso(QueContenga, sc)
+
+            If idVendedorQueContiene <> -1 Or idCorredorQueContiene <> -1 Then
+                strWHERE += "  " & _
+                 "           AND (Vendedor = " & idVendedorQueContiene & _
+                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
+                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
+                "             OR Corredor=" & idCorredorQueContiene & _
+                "             OR Corredor2=" & idCorredorQueContiene & _
+                "             OR Entregador=" & idVendedorQueContiene & ")"
+            End If
+
+
+        End If
+
+
+
+
+
+        If AplicarANDuORalFiltro = 1 Then
+            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
+                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+        Else
+            Dim s = " AND (1=0 " & _
+                     iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
+                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    iisIdValido(idDestinatario, "             OR  CDP.Entregador=" & idDestinatario, "") & _
+                    "  )  "
+
+            If s <> " AND (1=0   )  " Then strWHERE += s
+        End If
+
+
+        strWHERE += iisIdValido(idCorredor, "             AND (CDP.Corredor=" & idCorredor & " OR CDP.Corredor2=" & idCorredor & ") ", "")
+        strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
+        strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
+        strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+
+
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        'como hacer cuando hay periodo y es descarga+posicion?
+        'sWHERE += "    AND (isnull(FechaDescarga, FechaArribo) Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+
+
+        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
+
+        '
+
+        'dddd()
+        ' no debo filtrar por fecha las posiciones....
+
+
+
+        If True Then 'estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
+
+            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
+                        "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
+        Else
+            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= #" & Convert.ToDateTime(iisValidSqlDate(fechadesde, #1/1/1753#)).ToString("yyyy/MM/dd") & "# " & _
+                        "    AND isnull(FechaArribo,'1/1/1753') <= #" & Convert.ToDateTime(iisValidSqlDate(fechahasta, #1/1/2100#)).ToString("yyyy/MM/dd") & "# "
+        End If
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        If Vagon > 0 Then
+            strWHERE += "AND (CDP.SubnumeroVagon=" & Vagon & ")"
+        End If
+        If Patente <> "" Then
+            strWHERE += "AND (CDP.Patente='" & puntoventa & "')"
+        End If
+
+
+
+
+        If ModoExportacion = "Local" Or ModoExportacion = "Entregas" Then
+            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='NO'  "
+        ElseIf ModoExportacion = "Export" Then
+            strWHERE += "  AND ISNULL(CDP.Exporta,'NO')='SI'  "
+        Else
+        End If
+
+
+        If puntoventa > 0 Then
+            strWHERE += "AND (CDP.PuntoVenta=" & puntoventa & ")"  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
+        End If
+
+        Dim desde As String = iisValidSqlDate(fechadesde.ToString)
+        Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
+        'no se por qué no está andando el formateaFecha
+        'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
+        'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
+
+
+        'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+
+        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+            strWHERE += " AND ("
+
+            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+            strWHERE += " OR CDP.Acopio1=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio2=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio3=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio4=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio5=" & IdAcopio & ""
+
+            strWHERE += " )"
+        End If
+
+
+        If sTituloFiltroUsado = "" Then
+            Select Case estado
+                Case CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
+                    sTituloFiltroUsado &= "Todas (menos las rechazadas), "
+                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
+                    sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones, "
+                Case CartaDePorteManager.enumCDPestado.Posicion
+                    sTituloFiltroUsado &= "Posición, "
+                Case enumCDPestado.DescargasMasFacturadas
+                    sTituloFiltroUsado &= "Descargas, "
+                Case CartaDePorteManager.enumCDPestado.Rechazadas
+                    sTituloFiltroUsado &= "Rechazadas, "
+                Case Else
+                    sTituloFiltroUsado &= estado.ToString
+            End Select
+        End If
+
+
+
+
+
+        sTituloFiltroUsado &= FormatearTitulo(sc, _
+                              sTituloFiltroUsado, _
+                              estado, QueContenga, idVendedor, idCorredor, _
+                              idDestinatario, idIntermediario, _
+                              idRemComercial, idArticulo, idProcedencia, idDestino, _
+                              AplicarANDuORalFiltro, ModoExportacion, _
+                              fechadesde, fechahasta, _
+                              puntoventa, optDivisionSyngenta, False, "", "", -1)
+
+
+        If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
+
+
+
+        'strWHERE = strWHERE.Replace("CDP.", "")
+        strWHERE = strWHERE.Replace("WHERE", "")
+
+        Return strWHERE
+    End Function
+
+
+
+
+
+    Public Shared Function generarWHEREparaDatasetParametrizado( _
+                    ByVal sc As String, ByRef sTituloFiltroUsado As String, _
+                    ByVal estado As CartaDePorteManager.enumCDPestado, _
+                    ByVal QueContenga As String, _
+                    ByVal idVendedor As Integer, _
+                    ByVal idCorredor As Integer, _
+                    ByVal idDestinatario As Integer, _
+                    ByVal idIntermediario As Integer, _
+                    ByVal idRemComercial As Integer, _
+                    ByVal idArticulo As Integer, _
+                    ByVal idProcedencia As Integer, _
+                    ByVal idDestino As Integer, _
+                    ByVal AplicarANDuORalFiltro As FiltroANDOR, _
+                    ByVal ModoExportacion As String, _
+                    ByVal fechadesde As DateTime, ByVal fechahasta As DateTime, _
+                    ByVal puntoventa As Integer, _
+                    Optional ByVal optDivisionSyngenta As String = "Ambas", _
+                    Optional ByVal bTraerDuplicados As Boolean = False, _
+                    Optional ByVal Contrato As String = "", _
+                    Optional ByVal QueContenga2 As String = "", Optional ByVal idClienteAuxiliar As Integer = -1, _
+                    Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
+                    Optional ByVal optCamionVagon As String = "Ambas" _
+                ) As String
+
+
+        Dim strWHERE As String = "1=1 "
+
+
+
+
+        If QueContenga <> "" Then
+            Dim idVendedorQueContiene = BuscaIdClientePreciso(QueContenga, sc)
+            Dim idCorredorQueContiene = BuscaIdVendedorPreciso(QueContenga, sc)
+
+
+            '  strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga & "%'" & ") "
+
+            If idVendedorQueContiene <> -1 Then
+                'no hay que agregar el prefijo .CDP acá para que funcione?????
+                'no hay que agregar el prefijo .CDP acá para que funcione?????
+                'no hay que agregar el prefijo .CDP acá para que funcione?????
+                'no hay que agregar el prefijo .CDP acá para que funcione?????
+                strWHERE += "  " & _
+                 "           AND (Vendedor = " & idVendedorQueContiene & _
+                "           OR CuentaOrden1 = " & idVendedorQueContiene & _
+                "           OR CuentaOrden2 = " & idVendedorQueContiene & _
+                "             OR Entregador=" & idVendedorQueContiene & _
+                "           OR idClienteAuxiliar = " & idVendedorQueContiene & _
+                "           )"
+            End If
+
+            If idCorredorQueContiene <> -1 Then
+                strWHERE += "  " & _
+                "    AND (   Corredor=" & idCorredorQueContiene & _
+                "             OR Corredor2=" & idCorredorQueContiene & _
+                "           )"
+
+            End If
+
+
+        End If
+
+
+        If QueContenga2 <> "" Then
+            strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga2 & "%'" & ") "
+        End If
+
+
+
+
+
+
+
+
+
+        If AplicarANDuORalFiltro = 1 Then
+            strWHERE += iisIdValido(idVendedor, "           AND CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idIntermediario, "             AND CDP.CuentaOrden1=" & idIntermediario, "") & _
+                    iisIdValido(idRemComercial, "             AND CDP.CuentaOrden2=" & idRemComercial, "") & _
+                    ""
+            'iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+        Else
+            Dim s = " AND (1=0 " & _
+                    iisIdValido(idVendedor, "           OR CDP.Vendedor = " & idVendedor, "") & _
+                    iisIdValido(idIntermediario, "             OR CDP.CuentaOrden1=" & idIntermediario, "") & _
+                    iisIdValido(idRemComercial, "             OR CDP.CuentaOrden2=" & idRemComercial, "") & _
+                                                       "  )  "
+
+            'iisIdValido(idClienteAuxiliar, "             OR CDP.idClienteAuxiliar=" & idClienteAuxiliar, "") & _
+
+            If s <> " AND (1=0   )  " Then strWHERE += s
+        End If
+
+
+
+
+        'Estos son excluyentes:
+        strWHERE += iisIdValido(idCorredor, "             AND (CDP.Corredor=" & idCorredor & " OR CDP.Corredor2=" & idCorredor & ") ", "")
+        strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
+        strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
+        strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
+        strWHERE += iisIdValido(idDestinatario, "             AND  CDP.Entregador=" & idDestinatario, "")
+        strWHERE += iisIdValido(idClienteAuxiliar, "             AND CDP.idClienteAuxiliar=" & idClienteAuxiliar, "")
+
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        'como hacer cuando hay periodo y es descarga+posicion?
+        'sWHERE += "    AND (isnull(FechaDescarga, FechaArribo) Between '" & iisValidSqlDate(fechadesde, #1/1/1753#) & "' AND '" & iisValidSqlDate(fechahasta, #1/1/2100#) & "')"
+
+
+        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
+
+        '
+
+        'dddd()
+
+
+        If True Then '            If estado = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas Then
+
+            strWHERE += "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
+                        "    AND isnull(isnull(FechaDescarga, FechaArribo),'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
+        Else
+            strWHERE += "    AND isnull(FechaArribo,'1/1/1753') >= '" & FechaANSI(iisValidSqlDate(fechadesde, #1/1/1753#)) & "' " & _
+                        "    AND isnull(FechaArribo,'1/1/1753') <= '" & FechaANSI(iisValidSqlDate(fechahasta, #1/1/2100#)) & "' "
+        End If
+
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        If Vagon > 0 Then
+            strWHERE += " AND (CDP.SubnumeroVagon=" & Vagon & ") "
+        End If
+        If Patente <> "" Then
+            strWHERE += " AND (Patente='" & Patente.ToUpper & "') "
+        End If
+
+
+
+        If Contrato <> "" And Contrato <> "0" Then
+            strWHERE += "  AND Contrato='" & Contrato & "' "
+        End If
+
+
+        If puntoventa > 0 Then
+            strWHERE += " AND (CDP.PuntoVenta=" & puntoventa & ") "  ' OR PuntoVenta=0)"  'lo del punto de venta=0 era por las importaciones donde alguien (con acceso a todos los puntos de venta) no tenía donde elegir cual 
+        End If
+
+        Dim desde As String = iisValidSqlDate(fechadesde.ToString)
+        Dim hasta As String = iisValidSqlDate(fechahasta.ToString)
+        'no se por qué no está andando el formateaFecha
+        'Dim hasta As String = formateaFecha(iisValidSqlDate(fechadesde.ToString))
+        'Dim desde As String = formateaFecha(iisValidSqlDate(fechahasta.ToString))
+
+
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '//////////////////////////////////////////////////////////////////////will/////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+
+
+        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+            strWHERE += " AND ("
+
+            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+            strWHERE += " OR Acopio1=" & IdAcopio & ""
+            strWHERE += " OR Acopio2=" & IdAcopio & ""
+            strWHERE += " OR Acopio3=" & IdAcopio & ""
+            strWHERE += " OR Acopio4=" & IdAcopio & ""
+            strWHERE += " OR Acopio5=" & IdAcopio & ""
+
+            strWHERE += " )"
+        End If
+        '            strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'Agro')='" & optDivisionSyngenta & "'"
+
+
+
+
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        If optCamionVagon = "Camiones" Then
+            strWHERE += " AND ( isnull(CDP.SubNumeroVagon,'')='') "
+        ElseIf optCamionVagon = "Vagones" Then
+            strWHERE += " AND ( isnull(CDP.SubNumeroVagon,'')<>'') "
+        End If
+
+
+
+
+
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '/////////////      Cuestiones con las copias de cartas   //////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10268
+        'acá como hacemos para lo del tilde de exportacion en las copias????
+        '    -Si una carta de porte original tiene el tilde de exportacion y alguna de las copias no (o viceversa) la 
+        'carta de porte debe salir una vez en las planillas que tengan el tilde de exportacion y una vez en las planillas de descargas.
+
+
+
+        Dim strWHEREexportacion = ""
+
+        If ModoExportacion = "Local" Or ModoExportacion = "Entregas" Then
+            strWHEREexportacion += "  AND ISNULL(COPIAS.Exporta,'NO')='NO'  "   'fijate que hace el where sobre COPIAS, ojito
+        ElseIf ModoExportacion = "Export" Then
+            strWHEREexportacion += "  AND ISNULL(COPIAS.Exporta,'NO')='SI'  " 'fijate que hace el where sobre COPIAS, ojito
+        ElseIf ModoExportacion = "Ambos" Or ModoExportacion = "Ambas" Or ModoExportacion = "Buques" Or ModoExportacion = "" Then
+            'pasan todos
+        Else
+            Throw New Exception("ModoExportacion desconocido: " & ModoExportacion)
+
+
+        End If
+
+
+        If estado <> enumCDPestado.Rechazadas Then
+            strWHEREexportacion += " AND ISNULL(COPIAS.Anulada,'NO')<>'SI'"
+        End If
+
+
+        If True Then
+            strWHERE += " and EXISTS ( SELECT * FROM CartasDePorte COPIAS " & _
+                        " where COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon  " & _
+                           strWHEREexportacion & "  ) "
+        End If
+
+
+
+
+        If Not bTraerDuplicados Then
+            strWHERE += " AND ISNULL(CDP.SubnumeroDeFacturacion, 0) <= 0 "
+        End If
+
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+        '///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        If sTituloFiltroUsado = "" Then
+            Select Case estado
+                Case CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
+                    sTituloFiltroUsado &= "Todas (menos las rechazadas), "
+                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosiciones
+                    sTituloFiltroUsado &= "Descargas de Hoy + Todas las Posiciones, "
+                Case CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha
+                    sTituloFiltroUsado &= "Descargas de Hoy + Posiciones filtradas, "
+                Case CartaDePorteManager.enumCDPestado.Posicion
+                    sTituloFiltroUsado &= "Posición, "
+                Case CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
+                    sTituloFiltroUsado &= "Descargas, "
+                Case CartaDePorteManager.enumCDPestado.Rechazadas
+                    sTituloFiltroUsado &= "Rechazadas, "
+                Case Else
+                    sTituloFiltroUsado &= estado.ToString
+            End Select
+        End If
+
+
+
+        'String.Format("{13} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {14}.   ({10}, {11}, {12})", _
+        'String.Format("{11} - {13} de Williams Entregas - {0} {1}", _
+
+        sTituloFiltroUsado = FormatearTitulo(sc, _
+                              sTituloFiltroUsado, _
+                              estado, QueContenga, idVendedor, idCorredor, _
+                              idDestinatario, idIntermediario, _
+                              idRemComercial, idArticulo, idProcedencia, idDestino, _
+                              AplicarANDuORalFiltro, ModoExportacion, _
+                              fechadesde, fechahasta, _
+                              puntoventa, optDivisionSyngenta, bTraerDuplicados, Contrato, QueContenga2, idClienteAuxiliar)
+
+
+        If Trim(sTituloFiltroUsado) = "" Then sTituloFiltroUsado = "(sin filtrar)"
+
+
+
+        'strWHERE = strWHERE.Replace("CDP.", "")
+        strWHERE = strWHERE.Replace("WHERE", "")
+
+        Return strWHERE
+    End Function
+
+
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
     Shared Function SQL_ListaDeCDPsFiltradas2(ByVal sWHEREadicional As String, ByVal optFacturarA As Long, ByVal txtFacturarATerceros As String, _
                                          ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
                                          ByVal txtDestinatario As String, ByVal txtIntermediario As String, ByVal txtRcomercial As String, _
@@ -3708,8 +3754,24 @@ Public Class CartaDePorteManager
 
 
 
+        
+        'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
 
-        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+        If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
+            strWHERE += " AND ("
+
+            strWHERE += " isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
+
+            strWHERE += " OR CDP.Acopio1=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio2=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio3=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio4=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio5=" & IdAcopio & ""
+
+            strWHERE += " )"
+        End If
+
         'strWHERE += " and isnull(CDP.EnumSyngentaDivision,'Agro')='" & optDivisionSyngenta & "'"
 
 
@@ -3797,6 +3859,7 @@ Public Class CartaDePorteManager
 
         Return strSQL
     End Function
+
 
 
     Shared Function strSQLsincronismo() As String
@@ -16385,8 +16448,8 @@ Public Class barras
 
 
             If Not bVistaPrevia And VerificarEnviada(SC, idfac) Then
-                sErr += "La factura " & numerodefactura & " ya fue enviada antes" + Environment.NewLine
-                Continue For
+                'sErr += "La factura " & numerodefactura & " ya fue enviada antes" + Environment.NewLine
+                'Continue For
             End If
 
 

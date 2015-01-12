@@ -1,0 +1,24 @@
+
+
+Hechos pero revisar:
+
+-RM vía Web.   (en autotrol. cómo armar la demo?)
+-Firmas Electrónicas vía web.  (revisar cómo quedó)
+-Cuentas Corrientes de Proveedores vía Web.
+-Fondos Fijos vía Web. (lo probé y explotó)
+-Consultas vía web. Reporting. (qué informes tenemos disponibles?   vistas de certificados) 
+
+
+
+
+por desarrollar
+
+-Módulo de Compras vía Web.   
+	(cómo armar la demo de compras enganchadas? 
+		rm + presupuesto 
+		+ comparativa 
+		+ pedido 
+		+ orden pago) 	qué comprobantes andan de esto?
+		
+-Facturación Electrónica vía web. (la factura electronica no la probamos, quedó por desarrollar)
+-Comprobantes de Proveedores. (en desarrollo)

@@ -193,6 +193,9 @@
                     <div class="row-fluid">
                         <div class="span2 lightblue">
                             <span class="mvcMembership-username">@Html.ActionLink(user.UserName, "Details", new { id = user.ProviderUserKey })</span>
+                            <span class="mvcMembership-username">@Html.ActionLink("empl", "Edit", "Empleado", new { nombre = user.UserName, area = "" }, null)</span>
+                            <span class="mvcMembership-username">@Html.ActionLink("acc", "Edit", "Acceso", new { nombre = user.UserName, area = "" }, null)</span>
+                            
                         </div>
                         <div class="span3 lightblue">
                             <div class="span1 lightblue">
