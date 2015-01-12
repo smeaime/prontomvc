@@ -115,8 +115,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BusinessObject">
-      <HintPath>..\ProntoMVC\bin\BusinessObject.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=3.5.50927.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
