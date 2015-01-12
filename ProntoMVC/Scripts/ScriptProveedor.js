@@ -6,6 +6,8 @@
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
     var headerRow, rowHight, resizeSpanHeight;
 
+    ConfigurarControles();
+
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
         for (i = 0; i < l; i++) {
@@ -45,7 +47,11 @@
             $grid = $('#ListaRubros');
             grillaenfoco = true;
         }
-
+        if (jQuery("#ListaIIBB").find(target).length) {
+            $grid = $('#ListaIIBB');
+            grillaenfoco = true;
+        }
+        
         if (grillaenfoco) {
             gridCellWasClicked = true; // flat to check if there is a cell been edited.
             lastSelectediRow2 = lastSelectediRow;
@@ -76,19 +82,6 @@
         data = data.replace(/(\r\n|\n|\r)/gm, "");
         grid.jqGrid('addRowData', Id, data);
     };
-
-    //Esto es para analizar los parametros de entrada via querystring
-    var querystring = location.search.replace('?', '').split('&');
-    var queryObj = {};
-    for (var i = 0; i < querystring.length; i++) {
-        var name = querystring[i].split('=')[0];
-        var value = querystring[i].split('=')[1];
-        queryObj[name] = value;
-    }
-    if (queryObj["code"] === "1") {
-        $(":input").attr("disabled", "disabled");
-        $(".boton").hide();
-    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////DEFINICION DE GRILLAS   //////////////////////////////////////////////////////////
@@ -156,7 +149,6 @@
                                      },
                                  });
     jQuery("#ListaContactos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
-
 
     $('#ListaRubros').jqGrid({
         url: ROOT + 'Proveedor/DetProveedoresRubros/',
@@ -249,6 +241,117 @@
                                  });
     jQuery("#ListaRubros").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
+    $('#ListaIIBB').jqGrid({
+        url: ROOT + 'Proveedor/DetProveedoresIIBB/',
+        postData: { 'IdProveedor': function () { return $("#IdProveedor").val(); } },
+        editurl: ROOT + 'Proveedor/EditGridData/',
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['Acciones', 'IdDetalleProveedorIB', 'IdIBCondicion', 'Jurisdiccion', 'Alicuota', 'Fecha vto.'],
+        colModel: [
+                    { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
+                    { name: 'IdDetalleProveedorIB', index: 'IdDetalleProveedorIB', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdIBCondicion', index: 'IdIBCondicion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true }, label: 'TB' },
+                    {
+                        name: 'Jurisdiccion', index: 'Jurisdiccion', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        editoptions: {
+                            dataUrl: ROOT + 'IBCondicion/GetCategoriasIIBB',
+                            dataInit: function (elem) {
+                                $(elem).width(290);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaIIBB').getGridParam('selrow');
+                                    $('#ListaIIBB').jqGrid('setCell', rowid, 'IdIBCondicion', this.value);
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'AlicuotaAAplicar', index: 'AlicuotaAAplicar', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 20, defaultValue: '0.00',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaIIBB').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'FechaVencimiento', index: 'FechaVencimiento', width: 130, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    }
+        ],
+        onCellSelect: function (rowid, iCol, cellcontent, e) {
+            var $this = $(this);
+            var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+            lastSelectedId = rowid;
+            lastSelectediCol = iCol;
+            lastSelectediRow = iRow;
+        },
+        afterEditCell: function (rowid, cellName, cellValue, iRow, iCol) {
+            if (cellName == 'FechaVencimiento') {
+                jQuery("#" + iRow + "_FechaVencimiento", "#ListaIIBB").datepicker({ dateFormat: "dd/mm/yy" });
+            }
+        },
+        pager: $('#PagerIIBB'),
+        rowNum: 100,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdDetalleProveedorIB',
+        sortorder: 'asc',
+        viewrecords: true,
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: '80px', // 'auto',
+        rownumbers: true,
+        multiselect: true,
+        altRows: false,
+        footerrow: false,
+        userDataOnFooter: false,
+        pgbuttons: false,
+        viewrecords: false,
+        pgtext: "",
+        pginput: false,
+        rowList: "",
+        caption: '<b>DETALLE DE RETENCION PARA CONVENIO MULTILATERAL</b>',
+        cellEdit: true,
+        cellsubmit: 'clientArray'
+    });
+    jQuery("#ListaIIBB").jqGrid('navGrid', '#PagerIIBB', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#ListaIIBB").jqGrid('navButtonAdd', '#PagerIIBB',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                     onClickButton: function () {
+                                         AgregarItemVacio(jQuery("#ListaIIBB"));
+                                     },
+                                 });
+    jQuery("#ListaIIBB").jqGrid('navButtonAdd', '#PagerIIBB',
+                                 {
+                                     caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                     onClickButton: function () {
+                                         EliminarSeleccionados(jQuery("#ListaIIBB"));
+                                     },
+                                 });
+    jQuery("#ListaIIBB").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 50, maxHeight: 100 });
+
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
     function SerializaForm() {
@@ -305,7 +408,7 @@
             cabecera.ResolucionAfip3668 = "NO";
         };
 
-        cabecera.DetalleProveedores = [];
+        cabecera.DetalleProveedoresContactos = [];
         $grid = $('#ListaContactos');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -331,7 +434,7 @@
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetalleProveedores.push(data2);
+                cabecera.DetalleProveedoresContactos.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -339,7 +442,7 @@
             }
         };
 
-        cabecera.DetProveedoresRubros = [];
+        cabecera.DetalleProveedoresRubros = [];
         $grid = $('#ListaRubros');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -365,7 +468,41 @@
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetProveedoresRubros.push(data2);
+                cabecera.DetalleProveedoresRubros.push(data2);
+            }
+            catch (ex) {
+                alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
+                return;
+            }
+        };
+
+        cabecera.DetalleProveedoresIBs = [];
+        $grid = $('#ListaIIBB');
+        nuevo = -1;
+        colModel = $grid.jqGrid('getGridParam', 'colModel');
+        dataIds = $grid.jqGrid('getDataIDs');
+        for (i = 0; i < dataIds.length; i++) {
+            try {
+                data = $grid.jqGrid('getRowData', dataIds[i]);
+                iddeta = data['IdDetalleProveedorIB'];
+                if (!iddeta) {
+                    iddeta = nuevo;
+                    nuevo--;
+                }
+
+                data1 = '{"IdDetalleProveedorIB":"' + iddeta + '",';
+                data1 = data1 + '"IdProveedor":"' + $("#IdProveedor").val() + '",';
+                for (j = 0; j < colModel.length; j++) {
+                    cm = colModel[j]
+                    if (cm.label === 'TB') {
+                        valor = data[cm.name];
+                        data1 = data1 + '"' + cm.index + '":"' + valor + '",';
+                    }
+                }
+                data1 = data1.substring(0, data1.length - 1) + '}';
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+                data2 = JSON.parse(data1);
+                cabecera.DetalleProveedoresIBs.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -389,7 +526,11 @@
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "Proveedor/Edit/" + result.IdProveedor);
+                    if ($('#Eventual').val() == "SI") {
+                        window.location = (ROOT + "Proveedor/EditEventual/" + result.IdProveedor);
+                    } else {
+                        window.location = (ROOT + "Proveedor/Edit/" + result.IdProveedor);
+                    }
                 } else {
                     alert('No se pudo grabar el proveedor.');
                     $('.loading').html('');
@@ -424,7 +565,167 @@
         });
     });
 
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.hash == "#rubros") {
+            jQuery("#ListaRubros").setGridWidth(900);
+        }
+        if (e.target.hash == "#contactos") {
+            jQuery("#ListaContactos").setGridWidth(900);
+        }
+        if (e.target.hash == "#retenciones") {
+            jQuery("#ListaIIBB").setGridWidth(500);
+        }
+    })
+
+    $("input[name=IGCondicion]:radio").change(function () {
+        ConfigurarControles();
+    })
+
+    $("input[name=RetenerSUSS]:radio").change(function () {
+        ConfigurarControles();
+    })
+
+    $("input[name=IBCondicion]:radio").change(function () {
+        ConfigurarControles();
+    })
+
+    $('#IvaExencionRetencion').change(function () {
+        ConfigurarControles();
+    });
+
+    
 });
+
+function ConfigurarControles() {
+    var valor = "";
+    
+    valor = $("input[name='IGCondicion']:checked").val();
+    if (valor == "1") {
+        $('#IdTipoRetencionGanancia').val("");
+        $('#IdTipoRetencionGanancia:input').attr('disabled', 'disabled');
+        $('#FechaLimiteExentoGanancias:input').removeAttr('disabled');
+    } else {
+        $('#FechaLimiteExentoGanancias').val("");
+        $('#IdTipoRetencionGanancia:input').removeAttr('disabled');
+        $('#FechaLimiteExentoGanancias:input').attr('disabled', 'disabled');
+    }
+
+    valor = $("input[name='RetenerSUSS']:checked").val();
+    if (valor == "SI") {
+        $('#SUSSFechaCaducidadExencion').val("");
+        $('#IdImpuestoDirectoSUSS:input').removeAttr('disabled');
+        $('#SUSSFechaCaducidadExencion:input').attr('disabled', 'disabled');
+    } else {
+        if (valor == "EX") {
+            $('#IdImpuestoDirectoSUSS').val("");
+            $('#IdImpuestoDirectoSUSS:input').attr('disabled', 'disabled');
+            $('#SUSSFechaCaducidadExencion:input').removeAttr('disabled');
+        } else {
+            $('#IdImpuestoDirectoSUSS').val("");
+            $('#SUSSFechaCaducidadExencion').val("");
+            $('#IdImpuestoDirectoSUSS:input').attr('disabled', 'disabled');
+            $('#SUSSFechaCaducidadExencion:input').attr('disabled', 'disabled');
+        }
+    }
+
+    valor = $("input[name='IBCondicion']:checked").val();
+    if (valor == "1") {
+        $('#IdIBCondicionPorDefecto').val("");
+        $('#CoeficienteIIBBUnificado').val("");
+        $('#PorcentajeIBDirecto').val("");
+        $('#GrupoIIBB').val("");
+        $('#FechaInicioVigenciaIBDirecto').val("");
+        $('#FechaFinVigenciaIBDirecto').val("");
+        $('#PorcentajeIBDirectoCapital').val("");
+        $('#GrupoIIBBCapital').val("");
+        $('#FechaInicioVigenciaIBDirectoCapital').val("");
+        $('#FechaFinVigenciaIBDirectoCapital').val("");
+        
+        $('#IdIBCondicionPorDefecto:input').attr('disabled', 'disabled');
+        $('#FechaLimiteExentoIIBB:input').removeAttr('disabled');
+        $('#CoeficienteIIBBUnificado:input').attr('disabled', 'disabled');
+        $('#PorcentajeIBDirecto:input').attr('disabled', 'disabled');
+        $('#GrupoIIBB:input').attr('disabled', 'disabled');
+        $('#FechaInicioVigenciaIBDirecto:input').attr('disabled', 'disabled');
+        $('#FechaFinVigenciaIBDirecto:input').attr('disabled', 'disabled');
+        $('#PorcentajeIBDirectoCapital:input').attr('disabled', 'disabled');
+        $('#GrupoIIBBCapital:input').attr('disabled', 'disabled');
+        $('#FechaInicioVigenciaIBDirectoCapital:input').attr('disabled', 'disabled');
+        $('#FechaFinVigenciaIBDirectoCapital:input').attr('disabled', 'disabled');
+        ActivarListaIIBB(false);
+    } else {
+        if (valor == "2") {
+            $('#IdIBCondicionPorDefecto:input').removeAttr('disabled');
+            $('#FechaLimiteExentoIIBB:input').attr('disabled', 'disabled');
+            $('#CoeficienteIIBBUnificado:input').removeAttr('disabled');
+            $('#PorcentajeIBDirecto:input').removeAttr('disabled');
+            $('#GrupoIIBB:input').removeAttr('disabled');
+            $('#FechaInicioVigenciaIBDirecto:input').removeAttr('disabled');
+            $('#FechaFinVigenciaIBDirecto:input').removeAttr('disabled');
+            $('#PorcentajeIBDirectoCapital:input').removeAttr('disabled');
+            $('#GrupoIIBBCapital:input').removeAttr('disabled');
+            $('#FechaInicioVigenciaIBDirectoCapital:input').removeAttr('disabled');
+            $('#FechaFinVigenciaIBDirectoCapital:input').removeAttr('disabled');
+            ActivarListaIIBB(true);
+        } else {
+            if (valor == "3") {
+                $('#IdIBCondicionPorDefecto:input').removeAttr('disabled');
+                $('#FechaLimiteExentoIIBB:input').attr('disabled', 'disabled');
+                $('#CoeficienteIIBBUnificado:input').removeAttr('disabled');
+                $('#PorcentajeIBDirecto:input').removeAttr('disabled');
+                $('#GrupoIIBB:input').removeAttr('disabled');
+                $('#FechaInicioVigenciaIBDirecto:input').removeAttr('disabled');
+                $('#FechaFinVigenciaIBDirecto:input').removeAttr('disabled');
+                $('#PorcentajeIBDirectoCapital:input').removeAttr('disabled');
+                $('#GrupoIIBBCapital:input').removeAttr('disabled');
+                $('#FechaInicioVigenciaIBDirectoCapital:input').removeAttr('disabled');
+                $('#FechaFinVigenciaIBDirectoCapital:input').removeAttr('disabled');
+                ActivarListaIIBB(false);
+            } else {
+                $('#IBNumeroInscripcion').val("");
+                $('#IdIBCondicionPorDefecto').val("");
+                $('#CoeficienteIIBBUnificado').val("");
+                $('#PorcentajeIBDirecto').val("");
+                $('#GrupoIIBB').val("");
+                $('#FechaInicioVigenciaIBDirecto').val("");
+                $('#FechaFinVigenciaIBDirecto').val("");
+                $('#PorcentajeIBDirectoCapital').val("");
+                $('#GrupoIIBBCapital').val("");
+                $('#FechaInicioVigenciaIBDirectoCapital').val("");
+                $('#FechaFinVigenciaIBDirectoCapital').val("");
+
+                $('#IdIBCondicionPorDefecto:input').attr('disabled', 'disabled');
+                $('#FechaLimiteExentoIIBB:input').attr('disabled', 'disabled');
+                $('#CoeficienteIIBBUnificado:input').attr('disabled', 'disabled');
+                $('#PorcentajeIBDirecto:input').attr('disabled', 'disabled');
+                $('#GrupoIIBB:input').attr('disabled', 'disabled');
+                $('#FechaInicioVigenciaIBDirecto:input').attr('disabled', 'disabled');
+                $('#FechaFinVigenciaIBDirecto:input').attr('disabled', 'disabled');
+                $('#PorcentajeIBDirectoCapital:input').attr('disabled', 'disabled');
+                $('#GrupoIIBBCapital:input').attr('disabled', 'disabled');
+                $('#FechaInicioVigenciaIBDirectoCapital:input').attr('disabled', 'disabled');
+                $('#FechaFinVigenciaIBDirectoCapital:input').attr('disabled', 'disabled');
+                ActivarListaIIBB(false);
+            }
+        }
+
+        var valor = $('#IvaExencionRetencion').is(':checked');
+        if (valor) {
+            $('#IvaFechaInicioExencion').val("");
+            $('#IvaFechaCaducidadExencion').val("");
+            $('#IvaPorcentajeExencion').val(0);
+
+            $('#IvaFechaInicioExencion:input').attr('disabled', 'disabled');
+            $('#IvaFechaCaducidadExencion:input').attr('disabled', 'disabled');
+            $('#IvaPorcentajeExencion:input').attr('disabled', 'disabled');
+        } else {
+            $('#IvaFechaInicioExencion:input').removeAttr('disabled');
+            $('#IvaFechaCaducidadExencion:input').removeAttr('disabled');
+            $('#IvaPorcentajeExencion:input').removeAttr('disabled');
+        };
+
+    }
+}
 
 function pickdates(id) {
     jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
@@ -496,3 +797,18 @@ function CheckValidationErrorResponse(response, form, summaryElement) {
     });
 }
 
+function ActivarListaIIBB(Activar) {
+    var $td;
+    if (Activar) {
+        $("#ListaIIBB").unblock({
+            message: "",
+            theme: true,
+        });
+    } else {
+        $("#ListaIIBB").jqGrid("clearGridData", true)
+        $("#ListaIIBB").block({
+            message: "",
+            theme: true,
+        });
+    }
+};

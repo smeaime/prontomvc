@@ -2,147 +2,134 @@
 @{
     ViewBag.Title = "Conceptos";
 }
-<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<div><input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
+@*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
-   <button onclick="window.location.href='@Url.Action("Nuevo", new { id = -1 })'"  class="btn btn-primary"  >
-                    Nuevo
-                </button>
-<br />
+<div class="row-fluid">
+    <div class="span10 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+    </div>
+</div>
 
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
-<div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
-
-@*<p>@Html.ActionLink("Nuevo Concepto", "Edit", new { id = -1 }, new { @class="btn btn-primary" })</p>*@
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var lastSelectedId;
-        var inEdit;
-        grid = $("#Lista");
 
-        //Para que haga wrap en las celdas
-        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+    $.extend($.jgrid.inlineEdit, {
+        keys: true
+    });
+
+    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    document.body.onclick = saveEditedCell; // attach to current document.
+
+    function saveEditedCell(evt) {
+        var target = $(evt.target);
+
+        if ($grid) {
+            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            {
+                gridCellWasClicked = false;
+                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            }
+        }
+
+        //$grid = "";
+        gridCellWasClicked = false;
+
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
+            grillaenfoco = true;
+        }
+        if (grillaenfoco) {
+            gridCellWasClicked = true;
+            lastSelectediRow2 = lastSelectediRow;
+            lastSelectediCol2 = lastSelectediCol;
+        }
+    };
+
+    $().ready(function () {
+        'use strict';
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "Concepto")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            url: ROOT + 'Concepto/TT/',
+            postData: { congrupo: "NO" },
             datatype: 'json',
             mtype: 'POST',
-            shrinkToFit: true,
-            colNames: ['Acciones','Acciones', 'IdConcepto', 'Codigo', 'Descripcion', 'Cod Cuenta',
-                        'Cuenta', 'Valor Rechazado', 'Gravado Default.', 'Codigo AFIP'
-                      ],
+            colNames: ['Acciones', 'IdConcepto', 'IdCuenta', 'Grupo', 'Descripcion', 'Cuenta contable', 'ValorRechazado', 'Codigo', 'Gravado por default', 'Codigo AFIP', 'CoeficienteAuxiliar_1',
+                       'Genera comision vendedor?', 'Tipos de concepto'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'impr', index: 'act', align: 'center', width: 0, sortable: false, editable: false, hidden: true, search: false },
-                        {name: 'IdConcepto', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true },
-                        { name: 'CodigoConcepto', index: 'NumeroRequerimiento', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Descripcion', index: 'FechaRequerimiento', width: 0, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'IdCuenta', index: 'Cumplido', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Cuenta', index: 'Recepcionado', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ValorRechazado', index: 'Entregado', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'GravadoDefault', index: 'Impresa', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CodigoAFIP', index: 'Detalle', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-                    ],
-            onSelectRow: function (id) {
-                if (id && id !== lastSelectedId) {
-                    if (typeof lastSelectedId !== "undefined") {
-                        grid.jqGrid('restoreRow', lastSelectedId);
-                    }
-                    lastSelectedId = id;
-                }
+                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
+                        { name: 'IdConcepto', index: 'IdConcepto', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Grupo', index: 'Grupo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: false, editrules: { required: false } },
+                        { name: 'Cuenta', index: 'Cuenta', width: 200, align: 'left', editable: false, editrules: { required: false } },
+                        { name: 'ValorRechazado', index: 'ValorRechazado', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'CodigoConcepto', index: 'CodigoConcepto', align: 'left', width: 100, editable: false, hidden: false },
+                        { name: 'GravadoDefault', index: 'GravadoDefault', align: 'left', width: 100, editable: false, hidden: false },
+                        { name: 'CodigoAFIP', index: 'CodigoAFIP', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'CoeficienteAuxiliar_1', index: 'CoeficienteAuxiliar_1', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'GeneraComision', index: 'GeneraComision', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'TiposConcepto', index: 'TiposConcepto', align: 'left', width: 100, editable: false, hidden: true }
+            ],
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
             },
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdConcepto', //'NumeroRequerimiento',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
+            multiselect: true,
+            shrinkToFit: true,
             width: 'auto',
             height: '100%',
             altRows: false,
-            footerrow: true,
+            footerrow: false,
             userDataOnFooter: true,
-            //imgpath: '/content/cupertino/images',
-            //loadonce: true,
-            caption: '<b>CONCEPTOS</b>'
+            caption: '<b>CONCEPTOS</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
         });
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
     });
 
 </script>
-@*
-@{
-    var grid = new WebGrid(source: Model,
-        defaultSort: "NumeroRequerimiento",
-        rowsPerPage: 10,
-        canPage: true,
-        canSort: true,
-        fieldNamePrefix: "ItemRM_",
-        selectionFieldName: "selectedRow");
-}
-
-<div id="grid">
-    @grid.GetHtml(
-        tableStyle: "webgrid",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primera",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Última >>",
-                columns: new[] {
-                                        grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                        grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                        //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                        //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                        grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                        grid.Column("", header: "Acciones", 
-                                            format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                           @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                        )
-                                        }
-                            )
-</div>
-
-<table>
-    <tr>
-        <th>IdRequerimiento</th>
-        <th>Numero RM</th>
-        <th>Fecha</th>
-        <th>Obra</th>
-        <th>Sector</th>
-        <th></th>
-    </tr>
-
-@{int i = 1;}
-@foreach (var item in Model)
-{
-    <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-        <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-        <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-        </td>
-    </tr>
-}
-</table>
-*@

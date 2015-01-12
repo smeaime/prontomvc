@@ -1,0 +1,272 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Actividades_Proveedore>
+@{
+    ViewBag.Title = "Actividad principal";
+}
+
+<br />
+
+<div class="row-fluid">
+    <div class="span10 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+    </div>
+</div>
+
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+    $.extend($.jgrid.inlineEdit, {
+        keys: true
+    });
+
+    function GrabarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var datos = $("#formid").serializeObject();
+        var err;
+
+        datos.IdActividad = gridId;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Agrupacion1 = dataFromTheRow.Agrupacion1;
+
+        err = ""
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta la descripcion.\n"
+
+        if (err != "") {
+            alert('No se pudo grabar el registro.\n' + err);
+        } else {
+            //$('html, body').css('cursor', 'wait');
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Actividades_Proveedore/BatchUpdate',
+                dataType: 'json',
+                data: JSON.stringify(datos),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                    } else {
+                        alert('No se pudo grabar el registro.');
+                    }
+                },
+            });
+        };
+    };
+
+    function EliminarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        if (gridId <= 0) {
+            $grid.jqGrid('delRowData', gridId);
+        } else {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Actividades_Proveedore/Delete',
+                dataType: 'json',
+                data: JSON.stringify({ id: gridId }),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('delRowData', gridId);
+                    } else {
+                        alert('No se pudo eliminar el registro.');
+                    }
+                },
+            });
+        };
+    };
+
+    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    document.body.onclick = saveEditedCell; // attach to current document.
+
+    function saveEditedCell(evt) {
+        var target = $(evt.target);
+
+        if ($grid) {
+            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            {
+                gridCellWasClicked = false;
+                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            }
+        }
+
+        //$grid = "";
+        gridCellWasClicked = false;
+
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
+            grillaenfoco = true;
+        }
+        if (grillaenfoco) {
+            gridCellWasClicked = true;
+            lastSelectediRow2 = lastSelectediRow;
+            lastSelectediCol2 = lastSelectediCol;
+        }
+    };
+
+    function MarcarSeleccionadosParaEliminar(grid) {
+        var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var i, Id;
+        for (i = selectedIds.length - 1; i >= 0; i--) {
+            Id = selectedIds[i];
+            var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+            grid.jqGrid('setRowData', Id, { act: se });
+            //grid.jqGrid('delRowData', selectedIds[i]);
+        }
+    };
+
+    function AgregarItemVacio(grid) {
+        var colModel = grid.jqGrid('getGridParam', 'colModel');
+        var dataIds = grid.jqGrid('getDataIDs');
+        var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+        var data, j, cm;
+
+        data = '{';
+        for (j = 1; j < colModel.length; j++) {
+            cm = colModel[j];
+            data = data + '"' + cm.index + '":' + '"",';
+        }
+        data = data.substring(0, data.length - 1) + '}';
+        data = data.replace(/(\r\n|\n|\r)/gm, "");
+        grid.jqGrid('addRowData', Id, data, "first");
+        grid.jqGrid('setRowData', Id, { act: se });
+    };
+
+    $().ready(function () {
+        'use strict';
+
+        $('#Lista').jqGrid({
+            url: ROOT + 'Actividades_Proveedore/TT/',
+            postData: {},
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdActividad', 'Descripcion', 'Agrupacion'],
+            colModel: [
+                        {
+                            name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",
+                            //formatter: function (cellValue, options, rowObject) {
+                            //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
+                            //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
+                            //    var IdCotizacion = $(rowObject)[1]
+                            //    return (IdCotizacion >= 0 ? convertIcon : ""); // + "<span>" + cellValue + "</span>";
+                            //},
+                            //cellattr: function () {
+                            //    return " title=\"Graba el registro\"";
+                            //}
+                        },
+                        { name: 'IdActividad', index: 'IdActividad', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        {
+                            name: 'Agrupacion1', index: 'Agrupacion1', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            editoptions: {
+                                maxlength: 20, defaultValue: '0.00',
+                                dataEvents: [
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                }]
+                            }
+                        }
+            ],
+            //gridComplete: function () {
+            //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+            //    for (var i = 0; i < ids.length; i++) {
+            //        var cl = ids[i];
+            //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+            //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+            //    }
+            //},
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
+            },
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                if (name == 'Desde') {
+                    jQuery("#" + iRow + "_Desde", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                }
+                if (name == 'Hasta') {
+                    jQuery("#" + iRow + "_Hasta", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
+                }
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+            },
+            //beforeSelectRow: function (rowid, e) {
+            //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+            //    if (this.p.colModel[iCol].name === 'act') {
+            //        GrabarFila(rowid);
+            //        return false;
+            //    }
+            //},
+            pager: $('#ListaPager'),
+            rowNum: 20,
+            rowList: [10, 20, 50, 100],
+            sortname: 'Descripcion',
+            sortorder: 'asc',
+            viewrecords: true,
+            multiselect: true,
+            shrinkToFit: true,
+            width: 'auto',
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>ACTIVIDADES PRINCIPALES</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                            onClickButton: function () {
+                                                AgregarItemVacio(jQuery("#Lista"));
+                                            },
+                                        });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                            onClickButton: function () {
+                                                MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                            },
+                                        });
+    });
+
+</script>

@@ -256,7 +256,7 @@
       <End Role="DetalleRequerimiento" EntitySet="DetalleRequerimientos" />
       <End Role="DetallePresupuesto" EntitySet="DetallePresupuestos" />
     </AssociationSet>
-    <EntitySet Name="DetalleProveedores" EntityType="DemoProntoModel.DetalleProveedor" />
+    <EntitySet Name="DetalleProveedoresContactos" EntityType="DemoProntoModel.DetalleProveedor" />
     <EntitySet Name="DetalleProveedoresIBs" EntityType="DemoProntoModel.DetalleProveedoresIB" />
     <EntitySet Name="DetalleProveedoresRubros" EntityType="DemoProntoModel.DetalleProveedoresRubro" />
     <EntitySet Name="PlazosEntregas" EntityType="DemoProntoModel.PlazosEntrega" />
@@ -272,7 +272,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_DetalleProveedores_Proveedores" Association="DemoProntoModel.FK_DetalleProveedores_Proveedores">
       <End Role="Proveedor" EntitySet="Proveedores" />
-      <End Role="DetalleProveedore" EntitySet="DetalleProveedores" />
+      <End Role="DetalleProveedore" EntitySet="DetalleProveedoresContactos" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleProveedoresIB_IBCondiciones" Association="DemoProntoModel.FK_DetalleProveedoresIB_IBCondiciones">
       <End Role="IBCondicion" EntitySet="IBCondiciones" />
@@ -314,7 +314,7 @@
       <End Role="Provincia" EntitySet="Provincias" />
       <End Role="Proveedor" EntitySet="Proveedores" />
     </AssociationSet>
-    <EntitySet Name="DetalleClientes" EntityType="DemoProntoModel.DetalleCliente" />
+    <EntitySet Name="DetalleClientesContactos" EntityType="DemoProntoModel.DetalleCliente" />
     <EntitySet Name="DetalleClientesLugaresEntregas" EntityType="DemoProntoModel.DetalleClientesLugaresEntrega" />
     <AssociationSet Name="FK_DetalleClientesLugaresEntrega_Localidades" Association="DemoProntoModel.FK_DetalleClientesLugaresEntrega_Localidades">
       <End Role="Localidad" EntitySet="Localidades" />
@@ -326,7 +326,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_DetalleClientes_Clientes" Association="DemoProntoModel.FK_DetalleClientes_Clientes">
       <End Role="Cliente" EntitySet="Clientes" />
-      <End Role="DetalleCliente" EntitySet="DetalleClientes" />
+      <End Role="DetalleCliente" EntitySet="DetalleClientesContactos" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleLugaresEntrega_Clientes" Association="DemoProntoModel.FK_DetalleLugaresEntrega_Clientes">
       <End Role="Cliente" EntitySet="Clientes" />
@@ -938,6 +938,18 @@
       <End Role="OrdenPago" EntitySet="OrdenesPago" />
     </AssociationSet>
     <EntitySet Name="Trees" EntityType="DemoProntoModel.Tree" />
+    <EntitySet Name="TiposImpuestoes" EntityType="DemoProntoModel.TiposImpuesto" />
+    <EntitySet Name="Regiones" EntityType="DemoProntoModel.Regione" />
+    <EntitySet Name="DetalleClientesDirecciones" EntityType="DemoProntoModel.DetalleClientesDireccione" />
+    <EntitySet Name="DetalleClientesTelefonos" EntityType="DemoProntoModel.DetalleClientesTelefono" />
+    <AssociationSet Name="FK_DetalleClientesDirecciones_Clientes" Association="DemoProntoModel.FK_DetalleClientesDirecciones_Clientes">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="DetalleClientesDireccione" EntitySet="DetalleClientesDirecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleClientesTelefonos_Clientes" Association="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="DetalleClientesTelefono" EntitySet="DetalleClientesTelefonos" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -1989,7 +2001,7 @@
     <NavigationProperty Name="Facturas" Relationship="DemoProntoModel.FK_Facturas_Clientes" FromRole="Cliente" ToRole="Factura" />
     <NavigationProperty Name="IBCondicionCat2" Relationship="DemoProntoModel.FK_Clientes_CatIIBB2" FromRole="Cliente" ToRole="IBCondicion" />
     <NavigationProperty Name="IBCondicionCat3" Relationship="DemoProntoModel.FK_Clientes_CatIIBB3" FromRole="Cliente" ToRole="IBCondicion" />
-    <NavigationProperty Name="DetalleClientes" Relationship="DemoProntoModel.FK_DetalleClientes_Clientes" FromRole="Cliente" ToRole="DetalleCliente" />
+    <NavigationProperty Name="DetalleClientesContactos" Relationship="DemoProntoModel.FK_DetalleClientes_Clientes" FromRole="Cliente" ToRole="DetalleCliente" />
     <NavigationProperty Name="DetalleClientesLugaresEntregas" Relationship="DemoProntoModel.FK_DetalleLugaresEntrega_Clientes" FromRole="Cliente" ToRole="DetalleClientesLugaresEntrega" />
     <NavigationProperty Name="Estados_Proveedores" Relationship="DemoProntoModel.FK_Clientes_Estados" FromRole="Cliente" ToRole="Estados_Proveedore" />
     <NavigationProperty Name="CuentasCorrientesDeudores" Relationship="DemoProntoModel.FK_CuentasCorrientesDeudores_Clientes" FromRole="Cliente" ToRole="CuentasCorrientesDeudore" />
@@ -2033,6 +2045,8 @@
     <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="Int32" />
     <NavigationProperty Name="Empleado" Relationship="DemoProntoModel.FK_Clientes_Empleados_Ingreso" FromRole="Cliente" ToRole="Empleado" />
     <NavigationProperty Name="Empleado1" Relationship="DemoProntoModel.FK_Clientes_Empleados_Modifico" FromRole="Cliente" ToRole="Empleado" />
+    <NavigationProperty Name="DetalleClientesDirecciones" Relationship="DemoProntoModel.FK_DetalleClientesDirecciones_Clientes" FromRole="Cliente" ToRole="DetalleClientesDireccione" />
+    <NavigationProperty Name="DetalleClientesTelefonos" Relationship="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" FromRole="Cliente" ToRole="DetalleClientesTelefono" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -3623,7 +3637,7 @@
     <Property Type="String" Name="TextoAuxiliar1" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="TextoAuxiliar2" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="TextoAuxiliar3" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DetalleProveedores" Relationship="DemoProntoModel.FK_DetalleProveedores_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedore" />
+    <NavigationProperty Name="DetalleProveedoresContactos" Relationship="DemoProntoModel.FK_DetalleProveedores_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedore" />
     <NavigationProperty Name="DetalleProveedoresIBs" Relationship="DemoProntoModel.FK_DetalleProveedoresIB_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedoresIB" />
     <NavigationProperty Name="DetalleProveedoresRubros" Relationship="DemoProntoModel.FK_DetalleProveedoresRubros_Proveedores" FromRole="Proveedor" ToRole="DetalleProveedoresRubro" />
     <NavigationProperty Name="Localidad" Relationship="DemoProntoModel.FK_Proveedores_Localidades" FromRole="Proveedor" ToRole="Localidade" />
@@ -7836,4 +7850,65 @@
     <Property Name="EsPadre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="GrupoMenu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="TiposImpuesto">
+    <Key>
+      <PropertyRef Name="IdTipoImpuesto" />
+    </Key>
+    <Property Name="IdTipoImpuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Regione">
+    <Key>
+      <PropertyRef Name="IdRegion" />
+    </Key>
+    <Property Name="IdRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DetalleClientesDireccione">
+    <Key>
+      <PropertyRef Name="IdDetalleClienteDireccion" />
+    </Key>
+    <Property Name="IdDetalleClienteDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdLocalidad" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_DetalleClientesDirecciones_Clientes" FromRole="DetalleClientesDireccione" ToRole="Cliente" />
+  </EntityType>
+  <EntityType Name="DetalleClientesTelefono">
+    <Key>
+      <PropertyRef Name="IdDetalleClienteTelefono" />
+    </Key>
+    <Property Name="IdDetalleClienteTelefono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="Detalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" FromRole="DetalleClientesTelefono" ToRole="Cliente" />
+  </EntityType>
+  <Association Name="FK_DetalleClientesDirecciones_Clientes">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleClientesDireccione" Role="DetalleClientesDireccione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="DetalleClientesDireccione">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleClientesTelefonos_Clientes">
+    <End Type="DemoProntoModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleClientesTelefono" Role="DetalleClientesTelefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="DetalleClientesTelefono">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

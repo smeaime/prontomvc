@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.IBCondicion>
+@{
+    ViewBag.Title = "Condiciones IIBB";
+}
+@*<p>@Html.ActionLink("Nuevo Proveedor", "Edit", new { id = -1 }, null)</p>*@
+
+<br />
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva categoria IIBB</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("TT", "IBCondicion")',
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdIBCondicion', 'IdProvincia', 'IdProvinciaReal', 'IdCuentaPercepcionIIBB', 'IdCuentaPercepcionIIBBConvenio', 'IdCuentaPercepcionIIBBCompras', 
+                       'Descripcion', 'Provincia (contable)', 'Provincia (real)', 'Fecha vig.', 'Cod.', 'Cod. act.', 'Cod. AFIP', 'InformacionAuxiliar', 'Cod. art. inc.',
+                       'Tope minimo', 'Alicuota', '% s/Base', '% Adicional', 'Leyenda % adicional', 'Cod. norma ret.', 'Tope min. perc.', 'Alic. perc.', 'Cuenta percepcion',
+                       'Alic. perc. conv.', 'Cuenta percepcion convenio', 'Cuenta percepcion compras', 'Cod. norma perc.', 'Acum. por mes?', 'Tipo base calculo'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
+                        { name: 'IdIBCondicion', index: 'IdIBCondicion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdProvincia', index: 'IdProvincia', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdProvinciaReal', index: 'IdProvinciaReal', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaPercepcionIIBB', index: 'IdCuentaPercepcionIIBB', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaPercepcionIIBBConvenio', index: 'IdCuentaPercepcionIIBBConvenio', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaPercepcionIIBBCompras', index: 'IdCuentaPercepcionIIBBCompras', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ProvinciaContable', index: 'ProvinciaContable', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ProvinciaReal', index: 'ProvinciaReal', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaVigencia', index: 'FechaVigencia', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoActividad', index: 'CodigoActividad', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoAFIP', index: 'CodigoAFIP', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'InformacionAuxiliar', index: 'InformacionAuxiliar', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoArticuloInciso', index: 'CodigoArticuloInciso', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImporteTopeMinimo', index: 'ImporteTopeMinimo', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Alicuota', index: 'Alicuota', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PorcentajeATomarSobreBase', index: 'PorcentajeATomarSobreBase', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PorcentajeAdicional', index: 'PorcentajeAdicional', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LeyendaPorcentajeAdicional', index: 'LeyendaPorcentajeAdicional', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoNormaRetencion', index: 'CodigoNormaRetencion', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImporteTopeMinimoPercepcion', index: 'ImporteTopeMinimoPercepcion', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'AlicuotaPercepcion', index: 'AlicuotaPercepcion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PercepcionCuentaNormal', index: 'PercepcionCuentaNormal', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'AlicuotaPercepcionConvenio', index: 'AlicuotaPercepcionConvenio', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PercepcionCuentaConvenio', index: 'PercepcionCuentaConvenio', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PercepcionCuentaCompras', index: 'PercepcionCuentaCompras', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoNormaPercepcion', index: 'CodigoNormaPercepcion', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'AcumulaMensualmente', index: 'AcumulaMensualmente', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'BaseCalculo', index: 'BaseCalculo', align: 'center', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 20,
+            rowList: [10, 20, 50, 100],
+            sortname: 'Descripcion',
+            sortorder: 'asc',
+            viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar',
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true,
+            multiboxonly: true,
+            caption: '<b>CATEGORIAS DE IIBB</b>'
+    });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    });
+</script>

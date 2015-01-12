@@ -1149,6 +1149,17 @@
     <Property Name="Email" Type="varchar" MaxLength="200" />
     <Property Name="Acciones" Type="varchar" MaxLength="500" />
   </EntityType>
+  <EntityType Name="DetalleClientesDirecciones">
+    <Key>
+      <PropertyRef Name="IdDetalleClienteDireccion" />
+    </Key>
+    <Property Name="IdDetalleClienteDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="IdLocalidad" Type="int" />
+    <Property Name="IdProvincia" Type="int" />
+    <Property Name="IdPais" Type="int" />
+  </EntityType>
   <EntityType Name="DetalleClientesLugaresEntrega">
     <Key>
       <PropertyRef Name="IdDetalleClienteLugarEntrega" />
@@ -1158,6 +1169,15 @@
     <Property Name="DireccionEntrega" Type="varchar" MaxLength="50" />
     <Property Name="IdLocalidadEntrega" Type="int" />
     <Property Name="IdProvinciaEntrega" Type="int" />
+  </EntityType>
+  <EntityType Name="DetalleClientesTelefonos">
+    <Key>
+      <PropertyRef Name="IdDetalleClienteTelefono" />
+    </Key>
+    <Property Name="IdDetalleClienteTelefono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="Detalle" Type="varchar" MaxLength="50" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DetalleComparativas">
     <Key>
@@ -3526,6 +3546,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="LoteServicioCobro" Type="varchar" MaxLength="15" />
     <Property Name="IdFacturaDirecta" Type="int" />
   </EntityType>
+  <EntityType Name="Regiones">
+    <Key>
+      <PropertyRef Name="IdRegion" />
+    </Key>
+    <Property Name="IdRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+  </EntityType>
   <EntityType Name="Remitos">
     <Key>
       <PropertyRef Name="IdRemito" />
@@ -3826,6 +3854,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="EsCajaBanco" Type="varchar" MaxLength="2" />
     <Property Name="AjustarDiferenciasEnSubdiarios" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="TiposImpuesto">
+    <Key>
+      <PropertyRef Name="IdTipoImpuesto" />
+    </Key>
+    <Property Name="IdTipoImpuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TiposRetencionGanancia">
     <Key>
@@ -4476,6 +4511,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
         <PropertyRef Name="IdCliente" />
       </Principal>
       <Dependent Role="DetalleClientes">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleClientesDirecciones_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="DetalleClientesDirecciones" Type="Self.DetalleClientesDirecciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="DetalleClientesDirecciones">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleClientesTelefonos_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="DetalleClientesTelefonos" Type="Self.DetalleClientesTelefonos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="DetalleClientesTelefonos">
         <PropertyRef Name="IdCliente" />
       </Dependent>
     </ReferentialConstraint>
@@ -5463,7 +5522,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleAutorizacionesCompra" EntityType="Self.DetalleAutorizacionesCompra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleAutorizacionesFirmantes" EntityType="Self.DetalleAutorizacionesFirmantes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleClientes" EntityType="Self.DetalleClientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleClientesDirecciones" EntityType="Self.DetalleClientesDirecciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleClientesLugaresEntrega" EntityType="Self.DetalleClientesLugaresEntrega" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleClientesTelefonos" EntityType="Self.DetalleClientesTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComparativas" EntityType="Self.DetalleComparativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComprobantesProveedores" EntityType="Self.DetalleComprobantesProveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleComprobantesProveedoresPresupuestosObras" EntityType="Self.DetalleComprobantesProveedoresPresupuestosObras" Schema="dbo" store:Type="Tables" />
@@ -5543,6 +5604,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PuntosVenta" EntityType="Self.PuntosVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Regiones" EntityType="Self.Regiones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Remitos" EntityType="Self.Remitos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
@@ -5556,6 +5618,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="TiposComprobante" EntityType="Self.TiposComprobante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuentaGrupos" EntityType="Self.TiposCuentaGrupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposImpuesto" EntityType="Self.TiposImpuesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
@@ -5724,6 +5787,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_DetalleClientes_Clientes" Association="Self.FK_DetalleClientes_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="DetalleClientes" EntitySet="DetalleClientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleClientesDirecciones_Clientes" Association="Self.FK_DetalleClientesDirecciones_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="DetalleClientesDirecciones" EntitySet="DetalleClientesDirecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleClientesTelefonos_Clientes" Association="Self.FK_DetalleClientesTelefonos_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="DetalleClientesTelefonos" EntitySet="DetalleClientesTelefonos" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleComparativas_Articulo" Association="Self.FK_DetalleComparativas_Articulo">
       <End Role="Articulos" EntitySet="Articulos" />
