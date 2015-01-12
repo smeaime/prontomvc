@@ -17,7 +17,7 @@ namespace ProntoMVC.Data.Models
         public Cliente()
         {
             this.Facturas = new HashSet<Factura>();
-            this.DetalleClientes = new HashSet<DetalleCliente>();
+            this.DetalleClientesContactos = new HashSet<DetalleCliente>();
             this.DetalleClientesLugaresEntregas = new HashSet<DetalleClientesLugaresEntrega>();
             this.CuentasCorrientesDeudores = new HashSet<CuentasCorrientesDeudor>();
             this.OrdenesCompras = new HashSet<OrdenesCompra>();
@@ -25,6 +25,8 @@ namespace ProntoMVC.Data.Models
             this.Recibos = new HashSet<Recibo>();
             this.NotasCreditoes = new HashSet<NotasCredito>();
             this.NotasDebitoes = new HashSet<NotasDebito>();
+            this.DetalleClientesDirecciones = new HashSet<DetalleClientesDireccione>();
+            this.DetalleClientesTelefonos = new HashSet<DetalleClientesTelefono>();
         }
     
         public int IdCliente { get; set; }
@@ -142,7 +144,7 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<Factura> Facturas { get; set; }
         public virtual IBCondicion IBCondicionCat2 { get; set; }
         public virtual IBCondicion IBCondicionCat3 { get; set; }
-        public virtual ICollection<DetalleCliente> DetalleClientes { get; set; }
+        public virtual ICollection<DetalleCliente> DetalleClientesContactos { get; set; }
         public virtual ICollection<DetalleClientesLugaresEntrega> DetalleClientesLugaresEntregas { get; set; }
         public virtual Estados_Proveedore Estados_Proveedores { get; set; }
         public virtual ICollection<CuentasCorrientesDeudor> CuentasCorrientesDeudores { get; set; }
@@ -154,5 +156,7 @@ namespace ProntoMVC.Data.Models
         public virtual DescripcionIva DescripcionIva { get; set; }
         public virtual Empleado Empleado { get; set; }
         public virtual Empleado Empleado1 { get; set; }
+        public virtual ICollection<DetalleClientesDireccione> DetalleClientesDirecciones { get; set; }
+        public virtual ICollection<DetalleClientesTelefono> DetalleClientesTelefonos { get; set; }
     }
 }

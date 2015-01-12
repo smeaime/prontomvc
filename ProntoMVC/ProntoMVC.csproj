@@ -147,7 +147,7 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.3.18.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
@@ -251,8 +251,13 @@
     <Compile Include="Controllers\AutorizacionController.cs" />
     <Compile Include="Controllers\ComprobanteProveedorController.cs" />
     <Compile Include="Controllers\ControlCalidadController.cs" />
+    <Compile Include="Controllers\Actividades_ProveedoreController.cs" />
+    <Compile Include="Controllers\ImpuestosDirectoController.cs" />
     <Compile Include="Controllers\IBCondicionController.cs" />
     <Compile Include="Controllers\jqGridPaginacionController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
+    <Compile Include="Controllers\ProvinciaController.cs" />
+    <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\ObraController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProntoBaseController2.cs" />
@@ -277,7 +282,6 @@
     <Compile Include="Controllers\RubroController.cs" />
     <Compile Include="Controllers\SubrubroController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
-    <Compile Include="Controllers\IngresoBrutoController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\CuentaCorrienteController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -717,7 +721,8 @@
     <Content Include="Documentos\sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
     <Content Include="Documentos\sql\restoreDB.sql" />
     <Content Include="Documentos\sql\superbuscador  wFuncionBusqueda wBusqueda   .sql" />
-    <Content Include="Documentos\sql\Tree_TX_Arbol Tree_TX_Generar.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Arbol.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Generar.sql" />
     <Content Include="Documentos\sql\wDuplicarBase.sql" />
     <None Include="Documentos\vb6\frmAutorizacion.frms" />
     <None Include="Documentos\vb6\frmAutorizacion1.frms" />
@@ -803,6 +808,7 @@
     <Content Include="Scripts\jquery-layout\jquery.layout-latest.min.js" />
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
+    <Content Include="Scripts\ScriptCliente.js" />
     <Content Include="Scripts\ScriptProveedor.js" />
     <Content Include="Views\Moneda\Delete.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />
@@ -814,9 +820,16 @@
     <Content Include="Views\OrdenPago\EditFF.cshtml" />
     <Content Include="Views\Proveedor\IndexEventuales.cshtml" />
     <Content Include="Views\Proveedor\IndexAConfirmar.cshtml" />
+    <Content Include="Views\Proveedor\EditEventual.cshtml" />
+    <Content Include="Views\IBCondicion\Edit.cshtml" />
+    <Content Include="Views\IBCondicion\Index.cshtml" />
+    <Content Include="Views\ImpuestosDirecto\Edit.cshtml" />
+    <Content Include="Views\ImpuestosDirecto\Index.cshtml" />
+    <Content Include="Views\CondicionVenta\Edit.cshtml" />
+    <Content Include="Views\Actividades_Proveedore\Index.cshtml" />
+    <Content Include="Views\Concepto\IndexOP.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
-    <Content Include="Scripts\jsProveedor.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
     <Content Include="Scripts\jquery-grid\css\ellipsis-xbl.xml" />
     <Content Include="Scripts\jquery-grid\css\ui.jqgrid.css" />
@@ -1278,12 +1291,8 @@
     <Content Include="Views\Pedido\EditExterno.cshtml" />
     <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\Pedido\IndexExterno.cshtml" />
-    <Content Include="Views\Proveedor\_GrillaContactos.cshtml" />
-    <Content Include="Views\Proveedor\_GrillaLugaresEntrega.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
-    <Content Include="Views\Proveedor\FormEditing.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Proveedor\IndexResumido.cshtml" />
     <Content Include="Views\Obra\Index.cshtml" />
     <Content Include="Views\Account\CambiarPassword.cshtml" />
     <Content Include="Views\Account\LogOn_VersionOriginal.cshtml" />
@@ -1483,7 +1492,6 @@
     <Content Include="Scripts\TreeView\jquery.cookie.js" />
     <Content Include="Scripts\TreeView\jquery.treeview.edit.js" />
     <Content Include="Scripts\TreeView\jquery.treeview.js" />
-    <Content Include="Scripts\jsCliente.js" />
     <Content Include="Scripts\ScriptFactura.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1564,23 +1572,18 @@
     <Content Include="Views\Factura\Index.cshtml" />
     <Content Include="Views\Factura\Details.cshtml" />
     <Content Include="Views\Account\ElegirBase.cshtml" />
-    <Content Include="Views\Ganancia\Edit.cshtml" />
     <Content Include="Views\Concepto\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\CondicionVenta\Index.cshtml" />
     <Content Include="Views\Ganancia\Index.cshtml" />
     <Content Include="Views\PuntoVenta\Index.cshtml" />
-    <Content Include="Views\IngresoBruto\Index.cshtml" />
     <Content Include="Views\ListaPrecio\Index.cshtml" />
     <Content Include="Views\TipoRetencionGanancia\Index.cshtml" />
     <Content Include="Views\Home\_LayoutVacioHome.cshtml" />
     <Content Include="Views\PuntoVenta\Edit.cshtml" />
-    <Content Include="Views\IngresoBruto\Edit.cshtml" />
     <Content Include="Views\ListaPrecio\Edit.cshtml" />
-    <Content Include="Views\TipoRetencionGanancia\Edit.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Concepto\Edit.cshtml" />
-    <Content Include="Views\CondicionVenta\Edit.cshtml" />
     <Content Include="Views\Presupuesto\Index.cshtml" />
     <Content Include="Views\Presupuesto\Edit.cshtml" />
     <None Include="Models\SchemaCompare1.scmp" />
