@@ -1,4 +1,3 @@
-C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\ProntoMVC.Test.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\AutoMapper.Net4.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\Documentos\Factura A_Hawk_DOT_ORIGINAL.dot
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\Documentos\Factura_A_Hawk_FA.dot
@@ -93,5 +92,6 @@ C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\ru\AjaxControlToolkit.resources.d
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\tr-TR\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\zh-CHS\AjaxControlToolkit.resources.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\zh-CHT\AjaxControlToolkit.resources.dll
+C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\ProntoMVC.Test.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.pdb
