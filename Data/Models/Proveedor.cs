@@ -16,7 +16,7 @@ namespace ProntoMVC.Data.Models
     {
         public Proveedor()
         {
-            this.DetalleProveedores = new HashSet<DetalleProveedor>();
+            this.DetalleProveedoresContactos = new HashSet<DetalleProveedor>();
             this.DetalleProveedoresIBs = new HashSet<DetalleProveedoresIB>();
             this.DetalleProveedoresRubros = new HashSet<DetalleProveedoresRubro>();
             this.Pedidos = new HashSet<Pedido>();
@@ -147,7 +147,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<System.DateTime> FechaInicialControlComprobantes { get; set; }
         public string ResolucionAfip3668 { get; set; }
     
-        public virtual ICollection<DetalleProveedor> DetalleProveedores { get; set; }
+        public virtual ICollection<DetalleProveedor> DetalleProveedoresContactos { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }
         public virtual ICollection<DetalleProveedoresRubro> DetalleProveedoresRubros { get; set; }
         public virtual Localidad Localidad { get; set; }

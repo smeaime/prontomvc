@@ -1718,7 +1718,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleProveedores">
+    <EntitySetMapping Name="DetalleProveedoresContactos">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleProveedor">
         <MappingFragment StoreEntitySet="DetalleProveedores">
           <ScalarProperty Name="Acciones" ColumnName="Acciones" />
@@ -1910,7 +1910,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleClientes">
+    <EntitySetMapping Name="DetalleClientesContactos">
       <EntityTypeMapping TypeName="DemoProntoModel.DetalleCliente">
         <MappingFragment StoreEntitySet="DetalleClientes">
           <ScalarProperty Name="Acciones" ColumnName="Acciones" />
@@ -4471,6 +4471,45 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Clave" ColumnName="Clave" />
           <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposImpuestoes">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposImpuesto">
+        <MappingFragment StoreEntitySet="TiposImpuesto">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regiones">
+      <EntityTypeMapping TypeName="DemoProntoModel.Regione">
+        <MappingFragment StoreEntitySet="Regiones">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdRegion" ColumnName="IdRegion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleClientesDirecciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleClientesDireccione">
+        <MappingFragment StoreEntitySet="DetalleClientesDirecciones">
+          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdDetalleClienteDireccion" ColumnName="IdDetalleClienteDireccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleClientesTelefonos">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleClientesTelefono">
+        <MappingFragment StoreEntitySet="DetalleClientesTelefonos">
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdDetalleClienteTelefono" ColumnName="IdDetalleClienteTelefono" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-using System.Text;
-using System.Data.Entity.SqlServer;
-using System.Data.Objects;
-using System.Reflection;
 
 namespace ProntoMVC.Controllers
 {
@@ -52,170 +53,36 @@ namespace ProntoMVC.Controllers
             return View(o);
         }
 
-        public virtual JsonResult GetProveedoresAutocomplete2(string term)
+        public virtual ActionResult EditEventual(int id)
         {
-            var q = (from item in db.Proveedores
-                     where item.RazonSocial.StartsWith(term) && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"
-                     orderby item.RazonSocial
-                     select new
-                     {
-                         id = item.IdProveedor,
-                         value = item.RazonSocial,
-                         codigo = item.CodigoEmpresa,
-                         IdCondicionCompra = item.IdCondicionCompra,
-                         Contacto = item.Contacto
-                     }).Take(20).ToList();
-
-            if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
-
-            return Json(q, JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual JsonResult GetCodigosProveedorAutocomplete(string term)
-        {
-            if (true) // Starwith o Contains
+            Proveedor o;
+            if (id <= 0)
             {
-                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
-                         where item.RazonSocial.ToLower().StartsWith(term) && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"// .StartsWith(term, StringComparison.OrdinalIgnoreCase)
-                         // where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term)
-                         //where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
-                         orderby item.RazonSocial
-                         select new
-                         {
-                             id = item.IdProveedor,
-                             value = item.RazonSocial,
-                             // value = SqlFunctions.StringConvert(item.Codigo) + " " + item.RazonSocial,
-                             // value = item.Codigo + " " + item.RazonSocial, // esto trae problemas de COLLATION para linq... lo mejor parece ser resolver esos temas con una vista en sql
-
-                             codigo = item.CodigoProveedor,
-                             idCodigoIva = item.IdCodigoIva,
-                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
-                             Email = item.Email,
-                             Direccion = item.Direccion,
-                             Localidad = item.Localidad.Nombre,
-                             Provincia = item.Provincia.Nombre,
-                             Telefono = item.Telefono1,
-                             Fax = item.Fax,
-                             Cuit = item.Cuit,
-                             IdCondicionCompra = item.IdCondicionCompra, //.IdCondicionVenta, //por qué no?
-                             IdListaPrecios = item.IdListaPrecios,
-                             NumeroCAI = "",
-                             VencimientoCAI = ""
-                         }).Take(10).ToList();
-
-                if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
-
-                if (q.Count == 1)
-                {
-                    //q.First().NumeroCAI = "2222";
-                    //q[0].VencimientoCAI = "adad";
-                    //                                SELECT TOP 1 *  
-                    //FROM ComprobantesProveedores cp  
-                    //WHERE cp.IdProveedor=@IdProveedor or cp.IdProveedorEventual=@IdProveedor  
-                    //ORDER BY cp.FechaComprobante DESC,cp.NumeroComprobante2 DESC  
-                }
-
-                return Json(q, JsonRequestBehavior.AllowGet);
+                o = new Proveedor();
             }
             else
             {
-                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
-                         // where item.RazonSocial.StartsWith(term)
-                         // where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term)
-                         where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
-                         orderby item.RazonSocial
-                         select new
-                         {
-                             id = item.IdProveedor,
-                             value = item.RazonSocial,
-                             codigo = item.CodigoProveedor,
-                             idCodigoIva = item.IdCodigoIva,
-                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
-                             Email = item.Email,
-                             Direccion = item.Direccion,
-                             Localidad = item.Localidad.Nombre,
-                             Provincia = item.Provincia.Nombre,
-                             Telefono = item.Telefono1,
-                             Fax = item.Fax,
-                             Cuit = item.Cuit,
-                             IdListaPrecios = item.IdListaPrecios //,
-                         }).Take(10).ToList();
-                return Json(q, JsonRequestBehavior.AllowGet);
+                o = db.Proveedores.SingleOrDefault(x => x.IdProveedor == id);
             }
+            CargarViewBag(o);
+            return View(o);
         }
 
-        public virtual JsonResult GetCodigosProveedorAutocompleteEventuales2(int idproveedor)
+        [HttpPost]
+        public virtual JsonResult Delete(int Id)
         {
-            var q = db.ComprobantesProveedor
-                    .Where(x => x.IdProveedor == idproveedor || x.IdProveedorEventual == idproveedor)
-                    .OrderByDescending(x => x.FechaComprobante).ThenByDescending(x => x.NumeroComprobante2).FirstOrDefault();
-
-            if (q==null) return null;
- 
-            var q2 = new { q.NumeroCAI, q.FechaVencimientoCAI };
-
-            return Json(q2, JsonRequestBehavior.AllowGet);
+            Proveedor o = db.Proveedores.Find(Id);
+            db.Proveedores.Remove(o);
+            db.SaveChanges();
+            return Json(new { Success = 1, IdProveedor = Id, ex = "" });
         }
 
-        public virtual JsonResult GetCodigosProveedorAutocompleteEventuales(string term)
+        public virtual ActionResult DeleteConfirmed(int id)
         {
-            if (true) // Starwith o Contains
-            {
-                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
-                         where item.RazonSocial.ToLower().StartsWith(term) // && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"// .StartsWith(term, StringComparison.OrdinalIgnoreCase)
-                         orderby item.RazonSocial
-                         select new
-                         {
-                             id = item.IdProveedor,
-                             value = item.RazonSocial,
-                             codigo = item.CodigoProveedor,
-                             idCodigoIva = item.IdCodigoIva,
-                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
-                             Email = item.Email,
-                             Direccion = item.Direccion,
-                             Localidad = item.Localidad.Nombre,
-                             Provincia = item.Provincia.Nombre,
-                             Telefono = item.Telefono1,
-                             Fax = item.Fax,
-                             Cuit = item.Cuit,
-                             IdCondicionCompra = item.IdCondicionCompra, //.IdCondicionVenta, //por qué no?
-                             IdListaPrecios = item.IdListaPrecios,
-                             NumeroCAI = "",
-                             VencimientoCAI = ""
-                         }).Take(10).ToList();
-
-                if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
-
-                if (q.Count == 1)
-                {
-
-                }
-
-                return Json(q, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
-                         where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
-                         orderby item.RazonSocial
-                         select new
-                         {
-                             id = item.IdProveedor,
-                             value = item.RazonSocial,
-                             codigo = item.CodigoProveedor,
-                             idCodigoIva = item.IdCodigoIva,
-                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
-                             Email = item.Email,
-                             Direccion = item.Direccion,
-                             Localidad = item.Localidad.Nombre,
-                             Provincia = item.Provincia.Nombre,
-                             Telefono = item.Telefono1,
-                             Fax = item.Fax,
-                             Cuit = item.Cuit,
-                             IdListaPrecios = item.IdListaPrecios //,
-                         }).Take(10).ToList();
-                return Json(q, JsonRequestBehavior.AllowGet);
-            }
+            Proveedor o = db.Proveedores.Find(id);
+            db.Proveedores.Remove(o);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         void CargarViewBag(Proveedor o)
@@ -242,29 +109,54 @@ namespace ProntoMVC.Controllers
 
         public bool Validar(ProntoMVC.Data.Models.Proveedor o, ref string sErrorMsg)
         {
-            if (o.IdEstado == null) sErrorMsg += "\n" + "Falta el estado";
+            Int32 mPruebaInt = 0;
+            string mProntoIni = "";
+            string mExigirCUIT = "";
+            Boolean result;
 
-            if (o.RazonSocial == "") { sErrorMsg += "\n" + "Falta la razón social del proveedor"; }
+            if ((o.RazonSocial ?? "") == "") { sErrorMsg += "\n" + "Falta la razón social del proveedor"; }
 
             if ((o.Cuit ?? "") == "") { sErrorMsg += "\n" + "Falta el CUIT del proveedor"; }
 
-            string s="asdasd";
-            try
+            if ((o.Eventual ?? "") != "SI")
             {
-                s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
-                o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                if (o.IdEstado == null) sErrorMsg += "\n" + "Falta el estado";
+
+                if ((o.CodigoProveedor ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo del proveedor"; }
+
+                if ((o.Direccion ?? "") == "") { sErrorMsg += "\n" + "Falta la direccion del proveedor"; }
+
+                if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta la condicion de IVA del proveedor"; }
+
+                if (((o.IBCondicion ?? 0) == 2 || (o.IBCondicion ?? 0) == 3) && (o.IBNumeroInscripcion ?? "") == "") { sErrorMsg += "\n" + "Falta el numero de inscripcion de IIBB del proveedor"; }
+
+                if (o.RetenerSUSS == "SI" && (o.IdImpuestoDirectoSUSS ?? 0) == 0) { sErrorMsg += "\n" + "Falta la categoria SUSS del proveedor"; }
+
+                if ((o.CodigoSituacionRetencionIVA ?? "") != "")
+                {
+                    if ((o.CodigoSituacionRetencionIVA ?? "").Length > 1) { sErrorMsg += "\n" + "El codigo de situacion de IVA puede tener solo 1 digito"; }
+                    if (!(result = int.TryParse((o.CodigoSituacionRetencionIVA ?? ""), out mPruebaInt))) { sErrorMsg += "\n" + "El codigo de situacion de IVA debe ser numerico"; }
+                }
             }
-            catch (Exception)
-            {
-                //throw;
-            }
+
+            string s = "asdasd";
+            s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
+            o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
 
             if (!Generales.mkf_validacuit(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
 
-            if (db.Proveedores.Any(x => x.Cuit == s && x.Confirmado=="SI")) { sErrorMsg += "\n" + "El CUIT ya existe"; }
+            mProntoIni = BuscarClaveINI("Control estricto del CUIT", -1);
+            if ((o.IdProveedor <= 0 || (mProntoIni ?? "") == "SI") && o.Cuit.Length > 0)
+            {
+                if (db.Proveedores.Any(x => x.Cuit == s && x.Confirmado == "SI")) { sErrorMsg += "\n" + "El CUIT ya existe"; }
+            }
 
             if (db.Proveedores.Any(x => x.RazonSocial == s && x.Confirmado=="SI")) { sErrorMsg += "\n" + "La razon social y CUIT ya existen"; }
 
+            DescripcionIva DescripcionIva = db.DescripcionIvas.Where(c => c.IdCodigoIva == o.IdCodigoIva).SingleOrDefault();
+            if (DescripcionIva != null) { mExigirCUIT = DescripcionIva.ExigirCUIT; }
+            if (mExigirCUIT == "SI" && o.Cuit.Length == 0) { sErrorMsg += "\n" + "Debe ingresar el CUIT para esta condicion de IVA"; }
+            
             if (sErrorMsg != "") return false;
             else return true;
         }
@@ -274,46 +166,55 @@ namespace ProntoMVC.Controllers
         {
             try
             {
-                try
-                {
-                    var s = Proveedor.Cuit.Replace("-", "");
-                    Proveedor.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
-                }
-                catch (Exception)
-                {
-                    // throw;
-                }
+                var s = Proveedor.Cuit.Replace("-", "");
+                Proveedor.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
 
-                string erar = "";
-
-                if (!Validar(Proveedor, ref erar))
+                string errs = "";
+                if (!Validar(Proveedor, ref errs))
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                    List<string> errors = new List<string>();
-                    errors.Add(erar);
-                    return Json(errors);
-                }
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
 
-                if (!Generales.mkf_validacuit(Proveedor.Cuit.NullSafeToString()))
-                {
-                    ModelState.AddModelError("Cuit", "El CUIT es incorrecto"); //http://msdn.microsoft.com/en-us/library/dd410404(v=vs.90).aspx
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                    List<string> errors = new List<string>();
-                    errors.Add("El CUIT es incorrecto");
-                    return Json(errors);
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
                 }
 
                 if (ModelState.IsValid || true)
                 {
+                    string usuario = ViewBag.NombreUsuario;
+                    int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
                     if (Proveedor.IdProveedor > 0)
                     {
-                        var EntidadOriginal = db.Proveedores.Where(p => p.IdProveedor == Proveedor.IdProveedor).Include(p => p.DetalleProveedores).Include(p => p.DetalleProveedoresRubros).SingleOrDefault();
+                        Proveedor.IdUsuarioModifico = IdUsuario;
+                        Proveedor.FechaModifico = DateTime.Now;
+                    }
+                    else
+                    {
+                        Proveedor.IdUsuarioIngreso = IdUsuario;
+                        Proveedor.FechaIngreso = DateTime.Now;
+                    }
+
+                    if (Proveedor.IdProveedor > 0)
+                    {
+                        var EntidadOriginal = db.Proveedores.Where(p => p.IdProveedor == Proveedor.IdProveedor).Include(p => p.DetalleProveedoresContactos).Include(p => p.DetalleProveedoresRubros).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
                         EntidadEntry.CurrentValues.SetValues(Proveedor);
 
-                        foreach (var d in Proveedor.DetalleProveedores)
+                        foreach (var d in Proveedor.DetalleProveedoresContactos)
                         {
-                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedores.Where(c => c.IdDetalleProveedor == d.IdDetalleProveedor && d.IdDetalleProveedor > 0).SingleOrDefault();
+                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedoresContactos.Where(c => c.IdDetalleProveedor == d.IdDetalleProveedor && d.IdDetalleProveedor > 0).SingleOrDefault();
                             if (DetalleEntidadOriginal != null)
                             {
                                 var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
@@ -321,14 +222,14 @@ namespace ProntoMVC.Controllers
                             }
                             else
                             {
-                                EntidadOriginal.DetalleProveedores.Add(d);
+                                EntidadOriginal.DetalleProveedoresContactos.Add(d);
                             }
                         }
-                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedores.Where(c => c.IdDetalleProveedor != 0).ToList())
+                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedoresContactos.Where(c => c.IdDetalleProveedor != 0).ToList())
                         {
-                            if (!Proveedor.DetalleProveedores.Any(c => c.IdDetalleProveedor == DetalleEntidadOriginal.IdDetalleProveedor))
+                            if (!Proveedor.DetalleProveedoresContactos.Any(c => c.IdDetalleProveedor == DetalleEntidadOriginal.IdDetalleProveedor))
                             {
-                                EntidadOriginal.DetalleProveedores.Remove(DetalleEntidadOriginal);
+                                EntidadOriginal.DetalleProveedoresContactos.Remove(DetalleEntidadOriginal);
                                 db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
                             }
                         }
@@ -351,6 +252,28 @@ namespace ProntoMVC.Controllers
                             if (!Proveedor.DetalleProveedoresRubros.Any(c => c.IdDetalleProveedorRubros == DetalleEntidadOriginal.IdDetalleProveedorRubros))
                             {
                                 EntidadOriginal.DetalleProveedoresRubros.Remove(DetalleEntidadOriginal);
+                                db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            }
+                        }
+
+                        foreach (var d in Proveedor.DetalleProveedoresIBs)
+                        {
+                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedoresIBs.Where(c => c.IdDetalleProveedorIB == d.IdDetalleProveedorIB && d.IdDetalleProveedorIB > 0).SingleOrDefault();
+                            if (DetalleEntidadOriginal != null)
+                            {
+                                var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                                DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            }
+                            else
+                            {
+                                EntidadOriginal.DetalleProveedoresIBs.Add(d);
+                            }
+                        }
+                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedoresIBs.Where(c => c.IdDetalleProveedorIB != 0).ToList())
+                        {
+                            if (!Proveedor.DetalleProveedoresIBs.Any(c => c.IdDetalleProveedorIB == DetalleEntidadOriginal.IdDetalleProveedorIB))
+                            {
+                                EntidadOriginal.DetalleProveedoresIBs.Remove(DetalleEntidadOriginal);
                                 db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
                             }
                         }
@@ -802,7 +725,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult DetProveedores(string sidx, string sord, int? page, int? rows, int? IdProveedor)
         {
             int IdProveedor1 = IdProveedor ?? 0;
-            var Det = db.DetalleProveedores.Where(p => p.IdProveedor == IdProveedor).AsQueryable();
+            var Det = db.DetalleProveedoresContactos.Where(p => p.IdProveedor == IdProveedor).AsQueryable();
             int pageSize = rows ?? 20;
             int totalRecords = Det.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -883,6 +806,48 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult DetProveedoresIIBB(string sidx, string sord, int? page, int? rows, int? IdProveedor)
+        {
+            int IdProveedor1 = IdProveedor ?? 0;
+            var Det = db.DetalleProveedoresIBs.Where(p => p.IdProveedor == IdProveedor).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in Det
+                        from b in db.IBCondiciones.Where(o => o.IdIBCondicion == a.IdIBCondicion).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleProveedorIB,
+                            a.IdIBCondicion,
+                            Jurisdiccion = b != null ? b.Descripcion : "",
+                            a.AlicuotaAAplicar,
+                            a.FechaVencimiento
+                        }).OrderBy(x => x.IdDetalleProveedorIB).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleProveedorIB.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleProveedorIB.ToString(), 
+                            a.IdIBCondicion.NullSafeToString(),
+                            a.Jurisdiccion.NullSafeToString(),
+                            a.AlicuotaAAplicar.NullSafeToString(),
+                            a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy")
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
             switch (oper)
@@ -894,6 +859,172 @@ namespace ProntoMVC.Controllers
                 case "del": //Validate Input ; Delete Method
                     break;
                 default: break;
+            }
+        }
+
+        public virtual JsonResult GetProveedoresAutocomplete2(string term)
+        {
+            var q = (from item in db.Proveedores
+                     where item.RazonSocial.StartsWith(term) && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"
+                     orderby item.RazonSocial
+                     select new
+                     {
+                         id = item.IdProveedor,
+                         value = item.RazonSocial,
+                         codigo = item.CodigoEmpresa,
+                         IdCondicionCompra = item.IdCondicionCompra,
+                         Contacto = item.Contacto
+                     }).Take(20).ToList();
+
+            if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetCodigosProveedorAutocomplete(string term)
+        {
+            if (true) // Starwith o Contains
+            {
+                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
+                         where item.RazonSocial.ToLower().StartsWith(term) && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"// .StartsWith(term, StringComparison.OrdinalIgnoreCase)
+                         // where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term)
+                         //where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
+                         orderby item.RazonSocial
+                         select new
+                         {
+                             id = item.IdProveedor,
+                             value = item.RazonSocial,
+                             // value = SqlFunctions.StringConvert(item.Codigo) + " " + item.RazonSocial,
+                             // value = item.Codigo + " " + item.RazonSocial, // esto trae problemas de COLLATION para linq... lo mejor parece ser resolver esos temas con una vista en sql
+
+                             codigo = item.CodigoProveedor,
+                             idCodigoIva = item.IdCodigoIva,
+                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
+                             Email = item.Email,
+                             Direccion = item.Direccion,
+                             Localidad = item.Localidad.Nombre,
+                             Provincia = item.Provincia.Nombre,
+                             Telefono = item.Telefono1,
+                             Fax = item.Fax,
+                             Cuit = item.Cuit,
+                             IdCondicionCompra = item.IdCondicionCompra, //.IdCondicionVenta, //por qué no?
+                             IdListaPrecios = item.IdListaPrecios,
+                             NumeroCAI = "",
+                             VencimientoCAI = ""
+                         }).Take(10).ToList();
+
+                if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+                if (q.Count == 1)
+                {
+                    //q.First().NumeroCAI = "2222";
+                    //q[0].VencimientoCAI = "adad";
+                    //                                SELECT TOP 1 *  
+                    //FROM ComprobantesProveedores cp  
+                    //WHERE cp.IdProveedor=@IdProveedor or cp.IdProveedorEventual=@IdProveedor  
+                    //ORDER BY cp.FechaComprobante DESC,cp.NumeroComprobante2 DESC  
+                }
+
+                return Json(q, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
+                         // where item.RazonSocial.StartsWith(term)
+                         // where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term)
+                         where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
+                         orderby item.RazonSocial
+                         select new
+                         {
+                             id = item.IdProveedor,
+                             value = item.RazonSocial,
+                             codigo = item.CodigoProveedor,
+                             idCodigoIva = item.IdCodigoIva,
+                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
+                             Email = item.Email,
+                             Direccion = item.Direccion,
+                             Localidad = item.Localidad.Nombre,
+                             Provincia = item.Provincia.Nombre,
+                             Telefono = item.Telefono1,
+                             Fax = item.Fax,
+                             Cuit = item.Cuit,
+                             IdListaPrecios = item.IdListaPrecios //,
+                         }).Take(10).ToList();
+                return Json(q, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public virtual JsonResult GetCodigosProveedorAutocompleteEventuales2(int idproveedor)
+        {
+            var q = db.ComprobantesProveedor
+                    .Where(x => x.IdProveedor == idproveedor || x.IdProveedorEventual == idproveedor)
+                    .OrderByDescending(x => x.FechaComprobante).ThenByDescending(x => x.NumeroComprobante2).FirstOrDefault();
+
+            if (q == null) return null;
+
+            var q2 = new { q.NumeroCAI, q.FechaVencimientoCAI };
+
+            return Json(q2, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetCodigosProveedorAutocompleteEventuales(string term)
+        {
+            if (true) // Starwith o Contains
+            {
+                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
+                         where item.RazonSocial.ToLower().StartsWith(term) // && (item.Eventual ?? "NO") == "NO" && (item.Confirmado ?? "NO") == "SI"// .StartsWith(term, StringComparison.OrdinalIgnoreCase)
+                         orderby item.RazonSocial
+                         select new
+                         {
+                             id = item.IdProveedor,
+                             value = item.RazonSocial,
+                             codigo = item.CodigoProveedor,
+                             idCodigoIva = item.IdCodigoIva,
+                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
+                             Email = item.Email,
+                             Direccion = item.Direccion,
+                             Localidad = item.Localidad.Nombre,
+                             Provincia = item.Provincia.Nombre,
+                             Telefono = item.Telefono1,
+                             Fax = item.Fax,
+                             Cuit = item.Cuit,
+                             IdCondicionCompra = item.IdCondicionCompra, //.IdCondicionVenta, //por qué no?
+                             IdListaPrecios = item.IdListaPrecios,
+                             NumeroCAI = "",
+                             VencimientoCAI = ""
+                         }).Take(10).ToList();
+
+                if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+                if (q.Count == 1)
+                {
+
+                }
+
+                return Json(q, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var q = (from item in db.Proveedores.Include(c => c.IBCondicion) // .Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
+                         where (SqlFunctions.StringConvert((decimal?)item.CodigoProveedor).ToLower().Contains(term.ToLower()) || item.RazonSocial.ToLower().Contains(term.ToLower()))
+                         orderby item.RazonSocial
+                         select new
+                         {
+                             id = item.IdProveedor,
+                             value = item.RazonSocial,
+                             codigo = item.CodigoProveedor,
+                             idCodigoIva = item.IdCodigoIva,
+                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
+                             Email = item.Email,
+                             Direccion = item.Direccion,
+                             Localidad = item.Localidad.Nombre,
+                             Provincia = item.Provincia.Nombre,
+                             Telefono = item.Telefono1,
+                             Fax = item.Fax,
+                             Cuit = item.Cuit,
+                             IdListaPrecios = item.IdListaPrecios //,
+                         }).Take(10).ToList();
+                return Json(q, JsonRequestBehavior.AllowGet);
             }
         }
 

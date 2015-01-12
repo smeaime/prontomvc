@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Condiciones_Compra>
-
 @{
-    ViewBag.Title = "Condiciones de compra";
+    ViewBag.Title = "Condiciones de compra/venta";
 }
-
-<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<div><input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
+@*<p>@Html.ActionLink("Nuevo Proveedor", "Edit", new { id = -1 }, null)</p>*@
 
 <br />
-
-   <button onclick="window.location.href='@Url.Action("Nuevo", new { id = -1 })'"  class="btn btn-primary"  >
-                    Nuevo
-                </button>
-
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
-<div id="ListaPager" class="scroll" style="text-align: center;"></div>
-@*<p>@Html.ActionLink("Nueva Condicion de Venta", "Edit", new { id = -1 }, null)</p> *@
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva condicion</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -24,62 +22,48 @@
         var inEdit;
         grid = $("#Lista");
 
-        //Para que haga wrap en las celdas
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "CondicionVenta")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            url: '@Url.Action("TT", "CondicionVenta")',
             datatype: 'json',
             mtype: 'POST',
-            shrinkToFit: true,
-            colNames: ['Acciones', 'IdCondicionCompra', 'Codigo', 'Descripcion', 'Observaciones',
-                       'Dias (1)', '% (1)',
-                       'Dias (2)', '% (2)',
-                       'Dias (3)', '% (3)',
-                       'Dias (4)', '% (4)',
-                       'Dias (5)', '% (5)',
-                       'Dias (6)', '% (6)',
-                       'Dias (7)', '% (7)',
-                       'Dias (8)', '% (8)',
-                       'Dias (9)', '% (9)',
-                       'Dias (10)', '% (10)',
-                       'Dias (10)', '% (11)',
-                       'Dias (11)', '% (12)'
-                       ],
-
+            colNames: ['Acciones', 'IdCondicionCompra', 'Codigo', 'Descripcion', 'Dias (1)', '% (1)', 'Dias (2)', '% (2)', 'Dias (3)', '% (3)', 'Dias (4)', '% (4)', 'Dias (5)', '% (5)',
+                       'Dias (6)', '% (6)', 'Dias (7)', '% (7)', 'Dias (8)', '% (8)', 'Dias (9)', '% (9)', 'Dias (10)', '% (10)', 'Dias (10)', '% (11)', 'Dias (11)', '% (12)',
+                       '% Bonificacion (ventas)', 'Contra entrega valores', 'Observaciones'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdCondicionCompra', index: 'IdCondicionCompra', align: 'left', width: 0, editable: false, hidden: true },
-                        { name: 'CodigoCondicion', index: 'CodigoCondicion', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Descripcion', index: 'Descripcion', width: 0, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'CantidadDias1', index: 'CantidadDias1', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje1', index: 'Porcentaje1', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias2', index: 'CantidadDias2', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje2', index: 'Porcentaje2', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias3', index: 'CantidadDias3', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje3', index: 'Porcentaje3', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias4', index: 'CantidadDias4', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje4', index: 'Porcentaje4', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias5', index: 'CantidadDias5', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje5', index: 'Porcentaje5', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias6', index: 'CantidadDias6', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje6', index: 'Porcentaje6', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias7', index: 'CantidadDias7', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje7', index: 'Porcentaje7', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias8', index: 'CantidadDias8', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje8', index: 'Porcentaje8', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias9', index: 'CantidadDias9', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje9', index: 'Porcentaje9', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias10', index: 'CantidadDias10', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje10', index: 'Porcentaje10', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias11', index: 'CantidadDias11', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje11', index: 'Porcentaje11', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CantidadDias12', index: 'CantidadDias12', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Porcentaje12', index: 'Porcentaje12', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-                    ],
+                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
+                        { name: 'IdCondicionCompra', index: 'IdCondicionCompra', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'CodigoCondicion', index: 'CodigoCondicion', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias1', index: 'CantidadDias1', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje1', index: 'Porcentaje1', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias2', index: 'CantidadDias2', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje2', index: 'Porcentaje2', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias3', index: 'CantidadDias3', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje3', index: 'Porcentaje3', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias4', index: 'CantidadDias4', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje4', index: 'Porcentaje4', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias5', index: 'CantidadDias5', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje5', index: 'Porcentaje5', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias6', index: 'CantidadDias6', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje6', index: 'Porcentaje6', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias7', index: 'CantidadDias7', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje7', index: 'Porcentaje7', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias8', index: 'CantidadDias8', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje8', index: 'Porcentaje8', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias9', index: 'CantidadDias9', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje9', index: 'Porcentaje9', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias10', index: 'CantidadDias10', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje10', index: 'Porcentaje10', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias11', index: 'CantidadDias11', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje11', index: 'Porcentaje11', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadDias12', index: 'CantidadDias12', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Porcentaje12', index: 'Porcentaje12', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ContraEntregaDeValores', index: 'ContraEntregaDeValores', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+            ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
                     if (typeof lastSelectedId !== "undefined") {
@@ -89,94 +73,23 @@
                 }
             },
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdCondicionCompra',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar',
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            footerrow: true,
+            footerrow: false, //true,
             userDataOnFooter: true,
-            //imgpath: '/content/cupertino/images',
-            //loadonce: true,
-            caption: '<b>Condiciones de compra/venta</b>'
+            multiboxonly: true,
+            caption: '<b>CONDICIONES DE COMPRA/VENTA</b>'
         });
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
     });
-
 </script>
-
-
-@*
-@{
-    var grid = new WebGrid(source: Model,
-        defaultSort: "NumeroRequerimiento",
-        rowsPerPage: 10,
-        canPage: true,
-        canSort: true,
-        fieldNamePrefix: "ItemRM_",
-        selectionFieldName: "selectedRow");
-}
-
-<div id="grid">
-    @grid.GetHtml(
-        tableStyle: "webgrid",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primera",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Última >>",
-                columns: new[] {
-                                        grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                        grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                        //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                        //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                        grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                        grid.Column("", header: "Acciones", 
-                                            format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                           @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                        )
-                                        }
-                            )
-</div>
-
-<table>
-    <tr>
-        <th>IdRequerimiento</th>
-        <th>Numero RM</th>
-        <th>Fecha</th>
-        <th>Obra</th>
-        <th>Sector</th>
-        <th></th>
-    </tr>
-
-@{int i = 1;}
-@foreach (var item in Model)
-{
-    <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-        <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-        <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-        </td>
-    </tr>
-}
-</table>
-*@

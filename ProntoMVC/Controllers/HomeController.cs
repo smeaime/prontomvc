@@ -154,7 +154,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            if (System.Diagnostics.Debugger.IsAttached) return Json(TreeDest);
+            //if (System.Diagnostics.Debugger.IsAttached) return Json(TreeDest);
 
 
             int IdUsuario = 0;
