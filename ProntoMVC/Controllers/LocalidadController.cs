@@ -17,7 +17,7 @@ using System.Web.Script.Serialization;
 
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-using Trirand.Web.Mvc;
+//using Trirand.Web.Mvc;
 
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
