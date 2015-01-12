@@ -1173,7 +1173,7 @@ namespace ProntoMVC.Controllers
             var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)mvarCotizacion;
+            o.CotizacionDolar = (decimal) (mvarCotizacion ?? 0);
 
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());

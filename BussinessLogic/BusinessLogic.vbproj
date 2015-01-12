@@ -155,9 +155,13 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Trirand.Web.Mvc">
+      <HintPath>..\ProntoMVC\bin\Trirand.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>
     </Reference>
@@ -224,7 +228,6 @@
     <Compile Include="ManagerDebug\CartaDePorteManager.vb" />
     <Compile Include="ManagerDebug\CDPStockMovimientoManager.vb" />
     <Compile Include="ManagerDebug\ConsultasLinq.vb" />
-    <Compile Include="ManagerDebug\Dynamic.vb" />
     <Compile Include="ManagerDebug\FuncionesInterop.vb" />
     <Compile Include="ManagerDebug\Numalet.vb" />
     <Compile Include="ManagerDebug\PedidoItemManager.vb" />

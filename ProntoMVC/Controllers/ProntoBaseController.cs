@@ -1262,7 +1262,52 @@ namespace ProntoMVC.Controllers
 
 
 
-        public List<Tablas.Tree> TreeConNiveles(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
+        public List<Tablas.Tree> MenuConNiveles_Tree(int IdUsuario)
+        {
+
+            List<Tablas.Tree> Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
+            List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
+
+            //string usuario = ViewBag.NombreUsuario;
+            //int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+
+            foreach (Tablas.Tree o in Tree)
+            {
+                EmpleadosAcceso acc = permisos.Where(x => x.Nodo == o.Clave).FirstOrDefault();
+
+                //               if (acc == null) continue;
+                //if (o.Descripcion.Contains("(")) continue;
+                //     if (o.Descripcion.Contains("2") || o.Descripcion.Contains("1")) continue;
+
+                //if (acc.Nivel > 5) o.Descripcion = "Bloqueado! " + o.Descripcion;
+
+                if (acc != null)
+                {
+                    o.Link = acc.Nodo.NullSafeToString();
+                    o.Orden = acc.Nivel ?? -1;
+                }
+
+                if (acc == null ? false : !acc.Acceso)
+                {
+                    // si el Acceso está en 0, el nodo está invisible para el usuario
+                    o.Link = acc.Nodo.NullSafeToString();
+                    o.Orden = 9;
+                }
+
+
+
+                TreeDest.Add(o);
+
+            }
+
+            return TreeDest;
+
+        }
+
+
+        public List<Tablas.Tree> ArbolConNiveles_Tree(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid = new Guid())
         {
 
             List<Tablas.Tree> Tree = TablasDAL.Arbol(sBase, userGuid);

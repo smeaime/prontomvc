@@ -29,7 +29,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Entidad = db.Valores.Where(p => p.Estado == null && p.IdTipoComprobante != 17 && p.TiposComprobante1.Agrupacion1 == "CHEQUES").AsQueryable(); 
+            var Entidad = db.Valores.Where(p => p.Estado == null && p.IdTipoComprobante != 17 && p.TiposComprobante1.Agrupacion1 == "CHEQUES").AsQueryable();
 
             var data = (from a in Entidad
                         from b in db.Bancos.Where(o => o.IdBanco == a.IdBanco).DefaultIfEmpty()
@@ -49,7 +49,7 @@ namespace ProntoMVC.Controllers
                             Cliente = c.RazonSocial
                         }).OrderBy(x => x.FechaValor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
-            int totalRecords = Entidad.Count(); 
+            int totalRecords = Entidad.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
@@ -107,7 +107,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult GetTiposValores()
         {
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
-            foreach (TiposComprobante u in db.TiposComprobantes.Where(x => x.EsValor == "SI").OrderBy(x => x.Descripcion).ToList())
+            foreach (Data.Models.TiposComprobante u in db.TiposComprobantes.Where(x => x.EsValor == "SI").OrderBy(x => x.Descripcion).ToList())
                 Datacombo.Add(u.IdTipoComprobante, u.DescripcionAb);
             return PartialView("Select", Datacombo);
         }
