@@ -118,6 +118,10 @@
     <Reference Include="BusinessObject">
       <HintPath>..\ProntoMVC\bin\BusinessObject.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessObject, Version=1.0.4.3137, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\BussinessObject\bin\Debug\BusinessObject.dll</HintPath>
+    </Reference>
     <Reference Include="ClaseMigrar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClaseMigrar\obj\x86\Debug\ClaseMigrar.dll</HintPath>
@@ -159,9 +163,6 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Trirand.Web.Mvc">
-      <HintPath>..\ProntoMVC\bin\Trirand.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="WSAFIPFE">
       <HintPath>bin\Debug\WSAFIPFE.dll</HintPath>
     </Reference>
@@ -228,6 +229,7 @@
     <Compile Include="ManagerDebug\CartaDePorteManager.vb" />
     <Compile Include="ManagerDebug\CDPStockMovimientoManager.vb" />
     <Compile Include="ManagerDebug\ConsultasLinq.vb" />
+    <Compile Include="ManagerDebug\Dynamic.vb" />
     <Compile Include="ManagerDebug\FuncionesInterop.vb" />
     <Compile Include="ManagerDebug\Numalet.vb" />
     <Compile Include="ManagerDebug\PedidoItemManager.vb" />
