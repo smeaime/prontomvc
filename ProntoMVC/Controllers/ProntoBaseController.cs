@@ -27,6 +27,9 @@ namespace ProntoMVC.Controllers
         public string SC;
 
 
+        public string ROOT;
+
+
 
         public int glbIdUsuario
         {
@@ -217,7 +220,7 @@ namespace ProntoMVC.Controllers
 
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-
+            ROOT = ConfigurationManager.AppSettings["Root"];
             asignacadena((string)rc.HttpContext.Session["BasePronto"]);
 
 
@@ -439,7 +442,7 @@ namespace ProntoMVC.Controllers
             }
 
             var idclav = db.ProntoIniClaves.Where(x => x.Clave == clave).Select(x => x.IdProntoIniClave).FirstOrDefault();
-            string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && (IdUsuario==-1 || x.IdUsuario == IdUsuario)).Select(x => x.Valor).FirstOrDefault();
+            string idclava = db.ProntoIni.Where(x => x.IdProntoIniClave == idclav && (IdUsuario == -1 || x.IdUsuario == IdUsuario)).Select(x => x.Valor).FirstOrDefault();
 
             return idclava;
         }
@@ -1193,7 +1196,7 @@ namespace ProntoMVC.Controllers
             //else
             //{
 
-                glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
+            glbPathArchivoAPP = glbPathPlantillas + @"\..\app\" + sBase + ".app";
 
             //}
 
@@ -1261,6 +1264,550 @@ namespace ProntoMVC.Controllers
         }
 
 
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        public IQueryable<Tablas.Tree> TablaTree(string parentId)
+        {
+            var q = from n in db.Trees
+                    where (n.ParentId == parentId)
+                    select new Tablas.Tree()
+                    {
+                        IdItem = n.IdItem,
+                        Clave = n.Clave,
+                        Descripcion = n.Descripcion,
+                        ParentId = n.ParentId,
+                        Orden = n.Orden ?? 0,
+                        Parametros = n.Parametros,
+                        Link = n.Link,
+                        Imagen = n.Imagen,
+                        EsPadre = n.EsPadre,
+                        nivel = 1
+
+                        // , Orden = n.Orden
+                    };
+
+
+
+
+
+            return q;
+        }
+
+
+
+        public List<Tablas.Tree> TablaTree()
+        {
+            // return RedirectToAction("Arbol", "Acceso");
+
+            //esta llamada tarda // y no se puede usar linqtosql acá??????
+            List<Tablas.Tree> Tree = TablasDAL.Arbol(this.Session["BasePronto"].ToString());
+
+            List<Tablas.Tree> TreeDest = new List<Tablas.Tree>();
+            List<Tablas.Tree> TreeDest2 = new List<Tablas.Tree>();
+
+
+            // if (System.Diagnostics.Debugger.IsAttached) return Tree;
+
+
+
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario;
+            try
+            {
+                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw; // Exception("No se encuentra el usuario");
+            }
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+            var z = from n in db.Trees
+                    join p in permisos on n.Clave equals p.Nodo
+                    select new { n, p };
+
+            TreeDest = new List<Tablas.Tree>(Tree); //la duplico
+
+            var archivoapp = LeerArchivoAPP(IdUsuario, this.Session["BasePronto"].ToString(), usuario, db, new Guid(Membership.GetUser().ProviderUserKey.ToString()));
+
+
+            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+            bool esadmin = Roles.IsUserInRole(usuario, "Administrador");
+            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
+            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
+            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
+            bool esExterno = Roles.IsUserInRole(usuario, "Externo");
+            bool escompras = Roles.IsUserInRole(usuario, "Compras");
+            bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
+
+
+
+            foreach (Tablas.Tree o in Tree)
+            {
+
+
+                int? nivel;
+
+
+                nivel = 9;
+
+
+                if (essuperadmin)
+                {
+                    nivel = 1;
+                }
+
+
+                /*
+
+            else if (escomercial &&
+                (o.Clave.Contains("Comercial")
+                || o.Clave.Contains("IBCondici")
+                || o.Clave.Contains("Ganancia")
+                || o.Clave.Contains("IGCondici")
+                || o.Clave.Contains("Cliente")
+                || o.Clave.Contains("ListasPrecio")
+                || o.Clave.Contains("PuntosVenta")
+                || o.Clave.Contains("Concepto")
+                || o.Clave.Contains("OrdenesCom")
+                || o.Clave.Contains("Remito")
+                || o.Clave.Contains("OPago")
+                || o.Clave.Contains("Recibo")
+                || o.Clave.Contains("NotasCredito")
+                || o.Clave.Contains("NotasDebito")
+                || o.Clave.Contains("CondicionesCompra")
+                || o.Clave.Contains("Factura")
+                || o.Clave.Contains("CtasCtesD")
+                || o.Clave.Contains("Compras")
+                || o.Clave.Contains("Comparativa")
+                ))
+            {
+                nivel = 1;
+            }
+            else if (esfactura &&
+                (o.Clave.Contains("Comercial")
+                || o.Clave.Contains("IBCondici")
+                || o.Clave.Contains("Ganancia")
+                || o.Clave.Contains("IGCondici")
+                || o.Clave.Contains("Cliente")
+                || o.Clave.Contains("ListasPrecio")
+                || o.Clave.Contains("PuntosVenta")
+                || o.Clave.Contains("Concepto")
+                || o.Clave.Contains("CondicionesCompra")
+                || o.Clave.Contains("Factura")
+                || o.Clave.Contains("CtasCtesD")
+                ))
+            {
+                nivel = 1;
+            }
+            else if ((escomercial || esfactura) && (o.Clave.Contains("Factura") || o.Clave.Contains("Articulo") || o.Clave.Contains("Comercial") || o.Clave.Contains("CtasCtesD")))
+            {
+                nivel = 1;
+            }
+            else if ((esreq) && (o.Clave.Contains("Requerimiento") || o.Clave.Contains("Articulo")))
+            {
+                nivel = 1;
+            }
+
+            else if ((escompras) && (o.Clave.Contains("Comparativa") || o.Clave.Contains("Compras") || o.Clave.Contains("Presupuesto") || o.Clave.Contains("Pedido") || o.Clave.Contains("Cotizaci") || o.Clave.Contains("CtasCtesA") || o.Clave.Contains("ComprobantesPrv") || o.Clave.Contains("ComprobanteProveedor")))
+            {
+                nivel = 1;
+            }
+            else if (esExterno && o.Clave.Contains("Presupuesto"))
+            {
+                nivel = 1;
+            }
+            else if (esFondoFijo && (o.Clave.Contains("FondoFijo") || o.Clave.Contains("FondosFijos") || o.Clave.Contains("Compras") || o.Clave.Contains("ComprobantesPrv") || o.Clave.Contains("ComprobanteProveedor")))
+            {
+                nivel = 1;
+            }
+
+            else if (o.Clave.Contains("Ppal"))
+            {
+                nivel = 1;
+            }
+            else
+            {
+                nivel = 9;
+            }
+
+            */
+
+
+
+
+                int? nivelpronto = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
+                if (nivelpronto != null)
+                {
+                    if (nivelpronto > nivel || true)
+                    {
+                        nivel = nivelpronto; // si el nivel del pronto es mas bajo (mayor) que el de web, tiene prioridad el nivel pronto 
+                    }
+                }
+                else
+                {
+
+                }
+
+
+                if (!essuperadmin && !archivoapp.Contains(o.Clave))
+                {
+                    nivel = 9;
+                }
+
+
+
+                o.nivel = nivel ?? 9;
+
+
+
+
+                if (nivel >= 9)
+                {
+                    o.Descripcion = "Bloqueado!";
+                    eliminarNodoySusHijos(o, ref TreeDest);
+                }
+                else
+                {
+                    // TreeDest.Add(o);
+                }
+            }
+
+            if (esExterno)
+            {
+                var n = new Tablas.Tree();
+                if (Roles.IsUserInRole(usuario, "Externo"))
+                {
+                    string nombreproveedor = "";
+                    try
+                    {
+                        Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                        string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
+                        int idproveedor = buscaridproveedorporcuit(cuit);
+                        if (idproveedor <= 0)
+                        {
+                            idproveedor = buscaridclienteporcuit(cuit);
+                            if (idproveedor > 0) nombreproveedor = db.Clientes.Find(idproveedor).RazonSocial;
+                        }
+                        else
+                        {
+                            nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                        nombreproveedor = "Sin CUIT";
+                    }
+
+                    n.Link = nombreproveedor; // "<a href=\"#\">" + nombreproveedor + "</a>";
+                    n.Descripcion = "CUIT";
+                    n.Clave = "CUIT";
+                    n.EsPadre = "NO"; // "SI";
+                    n.IdItem = "1";
+                    n.ParentId = "01";
+                    n.Orden = 1;
+                    TreeDest.Add(n);
+                }
+
+
+                string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
+
+                n = new Tablas.Tree();
+                if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
+                {
+                    n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
+                    n.Descripcion = "Presupuesto";
+                    n.Clave = "Presupuesto";
+                    n.EsPadre = "NO";
+                    n.IdItem = "1";
+                    n.ParentId = "01";
+                    n.Orden = 1;
+                    TreeDest.Add(n);
+                }
+
+                if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
+                {
+
+                    //n = new Tablas.Tree();
+                    //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                    //n.Descripcion = "CuentasDeudor";
+                    //n.Clave = "CuentasDeudor";
+                    //n.EsPadre = "NO";
+                    //n.IdItem = "1";
+                    //n.ParentId = "";
+                    //n.Orden = 1;
+                    //TreeDest.Add(n);
+
+
+                    n = new Tablas.Tree();
+                    n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
+                    n.Descripcion = "CuentasAcreedor";
+                    n.Clave = "CuentasAcreedor";
+                    n.EsPadre = "NO";
+                    n.IdItem = "1";
+                    n.ParentId = "01";
+                    n.Orden = 1;
+                    TreeDest.Add(n);
+                }
+
+                if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
+                {
+
+                    //n = new Tablas.Tree();
+                    //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                    //n.Descripcion = "CuentasDeudor";
+                    //n.Clave = "CuentasDeudor";
+                    //n.EsPadre = "NO";
+                    //n.IdItem = "1";
+                    //n.ParentId = "";
+                    //n.Orden = 1;
+                    //TreeDest.Add(n);
+
+
+                    n = new Tablas.Tree();
+                    n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
+                    n.Descripcion = "CuentasDeudor";
+                    n.Clave = "CuentasDeudor";
+                    n.EsPadre = "NO";
+                    n.IdItem = "1";
+                    n.ParentId = "01";
+                    n.Orden = 1;
+                    TreeDest.Add(n);
+                }
+                if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
+                {
+
+                    n = new Tablas.Tree();
+                    n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
+                    n.Descripcion = "OrdenesPago";
+                    n.Clave = "OrdenesPago";
+                    n.EsPadre = "NO";
+                    n.IdItem = "1";
+                    n.ParentId = "01";
+                    n.Orden = 1;
+                    TreeDest.Add(n);
+
+
+                }
+
+
+
+            }
+            //return Json(Tree);
+
+            //foreach (Tablas.Tree o in TreeDest)
+            //{
+            //    var padre = TreeDest.Where(x => x.IdItem == o.ParentId).SingleOrDefault();
+            //    if (padre == null) continue;
+
+            //    TreeDest2.Add(o);
+            //}
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+
+            //hay que volar los nodos de fondo fijo
+            if (glbUsuario != null) // puede ser que el usuarioweb no esté definido en esta base como empleado
+            {
+                if ((glbUsuario.IdCuentaFondoFijo ?? 0) > 0)
+                {
+                    string nombrecuentaff = db.Cuentas.Find(glbUsuario.IdCuentaFondoFijo ?? 0).Descripcion;
+                    nombrecuentaff = nombrecuentaff.Substring(0, (nombrecuentaff.Length > 30) ? 30 : nombrecuentaff.Length);
+                    var l = TreeDest.Where(n => n.ParentId == "01-11-16-07" && n.Descripcion != nombrecuentaff).ToList();
+                    foreach (Tablas.Tree n in l)
+                    {
+                        eliminarNodoySusHijos(n, ref TreeDest);
+                    }
+                }
+            }
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            //reemplazo el directorio falso de sql por el parametro ROOT
+            foreach (Tablas.Tree n in TreeDest)
+            {
+                n.Link = n.Link.Replace("Pronto2", ROOT);
+            }
+
+
+
+
+            return TreeDest;
+
+        }
+
+
+
+        public List<Tablas.Tree> TablaMenu()
+        {
+
+
+
+
+            string usuario = ViewBag.NombreUsuario;
+
+
+
+
+
+
+            if (false)
+            {
+                if (Roles.IsUserInRole(usuario, "Firmas") && Roles.GetRolesForUser(usuario).Count() == 1) // Generales.TienePermisosDeFirma(SC, IdUsuario))
+                {
+                    return null;
+                }
+
+            }
+
+
+            if ((Roles.IsUserInRole(usuario, "Externo") || Roles.IsUserInRole(usuario, "AdminExterno")) && !Roles.IsUserInRole(usuario, "Administrador") && !Roles.IsUserInRole(usuario, "SuperAdmin")) // Generales.TienePermisosDeFirma(SC, IdUsuario))
+            {
+                return null;
+            }
+
+
+            List<Tablas.Tree> Tree;
+            List<Tablas.Tree> TreeDest;
+
+
+
+
+            Tree = TablasDAL.Menu(this.Session["BasePronto"].ToString());
+            TreeDest = new List<Tablas.Tree>();
+
+
+            //if (System.Diagnostics.Debugger.IsAttached) return Json(TreeDest);
+
+
+            int IdUsuario = 0;
+            Empleado empleado = new Empleado();
+
+
+            try
+            {
+                empleado = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).FirstOrDefault();
+                if (empleado != null) IdUsuario = empleado.IdEmpleado;
+            }
+            catch (Exception e)
+            {
+                ErrHandler.WriteError(e);
+                // throw; // Exception("No se encuentra el usuario");
+            }
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+
+
+            TreeDest = new List<Tablas.Tree>(Tree); //la duplico
+
+
+            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+            bool esadmin = Roles.IsUserInRole(usuario, "Administrador"); // || (empleado ?? new Empleado()).Administrador == "SI";
+            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
+            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
+            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
+
+            string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());
+            SC = Generales.sCadenaConex(this.HttpContext.Session["BasePronto"].ToString());
+            bool esfirma = Generales.TienePermisosDeFirma(SC, IdUsuario);
+
+            foreach (Tablas.Tree o in Tree)
+            {
+                int? nivel = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
+
+
+                
+                if (nivel == null)
+                {
+                    nivel = 9;
+                }
+
+
+                // if (essuperadmin) nivel = 1;
+
+
+                if (o.Descripcion.Contains("ccesos"))
+                {
+                    if (esadmin || essuperadmin) nivel = 1;
+                    else nivel = 9;
+                }
+
+
+
+                if (false)
+                {
+                    if ((esfirma || esadmin) && (o.Descripcion.Contains("Autorizaci") || o.Descripcion.Contains("Seguridad"))) nivel = 1;
+
+                    if ((escomercial || esadmin) && (o.Descripcion.Contains("Contabilidad") || o.Descripcion == "Consultas"))
+                        nivel = 1;
+                    if ((escomercial || esadmin) && (o.Descripcion.Contains("Mayor") || o.Descripcion == "Consultas")) nivel = 1;
+                    if ((escomercial || esadmin) && (o.Descripcion.Contains("Balance") || o.Descripcion == "Consultas")) nivel = 1;
+
+
+
+                    if ((esreq || esadmin) && (o.Descripcion.Contains("Requerimiento") || o.Descripcion.Contains("Articulo")))
+                    {
+                        nivel = 1;
+                    }
+
+                }
+
+
+                if (nivel >= 9)
+                {
+                    o.Descripcion = "Bloqueado!";
+
+                    eliminarNodoySusHijos(o, ref TreeDest);
+                }
+                else
+                {
+                    //estoy un duplicado y voy eliminando nodos, no uso el .add
+                    //TreeDest.Add(o);
+                }
+            }
+
+            foreach (Tablas.Tree n in TreeDest)
+            {
+                n.Link = n.Link.Replace("Pronto2", ROOT);
+            }
+
+
+            return TreeDest;
+
+
+
+
+
+        }
+
+
+
 
         public List<Tablas.Tree> MenuConNiveles_Tree(int IdUsuario)
         {
@@ -1287,6 +1834,7 @@ namespace ProntoMVC.Controllers
                 {
                     o.Link = acc.Nodo.NullSafeToString();
                     o.Orden = acc.Nivel ?? -1;
+                    o.nivel = o.Orden;
                 }
 
                 if (acc == null ? false : !acc.Acceso)
@@ -1294,6 +1842,7 @@ namespace ProntoMVC.Controllers
                     // si el Acceso está en 0, el nodo está invisible para el usuario
                     o.Link = acc.Nodo.NullSafeToString();
                     o.Orden = 9;
+                    o.nivel = o.Orden;
                 }
 
 
@@ -1450,6 +1999,16 @@ namespace ProntoMVC.Controllers
 
             return TreeDest;
         }
+
+
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
