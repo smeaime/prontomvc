@@ -225,7 +225,7 @@ namespace ProntoMVC.Controllers
                 DateTime hasta = desde.AddDays(1);
 
                 var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == IdMoneda).FirstOrDefault();
-                if (mvarCotizacion == null) cotizacion = -1; else cotizacion = mvarCotizacion.Cotizacion ?? -1;
+                if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
             }
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
         }

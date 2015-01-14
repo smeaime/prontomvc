@@ -1491,7 +1491,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                mvarIdUnidadCUdesc = mvarIdUnidadCU > 0 ? db.Unidades.Find(mvarIdUnidadCU).Abreviatura : "";
+                mvarIdUnidadCUdesc = mvarIdUnidadCU > 0 ? (db.Unidades.Find(mvarIdUnidadCU) ?? new Unidad()).Abreviatura : "";
             }
             catch (Exception ex)
             {
@@ -1525,7 +1525,7 @@ namespace ProntoMVC.Controllers
                 q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "" });
             }
 
-            
+
 
             return Json(q, JsonRequestBehavior.AllowGet);
         }
