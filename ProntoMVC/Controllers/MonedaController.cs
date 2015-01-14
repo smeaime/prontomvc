@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
-
 using System.Linq.Dynamic;
-
-
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using ProntoMVC.Data.Models;
-using ProntoMVC.Models;
+
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-using System.Text;
-using System.Data.Entity.SqlServer;
-using System.Data.Objects;
-using System.Reflection;
-using System.Configuration;
-using Pronto.ERP.Bll;
 //using Trirand.Web.Mvc;
+
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
+using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
@@ -44,96 +43,128 @@ namespace ProntoMVC.Controllers
             return View(Monedas);
         }
 
-        // GET: 
-        public virtual ActionResult Create()
+        public bool Validar(ProntoMVC.Data.Models.Moneda o, ref string sErrorMsg)
         {
-            return View();
-        }
+            Int32 mPruebaInt = 0;
+            Int32 mMaxLength = 0;
+            string mProntoIni = "";
+            string mExigirCUIT = "";
+            Boolean result;
 
-        // POST: 
-        [HttpPost]
-        public virtual ActionResult Create(Moneda Moneda)
-        {
-            if (ModelState.IsValid)
+            if (o.Nombre.NullSafeToString() == "")
             {
-                db.Monedas.Add(Moneda);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(Moneda);
-        }
-
-        // GET: 
-        public virtual ActionResult Edit(int id)
-        {
-            Moneda Moneda;
-
-            if (id == -1)
-            {
-                Moneda = new Moneda();
+                sErrorMsg += "\n" + "Falta el nombre";
             }
             else
             {
-                Moneda = db.Monedas.Find(id);
+                mMaxLength = GetMaxLength<Moneda>(x => x.Nombre) ?? 0;
+                if (o.Nombre.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre no puede tener mas de " + mMaxLength + " digitos"; }
             }
-            return View(Moneda);
+
+            if (o.Abreviatura.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta el abreviatura";
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Moneda>(x => x.Abreviatura) ?? 0;
+                if (o.Abreviatura.Length > mMaxLength) { sErrorMsg += "\n" + "El abreviatura no puede tener mas de " + mMaxLength + " digitos"; }
+            }
+
+            if (o.CodigoAFIP.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta el Codigo AFIP";
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Moneda>(x => x.CodigoAFIP) ?? 0;
+                if (o.CodigoAFIP.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo AFIP no puede tener mas de " + mMaxLength + " digitos"; }
+            }
+
+            if (o.GeneraImpuestos.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta el Codigo genera impuestos";
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Moneda>(x => x.GeneraImpuestos) ?? 0;
+                if (o.GeneraImpuestos.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo genera impuestos no puede tener mas de " + mMaxLength + " digitos"; }
+            }
+
+            if (sErrorMsg != "") return false;
+            else return true;
         }
 
-        // POST: 
-        [HttpPost]
-        public virtual ActionResult Edit(Moneda Moneda)
+        public virtual JsonResult BatchUpdate(Moneda Moneda)
         {
             try
             {
+                string errs = "";
+                if (!Validar(Moneda, ref errs))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
                 if (ModelState.IsValid)
                 {
-                    if (Moneda.IdMoneda <= 0)
+                    if (Moneda.IdMoneda > 0)
                     {
-                        db.Monedas.Add(Moneda);
-                        db.SaveChanges();
+                        var EntidadOriginal = db.Monedas.Where(p => p.IdMoneda == Moneda.IdMoneda).SingleOrDefault();
+                        var EntidadEntry = db.Entry(EntidadOriginal);
+                        EntidadEntry.CurrentValues.SetValues(Moneda);
+
+                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.Entry(Moneda).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
+                        db.Monedas.Add(Moneda);
                     }
-                    return RedirectToAction("Index");
+
+                    db.SaveChanges();
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdMoneda = Moneda.IdMoneda, ex = "" });
                 }
                 else
                 {
-                    var allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                    var mensajes = string.Join("; ", from i in allErrors select (i.ErrorMessage + (i.Exception == null ? "" : i.Exception.Message)));
-                    ViewBag.Errores = mensajes;
-                    return View(Moneda);
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El registro tiene datos invalidos";
+
+                    return Json(res);
                 }
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-            {
-                StringBuilder sb = new StringBuilder();
-
-                foreach (var failure in ex.EntityValidationErrors)
-                {
-                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
-                    foreach (var error in failure.ValidationErrors)
-                    {
-                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
-                        sb.AppendLine();
-
-                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage); //http://msdn.microsoft.com/en-us/library/dd410404(v=vs.90).aspx
-                    }
-                }
-                //CargarViewBag(Moneda);
-                return View(Moneda);
-            }
-
             catch (Exception ex)
             {
-                return Json(new { Success = 0, ex = ex.Message.ToString() });
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
             }
         }
 
-        // GET: 
         public virtual ActionResult Delete(int id)
         {
             Moneda Moneda = db.Monedas.Find(id);
@@ -150,13 +181,13 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public virtual ActionResult Listado_jqGrid(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
+        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Tabla = db.Monedas.AsQueryable();
+            var Entidad = db.Monedas.AsQueryable();
             if (_search)
             {
                 switch (searchField.ToLower())
@@ -174,17 +205,21 @@ namespace ProntoMVC.Controllers
                 campo = "true";
             }
 
-            var Tabla2 = (from a in Tabla
-                        select new
-                        {
-                            Id = a.IdMoneda,
-                        }).Where(campo).ToList();
+            var Entidad1 = (from a in Entidad
+                            select new { IdMoneda = a.IdMoneda }).Where(campo).ToList();
 
-            int totalRecords = Tabla2.Count();
+            int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data = (from a in Tabla
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdMoneda,
+                            a.Nombre,
+                            a.Abreviatura,
+                            a.CodigoAFIP,
+                            a.GeneraImpuestos
+                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -196,12 +231,13 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdMoneda.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdMoneda}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdMoneda}) +">Eliminar</>",
+                                "",
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdMoneda}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdMoneda}) +">Eliminar</>",
                                 a.IdMoneda.ToString(),
-                                a.Nombre,
-                                a.Abreviatura,
-                                a.CodigoAFIP,
-                                a.GeneraImpuestos
+                                a.Nombre.NullSafeToString(),
+                                a.Abreviatura.ToString(),
+                                a.CodigoAFIP.NullSafeToString(),
+                                a.GeneraImpuestos.NullSafeToString(),
                             }
                         }).ToArray()
             };

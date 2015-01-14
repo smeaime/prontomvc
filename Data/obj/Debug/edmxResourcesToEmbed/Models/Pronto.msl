@@ -4513,5 +4513,59 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Calles">
+      <EntityTypeMapping TypeName="DemoProntoModel.Calle">
+        <MappingFragment StoreEntitySet="Calles">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdCalle" ColumnName="IdCalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feriados">
+      <EntityTypeMapping TypeName="DemoProntoModel.Feriado">
+        <MappingFragment StoreEntitySet="Feriados">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdFeriado" ColumnName="IdFeriado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposCompras">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposCompra">
+        <MappingFragment StoreEntitySet="TiposCompra">
+          <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoCompra" ColumnName="IdTipoCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposNegociosVentas">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposNegociosVenta">
+        <MappingFragment StoreEntitySet="TiposNegociosVentas">
+          <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoNegocioVentas" ColumnName="IdTipoNegocioVentas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposOperaciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposOperacione">
+        <MappingFragment StoreEntitySet="TiposOperaciones">
+          <ScalarProperty Name="IdTipoOperacionGrupo" ColumnName="IdTipoOperacionGrupo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="IdTipoOperacion" ColumnName="IdTipoOperacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposOperacionesGrupos">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposOperacionesGrupos">
+        <MappingFragment StoreEntitySet="TiposOperacionesGrupos">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoOperacionGrupo" ColumnName="IdTipoOperacionGrupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

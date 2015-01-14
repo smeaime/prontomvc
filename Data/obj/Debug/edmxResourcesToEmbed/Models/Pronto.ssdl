@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -391,6 +391,13 @@
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="IdCuenta" Type="int" />
     <Property Name="IdMoneda" Type="int" />
+  </EntityType>
+  <EntityType Name="Calles">
+    <Key>
+      <PropertyRef Name="IdCalle" />
+    </Key>
+    <Property Name="IdCalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Cargos">
     <Key>
@@ -2257,6 +2264,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdTipoOperacion" Type="int" />
     <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="varchar" MaxLength="2" />
   </EntityType>
+  <EntityType Name="Feriados">
+    <Key>
+      <PropertyRef Name="IdFeriado" />
+    </Key>
+    <Property Name="IdFeriado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
   <EntityType Name="Formularios">
     <Key>
       <PropertyRef Name="IdFormulario" />
@@ -3801,6 +3816,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="NumeroServicio" Type="varchar" MaxLength="10" />
     <Property Name="Codigo" Type="int" />
   </EntityType>
+  <EntityType Name="TiposCompra">
+    <Key>
+      <PropertyRef Name="IdTipoCompra" />
+    </Key>
+    <Property Name="IdTipoCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Modalidad" Type="varchar" MaxLength="2" />
+  </EntityType>
   <EntityType Name="TiposComprobante">
     <Key>
       <PropertyRef Name="IdTipoComprobante" />
@@ -3860,6 +3883,31 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <PropertyRef Name="IdTipoImpuesto" />
     </Key>
     <Property Name="IdTipoImpuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TiposNegociosVentas">
+    <Key>
+      <PropertyRef Name="IdTipoNegocioVentas" />
+    </Key>
+    <Property Name="IdTipoNegocioVentas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Grupo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TiposOperaciones">
+    <Key>
+      <PropertyRef Name="IdTipoOperacion" />
+    </Key>
+    <Property Name="IdTipoOperacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="IdTipoOperacionGrupo" Type="int" />
+  </EntityType>
+  <EntityType Name="TiposOperacionesGrupos">
+    <Key>
+      <PropertyRef Name="IdTipoOperacionGrupo" />
+    </Key>
+    <Property Name="IdTipoOperacionGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TiposRetencionGanancia">
@@ -5493,6 +5541,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="BancoChequeras" EntityType="Self.BancoChequeras" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
@@ -5575,6 +5624,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
@@ -5615,10 +5665,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Subdiarios" EntityType="Self.Subdiarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subrubros" EntityType="Self.Subrubros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposCompra" EntityType="Self.TiposCompra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposComprobante" EntityType="Self.TiposComprobante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCuentaGrupos" EntityType="Self.TiposCuentaGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposImpuesto" EntityType="Self.TiposImpuesto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposNegociosVentas" EntityType="Self.TiposNegociosVentas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposOperaciones" EntityType="Self.TiposOperaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposOperacionesGrupos" EntityType="Self.TiposOperacionesGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />

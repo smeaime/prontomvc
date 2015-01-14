@@ -25,25 +25,25 @@ using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
-    public partial class PaisController : ProntoBaseController
+    public partial class CalleController : ProntoBaseController
     {
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
-            var Tabla = db.Paises
-                .OrderBy(s => s.Descripcion)
+            var Tabla = db.Calles
+                .OrderBy(s => s.Nombre)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             ViewBag.CurrentPage = page;
             ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Paises.Count() / pageSize);
+            ViewBag.TotalPages = Math.Ceiling((double)db.Calles.Count() / pageSize);
 
             return View(Tabla);
         }
 
-        public bool Validar(ProntoMVC.Data.Models.Pais o, ref string sErrorMsg)
+        public bool Validar(ProntoMVC.Data.Models.Calle o, ref string sErrorMsg)
         {
             Int32 mPruebaInt = 0;
             Int32 mMaxLength = 0;
@@ -51,36 +51,26 @@ namespace ProntoMVC.Controllers
             string mExigirCUIT = "";
             Boolean result;
 
-            if (o.Descripcion.NullSafeToString() == "")
+            if (o.Nombre.NullSafeToString() == "")
             {
                 sErrorMsg += "\n" + "Falta el nombre";
             }
             else
             {
-                mMaxLength = GetMaxLength<Pais>(x => x.Descripcion) ?? 0;
-                if (o.Descripcion.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre no puede tener mas de " + mMaxLength + " digitos"; }
-            }
-
-            if (o.Codigo.NullSafeToString() == "")
-            {
-                sErrorMsg += "\n" + "Falta el codigo";
-            }
-            else
-            {
-                mMaxLength = GetMaxLength<Pais>(x => x.Codigo) ?? 0;
-                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo no puede tener mas de " + mMaxLength + " digitos"; }
+                mMaxLength = GetMaxLength<Calle>(x => x.Nombre) ?? 0;
+                if (o.Nombre.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
             if (sErrorMsg != "") return false;
             else return true;
         }
 
-        public virtual JsonResult BatchUpdate(Pais Pais)
+        public virtual JsonResult BatchUpdate(Calle Calle)
         {
             try
             {
                 string errs = "";
-                if (!Validar(Pais, ref errs))
+                if (!Validar(Calle, ref errs))
                 {
                     try
                     {
@@ -102,24 +92,24 @@ namespace ProntoMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (Pais.IdPais > 0)
+                    if (Calle.IdCalle > 0)
                     {
-                        var EntidadOriginal = db.Paises.Where(p => p.IdPais == Pais.IdPais).SingleOrDefault();
+                        var EntidadOriginal = db.Calles.Where(p => p.IdCalle == Calle.IdCalle).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Pais);
+                        EntidadEntry.CurrentValues.SetValues(Calle);
 
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.Paises.Add(Pais);
+                        db.Calles.Add(Calle);
                     }
 
                     db.SaveChanges();
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdPais = Pais.IdPais, ex = "" });
+                    return Json(new { Success = 1, IdCalle = Calle.IdCalle, ex = "" });
                 }
                 else
                 {
@@ -148,10 +138,10 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult Delete(int Id)
         {
-            Pais Pais = db.Paises.Find(Id);
-            db.Paises.Remove(Pais);
+            Calle Calle = db.Calles.Find(Id);
+            db.Calles.Remove(Calle);
             db.SaveChanges();
-            return Json(new { Success = 1, IdPais = Id, ex = "" });
+            return Json(new { Success = 1, IdCalle = Id, ex = "" });
         }
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
@@ -160,7 +150,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Entidad = db.Paises.AsQueryable();
+            var Entidad = db.Calles.AsQueryable();
             //if (_search)
             //{
             //    switch (searchField.ToLower())
@@ -179,7 +169,7 @@ namespace ProntoMVC.Controllers
             //}
 
             var Entidad1 = (from a in Entidad
-                            select new { IdPais = a.IdPais }).Where(campo).ToList();
+                            select new { IdCalle = a.IdCalle }).Where(campo).ToList();
 
             int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -187,12 +177,8 @@ namespace ProntoMVC.Controllers
             var data = (from a in Entidad
                         select new
                         {
-                            a.IdPais,
-                            a.Descripcion,
-                            a.Codigo,
-                            a.Codigo2,
-                            a.CodigoESRI,
-                            a.Cuit
+                            a.IdCalle,
+                            a.Nombre
                         }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -203,29 +189,25 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdPais.ToString(),
+                            id = a.IdCalle.ToString(),
                             cell = new string[] { 
                                 "",
                                 //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
-                                a.IdPais.ToString(),
-                                a.Descripcion.NullSafeToString(),
-                                a.Codigo.NullSafeToString(),
-                                a.Codigo2.NullSafeToString(),
-                                a.CodigoESRI.NullSafeToString(),
-                                a.Cuit.NullSafeToString(),
+                                a.IdCalle.ToString(),
+                                a.Nombre.NullSafeToString()
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult GetPaises()
+        public virtual ActionResult GetCalles()
         {
-            Dictionary<int, string> paises = new Dictionary<int, string>();
-            foreach (ProntoMVC.Data.Models.Pais u in db.Paises.OrderBy(x => x.Descripcion).ToList())
-                paises.Add(u.IdPais, u.Descripcion);
+            Dictionary<int, string> calles = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.Calle u in db.Calles.OrderBy(x => x.Nombre).ToList())
+                calles.Add(u.IdCalle, u.Nombre);
 
-            return PartialView("Select", paises);
+            return PartialView("Select", calles);
         }
     }
 }

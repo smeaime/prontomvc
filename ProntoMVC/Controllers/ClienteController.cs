@@ -19,10 +19,6 @@ using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 
-using System.Data.Metadata.Edm;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Core.Objects.DataClasses;
-
 namespace ProntoMVC.Controllers
 {
     public partial class ClienteController : ProntoBaseController
@@ -69,10 +65,6 @@ namespace ProntoMVC.Controllers
             return View(o);
         }
 
-
-
-
-
         public virtual ActionResult Delete(int id)
         {
             Cliente Cliente = db.Clientes.Find(id);
@@ -87,9 +79,6 @@ namespace ProntoMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-
 
         void CargarViewBag(Cliente o)
         {
@@ -120,26 +109,43 @@ namespace ProntoMVC.Controllers
             
         }
 
-
- 
-
-
         private bool Validar(ProntoMVC.Data.Models.Cliente o, ref string sErrorMsg)
         {
             Int32 mPruebaInt = 0;
+            Int32 mMaxLength = 0;
             string mProntoIni = "";
             string mExigirCUIT = "";
             Boolean result;
 
-            if (o.CodigoCliente.NullSafeToString() == "") { sErrorMsg += "\n" + "Falta el codigo de cliente"; }
+            if ((o.CodigoCliente ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo de cliente"; }
 
-            if (o.RazonSocial.NullSafeToString() == "") { sErrorMsg += "\n" + "Falta la razon social"; }
+            if (o.Codigo.NullSafeToString() == "")
+            { 
+                sErrorMsg += "\n" + "Falta el codigo de cliente"; 
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Cliente>(x => x.Codigo) ?? 0;
+                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "La codigo no puede tener mas de " + mMaxLength + " digitos"; }
+            }
 
-            //var a = new DbModelBuilder().Entity<Cliente>().Property(p => p.RazonSocial);
-            var a= GetMaxLength<Cliente>(x => x.RazonSocial);
+            if (o.RazonSocial.NullSafeToString() == "") { 
+                sErrorMsg += "\n" + "Falta la razon social"; 
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Cliente>(x => x.RazonSocial) ?? 0;
+                if (o.RazonSocial.Length > mMaxLength) { sErrorMsg += "\n" + "La razon social no puede tener mas de " + mMaxLength + " digitos"; }
+            }
 
-
-            if (o.Direccion.NullSafeToString() == "") { sErrorMsg += "\n" + "Falta la dirección"; }
+            if (o.Direccion.NullSafeToString() == "") { 
+                sErrorMsg += "\n" + "Falta la dirección"; 
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Cliente>(x => x.Direccion) ?? 0;
+                if (o.Direccion.Length > mMaxLength) { sErrorMsg += "\n" + "La Direccion no puede tener mas de " + mMaxLength + " digitos"; }
+            }
 
             if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo de IVA"; }
             
@@ -171,55 +177,16 @@ namespace ProntoMVC.Controllers
             else return true;
         }
 
-        public static int? GetMaxLength<T>(Expression<Func<T, string>> column)
-        {
-            int? result = null;
-            //using (var context = new EfContext())
-            using (DbContext context = new DemoProntoEntities())
-            {
-                var entType = typeof(T);
-                var columnName = ((MemberExpression)column.Body).Member.Name;
-
-                var objectContext = ((IObjectContextAdapter)context).ObjectContext;
-                //var test = objectContext.MetadataWorkspace.GetItems(DataSpace.CSpace);
-                var test = objectContext.MetadataWorkspace.GetItems(System.Data.Entity.Core.Metadata.Edm.DataSpace.CSpace); //.GetItems(DataSpace.CSpace);
-
-
-                if (test == null)
-                    return null;
-
-                var q = test
-                    .Where(m => m.BuiltInTypeKind == System.Data.Entity.Core.Metadata.Edm.BuiltInTypeKind.EntityType)
-                    .SelectMany(meta => ((System.Data.Entity.Core.Metadata.Edm.EntityType)meta).Properties
-                    .Where(p => p.Name == columnName && p.TypeUsage.EdmType.Name == "String"));
-
-                var queryResult = q.Where(p =>
-                {
-                    var match = p.DeclaringType.Name == entType.Name;
-                    if (!match)
-                        match = entType.Name == p.DeclaringType.Name;
-
-                    return match;
-
-                })
-                    .Select(sel => sel.TypeUsage.Facets["MaxLength"].Value)
-                    .ToList();
-
-                if (queryResult.Any())
-                    result = Convert.ToInt32(queryResult.First());
-
-                return result;
-            }
-        }
-
-
         [HttpPost]
         public virtual JsonResult BatchUpdate(Cliente Cliente)
         {
             try
             {
-                var s = Cliente.Cuit.Replace("-", "");
-                Cliente.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                if (Cliente.Cuit != null)
+                {
+                    var s = Cliente.Cuit.Replace("-", "");
+                    Cliente.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                }
 
                 string errs = "";
                 if (!Validar(Cliente, ref errs))
