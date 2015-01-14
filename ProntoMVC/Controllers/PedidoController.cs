@@ -77,15 +77,38 @@ namespace ProntoMVC.Controllers
             string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_" +   this.HttpContext.Session["BasePronto"].ToString() + "_PUNTONET.docx";
             //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_ESUCO_PUNTONET.docx";
 
+            
+            
+            
+            ErrHandler.WriteError(plantilla);
+            CartaDePorteManager.MandarMailDeError(plantilla);
+
+
+
+
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
             if (!MyFile2.Exists)
             {
                 //usar la de sql
-                plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+                try
+                {
+                    plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+
+                }
+                catch (Exception e)
+                {
+                    ErrHandler.WriteError(e);
+            
+                }
+
 
             }
+
+
+            ErrHandler.WriteError(plantilla);
+            CartaDePorteManager.MandarMailDeError(plantilla);
 
 
             //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
