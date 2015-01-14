@@ -233,6 +233,7 @@ namespace ProntoMVC
             /////////////////////////////////////////////////////////////
 
 
+            ErrHandler.WriteError("Mando mail");
 
 
             try
@@ -257,9 +258,23 @@ namespace ProntoMVC
 
 
             }
-            catch (Exception ex) { };
+            catch (Exception ex) {
+                try
+                {
+                    ErrHandler.WriteError(ex);
+                }
+                catch (Exception)
+                {
+                    
+                    //throw;
+                }
+                        
+                
+            
+            };
 
 
+            ErrHandler.WriteError("Mandado");
 
 
             // http://stackoverflow.com/questions/5226791/custom-error-pages-on-asp-net-mvc3
