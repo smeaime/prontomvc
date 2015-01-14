@@ -174,6 +174,12 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Regione> Regiones { get; set; }
         public virtual DbSet<DetalleClientesDireccione> DetalleClientesDirecciones { get; set; }
         public virtual DbSet<DetalleClientesTelefono> DetalleClientesTelefonos { get; set; }
+        public virtual DbSet<Calle> Calles { get; set; }
+        public virtual DbSet<Feriado> Feriados { get; set; }
+        public virtual DbSet<TiposCompra> TiposCompras { get; set; }
+        public virtual DbSet<TiposNegociosVenta> TiposNegociosVentas { get; set; }
+        public virtual DbSet<TiposOperacione> TiposOperaciones { get; set; }
+        public virtual DbSet<TiposOperacionesGrupos> TiposOperacionesGrupos { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

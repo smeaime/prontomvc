@@ -66,7 +66,7 @@ namespace ProntoMVC.Controllers
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdCotizacion = TipoRetencionGanancia.IdTipoRetencionGanancia, ex = "" });
+                    return Json(new { Success = 1, IdTipoRetencionGanancia = TipoRetencionGanancia.IdTipoRetencionGanancia, ex = "" });
                 }
                 else
                 {
