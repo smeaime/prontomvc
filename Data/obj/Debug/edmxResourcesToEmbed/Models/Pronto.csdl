@@ -950,6 +950,12 @@
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="DetalleClientesTelefono" EntitySet="DetalleClientesTelefonos" />
     </AssociationSet>
+    <EntitySet Name="Calles" EntityType="DemoProntoModel.Calle" />
+    <EntitySet Name="Feriados" EntityType="DemoProntoModel.Feriado" />
+    <EntitySet Name="TiposCompras" EntityType="DemoProntoModel.TiposCompra" />
+    <EntitySet Name="TiposNegociosVentas" EntityType="DemoProntoModel.TiposNegociosVenta" />
+    <EntitySet Name="TiposOperaciones" EntityType="DemoProntoModel.TiposOperacione" />
+    <EntitySet Name="TiposOperacionesGrupos" EntityType="DemoProntoModel.TiposOperacionesGrupos" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -7911,4 +7917,52 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Calle">
+    <Key>
+      <PropertyRef Name="IdCalle" />
+    </Key>
+    <Property Name="IdCalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Feriado">
+    <Key>
+      <PropertyRef Name="IdFeriado" />
+    </Key>
+    <Property Name="IdFeriado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TiposCompra">
+    <Key>
+      <PropertyRef Name="IdTipoCompra" />
+    </Key>
+    <Property Name="IdTipoCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Modalidad" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TiposNegociosVenta">
+    <Key>
+      <PropertyRef Name="IdTipoNegocioVentas" />
+    </Key>
+    <Property Name="IdTipoNegocioVentas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Grupo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TiposOperacione">
+    <Key>
+      <PropertyRef Name="IdTipoOperacion" />
+    </Key>
+    <Property Name="IdTipoOperacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdTipoOperacionGrupo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TiposOperacionesGrupos">
+    <Key>
+      <PropertyRef Name="IdTipoOperacionGrupo" />
+    </Key>
+    <Property Name="IdTipoOperacionGrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

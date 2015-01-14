@@ -27,6 +27,95 @@ namespace ProntoMVC.Controllers
     public partial class EmpleadoController : ProntoBaseController
     {
 
+        [HttpGet]
+        public virtual ActionResult Index(int page = 1)
+        {
+            var Empleados = db.Empleados
+                .OrderBy(s => s.Nombre)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.pageSize = pageSize;
+            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
+
+            return View(Empleados);
+        }
+
+        // GET: /Empleado/Create
+        public virtual ActionResult Create()
+        {
+            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
+            return View();
+        }
+
+        // POST: /Empleado/Create
+        [HttpPost]
+        public virtual ActionResult Create(Empleado empleado)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Empleados.Add(empleado);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
+            return View(empleado);
+        }
+
+        // GET: /Empleado/Edit
+        public virtual ActionResult Edit(int id)
+        {
+            if (id == -1)
+            {
+                Empleado empleado = new Empleado();
+                CargarViewBag(empleado);
+                return View(empleado);
+            }
+            else
+            {
+                Empleado empleado = db.Empleados.Find(id);
+                CargarViewBag(empleado);
+                return View(empleado);
+            }
+        }
+
+        // POST: /Empleado/Edit
+        [HttpPost]
+        public virtual ActionResult Edit(Empleado empleado)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(empleado).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
+            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo);
+            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo);
+            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada);
+            return View(empleado);
+        }
+
+        // GET: /Empleado/Delete
+        public virtual ActionResult Delete(int id)
+        {
+            Empleado empleado = db.Empleados.Find(id);
+            return View(empleado);
+        }
+
+        // POST: /Empleado/Delete
+        [HttpPost, ActionName("Delete")]
+        public virtual ActionResult DeleteConfirmed(int id)
+        {
+            Empleado empleado = db.Empleados.Find(id);
+            db.Empleados.Remove(empleado);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public virtual JsonResult BatchUpdate(Empleado Empleado)
         {
@@ -194,7 +283,6 @@ namespace ProntoMVC.Controllers
                         foreach (var DetalleEmpleadoOriginal in EmpleadoOriginal.DetalleEmpleadosUbicaciones.Where(c => c.IdDetalleEmpleadoUbicacion != 0).ToList())
                         {
                             if (!Empleado.DetalleEmpleadosUbicaciones.Any(c => c.IdDetalleEmpleadoUbicacion == DetalleEmpleadoOriginal.IdDetalleEmpleadoUbicacion))
-                                EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
                             {
                                 EmpleadoOriginal.DetalleEmpleadosUbicaciones.Remove(DetalleEmpleadoOriginal);
                                 db.Entry(DetalleEmpleadoOriginal).State = System.Data.Entity.EntityState.Deleted;
@@ -256,95 +344,6 @@ namespace ProntoMVC.Controllers
                 return false;
             else
                 return true;
-        }
-
-        [HttpGet]
-        public virtual ActionResult Index(int page = 1)
-        {
-            var Empleados = db.Empleados
-                .OrderBy(s => s.Nombre)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            ViewBag.CurrentPage = page;
-            ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Sectores.Count() / pageSize);
-
-            return View(Empleados);
-        }
-
-        // GET: /Empleado/Create
-        public virtual ActionResult Create()
-        {
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
-            return View();
-        }
-
-        // POST: /Empleado/Create
-        [HttpPost]
-        public virtual ActionResult Create(Empleado empleado)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Empleados.Add(empleado);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
-            return View(empleado);
-        }
-
-        // GET: /Empleado/Edit
-        public virtual ActionResult Edit(int id)
-        {
-            if (id == -1)
-            {
-                Empleado empleado = new Empleado();
-                CargarViewBag(empleado);
-                return View(empleado);
-            }
-            else
-            {
-                Empleado empleado = db.Empleados.Find(id);
-                CargarViewBag(empleado);
-                return View(empleado);
-            }
-        }
-
-        // POST: /Empleado/Edit
-        [HttpPost]
-        public virtual ActionResult Edit(Empleado empleado)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(empleado).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion", empleado.IdSector);
-            ViewBag.IdCargo = new SelectList(db.Cargos, "IdCargo", "Descripcion", empleado.IdCargo);
-            ViewBag.IdCuentaFondoFijo = new SelectList(GetCuentasFF(), "IdCuenta", "Descripcion", empleado.IdCuentaFondoFijo);
-            ViewBag.IdObraAsignada = new SelectList(GetObras(), "IdObra", "Descripcion", empleado.IdObraAsignada);
-            return View(empleado);
-        }
-
-        // GET: /Empleado/Delete
-        public virtual ActionResult Delete(int id)
-        {
-            Empleado empleado = db.Empleados.Find(id);
-            return View(empleado);
-        }
-
-        // POST: /Empleado/Delete
-        [HttpPost, ActionName("Delete")]
-        public virtual ActionResult DeleteConfirmed(int id)
-        {
-            Empleado empleado = db.Empleados.Find(id);
-            db.Empleados.Remove(empleado);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         void CargarViewBag(Empleado o)

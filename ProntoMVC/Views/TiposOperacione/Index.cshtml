@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Moneda>
+﻿@model IEnumerable<ProntoMVC.Data.Models.TiposOperacione>
 @{
-    ViewBag.Title = "Moneda";
+    ViewBag.Title = "Tipos de operaciones";
 }
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
 <div class="row-fluid">
-    <div class="span5 lightblue">
+    <div class="span6 lightblue">
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
@@ -55,15 +55,14 @@
         var datos = $("#formid").serializeObject();
         var err;
 
-        datos.IdMoneda = gridId;
-        datos.Nombre = dataFromTheRow.Nombre;
-        datos.Abreviatura = dataFromTheRow.Abreviatura;
-        datos.CodigoAFIP = dataFromTheRow.CodigoAFIP;
-        datos.GeneraImpuestos = dataFromTheRow.GeneraImpuestos;
+        datos.IdTipoOperacion = gridId;
+        datos.IdTipoOperacionGrupo = dataFromTheRow.IdTipoOperacionGrupo;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Codigo = dataFromTheRow.Codigo;
+        datos.TiposOperacionesGrupos = dataFromTheRow.TiposOperacionesGrupos;
 
         err = ""
-        if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre.\n"
-        if (datos.Abreviatura == "" || datos.Abreviatura == undefined) err = err + "Falta definir la abreviatura.\n"
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -72,16 +71,16 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Moneda/BatchUpdate',
+                url: ROOT + 'TiposOperacione/BatchUpdate',
                 dataType: 'json',
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
-                        var valor = result.IdMoneda;
+                        var valor = result.IdTipoOperacion;
                         if (valor == "") { valor = "0"; }
-                        $('#Lista').jqGrid('setCell', rowid, 'IdMoneda', valor);
+                        $('#Lista').jqGrid('setCell', rowid, 'IdTipoOperacion', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
@@ -116,7 +115,7 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Moneda/Delete',
+                url: ROOT + 'TiposOperacione/Delete',
                 dataType: 'json',
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
@@ -166,6 +165,7 @@
             Id = selectedIds[i];
             var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
             grid.jqGrid('setRowData', Id, { act: se });
+            //grid.jqGrid('delRowData', selectedIds[i]);
         }
     };
 
@@ -191,18 +191,60 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Moneda/TT/',
+            url: ROOT + 'TiposOperacione/TT/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdMoneda', 'Nombre', 'Abreviatura', 'Codigo AFIP', 'Genera impuestos?'],
+            colNames: ['Acciones', 'IdTipoOperacion', 'IdTipoOperacionGrupo', 'Descripcion', 'Codigo', 'Grupo'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
-                        { name: 'IdMoneda', index: 'IdMoneda', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Nombre', index: 'Nombre', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Abreviatura', index: 'Abreviatura', width: 50, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'CodigoAFIP', index: 'CodigoAFIP', width: 50, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'GeneraImpuestos', index: 'GeneraImpuestos', width: 50, align: 'left', editable: true, editrules: { required: false }, editoptions: { value:"SI:NO"}, edittype: 'checkbox', label: 'TB' }
+                        { name: 'IdTipoOperacion', index: 'IdTipoOperacion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdTipoOperacionGrupo', index: 'IdTipoOperacionGrupo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        {
+                            name: 'Codigo', index: 'Codigo', width: 80, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            editoptions: {
+                                maxlength: 20, defaultValue: '0.00',
+                                dataEvents: [
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                }]
+                            }
+                        },
+                        {
+                            name: 'TiposOperacionesGrupos', index: 'TiposOperacionesGrupos', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'TiposOperacionesGrupos/GetTiposOperacionesGrupos',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdTipoOperacionGrupo').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0";}
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdTipoOperacionGrupo', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        }
             ],
             //gridComplete: function () {
             //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
@@ -233,7 +275,7 @@
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'Nombre',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
@@ -243,7 +285,7 @@
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>MONEDAS</b>',
+            caption: '<b>TIPOS DE OPERACIONES</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
             editurl: ROOT + 'Empleado/EditGridData/'
