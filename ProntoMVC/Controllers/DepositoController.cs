@@ -33,7 +33,7 @@ using System.IO;
 namespace ProntoMVC.Controllers
 {
 
-    [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
+  //  [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
     public partial class DepositoController : ProntoBaseController
     {
         public virtual ViewResult Index()
