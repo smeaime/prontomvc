@@ -6904,6 +6904,10 @@ Public Class CartaDePorteManager
         Catch ex As Exception
             'ErrHandler.WriteError("Ya tiene una factura imputada")
             ErrHandler.WriteError("Explota la imputacion")
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13368
+
             Throw
         End Try
 
@@ -14789,7 +14793,9 @@ Public Class LogicaFacturacion
                     Dim cant_X_precio_redondeado = Math.Round(.Fields("Cantidad").Value * (mvarPrecio), 2, MidpointRounding.AwayFromZero)
                     mvarSubTotal += cant_X_precio_redondeado
 
-                    ErrHandler.WriteError("cant*precio " & cant_X_precio_redondeado & " mvarSubTotal " & mvarSubTotal & " = + " & .Fields("Cantidad").Value & " *  " & mvarPrecio & "redond  * " & mAlicuotaIVA_Material & "/ 100")
+                    If False Then
+                        ErrHandler.WriteError("cant*precio " & cant_X_precio_redondeado & " mvarSubTotal " & mvarSubTotal & " = + " & .Fields("Cantidad").Value & " *  " & mvarPrecio & "redond  * " & mAlicuotaIVA_Material & "/ 100")
+                    End If
 
 
                     Dim iva As Double = Math.Round(.Fields("Cantidad").Value * (mvarPrecio), 2) * mAlicuotaIVA_Material / 100
@@ -14881,11 +14887,14 @@ Public Class LogicaFacturacion
         '//////////////////////////////////////////////////////////////////////
         '//////////////////////////////////////////////////////////////////////
 
-        ErrHandler.WriteError("mTotal       " & mTotal)
-        ErrHandler.WriteError("mvarSubTotal " & mvarSubTotal)
-        ErrHandler.WriteError("mvarIBrutos  " & mvarIBrutos)
-        ErrHandler.WriteError("totIVA       " & totIVA)
-        ErrHandler.WriteError("ImporteTotal " & Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2))
+        If False Then
+
+            ErrHandler.WriteError("mTotal       " & mTotal)
+            ErrHandler.WriteError("mvarSubTotal " & mvarSubTotal)
+            ErrHandler.WriteError("mvarIBrutos  " & mvarIBrutos)
+            ErrHandler.WriteError("totIVA       " & totIVA)
+            ErrHandler.WriteError("ImporteTotal " & Math.Round(mvarSubTotal + mvarIBrutos + Math.Round(totIVA, 2), 2))
+        End If
 
 
 

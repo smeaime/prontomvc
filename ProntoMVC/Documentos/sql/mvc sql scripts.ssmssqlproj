@@ -140,9 +140,9 @@
           <FullPath>Insert into Parametros 2010 WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevas_Tablas WEB.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Nuevas_Tablas WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevas_Tablas en BdlMaster WEB.sql">
