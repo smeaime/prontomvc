@@ -34,7 +34,7 @@ namespace ProntoMVC.Controllers
 {
 
 
-    [Authorize(Roles = "Administrador,SuperAdmin,FacturaElectronica,Comercial,Externo,ExternoCuentaCorrienteCliente")]
+  //  [Authorize(Roles = "Administrador,SuperAdmin,FacturaElectronica,Comercial,Externo,ExternoCuentaCorrienteCliente")]
     //ojo que el web.config tambien te puede bochar hacia el login (con sus location path=)
 
     public partial class FacturaController : ProntoBaseController

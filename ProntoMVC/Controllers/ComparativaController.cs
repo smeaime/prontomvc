@@ -38,7 +38,7 @@ namespace ProntoMVC.Controllers
 {
 
 
-    [Authorize(Roles = "Administrador,SuperAdmin,Comparativas,Compras,Firmas")] //ojo que el web.config tambien te puede bochar hacia el login
+    //[Authorize(Roles = "Administrador,SuperAdmin,Comparativas,Compras,Firmas")] //ojo que el web.config tambien te puede bochar hacia el login
 
     public partial class ComparativaController : ProntoBaseController
     {

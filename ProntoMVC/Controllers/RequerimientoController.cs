@@ -28,7 +28,7 @@ namespace ProntoMVC.Controllers
         //
         // GET: /Requerimiento/
 
-        [Authorize(Roles = "SuperAdmin,Requerimientos")] //ojo que el web.config tambien te puede bochar hacia el login
+    //    [Authorize(Roles = "SuperAdmin,Requerimientos")] //ojo que el web.config tambien te puede bochar hacia el login
 
 
         public virtual ViewResult Index(bool bAConfirmar = false, bool bALiberar = false)
