@@ -736,7 +736,7 @@ $(document).ready(function () {
                                     }
 
 
-                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden:true }
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden:false }
                                 ],
 
         // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
