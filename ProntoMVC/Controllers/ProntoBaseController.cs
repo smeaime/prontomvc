@@ -1839,6 +1839,11 @@ namespace ProntoMVC.Controllers
                     o.Link = acc.Nodo.NullSafeToString();
                     o.Orden = acc.Nivel ?? -1;
                     o.nivel = o.Orden;
+                                }
+                else
+                {
+
+
                 }
 
                 if (acc == null ? false : !acc.Acceso)
