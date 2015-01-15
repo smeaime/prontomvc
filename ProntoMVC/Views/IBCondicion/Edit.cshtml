@@ -3,8 +3,10 @@
     ViewBag.Title = "Categoria de IIBB " + Model.Descripcion;
 }
 
-<link href="~/Content/themes/base/jquery.ui.combobox.css" rel="stylesheet" />
-<script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>
+@*<link href="~/Content/themes/base/jquery.ui.combobox.css" rel="stylesheet" />
+<script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>*@
+<script src="~/Scripts/bootstrap-combobox.js"></script>
+<link href="~/Content/bootstrap-combobox.css" rel="stylesheet" />
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
@@ -33,7 +35,7 @@
         <div class="row-fluid">
             <div class="span4 lightblue">
                 @Html.LabelFor(model => model.IdProvincia, "Provincia")
-                @Html.DropDownList("IdProvincia", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox", @name = "horizontal", @style = "height: 15px; line-height: 14px;" })
                 @Html.ValidationMessageFor(model => model.IdProvincia)
             </div>
             <div class="span4 lightblue">
@@ -63,7 +65,7 @@
                 @Html.ValidationMessageFor(model => model.Codigo)
             </div>
             <div class="span2 lightblue">
-                @Html.LabelFor(model => model.CodigoActividad, "Codigo")
+                @Html.LabelFor(model => model.CodigoActividad, "Codigo actividad")
                 @Html.TextBoxFor(model => model.CodigoActividad, new { @class = "span12" })
                 @Html.ValidationMessageFor(model => model.CodigoActividad)
             </div>
@@ -193,7 +195,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('select').combobox();
+            //$('select').combobox();
+            $('.combobox').combobox()  // Bootstrap
 
             ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
             function SerializaForm() {
