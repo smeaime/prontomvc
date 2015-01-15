@@ -312,6 +312,7 @@
     <Content Include="Choferes.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Content\bootstrap-combobox.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -550,6 +551,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\smoothness\jquery-ui.css" />
     <Content Include="Content\unofficialchannels\images\banner.jpg" />
     <Content Include="Content\unofficialchannels\images\pic01.jpg" />
     <Content Include="Content\unofficialchannels\images\search.png" />
@@ -801,6 +803,7 @@
     <Content Include="Reportes\Proyectos de reporting\Report Project1\codigo certificados.vb" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Pronto informes.rptproj.user" />
     <Content Include="Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj.user" />
+    <Content Include="Scripts\bootstrap-combobox.js" />
     <Content Include="Scripts\jCombobox\jquery.ui.combobox.js" />
     <Content Include="Scripts\jquery-grid\grid.locale-es.js" />
     <Content Include="Scripts\jquery-layout\jquery.layout-latest.js" />
