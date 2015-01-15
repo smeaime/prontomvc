@@ -74,6 +74,10 @@
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdTipoOperacion;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdActividad', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
@@ -84,7 +88,8 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        if (gridId <= 0) {
+        var idprincipal = dataFromTheRow['IdActividad'];
+        if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
             $.ajax({
@@ -92,7 +97,7 @@
                 contentType: 'application/json; charset=utf-8',
                 url: ROOT + 'Actividades_Proveedore/Delete',
                 dataType: 'json',
-                data: JSON.stringify({ id: gridId }),
+                data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('delRowData', gridId);

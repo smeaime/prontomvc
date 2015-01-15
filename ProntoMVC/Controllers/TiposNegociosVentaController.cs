@@ -25,12 +25,12 @@ using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
-    public partial class PaisController : ProntoBaseController
+    public partial class TiposNegociosVentaController : ProntoBaseController
     {
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
-            var Tabla = db.Paises
+            var Tabla = db.TiposNegociosVentas
                 .OrderBy(s => s.Descripcion)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -38,12 +38,12 @@ namespace ProntoMVC.Controllers
 
             ViewBag.CurrentPage = page;
             ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Paises.Count() / pageSize);
+            ViewBag.TotalPages = Math.Ceiling((double)db.TiposNegociosVentas.Count() / pageSize);
 
             return View(Tabla);
         }
 
-        public bool Validar(ProntoMVC.Data.Models.Pais o, ref string sErrorMsg)
+        public bool Validar(ProntoMVC.Data.Models.TiposNegociosVenta o, ref string sErrorMsg)
         {
             Int32 mPruebaInt = 0;
             Int32 mMaxLength = 0;
@@ -57,30 +57,30 @@ namespace ProntoMVC.Controllers
             }
             else
             {
-                mMaxLength = GetMaxLength<Pais>(x => x.Descripcion) ?? 0;
+                mMaxLength = GetMaxLength<TiposNegociosVenta>(x => x.Descripcion) ?? 0;
                 if (o.Descripcion.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
-            if (o.Codigo.NullSafeToString() == "")
+            if (o.Grupo.NullSafeToString() == "")
             {
-                sErrorMsg += "\n" + "Falta el codigo";
+                o.Grupo = "";
             }
             else
             {
-                mMaxLength = GetMaxLength<Pais>(x => x.Codigo) ?? 0;
-                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo no puede tener mas de " + mMaxLength + " digitos"; }
+                mMaxLength = GetMaxLength<TiposNegociosVenta>(x => x.Grupo) ?? 0;
+                if (o.Grupo.Length > mMaxLength) { sErrorMsg += "\n" + "El grupo no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
             if (sErrorMsg != "") return false;
             else return true;
         }
 
-        public virtual JsonResult BatchUpdate(Pais Pais)
+        public virtual JsonResult BatchUpdate(TiposNegociosVenta TiposNegociosVenta)
         {
             try
             {
                 string errs = "";
-                if (!Validar(Pais, ref errs))
+                if (!Validar(TiposNegociosVenta, ref errs))
                 {
                     try
                     {
@@ -102,24 +102,24 @@ namespace ProntoMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (Pais.IdPais > 0)
+                    if (TiposNegociosVenta.IdTipoNegocioVentas > 0)
                     {
-                        var EntidadOriginal = db.Paises.Where(p => p.IdPais == Pais.IdPais).SingleOrDefault();
+                        var EntidadOriginal = db.TiposNegociosVentas.Where(p => p.IdTipoNegocioVentas == TiposNegociosVenta.IdTipoNegocioVentas).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Pais);
+                        EntidadEntry.CurrentValues.SetValues(TiposNegociosVenta);
 
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.Paises.Add(Pais);
+                        db.TiposNegociosVentas.Add(TiposNegociosVenta);
                     }
 
                     db.SaveChanges();
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdPais = Pais.IdPais, ex = "" });
+                    return Json(new { Success = 1, IdTipoNegocioVentas = TiposNegociosVenta.IdTipoNegocioVentas, ex = "" });
                 }
                 else
                 {
@@ -148,10 +148,10 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult Delete(int Id)
         {
-            Pais Pais = db.Paises.Find(Id);
-            db.Paises.Remove(Pais);
+            TiposNegociosVenta TiposNegociosVenta = db.TiposNegociosVentas.Find(Id);
+            db.TiposNegociosVentas.Remove(TiposNegociosVenta);
             db.SaveChanges();
-            return Json(new { Success = 1, IdPais = Id, ex = "" });
+            return Json(new { Success = 1, IdTipoNegocioVentas = Id, ex = "" });
         }
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
@@ -160,7 +160,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Entidad = db.Paises.AsQueryable();
+            var Entidad = db.TiposNegociosVentas.AsQueryable();
             //if (_search)
             //{
             //    switch (searchField.ToLower())
@@ -179,7 +179,7 @@ namespace ProntoMVC.Controllers
             //}
 
             var Entidad1 = (from a in Entidad
-                            select new { IdPais = a.IdPais }).Where(campo).ToList();
+                            select new { IdTipoNegocioVentas = a.IdTipoNegocioVentas }).Where(campo).ToList();
 
             int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -187,12 +187,10 @@ namespace ProntoMVC.Controllers
             var data = (from a in Entidad
                         select new
                         {
-                            a.IdPais,
+                            a.IdTipoNegocioVentas,
                             a.Descripcion,
                             a.Codigo,
-                            a.Codigo2,
-                            a.CodigoESRI,
-                            a.Cuit
+                            a.Grupo
                         }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -203,29 +201,27 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdPais.ToString(),
+                            id = a.IdTipoNegocioVentas.ToString(),
                             cell = new string[] { 
                                 "",
                                 //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
-                                a.IdPais.ToString(),
+                                a.IdTipoNegocioVentas.ToString(),
                                 a.Descripcion.NullSafeToString(),
-                                a.Codigo.NullSafeToString(),
-                                a.Codigo2.NullSafeToString(),
-                                a.CodigoESRI.NullSafeToString(),
-                                a.Cuit.NullSafeToString(),
+                                a.Codigo.ToString(),
+                                a.Grupo.NullSafeToString(),
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult GetPaises()
+        public virtual ActionResult GetTiposNegociosVentas()
         {
-            Dictionary<int, string> paises = new Dictionary<int, string>();
-            foreach (ProntoMVC.Data.Models.Pais u in db.Paises.OrderBy(x => x.Descripcion).ToList())
-                paises.Add(u.IdPais, u.Descripcion);
+            Dictionary<int, string> TiposNegociosVentas = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.TiposNegociosVenta u in db.TiposNegociosVentas.OrderBy(x => x.Descripcion).ToList())
+                TiposNegociosVentas.Add(u.IdTipoNegocioVentas, u.Descripcion);
 
-            return PartialView("Select", paises);
+            return PartialView("Select", TiposNegociosVentas);
         }
     }
 }
