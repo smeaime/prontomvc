@@ -2848,6 +2848,9 @@ Released   : 20120723
                             if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
                             // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
                             if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+
+
+                            if (data[i - 1].EsPadre == "SI" && (longitud == data[i].IdItem.split("-").length)) { menu_html += '</ul></li>' }
                         }
 
 
