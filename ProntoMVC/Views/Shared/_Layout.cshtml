@@ -2129,14 +2129,14 @@ Released   : 20120723
                 <div class="row-fluid">
                     <div>
                         <style>
-                                /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                            /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                             /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                             .ui-jqgrid .ui-jqgrid-btable
                             {
                                 /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                 /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                                 /* http://stackoverflow.com/questions/1395746/jqgrid-how-do-i-removed-the-annoying-horizontal-scrollbar-when-autowidth-true */
-                                /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
+                            /*table-layout: auto;*/ /* este truco me provoca el desfasaje de los encabezados con el cuerpo
                             }
 
                             .ui-icon ui-icon-document-b tree-leaf treeclick
@@ -2696,11 +2696,11 @@ Released   : 20120723
                                     </li>
                                 </ul>
                                 <style>
-                                        .ui-tabs .ui-tabs-panel {
-                                            padding: 0px;
-                                        }
+                                    .ui-tabs .ui-tabs-panel {
+                                        padding: 0px;
+                                    }
 
-                                        /* .ui-pager-control
+                                    /* .ui-pager-control
                                     {
                                         height: 30px;
                                     }
@@ -2830,13 +2830,60 @@ Released   : 20120723
                     // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
 
                     var longitud = 0
+
+
+
+
+
+
+
+
                     for (var i = 0; i < data.length; i++) {
+
+
+
                         if (longitud > 0) {
-                            if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                            if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                            if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                            if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                            if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
+                            if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
+                            if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                            // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                            if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
                         }
+
+
+                     
+                        //if (longitud > 0) {
+                        //    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
+                        //    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
+                        //    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                        //    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                        //}
+
+
+
+
+
+                        //if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
+
+                        //    if (data[i].Link.length > 0) {
+                        //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '"><strong>' + data[i].Link + '</strong></span><ul>'
+                        //    }
+                        //    else {
+                        //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span><ul>'
+                        //    }
+
+                        //}
+                        //else {
+                        //    if (data[i].Link.length > 0) {
+                        //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Link + '</span>' + '</li>'
+                        //    }
+                        //    else {
+                        //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span></li>'
+                        //    }
+                        //}
+
+
+
                         if (data[i].EsPadre == "SI") {
                             if (data[i].ParentId == "") {
                                 menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
@@ -2855,19 +2902,55 @@ Released   : 20120723
                                 menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
                             }
                         }
-                        longitud = data[i].IdItem.length;
+
+
+
+                        //longitud = data[i].IdItem.length;
+                        longitud = data[i].IdItem.split("-").length;
                     }
+
+
+
+                    //if (longitud > 0) {
+                    //    if (longitud - 2 == 3) { menu_html += '</ul></li>' }
+                    //    if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
+                    //    if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    //    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                    //}
+
                     if (longitud > 0) {
-                        if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-                        if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-                        if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                        if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                        if (longitud == 1) { menu_html += '</ul></li>' }
+                        if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
+                        if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                        //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                        if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
                     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     menu_html += ''
                     //                    $("#navigation2").empty().append(menu_html);
                     //$("#navigation2").append(menu_html);
                     //$("#navigation3").empty().append(menu_html);
                     $("#navigation3").empty().replaceWith(menu_html);
+
+
+
+
+
+
+
 
 
 
