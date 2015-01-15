@@ -79,17 +79,39 @@
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdTipoRetencionGanancia;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdTipoRetencionGanancia', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
                 },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                    }
+                }
             });
         };
     };
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        if (gridId <= 0) {
+        var idprincipal = dataFromTheRow['IdTipoOperacion'];
+        if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
             $.ajax({
@@ -97,7 +119,7 @@
                 contentType: 'application/json; charset=utf-8',
                 url: ROOT + 'TipoRetencionGanancia/Delete',
                 dataType: 'json',
-                data: JSON.stringify({ id: gridId }),
+                data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('delRowData', gridId);
@@ -175,7 +197,7 @@
             postData: {},
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdTipoRetencionGanancia', 'IdBienesOServicios', 'Descripcion', 'CodigoImpuestoAFIP', 'CodigoRegimenAFIP', 'InformacionAuxiliar', 'BienesOServicios'],
+            colNames: ['Acciones', 'IdTipoRetencionGanancia', 'IdBienesOServicios', 'Descripcion', 'Cod. impuesto AFIP', 'Cod. regimen AFIP', 'Informacion auxiliar', 'Bienes o Servicios'],
             colModel: [
                         {
                             name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",

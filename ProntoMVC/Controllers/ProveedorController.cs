@@ -110,13 +110,22 @@ namespace ProntoMVC.Controllers
         public bool Validar(ProntoMVC.Data.Models.Proveedor o, ref string sErrorMsg)
         {
             Int32 mPruebaInt = 0;
+            Int32 mMaxLength = 0;
             string mProntoIni = "";
             string mExigirCUIT = "";
             Boolean result;
 
-            if ((o.RazonSocial ?? "") == "") { sErrorMsg += "\n" + "Falta la razón social del proveedor"; }
+            if (o.RazonSocial.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta la razon social";
+            }
+            else
+            {
+                mMaxLength = GetMaxLength<Cliente>(x => x.RazonSocial) ?? 0;
+                if (o.RazonSocial.Length > mMaxLength) { sErrorMsg += "\n" + "La razon social no puede tener mas de " + mMaxLength + " digitos"; }
+            }
 
-            if ((o.Cuit ?? "") == "") { sErrorMsg += "\n" + "Falta el CUIT del proveedor"; }
+            //if ((o.Cuit ?? "") == "") { sErrorMsg += "\n" + "Falta el CUIT del proveedor"; }
 
             if ((o.Eventual ?? "") != "SI")
             {
@@ -124,7 +133,15 @@ namespace ProntoMVC.Controllers
 
                 if ((o.CodigoProveedor ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo del proveedor"; }
 
-                if ((o.Direccion ?? "") == "") { sErrorMsg += "\n" + "Falta la direccion del proveedor"; }
+                if (o.Direccion.NullSafeToString() == "")
+                {
+                    sErrorMsg += "\n" + "Falta la dirección";
+                }
+                else
+                {
+                    mMaxLength = GetMaxLength<Cliente>(x => x.Direccion) ?? 0;
+                    if (o.Direccion.Length > mMaxLength) { sErrorMsg += "\n" + "La Direccion no puede tener mas de " + mMaxLength + " digitos"; }
+                }
 
                 if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta la condicion de IVA del proveedor"; }
 

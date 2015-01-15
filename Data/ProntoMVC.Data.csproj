@@ -153,6 +153,9 @@
     <Compile Include="Models\Caja.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calle.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cargo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -415,6 +418,9 @@
     <Compile Include="Models\Factura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Feriado.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Formulario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -553,6 +559,9 @@
     <Compile Include="Models\TarjetasCredito.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TiposCompra.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiposComprobante.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -563,6 +572,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposImpuesto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposNegociosVenta.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposOperacione.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposOperacionesGrupos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposRetencionGanancia.cs">
