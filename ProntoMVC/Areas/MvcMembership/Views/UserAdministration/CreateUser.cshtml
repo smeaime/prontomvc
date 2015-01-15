@@ -95,9 +95,11 @@
                     <div class="row-fluid">
                         @Html.Label("Empleados en esa base sin usuario web")
 
+                        @Html.DropDownList("Empleados", null, new { @class = "span12" })
+
                         @try
                         {
-                            Html.DropDownList("Empleados", null, new { @class = "span12" });
+                            
                         }
                         catch (Exception)
                         {
