@@ -722,7 +722,8 @@
     <Content Include="Documentos\sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
     <Content Include="Documentos\sql\restoreDB.sql" />
     <Content Include="Documentos\sql\superbuscador  wFuncionBusqueda wBusqueda   .sql" />
-    <Content Include="Documentos\sql\Tree_TX_Arbol Tree_TX_Generar.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Arbol.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Generar.sql" />
     <Content Include="Documentos\sql\wDuplicarBase.sql" />
     <None Include="Documentos\vb6\frmAutorizacion.frms" />
     <None Include="Documentos\vb6\frmAutorizacion1.frms" />
