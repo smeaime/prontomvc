@@ -6,15 +6,15 @@
 }
 <div class="container-fluid">
     <div class="modal" id="loading">
-        <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
+        <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
         Cargando...
     </div>
     @*    <ul class="breadcrumb">
-        <li><a href="#">Inicio</a> <span class="divider">/</span></li>
-        <li><a href="@Url.Content("~")MvcMembership/UserAdministration">Usuarios</a> <span
-            class="divider">/</span></li>
-        <li class="active">@Model.DisplayName</li>
-    </ul>*@
+            <li><a href="#">Inicio</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("~")MvcMembership/UserAdministration">Usuarios</a> <span
+                class="divider">/</span></li>
+            <li class="active">@Model.DisplayName</li>
+        </ul>*@
     <br />
     <link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
     <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 400;
@@ -30,7 +30,7 @@
         {
             <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
         }
-@*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
+        @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
         <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
     </ul>
     <div class="row-fluid">
@@ -41,10 +41,12 @@
                     {
                         <dt>Ultima visita:</dt>
                         <dd>
-                            <em>Nunca</em></dd>
+                            <em>Nunca</em>
+                        </dd>
                         <dt>Ultimo Login:</dt>
                         <dd>
-                            <em>Nunca</em></dd>
+                            <em>Nunca</em>
+                        </dd>
                     }
                     else
                     {
@@ -59,7 +61,7 @@
                 @using (Html.BeginForm("ChangeApproval", "UserAdministration", new { id = Model.User.ProviderUserKey }))
                 {
                     @Html.Hidden("isApproved", !Model.User.IsApproved)
-                    <input type="submit" value='@(Model.User.IsApproved ? "Deshabilitar" : "Habilitar")' class="btn"  />
+                    <input type="submit" value='@(Model.User.IsApproved ? "Deshabilitar" : "Habilitar")' class="btn" />
                 }
                 @using (Html.BeginForm("DeleteUser", "UserAdministration", new { id = Model.User.ProviderUserKey }))
                 {
@@ -71,34 +73,37 @@
             <div class="mvcMembership-emailAndComments">
                 @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
                 {
-                    
+
                     <fieldset>
                         @Html.Label("Base default")
                         @Html.DropDownList("EmpresaDefault", null, new { @class = "span12" })
                         @{
                     string[] listItems = { "1", "2" };
                     SelectList selectList = new SelectList(listItems);
-@*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
+                    @*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
                         }
                         @*@Html.DropDownListFor(x => x.EmpresaDefault, (IEnumerable<SelectListItem>)ViewData["Bases"], new { @style = "width: 260px", @class = "" })*@
                         <br />
                         <p>
                             <label for="email">
-                                Email</label>
+                                Email
+                            </label>
                             @Html.TextBox("email", Model.User.Email)
                         </p>
                         <p>
                             <label for="comments">
-                                Observaciones</label>
+                                Observaciones
+                            </label>
                             @Html.TextArea("comments", Model.User.Comment)
                         </p>
                         @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
                         {
                             <p>
                                 <label for="grupo">
-                                    Grupo</label>
+                                    Grupo
+                                </label>
                                 @Html.TextBox("grupo", Model.Grupo)
-                            </p> 
+                            </p>
                         }
                         <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
                             Aceptar
@@ -107,14 +112,36 @@
                 }
             </div>
         </div>
-            @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+
+
+
+
+        
+
+        @{ Html.RenderAction("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }); }
+
+
+
+        @*@Html.Partial("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }))
+        @using (Html.BeginForm("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }))
+        {
+            @RenderBody()
+            <br />
+
+        }*@
+
+
+
+
+
+        @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
         {
             <div class="span3">
                 @if ((Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) && false)
                 {
-                <br />
-                    
-                                        <div class="row-fluid">
+                    <br />
+
+                    <div class="row-fluid">
                         <div class="span12">
                             Crear base @*@Html.TextBoxFor(x => x.EmpresaNueva)*@
                         </div>
@@ -125,17 +152,17 @@
                             @* <input type="button" value="Crearle base" class="btn" />*@
                         </div>
                     </div>
-                    
-                    
-                    
+
+
+
                     @Html.Hidden("UsuarioGuid", Model.User.ProviderUserKey)
-@*       @Html.ActionLink("Crear base", "CrearBasePronto", "UserAdministration",
-                            new { guid = Model.User.ProviderUserKey, basenueva = "dddd", EmpresaDefault = "Capen" }, null)
+                    @*       @Html.ActionLink("Crear base", "CrearBasePronto", "UserAdministration",
+                        new { guid = Model.User.ProviderUserKey, basenueva = "dddd", EmpresaDefault = "Capen" }, null)
 
                     *@
-                    
+
                     <input type="button" id="crearbase" value="crear base" class="btn" />
-                    
+
                     <script>
 
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +173,8 @@
 
                             $('#crearbase').click(function () {
 
-                                var cabecera = { guid: $("#UsuarioGuid").val(),
+                                var cabecera = {
+                                    guid: $("#UsuarioGuid").val(),
                                     basenueva: $("#EmpresaNueva").val(),
                                     EmpresaDefault: $("#EmpresaDefault").val()
                                 };
@@ -243,12 +271,12 @@
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////
                         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    
-                    
-                    
+
+
+
                     </script>
-                    
-                    
+
+
                 }
                 <br />
                 <br />
@@ -264,6 +292,6 @@
                 </script>
             </div>
         }
-    
+
     </div>
 </div>

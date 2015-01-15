@@ -33,16 +33,16 @@ using System.IO;
 namespace ProntoMVC.Controllers
 {
 
-    [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
+ //   [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
     public partial class AsientoController : ProntoBaseController
     {
         public virtual ViewResult Index()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-                ) throw new Exception("No tenés permisos");
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //    ) throw new Exception("No tenés permisos");
 
             //var Pedidos = db.Pedidos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();

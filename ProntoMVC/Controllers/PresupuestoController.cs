@@ -21,15 +21,15 @@ using System.Web.Security;
 
 namespace ProntoMVC.Controllers
 {
-    [Authorize(Roles = "Administrador,SuperAdmin,Compras,Externo,AdminExterno")]
+ //   [Authorize(Roles = "Administrador,SuperAdmin,Compras,Externo,AdminExterno")]
     public partial class PresupuestoController : ProntoBaseController
     {
         public virtual ViewResult Index()
         {
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-                ) throw new Exception("No tenés permisos");
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //    ) throw new Exception("No tenés permisos");
 
             //var presupuestos = db.Presupuestos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
