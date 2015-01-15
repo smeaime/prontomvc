@@ -1743,11 +1743,14 @@ namespace ProntoMVC.Controllers
 
             foreach (Tablas.Tree o in Tree)
             {
-                int? nivel = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
+                EmpleadosAcceso acc = permisos.Where(x => x.Nodo == o.Clave).FirstOrDefault();
 
+                if (acc==null) continue;
 
+                int? nivel = acc.Nivel;
                 
-                if (nivel == null)
+                
+                if (nivel == null || !acc.Acceso || nivel==0)
                 {
                     nivel = 9;
                 }
