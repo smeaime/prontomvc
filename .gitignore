@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 /ProntoMVC/Error
 ProntoMVC/Documentos/archivo.pdf
 /Data/Models/*.edmx
+/Data/Models/Pronto.edmx
