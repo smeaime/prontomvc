@@ -2307,6 +2307,12 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_Cuentas" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Tree" Width="1.5" PointX="19.375" PointY="17.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calle" Width="1.5" PointX="9.75" PointY="19.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Feriado" Width="1.5" PointX="11.75" PointY="20.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposCompra" Width="1.5" PointX="4.75" PointY="21.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposNegociosVenta" Width="1.5" PointX="13.75" PointY="23.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacione" Width="1.5" PointX="15.75" PointY="23.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacionesGrupos" Width="1.5" PointX="0.75" PointY="25.75" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

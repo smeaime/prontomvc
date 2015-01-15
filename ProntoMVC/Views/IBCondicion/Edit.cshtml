@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Categoria de IIBB " + Model.Descripcion;
 }
+
+<link href="~/Content/themes/base/jquery.ui.combobox.css" rel="stylesheet" />
+<script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
     @Html.ValidationSummary(true)
@@ -18,7 +22,6 @@
                 @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
             </div>
         </div>
-
         <div class="row-fluid">
             <div class="span8 lightblue">
                 @Html.LabelFor(model => model.Descripcion, "Descripcion")
@@ -189,6 +192,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $('select').combobox();
+
             ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
             function SerializaForm() {
                 var valor;

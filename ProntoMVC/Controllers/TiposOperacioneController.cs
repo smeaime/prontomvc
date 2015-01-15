@@ -25,12 +25,12 @@ using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
-    public partial class PaisController : ProntoBaseController
+    public partial class TiposOperacioneController : ProntoBaseController
     {
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
-            var Tabla = db.Paises
+            var Tabla = db.TiposOperaciones
                 .OrderBy(s => s.Descripcion)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -38,12 +38,12 @@ namespace ProntoMVC.Controllers
 
             ViewBag.CurrentPage = page;
             ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Paises.Count() / pageSize);
+            ViewBag.TotalPages = Math.Ceiling((double)db.TiposOperaciones.Count() / pageSize);
 
             return View(Tabla);
         }
 
-        public bool Validar(ProntoMVC.Data.Models.Pais o, ref string sErrorMsg)
+        public bool Validar(ProntoMVC.Data.Models.TiposOperacione o, ref string sErrorMsg)
         {
             Int32 mPruebaInt = 0;
             Int32 mMaxLength = 0;
@@ -57,30 +57,24 @@ namespace ProntoMVC.Controllers
             }
             else
             {
-                mMaxLength = GetMaxLength<Pais>(x => x.Descripcion) ?? 0;
+                mMaxLength = GetMaxLength<TiposOperacione>(x => x.Descripcion) ?? 0;
                 if (o.Descripcion.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
-            if (o.Codigo.NullSafeToString() == "")
-            {
-                sErrorMsg += "\n" + "Falta el codigo";
-            }
-            else
-            {
-                mMaxLength = GetMaxLength<Pais>(x => x.Codigo) ?? 0;
-                if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "El codigo no puede tener mas de " + mMaxLength + " digitos"; }
-            }
+            if ((o.IdTipoOperacionGrupo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el grupo"; }
+
+            if ((o.Codigo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo"; }
 
             if (sErrorMsg != "") return false;
             else return true;
         }
 
-        public virtual JsonResult BatchUpdate(Pais Pais)
+        public virtual JsonResult BatchUpdate(TiposOperacione TiposOperacione)
         {
             try
             {
                 string errs = "";
-                if (!Validar(Pais, ref errs))
+                if (!Validar(TiposOperacione, ref errs))
                 {
                     try
                     {
@@ -102,24 +96,24 @@ namespace ProntoMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (Pais.IdPais > 0)
+                    if (TiposOperacione.IdTipoOperacion > 0)
                     {
-                        var EntidadOriginal = db.Paises.Where(p => p.IdPais == Pais.IdPais).SingleOrDefault();
+                        var EntidadOriginal = db.TiposOperaciones.Where(p => p.IdTipoOperacion == TiposOperacione.IdTipoOperacion).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Pais);
+                        EntidadEntry.CurrentValues.SetValues(TiposOperacione);
 
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.Paises.Add(Pais);
+                        db.TiposOperaciones.Add(TiposOperacione);
                     }
 
                     db.SaveChanges();
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdPais = Pais.IdPais, ex = "" });
+                    return Json(new { Success = 1, IdTipoOperacion = TiposOperacione.IdTipoOperacion, ex = "" });
                 }
                 else
                 {
@@ -148,10 +142,10 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult Delete(int Id)
         {
-            Pais Pais = db.Paises.Find(Id);
-            db.Paises.Remove(Pais);
+            TiposOperacione TiposOperacione = db.TiposOperaciones.Find(Id);
+            db.TiposOperaciones.Remove(TiposOperacione);
             db.SaveChanges();
-            return Json(new { Success = 1, IdPais = Id, ex = "" });
+            return Json(new { Success = 1, IdTipoOperacion = Id, ex = "" });
         }
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
@@ -160,7 +154,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Entidad = db.Paises.AsQueryable();
+            var Entidad = db.TiposOperaciones.AsQueryable();
             //if (_search)
             //{
             //    switch (searchField.ToLower())
@@ -179,20 +173,20 @@ namespace ProntoMVC.Controllers
             //}
 
             var Entidad1 = (from a in Entidad
-                            select new { IdPais = a.IdPais }).Where(campo).ToList();
+                            select new { IdTipoOperacion = a.IdTipoOperacion }).Where(campo).ToList();
 
             int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Entidad
+                        from b in db.TiposOperacionesGrupos.Where(o => o.IdTipoOperacionGrupo == a.IdTipoOperacionGrupo).DefaultIfEmpty()
                         select new
                         {
-                            a.IdPais,
+                            a.IdTipoOperacion,
+                            a.IdTipoOperacionGrupo,
                             a.Descripcion,
                             a.Codigo,
-                            a.Codigo2,
-                            a.CodigoESRI,
-                            a.Cuit
+                            TiposOperacionesGrupos = b != null ? b.Descripcion : ""
                         }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -203,29 +197,28 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdPais.ToString(),
+                            id = a.IdTipoOperacion.ToString(),
                             cell = new string[] { 
                                 "",
                                 //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
-                                a.IdPais.ToString(),
+                                a.IdTipoOperacion.ToString(),
+                                a.IdTipoOperacionGrupo.ToString(),
                                 a.Descripcion.NullSafeToString(),
-                                a.Codigo.NullSafeToString(),
-                                a.Codigo2.NullSafeToString(),
-                                a.CodigoESRI.NullSafeToString(),
-                                a.Cuit.NullSafeToString(),
+                                a.Codigo.ToString(),
+                                a.TiposOperacionesGrupos.NullSafeToString(),
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult GetPaises()
+        public virtual ActionResult GetTiposOperaciones()
         {
-            Dictionary<int, string> paises = new Dictionary<int, string>();
-            foreach (ProntoMVC.Data.Models.Pais u in db.Paises.OrderBy(x => x.Descripcion).ToList())
-                paises.Add(u.IdPais, u.Descripcion);
+            Dictionary<int, string> TiposOperacione = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.TiposOperacione u in db.TiposOperaciones.OrderBy(x => x.Descripcion).ToList())
+                TiposOperacione.Add(u.IdTipoOperacion, u.Descripcion);
 
-            return PartialView("Select", paises);
+            return PartialView("Select", TiposOperacione);
         }
     }
 }
