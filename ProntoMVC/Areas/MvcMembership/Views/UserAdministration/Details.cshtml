@@ -118,7 +118,7 @@
 
         
 
-        @{ Html.RenderAction("Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }); }
+        @{ Html.RenderAction("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }); }
 
 
 
