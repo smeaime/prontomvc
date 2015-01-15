@@ -145,11 +145,7 @@
     </Reference>
     <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-<<<<<<< HEAD
       <HintPath>..\Data\bin\x86\Debug\ProntoMVC.Data.dll</HintPath>
-=======
-      <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
->>>>>>> 4a31d67aad5c41105499ca3e1247c47f8122f52b
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
