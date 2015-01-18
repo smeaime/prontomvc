@@ -380,7 +380,7 @@ namespace ProntoMVC.Controllers
 
                             //table of cells values
                             cell = new[] {
-                            (child.Link=="") ?    child.Descripcion :  child.Link, // Correspond to the colmodel NAME in javascript
+                            ((child.Link ?? "")  =="") ?    child.Descripcion :  child.Link, // Correspond to the colmodel NAME in javascript
                             
                             // The next one correspond to the colmodel ID in javascript Id
                             // If we are are the root level the [nodeid] will be empty as i explained above
