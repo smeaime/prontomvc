@@ -1297,14 +1297,13 @@ namespace ProntoMVC.Controllers
                         ParentId = n.ParentId,
                         Orden = n.Orden ?? 0,
                         Parametros = n.Parametros,
-                        Link = n.Link,
+                        Link = n.Link.Replace("Pronto2", ROOT),
                         Imagen = n.Imagen,
                         EsPadre = n.EsPadre,
                         nivel = 1
 
                         // , Orden = n.Orden
                     };
-
 
 
 
