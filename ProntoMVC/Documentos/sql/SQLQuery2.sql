@@ -1,1 +1,1 @@
-create una vista y chau
+select * from empleadosaccesos w

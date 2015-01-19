@@ -1297,14 +1297,13 @@ namespace ProntoMVC.Controllers
                         ParentId = n.ParentId,
                         Orden = n.Orden ?? 0,
                         Parametros = n.Parametros,
-                        Link = n.Link,
+                        Link = n.Link.Replace("Pronto2", ROOT),
                         Imagen = n.Imagen,
                         EsPadre = n.EsPadre,
                         nivel = 1
 
                         // , Orden = n.Orden
                     };
-
 
 
 
@@ -1743,11 +1742,14 @@ namespace ProntoMVC.Controllers
 
             foreach (Tablas.Tree o in Tree)
             {
-                int? nivel = permisos.Where(x => x.Nodo == o.Clave).Select(x => x.Nivel).FirstOrDefault();
+                EmpleadosAcceso acc = permisos.Where(x => x.Nodo == o.Clave).FirstOrDefault();
 
+                if (acc==null) continue;
 
+                int? nivel = acc.Nivel;
                 
-                if (nivel == null)
+                
+                if (nivel == null || !acc.Acceso || nivel==0)
                 {
                     nivel = 9;
                 }
@@ -1839,6 +1841,11 @@ namespace ProntoMVC.Controllers
                     o.Link = acc.Nodo.NullSafeToString();
                     o.Orden = acc.Nivel ?? -1;
                     o.nivel = o.Orden;
+                                }
+                else
+                {
+
+
                 }
 
                 if (acc == null ? false : !acc.Acceso)
