@@ -1,0 +1,400 @@
+﻿@model ProntoMVC.Data.Models.Vendedor
+@{
+    ViewBag.Title = "Vendedor " + Model.Nombre;
+}
+
+@*<link href="~/Content/themes/base/jquery.ui.combobox.css" rel="stylesheet" />
+<script src="~/Scripts/jCombobox/jquery.ui.combobox.js"></script>*@
+<script src="~/Scripts/bootstrap-combobox.js"></script>
+<link href="~/Content/bootstrap-combobox.css" rel="stylesheet" />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="container-fluid">
+        <div>@Html.Hidden("IdVendedor", Model.IdVendedor)</div>
+        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+            <div class="span5 lightblue">
+                @Html.TextBox("Titulo", "VENDEDORES", new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span10", @readonly = "readonly" })
+            </div>
+            <div class="span4 lightblue">
+                <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
+                @if (Model.IdVendedor > 0)
+                { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdVendedor }, new { @class = "btn  btn-default" }) }
+                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span8 lightblue">
+                @Html.LabelFor(model => model.Nombre, "Nombre")
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Direccion, "Direccion")
+                @Html.TextBoxFor(model => model.Direccion, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Direccion)
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.IdLocalidad, "Localidad")
+                @Html.DropDownList("IdLocalidad", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
+                @Html.ValidationMessageFor(model => model.IdLocalidad)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.IdProvincia, "Provincia")
+                @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox input-large4", @style = "height: 15px;   line-height: 14px;" })
+                @Html.ValidationMessageFor(model => model.IdProvincia)
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.CodigoPostal, "Codigo postal")
+                @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.CodigoPostal)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Telefono, "Telefono")
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Fax, "Fax")
+                @Html.TextBoxFor(model => model.Fax, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Fax)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Email, "Email")
+                @Html.TextBoxFor(model => model.Email, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.IdEmpleado, "Si es usuario de PRONTO")
+                @Html.DropDownList("IdEmpleado", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
+                @Html.ValidationMessageFor(model => model.IdEmpleado)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Comision, "% de Comision")
+                @Html.TextBoxFor(model => model.Comision, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Comision)
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.Cuit)
+                @Html.TextBoxFor(model => model.Cuit, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cuit)
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.TodasLasZonas, "Percibe comision por todas las zonas ?")
+                @Html.RadioButtonFor(model => model.TodasLasZonas, "SI") SI
+                @Html.RadioButtonFor(model => model.TodasLasZonas, "NO") NO
+            </div>
+            <div class="span4 lightblue">
+                @Html.LabelFor(model => model.EmiteComision, "Emite comision ?")
+                @Html.RadioButtonFor(model => model.EmiteComision, "SI") SI
+                @Html.RadioButtonFor(model => model.EmiteComision, "NO") NO
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row-fluid">
+            <div class="span4 lightblue">
+                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+                <div id="ListaPager" class="scroll"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.combobox').combobox({ bsVersion: '2' }); //.combobox()  // Bootstrap
+
+            $("input[name=TodasLasZonas]:radio").change(function () {
+                var value = $(this).val();
+                $("#TodasLasZonas").val(value)
+            })
+
+            $("input[name=EmiteComision]:radio").change(function () {
+                var value = $(this).val();
+                $("#EmiteComision").val(value)
+            })
+
+            ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
+            function SerializaForm() {
+                var valor;
+                var cabecera = $("#formid").serializeObject();
+                cabecera.IdLocalidad = $("#IdLocalidad").val();
+                cabecera.IdProvincia = $("#IdProvincia").val();
+
+                valor = $("input[name='TodasLasZonas']:checked").val();
+                if (typeof valor == "undefined") { $("#TodasLasZonas").val(""); }
+
+                valor = $("input[name='EmiteComision']:checked").val();
+                if (typeof valor == "undefined") { $("#EmiteComision").val(""); }
+
+                return cabecera;
+            }
+
+            $('#grabar2').click(function () {
+                var cabecera = SerializaForm();
+
+                var IdsVendedoresAsignados, colModel, dataIds, data, data1, iddeta, i;
+                $grid = $('#Lista');
+                colModel = $grid.jqGrid('getGridParam', 'colModel');
+                dataIds = $grid.jqGrid('getDataIDs');
+                data1 = "";
+                for (i = 0; i < dataIds.length; i++) {
+                    data = $grid.jqGrid('getRowData', dataIds[i]);
+                    iddeta = data['IdVendedor2'];
+                    data1 = data1 + iddeta + ',';
+                };
+                data1 = data1.substring(0, data1.length - 1);
+                data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
+
+                $('html, body').css('cursor', 'wait');
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: ROOT + 'Vendedor/BatchUpdate',
+                    dataType: 'json',
+                    data: JSON.stringify({ Vendedor: cabecera, IdsVendedoresAsignados: data1 }),
+                    success: function (result) {
+                        if (result) {
+                            $('html, body').css('cursor', 'auto');
+                            window.location = (ROOT + "Vendedor/Edit/" + result.IdVendedor);
+                        } else {
+                            alert('No se pudo grabar el objeto.');
+                            $('.loading').html('');
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                        }
+                    },
+                    beforeSend: function () {
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    },
+                    error: function (xhr, textStatus, exceptionThrown) {
+                        try {
+                            var errorData = $.parseJSON(xhr.responseText);
+                            var errorMessages = [];
+                            for (var key in errorData) { errorMessages.push(errorData[key]); }
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                            $("#mensajeAlerta").show();
+                            alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                        } catch (e) {
+                            $('html, body').css('cursor', 'auto');
+                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                            $("#textoMensajeAlerta").html(xhr.responseText);
+                            $("#mensajeAlerta").show();
+                        }
+                    }
+                });
+            });
+
+            var $grid = "";
+            var lastSelectedId;
+            var lastSelectediCol;
+            var lastSelectediRow;
+            var lastSelectediCol2;
+            var lastSelectediRow2;
+            var inEdit;
+            var selICol;
+            var selIRow;
+            var gridCellWasClicked = false;
+            var grillaenfoco = false;
+            var getColumnIndexByName = function (grid, columnName) {
+                var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+                for (i = 0; i < l; i++) {
+                    if (cm[i].name === columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            };
+            var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+            $.extend($.jgrid.inlineEdit, {
+                keys: true
+            });
+
+            function EliminarFila(grid) {
+                var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+                var i, Id;
+                for (i = selectedIds.length - 1; i >= 0; i--) {
+                    Id = selectedIds[i];
+                    $grid.jqGrid('delRowData', Id);
+                };
+            };
+
+            window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+            document.body.onclick = saveEditedCell; // attach to current document.
+
+            function saveEditedCell(evt) {
+                var target = $(evt.target);
+
+                if ($grid) {
+                    var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+                    if (gridCellWasClicked && !isCellClicked) // check if a valid click
+                    {
+                        gridCellWasClicked = false;
+                        $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+                    }
+                }
+
+                //$grid = "";
+                gridCellWasClicked = false;
+
+                if (jQuery("#Lista").find(target).length) {
+                    $grid = $('#Lista');
+                    grillaenfoco = true;
+                }
+                if (grillaenfoco) {
+                    gridCellWasClicked = true;
+                    lastSelectediRow2 = lastSelectediRow;
+                    lastSelectediCol2 = lastSelectediCol;
+                }
+            };
+
+            function AgregarItemVacio(grid) {
+                var colModel = grid.jqGrid('getGridParam', 'colModel');
+                var dataIds = grid.jqGrid('getDataIDs');
+                var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+                var data, j, cm;
+
+                data = '{';
+                for (j = 1; j < colModel.length; j++) {
+                    cm = colModel[j];
+                    data = data + '"' + cm.index + '":' + '"",';
+                }
+                data = data.substring(0, data.length - 1) + '}';
+                data = data.replace(/(\r\n|\n|\r)/gm, "");
+                grid.jqGrid('addRowData', Id, data, "first");
+                grid.jqGrid('setRowData', Id, { act: se });
+            };
+
+            $('#Lista').jqGrid({
+                url: ROOT + 'Vendedor/Subgrupo/',
+                postData: { 'IdVendedor': function () { return $("#IdVendedor").val(); } },
+                datatype: 'json',
+                mtype: 'POST',
+                colNames: ['Acciones', 'IdVendedor2', 'Vendedor'],
+                colModel: [
+                            { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true },
+                            { name: 'IdVendedor2', index: 'IdVendedor2', align: 'left', width: 100, editable: false, hidden: true },
+                            {
+                                name: 'Vendedor', index: 'Vendedor', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                                editoptions: {
+                                    dataUrl: ROOT + 'Vendedor/GetVendedores',
+                                    async: false,
+                                    dataInit: function (elem) {
+                                        $(elem).width(190);
+                                    },
+                                    dataEvents: [{
+                                        type: 'change', fn: function (e) {
+                                            var $this = $(e.target), $td;
+                                            if ($this.hasClass("FormElement")) {
+                                                // form editing
+                                                $('#IdVendedor2').val(this.value);
+                                            } else {
+                                                $td = $this.closest("td");
+                                                if ($td.hasClass("edit-cell")) {
+                                                    // cell editing
+                                                    var rowid = $('#Lista').getGridParam('selrow');
+                                                    var valor = this.value;
+                                                    if (valor == "") { valor = "0"; }
+                                                    $('#Lista').jqGrid('setCell', rowid, 'IdVendedor2', valor);
+                                                } else {
+                                                    // inline editing
+                                                }
+                                            }
+                                        }
+                                    }]
+                                },
+                            }
+                ],
+                //gridComplete: function () {
+                //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                //    for (var i = 0; i < ids.length; i++) {
+                //        var cl = ids[i];
+                //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+                //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+                //    }
+                //},
+                onCellSelect: function (rowid, iCol, cellcontent, e) {
+                    var $this = $(this);
+                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                    lastSelectedId = rowid;
+                    lastSelectediCol = iCol;
+                    lastSelectediRow = iRow;
+                },
+                afterEditCell: function (id, name, val, iRow, iCol) {
+                    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+                },
+                //beforeSelectRow: function (rowid, e) {
+                //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+                //    if (this.p.colModel[iCol].name === 'act') {
+                //        GrabarFila(rowid);
+                //        return false;
+                //    }
+                //},
+                pager: $('#ListaPager'),
+                rowNum: 20,
+                rowList: [10, 20, 50, 100],
+                sortname: 'Vendedor',
+                sortorder: 'asc',
+                viewrecords: true,
+                multiselect: true,
+                shrinkToFit: true,
+                width: 'auto',
+                height: '100%',
+                altRows: false,
+                footerrow: false,
+                userDataOnFooter: true,
+                caption: '<b>VENDEDORES SOBRE LOS QUE PERCIBE COMISION</b>',
+                cellEdit: true,
+                cellsubmit: 'clientArray',
+                editurl: ROOT + 'Empleado/EditGridData/'
+            });
+            jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+            jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                            {
+                                                caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                                onClickButton: function () {
+                                                    AgregarItemVacio(jQuery("#Lista"));
+                                                },
+                                            });
+            jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                            {
+                                                caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                                onClickButton: function () {
+                                                    EliminarFila(jQuery("#Lista"));
+                                                },
+                                            });
+
+        });
+
+    </script>
+}

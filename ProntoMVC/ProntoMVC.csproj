@@ -145,7 +145,7 @@
     </Reference>
     <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Data\bin\x86\Debug\ProntoMVC.Data.dll</HintPath>
+      <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
@@ -235,6 +235,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BancoController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\ModeloController.cs" />
+    <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\GruposObraControlles.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\UnidadesOperativaController.cs" />
+    <Compile Include="Controllers\CargoControlles.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Controllers\TiposOperacioneController.cs" />
     <Compile Include="Controllers\TiposOperacionesGruposController.cs" />
     <Compile Include="Controllers\FeriadoController.cs" />
@@ -725,7 +733,8 @@
     <Content Include="Documentos\sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
     <Content Include="Documentos\sql\restoreDB.sql" />
     <Content Include="Documentos\sql\superbuscador  wFuncionBusqueda wBusqueda   .sql" />
-    <Content Include="Documentos\sql\Tree_TX_Arbol Tree_TX_Generar.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Arbol.sql" />
+    <Content Include="Documentos\sql\Tree_TX_Generar.sql" />
     <Content Include="Documentos\sql\wDuplicarBase.sql" />
     <None Include="Documentos\vb6\frmAutorizacion.frms" />
     <None Include="Documentos\vb6\frmAutorizacion1.frms" />
@@ -838,6 +847,11 @@
     <Content Include="Views\TiposOperacione\Index.cshtml" />
     <Content Include="Views\Provincia\Edit.cshtml" />
     <Content Include="Views\Provincia\Index.cshtml" />
+    <Content Include="Views\Vendedor\Edit.cshtml" />
+    <Content Include="Views\Vendedor\Index.cshtml" />
+    <Content Include="Views\Color\Index.cshtml" />
+    <Content Include="Views\Modelo\Index.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1218,10 +1232,8 @@
     <Content Include="Views\PaginaWebForm\InformesSoloRemoto.aspx" />
     <Compile Include="Views\PaginaWebForm\InformesSoloRemoto.aspx.cs" />
     <Content Include="Views\PaginaWebForm\ViewPage1.aspx" />
-    <Content Include="Views\Rubro\Edit.cshtml" />
     <Content Include="Views\Rubro\Index.cshtml" />
     <Content Include="Scripts\jsLayout.js" />
-    <Content Include="Views\Subrubro\Edit.cshtml" />
     <Content Include="Views\Subrubro\Index.cshtml" />
     <Content Include="Views\Articulo\PartialMascara.cshtml" />
     <Content Include="Views\Acceso\Index.cshtml" />
@@ -1286,16 +1298,8 @@
     <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\Index.cshtml" />
     <Content Include="Views\Cuenta\IndexExterno.cshtml" />
-    <Content Include="Views\Deposito\Edit.cshtml" />
-    <Content Include="Views\Deposito\EditExterno.cshtml" />
     <Content Include="Views\Deposito\Index.cshtml" />
-    <Content Include="Views\Deposito\IndexExterno.cshtml" />
-    <Content Include="Views\Ubicacion\Edit.cshtml" />
-    <Content Include="Views\Ubicacion\EditExterno.cshtml" />
     <Content Include="Views\Ubicacion\Index.cshtml" />
-    <Content Include="Views\Ubicacion\IndexExterno.cshtml" />
-    <Content Include="Views\Unidad\Details.cshtml" />
-    <Content Include="Views\Unidad\Edit.cshtml" />
     <Content Include="Views\Unidad\Index.cshtml" />
     <Content Include="Views\Pedido\Edit.cshtml" />
     <Content Include="Views\Pedido\EditExterno.cshtml" />
@@ -1310,6 +1314,10 @@
     <Content Include="Views\ComprobanteProveedor\IndexFF.cshtml" />
     <Content Include="Views\Feriado\Index.cshtml" />
     <Content Include="Views\TiposOperacionesGrupos\Index.cshtml" />
+    <Content Include="Views\Cargo\Index.cshtml" />
+    <Content Include="Views\UnidadesOperativa\Index.cshtml" />
+    <Content Include="Views\GruposObra\Index.cshtml" />
+    <Content Include="Views\Marca\Index.cshtml" />
     <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
     <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
@@ -1547,10 +1555,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Sector\Index.cshtml" />
-    <Content Include="Views\Sector\Details.cshtml" />
-    <Content Include="Views\Sector\Create.cshtml" />
-    <Content Include="Views\Sector\Edit.cshtml" />
-    <Content Include="Views\Sector\Delete.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Empleado\Delete.cshtml" />
@@ -1602,9 +1606,6 @@
     <Content Include="Views\Cliente\IndexResumido.cshtml" />
     <Content Include="Views\ListaPrecio\EditDetalle.cshtml" />
     <Content Include="Views\ListaPrecio\GridDemo.cshtml" />
-    <Content Include="Views\Cliente\_GrillaContactos.cshtml" />
-    <Content Include="Views\Cliente\FormEditing.cshtml" />
-    <Content Include="Views\Cliente\_GrillaLugaresEntrega.cshtml" />
     <Content Include="Views\ListaPrecio\EditSinJqgrid.cshtml" />
     <Content Include="Views\ListaPrecio\Details.cshtml" />
     <Content Include="Views\ListaPrecio\MyViewModel.cshtml" />

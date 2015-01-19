@@ -1,0 +1,798 @@
+﻿@model ProntoMVC.Models.Factura
+@{
+    ViewBag.Title = "Create";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@Html.ValidationSummary(true)
+<div class="container-fluid">
+    <form class="form-horizontal">
+    <legend>Nueva factura</legend>@*    <div>@Html.Hidden("IdFactura", Model.IdFactura)</div>*@
+    <div class="span12">
+        @*<div class="row-fluid">
+                <div class="span12 bgcolor">
+                    <div class="alert alert-error">
+                        <a href="#" class="close" data-dismiss="alert">×</a>
+                        Error Messages.
+                    </div>
+                </div>
+            </div>   *@
+        <div class="row-fluid">
+            <div class="span3 lightblue">
+                @Html.LabelFor(model => model.IdPuntoVenta, "PV")
+                @Html.DropDownList("IdPuntoVenta", String.Empty)
+                @*        @Html.DropDownList("IdPuntoVenta", Enumerable.Empty<SelectListItem>(), new { @style = "width: 50px;" })
+         *@ @*@Html.DropDownListFor(model => model.IdPuntoVenta, Enumerable.Empty<SelectListItem>(), new { style = "width: 50px;" }) *@
+                @Html.ValidationMessageFor(model => model.IdPuntoVenta)
+            </div>
+            <div class="span1 lightblue">
+                @Html.LabelFor(model => model.TipoABC, "Letra")
+                @Html.TextBoxFor(model => model.TipoABC, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.TipoABC)
+            </div>
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.NumeroFactura, "Número")
+                @Html.TextBoxFor(model => model.NumeroFactura, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.NumeroFactura)
+            </div>
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.FechaFactura, "Fecha")
+                @Html.TextBoxFor(model => model.FechaFactura, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                @*, { "type", "date" }, { "data-datepicker", "datepicker" }*@
+                @Html.ValidationMessageFor(model => model.FechaFactura)
+            </div>
+            <!--/span-->
+            <!--/span-->
+            <!--/span-->
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="row-fluid">
+            <div class="span6 lightblue">
+                @Html.LabelFor(model => model.IdCliente, "Cliente")
+                <input id="IdClienteAutocomplete" class="span12" />
+            </div>
+            <div class="span1 lightblue" style="visibility: hidden">
+                @Html.LabelFor(model => model.IdCliente, "Cliente")
+                @Html.DropDownList("IdCliente", String.Empty)
+                @Html.ValidationMessageFor(model => model.IdCliente)
+            </div>
+            <div class="span2 lightblue">
+               @* @Html.LabelFor(model => model.Cliente, "Cuit")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <!--/span-->
+        </div>
+        <div class="row-fluid">
+            <div class="span3 lightblue">
+                @Html.LabelFor(model => model.IdCodigoIva, "Condicion IVA")
+                @Html.DropDownList("IdCodigoIva", String.Empty)
+                @Html.ValidationMessageFor(model => model.IdCodigoIva)
+            </div>
+            <div class="span3 lightblue">
+               @* @Html.LabelFor(model => model.Cliente, "Lista de precios")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span3 lightblue">
+                @*@Html.LabelFor(model => model.Cliente, "vencimiento")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <!--/span-->
+            <div class="span8 lightblue">
+               @* @Html.LabelFor(model => model.Cliente, "vendedor")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <!--/span-->
+        </div>
+        <div class="row-fluid">
+            <div class="span3 lightblue">
+              @*  @Html.LabelFor(model => model.Cliente, "direccion")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <div class="span3 lightblue">
+               @* @Html.LabelFor(model => model.Cliente, "telefono")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <div class="span2 lightblue">
+              @*  @Html.LabelFor(model => model.Cliente, "Cat IIBB 1")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <!--/span-->
+            <div class="span3 lightblue">
+     @*           @Html.LabelFor(model => model.Cliente, " n° Cert. percep ing brut")
+                @Html.TextBoxFor(model => model.Cliente, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Cliente)*@
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        @*<div class="row-fluid">   
+                <div class="span3 lightblue">
+                    @Html.LabelFor(model => model.Aprobo, "Aprobo")
+                    @Html.DropDownList("Aprobo", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Aprobo)
+                </div><!--/span-->
+                <div class="span8 lightblue">
+                    @Html.LabelFor(model => model.Detalle)
+                    @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                    @Html.ValidationMessageFor(model => model.Detalle)
+                </div><!--/span-->
+            </div><!--/row-->*@
+        <div class="row-fluid">
+            <div class="span11 lightblue">
+                @Html.LabelFor(model => model.Observaciones)
+                @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Observaciones)
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <br />
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="width: 860px">
+        </table>
+        <table style="width: 860px; border: 0; padding: 0" cellpadding="0" cellspacing="0">
+            <tr style="width: 860px; border: 0; padding: 0" cellpadding="0" cellspacing="0">
+                <td style="border: 0; padding: 0; width: 70%">
+                    <input type="button" id="addData" value="Agregar item" />
+                    <input type="button" id="edtData" value="Modificar item" />
+                    <input type="button" id="delData" value="Borrar item" />
+                    <br />
+                    <br />
+                    <input type="button" id="Guardar" value="Guardar" class="btn btn-primary" />
+                    <br />
+                    <br />
+                    @*<input type="button" id="facturaElectronica" value="Factura electronica" class="but" />*@
+                    <input type="button" id="imprimir" value="Imprimir" class="but" />
+                    <br />
+                    <br />
+                    <div>@Html.ActionLink("Volver al listado", "Index")
+                </td>
+                <td style="border: 0; padding: 0px;">
+                    <table style="margin: 0px 0px 0px 0px; padding: 0px; border: 0px; border-style: none;
+                        border-width: thin; font-size: xx-small; width: 100%; border-spacing: 0px; color: ;
+                        height: 100px" id="TablaResumen" cellpadding="0" cellspacing="0">
+                        <tr style="border: 0; padding: 0">
+                            <td style="width: 191px;">
+                                SUBTOTAL
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 191px;">
+                                Bonif
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 191px;">
+                                IVA
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 191px;">
+                                Percep IIBB
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 191px;">
+                                Percep IVA
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 191px;">
+                                TOTAL
+                            </td>
+                            <td align="right" style="">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        @*     <div id="ListaPager" class="scroll" style="text-align: center;">
+        </div>*@
+    </div>
+</div>
+</form> </div>
+<div>
+    <br />
+    <br />
+    <br />
+    factura electronica http://www.fcelectronica.com.ar/regimen_como.php COMO FUNCIONA?
+    1. Envío de datos de facturación: Desde su Pc genera las facturas con los datos
+    correspondientes (clientes y productos previamente definidos desde el soft). Una
+    vez finalizado, el software se conecta a los servidores de la AFIP y envía cada
+    una de las facturas Online para solicitar autorización de emisión. 2. Recepción
+    de código de autorización: En el mismo momento, la AFIP autoriza la emisión de los
+    comprobantes electrónicos entregando un código de autorización (CAE), el cual es
+    incluido en el documento a enviar: la factura electrónica. 3. Envío de facturas
+    electrónicas autorizadas a clientes: Al contar ya con los comprobantes autorizados
+    por la AFIP se envían las facturas a cada uno de sus clientes. Al tener ingresado
+    el de cada uno, esta tarea es automática e inmediata. -Maneras de pedir el CAE de
+    a una factura o lote de facturas. Que webservice usar para pedir el cae? El otro
+    metodo de exportar el archivo, Cómo funciona (en el Pronto) la exportacion del txt
+    del 1361, y la importacion de los CAE recibidos? La importacion de CAEs es otra
+    cuestion? Web Service de Facturación Electrónica (WSFE) provisto por la AFIP. http://www.pyafipws.com.ar/inicio
+    *En la puesta en marcha de la web de Tango, qué cosa consigue de la afip ? -Como
+    primer paso deberás obtener el certificado digital que te autoriza a emitir comprobantes
+    electrónicos. Mirá los videos explicativos para registrarte en la A.F.I.P. http://www.youtube.com/watch?v=pJvdm540PUQ&feature=youtu.be
+    El Tango me da un .req, te metes en la pagina de la AFIP y pedís el certificado
+    .crt, y se lo pasas al Tango. Me confundo el CAE(Código de Autorización Electrónico)
+    con el CAI (Constatación de comprobantes emitidos). Son unos genios para las abreviaciones.
+    http://mifacturadigital.blogspot.com.ar/ http://www.afip.gov.ar/ws/WSFEX/WSFEX-Manualparaeldesarrollador.pdf
+    http://www.afip.gov.ar/ws/WSAA/wsaa_asociar_certificado_a_wsn_produccion.pdf http://www.afip.gob.ar/fe/documentos/DemofacturaEnLinea/fa.htm
+</div>
+<!--/.fluid-container-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        initDateEdit = function (elem) {
+            setTimeout(function () {
+                $(elem).datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    autoSize: true,
+                    showOn: 'button', // it dosn't work in searching dialog
+                    changeYear: true,
+                    changeMonth: true,
+                    showButtonPanel: true,
+                    showWeek: true
+                });
+                $(elem).focus();
+            }, 100);
+        };
+
+        $("#FechaFactura").datepicker({
+		    changeMonth: true,
+		    changeYear: true
+		    //numberOfMonths: 2,
+	    });
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+        //$.jgrid.formatter.integer.thousandsSeparator=',';
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //http://blogs.msdn.com/b/rickandy/archive/2012/01/09/cascasding-dropdownlist-in-asp-net-mvc.aspx
+
+        
+
+        $("#IdClienteAutocomplete").autocomplete({
+            source: '@Url.Action("GetCodigosClienteAutocomplete", "Cliente")', minLength : 0, 
+                    select: function (event, ui) {
+                        $("#IdCliente").val(ui.item.id);
+                        $("#IdCodigoIva").val(ui.item.idCodigoIva);
+                        $("#TipoABC").val(ui.item.letra);
+            
+                       // $("#IdPuntoVenta").val(ui.item.PuntoVenta);
+             //           $("#IdCodigoIVA").sel.val(ui.item.idCodigoIva);
+           //             model.IdCodigoIVA=22;
+                        }
+        });
+
+        
+
+//      http://stackoverflow.com/questions/4458970/cascading-drop-downs-in-mvc-3-razor-view
+        $('#IdPuntoVenta').change(function () {
+            var IdPuntoVenta = $(this).val();
+            var IdCodigoIva = $('#IdCodigoIva').val();
+            $.getJSON('@Url.Action("PuntosVenta", "Cliente")', { IdCodigoIva: IdCodigoIva, PuntoVenta: $("#IdPuntoVenta option:selected").text() }, function (cities) {
+                var p=cities[0].proxnumero;
+                $('#NumeroFactura').val(p);
+                var l=cities[0].letra;
+                $('#TipoABC').val(l);
+
+//                var citiesSelect = $('#NumeroFactura');
+//                citiesSelect.empty();
+//                $.each(cities, function (index, city) {
+//                    citiesSelect.append(
+//                        $('<option/>')
+//                            .attr('value', city.Id)
+//                            .text(city.Name)
+//                    );
+//                });
+            });
+        });
+
+      
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//        $("#IdPuntoVenta").change({
+//            source: '@Url.Action("GetNumeroPorPuntoVenta", "Cliente")', minLength : 0, 
+//                    select: function (event, ui) {
+//                        //$("#IdCliente").val(ui.item.id);
+//                        $("#IdCodigoIva").val(ui.item.idCodigoIva);
+//                       // $("#IdPuntoVenta").val(ui.item.PuntoVenta);
+//             //           $("#IdCodigoIVA").sel.val(ui.item.idCodigoIva);
+//           //             model.IdCodigoIVA=22;
+//                        }
+//        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        //TODO: directorio virtual acá !!!!!
+        //http://stackoverflow.com/questions/2116788/javascript-in-virtual-directory-unaware-of-virtual-directory
+
+
+        $('#Lista').jqGrid({
+            url: '/Pronto2/Factura/DetFacturas/',
+            postData: { 'IdFactura': function () { return $("#IdFactura").val(); } },
+            editurl: '/Pronto2/Factura/EditGridData/',
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdDetalleFactura', 'IdArticulo', 'IdUnidad', 'Item', 'Cantidad', 'Unidad', 'Codigo', 'Descripcion', 'Fecha entrega', 'Adjunto', 'Observaciones'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'left', width: 60, sortable: false, editable: false },
+                        { name: 'IdDetalleFactura', index: 'IdDetalleFactura', label:'TB', align: 'left', width: 85,
+                             editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true} },
+                        { name: 'IdArticulo', index: 'IdArticulo', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true} },
+                        { name: 'IdUnidad', index: 'IdUnidad', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true} },
+                        //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
+                        { name: 'Item', index: 'NumeroItem', label:'TB', align: 'left', width: 85, editable: false },
+                        { name: 'Cantidad', index: 'Cantidad', label:'TB', align: 'right', width: 60, editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true } }, //, unformat:numUnformat
+                        { name: 'Unidad', index: 'IdUnidad', align: 'left', width: 50, editable: true, edittype: 'select', editrules: { required: true },
+                            editoptions: { dataUrl: '@Url.Action("Unidades", "Articulo")',
+                                dataEvents: [{ type: 'change', fn: function (e) { $('#IdUnidad').val(this.value); } }]
+                            }
+                        },
+                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 85, editable: true, edittype: 'text',
+                            editoptions: {
+                                dataInit: function (elem) {
+                                    $(elem).autocomplete({ source: '@Url.Action("GetCodigosArticulosAutocomplete2", "Articulo")', minLength : 3, 
+                                        select: function (event, ui) {
+                                            $("#IdArticulo").val(ui.item.id);
+                                            $("#Descripcion").val(ui.item.title);
+                                        }
+                                    })
+                                    .data("autocomplete")._renderItem = function (ul, item) {
+                                        return $("<li></li>")
+                                            .data("item.autocomplete", item)
+                                            .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " " +  item.title + "</b></span></a>")
+                                            .appendTo(ul);
+                                    };
+                                }
+                            },
+                            editrules: { required: true }
+                        },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'left', width: 85, editable: true, edittype: 'text',
+                            editoptions: {
+                                dataInit: function (elem) {
+                                    $(elem).autocomplete({ source: '@Url.Action("GetArticulosAutocomplete2", "Articulo")', minLength : 0, 
+                                        select: function (event, ui) {
+                                            $("#IdArticulo").val(ui.item.id);
+                                            $("#Codigo").val(ui.item.codigo);
+                                        }
+                                    })
+                                    .data("autocomplete")._renderItem = function (ul, item) {
+                                        return $("<li></li>")
+                                            .data("item.autocomplete", item)
+                                            .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + " [" + item.codigo + "]</b></span></a>")
+                                            .appendTo(ul);
+                                    };
+                                }
+                            },
+                            editrules: { required: true }
+                        },
+                        //{ name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Articulos")' }, editrules: { required: true} },
+                        { name: 'FechaEntrega', index: 'FechaEntrega', label:'TB', width: 75, align: 'center', sorttype: 'date', editable: true,
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }
+                        },
+                        { name: 'Adjunto', index: 'Adjunto', align: 'left', width: 67, align: 'center', formatter: 'checkbox', editable: true,
+                            edittype: 'checkbox', editoptions: { value: 'Si:No', defaultValue: 'Si' }
+                        }, 
+                        { name: 'Observaciones', index: 'Observaciones', label:'TB', align: 'left', width: 300, editable: true, edittype: 'textarea',
+                            editoptions: { rows: '4', cols: '80'} //editoptions: { dataInit: function (elem) { $(elem).val(inEdit ? "Modificado" : "Nuevo"); }
+                        }
+                    ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                    calculateTotal();
+                }
+            },
+            gridComplete: function () {
+                var ids = jQuery("#Lista").jqGrid('getDataIDs');
+                for (var i = 0; i < ids.length; i++) {
+                    var cl = ids[i];
+                    be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#Lista').editRow('" + cl + "',true,pickdates);\"  />";
+                    se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#Lista').saveRow('" + cl + "');\"  />";
+                    ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#Lista').restoreRow('" + cl + "');\" />";
+                    jQuery("#Lista").jqGrid('setRowData', ids[i], { act: be + se + ce });
+//                    jQuery("#Lista").jqGrid('editRow', ids[i], false);
+                    calculateTotal();
+                }
+            },
+            afterSaveCell: function (rowid, name, val, iRow, iCol) {
+                calculateTotal();
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            sortname: 'NumeroItem',
+            sortorder: 'asc',
+            viewrecords: true,
+            width: 860, // 'auto',
+            height: 'auto',
+            altRows: true,
+            footerrow: false,
+            userDataOnFooter: false,
+            loadonce: true,
+//            caption: ''  '<b>ITEMS DEL Factura</b>'
+        });
+
+        function numUnformat( cellvalue, options, rowObject ){
+            return cellvalue.replace(",",".");
+        }
+
+        $("#addData").click(function () {
+            jQuery("#Lista").jqGrid('editGridRow', "new", { addCaption: "Agregar registro", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
+                recreateForm: true,
+                beforeShowForm: function(form) {
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                },
+                beforeInitData: function () {
+                    inEdit = false;
+                },
+                onInitializeForm: function (form) {
+                    $('#IdDetalleFactura', form).val(0);
+                },
+                //beforeShowForm: function (form) { $('#tr_IdDetalleFactura', form).hide(); }
+            });
+        });
+
+        $("#edtData").click(function () {
+            var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+            if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, { editCaption: "Modificar registro", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
+                closeAfterEdit: true, recreateForm: true, Top: 0, 
+                beforeShowForm: function(form) {
+                    // "editmodlist"
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                    var dlgWidth = dlgDiv.width();
+                    var parentWidth = parentDiv.width();
+                    var dlgHeight = dlgDiv.height();
+                    var parentHeight = parentDiv.height();
+                    dlgDiv[0].style.top = 0 //Math.round((parentHeight-dlgHeight)/2) + "px";
+                    dlgDiv[0].style.left = 0 //Math.round((parentWidth-dlgWidth)/2) + "px";
+                },
+                beforeInitData: function () {
+                    inEdit = true;
+                }
+            });
+            else alert("Debe seleccionar un item!");
+        });
+
+        $("#delData").click(function () {
+            var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
+            if (gr != null) {
+                    //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
+                    //$("#"+gr).hide();  
+                    jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar", width: 800, closeOnEscape: true, reloadAfterSubmit: true });
+                }
+            else alert("Debe seleccionar un item!");
+        });
+
+        $('#grabar').click(function() {
+            var colModel = jQuery("#Lista").jqGrid ('getGridParam', 'colModel');
+            var cabecera = {"IdFactura":"", "NumeroFactura":"","FechaFactura":"","LugarEntrega":"","Observaciones":"","IdCliente":"", "DetalleFacturas":[],"IdPuntoVenta":"","PuntoVenta":"","TipoABC":"" };
+//            var detalle = {"IdDetalleFactura":"", "IdFactura":"","NumeroItem":"","Cantidad":"","IdUnidad":"","IdArticulo":"","FechaEntrega":"","Observaciones":"","Adjunto":"" };
+            var cm, data1, data2, valor;
+
+            cabecera.IdFactura = $("#IdFactura").val();
+            cabecera.NumeroFactura = $("#NumeroFactura").val();
+            cabecera.FechaFactura = $("#FechaFactura").val();
+            cabecera.LugarEntrega = $("#LugarEntrega").val();
+            cabecera.Observaciones = $("#Observaciones").val();
+            cabecera.IdCliente = $("#IdCliente").val();
+            cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
+            cabecera.PuntoVenta = $("#IdPuntoVenta option:selected").text()
+            cabecera.TipoABC = $("#TipoABC").val();
+
+            var dataIds = $('#Lista').jqGrid('getDataIDs');
+            for (var i = 0; i < dataIds.length; i++) {
+                try {
+	                $('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+                    var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+                    data1 = '{"IdFactura":"' + $("#IdFactura").val() + '",'
+                    for (var j = 0; j < colModel.length; j++) {
+                        cm = colModel[j]
+                        if (cm.label==='TB') {
+                            valor=data[cm.name];
+                            if (cm.name==='Cantidad') valor=valor.replace(".",",")
+                            data1 = data1 + '"' + cm.name + '":"' + valor + '",'; 
+                        }
+                    }
+                    data1 = data1.substring(0, data1.length-1) + '}';
+                    data1 = data1.replace(/(\r\n|\n|\r)/gm,"");
+                    data2 = JSON.parse(data1);  
+                    cabecera.DetalleFacturas.push(data2);
+
+//                    detalle.IdDetalleFactura=data.IdDetalleFactura;
+//                    detalle.IdFactura=$("#IdFactura").val();
+//                    detalle.NumeroItem=data.NumeroItem;
+//                    detalle.Cantidad=data.Cantidad;
+//                    detalle.IdUnidad=data.IdUnidad;
+//                    detalle.IdArticulo=data.IdArticulo;
+//                    detalle.FechaEntrega=data.FechaEntrega;
+//                    detalle.Observaciones=data.Observaciones;
+//                    cabecera.DetalleFacturas.push(detalle);
+//                    detalle = {"IdDetalleFactura":"", "IdFactura":"","NumeroItem":"","Cantidad":"","IdUnidad":"","IdArticulo":"","FechaEntrega":"","Observaciones":"","Adjunto":"" };
+                }
+                catch (ex) {
+                    $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                    alert("No se pudo grabar el comprobante. " + ex);
+                    return;
+                }
+            }
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '@Url.Action("BatchUpdate", "Factura")',
+                dataType: 'json',
+                data: $.toJSON(cabecera),
+                success: function(result) {
+                     if (result) {
+                        //http://stackoverflow.com/questions/2864972/how-to-redirect-to-a-controller-action-from-a-jsonresult-method-in-asp-net-mvc
+                        window.location.href = "\Index"; // json.redirectUrl;
+                        // $('#Lista').trigger('reloadGrid'); 
+                    } else {
+                        alert('No se pudo grabar el comprobante.');
+                    }
+                }
+            });
+        });
+
+        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        $("#ListaDrag").jqGrid({
+            url: '@Url.Action("ArticulosGridData2", "Articulo")',
+            datatype: 'json',
+            mtype: 'POST',
+            cellEdit: true,
+            colNames: ['IdArticulo', 'Codigo', 'Descripcion'],
+            colModel: [
+                        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Codigo', index: 'Codigo', width: 100, align: 'left', search: true, stype: 'text' },
+                        { name: 'Descripcion', index: 'Descripcion', width: 400, align: 'left', search: true, stype: 'text', editable: true, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true} }
+            ],
+            pager: $('#ListaDragPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50],
+            sortname: 'Descripcion',
+            sortorder: "asc",
+            viewrecords: true,
+            width: 'auto',
+            height: '100%',
+            altRows: true,
+            emptyrecords: 'No hay registros para mostrar',
+            caption: '<b>MATERIALES</b>'
+        })
+        jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        // connect grid1 with grid2
+        $("#ListaDrag").jqGrid('gridDnD', {
+            connectWith: '#Lista',//drag_opts:{stop:null},
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                        .addClass("ui-state-error ui-widget")
+                        .css({
+                            border: "5px ridge tomato"
+                        });
+                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            beforedrop: function (ev, ui, getdata, $source, $target) {
+//                var names = $target.jqGrid('getCol', 'name2');
+//                if ($.inArray(getdata.name2, names) >= 0) {
+//                    // prevent data for dropping
+//                    ui.helper.dropped = false;
+//                    alert("The row is already in the destination grid");
+//                }
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+                var getdata = ui.draggable.parent().parent().jqGrid('getRowData',acceptId);
+				var j =0, tmpdata = {}, dropname;
+				var dropmodel = $("#"+this.id).jqGrid('getGridParam','colModel');
+				try {
+//					for (var key in getdata) {
+//						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
+//							dropname = dropmodel[j].name;
+//							tmpdata[dropname] = getdata[key];
+//						}
+//						j++;
+//					}
+					tmpdata['IdArticulo'] = getdata['IdArticulo'];
+					tmpdata['Codigo'] = getdata['Codigo'];
+					tmpdata['Descripcion'] = getdata['Descripcion'];
+					getdata = tmpdata;
+				} catch (e) {}
+                var grid;
+				grid = Math.ceil(Math.random()*1000000);
+				// SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData
+				$("#"+this.id).jqGrid('addRowData',grid,getdata);
+                //resetAltRows.call(this);
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+            }
+        });
+
+        // make grid2 sortable
+        $("#Lista").jqGrid('sortableRows', {
+            update: function () {
+                resetAltRows.call(this.parentNode);
+            }
+        });
+
+    });
+
+    function pickdates(id) {
+        jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
+    }
+    
+    function formEdit() {
+        $('input[name=rdEditApproach]').attr('disabled', true);
+        $('#Lista').navGrid(
+                '#Lista',
+        //enabling buttons
+                {add: true, del: true, edit: true, search: false },
+        //edit option
+                {width: 'auto' },
+        //add options
+                {width: 'auto', url: '/Home/AddProduct/' },
+        //delete options
+                {url: '/Home/DeleteProduct/' });
+    };
+
+    calculateTotal = function () {
+        var totalCantidad = grid.jqGrid('getCol', 'Cantidad', false, 'sum')
+        grid.jqGrid('footerData', 'set', { NumeroItem: 'TOTAL', Cantidad: totalCantidad });
+    };
+
+    getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    },
+
+    // Para usar en la edicion de una fila afterSubmit:processAddEdit,
+    function processAddEdit(response, postdata) {
+        var success = true;
+        var message = ""
+        var json = eval('(' + response.responseText + ')');
+        if (json.errors) {
+            success = false;
+            for (i = 0; i < json.errors.length; i++) {
+                message += json.errors[i] + '<br/>';
+            }
+        }
+        var new_id = "1";
+        return [success, message, new_id];
+    }
+
+ //    function supplierFormatter(cellvalue, options, rowObject) {
+//        return "<a href='' onclick='showSupplierDialog(this, " + cellvalue.substr(1, cellvalue.indexOf(']') - 1) + "); return false;'>" + cellvalue.substr(cellvalue.indexOf(']') + 2) + "</a>";
+//    };
+
+//    function supplierUnFormatter(cellvalue, options, cellobject) {
+//        return cellvalue;
+//    }
+
+//    function showSupplierDialog(linkElement, supplierId) {
+//        //request json data
+//        $.getJSON('/Home/SupplierData/', { supplierId: supplierId }, function (data) {
+//            //set values in dialog
+//            $('#sCompanyName').text(data.companyName);
+//            $('#sAddress').text(data.address);
+//            $('#sPostalCode').text(data.postalCode);
+//            $('#sCity').text(data.city);
+//            $('#sCountry').text(data.country);
+//            $('#sPhone').text(data.phone);
+//            $('#sHomePage').text(data.homePage);
+//            //get link position
+//            var linkPosition = $(linkElement).offset();
+//            //set dialog position
+//            $('#jqdlgSupplier').dialog('option', 'position', [linkPosition.left, linkPosition.top]);
+//            //open dialog
+//            $('#jqdlgSupplier').dialog('open');
+//        });
+//    };
+</script>
+@*function getDataLine(grida, rowid){  //vykradeno z inineeditu a vohackovano
+
+                    if(grida.lastIndexOf("#", 0) === 0){
+                        grida = $(grida);
+                    }else{
+                        grida = $("#"+grida);
+                    }
+
+                    var nm, tmp={}, tmp2={}, tmp3= {}, editable, fr, cv, ind;
+
+                    ind = grida.jqGrid("getInd",rowid,true);
+                    if(ind === false) {return success;}
+                    editable = $(ind).attr("editable");
+                    if (editable==="1") {
+                        var cm;
+                        var colModel = grida.jqGrid("getGridParam","colModel") ;
+                        $("td",ind).each(function(i) {
+                            // cm = $('#mygrid').p.colModel[i];
+                            cm = colModel[i];
+                            nm = cm.name;
+                            if ( nm != 'cb' && nm != 'subgrid' && cm.editable===true && nm != 'rn' && !$(this).hasClass('not-editable-cell')) {
+                                switch (cm.edittype) {
+                                    case "checkbox":
+                                        var cbv = ["Yes","No"];
+                                        if(cm.editoptions ) {
+                                            cbv = cm.editoptions.value.split(":");
+                                        }
+                                        tmp[nm]=  $("input",this).is(":checked") ? cbv[0] : cbv[1]; 
+                                        break;
+                                    case 'text':
+                                    case 'password':
+                                    case 'textarea':
+                                    case "button" :
+                                        tmp[nm]=$("input, textarea",this).val();
+                                        break;
+                                    case 'select':
+                                        if(!cm.editoptions.multiple) {
+                                            tmp[nm] = $("select option:selected",this).val();
+                                            tmp2[nm] = $("select option:selected", this).text();
+                                        } else {
+                                            var sel = $("select",this), selectedText = [];
+                                            tmp[nm] = $(sel).val();
+                                            if(tmp[nm]) { tmp[nm]= tmp[nm].join(","); } else { tmp[nm] =""; }
+                                            $("select option:selected",this).each(
+                                                function(i,selected){
+                                                    selectedText[i] = $(selected).text();
+                                                }
+                                            );
+                                            tmp2[nm] = selectedText.join(",");
+                                        }
+                                        if(cm.formatter && cm.formatter == 'select') { tmp2={}; }
+                                        break;
+                                }
+                            }
+                        });
+                    }
+                    return tmp;
+                }*@ 

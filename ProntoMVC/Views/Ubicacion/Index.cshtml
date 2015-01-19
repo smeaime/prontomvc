@@ -1,257 +1,315 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Ubicacion>
 @{
-    ViewBag.Title = "Pedidos";
+    ViewBag.Title = "Ubicaciones";
 }
-<div>
-    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div>
-    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
 
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4;
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
+<br />
+
+<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+<div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
     }
 </style>
-<br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-prepend input-append">
-                @* <div class="btn-group ">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                En todo <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu">
-                                Requerimientos
-                            </div>
-                            <ul class="dropdown-menu">
-                                Número
-                            </ul>
-                        </div>*@
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                @*<div>
-                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-                        <div>
-                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-                        <div>
-                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    avanzada</button>
-            </div>
-        </div>
-        @*   <div class="btn-group  pull-right ">
-                    <button onclick="  " class="btn">
-                        <
-                    </button>
-                    <button onclick="  " class="btn ">
-                        >
-                    </button>
-                </div>*@
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-        {
-                                               
-            <button onclick="  " class="btn span1">
-                Excel
-            </button>
-        }
-    </div>
-    <br />
-    <br />
-    <script>
 
-
-
-        $("#BuscadorListado").change(function () {
-
-
-
-            var grid = jQuery("#Lista");
-            var postdata = grid.jqGrid('getGridParam', 'postData');
-            jQuery.extend(postdata,
-               { filters: '',
-                   searchField: 'NumeroPedido',
-                   searchOper: 'eq',
-                   searchString: parseInt($("#BuscadorListado").val(), 10) || 0
-               });
-            grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1}]);
-
-
-            //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-        });
-    </script>
-</div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
-</div>
-@*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
 <script type="text/javascript">
-    $(document).ready(function () {
-        var lastSelectedId;
-        var inEdit;
-        grid = $("#Lista");
 
-        //Para que haga wrap en las celdas
-        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+    $.extend($.jgrid.inlineEdit, {
+        keys: true
+    });
+
+    function GrabarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var datos = $("#formid").serializeObject();
+        var err;
+
+        datos.IdUbicacion = gridId;
+        datos.IdDeposito = dataFromTheRow.IdDeposito;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Estanteria = dataFromTheRow.Estanteria;
+        datos.Modulo = dataFromTheRow.Modulo;
+        datos.Gabeta = dataFromTheRow.Gabeta;
+        datos.DepositoActual = dataFromTheRow.DepositoActual;
+        
+        err = ""
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
+
+        if (err != "") {
+            alert('No se pudo grabar el registro.\n' + err);
+        } else {
+            //$('html, body').css('cursor', 'wait');
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Ubicacion/BatchUpdate',
+                dataType: 'json',
+                data: JSON.stringify(datos),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdUbicacion;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdUbicacion', valor);
+                    } else {
+                        alert('No se pudo grabar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
+                    }
+                }
+            });
+        };
+    };
+
+    function EliminarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var idprincipal = dataFromTheRow['IdUbicacion'];
+        if (idprincipal <= 0) {
+            $grid.jqGrid('delRowData', gridId);
+        } else {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Ubicacion/Delete',
+                dataType: 'json',
+                data: JSON.stringify({ id: idprincipal }),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('delRowData', gridId);
+                    } else {
+                        alert('No se pudo eliminar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
+                    }
+                }
+            });
+        };
+    };
+
+    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    document.body.onclick = saveEditedCell; // attach to current document.
+
+    function saveEditedCell(evt) {
+        var target = $(evt.target);
+
+        if ($grid) {
+            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            {
+                gridCellWasClicked = false;
+                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            }
+        }
+
+        //$grid = "";
+        gridCellWasClicked = false;
+
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
+            grillaenfoco = true;
+        }
+        if (grillaenfoco) {
+            gridCellWasClicked = true;
+            lastSelectediRow2 = lastSelectediRow;
+            lastSelectediCol2 = lastSelectediCol;
+        }
+    };
+
+    function MarcarSeleccionadosParaEliminar(grid) {
+        var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var i, Id;
+        for (i = selectedIds.length - 1; i >= 0; i--) {
+            Id = selectedIds[i];
+            var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+            grid.jqGrid('setRowData', Id, { act: se });
+            //grid.jqGrid('delRowData', selectedIds[i]);
+        }
+    };
+
+    function AgregarItemVacio(grid) {
+        var colModel = grid.jqGrid('getGridParam', 'colModel');
+        var dataIds = grid.jqGrid('getDataIDs');
+        var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+        var data, j, cm;
+
+        data = '{';
+        for (j = 1; j < colModel.length; j++) {
+            cm = colModel[j];
+            data = data + '"' + cm.index + '":' + '"",';
+        }
+        data = data.substring(0, data.length - 1) + '}';
+        data = data.replace(/(\r\n|\n|\r)/gm, "");
+        grid.jqGrid('addRowData', Id, data, "first");
+        grid.jqGrid('setRowData', Id, { act: se });
+    };
+
+    $().ready(function () {
+        'use strict';
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Pedidos", "Pedido")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            url: ROOT + 'Ubicacion/TT/',
+            postData: {},
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdPedido', 'Numero', 'Sub', 'Fecha', 'Salida',
-            'Cumplido', 'RMs', 'Obras', 'Proveedor', 'Total',
-            'Bonif.', 'IVA', 'Moneda', 'Comprador', 'Aprobo',
-            'Items', 'idaux', 'Comparativa', 'Tipo Compra', 'Observaciones',
-            'Detalle cond. compra', 'Pedido Exterior', 'IdPedidoAbierto', 'Licitacion', 'Impresa',
-            'Anuló', 'Fecha Anulacion', 'Motivo Anulacion', 'Impuestos Internos', 'Equipos',
-            'Circuito Firmas Completo', '', '', '', 'Web'
-
-            ],
+            colNames: ['Acciones', 'IdUbicacion', 'IdDeposito', 'Descripcion', 'Estanteria', 'Modulo', 'Gabeta', 'Deposito'],
             colModel: [
-
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: '', index: '', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-
-
-                    ],
-            onSelectRow: function (id) {
-                if (id && id !== lastSelectedId) {
-                    if (typeof lastSelectedId !== "undefined") {
-                        grid.jqGrid('restoreRow', lastSelectedId);
-                    }
-                    lastSelectedId = id;
-                }
+                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
+                        { name: 'IdUbicacion', index: 'IdUbicacion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdObra', index: 'IdObra', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Estanteria', index: 'Estanteria', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Modulo', index: 'Modulo', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Gabeta', index: 'Gabeta', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        {
+                            name: 'DepositoActual', index: 'DepositoActual', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Deposito/GetDepositos',
+                                dataInit: function (elem) {
+                                    $(elem).width(290);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdDeposito').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdDeposito', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        }
+            ],
+            //gridComplete: function () {
+            //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+            //    for (var i = 0; i < ids.length; i++) {
+            //        var cl = ids[i];
+            //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+            //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+            //    }
+            //},
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
             },
-            ondblClickRow: function (idrow) {
-                window.location.href = ROOT + 'Pedido/Edit/' + idrow;
-
-
-                // $("#edtData").click();
-
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){ 
-                //                    jQuery('#Lista').restoreRow(lastSel); 
-                //                    lastSel=id; 
-                //                }
-                //                jQuery('#Lista').editRow(id, true); 
-                //   
-
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
             },
+            //beforeSelectRow: function (rowid, e) {
+            //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+            //    if (this.p.colModel[iCol].name === 'act') {
+            //        GrabarFila(rowid);
+            //        return false;
+            //    }
+            //},
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'NumeroPedido',
-            sortorder: 'desc',
+            sortname: 'Descripcion',
+            sortorder: 'asc',
             viewrecords: true,
-
-
-            ///////////////////////////////
-            //width: 'auto', // 'auto',
+            multiselect: true,
+            width: 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
-
-            height: $(window).height() - ALTOLISTADO, // '100%'
+            height: '100%',
             altRows: false,
-            footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>UBICACIONES</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
         });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-        //jQuery("#Lista").jqGrid('setFrozenColumns');
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                            onClickButton: function () {
+                                                AgregarItemVacio(jQuery("#Lista"));
+                                            },
+                                        });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                            onClickButton: function () {
+                                                MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                            },
+                                        });
     });
 
 </script>
