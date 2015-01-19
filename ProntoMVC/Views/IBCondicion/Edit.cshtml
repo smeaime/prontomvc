@@ -34,13 +34,9 @@
 
         <div class="row-fluid">
             <div class="span4 lightblue">
-                <div class="row-fluid">
-                    <div class="span12 lightblue">
-                        @Html.LabelFor(model => model.IdProvincia, "Provincia")
-                        @Html.DropDownList("IdProvincia",  null, "", new { @class = "combobox", @style = "height: 15px; line-height: 14px;" })
-                        @Html.ValidationMessageFor(model => model.IdProvincia)
-                    </div>
-                </div>
+                @Html.LabelFor(model => model.IdProvincia, "Provincia")
+                @Html.DropDownList("IdProvincia", null, "", new { @class = "combobox input-large4", @style = "height: 15px; line-height: 14px; " })
+                @Html.ValidationMessageFor(model => model.IdProvincia)
             </div>
             <div class="span4 lightblue">
                 @Html.LabelFor(model => model.IdProvinciaReal, "Provincia real")
@@ -200,7 +196,9 @@
         $(document).ready(function () {
 
             //$('select').combobox();
-            $('.combobox').combobox({bsVersion: '2'}); //.combobox()  // Bootstrap
+            $('.combobox').combobox({ bsVersion: '2' }); //.combobox()  // Bootstrap
+            //$('.comboboxspan4').width('300px');
+            //$('.dropdown-toggle').css({'float' : 'left'});
 
             ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
             function SerializaForm() {

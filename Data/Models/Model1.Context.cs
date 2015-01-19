@@ -180,6 +180,9 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<TiposNegociosVenta> TiposNegociosVentas { get; set; }
         public virtual DbSet<TiposOperacione> TiposOperaciones { get; set; }
         public virtual DbSet<TiposOperacionesGrupos> TiposOperacionesGrupos { get; set; }
+        public virtual DbSet<GruposObra> GruposObras { get; set; }
+        public virtual DbSet<UnidadesOperativa> UnidadesOperativas { get; set; }
+        public virtual DbSet<Colore> Colores { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
