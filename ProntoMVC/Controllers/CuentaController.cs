@@ -65,6 +65,14 @@ namespace ProntoMVC.Controllers
 
                                  }).Take(20).ToList();
 
+
+            // todo
+            //|| Cuenta =1  || Cuenta =2
+            // no entendi. cómo dejo filtrar las cuentas de activo, pasivo y patrimonio?
+                
+
+            //sdfsdf
+
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
