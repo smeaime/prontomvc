@@ -1,0 +1,261 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Cargo>
+@{
+    ViewBag.Title = "Cargo";
+}
+
+<br />
+
+<div class="row-fluid">
+    <div class="span6 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+    </div>
+</div>
+
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+    $.extend($.jgrid.inlineEdit, {
+        keys: true
+    });
+
+    function GrabarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var datos = $("#formid").serializeObject();
+        var err;
+
+        datos.IdCargo = gridId;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+
+        err = ""
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir la descripcion.\n"
+
+        if (err != "") {
+            alert('No se pudo grabar el registro.\n' + err);
+        } else {
+            //$('html, body').css('cursor', 'wait');
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Cargo/BatchUpdate',
+                dataType: 'json',
+                data: JSON.stringify(datos),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdCargo;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdCargo', valor);
+                    } else {
+                        alert('No se pudo grabar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                    }
+                }
+            });
+        };
+    };
+
+    function EliminarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var idprincipal = dataFromTheRow['IdCargo'];
+        if (idprincipal <= 0) {
+            $grid.jqGrid('delRowData', gridId);
+        } else {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Cargo/Delete',
+                dataType: 'json',
+                data: JSON.stringify({ id: idprincipal }),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('delRowData', gridId);
+                    } else {
+                        alert('No se pudo eliminar el registro.');
+                    }
+                },
+            });
+        };
+    };
+
+    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    document.body.onclick = saveEditedCell; // attach to current document.
+
+    function saveEditedCell(evt) {
+        var target = $(evt.target);
+
+        if ($grid) {
+            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            {
+                gridCellWasClicked = false;
+                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            }
+        }
+
+        //$grid = "";
+        gridCellWasClicked = false;
+
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
+            grillaenfoco = true;
+        }
+        if (grillaenfoco) {
+            gridCellWasClicked = true;
+            lastSelectediRow2 = lastSelectediRow;
+            lastSelectediCol2 = lastSelectediCol;
+        }
+    };
+
+    function MarcarSeleccionadosParaEliminar(grid) {
+        var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var i, Id;
+        for (i = selectedIds.length - 1; i >= 0; i--) {
+            Id = selectedIds[i];
+            var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+            grid.jqGrid('setRowData', Id, { act: se });
+            //grid.jqGrid('delRowData', selectedIds[i]);
+        }
+    };
+
+    function AgregarItemVacio(grid) {
+        var colModel = grid.jqGrid('getGridParam', 'colModel');
+        var dataIds = grid.jqGrid('getDataIDs');
+        var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+        var data, j, cm;
+
+        data = '{';
+        for (j = 1; j < colModel.length; j++) {
+            cm = colModel[j];
+            data = data + '"' + cm.index + '":' + '"",';
+        }
+        data = data.substring(0, data.length - 1) + '}';
+        data = data.replace(/(\r\n|\n|\r)/gm, "");
+        grid.jqGrid('addRowData', Id, data, "first");
+        grid.jqGrid('setRowData', Id, { act: se });
+    };
+
+    $().ready(function () {
+        'use strict';
+
+        $('#Lista').jqGrid({
+            url: ROOT + 'Cargo/TT/',
+            postData: {},
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['Acciones', 'IdCargo', 'Descripcion'],
+            colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
+                        { name: 'IdCargo', index: 'IdCargo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' }
+            ],
+            //gridComplete: function () {
+            //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+            //    for (var i = 0; i < ids.length; i++) {
+            //        var cl = ids[i];
+            //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+            //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+            //    }
+            //},
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
+            },
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+            },
+            //beforeSelectRow: function (rowid, e) {
+            //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+            //    if (this.p.colModel[iCol].name === 'act') {
+            //        GrabarFila(rowid);
+            //        return false;
+            //    }
+            //},
+            pager: $('#ListaPager'),
+            rowNum: 20,
+            rowList: [10, 20, 50, 100],
+            sortname: 'Descripcion',
+            sortorder: 'asc',
+            viewrecords: true,
+            multiselect: true,
+            shrinkToFit: true,
+            width: 'auto',
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>CARGOS</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                            onClickButton: function () {
+                                                AgregarItemVacio(jQuery("#Lista"));
+                                            },
+                                        });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                            onClickButton: function () {
+                                                MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                            },
+                                        });
+    });
+
+</script>

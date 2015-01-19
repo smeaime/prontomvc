@@ -487,6 +487,16 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Datacombo);
         }
 
+        public virtual ActionResult GetCuentasConMadres()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4).OrderBy(x => x.Codigo).ToList())
+                Datacombo.Add(u.IdCuenta, u.Codigo + " " + u.Descripcion.ToString());
+
+            return PartialView("Select", Datacombo);
+        }
+
         public virtual JsonResult GetCuentasPorIdObraIdCuentaGasto(int IdObra = 0, int IdCuentaGasto = 0)
         {
             var filtereditems = (from a in db.Cuentas
