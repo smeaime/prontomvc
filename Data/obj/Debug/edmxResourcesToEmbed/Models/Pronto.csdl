@@ -956,6 +956,9 @@
     <EntitySet Name="TiposNegociosVentas" EntityType="DemoProntoModel.TiposNegociosVenta" />
     <EntitySet Name="TiposOperaciones" EntityType="DemoProntoModel.TiposOperacione" />
     <EntitySet Name="TiposOperacionesGrupos" EntityType="DemoProntoModel.TiposOperacionesGrupos" />
+    <EntitySet Name="GruposObras" EntityType="DemoProntoModel.GruposObra" />
+    <EntitySet Name="UnidadesOperativas" EntityType="DemoProntoModel.UnidadesOperativa" />
+    <EntitySet Name="Colores" EntityType="DemoProntoModel.Colore" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -7964,5 +7967,37 @@
     </Key>
     <Property Name="IdTipoOperacionGrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GruposObra">
+    <Key>
+      <PropertyRef Name="IdGrupoObra" />
+    </Key>
+    <Property Name="IdGrupoObra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UnidadesOperativa">
+    <Key>
+      <PropertyRef Name="IdUnidadOperativa" />
+    </Key>
+    <Property Name="IdUnidadOperativa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EnviarEmail" Type="Byte" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Colore">
+    <Key>
+      <PropertyRef Name="IdColor" />
+    </Key>
+    <Property Name="IdColor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Abreviatura" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Codigo1" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="IdVendedor" Type="Int32" />
+    <Property Name="IdUsuarioAlta" Type="Int32" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="Codigo2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

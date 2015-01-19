@@ -506,6 +506,22 @@
     <Property Name="OperacionesMercadoInternoEntidadVinculada" Type="varchar" MaxLength="2" />
     <Property Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="int" />
   </EntityType>
+  <EntityType Name="Colores">
+    <Key>
+      <PropertyRef Name="IdColor" />
+    </Key>
+    <Property Name="IdColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Abreviatura" Type="varchar" MaxLength="15" />
+    <Property Name="Codigo" Type="int" />
+    <Property Name="Codigo1" Type="varchar" MaxLength="1" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="IdVendedor" Type="int" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="Codigo2" Type="varchar" MaxLength="5" />
+  </EntityType>
   <EntityType Name="Comparativas">
     <Key>
       <PropertyRef Name="IdComparativa" />
@@ -2292,6 +2308,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="MinimoNoImponible" Type="numeric" Precision="18" Scale="2" />
     <Property Name="MinimoARetener" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
+  <EntityType Name="GruposObras">
+    <Key>
+      <PropertyRef Name="IdGrupoObra" />
+    </Key>
+    <Property Name="IdGrupoObra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="IBCondiciones">
     <Key>
       <PropertyRef Name="IdIBCondicion" />
@@ -3997,6 +4020,15 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="UnidadesPorPack" Type="int" />
     <Property Name="TaraEnKg" Type="numeric" Precision="18" Scale="4" />
   </EntityType>
+  <EntityType Name="UnidadesOperativas">
+    <Key>
+      <PropertyRef Name="IdUnidadOperativa" />
+    </Key>
+    <Property Name="IdUnidadOperativa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="Valores">
     <Key>
       <PropertyRef Name="IdValor" />
@@ -5544,6 +5576,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComprobantesProveedores" EntityType="Self.ComprobantesProveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Conceptos" EntityType="Self.Conceptos" Schema="dbo" store:Type="Tables" />
@@ -5627,6 +5660,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImpuestosDirectos" EntityType="Self.ImpuestosDirectos" Schema="dbo" store:Type="Tables" />
@@ -5680,6 +5714,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">

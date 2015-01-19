@@ -348,12 +348,6 @@
                 lastSelectediRow = iRow;
             },
             afterEditCell: function (id, name, val, iRow, iCol) {
-                if (name == 'Desde') {
-                    jQuery("#" + iRow + "_Desde", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                }
-                if (name == 'Hasta') {
-                    jQuery("#" + iRow + "_Hasta", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                }
                 var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
                 jQuery("#Lista").jqGrid('setRowData', id, { act: se });
             },
