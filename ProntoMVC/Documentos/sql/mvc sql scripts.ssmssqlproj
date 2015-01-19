@@ -206,9 +206,9 @@
           <FullPath>SQLQuery1asdasd.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQuery2.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>SQLQuery2.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQuery3.sql">
@@ -236,9 +236,9 @@
           <FullPath>SQLQuery7.sql</FullPath>
         </FileNode>
         <FileNode Name="Tree_TX_Arbol Tree_TX_Generar.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Tree_TX_Arbol Tree_TX_Generar.sql</FullPath>
         </FileNode>
         <FileNode Name="clienteswilliams_alter table.sql">
