@@ -30,7 +30,7 @@ namespace ProntoMVC.Controllers
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
-            var TipoGanancias = db.TiposRetencionGanancias
+            var Tabla = db.TiposRetencionGanancias
                 .OrderBy(s => s.Descripcion)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -40,7 +40,7 @@ namespace ProntoMVC.Controllers
             ViewBag.pageSize = pageSize;
             ViewBag.TotalPages = Math.Ceiling((double)db.TiposRetencionGanancias.Count() / pageSize);
 
-            return View(TipoGanancias);
+            return View(Tabla);
         }
 
         public virtual JsonResult BatchUpdate(TiposRetencionGanancia TipoRetencionGanancia)
