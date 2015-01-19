@@ -1,144 +1,746 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Rubro>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rubros";
 }
-<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<div><input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
 
-<br />
 <br />
 
 <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
 <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
 
-<p>@Html.ActionLink("Nuevo Rubro", "Edit", new { id = -1 }, new { @class="btn btn-primary" })</p>
+<style>
+    .myLink {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var lastSelectedId;
-        var inEdit;
-        grid = $("#Lista");
 
-        //Para que haga wrap en las celdas
-        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+    var $grid = "";
+    var lastSelectedId;
+    var lastSelectediCol;
+    var lastSelectediRow;
+    var lastSelectediCol2;
+    var lastSelectediRow2;
+    var inEdit;
+    var selICol;
+    var selIRow;
+    var gridCellWasClicked = false;
+    var grillaenfoco = false;
+    var getColumnIndexByName = function (grid, columnName) {
+        var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+        for (i = 0; i < l; i++) {
+            if (cm[i].name === columnName) {
+                return i; // return the index
+            }
+        }
+        return -1;
+    };
+    var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+    $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+    $.extend($.jgrid.inlineEdit, {
+        keys: true
+    });
+
+    function GrabarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var datos = $("#formid").serializeObject();
+        var err;
+
+        datos.IdRubro = gridId;
+        datos.IdTipoOperacion = dataFromTheRow.IdTipoOperacion;
+        datos.IdCuenta = dataFromTheRow.IdCuenta;
+        datos.IdCuentaCompras = dataFromTheRow.IdCuentaCompras;
+        datos.IdCuentaComprasActivo = dataFromTheRow.IdCuentaComprasActivo;
+        datos.IdCuentaCompras1 = dataFromTheRow.IdCuentaCompras1;
+        datos.IdCuentaCompras2 = dataFromTheRow.IdCuentaCompras2;
+        datos.IdCuentaCompras3 = dataFromTheRow.IdCuentaCompras3;
+        datos.IdCuentaCompras4 = dataFromTheRow.IdCuentaCompras4;
+        datos.IdCuentaCompras5 = dataFromTheRow.IdCuentaCompras5;
+        datos.IdCuentaCompras6 = dataFromTheRow.IdCuentaCompras6;
+        datos.IdCuentaCompras7 = dataFromTheRow.IdCuentaCompras7;
+        datos.IdCuentaCompras8 = dataFromTheRow.IdCuentaCompras8;
+        datos.IdCuentaCompras9 = dataFromTheRow.IdCuentaCompras9;
+        datos.IdCuentaCompras10 = dataFromTheRow.IdCuentaCompras10;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Codigo = dataFromTheRow.Codigo;
+        datos.Abreviatura = dataFromTheRow.Abreviatura;
+        datos.TipoOperacion = dataFromTheRow.TipoOperacion;
+        datos.CuentaVentas = dataFromTheRow.CuentaVentas;
+        datos.CuentaCompras = dataFromTheRow.CuentaCompras;
+        datos.CuentaActivo = dataFromTheRow.CuentaActivo;
+        datos.CuentaAdicionalCompras1 = dataFromTheRow.CuentaAdicionalCompras1;
+        datos.CuentaAdicionalCompras2 = dataFromTheRow.CuentaAdicionalCompras2;
+        datos.CuentaAdicionalCompras3 = dataFromTheRow.CuentaAdicionalCompras3;
+        datos.CuentaAdicionalCompras4 = dataFromTheRow.CuentaAdicionalCompras4;
+        datos.CuentaAdicionalCompras5 = dataFromTheRow.CuentaAdicionalCompras5;
+        datos.CuentaAdicionalCompras6 = dataFromTheRow.CuentaAdicionalCompras6;
+        datos.CuentaAdicionalCompras7 = dataFromTheRow.CuentaAdicionalCompras7;
+        datos.CuentaAdicionalCompras8 = dataFromTheRow.CuentaAdicionalCompras8;
+        datos.CuentaAdicionalCompras9 = dataFromTheRow.CuentaAdicionalCompras9;
+        datos.CuentaAdicionalCompras10 = dataFromTheRow.CuentaAdicionalCompras10;
+
+        err = ""
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
+
+        if (err != "") {
+            alert('No se pudo grabar el registro.\n' + err);
+        } else {
+            //$('html, body').css('cursor', 'wait');
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Rubro/BatchUpdate',
+                dataType: 'json',
+                data: JSON.stringify(datos),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('setRowData', gridId, { act: "" });
+                        var rowid = $('#Lista').getGridParam('selrow');
+                        var valor = result.IdRubro;
+                        if (valor == "") { valor = "0"; }
+                        $('#Lista').jqGrid('setCell', rowid, 'IdRubro', valor);
+                    } else {
+                        alert('No se pudo grabar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
+                    }
+                }
+            });
+        };
+    };
+
+    function EliminarFila(gridId) {
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var idprincipal = dataFromTheRow['IdRubro'];
+        if (idprincipal <= 0) {
+            $grid.jqGrid('delRowData', gridId);
+        } else {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Rubro/Delete',
+                dataType: 'json',
+                data: JSON.stringify({ id: idprincipal }),
+                success: function (result) {
+                    if (result) {
+                        $grid.jqGrid('delRowData', gridId);
+                    } else {
+                        alert('No se pudo eliminar el registro.');
+                    }
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                    } catch (e) {
+                        $('html, body').css('cursor', 'auto');
+                        $('#grabar2').attr("disabled", false).val("Aceptar");
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
+                    }
+                }
+            });
+        };
+    };
+
+    window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+    document.body.onclick = saveEditedCell; // attach to current document.
+
+    function saveEditedCell(evt) {
+        var target = $(evt.target);
+
+        if ($grid) {
+            var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            {
+                gridCellWasClicked = false;
+                $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            }
+        }
+
+        //$grid = "";
+        gridCellWasClicked = false;
+
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
+            grillaenfoco = true;
+        }
+        if (grillaenfoco) {
+            gridCellWasClicked = true;
+            lastSelectediRow2 = lastSelectediRow;
+            lastSelectediCol2 = lastSelectediCol;
+        }
+    };
+
+    function MarcarSeleccionadosParaEliminar(grid) {
+        var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+        var i, Id;
+        for (i = selectedIds.length - 1; i >= 0; i--) {
+            Id = selectedIds[i];
+            var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+            grid.jqGrid('setRowData', Id, { act: se });
+            //grid.jqGrid('delRowData', selectedIds[i]);
+        }
+    };
+
+    function AgregarItemVacio(grid) {
+        var colModel = grid.jqGrid('getGridParam', 'colModel');
+        var dataIds = grid.jqGrid('getDataIDs');
+        var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
+        var data, j, cm;
+
+        data = '{';
+        for (j = 1; j < colModel.length; j++) {
+            cm = colModel[j];
+            data = data + '"' + cm.index + '":' + '"",';
+        }
+        data = data.substring(0, data.length - 1) + '}';
+        data = data.replace(/(\r\n|\n|\r)/gm, "");
+        grid.jqGrid('addRowData', Id, data, "first");
+        grid.jqGrid('setRowData', Id, { act: se });
+    };
+
+    $().ready(function () {
+        'use strict';
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Listado_jqGrid", "Rubro")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            url: ROOT + 'Rubro/TT/',
+            postData: {},
             datatype: 'json',
             mtype: 'POST',
-            shrinkToFit: true,
-            colNames: ['Acciones','Acciones', 'IdRubro', 'Codigo', 'Descripcion', 'Cod Cuenta',
-                        'Cuenta', 'Valor Rechazado', 'Gravado Default.', 'Codigo AFIP'
-                      ],
+            colNames: ['Acciones', 'IdRubro', 'IdTipoOperacion', 'IdCuenta', 'IdCuentaCompras', 'IdCuentaComprasActivo', 'IdCuentaCompras1', 'IdCuentaCompras2', 'IdCuentaCompras3', 'IdCuentaCompras4',
+                       'IdCuentaCompras5', 'IdCuentaCompras6', 'IdCuentaCompras7', 'IdCuentaCompras8', 'IdCuentaCompras9', 'IdCuentaCompras10', 'Descripcion', 'Codigo', 'Abreviatura', 'Tipo operacion',
+                       'Cuenta ventas', 'Cuenta compras', 'Cuenta activo', 'Cuenta adicional compras 1', 'Cuenta adicional compras 2', 'Cuenta adicional compras 3', 'Cuenta adicional compras 4',
+                       'Cuenta adicional compras 5', 'Cuenta adicional compras 6', 'Cuenta adicional compras 7', 'Cuenta adicional compras 8', 'Cuenta adicional compras 9', 'Cuenta adicional compras 10'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'impr', index: 'act', align: 'center', width: 0, sortable: false, editable: false, hidden: true, search: false },
-                        {name: 'IdRubro', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true },
-                        { name: 'CodigoRubro', index: 'NumeroRequerimiento', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Descripcion', index: 'FechaRequerimiento', width: 0, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'IdCuenta', index: 'Cumplido', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Cuenta', index: 'Recepcionado', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ValorRechazado', index: 'Entregado', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'GravadoDefault', index: 'Impresa', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CodigoAFIP', index: 'Detalle', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-                    ],
-            onSelectRow: function (id) {
-                if (id && id !== lastSelectedId) {
-                    if (typeof lastSelectedId !== "undefined") {
-                        grid.jqGrid('restoreRow', lastSelectedId);
-                    }
-                    lastSelectedId = id;
-                }
+                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
+                        { name: 'IdRubro', index: 'IdRubro', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdTipoOperacion', index: 'IdTipoOperacion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuenta', index: 'IdCuenta', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras', index: 'IdCuentaCompras', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaComprasActivo', index: 'IdCuentaComprasActivo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras1', index: 'IdCuentaCompras1', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras2', index: 'IdCuentaCompras2', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras3', index: 'IdCuentaCompras3', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras4', index: 'IdCuentaCompras4', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras5', index: 'IdCuentaCompras5', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras6', index: 'IdCuentaCompras6', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras7', index: 'IdCuentaCompras7', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras8', index: 'IdCuentaCompras8', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras9', index: 'IdCuentaCompras9', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdCuentaCompras10', index: 'IdCuentaCompras10', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        {
+                            name: 'Codigo', index: 'Codigo', width: 80, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            editoptions: {
+                                maxlength: 20, defaultValue: '0.00',
+                                dataEvents: [
+                                {
+                                    type: 'keypress',
+                                    fn: function (e) {
+                                        var key = e.charCode || e.keyCode;
+                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    }
+                                }]
+                            }
+                        },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        {
+                            name: 'TipoOperacion', index: 'TipoOperacion', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'TiposOperacione/GetTiposOperaciones',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdTipoOperacion').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdTipoOperacion', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaVentas', index: 'CuentaVentas', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuenta').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuenta', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaCompras', index: 'CuentaCompras', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaActivo', index: 'CuentaActivo', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaComprasActivo').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaComprasActivo', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras1', index: 'CuentaAdicionalCompras1', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras1').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras1', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras2', index: 'CuentaAdicionalCompras2', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras2').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras2', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras3', index: 'CuentaAdicionalCompras3', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras3').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras3', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras4', index: 'CuentaAdicionalCompras4', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras4').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras4', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras5', index: 'CuentaAdicionalCompras5', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras5').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras5', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras6', index: 'CuentaAdicionalCompras6', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras6').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras6', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras7', index: 'CuentaAdicionalCompras7', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras7').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras7', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras8', index: 'CuentaAdicionalCompras8', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras8').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras8', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras9', index: 'CuentaAdicionalCompras9', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras9').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras9', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        },
+                        {
+                            name: 'CuentaAdicionalCompras10', index: 'CuentaAdicionalCompras10', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            editoptions: {
+                                dataUrl: ROOT + 'Cuenta/GetCuentasConMadres',
+                                dataInit: function (elem) {
+                                    $(elem).width(190);
+                                },
+                                dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var $this = $(e.target), $td;
+                                        if ($this.hasClass("FormElement")) {
+                                            // form editing
+                                            $('#IdCuentaCompras10').val(this.value);
+                                        } else {
+                                            $td = $this.closest("td");
+                                            if ($td.hasClass("edit-cell")) {
+                                                // cell editing
+                                                var rowid = $('#Lista').getGridParam('selrow');
+                                                var valor = this.value;
+                                                if (valor == "") { valor = "0"; }
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdCuentaCompras10', valor);
+                                            } else {
+                                                // inline editing
+                                            }
+                                        }
+                                    }
+                                }]
+                            },
+                        }
+            ],
+            //gridComplete: function () {
+            //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+            //    for (var i = 0; i < ids.length; i++) {
+            //        var cl = ids[i];
+            //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
+            //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+            //    }
+            //},
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
             },
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+            },
+            //beforeSelectRow: function (rowid, e) {
+            //    var iCol = $.jgrid.getCellIndex($(e.target).closest("td")[0]);
+            //    if (this.p.colModel[iCol].name === 'act') {
+            //        GrabarFila(rowid);
+            //        return false;
+            //    }
+            //},
             pager: $('#ListaPager'),
-            rowNum: 15,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdRubro', //'NumeroRequerimiento',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
+            multiselect: true,
             width: 'auto',
+            autowidth: true,
+            shrinkToFit: false,
             height: '100%',
             altRows: false,
-            footerrow: true,
+            footerrow: false,
             userDataOnFooter: true,
-            //imgpath: '/content/cupertino/images',
-            //loadonce: true,
-            caption: '<b>RubroS</b>'
+            caption: '<b>RUBROS</b>',
+            cellEdit: true,
+            cellsubmit: 'clientArray',
+            editurl: ROOT + 'Empleado/EditGridData/'
         });
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                            onClickButton: function () {
+                                                AgregarItemVacio(jQuery("#Lista"));
+                                            },
+                                        });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                            onClickButton: function () {
+                                                MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                            },
+                                        });
     });
 
 </script>
-@*
-@{
-    var grid = new WebGrid(source: Model,
-        defaultSort: "NumeroRequerimiento",
-        rowsPerPage: 10,
-        canPage: true,
-        canSort: true,
-        fieldNamePrefix: "ItemRM_",
-        selectionFieldName: "selectedRow");
-}
-
-<div id="grid">
-    @grid.GetHtml(
-        tableStyle: "webgrid",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primera",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Última >>",
-                columns: new[] {
-                                        grid.Column(columnName: "NumeroRequerimiento", header: "Nro.", style: "text-align-left"),
-                                        grid.Column(columnName: "FechaRequerimiento", header: "Fecha", style: "text-align-left", format: p => p.FechaRequerimiento.ToShortDateString()),
-                                        //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                        //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                        grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                        grid.Column("", header: "Acciones", 
-                                            format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdRequerimiento })|
-                                                           @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRequerimiento })</text>
-                                        )
-                                        }
-                            )
-</div>
-
-<table>
-    <tr>
-        <th>IdRequerimiento</th>
-        <th>Numero RM</th>
-        <th>Fecha</th>
-        <th>Obra</th>
-        <th>Sector</th>
-        <th></th>
-    </tr>
-
-@{int i = 1;}
-@foreach (var item in Model)
-{
-    <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-        <td>@Html.DisplayFor(modelItem => item.IdRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.NumeroRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.FechaRequerimiento)</td>
-        <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-        <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdRequerimiento }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdRequerimiento })
-        </td>
-    </tr>
-}
-</table>
-*@

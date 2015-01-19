@@ -1305,6 +1305,44 @@ textarea::-webkit-input-placeholder {
   width: 530px;
 }
 
+/*  ---- Mio ---- */
+.input-large12 {
+     width:912px;
+}
+.input-large11 {
+     width:832px;
+}
+.input-large10 {
+     width:752px;
+}
+.input-large9 {
+     width:672px;
+}
+.input-large8 {
+     width:592px;
+}
+.input-large7 {
+     width:512px;
+}
+.input-large6 {
+     width:432px;
+}
+.input-large5 {
+     width:352px;
+}
+.input-large4 {
+     width:272px;
+}
+.input-large3 {
+     width:192px;
+}
+.input-large2 {
+     width:112px;
+}
+.input-large1 {
+     width:32px;
+}
+
 input[class*="span"],
 select[class*="span"],
 textarea[class*="span"],
