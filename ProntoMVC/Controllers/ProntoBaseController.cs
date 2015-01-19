@@ -1237,7 +1237,18 @@ namespace ProntoMVC.Controllers
             {
                 ErrHandler.WriteError("archivo " + glbPathArchivoAPP);
                 ErrorLog2.LogError(ex, "archivo " + glbPathArchivoAPP);
-                throw;
+
+                try
+                {
+                    glbPathArchivoAPP = AppDomain.CurrentDomain.BaseDirectory + @"Documentos\Pronto.app";
+                    contents = System.IO.File.ReadAllText(glbPathArchivoAPP);
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+
             }
 
 
