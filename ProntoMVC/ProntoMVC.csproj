@@ -668,13 +668,13 @@
     <Content Include="Areas\MvcMembership\Views\UserAdministration\IndexAdminExterno.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\CreateUserExterno.cshtml" />
     <Content Include="Areas\MvcMembership\Views\Web.config" />
-    <None Include="Documentos\CertificadoRetencionGanancias.dot" />
-    <None Include="Documentos\CertificadoRetencionIIBB.dot" />
-    <None Include="Documentos\CertificadoRetencionIIBB_StaFe.dot" />
-    <None Include="Documentos\CertificadoRetencionIVA.dot" />
-    <None Include="Documentos\CertificadoRetencionSUSS.dot" />
-    <None Include="Documentos\Comparativa.xlsx" />
-    <None Include="Documentos\Comparativa.xlt" />
+    <Content Include="Documentos\CertificadoRetencionGanancias.dot" />
+    <Content Include="Documentos\CertificadoRetencionIIBB.dot" />
+    <Content Include="Documentos\CertificadoRetencionIIBB_StaFe.dot" />
+    <Content Include="Documentos\CertificadoRetencionIVA.dot" />
+    <Content Include="Documentos\CertificadoRetencionSUSS.dot" />
+    <Content Include="Documentos\Comparativa.xlsx" />
+    <Content Include="Documentos\Comparativa.xlt" />
     <Content Include="Documentos\Factura A_Hawk_DOT_ORIGINAL.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -696,17 +696,20 @@
     <Content Include="Documentos\Factura_B_Vialagro_FA.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Documentos\Pedido_Autotrol_PUNTONET.docx">
+    <Content Include="Documentos\Pedido_Autotrol_PUNTONET.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Documentos\Pedido_Esuco.dot">
+    </Content>
+    <Content Include="Documentos\Pedido_Esuco.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Documentos\Pedido_ESUCO_PUNTONET.docx">
+    </Content>
+    <Content Include="Documentos\Pedido_ESUCO_PUNTONET.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Documentos\Pronto.app" />
-    <None Include="Documentos\Requerimiento1_ESUCO_PUNTONET.docx" />
+    <Content Include="Documentos\Requerimiento1_ESUCO_PUNTONET.docx" />
+    <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
@@ -1562,9 +1565,9 @@
     <Content Include="Views\Shared\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documentos\FacturaNET_Hawk.docx">
+    <Content Include="Documentos\FacturaNET_Hawk.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Documentos\vb6\frmClientes.frmzzz" />
     <None Include="Documentos\vb6\frmConceptos.frmzzz" />
     <None Include="Documentos\vb6\frmCondicionesCompra.frmzzz" />
