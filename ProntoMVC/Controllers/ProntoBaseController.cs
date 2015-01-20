@@ -1479,6 +1479,8 @@ namespace ProntoMVC.Controllers
                 }
 
 
+                los nodos hijos de agrupados como no estan en la coleccion  hay Que incluirlos de prepo
+
                 if (!essuperadmin && !archivoapp.Contains(o.Clave))
                 {
                     nivel = 9;
