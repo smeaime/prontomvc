@@ -4703,8 +4703,14 @@ Public Class CartaDePorteManager
         myCartaDePorte.Exporta = True
         myCartaDePorte.SubnumeroDeFacturacion = 1
 
-        'como evitar la recursion?
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+
+        Try
+            'como evitar la recursion?
+            CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Catch ex As Exception
+            ErrHandler.WriteError("ya existía un duplicado 1 probablemente")
+            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+        End Try
 
 
         myCartaDePorte.Id = tempid
@@ -4712,7 +4718,14 @@ Public Class CartaDePorteManager
         myCartaDePorte.Exporta = False
         myCartaDePorte.SubnumeroDeFacturacion = 0
 
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Try
+
+            CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Catch ex As Exception
+            ErrHandler.WriteError("ya existía un duplicado 0 probablemente")
+            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+        End Try
+
 
 
     End Sub
@@ -6012,8 +6025,7 @@ Public Class CartaDePorteManager
 
 
 
-            If EsUnoDeLosClientesExportador(SC, myCartaDePorte) Then
-
+            If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
                 sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             End If
 

@@ -563,7 +563,8 @@ namespace ProntoMVC.Controllers
                     //no existe. verificar que no estoy mandando los subitems de agrupamiento
                     if (dr.Nodo != null)
                     {
-                        if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")))
+
+                        if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra"))  || dr.Nodo=="RequerimientosPorObra" || dr.Nodo=="RequerimientosAgrupados" || dr.Nodo=="PedidosAgrupados"       )
                         {
                             dr.IdEmpleado = o.IdEmpleado;
                             if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
