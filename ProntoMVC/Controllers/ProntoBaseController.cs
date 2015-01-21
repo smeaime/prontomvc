@@ -1479,12 +1479,21 @@ namespace ProntoMVC.Controllers
                 }
 
 
-                los nodos hijos de agrupados como no estan en la coleccion  hay Que incluirlos de prepo
-
+                
                 if (!essuperadmin && !archivoapp.Contains(o.Clave))
                 {
                     nivel = 9;
                 }
+
+
+                if (!(!(o.Clave.Contains("Agrupad") || o.Clave.Contains("RequerimientosPorObra")) || o.Clave == "RequerimientosPorObra" || o.Clave == "RequerimientosAgrupados" || o.Clave == "PedidosAgrupados"))
+                {
+                    //  los nodos hijos de agrupados, como no estan en la coleccion del APP, hay que incluirlos de prepo
+                    nivel = 1;
+
+                }
+
+
 
 
 
