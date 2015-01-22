@@ -671,6 +671,8 @@ If you want additionally remove vertical border between the cells in the grid yo
 
             // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
 
+            if (!data) return;
+
             var longitud = 0
             for (var i = 0; i < data.length; i++) {
                 if (longitud > 0) {
