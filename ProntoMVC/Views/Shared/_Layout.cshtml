@@ -2838,7 +2838,7 @@ Released   : 20120723
 
 
 
-
+                    if (!data) return;
 
 
                     for (var i = 0; i < data.length; i++) {
@@ -2901,12 +2901,19 @@ Released   : 20120723
                             }
                         }
                         else {
-                            if (data[i].Link.length > 0) {
-                                menu_html += '<li>' + data[i].Link + '</li>'
-                            }
-                            else {
+                            try {
+                                if (data[i].Link.length > 0) {
+                                    menu_html += '<li>' + data[i].Link + '</li>'
+                                }
+                                else {
+                                    menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+                                }
+                            } catch (e) {
                                 menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+
                             }
+
+                            
                         }
 
 
