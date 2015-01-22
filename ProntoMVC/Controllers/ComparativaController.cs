@@ -528,7 +528,7 @@ namespace ProntoMVC.Controllers
             //    // return false;
             //}
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar("Comparativas")) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdComparativa <= 0)

@@ -349,7 +349,7 @@ namespace ProntoMVC.Controllers
             if (!ok)
             {
                 db = null;
-                throw new Exception("Permisos insuficientes de lectura");
+                //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
             }
 
 
@@ -374,7 +374,7 @@ namespace ProntoMVC.Controllers
             if (!ok)
             {
                 db = null;
-                throw new Exception("Permisos insuficientes de edición");
+                //throw new Exception("Permisos insuficientes de edición para el modulo " + filterContext.RouteData.Values["controller"].ToString());
             }
 
 
@@ -397,7 +397,7 @@ namespace ProntoMVC.Controllers
             if (!ok)
             {
                 db = null;
-                throw new Exception("Permisos insuficientes de borrado");
+                //throw new Exception("Permisos insuficientes de borrado para el modulo " + filterContext.RouteData.Values["controller"].ToString());
             }
 
         }
