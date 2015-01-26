@@ -62,6 +62,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Presupuesto presupuesto)
         {
+            if (!PuedeEditar()) throw new Exception("No tenés permisos");
 
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
@@ -226,6 +227,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -324,7 +326,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditExterno(int id)
         {
-
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
 
 
