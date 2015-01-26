@@ -158,7 +158,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id = -1, string nombre = "")
         {
-
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
             if (nombre != "")
             {
                 id = db.Empleados.Where(x => x.Nombre == nombre || x.UsuarioNT == nombre).Select(x => x.IdEmpleado).FirstOrDefault();

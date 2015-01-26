@@ -40,6 +40,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
             Proveedor o;
             if (id <= 0)
             {
@@ -55,6 +56,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditEventual(int id)
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
             Proveedor o;
             if (id <= 0)
             {
@@ -181,6 +183,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleProveedor")] Proveedor Proveedor)
         {
+            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+
             try
             {
                 var s = Proveedor.Cuit.Replace("-", "");

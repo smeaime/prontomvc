@@ -643,9 +643,15 @@ namespace ProntoMVC.Controllers
             return false;
         }
 
+        enum sss
+        {
 
+            asdasda
+            asdad
 
-        public bool PuedeEditar(string Modulo)
+        }
+
+        public bool PuedeEditar(sss Modulo)
         {
             return true;// desactivados desde el uso de los roles de asp.net
 

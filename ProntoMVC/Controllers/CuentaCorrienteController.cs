@@ -24,6 +24,8 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
                 ) throw new Exception("No tenés permisos");
@@ -31,6 +33,8 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+
             return View();
         }
 

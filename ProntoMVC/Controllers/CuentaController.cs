@@ -309,6 +309,10 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Cuentas(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                            string FechaInicial, string FechaFinal, string IdObra)
         {
+
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+
+
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
@@ -463,10 +467,10 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult Index()
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
-                ) throw new Exception("No tenés permisos");
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //         !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            //    ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
@@ -474,11 +478,12 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult IndexFF()
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
-                ) throw new Exception("No tenés permisos");
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //         !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+            //    ) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
