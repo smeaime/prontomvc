@@ -37,6 +37,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
             //if (db == null)
             //{
@@ -122,6 +123,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Recibo Recibo)
         {
+            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+
             try
             {
                 string erar = "";
@@ -782,6 +785,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(Recibo Recibo)
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
             if (ModelState.IsValid)
             {
                 db.Entry(Recibo).State = System.Data.Entity.EntityState.Modified;

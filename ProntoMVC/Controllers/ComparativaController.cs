@@ -184,6 +184,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
             //if (db == null)
             //{
@@ -870,6 +871,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdateConGrilla(Comparativa o, List<RenglonJQgrid> grilla = null)
         {
+            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+
 
             o.DetalleComparativas.Clear();
             DeGrillaHaciaObjeto(grilla, o);
@@ -881,6 +884,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Comparativa Comparativa)
         {
+            if (!PuedeEditar()) throw new Exception("No tenés permisos");
 
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
