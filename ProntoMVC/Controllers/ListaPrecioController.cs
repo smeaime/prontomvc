@@ -36,7 +36,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ListasPrecios)) throw new Exception("No tenés permisos");
 
             if (db == null)
             {
@@ -90,7 +90,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(ProntoMVC.Data.Models.ListasPrecio o)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.ListasPrecios)) throw new Exception("No tenés permisos");
 
             try
             {
@@ -222,7 +222,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ListasPrecios)) throw new Exception("No tenés permisos");
             ProntoMVC.Data.Models.ListasPrecio o;
             if (id == -1)
             {
@@ -248,7 +248,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(ProntoMVC.Data.Models.ListasPrecio o)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ListasPrecios)) throw new Exception("No tenés permisos");
             if (ModelState.IsValid)
             {
                 if (o.IdListaPrecios <= 0)
@@ -565,7 +565,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditDetalle(int id, int idparent = -1)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ListasPrecios)) throw new Exception("No tenés permisos");
             ProntoMVC.Data.Models.ListasPreciosDetalle o;
             if (id == -1)
             {

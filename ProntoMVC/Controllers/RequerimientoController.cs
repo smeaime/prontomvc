@@ -36,12 +36,10 @@ namespace ProntoMVC.Controllers
             //var requerimientos = db.Requerimientos.Include(r => r.Obra).Include(r => r.Empleados).Include(r => r.Empleados1).Include(r => r.Sectores)
             //    .OrderBy(r => r.NumeroRequerimiento);
             //return View(db.Requerimientos.ToList());
-                        if (!PuedeLeer()) throw new Exception("No tenés permisos");
 
+            if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
 
-            if (!PuedeLeer("Requerimiento")) throw new Exception("No tenés permisos");
-
-            ss
+            
 
 
             ViewBag.bAConfirmar = (bool)(Request.QueryString["bAConfirmar"].NullSafeToString() == "SI");
@@ -289,7 +287,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
 
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Facturas)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdRequerimiento <= 0)
@@ -383,14 +381,12 @@ namespace ProntoMVC.Controllers
 
         [HttpPost]
         public virtual JsonResult BatchUpdate(Requerimiento requerimiento)
-        {            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+        {
 
 
             // acá esta el temita de http://stackoverflow.com/questions/5538974/the-relationship-could-not-be-changed-because-one-or-more-of-the-foreign-key-pro
 
-            if (!PuedeEditar("Requerimiento")) throw new Exception("No tenés permisos");
-
-            ss
+            if (!PuedeEditar(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
 
 
             try
@@ -645,8 +641,8 @@ namespace ProntoMVC.Controllers
             int? IdSector = -1, IdObra = -1;
 
 
-            if (!PuedeLeer("Requerimiento")) throw new Exception("No tenés permisos");
-            sss
+            if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
+            
 
 
 

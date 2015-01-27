@@ -39,7 +39,7 @@ namespace ProntoMVC.Controllers
         public virtual ViewResult Index()
         {
 
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Articulos)) throw new Exception("No tenés permisos");
 
 
 
@@ -87,7 +87,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult IndexResumido()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Articulos)) throw new Exception("No tenés permisos");
 
             if (db == null)
             {
@@ -153,7 +153,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetalleArticuloDocumento,IdDetalleArticuloUnidad")]  Articulo Articulo) // el Exclude es para las altas, donde el Id viene en 0
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Articulos)) throw new Exception("No tenés permisos");
 
             try
             {
@@ -734,7 +734,7 @@ namespace ProntoMVC.Controllers
         // GET: /Articulo/Edit/5
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Articulos)) throw new Exception("No tenés permisos");
             Articulo o;
             if (id <= 0)
             {
