@@ -4697,6 +4697,9 @@ Public Class CartaDePorteManager
         Dim tempid = myCartaDePorte.Id
         Dim tempidcli = IIf(myCartaDePorte.IdClienteAFacturarle = idclienteexportador, -1, myCartaDePorte.IdClienteAFacturarle)
 
+        'anda mal en el alta de carta que cumpla estas condiciones (en la edicion anda bien).  
+        'Está triplicando la carta, porque pasa dos veces por esta funcion con el Id=-1, y despues una vez más en el Save original
+
 
         myCartaDePorte.Id = -1
         myCartaDePorte.IdClienteAFacturarle = idclienteexportador
@@ -4712,6 +4715,7 @@ Public Class CartaDePorteManager
             ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
         End Try
 
+        'y si este tempid es -1?
 
         myCartaDePorte.Id = tempid
         myCartaDePorte.IdClienteAFacturarle = tempidcli
@@ -5768,7 +5772,8 @@ Public Class CartaDePorteManager
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13223
             If bCopiarDuplicados Then
                 If EsUnoDeLosClientesExportador(SC, myCartaDePorte) Then
-
+                    If myCartaDePorte.Id = -1 And myCartaDePorte.SubnumeroDeFacturacion = -1 Then myCartaDePorte.SubnumeroDeFacturacion = 0
+                    myCartaDePorte.Id = CartaDePorteId
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
 
                 End If
