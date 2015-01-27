@@ -95,3 +95,4 @@ C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\zh-CHT\AjaxControlToolkit.resourc
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\ProntoMVC.Test.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.pdb
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx

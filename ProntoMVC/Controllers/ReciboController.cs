@@ -37,6 +37,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer(enumNodos.Recibos)) throw new Exception("No tenés permisos");
 
             //if (db == null)
             //{
@@ -90,7 +91,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
 
 
-            if (!PuedeEditar("Recibos")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Recibos)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdRecibo <= 0)
@@ -122,6 +123,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Recibo Recibo)
         {
+            if (!PuedeEditar(enumNodos.Recibos)) throw new Exception("No tenés permisos");
+
             try
             {
                 string erar = "";
@@ -644,7 +647,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                if (!PuedeLeer("Recibos"))
+                if (!PuedeLeer(enumNodos.Recibos))
                 {
                     o = new Recibo();
                     CargarViewBag(o);
@@ -782,6 +785,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(Recibo Recibo)
         {
+            if (!PuedeLeer(enumNodos.Recibos)) throw new Exception("No tenés permisos");
             if (ModelState.IsValid)
             {
                 db.Entry(Recibo).State = System.Data.Entity.EntityState.Modified;

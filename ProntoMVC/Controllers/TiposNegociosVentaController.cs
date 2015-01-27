@@ -77,6 +77,8 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(TiposNegociosVenta TiposNegociosVenta)
         {
+            if (!PuedeEditar(enumNodos.TiposNegociosVentas)) throw new Exception("No tenés permisos");
+
             try
             {
                 string errs = "";
