@@ -27,6 +27,30 @@ namespace ProntoMVC.Controllers
     public partial class CuentaController : ProntoBaseController
     {
 
+        public virtual ViewResult Index()
+        {
+
+            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+                ) throw new Exception("No tenés permisos");
+
+            //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
+            return View();
+        }
+
+        public virtual ViewResult IndexFF()
+        {
+
+            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
+                ) throw new Exception("No tenés permisos");
+
+            //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
+            return View();
+        }
+
         public virtual JsonResult GetCuentasAutocomplete(string term)
         {
 
@@ -35,15 +59,7 @@ namespace ProntoMVC.Controllers
             var ci = new System.Globalization.CultureInfo("en-US");
 
             var filtereditems = (from item in db.Cuentas
-                                 // TO DO: no me funciona el  .StartsWith(term, true, ci) !!!!!!!!! 
-                                 // y usarlo con el int del codigo tambien es un dolor de cabeza!!!!!
-                                 // http://stackoverflow.com/questions/1066760/problem-with-converting-int-to-string-in-linq-to-entities/3292773#3292773
-                                 // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
-
                                  where ((
-                                 
-                                 //item.Descripcion.StartsWith(term)
-
                                  (item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))).StartsWith(term)
 
                                      //       || SqlFunctions.StringConvert((double)(item.Codigo ?? 0)).StartsWith(term)
@@ -73,21 +89,13 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetCuentasGastoAutocomplete(string term, int obra = 0)
         {
-
-
             // http://stackoverflow.com/questions/444798/case-insensitive-containsstring
 
             var ci = new System.Globalization.CultureInfo("en-US");
 
 
             var filtereditems = (from item in db.CuentasGastos
-                                 // TO DO: no me funciona el  .StartsWith(term, true, ci) !!!!!!!!! 
-                                 // y usarlo con el int del codigo tambien es un dolor de cabeza!!!!!
-                                 // http://stackoverflow.com/questions/1066760/problem-with-converting-int-to-string-in-linq-to-entities/3292773#3292773
-                                 // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
-                                 
                                  join cu in db.Cuentas on item.IdCuentaGasto  equals  cu.IdCuentaGasto
-                                 
                                  where ((
 
                                  (item.Descripcion ).StartsWith(term)
@@ -167,18 +175,11 @@ namespace ProntoMVC.Controllers
                      orderby item.Codigo
                      select new
                      {
-                         //id = cu.IdCuenta,
-                         //value = SqlFunctions.StringConvert((double)(item.Codigo ?? 0)) + " " + item.Descripcion,
-                         //codigo = item.Codigo,
-                         //title = item.Descripcion
-
                          id = cu.IdCuenta,
                          value = cu.Codigo, // SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)) + " " + item.Descripcion,
                          codigo = cu.Codigo,
-                         title = item.Descripcion
-                            ,
+                         title = item.Descripcion,
                          idcuentagasto = cu.IdCuenta
-
                      }).Take(10).ToList();
 
             return Json(q, JsonRequestBehavior.AllowGet);
@@ -186,28 +187,13 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetCuentasFFAutocomplete(string term)
         {
-
-            
-           Parametros parametros = db.Parametros.Find(1);
+            Parametros parametros = db.Parametros.Find(1);
             int? i = parametros.IdTipoCuentaGrupoFF;
-
-
-
-
-            // http://stackoverflow.com/questions/444798/case-insensitive-containsstring
 
             var ci = new System.Globalization.CultureInfo("en-US");
 
             var filtereditems = (from item in db.Cuentas
-                                 // TO DO: no me funciona el  .StartsWith(term, true, ci) !!!!!!!!! 
-                                 // y usarlo con el int del codigo tambien es un dolor de cabeza!!!!!
-                                 // http://stackoverflow.com/questions/1066760/problem-with-converting-int-to-string-in-linq-to-entities/3292773#3292773
-                                 // http://stackoverflow.com/questions/10110266/why-linq-to-entities-does-not-recognize-the-method-system-string-tostring
-
                                  where ((
-
-                                 //item.Descripcion.StartsWith(term)
-
                                  (item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))).StartsWith(term)
 
                                      //       || SqlFunctions.StringConvert((double)(item.Codigo ?? 0)).StartsWith(term)
@@ -452,30 +438,6 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ViewResult Index()
-        {
-
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
-                ) throw new Exception("No tenés permisos");
-
-            //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
-            return View();
-        }
-
-        public virtual ViewResult IndexFF()
-        {
-
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                     !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos")
-                ) throw new Exception("No tenés permisos");
-
-            //var ComprobantesProveedores = db.ComprobantesProveedor.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
-            return View();
-        }
-
         public virtual ActionResult GetCuentas(int? TipoEntidad)
         {
             int TipoEntidad1 = TipoEntidad ?? 0;
@@ -492,6 +454,19 @@ namespace ProntoMVC.Controllers
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
             foreach (Cuenta u in db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4).OrderBy(x => x.Codigo).ToList())
+                Datacombo.Add(u.IdCuenta, u.Codigo + " " + u.Descripcion.ToString());
+
+            return PartialView("Select", Datacombo);
+        }
+
+        public virtual ActionResult GetCuentasFF()
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int? i = parametros.IdTipoCuentaGrupoFF;
+
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Cuenta u in db.Cuentas.Where(x => (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4) && x.IdTipoCuentaGrupo == i).OrderBy(x => x.Codigo).ToList())
                 Datacombo.Add(u.IdCuenta, u.Codigo + " " + u.Descripcion.ToString());
 
             return PartialView("Select", Datacombo);

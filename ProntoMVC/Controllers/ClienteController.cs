@@ -18,6 +18,7 @@ using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
+using Newtonsoft.Json;
 
 namespace ProntoMVC.Controllers
 {
@@ -758,6 +759,57 @@ namespace ProntoMVC.Controllers
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult GetClientesAutocomplete(string term)
+        {
+            var q = (from item in db.Clientes
+                     where item.RazonSocial.ToLower().Contains(term.ToLower())   //.StartsWith(term.ToLower())
+                     orderby item.RazonSocial
+                     select new
+                     {
+                         id = item.IdCliente,
+                         value = item.RazonSocial,
+                         codigo = item.Codigo,
+                         IdCodigoIva = item.IdCodigoIva.ToString()
+                     }).Take(100).ToList();
+
+            if (q.Count == 0 && term != "No se encontraron resultados") { q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", IdCodigoIva = "" }); }
+
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetClientePorId(int Id)
+        {
+            var filtereditems = (from a in db.Clientes
+                                 where (a.IdCliente == Id)
+                                 select new
+                                 {
+                                    id = a.IdCliente,
+                                    Articulo = a.RazonSocial.Trim(),
+                                    value = a.RazonSocial.Trim(),
+                                    a.Codigo,
+                                    a.Direccion,
+                                    Localidad = a.Localidad.Nombre,
+                                    a.CodigoPostal,
+                                    Provincia = a.Provincia.Nombre,
+                                    Pais = a.Pais.Descripcion,
+                                    a.Telefono,
+                                    a.Fax,
+                                    a.Email,
+                                    a.Cuit,
+                                    DescripcionIva = a.DescripcionIva.Descripcion,
+                                    a.PorcentajePercepcionIVA,
+                                    a.BaseMinimaParaPercepcionIVA,
+                                    a.EsAgenteRetencionIVA,
+                                    a.IdIBCondicionPorDefecto,
+                                    a.IdIBCondicionPorDefecto2,
+                                    a.IdIBCondicionPorDefecto3
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
         public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
             switch (oper)
@@ -770,6 +822,208 @@ namespace ProntoMVC.Controllers
                     break;
                 default: break;
             }
+        }
+        
+        //[HttpPost]
+        public virtual JsonResult CalcularPercepciones(Int32 IdCliente, decimal TotalGravado, Int32 IdMoneda, Int32 IdIBCondicion1, Int32 IdIBCondicion2, Int32 IdIBCondicion3, DateTime Fecha)
+        {
+            Int32 IBCondicion = 1;
+            Int32 mIdProvinciaRealIIBB = 0;
+
+            decimal mBaseMinimaParaPercepcionIVA = 0;
+            decimal mPorcentajePercepcionIVA = 0;
+            decimal mPercepcionIVA = 0;
+            decimal mAlicuota = 0;
+            decimal mAlicuota1 = 0;
+            decimal mAlicuota2 = 0;
+            decimal mAlicuota3 = 0;
+            decimal mAlicuotaDirecta = 0;
+            decimal mAlicuotaDirectaCapital = 0;
+            decimal mImporteTopeMinimoPercepcion = 0;
+            decimal mPercepcionIIBB1 = 0;
+            decimal mPercepcionIIBB2 = 0;
+            decimal mPercepcionIIBB3 = 0;
+
+            string mEsAgenteRetencionIVA = "NO";
+            string mGeneraImpuestos = "SI";
+            string mCodigoProvincia = "";
+            string mMultilateral = "";
+
+            DateTime mFechaVigencia = DateTime.Now;
+            DateTime mFechaInicioVigenciaIBDirecto = DateTime.Now;
+            DateTime mFechaFinVigenciaIBDirecto = DateTime.Now;
+            DateTime mFechaInicioVigenciaIBDirectoCapital = DateTime.Now;
+            DateTime mFechaFinVigenciaIBDirectoCapital = DateTime.Now;
+
+            var Cliente = db.Clientes.Where(p => p.IdCliente == IdCliente).FirstOrDefault();
+            if (Cliente != null)
+            {
+                mBaseMinimaParaPercepcionIVA = Cliente.BaseMinimaParaPercepcionIVA ?? 0;
+                mPorcentajePercepcionIVA = Cliente.PorcentajePercepcionIVA ?? 0;
+                mEsAgenteRetencionIVA = Cliente.EsAgenteRetencionIVA ?? "";
+
+                IBCondicion = Cliente.IBCondicion ?? 1;
+                mAlicuotaDirecta = Cliente.PorcentajeIBDirecto ?? 0;
+                mFechaInicioVigenciaIBDirecto = Cliente.FechaInicioVigenciaIBDirecto ?? DateTime.MinValue;
+                mFechaFinVigenciaIBDirecto = Cliente.FechaFinVigenciaIBDirecto ?? DateTime.MinValue;
+                mAlicuotaDirectaCapital = Cliente.PorcentajeIBDirectoCapital ?? 0;
+                mFechaInicioVigenciaIBDirectoCapital = Cliente.FechaInicioVigenciaIBDirectoCapital ?? DateTime.MinValue;
+                mFechaFinVigenciaIBDirectoCapital = Cliente.FechaFinVigenciaIBDirectoCapital ?? DateTime.MinValue;
+            };
+
+            var Monedas = db.Monedas.Where(p => p.IdMoneda == IdMoneda).FirstOrDefault();
+            if (Monedas != null) { mGeneraImpuestos = Monedas.GeneraImpuestos ?? "NO"; }
+
+            if (mGeneraImpuestos == "SI")
+            {
+                if (mEsAgenteRetencionIVA == "NO" && TotalGravado >= mBaseMinimaParaPercepcionIVA) { mPercepcionIVA = TotalGravado * mPorcentajePercepcionIVA / 100; }
+
+                var IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == IdIBCondicion1).FirstOrDefault();
+                if (IBCondiciones != null)
+                {
+                    mImporteTopeMinimoPercepcion = IBCondiciones.ImporteTopeMinimoPercepcion ?? 0;
+                    mIdProvinciaRealIIBB = IBCondiciones.IdProvinciaReal ?? 0;
+                    mFechaVigencia = IBCondiciones.FechaVigencia ?? DateTime.MinValue;
+
+                    var Provincia = db.Provincias.Where(p => p.IdProvincia == mIdProvinciaRealIIBB).FirstOrDefault();
+                    if (Provincia != null) { mCodigoProvincia = Provincia.InformacionAuxiliar ?? ""; }
+
+                    mAlicuota = 0;
+                    if (mCodigoProvincia == "902" && Fecha >= mFechaInicioVigenciaIBDirecto && Fecha <= mFechaFinVigenciaIBDirecto) { 
+                        mAlicuota = mAlicuotaDirecta;
+                    }
+                    else
+                    {
+                        if (mCodigoProvincia == "901" && Fecha >= mFechaInicioVigenciaIBDirectoCapital && Fecha <= mFechaFinVigenciaIBDirectoCapital) { 
+                            mAlicuota = mAlicuotaDirectaCapital;
+                        }
+                        else
+                        {
+                            if (TotalGravado > mImporteTopeMinimoPercepcion && Fecha > mFechaVigencia)
+                            {
+                                if (IdIBCondicion1 == 2)
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcionConvenio ?? 0;
+                                    mMultilateral = "SI";
+                                }
+                                else
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcion ?? 0;
+                                }
+                            }
+                        }
+                    }
+                    mPercepcionIIBB1 = Math.Round(TotalGravado * mAlicuota / 100, 2);
+                    mAlicuota1 = mAlicuota;
+                }
+
+                IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == IdIBCondicion2).FirstOrDefault();
+                if (IBCondiciones != null)
+                {
+                    mImporteTopeMinimoPercepcion = IBCondiciones.ImporteTopeMinimoPercepcion ?? 0;
+                    mIdProvinciaRealIIBB = IBCondiciones.IdProvinciaReal ?? 0;
+                    mFechaVigencia = IBCondiciones.FechaVigencia ?? DateTime.MinValue;
+
+                    var Provincia = db.Provincias.Where(p => p.IdProvincia == mIdProvinciaRealIIBB).FirstOrDefault();
+                    if (Provincia != null) { mCodigoProvincia = Provincia.InformacionAuxiliar ?? ""; }
+
+                    mAlicuota = 0;
+                    if (mCodigoProvincia == "902" && Fecha >= mFechaInicioVigenciaIBDirecto && Fecha <= mFechaFinVigenciaIBDirecto)
+                    {
+                        mAlicuota = mAlicuotaDirecta;
+                    }
+                    else
+                    {
+                        if (mCodigoProvincia == "901" && Fecha >= mFechaInicioVigenciaIBDirectoCapital && Fecha <= mFechaFinVigenciaIBDirectoCapital)
+                        {
+                            mAlicuota = mAlicuotaDirectaCapital;
+                        }
+                        else
+                        {
+                            if (TotalGravado > mImporteTopeMinimoPercepcion && Fecha > mFechaVigencia)
+                            {
+                                if (IdIBCondicion1 == 2)
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcionConvenio ?? 0;
+                                    mMultilateral = "SI";
+                                }
+                                else
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcion ?? 0;
+                                }
+                            }
+                        }
+                    }
+                    mPercepcionIIBB2 = Math.Round(TotalGravado * mAlicuota / 100, 2);
+                    mAlicuota2 = mAlicuota;
+                }
+
+                IBCondiciones = db.IBCondiciones.Where(p => p.IdIBCondicion == IdIBCondicion3).FirstOrDefault();
+                if (IBCondiciones != null)
+                {
+                    mImporteTopeMinimoPercepcion = IBCondiciones.ImporteTopeMinimoPercepcion ?? 0;
+                    mIdProvinciaRealIIBB = IBCondiciones.IdProvinciaReal ?? 0;
+                    mFechaVigencia = IBCondiciones.FechaVigencia ?? DateTime.MinValue;
+
+                    var Provincia = db.Provincias.Where(p => p.IdProvincia == mIdProvinciaRealIIBB).FirstOrDefault();
+                    if (Provincia != null) { mCodigoProvincia = Provincia.InformacionAuxiliar ?? ""; }
+
+                    mAlicuota = 0;
+                    if (mCodigoProvincia == "902" && Fecha >= mFechaInicioVigenciaIBDirecto && Fecha <= mFechaFinVigenciaIBDirecto)
+                    {
+                        mAlicuota = mAlicuotaDirecta;
+                    }
+                    else
+                    {
+                        if (mCodigoProvincia == "901" && Fecha >= mFechaInicioVigenciaIBDirectoCapital && Fecha <= mFechaFinVigenciaIBDirectoCapital)
+                        {
+                            mAlicuota = mAlicuotaDirectaCapital;
+                        }
+                        else
+                        {
+                            if (TotalGravado > mImporteTopeMinimoPercepcion && Fecha > mFechaVigencia)
+                            {
+                                if (IdIBCondicion1 == 2)
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcionConvenio ?? 0;
+                                    mMultilateral = "SI";
+                                }
+                                else
+                                {
+                                    mAlicuota = IBCondiciones.AlicuotaPercepcion ?? 0;
+                                }
+                            }
+                        }
+                    }
+                    mPercepcionIIBB3 = Math.Round(TotalGravado * mAlicuota / 100, 2);
+                    mAlicuota3 = mAlicuota;
+                }
+            }
+
+            DatosJson data = new DatosJson();
+            data.campo1 = mPercepcionIIBB1.ToString();
+            data.campo2 = mPercepcionIIBB2.ToString();
+            data.campo3 = mPercepcionIIBB3.ToString();
+            data.campo4 = mAlicuota1.ToString();
+            data.campo5 = mAlicuota2.ToString();
+            data.campo6 = mAlicuota3.ToString();
+            data.campo7 = mPercepcionIVA.ToString();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
+        }
+
+        class DatosJson
+        {
+            public string campo1 { get; set; }
+            public string campo2 { get; set; }
+            public string campo3 { get; set; }
+            public string campo4 { get; set; }
+            public string campo5 { get; set; }
+            public string campo6 { get; set; }
+            public string campo7 { get; set; }
+            public string campo8 { get; set; }
+            public string campo9 { get; set; }
+            public string campo10 { get; set; }
         }
 
         protected override void Dispose(bool disposing)

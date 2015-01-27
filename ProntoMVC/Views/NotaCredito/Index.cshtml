@@ -1,138 +1,24 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.NotasCredito>
 @{
-    ViewBag.Title = "Pedidos";
+    ViewBag.Title = "Nota de credito";
 }
-<div>
-    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div>
-    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
 
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4;
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
-    }
-</style>
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
 <br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-prepend input-append">
-                @* <div class="btn-group ">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                En todo <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu">
-                                Requerimientos
-                            </div>
-                            <ul class="dropdown-menu">
-                                Número
-                            </ul>
-                        </div>*@
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
-                @*<div>
-                            <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-                        <div>
-                            <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-                        <div>
-                            <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>*@
-                <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                    avanzada</button>
-            </div>
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nueva Nota de Credito</button>
         </div>
-        @*   <div class="btn-group  pull-right ">
-                    <button onclick="  " class="btn">
-                        <
-                    </button>
-                    <button onclick="  " class="btn ">
-                        >
-                    </button>
-                </div>*@
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-        {
-                                               
-            <button onclick="  " class="btn span1">
-                Excel
-            </button>
-        }
     </div>
     <br />
-    <br />
-    <script>
-
-
-
-        $("#BuscadorListado").change(function () {
-
-
-
-            var grid = jQuery("#Lista");
-            var postdata = grid.jqGrid('getGridParam', 'postData');
-            jQuery.extend(postdata,
-               { filters: '',
-                   searchField: 'NumeroPedido',
-                   searchOper: 'eq',
-                   searchString: parseInt($("#BuscadorListado").val(), 10) || 0
-               });
-            grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1}]);
-
-
-            //<select><option value="NumeroRequerimiento" selected="selected">N°</option><option value="Detalle">Detalle</option><option value="NumeroObra">Obra</option><option value="Sector">Sector</option><option value="Observaciones">Observaciones</option><option value="LugarEntrega">Lugar de necesidad</option></select>
-        });
-    </script>
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
 </div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
-</div>
-@*<p>@Html.ActionLink("Nuevo Pedido", "Edit", new { id = -1 }, null)</p> *@
+
 <script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
@@ -143,68 +29,46 @@ If you want additionally remove vertical border between the cells in the grid yo
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Pedidos", "Pedido")',
+            url: '@Url.Action("TT", "NotaCredito")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdPedido', 'Numero', 'Sub', 'Fecha', 'Salida',
-            'Cumplido', 'RMs', 'Obras', 'Proveedor', 'Total',
-            'Bonif.', 'IVA', 'Moneda', 'Comprador', 'Aprobo',
-            'Items', 'idaux', 'Comparativa', 'Tipo Compra', 'Observaciones',
-            'Detalle cond. compra', 'Pedido Exterior', 'IdPedidoAbierto', 'Licitacion', 'Impresa',
-            'Anuló', 'Fecha Anulacion', 'Motivo Anulacion', 'Impuestos Internos', 'Equipos',
-            'Circuito Firmas Completo', '', '', '', 'Web'
-
-            ],
+            colNames: ['', '', 'IdNotaCredito', 'Tipo', 'Letra', 'Punto venta', 'Numero', 'Fecha', 'Anulada', 'Codigo cliente', 'Cliente', 'Condicion iva', 'CUIT', 'Total gravado', 'Total iva', 'Total IIBB',
+                       'Total percepcion iva', 'Otras Percepciones', 'Importe total', 'Mon.', 'Obra', 'Vendedor', 'Provincia destino', 'Fecha anulacion', 'Usuario anulo', 'Fecha ingreso', 'Usuario ingreso',
+                       'CAE', 'Rechazo CAE', 'Fecha Vto. o Rech. CAE', 'Observaciones'],
             colModel: [
-
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: '', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: '', index: '', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-
-
-                    ],
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                        { name: 'IdNotaCredito', index: 'IdNotaCredito', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroNotaCredito', index: 'NumeroNotaCredito', align: 'right', width: 80, editable: false, hidden: false },
+                        { name: 'FechaNotaCredito', index: 'FechaNotaCredito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIva', index: 'TotalIva', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIIBB', index: 'TotalIIBB', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalPercepcionIVA', index: 'TotalPercepcionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalOtrasPercepciones', index: 'TotalOtrasPercepciones', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'MonedaAbreviatura', index: 'MonedaAbreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Obra', index: 'Obra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ProvinciaDestino', index: 'ProvinciaDestino', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'UsuarioIngreso', index: 'UsuarioIngreso', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'CAE', index: 'CAE', align: 'left', width: 200, editable: false, hidden: false },
+                        { name: 'RechazoCAE', index: 'RechazoCAE', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'FechaVencimientoORechazoCAE', index: 'FechaVencimientoORechazoCAE', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
+            ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
                     if (typeof lastSelectedId !== "undefined") {
@@ -213,45 +77,31 @@ If you want additionally remove vertical border between the cells in the grid yo
                     lastSelectedId = id;
                 }
             },
-            ondblClickRow: function (idrow) {
-                window.location.href = ROOT + 'Pedido/Edit/' + idrow;
-
-
-                // $("#edtData").click();
-
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){ 
-                //                    jQuery('#Lista').restoreRow(lastSel); 
-                //                    lastSel=id; 
-                //                }
-                //                jQuery('#Lista').editRow(id, true); 
-                //   
-
-            },
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 100],
-            sortname: 'NumeroPedido',
-            sortorder: 'desc',
+            rowList: [10, 20, 50, 20000],
+            sortname: 'Numero',
+            sortorder: 'asc',
             viewrecords: true,
-
-
-            ///////////////////////////////
-            //width: 'auto', // 'auto',
+            width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
-
-            height: $(window).height() - ALTOLISTADO, // '100%'
+            height: '100%',
             altRows: false,
-            footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>NOTAS DE CREDITO</b>'
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
         //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
     });
 
 </script>

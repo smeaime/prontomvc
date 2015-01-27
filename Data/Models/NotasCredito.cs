@@ -14,6 +14,14 @@ namespace ProntoMVC.Data.Models
     
     public partial class NotasCredito
     {
+        public NotasCredito()
+        {
+            this.DetalleNotasCreditoes = new HashSet<DetalleNotasCredito>();
+            this.DetalleNotasCreditoImputaciones = new HashSet<DetalleNotasCreditoImputacione>();
+            this.DetalleNotasCreditoOrdenesCompras = new HashSet<DetalleNotasCreditoOrdenesCompra>();
+            this.DetalleNotasCreditoProvincias = new HashSet<DetalleNotasCreditoProvincia>();
+        }
+    
         public int IdNotaCredito { get; set; }
         public Nullable<int> NumeroNotaCredito { get; set; }
         public string TipoABC { get; set; }
@@ -84,5 +92,9 @@ namespace ProntoMVC.Data.Models
         public virtual Cliente Cliente { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual ICollection<DetalleNotasCredito> DetalleNotasCreditoes { get; set; }
+        public virtual ICollection<DetalleNotasCreditoImputacione> DetalleNotasCreditoImputaciones { get; set; }
+        public virtual ICollection<DetalleNotasCreditoOrdenesCompra> DetalleNotasCreditoOrdenesCompras { get; set; }
+        public virtual ICollection<DetalleNotasCreditoProvincia> DetalleNotasCreditoProvincias { get; set; }
     }
 }

@@ -34,6 +34,8 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
+        // /////////////////////////////////////////// ACREEDORES //////////////////////////////////////////////
+
         public virtual ActionResult CuentaCorrienteAcreedorPendiente(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
@@ -277,6 +279,122 @@ namespace ProntoMVC.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+
+        // /////////////////////////////////////////// DEUDORES //////////////////////////////////////////////
+
+        public virtual ActionResult CuentaCorrienteDeudoresPendientePorCliente(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, int? IdCliente)
+        {
+            string campo = String.Empty;
+            int pageSize = rows ?? 50;
+            int currentPage = page ?? 1;
+            IdCliente = IdCliente ?? -1;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var pendiente = "S";
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesD_TXPorTrs", IdCliente, -1, DateTime.Now, DateTime.Now, -1, pendiente);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            if (_search)
+            {
+                switch (searchField.ToLower())
+                {
+                    case "numero":
+                        campo = String.Format("{0} = {1}", searchField, searchString);
+                        break;
+                    case "fechaingreso":
+                        //No anda
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                    default:
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                }
+            }
+            else
+            {
+                campo = "true";
+            }
+
+            int totalRecords = Entidad.Count();  
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdCtaCte = a[0],
+                            IdImputacion = (a[1].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[1].NullSafeToString()),
+                            Tipo = a[2],
+                            IdTipoComp = a[3],
+                            IdComprobante = a[4],
+                            Numero = a[5],
+                            Fecha = a[6],
+                            FechaVencimiento = a[7],
+                            ImporteTotal = a[8],
+                            Saldo = a[9],
+                            SaldoTrs = a[10],
+                            Observaciones = a[11],
+                            Cabeza = a[12],
+                            IdImputacion2 = a[13],
+                            Moneda = a[18]
+                        }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCtaCte.ToString(),
+                            cell = new string[] { 
+                                string.Empty,
+                                a.IdCtaCte.ToString(),
+                                a.IdImputacion.ToString(),
+                                a.IdTipoComp.ToString(),
+                                a.IdComprobante.ToString(),
+                                a.Cabeza.ToString(),
+                                a.Tipo.ToString(),
+                                a.Numero.ToString(),
+                                a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.FechaVencimiento == null || a.FechaVencimiento.ToString() == "" ? "" : Convert.ToDateTime(a.FechaVencimiento.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.Moneda.ToString(),
+                                a.ImporteTotal.ToString(),
+                                a.Saldo.ToString(),
+                                a.SaldoTrs.ToString(),
+                                a.Observaciones.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult TraerUnoDeudor(int IdCtaCte)
+        {
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesD_TX_PorIdConDatos", IdCtaCte);
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdCtaCte = a["IdCtaCte"],
+                            IdImputacion = (a["IdImputacion"].NullSafeToString() == "") ? 0 : Convert.ToInt32(a["IdImputacion"].NullSafeToString()),
+                            Tipo = a["Tipo"],
+                            Numero = a["Numero"],
+                            Fecha = a["Fecha"],
+                            ImporteOriginal = a["ImporteTotal"],
+                            Saldo = a["Saldo"],
+                            FechaVencimiento = a["FechaVencimiento"],
+                            CotizacionMoneda = a["CotizacionMoneda"],
+                            IdTipoComp = a["IdTipoComp"],
+                            IdComprobante = a["IdComprobante"],
+                            Importe = a["Saldo"]
+                        }).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        
         [HttpPost]
         public void EditGridData(int? IdRequerimiento, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
