@@ -77,7 +77,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(Pais Pais)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Paises)) throw new Exception("No tenés permisos");
 
             try
             {

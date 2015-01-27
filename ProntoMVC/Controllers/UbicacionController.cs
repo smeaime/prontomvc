@@ -99,7 +99,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(ProntoMVC.Data.Models.Ubicacion Ubicacion)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Ubicaciones)) throw new Exception("No tenés permisos");
 
             try
             {

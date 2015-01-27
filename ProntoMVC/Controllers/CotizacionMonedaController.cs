@@ -29,7 +29,7 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Cotizaciones)) throw new Exception("No tenés permisos");
 
             return View();
         }
@@ -37,7 +37,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Cotizacione Cotizacion)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Cotizaciones)) throw new Exception("No tenés permisos");
 
             try
             {

@@ -62,7 +62,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Presupuesto presupuesto)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
@@ -227,7 +227,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -278,7 +278,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
 
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Facturas)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdPresupuesto <= 0)
@@ -326,7 +326,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditExterno(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
 

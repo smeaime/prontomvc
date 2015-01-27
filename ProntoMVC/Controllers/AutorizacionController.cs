@@ -55,7 +55,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.MnuSeg2)) throw new Exception("No tenés permisos");
 
 
             //string SC = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString());

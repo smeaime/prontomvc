@@ -310,7 +310,7 @@ namespace ProntoMVC.Controllers
                                            string FechaInicial, string FechaFinal, string IdObra)
         {
 
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Cuentas)) throw new Exception("No tenés permisos");
 
 
             string campo = String.Empty;
@@ -478,7 +478,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult IndexFF()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Cuentas)) throw new Exception("No tenés permisos");
 
             //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
             //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
