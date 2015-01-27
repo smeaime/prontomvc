@@ -14,6 +14,12 @@ namespace ProntoMVC.Data.Models
     
     public partial class NotasDebito
     {
+        public NotasDebito()
+        {
+            this.DetalleNotasDebitoes = new HashSet<DetalleNotasDebito>();
+            this.DetalleNotasDebitoProvincias = new HashSet<DetalleNotasDebitoProvincia>();
+        }
+    
         public int IdNotaDebito { get; set; }
         public Nullable<int> NumeroNotaDebito { get; set; }
         public string TipoABC { get; set; }
@@ -76,5 +82,7 @@ namespace ProntoMVC.Data.Models
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual ICollection<DetalleNotasDebito> DetalleNotasDebitoes { get; set; }
+        public virtual ICollection<DetalleNotasDebitoProvincia> DetalleNotasDebitoProvincias { get; set; }
     }
 }

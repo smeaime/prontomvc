@@ -1,10 +1,74 @@
-/****** Object:  StoredProcedure [dbo].[Tree_TX_Generar]    Script Date: 01/27/2015 17:00:13 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+--use DemoProntovarchar(5
+
+
+--Mariano tenes que cambiar el SP Tree_Generar y en la creacion del #Auxiliar0
+--agrandar el campo Clave VARCHAR(100) (originalmente 50),  
+
+--y en la tabal Tree
+--agrandar los campos 
+-- IdItem VARCHAR(30),  
+-- Clave VARCHAR(100),  
+--Yo ya lo tengo arreglado pero documentalo vos
+--Saludos
+
+--Si cambias eso hay que cambiar tambien el largo de Nodo en EmpleadosAceesos
+
+
+
+--ALTER TABLE empleadosaccesos ALTER COLUMN Nodo varchar(100) NULL
+
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Tree]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+	drop table [dbo].[Tree]
 GO
 
-ALTER Procedure [dbo].[Tree_TX_Generar]  
+CREATE TABLE [dbo].[Tree] (
+	[IdItem] [varchar] (30) COLLATE Modern_Spanish_CI_AS NOT NULL ,
+	[Clave] [varchar] (100) COLLATE Modern_Spanish_CI_AS NULL ,
+	[Descripcion] [varchar] (100) COLLATE Modern_Spanish_CI_AS NULL ,
+	[ParentId] [varchar] (30) COLLATE Modern_Spanish_CI_AS NULL ,
+	[Orden] [int] NULL ,
+	[Parametros] [varchar] (50) COLLATE Modern_Spanish_CI_AS NULL ,
+	[Link] [varchar] (200) COLLATE Modern_Spanish_CI_AS NULL ,
+	[Imagen] [varchar] (100) COLLATE Modern_Spanish_CI_AS NULL ,
+	[EsPadre] [varchar] (2) COLLATE Modern_Spanish_CI_AS NULL ,
+	[GrupoMenu] [varchar] (30) COLLATE Modern_Spanish_CI_AS NULL 
+) ON [PRIMARY]
+GO
+
+
+
+
+ALTER TABLE [dbo].[Tree] WITH NOCHECK ADD 
+	CONSTRAINT [PK_Tree] PRIMARY KEY  CLUSTERED 
+	(
+		[IdItem]
+	)  ON [PRIMARY] 
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Tree_TX_Arbol]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure [dbo].[Tree_TX_Arbol]
+GO
+
+CREATE Procedure [dbo].[Tree_TX_Arbol]
+@GrupoMenu varchar(30) = Null
+AS 
+SET @GrupoMenu=IsNull(@GrupoMenu,'Principal')
+SELECT *
+FROM Tree
+WHERE GrupoMenu=@GrupoMenu   --poner indice acá
+ORDER BY IdItem, Orden
+GO
+
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[Tree_TX_Generar]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	drop procedure [dbo].[Tree_TX_Generar]
+GO
+
+CREATE Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
   
@@ -86,13 +150,13 @@ INSERT INTO #Auxiliar1
 --INSERT INTO #Auxiliar0 Select '01','Ppal','PRINCIPAL',Null,1,Null,Null,'Ppal','SI','Principal'    
   
 INSERT INTO #Auxiliar0 Select '01-01','Tablas Generales','Generales','01',1,Null,Null,'TablasG','SI','Principal'  
---INSERT INTO #Auxiliar0 Select '01-01-01','ArchivosATransmitirDestinos','Novedades','01-01',1,Null,Null,'ArchivosATransmitirDestinos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-01-02','Localidades','Localidades','01-01',2,Null,'<a href="/' + @Directorio + '/Localidad/Index">Localidades</a>','Localidades','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-01','ArchivosATransmitirDestinos','Novedades','01-01',1,Null,Null,'ArchivosATransmitirDestinos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-02','Localidades','Localidades','01-01',2,Null,Null,'Localidades','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-03','Monedas','Monedas','01-01',3,Null,'<a href="/' + @Directorio + '/Moneda/Index">Monedas</a>','Monedas','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-01-04','Paises','Paises','01-01',4,Null,'<a href="/' + @Directorio + '/Pais/Index">Paises</a>','Paises','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-01-05','Provincias','Provincias','01-01',5,Null,'<a href="/' + @Directorio + '/Provincia/Index">Provincias</a>','Provincias','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-04','Paises','Paises','01-01',4,Null,Null,'Paises','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-05','Provincias','Provincias','01-01',5,Null,Null,'Provincias','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-06','TiposComprobante','Tipos de comprobante','01-01',6,Null,Null,'TiposComprobante','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-01-07','Traducciones','Traducciones','01-01',7,Null,Null,'Traducciones','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-07','Traducciones','Traducciones','01-01',7,Null,Null,'Traducciones','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-08','Transportistas','Transportistas','01-01',8,Null,'<a href="/' + @Directorio + '/Transportista/Index">Transportistas</a>','Transportistas','NO','Principal'  
   
 --INSERT INTO #Auxiliar0 Select '01-02','Articulos','Artículos','01',1,Null,'<a href="/' + @directorio + '/Articulo/Index">Artículos</a>','Articulos','SI','Principal'  
@@ -110,60 +174,60 @@ If Len(@BasePRONTOMANT)>0
 INSERT INTO #Auxiliar0 Select '01-02-08','DefinicionesArt','Máscaras','01-02',8,Null,Null,'DefinicionesArt','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-08-01','DefinicionesArtTodos','Todas','01-02-08',1,Null,Null,'DefinicionesArt','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-08-02','DefinicionesArtRubros','Por rubros','01-02-08',2,Null,Null,'DefinicionesArt','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-09','Rubros','Rubros','01-02',9,Null,'<a href="/' + @Directorio + '/Rubro/Index">Rubros</a>','Rubros','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-10','Subrubros','Subrubros','01-02',10,Null,'<a href="/' + @Directorio + '/Subrubro/Index">Subrubros</a>','Subrubros','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-09','Rubros','Rubros','01-02',9,Null,Null,'Rubros','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-10','Subrubros','Subrubros','01-02',10,Null,Null,'Subrubros','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-11','Conjuntos','Conjuntos','01-02',11,Null,Null,'Conjuntos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-11-01','ConjuntosTodos','Todos','01-02-11',1,Null,Null,'Conjuntos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-11-02','ConjuntosFinales','Finales','01-02-11',2,Null,Null,'Conjuntos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-11-03','ConjuntosDependientes','Subconjuntos','01-02-11',3,Null,Null,'Conjuntos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-12','ItemsPopUpMateriales','Menu desplegable','01-02',12,Null,Null,'ItemsPopUpMateriales','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-13','Depositos','Depositos','01-02',13,Null,'<a href="/' + @Directorio + '/Deposito/Index">Depositos</a>','Depositos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-14','Ubicaciones','Ubicaciones','01-02',14,Null,'<a href="/' + @Directorio + '/Ubicacion/Index">Ubicaciones</a>','Ubicaciones','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-13','Depositos','Depositos','01-02',13,Null,Null,'Depositos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-14','Ubicaciones','Ubicaciones','01-02',14,Null,Null,'Ubicaciones','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15','Tablas relacionadas','Tablas relacionadas','01-02',15,Null,Null,'TablasG','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-01','Acabados','Acabados','01-02-15',1,Null,Null,'Acabados','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-02','AlimentacionesElectricas','Alimentaciones Electricas','01-02-15',2,Null,Null,'AlimentacionesElectricas','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-03','AniosNorma','Años y Adenda de Normas','01-02-15',3,Null,Null,'AniosNorma','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-04','Biselados','Biselados','01-02-15',4,Null,Null,'Biselados','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-05','Calidades','Calidades','01-02-15',5,Null,Null,'Calidades','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-06','CalidadesClad','Calidades clad','01-02-15',6,Null,Null,'CalidadesClad','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-07','Codigos','Codigos','01-02-15',7,Null,Null,'Codigos','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-08','CodigosUniversales','Codigos Universales','01-02-15',8,Null,Null,'CodigosUniversales','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-15-09','Colores','Colores','01-02-15',9,Null,'<a href="/' + @Directorio + '/Color/Index">Colores</a>','Colores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-06','CalidadesClad','Calidades clad','01-02-15',6,Null,Null,'CalidadesClad','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-07','Codigos','Codigos','01-02-15',7,Null,Null,'Codigos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-08','CodigosUniversales','Codigos Universales','01-02-15',8,Null,Null,'CodigosUniversales','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-09','Colores','Colores','01-02-15',9,Null,Null,'Colores','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-10','ControlesCalidad','Controles de Calidad','01-02-15',10,Null,Null,'ControlesCalidad','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-11','Densidades','Densidades','01-02-15',11,Null,Null,'Densidades','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-12','Formas','Formas','01-02-15',12,Null,Null,'Formas','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-13','Grados','Grados','01-02-15',13,Null,Null,'Grados','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-15-14','Marcas','Marcas','01-02-15',14,Null,'<a href="/' + @Directorio + '/Marca/Index">Marcas</a>','Marcas','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-15-15','Materiales','Materiales','01-02-15',15,Null,'<a href="/' + @Directorio + '/Material/Index">Materiales</a>','Materiales','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-15-16','Modelos','Modelos','01-02-15',16,Null,'<a href="/' + @Directorio + '/Modelo/Index">Modelos</a>','Modelos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-14','Marcas','Marcas','01-02-15',14,Null,Null,'Marcas','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-15','Materiales','Materiales','01-02-15',15,Null,Null,'Materiales','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-16','Modelos','Modelos','01-02-15',16,Null,Null,'Modelos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-17','Normas','Normas','01-02-15',17,Null,Null,'Normas','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-18','Rangos','Rangos','01-02-15',18,Null,Null,'Rangos','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-19','Relaciones','Relaciones','01-02-15',19,Null,Null,'Relaciones','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-20','Schedulers','Schedulers','01-02-15',20,Null,Null,'Schedulers','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-21','Series','Series','01-02-15',21,Null,Null,'Series','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-18','Rangos','Rangos','01-02-15',18,Null,Null,'Rangos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-19','Relaciones','Relaciones','01-02-15',19,Null,Null,'Relaciones','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-20','Schedulers','Schedulers','01-02-15',20,Null,Null,'Schedulers','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-21','Series','Series','01-02-15',21,Null,Null,'Series','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-22','Tipos','Tipos genericos','01-02-15',22,Null,Null,'Tipos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-23','TiposArticulos','Tipos de articulo','01-02-15',23,Null,Null,'Tipos','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-15-24','TiposRosca','Tipos 2','01-02-15',24,Null,Null,'TiposRosca','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-24','TiposRosca','Tipos 2','01-02-15',24,Null,Null,'TiposRosca','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-15-25','TTermicos','Tratamientos Termicos','01-02-15',25,Null,Null,'TTermicos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-02-15-26','Unidades','Unidades','01-02-15',26,Null,'<a href="/' + @Directorio + '/Unidad/Index">Unidades</a>','Unidades','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-15-26','Unidades','Unidades','01-02-15',26,Null,Null,'Unidades','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-03','Personal','Personal','01',1,Null,Null,'Empleados','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-03-01','Empleados','Personal','01-03',1,Null,Null,'Empleados','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-03-01-01','Empleados1','De Obra','01-03-01',1,Null,Null,'Empleados','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-03-01-02','Empleados2','Usuarios','01-03-01',2,Null,Null,'Empleados','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-03-01-03','Empleados3','Todos','01-03-01',3,Null,'<a href="/' + @Directorio + '/Empleado/Index">Empleados</a>','Empleados','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-03-02','Vendedores','Vendedores','01-03',2,Null,'<a href="/' + @Directorio + '/Color/Index">Colores</a>','Vendedores','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-03-03','Cargos','Cargos','01-03',3,Null,'<a href="/' + @Directorio + '/Cargo/Index">Cargos</a>','Cargos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-03-04','Sectores','Sectores','01-03',4,Null,'<a href="/' + @Directorio + '/Sector/Index">Sectores</a>','Sectores','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-03-05','AnticiposAlPersonal','Anticipos','01-03',5,Null,Null,'AnticiposAlPersonal','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-03-06','AnticiposAlPersonalSyJ','Anticipos via SyJ)','01-03',6,Null,Null,'AnticiposAlPersonal','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-03-02','Vendedores','Vendedores','01-03',2,Null,Null,'Vendedores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-03-03','Cargos','Cargos','01-03',3,Null,Null,'Cargos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-03-04','Sectores','Sectores','01-03',4,Null,Null,'Sectores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-03-05','AnticiposAlPersonal','Anticipos','01-03',5,Null,Null,'AnticiposAlPersonal','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-03-06','AnticiposAlPersonalSyJ','Anticipos via SyJ)','01-03',6,Null,Null,'AnticiposAlPersonal','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-04','Obras','Obras','01',1,Null,Null,'Obras','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-04-01','UnidadesOperativas','Unidades operativas','01-04',1,Null,'<a href="/' + @Directorio + '/UnidadesOperativa/Index">Unidades operativas</a>','UnidadesOperativas','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-04-02','GruposObras','Grupos de obras','01-04',2,Null,'<a href="/' + @Directorio + '/GruposObra/Index">Grupos de obras</a>','GruposObras','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-04-03','Obras1','Obras','01-04',3,Null,'<a href="/' + @Directorio + '/Obra/Index">Obras</a>','Obras','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-04-04','Planos','Planos','01-04',4,Null,Null,'Planos','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-04-05','Equipos','Equipos','01-04',5,Null,Null,'Equipos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-04-01','UnidadesOperativas','Unidades operativas','01-04',1,Null,Null,'UnidadesOperativas','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-04-02','GruposObras','Grupos de obras','01-04',2,Null,Null,'GruposObras','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-04-03','Obras1','Obras','01-04',3,Null,Null,'Obras','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-04-04','Planos','Planos','01-04',4,Null,Null,'Planos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-04-05','Equipos','Equipos','01-04',5,Null,Null,'Equipos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-04-06','LMateriales','Lista de Materiales','01-04',6,Null,Null,'LMateriales','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-04-07','PresupuestoObrasRubros','Rubros para obras','01-04',7,Null,Null,'PresupuestoObrasRubros','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-04-08','PresupuestoObrasGruposMateriales','Grupos de materiales','01-04',8,Null,Null,'PresupuestoObrasGruposMateriales','NO','Principal'  
@@ -219,7 +283,7 @@ INSERT INTO #Auxiliar0 Select '01-07-09-02','RecepcionesBalanza','Recepciones','
 INSERT INTO #Auxiliar0 Select '01-07-09-03','SalidasBalanza','Salidas','01-07-09',3,Null,Null,'SalidaMateriales','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-08','CtrlTransp','Transportes','01',1,Null,Null,'CtrlTransp','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-08-01','Transportistas1','Transportistas','01-08',1,Null,'<a href="/' + @Directorio + '/Transportista/Index">Transportistas</a>','Transportistas','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-08-01','Transportistas1','Transportistas','01-08',1,Null,Null,'Transportistas','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-08-02','Choferes','Choferes','01-08',2,Null,Null,'Choferes','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-08-03','Fletes','Unidades','01-08',3,Null,Null,'Fletes','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-08-04','TarifasFletes','Tarifas fletes','01-08',4,Null,Null,'TarifasFletes','NO','Principal'  
@@ -234,13 +298,13 @@ INSERT INTO #Auxiliar0 Select '01-09','Cotizaciones','Cotizaciones','01',1,Null,
     
 INSERT INTO #Auxiliar0 Select '01-10','Comercial','Comercial','01',1,Null,Null,'Comercial','SI','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-01','Clientes','Clientes','01-10',1,Null,Null,'Clientes','SI','Principal'    
---INSERT INTO #Auxiliar0 Select '01-10-01-01','ClientesResumen','Resumido','01-10-01',1,Null,'<a href="/' + @Directorio + '/Cliente/Index">Todos</a>','Clientes','NO','Principal'    
-INSERT INTO #Auxiliar0 Select '01-10-01-02','ClientesDetalle','Detallado','01-10-01',2,Null,'<a href="/' + @Directorio + '/Cliente/Index">Detallado</a>','Clientes','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-10-01-01','ClientesResumen','Resumido','01-10-01',1,Null,'<a href="/' + @Directorio + '/Cliente/Index">Todos</a>','Clientes','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-10-01-02','ClientesDetalle','Detallado','01-10-01',2,Null,Null,'Clientes','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-01-03','ClientesAConfirmar','A Confirmar','01-10-01',3,Null,Null,'Clientes','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-02','PuntosVenta','Puntos de Venta','01-10',2,Null,'<a href="/' + @Directorio + '/PuntoVenta/Index">Puntos de venta</a>','PuntosVenta','NO','Principal'    
-INSERT INTO #Auxiliar0 Select '01-10-03','Ganancias1','Ganancias','01-10',3,Null,'<a href="/' + @Directorio + '/Ganancia/Index">Tabla de ganancias</a>','Ganancias','NO','Principal'    
-INSERT INTO #Auxiliar0 Select '01-10-04','IGCondiciones1','Categorías ganancias','01-10',4,Null,'<a href="/' + @Directorio + '/TipoRetencionGanancia/Index">Categ. de ganancias</a>','IGCondiciones','NO','Principal'    
-INSERT INTO #Auxiliar0 Select '01-10-05','IBCondiciones1','Ingresos brutos','01-10',5,Null,'<a href="/' + @Directorio + '/IBCondicion/Index">Ingresos brutos</a>','IBCondiciones','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-10-03','Ganancias1','Ganancias','01-10',3,Null,'<a href="/' + @Directorio + '/Ganancia/Index">Ganancias</a>','Ganancias','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-10-04','IGCondiciones1','Categorías ganancias','01-10',4,Null,'<a href="/' + @Directorio + '/TipoRetencionGanancia/Index">Cat. de ganancias</a>','IGCondiciones','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-10-05','IBCondiciones1','Ingresos brutos','01-10',5,Null,'<a href="/' + @Directorio + '/IngresoBruto/Index">Ingresos brutos</a>','IBCondiciones','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-06','CondicionesCompra1','Condiciones de venta','01-10',6,Null,'<a href="/' + @Directorio + '/CondicionVenta/Index">Condiciones de venta</a>','CondicionesCompra','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-07','ListasPrecios','Listas de precios','01-10',7,Null,Null,'ListasPrecios','SI','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-07-01','ListasPreciosDefinicion','Definicion de listas de precios','01-10-07',1,Null,'<a href="/' + @Directorio + '/ListaPrecio/Index">Todos</a>','ListasPrecios','NO','Principal'    
@@ -257,6 +321,11 @@ INSERT INTO #Auxiliar0 Select '01-10-11-01','FacturasAgrupadas','Por Períodos','
 --INSERT INTO #Auxiliar0 Select '01-10-11-01-00','FacturasAgrupadas','factura dummy','01-10-11-01',1,Null,Null,'factura dummy','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-11-02','FacturasTodas','Todas','01-10-11',2,Null,'<a href="/' + @directorio + '/Factura/Index">Todas</a>','Facturas','NO','Principal'  
   
+/*  
+creo que no le da bola a que comentes con --!!!!!!!  
+*/  
+  
+  
 INSERT INTO #Auxiliar0 Select '01-10-12','FacturasContado','Facturas contado','01-10',12,Null,Null,'Facturas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-12-01','FacturasContadoAgrupadas','Por Períodos','01-10-12',1,Null,Null,'Facturas','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-12-02','FacturasContadoTodas','Todas','01-10-12',2,Null,Null,'Facturas','NO','Principal'  
@@ -267,14 +336,12 @@ INSERT INTO #Auxiliar0 Select '01-10-13-02','DevolucionesTodas','Devoluciones (T
 INSERT INTO #Auxiliar0 Select '01-10-14','Recibos','Recibos','01-10',14,Null,Null,'Recibos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-14-01','RecibosAgrupados','Recibos (por períodos)','01-10-14',1,Null,Null,'Recibos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-14-02','RecibosTodos','Recibos (Todos)','01-10-14',2,Null,'<a href="/' + @directorio + '/Recibo/Index">Recibos</a>','Recibos','NO','Principal'  
-
 INSERT INTO #Auxiliar0 Select '01-10-15','NotasDebito','Notas de Debito','01-10',15,Null,Null,'NotasDebito','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-15-01','NotasDebitoAgrupadas','Por Períodos','01-10-15',1,Null,Null,'NotasDebito','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-15-02','NotasDebitoTodas','Todas','01-10-15',2,Null,'<a href="/' + @directorio + '/NotaDebito/Index">Todas</a>','NotasDebito','NO','Principal'  
-
+INSERT INTO #Auxiliar0 Select '01-10-15-01','NotasDebitoAgrupadas','Notas de Debito (por períodos)','01-10-15',1,Null,Null,'NotasDebito','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-10-15-02','NotasDebitoTodas','Notas de Debito (Todas)','01-10-15',2,Null,Null,'NotasDebito','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-16','NotasCredito','Notas de Credito','01-10',16,Null,Null,'NotasCredito','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-16-01','NotasCreditoAgrupadas','Notas de Credito (por períodos)','01-10-16',1,Null,Null,'NotasCredito','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-16-02','NotasCreditoTodas','Todas','01-10-16',2,Null,'<a href="/' + @directorio + '/NotaCredito/Index">Todas</a>','NotasCredito','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-10-16-02','NotasCreditoTodas','Notas de Credito (Todas)','01-10-16',2,Null,Null,'NotasCredito','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-17','DiferenciasCambio_C','Difer. de cambio (cobranzas)','01-10',17,Null,Null,'DiferenciasCambio_C','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-17-01','DiferenciasCambio_CP','Pendientes','01-10-17',1,Null,Null,'DiferenciasCambio_C','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-17-02','DiferenciasCambio_CG','Generadas - Anuladas','01-10-17',2,Null,Null,'DiferenciasCambio_C','NO','Principal'  
@@ -287,21 +354,21 @@ INSERT INTO #Auxiliar0 Select '01-10-19','CtasCtesD','Resumen Cta. Cte.','01-10'
     
 INSERT INTO #Auxiliar0 Select '01-11','Compras','Compras','01',1,Null,Null,'Compras','SI','Principal'    
 INSERT INTO #Auxiliar0 Select '01-11-01','Proveedores','Proveedores','01-11',1,Null,Null,'Proveedores','SI','Principal'  
---INSERT INTO #Auxiliar0 Select '01-11-01-01','ProveedoresResumen','Resumido','01-11-01',1,Null,Null,'Proveedores','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-01-02','ProveedoresDetalle','Detallado','01-11-01',2,Null,'<a href="/' + @Directorio + '/Proveedor/Index">Detallado</a>','Proveedores','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-01-03','ProveedoresEventuales','Eventuales','01-11-01',3,Null,'<a href="/' + @Directorio + '/Proveedor/IndexEventuales">Eventuales</a>','Proveedores','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-01-04','ProveedoresAConfirmar','A Confirmar','01-11-01',4,Null,'<a href="/' + @Directorio + '/Proveedor/IndexAConfirmar">A Confirmar</a>','Proveedores','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-02','Ganancias2','Tabla de ganancias','01-11',2,Null,'<a href="/' + @Directorio + '/Ganancia/Index">Tabla de ganancias</a>','Ganancias','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-03','IGCondiciones2','Categ. de ganancias','01-11',3,Null,'<a href="/' + @Directorio + '/TipoRetencionGanancia/Index">Categ. de ganancias</a>','IGCondiciones','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-04','IBCondiciones2','Categ. de ing. brutos','01-11',4,Null,'<a href="/' + @Directorio + '/IBCondicion/Index">Ingresos brutos</a>','IBCondiciones','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-05','ImpuestosDirectos','Otros impuestos directos','01-11',5,Null,'<a href="/' + @Directorio + '/ImpuestosDirecto/Index">Otros impuestos directos</a>','ImpuestosDirectos','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-06','CondicionesCompra2','Condiciones de compra','01-11',6,Null,'<a href="/' + @Directorio + '/CondicionVenta/Index">Condiciones de compra</a>','CondicionesCompra','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-01-01','ProveedoresResumen','Resumido','01-11-01',1,Null,Null,'Proveedores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-01-02','ProveedoresDetalle','Detallado','01-11-01',2,Null,Null,'Proveedores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-01-03','ProveedoresEventuales','Eventuales','01-11-01',3,Null,Null,'Proveedores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-01-04','ProveedoresAConfirmar','A Confirmar','01-11-01',4,Null,Null,'Proveedores','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-02','Ganancias2','Tabla de ganancias','01-11',2,Null,Null,'Ganancias','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-03','IGCondiciones2','Categ. de ganancias','01-11',3,Null,Null,'IGCondiciones','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-04','IBCondiciones2','Categ. de ing. brutos','01-11',4,Null,Null,'IBCondiciones','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-05','ImpuestosDirectos','Otros impuestos directos','01-11',5,Null,Null,'ImpuestosDirectos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-06','CondicionesCompra2','Condiciones de compra','01-11',6,Null,Null,'CondicionesCompra','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-07','PosicionesImportacion','Posiciones de importacion','01-11',7,Null,Null,'PosicionesImportacion','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-08','CostosImportacion','Costos de importacion','01-11',8,Null,Null,'CostosImportacion','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-09','ActividadesP','Actividad principal','01-11',9,Null,'<a href="/' + @Directorio + '/Actividades_Proveedore/Index">Actividad principal</a>','ActividadesP','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-09','ActividadesP','Actividad principal','01-11',9,Null,Null,'ActividadesP','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-10','DistribucionesObras','Distribucion de gastos','01-11',10,Null,Null,'DistribucionesObras','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-11','ConceptosOP','Conceptos p/OP otros','01-11',11,Null,'<a href="/' + @Directorio + '/Concepto/IndexOP">Conceptos p/OP otros</a>','Conceptos','NO','Principal'  
-
+INSERT INTO #Auxiliar0 Select '01-11-11','ConceptosOP','Conceptos p/OP otros','01-11',11,Null,Null,'Conceptos','NO','Principal'  
+  
 INSERT INTO #Auxiliar0 Select '01-11-12','Presupuestos','Solicitudes de cotizacion','01-11',12,Null,Null,'Presupuestos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-12-01','PresupuestosAgrupados','Por Períodos','01-11-12',1,Null,Null,'Presupuestos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-12-02','PresupuestosTodos','Todos','01-11-12',2,Null,Null,'Presupuestos','NO','Principal'  
@@ -355,7 +422,7 @@ IF Isnull((Select Top 1 ProntoIni.Valor From ProntoIni
   Where pic.Clave='Habilitar caja obra en OP'),'')='SI'  
 INSERT INTO #Auxiliar0 Select '01-11-18-04','OPagoEnCajaObra', 'En caja obra','01-11-18', 4,Null,Null,'OPago','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-18-05','OPagoAConfirmar', 'A Confirmar','01-11-18', 5,Null,'<a href="/' + @Directorio + '/OrdenPago/Index?bAConfirmar=true">A Confirmar</a>' ,'OPago','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-18-06','OPagoTodas', 'Todas','01-11-18', 6, Null,'<a href="/' + @Directorio + '/OrdenPago/Index">Todos</a>','OPago','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-18-06','OPagoTodas', 'Todas','01-11-18', 6, Null,'<a href="/' + @Directorio + '/OrdenPago/Index">Todos</a>'       ,'OPago','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-11-19','DiferenciasCambio','Dif. de cambio (pagos)','01-11',19,Null,Null,'DiferenciasCambio_P','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-19-01','DiferenciasCambio_PP','Pendientes','01-11-19',1,Null,Null,'DiferenciasCambio_P','NO','Principal'  
@@ -363,14 +430,14 @@ INSERT INTO #Auxiliar0 Select '01-11-19-02','DiferenciasCambio_PG','Generadas - 
 INSERT INTO #Auxiliar0 Select '01-11-20','CtasCtesA','Resumen Cta. Cte.','01-11',20,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores">Cta Cte Acreedores</a>','CtasCtesA','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-12','Contabilidad','Contabilidad','01',1,Null,Null,'Contabilidad','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-12-01','EjerciciosContables','Ejercicios contables','01-12',1,Null,'<a href="/' + @Directorio + '/EjerciciosContable/Index">Ejercicios contables</a>','EjerciciosContables','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-12-01','EjerciciosContables','Ejercicios contables','01-12',1,Null,Null,'EjerciciosContables','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-02','RubrosContables','Rubros contables','01-12',2,Null,Null,'RubrosContables','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-02-01','RubrosContablesGastosPorObra','Rubros contables p/cuentas de obra','01-12-02',1,Null,Null,'RubrosContables','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-02-02','RubrosContablesFinancieros','Rubros contables financieros','01-12-02',2,Null,Null,'RubrosContables','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-03','PresupuestoFinanciero','Presupuesto financiero por rubro contable','01-12',3,Null,Null,'PresupuestoFinanciero','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-04','PresupuestoEconomico','Presupuesto economico por cuenta','01-12',4,Null,Null,'PresupuestoEconomico','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-05','CashFlow','Definicion de flujo de caja','01-12',5,Null,Null,'CashFlow','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-12-06','TiposCuentaGrupos','Grupos de cuenta','01-12',6,Null,'<a href="/' + @Directorio + '/TiposCuentaGrupos/Index">Grupos de cuenta</a>','TiposCuentaGrupos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-12-06','TiposCuentaGrupos','Grupos de cuenta','01-12',6,Null,Null,'TiposCuentaGrupos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-07','CuentasGastos','Cuentas para obras','01-12',7,Null,Null,'CuentasGastos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-08','Cuentas','Cuentas','01-12',8,Null,Null,'Cuentas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-12-08-01','CuentasTodas','Cuentas (Todas)','01-12-08',1,Null,Null,'Cuentas','NO','Principal'  
@@ -689,6 +756,13 @@ INSERT INTO #Auxiliar0 Select '80-01-01-10','mnuSubA10','Ordenes de trabajo','80
 INSERT INTO #Auxiliar0 Select '80-01-01-11','mnuSubA11','Desarrollo y seguimiento por item de ordenes de compra','80-01-01',11,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Desarrollo y seguimiento por item de ordenes de compra">Desarrollo y seguimiento por item de ordenes de compra</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-01-12','mnuSubA12','Detalle de comprobantes por partida','80-01-01',12,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Movimientos por partida">Detalle de comprobantes por partida</a>',Null,'NO','Horizontal'  
 
+
+
+
+
+
+
+
 INSERT INTO #Auxiliar0 Select '80-01-02','mnuSub1','Compras','80-01',1,Null,Null,Null,'SI','Horizontal' --tiene la misma clave que el del arbol  
 INSERT INTO #Auxiliar0 Select '80-01-02-01','mnuSubC1','Requerimientos y listas de acopio pendientes sin nota de pedido','80-01-02',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Requerimientos pendientes sin pedido">Requerimientos pendientes sin nota de pedido</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-02-02','mnuSubC2','Pedidos pendientes de recibir','80-01-02',2,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Pedidos pendientes de recibir">Pedidos pendientes de recibir</a>',Null,'NO','Horizontal'  
@@ -713,6 +787,8 @@ INSERT INTO #Auxiliar0 Select '80-01-02-20','mnuSubC20','Pedidos pendientes de f
 INSERT INTO #Auxiliar0 Select '80-01-02-21','mnuSubC21','Subcontratos - Certificaciones','80-01-02',21,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-02-22','mnuSubC22','Subcontratos - Resumen','80-01-02',22,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-02-23','mnuSubC23','Certificados de subcontratos pendientes de facturar','80-01-02',23,Null,'',Null,'NO','Horizontal'  
+
+
 
 INSERT INTO #Auxiliar0 Select '80-01-03','mnuSub2','Proveedores','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-01','MnuSubPrv0','Retenciones y Percepciones','80-01-03',1,Null,Null,Null,'SI','Horizontal'  
@@ -744,6 +820,7 @@ INSERT INTO #Auxiliar0 Select '80-01-03-14','mnuSubPrv13','Anticipos a proveedor
 INSERT INTO #Auxiliar0 Select '80-01-03-15','mnuSubPrv14','Caja egresos','80-01-03',15,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv15','Listado de saldos de fondos fijos (todos)','80-01-03',16,Null,'',Null,'NO','Horizontal'  
   
+
 INSERT INTO #Auxiliar0 Select '80-01-04','mnuSub3','Clientes','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-01','MnuSubCli0','Retenciones y Percepciones','80-01-04',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-01-01','MnuSubCliRet0','SICORE - Generacion','80-01-04-01',1,Null,'',Null,'NO','Horizontal'  
@@ -771,6 +848,8 @@ INSERT INTO #Auxiliar0 Select '80-01-04-16','MnuSubCli15','Control de facturacio
 INSERT INTO #Auxiliar0 Select '80-01-04-17','MnuSubCli16','Remitos - Movimiento de materiales por cliente','80-01-04',17,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Remitos por cliente">Remitos - Movimiento de materiales por cliente</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-18','MnuSubCli17','Resumen por certificaciones de obra','80-01-04',18,Null,'',Null,'NO','Horizontal'  
   
+
+
 INSERT INTO #Auxiliar0 Select '80-01-05','mnuSub4','Fabrica','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-05-01','MnuSubF0','Disponibilidad de materiales (segun lista de materiales)','80-01-05',1,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-05-02','MnuSubF1','Consulta de revisiones','80-01-05',2,Null,'',Null,'NO','Horizontal'  
@@ -787,6 +866,8 @@ INSERT INTO #Auxiliar0 Select '80-01-06-01','MnuSubO0','Obras, equipos y planos'
 INSERT INTO #Auxiliar0 Select '80-01-06-02','MnuSubO1','Estado de polizas','80-01-06',2,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-06-03','MnuSubO2','Detalle de equipos instalados por fecha','80-01-06',3,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-06-04','MnuSubO3','Estado de equipos','80-01-06',4,Null,'',Null,'NO','Horizontal'  
+
+
 
 INSERT INTO #Auxiliar0 Select '80-01-07','mnuSub6','Planeamiento','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-07-01','MnuSubP0','Listados de acopio sumarizados por obra','80-01-07',1,Null,'',Null,'NO','Horizontal'  
@@ -814,6 +895,7 @@ INSERT INTO #Auxiliar0 Select '80-01-08-02','MnuSubS1','Costos promedios pondera
 INSERT INTO #Auxiliar0 Select '80-01-08-03','MnuSubS2','Stock de articulos a fecha','80-01-08',3,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-08-04','MnuSubS3','Stock de articulos a fecha (Cubo)','80-01-08',4,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-08-05','MnuSubS4','Control stock reposicion - minimo','80-01-08',5,Null,'',Null,'NO','Horizontal'  
+  
   
 INSERT INTO #Auxiliar0 Select '80-01-09','mnuSub8','Contabilidad','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-01','mnuSubCo0','Diario','80-01-09',1,Null,'',Null,'NO','Horizontal'  
@@ -848,6 +930,9 @@ INSERT INTO #Auxiliar0 Select '80-01-09-16-08','mnuSubCoB7','Emision de estado d
 INSERT INTO #Auxiliar0 Select '80-01-09-16-09','mnuSubCoB8','Emision de estado de resultados (x Mes + Proyectado)','80-01-09-16',9,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-16-10','mnuSubCoB9','Emision de estado de resultados (x Mes + Acumulado) Modelo 1','80-01-09-16',10,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-16-11','mnuSubCoB10','Emision de estado de resultados (x Mes + Acumulado) Modelo 2','80-01-09-16',11,Null,'',Null,'NO','Horizontal'  
+
+
+
   
 INSERT INTO #Auxiliar0 Select '80-01-09-17','mnuSubCo16','Subdiarios','80-01-09',17,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-17-01','mnuSubCo16__','Subdiario de proveedores','80-01-09-17',1,Null,'',Null,'NO','Horizontal'  
@@ -860,6 +945,11 @@ INSERT INTO #Auxiliar0 Select '80-01-09-17-07','mnuSubCo16__','Subdiario de iva 
 
 INSERT INTO #Auxiliar0 Select '80-01-09-18','mnuSubCo17','Diario IGJ','80-01-09',18,Null,'',Null,'NO','Horizontal'  
 
+
+
+
+
+  
 INSERT INTO #Auxiliar0 Select '80-02','mnuMaster4','Seguridad',Null,1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-01','mnuSeg0','Definicion de accesos','80-02',1,Null,'<a href="/' + @directorio + '/Acceso/Edit/-1">Definicion de accesos</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-02','mnuSeg1','Definicion de autorizaciones','80-02',2,Null,'',Null,'NO','Horizontal'  
@@ -872,6 +962,12 @@ INSERT INTO #Auxiliar0 Select '80-02-08','mnuSeg7','Definicion de anulacion de c
 INSERT INTO #Auxiliar0 Select '80-02-09','mnuSeg8','Log de movimientos','80-02',9,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-10','mnuSeg9','Configuracion de usuarios (Pronto Ini)','80-02',10,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-11','mnuSeg10','Control facturacion electronica','80-02',11,Null,'',Null,'NO','Horizontal'  
+
+
+
+
+
+
 
 INSERT INTO #Auxiliar0 Select '80-03','mnuMaster5','Utilidades',Null,1,Null,Null,Null,'SI','Horizontal'  
 
@@ -941,3 +1037,38 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
     
 DROP TABLE #Auxiliar0    
 DROP TABLE #Auxiliar1    
+  
+  
+  
+go  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+
+--select * from tree
+--truncate table tree
+[Tree_TX_Generar]
+go
+[Tree_TX_Arbol]
+go
+
+[Tree_TX_Arbol] 'Horizontal'
+go
+
+
+
+--CREATE NONCLUSTERED INDEX IDX_Tree_GrupoMenu3
+--ON Tree (GrupoMenu,IdItem,Clave,Descripcion,ParentId,Orden,Parametros,Link,Imagen,EsPadre)
+--GO
+
+

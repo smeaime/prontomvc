@@ -223,6 +223,7 @@ namespace ProntoMVC.Controllers
             var ci = new System.Globalization.CultureInfo("en-US");
 
             var filtereditems = (from item in db.Localidades
+                                 from b in db.Provincias.Where(o => o.IdProvincia == item.IdProvincia).DefaultIfEmpty()
                                  where ((item.Nombre.StartsWith(term)))
                                  orderby item.Nombre
                                  select new
@@ -230,8 +231,25 @@ namespace ProntoMVC.Controllers
                                      id = item.IdLocalidad,
                                      value = item.Nombre,
                                      title = item.Nombre + " " + item.CodigoPostal,
-                                     idprovincia = item.IdProvincia
+                                     idprovincia = item.IdProvincia,
+                                     IdPais = b != null ? b.IdPais : 0
                                  }).Take(20).ToList();
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetLocalidadPorId(int IdLocalidad)
+        {
+            var filtereditems = (from a in db.Localidades
+                                 where (a.IdLocalidad == IdLocalidad)
+                                 select new
+                                 {
+                                     id = a.IdLocalidad,
+                                     Localidad = a.Nombre.Trim(),
+                                     value = a.Nombre.Trim()
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }

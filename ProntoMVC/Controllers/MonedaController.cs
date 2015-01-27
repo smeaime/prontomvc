@@ -22,6 +22,7 @@ using Lib.Web.Mvc.JQuery.JqGrid;
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using Pronto.ERP.Bll;
+using Newtonsoft.Json;
 
 namespace ProntoMVC.Controllers
 {
@@ -251,19 +252,50 @@ namespace ProntoMVC.Controllers
 
             decimal cotizacion;
 
-            if (false)
-            {
-                cotizacion = db.Cotizaciones_TX_PorFechaMoneda(fecha, IdMoneda);
-            }
-            else
-            {
-                DateTime desde = fecha.Value.Date;
-                DateTime hasta = desde.AddDays(1);
+            DateTime desde = fecha.Value.Date;
+            DateTime hasta = desde.AddDays(1);
 
-                var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == IdMoneda).FirstOrDefault();
-                if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
-            }
+            var mvarCotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == IdMoneda).FirstOrDefault();
+            if (mvarCotizacion == null) cotizacion = -1; else cotizacion = (mvarCotizacion.CotizacionLibre ?? mvarCotizacion.Cotizacion) ?? -1;
+
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult CotizacionesPorFecha(DateTime? fecha)
+        {
+            if (db == null) return null;
+            if (fecha == null) fecha = DateTime.Now;
+
+            decimal mCotizacionDolar = 0;
+            decimal mCotizacionEuro = 0;
+
+            Int32 mIdMonedaPrincipal;
+            Int32 mIdMonedaDolar;
+            Int32 mIdMonedaEuro;
+
+            DateTime desde = fecha.Value.Date;
+            DateTime hasta = desde.AddDays(1);
+
+            Parametros parametros = db.Parametros.Find(1);
+
+            mIdMonedaPrincipal = parametros.IdMonedaPrincipal ?? 0;
+            mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
+            mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            var Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaDolar).FirstOrDefault();
+            if (Cotizacion != null) { mCotizacionDolar = (Cotizacion.CotizacionLibre ?? Cotizacion.Cotizacion) ?? 0; }
+
+            Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaEuro).FirstOrDefault();
+            if (Cotizacion != null) { mCotizacionEuro = (Cotizacion.CotizacionLibre ?? Cotizacion.Cotizacion) ?? 0; }
+
+            DatosJson data = new DatosJson();
+            data.campo1 = mIdMonedaPrincipal.ToString();
+            data.campo2 = mIdMonedaDolar.ToString();
+            data.campo3 = mCotizacionDolar.ToString();
+            data.campo4 = mIdMonedaEuro.ToString();
+            data.campo5 = mCotizacionEuro.ToString();
+
+            return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
         }
 
         public virtual ActionResult GetMonedas()
@@ -274,7 +306,16 @@ namespace ProntoMVC.Controllers
 
             return PartialView("Select", monedas);
         }
-        
+
+        class DatosJson
+        {
+            public string campo1 { get; set; }
+            public string campo2 { get; set; }
+            public string campo3 { get; set; }
+            public string campo4 { get; set; }
+            public string campo5 { get; set; }
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

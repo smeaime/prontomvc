@@ -247,6 +247,15 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetConceptos()
+        {
+            Dictionary<int, string> Tabla = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.Concepto u in db.Conceptos.Where(x => (x.Grupo ?? 0) == 0).OrderBy(x => x.Descripcion).ToList())
+                Tabla.Add(u.IdConcepto, u.Descripcion);
+
+            return PartialView("Select", Tabla);
+        }
+
         public virtual ActionResult GetTiposGrupoConcepto()
         {
             Dictionary<int, string> tiposconcepto = new Dictionary<int, string>();

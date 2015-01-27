@@ -183,6 +183,10 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<GruposObra> GruposObras { get; set; }
         public virtual DbSet<UnidadesOperativa> UnidadesOperativas { get; set; }
         public virtual DbSet<Colore> Colores { get; set; }
+        public virtual DbSet<DetalleObrasEquiposInstalado> DetalleObrasEquiposInstalados { get; set; }
+        public virtual DbSet<DetalleObrasEquiposInstalados2> DetalleObrasEquiposInstalados2 { get; set; }
+        public virtual DbSet<DetalleObrasPoliza> DetalleObrasPolizas { get; set; }
+        public virtual DbSet<TiposPoliza> TiposPolizas { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -363,6 +367,15 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("IdDetalleOrdenPagoCuentas", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Valores_BorrarPorIdDetalleOrdenPagoCuentas", idDetalleOrdenPagoCuentasParameter);
+        }
+    
+        public virtual int Obras_EliminarCuentasNoUsadasPorIdObra(Nullable<int> idObra)
+        {
+            var idObraParameter = idObra.HasValue ?
+                new ObjectParameter("IdObra", idObra) :
+                new ObjectParameter("IdObra", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Obras_EliminarCuentasNoUsadasPorIdObra", idObraParameter);
         }
     }
 }
