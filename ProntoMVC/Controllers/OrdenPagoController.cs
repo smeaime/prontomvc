@@ -28,6 +28,8 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
@@ -38,6 +40,8 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
         }
@@ -65,6 +69,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -138,6 +143,9 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditFF(int id)
         {
+
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
             if (id == -1)
             {
                 OrdenPago OrdenPago = new OrdenPago();
@@ -158,6 +166,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditOT(int id)
         {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
             if (id == -1)
             {
                 OrdenPago OrdenPago = new OrdenPago();
@@ -2066,6 +2075,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(OrdenPago OrdenPago, string IdsGastosFF = "")
         {
+            if (!PuedeEditar(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
             try
             {
                 decimal mCotizacionMoneda = 0;

@@ -67,6 +67,8 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(Feriado Feriado)
         {
+            if (!PuedeEditar(enumNodos.Feriados)) throw new Exception("No tenés permisos");
+
             try
             {
                 string errs = "";

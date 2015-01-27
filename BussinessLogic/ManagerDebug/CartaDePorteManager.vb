@@ -4697,22 +4697,39 @@ Public Class CartaDePorteManager
         Dim tempid = myCartaDePorte.Id
         Dim tempidcli = IIf(myCartaDePorte.IdClienteAFacturarle = idclienteexportador, -1, myCartaDePorte.IdClienteAFacturarle)
 
+        'anda mal en el alta de carta que cumpla estas condiciones (en la edicion anda bien).  
+        'Está triplicando la carta, porque pasa dos veces por esta funcion con el Id=-1, y despues una vez más en el Save original
+
 
         myCartaDePorte.Id = -1
         myCartaDePorte.IdClienteAFacturarle = idclienteexportador
         myCartaDePorte.Exporta = True
         myCartaDePorte.SubnumeroDeFacturacion = 1
 
-        'como evitar la recursion?
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
 
+        Try
+            'como evitar la recursion?
+            CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Catch ex As Exception
+            ErrHandler.WriteError("ya existía un duplicado 1 probablemente")
+            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+        End Try
+
+        'y si este tempid es -1?
 
         myCartaDePorte.Id = tempid
         myCartaDePorte.IdClienteAFacturarle = tempidcli
         myCartaDePorte.Exporta = False
         myCartaDePorte.SubnumeroDeFacturacion = 0
 
-        CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Try
+
+            CartaDePorteManager.Save(SC, myCartaDePorte, 0, "", False)
+        Catch ex As Exception
+            ErrHandler.WriteError("ya existía un duplicado 0 probablemente")
+            ErrHandler.WriteError(ex) 'ya existía un duplicado probablemente
+        End Try
+
 
 
     End Sub
@@ -5755,7 +5772,8 @@ Public Class CartaDePorteManager
             'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13223
             If bCopiarDuplicados Then
                 If EsUnoDeLosClientesExportador(SC, myCartaDePorte) Then
-
+                    If myCartaDePorte.Id = -1 And myCartaDePorte.SubnumeroDeFacturacion = -1 Then myCartaDePorte.SubnumeroDeFacturacion = 0
+                    myCartaDePorte.Id = CartaDePorteId
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
 
                 End If
@@ -6012,8 +6030,7 @@ Public Class CartaDePorteManager
 
 
 
-            If EsUnoDeLosClientesExportador(SC, myCartaDePorte) Then
-
+            If EsUnoDeLosClientesExportador(SC, myCartaDePorte) And .SubnumeroDeFacturacion < 0 Then
                 sWarnings &= "Se usará automáticamente un duplicado para facturarle al cliente exportador" & vbCrLf
             End If
 
@@ -18185,7 +18202,181 @@ Public Class LogicaImportador
     End Enum
 
 
+    Public Shared Function PuertoACAToDataset(ByVal pFileName As String) As Data.DataSet
 
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 1: abrirlo a lo macho y meterlo en un dataset
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+        Dim dt As New Data.DataTable
+        For i As Integer = 0 To 50
+            dt.Columns.Add("column" & i + 1)
+        Next
+
+        Dim dr = dt.NewRow()
+        dr(0) = "F. DE CARGA"
+        dr(1) = "HORA"
+        dr(2) = "Carton"
+        dr(3) = "Turno"
+        dr(4) = "CTG"
+        dr(5) = "CARGADOR"
+        'dr(6) = "CUIT"
+        dr(7) = "INTERMEDIARIO"
+        'dr(8) = "CUIT"
+        dr(9) = "REMITENTE COMERCIAL"
+        'dr(10) = "CUIT"
+        dr(13) = "CORREDOR"
+
+        dr(19) = "DESTINATARIO"
+        'dr(20) = "DESTINATARIOCUIT"
+
+        dr(21) = "TRANSPORTISTA"
+        dr(22) = "TRANSPCUIT"
+        dr(23) = "CHOFER"
+        dr(24) = "CHOFERCUIT"
+        dr(25) = "PRODUCTO"
+        dr(26) = "CARTA PORTE"
+
+
+        dt.Rows.Add(dr)
+
+
+
+
+
+
+        ' 0        IngresoFecha(LLEGADA)
+        ' 1        IngresoHora(HORA)
+        ' 2 Carton (turno orden de ingreso) 
+        ' 3 Turno  (código que le asigna ACA a cada camión ) (ORDEN)
+        ' 4 Número de CTG  (CTG)
+        ' 5 Cargador1 (TITULA DE CP) (CARGADOR)
+        ' 6        CUIT()
+        ' 7 Cargador2  (INTERMEDIARIO) (VEND. CJE.)
+        ' 8        CUIT()
+        ' 9 Cargador3 (REMITENTE COMERCIAL) (C Y ORD2)
+        '10        CUIT()
+        '11 Cargador4 (CUANDO CORRESPONDA “MERCADO A TERMINO”)
+        '12        CUIT()
+        '13 Corredor1 (CORREDOR QUE FIGURA EN CP “CORREDOR”) (CORREDOR) 
+        '14        CUIT()
+        '15 Corredor2 (CORREDOR QUE FIGURA EN OBSEVACIONES “CORR INTERVINIENTE”) (OBS)
+        '16        CUIT()
+        '17        Entregador1(ENTREGADOR)
+        '18        CUIT()
+        '19        Exportador1(DESTINATARIO)(COMPRADOR)
+        '20        CUIT()
+        '21        transportista()
+        '22        CUIT(transportista(TRANSPORTISTA))
+        '23        Chofer()
+        '24        CUIT(chofer(CHOFER))
+        '25        Producto(PRODUCTO)
+        '26 Numero de CartaPorte (CARTA DE PORTE)
+
+
+
+
+
+        '27        Procedencia.Bruto()
+        dr(27) = "BRUTO PROC"
+        '28        Procedencia.Tara()
+        dr(28) = "TARA PROC"
+        '29 Procedencia.Neto (KG PROCED)
+        dr(29) = "NETO PROC"
+        '30        Procedencia.Ciudad(PROCEDENCIA)
+        dr(30) = "PROCEDENCIA"
+        '31 Transporte ( A= SI ES CAMION    F= SI ES VAGON)
+        'dr(31) = "PROCEDENCIA"
+        '32        DominioChasis(PATENTE)
+        dr(32) = "PATENTE"
+        '33        DominioAcoplado(PAT.ACOPLADO)
+        dr(33) = "ACOPLADO"
+        '34        Contrato(CONTRATO)
+        dr(34) = "CONTRATO"
+        '35        SalidaBruto()
+        dr(35) = "BRUTO PTO"
+        '36        SalidaTara()
+        dr(36) = "TARA PTO"
+        '37 KilosMerma  (OTRAS MERMAS)
+        dr(37) = "MERMA"
+        '38 SalidaNeto 
+        dr(38) = "NETO PTO"
+        '39 SalidaFecha (DIA DESCARGA)
+        dr(39) = "F. DE DESCARGA"
+        '40        SalidaHora(HORA)
+        'dr(40) = "HORA"
+        '41 atributo de Porteria: “CON CUPO” o “SIN CUPO” o “LE DIERON CUPO”
+        'dr(41) = "PROCEDENCIA"
+        '42 atributo de Calada:  "DEMORADO" "ANALIZADO" "CONDICIONAL" "CONFORME"  "RECHAZADO"  "AUTORIZADO" camión ya autorizado por el entregador
+        dr(42) = "CALIDAD"
+        '43 Observaciones: comentarios varios, resultado de análisis de calidad, mermas, focos, etc. 
+        dr(43) = "OBSERVACIONES"
+
+
+        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
+
+            MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
+            MyReader.Delimiters = New String() {";"}
+
+            Dim currentRow As String()
+            'Loop through all of the fields in the file. 
+            'If any lines are corrupt, report an error and continue parsing. 
+            While Not MyReader.EndOfData
+                Try
+                    currentRow = MyReader.ReadFields()
+
+                    ' Include code here to handle the row.
+
+
+                    dr = dt.NewRow()
+                    For i As Integer = 0 To currentRow.Length - 1
+                        dr(i) = currentRow(i)
+                    Next
+                    dt.Rows.Add(dr)
+
+
+                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                    ErrHandler.WriteError("Line " & ex.ToString & " is invalid.  Skipping")
+                End Try
+            End While
+        End Using
+
+
+        Dim ds As New Data.DataSet
+        ds.Tables.Add(dt)
+        Return ds
+
+
+        'http://stackoverflow.com/questions/1103495/is-there-a-proper-way-to-read-csv-files
+        'http://www.codeproject.com/KB/database/GenericParser.aspx
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 2: convertirlo a excel con OOXML
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'Dim oExc As SpreadsheetDocument=SpreadsheetDocument.Open(pFileName,False,OpenSettings.
+
+
+
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        'METODO 3: a excel pero con EPPLUS
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+        '/////////////////////////////////////////////////
+
+
+    End Function
     Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
@@ -19121,7 +19312,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Enum enumColumnasDeGrillaFinal As Integer
+    Public Enum enumColumnasDeGrillaFinal As Integer
         'Tenés que agregar el campo en la tabla "ExcelImportador"
         'Tenés que agregar el campo en la tabla "ExcelImportador"
         'Tenés que agregar el campo en la tabla "ExcelImportador"
