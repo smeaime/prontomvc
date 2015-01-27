@@ -159,6 +159,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id = -1, string nombre = "")
         {
 
+
             if (nombre != "")
             {
                 id = db.Empleados.Where(x => x.Nombre == nombre || x.UsuarioNT == nombre).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -169,8 +170,14 @@ namespace ProntoMVC.Controllers
             string usuario = ViewBag.NombreUsuario;
 
 
-            if (Roles.GetRolesForUser(usuario).Contains("SuperAdmin") || Roles.GetRolesForUser(usuario).Contains("Administrador") || Roles.GetRolesForUser(usuario).Contains("AdminExterno"))
+
+            if (!(
+                   Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
+                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
+                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                )
             {
+                throw new Exception("No tenés permisos");
                 // return RedirectToAction("Index", "MvcMembership/UserAdministration");
             }
             else
@@ -260,6 +267,18 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(Empleado o)
         {
+
+
+            if (!
+                (
+                 Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
+                Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") ||
+                Roles.IsUserInRole(Membership.GetUser().UserName, "AdminExterno"))
+                )
+            {
+                throw new Exception("No tenés permisos");
+
+            }
 
 
             try
@@ -563,7 +582,8 @@ namespace ProntoMVC.Controllers
                     //no existe. verificar que no estoy mandando los subitems de agrupamiento
                     if (dr.Nodo != null)
                     {
-                        if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")))
+
+                        if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")) || dr.Nodo == "RequerimientosPorObra" || dr.Nodo == "RequerimientosAgrupados" || dr.Nodo == "PedidosAgrupados")
                         {
                             dr.IdEmpleado = o.IdEmpleado;
                             if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso

@@ -63,6 +63,7 @@ namespace ProntoMVC.Controllers
         // GET: 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer(enumNodos.Transportistas)) throw new Exception("No tenés permisos");
             ProntoMVC.Data.Models.Transportista Transportista;
 
             if (id == -1)
@@ -81,6 +82,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(ProntoMVC.Data.Models.Transportista Transportista)
         {
+            if (!PuedeLeer(enumNodos.Transportistas)) throw new Exception("No tenés permisos");
             try
             {
                 if (ModelState.IsValid)

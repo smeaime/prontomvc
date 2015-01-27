@@ -48,6 +48,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer(enumNodos.Clientes)) throw new Exception("No tenés permisos");
             Cliente o;
             if (id <= 0)
             {
@@ -181,6 +182,8 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Cliente Cliente)
         {
+            if (!PuedeEditar(enumNodos.Clientes)) throw new Exception("No tenés permisos");
+
             try
             {
                 if (Cliente.Cuit != null)

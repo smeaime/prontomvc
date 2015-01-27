@@ -38,6 +38,7 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
+            if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
             //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
             //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -49,6 +50,8 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
+            if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
+
             //var Pedidos = db.Pedidos.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
         }
@@ -735,6 +738,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Pedido Pedido)
         {
+            if (!PuedeEditar(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
@@ -1014,7 +1018,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-
+            if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
              !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
              !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
@@ -1297,7 +1301,7 @@ namespace ProntoMVC.Controllers
                 // return false;
             }
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Asientos)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdPedido <= 0)

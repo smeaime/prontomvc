@@ -37,6 +37,10 @@ namespace ProntoMVC.Controllers
             //    .OrderBy(r => r.NumeroRequerimiento);
             //return View(db.Requerimientos.ToList());
 
+            if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
+
+            
+
 
             ViewBag.bAConfirmar = (bool)(Request.QueryString["bAConfirmar"].NullSafeToString() == "SI");
             ViewBag.bALiberar = (bool)(Request.QueryString["bALiberar"].NullSafeToString() == "SI");
@@ -283,7 +287,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
 
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Facturas)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdRequerimiento <= 0)
@@ -379,7 +383,11 @@ namespace ProntoMVC.Controllers
         public virtual JsonResult BatchUpdate(Requerimiento requerimiento)
         {
 
+
             // acá esta el temita de http://stackoverflow.com/questions/5538974/the-relationship-could-not-be-changed-because-one-or-more-of-the-foreign-key-pro
+
+            if (!PuedeEditar(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
+
 
             try
             {
@@ -631,6 +639,12 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
             int? IdSector = -1, IdObra = -1;
+
+
+            if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
+            
+
+
 
             if (id == -1)
             {

@@ -45,6 +45,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
+            if (!PuedeLeer(enumNodos.ImpuestosDirectos)) throw new Exception("No tenés permisos");
             ImpuestosDirecto o;
             if (id <= 0)
             {
@@ -81,6 +82,8 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(ImpuestosDirecto ImpuestosDirecto)
         {
+            if (!PuedeEditar(enumNodos.ImpuestosDirectos)) throw new Exception("No tenés permisos");
+
             try
             {
                 string errs = "";
