@@ -25,5 +25,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdCaja { get; set; }
     
         public virtual Concepto Concepto { get; set; }
+        public virtual NotasDebito NotasDebito { get; set; }
     }
 }

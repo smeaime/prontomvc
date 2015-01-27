@@ -959,6 +959,49 @@
     <EntitySet Name="GruposObras" EntityType="DemoProntoModel.GruposObra" />
     <EntitySet Name="UnidadesOperativas" EntityType="DemoProntoModel.UnidadesOperativa" />
     <EntitySet Name="Colores" EntityType="DemoProntoModel.Colore" />
+    <EntitySet Name="DetalleObrasEquiposInstalados" EntityType="DemoProntoModel.DetalleObrasEquiposInstalado" />
+    <EntitySet Name="DetalleObrasEquiposInstalados2" EntityType="DemoProntoModel.DetalleObrasEquiposInstalados2" />
+    <EntitySet Name="DetalleObrasPolizas" EntityType="DemoProntoModel.DetalleObrasPoliza" />
+    <AssociationSet Name="FK_DetalleObrasEquiposInstalados_Obras" Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados_Obras">
+      <End Role="Obra" EntitySet="Obras" />
+      <End Role="DetalleObrasEquiposInstalado" EntitySet="DetalleObrasEquiposInstalados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleObrasEquiposInstalados2_Obras" Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados2_Obras">
+      <End Role="Obra" EntitySet="Obras" />
+      <End Role="DetalleObrasEquiposInstalados2" EntitySet="DetalleObrasEquiposInstalados2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleObrasPolizas_Obras" Association="DemoProntoModel.FK_DetalleObrasPolizas_Obras">
+      <End Role="Obra" EntitySet="Obras" />
+      <End Role="DetalleObrasPoliza" EntitySet="DetalleObrasPolizas" />
+    </AssociationSet>
+    <EntitySet Name="TiposPolizas" EntityType="DemoProntoModel.TiposPoliza" />
+    <FunctionImport Name="Obras_EliminarCuentasNoUsadasPorIdObra">
+      <Parameter Name="IdObra" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="FK_DetalleNotasDebito_NotasDebito" Association="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito">
+      <End Role="NotasDebito" EntitySet="NotasDebitoes" />
+      <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebitoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasDebitoProvincias_NotasDebito" Association="DemoProntoModel.FK_DetalleNotasDebitoProvincias_NotasDebito">
+      <End Role="NotasDebito" EntitySet="NotasDebitoes" />
+      <End Role="DetalleNotasDebitoProvincia" EntitySet="DetalleNotasDebitoProvincias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCredito_NotasCredito" Association="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCreditoes" />
+      <End Role="DetalleNotasCredito" EntitySet="DetalleNotasCreditoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoImputaciones_NotasCredito" Association="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCreditoes" />
+      <End Role="DetalleNotasCreditoImputacione" EntitySet="DetalleNotasCreditoImputaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" Association="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCreditoes" />
+      <End Role="DetalleNotasCreditoOrdenesCompra" EntitySet="DetalleNotasCreditoOrdenesCompras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoProvincias_NotasCredito" Association="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCreditoes" />
+      <End Role="DetalleNotasCreditoProvincia" EntitySet="DetalleNotasCreditoProvincias" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -1390,6 +1433,9 @@
     <NavigationProperty Name="ComprobantesProveedores" Relationship="DemoProntoModel.FK_ComprobantesProveedores_Obra" FromRole="Obra" ToRole="ComprobanteProveedor" />
     <Property Type="Int32" Name="OrdenamientoSecundario" />
     <NavigationProperty Name="Conjuntos" Relationship="DemoProntoModel.FK_Conjuntos_Obras" FromRole="Obra" ToRole="Conjunto" />
+    <NavigationProperty Name="DetalleObrasEquiposInstalados" Relationship="DemoProntoModel.FK_DetalleObrasEquiposInstalados_Obras" FromRole="Obra" ToRole="DetalleObrasEquiposInstalado" />
+    <NavigationProperty Name="DetalleObrasEquiposInstalados2" Relationship="DemoProntoModel.FK_DetalleObrasEquiposInstalados2_Obras" FromRole="Obra" ToRole="DetalleObrasEquiposInstalados2" />
+    <NavigationProperty Name="DetalleObrasPolizas" Relationship="DemoProntoModel.FK_DetalleObrasPolizas_Obras" FromRole="Obra" ToRole="DetalleObrasPoliza" />
   </EntityType>
   <EntityType Name="Requerimiento">
     <Key>
@@ -6227,6 +6273,7 @@
     <Property Type="Int32" Name="IdCuentaBancaria" />
     <Property Type="Int32" Name="IdCaja" />
     <NavigationProperty Name="Concepto" Relationship="DemoProntoModel.FK_DetalleNotasCredito_Conceptos" FromRole="DetalleNotasCredito" ToRole="Concepto" />
+    <NavigationProperty Name="NotasCredito" Relationship="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito" FromRole="DetalleNotasCredito" ToRole="NotasCredito" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoImputacione">
     <Key>
@@ -6236,6 +6283,7 @@
     <Property Type="Int32" Name="IdNotaCredito" />
     <Property Type="Int32" Name="IdImputacion" />
     <Property Type="Decimal" Name="Importe" Precision="19" Scale="2" />
+    <NavigationProperty Name="NotasCredito" Relationship="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" FromRole="DetalleNotasCreditoImputacione" ToRole="NotasCredito" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoOrdenesCompra">
     <Key>
@@ -6246,6 +6294,7 @@
     <Property Type="Int32" Name="IdDetalleOrdenCompra" />
     <Property Type="Decimal" Name="Cantidad" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="PorcentajeCertificacion" Precision="12" Scale="6" />
+    <NavigationProperty Name="NotasCredito" Relationship="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" FromRole="DetalleNotasCreditoOrdenesCompra" ToRole="NotasCredito" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoProvincia">
     <Key>
@@ -6255,6 +6304,7 @@
     <Property Type="Int32" Name="IdNotaCredito" />
     <Property Type="Int32" Name="IdProvinciaDestino" />
     <Property Type="Decimal" Name="Porcentaje" Precision="6" Scale="2" />
+    <NavigationProperty Name="NotasCredito" Relationship="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" FromRole="DetalleNotasCreditoProvincia" ToRole="NotasCredito" />
   </EntityType>
   <EntityType Name="DetalleNotasDebito">
     <Key>
@@ -6270,6 +6320,7 @@
     <Property Type="Int32" Name="IdCuentaBancaria" />
     <Property Type="Int32" Name="IdCaja" />
     <NavigationProperty Name="Concepto" Relationship="DemoProntoModel.FK_DetalleNotasDebito_Conceptos" FromRole="DetalleNotasDebito" ToRole="Concepto" />
+    <NavigationProperty Name="NotasDebito" Relationship="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito" FromRole="DetalleNotasDebito" ToRole="NotasDebito" />
   </EntityType>
   <EntityType Name="DetalleNotasDebitoProvincia">
     <Key>
@@ -6279,6 +6330,7 @@
     <Property Type="Int32" Name="IdNotaDebito" />
     <Property Type="Int32" Name="IdProvinciaDestino" />
     <Property Type="Decimal" Name="Porcentaje" Precision="6" Scale="2" />
+    <NavigationProperty Name="NotasDebito" Relationship="DemoProntoModel.FK_DetalleNotasDebitoProvincias_NotasDebito" FromRole="DetalleNotasDebitoProvincia" ToRole="NotasDebito" />
   </EntityType>
   <EntityType Name="Ejercicio">
     <Key>
@@ -6416,6 +6468,10 @@
     <Property Name="IdTipoOperacion" Type="Int32" />
     <NavigationProperty Name="IBCondicione" Relationship="DemoProntoModel.FK_NotasCredito_IBCondiciones" FromRole="NotasCredito" ToRole="IBCondicion" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasCredito_Monedas" FromRole="NotasCredito" ToRole="Moneda" />
+    <NavigationProperty Name="DetalleNotasCreditoes" Relationship="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito" FromRole="NotasCredito" ToRole="DetalleNotasCredito" />
+    <NavigationProperty Name="DetalleNotasCreditoImputaciones" Relationship="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" FromRole="NotasCredito" ToRole="DetalleNotasCreditoImputacione" />
+    <NavigationProperty Name="DetalleNotasCreditoOrdenesCompras" Relationship="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" FromRole="NotasCredito" ToRole="DetalleNotasCreditoOrdenesCompra" />
+    <NavigationProperty Name="DetalleNotasCreditoProvincias" Relationship="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" FromRole="NotasCredito" ToRole="DetalleNotasCreditoProvincia" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -6482,6 +6538,8 @@
     <Property Type="Int32" Name="IdIdentificacionCAE" />
     <NavigationProperty Name="Cliente" Relationship="DemoProntoModel.FK_NotasDebito_Clientes" FromRole="NotasDebito" ToRole="Cliente" />
     <NavigationProperty Name="Moneda" Relationship="DemoProntoModel.FK_NotasDebito_Monedas" FromRole="NotasDebito" ToRole="Moneda" />
+    <NavigationProperty Name="DetalleNotasDebitoes" Relationship="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito" FromRole="NotasDebito" ToRole="DetalleNotasDebito" />
+    <NavigationProperty Name="DetalleNotasDebitoProvincias" Relationship="DemoProntoModel.FK_DetalleNotasDebitoProvincias_NotasDebito" FromRole="NotasDebito" ToRole="DetalleNotasDebitoProvincia" />
   </EntityType>
   <EntityType Name="TiposValore">
     <Key>
@@ -8000,4 +8058,165 @@
     <Property Name="FechaAlta" Type="DateTime" Precision="3" />
     <Property Name="Codigo2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="DetalleObrasEquiposInstalado">
+    <Key>
+      <PropertyRef Name="IdDetalleObraEquipoInstalado" />
+    </Key>
+    <Property Name="IdDetalleObraEquipoInstalado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FechaInstalacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaDesinstalacion" Type="DateTime" Precision="3" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_DetalleObrasEquiposInstalados_Obras" FromRole="DetalleObrasEquiposInstalado" ToRole="Obra" />
+  </EntityType>
+  <EntityType Name="DetalleObrasEquiposInstalados2">
+    <Key>
+      <PropertyRef Name="IdDetalleObraEquipoInstalado2" />
+    </Key>
+    <Property Name="IdDetalleObraEquipoInstalado2" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDetalleObraEquipoInstalado" Type="Int32" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="FechaInstalacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaDesinstalacion" Type="DateTime" Precision="3" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_DetalleObrasEquiposInstalados2_Obras" FromRole="DetalleObrasEquiposInstalados2" ToRole="Obra" />
+  </EntityType>
+  <EntityType Name="DetalleObrasPoliza">
+    <Key>
+      <PropertyRef Name="IdDetalleObraPoliza" />
+    </Key>
+    <Property Name="IdDetalleObraPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdTipoPoliza" Type="Int32" />
+    <Property Name="IdProveedor" Type="Int32" />
+    <Property Name="NumeroPoliza" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FechaVigencia" Type="DateTime" Precision="3" />
+    <Property Name="FechaVencimientoCuota" Type="DateTime" Precision="3" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FechaEstimadaRecupero" Type="DateTime" Precision="3" />
+    <Property Name="FechaRecupero" Type="DateTime" Precision="3" />
+    <Property Name="CondicionRecupero" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MotivoDeContratacionSeguro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaFinalizacionCobertura" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_DetalleObrasPolizas_Obras" FromRole="DetalleObrasPoliza" ToRole="Obra" />
+  </EntityType>
+  <Association Name="FK_DetalleObrasEquiposInstalados_Obras">
+    <End Type="DemoProntoModel.Obra" Role="Obra" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleObrasEquiposInstalado" Role="DetalleObrasEquiposInstalado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obra">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasEquiposInstalado">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleObrasEquiposInstalados2_Obras">
+    <End Type="DemoProntoModel.Obra" Role="Obra" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleObrasEquiposInstalados2" Role="DetalleObrasEquiposInstalados2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obra">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasEquiposInstalados2">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleObrasPolizas_Obras">
+    <End Type="DemoProntoModel.Obra" Role="Obra" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleObrasPoliza" Role="DetalleObrasPoliza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obra">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasPoliza">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TiposPoliza">
+    <Key>
+      <PropertyRef Name="IdTipoPoliza" />
+    </Key>
+    <Property Name="IdTipoPoliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_DetalleNotasDebito_NotasDebito">
+    <End Type="DemoProntoModel.NotasDebito" Role="NotasDebito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasDebito" Role="DetalleNotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Principal>
+      <Dependent Role="DetalleNotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasDebitoProvincias_NotasDebito">
+    <End Type="DemoProntoModel.NotasDebito" Role="NotasDebito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasDebitoProvincia" Role="DetalleNotasDebitoProvincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Principal>
+      <Dependent Role="DetalleNotasDebitoProvincia">
+        <PropertyRef Name="IdNotaDebito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCredito_NotasCredito">
+    <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasCredito" Role="DetalleNotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoImputaciones_NotasCredito">
+    <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasCreditoImputacione" Role="DetalleNotasCreditoImputacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoImputacione">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoOrdenesCompra_NotasCredito">
+    <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasCreditoOrdenesCompra" Role="DetalleNotasCreditoOrdenesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoOrdenesCompra">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoProvincias_NotasCredito">
+    <End Type="DemoProntoModel.NotasCredito" Role="NotasCredito" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleNotasCreditoProvincia" Role="DetalleNotasCreditoProvincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoProvincia">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

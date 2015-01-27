@@ -89,7 +89,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_R_A").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -108,7 +109,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_F_A").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -127,7 +129,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_C_A").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -146,8 +149,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_D_A").datepicker({
                         changeMonth: true,
-                        changeYear: true
-                        //numberOfMonths: 2,
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                     });
                 </script>
             </div>
@@ -165,7 +168,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_F_B").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -184,7 +188,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_C_B").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -203,7 +208,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_D_B").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -222,7 +228,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_F_E").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -241,7 +248,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_C_E").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -260,7 +268,8 @@
                 <script type="text/jscript">
                     $("#FechaCAI_D_E").datepicker({
                         changeMonth: true,
-                        changeYear: true
+                        changeYear: true,
+                        dateFormat: 'dd/mm/yy'
                         //numberOfMonths: 2,
                     });
                 </script>
@@ -539,61 +548,3 @@
     
     
 }
-@*function getDataLine(grida, rowid){  //vykradeno z inineeditu a vohackovano
-
-                    if(grida.lastIndexOf("#", 0) === 0){
-                        grida = $(grida);
-                    }else{
-                        grida = $("#"+grida);
-                    }
-
-                    var nm, tmp={}, tmp2={}, tmp3= {}, editable, fr, cv, ind;
-
-                    ind = grida.jqGrid("getInd",rowid,true);
-                    if(ind === false) {return success;}
-                    editable = $(ind).attr("editable");
-                    if (editable==="1") {
-                        var cm;
-                        var colModel = grida.jqGrid("getGridParam","colModel") ;
-                        $("td",ind).each(function(i) {
-                            // cm = $('#mygrid').p.colModel[i];
-                            cm = colModel[i];
-                            nm = cm.name;
-                            if ( nm != 'cb' && nm != 'subgrid' && cm.editable===true && nm != 'rn' && !$(this).hasClass('not-editable-cell')) {
-                                switch (cm.edittype) {
-                                    case "checkbox":
-                                        var cbv = ["Yes","No"];
-                                        if(cm.editoptions ) {
-                                            cbv = cm.editoptions.value.split(":");
-                                        }
-                                        tmp[nm]=  $("input",this).is(":checked") ? cbv[0] : cbv[1]; 
-                                        break;
-                                    case 'text':
-                                    case 'password':
-                                    case 'textarea':
-                                    case "button" :
-                                        tmp[nm]=$("input, textarea",this).val();
-                                        break;
-                                    case 'select':
-                                        if(!cm.editoptions.multiple) {
-                                            tmp[nm] = $("select option:selected",this).val();
-                                            tmp2[nm] = $("select option:selected", this).text();
-                                        } else {
-                                            var sel = $("select",this), selectedText = [];
-                                            tmp[nm] = $(sel).val();
-                                            if(tmp[nm]) { tmp[nm]= tmp[nm].join(","); } else { tmp[nm] =""; }
-                                            $("select option:selected",this).each(
-                                                function(i,selected){
-                                                    selectedText[i] = $(selected).text();
-                                                }
-                                            );
-                                            tmp2[nm] = selectedText.join(",");
-                                        }
-                                        if(cm.formatter && cm.formatter == 'select') { tmp2={}; }
-                                        break;
-                                }
-                            }
-                        });
-                    }
-                    return tmp;
-                }*@

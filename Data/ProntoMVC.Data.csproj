@@ -331,6 +331,15 @@
     <Compile Include="Models\DetalleNotasDebitoProvincia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleObrasEquiposInstalado.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleObrasEquiposInstalados2.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleObrasPoliza.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleOrdenesCompra.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -587,6 +596,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposOperacionesGrupos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposPoliza.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposRetencionGanancia.cs">

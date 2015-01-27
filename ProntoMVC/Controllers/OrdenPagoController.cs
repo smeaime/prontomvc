@@ -2571,7 +2571,7 @@ namespace ProntoMVC.Controllers
                                 CtaCte.CotizacionEuro = OrdenPago.CotizacionEuro;
                                 CtaCte.CotizacionMoneda = OrdenPago.CotizacionMoneda;
                                 if (d.IdImputacion != -2) { CtaCte.IdTipoComp = 17; } else { CtaCte.IdTipoComp = 16; }
-                                CtaCte.IdComprobante = mIdOrdenPago;
+                                CtaCte.IdComprobante = OrdenPago.IdOrdenPago;
                                 if (d.IdImputacion > 0) { CtaCte.IdImputacion = d.IdImputacion; }
                                 CtaCte.ImporteTotal = mImportePesos;
                                 CtaCte.Saldo = mImportePesos;

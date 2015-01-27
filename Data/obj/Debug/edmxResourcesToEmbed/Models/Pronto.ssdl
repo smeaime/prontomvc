@@ -1561,6 +1561,49 @@
     <Property Name="IdProvinciaDestino" Type="int" />
     <Property Name="Porcentaje" Type="numeric" Precision="6" Scale="2" />
   </EntityType>
+  <EntityType Name="DetalleObrasEquiposInstalados">
+    <Key>
+      <PropertyRef Name="IdDetalleObraEquipoInstalado" />
+    </Key>
+    <Property Name="IdDetalleObraEquipoInstalado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="FechaInstalacion" Type="datetime" />
+    <Property Name="FechaDesinstalacion" Type="datetime" />
+    <Property Name="Observaciones" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DetalleObrasEquiposInstalados2">
+    <Key>
+      <PropertyRef Name="IdDetalleObraEquipoInstalado2" />
+    </Key>
+    <Property Name="IdDetalleObraEquipoInstalado2" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDetalleObraEquipoInstalado" Type="int" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="FechaInstalacion" Type="datetime" />
+    <Property Name="FechaDesinstalacion" Type="datetime" />
+    <Property Name="Observaciones" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DetalleObrasPolizas">
+    <Key>
+      <PropertyRef Name="IdDetalleObraPoliza" />
+    </Key>
+    <Property Name="IdDetalleObraPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="IdTipoPoliza" Type="int" />
+    <Property Name="IdProveedor" Type="int" />
+    <Property Name="NumeroPoliza" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="FechaVigencia" Type="datetime" />
+    <Property Name="FechaVencimientoCuota" Type="datetime" />
+    <Property Name="Importe" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="FechaEstimadaRecupero" Type="datetime" />
+    <Property Name="FechaRecupero" Type="datetime" />
+    <Property Name="CondicionRecupero" Type="varchar" MaxLength="100" />
+    <Property Name="MotivoDeContratacionSeguro" Type="varchar" MaxLength="100" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="FechaFinalizacionCobertura" Type="datetime" />
+  </EntityType>
   <EntityType Name="DetalleOrdenesCompra">
     <Key>
       <PropertyRef Name="IdDetalleOrdenCompra" />
@@ -3933,6 +3976,13 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdTipoOperacionGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="TiposPoliza">
+    <Key>
+      <PropertyRef Name="IdTipoPoliza" />
+    </Key>
+    <Property Name="IdTipoPoliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="TiposRetencionGanancia">
     <Key>
       <PropertyRef Name="IdTipoRetencionGanancia" />
@@ -4835,6 +4885,54 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleNotasCredito_NotasCredito">
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="0..1" />
+    <End Role="DetalleNotasCredito" Type="Self.DetalleNotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoImputaciones_NotasCredito">
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="0..1" />
+    <End Role="DetalleNotasCreditoImputaciones" Type="Self.DetalleNotasCreditoImputaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoImputaciones">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoOrdenesCompra_NotasCredito">
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="0..1" />
+    <End Role="DetalleNotasCreditoOrdenesCompra" Type="Self.DetalleNotasCreditoOrdenesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoOrdenesCompra">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasCreditoProvincias_NotasCredito">
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="0..1" />
+    <End Role="DetalleNotasCreditoProvincias" Type="Self.DetalleNotasCreditoProvincias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasCredito">
+        <PropertyRef Name="IdNotaCredito" />
+      </Principal>
+      <Dependent Role="DetalleNotasCreditoProvincias">
+        <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleNotasDebito_Conceptos">
     <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
     <End Role="DetalleNotasDebito" Type="Self.DetalleNotasDebito" Multiplicity="*" />
@@ -4844,6 +4942,66 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="DetalleNotasDebito">
         <PropertyRef Name="IdConcepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasDebito_NotasDebito">
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="0..1" />
+    <End Role="DetalleNotasDebito" Type="Self.DetalleNotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Principal>
+      <Dependent Role="DetalleNotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleNotasDebitoProvincias_NotasDebito">
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="0..1" />
+    <End Role="DetalleNotasDebitoProvincias" Type="Self.DetalleNotasDebitoProvincias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotasDebito">
+        <PropertyRef Name="IdNotaDebito" />
+      </Principal>
+      <Dependent Role="DetalleNotasDebitoProvincias">
+        <PropertyRef Name="IdNotaDebito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleObrasEquiposInstalados_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="DetalleObrasEquiposInstalados" Type="Self.DetalleObrasEquiposInstalados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasEquiposInstalados">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleObrasEquiposInstalados2_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="DetalleObrasEquiposInstalados2" Type="Self.DetalleObrasEquiposInstalados2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasEquiposInstalados2">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleObrasPolizas_Obras">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="DetalleObrasPolizas" Type="Self.DetalleObrasPolizas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="DetalleObrasPolizas">
+        <PropertyRef Name="IdObra" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5528,6 +5686,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
   </Function>
+  <Function Name="Obras_EliminarCuentasNoUsadasPorIdObra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdObra" Type="int" Mode="In" />
+  </Function>
   <Function Name="OrdenesCompra_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="OrdenesPago_TX_EnCaja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Estado" Type="varchar" Mode="In" />
@@ -5631,6 +5792,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleNotasCreditoProvincias" EntityType="Self.DetalleNotasCreditoProvincias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleNotasDebito" EntityType="Self.DetalleNotasDebito" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleNotasDebitoProvincias" EntityType="Self.DetalleNotasDebitoProvincias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleObrasEquiposInstalados" EntityType="Self.DetalleObrasEquiposInstalados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleObrasEquiposInstalados2" EntityType="Self.DetalleObrasEquiposInstalados2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleObrasPolizas" EntityType="Self.DetalleObrasPolizas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleOrdenesCompra" EntityType="Self.DetalleOrdenesCompra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleOrdenesPago" EntityType="Self.DetalleOrdenesPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleOrdenesPagoCuentas" EntityType="Self.DetalleOrdenesPagoCuentas" Schema="dbo" store:Type="Tables" />
@@ -5707,6 +5871,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="TiposNegociosVentas" EntityType="Self.TiposNegociosVentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposOperaciones" EntityType="Self.TiposOperaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposOperacionesGrupos" EntityType="Self.TiposOperacionesGrupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposPoliza" EntityType="Self.TiposPoliza" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
@@ -5957,9 +6122,45 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Conceptos" EntitySet="Conceptos" />
       <End Role="DetalleNotasCredito" EntitySet="DetalleNotasCredito" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCredito_NotasCredito" Association="Self.FK_DetalleNotasCredito_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+      <End Role="DetalleNotasCredito" EntitySet="DetalleNotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoImputaciones_NotasCredito" Association="Self.FK_DetalleNotasCreditoImputaciones_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+      <End Role="DetalleNotasCreditoImputaciones" EntitySet="DetalleNotasCreditoImputaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" Association="Self.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+      <End Role="DetalleNotasCreditoOrdenesCompra" EntitySet="DetalleNotasCreditoOrdenesCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasCreditoProvincias_NotasCredito" Association="Self.FK_DetalleNotasCreditoProvincias_NotasCredito">
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+      <End Role="DetalleNotasCreditoProvincias" EntitySet="DetalleNotasCreditoProvincias" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleNotasDebito_Conceptos" Association="Self.FK_DetalleNotasDebito_Conceptos">
       <End Role="Conceptos" EntitySet="Conceptos" />
       <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasDebito_NotasDebito" Association="Self.FK_DetalleNotasDebito_NotasDebito">
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+      <End Role="DetalleNotasDebito" EntitySet="DetalleNotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleNotasDebitoProvincias_NotasDebito" Association="Self.FK_DetalleNotasDebitoProvincias_NotasDebito">
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+      <End Role="DetalleNotasDebitoProvincias" EntitySet="DetalleNotasDebitoProvincias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleObrasEquiposInstalados_Obras" Association="Self.FK_DetalleObrasEquiposInstalados_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="DetalleObrasEquiposInstalados" EntitySet="DetalleObrasEquiposInstalados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleObrasEquiposInstalados2_Obras" Association="Self.FK_DetalleObrasEquiposInstalados2_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="DetalleObrasEquiposInstalados2" EntitySet="DetalleObrasEquiposInstalados2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleObrasPolizas_Obras" Association="Self.FK_DetalleObrasPolizas_Obras">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="DetalleObrasPolizas" EntitySet="DetalleObrasPolizas" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleOrdenesCompra_OrdenesCompra" Association="Self.FK_DetalleOrdenesCompra_OrdenesCompra">
       <End Role="OrdenesCompra" EntitySet="OrdenesCompra" />

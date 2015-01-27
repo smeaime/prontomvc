@@ -2,7 +2,7 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="53">
+      <edmx:Diagram Name="Pronto" ZoomLevel="89">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
@@ -2004,8 +2004,8 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.EjerciciosPeriodo" Width="1.5" PointX="22.875" PointY="21.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Empresa" Width="1.5" PointX="18.875" PointY="24.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Formulario" Width="1.5" PointX="3.875" PointY="24.75" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasCredito" Width="1.5" PointX="13" PointY="135.5" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasDebito" Width="1.5" PointX="13" PointY="150" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasCredito" Width="3.625" PointX="13" PointY="135.5" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasDebito" Width="3.5" PointX="8.875" PointY="142.25" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposValore" Width="1.5" PointX="20.875" PointY="24.75" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Cajas_Cuentas">
           <edmx:ConnectorPoint PointX="4.9999975" PointY="5.7" />
@@ -2313,6 +2313,22 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposNegociosVenta" Width="1.5" PointX="13.75" PointY="23.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacione" Width="1.5" PointX="15.75" PointY="23.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacionesGrupos" Width="1.5" PointX="0.75" PointY="25.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.GruposObra" Width="1.5" PointX="25.375" PointY="2.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.UnidadesOperativa" Width="1.5" PointX="25.375" PointY="5.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Colore" Width="1.5" PointX="25.375" PointY="8.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasEquiposInstalado" Width="1.5" PointX="4" PointY="38.375" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasEquiposInstalados2" Width="1.5" PointX="4" PointY="35.125" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasPoliza" Width="1.5" PointX="4" PointY="30.5" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados_Obras" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados2_Obras" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasPolizas_Obras" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposPoliza" Width="1.5" PointX="25.375" PointY="12.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasDebitoProvincias_NotasDebito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

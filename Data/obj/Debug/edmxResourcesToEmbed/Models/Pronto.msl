@@ -4602,5 +4602,60 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DetalleObrasEquiposInstalados">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleObrasEquiposInstalado">
+        <MappingFragment StoreEntitySet="DetalleObrasEquiposInstalados">
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaDesinstalacion" ColumnName="FechaDesinstalacion" />
+          <ScalarProperty Name="FechaInstalacion" ColumnName="FechaInstalacion" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="IdDetalleObraEquipoInstalado" ColumnName="IdDetalleObraEquipoInstalado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleObrasEquiposInstalados2">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleObrasEquiposInstalados2">
+        <MappingFragment StoreEntitySet="DetalleObrasEquiposInstalados2">
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaDesinstalacion" ColumnName="FechaDesinstalacion" />
+          <ScalarProperty Name="FechaInstalacion" ColumnName="FechaInstalacion" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="IdDetalleObraEquipoInstalado" ColumnName="IdDetalleObraEquipoInstalado" />
+          <ScalarProperty Name="IdDetalleObraEquipoInstalado2" ColumnName="IdDetalleObraEquipoInstalado2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleObrasPolizas">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleObrasPoliza">
+        <MappingFragment StoreEntitySet="DetalleObrasPolizas">
+          <ScalarProperty Name="FechaFinalizacionCobertura" ColumnName="FechaFinalizacionCobertura" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="MotivoDeContratacionSeguro" ColumnName="MotivoDeContratacionSeguro" />
+          <ScalarProperty Name="CondicionRecupero" ColumnName="CondicionRecupero" />
+          <ScalarProperty Name="FechaRecupero" ColumnName="FechaRecupero" />
+          <ScalarProperty Name="FechaEstimadaRecupero" ColumnName="FechaEstimadaRecupero" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="FechaVencimientoCuota" ColumnName="FechaVencimientoCuota" />
+          <ScalarProperty Name="FechaVigencia" ColumnName="FechaVigencia" />
+          <ScalarProperty Name="NumeroPoliza" ColumnName="NumeroPoliza" />
+          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+          <ScalarProperty Name="IdTipoPoliza" ColumnName="IdTipoPoliza" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="IdDetalleObraPoliza" ColumnName="IdDetalleObraPoliza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposPolizas">
+      <EntityTypeMapping TypeName="DemoProntoModel.TiposPoliza">
+        <MappingFragment StoreEntitySet="TiposPoliza">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoPoliza" ColumnName="IdTipoPoliza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Obras_EliminarCuentasNoUsadasPorIdObra" FunctionName="DemoProntoModel.Store.Obras_EliminarCuentasNoUsadasPorIdObra" />
   </EntityContainerMapping>
 </Mapping>

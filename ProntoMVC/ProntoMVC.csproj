@@ -235,11 +235,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BancoController.cs" />
+    <Compile Include="Controllers\EjerciciosContableController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\GruposObraControlles.cs" />
     <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\TiposPolizaController.cs" />
+    <Compile Include="Controllers\TiposCuentaGruposController.cs" />
     <Compile Include="Controllers\UnidadesOperativaController.cs" />
     <Compile Include="Controllers\CargoControlles.cs" />
     <Compile Include="Controllers\VendedorController.cs" />
@@ -820,6 +823,9 @@
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Scripts\ScriptCliente.js" />
+    <Content Include="Scripts\ScriptNotaCredito.js" />
+    <Content Include="Scripts\ScriptNotaDebito.js" />
+    <Content Include="Scripts\ScriptObra.js" />
     <Content Include="Scripts\ScriptProveedor.js" />
     <Content Include="Views\Moneda\Index.cshtml" />
     <Content Include="Views\Transportista\Delete.cshtml" />
@@ -849,6 +855,9 @@
     <Content Include="Views\Color\Index.cshtml" />
     <Content Include="Views\Modelo\Index.cshtml" />
     <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\TiposCuentaGrupos\Index.cshtml" />
+    <Content Include="Views\EjerciciosContable\Index.cshtml" />
+    <Content Include="Views\Obra\Edit.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1284,13 +1293,9 @@
     <Content Include="Views\Subdiario\Index.cshtml" />
     <Content Include="Views\Subdiario\IndexExterno.cshtml" />
     <Content Include="Views\NotaDebito\Edit.cshtml" />
-    <Content Include="Views\NotaDebito\EditExterno.cshtml" />
     <Content Include="Views\NotaDebito\Index.cshtml" />
-    <Content Include="Views\NotaDebito\IndexExterno.cshtml" />
     <Content Include="Views\NotaCredito\Edit.cshtml" />
-    <Content Include="Views\NotaCredito\EditExterno.cshtml" />
     <Content Include="Views\NotaCredito\Index.cshtml" />
-    <Content Include="Views\NotaCredito\IndexExterno.cshtml" />
     <Content Include="Views\Cuenta\Edit.cshtml" />
     <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\Index.cshtml" />

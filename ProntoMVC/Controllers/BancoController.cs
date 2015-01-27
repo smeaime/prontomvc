@@ -172,7 +172,7 @@ namespace ProntoMVC.Controllers
         {
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
-            foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => x.Banco.IdCuenta == IdCuenta && x.Activa == "SI").OrderBy(x => x.Cuenta).ToList())
+            foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => (IdCuenta == 0 || x.Banco.IdCuenta == IdCuenta) && x.Activa == "SI").OrderBy(x => x.Cuenta).ToList())
                 Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre + " " + u.Cuenta);
 
             return PartialView("Select", Datacombo);
@@ -182,7 +182,7 @@ namespace ProntoMVC.Controllers
         {
             Dictionary<int, string> Datacombo = new Dictionary<int, string>();
 
-            foreach (Caja u in db.Cajas.Where(x => x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
+            foreach (Caja u in db.Cajas.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
                 Datacombo.Add(u.IdCaja, u.Descripcion);
 
             return PartialView("Select", Datacombo);

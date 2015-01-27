@@ -20,53 +20,53 @@ using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 
 using ProntoMVC.Models;
-using ProntoMVC.Data.Models; 
+using ProntoMVC.Data.Models;
 using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
-    public partial class GananciaController : ProntoBaseController
+    public partial class TiposCuentaGruposController : ProntoBaseController
     {
         [HttpGet]
         public virtual ActionResult Index(int page = 1)
         {
-            var Tabla = db.Ganancias
-                .OrderBy(s => s.IdGanancia)
+            var Tabla = db.TiposCuentaGrupos
+                .OrderBy(s => s.Descripcion)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-            
+
             ViewBag.CurrentPage = page;
             ViewBag.pageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)db.Ganancias.Count() / pageSize);
+            ViewBag.TotalPages = Math.Ceiling((double)db.TiposCuentaGrupos.Count() / pageSize);
 
             return View(Tabla);
         }
 
-        public virtual JsonResult BatchUpdate(Ganancia Ganancia)
+        public virtual JsonResult BatchUpdate(TiposCuentaGrupos TiposCuentaGrupos)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (Ganancia.IdGanancia > 0)
+                    if (TiposCuentaGrupos.IdTipoCuentaGrupo > 0)
                     {
-                        var EntidadOriginal = db.Ganancias.Where(p => p.IdGanancia == Ganancia.IdGanancia).SingleOrDefault();
+                        var EntidadOriginal = db.TiposCuentaGrupos.Where(p => p.IdTipoCuentaGrupo == TiposCuentaGrupos.IdTipoCuentaGrupo).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Ganancia);
+                        EntidadEntry.CurrentValues.SetValues(TiposCuentaGrupos);
 
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
                     }
                     else
                     {
-                        db.Ganancias.Add(Ganancia);
+                        db.TiposCuentaGrupos.Add(TiposCuentaGrupos);
                     }
 
                     db.SaveChanges();
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
-                    return Json(new { Success = 1, IdGanancia = Ganancia.IdGanancia, ex = "" });
+                    return Json(new { Success = 1, IdTipoCuentaGrupo = TiposCuentaGrupos.IdTipoCuentaGrupo, ex = "" });
                 }
                 else
                 {
@@ -95,10 +95,10 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult Delete(int Id)
         {
-            Ganancia Ganancia = db.Ganancias.Find(Id);
-            db.Ganancias.Remove(Ganancia);
+            TiposCuentaGrupos TiposCuentaGrupos = db.TiposCuentaGrupos.Find(Id);
+            db.TiposCuentaGrupos.Remove(TiposCuentaGrupos);
             db.SaveChanges();
-            return Json(new { Success = 1, IdGanancia = Id, ex = "" });
+            return Json(new { Success = 1, IdTipoCuentaGrupo = Id, ex = "" });
         }
 
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
@@ -107,7 +107,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var Entidad = db.Ganancias.Include("TiposRetencionGanancia").AsQueryable();
+            var Entidad = db.TiposCuentaGrupos.AsQueryable();
             //if (_search)
             //{
             //    switch (searchField.ToLower())
@@ -126,7 +126,7 @@ namespace ProntoMVC.Controllers
             //}
 
             var Entidad1 = (from a in Entidad
-                            select new { IdGanancia = a.IdGanancia }).Where(campo).ToList();
+                            select new { IdTipoCuentaGrupo = a.IdTipoCuentaGrupo }).Where(campo).ToList();
 
             int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -134,15 +134,11 @@ namespace ProntoMVC.Controllers
             var data = (from a in Entidad
                         select new
                         {
-                            a.IdGanancia,
-                            a.IdTipoRetencionGanancia,
-                            CategoriaGanancias = a.TiposRetencionGanancia.Descripcion,
-                            a.Desde,
-                            a.Hasta,
-                            a.SumaFija,
-                            a.PorcentajeAdicional,
-                            a.MinimoNoImponible,
-                            a.MinimoARetener
+                            a.IdTipoCuentaGrupo,
+                            a.Descripcion,
+                            a.EsCajaBanco,
+                            IdTipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? 1 : ((a.EsCajaBanco ?? "") == "BA" ? 2 : ((a.EsCajaBanco ?? "") == "TC" ? 3 : 4)),
+                            TipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? "Cajas" : ((a.EsCajaBanco ?? "") == "BA" ? "Bancos" : ((a.EsCajaBanco ?? "") == "TC" ? "Tarjetas" : "Otros"))
                         }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -153,23 +149,37 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdGanancia.ToString(),
-                            cell = new string[] { 
-                                "",
-                                //"<a href="+ Url.Action("Imprimir",new {id = a.IdGanancia} )  +">Imprimir</>",
-                                a.IdGanancia.ToString(),
-                                a.IdTipoRetencionGanancia.ToString(),
-                                a.CategoriaGanancias,
-                                a.Desde.ToString(),
-                                a.Hasta.ToString(),
-                                a.SumaFija.ToString(),
-                                a.PorcentajeAdicional.ToString(),
-                                a.MinimoNoImponible.ToString(),
-                                a.MinimoARetener.ToString()
+                            id = a.IdTipoCuentaGrupo.ToString(),
+                            cell = new string[] { "",
+                                a.IdTipoCuentaGrupo.ToString(),
+                                a.EsCajaBanco.NullSafeToString(),
+                                a.IdTipoGrupo.ToString(),
+                                a.Descripcion.NullSafeToString(),
+                                a.TipoGrupo.NullSafeToString()
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult GetTiposCuentaGrupos()
+        {
+            Dictionary<int, string> tipos = new Dictionary<int, string>();
+            foreach (TiposCuentaGrupos u in db.TiposCuentaGrupos.OrderBy(x => x.Descripcion).ToList())
+                tipos.Add(u.IdTipoCuentaGrupo, u.Descripcion);
+
+            return PartialView("Select", tipos);
+        }
+
+        public virtual ActionResult GetTiposGrupos()
+        {
+            Dictionary<int, string> tiposgrupos = new Dictionary<int, string>();
+            tiposgrupos.Add(1, "Cajas");
+            tiposgrupos.Add(2, "Bancos");
+            tiposgrupos.Add(3, "Tarjetas");
+            tiposgrupos.Add(4, "Otros");
+
+            return PartialView("Select", tiposgrupos);
         }
     }
 }

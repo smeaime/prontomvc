@@ -1406,10 +1406,6 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
         public virtual ActionResult Articulos()
         {
             Dictionary<int, string> articulos = new Dictionary<int, string>();
@@ -1425,12 +1421,11 @@ namespace ProntoMVC.Controllers
                          select new
                          {
                              value = item.IdArticulo,
-                             title = item.Descripcion
+                             title = item.Descripcion,
+                             codigo = item.Codigo
                          }).ToList(),
                          JsonRequestBehavior.AllowGet);
         }
-
-
 
         public virtual ContentResult GetCodigosArticulosAutocomplete(string q, int limit, Int64 timestamp)
         {
@@ -1478,8 +1473,22 @@ namespace ProntoMVC.Controllers
             return a;
         }
 
+        //public virtual JsonResult GetArticulosAutocomplete2(string term)
+        //{
+        //    var q = (from item in db.Articulos
+        //             where item.Descripcion.StartsWith(term)
+        //             orderby item.Descripcion
+        //             select new
+        //             {
+        //                 id = item.IdArticulo,
+        //                 value = item.Descripcion,
+        //                 codigo = item.Codigo
+        //             }).Take(20).ToList();
 
+        //    if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
+        //    return Json(q, JsonRequestBehavior.AllowGet);
+        //}
 
         public virtual JsonResult GetArticulosAutocomplete2(string term)
         {
@@ -1843,16 +1852,22 @@ namespace ProntoMVC.Controllers
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult GetArticuloPorId(int IdArticulo)
+        {
+            var filtereditems = (from a in db.Articulos
+                                 where (a.IdArticulo == IdArticulo)
+                                 select new
+                                 {
+                                     id = a.IdArticulo,
+                                     Articulo = a.Descripcion.Trim(),
+                                     value = a.Descripcion.Trim()
+                                 }).ToList();
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

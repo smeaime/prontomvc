@@ -1,12 +1,17 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Ubicacion>
+﻿@model IEnumerable<ProntoMVC.Data.Models.TiposCuentaGrupos>
 @{
-    ViewBag.Title = "Ubicaciones";
+    ViewBag.Title = "Tipos cuenta grupos";
 }
+@*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
-<div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+<div class="row-fluid">
+    <div class="span10 lightblue">
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
+    </div>
+</div>
 
 <style>
     .myLink {
@@ -50,16 +55,17 @@
         var datos = $("#formid").serializeObject();
         var err;
 
-        datos.IdUbicacion = gridId;
-        datos.IdDeposito = dataFromTheRow.IdDeposito;
+        datos.IdTipoCuentaGrupo = gridId;
         datos.Descripcion = dataFromTheRow.Descripcion;
-        datos.Estanteria = dataFromTheRow.Estanteria;
-        datos.Modulo = dataFromTheRow.Modulo;
-        datos.Gabeta = dataFromTheRow.Gabeta;
-        datos.DepositoActual = dataFromTheRow.DepositoActual;
-        
+        datos.IdTipoGrupo = dataFromTheRow.IdTipoGrupo;
+        datos.TipoGrupo = dataFromTheRow.TipoGrupo;
+        if (dataFromTheRow.IdTipoGrupo == 1) { datos.EsCajaBanco = "CA"; }
+        if (dataFromTheRow.IdTipoGrupo == 2) { datos.EsCajaBanco = "BA"; }
+        if (dataFromTheRow.IdTipoGrupo == 3) { datos.EsCajaBanco = "TC"; }
+        if (dataFromTheRow.IdTipoGrupo == 4) { datos.EsCajaBanco = ""; }
+
         err = ""
-        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir la descripcion.\n"
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -68,16 +74,16 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Ubicacion/BatchUpdate',
+                url: ROOT + 'TiposCuentaGrupos/BatchUpdate',
                 dataType: 'json',
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
-                        var valor = result.IdUbicacion;
+                        var valor = result.IdTipoCuentaGrupo;
                         if (valor == "") { valor = "0"; }
-                        $('#Lista').jqGrid('setCell', rowid, 'IdUbicacion', valor);
+                        $('#Lista').jqGrid('setCell', rowid, 'IdTipoCuentaGrupo', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
@@ -97,7 +103,6 @@
                         $('#grabar2').attr("disabled", false).val("Aceptar");
                         $("#textoMensajeAlerta").html(xhr.responseText);
                         $("#mensajeAlerta").show();
-                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
                     }
                 }
             });
@@ -106,14 +111,14 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        var idprincipal = dataFromTheRow['IdUbicacion'];
+        var idprincipal = dataFromTheRow['IdTipoCuentaGrupo'];
         if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Ubicacion/Delete',
+                url: ROOT + 'TiposCuentaGrupos/Delete',
                 dataType: 'json',
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
@@ -123,24 +128,6 @@
                         alert('No se pudo eliminar el registro.');
                     }
                 },
-                error: function (xhr, textStatus, exceptionThrown) {
-                    try {
-                        var errorData = $.parseJSON(xhr.responseText);
-                        var errorMessages = [];
-                        for (var key in errorData) { errorMessages.push(errorData[key]); }
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                        $("#mensajeAlerta").show();
-                        alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
-                    } catch (e) {
-                        $('html, body').css('cursor', 'auto');
-                        $('#grabar2').attr("disabled", false).val("Aceptar");
-                        $("#textoMensajeAlerta").html(xhr.responseText);
-                        $("#mensajeAlerta").show();
-                        alert(xhr.responseText.replace(/<br\/>/g, '\n'));
-                    }
-                }
             });
         };
     };
@@ -207,40 +194,35 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Ubicacion/TT/',
+            url: ROOT + 'TiposCuentaGrupos/TT/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdUbicacion', 'IdDeposito', 'Descripcion', 'Estanteria', 'Modulo', 'Gabeta', 'Deposito'],
+            colNames: ['Acciones', 'IdTipoCuentaGrupo', 'EsCajaBanco', 'IdTipoGrupo', 'Descripcion', 'Tipo de grupo'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
-                        { name: 'IdUbicacion', index: 'IdUbicacion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdDeposito', index: 'IdDeposito', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
+                        { name: 'IdTipoCuentaGrupo', index: 'IdTipoCuentaGrupo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'EsCajaBanco', index: 'EsCajaBanco', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdTipoGrupo', index: 'IdTipoGrupo', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Estanteria', index: 'Estanteria', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Modulo', index: 'Modulo', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                        { name: 'Gabeta', index: 'Gabeta', width: 70, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'DepositoActual', index: 'DepositoActual', align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                            name: 'TipoGrupo', index: 'TipoGrupo', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                             editoptions: {
-                                dataUrl: ROOT + 'Deposito/GetDepositos',
-                                dataInit: function (elem) {
-                                    $(elem).width(290);
-                                },
+                                dataUrl: ROOT + 'TiposCuentaGrupos/GetTiposGrupos',
                                 dataEvents: [{
                                     type: 'change', fn: function (e) {
                                         var $this = $(e.target), $td;
                                         if ($this.hasClass("FormElement")) {
                                             // form editing
-                                            $('#IdDeposito').val(this.value);
+                                            $('#IdTipoGrupo').val(this.value);
                                         } else {
                                             $td = $this.closest("td");
                                             if ($td.hasClass("edit-cell")) {
                                                 // cell editing
                                                 var rowid = $('#Lista').getGridParam('selrow');
                                                 var valor = this.value;
-                                                if (valor == "") { valor = "0"; }
-                                                $('#Lista').jqGrid('setCell', rowid, 'IdDeposito', valor);
+                                                if (valor == "") { valor = "0";}
+                                                $('#Lista').jqGrid('setCell', rowid, 'IdTipoGrupo', valor);
                                             } else {
                                                 // inline editing
                                             }
@@ -283,14 +265,13 @@
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
+            shrinkToFit: true,
             width: 'auto',
-            autowidth: true,
-            shrinkToFit: false,
             height: '100%',
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>UBICACIONES</b>',
+            caption: '<b>GRUPOS PARA CUENTAS CONTABLES</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
             editurl: ROOT + 'Empleado/EditGridData/'
