@@ -45,7 +45,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Facturas)) throw new Exception("No tenés permisos");
 
             //if (db == null)
             //{
@@ -99,7 +99,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
 
 
-            if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Facturas)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdFactura <= 0)
@@ -132,7 +132,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Factura Factura)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Facturas)) throw new Exception("No tenés permisos");
 
             try
             {
@@ -1048,7 +1048,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                if (!PuedeLeer("Facturas"))
+                if (!PuedeLeer(enumNodos.Facturas))
                 {
                     o = new Factura();
                     CargarViewBag(o);
@@ -1200,7 +1200,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(Factura Factura)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Facturas)) throw new Exception("No tenés permisos");
             if (ModelState.IsValid)
             {
                 db.Entry(Factura).State = System.Data.Entity.EntityState.Modified;
@@ -3696,6 +3696,7 @@ a.FechaVencimientoORechazoCAE.NullSafeToString() //  as [Fecha vto.CAE],
 
         void MercadoPago()
         {
+            return;
 
             // http://developers.mercadopago.com/documentacion/recibir-pagos#
             MP mp = new MP("7300779784794197", "yKhGAzhyjGOck9Lox4UEK9fSs3fVpUMR");

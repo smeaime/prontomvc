@@ -126,7 +126,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult IndexFF()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            //if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
 
             return Index();
@@ -134,7 +134,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            //if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
             if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -147,7 +147,7 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+           // if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
@@ -908,7 +908,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate_ORIGINALSINREPO(ComprobanteProveedor ComprobanteProveedor)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
 
@@ -1178,7 +1178,7 @@ namespace ProntoMVC.Controllers
         public virtual JsonResult BatchUpdate(ViewModelComprobanteProveedor ComprobanteProveedor)
         //public virtual JsonResult BatchUpdate(ComprobanteProveedor ComprobanteProveedor)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
             if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
@@ -1462,7 +1462,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
             if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
              !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
@@ -1540,7 +1540,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditFF(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
             return Edit(id);
 
         }
@@ -4017,7 +4017,7 @@ namespace ProntoMVC.Controllers
                 // return false;
             }
 
-            //  if (!PuedeEditar("Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            //  if (!PuedeEditar(enumNodos.Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
 
@@ -4847,7 +4847,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult EditExterno(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
 
 

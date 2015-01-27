@@ -97,7 +97,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(Moneda Moneda)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Monedas)) throw new Exception("No tenés permisos");
 
             try
             {

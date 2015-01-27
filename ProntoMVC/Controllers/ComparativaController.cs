@@ -184,7 +184,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
             //if (db == null)
             //{
@@ -529,7 +529,7 @@ namespace ProntoMVC.Controllers
             //    // return false;
             //}
 
-            if (!PuedeEditar("Comparativas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+            if (!PuedeEditar(enumNodos.Comparativas)) sErrorMsg += "\n" + "No tiene permisos de edición";
 
 
             if (o.IdComparativa <= 0)
@@ -871,7 +871,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdateConGrilla(Comparativa o, List<RenglonJQgrid> grilla = null)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
 
             o.DetalleComparativas.Clear();
@@ -884,7 +884,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult BatchUpdate(Comparativa Comparativa)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.Comparativas)) throw new Exception("No tenés permisos");
 
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&

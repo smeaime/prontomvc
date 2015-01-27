@@ -13,7 +13,8 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Reflection;
-using ProntoMVC.Data.Models; using ProntoMVC.Models;
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
@@ -24,7 +25,7 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            //            if (!PuedeLeer(enumNodos.cuen)) throw new Exception("No tenés permisos");
 
             if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
@@ -33,7 +34,7 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            //if (!PuedeLeer(enumNodos.)) throw new Exception("No tenés permisos");
 
             return View();
         }
@@ -56,7 +57,7 @@ namespace ProntoMVC.Controllers
                 idproveedor = 2;
                 pendiente = "N"; // "N"
             }
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC,"CtasCtesA_TXPorTrs", idproveedor, -1, DateTime.Now, null, null, pendiente);
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesA_TXPorTrs", idproveedor, -1, DateTime.Now, null, null, pendiente);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             if (FechaInicial != string.Empty)
@@ -160,7 +161,7 @@ namespace ProntoMVC.Controllers
             IdProveedor = IdProveedor ?? -1;
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
-            var pendiente = "S"; 
+            var pendiente = "S";
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesA_TXPorTrs", IdProveedor, -1, DateTime.Now, null, null, pendiente);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 

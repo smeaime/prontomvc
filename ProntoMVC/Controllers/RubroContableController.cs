@@ -33,13 +33,13 @@ namespace ProntoMVC.Controllers
     {
         public virtual ViewResult Index()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.RubrosContables)) throw new Exception("No tenés permisos");
 
             return View();
         }
         public virtual ViewResult IndexExterno()
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.RubrosContables)) throw new Exception("No tenés permisos");
 
             return View();
         }

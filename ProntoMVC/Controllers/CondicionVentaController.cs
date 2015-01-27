@@ -46,7 +46,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.CondicionesCompra)) throw new Exception("No tenés permisos");
             Condiciones_Compra o;
             if (id <= 0)
             {
@@ -82,7 +82,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult BatchUpdate(Condiciones_Compra CondicionCompra)
         {
-            if (!PuedeEditar()) throw new Exception("No tenés permisos");
+            if (!PuedeEditar(enumNodos.CondicionesCompra)) throw new Exception("No tenés permisos");
 
             try
             {

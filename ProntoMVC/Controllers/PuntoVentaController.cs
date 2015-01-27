@@ -56,7 +56,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Edit(int id)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.PuntosVenta)) throw new Exception("No tenés permisos");
             //ojo: si llama a esta funcion al hacer POST, debe ser porque la vista no pusiste el Html.BeginForm()
           Data.Models.PuntosVenta PuntosVenta;
 
@@ -114,7 +114,7 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual ActionResult Edit(Data.Models.PuntosVenta PuntosVenta)
         {
-            if (!PuedeLeer()) throw new Exception("No tenés permisos");
+            if (!PuedeLeer(enumNodos.PuntosVenta)) throw new Exception("No tenés permisos");
             try
             {
 
