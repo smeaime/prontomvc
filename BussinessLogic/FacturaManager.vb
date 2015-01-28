@@ -2032,6 +2032,7 @@ Mal:
                 'averiguo el id del talonario 
                 Dim IdPuntoVenta = IdPuntoVentaComprobanteFacturaSegunSubnumeroYLetra(SC, NumeroDePuntoVenta, Letra)
 
+                If IdPuntoVenta <= 0 Then Return -1
 
                 Dim oPto = EntidadManager.GetItem(SC, "PuntosVenta", IdPuntoVenta)
                 Return oPto.Item("ProximoNumero")
