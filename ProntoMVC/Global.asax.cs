@@ -10,6 +10,9 @@ using System.Web.Security;
 
 using System.Configuration;
 
+using StackExchange.Profiling;
+using StackExchange.Profiling.EntityFramework6;
+
 
 namespace ProntoMVC
 {
@@ -49,8 +52,27 @@ namespace ProntoMVC
             );
         }
 
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                MiniProfiler.Start();
+            }
+        }
+
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Stop();
+        }
+
+
         protected void Application_Start()
         {
+
+
+            MiniProfilerEF6.Initialize();
+
 
             ViewEngines.Engines.Add(new RazorViewEngine());
 
@@ -214,7 +236,7 @@ namespace ProntoMVC
                 nombreLargo = AppDomain.CurrentDomain.BaseDirectory + @"Error\" + DateTime.Today.ToString("dd-MM-yy") + ".txt";
             }
 
-            string log="";
+            string log = "";
             try
             {
                 log = System.IO.File.ReadAllText(nombreLargo);
@@ -222,7 +244,7 @@ namespace ProntoMVC
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
 
@@ -258,19 +280,20 @@ namespace ProntoMVC
 
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 try
                 {
                     ErrHandler.WriteError(ex);
                 }
                 catch (Exception)
                 {
-                    
+
                     //throw;
                 }
-                        
-                
-            
+
+
+
             };
 
 
