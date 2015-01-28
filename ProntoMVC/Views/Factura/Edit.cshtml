@@ -169,7 +169,7 @@
                                         $.getJSON('@Url.Action("PuntosVenta", "Cliente")',
                                                     {
                                                         IdCodigoIva: IdCodigoIva,
-                                                        PuntoVenta: parseInt( $("#PuntoVenta option:selected").text(), 10 ) || 0
+                                                        PuntoVenta: parseInt($("#PuntoVenta option:selected").text(), 10) || 0
 
 
                                                     },
@@ -661,28 +661,30 @@
                     @*---------------------------------------------------------------------------------------*@
                     <!--/row-->
                     <br />
-                    <div class="row-fluid">
-                        <div class="span12 lightblue">
-                            @*@Html.Hidden("DetalleFacturas", Model.DetalleFacturas)*@
-                            @Html.HiddenFor(m => m.DetalleFacturas)
-                            @*<style type="text/css">
-                                    .ui-jqgrid tr.jqgrow td
-                                    {
-                                        white-space: normal !important;
-                                        height: auto;
-                                        vertical-align: text-top;
-                                        padding-top: 2px;
-                                    }
-                                </style>*@
-                            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="width: "></table>
-                            <input type="button" class="btn btn-mini" id="addData" value="Agregar item" />
-                            <input type="button" class="btn btn-mini" id="edtData" value="Modificar item" />
-                            <input type="button" class="btn btn-mini" id="delData" value="Borrar item" />
-                            <input type="button" class="btn btn-mini" id="" value="Buscar" onclick="conmutarPanelesDerecho();   pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />
-                        </div>
-                        <script>
 
-                        </script>
+                    <div class="row-fluid">
+                        <div id="divGrilla" class="span12 lightblue" style="padding-left: 0px; padding-right: 2px;
+                        min-height: 150px">
+
+
+                            <div class="span12 lightblue">
+                                @Html.HiddenFor(m => m.DetalleFacturas)
+
+                                <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
+                                       style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
+                                    @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
+                                </table>
+
+
+                                <input type="button" class="btn btn-mini" id="addData" value="Agregar item" />
+                                <input type="button" class="btn btn-mini" id="edtData" value="Modificar item" />
+                                <input type="button" class="btn btn-mini" id="delData" value="Borrar item" />
+                                <input type="button" class="btn btn-mini" id="" value="Buscar" onclick="conmutarPanelesDerecho();   pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />
+                            </div>
+                            <script>
+
+                            </script>
+                        </div>
                     </div>
                     <br />
                     <div class="row-fluid" style="font-size: 12px;">
@@ -939,5 +941,4 @@
 
 
 
-    @MiniProfiler.RenderIncludes()
 }
