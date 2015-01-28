@@ -372,8 +372,8 @@ $(document).ready(function () {
         //sacarDeEditMode();
         jQuery('#arbolpermisos').jqGrid('saveCell', lastRowIndex, lastColIndex);
 
-      
-        
+
+
         GrabarGrillaLocal()
 
         var cabecera = SerializaForm();
@@ -707,13 +707,17 @@ $(document).ready(function () {
     $grid.jqGrid({
 
         //columns names
-        colNames: ['descripcion', 'id', 'link', 'nivel (1 max ... 9 min)', 'clave'],
+        colNames: ['descripcion', 'id', 'link', 'nivel (1 max ... 9 min)', 'clave'
+            // el controlador me está devolviendo datos en estas columnas que impiden que las agrupe!!!!
+            //, 'puede ver', 'editar', 'borrar'
+        ],
         //columns model
         colModel: [
                                     { name: 'Descripcion', index: 'Nodo', align: 'left', width: 300 },
                                     { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
                                     { name: 'link', index: 'link', width: 200, hidden: true },
-                                    { name: 'Nivel', index: 'Nivel', width: 200, hidden: false, editable: true
+                                    {
+                                        name: 'Nivel', index: 'Nivel', width: 200, hidden: false, editable: true
                                         , align: 'right', edittype: 'select',
                                         editrules: { required: false },
                                         editoptions: {
@@ -725,19 +729,27 @@ $(document).ready(function () {
                                             value: "1:1; 2:2 ; 3:3 ; 4:4;  5:5; 6:6 ; 7:7; 8:8 ; 9:9 ",
                                             size: 1,
 
-                                            dataEvents: [{ type: 'change', fn: function (e) {
+                                            dataEvents: [{
+                                                type: 'change', fn: function (e) {
 
-//                                                $('#IVAComprasPorcentaje1').val(this.value);
-//                                                CalcularItem();
+                                                    //                                                $('#IVAComprasPorcentaje1').val(this.value);
+                                                    //                                                CalcularItem();
 
-                                            }
+                                                }
                                             }] // dataevents va ADENTRO de editoptions!!!
                                         }
                                     }
 
 
-                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden:false }
-                                ],
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden: false }
+
+// el controlador me está devolviendo datos en estas columnas que impiden que las agrupe!!!!
+    //, { name: 'ver', index: 'Aktiasdv', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false }, hidden: true }
+    //, { name: 'editar', index: 'Aktasdddiv', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false }, hidden: true }
+    //, { name: 'borrar', index: 'Aktidaav', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false } , hidden:true}
+
+
+        ],
 
         // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
         treeReader: {
