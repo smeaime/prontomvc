@@ -108,7 +108,7 @@ namespace ProntoMVC.Controllers
             ViewBag.IdRegion = new SelectList(db.Regiones, "IdRegion", "Descripcion", o.IdRegion);
             ViewBag.IdCuenta = new SelectList(db.Cuentas, "IdCuenta", "Descripcion", o.IdCuenta);
             ViewBag.IdCuentaMonedaExt = new SelectList(db.Cuentas, "IdCuenta", "Descripcion", o.IdCuentaMonedaExt);
-            
+
         }
 
         private bool Validar(ProntoMVC.Data.Models.Cliente o, ref string sErrorMsg)
@@ -122,8 +122,8 @@ namespace ProntoMVC.Controllers
             if ((o.CodigoCliente ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo de cliente"; }
 
             if (o.Codigo.NullSafeToString() == "")
-            { 
-                sErrorMsg += "\n" + "Falta el codigo de cliente"; 
+            {
+                sErrorMsg += "\n" + "Falta el codigo de cliente";
             }
             else
             {
@@ -131,8 +131,9 @@ namespace ProntoMVC.Controllers
                 if (o.Codigo.Length > mMaxLength) { sErrorMsg += "\n" + "La codigo no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
-            if (o.RazonSocial.NullSafeToString() == "") { 
-                sErrorMsg += "\n" + "Falta la razon social"; 
+            if (o.RazonSocial.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta la razon social";
             }
             else
             {
@@ -140,8 +141,9 @@ namespace ProntoMVC.Controllers
                 if (o.RazonSocial.Length > mMaxLength) { sErrorMsg += "\n" + "La razon social no puede tener mas de " + mMaxLength + " digitos"; }
             }
 
-            if (o.Direccion.NullSafeToString() == "") { 
-                sErrorMsg += "\n" + "Falta la dirección"; 
+            if (o.Direccion.NullSafeToString() == "")
+            {
+                sErrorMsg += "\n" + "Falta la dirección";
             }
             else
             {
@@ -150,22 +152,22 @@ namespace ProntoMVC.Controllers
             }
 
             if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo de IVA"; }
-            
+
             if (o.IdProvincia == null) { sErrorMsg += "\n" + "Falta la provincia"; }
-            
+
             if (o.IdPais == null) { sErrorMsg += "\n" + "Falta el país"; }
-            
+
             if (o.IdCondicionVenta == null) { sErrorMsg += "\n" + "Falta la condicion venta"; }
-            
+
             if (o.IGCondicion == null) { sErrorMsg += "\n" + "Falta la condicion ganacias"; }
-            
+
             if (o.IdListaPrecios == null) { sErrorMsg += "\n" + "Falta la lista de precios"; }
-            
+
             if (o.IdCuentaMonedaExt == null) { sErrorMsg += "\n" + "Falta la cuenta contable en moneda extranjera"; }
-            
+
             if (o.IdCuenta == null) { sErrorMsg += "\n" + "Falta la cuenta contable"; }
-            
-            if (o.Vendedor1 == null) {sErrorMsg += "\n" + "Falta el vendedor";}
+
+            if (o.Vendedor1 == null) { sErrorMsg += "\n" + "Falta el vendedor"; }
 
             if (o.IdEstado == null) { sErrorMsg += "\n" + "Falta el estado"; }
 
@@ -213,7 +215,7 @@ namespace ProntoMVC.Controllers
                     return Json(res);
                 }
 
-                if (ModelState.IsValid || true) 
+                if (ModelState.IsValid || true)
                 {
                     string usuario = ViewBag.NombreUsuario;
                     int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -422,7 +424,7 @@ namespace ProntoMVC.Controllers
                             a.IdCliente,
                             a.RazonSocial,
                             a.Codigo,
-                            Subcodigo = a.Codigo != null ? a.Codigo.Substring(1,2) : "",
+                            Subcodigo = a.Codigo != null ? a.Codigo.Substring(1, 2) : "",
                             a.Direccion,
                             Localidad = a.Localidad.Nombre,
                             a.CodigoPostal,
@@ -682,47 +684,106 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+
         public virtual JsonResult GetCodigosClienteAutocomplete(string term)
         {
-            return Json((from item in db.Clientes.Include(c => c.IBCondicionCat1).Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
-                         where item.RazonSocial.StartsWith(term) || item.Codigo.StartsWith(term)
-                         orderby item.RazonSocial
-                         select new
-                         {
-                             id = item.IdCliente,
-                             value = item.RazonSocial,
-                             codigo = item.Codigo,
+            var q = (from item in db.Clientes.Include(c => c.IBCondicionCat1).Include(c => c.IBCondicionCat2).Include(c => c.IBCondicionCat3)
+                     where item.RazonSocial.ToLower().Contains(term.ToLower())
+                            || item.Codigo.ToLower().Contains(term.ToLower())  
+                     //where item.RazonSocial.StartsWith(term) || item.Codigo.StartsWith(term)
+                     orderby item.RazonSocial
+                     select new
+                     {
+                         id = item.IdCliente,
+                         value = item.RazonSocial,
+                         codigo = item.Codigo,
 
-                             /////////////////////////////
-                             idCodigoIva = item.IdCodigoIva,
+                         /////////////////////////////
+                         idCodigoIva = item.IdCodigoIva,
 
-                             //////////////////////////////////////////
-                             IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
-                             IdIBCondicionPorDefecto2 = item.IdIBCondicionPorDefecto2,
-                             IdIBCondicionPorDefecto3 = item.IdIBCondicionPorDefecto3,
-                             AlicuotaPercepcion1 = (item.IBCondicionCat1).AlicuotaPercepcion,
-                             AlicuotaPercepcion2 = (item.IBCondicionCat2 ).AlicuotaPercepcion,
-                             AlicuotaPercepcion3 = (item.IBCondicionCat3 ).AlicuotaPercepcion,
-                             ///////////////////////////////////////
+                         //////////////////////////////////////////
+                         IdIBCondicionPorDefecto = item.IdIBCondicionPorDefecto,
+                         IdIBCondicionPorDefecto2 = item.IdIBCondicionPorDefecto2,
+                         IdIBCondicionPorDefecto3 = item.IdIBCondicionPorDefecto3,
+                         AlicuotaPercepcion1 = (item.IBCondicionCat1).AlicuotaPercepcion,
+                         AlicuotaPercepcion2 = (item.IBCondicionCat2).AlicuotaPercepcion,
+                         AlicuotaPercepcion3 = (item.IBCondicionCat3).AlicuotaPercepcion,
+                         ///////////////////////////////////////
 
 
-                             Email = item.Email,
-                             Direccion = item.Direccion,
+                         Email = item.Email,
+                         Direccion = item.Direccion,
 
-                             Localidad = item.Localidad.Nombre,
-                             Provincia = item.Provincia.Nombre,
+                         Localidad = item.Localidad.Nombre,
+                         Provincia = item.Provincia.Nombre,
 
-                             Telefono = item.Telefono,
-                             Fax = item.Fax,
-                             Cuit = item.Cuit,
-                             IdCondicionVenta = item.IdCondicionVenta,
-                             IdListaPrecios = item.IdListaPrecios,
+                         Telefono = item.Telefono,
+                         Fax = item.Fax,
+                         Cuit = item.Cuit,
+                         IdCondicionVenta = item.IdCondicionVenta,
+                         IdListaPrecios = item.IdListaPrecios,
 
-                             item.EsAgenteRetencionIVA,
-                             item.BaseMinimaParaPercepcionIVA,
-                             item.PorcentajePercepcionIVA
-                             // letra = EntidadManager.LetraSegunTipoIVA((long)item.IdCodigoIva)
-                         }).Take(10).ToList(), JsonRequestBehavior.AllowGet);
+                         item.EsAgenteRetencionIVA,
+                         item.BaseMinimaParaPercepcionIVA,
+                         item.PorcentajePercepcionIVA 
+                         // letra = EntidadManager.LetraSegunTipoIVA((long)item.IdCodigoIva)
+                     }).Take(10).ToList();
+
+            if (q.Count == 0 && term != "No se encontraron resultados")
+            {
+               // q.Add(new
+               // {
+               //     id = 0,
+               //     value = "No se encontraron resultados",
+               //     codigo = "",
+               //     IdCodigoIva = ""
+
+               //     ,
+               //     IdIBCondicionPorDefecto = 0
+               //     ,
+               //     IdIBCondicionPorDefecto2 = 0
+               //     ,
+               //     IdIBCondicionPorDefecto3 = 0
+               //     ,
+               //     AlicuotaPercepcion1 = 0
+               //     ,
+               //     AlicuotaPercepcion2 = 0
+               //     ,
+               //     AlicuotaPercepcion3 = 0D
+
+               //     ,
+               //     Email = ""
+               //     ,
+               //     Direccion = ""
+
+               //     ,
+               //     Localidad = ""
+               //     ,
+               //     Provincia = ""
+
+               //     ,
+               //     Telefono = ""
+               //     ,
+               //     Fax = ""
+               //     ,
+               //     Cuit = ""
+               //     ,
+               //     IdCondicionVenta = 0
+               //     ,
+               //     IdListaPrecios = 0
+
+               //     ,
+               //     EsAgenteRetencionIVA = ""
+               //     ,
+               //     BaseMinimaParaPercepcionIVA = 0
+               //     ,
+               //     PorcentajePercepcionIVA = 0
+               // }
+               //);
+            }
+
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult GetPuntosVenta(long IdCodigoIva)
@@ -744,7 +805,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult PuntosVenta(int IdCodigoIva, int PuntoVenta)
         {
-            string letra =Pronto.ERP.Bll.EntidadManager.LetraSegunTipoIVA((long)IdCodigoIva);
+            string letra = Pronto.ERP.Bll.EntidadManager.LetraSegunTipoIVA((long)IdCodigoIva);
 
             var q = (from item in db.PuntosVentas
                      where item.Letra == letra && item.PuntoVenta == PuntoVenta
@@ -786,26 +847,26 @@ namespace ProntoMVC.Controllers
                                  where (a.IdCliente == Id)
                                  select new
                                  {
-                                    id = a.IdCliente,
-                                    Articulo = a.RazonSocial.Trim(),
-                                    value = a.RazonSocial.Trim(),
-                                    a.Codigo,
-                                    a.Direccion,
-                                    Localidad = a.Localidad.Nombre,
-                                    a.CodigoPostal,
-                                    Provincia = a.Provincia.Nombre,
-                                    Pais = a.Pais.Descripcion,
-                                    a.Telefono,
-                                    a.Fax,
-                                    a.Email,
-                                    a.Cuit,
-                                    DescripcionIva = a.DescripcionIva.Descripcion,
-                                    a.PorcentajePercepcionIVA,
-                                    a.BaseMinimaParaPercepcionIVA,
-                                    a.EsAgenteRetencionIVA,
-                                    a.IdIBCondicionPorDefecto,
-                                    a.IdIBCondicionPorDefecto2,
-                                    a.IdIBCondicionPorDefecto3
+                                     id = a.IdCliente,
+                                     Articulo = a.RazonSocial.Trim(),
+                                     value = a.RazonSocial.Trim(),
+                                     a.Codigo,
+                                     a.Direccion,
+                                     Localidad = a.Localidad.Nombre,
+                                     a.CodigoPostal,
+                                     Provincia = a.Provincia.Nombre,
+                                     Pais = a.Pais.Descripcion,
+                                     a.Telefono,
+                                     a.Fax,
+                                     a.Email,
+                                     a.Cuit,
+                                     DescripcionIva = a.DescripcionIva.Descripcion,
+                                     a.PorcentajePercepcionIVA,
+                                     a.BaseMinimaParaPercepcionIVA,
+                                     a.EsAgenteRetencionIVA,
+                                     a.IdIBCondicionPorDefecto,
+                                     a.IdIBCondicionPorDefecto2,
+                                     a.IdIBCondicionPorDefecto3
                                  }).ToList();
 
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
@@ -826,7 +887,7 @@ namespace ProntoMVC.Controllers
                 default: break;
             }
         }
-        
+
         //[HttpPost]
         public virtual JsonResult CalcularPercepciones(Int32 IdCliente, decimal TotalGravado, Int32 IdMoneda, Int32 IdIBCondicion1, Int32 IdIBCondicion2, Int32 IdIBCondicion3, DateTime Fecha)
         {
@@ -892,12 +953,14 @@ namespace ProntoMVC.Controllers
                     if (Provincia != null) { mCodigoProvincia = Provincia.InformacionAuxiliar ?? ""; }
 
                     mAlicuota = 0;
-                    if (mCodigoProvincia == "902" && Fecha >= mFechaInicioVigenciaIBDirecto && Fecha <= mFechaFinVigenciaIBDirecto) { 
+                    if (mCodigoProvincia == "902" && Fecha >= mFechaInicioVigenciaIBDirecto && Fecha <= mFechaFinVigenciaIBDirecto)
+                    {
                         mAlicuota = mAlicuotaDirecta;
                     }
                     else
                     {
-                        if (mCodigoProvincia == "901" && Fecha >= mFechaInicioVigenciaIBDirectoCapital && Fecha <= mFechaFinVigenciaIBDirectoCapital) { 
+                        if (mCodigoProvincia == "901" && Fecha >= mFechaInicioVigenciaIBDirectoCapital && Fecha <= mFechaFinVigenciaIBDirectoCapital)
+                        {
                             mAlicuota = mAlicuotaDirectaCapital;
                         }
                         else
@@ -1035,7 +1098,7 @@ namespace ProntoMVC.Controllers
             base.Dispose(disposing);
 
         }
-   
+
 
     }
 }
