@@ -643,7 +643,10 @@ $(document).ready(function () {
         loadonce: true
 
         ///////
-               , cellEdit: true,
+        , cellEdit: true
+        , cellsubmit: 'clientArray'
+        , editurl: ROOT + 'Requerimiento/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
+
 //                cellurl: 'se/ref_mgmnt_save.php'/*,
 
 
