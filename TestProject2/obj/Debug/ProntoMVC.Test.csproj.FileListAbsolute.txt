@@ -96,3 +96,9 @@ C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\ProntoMVC.Test.csprojResolveAssem
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.dll
 C:\Backup\BDL\ProntoMVC\TestProject2\obj\Debug\TestProject2.pdb
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.dll
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.EntityFramework6.dll
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.pdb
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.xml
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.EntityFramework6.pdb
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.EntityFramework6.xml

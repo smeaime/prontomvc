@@ -1995,9 +1995,11 @@ namespace ProntoMVC.Controllers
 
         public List<string> LeerArchivoAPP(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid)
         {
-            string glbArchivoAyuda = dbcontext.Parametros.Find(1).ArchivoAyuda;
+            //string glbArchivoAyuda = dbcontext.Parametros.Find(1).ArchivoAyuda;
+            string glbArchivoAyuda = dbcontext.Parametros.Select(x=>x.ArchivoAyuda).FirstOrDefault();
             string glbPathPlantillas = "";
-            string s = dbcontext.Parametros.Find(1).PathPlantillas;
+            //string s = dbcontext.Parametros.Find(1).PathPlantillas;
+            string s = dbcontext.Parametros.Select(x => x.PathPlantillas).FirstOrDefault();
             if (s.Length == 0)
             {
                 //glbPathPlantillas= App.Path & "\Plantillas"

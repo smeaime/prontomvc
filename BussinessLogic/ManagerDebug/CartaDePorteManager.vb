@@ -5776,6 +5776,8 @@ Public Class CartaDePorteManager
                     myCartaDePorte.Id = CartaDePorteId
                     CrearleDuplicadaConEl_FacturarA_Indicado(SC, myCartaDePorte)
 
+
+                    'arreglar esta galletita
                 End If
             End If
 
