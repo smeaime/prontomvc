@@ -1002,6 +1002,12 @@
       <End Role="NotasCredito" EntitySet="NotasCreditoes" />
       <End Role="DetalleNotasCreditoProvincia" EntitySet="DetalleNotasCreditoProvincias" />
     </AssociationSet>
+    <EntitySet Name="DetalleDevoluciones" EntityType="DemoProntoModel.DetalleDevolucione" />
+    <EntitySet Name="Devoluciones" EntityType="DemoProntoModel.Devolucione" />
+    <AssociationSet Name="FK_DetalleDevoluciones_Devoluciones" Association="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones">
+      <End Role="Devolucione" EntitySet="Devoluciones" />
+      <End Role="DetalleDevolucione" EntitySet="DetalleDevoluciones" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -5332,7 +5338,7 @@
     <Property Type="Int32" Name="IdProvinciaDestino" />
     <Property Type="String" Name="ServicioCobro" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="LoteServicioCobro" MaxLength="15" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DetalleRecibos" Relationship="DemoProntoModel.FK_DetalleRecibos_Recibos" FromRole="Recibo" ToRole="DetalleRecibo" />
+    <NavigationProperty Name="DetalleRecibosImputaciones" Relationship="DemoProntoModel.FK_DetalleRecibos_Recibos" FromRole="Recibo" ToRole="DetalleRecibo" />
     <NavigationProperty Name="DetalleRecibosCuentas" Relationship="DemoProntoModel.FK_DetalleRecibosCuentas_Recibos" FromRole="Recibo" ToRole="DetalleRecibosCuenta" />
     <NavigationProperty Name="DetalleRecibosRubrosContables" Relationship="DemoProntoModel.FK_DetalleRecibosRubrosContables_Recibos" FromRole="Recibo" ToRole="DetalleRecibosRubrosContable" />
     <NavigationProperty Name="DetalleRecibosValores" Relationship="DemoProntoModel.FK_DetalleRecibosValores_Recibos" FromRole="Recibo" ToRole="DetalleRecibosValore" />
@@ -8216,6 +8222,104 @@
       </Principal>
       <Dependent Role="DetalleNotasCreditoProvincia">
         <PropertyRef Name="IdNotaCredito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleDevolucione">
+    <Key>
+      <PropertyRef Name="IdDetalleDevolucion" />
+    </Key>
+    <Property Name="IdDetalleDevolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDevolucion" Type="Int32" />
+    <Property Name="NumeroDevolucion" Type="Int32" />
+    <Property Name="TipoABC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoVenta" Type="Int32" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="CodigoArticulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Partida" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Costo" Type="Decimal" Precision="19" Scale="8" />
+    <Property Name="PrecioUnitario" Type="Decimal" Precision="19" Scale="8" />
+    <Property Name="Bonificacion" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdUnidad" Type="Int32" />
+    <Property Name="OrigenDescripcion" Type="Int32" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PorcentajeCertificacion" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdUbicacion" Type="Int32" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="NumeroCaja" Type="Int32" />
+    <Property Name="IdDetalleFactura" Type="Int32" />
+    <Property Name="Talle" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="IdColor" Type="Int32" />
+    <Property Name="IdDetallePresupuestoVenta" Type="Int32" />
+    <NavigationProperty Name="Devolucione" Relationship="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" FromRole="DetalleDevolucione" ToRole="Devolucione" />
+  </EntityType>
+  <EntityType Name="Devolucione">
+    <Key>
+      <PropertyRef Name="IdDevolucion" />
+    </Key>
+    <Property Name="IdDevolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroDevolucion" Type="Int32" />
+    <Property Name="TipoABC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoVenta" Type="Int32" />
+    <Property Name="IdFactura" Type="Int32" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="FechaDevolucion" Type="DateTime" Precision="3" />
+    <Property Name="IdVendedor" Type="Int32" />
+    <Property Name="TipoPedidoConsignacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Anulada" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+    <Property Name="ImporteTotal" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="ImporteIva1" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="ImporteIva2" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="ImporteBonificacion" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="RetencionIBrutos1" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos1" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="RetencionIBrutos2" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos2" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="ConvenioMultilateral" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="RetencionIBrutos3" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos3" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdTipoVentaC" Type="Int16" />
+    <Property Name="ImporteIvaIncluido" Type="Decimal" Precision="19" Scale="2" />
+    <Property Name="CotizacionDolar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIva1" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="PorcentajeIva2" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IVANoDiscriminado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="CotizacionMoneda" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="PorcentajeBonificacion" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaRegistracion" Type="DateTime" Precision="3" />
+    <Property Name="IdProvinciaDestino" Type="Int32" />
+    <Property Name="OtrasPercepciones1" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtrasPercepciones1Desc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="OtrasPercepciones2" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtrasPercepciones2Desc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IdIBCondicion" Type="Int32" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
+    <Property Name="NumeroCAI" Type="Decimal" Precision="19" Scale="0" />
+    <Property Name="FechaVencimientoCAI" Type="DateTime" Precision="3" />
+    <Property Name="IdObra" Type="Int32" />
+    <Property Name="IdCodigoIva" Type="Int32" />
+    <Property Name="IdListaPrecios" Type="Int32" />
+    <Property Name="IdIBCondicion2" Type="Int32" />
+    <Property Name="IdIBCondicion3" Type="Int32" />
+    <Property Name="PercepcionIVA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajePercepcionIVA" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="IdDeposito" Type="Int32" />
+    <Property Name="IdUsuarioAnulacion" Type="Int32" />
+    <NavigationProperty Name="DetalleDevoluciones" Relationship="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" FromRole="Devolucione" ToRole="DetalleDevolucione" />
+  </EntityType>
+  <Association Name="FK_DetalleDevoluciones_Devoluciones">
+    <End Type="DemoProntoModel.Devolucione" Role="Devolucione" Multiplicity="0..1" />
+    <End Type="DemoProntoModel.DetalleDevolucione" Role="DetalleDevolucione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devolucione">
+        <PropertyRef Name="IdDevolucion" />
+      </Principal>
+      <Dependent Role="DetalleDevolucione">
+        <PropertyRef Name="IdDevolucion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,32 +1,25 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Recibo>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recibo";
 }
-@*<a>@Html.ActionLink("Nueva Recibo", "Edit", new { id = -1 }, new { @class = "btn btn-primary" })</a>*@
-@*http://stackoverflow.com/questions/10429510/display-html-within-html-actionlink-with-twitter-bootstrap*@
-<div class="container-fluid">
-    <div>
-        <div class="row-fluid">
-            <div class="span12 lightblue">
-                <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary"  >
-                    Nuevo Recibo
-                </button>
-                <br />
-                <br />
-                <div>
-                    <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-                <div>
-                    <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-                <div>
-                    <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
-                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
-                </table>
-                <div id="ListaPager" class="scroll" style="text-align: center;">
-                </div>
-            </div>
+
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("EditCC", new { id = -1 })'" class="btn btn-primary">Nueva Recibo (Clientes)</button>
+            <button onclick="window.location.href='@Url.Action("EditOT", new { id = -1 })'" class="btn btn-primary">Nueva Recibo (Otros)</button>
         </div>
     </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
@@ -38,95 +31,40 @@
 
         $('#Lista').jqGrid({
             url: '@Url.Action("Recibos", "Recibo")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdRecibo', 'A/B/E', 'Punto Venta', 'Numero',
-                            'Anulada',
-                            'Cod.Cli.',
-                            'Razon Social',
-                            'Condicion',
-                            'Cuit',
-                            'Fecha',
-                            'Ordenes de compra',
-                            'Remitos',
-                            'Subtotal',
-                            'Bonificacion',
-                            'Iva',
-                            'Ajuste IVA',
-                            'IIBB',
-                            'Perc.IVA',
-                            'ImporteTotal',
-                            'Mon',
-                            'Telefono del cliente',
-                            'Vendedor',
-                            'Ingreso',
-                            'Fecha ingreso',
-                            'Obra (x defecto)',
-                            'Provincia destino',
-                            'Cant.Items',
-                            'Cant.Abonos',
-                            'Grupo Recibocion automatica',
-                            'Act.Rec.Gtos.',
-                            'Fecha Contab.',
-                            'CAE',
-                            'Rech.CAE',
-                            'Fecha vto.CAE'
-
-
-
-            ],
-
-
-
-
+            colNames: ['', 'Emitir', 'IdRecibo', 'Punto venta', 'Numero recibo', 'Fecha recibo', 'Tipo', 'Anulado', 'Codigo cliente', 'Cliente', 'Cuenta', 'Mon.', 'Deudores', 'Valores', 'Ret. iva', 'Ret. gan',
+                       'Ret. iibb', 'Otros conceptos', 'Obra', 'Vendedor', 'Cobrador', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Cotizacion', 'Observaciones'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'Imprimir', index: 'Imprimir', align: 'center', width: 0, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
-                        {name: 'IdRecibo', index: 'IdRecibo', align: 'left', width: 0, editable: false, hidden: true },
-                        { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-
-   { name: '', index: '', align: 'right', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 500, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-   { name: 'Fecha', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: 'Moneda', index: '', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-   { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} }
-
-
-
-
-
-
-                    ],
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
+                        { name: 'IdRecibo', index: 'IdRecibo', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'right', width: 50, editable: false, hidden: false },
+                        { name: 'NumeroRecibo', index: 'NumeroRecibo', align: 'right', width: 80, editable: false, hidden: false },
+                        { name: 'FechaRecibo', index: 'FechaRecibo', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoCliente', index: 'CodigoCliente', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Deudores', index: 'Deudores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'OtrosConceptos', index: 'OtrosConceptos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra', align: 'left', width: 100, editable: false },
+                        { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Cobrador', index: 'Cobrador', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'FechaModifico', index: 'FechaModifico', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Cotizacion', index: 'Cotizacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, hidden: false }
+            ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
                     if (typeof lastSelectedId !== "undefined") {
@@ -137,30 +75,29 @@
             },
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 100],
-            sortname: 'FechaRecibo',
+            rowList: [10, 20, 50, 20000],
+            sortname: 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
-            width: 'auto',
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
             height: '100%',
             altRows: false,
-            footerrow: true,
+            footerrow: false,
             userDataOnFooter: true,
-            //imgpath: '/content/cupertino/images',
-            //loadonce: true,
-            autowidth: true,
-
-            caption: '<b>Recibos</b>'
-
+            caption: '<b>RECIBOS</b>'
         });
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
 
-        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350,
-            maxWidth: 1500,
-            minHeight: 80, maxHeight: 500
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
         });
 
+        pageLayout.hide('east');
+        pageLayout.hide('south');
     });
 
 </script>

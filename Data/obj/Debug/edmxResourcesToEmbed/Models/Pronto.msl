@@ -4657,5 +4657,91 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Obras_EliminarCuentasNoUsadasPorIdObra" FunctionName="DemoProntoModel.Store.Obras_EliminarCuentasNoUsadasPorIdObra" />
+    <EntitySetMapping Name="DetalleDevoluciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.DetalleDevolucione">
+        <MappingFragment StoreEntitySet="DetalleDevoluciones">
+          <ScalarProperty Name="IdDetallePresupuestoVenta" ColumnName="IdDetallePresupuestoVenta" />
+          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+          <ScalarProperty Name="Talle" ColumnName="Talle" />
+          <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
+          <ScalarProperty Name="NumeroCaja" ColumnName="NumeroCaja" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
+          <ScalarProperty Name="PorcentajeCertificacion" ColumnName="PorcentajeCertificacion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
+          <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+          <ScalarProperty Name="Bonificacion" ColumnName="Bonificacion" />
+          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="Partida" ColumnName="Partida" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="CodigoArticulo" ColumnName="CodigoArticulo" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="TipoABC" ColumnName="TipoABC" />
+          <ScalarProperty Name="NumeroDevolucion" ColumnName="NumeroDevolucion" />
+          <ScalarProperty Name="IdDevolucion" ColumnName="IdDevolucion" />
+          <ScalarProperty Name="IdDetalleDevolucion" ColumnName="IdDetalleDevolucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devoluciones">
+      <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
+        <MappingFragment StoreEntitySet="Devoluciones">
+          <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+          <ScalarProperty Name="IdDeposito" ColumnName="IdDeposito" />
+          <ScalarProperty Name="PorcentajePercepcionIVA" ColumnName="PorcentajePercepcionIVA" />
+          <ScalarProperty Name="PercepcionIVA" ColumnName="PercepcionIVA" />
+          <ScalarProperty Name="IdIBCondicion3" ColumnName="IdIBCondicion3" />
+          <ScalarProperty Name="IdIBCondicion2" ColumnName="IdIBCondicion2" />
+          <ScalarProperty Name="IdListaPrecios" ColumnName="IdListaPrecios" />
+          <ScalarProperty Name="IdCodigoIva" ColumnName="IdCodigoIva" />
+          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+          <ScalarProperty Name="FechaVencimientoCAI" ColumnName="FechaVencimientoCAI" />
+          <ScalarProperty Name="NumeroCAI" ColumnName="NumeroCAI" />
+          <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
+          <ScalarProperty Name="IdIBCondicion" ColumnName="IdIBCondicion" />
+          <ScalarProperty Name="OtrasPercepciones2Desc" ColumnName="OtrasPercepciones2Desc" />
+          <ScalarProperty Name="OtrasPercepciones2" ColumnName="OtrasPercepciones2" />
+          <ScalarProperty Name="OtrasPercepciones1Desc" ColumnName="OtrasPercepciones1Desc" />
+          <ScalarProperty Name="OtrasPercepciones1" ColumnName="OtrasPercepciones1" />
+          <ScalarProperty Name="IdProvinciaDestino" ColumnName="IdProvinciaDestino" />
+          <ScalarProperty Name="FechaRegistracion" ColumnName="FechaRegistracion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="PorcentajeBonificacion" ColumnName="PorcentajeBonificacion" />
+          <ScalarProperty Name="CotizacionMoneda" ColumnName="CotizacionMoneda" />
+          <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+          <ScalarProperty Name="IVANoDiscriminado" ColumnName="IVANoDiscriminado" />
+          <ScalarProperty Name="PorcentajeIva2" ColumnName="PorcentajeIva2" />
+          <ScalarProperty Name="PorcentajeIva1" ColumnName="PorcentajeIva1" />
+          <ScalarProperty Name="CotizacionDolar" ColumnName="CotizacionDolar" />
+          <ScalarProperty Name="ImporteIvaIncluido" ColumnName="ImporteIvaIncluido" />
+          <ScalarProperty Name="IdTipoVentaC" ColumnName="IdTipoVentaC" />
+          <ScalarProperty Name="PorcentajeIBrutos3" ColumnName="PorcentajeIBrutos3" />
+          <ScalarProperty Name="RetencionIBrutos3" ColumnName="RetencionIBrutos3" />
+          <ScalarProperty Name="ConvenioMultilateral" ColumnName="ConvenioMultilateral" />
+          <ScalarProperty Name="PorcentajeIBrutos2" ColumnName="PorcentajeIBrutos2" />
+          <ScalarProperty Name="RetencionIBrutos2" ColumnName="RetencionIBrutos2" />
+          <ScalarProperty Name="PorcentajeIBrutos1" ColumnName="PorcentajeIBrutos1" />
+          <ScalarProperty Name="RetencionIBrutos1" ColumnName="RetencionIBrutos1" />
+          <ScalarProperty Name="ImporteBonificacion" ColumnName="ImporteBonificacion" />
+          <ScalarProperty Name="ImporteIva2" ColumnName="ImporteIva2" />
+          <ScalarProperty Name="ImporteIva1" ColumnName="ImporteIva1" />
+          <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+          <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+          <ScalarProperty Name="Anulada" ColumnName="Anulada" />
+          <ScalarProperty Name="TipoPedidoConsignacion" ColumnName="TipoPedidoConsignacion" />
+          <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+          <ScalarProperty Name="FechaDevolucion" ColumnName="FechaDevolucion" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="TipoABC" ColumnName="TipoABC" />
+          <ScalarProperty Name="NumeroDevolucion" ColumnName="NumeroDevolucion" />
+          <ScalarProperty Name="IdDevolucion" ColumnName="IdDevolucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
