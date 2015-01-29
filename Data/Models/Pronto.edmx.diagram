@@ -2,7 +2,7 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="89">
+      <edmx:Diagram Name="Pronto" ZoomLevel="81">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
@@ -1817,11 +1817,11 @@
           <edmx:ConnectorPoint PointX="10" PointY="51.687497500000006" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.EmpleadosAcceso" Width="1.5" PointX="10" PointY="102" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibo" Width="1.5" PointX="15.25" PointY="106.25" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosCuenta" Width="1.5" PointX="15.25" PointY="111.125" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosRubrosContable" Width="1.5" PointX="15.25" PointY="116.375" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosValore" Width="1.5" PointX="15.25" PointY="120" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recibo" Width="1.5" PointX="13" PointY="105.25" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibo" Width="2" PointX="16.125" PointY="102.25" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosCuenta" Width="1.875" PointX="16.25" PointY="110.5" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosRubrosContable" Width="2" PointX="16.125" PointY="115.875" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosValore" Width="2" PointX="16.125" PointY="119.625" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recibo" Width="2.375" PointX="13.5" PointY="101.5" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosContable" Width="1.5" PointX="1.375" PointY="2.625" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosValore" Width="1.5" PointX="14.875" PointY="9.75" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas">
@@ -2329,6 +2329,9 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDevolucione" Width="1.5" PointX="27.625" PointY="19.125" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Devolucione" Width="1.5" PointX="25.375" PointY="16.375" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
