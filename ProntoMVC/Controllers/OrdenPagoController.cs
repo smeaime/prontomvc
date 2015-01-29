@@ -8,19 +8,21 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using System.Text;
-using System.Transactions;
-using System.Reflection;
+using System.Web.Security;
+
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
+using Pronto.ERP.Bll;
+
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-using System.Web.Security;
 using Newtonsoft.Json;
-using Pronto.ERP.Bll;
 
 namespace ProntoMVC.Controllers
 {
@@ -37,34 +39,6 @@ namespace ProntoMVC.Controllers
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
-        }
-        public virtual ViewResult IndexExterno()
-        {
-            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
-
-            //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
-            return View();
-        }
-        public virtual ViewResult Details(int id)
-        {
-            OrdenPago OrdenPago = db.OrdenesPago.Find(id);
-            return View(OrdenPago);
-        }
-
-        public virtual ActionResult Create()
-        {
-            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion");
-            ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre");
-            ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion");
-            ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            ViewBag.Proveedor = "";
-            return View();
-        }
-
-        void enviarmailAlComprador()
-        {
-
         }
 
         public virtual ActionResult Edit(int id)
@@ -92,20 +66,6 @@ namespace ProntoMVC.Controllers
                 Session.Add("OrdenPago", OrdenPago);
                 return View(OrdenPago);
             }
-        }
-
-        [HttpPost]
-        public virtual ActionResult Edit(OrdenPago OrdenPago)
-        {
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") && !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")) throw new Exception("No tenés permisos");
-            if (ModelState.IsValid)
-            {
-                db.Entry(OrdenPago).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            CargarViewBag(OrdenPago);
-            return View(OrdenPago);
         }
 
         public virtual ActionResult EditCC(int id)

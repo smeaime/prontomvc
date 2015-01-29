@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.OrdenPago>
 @{
     ViewBag.Title = "Ordenes de Pago";
 }
@@ -35,7 +35,7 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'Emitir cert.', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
+            colNames: ['', 'Emitir', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
                        'Ret.iva', 'Ret.gan', 'Ret.iibb', 'Ret.SUSS', 'Dev.FF', 'Dif. Balanceo', 'OP compl.FF', 'Destinatario FF', 'Nro.Rend.FF', 'Conf.Acred.FF', 'Conc. OP Otros', 'Clasificacion', 'Detalle',
                        'Modalidad', 'Enviar a', 'Auxiliar', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Observaciones', 'Cotiz.dolar', 'Cotiz.euro'
             ],
