@@ -55,7 +55,7 @@ namespace ProntoMVC
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal)
+            if (Request.IsLocal || true)
             {
                 MiniProfiler.Start();
             }
@@ -72,7 +72,9 @@ namespace ProntoMVC
 
 
             MiniProfilerEF6.Initialize();
+            GlobalFilters.Filters.Add(new StackExchange.Profiling.Mvc.ProfilingActionFilter());
 
+            
 
             ViewEngines.Engines.Add(new RazorViewEngine());
 
