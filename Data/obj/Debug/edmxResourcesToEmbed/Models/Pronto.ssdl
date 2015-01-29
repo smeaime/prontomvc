@@ -1369,6 +1369,34 @@
     <Property Name="CodigoAnterior" Type="int" />
     <Property Name="JerarquiaAnterior" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="DetalleDevoluciones">
+    <Key>
+      <PropertyRef Name="IdDetalleDevolucion" />
+    </Key>
+    <Property Name="IdDetalleDevolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDevolucion" Type="int" />
+    <Property Name="NumeroDevolucion" Type="int" />
+    <Property Name="TipoABC" Type="varchar" MaxLength="1" />
+    <Property Name="PuntoVenta" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="CodigoArticulo" Type="varchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Partida" Type="varchar" MaxLength="20" />
+    <Property Name="Costo" Type="numeric" Precision="19" Scale="8" />
+    <Property Name="PrecioUnitario" Type="numeric" Precision="19" Scale="8" />
+    <Property Name="Bonificacion" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="OrigenDescripcion" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="PorcentajeCertificacion" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdUbicacion" Type="int" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="NumeroCaja" Type="int" />
+    <Property Name="IdDetalleFactura" Type="int" />
+    <Property Name="Talle" Type="varchar" MaxLength="2" />
+    <Property Name="IdColor" Type="int" />
+    <Property Name="IdDetallePresupuestoVenta" Type="int" />
+  </EntityType>
   <EntityType Name="DetalleEmpleados">
     <Key>
       <PropertyRef Name="IdDetalleEmpleado" />
@@ -2057,6 +2085,62 @@
     <Property Name="IdFirmanteObservo" Type="int" />
     <Property Name="FechaUltimaObservacionFirmante" Type="datetime" />
     <Property Name="IdPresupuestoObrasNodo" Type="int" />
+  </EntityType>
+  <EntityType Name="Devoluciones">
+    <Key>
+      <PropertyRef Name="IdDevolucion" />
+    </Key>
+    <Property Name="IdDevolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroDevolucion" Type="int" />
+    <Property Name="TipoABC" Type="varchar" MaxLength="1" />
+    <Property Name="PuntoVenta" Type="int" />
+    <Property Name="IdFactura" Type="int" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="FechaDevolucion" Type="datetime" />
+    <Property Name="IdVendedor" Type="int" />
+    <Property Name="TipoPedidoConsignacion" Type="varchar" MaxLength="1" />
+    <Property Name="Anulada" Type="varchar" MaxLength="2" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="ImporteTotal" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="ImporteIva1" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="ImporteIva2" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="ImporteBonificacion" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="RetencionIBrutos1" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos1" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="RetencionIBrutos2" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos2" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ConvenioMultilateral" Type="varchar" MaxLength="2" />
+    <Property Name="RetencionIBrutos3" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="PorcentajeIBrutos3" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdTipoVentaC" Type="smallint" />
+    <Property Name="ImporteIvaIncluido" Type="numeric" Precision="19" Scale="2" />
+    <Property Name="CotizacionDolar" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajeIva1" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="PorcentajeIva2" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IVANoDiscriminado" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdMoneda" Type="int" />
+    <Property Name="CotizacionMoneda" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="PorcentajeBonificacion" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="FechaRegistracion" Type="datetime" />
+    <Property Name="IdProvinciaDestino" Type="int" />
+    <Property Name="OtrasPercepciones1" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="OtrasPercepciones1Desc" Type="varchar" MaxLength="15" />
+    <Property Name="OtrasPercepciones2" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="OtrasPercepciones2Desc" Type="varchar" MaxLength="15" />
+    <Property Name="IdIBCondicion" Type="int" />
+    <Property Name="IdPuntoVenta" Type="int" />
+    <Property Name="NumeroCAI" Type="numeric" Precision="19" Scale="0" />
+    <Property Name="FechaVencimientoCAI" Type="datetime" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="IdCodigoIva" Type="int" />
+    <Property Name="IdListaPrecios" Type="int" />
+    <Property Name="IdIBCondicion2" Type="int" />
+    <Property Name="IdIBCondicion3" Type="int" />
+    <Property Name="PercepcionIVA" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PorcentajePercepcionIVA" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="IdDeposito" Type="int" />
+    <Property Name="IdUsuarioAnulacion" Type="int" />
   </EntityType>
   <EntityType Name="DiferenciasCambio">
     <Key>
@@ -4741,6 +4825,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleDevoluciones_Devoluciones">
+    <End Role="Devoluciones" Type="Self.Devoluciones" Multiplicity="0..1" />
+    <End Role="DetalleDevoluciones" Type="Self.DetalleDevoluciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devoluciones">
+        <PropertyRef Name="IdDevolucion" />
+      </Principal>
+      <Dependent Role="DetalleDevoluciones">
+        <PropertyRef Name="IdDevolucion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleEmpleados_Empleados">
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
     <End Role="DetalleEmpleados" Type="Self.DetalleEmpleados" Multiplicity="*" />
@@ -5775,6 +5871,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleConciliaciones" EntityType="Self.DetalleConciliaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" />
@@ -5813,6 +5910,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleRecibosValores" EntityType="Self.DetalleRecibosValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleRemitos" EntityType="Self.DetalleRemitos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleRequerimientos" EntityType="Self.DetalleRequerimientos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Devoluciones" EntityType="Self.Devoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiferenciasCambio" EntityType="Self.DiferenciasCambio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ejercicios" EntityType="Self.Ejercicios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EjerciciosContables" EntityType="Self.EjerciciosContables" Schema="dbo" store:Type="Tables" />
@@ -6073,6 +6171,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_DetalleConciliacionesNoContables_Conciliaciones" Association="Self.FK_DetalleConciliacionesNoContables_Conciliaciones">
       <End Role="Conciliaciones" EntitySet="Conciliaciones" />
       <End Role="DetalleConciliacionesNoContables" EntitySet="DetalleConciliacionesNoContables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleDevoluciones_Devoluciones" Association="Self.FK_DetalleDevoluciones_Devoluciones">
+      <End Role="Devoluciones" EntitySet="Devoluciones" />
+      <End Role="DetalleDevoluciones" EntitySet="DetalleDevoluciones" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="Self.FK_DetalleEmpleados_Empleados">
       <End Role="Empleados" EntitySet="Empleados" />
