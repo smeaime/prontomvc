@@ -453,7 +453,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                 margin-top: 12px; color: Gray; overflow-y: scroll">
             </div>
         </div>
-        <div class="span10" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
+        <div class="span9" style="background: /*  rgba(255, 255, 255, 0.58) */; /* background-image: url('http://www.bootstrapcdn.com/img/bootstrap-bkg.jpg') */">
             <br />
             <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
                 <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;

@@ -9,7 +9,6 @@
 
     <script src="@Url.Content("~/Scripts/ScriptComparativa.js")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
 
-    <br />
 
     <style>
         /*    To wrap a cell's text (non header) include this CSS after all of the jquery & jqgrid css has loaded:  */
@@ -34,7 +33,7 @@
 
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <div class="modal" id="loading">
             <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
             Cargando...
@@ -165,18 +164,24 @@
                 }
             </style>
         }
-        <form class="form-horizontal" >
+        <form class="form-horizontal">
             <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
+                <br />
                 <div>@Html.Hidden("IdComparativa", Model.IdComparativa)</div>
                 <div>@Html.Hidden("Numero", Model.Numero)</div>
-                <div class="span12">
-                    <div class="row-fluid" style="position: ;">
-                        <div class="" style='font-size: 34px; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            Comparativa @Model.Numero
-                        </div>
+             
+                
+
+
+                <div class="row-fluid" style="">
+                    <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+                        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                        Comparativa @Model.Numero
                     </div>
+                </div>
+
+
                     <div class="row-fluid">
                         <div class="span4 lightblue">
                         </div>
@@ -373,8 +378,8 @@
                                 @{
 
         // con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
-        <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
-               title="" />
+                                <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
+                                       title="" />
 
         int ca = ViewBag.CantidadAutorizaciones;
 
@@ -580,7 +585,7 @@
                                 <div class="accordion-group" style="border: 0px; padding: 0px;">
                                     <div class="accordion-heading" style="border: 0px; padding: 0px;">
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseAdicionales"
-                                           style="border: 0px; padding: 0px;">Resumen</a>
+                                           style="border: 0px; padding: 0px;">Resumen...</a>
                                     </div>
                                     <div id="collapseAdicionales" class="accordion-body collapse" style="border: 0px;
                                 padding: 0px;">
@@ -752,12 +757,12 @@
                                     if (Model.IdAprobo == null)
                                     {
 
-                                        <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
-                                        @*<input type="button" id="grabar3" value="grabar3" class="btn  btn-large btn-primary" />*@
+                                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
+                                @*<input type="button" id="grabar3" value="grabar3" class="btn  btn-large btn-primary" />*@
                                     }
                                     else
                                     {
-                                        <span class="label label-info">Liberado</span>
+                                <span class="label label-info">Liberado</span>
 
                                     }
 
@@ -768,38 +773,53 @@
                                     {
 
 
-                                        @* <div class="btn-group ">*@
-                                        <a class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdComparativa })">
-                                            <i class="icon-print"></i>&nbsp;Imprimir
-                                        </a>
-                                        @*   <button class="btn dropdown-toggle btn-large" data-toggle="dropdown">
+                                @* <div class="btn-group ">*@
+                                <a class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdComparativa })">
+                                    <i class="icon-print"></i>&nbsp;Imprimir
+                                </a>
+                                @*   <button class="btn dropdown-toggle btn-large" data-toggle="dropdown">
                                         <span class="caret "></span>
                                     </button>
                                     <ul class="dropdown-menu ">
                                         <li><a class="" href="@Url.Action("Imprimir", new { @id = Model.IdComparativa, @bAgruparItems = true })">
                                             <i class="icon-print"></i>&nbsp;Agrupar items</a></li>
                                     </ul>*@
-                                        @*</div>*@
+                                @*</div>*@
 
 
-                                        <a class="btn btn-link" style="color: Black" href="@Url.Action("Anular", new { @id = Model.IdComparativa })">
-                                            <i class=""></i>&nbsp;Anular
-                                        </a>
+                                <a class="btn btn-link" style="color: Black" href="@Url.Action("Anular", new { @id = Model.IdComparativa })">
+                                    <i class=""></i>&nbsp;Anular
+                                </a>
                                     }
                                 }
                                 else
                                 {
-                                    <span class="label error-info">ANULADA</span>
+                                <span class="label error-info">ANULADA</span>
                                 }
                                 @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
                             </div>
                         </div>
                     </div>
-                </div>
-
-                </div>
-</form>
+                
+            </div>
+        </form>
     </div>
+
+
+    <script type="text/javascript">
+        //    function theimage(){
+        //     var filename = document.getElementById('file-id').value;
+        //     document.getElementById('file-path').value = filename;
+        //     var filename1 = $('#file-id').next().val();
+        //     alert(filename);
+        //    }
+
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
+
+            $("#conscroll").height($(window).height() - 120);
+        });
+    </script>
 
 
 }

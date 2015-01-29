@@ -180,11 +180,7 @@ namespace ProntoMVC.Controllers
                 throw new Exception("No tenés permisos");
                 // return RedirectToAction("Index", "MvcMembership/UserAdministration");
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
+            
 
 
             LeerArchivoSecuencial_____EncriptadoPuntoAPP();
