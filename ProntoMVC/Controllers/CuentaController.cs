@@ -73,12 +73,12 @@ namespace ProntoMVC.Controllers
                                      id = item.IdCuenta,
                                      codigo = item.Codigo,
                                      value = item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0)),
-                                     title = item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))
-
-                                                                         
-                                     , NumeroRendicionFF = item.NumeroAuxiliar ?? 1
-
-
+                                     title = item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0)),
+                                     Descripcion = item.Descripcion,
+                                     NumeroRendicionFF = item.NumeroAuxiliar ?? 1,
+                                     IdObra = item.IdObra ?? 0,
+                                     IdCuentaGasto = item.IdCuentaGasto ?? 0,
+                                     IdTipoCuentaGrupo = item.IdTipoCuentaGrupo ?? 0
                                  }).Take(20).ToList();
 
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
@@ -278,7 +278,10 @@ namespace ProntoMVC.Controllers
                          IdCuenta = a.IdCuenta,
                          codigo = a.Codigo,
                          Descripcion = a.Descripcion + " " + a.Codigo.ToString(),
-                         EsCajaBanco = b != null ? b.EsCajaBanco : ""
+                         EsCajaBanco = b != null ? b.EsCajaBanco : "",
+                         IdObra = a.IdObra ?? 0,
+                         IdCuentaGasto = a.IdCuentaGasto ?? 0,
+                         IdTipoCuentaGrupo = a.IdTipoCuentaGrupo ?? 0
                      }).ToList();
 
             return Json(q, JsonRequestBehavior.AllowGet);
@@ -536,7 +539,8 @@ namespace ProntoMVC.Controllers
                                  orderby a.Descripcion
                                  select new
                                  {
-                                     id = a.IdCuenta
+                                     id = a.IdCuenta,
+                                     value = a.Descripcion + " " + a.Codigo.ToString()
                                  }).ToList();
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
