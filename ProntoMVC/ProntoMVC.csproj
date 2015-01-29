@@ -875,6 +875,7 @@
     <Content Include="Views\TiposCuentaGrupos\Index.cshtml" />
     <Content Include="Views\EjerciciosContable\Index.cshtml" />
     <Content Include="Views\Obra\Edit.cshtml" />
+    <Content Include="Views\Recibo\EditCC.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1266,7 +1267,6 @@
     <Content Include="Views\ErrorPages\PageNotFound.cshtml" />
     <Content Include="Views\ErrorPages\Error.cshtml" />
     <Content Include="Views\Account\RecuperarPassword.cshtml" />
-    <Content Include="Views\Recibo\Details.cshtml" />
     <Content Include="Views\Recibo\Edit.cshtml" />
     <Content Include="Views\Recibo\Index.cshtml" />
     <Content Include="Views\Comparativa\Details.cshtml" />

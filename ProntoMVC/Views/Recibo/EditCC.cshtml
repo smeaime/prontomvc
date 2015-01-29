@@ -1,0 +1,410 @@
+﻿@model ProntoMVC.Data.Models.Recibo
+@{
+    ViewBag.Title = "Recibo";
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
+{
+    @Html.ValidationSummary(true)
+
+    <script src="@Url.Content("~/Scripts/ScriptRecibo.js")"  type="text/javascript"></script>
+
+    <style>
+        .subtotales input {
+            /*height: 16px;*/
+            min-height: 18px !important;
+            line-height: 18px;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            text-align: right;
+            font-weight: bold;
+            background-color: #e8eef4;
+        }
+
+            .subtotales input[readonly] {
+                background: transparent;
+                border: 0;
+            }
+
+        .subtotales select {
+            /* height : 16px; */
+            min-height: 18px !important;
+            line-height: 18px;
+            padding: 0;
+            margin: 0;
+            font-size: 10px;
+        }
+
+        table td {
+            padding: 0px;
+            border: solid 1px;
+            border-color: transparent;
+        }
+    </style>
+        
+    <div id="principal" class="container-fluid">
+        <form class="form-horizontal">
+            <div class="row-fluid">
+                <div class="span3 lightblue">
+                    <legend>Recibo (Clientes)</legend>
+                </div>
+                <div class="span1 lightblue">
+                    <div>@Html.Hidden("IdRecibo", Model.IdRecibo)</div>
+                    <div>@Html.Hidden("IdCliente", Model.IdCliente)</div>
+                    <div>@Html.Hidden("Anulado", Model.Anulado)</div>
+                    <div>@Html.Hidden("Valores", Model.Valores)</div>
+                    <div>@Html.Hidden("Deudores", Model.Deudores)</div>
+                    <div>@Html.Hidden("Tipo", Model.Tipo)</div>
+                </div>
+                <div class="span3 lightblue">
+                </div>
+                <div class="span4 lightblue">
+                    <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+                    @if (Model.IdRecibo > 0)
+                    {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />}
+                    <script>
+                        $(function () {
+                            $("#anular").click(function () {
+                                $("#dialog-password").dialog({
+                                    buttons: {
+                                        'Aceptar': function () {
+                                            var idAux = $("#Aux1").val();
+                                            $("#Anulado").val("SI");
+                                            //$("#FechaAnulacion").val(Hoy());
+                                            //$("#IdUsuarioAnulacion").val(idAux);
+                                            $('#grabar2').click();
+                                        },
+                                        'Cancelar': function () {
+                                            $(this).dialog('close');
+                                        }
+                                    },
+                                    open: function () {
+                                    }
+                                });
+                                $('#dialog-password').dialog('open');
+                                $('#mySelect').prop("disabled", false);
+                                CargarUsuariosConPermisoDeAnulacion();
+                            });
+
+                            function CargarUsuariosConPermisoDeAnulacion() {
+                                var combo = $("#mySelect")
+                                combo.find("option:gt(0)").remove();
+                                combo.find("option:first").text("Cargando...");
+                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=2', {
+                                }, function (json) {
+                                    combo.find("option:first").text("");
+                                    for (var i = 0; i < json.length; i++) {
+                                        $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                                    }
+                                });
+                            }
+                        })
+                    </script>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span1 lightblue">
+                    @Html.LabelFor(model => model.IdPuntoVenta, "Punto de venta")
+                    @Html.DropDownList("IdPuntoVenta", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                    @Html.ValidationMessageFor(model => model.IdPuntoVenta)
+                </div>
+                <div class="span1 lightblue">
+                    @Html.LabelFor(model => model.NumeroRecibo, "Numero")
+                    @Html.TextBoxFor(model => model.NumeroRecibo, new { style = "font-weight: bold; text-align: center; font-size: 18px;", @class = "span12", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.NumeroRecibo)
+                </div>
+                <div class="span2 lightblue">
+                    @Html.LabelFor(model => model.FechaRecibo, "Fecha")
+                    @Html.TextBoxFor(model => model.FechaRecibo, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.FechaRecibo)
+                    <script>
+                        $("#FechaRecibo").datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'dd/mm/yy'
+                            //numberOfMonths: 2,
+                        });
+                    </script>
+                </div>
+                <div class="span1 lightblue">
+                </div>
+                <div class="span3 lightblue">
+                    @Html.LabelFor(model => model.IdTipoRetencionGanancia, "Categoria retencion ganancias")
+                    @Html.DropDownList("IdTipoRetencionGanancia", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                    @Html.ValidationMessageFor(model => model.IdTipoRetencionGanancia)
+                </div>
+                <div class="span1 lightblue">
+                    @Html.LabelFor(model => model.NumeroCertificadoRetencionGanancias, "Nro. certif. gan.")
+                    @Html.TextBoxFor(model => model.NumeroCertificadoRetencionGanancias, new { @class = "span12" })
+                    @Html.ValidationMessageFor(model => model.NumeroCertificadoRetencionGanancias)
+                </div>
+                <div class="span1 lightblue">
+                    @Html.LabelFor(model => model.NumeroCertificadoRetencionIVA, "Nro. certif. iva")
+                    @Html.TextBoxFor(model => model.NumeroCertificadoRetencionIVA, new { @class = "span12" })
+                    @Html.ValidationMessageFor(model => model.NumeroCertificadoRetencionIVA)
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span4 lightblue">
+                    <label for="ArticuloAsociado">Cliente</label>
+                    <input type="text" name="Cliente" id="Cliente" style="font-size: 15px; text-align: left;" class="span12" />
+                    <script type="text/jscript">
+                        $("#Cliente").autocomplete({
+                            source: '@Url.Action("GetClientesAutocomplete", "Cliente")',
+                            minLength: 0,
+                            messages: { noResults: "", results: function () { } },
+                            select: function (event, ui) {
+                                $("#IdCliente").val(ui.item.id);
+                                $("#Cliente").val(ui.item.value);
+                                $("#IdCodigoIva").val(ui.item.IdCodigoIva);
+                                event.preventDefault();
+                                $("#ListaDrag").trigger("reloadGrid");
+                                ActualizarDatos();
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="span2 lightblue">
+                    <label for="CondicionIva">Condicion Iva</label>
+                    <input type="text" name="CondicionIva" id="CondicionIva" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span1 lightblue">
+                    <label for="Cuit">Cuit</label>
+                    <input type="text" name="Cuit" id="Cuit" style="font-size: 10px; text-align: center;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span3 lightblue">
+                    <label for="Email">Email</label>
+                    <input type="text" name="Email" id="Email" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span3 lightblue">
+                    <label for="Direccion">Direccion</label>
+                    <input type="text" name="Direccion" id="Direccion" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span2 lightblue">
+                    <label for="Localidad">Localidad</label>
+                    <input type="text" name="Localidad" id="Localidad" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span2 lightblue">
+                    <label for="Provincia">Provincia</label>
+                    <input type="text" name="Provincia" id="Provincia" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span1 lightblue">
+                    <label for="CodigoPostal">Codigo postal</label>
+                    <input type="text" name="CodigoPostal" id="CodigoPostal" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+                <div class="span2 lightblue">
+                    <label for="Telefono">Telefono</label>
+                    <input type="text" name="Telefono" id="Telefono" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span5 lightblue">
+                    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+                    <div id="ListaPager1" class="scroll" style="text-align: center; height: 30px"></div>
+                </div>
+                <div class="span5 lightblue">
+                    <table id="ListaContable" class="scroll" cellpadding="0" cellspacing="0"></table>
+                    <div id="ListaPager2" class="scroll" style="text-align: center; height: 30px"></div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span10 lightblue">
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group" style="border: 0px; padding: 0px;">
+                            <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="border: 0px; padding: 0px; text-align: right;">Otros conceptos</a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
+                                @*si pones "collapse in" empieza abierto*@
+                                <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                                    <div class="row-fluid">
+                                        <div class="span2 lightblue"><label for="Obras">Obra</label></div>
+                                        <div class="span2 lightblue"><label for="CuentasGasto">Cuentas gasto</label></div>
+                                        <div class="span1 lightblue"><label for="Grupos">Grupo</label></div>
+                                        <div class="span1 lightblue"><label for="Codigos">Codigo</label></div>
+                                        <div class="span2 lightblue"><label for="Cuentas">Cuenta x nombre</label></div>
+                                        <div class="span2 lightblue"><label for="Cuentas">Cuenta x seleccion lista</label></div>
+                                        <div class="span1 lightblue"><label for="Numeros">Nro.Comprob.</label></div>
+                                        <div class="span1 lightblue"><label for="Importes">Importe</label></div>
+                                    </div>
+
+                                    <div class="row-fluid">
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdObra1", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdObra1)
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdCuentaGasto1", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdCuentaGasto1)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.DropDownList("IdTipoCuentaGrupo1", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            <input type="text" name="CodigoCuenta1" id="CodigoCuenta1" style="font-size: 10px; text-align: center;" class="span12" />
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            <input type="text" name="Cuenta1" id="Cuenta1" style="font-size: 15px; text-align: left;" class="span12" />
+                                            <script type="text/jscript">
+                                                $("#Cuenta1").autocomplete({
+                                                    source: '@Url.Action("GetCuentasAutocomplete", "Cuenta")',
+                                                    minLength: 0,
+                                                    messages: { noResults: "", results: function () { } },
+                                                    select: function (event, ui) {
+                                                        $("#IdCuenta1").val(ui.item.id);
+                                                        $("#Cuenta1").val(ui.item.Descripcion);
+                                                        $("#CodigoCuenta1").val(ui.item.codigo);
+                                                        $("#IdObra1").val(ui.item.IdObra);
+                                                        $("#IdCuentaGasto1").val(ui.item.IdCuentaGasto);
+                                                        $("#IdTipoCuentaGrupo1").val(ui.item.IdTipoCuentaGrupo);
+
+                                                        newOptions = TraerCuentaPorCodigo2(ui.item.codigo);
+                                                        if (newOptions.length > 0) {
+                                                            $("select#IdCuenta1").empty();
+                                                            $("select#IdCuenta1").append(newOptions);
+                                                        }
+                                                        event.preventDefault();
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdCuenta1", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdCuenta1)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.TextBoxFor(model => model.NumeroComprobante1, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.NumeroComprobante1)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.TextBoxFor(model => model.Otros1, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Otros1)
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid">
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdObra2", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdObra2)
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdCuentaGasto2", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdCuentaGasto2)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.DropDownList("IdTipoCuentaGrupo2", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            <input type="text" name="CodigoCuenta2" id="CodigoCuenta2" style="font-size: 15px; text-align: left;" class="span12" />
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            <input type="text" name="Cuenta2" id="Cuenta2" style="font-size: 15px; text-align: left;" class="span12" />
+                                            <script type="text/jscript">
+                                                $("#Cuenta2").autocomplete({
+                                                    source: '@Url.Action("GetCuentasAutocomplete", "Cuenta")',
+                                                    minLength: 0,
+                                                    messages: { noResults: "", results: function () { } },
+                                                    select: function (event, ui) {
+                                                        $("#IdCuenta2").val(ui.item.id);
+                                                        $("#Cuenta2").val(ui.item.value);
+                                                        $("#CodigoCuenta2").val(ui.item.codigo);
+                                                        event.preventDefault();
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="span2 lightblue">
+                                            @Html.DropDownList("IdCuenta2", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                                            @Html.ValidationMessageFor(model => model.IdCuenta2)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.TextBoxFor(model => model.NumeroComprobante2, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.NumeroComprobante2)
+                                        </div>
+                                        <div class="span1 lightblue">
+                                            @Html.TextBoxFor(model => model.Otros2, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Otros2)
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6 lightblue">
+                    <table id="ListaValores" class="scroll" cellpadding="0" cellspacing="0"></table>
+                    <div id="ListaPager3" class="scroll" style="text-align: center; height: 30px"></div>
+                </div>
+                <div class="span4 lightblue">
+                    <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0"
+                           style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 4px; border-spacing: 0px; font-size: xx-small; background-color: #E0ECFF; ">
+                        <tr class="">
+                            <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">SUBTOTAL</td>
+                            <td width="100"><input type="text" name="Subtotal" id="Subtotal" style="width: 83%; text-align: right; font-size: 12px; font-weight: bold; background-color: #e8eef4; " readonly="readonly" /></td>
+                            <td width="50">MONEDA</td>
+                            <td width="100">@Html.DropDownList("IdMoneda", null, "", new { @class = "span12 ", @style = "height: 15px;   line-height: 14px;" })</td>
+                        </tr>
+                        <tr>
+                            <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCION IVA</td>
+                            <td width="100">@Html.TextBoxFor(model => model.RetencionIVA, new { @class = "span10 subtotales" })</td>
+                            <td width="50">CONV.PESOS</td>
+                            <td width="100">@Html.TextBoxFor(model => model.CotizacionMoneda, new { @class = "span8 subtotales" })</td>
+                        </tr>
+                        <tr>
+                            <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">RETENCION GANANCIAS</td>
+                            <td width="100">@Html.TextBoxFor(model => model.RetencionGanancias, new { @class = "span10 subtotales" })</td>
+                            <td width="50">COTIZ DOLAR</td>
+                            <td width="100">@Html.TextBoxFor(model => model.Cotizacion, new { @class = "span8 subtotales" })</td>
+                        </tr>
+                        <tr>
+                            <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">OTROS CONCEPTOS</td>
+                            <td width="100"><input type="text" name="OtrosConceptos" id="OtrosConceptos" style="width: 83%; text-align: right; font-size: 12px; font-weight: bold; background-color: #e8eef4; " readonly="readonly" /></td>
+                            <td width="50"></td>
+                            <td width="100"></td>
+                        </tr>
+                        <tr>
+                            <td width="200" colspan="2" style="font-size: 12px; font-weight: bold; ">DIFERENCIA</td>
+                            <td width="100"><input type="text" name="Diferencia" id="Diferencia" style="width: 83%; text-align: right; font-size: 12px; font-weight: bold; background-color: #e8eef4; " readonly="readonly" /></td>
+                            <td width="50"></td>
+                            <td width="100"></td>
+                        </tr>
+                    </table>
+
+                    <br />
+                    @if (Model.AsientoManual == "SI")
+                    {
+                        <script>$(function () { ActivarAsientoManual(true); })</script> }
+                    else
+                    {
+                        <script>$(function () { ActivarAsientoManual(false); })</script> }
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row-fluid">
+                <div class="span4 lightblue">
+                    <table id="ListaRubrosContables" class="scroll" cellpadding="0" cellspacing="0"></table>
+                    <div id="ListaPager5" class="scroll" style="text-align: center; height: 30px"></div>
+                </div>
+                <div class="span6 lightblue">
+                    @Html.LabelFor(model => model.Observaciones)
+                    @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12", @style = "height: 190px;" })
+                    @Html.ValidationMessageFor(model => model.Observaciones)
+                </div>
+            </div>
+        </form>
+    </div>
+}
