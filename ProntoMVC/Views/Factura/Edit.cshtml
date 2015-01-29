@@ -670,6 +670,89 @@
                             <div class="span12 lightblue">
                                 @Html.HiddenFor(m => m.DetalleFacturas)
 
+                                <style>
+                                    .ui-jqdialog td {
+                                        border: 0px !important;
+                                    }
+
+                                    .ui-jqdialog table {
+                                        border: 0px !important;
+                                    }
+
+                                    .ui-jqdialog .ui-jqdialog-titlebar {
+                                        padding: 0;
+                                        position: relative;
+                                    }
+
+                                    .ui-jqdialog-titlebar {
+                                        height: 15px;
+                                    }
+
+                                    .ui-jqdialog button {
+                                    }
+                                    /* http://stackoverflow.com/questions/14954587/jqgrid-for-twitter-bootstrap
+                                                                */ input.ui-pg-input {
+                                        width: auto;
+                                        padding: 0px;
+                                        margin: 0px;
+                                        line-height: normal;
+                                    }
+
+                                    select.ui-pg-selbox {
+                                        width: auto;
+                                        padding: 0px;
+                                        margin: 0px;
+                                        line-height: normal;
+                                    }
+
+                                    .ui-widget select {
+                                        margin-bottom: 0px !important; /* para que en la edicion inline de la grilla no me haga mas alto el renglon   */
+                                    }
+
+
+
+
+                                    .ui-widget-content button {
+                                        background: rgb(231, 231, 231);
+                                        color: black !important;
+                                    }
+
+                                    .ui-jqgrid tr.footrow-ltr {
+                                        font-size: 9px;
+                                    }
+
+                                    .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
+                                        height: 32px;
+                                    }
+
+                                    .ui-jqgrid tr.ui-row-ltr td {
+                                        /* lineas de las grillas verticales*/ /*
+                                                                                    border-right-style: none;
+                                                                                    border-left-style: none;
+                                                                                    */
+                                    }
+
+                                    .ui-icon, .ui-widget-content .ui-icon {
+                                        /* background-image:
+                                                                none; */
+                                    }
+
+                                    /* el padding... http://stackoverflow.com/questions/17732147/how-to-add-class-to-a-cell-in-jqgrid*/
+                                    .ui-jqgrid tr.jqgrow td {
+                                        padding-left: 8px;
+                                        padding-right: 8px;
+                                    }
+
+                                    .ui-widget-content hr {
+                                        border: 0 !important; /* el borde molesto en el form de detalle de la jqgrid antes de los botones de aceptar/cancelar */
+                                    }
+
+
+                                    .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
+                                        height: 36px; /* jugar entre .AltoRenglones y el style de font de la grilla */
+                                    }
+                                </style>
+
                                 <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
                                        style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
                                     @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
