@@ -1390,7 +1390,7 @@ namespace ProntoMVC.Controllers
             var eeeee = string.Join(",", num);
 
 
-            o.Obras = ssss;
+            o.Obras =  ssss.Substring(0,20);
             o.NumeroRequerimiento = 0;
             o.PresupuestoSeleccionado = 0;
             o.MontoParaCompra = "0";

@@ -102,3 +102,5 @@ C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.pdb
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.xml
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.EntityFramework6.pdb
 C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.EntityFramework6.xml
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.Mvc.dll
+C:\Backup\BDL\ProntoMVC\TestProject2\bin\Debug\MiniProfiler.Mvc.pdb
