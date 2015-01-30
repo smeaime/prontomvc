@@ -9786,7 +9786,14 @@ Public Class LogicaFacturacion
 
         'Para la facturación automática, de haber cartas de porte Agro y cartas de Porte Seeds, armar dos facturas separadas.
         'Como las cartas de porte duplicadas solamente se pueden facturar mediante la facturación automática, entran en el automático. Para que no se pase la facturación separada, armar dos facturas distintas automaticamente.
-        CasosSyngenta_y_Acopios(lista, SC)
+
+        Try
+            CasosSyngenta_y_Acopios(lista, SC)
+
+        Catch ex As Exception
+            ErrHandler.WriteError("CasosSyngenta_y_Acopios")
+            ErrHandler.WriteError(ex)
+        End Try
 
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
@@ -10680,6 +10687,18 @@ Public Class LogicaFacturacion
 
         ErrHandler.WriteError("entrando en GetDatatableAsignacionAutomatica . tanda " & sesionId)
 
+
+        '        por qué puede ser que no haya sesionId???
+
+
+        '        Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:en donde explota? no encuentra un cliente tercero, entonces explota
+
+        '        Log Entry
+        '01/30/2015 16:41:23
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 
+
+
+
         Try
 
 
@@ -10986,6 +11005,29 @@ Public Class LogicaFacturacion
         'te lo pisa ActualizarCampoClienteSeparador(). tenes que verlo tambien ahí
 
 
+
+        '        dddddd()
+
+
+        '        Log Entry
+        '01/30/2015 16:41:16
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:System.InvalidOperationException
+        'Sequence contains no elements
+        '   at System.Data.Linq.SqlClient.SqlProvider.Execute(Expression query, QueryInfo queryInfo, IObjectReaderFactory factory, Object[] parentArgs, Object[] userArgs, ICompiledSubQuery[] subQueries, Object lastResult)
+        '   at System.Data.Linq.SqlClient.SqlProvider.ExecuteAll(Expression query, QueryInfo[] queryInfos, IObjectReaderFactory factory, Object[] userArguments, ICompiledSubQuery[] subQueries)
+        '   at System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+        '   at System.Data.Linq.DataQuery`1.System.Linq.IQueryProvider.Execute[S](Expression expression)
+        '   at System.Linq.Queryable.First[TSource](IQueryable`1 source)
+        '   at LogicaFacturacion.CasosSyngenta_y_Acopios(List`1& listaDeCartasPorteAFacturar, String SC)
+        '   at LogicaFacturacion.PreProcesos(List`1 lista, String SC, String desde, String hasta, String puntoVenta, Object& slinks)
+        '   at LogicaFacturacion.generarTabla(String SC, Object& pag, Object& sesionId, Int64 iPageSize, Int32 puntoVenta, DateTime desde, DateTime hasta, String sLista, Boolean bNoUsarLista, Int64 optFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta)
+        '        System.Data.Linq()
+
+
+
+
+
+
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
         Dim a As linqCliente
 
@@ -11001,7 +11043,14 @@ Public Class LogicaFacturacion
 
             For Each c In q
 
-                Dim cartamapeada = (From x In db.CartasDePortes Where x.IdCartaDePorte = c.IdCartaDePorte).First
+
+                Dim cartamapeada = (From x In db.CartasDePortes Where x.IdCartaDePorte = c.IdCartaDePorte).FirstOrDefault
+
+                If cartamapeada Is Nothing Then
+                    ErrHandlerWriteErrorLogPronto("casossyngenta_y_acopios: no encontró la carta " & c.IdCartaDePorte, SC, Membership.GetUser.UserName)
+                    Continue For
+                End If
+
                 Dim tiposyng As String = cartamapeada.EnumSyngentaDivision
 
                 Dim lambdaTemp = c
