@@ -40,6 +40,16 @@ namespace ProntoMVC.Controllers
 
 
 
+        class c
+        {
+            public Guid IdFactura;
+            public Guid UserId;
+            public string UserName;
+            public int IdEmpleado;
+
+        };
+
+
 
         public virtual ActionResult Usuarios(string sidx, string sord, int? page, int? rows, bool? _search, string searchField, string searchOper, string searchString
                                             )
@@ -51,7 +61,61 @@ namespace ProntoMVC.Controllers
 
             ProntoMVC.Data.Models.BDLMasterEntities bdlmaster = new ProntoMVC.Data.Models.BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER());
 
-            var Fac = bdlmaster.aspnet_Users.AsQueryable();
+
+            string sc = Generales.sCadenaConex((string)Session["BasePronto"]);
+            if (sc == null)
+            {
+                return RedirectToAction("ElegirBase");
+                return null;
+            }
+            ProntoMVC.Data.Models.DemoProntoEntities pronto = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+
+
+
+            var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado }).ToList();
+            var users = (from n in bdlmaster.aspnet_Users select new { n.UserId, n.UserName }).ToList();
+
+
+
+
+
+            var Fac4 = (from u in users
+                       join n in emp on u.UserName equals n.UsuarioNT
+                       select new c
+                       {
+                           IdFactura = u.UserId,
+                           UserId = u.UserId,
+                           UserName = u.UserName,
+                           IdEmpleado = n.IdEmpleado
+                       }
+                       ).ToList();
+
+            var Fac2 = (from u in users
+                        where !emp.Select(x => x.UsuarioNT).Contains(u.UserName)
+                        select new c
+                        {
+                            IdFactura = u.UserId,
+                            UserId = u.UserId,
+                            UserName = u.UserName,
+                            IdEmpleado = 0
+                        }
+                       ).ToList();
+
+            var Fac3 = (from e in emp
+                        where !users.Select(x => x.UserName).Contains(e.UsuarioNT)
+                        select new c
+                        {
+                            IdFactura = new Guid(),
+                            UserId = new Guid(),
+                            UserName = e.UsuarioNT,
+                            IdEmpleado = e.IdEmpleado
+                        }
+                       ).ToList();
+
+
+            var Fac = Fac3.Union(Fac2).Union(Fac4);
+
+
 
 
 
@@ -59,6 +123,10 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             IdFactura = a.UserId,
+                            UserId = a.UserId,
+                            UserName = a.UserName,
+                            IdEmpleado = a.IdEmpleado
+
                             //NumeroFactura = a.NumeroFactura,
                             //FechaFactura = a.FechaFactura,
                             //NumeroObra=a.Obra.NumeroObra,
@@ -67,7 +135,17 @@ namespace ProntoMVC.Controllers
                             //Sector=a.Sectores.Descripcion,
                             //Detalle=a.Detalle
                         });
-                        //).Where(campo);
+            //).Where(campo);
+
+
+            var empleados = (from u in bdlmaster.aspnet_Users
+                             //join n in bdlmaster.aspnet_Users on u.
+                             select u
+
+                       ).AsQueryable();
+
+
+
 
             int totalRecords = Req1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -99,13 +177,17 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.UserId.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.UserId} )  +" target='_blank' >Editar</>"
+                                a.UserName,
+
+                                // "<a href="+ Url.Action("Edit",new {id = a.UserId} )  +" target='_blank' >Editar</>"
                                 //+
                                 //"|" +
                                 //"<a href=/Factura/Details/" + a.IdFactura + ">Detalles</a> "
-                                ,
-                                "<a href="+ Url.Action("Imprimir",new {id = a.UserId} )  +">Imprimir</>" ,
-                            
+                                
+                                "<a href="+ Url.Action("Usuario web",new {id = a.UserId} )  +">Imprimir</>" ,
+                                "<a href="+ Url.Action("Accesos",new {id = a.UserId} )  +">Imprimir</>" ,
+                                "<a href="+ Url.Action("Empleado",new {id = a.UserId} )  +">Imprimir</>" ,
+                            "mostrar si el usuario web no tiene empleado, o viceversa"
                                 // create una vista y chau
  
 
@@ -140,7 +222,7 @@ namespace ProntoMVC.Controllers
 
             var a = UserDatosExtendidosManager.Traer(membershipUser.ProviderUserKey.ToString());
 
-            if (a==null) return null;
+            if (a == null) return null;
             return a.UltimaBaseAccedida;
         }
 
@@ -181,7 +263,7 @@ namespace ProntoMVC.Controllers
             public static ProntoMVC.Data.Models.UserDatosExtendidos Traer(string UserId)
             {
 
-                 
+
                 ProntoMVC.Data.Models.BDLMasterEntities db = new ProntoMVC.Data.Models.BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER());
 
 
@@ -465,7 +547,7 @@ namespace ProntoMVC.Controllers
             string sc;
             try
             {
-               if (Membership.GetUser()!= null) sc = Generales.sCadenaConex(rc);
+                if (Membership.GetUser() != null) sc = Generales.sCadenaConex(rc);
 
                 //ViewData["BasePronto"] = sBasePronto;
                 ViewBag.BasePronto = this.Session["BasePronto"];
@@ -1124,7 +1206,7 @@ namespace ProntoMVC.Controllers
                 //////////////////////////////////////////////////////////////////////////////////////
                 Generales.MailDeHabilitacionSinContrasena(u);
 
-             
+
             }
             else
             {
