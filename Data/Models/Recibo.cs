@@ -16,7 +16,7 @@ namespace ProntoMVC.Data.Models
     {
         public Recibo()
         {
-            this.DetalleRecibosImputaciones = new HashSet<DetalleRecibo>();
+            this.DetalleRecibos = new HashSet<DetalleRecibo>();
             this.DetalleRecibosCuentas = new HashSet<DetalleRecibosCuenta>();
             this.DetalleRecibosRubrosContables = new HashSet<DetalleRecibosRubrosContable>();
             this.DetalleRecibosValores = new HashSet<DetalleRecibosValore>();
@@ -126,7 +126,7 @@ namespace ProntoMVC.Data.Models
         public string LoteServicioCobro { get; set; }
         public Nullable<int> IdFacturaDirecta { get; set; }
     
-        public virtual ICollection<DetalleRecibo> DetalleRecibosImputaciones { get; set; }
+        public virtual ICollection<DetalleRecibo> DetalleRecibos { get; set; }
         public virtual ICollection<DetalleRecibosCuenta> DetalleRecibosCuentas { get; set; }
         public virtual ICollection<DetalleRecibosRubrosContable> DetalleRecibosRubrosContables { get; set; }
         public virtual ICollection<DetalleRecibosValore> DetalleRecibosValores { get; set; }

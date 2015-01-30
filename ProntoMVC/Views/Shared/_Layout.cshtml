@@ -2260,7 +2260,7 @@ Released   : 20120723
 
                 function conmutarPanelesNorte() {
 
-                    window.location = (ROOT + "Home" );
+                    window.location = (ROOT + "Home");
                     return;
 
                     if (true) {
@@ -2441,6 +2441,8 @@ Released   : 20120723
                             @*/////////////////////////////////////////////////////////////////////////////////////////////////////*@
                             <div class="row-fluid" style="width: ">
                                 @RenderBody()
+
+
                             </div>
                             @*<span class="span1 lightblue"></span>*@
                             <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
@@ -2812,7 +2814,8 @@ Released   : 20120723
 
 
 
-                @MiniProfiler.RenderIncludes()
+
+                @MiniProfiler.RenderIncludes(position: RenderPosition.Left)
 
 
             </body>
