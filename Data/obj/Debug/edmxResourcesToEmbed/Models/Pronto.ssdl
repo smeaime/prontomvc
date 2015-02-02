@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -1368,34 +1368,6 @@
     <Property Name="FechaCambio" Type="datetime" />
     <Property Name="CodigoAnterior" Type="int" />
     <Property Name="JerarquiaAnterior" Type="varchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="DetalleDevoluciones">
-    <Key>
-      <PropertyRef Name="IdDetalleDevolucion" />
-    </Key>
-    <Property Name="IdDetalleDevolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdDevolucion" Type="int" />
-    <Property Name="NumeroDevolucion" Type="int" />
-    <Property Name="TipoABC" Type="varchar" MaxLength="1" />
-    <Property Name="PuntoVenta" Type="int" />
-    <Property Name="IdArticulo" Type="int" />
-    <Property Name="CodigoArticulo" Type="varchar" MaxLength="20" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="Partida" Type="varchar" MaxLength="20" />
-    <Property Name="Costo" Type="numeric" Precision="19" Scale="8" />
-    <Property Name="PrecioUnitario" Type="numeric" Precision="19" Scale="8" />
-    <Property Name="Bonificacion" Type="numeric" Precision="6" Scale="2" />
-    <Property Name="IdUnidad" Type="int" />
-    <Property Name="OrigenDescripcion" Type="int" />
-    <Property Name="Observaciones" Type="ntext" />
-    <Property Name="PorcentajeCertificacion" Type="numeric" Precision="6" Scale="2" />
-    <Property Name="IdUbicacion" Type="int" />
-    <Property Name="IdObra" Type="int" />
-    <Property Name="NumeroCaja" Type="int" />
-    <Property Name="IdDetalleFactura" Type="int" />
-    <Property Name="Talle" Type="varchar" MaxLength="2" />
-    <Property Name="IdColor" Type="int" />
-    <Property Name="IdDetallePresupuestoVenta" Type="int" />
   </EntityType>
   <EntityType Name="DetalleEmpleados">
     <Key>
@@ -4825,18 +4797,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DetalleDevoluciones_Devoluciones">
-    <End Role="Devoluciones" Type="Self.Devoluciones" Multiplicity="0..1" />
-    <End Role="DetalleDevoluciones" Type="Self.DetalleDevoluciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Devoluciones">
-        <PropertyRef Name="IdDevolucion" />
-      </Principal>
-      <Dependent Role="DetalleDevoluciones">
-        <PropertyRef Name="IdDevolucion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DetalleEmpleados_Empleados">
     <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
     <End Role="DetalleEmpleados" Type="Self.DetalleEmpleados" Multiplicity="*" />
@@ -5871,7 +5831,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleConciliaciones" EntityType="Self.DetalleConciliaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" />
@@ -6171,10 +6130,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_DetalleConciliacionesNoContables_Conciliaciones" Association="Self.FK_DetalleConciliacionesNoContables_Conciliaciones">
       <End Role="Conciliaciones" EntitySet="Conciliaciones" />
       <End Role="DetalleConciliacionesNoContables" EntitySet="DetalleConciliacionesNoContables" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalleDevoluciones_Devoluciones" Association="Self.FK_DetalleDevoluciones_Devoluciones">
-      <End Role="Devoluciones" EntitySet="Devoluciones" />
-      <End Role="DetalleDevoluciones" EntitySet="DetalleDevoluciones" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleEmpleados_Empleados" Association="Self.FK_DetalleEmpleados_Empleados">
       <End Role="Empleados" EntitySet="Empleados" />

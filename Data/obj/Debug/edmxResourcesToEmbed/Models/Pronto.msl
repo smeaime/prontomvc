@@ -4657,35 +4657,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Obras_EliminarCuentasNoUsadasPorIdObra" FunctionName="DemoProntoModel.Store.Obras_EliminarCuentasNoUsadasPorIdObra" />
-    <EntitySetMapping Name="DetalleDevoluciones">
-      <EntityTypeMapping TypeName="DemoProntoModel.DetalleDevolucione">
-        <MappingFragment StoreEntitySet="DetalleDevoluciones">
-          <ScalarProperty Name="IdDetallePresupuestoVenta" ColumnName="IdDetallePresupuestoVenta" />
-          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
-          <ScalarProperty Name="Talle" ColumnName="Talle" />
-          <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
-          <ScalarProperty Name="NumeroCaja" ColumnName="NumeroCaja" />
-          <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-          <ScalarProperty Name="IdUbicacion" ColumnName="IdUbicacion" />
-          <ScalarProperty Name="PorcentajeCertificacion" ColumnName="PorcentajeCertificacion" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
-          <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-          <ScalarProperty Name="Bonificacion" ColumnName="Bonificacion" />
-          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
-          <ScalarProperty Name="Costo" ColumnName="Costo" />
-          <ScalarProperty Name="Partida" ColumnName="Partida" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="CodigoArticulo" ColumnName="CodigoArticulo" />
-          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-          <ScalarProperty Name="TipoABC" ColumnName="TipoABC" />
-          <ScalarProperty Name="NumeroDevolucion" ColumnName="NumeroDevolucion" />
-          <ScalarProperty Name="IdDevolucion" ColumnName="IdDevolucion" />
-          <ScalarProperty Name="IdDetalleDevolucion" ColumnName="IdDetalleDevolucion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Devoluciones">
       <EntityTypeMapping TypeName="DemoProntoModel.Devolucione">
         <MappingFragment StoreEntitySet="Devoluciones">
