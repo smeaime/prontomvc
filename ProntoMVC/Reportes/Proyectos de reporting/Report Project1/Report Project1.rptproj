@@ -177,6 +177,14 @@
       <Name>Subdiario.rdl</Name>
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</Name>
+      <FullPath>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</Name>
+      <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
