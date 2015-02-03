@@ -6621,7 +6621,7 @@ Public Class CartaDePorteManager
 
 
         Else
-            RebindReportViewerhhhhhh_ServidorExcel(ReportViewer2, "/Pronto informes/Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer", "wCartasDePorte_TX_PorIdFactura " & IdFactura, SC, , ArchivoExcelDestino)
+            RebindReportViewer_ServidorExcel_SinSanata(ReportViewer2, "/Pronto informes/Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer", "wCartasDePorte_TX_PorIdFactura " & IdFactura, SC, ArchivoExcelDestino, IdFactura)
         End If
 
 
@@ -6635,12 +6635,12 @@ Public Class CartaDePorteManager
 
 
 
-    Public Shared Function RebindReportViewerhhhhhh_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
+    Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer, _
                                                                 ByVal rdlFile As String, strSQL As String, SC As String, _
-                                     Optional ByVal bDescargaExcel As Boolean = False, _
-                                    Optional ByRef ArchivoExcelDestino As String = "", Optional ByVal titulo As String = "", _
-                                    Optional ByVal bDescargaHtml As Boolean = False) As String
+                                    ByRef ArchivoExcelDestino As String,
+                                    IdFactura As Integer) As String
         'http://forums.asp.net/t/1183208.aspx
+
 
         With oReportViewer
             .Reset()
@@ -6676,7 +6676,7 @@ Public Class CartaDePorteManager
                 Dim yourParams As ReportParameter() = New ReportParameter(3) {}
 
                 yourParams(0) = New ReportParameter("RenglonesPorBoleta", 8)
-                yourParams(1) = New ReportParameter("IdFactura", 1)
+                yourParams(1) = New ReportParameter("IdFactura", IdFactura)
                 yourParams(2) = New ReportParameter("Consulta", strSQL)
 
                 If Diagnostics.Debugger.IsAttached Then
@@ -6807,7 +6807,7 @@ Public Class CartaDePorteManager
 
 
 
-            
+
 
         End With
 
@@ -6846,61 +6846,71 @@ Public Class CartaDePorteManager
         Next
 
 
+        If False Then
+            '        Using ReportViewer2 As New ReportViewer
+            With ReportViewer2
 
-        '        Using ReportViewer2 As New ReportViewer
-        With ReportViewer2
-            .ProcessingMode = ProcessingMode.Local
+                .ProcessingMode = ProcessingMode.Local
 
-            .Visible = False
+                .Visible = False
 
-            With .LocalReport
+                With .LocalReport
 
-                .ReportPath = "ProntoWeb\Informes\Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl"
-                .EnableHyperlinks = True
-                .DataSources.Clear()
+                    .ReportPath = "ProntoWeb\Informes\Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl"
+                    .EnableHyperlinks = True
+                    .DataSources.Clear()
 
-                .EnableExternalImages = True
+                    .EnableExternalImages = True
 
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                    .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+                End With
+
+                .DocumentMapCollapsed = True
+
+                '.LocalReport.Refresh()
+                '.DataBind()
+
+
+
+
+                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+                Dim warnings As Warning()
+                Dim streamids As String()
+                Dim mimeType, encoding, extension As String
+
+                Dim format = "Excel"
+
+                Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
+                           format, Nothing, mimeType, encoding, _
+                             extension, _
+                            streamids, warnings)
+
+                Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+
+
+
+
+                'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
+                'Notas de Entrega: 160 ancho x 36 alt
+                'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+
 
             End With
-
-            .DocumentMapCollapsed = True
-
-            '.LocalReport.Refresh()
-            '.DataBind()
+        Else
+            RebindReportViewer_ServidorExcel_SinSanata(ReportViewer2, "/Pronto informes/Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer", "wCartasDePorte_TX_PorIdFactura " & IdFactura, SC, ArchivoExcelDestino, IdFactura)
+        End If
 
 
 
+        ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto(ArchivoExcelDestino)
 
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-
-            Dim format = "Excel"
-
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       format, Nothing, mimeType, encoding, _
-                         extension, _
-                        streamids, warnings)
-
-            Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
-            fs.Write(bytes, 0, bytes.Length)
-            fs.Close()
-
-
-
-
-
-            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
-            'Notas de Entrega: 160 ancho x 36 alt
-            'Facturas y Adjuntos: 160 ancho x 78 alto
-
-            ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto(ArchivoExcelDestino)
-
-        End With
         ' End Using
 
 
@@ -6935,99 +6945,106 @@ Public Class CartaDePorteManager
             End If
         Next
 
+        If False Then
 
 
-        '  Using ReportViewer2 As New ReportViewer
-        With ReportViewer2
-            .ProcessingMode = ProcessingMode.Local
 
-            .Visible = False
+            '  Using ReportViewer2 As New ReportViewer
+            With ReportViewer2
+                .ProcessingMode = ProcessingMode.Local
 
-            With .LocalReport
+                .Visible = False
 
-                .ReportPath = "ProntoWeb\Informes\Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl"
-                .EnableHyperlinks = True
-                .DataSources.Clear()
+                With .LocalReport
 
-                .EnableExternalImages = True
+                    .ReportPath = "ProntoWeb\Informes\Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos).rdl"
+                    .EnableHyperlinks = True
+                    .DataSources.Clear()
 
-                '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
-                .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+                    .EnableExternalImages = True
+
+                    '.DataSources.Add(New ReportDataSource("DataSet1", TraerDataset)) '//the first patameter is the name of the datasource which you bind your report table to.
+                    .DataSources.Add(New ReportDataSource("DataSet1", dt)) '//the first parameter is the name of the datasource which you bind your report table to.
+
+                End With
+
+                .DocumentMapCollapsed = True
+
+                '.LocalReport.Refresh()
+                '.DataBind()
+
+
+
+
+                'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
+                Dim warnings As Warning()
+                Dim streamids As String()
+                Dim mimeType, encoding, extension As String
+
+                Dim format = "Excel"
+
+                Dim bytes As Byte()
+
+
+
+                Try
+
+                    bytes = ReportViewer2.LocalReport.Render( _
+                           format, Nothing, mimeType, encoding, _
+                             extension, _
+                            streamids, warnings)
+
+
+
+
+
+                Catch e As System.Exception
+                    Dim inner As Exception = e.InnerException
+                    While Not (inner Is Nothing)
+                        If System.Diagnostics.Debugger.IsAttached() Then
+                            'MsgBox(inner.Message)
+                            'Stop
+                        End If
+                        ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
+                        inner = inner.InnerException
+                    End While
+                    Throw
+                End Try
+
+
+
+
+                Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
+                fs.Write(bytes, 0, bytes.Length)
+                fs.Close()
+
+
+
+
+
+                'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
+                'Notas de Entrega: 160 ancho x 36 alt
+                'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
 
             End With
+            '  End Using
 
-            .DocumentMapCollapsed = True
+            RebindReportViewer_ServidorExcel_SinSanata(ReportViewer2, "/Pronto informes/Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer", "wCartasDePorte_TX_PorIdFactura " & IdFactura, SC, ArchivoExcelDestino, IdFactura)
 
-            '.LocalReport.Refresh()
-            '.DataBind()
+        End If
 
+        If True Then
 
+            Threading.Thread.Sleep(5000)
+            For n = 1 To 2
+                ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto_A4(ArchivoExcelDestino)
+            Next
 
-
-            'Exportar a EXCEL directo http://msdn.microsoft.com/en-us/library/ms251839(VS.80).aspx
-            Dim warnings As Warning()
-            Dim streamids As String()
-            Dim mimeType, encoding, extension As String
-
-            Dim format = "Excel"
-
-            Dim bytes As Byte()
+        End If
 
 
-
-            Try
-
-                bytes = ReportViewer2.LocalReport.Render( _
-                       format, Nothing, mimeType, encoding, _
-                         extension, _
-                        streamids, warnings)
-
-
-
-
-
-            Catch e As System.Exception
-                Dim inner As Exception = e.InnerException
-                While Not (inner Is Nothing)
-                    If System.Diagnostics.Debugger.IsAttached() Then
-                        'MsgBox(inner.Message)
-                        'Stop
-                    End If
-                    ErrHandler.WriteError("Error al hacer el LocalReport.Render()  " & inner.Message) ' & "   Filas:" & dt.Rows.Count & " Filtro:" & titulo)
-                    inner = inner.InnerException
-                End While
-                Throw
-            End Try
-
-
-
-
-            Dim fs = New IO.FileStream(ArchivoExcelDestino, IO.FileMode.Create)
-            fs.Write(bytes, 0, bytes.Length)
-            fs.Close()
-
-
-
-
-
-            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es la mitad de la normal)
-            'Notas de Entrega: 160 ancho x 36 alt
-            'Facturas y Adjuntos: 160 ancho x 78 alto
-
-            If True Then
-
-                Threading.Thread.Sleep(5000)
-                For n = 1 To 2
-                    ArchivoExcelDestino = ImpresoraMatrizDePuntosEPSONTexto.ExcelToTextWilliamsAdjunto_A4(ArchivoExcelDestino)
-                Next
-
-            End If
-
-
-
-
-        End With
-        '  End Using
 
 
         Return ArchivoExcelDestino
