@@ -274,50 +274,52 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     'por ahora están en una lista, hay que pasarlos a una tabla
 
-    Public Shared Property excepciones As String()
-        Get
+    Public Shared Function excepciones(SC) As String()
+        'Get
 
-            If True Then
-                Dim SC As String = ""
-                Dim cli As Integer
-
-
-                Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-                Dim q = From i In db.CartasPorteAcopios1 _
-                        Where (True Or i.IdCliente = cli)
-                        Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
+        If True Then
+            'Dim SC As String = ""
+            Dim cli As Integer
 
 
-                Return q.Select(Function(x) x.Descripcion).ToArray
+            Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+            Dim q = From i In db.CartasPorteAcopios1 _
+                    Where (True Or i.IdCliente = cli)
+                    Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
 
 
-            Else
-
-                Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
-
-            End If
+            Return q.Select(Function(x) x.Descripcion).ToArray
 
 
+        Else
 
-        End Get
-        Set(ByVal excepciones As String())
-            'newPropertyValue = value
-        End Set
-    End Property
+            Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
 
-    Shared Function BuscarIdAcopio(descripcionAcopio As String) As Integer
+        End If
+
+
+
+        'End Get
+        'Set(ByVal excepciones As String(SC))
+        '    'newPropertyValue = value
+        'End Set
+        'End Property
+    End Function
+
+
+    Shared Function BuscarIdAcopio(descripcionAcopio As String, SC As String) As Integer
         'excepciones.Where(Function(x) x = descripcionAcopio).FirstOrDefault()
-        Dim s As String() = excepciones
-        For n = 0 To excepciones.Count - 1
+        Dim s As String() = excepciones(SC)
+        For n = 0 To excepciones(SC).Count - 1
             If s(n) = descripcionAcopio Then Return n
         Next
         Return -1
     End Function
 
-    Shared Function BuscarTextoAcopio(IdAcopio As Integer) As String
+    Shared Function BuscarTextoAcopio(IdAcopio As Integer, SC As String) As String
         If IdAcopio < 0 Then Return ""
         Try
-            Return excepciones(IdAcopio)
+            Return excepciones(SC)(IdAcopio)
         Catch ex As Exception
             Return ""
         End Try
@@ -3146,7 +3148,7 @@ Public Class CartaDePorteManager
 
 
         'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
-        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, sc)
 
         If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
             strWHERE += " AND ("
@@ -3373,7 +3375,7 @@ Public Class CartaDePorteManager
         '///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, sc)
 
 
         If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
@@ -3758,7 +3760,7 @@ Public Class CartaDePorteManager
 
         
         'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
-        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta)
+        Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, HFSC)
 
         If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then
             strWHERE += " AND ("
@@ -18879,7 +18881,7 @@ Public Class LogicaImportador
                     (.CuentaOrden1 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0) _
                     Or _
                     (.CuentaOrden2 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) Then
-                    Dim excep = CartaDePorteManager.excepciones
+                    Dim excep = CartaDePorteManager.excepciones(SC)
                     Const otros = 15
                     .EnumSyngentaDivision = excep(otros) 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
                     .Acopio1 = otros
