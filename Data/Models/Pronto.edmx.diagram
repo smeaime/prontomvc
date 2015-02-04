@@ -2332,6 +2332,8 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDevolucione" Width="1.5" PointX="27.625" PointY="19.125" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Devolucione" Width="1.5" PointX="25.375" PointY="16.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Chofere" Width="1.5" PointX="13.375" PointY="26.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.LogComprobantesElectronico" Width="1.5" PointX="15.375" PointY="26.75" />
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

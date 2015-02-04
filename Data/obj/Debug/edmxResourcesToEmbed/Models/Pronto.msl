@@ -4743,5 +4743,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LogComprobantesElectronicos_InsertarRegistro" FunctionName="DemoProntoModel.Store.LogComprobantesElectronicos_InsertarRegistro" />
+    <EntitySetMapping Name="Choferes">
+      <EntityTypeMapping TypeName="DemoProntoModel.Chofere">
+        <MappingFragment StoreEntitySet="Choferes">
+          <ScalarProperty Name="Cuil" ColumnName="Cuil" />
+          <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+          <ScalarProperty Name="PathImagen1" ColumnName="PathImagen1" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogComprobantesElectronicos">
+      <EntityTypeMapping TypeName="DemoProntoModel.LogComprobantesElectronico">
+        <MappingFragment StoreEntitySet="LogComprobantesElectronicos">
+          <ScalarProperty Name="Recibido" ColumnName="Recibido" />
+          <ScalarProperty Name="Enviado" ColumnName="Enviado" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="NumeroComprobante" ColumnName="NumeroComprobante" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="Letra" ColumnName="Letra" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IdLog" ColumnName="IdLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

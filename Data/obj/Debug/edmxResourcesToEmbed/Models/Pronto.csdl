@@ -1008,6 +1008,17 @@
       <End Role="Devolucione" EntitySet="Devoluciones" />
       <End Role="DetalleDevolucione" EntitySet="DetalleDevoluciones" />
     </AssociationSet>
+    <FunctionImport Name="LogComprobantesElectronicos_InsertarRegistro">
+      <Parameter Name="PuntoVenta" Mode="In" Type="Int32" />
+      <Parameter Name="NumeroComprobante" Mode="In" Type="Int32" />
+      <Parameter Name="Identificador" Mode="In" Type="Int32" />
+      <Parameter Name="Enviado" Mode="In" Type="String" />
+      <Parameter Name="Recibido" Mode="In" Type="String" />
+      <Parameter Name="Tipo" Mode="In" Type="String" />
+      <Parameter Name="Letra" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Choferes" EntityType="DemoProntoModel.Chofere" />
+    <EntitySet Name="LogComprobantesElectronicos" EntityType="DemoProntoModel.LogComprobantesElectronico" />
   </EntityContainer>
   <EntityType Name="Articulo">
     <Key>
@@ -8323,4 +8334,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Chofere">
+    <Key>
+      <PropertyRef Name="IdChofer" />
+    </Key>
+    <Property Name="IdChofer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PathImagen1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Cuil" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LogComprobantesElectronico">
+    <Key>
+      <PropertyRef Name="IdLog" />
+    </Key>
+    <Property Name="IdLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Letra" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="PuntoVenta" Type="Int32" />
+    <Property Name="NumeroComprobante" Type="Int32" />
+    <Property Name="Identificador" Type="Int32" />
+    <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+    <Property Name="Enviado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Recibido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
