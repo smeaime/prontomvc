@@ -635,6 +635,45 @@ namespace ProntoMVC.Controllers
         //    return View(requerimiento);
         //}
 
+
+
+        [HttpPost]
+        public virtual ActionResult SubirPlantilla(System.Web.HttpPostedFileBase file)
+        {
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            // Verify that the user selected a file
+            if (file != null && file.ContentLength > 0)
+            {
+                // extract only the fielname
+                var fileName = System.IO.Path.GetFileName(file.FileName);
+                // store the file inside ~/App_Data/uploads folder
+                var path = System.IO.Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName); // "~/App_Data/uploads"
+                file.SaveAs(path);
+
+                // OpenXML_Pronto.GuardarEnSQL(SC, OpenXML_Pronto.enumPlantilla.FacturaA, fileName, "Requerimiento", path);
+            }
+
+
+
+
+
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                file.InputStream.CopyTo(ms);
+                byte[] array = ms.GetBuffer();
+            }
+
+
+
+            // redirect back to the index action to show the form once again
+            //return RedirectToAction("Index");
+
+            return View();
+
+        }
+
+
+
         // GET: /Requerimiento/Edit/5
         public virtual ActionResult Edit(int id)
         {

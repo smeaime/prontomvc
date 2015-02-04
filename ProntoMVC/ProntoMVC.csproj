@@ -1563,6 +1563,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Novedades\" />
     <Folder Include="Views\Reportes\" />
   </ItemGroup>
