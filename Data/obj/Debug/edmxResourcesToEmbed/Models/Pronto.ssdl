@@ -406,6 +406,16 @@
     <Property Name="IdCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Choferes">
+    <Key>
+      <PropertyRef Name="IdChofer" />
+    </Key>
+    <Property Name="IdChofer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="PathImagen1" Type="varchar" MaxLength="200" />
+    <Property Name="NumeroDocumento" Type="varchar" MaxLength="20" />
+    <Property Name="Cuil" Type="varchar" MaxLength="13" />
+  </EntityType>
   <EntityType Name="Clientes">
     <Key>
       <PropertyRef Name="IdCliente" />
@@ -2557,6 +2567,20 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Codigo" Type="int" />
     <Property Name="Partido" Type="varchar" MaxLength="60" />
     <Property Name="IdPartido" Type="int" />
+  </EntityType>
+  <EntityType Name="LogComprobantesElectronicos">
+    <Key>
+      <PropertyRef Name="IdLog" />
+    </Key>
+    <Property Name="IdLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="2" />
+    <Property Name="Letra" Type="varchar" MaxLength="2" />
+    <Property Name="PuntoVenta" Type="int" />
+    <Property Name="NumeroComprobante" Type="int" />
+    <Property Name="Identificador" Type="int" />
+    <Property Name="FechaRegistro" Type="datetime" />
+    <Property Name="Enviado" Type="ntext" />
+    <Property Name="Recibido" Type="ntext" />
   </EntityType>
   <EntityType Name="Marcas">
     <Key>
@@ -5782,6 +5806,21 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
   </Function>
+  <Function Name="Facturas_OrdenesCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Facturas_Remitos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LogComprobantesElectronicos_InsertarRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PuntoVenta" Type="int" Mode="In" />
+    <Parameter Name="NumeroComprobante" Type="int" Mode="In" />
+    <Parameter Name="Identificador" Type="int" Mode="In" />
+    <Parameter Name="Enviado" Type="ntext" Mode="In" />
+    <Parameter Name="Recibido" Type="ntext" Mode="In" />
+    <Parameter Name="Tipo" Type="varchar" Mode="In" />
+    <Parameter Name="Letra" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="Obras_EliminarCuentasNoUsadasPorIdObra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdObra" Type="int" Mode="In" />
   </Function>
@@ -5832,6 +5871,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Choferes" EntityType="Self.Choferes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
@@ -5929,6 +5969,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="ListasPrecios" EntityType="Self.ListasPrecios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogComprobantesElectronicos" EntityType="Self.LogComprobantesElectronicos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
