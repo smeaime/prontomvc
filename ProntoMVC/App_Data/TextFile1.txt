@@ -1,1 +1,10 @@
-﻿
+﻿Temas para ver :
+
+Archivos adjuntos
+
+Funciones de sql (Linq to SQL)
+
+Botones de aceptar flotantes en todos los formularios
+
+
+
