@@ -463,18 +463,18 @@ namespace ProntoMVC.Controllers
                 {
                     if (mTipoABC == "A" || mTipoABC == "M")
                     {
-                        mCAI = PuntoVenta.NumeroCAI_D_A ?? "";
-                        mFechaCAI = PuntoVenta.FechaCAI_D_A ?? DateTime.MinValue;
+                        mCAI = PuntoVenta.NumeroCAI_C_A ?? "";
+                        mFechaCAI = PuntoVenta.FechaCAI_C_A ?? DateTime.MinValue;
                     }
                     if (mTipoABC == "B")
                     {
-                        mCAI = PuntoVenta.NumeroCAI_D_B ?? "";
-                        mFechaCAI = PuntoVenta.FechaCAI_D_B ?? DateTime.MinValue;
+                        mCAI = PuntoVenta.NumeroCAI_C_B ?? "";
+                        mFechaCAI = PuntoVenta.FechaCAI_C_B ?? DateTime.MinValue;
                     }
                     if (mTipoABC == "E")
                     {
-                        mCAI = PuntoVenta.NumeroCAI_D_E ?? "";
-                        mFechaCAI = PuntoVenta.FechaCAI_D_E ?? DateTime.MinValue;
+                        mCAI = PuntoVenta.NumeroCAI_C_E ?? "";
+                        mFechaCAI = PuntoVenta.FechaCAI_C_E ?? DateTime.MinValue;
                     }
                     mWS = PuntoVenta.WebService ?? "";
                     mWSModoTest = PuntoVenta.WebServiceModoTest ?? "";

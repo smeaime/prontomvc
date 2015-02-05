@@ -48,6 +48,16 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Datacombo);
         }
 
+        public virtual ActionResult GetBancos()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Banco u in db.Bancos.OrderBy(x => x.Nombre).ToList())
+                Datacombo.Add(u.IdBanco, u.Nombre);
+
+            return PartialView("Select", Datacombo);
+        }
+
         public virtual JsonResult GetCuentasBancariasAutocomplete(string term, int obra = 0)
         {
             var ci = new System.Globalization.CultureInfo("en-US");
@@ -108,6 +118,16 @@ namespace ProntoMVC.Controllers
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetCuentasBancariasPorIdCuenta2(int IdCuenta = 0)
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => (IdCuenta == 0 || x.Banco.IdCuenta == IdCuenta) && x.Activa == "SI").OrderBy(x => x.Cuenta).ToList())
+                Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre + " " + u.Cuenta);
+
+            return PartialView("Select", Datacombo);
+        }
+
         public virtual JsonResult GetCajasPorIdCuenta(int IdCuenta, int Filler = 0)
         {
             var filtereditems = (from a in db.Cajas
@@ -125,6 +145,16 @@ namespace ProntoMVC.Controllers
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetCajasPorIdCuenta2(int IdCuenta = 0)
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Caja u in db.Cajas.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
+                Datacombo.Add(u.IdCaja, u.Descripcion);
+
+            return PartialView("Select", Datacombo);
+        }
+
         public virtual JsonResult GetTarjetasCreditoPorIdCuenta(int IdCuenta, int Filler = 0)
         {
             var filtereditems = (from a in db.TarjetasCreditoes
@@ -140,6 +170,16 @@ namespace ProntoMVC.Controllers
             if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult GetTarjetasCreditoPorIdCuenta2(int IdCuenta = 0)
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (TarjetasCredito u in db.TarjetasCreditoes.Where(x => x.IdCuenta == IdCuenta || IdCuenta == 0).OrderBy(x => x.Nombre).ToList())
+                Datacombo.Add(u.IdTarjetaCredito, u.Nombre);
+
+            return PartialView("Select", Datacombo);
         }
 
         public virtual JsonResult GetChequerasPorIdCuentaBancaria(int IdCuentaBancaria = 0)
@@ -167,35 +207,6 @@ namespace ProntoMVC.Controllers
                                      value = a.ProximoNumeroCheque.ToString()
                                  }).ToList();
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
-        }
-        public virtual ActionResult GetCuentasBancariasPorIdCuenta2(int IdCuenta = 0)
-        {
-            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
-
-            foreach (CuentasBancaria u in db.CuentasBancarias.Where(x => (IdCuenta == 0 || x.Banco.IdCuenta == IdCuenta) && x.Activa == "SI").OrderBy(x => x.Cuenta).ToList())
-                Datacombo.Add(u.IdCuentaBancaria, u.Banco.Nombre + " " + u.Cuenta);
-
-            return PartialView("Select", Datacombo);
-        }
-
-        public virtual ActionResult GetCajasPorIdCuenta2(int IdCuenta = 0)
-        {
-            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
-
-            foreach (Caja u in db.Cajas.Where(x => IdCuenta == 0 || x.IdCuenta == IdCuenta).OrderBy(x => x.Descripcion).ToList())
-                Datacombo.Add(u.IdCaja, u.Descripcion);
-
-            return PartialView("Select", Datacombo);
-        }
-
-        public virtual ActionResult GetTarjetasCreditoPorIdCuenta2(int IdCuenta = 0)
-        {
-            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
-
-            foreach (TarjetasCredito u in db.TarjetasCreditoes.Where(x => x.IdCuenta == IdCuenta).OrderBy(x => x.Nombre).ToList())
-                Datacombo.Add(u.IdTarjetaCredito, u.Nombre);
-
-            return PartialView("Select", Datacombo);
         }
 
         public virtual ActionResult GetChequerasPorIdCuentaBancaria2(int IdCuentaBancaria = 0)

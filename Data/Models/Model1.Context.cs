@@ -187,7 +187,10 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleObrasEquiposInstalados2> DetalleObrasEquiposInstalados2 { get; set; }
         public virtual DbSet<DetalleObrasPoliza> DetalleObrasPolizas { get; set; }
         public virtual DbSet<TiposPoliza> TiposPolizas { get; set; }
+        public virtual DbSet<DetalleDevolucione> DetalleDevoluciones { get; set; }
         public virtual DbSet<Devolucione> Devoluciones { get; set; }
+        public virtual DbSet<Chofere> Choferes { get; set; }
+        public virtual DbSet<LogComprobantesElectronico> LogComprobantesElectronicos { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -377,6 +380,39 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("IdObra", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Obras_EliminarCuentasNoUsadasPorIdObra", idObraParameter);
+        }
+    
+        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> puntoVenta, Nullable<int> numeroComprobante, Nullable<int> identificador, string enviado, string recibido, string tipo, string letra)
+        {
+            var puntoVentaParameter = puntoVenta.HasValue ?
+                new ObjectParameter("PuntoVenta", puntoVenta) :
+                new ObjectParameter("PuntoVenta", typeof(int));
+    
+            var numeroComprobanteParameter = numeroComprobante.HasValue ?
+                new ObjectParameter("NumeroComprobante", numeroComprobante) :
+                new ObjectParameter("NumeroComprobante", typeof(int));
+    
+            var identificadorParameter = identificador.HasValue ?
+                new ObjectParameter("Identificador", identificador) :
+                new ObjectParameter("Identificador", typeof(int));
+    
+            var enviadoParameter = enviado != null ?
+                new ObjectParameter("Enviado", enviado) :
+                new ObjectParameter("Enviado", typeof(string));
+    
+            var recibidoParameter = recibido != null ?
+                new ObjectParameter("Recibido", recibido) :
+                new ObjectParameter("Recibido", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(string));
+    
+            var letraParameter = letra != null ?
+                new ObjectParameter("Letra", letra) :
+                new ObjectParameter("Letra", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter);
         }
     }
 }

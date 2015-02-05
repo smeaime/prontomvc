@@ -60,11 +60,8 @@ namespace ProntoMVC.Controllers
 
             var filtereditems = (from item in db.Cuentas
                                  where ((
-                                 (item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))).StartsWith(term)
-
-                                     //       || SqlFunctions.StringConvert((double)(item.Codigo ?? 0)).StartsWith(term)
-                                         )
-                                     && item.IdTipoCuenta == 2
+                                 (item.Descripcion + " " + SqlFunctions.StringConvert((double)(item.Codigo ?? 0))).StartsWith(term))
+                                     && item.IdTipoCuenta == 2 && (item.IdObra ?? 0) == 0
                                      // && item.Descripcion.Trim().Length > 0
                                      )
                                  orderby item.Descripcion

@@ -2032,6 +2032,182 @@ namespace ProntoMVC.Controllers
             return Json(JsonConvert.SerializeObject(data), JsonRequestBehavior.AllowGet);
         }
 
+        private bool Validar(ProntoMVC.Data.Models.OrdenPago o, ref string sErrorMsg, ref string sWarningMsg)
+        {
+            Int32 mIdOrdenPago = 0;
+            Int32 mNumeroOrdenPago = 0;
+            Int32 mNumeroOrdenPagoAux = 0;
+            Int32 mIdMoneda = 1;
+            Int32 mIdProveedor = 0;
+            Int32 mIdEstado = 0;
+
+            decimal mTotalRubrosContables = 0;
+            decimal mTotalValores = 0;
+
+            string mTipo = "";
+            string mObservaciones = "";
+            string mOrdenPagoExterior = "";
+
+            DateTime mFechaOrdenPago = DateTime.Today;
+            DateTime mFechaUltimoCierre = DateTime.Today;
+
+            DataRow oRsAux1;
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            mIdOrdenPago = o.IdOrdenPago;
+            mNumeroOrdenPago = o.NumeroOrdenPago ?? 0;
+            mTipo = o.Tipo;
+            mIdMoneda = o.IdMoneda ?? 1;
+            mIdProveedor = o.IdProveedor ?? 0;
+            mObservaciones = o.Observaciones ?? "";
+            mOrdenPagoExterior = o.Exterior ?? "NO";
+
+            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mFechaUltimoCierre = parametros.FechaUltimoCierre ?? DateTime.Today;
+
+            if ((o.NumeroOrdenPago ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de orden de pago"; }
+            if (o.FechaOrdenPago < mFechaUltimoCierre) { sErrorMsg += "\n" + "La fecha de la orden no puede ser anterior a la del ultimo cierre contable"; }
+            if (BuscarClaveINI("Requerir obra en OP", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
+            if ((o.CotizacionMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización de equivalencia a pesos"; }
+            if ((o.CotizacionDolar ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización dolar"; }
+            if ((o.CotizacionEuro ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización euro"; }
+            if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
+
+            if (mTipo == "CC")
+            {
+                if (o.DetalleOrdenesPagoes.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene imputaciones a cuenta corriente";
+                if (mIdProveedor <= 0) { 
+                    sErrorMsg += "\n" + "Falta el proveedor"; 
+                }
+                else
+                {
+                    Proveedor Proveedor = db.Proveedores.Where(c => c.IdProveedor == mIdProveedor).SingleOrDefault();
+                    if (Proveedor != null)
+                    {
+                        mIdEstado = Proveedor.IdEstado ?? 0;
+                        if ((Proveedor.CodigoSituacionRetencionIVA ?? "") == "3" && (Proveedor.IdCodigoIva ?? 0) == 1) { sErrorMsg += "\n" + "El codigo de situacion del proveedor para retencion IVA es 3, no puede registrar la orden de pago"; }
+                        if ((Proveedor.SujetoEmbargado ?? "") == "SI") { sWarningMsg += "\n" + "Proveedor embargado, revise su situacion en el maestro y proceda en consecuencia"; }
+
+                        Estados_Proveedore EstadoProveedor = db.Estados_Proveedores.Where(c => c.IdEstado == mIdEstado).SingleOrDefault();
+                        if (EstadoProveedor != null)
+                        {
+                            if ((EstadoProveedor.Activo ?? "") == "NO") { sErrorMsg += "\n" + "El proveedor esta inactivo"; }
+                        }
+                    }
+                }
+                if ((o.DiferenciaBalanceo ?? 0) != 0) { sErrorMsg += "\n" + "La orden de pago no balancea"; }
+            }
+            else
+            {
+                if (mTipo == "FF")
+                {
+                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio"; }
+                    if ((o.IdEmpleadoFF ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el destinatario del fondo"; }
+                }
+                else
+                {
+                    if ((o.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cuenta contable"; }
+                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio"; }
+                }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPago x in o.DetalleOrdenesPagoes)
+            {
+                if (mIdOrdenPago > 0)
+                {
+                    if (x.IdDetalleOrdenPago > 0 && (x.IdImputacion ?? 0) == -1)
+                    {
+                        CuentasCorrientesAcreedor CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdDetalleOrdenPago == x.IdDetalleOrdenPago).SingleOrDefault();
+                        if (CtaCte != null)
+                        {
+                            if ((CtaCte.ImporteTotal ?? 0) != (CtaCte.Saldo ?? 0)) { sErrorMsg += "\n" + "Hay anticipos que en cuenta corriente tienen aplicado el saldo, no puede modificar esta orden de pago"; }
+                        }
+                    }
+                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "OrdenesPago_TX_ValidarNumero", mNumeroOrdenPago, mIdOrdenPago, mTipo, mOrdenPagoExterior);
+                    if (oRsAux1 != null)
+                    {
+                        mFechaOrdenPago = (DateTime)oRsAux1["FechaOrdenPago"];
+                        sErrorMsg += "\n" + "El numero de orden de pago ya fue utilizado por una OP del dia " + mFechaOrdenPago.ToString() + ".";
+                    }
+                }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoValore x in o.DetalleOrdenesPagoValores)
+            {
+                if ((x.IdCuentaBancaria ?? 0) > 0)
+                {
+                    CuentasBancaria CuentasBancaria = db.CuentasBancarias.Where(c => c.IdCuentaBancaria == x.IdCuentaBancaria).SingleOrDefault();
+                    if (CuentasBancaria != null)
+                    {
+                        if (mIdMoneda != (CuentasBancaria.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay valores con una moneda distinta a la de la orden de pago"; }
+                    }
+                    else
+                    {
+                        sErrorMsg += "\n" + "Hay valores que apuntan a cuentas bancarias inexistentes";
+                    }
+                    if ((x.IdBancoChequera ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con cuenta bancaria que no tiene chequera asignada"; }
+                }
+                if ((x.IdBancoChequera ?? 0) > 0)
+                {
+                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "DetOrdenesPagoValores_TX_Control", mIdOrdenPago, x.IdBancoChequera, x.NumeroValor);
+                    if (oRsAux1 != null)
+                    {
+                        mNumeroOrdenPagoAux = (Int32)oRsAux1["Numero"];
+                        sErrorMsg += "\n" + "El cheque  " + x.NumeroValor.ToString() + " ya existe en la orden de pago " + mNumeroOrdenPagoAux.ToString() + ".";
+                    }
+                    else
+                    {
+                        BancoChequera BancoChequera = db.BancoChequeras.Where(c => c.IdBancoChequera == x.IdBancoChequera).SingleOrDefault();
+                        if (BancoChequera != null)
+                        {
+                            if ((x.IdCuentaBancaria ?? 0) != BancoChequera.IdCuentaBancaria) { sErrorMsg += "\n" + "Hay valores que tienen cuentas bancarias con chequeras de otra cuenta"; }
+                        }
+                        else
+                        {
+                            sErrorMsg += "\n" + "Hay valores que apuntan a chequeras inexistentes";
+                        }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con chequera asignada y sin cuenta bancaria"; }
+                }
+                if ((x.IdCaja ?? 0) > 0)
+                {
+                    Caja Caja = db.Cajas.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
+                    if (Caja != null)
+                    {
+                        if (mIdMoneda != (Caja.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay una caja con una moneda distinta a la de la orden de pago"; }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay movimientos de caja que tienen cuenta bancaria o chequera asignada y no deberia"; }
+                }
+                if ((x.IdValor ?? 0) > 0)
+                {
+                    Valore Valor = db.Valores.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
+                    if (Valor != null)
+                    {
+                        if (mIdMoneda != (Valor.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay un valor de terceros con una moneda distinta a la de la orden de pago"; }
+                    }
+                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay endosos de cheques que tienen cuenta bancaria o chequera asignada y no deberia"; }
+                }
+                mTotalValores += x.Importe ?? 0;
+            }
+
+            if (o.DetalleOrdenesPagoCuentas.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene registro contable";
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoCuenta x in o.DetalleOrdenesPagoCuentas)
+            {
+                if ((x.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items de registro contable sin cuenta"; }
+            }
+
+            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoRubrosContable x in o.DetalleOrdenesPagoRubrosContables)
+            {
+                mTotalRubrosContables += x.Importe ?? 0;
+            }
+            if (mTotalRubrosContables != mTotalValores) { sErrorMsg += "\n" + "El total de rubros contables asignados debe ser igual al total de valores"; }
+
+            sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
+            if (sErrorMsg != "") return false;
+            return true;
+        }
+
         [HttpPost]
         public virtual JsonResult BatchUpdate(OrdenPago OrdenPago, string IdsGastosFF = "")
         {
@@ -2970,184 +3146,6 @@ namespace ProntoMVC.Controllers
                 errors.Add(ex.Message);
                 return Json(errors);
             }
-        }
-
-        private bool Validar(ProntoMVC.Data.Models.OrdenPago o, ref string sErrorMsg, ref string sWarningMsg)
-        {
-            Int32 mIdOrdenPago = 0;
-            Int32 mNumeroOrdenPago = 0;
-            Int32 mNumeroOrdenPagoAux = 0;
-            Int32 mIdMoneda = 1;
-            Int32 mIdProveedor = 1;
-            Int32 mIdEstado = 0;
-
-            decimal mTotalRubrosContables = 0;
-            decimal mTotalValores = 0;
-
-            string mTipo = "";
-            string mObservaciones = "";
-            string mOrdenPagoExterior = "";
-
-            DateTime mFechaOrdenPago = DateTime.Today;
-            DateTime mFechaUltimoCierre = DateTime.Today;
-
-            DataRow oRsAux1;
-
-            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
-            
-
-            mIdOrdenPago = o.IdOrdenPago;
-            mNumeroOrdenPago = o.NumeroOrdenPago ?? 0;
-            mTipo = o.Tipo;
-            mIdMoneda = o.IdMoneda ?? 1;
-            mIdProveedor = o.IdProveedor ?? 0;
-            mObservaciones = o.Observaciones ?? "";
-            mOrdenPagoExterior = o.Exterior ?? "NO";
-
-            var parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
-            mFechaUltimoCierre = parametros.FechaUltimoCierre ?? DateTime.Today;
-
-            if ((o.NumeroOrdenPago ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de orden de pago"; }
-            if (o.FechaOrdenPago < mFechaUltimoCierre) { sErrorMsg += "\n" + "La fecha de la orden no puede ser anterior a la del ultimo cierre contable"; }
-            if (BuscarClaveINI("Requerir obra en OP", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
-            if ((o.CotizacionMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización de equivalencia a pesos"; }
-            if ((o.CotizacionDolar ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización dolar"; }
-            if ((o.CotizacionEuro ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización euro"; }
-            if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
-
-            if (mTipo == "CC")
-            {
-                if (o.DetalleOrdenesPagoes.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene imputaciones a cuenta corriente";
-                if (mIdProveedor <= 0)
-                {
-                    sErrorMsg += "\n" + "Falta el proveedor";
-                }
-                else
-                {
-                    Proveedor Proveedor = db.Proveedores.Where(c => c.IdProveedor == mIdProveedor).SingleOrDefault();
-                    if (Proveedor != null)
-                    {
-                        mIdEstado = Proveedor.IdEstado ?? 0;
-                        if ((Proveedor.CodigoSituacionRetencionIVA ?? "") == "3" && (Proveedor.IdCodigoIva ?? 0) == 1) { sErrorMsg += "\n" + "El codigo de situacion del proveedor para retencion IVA es 3, no puede registrar la orden de pago"; }
-                        if ((Proveedor.SujetoEmbargado ?? "") == "SI") { sWarningMsg += "\n" + "Proveedor embargado, revise su situacion en el maestro y proceda en consecuencia"; }
-                        
-                        Estados_Proveedore EstadoProveedor = db.Estados_Proveedores.Where(c => c.IdEstado == mIdEstado).SingleOrDefault();
-                        if (EstadoProveedor != null)
-                        {
-                            if ((EstadoProveedor.Activo ?? "") == "NO") { sErrorMsg += "\n" + "El proveedor esta inactivo"; }
-                        }
-                    }
-                }
-                if ((o.DiferenciaBalanceo ?? 0) != 0) { sErrorMsg += "\n" + "La orden de pago no balancea"; }
-            }
-            else
-            {
-                if (mTipo == "FF")
-                {
-                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio";  }
-                    if ((o.IdEmpleadoFF ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el destinatario del fondo"; }
-                }
-                else
-                {
-                    if ((o.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cuenta contable"; }
-                    if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio"; }
-                }
-            }
-
-            foreach (ProntoMVC.Data.Models.DetalleOrdenesPago x in o.DetalleOrdenesPagoes)
-            {
-                if (mIdOrdenPago > 0)
-                {
-                    if (x.IdDetalleOrdenPago > 0 && (x.IdImputacion ?? 0) == -1)
-                    {
-                        CuentasCorrientesAcreedor CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdDetalleOrdenPago == x.IdDetalleOrdenPago).SingleOrDefault();
-                        if (CtaCte != null)
-                        {
-                            if ((CtaCte.ImporteTotal ?? 0) != (CtaCte.Saldo ?? 0)) { sErrorMsg += "\n" + "Hay anticipos que en cuenta corriente tienen aplicado el saldo, no puede modificar esta orden de pago"; }
-                        }
-                    }
-                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "OrdenesPago_TX_ValidarNumero", mNumeroOrdenPago,mIdOrdenPago,mTipo,mOrdenPagoExterior);
-                    if (oRsAux1 != null)
-                    {
-                        mFechaOrdenPago = (DateTime)oRsAux1["FechaOrdenPago"];
-                        sErrorMsg += "\n" + "El numero de orden de pago ya fue utilizado por una OP del dia " + mFechaOrdenPago.ToString() + ".";
-                    }
-                }
-            }
-
-            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoValore x in o.DetalleOrdenesPagoValores)
-            {
-                if ((x.IdCuentaBancaria ?? 0) > 0)
-                {
-                    CuentasBancaria CuentasBancaria = db.CuentasBancarias.Where(c => c.IdCuentaBancaria == x.IdCuentaBancaria).SingleOrDefault();
-                    if (CuentasBancaria != null)
-                    {
-                        if (mIdMoneda != (CuentasBancaria.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay valores con una moneda distinta a la de la orden de pago"; }
-                    }
-                    else
-                    {
-                        sErrorMsg += "\n" + "Hay valores que apuntan a cuentas bancarias inexistentes";
-                    }
-                    if ((x.IdBancoChequera ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con cuenta bancaria que no tiene chequera asignada"; }
-                }
-                if ((x.IdBancoChequera ?? 0) > 0)
-                {
-                    oRsAux1 = EntidadManager.GetStoreProcedureTop1(SC, "DetOrdenesPagoValores_TX_Control", mIdOrdenPago, x.IdBancoChequera, x.NumeroValor);
-                    if (oRsAux1 != null)
-                    {
-                        mNumeroOrdenPagoAux = (Int32)oRsAux1["Numero"];
-                        sErrorMsg += "\n" + "El cheque  " + x.NumeroValor.ToString() + " ya existe en la orden de pago " + mNumeroOrdenPagoAux.ToString() + ".";
-                    }
-                    else
-                    {
-                        BancoChequera BancoChequera = db.BancoChequeras.Where(c => c.IdBancoChequera == x.IdBancoChequera).SingleOrDefault();
-                        if (BancoChequera != null)
-                        {
-                            if ((x.IdCuentaBancaria ?? 0) != BancoChequera.IdCuentaBancaria) { sErrorMsg += "\n" + "Hay valores que tienen cuentas bancarias con chequeras de otra cuenta"; }
-                        }
-                        else
-                        {
-                            sErrorMsg += "\n" + "Hay valores que apuntan a chequeras inexistentes";
-                        }
-                    }
-                    if ((x.IdCuentaBancaria ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores con chequera asignada y sin cuenta bancaria"; }
-                }
-                if ((x.IdCaja ?? 0) > 0)
-                {
-                    Caja Caja = db.Cajas.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
-                    if (Caja != null)
-                    {
-                        if (mIdMoneda != (Caja.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay una caja con una moneda distinta a la de la orden de pago"; }
-                    }
-                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay movimientos de caja que tienen cuenta bancaria o chequera asignada y no deberia"; }
-                }
-                if ((x.IdValor ?? 0) > 0)
-                {
-                    Valore Valor = db.Valores.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
-                    if (Valor != null)
-                    {
-                        if (mIdMoneda != (Valor.IdMoneda ?? 0)) { sErrorMsg += "\n" + "Hay un valor de terceros con una moneda distinta a la de la orden de pago"; }
-                    }
-                    if ((x.IdCuentaBancaria ?? 0) > 0 || (x.IdBancoChequera ?? 0) > 0) { sErrorMsg += "\n" + "Hay endosos de cheques que tienen cuenta bancaria o chequera asignada y no deberia"; }
-                }
-                mTotalValores += x.Importe ?? 0;
-            }
-
-            if (o.DetalleOrdenesPagoCuentas.Count <= 0) sErrorMsg += "\n" + "La orden de pago no tiene registro contable";
-            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoCuenta x in o.DetalleOrdenesPagoCuentas)
-            {
-                if ((x.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items de registro contable sin cuenta"; }
-            }
-
-            foreach (ProntoMVC.Data.Models.DetalleOrdenesPagoRubrosContable x in o.DetalleOrdenesPagoRubrosContables)
-            {
-                mTotalRubrosContables += x.Importe ?? 0;
-            }
-            if (mTotalRubrosContables != mTotalValores) { sErrorMsg += "\n" + "El total de rubros contables asignados debe ser igual al total de valores"; }
-
-            sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
-            if (sErrorMsg != "") return false;
-            return true;
         }
 
         public virtual JsonResult GetIdOrdenPagoPorNumero(int NumeroOrdenPago = 0)
