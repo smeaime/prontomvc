@@ -836,7 +836,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="Requerimientos_ActualizarEstado" FunctionName="DemoProntoModel.Store.Requerimientos_ActualizarEstado" />
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
         <MappingFragment StoreEntitySet="Clientes">

@@ -46,7 +46,7 @@ namespace ProntoMVC.Controllers
             public Guid UserId;
             public string UserName;
             public int IdEmpleado;
-
+            public string leyenda;
         };
 
 
@@ -80,14 +80,15 @@ namespace ProntoMVC.Controllers
 
 
             var Fac4 = (from u in users
-                       join n in emp on u.UserName equals n.UsuarioNT
-                       select new c
-                       {
-                           IdFactura = u.UserId,
-                           UserId = u.UserId,
-                           UserName = u.UserName,
-                           IdEmpleado = n.IdEmpleado
-                       }
+                        join n in emp on u.UserName equals n.UsuarioNT
+                        select new c
+                        {
+                            IdFactura = u.UserId,
+                            UserId = u.UserId,
+                            UserName = u.UserName,
+                            IdEmpleado = n.IdEmpleado,
+                            leyenda = "con empleado"
+                        }
                        ).ToList();
 
             var Fac2 = (from u in users
@@ -97,7 +98,8 @@ namespace ProntoMVC.Controllers
                             IdFactura = u.UserId,
                             UserId = u.UserId,
                             UserName = u.UserName,
-                            IdEmpleado = 0
+                            IdEmpleado = 0,
+                            leyenda = "sin empleado en la base"
                         }
                        ).ToList();
 
@@ -108,7 +110,8 @@ namespace ProntoMVC.Controllers
                             IdFactura = new Guid(),
                             UserId = new Guid(),
                             UserName = e.UsuarioNT,
-                            IdEmpleado = e.IdEmpleado
+                            IdEmpleado = e.IdEmpleado,
+                            leyenda = "sin usuario"
                         }
                        ).ToList();
 
@@ -184,13 +187,13 @@ namespace ProntoMVC.Controllers
                                 //"|" +
                                 //"<a href=/Factura/Details/" + a.IdFactura + ">Detalles</a> "
                                 
-                                "<a href="+ Url.Action("Usuario web",new {id = a.UserId} )  +">Imprimir</>" ,
-                                "<a href="+ Url.Action("Accesos",new {id = a.UserId} )  +">Imprimir</>" ,
-                                "<a href="+ Url.Action("Empleado",new {id = a.UserId} )  +">Imprimir</>" ,
-                            "mostrar si el usuario web no tiene empleado, o viceversa"
+                            a.leyenda!="sin usuario"  ?  "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web</>" : "CREAR USUARIO" ,
+                            a.IdEmpleado>0   ?  "<a href="+ Url.Action("Edit", "Empleado",new {id = a.IdEmpleado, area = ""} )  +">Empleado</>"  
+                                                +" - <a href="+ Url.Action("Edit", "Acceso",new {id = a.IdEmpleado, area = ""} )  +">Accesos</>" 
+                                                :         "CREAR EMPLEADO" ,
+                            "mostrar si el usuario web no tiene empleado, o viceversa", a.leyenda
                                 // create una vista y chau
  
-
 
 
 
