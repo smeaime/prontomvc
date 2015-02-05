@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 20.375" name="LinqToSQL_Pronto">
+  <DataContextMoniker Name="/LinqToSQL_ProntoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="44321e8a-73cd-4579-bd1c-57b7040a4922" absoluteBounds="3.25, 2.375, 2, 13.308982747395833">
+      <DataClassMoniker Name="/LinqToSQL_ProntoDataContext/Requerimientos" />
+      <nestedChildShapes>
+        <elementListCompartment Id="87032602-705d-43e1-b878-d65afd2c17eb" absoluteBounds="3.265, 2.835, 1.9700000000000002, 12.748982747395832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="00bae746-609a-40f6-b0b0-b252e91a4379" absoluteBounds="0.5, 1.375, 2, 18.693422851562502">
+      <DataClassMoniker Name="/LinqToSQL_ProntoDataContext/Pedidos" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a5e14b64-f44b-4662-935e-e1038212a996" absoluteBounds="0.51500000000000012, 1.835, 1.9700000000000002, 18.1334228515625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
