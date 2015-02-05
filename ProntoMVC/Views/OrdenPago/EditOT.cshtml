@@ -278,7 +278,7 @@
                                 var combo = $("#mySelect")
                                 combo.find("option:gt(0)").remove();
                                 combo.find("option:first").text("Cargando...");
-                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=17', {
+                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=32', {
                                 }, function (json) {
                                     combo.find("option:first").text("");
                                     for (var i = 0; i < json.length; i++) {

@@ -55,6 +55,7 @@
                     <div>@Html.Hidden("IVANoDiscriminado", Model.IVANoDiscriminado)</div>
                     <input type="hidden" name="BaseMinimaParaPercepcionIVA" id="BaseMinimaParaPercepcionIVA" style="font-size: 15px; text-align: left;" class="span12" />
                     <input type="hidden" name="EsAgenteRetencionIVA" id="EsAgenteRetencionIVA" style="font-size: 15px; text-align: left;" class="span12" />
+                    <input type="hidden" name="CantidadDias1" id="CantidadDias1" style="font-size: 15px; text-align: left;" class="span12" />
                 </div>
                 <div class="span1 lightblue">
                 </div>
@@ -94,7 +95,7 @@
                                 var combo = $("#mySelect")
                                 combo.find("option:gt(0)").remove();
                                 combo.find("option:first").text("Cargando...");
-                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=1', {
+                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=23', {
                                 }, function (json) {
                                     combo.find("option:first").text("");
                                     for (var i = 0; i < json.length; i++) {
@@ -172,6 +173,7 @@
                                 $("#IdCliente").val(ui.item.id);
                                 $("#Cliente").val(ui.item.value);
                                 $("#IdCodigoIva").val(ui.item.IdCodigoIva);
+                                $("#IdCondicionVenta").val(ui.item.IdCondicionVenta);
                                 event.preventDefault();
                                 ActualizarDatos();
                             }
@@ -245,18 +247,30 @@
                     <table id="Adicionales" class="span12" width="" border="0" cellspacing="0" cellpadding="0"
                            style="margin: 0px 0px 0px 0px; height:; padding: 20px; border-style: groove; border-width: 0px; border-spacing: 0px; font-size: xx-small;">
                         <tr class="">
-                            <td width="120"><label for="CAE">CAE :</label></td>
-                            <td width="300">@Html.TextBoxFor(model => model.CAE, new { @class = "span12" })</td>
+                            <td width="220"><label for="CAE">CAE :</label></td>
+                            <td width="200">@Html.TextBoxFor(model => model.CAE, new { @class = "span12" })</td>
                         </tr>
                         <tr class="">
-                            <td width="120"><label for="FechaCAE">Fecha vto. CAE :</label></td>
-                            <td width="300">@Html.TextBoxFor(model => model.FechaVencimientoORechazoCAE, new { @class = "span12" })</td>
+                            <td width="220"><label for="FechaCAE">Fecha vto. CAE :</label></td>
+                            <td width="200">@Html.TextBoxFor(model => model.FechaVencimientoORechazoCAE, new { @class = "span12" })</td>
                         </tr>
                         <tr class="">
-                            <td width="120"><label for="CAE">Lista de precio :</label></td>
-                            <td width="300">
+                            <td width="220"><label for="CAE">Lista de precio :</label></td>
+                            <td width="200">
                                 @Html.DropDownList("IdListaPrecios", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
                                 @Html.ValidationMessageFor(model => model.IdListaPrecios)
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td width="220"><label for="CAE">No incluir en cubos de venta :</label></td>
+                            <td width="200">
+                                @Html.CheckBox("NoIncluirEnCubos", Model.NoIncluirEnCubos == "SI")
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td width="220"><label for="CAE">Contabilizar segun fecha de vto. :</label></td>
+                            <td width="200">
+                                @Html.CheckBox("ContabilizarAFechaVencimiento", Model.ContabilizarAFechaVencimiento == "SI")
                             </td>
                         </tr>
                         <tr class="">
@@ -333,7 +347,7 @@
                             <td width="100"></td>
                             <td width="100"></td>
                             <td width="10"></td>
-                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">TOTAL NOTA DE DEBITO</td>
+                            <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">TOTAL FACTURA</td>
                             <td width="60"></td>
                             <td width="150">@Html.TextBoxFor(model => model.ImporteTotal, new { @class = "span10 subtotales" })</td>
                         </tr>

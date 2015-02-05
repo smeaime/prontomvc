@@ -128,7 +128,11 @@ namespace ProntoMVC.Controllers
             Int32 mIdMoneda = 1;
             Int32 mIdCliente = 1;
             Int32 mIdPuntoVenta = 0;
+            Int32 mPuntoVenta = 0;
             Int32 mIdTipoComprobante = 3;
+
+            decimal mImporteDetalle = 0;
+            decimal mSubtotal = 0;
 
             string mObservaciones = "";
             string mTipoABC = "";
@@ -151,6 +155,7 @@ namespace ProntoMVC.Controllers
             mIdCliente = o.IdCliente ?? 0;
             mObservaciones = o.Observaciones ?? "";
             mIdPuntoVenta = o.IdPuntoVenta ?? 0;
+            mPuntoVenta = o.PuntoVenta ?? 0;
             mTipoABC = o.TipoABC ?? "";
             mAnulada = o.Anulada ?? "";
 
@@ -160,12 +165,14 @@ namespace ProntoMVC.Controllers
             if ((o.NumeroFactura ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número"; }
             if ((o.TipoABC ?? "") == "") { sErrorMsg += "\n" + "Falta la letra del comprobante"; }
             if (o.FechaFactura < mFechaUltimoCierre) { sErrorMsg += "\n" + "La fecha no puede ser anterior a la del ultimo cierre contable"; }
-            if (BuscarClaveINI("Requerir obra en OP", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
             if ((o.CotizacionMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización de equivalencia a pesos"; }
             if ((o.CotizacionDolar ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización dolar"; }
             if (mIdMoneda <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
             if ((o.IdPuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el punto de venta"; }
             if ((o.PuntoVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el numero de sucursal"; }
+            if ((o.IdCondicionVenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condicion de venta"; }
+
+            if (BuscarClaveINI("Exigir obra en facturacion", -1) == "SI") { if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; } }
 
             if (mIdPuntoVenta > 0)
             {
@@ -201,12 +208,15 @@ namespace ProntoMVC.Controllers
                 }
             }
 
+            var Facturas = db.Facturas.Where(p => p.IdPuntoVenta == mIdPuntoVenta && p.TipoABC == mTipoABC && p.NumeroFactura == mNumero && p.IdFactura != mIdFactura).OrderByDescending(p => p.FechaFactura).FirstOrDefault();
+            if (Facturas != null) { sErrorMsg += "\n" + "La factura ya existe."; } 
+
             mProntoIni = BuscarClaveINI("Validar fecha de facturas nuevas", -1);
             if ((mProntoIni ?? "") == "SI" && mIdFactura <= 0 && mIdPuntoVenta > 0)
             {
-                var Factura = db.Facturas.Where(p => p.IdPuntoVenta == mIdPuntoVenta).OrderByDescending(p => p.FechaFactura).FirstOrDefault();
-                if (Factura != null)
-                { if (Factura.FechaFactura > mFechaFactura) { sErrorMsg += "\n" + "La fecha de la ultima factura es " + Factura.FechaFactura.ToString() + " para este punto de venta."; } }
+                Facturas = db.Facturas.Where(p => p.IdPuntoVenta == mIdPuntoVenta).OrderByDescending(p => p.FechaFactura).FirstOrDefault();
+                if (Facturas != null)
+                { if (Facturas.FechaFactura > mFechaFactura) { sErrorMsg += "\n" + "La fecha de la ultima factura es " + Facturas.FechaFactura.ToString() + " para este punto de venta."; } }
             }
 
             var Cliente = db.Clientes.Where(p => p.IdCliente == mIdCliente).FirstOrDefault();
@@ -215,10 +225,15 @@ namespace ProntoMVC.Controllers
                 if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             }
 
+            if (o.DetalleFacturas.Count <= 0) sErrorMsg += "\n" + "La factura no tiene items";
             foreach (ProntoMVC.Data.Models.DetalleFactura x in o.DetalleFacturas)
             {
                 if ((x.IdArticulo ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen articulo"; }
+                mImporteDetalle = (x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0);
+                mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
+                mSubtotal += mImporteDetalle;
             }
+            if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
 
             if (mAnulada == "SI")
             {
@@ -229,6 +244,25 @@ namespace ProntoMVC.Controllers
                 }
             }
 
+
+            
+         //If mvarId < 0 And IsNumeric(dcfields(10).BoundText) And Not BuscarClaveINI("Validar fecha de facturas nuevas") = "NO" Then
+         //   Set oRs = Aplicacion.Facturas.TraerFiltrado("_UltimaPorIdPuntoVenta", dcfields(10).BoundText)
+         //   If oRs.RecordCount > 0 Then
+         //      If oRs.Fields("FechaFactura").Value > DTFields(0).Value Then
+         //         MsgBox "La fecha de la ultima factura es " & oRs.Fields("FechaFactura").Value & ", modifiquela", vbExclamation
+         //         oRs.Close
+         //         Set oRs = Nothing
+         //         Exit Sub
+         //      End If
+         //   End If
+         //   oRs.Close
+         //   Set oRs = Nothing
+         //End If
+            
+            
+            // VERIFICAR QUE EXISTAN TODAS LAS CUENTAS CONTABLES DEL ASIENTO DE SUBDIARIO
+            
             sErrorMsg = sErrorMsg.Replace("\n", "<br/>");
             if (sErrorMsg != "") return false;
             return true;
@@ -743,7 +777,7 @@ namespace ProntoMVC.Controllers
                     JsonResponse res = new JsonResponse();
                     res.Status = Status.Error;
                     res.Errors = GetModelStateErrorsAsString(this.ModelState);
-                    res.Message = "La orden de pago tiene datos invalidos";
+                    res.Message = "El comprobante tiene datos invalidos";
 
                     return Json(res);
                 }
@@ -1064,6 +1098,7 @@ namespace ProntoMVC.Controllers
                             a.IdArticulo,
                             a.IdUnidad,
                             a.IdColor,
+                            a.OrigenDescripcion,
                             Codigo = a.Articulo.Codigo,
                             Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
                             a.Cantidad,
@@ -1071,7 +1106,8 @@ namespace ProntoMVC.Controllers
                             Costo = Math.Round((double)a.Costo,2),
                             PrecioUnitario = Math.Round((double)a.PrecioUnitario,2),
                             a.Bonificacion,
-                            Importe = Math.Round((double)a.Cantidad * (double)a.PrecioUnitario * (1 - (double)(a.Bonificacion ?? 0 / 100)),2)
+                            Importe = Math.Round((double)a.Cantidad * (double)a.PrecioUnitario * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : ""))
                         }).OrderBy(x => x.IdDetalleFactura).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -1089,6 +1125,7 @@ namespace ProntoMVC.Controllers
                             a.IdArticulo.NullSafeToString(),
                             a.IdUnidad.NullSafeToString(),
                             a.IdColor.NullSafeToString(),
+                            a.OrigenDescripcion.NullSafeToString(),
                             a.Codigo.NullSafeToString(),
                             a.Articulo.NullSafeToString(),
                             a.Cantidad.NullSafeToString(),
@@ -1096,7 +1133,8 @@ namespace ProntoMVC.Controllers
                             a.Costo.NullSafeToString(),
                             a.PrecioUnitario.NullSafeToString(),
                             a.Bonificacion.NullSafeToString(),
-                            a.Importe.NullSafeToString()
+                            a.Importe.NullSafeToString(),
+                            a.TiposDeDescripcion.NullSafeToString()
                             }
                         }).ToArray()
             };
@@ -1587,8 +1625,6 @@ namespace ProntoMVC.Controllers
                         log.Enviado = mArchivoXMLEnviado2;
                         log.Recibido = mArchivoXMLRecibido2;
 
-                        //db.LogComprobantesElectronicos_InsertarRegistro(mPuntoVenta, mNumeroFacturaElectronica, 0, mArchivoXMLEnviado2, mArchivoXMLRecibido2, "FA", mTipoABC);
-
                         o.CAE = mCAE;
                         o.IdIdentificacionCAE = 0;
                         if (mFechaVencimientoORechazoCAE.Length > 0)
@@ -1597,6 +1633,11 @@ namespace ProntoMVC.Controllers
                             o.FechaVencimientoORechazoCAE = Convert.ToDateTime(mFechaString);
                         }
                         o.NumeroFactura = mNumeroFacturaElectronica;
+                    }
+                    else
+                    {
+                        var s = "Error al obtener CAE : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
+                        throw new Exception(s);
                     }
                 }
                 else
