@@ -217,5 +217,21 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+        public virtual JsonResult GetCondicionVenta(int IdCondicionCompra = 0)
+        {
+            var filtereditems = (from a in db.Condiciones_Compras
+                                 where ((IdCondicionCompra <= 0 || a.IdCondicionCompra == IdCondicionCompra))
+                                 select new
+                                 {
+                                     IdCondicionCompra = a.IdCondicionCompra,
+                                     Descripcion = a.Descripcion,
+                                     CantidadDias1 = a.CantidadDias1
+                                 }).ToList();
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+    
+    
     }
 }

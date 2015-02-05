@@ -833,10 +833,11 @@ namespace ProntoMVC.Controllers
                          id = item.IdCliente,
                          value = item.RazonSocial,
                          codigo = item.Codigo,
-                         IdCodigoIva = item.IdCodigoIva.ToString()
+                         IdCodigoIva = item.IdCodigoIva.ToString(),
+                         IdCondicionVenta = item.IdCondicionVenta.ToString()
                      }).Take(100).ToList();
 
-            if (q.Count == 0 && term != "No se encontraron resultados") { q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", IdCodigoIva = "" }); }
+            if (q.Count == 0 && term != "No se encontraron resultados") { q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", IdCodigoIva = "", IdCondicionVenta = "" }); }
 
             return Json(q, JsonRequestBehavior.AllowGet);
         }

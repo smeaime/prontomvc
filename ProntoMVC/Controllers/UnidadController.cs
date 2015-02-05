@@ -239,6 +239,15 @@ namespace ProntoMVC.Controllers
 
             return PartialView("Select", unidades);
         }
+
+        public virtual ActionResult GetUnidades2()
+        {
+            Dictionary<int, string> unidades = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.Unidad u in db.Unidades.OrderBy(x => x.Descripcion).ToList())
+                unidades.Add(u.IdUnidad, u.Abreviatura);
+
+            return PartialView("Select", unidades);
+        }
     }
 }
 
