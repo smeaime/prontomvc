@@ -1454,24 +1454,20 @@ namespace ProntoMVC.Controllers
                      select new
                      {
                          id = item.IdArticulo,
-
-
-                         //value = SqlFunctions.StringConvert(item.Codigo)  + " " + item.Descripcion, // esto es lo que se ve
-                         //value = item.Codigo + " " + item.Descripcion, // esto es lo que se ve   //problemas con el collate
                          value = item.Codigo, // esto es lo que se ve
                          codigo = item.Codigo,
                          title = item.Descripcion, // esto es lo que se pega
-
                          iva = item.AlicuotaIVA,
                          IdUnidad = item.IdUnidad,
-                         Unidad = item.Unidad.Abreviatura
+                         Unidad = item.Unidad.Abreviatura,
+                         CostoReposicion = (item.CostoReposicion ?? 0).ToString()
                      }).Take(MAXLISTA).ToList();
 
 
 
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
-                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", title = "", iva = (decimal?)0, IdUnidad = (int?)0, Unidad = "" });
+                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", title = "", iva = (decimal?)0, IdUnidad = (int?)0, Unidad = "", CostoReposicion = "0" });
             }
 
             var a = Json(q, JsonRequestBehavior.AllowGet);
@@ -1532,13 +1528,14 @@ namespace ProntoMVC.Controllers
                          codigo = item.Codigo,
                          iva = item.AlicuotaIVA,
                          IdUnidad = item.IdUnidad ?? mvarIdUnidadCU,
-                         Unidad = item.Unidad.Abreviatura ?? mvarIdUnidadCUdesc
+                         Unidad = item.Unidad.Abreviatura ?? mvarIdUnidadCUdesc,
+                         CostoReposicion = (item.CostoReposicion ?? 0).ToString()
                      }).Take(MAXLISTA).ToList();
 
 
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
-                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "" });
+                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "", CostoReposicion = "0" });
             }
 
 
@@ -1875,6 +1872,15 @@ namespace ProntoMVC.Controllers
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual ActionResult GetTiposDeDescripcion()
+        {
+            Dictionary<int, string> TiposDeDescripcion = new Dictionary<int, string>();
+            TiposDeDescripcion.Add(1, "Solo material");
+            TiposDeDescripcion.Add(2, "Solo observaciones");
+            TiposDeDescripcion.Add(3, "Material + observaciones");
+
+            return PartialView("Select", TiposDeDescripcion);
+        }
 
     }
 }

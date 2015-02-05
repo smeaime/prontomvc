@@ -1,11 +1,15 @@
-﻿$(function () {
+﻿//HABILITAR DRAG AND DROP : ORDENES DE COMPRA
+//AGREGAR ADJUNTOS A LA CABECERA
+
+$(function () {
     $("#loading").hide();
 
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic;
-    var headerRow, rowHight, resizeSpanHeight, idaux = 0, detalle = "", mTotalImputaciones, mImporteIva1, mPercepcionIIBB1, mPercepcionIIBB2, mPercepcionIIBB3, mPercepcionIVA, mImporteTotal;
-    var mIVANoDiscriminado, mPorcentajePercepcionIIBB1, mPorcentajePercepcionIIBB2, mPorcentajePercepcionIIBB3;
+    var headerRow, rowHight, resizeSpanHeight, idaux = 0, detalle = "", mTotalImputaciones, mImporteTotal;
+
+    pageLayout.show('east');
 
     if ($("#Anulada").val() == "SI") {
         $("#grabar2").prop("disabled", true);
@@ -16,8 +20,6 @@
     if (idaux.length > 0) {
         MostrarDatosCliente(idaux);
     }
-    TraerCotizacion()
-    TraerNumeroComprobante()
 
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -87,6 +89,12 @@
         grid.jqGrid('setCell', Id, 'OrigenDescripcion', 1);
         grid.jqGrid('setCell', Id, 'TiposDeDescripcion', "Solo material");
         grid.jqGrid('setCell', Id, 'Cantidad', 1);
+        grid.jqGrid('setCell', Id, 'NumeroItem', ProximoItem(grid));
+        grid.jqGrid('setCell', Id, 'TipoCancelacion', 1);
+        grid.jqGrid('setCell', Id, 'TiposCancelacion', "Por cantidad");
+        grid.jqGrid('setCell', Id, 'FechaNecesidad', $("#FechaOrdenCompra").val().substring(0, 10));
+        grid.jqGrid('setCell', Id, 'FacturacionAutomatica', "NO");
+        grid.jqGrid('setCell', Id, 'FacturacionCompletaMensual', "NO");
     };
 
     var CalcularItem = function (value, colname) {
@@ -94,8 +102,8 @@
             var rowid = $('#ListaArticulos').getGridParam('selrow');
             value = Number(value);
             var Cantidad = value;
-            var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
-            var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
+            var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "PorcentajeBonificacion").replace(",", ".")) || 0;
+            var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "Precio").replace(",", ".")) || 0;
 
             var Importe1 = Math.round(PrecioUnitario * Cantidad * 10000) / 10000;
             var Bonificacion = Math.round(Importe1 * Bonificacion / 100 * 10000) / 10000;
@@ -107,7 +115,7 @@
                 var rowid = $('#ListaArticulos').getGridParam('selrow');
                 value = Number(value);
                 var PrecioUnitario = value;
-                var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "Bonificacion").replace(",", ".")) || 0;
+                var Bonificacion = parseFloat($("#ListaArticulos").getCell(rowid, "PorcentajeBonificacion").replace(",", ".")) || 0;
                 var Cantidad = parseFloat($("#ListaArticulos").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
 
                 var Importe1 = Math.round(PrecioUnitario * Cantidad * 10000) / 10000;
@@ -120,7 +128,7 @@
                     var rowid = $('#ListaArticulos').getGridParam('selrow');
                     value = Number(value);
                     var Bonificacion = value;
-                    var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "PrecioUnitario").replace(",", ".")) || 0;
+                    var PrecioUnitario = parseFloat($("#ListaArticulos").getCell(rowid, "Precio").replace(",", ".")) || 0;
                     var Cantidad = parseFloat($("#ListaArticulos").getCell(rowid, "Cantidad").replace(",", ".")) || 0;
 
                     var Importe1 = Math.round(PrecioUnitario * Cantidad * 10000) / 10000;
@@ -139,20 +147,37 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $('#ListaArticulos').jqGrid({
-        url: ROOT + 'Factura/DetFactura/',
-        postData: { 'IdFactura': function () { return $("#IdFactura").val(); } },
-        editurl: ROOT + 'Factura/EditGridData/',
+        url: ROOT + 'OrdenCompra/DetOrdenesCompra/',
+        postData: { 'IdOrdenCompra': function () { return $("#IdOrdenCompra").val(); } },
+        editurl: ROOT + 'OrdenCompra/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleFactura', 'IdArticulo', 'IdUnidad', 'IdColor', 'OrigenDescripcion', 'Codigo', 'Articulo', 'Cantidad', 'Unidad', 'Costo', 'Precio', '% Bonif.', 'Importe',
-                   'Tipos de descripcion'],
+        colNames: ['Acciones', 'IdDetalleOrdenCompra', 'IdArticulo', 'IdUnidad', 'IdColor', 'OrigenDescripcion', 'TipoCancelacion', 'Item', 'Codigo', 'Articulo', 'Cantidad', 'Unidad', 'Precio',
+                   '% Bonif.', 'Importe', 'Tipos de descripcion', 'Tipos de cancelacion', 'Fecha de necesidad', 'Fecha de entrega', 'Facturacion automatica?', 'Fecha comienzo facturacion',
+                   'Cant. meses a facturar', 'Fact. completa mensual?'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                    { name: 'IdDetalleFactura', index: 'IdDetalleFactura', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdDetalleOrdenCompra', index: 'IdDetalleOrdenCompra', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdArticulo', index: 'IdArticulo', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdColor', index: 'IdColor', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'OrigenDescripcion', index: 'OrigenDescripcion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'TipoCancelacion', index: 'TipoCancelacion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    {
+                        name: 'NumeroItem', index: 'NumeroItem', width: 40, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 3, defaultValue: '',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
                     {
                         name: 'Codigo', index: 'Codigo', width: 120, align: 'right', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -173,6 +198,7 @@
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Precio', ui.item.CostoReposicion);
                                         CalcularItem(1, "Cantidad");
                                     },
                                     focus: function (event, ui) {
@@ -210,6 +236,8 @@
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
                                         $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Precio', ui.item.CostoReposicion);
+                                        CalcularItem(1, "Cantidad");
                                     },
                                     focus: function (event, ui) {
                                         if (ui.item.label === NoResultsLabel) {
@@ -221,7 +249,6 @@
                                     return $("<li></li>")
                                         .data("ui-autocomplete-item", item)
                                         .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + "</b></span></a>")
-                                        //.append("<a>" + item.value + "<br>" + item.title + "</a>")
                                         .appendTo(ul);
                                 };
                             },
@@ -257,9 +284,8 @@
                             }]
                         },
                     },
-                    { name: 'Costo', index: 'Costo', width: 80, align: 'right', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     {
-                        name: 'PrecioUnitario', index: 'PrecioUnitario', width: 80, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Precio', index: 'Precio', width: 80, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '',
                             dataEvents: [
@@ -274,7 +300,7 @@
                         }
                     },
                     {
-                        name: 'Bonificacion', index: 'Bonificacion', width: 80, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', width: 80, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '',
                             dataEvents: [
@@ -303,7 +329,87 @@
                                 }
                             }]
                         },
-                    }
+                    },
+                    {
+                        name: 'TiposCancelacion', index: 'TiposCancelacion', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        editoptions: {
+                            dataUrl: ROOT + 'OrdenCompra/GetTiposCancelacion',
+                            dataInit: function (elem) {
+                                $(elem).width(145);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
+                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'TipoCancelacion', this.value);
+                                }
+                            }]
+                        },
+                    },
+                    {
+                        name: 'FechaNecesidad', index: 'FechaNecesidad', width: 120, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+                    {
+                        name: 'FechaEntrega', index: 'FechaEntrega', width: 120, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+                    { name: 'FacturacionAutomatica', index: 'FacturacionAutomatica', width: 100, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                    {
+                        name: 'FechaComienzoFacturacion', index: 'FechaComienzoFacturacion', width: 120, sortable: false, align: 'right', editable: true, label: 'TB',
+                        editoptions: {
+                            size: 10,
+                            maxlengh: 10,
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    constrainInput: false,
+                                    showOn: 'button',
+                                    buttonText: '...'
+                                });
+                            }
+                        },
+                        formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
+                    },
+                    {
+                        name: 'CantidadMesesAFacturar', index: 'CantidadMesesAFacturar', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 3, defaultValue: '',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    { name: 'FacturacionCompletaMensual', index: 'FacturacionCompletaMensual', width: 100, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
@@ -328,7 +434,7 @@
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
-        sortname: 'IdDetalleFactura',
+        sortname: 'NumeroItem',
         sortorder: 'asc',
         viewrecords: true,
         width: 'auto', // 'auto',
@@ -366,38 +472,177 @@
                                  });
     jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
+    $("#ListaDrag").jqGrid({
+        url: ROOT + 'OrdenCompra/TT',
+        postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['', '', 'IdOrdenCompra', 'Nro. OC cliente', 'Numero OC', 'Fecha', 'Producido', 'Cumplido', 'Anulada', 'Selecc.', 'Obra', 'Codigo cliente', 'Cliente',
+                   'CUIT', 'Aprobo', 'Remitos', 'Facturas', 'Condicion de venta', 'Items', 'Facturar a', 'Fecha anulacion', 'Usuario anulo', 'Fecha ingreso', 'Usuario ingreso', 'Fecha modificacion',
+                   'Usuario modifico', 'Grupo fact.', 'Tipo OC', 'Mayor fecha entrega', 'Lista de precio', 'Importe total', 'Mon.', 'Observaciones'],
+        colModel: [
+                    { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                    { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                    { name: 'IdOrdenCompra', index: 'IdOrdenCompra', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'NumeroOrdenCompraCliente', index: 'NumeroOrdenCompraCliente', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'NumeroOrdenCompra', index: 'NumeroOrdenCompra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'SeleccionadaParaFacturacion', index: 'SeleccionadaParaFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Obra', index: 'Obra', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'Remitos', index: 'Remitos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'CondicionVenta', index: 'CondicionVenta', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Items', index: 'Items', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'FacturarA', index: 'FacturarA', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'UsuarioIngreso', index: 'UsuarioIngreso', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'FechaModifico', index: 'FechaModifico', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'UsuarioModifico', index: 'UsuarioModifico', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'GrupoFacturacion', index: 'GrupoFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'TipoOC', index: 'TipoOC', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'MayorFechaEntrega', index: 'MayorFechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'ListaDePrecio', index: 'ListaDePrecio', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
+        ],
+        ondblClickRow: function (id) {
+            Copiar1(id, "Dbl");
+        },
+        loadComplete: function () {
+            grid = $(this);
+            $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+        },
+        pager: $('#ListaDragPager'),
+        rowNum: 15,
+        rowList: [10, 20, 50],
+        sortname: 'FechaOrdenCompra,NumeroOrdenCompra',
+        sortorder: "desc",
+        viewrecords: true,
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: '100%',
+        altRows: false,
+        emptyrecords: 'No hay registros para mostrar'//,
+    })
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+
+    //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
+    $('a#a_panel_este_tab1').text('Ordenes de compra');
+    //$('a#a_panel_este_tab5').remove();  //    
+
+    ConectarGrillas1();
+
+    $('#a_panel_este_tab1').click(function () {
+        ConectarGrillas1();
+    });
+
+    function ConectarGrillas1() {
+        $("#ListaDrag").jqGrid('gridDnD', {
+            connectWith: '#ListaArticulos',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                            .addClass("ui-state-error ui-widget")
+                            .css({ border: "5px ridge tomato" });
+                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                Copiar1($(ui.draggable).attr("id"), "DnD");
+                //var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                //var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+            }
+        });
+    }
+
+    function Copiar1(idsource, Origen) {
+        //var acceptId = idsource;
+        //var $gridOrigen = $("#ListaDrag"), $gridDestino = $("#ListaArticulos");
+
+        //var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
+        //var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+        ////var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
+
+        //dataIds = $gridDestino.jqGrid('getDataIDs');
+        //for (i = 0; i < dataIds.length; i++) {
+        //    data2 = $gridDestino.jqGrid('getRowData', dataIds[i]);
+        //    if (data2.IdImputacion == acceptId) {
+        //        if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
+        //        alert("Ya existe el registro");
+        //        return;
+        //    }
+        //};
+        //Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+        //try {
+        //    $.ajax({
+        //        type: "GET",
+        //        contentType: "application/json; charset=utf-8",
+        //        url: ROOT + 'CuentaCorriente/TraerUnoDeudor/',
+        //        data: { IdCtaCte: IdCtaCte },
+        //        dataType: "Json",
+        //        success: function (data) {
+        //            for (i = 0; i < data.length; i++) {
+        //                data2 = data[i]
+        //                data2.IdDetalleRecibo = Id2;
+
+        //                date = new Date(parseInt(data[i].Fecha.substr(6)));
+        //                displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+        //                data2.Fecha = displayDate;
+        //                date = new Date(parseInt(data[i].FechaVencimiento.substr(6)));
+        //                displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+        //                data2.FechaVencimiento = displayDate;
+
+        //                if (Origen == "DnD") {
+        //                    Id = dataIds[0];
+        //                    $gridDestino.jqGrid('setRowData', Id, data2);
+        //                } else {
+        //                    Id = Id2
+        //                    $gridDestino.jqGrid('addRowData', Id, data2, "first");
+        //                };
+        //                calculaTotalImputaciones();
+        //                //ar new_id = 39; //for example
+        //                //aftersavefunc: function( old_id ) {
+
+        //                //    //get data param
+        //                //    var row = grid.jqGrid('getLocalRow', old_id);
+        //                //    console.log(row); //use for firefox test
+        //                //    row._id_ = new_id;
+
+        //                //    grid.jqGrid('setRowData',old_id,{my_id:new_id});
+        //                //    $("#"+response).attr("id", new_id); //change TR element in DOM
+
+        //                //    //very important to change the _index, some functions using the                  
+        //                //    var _index = grid.jqGrid('getGridParam', '_index');
+        //                //    var valueTemp = _index[old_id];
+        //                //    delete _index[old_id];
+        //                //    _index[new_id] = valueTemp;
+        //                //}
+        //            }
+        //        }
+        //    });
+        //} catch (e) { }
+        //$("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
     ////////////////////////////////////////////////////////// CHANGES //////////////////////////////////////////////////////////
 
-    $("#IdPuntoVenta").change(function () {
-        TraerNumeroComprobante()
-    });
-
-    $("#IdIBCondicion").change(function () {
-        CalcularTotales()
-    });
-
-    $("#IdIBCondicion2").change(function () {
-        CalcularTotales()
-    });
-
-    $("#IdIBCondicion3").change(function () {
-        CalcularTotales()
-    });
-
-    $("input[name=CtaCte]:radio").change(function () {
-        TraerNumeroComprobante();
-        CalcularTotales();
-    })
-
-    $("#IdMoneda").change(function () {
-        TraerCotizacion()
-    })
-
     $("#IdCondicionVenta").change(function () {
-        var fechaFinal = CalcularFechaVencimiento($("#FechaFactura").val());
-        $("#FechaVencimiento").val(fechaFinal);
+        //var fechaFinal = CalcularFechaVencimiento($("#FechaFactura").val());
+        //$("#FechaVencimiento").val(fechaFinal);
     })
 
+    $("#PorcentajeBonificacion").change(function () {
+        CalcularTotales()
+    })
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
@@ -406,29 +651,11 @@
 
         var cabecera = $("#formid").serializeObject();
 
-        cabecera.NumeroFactura = $("#NumeroFactura").val();
-        cabecera.CAE = $("#CAE").val();
-        cabecera.FechaVencimientoORechazoCAE = $("#FechaVencimientoORechazoCAE").val();
-        cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
-        cabecera.PuntoVenta = $("#IdPuntoVenta").find('option:selected').text();
+        cabecera.NumeroOrdenCompra = $("#NumeroOrdenCompra").val();
         cabecera.Cliente = "";
         cabecera.Provincia = "";
 
-        var chk = $('#NoIncluirEnCubos').is(':checked');
-        if (chk) {
-            cabecera.NoIncluirEnCubos = "SI";
-        } else {
-            cabecera.NoIncluirEnCubos = "NO";
-        };
-
-        var chk = $('#ContabilizarAFechaVencimiento').is(':checked');
-        if (chk) {
-            cabecera.ContabilizarAFechaVencimiento = "SI";
-        } else {
-            cabecera.ContabilizarAFechaVencimiento = "NO";
-        };
-        
-        cabecera.DetalleFacturas = [];
+        cabecera.DetalleOrdenesCompras = [];
         $grid = $('#ListaArticulos');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -436,14 +663,14 @@
         for (i = 0; i < dataIds.length; i++) {
             try {
                 data = $grid.jqGrid('getRowData', dataIds[i]);
-                iddeta = data['IdDetalleFactura'];
+                iddeta = data['IdDetalleOrdenCompra'];
                 if (!iddeta) {
                     iddeta = nuevo;
                     nuevo--;
                 }
 
-                data1 = '{"IdDetalleFactura":"' + iddeta + '",';
-                data1 = data1 + '"IdFactura":"' + $("#IdFactura").val() + '",';
+                data1 = '{"IdDetalleOrdenCompra":"' + iddeta + '",';
+                data1 = data1 + '"IdOrdenCompra":"' + $("#IdOrdenCompra").val() + '",';
                 for (j = 0; j < colModel.length; j++) {
                     cm = colModel[j]
                     if (cm.label === 'TB') {
@@ -454,7 +681,7 @@
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetalleFacturas.push(data2);
+                cabecera.DetalleOrdenesCompras.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -474,13 +701,13 @@
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Factura/BatchUpdate',
+            url: ROOT + 'OrdenCompra/BatchUpdate',
             dataType: 'json',
-            data: JSON.stringify({ Factura: cabecera }),
+            data: JSON.stringify({ OrdenCompra: cabecera }),
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "Factura/Edit/" + result.IdFactura);
+                    window.location = (ROOT + "OrdenCompra/Edit/" + result.IdOrdenCompra);
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');
@@ -515,27 +742,6 @@
         });
     });
 
-
-    $('#probar').click(function () {
-        CalcularTotales()
-
-        var cabecera = SerializaForm();
-
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Factura/Probar',
-            dataType: 'json',
-            data: JSON.stringify({ Factura: cabecera }),
-            success: function (result) {
-                if (result) {
-                    $('html, body').css('cursor', 'auto');
-                } else {
-                }
-            },
-        });
-    });
-
 });
 
 function ActualizarDatos() {
@@ -546,197 +752,49 @@ function ActualizarDatos() {
         MostrarDatosCliente(id);
     }
 
-    id = $("#IdFactura").val() || 0;
+    id = $("#OrdenCompra").val() || 0;
     if (id <= 0) {
-        var fechaFinal = CalcularFechaVencimiento($("#FechaFactura").val());
-        $("#FechaVencimiento").val(fechaFinal);
     }
 
-    IdCodigoIva = $("#IdCodigoIva").val();
-
-    if (IdCodigoIva == 1) { Letra = "A" }
-    if (IdCodigoIva == 2) { Letra = "B" }
-    if (IdCodigoIva == 3) { Letra = "E" }
-    if (IdCodigoIva == 8) { Letra = "B" }
-    if (IdCodigoIva == 9) { Letra = "A" }
-    $("#TipoABC").val(Letra)
-
     calculaTotalImputaciones();
-
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: ROOT + 'PuntoVenta/GetPuntosVenta2/',
-        data: { IdTipoComprobante: 1, Letra: Letra },
-        contentType: "application/json",
-        dataType: "json",
-        success: function (result) {
-            $("#IdPuntoVenta").empty();
-            $.each(result, function () {
-                $("#IdPuntoVenta").append($("<option></option>").val(this['IdPuntoVenta']).html(this['PuntoVenta']));
-            });
-            TraerNumeroComprobante();
-        }
-    });
 }
 
 calculaTotalImputaciones = function () {
-    var imp = 0, imp2 = 0, grav = "", letra = "", porciva = 0, ivaitem = 0;
-
-    letra = $("#TipoABC").val();
-    porciva = parseFloat($("#PorcentajeIva1").val().replace(",", ".") || 0) || 0;
-    mIVANoDiscriminado = 0;
-    mImporteIva1 = 0;
+    var imp = 0, imp2 = 0, grav = "", letra = "";
 
     var dataIds = $('#ListaArticulos').jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
         var data = $('#ListaArticulos').jqGrid('getRowData', dataIds[i]);
         imp = parseFloat(data['Importe'].replace(",", ".") || 0) || 0;
-        if (letra == "B") {
-            ivaitem = imp - (imp / (1 + (porciva / 100)));
-            mIVANoDiscriminado = mIVANoDiscriminado + ivaitem;
-        } else {
-            mImporteIva1 = mImporteIva1 + (imp * (porciva / 100));
-        }
         imp2 = imp2 + imp;
     }
     imp2 = Math.round((imp2) * 10000) / 10000;
     mTotalImputaciones = imp2;
-    $("#ListaArticulos").jqGrid('footerData', 'set', { Gravado: 'TOTALES', Importe: imp2.toFixed(2) });
-    $("#ImporteIva1").val(mImporteIva1.toFixed(2));
-    $("#IVANoDiscriminado").val(mIVANoDiscriminado.toFixed(2));
+    $("#ListaArticulos").jqGrid('footerData', 'set', { Precio: 'TOTALES', Importe: imp2.toFixed(2) });
 
     CalcularTotales()
 };
 
 function CalcularTotales() {
-    var mSubtotal = 0, mIdFactura = 0, mIdCliente = 0, mIdMoneda = 0, mIdIBCondicion1 = 0, mIdIBCondicion2 = 0, mIdIBCondicion3 = 0, mFecha, datos1;
+    var mSubtotal = 0, mIdOrdenCompra = 0, mIdCliente = 0, mIdMoneda = 0, mPorcentajeBonificacion = 0, mImporteBonificacion = 0, mFecha, datos1;
 
-    mIdFactura = $("#IdFactura").val();
+    mIdOrdenCompra = $("#IdOrdenCompra").val();
 
     if (typeof mTotalImputaciones == "undefined") { mTotalImputaciones = 0; }
     mSubtotal = mTotalImputaciones;
 
-    mImporteIva1 = parseFloat($("#ImporteIva1").val().replace(",", ".") || 0) || 0;
+    mPorcentajeBonificacion = parseFloat($("#PorcentajeBonificacion").val().replace(",", ".") || 0) || 0;
+    mImporteBonificacion = Math.round((mSubtotal * mPorcentajeBonificacion / 100) * 10000) / 10000;
 
     mIdCliente = $("#IdCliente").val();
     mIdMoneda = $("#IdMoneda").val();
-    mIdIBCondicion1 = parseInt($("#IdIBCondicion").val() || 0) || 0;
-    mIdIBCondicion2 = parseInt($("#IdIBCondicion2").val() || 0) || 0;
-    mIdIBCondicion3 = parseInt($("#IdIBCondicion3").val() || 0) || 0;
-    mFecha = $("#FechaFactura").val();
+    mFecha = $("#FechaOrdenCompra").val();
 
-    mPorcentajePercepcionIIBB1 = 0;
-    mPorcentajePercepcionIIBB2 = 0;
-    mPorcentajePercepcionIIBB3 = 0;
-
-    $("#RetencionIBrutos1").val(0);
-    $("#RetencionIBrutos2").val(0);
-    $("#RetencionIBrutos3").val(0);
-    $("#PercepcionIVA").val(0);
-
-    if (mIdFactura <= 0 && mIdCliente > 0 && CtaCte == "SI") {
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Cliente/CalcularPercepciones',
-            dataType: 'json',
-            async: false,
-            data: JSON.stringify({ IdCliente: mIdCliente, TotalGravado: mSubtotal, IdMoneda: mIdMoneda, IdIBCondicion1: mIdIBCondicion1, IdIBCondicion2: mIdIBCondicion2, IdIBCondicion3: mIdIBCondicion3, Fecha: mFecha }),
-            //data: { IdCliente: mIdCliente, TotalGravado: mSubtotal, IdMoneda: mIdMoneda, IdIBCondicion1: mIdIBCondicion1, IdIBCondicion2: mIdIBCondicion2, IdIBCondicion3: mIdIBCondicion3, Fecha: mFecha },
-            success: function (result) {
-                if (result) {
-                    datos = JSON.parse(result);
-                    datos1 = datos.campo1;
-                    mPercepcionIIBB1 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo2;
-                    mPercepcionIIBB2 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo3;
-                    mPercepcionIIBB3 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo4;
-                    mPorcentajePercepcionIIBB1 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo5;
-                    mPorcentajePercepcionIIBB2 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo6;
-                    mPorcentajePercepcionIIBB3 = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                    datos1 = datos.campo7;
-                    mPercepcionIVA = parseFloat(datos1.replace(",", ".") || 0) || 0;
-                } else { alert('No se pudo calcular el comprobante.'); }
-            },
-            beforeSend: function () {
-            },
-            error: function (xhr, textStatus, exceptionThrown) {
-                try {
-                    var errorData = $.parseJSON(xhr.responseText);
-                    var errorMessages = [];
-                    for (var key in errorData) { errorMessages.push(errorData[key]); }
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                    $("#mensajeAlerta").show();
-                } catch (e) {
-                    $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show();
-                }
-            }
-        });
-    } else {
-        mPercepcionIIBB1 = parseFloat($("#RetencionIBrutos1").val().replace(",", ".") || 0) || 0;
-        mPercepcionIIBB2 = parseFloat($("#RetencionIBrutos2").val().replace(",", ".") || 0) || 0;
-        mPercepcionIIBB3 = parseFloat($("#RetencionIBrutos3").val().replace(",", ".") || 0) || 0;
-        mPorcentajePercepcionIIBB1 = parseFloat($("#PorcentajeIBrutos1").val().replace(",", ".") || 0) || 0;
-        mPorcentajePercepcionIIBB2 = parseFloat($("#PorcentajeIBrutos2").val().replace(",", ".") || 0) || 0;
-        mPorcentajePercepcionIIBB3 = parseFloat($("#PorcentajeIBrutos3").val().replace(",", ".") || 0) || 0;
-        mPercepcionIVA = parseFloat($("#PercepcionIVA").val().replace(",", ".") || 0) || 0;
-    }
-
-    mImporteTotal = mSubtotal + mImporteIva1 + mPercepcionIIBB1 + mPercepcionIIBB2 + mPercepcionIIBB3 + mPercepcionIVA
+    mImporteTotal = mSubtotal - mImporteBonificacion;
 
     $("#Subtotal").val(mSubtotal.toFixed(2));
-    $("#RetencionIBrutos1").val(mPercepcionIIBB1.toFixed(2));
-    $("#RetencionIBrutos2").val(mPercepcionIIBB2.toFixed(2));
-    $("#RetencionIBrutos3").val(mPercepcionIIBB3.toFixed(2));
-    $("#PorcentajeIBrutos1").val(mPorcentajePercepcionIIBB1.toFixed(2));
-    $("#PorcentajeIBrutos2").val(mPorcentajePercepcionIIBB2.toFixed(2));
-    $("#PorcentajeIBrutos3").val(mPorcentajePercepcionIIBB3.toFixed(2));
-    $("#PercepcionIVA").val(mPercepcionIVA.toFixed(2));
+    $("#Bonificacion").val(mImporteBonificacion.toFixed(2));
     $("#ImporteTotal").val(mImporteTotal.toFixed(2));
-};
-
-function TraerCotizacion() {
-    var fecha, IdMoneda, datos1, mIdMonedaPrincipal = 1, mIdMonedaDolar = 2, mCotizacionDolar = 0;
-    fecha = $("#FechaNotaDebito").val();
-    IdMoneda = $("#IdMoneda").val();
-    $.ajax({
-        type: "GET",
-        async: false,
-        contentType: "application/json; charset=utf-8",
-        url: ROOT + 'Moneda/CotizacionesPorFecha',
-        data: { fecha: fecha },
-        dataType: "json",
-        success: function (result) {
-            if (result) {
-                datos = JSON.parse(result);
-                mIdMonedaPrincipal = datos.campo1;
-                mIdMonedaDolar = datos.campo2;
-                datos1 = datos.campo3;
-                mCotizacionDolar = parseFloat(datos1.replace(",", ".") || 0) || 0;
-            } else { alert('No se pudo completar la operacion.'); }
-        },
-        error: function (xhr, textStatus, exceptionThrown) {
-            alert('No hay cotizacion, ingresela manualmente');
-            $('#CotizacionMoneda').val("");
-        }
-    });
-
-    if (IdMoneda == mIdMonedaPrincipal) {
-        $('#CotizacionMoneda').val("1");
-        if (mCotizacionDolar != 0) { $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2)); }
-    }
-    else {
-        if (IdMoneda == mIdMonedaDolar) {
-            $("#CotizacionMoneda").val(mCotizacionDolar.toFixed(2));
-            $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2));
-        }
-    }
 };
 
 function pickdates(id) {
@@ -828,101 +886,13 @@ function MostrarDatosCliente(Id) {
                 $("#CodigoPostal").val(result[0].CodigoPostal);
                 $("#Email").val(result[0].Email);
                 $("#Telefono").val(result[0].Telefono);
-                $("#PorcentajePercepcionIVA").val(result[0].PorcentajePercepcionIVA);
-                $("#BaseMinimaParaPercepcionIVA").val(result[0].BaseMinimaParaPercepcionIVA);
-                $("#EsAgenteRetencionIVA").val(result[0].EsAgenteRetencionIVA);
-                $("#IdIBCondicion").val(result[0].IdIBCondicionPorDefecto);
-                $("#IdIBCondicion2").val(result[0].IdIBCondicionPorDefecto2);
-                $("#IdIBCondicion3").val(result[0].IdIBCondicionPorDefecto3);
-
             }
         }
     });
     return Entidad;
 }
 
-function TraerNumeroComprobante() {
-    var IdFactura = $("#IdFactura").val();
-    var IdPuntoVenta = $("#IdPuntoVenta").val();
-    var CtaCte = $("input[name='CtaCte']:checked").val();
-
-    if (IdFactura <= 0) {
-        $("#IdPuntoVenta").prop("disabled", false);
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: ROOT + 'PuntoVenta/GetPuntosVentaPorId/',
-            data: { IdPuntoVenta: IdPuntoVenta },
-            contentType: "application/json",
-            dataType: "json",
-            success: function (result) {
-                if (result.length > 0) {
-                    var ProximoNumero = result[0]["ProximoNumero"];
-                    var CAEManual = result[0]["CAEManual"];
-                    $("#NumeroFactura").val(ProximoNumero);
-                    if (CAEManual == "SI") {
-                        $("#CAE").prop("disabled", false);
-                        $("#FechaVencimientoORechazoCAE").prop("disabled", false);
-                    } else {
-                        $("#CAE").val("");
-                        $("#FechaVencimientoORechazoCAE").val("");
-                        $("#CAE").prop("disabled", true);
-                        $("#FechaVencimientoORechazoCAE").prop("disabled", true);
-                    }
-                }
-            }
-        });
-    } else {
-        $("#IdPuntoVenta").prop("disabled", true);
-        $("#CAE").prop("disabled", true);
-        $("#FechaVencimientoORechazoCAE").prop("disabled", true);
-    }
-}
-
-function CalcularFechaVencimiento(fecha) {
-    var mCantidadDias1, id;
-
-    id = $("#IdCondicionVenta").val() || 0;
-    $.ajax({
-        type: "GET",
-        async: false,
-        contentType: "application/json; charset=utf-8",
-        url: ROOT + 'CondicionVenta/GetCondicionVenta',
-        data: { IdCondicionCompra: id },
-        dataType: "json",
-        success: function (result) {
-            if (result) {
-                mCantidadDias1 = parseInt(result[0]["CantidadDias1"] || 0) || 0;
-            } else { alert('No se pudo completar la operacion.'); }
-        }
-    });
-
-    var arrayFecha = fecha.split('/');
-    var dia = arrayFecha[0];
-    var mes = arrayFecha[1];
-    var año = arrayFecha[2].substring(0, 4);
-    var fecha2 = mes + '/' + dia + '/' + año;
-
-    //var nuevafecha = new Date(fecha2);
-    //nuevafecha.setDate(mCantidadDias1);
-    //dia = nuevafecha.getDate();
-    //mes = nuevafecha.getMonth() + 1;
-    //año = nuevafecha.getFullYear();
-    //mes = (mes < 10) ? ("0" + mes) : mes;
-    //dia = (dia < 10) ? ("0" + dia) : dia;
-    //var fechaFinal = dia + '/' + mes + '/' + año;
-
-    var date = new Date(fecha2);
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    var fechaFinal = new Date(y, m, d + mCantidadDias1);
-    dia = fechaFinal.getDate();
-    mes = fechaFinal.getMonth() + 1;
-    año = fechaFinal.getFullYear();
-    mes = (mes < 10) ? ("0" + mes) : mes;
-    dia = (dia < 10) ? ("0" + dia) : dia;
-    fechaFinal = dia + '/' + mes + '/' + año;
-
-    return (fechaFinal);
+function ProximoItem(grid) {
+    var totalCantidad = grid.jqGrid('getCol', 'NumeroItem', false, 'max')
+    return (totalCantidad || 0) + 1;
 }
