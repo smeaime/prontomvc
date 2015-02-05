@@ -158,7 +158,7 @@
     </Reference>
     <Reference Include="ProntoMVC.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Data\bin\Debug\ProntoMVC.Data.dll</HintPath>
+      <HintPath>..\Data\bin\x86\Debug\ProntoMVC.Data.dll</HintPath>
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
@@ -167,6 +167,7 @@
       <HintPath>..\Servicio\bin\Debug\Servicio.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
@@ -1563,6 +1564,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Novedades\" />
     <Folder Include="Views\Reportes\" />
   </ItemGroup>

@@ -5806,12 +5806,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
   </Function>
-  <Function Name="Facturas_OrdenesCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdFactura" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Facturas_Remitos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdFactura" Type="int" Mode="In" />
-  </Function>
   <Function Name="LogComprobantesElectronicos_InsertarRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PuntoVenta" Type="int" Mode="In" />
     <Parameter Name="NumeroComprobante" Type="int" Mode="In" />
@@ -5830,22 +5824,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="IdUsuario" Type="int" Mode="In" />
   </Function>
   <Function Name="Remitos_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="Requerimientos_ActualizarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
-    <Parameter Name="IdDetalleRequerimiento" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Requerimientos_Pedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Requerimientos_Presupuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Requerimientos_Recepciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
-  </Function>
-  <Function Name="Requerimientos_SalidasMateriales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
-  </Function>
   <Function Name="Valores_BorrarPorIdDetalleOrdenPagoCuentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdDetalleOrdenPagoCuentas" Type="int" Mode="In" />
   </Function>
