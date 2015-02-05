@@ -187,6 +187,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<DetalleObrasEquiposInstalados2> DetalleObrasEquiposInstalados2 { get; set; }
         public virtual DbSet<DetalleObrasPoliza> DetalleObrasPolizas { get; set; }
         public virtual DbSet<TiposPoliza> TiposPolizas { get; set; }
+        public virtual DbSet<DetalleDevolucione> DetalleDevoluciones { get; set; }
         public virtual DbSet<Devolucione> Devoluciones { get; set; }
         public virtual DbSet<Chofere> Choferes { get; set; }
         public virtual DbSet<LogComprobantesElectronico> LogComprobantesElectronicos { get; set; }

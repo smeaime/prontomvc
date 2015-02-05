@@ -361,7 +361,7 @@
     <Content Include="Content\images\11788_591409570876898_1315911201_n.jpg" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\BDL grande.jpg" />
-    <Content Include="Content\images\BDL grande.png" />
+    <Content Include="Content\images\Empresas\BDLConsultores.png" />
     <Content Include="Content\images\bdl.gif" />
     <Content Include="Content\images\bg_texture.jpg" />
     <Content Include="Content\images\bootstrap-mdo-sfmoma-02.jpg" />
@@ -839,6 +839,7 @@
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Scripts\ScriptCliente.js" />
+    <Content Include="Scripts\ScriptOrdenCompra.js" />
     <Content Include="Scripts\ScriptNotaCredito.js" />
     <Content Include="Scripts\ScriptFactura.js" />
     <Content Include="Scripts\ScriptNotaDebito.js" />
@@ -877,6 +878,8 @@
     <Content Include="Views\Obra\Edit.cshtml" />
     <Content Include="Views\Recibo\EditCC.cshtml" />
     <Content Include="Views\Factura\Edit.cshtml" />
+    <Content Include="Views\OrdenCompra\Index.cshtml" />
+    <Content Include="Views\OrdenCompra\Edit.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1302,10 +1305,6 @@
     <Content Include="Views\Remito\EditExterno.cshtml" />
     <Content Include="Views\Remito\Index.cshtml" />
     <Content Include="Views\Remito\IndexExterno.cshtml" />
-    <Content Include="Views\OrdenCompra\Edit.cshtml" />
-    <Content Include="Views\OrdenCompra\EditExterno.cshtml" />
-    <Content Include="Views\OrdenCompra\Index.cshtml" />
-    <Content Include="Views\OrdenCompra\IndexExterno.cshtml" />
     <Content Include="Views\Subdiario\Edit.cshtml" />
     <Content Include="Views\Subdiario\EditExterno.cshtml" />
     <Content Include="Views\Subdiario\Index.cshtml" />
@@ -1606,7 +1605,6 @@
     <Content Include="Views\Shared\_Layout_Prueba.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutVacio.cshtml" />
-    <Content Include="Views\Factura\Edit1.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
     <Content Include="Views\Account\ElegirBase.cshtml" />
     <Content Include="Views\Concepto\Index.cshtml" />
