@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class Devolucione
     {
+        public Devolucione()
+        {
+            this.DetalleDevoluciones = new HashSet<DetalleDevolucione>();
+        }
+    
         public int IdDevolucion { get; set; }
         public Nullable<int> NumeroDevolucion { get; set; }
         public string TipoABC { get; set; }
@@ -65,5 +70,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> PorcentajePercepcionIVA { get; set; }
         public Nullable<int> IdDeposito { get; set; }
         public Nullable<int> IdUsuarioAnulacion { get; set; }
+    
+        public virtual ICollection<DetalleDevolucione> DetalleDevoluciones { get; set; }
     }
 }

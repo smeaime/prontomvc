@@ -36,7 +36,9 @@ namespace ProntoMVC.Controllers
                             a.IdTipoComprobanteCajaEgresos,
                             a.ProximoNumeroInternoChequeEmitido,
                             a.ProximaNotaDebitoInterna,
-                            a.ProximaNotaCreditoInterna
+                            a.ProximaNotaCreditoInterna,
+                            a.IdTipoComprobanteCajaIngresos,
+                            a.IdTipoComprobanteTarjetaCredito
                         }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
