@@ -28,7 +28,7 @@ namespace ProntoMVC.Controllers
         //
         // GET: /Requerimiento/
 
-    //    [Authorize(Roles = "SuperAdmin,Requerimientos")] //ojo que el web.config tambien te puede bochar hacia el login
+        //    [Authorize(Roles = "SuperAdmin,Requerimientos")] //ojo que el web.config tambien te puede bochar hacia el login
 
 
         public virtual ViewResult Index(bool bAConfirmar = false, bool bALiberar = false)
@@ -39,7 +39,7 @@ namespace ProntoMVC.Controllers
 
             if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
 
-            
+
 
 
             ViewBag.bAConfirmar = (bool)(Request.QueryString["bAConfirmar"].NullSafeToString() == "SI");
@@ -681,7 +681,7 @@ namespace ProntoMVC.Controllers
 
 
             if (!PuedeLeer(enumNodos.Requerimientos)) throw new Exception("No tenés permisos");
-            
+
 
 
 
@@ -897,6 +897,15 @@ namespace ProntoMVC.Controllers
             int totalPages = 0;
 
 
+            if (true)
+            {
+                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext( ProntoFuncionesGeneralesCOMPRONTO.Encriptar( SCsql()));
+                var qq = (from rm in l2sqlPronto.Requerimientos  
+                          select l2sqlPronto.Requerimientos_Pedidos       (rm.IdRequerimiento)
+                          ).Take(100).ToList();
+
+
+            }
 
             var Req = db.Requerimientos
                 // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
@@ -1677,7 +1686,7 @@ namespace ProntoMVC.Controllers
                             NumeroItem = a.NumeroItem,
 
                             // Cantidad = a.Cantidad,
-                            Cantidad = ( (a.Cantidad ?? 0) -
+                            Cantidad = ((a.Cantidad ?? 0) -
                                  (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento
                                                                 && ((x.Cumplido ?? "NO") != "AN"))
                                                         .Sum(z => z.Cantidad) ?? 0)
