@@ -277,7 +277,7 @@ Public Class CartaDePorteManager
     Public Shared Function excepciones(SC) As String()
         'Get
 
-        If True Then
+        If False Then
             'Dim SC As String = ""
             Dim cli As Integer
 
@@ -10016,8 +10016,13 @@ Public Class LogicaFacturacion
         '* Los Movimientos que sean Embarques (solo los embarques) se facturarán como una Carta de Porte más. 
         'Tomar el cereal, la cantidad de Kg y el Destinatario para facturar.
 
+        ErrHandler.WriteError("entro a Preprocesos " & lista.Count())
+
+
+
         AgregarEmbarques(lista, SC, desde, hasta, -1, puntoVenta)
 
+        ErrHandler.WriteError("despues de AgregarEmbarques" & lista.Count())
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
 
@@ -10025,6 +10030,7 @@ Public Class LogicaFacturacion
 
 
         ExcluirDeGastosAdministrativos(lista, SC)
+        ErrHandler.WriteError("despues de ExcluirDeGastosAdministrativos" & lista.Count())
 
         '///////////////////////////////////////////////////////////////////////////////
         '///////////////////////////////////////////////////////////////////////////////
@@ -10037,6 +10043,7 @@ Public Class LogicaFacturacion
 
         '* Nueva función en Facturación Automática: "Facturarle al Corredor". Agregar un tilde en los clientes con ese nombre. En el Automático, las Cartas de Porte que corresponda facturarle a estos clientes se le facturarán al Corredor de cada Carta de Porte
         ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor(lista, SC)
+        ErrHandler.WriteError("despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor" & lista.Count())
 
 
         'hay que hacer un update de la lista por si se derivó a un corredor?
@@ -10056,6 +10063,7 @@ Public Class LogicaFacturacion
 
         Try
             CasosSyngenta_y_Acopios(lista, SC)
+            ErrHandler.WriteError("despues de CasosSyngenta_y_Acopios" & lista.Count())
 
         Catch ex As Exception
             ErrHandler.WriteError("CasosSyngenta_y_Acopios")
@@ -10090,12 +10098,20 @@ Public Class LogicaFacturacion
     Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                                         optFacturarA As String, agruparArticulosPor As String, sc As String)
 
+
+        ErrHandler.WriteError("entro en PostProcesos " & lista.Count())
+
         EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado(lista, sc)
+        ErrHandler.WriteError("despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado " & lista.Count())
+
         EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones(lista, optFacturarA, agruparArticulosPor, sc, "")
+        ErrHandler.WriteError("despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones " & lista.Count())
 
         SepararAcopiosLDCyACA(lista, sc)
+        ErrHandler.WriteError("despues de SepararAcopiosLDCyACA " & lista.Count())
 
         PostProcesoFacturacion_ReglaExportadores(lista, sc)
+        ErrHandler.WriteError("despues de PostProcesoFacturacion_ReglaExportadores " & lista.Count())
 
     End Sub
 
@@ -12033,7 +12049,8 @@ Public Class LogicaFacturacion
         Return LasNoRepetidas
     End Function
 
-    Shared Function MostrarConflictivasEnPaginaAparte(ByVal l As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), ByVal sc As String) As String
+    Shared Function MostrarConflictivasEnPaginaAparte(ByVal l As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+                                                      ByVal sc As String) As String
 
         'http://msdn.microsoft.com/en-us/vstudio/bb737926#grpbysum
         'http://msdn.microsoft.com/en-us/vstudio/bb737926#grpbysum
@@ -12116,6 +12133,10 @@ Public Class LogicaFacturacion
 
                 Next
             End If
+
+
+            ErrHandler.WriteError("punto 4 en MostrarConflictivasEnPaginaAparte . " & l.Count & " " & cartasrepetidasaa.Count & " " & cartasrepetidaso.Count & " " & cartasrepetidas.Count & " " & cartasconflic.Count)
+
         End If
 
 
@@ -12124,7 +12145,6 @@ Public Class LogicaFacturacion
 
 
 
-        ErrHandler.WriteError("punto 4 en MostrarConflictivasEnPaginaAparte .")
 
         Return sErr
     End Function
@@ -14397,7 +14417,11 @@ Public Class LogicaFacturacion
 
 
                                     Dim tarif As Double
-                                    If .Fields("IdArticulo").Value = K_idartcambio Or InStr(dr.Item("Producto"), "ANALISIS") > 0 Or InStr(dr.Item("Producto"), "FLETE") > 0 Then
+                                    If .Fields("IdArticulo").Value = K_idartcambio Or InStr(dr.Item("Producto"), "ANALISIS") > 0 Or _
+                                         InStr(dr.Item("Producto"), "RETIRO DE DOCUMENTACION") > 0 Or _
+                                        InStr(dr.Item("Producto"), "FLETE") > 0 Then
+
+
                                         'si es un "cambio de carta porte", no dividir por mil. 
                                         'Es decir, la "Tarifa" en los renglones normales es por "Tonelada", y en estos es por "Unidad".
                                         'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11379
