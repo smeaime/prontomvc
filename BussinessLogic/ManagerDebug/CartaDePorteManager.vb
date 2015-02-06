@@ -10249,9 +10249,18 @@ Public Class LogicaFacturacion
             Debug.Print(IdsEnElAutomatico.ToString)
 
 
+
+
+            ReasignarParaElTitularALasCartasSinClienteAutomaticoEncontrado(lista, sesionId, sesionIdposta, tildadosEnPrimerPasoLongs, False, IdsEnElAutomatico, sc)
+
+
             'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
             Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
                                                  Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
+
+
+            ErrHandler.WriteError("Cartas sin automatico encontrado (pero este es el modo no automatico!!!)" & IdcartasSinAutomaticoEncontrado.Count)
+
 
             If IdcartasSinAutomaticoEncontrado.Count > 0 Then
 
@@ -10530,6 +10539,99 @@ Public Class LogicaFacturacion
     End Sub
 
 
+
+    Shared Sub ReasignarParaElTitularALasCartasSinClienteAutomaticoEncontrado _
+                (ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+                  ByRef sesionId As Object, _
+                  sesionIdposta As String, tildadosEnPrimerPasoLongs As List(Of Integer), bNoUsarLista As Boolean, _
+                  IdsEnElAutomatico As List(Of Integer?), SC As String)
+
+        Return
+
+        'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
+        Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
+                                             Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
+
+
+
+
+
+        ErrHandler.WriteError("punto 3. tanda " & sesionId)
+
+
+
+
+        ErrHandler.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
+
+
+
+        'TO DO: avisar que no se les encontró automático
+
+
+        If IdcartasSinAutomaticoEncontrado.Count > 0 And Not bNoUsarLista Then
+            Dim sWhere = " AND IdCartaDePorte IN (" & Join(IdcartasSinAutomaticoEncontrado, ",") & ")"
+
+            '///////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////
+
+            'ineficiente
+            Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionIdposta)
+
+            ErrHandler.WriteError("punto 4. tanda " & sesionId)
+            'ineficiente
+            For Each cdp In dtForzadasAlTitular.Rows
+                Dim x As New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult
+                With x
+                    .ColumnaTilde = CInt(cdp("ColumnaTilde"))
+                    .IdCartaDePorte = CInt(iisNull(cdp("IdCartaDePorte")))
+                    .IdArticulo = CInt(iisNull(cdp("IdArticulo")))
+                    .NumeroCartaDePorte = iisNull(cdp("NumeroCartaDePorte"))
+
+                    Try
+                        .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon")))
+                    Catch ex As Exception
+                        'raro
+                        ErrHandler.WriteError(ex)
+                    End Try
+
+                    .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
+                    .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
+                    .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
+                    .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
+                    .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
+                    .Confirmado = iisNull(cdp("Confirmado"))
+                    .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
+                    .CUIT = CStr(iisNull(cdp("CUIT")))
+                    .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
+                    .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
+                    .Producto = CStr(iisNull(cdp("Producto")))
+                    .KgNetos = CDec(iisNull(cdp("KgNetos")))
+                    .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
+                    .IdTitular = CInt(iisNull(cdp("IdTitular")))
+                    .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
+                    .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
+                    .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
+                    .Titular = CStr(iisNull(cdp("Titular")))
+                    .Intermediario = CStr(iisNull(cdp("Intermediario")))
+                    .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
+                    .Corredor = CStr(iisNull(cdp("Corredor ")))
+                    .Destinatario = CStr(iisNull(cdp("Destinatario")))
+                    .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
+                    .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
+                    .IdDestino = CInt(iisNull(cdp("IdDestino")))
+                    .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
+                    lista.Add(x)
+                End With
+            Next
+        End If
+
+
+
+    End Sub
+
+
+
     Shared Function ValidaQueHayaClienteCorredorEquivalente() As Boolean
 
         'adasd()
@@ -10685,80 +10787,8 @@ Public Class LogicaFacturacion
             Debug.Print(IdsEnElAutomatico.ToString)
 
 
-            'como agregar las cartas sin automatico posible? haces un filtro de lo que vino con las Id tildadas en el primer paso, antes de filtrar por repetido. Si no vino nada, es que no hay automatico.
-            Dim IdcartasSinAutomaticoEncontrado = (From i In tildadosEnPrimerPasoLongs Select id = CStr(i) _
-                                                 Where Not IdsEnElAutomatico.Contains(CLng(id))).ToArray
 
-
-            ErrHandler.WriteError("punto 3. tanda " & sesionId)
-
-
-
-
-            ErrHandler.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
-
-
-
-            'TO DO: avisar que no se les encontró automático
-
-
-            If IdcartasSinAutomaticoEncontrado.Count > 0 And Not bNoUsarLista Then
-                Dim sWhere = " AND IdCartaDePorte IN (" & Join(IdcartasSinAutomaticoEncontrado, ",") & ")"
-
-                '///////////////////////////////////////////////////////////////////////////////
-                '///////////////////////////////////////////////////////////////////////////////
-                '///////////////////////////////////////////////////////////////////////////////
-
-                'ineficiente
-                Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionIdposta)
-
-                ErrHandler.WriteError("punto 4. tanda " & sesionId)
-                'ineficiente
-                For Each cdp In dtForzadasAlTitular.Rows
-                    Dim x As New wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult
-                    With x
-                        .ColumnaTilde = CInt(cdp("ColumnaTilde"))
-                        .IdCartaDePorte = CInt(iisNull(cdp("IdCartaDePorte")))
-                        .IdArticulo = CInt(iisNull(cdp("IdArticulo")))
-                        .NumeroCartaDePorte = iisNull(cdp("NumeroCartaDePorte"))
-
-                        Try
-                            .SubNumeroVagon = CInt(iisNull(cdp("SubNumeroVagon")))
-                        Catch ex As Exception
-                            'raro
-                            ErrHandler.WriteError(ex)
-                        End Try
-
-                        .SubnumeroDeFacturacion = CInt(iisNull(cdp("SubnumeroDeFacturacion"), 0))
-                        .FechaArribo = CDate(iisNull(cdp("FechaArribo")))
-                        .FechaDescarga = CDate(iisNull(cdp("FechaDescarga")))
-                        .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
-                        .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
-                        .Confirmado = iisNull(cdp("Confirmado"))
-                        .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
-                        .CUIT = CStr(iisNull(cdp("CUIT")))
-                        .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
-                        .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
-                        .Producto = CStr(iisNull(cdp("Producto")))
-                        .KgNetos = CDec(iisNull(cdp("KgNetos")))
-                        .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
-                        .IdTitular = CInt(iisNull(cdp("IdTitular")))
-                        .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
-                        .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
-                        .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
-                        .Titular = CStr(iisNull(cdp("Titular")))
-                        .Intermediario = CStr(iisNull(cdp("Intermediario")))
-                        .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
-                        .Corredor = CStr(iisNull(cdp("Corredor ")))
-                        .Destinatario = CStr(iisNull(cdp("Destinatario")))
-                        .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
-                        .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
-                        .IdDestino = CInt(iisNull(cdp("IdDestino")))
-                        .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
-                        lista.Add(x)
-                    End With
-                Next
-            End If
+            ReasignarParaElTitularALasCartasSinClienteAutomaticoEncontrado(lista, sesionId, sesionIdposta, tildadosEnPrimerPasoLongs, bNoUsarLista, IdsEnElAutomatico, SC)
 
 
 
@@ -20881,10 +20911,9 @@ Public Class CDPMailFiltrosManager2
 End Class
 
 
-
+'pinta que no lo puedo usar en la dll?
 Partial Public Class LinqCartasPorteDataContext
-
-    'Public Function asfsdf(SC As String) As LinqCartasPorteDataContext
+    'Public Function TraerContext(SC As String) As LinqCartasPorteDataContext
     '    Dim conn As StackExchange.Profiling.Data.ProfiledDbConnection = New StackExchange.Profiling.Data.ProfiledDbConnection(New SqlConnection(SC), MiniProfiler.Current)
     '    Return New LinqCartasPorteDataContext(conn)
     'End Function
