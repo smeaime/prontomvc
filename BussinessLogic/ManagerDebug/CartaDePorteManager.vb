@@ -56,6 +56,8 @@ Imports CDPMailFiltrosManager2
 
 Imports LogicaImportador.FormatosDeExcel
 
+
+
 <DataObjectAttribute()> _
 <Transaction(TransactionOption.Required)> _
 Public Class CartaDePorteManager
@@ -1037,6 +1039,9 @@ Public Class CartaDePorteManager
             'the query executes the query. – Eric Lippert J
 
             'y qué pasa si vuelvo a usar Equals? (en lugar de DefaultIfEmpty que me permite traer los nulls)
+
+
+            'optimizar, porque da sensacion de lentitud
 
             Dim q = From cdp In db.CartasDePortes _
                     From art In db.linqArticulos.Where(Function(i) i.IdArticulo = cdp.IdArticulo).DefaultIfEmpty _
@@ -10687,6 +10692,16 @@ Public Class LogicaFacturacion
 
             ErrHandler.WriteError("punto 3. tanda " & sesionId)
 
+
+
+
+            ErrHandler.WriteError("Cartas sin automatico encontrado " & IdcartasSinAutomaticoEncontrado.Count)
+
+
+
+            'TO DO: avisar que no se les encontró automático
+
+
             If IdcartasSinAutomaticoEncontrado.Count > 0 And Not bNoUsarLista Then
                 Dim sWhere = " AND IdCartaDePorte IN (" & Join(IdcartasSinAutomaticoEncontrado, ",") & ")"
 
@@ -10695,7 +10710,7 @@ Public Class LogicaFacturacion
                 '///////////////////////////////////////////////////////////////////////////////
 
                 'ineficiente
-                Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionId)
+                Dim dtForzadasAlTitular = SQLSTRING_FacturacionCartas_por_Titular(sWhere, SC, sesionIdposta)
 
                 ErrHandler.WriteError("punto 4. tanda " & sesionId)
                 'ineficiente
@@ -10744,6 +10759,9 @@ Public Class LogicaFacturacion
                     End With
                 Next
             End If
+
+
+
             'consulta 8413
             '        * Ordenar alfabeticamente por la columna "Facturarle a"
             '       * Poner las que tienen tarifa en 0 al principio
@@ -20858,4 +20876,18 @@ Public Class CDPMailFiltrosManager2
 
 
 
+
+
 End Class
+
+
+
+Partial Public Class LinqCartasPorteDataContext
+
+    'Public Function asfsdf(SC As String) As LinqCartasPorteDataContext
+    '    Dim conn As StackExchange.Profiling.Data.ProfiledDbConnection = New StackExchange.Profiling.Data.ProfiledDbConnection(New SqlConnection(SC), MiniProfiler.Current)
+    '    Return New LinqCartasPorteDataContext(conn)
+    'End Function
+End Class
+
+
