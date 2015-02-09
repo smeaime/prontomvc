@@ -313,11 +313,11 @@
           <AssociatedConnUserName />
           <FullPath>sp who.sql</FullPath>
         </FileNode>
-        <FileNode Name="superbuscador  wFuncionBusqueda wBusqueda   .sql">
+        <FileNode Name="superbuscador  generico (inlcluyendo rms etc) wFuncionBusqueda wBusqueda   .sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
-          <FullPath>superbuscador  wFuncionBusqueda wBusqueda   .sql</FullPath>
+          <FullPath>superbuscador  generico (inlcluyendo rms etc) wFuncionBusqueda wBusqueda   .sql</FullPath>
         </FileNode>
         <FileNode Name="superbuscador version vieja.sql">
           <AssociatedConnectionMoniker />

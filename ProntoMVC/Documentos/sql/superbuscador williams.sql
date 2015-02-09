@@ -74,7 +74,7 @@ RETURN (
 
 
 	SELECT 
-	top 20
+	top 10
 	
 	IdCliente as ID,
 	
@@ -214,7 +214,7 @@ RETURN (
 
 
 	SELECT 
-	top 20
+	top 10
 	
 	IdCliente as ID,
 	
