@@ -230,6 +230,16 @@ Public Class CartaDePorteManager
         'y si devolves directamente el objeto pulenta?
 
         Public PathImagen As String
+
+
+        Public ProductoSagpya As String
+
+
+        Public NetoPto As Decimal
+        Public TaraPto As Decimal
+        Public BrutoPto As Decimal
+
+
     End Class
 
     Enum FiltroANDOR
@@ -1785,6 +1795,9 @@ Public Class CartaDePorteManager
             .NetoFinal = cdp.NetoFinal, _
             .TaraFinal = cdp.TaraFinal, _
             .BrutoFinal = cdp.BrutoFinal, _
+            .NetoPto = cdp.NetoPto, _
+            .TaraPto = cdp.TaraPto, _
+            .BrutoPto = cdp.BrutoPto, _
             .Humedad = cdp.Humedad, _
             .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
             .Merma = cdp.Merma, _
@@ -1800,6 +1813,7 @@ Public Class CartaDePorteManager
              .DestinatarioDesc = clidest.RazonSocial, _
              .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
              .Producto = art.Descripcion, _
+             .ProductoSagpya = art.AuxiliarString6, _
              .ProcedenciaDesc = loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
              .CalidadDesc = "", _
@@ -2772,7 +2786,7 @@ Public Class CartaDePorteManager
                 yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
                 yourParams(6) = New ReportParameter("quecontenga", "")
                 yourParams(7) = New ReportParameter("Consulta", strSQL)
-                
+
                 If Diagnostics.Debugger.IsAttached Then
                     SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
                     'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
@@ -3532,7 +3546,7 @@ Public Class CartaDePorteManager
 
 
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
 
     Shared Function SQL_ListaDeCDPsFiltradas2(ByVal sWHEREadicional As String, ByVal optFacturarA As Long, ByVal txtFacturarATerceros As String, _
                                          ByVal HFSC As String, ByVal txtTitular As String, ByVal txtCorredor As String, _
@@ -3763,7 +3777,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
         'If optDivisionSyngenta <> "Ambas" And optDivisionSyngenta <> "" Then strWHERE += " AND isnull(CDP.EnumSyngentaDivision,'')='" & optDivisionSyngenta & "'"
         Dim IdAcopio = BuscarIdAcopio(optDivisionSyngenta, HFSC)
 
