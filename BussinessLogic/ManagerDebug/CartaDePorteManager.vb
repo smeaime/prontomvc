@@ -206,7 +206,7 @@ Public Class CartaDePorteManager
 
 
 
-        Public ProcedenciaLocalidadONCCA As String
+        Public ProcedenciaLocalidadONCCA_SAGPYA As String
         Public ProcedenciaPartidoONCCA As String
         Public Patente As String
         Public Acoplado As String
@@ -239,6 +239,13 @@ Public Class CartaDePorteManager
         Public TaraPto As Decimal
         Public BrutoPto As Decimal
 
+        Public CEE_CAU As String
+
+        Public DestinoCodigoSAGPYA As String
+
+        Public Contrato As String
+
+        Public PuntoVenta As Integer
 
     End Class
 
@@ -1848,12 +1855,13 @@ Public Class CartaDePorteManager
             .CalidadMermaZarandeo = If(cdp.CalidadMermaZarandeo, 0), _
             .CalidadMermaZarandeoBonifRebaja = If(cdp.CalidadMermaZarandeoBonifica_o_Rebaja, 0), _
  _
-            .ProcedenciaLocalidadONCCA = loc.CodigoONCAA, _
+            .ProcedenciaLocalidadONCCA_SAGPYA = loc.CodigoONCAA, _
             .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
  _
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
             .DestinoCodigoYPF = dest.CodigoYPF, _
+            .DestinoCodigoSAGPYA = dest.CodigoSAJPYA, _
             .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
             .ChoferCUIT = chf.CUIL.Replace("-", ""), _
             .TransportistaDesc = tr.RazonSocial, _
@@ -1867,9 +1875,15 @@ Public Class CartaDePorteManager
             .IdDetalleFacturaImputada = If(cdp.IdDetalleFactura, -1), _
             .PrecioUnitarioTotal = If(detfac.PrecioUnitarioTotal, 0), _
             .ClienteFacturado = clifac.RazonSocial, _
-            .PathImagen = cdp.PathImagen _
+            .PathImagen = cdp.PathImagen, _
  _
+                .CEE_CAU = cdp.CEE _
+        , .Contrato = cdp.Contrato _
+      , .PuntoVenta = If(cdp.PuntoVenta, 0) _
             })
+
+
+
 
         If False Then
             q = q.Skip(startRowIndex)  'el Skip no anda con SQL2000
@@ -1938,11 +1952,11 @@ Public Class CartaDePorteManager
                 From clircom In db.linqClientes.Where(Function(i) i.IdCliente = cdp.CuentaOrden2).DefaultIfEmpty _
                 From corr In db.linqCorredors.Where(Function(i) i.IdVendedor = cdp.Corredor).DefaultIfEmpty _
                 From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Destino).DefaultIfEmpty _
-                From loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
+                From proced_loc In db.Localidades.Where(Function(i) i.IdLocalidad = CInt(cdp.Procedencia)).DefaultIfEmpty _
                 From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
                 From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
                 From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
+                From proced_part In db.Partidos.Where(Function(i) i.IdPartido = proced_loc.IdPartido).DefaultIfEmpty _
                 From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
                 From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
             Order By cdp.FechaModificacion Descending _
@@ -1976,7 +1990,7 @@ Public Class CartaDePorteManager
              .DestinatarioDesc = clidest.RazonSocial, _
              .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
              .Producto = art.Descripcion, _
-             .ProcedenciaDesc = loc.Nombre, _
+             .ProcedenciaDesc = proced_loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
              .CalidadDesc = "", _
              .UsuarioIngreso = "", _
@@ -2010,8 +2024,8 @@ Public Class CartaDePorteManager
             .CalidadMermaZarandeo = cdp.CalidadMermaZarandeo, _
             .CalidadMermaZarandeoBonifRebaja = cdp.CalidadMermaZarandeoBonifica_o_Rebaja, _
  _
-            .ProcedenciaLocalidadONCCA = loc.CodigoONCAA, _
-            .ProcedenciaPartidoONCCA = part.CodigoONCCA, _
+            .ProcedenciaLocalidadONCCA_SAGPYA = proced_loc.CodigoONCAA, _
+            .ProcedenciaPartidoONCCA = proced_part.CodigoONCCA, _
  _
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
