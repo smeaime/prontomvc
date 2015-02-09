@@ -217,6 +217,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
         </FileNode>
+        <FileNode Name="monitoreo_ las 10 peores .sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>monitoreo_ las 10 peores .sql</FullPath>
+        </FileNode>
         <FileNode Name="wFacturas_TXFecha.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
@@ -277,11 +283,11 @@
           <AssociatedConnUserName />
           <FullPath>factura mala de williams.sql</FullPath>
         </FileNode>
-        <FileNode Name="fk williams.sql">
+        <FileNode Name="fk e indices williams.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
-          <FullPath>fk williams.sql</FullPath>
+          <FullPath>fk e indices williams.sql</FullPath>
         </FileNode>
         <FileNode Name="funcDetalleFactura.sql">
           <AssociatedConnectionMoniker />
