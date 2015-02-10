@@ -2599,7 +2599,7 @@ Namespace Pronto.ERP.Bll
             Dim i As Integer = 0
             Dim dr As DataRow
 
-            Const cuitYPF = "30546689979"
+            Const cuitDOW = "30636021578"
 
             For Each cdp As CartasConCalada In q
                 i = 0 : sb = ""
@@ -2625,6 +2625,52 @@ Namespace Pronto.ERP.Bll
                 'If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
                 'If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
                 'If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+
+                cdp.PuntoVenta = cdp.NumeroCartaDePorte.ToString.Substring(0, 1)
+                cdp.NumeroCartaDePorte = cdp.NumeroCartaDePorte.ToString.Substring(1)
+                'cdp.SubnumeroVagon = ""
+
+
+                'Cómo completar ROL REMITENTE?
+
+                'Comentario: DOW es Destinatario
+
+                '•	Debemos enviar 1 si el cliente de DOW está como Titular y el establecimiento está en blanco.
+                '•	Debemos enviar 2 si el cliente de DOW está como Titular y tiene establecimiento en la carta de porte.
+                '•	Debemos enviar 2 si el cliente de DOW está como Intermediario
+
+
+                'Cómo saber quién es el cliente de DOW?
+
+                '•	Cuando hay Cliente e Intermediario el cliente de DOW es el Intermediario.
+                '•	Cuando solo hay Titular es el Titular.
+
+                'Con lo cuál:
+
+                'Con lo cuál: 
+                '• Debemos enviar 1 si DOW es Destinatario o Rte Comercial, hay Titular pero no Intermediario y el establecimiento está en blanco. 
+                '• Debemos enviar 2 si DOW es Destinatario o Rte Comercial, hay Titular pero no Intermediario y tiene establecimiento en la carta de porte. 
+                '• Debemos enviar 2 si DOW es Destinatario o Rte Comercial y hay Titular e Intermediario
+                'Feb 10 2015 9:41AM		
+                '                Andres()
+                'Fe de ratas: DOW viene como Destinatario o posiblemente también como Rte Comercial
+
+                If cdp.TitularCUIT = cuitDOW And cdp.Establecimiento = "" Then
+                    cdp.ChoferDesc = "1"
+                ElseIf cdp.TitularCUIT = cuitDOW And cdp.Establecimiento <> "" Then
+                    cdp.ChoferDesc = "2"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT = "" And cdp.Establecimiento = "" Then
+                    cdp.ChoferDesc = "1"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT = "" And cdp.Establecimiento <> "" Then
+                    cdp.ChoferDesc = "2"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT <> "" Then
+                    cdp.ChoferDesc = "2"
+                Else
+                    cdp.ChoferDesc = "1"
+                    'Throw New Exception("Rol Remitente inexistente")
+                End If
+
+
 
 
 
