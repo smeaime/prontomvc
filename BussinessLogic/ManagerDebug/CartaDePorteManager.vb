@@ -1793,7 +1793,6 @@ Public Class CartaDePorteManager
             And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2)) _
             Order By cdp.FechaModificacion Descending _
             Select New CartasConCalada With { _
-             .TitularDesc = clitit.RazonSocial, _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
              .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
@@ -1815,15 +1814,17 @@ Public Class CartaDePorteManager
             .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
             .Merma = cdp.Merma, _
  _
-             .TitularCUIT = clitit.Cuit.Replace("-", ""), _
+             .TitularDesc = clitit.RazonSocial, _
              .IntermediarioDesc = cliint.RazonSocial, _
-             .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
              .RComercialDesc = clircom.RazonSocial, _
-             .RComercialCUIT = clircom.Cuit.Replace("-", ""), _
              .CorredorDesc = corr.Nombre, _
-             .CorredorCUIT = corr.Cuit.Replace("-", ""), _
              .DestinatarioDesc = clidest.RazonSocial, _
+             .TitularCUIT = clitit.Cuit.Replace("-", ""), _
+             .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
+             .RComercialCUIT = clircom.Cuit.Replace("-", ""), _
+             .CorredorCUIT = corr.Cuit.Replace("-", ""), _
              .DestinatarioCUIT = clidest.Cuit.Replace("-", ""), _
+ _
              .Producto = art.Descripcion, _
              .ProductoSagpya = art.AuxiliarString6, _
              .ProcedenciaDesc = loc.Nombre, _
@@ -1866,7 +1867,7 @@ Public Class CartaDePorteManager
              .Patente = cdp.Patente, _
             .Acoplado = cdp.Acoplado, _
             .DestinoCodigoYPF = dest.CodigoYPF, _
-            .DestinoCodigoSAGPYA = dest.CodigoSAJPYA, _
+            .DestinoCodigoSAGPYA = dest.CodigoONCAA, _
             .TransportistaCUIT = tr.Cuit.Replace("-", ""), _
             .ChoferCUIT = chf.CUIL.Replace("-", ""), _
             .TransportistaDesc = tr.RazonSocial, _
