@@ -699,6 +699,12 @@ ON CartasDePorte (NumeroCartaEnTextoParaBusqueda,NumeroCartaDePorte,NumeroSubFij
 GO
 
 
+DBCC SHOW_STATISTICS (CartasDePorte, IDX_NumeroCartaEnTextoParaBusqueda_Superbuscador4)
+go
+
+
+
+
 sp_help 'CartasDePorte'
 
 CREATE NONCLUSTERED INDEX IDX_Facturas_Superbuscador5
