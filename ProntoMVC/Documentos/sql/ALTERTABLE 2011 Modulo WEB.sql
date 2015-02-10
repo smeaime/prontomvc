@@ -1080,6 +1080,8 @@ ALTER TABLE  CartasPorteAcopios  ADD
 	IdCliente int null references Clientes(IdCliente)
 GO
 
+select * from CartasPorteAcopios
+
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  1, 'AGRO', 4333              ) --syngenta 4333
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
@@ -1107,7 +1109,7 @@ VALUES  (  12, 'RUFINO', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  13, 'BRAGADO', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  14, ',LAS FLORES', 10) --A.C.A. LTDA   id10
+VALUES  (  14, 'LAS FLORES', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  15, 'OTROS', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
@@ -1138,4 +1140,16 @@ CREATE NONCLUSTERED INDEX CartasDePorte_TarifaFacturada
 ON [dbo].[CartasDePorte] ([TarifaFacturada],[IdFacturaImputada])
 INCLUDE ([IdCartaDePorte],[Anulada],[Vendedor],[IdArticulo],[Destino],[Exporta])
 GO
+
+
+
+
+
+alter table cartasdeporte ADD
+	CalidadGranosDanadosRebaja numeric(18,2) NULL,
+	CalidadGranosExtranosRebaja  numeric(18,2) NULL
+go
+
+
+
 
