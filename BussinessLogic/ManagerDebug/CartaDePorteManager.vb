@@ -247,6 +247,11 @@ Public Class CartaDePorteManager
 
         Public PuntoVenta As Integer
 
+
+        Public Cosecha2 As String
+        Public FechaDeCarga As Date
+        Public NRecibo As String
+
     End Class
 
     Enum FiltroANDOR
@@ -1788,6 +1793,7 @@ Public Class CartaDePorteManager
             And (QueContenga2 = "" Or cdp.NumeroCartaEnTextoParaBusqueda.Contains(QueContenga2)) _
             Order By cdp.FechaModificacion Descending _
             Select New CartasConCalada With { _
+             .TitularDesc = clitit.RazonSocial, _
              .IdCartaDePorte = cdp.IdCartaDePorte, _
              .NumeroCartaDePorte = cdp.NumeroCartaDePorte, _
              .NumeroCartaDePorteFormateada = cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(0, 4) & "-" & cdp.NumeroCartaDePorte.ToString.PadLeft(12, "0").Substring(4, 8), _
@@ -1809,7 +1815,6 @@ Public Class CartaDePorteManager
             .HumedadDesnormalizada = cdp.HumedadDesnormalizada, _
             .Merma = cdp.Merma, _
  _
-             .TitularDesc = clitit.RazonSocial, _
              .TitularCUIT = clitit.Cuit.Replace("-", ""), _
              .IntermediarioDesc = cliint.RazonSocial, _
              .IntermediarioCUIT = cliint.Cuit.Replace("-", ""), _
@@ -1823,9 +1828,9 @@ Public Class CartaDePorteManager
              .ProductoSagpya = art.AuxiliarString6, _
              .ProcedenciaDesc = loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
-             .CalidadDesc = "", _
+             .CalidadDesc = cdp.Calidad, _
              .UsuarioIngreso = "", _
- _
+            .FechaDeCarga = If(cdp.FechaDeCarga, cdp.FechaArribo), _
             .NobleExtranos = cdp.NobleExtranos, _
             .NobleNegros = cdp.NobleNegros, _
             .NobleQuebrados = cdp.NobleQuebrados, _
@@ -1868,6 +1873,7 @@ Public Class CartaDePorteManager
             .ChoferDesc = chf.Nombre, _
             .EspecieONCCA = art.AuxiliarString6, _
             .Cosecha = cdp.Cosecha.Replace("/", "-20"), _
+            .Cosecha2 = cdp.Cosecha.Replace("20", "").Replace("/", ""), _
             .Establecimiento = estab.Descripcion, _
  _
             .IdFacturaImputada = If(cdp.IdFacturaImputada, -1), _
@@ -1880,7 +1886,12 @@ Public Class CartaDePorteManager
                 .CEE_CAU = cdp.CEE _
         , .Contrato = cdp.Contrato _
       , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-            })
+  , .NRecibo = cdp.NRecibo _
+           }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
+
+
+
+
 
 
 
@@ -1911,7 +1922,11 @@ Public Class CartaDePorteManager
         '"          '' as CadenaVacia, NetoProc, EnumSyngentaDivision, IdTipoMovimiento,CobraAcarreo,LiquidaViaje,IdCartaDePorte,SubNumeroVagon,Procedencia  " & _
 
 
-
+        Debug.Print(q.ToString) '   mejor usá el 
+        '                           profiler para traerte la consulta sql. 
+        '                           Y despues, la pasas al informe para tener bien el orden de las columnas
+        '                           Tuve problemas con los parametros de fecha, las pasé a ANSI en la consulta y listo
+        ' -pero tenés los campos que son creados desde linq! por ejemplo, puntoventa!!
 
         Return q 'hago el tolist porque estoy en un using
 
