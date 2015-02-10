@@ -1760,7 +1760,7 @@ Public Class CartaDePorteManager
                 From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
                 From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
                 From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From part In db.Partidos.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
+                From part In db.linqPartido.Where(Function(i) i.IdPartido = loc.IdPartido).DefaultIfEmpty _
                 From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
                 From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
                 From fac In db.linqFacturas.Where(Function(i) i.IdFactura = cdp.IdFacturaImputada).DefaultIfEmpty _
@@ -1972,7 +1972,7 @@ Public Class CartaDePorteManager
                 From cal In db.Calidades.Where(Function(i) i.IdCalidad = cdp.Calidad).DefaultIfEmpty _
                 From estab In db.linqCDPEstablecimientos.Where(Function(i) i.IdEstablecimiento = cdp.IdEstablecimiento).DefaultIfEmpty _
                 From tr In db.Transportistas.Where(Function(i) i.IdTransportista = cdp.IdTransportista).DefaultIfEmpty _
-                From proced_part In db.Partidos.Where(Function(i) i.IdPartido = proced_loc.IdPartido).DefaultIfEmpty _
+                From proced_part In db.linqPartido.Where(Function(i) i.IdPartido = proced_loc.IdPartido).DefaultIfEmpty _
                 From chf In db.Choferes.Where(Function(i) i.IdChofer = cdp.IdChofer).DefaultIfEmpty _
                 From emp In db.linqEmpleados.Where(Function(i) i.IdEmpleado = cdp.IdUsuarioIngreso).DefaultIfEmpty _
             Order By cdp.FechaModificacion Descending _
@@ -5419,6 +5419,11 @@ Public Class CartaDePorteManager
                 .AcopioFacturarleA = If(oCarta.AcopioFacturarleA, -1)
 
 
+                .CalidadGranosExtranosRebaja = iisNull(oCarta.CalidadGranosExtranosRebaja, 0)
+                .CalidadGranosDanadosRebaja = iisNull(oCarta.CalidadGranosDanadosRebaja, 0)
+
+
+
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
@@ -5683,9 +5688,14 @@ Public Class CartaDePorteManager
 
 
 
-
                     oCarta.NumeroCartaEnTextoParaBusqueda = oCarta.NumeroCartaDePorte & " " & oCarta.NumeroSubfijo & "-" & oCarta.SubnumeroVagon
                     oCarta.SubnumeroVagonEnTextoParaBusqueda = oCarta.SubnumeroVagon
+
+
+                    oCarta.CalidadGranosExtranosRebaja = .CalidadGranosExtranosRebaja
+                    oCarta.CalidadGranosDanadosRebaja = .CalidadGranosDanadosRebaja
+
+
                     'If IsNothing(ue) Then
                     '    ue = New UserDatosExtendido
                     '    ue.UserId = New Guid(userid)
@@ -18761,8 +18771,7 @@ Public Class LogicaImportador
         dr(26) = "CARTA PORTE"
 
 
-        dt.Rows.Add(dr)
-
+        
 
 
 
@@ -18836,6 +18845,10 @@ Public Class LogicaImportador
         dr(43) = "OBSERVACIONES"
 
 
+        dt.Rows.Add(dr)
+
+
+
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(pFileName)
 
             MyReader.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited
@@ -18853,6 +18866,7 @@ Public Class LogicaImportador
 
                     dr = dt.NewRow()
                     For i As Integer = 0 To currentRow.Length - 1
+                        If i = 43 Then currentRow(i) = currentRow(i).Substring(0, 50)
                         dr(i) = currentRow(i)
                     Next
                     dt.Rows.Add(dr)
@@ -21037,11 +21051,11 @@ End Class
 
 
 'pinta que no lo puedo usar en la dll?
-Partial Public Class LinqCartasPorteDataContext
-    'Public Function TraerContext(SC As String) As LinqCartasPorteDataContext
-    '    Dim conn As StackExchange.Profiling.Data.ProfiledDbConnection = New StackExchange.Profiling.Data.ProfiledDbConnection(New SqlConnection(SC), MiniProfiler.Current)
-    '    Return New LinqCartasPorteDataContext(conn)
-    'End Function
-End Class
+'Partial Public Class LinqCartasPorteDataContext
+'Public Function TraerContext(SC As String) As LinqCartasPorteDataContext
+'    Dim conn As StackExchange.Profiling.Data.ProfiledDbConnection = New StackExchange.Profiling.Data.ProfiledDbConnection(New SqlConnection(SC), MiniProfiler.Current)
+'    Return New LinqCartasPorteDataContext(conn)
+'End Function
+'End Class
 
 
