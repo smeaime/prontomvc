@@ -2621,10 +2621,10 @@ Namespace Pronto.ERP.Bll
 
 
                 'el titulardesc lo uso en la columna de "cuit de proveedor", y la segunda columna es el "cuit titular
-                cdp.TitularDesc = cdp.TitularCUIT
-                If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
-                If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
-                If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+                '        cdp.TitularDesc = cdp.TitularCUIT
+                'If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
+                'If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
+                'If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
 
 
 
