@@ -2760,9 +2760,13 @@ Public Class CartaDePorteManager
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
 
 
-            ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" Then
+            ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idIntermediario) = "DOW AGROSCIENCES ARG. SA" _
+                    Or NombreCliente(SC, idDestinatario) = "DOW AGROSCIENCES ARG. SA" _
+                        Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl"
+                rdl = "Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl"
                 'hay que mandarle el informe extendido
 
             ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
@@ -2833,8 +2837,12 @@ Public Class CartaDePorteManager
 
 
             'rdlFile = "/Pronto informes/" + "Resumen Cuenta Corriente Acreedores"
-            Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
-            rdlFile = "/Pronto informes/" & reportName
+            'Dim reportName = "Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice"
+            If rdlFile = "" Then
+
+            End If
+            rdlFile = rdlFile.Replace(".rdl", "")
+            rdlFile = "/Pronto informes/" & rdlFile
 
 
 
@@ -2856,9 +2864,14 @@ Public Class CartaDePorteManager
                 yourParams(6) = New ReportParameter("quecontenga", "")
                 yourParams(7) = New ReportParameter("Consulta", strSQL)
 
-                If Diagnostics.Debugger.IsAttached Then
+                If Diagnostics.Debugger.IsAttached And False Then
                     SC = Encriptar("Data Source=serversql3\TESTING;Initial catalog=Pronto;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500")
                     'estoy teniendo problemas al usar el reporteador desde un servidor distinto que el que tiene la base
+                    '-no creo que sea ese el problema, porque anda bien si ejecuto desde
+                    '                   terminal en el server3 el informe con el parametro de conexion al server1 
+                    '-todo lo que quieras, pero cuando uso una base del server3, el reporte no explota al llamar a .Render
+                    '-y si acá usas el numero de ip?
+                    '-hagamos así: pasá la base que te interesa del server1 al 3, y listo
                 End If
                 yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(SC))
 

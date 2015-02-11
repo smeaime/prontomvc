@@ -147,10 +147,10 @@
               <Width>39.81653mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>25mm</Width>
+              <Width>28.70417mm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>25mm</Width>
+              <Width>28.70417mm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>25mm</Width>
@@ -3154,7 +3154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ChoferCUIT.Value</Value>
+                              <Value>=Fields!choferCUIT.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -3514,14 +3514,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox216">
+                    <Textbox Name="FechaTimeStamp">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>[NobleChamico]</Value>
+                              <Value>=Fields!NobleChamico.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Normal</FontWeight>
@@ -3533,7 +3533,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox216</rd:DefaultName>
+                      <rd:DefaultName>FechaTimeStamp</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -3557,7 +3557,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NobleChamicoo2.Value</Value>
+                              <Value>=Fields!NobleChamico2.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Normal</FontWeight>
@@ -3586,14 +3586,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox221">
+                    <Textbox Name="Observaciones">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>[NobleExtranos]</Value>
+                              <Value>=Fields!NobleExtranos.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Normal</FontWeight>
@@ -3605,7 +3605,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox221</rd:DefaultName>
+                      <rd:DefaultName>Observaciones</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -3663,7 +3663,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NobleDaniado.Value</Value>
+                              <Value>=Fields!NobleDaniados.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -3697,7 +3697,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CalidadGranosExtranosDanados.Value</Value>
+                              <Value>=Fields!CalidadGranosDanadosRebaja.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Color>#4d4d4d</Color>
@@ -5630,7 +5630,7 @@
         <Top>15.00746mm</Top>
         <Left>3.12769mm</Left>
         <Height>17.47089mm</Height>
-        <Width>1238.88378mm</Width>
+        <Width>1246.29211mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5758,7 +5758,7 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>1242.01147mm</Width>
+  <Width>1249.4198mm</Width>
   <Page>
     <PageFooter>
       <Height>10.90083mm</Height>
@@ -6500,6 +6500,10 @@
         </Field>
         <Field Name="CalidadGranosExtranosRebaja">
           <DataField>CalidadGranosExtranosRebaja</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="EstablecimientoDesc">
+          <DataField>EstablecimientoDesc</DataField>
           <rd:UserDefined>true</rd:UserDefined>
         </Field>
       </Fields>
