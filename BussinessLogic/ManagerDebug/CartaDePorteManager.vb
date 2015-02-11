@@ -252,6 +252,11 @@ Public Class CartaDePorteManager
         Public FechaDeCarga As Date
         Public NRecibo As String
 
+
+        Public CalidadGranosDanadosRebaja As Decimal
+        Public CalidadGranosExtranosRebaja As Decimal
+
+
     End Class
 
     Enum FiltroANDOR
@@ -682,7 +687,7 @@ Public Class CartaDePorteManager
 
     End Function
 
-
+    
 
 
     'ReadOnly s_compQuery = CompiledQuery.Compile(Of CartasDePortes, Decimal, IQueryable(Of CartasDePorte))( _
@@ -1888,6 +1893,8 @@ Public Class CartaDePorteManager
         , .Contrato = cdp.Contrato _
       , .PuntoVenta = If(cdp.PuntoVenta, 0) _
   , .NRecibo = cdp.NRecibo _
+    , .CalidadGranosDanadosRebaja = If(cdp.CalidadGranosDanadosRebaja, 0) _
+            , .CalidadGranosExtranosRebaja = If(cdp.CalidadGranosExtranosRebaja, 0) _
            }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
@@ -2587,32 +2594,9 @@ Public Class CartaDePorteManager
                 'de diferenciarlo que viendo los filtros...
                 'Dim IdClienteEquivalenteAlCorredor = BuscaIdVendedorPreciso(EntidadManager.NombreVendedor(SC, drCDP("Corredor")), SC)
                 'If IdClienteEquivalenteAlCorredor < 1 Then Return 0
-                If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
-                ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
-                    'formato para corredores (menos BLD)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
 
-                ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
-                ElseIf NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
-                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
+                rdl = QueInforme(SC, dr)
 
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
-                    'este era el tradicional
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
-                    'este era el tradicional
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
-                ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
-                    'formato normal para clientes (incluye la foto)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
-                Else
-                    'formato normal para clientes (incluye la foto)
-                    rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
-                End If
 
                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2755,6 +2739,61 @@ Public Class CartaDePorteManager
 
     End Function
 
+
+    Shared Function QueInforme(SC As String, dr As DataRow) As String
+
+
+        Dim rdl As String
+        With dr
+            Dim idVendedor As Long = iisNull(.Item("Vendedor"), -1)
+            Dim idCorredor As Long = iisNull(.Item("Corredor"), -1)
+            Dim idDestinatario As Long = iisNull(.Item("Entregador"), -1)
+            Dim idIntermediario As Long = iisNull(.Item("CuentaOrden1"), -1)
+            Dim idRemComercial As Long = iisNull(.Item("CuentaOrden2"), -1)
+            Dim IdClienteAuxiliar As Long = iisNull(.Item("IdClienteAuxiliar"), -1)
+            Dim idArticulo As Long = iisNull(.Item("IdArticulo"), -1)
+            Dim idProcedencia As Long = iisNull(.Item("Procedencia"), -1)
+            Dim idDestino As Long = iisNull(.Item("Destino"), -1)
+
+
+            If iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto para html.rdl"
+
+
+            ElseIf NombreCliente(SC, idVendedor) = "DOW AGROSCIENCES ARG. SA" Or NombreCliente(SC, idRemComercial) = "DOW AGROSCIENCES ARG. SA" Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl"
+                'hay que mandarle el informe extendido
+
+            ElseIf idCorredor > 0 AndAlso NombreVendedor(SC, idCorredor) <> "BLD S.A" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "Imagen" AndAlso Not iisNull(.Item("ModoImpresion"), "") = "HtmlIm" Then
+                'formato para corredores (menos BLD)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original)  para Corredores.rdl"
+
+            ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
+            ElseIf NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
+
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Html" Then
+                'este era el tradicional
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "Excel" Then
+                'este era el tradicional
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) .rdl"
+            ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcelIm" Then
+                'formato normal para clientes (incluye la foto)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+            Else
+                'formato normal para clientes (incluye la foto)
+                rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl"
+            End If
+
+        End With
+
+        Return rdl
+    End Function
 
 
     Public Shared Function GenerarSufijoRand() As String
