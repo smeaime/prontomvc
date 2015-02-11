@@ -14,6 +14,14 @@
   <DataSets />
   <Reports>
     <ProjectItem>
+      <Name>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</Name>
+      <FullPath>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</Name>
+      <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Balance2.rdl</Name>
       <FullPath>Balance2.rdl</FullPath>
     </ProjectItem>
@@ -178,12 +186,8 @@
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</Name>
-      <FullPath>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</Name>
-      <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
+      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
+      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
