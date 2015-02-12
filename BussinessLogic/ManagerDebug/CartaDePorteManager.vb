@@ -7275,13 +7275,37 @@ Public Class CartaDePorteManager
 
     End Sub
 
-    Shared Sub ImputoLaCDP(ByVal oCDP As Pronto.ERP.BO.CartaDePorte, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String)
+    Shared Sub ImputoLaCDP(ByVal oCDP As Pronto.ERP.BO.CartaDePorte, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String, imput As List(Of LogicaFacturacion.grup))
 
         'METODO 1
         'oCDP.IdFacturaImputada = idfactura
         'CartaDePorteManager.Save(HFSC.Value, oCDP, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName))
 
+
         'METODO 2
+
+        'si hay un error (de timeout por ejemplo), no se podría volver a intentar?
+
+        Dim q = _
+                    (From p In imput _
+                    Where p.cartas.Any(Function(x) x.Id = oCDP.Id) _
+                    Select p).First
+        
+        Dim ind As Integer = imput.IndexOf(q)
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim a = (From f In db.linqDetalleFacturas _
+                Where f.IdFactura = idfactura _
+                Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
+
+        Dim iddetallefact As Long = a(ind)
+
+
+
+
+
 
         Try
             'verificar que no tiene nada imputado
@@ -7291,17 +7315,17 @@ Public Class CartaDePorteManager
             End If
 
             EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdFacturaImputada=" & idfactura & "  WHERE IdCartaDePorte=" & oCDP.Id)
+            EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdDetalleFactura=" & iddetallefact & "  WHERE IdCartaDePorte=" & oCDP.Id)
 
             'actualizar el item de la factura
 
 
 
-            EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCartaPorte" & oCDP.Id & "CDP:" & oCDP.NumeroCartaDePorte & " " & oCDP.SubnumeroVagon & "  IdFacturaImputada " & idfactura, nombreUsuario)
+            EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCartaPorte" & oCDP.Id & "CDP:" & oCDP.NumeroCartaDePorte & " " & oCDP.SubnumeroVagon & "  IdFacturaImputada=" & idfactura & "   IdDetalleFactura=" & iddetallefact, , nombreUsuario)
 
         Catch ex As Exception
             'ErrHandler.WriteError("Ya tiene una factura imputada")
             ErrHandler.WriteError("Explota la imputacion")
-            jjjjjjj()
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13368
 
@@ -13013,6 +13037,13 @@ Public Class LogicaFacturacion
 
             End Using
         Catch ex As Exception
+
+            'http://stackoverflow.com/questions/656167/hitting-the-2100-parameter-limit-sql-server-when-using-contains
+            '            The incoming tabular data stream (TDS) remote procedure call (RPC) protocol stream is incorre...
+            'Hitting the 2100 parameter limit
+
+
+
             MandarMailDeError("Error en VerificarQueNoHayaCambiadoElLoteDesdeQueSeCreoLaFacturacion. Revisar si es el de 'severe error' o el de 'transport level'.       Tamaño de lista: " & lista.Count & "   " & ex.ToString)
             'A severe error occurred on the current command.  The results, if any, should be discarded.????
 
@@ -13552,10 +13583,14 @@ Public Class LogicaFacturacion
 
             'como puedo averiguar cuantos renglones tendrá la factura? -tantos renglones como agrupamientos devuelva AgruparItemsDeLaFactura()
 
+
+            Dim imputaciones As IEnumerable(Of grup)
+
+
             Try
                 idFactura = CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta, dtRenglonesAgregados, SC, Session, optFacturarA, _
                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor, _
-                                             txtCorredor, chkPagaCorredor, listEmbarques)
+                                             txtCorredor, chkPagaCorredor, listEmbarques, imputaciones)
 
             Catch ex As AccessViolationException
                 'http://stackoverflow.com/questions/5842985/attempted-to-read-or-write-protected-memory-error-when-accessing-com-component
@@ -13614,10 +13649,11 @@ Public Class LogicaFacturacion
 
                         If True Then
                             'If InStr(o.FacturarselaA, "<EMBARQUE>") = 0 Then
-                            CartaDePorteManager.ImputoLaCDP(o, idFactura, SC, Session(SESSIONPRONTO_UserName))
+                            CartaDePorteManager.ImputoLaCDP(o, idFactura, SC, Session(SESSIONPRONTO_UserName), imputaciones)
                         Else
                             'y si es un embarque? -pero los embarques no estan en la coleccion lote !!!!!!
                         End If
+
 
                     Next
 
@@ -13630,10 +13666,14 @@ Public Class LogicaFacturacion
 
                 Catch ex As Exception
                     'si esto falla, anular la ultima factura y cortar el proceso
-                    anular factura idfactura
+                    'anular factura idfactura
+                    MandarMailDeError(ex)
 
-                    terminar lote
+                    Dim myFactura As Pronto.ERP.BO.Factura = FacturaManager.GetItem(SC, idFactura)
+                    FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
 
+                    'terminar lote
+                    Throw
                 End Try
 
 
@@ -13758,7 +13798,7 @@ Public Class LogicaFacturacion
 
 
     Class grup
-        Public Group As System.Collections.Generic.IEnumerable(Of Pronto.ERP.BO.CartaDePorte)
+        Public cartas As System.Collections.Generic.IEnumerable(Of Pronto.ERP.BO.CartaDePorte)
         Public IdArticulo As Integer
         Public Entregador As Integer
         Public Titular As Integer
@@ -13766,7 +13806,6 @@ Public Class LogicaFacturacion
         Public ObservacionItem As String
         Public NetoFinal As Double
         Public total As Double
-        Public cartas As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte)
     End Class
 
 
@@ -13774,7 +13813,7 @@ Public Class LogicaFacturacion
 
     Shared Function AgruparItemsDeLaFactura(ByRef oListaCDP As System.Collections.Generic.List(Of Pronto.ERP.BO.CartaDePorte), _
                                             ByVal optFacturarA As Integer, ByVal agruparArticulosPor As String, ByVal SC As String, _
-                                            ByVal sBusqueda As String) As IEnumerable(Of grup) 'Generic.List(Of Object) 'grup)
+                                            ByVal sBusqueda As String) As List(Of grup) 'Generic.List(Of Object) 'grup)
 
         'Dim q 'As Generic.List(Of Object) 'grup) 
         Dim q As Generic.IEnumerable(Of grup)
@@ -13820,7 +13859,10 @@ Public Class LogicaFacturacion
         '       String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean 
         '       chkPagaCorredor, List`1 listEmbarques)
 
-como hacer para marcar a con qué grupo se imputó cada carta????
+
+
+        'como hacer para marcar a con qué grupo se imputó cada carta????
+        '-usar el Group
 
 
 
@@ -13829,7 +13871,8 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = -1, _
+            Select New grup With {
+                        .cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = -1, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
                                 .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
                                 .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente) _
@@ -13840,7 +13883,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino, i.Entregador Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                      & SEPAR & NombreCliente(SC, Entregador), _
                                      .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
@@ -13851,7 +13894,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino, i.Titular Into Group _
-            Select New With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
+            Select New With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                                  & SEPAR & NombreCliente(SC, Titular), _
                                 .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
@@ -13867,7 +13910,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & sBusqueda _
                                         & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2, _
@@ -13883,7 +13926,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino, i.CuentaOrden1, i.CuentaOrden2, i.Entregador Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & sBusqueda _
                                         & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2, _
@@ -13897,7 +13940,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Destino, i.Titular, i.Entregador Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = Titular, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = Titular, _
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & NombreCliente(SC, Titular) _
                                         & SEPAR & NombreCliente(SC, Entregador), _
@@ -13912,7 +13955,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Titular, i.Destino Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular, _
                                 .ObservacionItem = NombreCliente(SC, Titular) _
                                         & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
                                 .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
@@ -13924,7 +13967,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
             q = From i As Pronto.ERP.BO.CartaDePorte In oListaCDP _
             Group i By i.IdArticulo, i.Entregador, i.Destino Into Group _
-            Select New grup With {.Group = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
+            Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1, _
                                       .ObservacionItem = NombreCliente(SC, Entregador) _
                                                     & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino), _
                                 .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000), _
@@ -13947,11 +13990,9 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
         'acá se puede empezar a hacer la imputacion a nivel item
 
-        q.ToList()
 
 
-
-        Return q
+        Return q.ToList()
     End Function
 
 
@@ -14187,7 +14228,9 @@ como hacer para marcar a con qué grupo se imputó cada carta????
                                          ByVal txtTarifaGastoAdministrativo As String, _
                                          ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String, _
                                          ByVal chkPagaCorredor As Boolean, _
-                                         ByVal listEmbarques As System.Collections.Generic.List(Of DataRow)) As Integer
+                                         ByVal listEmbarques As System.Collections.Generic.List(Of DataRow), _
+                                        ByRef ImputacionDevuelta As IEnumerable(Of grup) _
+) As Integer
         'Revisar tambien en
         ' Pronto el Utilidades->"Generacion de Facturas a partir de Ordenes de Compra automaticas",
         ' (se llama con frmConsulta2 Id = 74) -Eso es un informe!! No genera nada
@@ -14517,10 +14560,15 @@ como hacer para marcar a con qué grupo se imputó cada carta????
 
 
                     'ver esta funcion. dependiendo de q.count....
-                    Dim q = AgruparItemsDeLaFactura(oListaCDP, optFacturarA, agruparArticulosPor, SC, txtBuscar)
+                    ImputacionDevuelta = AgruparItemsDeLaFactura(oListaCDP, optFacturarA, agruparArticulosPor, SC, txtBuscar)
+
+                    'como hago para que el imputador revise esto?
+
+
+
 
                     Dim renglons As Integer = 0
-                    For Each o In q
+                    For Each o In ImputacionDevuelta
                         renglons += 1 'como es un Enumerable, tengo que iterar, no tengo un metodo Count()
                     Next
 
@@ -14554,7 +14602,7 @@ como hacer para marcar a con qué grupo se imputó cada carta????
                     '////////////////////////////////////////////////////////////////////////////
 
 
-                    For Each o In q
+                    For Each o In ImputacionDevuelta
 
                         With .DetFacturas.Item(-1)
                             With .Registro
