@@ -7301,7 +7301,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
             'ErrHandler.WriteError("Ya tiene una factura imputada")
             ErrHandler.WriteError("Explota la imputacion")
-
+            jjjjjjj()
 
             'http://bdlconsultores.sytes.net/Consultas/Admin/VerConsultas1.php?recordid=13368
 
@@ -13605,24 +13605,37 @@ Public Class LogicaFacturacion
                 ultima = idFactura
 
                 'hago las imputaciones
-                For Each o In lote
-                    'TODO: la imputacion tambien es ineficiente, porque llama para grabar a la cdp, que a su vez revisa clientes, etc
-                    'Debug.Print("               imputo " & Now.ToString)
+                Try
 
-                    If True Then
-                        'If InStr(o.FacturarselaA, "<EMBARQUE>") = 0 Then
-                        CartaDePorteManager.ImputoLaCDP(o, idFactura, SC, Session(SESSIONPRONTO_UserName))
-                    Else
-                        'y si es un embarque? -pero los embarques no estan en la coleccion lote !!!!!!
-                    End If
 
-                Next
+                    For Each o In lote
+                        'TODO: la imputacion tambien es ineficiente, porque llama para grabar a la cdp, que a su vez revisa clientes, etc
+                        'Debug.Print("               imputo " & Now.ToString)
 
-                For Each o In listEmbarques
-                    CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName))
-                Next
+                        If True Then
+                            'If InStr(o.FacturarselaA, "<EMBARQUE>") = 0 Then
+                            CartaDePorteManager.ImputoLaCDP(o, idFactura, SC, Session(SESSIONPRONTO_UserName))
+                        Else
+                            'y si es un embarque? -pero los embarques no estan en la coleccion lote !!!!!!
+                        End If
 
-                EntidadManager.LogPronto(SC, idFactura, "Factura De CartasPorte: id" & idFactura & " " & optFacturarA & " AGR:" & agruparArticulosPor & " busc:" & txtBuscar, Session(SESSIONPRONTO_UserName))
+                    Next
+
+                    For Each o In listEmbarques
+                        CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName))
+                    Next
+
+                    EntidadManager.LogPronto(SC, idFactura, "Factura De CartasPorte: id" & idFactura & " " & optFacturarA & " AGR:" & agruparArticulosPor & " busc:" & txtBuscar, Session(SESSIONPRONTO_UserName))
+
+
+                Catch ex As Exception
+                    'si esto falla, anular la ultima factura y cortar el proceso
+                    anular factura idfactura
+
+                    terminar lote
+
+                End Try
+
 
             Else
                 Try
@@ -13806,6 +13819,8 @@ Public Class LogicaFacturacion
         '       DataTable dtRenglonesManuales, String SC, HttpSessionState Session, Int32 optFacturarA, String agruparArticulosPor, 
         '       String txtBuscar, String txtTarifaGastoAdministrativo, Boolean SeSeparaPorCorredor, String txtCorredor, Boolean 
         '       chkPagaCorredor, List`1 listEmbarques)
+
+como hacer para marcar a con qué grupo se imputó cada carta????
 
 
 
