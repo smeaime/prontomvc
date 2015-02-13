@@ -541,7 +541,16 @@ Public Class ConsultasLinq
             " and isnull(Anulada,'')<>'SI'" & _
             " and tarifafacturada=0"
 
-        ExecDinamico(SC, sSQL) ', 300) si le pongo 300 me chifla que no está preparada la cadena de conexion para ese timeout
+        Try
+            ExecDinamico(SC, sSQL) ', 300) si le pongo 300 me chifla que no está preparada la cadena de conexion para ese timeout
+
+        Catch ex As Exception
+            ah mira vos es este el que suele explotar por timeout
+
+            ErrHandler()
+            mandamailerror()
+        End Try
+
 
 
 
