@@ -466,7 +466,16 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual ViewResult Details(Guid id)
         {
+            
             var user = _userService.Get(id);
+            if (user==null)
+            {
+
+                throw new Exception("No se encontró el usuario en la BDLmaster");
+            }
+
+
+
             var userRoles = _rolesService.Enabled
                 ? _rolesService.FindByUser(user)
                 : Enumerable.Empty<string>();

@@ -76,7 +76,7 @@ namespace ProntoMVC.Controllers
             var users = (from n in bdlmaster.aspnet_Users select new { n.UserId, n.UserName }).ToList();
 
 
-
+            // Verificar que No tienen Roles externos
 
 
             var Fac4 = (from u in users
@@ -167,7 +167,7 @@ namespace ProntoMVC.Controllers
                 ////.Include(x => x.i)
                 //        .Where(campo)
                 //.OrderBy(sidx + " " + sord)
-                        .OrderByDescending(x => x.UserId).ThenByDescending(x => x.UserId)
+                        .OrderBy(x => x.UserName).ThenByDescending(x => x.UserId)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()

@@ -741,7 +741,7 @@ $(document).ready(function () {
                                     }
 
 
-                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden: false }
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden: true }
 
 // el controlador me está devolviendo datos en estas columnas que impiden que las agrupe!!!!
     //, { name: 'ver', index: 'Aktiasdv', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false }, hidden: true }
