@@ -96,15 +96,7 @@
                             </label>
                             @Html.TextArea("comments", Model.User.Comment)
                         </p>
-                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
-                        {
-                            <p>
-                                <label for="grupo">
-                                    Grupo
-                                </label>
-                                @Html.TextBox("grupo", Model.Grupo)
-                            </p>
-                        }
+                        
                         <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
                             Aceptar
                         </button>

@@ -735,6 +735,7 @@
     <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
