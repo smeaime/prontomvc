@@ -187,10 +187,16 @@ namespace ProntoMVC.Controllers
                                 //"|" +
                                 //"<a href=/Factura/Details/" + a.IdFactura + ">Detalles</a> "
                                 
-                            a.leyenda!="sin usuario"  ?  "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web</>" : "CREAR USUARIO" ,
+                            a.leyenda!="sin usuario"  ?  "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web</>" :
+                            
+                            "<a href="+ Url.Action("CreateUser",  "UserAdministration",new {id = -1, area="MvcMembership" } )  +">CREAR USUARIO</>",
+
                             a.IdEmpleado>0   ?  "<a href="+ Url.Action("Edit", "Empleado",new {id = a.IdEmpleado, area = ""} )  +">Empleado</>"  
                                                 +" - <a href="+ Url.Action("Edit", "Acceso",new {id = a.IdEmpleado, area = ""} )  +">Accesos</>" 
-                                                :         "CREAR EMPLEADO" ,
+                                                :       
+                            "<a href="+ Url.Action("Edit",  "Empleado",new {id = -1, area="" } )  +">CREAR EMPLEADO</>",
+
+                                            
                             "mostrar si el usuario web no tiene empleado, o viceversa", a.leyenda
                                 // create una vista y chau
  
