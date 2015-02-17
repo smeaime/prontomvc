@@ -1996,7 +1996,7 @@ namespace ProntoMVC.Controllers
         public List<string> LeerArchivoAPP(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid)
         {
             //string glbArchivoAyuda = dbcontext.Parametros.Find(1).ArchivoAyuda;
-            string glbArchivoAyuda = dbcontext.Parametros.Select(x=>x.ArchivoAyuda).FirstOrDefault();
+            string glbArchivoAyuda = dbcontext.Parametros.Select(x => x.ArchivoAyuda).FirstOrDefault();
             string glbPathPlantillas = "";
             //string s = dbcontext.Parametros.Find(1).PathPlantillas;
             string s = dbcontext.Parametros.Select(x => x.PathPlantillas).FirstOrDefault();
@@ -2122,7 +2122,53 @@ namespace ProntoMVC.Controllers
 
         public IQueryable<Tablas.Tree> TablaTree(string parentId)
         {
+
+            // cómo filtrar esto?, en especial en el nodo raíz (parentId="01")
+            //    y si es externo?
+
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario;
+            try
+            {
+                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw; // Exception("No se encuentra el usuario");
+            }
+
+
+
+            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+            bool esadmin = Roles.IsUserInRole(usuario, "Administrador");
+            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
+            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
+            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                            Roles.IsUserInRole(usuario, "Externo") ||
+                            Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                            Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+            bool escompras = Roles.IsUserInRole(usuario, "Compras");
+            bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
+
+
+            if (esExterno)
+            {
+
+                // agregarExterno() // hasta que metas el agregar externa, deberás usar TablaTree
+                return TablaTree().AsQueryable();
+
+            }
+
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+
+
+
             var q = from n in db.Trees
+                    join p in permisos on n.Clave equals p.Nodo
                     where (n.ParentId == parentId)
                     select new Tablas.Tree()
                     {
@@ -2135,7 +2181,7 @@ namespace ProntoMVC.Controllers
                         Link = n.Link.Replace("Pronto2", ROOT),
                         Imagen = n.Imagen,
                         EsPadre = n.EsPadre,
-                        nivel = 1
+                        nivel = p.Nivel ?? 9
 
                         // , Orden = n.Orden
                     };
@@ -2144,6 +2190,137 @@ namespace ProntoMVC.Controllers
 
 
             return q;
+        }
+
+
+
+        void agregarExterno(string usuario, List<Tablas.Tree> TreeDest)
+        {
+
+
+            var n = new Tablas.Tree();
+            if (Roles.IsUserInRole(usuario, "Externo"))
+            {
+                string nombreproveedor = "";
+                try
+                {
+                    Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
+                    int idproveedor = buscaridproveedorporcuit(cuit);
+                    if (idproveedor <= 0)
+                    {
+                        idproveedor = buscaridclienteporcuit(cuit);
+                        if (idproveedor > 0) nombreproveedor = db.Clientes.Find(idproveedor).RazonSocial;
+                    }
+                    else
+                    {
+                        nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    nombreproveedor = "Sin CUIT";
+                }
+
+                n.Link = nombreproveedor; // "<a href=\"#\">" + nombreproveedor + "</a>";
+                n.Descripcion = "CUIT";
+                n.Clave = "CUIT";
+                n.EsPadre = "NO"; // "SI";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
+
+            n = new Tablas.Tree();
+            if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
+            {
+                n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
+                n.Descripcion = "Presupuesto";
+                n.Clave = "Presupuesto";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
+            {
+
+                //n = new Tablas.Tree();
+                //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                //n.Descripcion = "CuentasDeudor";
+                //n.Clave = "CuentasDeudor";
+                //n.EsPadre = "NO";
+                //n.IdItem = "1";
+                //n.ParentId = "";
+                //n.Orden = 1;
+                //TreeDest.Add(n);
+
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
+                n.Descripcion = "CuentasAcreedor";
+                n.Clave = "CuentasAcreedor";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+            if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
+            {
+
+                //n = new Tablas.Tree();
+                //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                //n.Descripcion = "CuentasDeudor";
+                //n.Clave = "CuentasDeudor";
+                //n.EsPadre = "NO";
+                //n.IdItem = "1";
+                //n.ParentId = "";
+                //n.Orden = 1;
+                //TreeDest.Add(n);
+
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
+                n.Descripcion = "CuentasDeudor";
+                n.Clave = "CuentasDeudor";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
+            {
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
+                n.Descripcion = "OrdenesPago";
+                n.Clave = "OrdenesPago";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+
+
+            }
+
+
+
+
         }
 
 
@@ -2189,7 +2366,12 @@ namespace ProntoMVC.Controllers
             bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
             bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
             bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
-            bool esExterno = Roles.IsUserInRole(usuario, "Externo");
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                        Roles.IsUserInRole(usuario, "Externo") ||
+                        Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
             bool escompras = Roles.IsUserInRole(usuario, "Compras");
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
