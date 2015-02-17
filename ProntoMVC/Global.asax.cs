@@ -55,7 +55,7 @@ namespace ProntoMVC
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal || true)
+            if (Request.IsLocal && ConfigurationManager.AppSettings["Debug"].ToString()=="SI")
             {
                 MiniProfiler.Start();
             }
