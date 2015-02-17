@@ -281,7 +281,10 @@ namespace ProntoMVC.Controllers
                 // q = TablaTree("01").Where(x => x.ParentId == "01").ToList(); ; // podrias devolver un queryable
                 //q = q.Where(x => x.ParentId == "01").ToList();
                 q = TablaTree("01").ToList();
+                //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
 
+                    //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
+                    // mostrar todos los nodos raíces de los que tenga permiso...
 
             }
             else if (collection.AllKeys.Contains("idsOfExpandedRows"))

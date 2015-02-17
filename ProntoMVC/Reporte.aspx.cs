@@ -95,13 +95,19 @@ namespace ProntoMVC.Reportes
 
             bool bMostrar = false;
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
-                 &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-                 &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
-                )
+
+            string usuario = Membership.GetUser().UserName;
+
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                        Roles.IsUserInRole(usuario, "Externo") ||
+                        Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+
+
+
+            if (esExterno)
             {
 
                 Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -117,7 +123,13 @@ namespace ProntoMVC.Reportes
 
                 string cuit = c.DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
 
+                
+                
+                //si es deudor,  no puede ser <=0 esto
+
                 idproveedor = c.buscaridproveedorporcuit(cuit);
+                
+                
                 idcliente = c.buscaridclienteporcuit(cuit);
 
                 //this.Session["NombreProveedor"];

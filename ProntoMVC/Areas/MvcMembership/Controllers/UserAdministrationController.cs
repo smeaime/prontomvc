@@ -676,6 +676,16 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         }
 
 
+
+        
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateUserExterno(CreateUserViewModel createUserViewModel)
+        {
+
+            return CreateUser(createUserViewModel);
+        }
+
+
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateUser(CreateUserViewModel createUserViewModel)
         {
