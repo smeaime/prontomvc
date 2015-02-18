@@ -17,18 +17,26 @@
 
 
 
-            <p>Version de storeproc    </p>
+            <p>@*Version de storeproc*@    </p>
 
+            <br /><br />
             <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"]">Servidor de informes</a>
+            <br />
+            <a href="localhost/Reports_MSSQLSERVER2/Pages/Folder.aspx?ViewMode=Detail">
+                Interfaz local
+            </a>
+            <br />
             <a href="@System.Configuration.ConfigurationManager.AppSettings["ReportServer"].Replace("ReportServer", "Reports") ">
-                <p> localhost/Reports_MSSQLSERVER2/Pages/Folder.aspx?ViewMode=Detail </p>
-
                 Interfaz web
             </a>
+
+            <br />
+            <br />
+
             <p>
-                Logs de RRSS en la base (tablas [ExecutionLogStorage] ?)
+                @*Logs de RRSS en la base (tablas [ExecutionLogStorage] ?)
                 http://stackoverflow.com/questions/491389/where-does-reporting-services-store-its-log-files
-                C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles
+                C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles*@
             </p>
 
 
@@ -45,8 +53,8 @@
 
 
 
-            @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas") @*para que quede el espacio*@
-            @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span2" })
+            @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas y archivo .APP") @*para que quede el espacio*@
+            @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span6" })
 
 
             using (Html.BeginForm("SubirPlantilla", "UserAdministration"))
