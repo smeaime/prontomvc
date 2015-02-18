@@ -84,9 +84,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ClaseMigrar.dll</HintPath>
     </Reference>
-    <Reference Include="ClosedXML, Version=0.68.1.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\ClosedXML.dll</HintPath>
+      <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="DataAnnotationsExtensions">
       <HintPath>..\packages\DataAnnotationsExtensions.0.6.0.0\lib\NETFramework40\DataAnnotationsExtensions.dll</HintPath>
@@ -738,6 +738,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
+    <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET - Copia.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Pedido_DemoProntoWeb_PUNTONET.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
