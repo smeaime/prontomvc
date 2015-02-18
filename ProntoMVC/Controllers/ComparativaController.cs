@@ -1390,7 +1390,8 @@ namespace ProntoMVC.Controllers
             var eeeee = string.Join(",", num);
 
 
-            o.Obras =  ssss.Substring(0,20);
+
+            o.Obras = ssss.Substring(0, (ssss.Length > 20) ? 20 : ssss.Length);
             o.NumeroRequerimiento = 0;
             o.PresupuestoSeleccionado = 0;
             o.MontoParaCompra = "0";
@@ -1469,7 +1470,7 @@ namespace ProntoMVC.Controllers
                                     db.Presupuestos.Include("Proveedor").SingleOrDefault(x => x.IdPresupuesto == dd0).Proveedor.RazonSocial +
                                     " (" + db.Presupuestos.Include("Moneda").SingleOrDefault(x => x.IdPresupuesto == dd0).Moneda.Abreviatura + ")"
                                         : "",
-                Total_A = (pr > 0) ? provs2[0].ToString ("#.##") : "",
+                Total_A = (pr > 0) ? provs2[0].ToString("#.##") : "",
 
                 PrecioB = (pr > 1) ? "Presupuesto " + db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).Numero + " " +
                                     db.Presupuestos.SingleOrDefault(x => x.IdPresupuesto == dd1).SubNumero + " del " +
@@ -1564,7 +1565,7 @@ namespace ProntoMVC.Controllers
                     if (p.numcol == 1)
                     {
                         it.PrecioB = (p.numcol == 1) ? a.Precio.ToString() : 0.ToString();
-                        it.Total_B = ((p.numcol == 1) ? a.Precio * a.Cantidad ?? 0  : 0).ToString("#.##");
+                        it.Total_B = ((p.numcol == 1) ? a.Precio * a.Cantidad ?? 0 : 0).ToString("#.##");
                         it.Check_B = (p.numcol == 1) ? (a.Estado == "MR").ToString() : "false";
                     }
 
@@ -1969,7 +1970,7 @@ namespace ProntoMVC.Controllers
             {
                 tabpie = ComparativaManager.TraerPieDLL(SC, myComparativa);
             }
-          
+
 
             catch (Exception e)
             {

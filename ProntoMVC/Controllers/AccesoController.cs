@@ -25,10 +25,10 @@ using System.Web.Security;
 
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
-using ProntoMVC.Models;
 
 
 
+using StackExchange.Profiling;
 
 
 namespace ProntoMVC.Controllers
@@ -180,7 +180,7 @@ namespace ProntoMVC.Controllers
                 throw new Exception("No tenés permisos");
                 // return RedirectToAction("Index", "MvcMembership/UserAdministration");
             }
-            
+
 
 
             LeerArchivoSecuencial_____EncriptadoPuntoAPP();
@@ -264,6 +264,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(Empleado o)
         {
 
+            MiniProfiler profiler = MiniProfiler.Current;
 
             if (!
                 (
@@ -283,7 +284,11 @@ namespace ProntoMVC.Controllers
 
                 if (ViewBag.SuperadminPass != null || this.Session["SuperadminPass"] != null)
                 {
-                    UpdateColecciones(ref o, db);
+
+                    using (profiler.Step("Llamo a UpdateColecciones"))
+                    {
+                        UpdateColecciones(ref o, db);
+                    }
 
                 }
                 else if (o.IdEmpleado <= 0)
@@ -316,7 +321,11 @@ namespace ProntoMVC.Controllers
                     if (o.IdEmpleado > 0)
                     {
 
-                        UpdateColecciones(ref o, db);
+                        using (profiler.Step("Llamo a UpdateColecciones"))
+                        {
+                            UpdateColecciones(ref o, db);
+                        }
+
 
 
                     }
@@ -387,28 +396,32 @@ namespace ProntoMVC.Controllers
 
                     //esta arruinando la tabla empleados
                     db.SaveChanges();
-                    ResetearProntoAccesos();
 
-                    //////////
-                    bool bNoExisteComoUsuarioWeb = Membership.GetUser(o.UsuarioNT) == null;
-                    if (bNoExisteComoUsuarioWeb)
+                    using (profiler.Step("Llamo a ResetearProntoAccesos + AddToEmpresa"))
                     {
+                        ResetearProntoAccesos();
 
 
-                        MembershipCreateStatus createStatus;
-                        var u = Membership.CreateUser(o.UsuarioNT, o.UsuarioNT + "!", o.UsuarioNT + "mscalella911@hotmail.com", "pregunta", "respuesta", true, null, out createStatus);
+                        //////////
+                        bool bNoExisteComoUsuarioWeb = Membership.GetUser(o.UsuarioNT) == null;
+                        if (bNoExisteComoUsuarioWeb)
+                        {
 
 
-                        string nombrebase = (string)this.Session["BasePronto"]; //cambiar esto para buscar los datos en la base, no en la session
+                            MembershipCreateStatus createStatus;
+                            var u = Membership.CreateUser(o.UsuarioNT, o.UsuarioNT + "!", o.UsuarioNT + "mscalella911@hotmail.com", "pregunta", "respuesta", true, null, out createStatus);
 
-                        // y cómo sé quién lo habilitó?, si ahora no le pido que se loguee...
-                        var cc = new Areas.MvcMembership.Controllers.UserAdministrationController();
-                        cc.AddToEmpresa(new Guid(u.ProviderUserKey.ToString()), nombrebase);
 
-                        // y qué roles va a tener ese usuario??????
+                            string nombrebase = (string)this.Session["BasePronto"]; //cambiar esto para buscar los datos en la base, no en la session
+
+                            // y cómo sé quién lo habilitó?, si ahora no le pido que se loguee...
+                            var cc = new Areas.MvcMembership.Controllers.UserAdministrationController();
+                            cc.AddToEmpresa(new Guid(u.ProviderUserKey.ToString()), nombrebase);
+
+                            // y qué roles va a tener ese usuario??????
+                        }
+
                     }
-
-
 
                     //}
                     ////////////////////////////////////////////////////////////////////////////////
@@ -439,16 +452,18 @@ namespace ProntoMVC.Controllers
 
                 }
 
+                using (profiler.Step("Llamo a GuardarArchivoSecuencial__EncriptadoPuntoAPP"))
+                {
 
-                var c = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
-                // x.VerificarClaveDeRoles
-                //   x.GrabarNuevaClaveDeRoles
-
-
-                // revisar la cuestion de la anulacion de nodos, y del exclusivo del superadmin
-                GuardarArchivoSecuencial__EncriptadoPuntoAPP();
+                    var c = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
+                    // x.VerificarClaveDeRoles
+                    //   x.GrabarNuevaClaveDeRoles
 
 
+                    // revisar la cuestion de la anulacion de nodos, y del exclusivo del superadmin
+                    GuardarArchivoSecuencial__EncriptadoPuntoAPP();
+
+                }
 
 
             }
@@ -517,6 +532,9 @@ namespace ProntoMVC.Controllers
 
         public void UpdateColecciones(ref Empleado o, DemoProntoEntities dbcontext)
         {
+
+
+
 
             if (ViewBag.SuperadminPass != null || this.Session["SuperadminPass"] != null)
             {

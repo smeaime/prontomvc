@@ -5,7 +5,7 @@
 @Html.ValidationSummary(true)
 
 <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-    <form class="form-horizontal">
+    <form class="form-horizontal" style=" margin-bottom: 0px;">
 
 
         @if (false)
@@ -40,32 +40,28 @@
         }
 
 
-
-
-
         <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
+
             @*http://stackoverflow.com/questions/6431881/css-layout-for-fixed-header-and-100-content-height*@
 
 
 
-
-            <div id="header" style="position: absolute; top: -50px;
-                width: 100%; height: 50px;  padding-left: 25px; padding-right: 25px;">
-                <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                    @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                    <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                        <span class="span1" style="padding-top: 15px; width: 110px">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
-                        @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
-                        <span class="" style="padding-top: 15px; width: 10px">/ </span>
-                        @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
-                    </div>
-
-                </div>
-            </div>
-            <div id="conscroll" style="height: 600px; margin-top: 30px; top: 60px; overflow-y: scroll;
+            <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
+                <div id="">
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                        @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+                        <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                            <span class="span1" style="padding-top: 15px; width: 110px">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+                            @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
+                            <span class="" style="padding-top: 15px; width: 10px">/ </span>
+                            @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
+                        </div>
+
+                    </div>
+                </div>
 
 
 
@@ -343,14 +339,27 @@
                     </table>
                 </form>
                 <br />
-                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+                
             </div>
 
+            <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
+                width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
+                <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                    <div class="span1 pull-right">
+                    </div>
+                    <div class="span11 pull-right">
+                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
+                        <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" />
+                       
+                    </div>
+                    </div>
+            </div>
 
         </div>
 
     </form>
+
 </div>
 <!--/.fluid-container-->
 <script type="text/javascript">

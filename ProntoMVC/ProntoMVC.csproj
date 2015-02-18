@@ -736,6 +736,7 @@
     <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
@@ -750,7 +751,7 @@
     <Content Include="Documentos\sql\pruebas\sincro demopronto campos de tabla.sql" />
     <Content Include="Documentos\sql\pruebas\[wActualizacionesVariasPorComprobante] SQLs Varios.sql" />
     <Content Include="Documentos\sql\restoreDB.sql" />
-    <Content Include="Documentos\sql\superbuscador  wFuncionBusqueda wBusqueda   .sql" />
+    <Content Include="Documentos\sql\superbuscador  generico %28inlcluyendo rms etc%29 wFuncionBusqueda wBusqueda   .sql" />
     <Content Include="Documentos\sql\Tree_TX_Arbol.sql" />
     <Content Include="Documentos\sql\Tree_TX_Generar.sql" />
     <Content Include="Documentos\sql\wDuplicarBase.sql" />

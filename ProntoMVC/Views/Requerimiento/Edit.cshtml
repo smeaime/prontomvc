@@ -140,24 +140,26 @@
         </style>
         <form class="form-horizontal" style=" margin-bottom: 0px;">
             <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
-                <div id="encabezadoFijo" style="height: 50px; margin-bottom: 40px; overflow-y: hidden;
-                padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
-
-                    <div class="row-fluid" style="">
-                        @*            <div class="" style='font-size: 34px; height: 40px; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                        *@
-                        <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            Requerimiento
-                            @Html.DisplayFor(model => model.NumeroRequerimiento, new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "", @readonly = "readonly" })
-                            @*@Html.TextBoxFor(model => model.NumeroRequerimiento, new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "", @readonly = "readonly" })*@
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
+
+
                     <br />
+                    <div id="">
+                        <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                            @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                                <div class="span5">
+                                    Requerimiento
+                                    @Html.DisplayFor(model => model.NumeroRequerimiento, new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "", @readonly = "readonly" })
+                                    @*@Html.TextBoxFor(model => model.NumeroRequerimiento, new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "", @readonly = "readonly" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @*    <legend>Requerimiento</legend>*@
                     <div>@Html.Hidden("IdRequerimiento", Model.IdRequerimiento)</div>
                     <div>@Html.Hidden("Cumplido", Model.Cumplido)</div>
@@ -511,7 +513,7 @@
                                 .ui-jqdialog button {
                                 }
                                 /* http://stackoverflow.com/questions/14954587/jqgrid-for-twitter-bootstrap
-                                */ input.ui-pg-input {
+                                    */ input.ui-pg-input {
                                     width: auto;
                                     padding: 0px;
                                     margin: 0px;
@@ -547,14 +549,14 @@
 
                                 .ui-jqgrid tr.ui-row-ltr td {
                                     /* lineas de las grillas verticales*/ /*
-                                                    border-right-style: none;
-                                                    border-left-style: none;
-                                                    */
+                                                        border-right-style: none;
+                                                        border-left-style: none;
+                                                        */
                                 }
 
                                 .ui-icon, .ui-widget-content .ui-icon {
                                     /* background-image:
-                                none; */
+                                    none; */
                                 }
 
                                 /* el padding... http://stackoverflow.com/questions/17732147/how-to-add-class-to-a-cell-in-jqgrid*/
@@ -681,7 +683,7 @@
                             @Html.ValidationMessageFor(model => model.Observaciones)
                         </div>
 
-                        <div class="span6 lightblue">
+                        <div class="span6 lightblue" style="visibility: hidden">
 
                             @using (Html.BeginForm("SubirPlantilla", "Requerimiento", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {

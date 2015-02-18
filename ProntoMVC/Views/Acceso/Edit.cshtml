@@ -62,10 +62,10 @@
                 }
             </div>
         </div>
-        <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = -1 }, null)</li>
+        @*<li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = -1 }, null)</li>
         <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = -1 }, null)</li>
-        <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = -1 }, null)</li>
-        <li>@Html.ActionLink("Empleado", "Edit", "Empleado", new { id = -1, area = "" }, null)</li>
+        <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id =  -1 }, null)</li>*@
+        <li>@Html.ActionLink("Empleado", "Edit", "Empleado", new { id = Model.IdEmpleado, area = "" }, null)</li>
         @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
         @*     http://www.techiesweb.net/asp-net-mvc3-dynamically-added-form-fields-model-binding/*@
         @*    <button  type=submit onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary"  >

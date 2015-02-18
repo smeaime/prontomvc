@@ -96,6 +96,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting
     <%////////////////////////////////////////////////////////////////////////////////%>
     <%////////////////////////////////////////////////////////////////////////////////%>
     <script src="<%=Page.ResolveUrl("~/")%>Scripts/pronto.js?1611" type="text/javascript"></script>
+    <script src="<%=Page.ResolveUrl("~/")%>Scripts/jsLayout.js?1611" type="text/javascript"></script>
     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////////////////////////////--%>
@@ -661,58 +662,7 @@ If you want additionally remove vertical border between the cells in the grid yo
     }
 
 
-    function armarMenu() {
-
-        // https: //github.com/twitter/bootstrap/issues/160
-        //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
-        // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
-        $.post(ROOT + "Home/Menu", null, function (data) {
-            var menu_html = '';
-
-            // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
-
-            if (!data) return;
-
-            var longitud = 0
-            for (var i = 0; i < data.length; i++) {
-                if (longitud > 0) {
-                    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
-                    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-                }
-                if (data[i].EsPadre == "SI") {
-                    if (data[i].ParentId == "") {
-                        menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion + ' <b class="caret"></b></a><ul class="dropdown-menu" id="444' + i + '">'
-                    }
-                    else {
-                        menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
-                    }
-                }
-                else {
-                    if (data[i].Link.length > 0) {
-                        menu_html += '<li>' + data[i].Link + '</li>'
-                    }
-                    else {
-                        menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
-                    }
-                }
-                longitud = data[i].IdItem.length;
-            }
-            if (longitud > 0) {
-                if (longitud - 2 == 3) { menu_html += '</ul></li>' }
-                if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
-                if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
-                if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
-            }
-            menu_html += ''
-            //                    $("#navigation2").empty().append(menu_html);
-            //$("#navigation2").append(menu_html);
-            //$("#navigation3").empty().append(menu_html);
-            $("#navigation3").empty().replaceWith(menu_html);
-
-        });
-    }
+  
 
 
 </script>

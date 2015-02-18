@@ -1005,7 +1005,7 @@ Mal:
         <DataObjectMethod(DataObjectMethodType.Select, True)> _
         Public Shared Function GetListDataset(ByVal SC As String, ByVal dtDesde As Date, ByVal dtHasta As Date) As DataView 'As DataTable
 
-
+            Exit Function
 
             'En realidad lo que hace esta funcion es devolverme un dataset en lugar de un list, y le ensoqueta una
             ' variable para guardar el valor del checkbox            'If Parametros Is Nothing Then Parametros = New String() {""}

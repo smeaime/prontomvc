@@ -50,11 +50,11 @@ GO
 
 IF EXISTS ( SELECT  *
             FROM    dbo.sysobjects
-            WHERE   id = OBJECT_ID(N'[dbo].wFuncionBusqueda'))
-    DROP FUNCTION [dbo].wFuncionBusqueda
+            WHERE   id = OBJECT_ID(N'[dbo].wFuncionBusquedaMVC'))
+    DROP FUNCTION [dbo].wFuncionBusquedaMVC
 go
 
-CREATE FUNCTION wFuncionBusqueda (@q VARCHAR(50))
+CREATE FUNCTION wFuncionBusquedaMVC (@q VARCHAR(50))
 
 
 
@@ -294,8 +294,8 @@ UNION all
                
  GO
               
---SELECT * FROM dbo.wFuncionBusqueda('102354235235')	
---SELECT * FROM dbo.wFuncionBusqueda('pedi')	
+--SELECT * FROM dbo.wFuncionBusquedaMVC('102354235235')	
+--SELECT * FROM dbo.wFuncionBusquedaMVC('pedi')	
 -- wUltimosComprobantesCreados ''
 
 
@@ -313,24 +313,24 @@ go
 
 IF EXISTS ( SELECT  *
             FROM    dbo.sysobjects
-            WHERE   id = OBJECT_ID(N'[dbo].wBusqueda')
+            WHERE   id = OBJECT_ID(N'[dbo].wBusquedaMVC')
                     AND OBJECTPROPERTY(id, N'IsProcedure') = 1 ) 
-    DROP PROCEDURE [dbo].wBusqueda
+    DROP PROCEDURE [dbo].wBusquedaMVC
 go
 
-CREATE PROCEDURE wBusqueda
+CREATE PROCEDURE wBusquedaMVC
     @q VARCHAR(50)
 AS
 
 	SELECT top 20 * 
-	FROM dbo.wFuncionBusqueda(@q) 
+	FROM dbo.wFuncionBusquedaMVC(@q) 
 --	group by Numero
 	order by Fecha desc
 
 GO
 
 
---EXEC wBusqueda '102354235235'
+--EXEC wBusquedaMVC '102354235235'
 --
 
 --/////////////////////////////////////////////////////////////////////////////////////////////
@@ -338,38 +338,38 @@ GO
 --/////////////////////////////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////////////////////////////
 
-exec wBusqueda '30'
-exec wBusqueda 'pedi'
-SELECT * FROM dbo.wFuncionBusqueda('pedi')	
-exec wBusqueda '20306762'
-exec wBusqueda '20306762 0-0'
-SELECT * FROM dbo.wFuncionBusqueda('20306762 0-0')	
-SELECT * FROM dbo.wFuncionBusqueda('3333333')	
-SELECT * FROM dbo.wFuncionBusqueda('caso')	
-SELECT * FROM dbo.wFuncionBusqueda('300')	
-SELECT * FROM dbo.wFuncionBusqueda('1111')	
-SELECT * FROM dbo.wFuncionBusqueda('1311111')	
-SELECT * FROM dbo.wFuncionBusqueda('523469')	
+exec wBusquedaMVC '30'
+exec wBusquedaMVC 'pedi'
+SELECT * FROM dbo.wFuncionBusquedaMVC('pedi')	
+exec wBusquedaMVC '20306762'
+exec wBusquedaMVC '20306762 0-0'
+SELECT * FROM dbo.wFuncionBusquedaMVC('20306762 0-0')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('3333333')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('caso')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('300')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('1111')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('1311111')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('523469')	
 
-SELECT * FROM dbo.wFuncionBusqueda('528790550')
-SELECT * FROM dbo.wFuncionBusqueda('528790550 0-0')
+SELECT * FROM dbo.wFuncionBusquedaMVC('528790550')
+SELECT * FROM dbo.wFuncionBusquedaMVC('528790550 0-0')
 
 exec wClientes_TX_BusquedaConCUIT '528790550 0-0'
 
 
 
-EXEC wBusqueda 'caso'
-EXEC wBusqueda '333333'
+EXEC wBusquedaMVC 'caso'
+EXEC wBusquedaMVC '333333'
 
 
-SELECT * FROM dbo.wFuncionBusqueda('30-68296681-1')	
-SELECT * FROM dbo.wFuncionBusqueda('30682966811')
+SELECT * FROM dbo.wFuncionBusquedaMVC('30-68296681-1')	
+SELECT * FROM dbo.wFuncionBusquedaMVC('30682966811')
 
 
 print dbo.FirstWord ('30-68296681-1')
 	
-exec wBusqueda '30'
-exec wBusqueda '528790550 0-0'
+exec wBusquedaMVC '30'
+exec wBusquedaMVC '528790550 0-0'
 SET STATISTICS TIME ON;
 GO
 SET STATISTICS TIME OFF;
@@ -379,7 +379,7 @@ GO
 
 --cómo conseguir un INDEX SEEK en lugar de un INDEX SCAN ?????? http://myitforum.com/cs2/blogs/jnelson/archive/2007/11/16/108354.aspx
 
-SELECT * FROM dbo.wFuncionBusqueda('528790550 0-0')
+SELECT * FROM dbo.wFuncionBusquedaMVC('528790550 0-0')
 
 
 

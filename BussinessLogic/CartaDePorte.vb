@@ -204,8 +204,6 @@ Namespace Pronto.ERP.BO
 
 
 
-
-
         Public PathImagen As String
         Public PathImagen2 As String
 
@@ -217,6 +215,12 @@ Namespace Pronto.ERP.BO
         Public Acopio5 As Integer
 
         Public AcopioFacturarleA As Integer
+
+
+
+        Public CalidadGranosExtranosRebaja As Double = 0
+        Public CalidadGranosDanadosRebaja As Double = 0
+
 
 
         Public Property Id() As Integer
