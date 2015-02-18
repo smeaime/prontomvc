@@ -423,6 +423,11 @@ function CargarGrillaManualmente(IdPresupuesto) { //lo hago manualmente porque t
     // http://theycallmemrjames.blogspot.com.ar/2010/05/aspnet-mvc-and-jquery-part-4-advanced.html
 
 
+
+
+
+
+
     $.ajax({
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
@@ -468,7 +473,24 @@ function CargarGrillaManualmente(IdPresupuesto) { //lo hago manualmente porque t
             //                }
 
 
+
         }
+
+        ,
+        beforeSend: function () {
+            //$('.loading').html('some predefined loading img html');
+        $("#loading").show();
+
+
+
+
+    },
+    complete: function () {
+        $("#loading").hide();
+    }
+
+
+
 
     });
 

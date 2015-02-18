@@ -601,6 +601,8 @@ namespace ProntoMVC.Reportes
                 if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
 
+                lblTitulo.Text = "Balance";
+
             }
             else if (this.Request.QueryString["ReportName"] == "Mayor")
             {
