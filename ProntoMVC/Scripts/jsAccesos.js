@@ -878,7 +878,7 @@ $(document).ready(function () {
 
         col: false,
         gridview: true,
-        height: 500, //'auto',
+        height: 4000, //'auto',
         pager: "parbolpermisos", // "#parbolpermisos",
         treeGrid: true,
         rowNum: 10000,

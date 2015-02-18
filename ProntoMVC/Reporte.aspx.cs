@@ -293,6 +293,7 @@ namespace ProntoMVC.Reportes
 
             ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/" + reportName;
 
+            lblTitulo.Text = reportName;
 
             if (this.Request.QueryString["ReportName"] == null || this.Request.QueryString["ReportName"] == "Resumen Cuenta Corriente Acreedores")
             {
@@ -670,7 +671,7 @@ namespace ProntoMVC.Reportes
             // "/informes/" + reportName;
 
 
-            lblTitulo.Text = reportName;
+            //lblTitulo.Text = reportName;
 
 
             ReportViewerRemoto.ServerReport.Refresh();
