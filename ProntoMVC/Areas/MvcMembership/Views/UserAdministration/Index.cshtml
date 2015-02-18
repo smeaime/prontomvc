@@ -556,8 +556,8 @@
                         autowidth: true,
                         shrinkToFit: false,
                         //////////////////////////////
-
-                        height: '110%', // $(window).height() - ALTOLISTADO, // '100%'
+                        //scrollerbar: false,
+                        height: '2000', // $(window).height() - ALTOLISTADO, // '100%'
                         altRows: false,
                         footerrow: false, //true,
                         userDataOnFooter: true
@@ -573,7 +573,7 @@
                     jQuery("#Lista").jqGrid('gridResize', {
                         minWidth: 350,
                         maxWidth: 1500,
-                        minHeight: 80, maxHeight: 2000
+                        minHeight: 80, maxHeight: 4000
                     });
 
 
@@ -581,7 +581,15 @@
             </div>
 
 
-        <br />
+            <style>
+                /*.ui-jqgrid .ui-jqgrid-btable {
+                    table-layout: auto;
+                }
+                .ui-jqgrid .ui-jqgrid-bdiv { overflow-y: scroll }*/
+            </style>
+
+
+            <br />
             <div class="mvcMembership-allRoles">
                 <div class="row-fluid">
                     <div class="span2 ">
