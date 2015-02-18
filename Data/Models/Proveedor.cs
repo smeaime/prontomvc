@@ -161,5 +161,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<OrdenPago> OrdenesPagoes { get; set; }
         public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores_1 { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Estados_Proveedore Estados_Proveedores { get; set; }
     }
 }
