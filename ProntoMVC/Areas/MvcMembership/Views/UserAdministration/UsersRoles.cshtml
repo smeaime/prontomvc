@@ -32,6 +32,18 @@
         <ul class="mvcMembership">
             @foreach (var role in Model.Roles)
             {
+
+                // solo permitir Roles externos
+                string[] rolesexternos = new string[5] {"ExternoCuentaCorrienteCliente",
+                                                    "ExternoCuentaCorrienteProveedor",
+                                                    "ExternoOrdenesPagoListas",
+                                                    "ExternoPresupuestos", "AdminExterno"};
+
+
+
+                if (!rolesexternos.Contains(role.Key) && !Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) { continue; }
+
+
                 if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") ||
                     Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") && (Roles.IsUserInRole(ViewBag.NombreUsuario, role.Key) || role.Key.Contains("Externo")))
                 {

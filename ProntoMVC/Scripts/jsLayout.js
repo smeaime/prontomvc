@@ -275,3 +275,162 @@ jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defa
     ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+    function armarMenu() {
+
+        // https: //github.com/twitter/bootstrap/issues/160
+        //                http: //stackoverflow.com/questions/9758587/twitter-bootstrap-multilevel-dropdown-menu
+        // http: //wiki.pixelpress.com.au/2012/07/23/bootstrap-3rd-level-navbar-dropdowns/
+        $.post(ROOT + "Home/Menu", null, function (data) {
+            var menu_html = '';
+
+            // menu_html += '   <li class="pull-left">  &nbsp  </li>'; // para agregar un margen a la izquierda
+
+            var longitud = 0
+
+
+
+
+
+            if (!data) return;
+
+
+            for (var i = 0; i < data.length; i++) {
+
+
+
+                if (longitud > 0) {
+                    if (longitud - data[i].IdItem.split("-").length == 1) { menu_html += '</ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 2) { menu_html += '</ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                    // if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                    if (longitud - data[i].IdItem.split("-").length >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+
+
+                    if (data[i - 1].EsPadre == "SI" && (longitud == data[i].IdItem.split("-").length)) { menu_html += '</ul></li>' }
+                }
+
+
+
+                //if (longitud > 0) {
+                //    if (longitud - data[i].IdItem.length == 3) { menu_html += '</ul></li>' }
+                //    if (longitud - data[i].IdItem.length == 6) { menu_html += '</ul></li></ul></li>' }
+                //    if (longitud - data[i].IdItem.length == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+                //    if (longitud - data[i].IdItem.length == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                //}
+
+
+
+
+
+                //if (data[i].EsPadre == "SI" && longitud - data[i].IdItem.length < 12) {
+
+                //    if (data[i].Link.length > 0) {
+                //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '"><strong>' + data[i].Link + '</strong></span><ul>'
+                //    }
+                //    else {
+                //        menu_html += '<li><span class="folder" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span><ul>'
+                //    }
+
+                //}
+                //else {
+                //    if (data[i].Link.length > 0) {
+                //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Link + '</span>' + '</li>'
+                //    }
+                //    else {
+                //        menu_html += '<li><span class="leaf country" id="' + data[i].Clave + '">' + data[i].Descripcion + '</span></li>'
+                //    }
+                //}
+
+
+
+                if (data[i].EsPadre == "SI") {
+                    if (data[i].ParentId == "") {
+                        menu_html += '<li class="dropdown pull-left " name="MenusesPronto" ><a href="#" data-toggle="dropdown" class="dropdown-toggle  pull-left ">' + data[i].Descripcion
+                        // + ' <b class="caret"></b>'
+                        + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                    }
+                    else {
+                        menu_html += '<li class="dropdown-submenu " name="MenusesPronto"><a href="#">' + data[i].Descripcion + '</a><ul class="dropdown-menu" id="444' + i + '">'
+                    }
+                }
+                else {
+                    try {
+                        if (data[i].Link.length > 0) {
+                            menu_html += '<li>' + data[i].Link + '</li>'
+                        }
+                        else {
+                            menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+                        }
+                    } catch (e) {
+                        menu_html += '<li><a href="#">' + data[i].Descripcion + '</a></li>'
+
+                    }
+
+
+                }
+
+
+
+                //longitud = data[i].IdItem.length;
+                longitud = data[i].IdItem.split("-").length;
+            }
+
+
+
+            //if (longitud > 0) {
+            //    if (longitud - 2 == 3) { menu_html += '</ul></li>' }
+            //    if (longitud - 2 == 6) { menu_html += '</ul></li></ul></li>' }
+            //    if (longitud - 2 == 9) { menu_html += '</ul></li></ul></li></ul></li>' }
+            //    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+            //}
+
+            if (longitud > 0) {
+                if (longitud == 1) { menu_html += '</ul></li>' }
+                if (longitud == 2) { menu_html += '</ul></li></ul></li>' }
+                if (longitud == 3) { menu_html += '</ul></li></ul></li></ul></li>' }
+                //                    if (longitud - 2 == 12) { menu_html += '</ul></li></ul></li></ul></li></ul></li>' }
+                if (longitud >= 4) { menu_html += '</ul></li></ul></li></ul></li>' }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            menu_html += ''
+            //                    $("#navigation2").empty().append(menu_html);
+            //$("#navigation2").append(menu_html);
+            //$("#navigation3").empty().append(menu_html);
+            $("#navigation3").empty().replaceWith(menu_html);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            estiloArbol();
+
+
+        });
+    }
+

@@ -23,7 +23,7 @@
     <div class="row-fluid">
         <div class="span2 lightblue">
             <button onclick="window.location.href='@Url.Action("CreateUserExterno", new { id = -1 })'" class="btn btn-primary">
-                Nuevo Usuario
+                Nuevo Usuario Externo
             </button>
         </div>
         @ViewBag.Alerta
@@ -164,7 +164,7 @@
                         </div>
                         <div class="span3 lightblue">
                             <div class="cc">
-                                Listado de Ordenes de Pago Listas @* ExternoOrdenesPagoListas*@
+                                Ord. de Pago @* ExternoOrdenesPagoListas*@
                             </div>
                         </div>
                         <div class="span3 lightblue">
@@ -214,7 +214,7 @@
                     
                     <div class="row-fluid">
                         <div class="span2 lightblue">
-                            <span class="mvcMembership-username">@Html.ActionLink(user.UserName, "Details", new { id = user.ProviderUserKey })</span>
+                            <span class="mvcMembership-username">@Html.ActionLink(user.UserName, "DetailsExterno", new { id = user.ProviderUserKey })</span>
                         </div>
                         <div class="span4 lightblue cc">
                             <div class="span3 lightblue">

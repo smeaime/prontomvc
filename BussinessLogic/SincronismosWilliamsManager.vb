@@ -2553,6 +2553,136 @@ Namespace Pronto.ERP.Bll
             'Return TextToExcel(vFileName, titulo)
         End Function
 
+        Public Shared Function Sincronismo_DOW_ConLINQ(q As Generic.List(Of CartasConCalada), ByRef sErrores As String, ByVal titulo As String, SC As String) As String
+
+
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+            'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
+
+            Dim codigoBahiaBlanca As String
+            Using db As New LinqCartasPorteDataContext(Encriptar(SC))
+                codigoBahiaBlanca = (From x In db.WilliamsDestinos Where x.Descripcion = "Bahia Blanca" Select x.CodigoLosGrobo).FirstOrDefault
+                If codigoBahiaBlanca = "" Then Throw New Exception("Falta asignar código al destino 'Bahia Blanca'")
+            End Using
+            Dim l As String = iisNull(ParametroManager.TraerValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo"), "")
+            'la dichosa tabla Parametros no tiene los campos de valor muy largos
+            If l = "" Or True Then
+                l = "CANGREJALES;LDC - PUERTO GALVAN;CARGILL BAHIA BLANCA;TERMINAL BAHIA BLANCA SA;ACTIAR SRL;PUERTO GALVAN. O.M.H.S.A"  '"LDC - PUERTO GALVAN"
+                ParametroManager.GuardarValorParametro2(SC, "Williams_SincroGrobo_BahiaBlancaGrupo", l)
+            End If
+            Dim bahiablanca = Split(l, ";").ToList
+
+
+
+
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            Dim sErroresOtros As String
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo " & Now.ToString("ddMMMyyyy_HHmmss") & ".txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+            Const cuitDOW = "30636021578"
+
+            For Each cdp As CartasConCalada In q
+                i = 0 : sb = ""
+
+
+
+
+                '  Las columnas Destino (Centro),  Fecha Descarga SIEMPRE deben tener formato TEXTO. El resto de las columnas, formato GENERAL
+
+                '·         Columna CUIT del Remitente Comercial: cuando el CUIT sea distinto a YPF, 
+                'entonces este CUIT debe ser igual al CUIT informado en la columna Cuit del Proveedor (Proveedor Granos)
+
+                '·         Columna CUIT del Intermediario: cuando el CUIT sea distinto a YPF, 
+                'entonces este CUIT debe ser igual al CUIT informado en la columna Cuit del Proveedor (Proveedor Granos)
+
+                '·         Columna CUIT del Destinatario: cuando el grano sea SOJA, siempre deberá ser el CUIT de YPF
+
+                '·         Columnas Patente Camión, Patente Acoplado: no deben existir espacios en blanco entre las letras y números
+
+
+                'el titulardesc lo uso en la columna de "cuit de proveedor", y la segunda columna es el "cuit titular
+                '        cdp.TitularDesc = cdp.TitularCUIT
+                'If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
+                'If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
+                'If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+
+                cdp.PuntoVenta = cdp.NumeroCartaDePorte.ToString.Substring(0, 1)
+                cdp.NumeroCartaDePorte = cdp.NumeroCartaDePorte.ToString.Substring(1)
+                'cdp.SubnumeroVagon = ""
+
+
+                'Cómo completar ROL REMITENTE?
+
+                'Comentario: DOW es Destinatario
+
+                '•	Debemos enviar 1 si el cliente de DOW está como Titular y el establecimiento está en blanco.
+                '•	Debemos enviar 2 si el cliente de DOW está como Titular y tiene establecimiento en la carta de porte.
+                '•	Debemos enviar 2 si el cliente de DOW está como Intermediario
+
+
+                'Cómo saber quién es el cliente de DOW?
+
+                '•	Cuando hay Cliente e Intermediario el cliente de DOW es el Intermediario.
+                '•	Cuando solo hay Titular es el Titular.
+
+                'Con lo cuál:
+
+                'Con lo cuál: 
+                '• Debemos enviar 1 si DOW es Destinatario o Rte Comercial, hay Titular pero no Intermediario y el establecimiento está en blanco. 
+                '• Debemos enviar 2 si DOW es Destinatario o Rte Comercial, hay Titular pero no Intermediario y tiene establecimiento en la carta de porte. 
+                '• Debemos enviar 2 si DOW es Destinatario o Rte Comercial y hay Titular e Intermediario
+                'Feb 10 2015 9:41AM		
+                '                Andres()
+                'Fe de ratas: DOW viene como Destinatario o posiblemente también como Rte Comercial
+
+                If cdp.TitularCUIT = cuitDOW And cdp.Establecimiento = "" Then
+                    cdp.ChoferDesc = "1"
+                ElseIf cdp.TitularCUIT = cuitDOW And cdp.Establecimiento <> "" Then
+                    cdp.ChoferDesc = "2"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT = "" And cdp.Establecimiento = "" Then
+                    cdp.ChoferDesc = "1"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT = "" And cdp.Establecimiento <> "" Then
+                    cdp.ChoferDesc = "2"
+                ElseIf (cdp.DestinatarioCUIT = cuitDOW Or cdp.RComercialCUIT = cuitDOW) And cdp.TitularCUIT <> "" And cdp.IntermediarioCUIT <> "" Then
+                    cdp.ChoferDesc = "2"
+                Else
+                    cdp.ChoferDesc = "1"
+                    'Throw New Exception("Rol Remitente inexistente")
+                End If
+
+
+
+
+
+                cdp.Patente = cdp.Patente.Replace(" ", "")
+                cdp.Acoplado = cdp.Acoplado.Replace(" ", "")
+
+            Next
+
+
+
+        End Function
+
         Public Shared Function Sincronismo_YPF_ConLINQ(q As Generic.List(Of CartasConCalada), ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 

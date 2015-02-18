@@ -73,14 +73,35 @@ namespace ProntoMVC.Controllers
 
 
             var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado }).ToList();
-            var users = (from n in bdlmaster.aspnet_Users select new { n.UserId, n.UserName }).ToList();
+
+            var usersext = (from u in bdlmaster.aspnet_Users
+                            join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
+                            join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
+                            where 
+                               // !emp.Select(x => x.UsuarioNT).Contains(u.UserName)  && 
+                                (r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
+                            select new { u.UserId, u.UserName }
+                ).Distinct().ToList();
+
+            var users1 = (from u in bdlmaster.aspnet_Users
+                         //join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
+                         //join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
+                      //   where !usersext.Select(x => x.UserName).Contains(u.UserName) 
+                       //     && 
+                            //!(r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
+                         select new { u.UserId, u.UserName }).Distinct().ToList();
+
+            var users = (from u in users1 
+                         where !usersext.Select(x => x.UserName).Contains(u.UserName)
+                            select u).ToList();
 
 
-
+            // Verificar que No tienen Roles externos
 
 
             var Fac4 = (from u in users
                         join n in emp on u.UserName equals n.UsuarioNT
+                        where !usersext.Select(x => x.UserName).Contains(u.UserName)   
                         select new c
                         {
                             IdFactura = u.UserId,
@@ -103,8 +124,22 @@ namespace ProntoMVC.Controllers
                         }
                        ).ToList();
 
+
+
+            var Fac8 = (from u in usersext
+                        select new c
+                        {
+                            IdFactura = u.UserId,
+                            UserId = u.UserId,
+                            UserName = u.UserName,
+                            IdEmpleado = 0,
+                            leyenda = "usuario externo!"
+                        }
+                       ).ToList();
+
+
             var Fac3 = (from e in emp
-                        where !users.Select(x => x.UserName).Contains(e.UsuarioNT)
+                        where !users.Select(x => x.UserName).Contains(e.UsuarioNT) && !usersext.Select(x => x.UserName).Contains(e.UsuarioNT)
                         select new c
                         {
                             IdFactura = new Guid(),
@@ -116,7 +151,8 @@ namespace ProntoMVC.Controllers
                        ).ToList();
 
 
-            var Fac = Fac3.Union(Fac2).Union(Fac4);
+            var Fac = Fac3.Union(Fac2).Union(Fac4).Union(Fac8);
+
 
 
 
@@ -167,7 +203,7 @@ namespace ProntoMVC.Controllers
                 ////.Include(x => x.i)
                 //        .Where(campo)
                 //.OrderBy(sidx + " " + sord)
-                        .OrderByDescending(x => x.UserId).ThenByDescending(x => x.UserId)
+                        .OrderBy(x => x.UserName).ThenByDescending(x => x.UserId)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -187,10 +223,21 @@ namespace ProntoMVC.Controllers
                                 //"|" +
                                 //"<a href=/Factura/Details/" + a.IdFactura + ">Detalles</a> "
                                 
-                            a.leyenda!="sin usuario"  ?  "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web</>" : "CREAR USUARIO" ,
+                            a.leyenda!="sin usuario"  ? 
+                            
+                            "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web" +   (a.leyenda=="usuario externo!"  ? " externo"  : ""  ) +  "</>" :         
+                            
+                            "<a href="+ Url.Action("CreateUser",  "UserAdministration",new {id = -1, area="MvcMembership" } )  +">CREAR USUARIO</>",
+
+
+
                             a.IdEmpleado>0   ?  "<a href="+ Url.Action("Edit", "Empleado",new {id = a.IdEmpleado, area = ""} )  +">Empleado</>"  
                                                 +" - <a href="+ Url.Action("Edit", "Acceso",new {id = a.IdEmpleado, area = ""} )  +">Accesos</>" 
-                                                :         "CREAR EMPLEADO" ,
+                                                :       
+                                a.leyenda!="usuario externo!"  ? 
+                                        "<a href="+ Url.Action("Edit",  "Empleado",new {id = -1, area="" } )  +">CREAR EMPLEADO</>" : "",
+
+                                            
                             "mostrar si el usuario web no tiene empleado, o viceversa", a.leyenda
                                 // create una vista y chau
  

@@ -23,8 +23,17 @@ namespace ProntoMVC
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            
+            
             filters.Add(new HandleErrorAttribute());
+
+
+        // http://stackoverflow.com/questions/6507568/using-mvc-miniprofiler-for-every-action-call/24197984#24197984
+            filters.Add(new ProfileActionsAttribute());
         }
+
+
+
 
         public static void RegisterRoutes(RouteCollection routes)
         {
@@ -55,7 +64,8 @@ namespace ProntoMVC
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal || true)
+            //if (Request.IsLocal && )
+            if (ConfigurationManager.AppSettings["Debug"].ToString() == "SI")
             {
                 MiniProfiler.Start();
             }
@@ -74,7 +84,7 @@ namespace ProntoMVC
             MiniProfilerEF6.Initialize();
             GlobalFilters.Filters.Add(new StackExchange.Profiling.Mvc.ProfilingActionFilter());
 
-            
+
 
             ViewEngines.Engines.Add(new RazorViewEngine());
 
@@ -472,57 +482,64 @@ namespace ProntoMVC
         public object BindModel(ControllerContext controllerContext,
             ModelBindingContext bindingContext)
         {
-            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            ModelState modelState = new ModelState { Value = valueResult };
-            object actualValue = null;
 
-            if (valueResult == null) actualValue = null;
-            else
+            MiniProfiler profiler = MiniProfiler.Current;
+
+            using (profiler.Step("En el DecimalModelBinder.BindModel"))
             {
-                try
+
+                ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                ModelState modelState = new ModelState { Value = valueResult };
+                object actualValue = null;
+
+                if (valueResult == null) actualValue = null;
+                else
                 {
-
-                    if (valueResult.AttemptedValue.Equals("N.aN") ||
-                        valueResult.AttemptedValue.Equals("NaN") ||
-                        valueResult.AttemptedValue.Equals("Infini.ty") ||
-                        valueResult.AttemptedValue.Equals("Infinity") ||
-                        string.IsNullOrEmpty(valueResult.AttemptedValue))
-                    { actualValue = 0m; }
-                    else
+                    try
                     {
-                        // actualValue = Convert.ToDecimal(valueResult.AttemptedValue,                        CultureInfo.CurrentCulture);
-                        string tempResult = valueResult.AttemptedValue.Replace(",", ".");
-                        double n;
-                        bool isNumeric = double.TryParse(tempResult, out n);
 
-                        if (isNumeric)
-                        {
-                            actualValue = Convert.ToDecimal(tempResult, CultureInfo.InvariantCulture);
-                        }
+                        if (valueResult.AttemptedValue.Equals("N.aN") ||
+                            valueResult.AttemptedValue.Equals("NaN") ||
+                            valueResult.AttemptedValue.Equals("Infini.ty") ||
+                            valueResult.AttemptedValue.Equals("Infinity") ||
+                            string.IsNullOrEmpty(valueResult.AttemptedValue))
+                        { actualValue = 0m; }
                         else
                         {
-                            actualValue = null;
+                            // actualValue = Convert.ToDecimal(valueResult.AttemptedValue,                        CultureInfo.CurrentCulture);
+                            string tempResult = valueResult.AttemptedValue.Replace(",", ".");
+                            double n;
+                            bool isNumeric = double.TryParse(tempResult, out n);
+
+                            if (isNumeric)
+                            {
+                                actualValue = Convert.ToDecimal(tempResult, CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                actualValue = null;
+                            }
                         }
+
+
                     }
+                    catch (FormatException e)
+                    {
+                        ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
 
+                        modelState.Errors.Add(e);
+                    }
+                    catch (Exception e)
+                    {
+                        ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
 
+                        ErrHandler.WriteError(e);
+                    }
                 }
-                catch (FormatException e)
-                {
-                    ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
 
-                    modelState.Errors.Add(e);
-                }
-                catch (Exception e)
-                {
-                    ErrHandler.WriteError("propiedad:" + bindingContext.ModelName + "   valor:" + valueResult.AttemptedValue);
-
-                    ErrHandler.WriteError(e);
-                }
+                bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
+                return actualValue;
             }
-
-            bindingContext.ModelState.Add(bindingContext.ModelName, modelState);
-            return actualValue;
         }
     }
 
@@ -594,3 +611,23 @@ namespace MixingBothWorldsExample
     }
 }
  */
+
+
+public class ProfileActionsAttribute : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext filterContext)
+    {
+        var profiler = MiniProfiler.Current;
+        var step = profiler.Step("Action: " + filterContext.ActionDescriptor.ActionName);
+        filterContext.HttpContext.Items["step"] = step;
+    }
+
+    public override void OnActionExecuted(ActionExecutedContext filterContext)
+    {
+        var step = filterContext.HttpContext.Items["step"] as IDisposable;
+        if (step != null)
+        {
+            step.Dispose();
+        }
+    }
+}

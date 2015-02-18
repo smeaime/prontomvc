@@ -95,13 +95,19 @@ namespace ProntoMVC.Reportes
 
             bool bMostrar = false;
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
-                 &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-                 &&
-                    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
-                )
+
+            string usuario = Membership.GetUser().UserName;
+
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                        Roles.IsUserInRole(usuario, "Externo") ||
+                        Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+
+
+
+            if (esExterno)
             {
 
                 Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -117,7 +123,13 @@ namespace ProntoMVC.Reportes
 
                 string cuit = c.DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
 
+                
+                
+                //si es deudor,  no puede ser <=0 esto
+
                 idproveedor = c.buscaridproveedorporcuit(cuit);
+                
+                
                 idcliente = c.buscaridclienteporcuit(cuit);
 
                 //this.Session["NombreProveedor"];
@@ -281,6 +293,7 @@ namespace ProntoMVC.Reportes
 
             ReportViewerRemoto.ServerReport.ReportPath = "/Pronto informes/" + reportName;
 
+            lblTitulo.Text = reportName;
 
             if (this.Request.QueryString["ReportName"] == null || this.Request.QueryString["ReportName"] == "Resumen Cuenta Corriente Acreedores")
             {
@@ -589,6 +602,8 @@ namespace ProntoMVC.Reportes
                 if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
 
+                lblTitulo.Text = "Balance";
+
             }
             else if (this.Request.QueryString["ReportName"] == "Mayor")
             {
@@ -656,7 +671,7 @@ namespace ProntoMVC.Reportes
             // "/informes/" + reportName;
 
 
-            lblTitulo.Text = reportName;
+            //lblTitulo.Text = reportName;
 
 
             ReportViewerRemoto.ServerReport.Refresh();

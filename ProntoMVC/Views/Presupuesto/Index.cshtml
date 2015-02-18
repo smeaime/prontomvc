@@ -8,13 +8,25 @@
 
 <br />
 
-<button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">
-    Nueva Solicitud de Cotizacion
-</button>
-<br /><br />
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"   style="font-size: 14px;"></table>
-<div id="ListaPager" class="scroll" style="text-align: center;"></div>
-@*<p>@Html.ActionLink("Nuevo Presupuesto", "Edit", new { id = -1 }, null)</p> *@
+<div style=" padding-left: 15px;  padding-right: 15px ;">
+    <div>
+
+        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">
+            Nueva Solicitud de Cotizacion
+        </button>
+        <br /><br />
+        @*<table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;"></table>
+            <div id="ListaPager" class="scroll" style="text-align: center;"></div>*@
+        @*<p>@Html.ActionLink("Nuevo Presupuesto", "Edit", new { id = -1 }, null)</p> *@
+
+
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center;">
+        </div>
+
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -30,7 +42,7 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total', 
+            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
                        'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
