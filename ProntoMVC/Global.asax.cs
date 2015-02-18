@@ -55,7 +55,8 @@ namespace ProntoMVC
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal && ConfigurationManager.AppSettings["Debug"].ToString()=="SI")
+            //if (Request.IsLocal && )
+            if (ConfigurationManager.AppSettings["Debug"].ToString() == "SI")
             {
                 MiniProfiler.Start();
             }
@@ -74,7 +75,7 @@ namespace ProntoMVC
             MiniProfilerEF6.Initialize();
             GlobalFilters.Filters.Add(new StackExchange.Profiling.Mvc.ProfilingActionFilter());
 
-            
+
 
             ViewEngines.Engines.Add(new RazorViewEngine());
 

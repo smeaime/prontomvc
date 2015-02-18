@@ -2163,7 +2163,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i).ToList();
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i); //.ToList();
 
 
 
