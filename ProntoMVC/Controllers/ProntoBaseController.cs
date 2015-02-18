@@ -23,6 +23,8 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq.Expressions;
 using System.Data.Entity;
 
+using StackExchange.Profiling;
+
 
 namespace ProntoMVC.Controllers
 {
@@ -212,47 +214,54 @@ namespace ProntoMVC.Controllers
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
-            base.Initialize(rc);
 
-            // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
-            // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-            ROOT = ConfigurationManager.AppSettings["Root"];
-            asignacadena((string)rc.HttpContext.Session["BasePronto"]);
+            MiniProfiler profiler = MiniProfiler.Current;
 
-
-
-            string us = Membership.GetUser().ProviderUserKey.ToString();
-
-            string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-            System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                                     "SELECT * FROM BASES " +
-                                                     "join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
-                                                     "where UserId='" + us + "'");
-            //DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
-            // List<string> baselistado = new List<string>();
-            List<SelectListItem> baselistado = new List<SelectListItem>();
-            foreach (DataRow r in dt.Rows)
+            using (profiler.Step("En el Initialize"))
             {
-                baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
+
+
+                base.Initialize(rc);
+
+                // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
+                // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
+                ROOT = ConfigurationManager.AppSettings["Root"];
+                asignacadena((string)rc.HttpContext.Session["BasePronto"]);
+
+
+
+                string us = Membership.GetUser().ProviderUserKey.ToString();
+
+                string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+                System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                                         "SELECT * FROM BASES " +
+                                                         "join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                         "where UserId='" + us + "'");
+                //DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
+                // List<string> baselistado = new List<string>();
+                List<SelectListItem> baselistado = new List<SelectListItem>();
+                foreach (DataRow r in dt.Rows)
+                {
+                    baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
+                }
+
+
+                ViewBag.Bases = baselistado;
+
+
+                //try
+                //{
+                //    if (!PuedeLeer(rc.RouteData.Values["controller"].ToString())) db = null;
+
+                //}
+                //catch (Exception)
+                //{
+
+                //  //  throw;
+                //}
+
+                //PuedeLeer(rc.RouteData.Values["action"])
             }
-
-
-            ViewBag.Bases = baselistado;
-
-
-            //try
-            //{
-            //    if (!PuedeLeer(rc.RouteData.Values["controller"].ToString())) db = null;
-
-            //}
-            //catch (Exception)
-            //{
-
-            //  //  throw;
-            //}
-
-            //PuedeLeer(rc.RouteData.Values["action"])
-
         }
 
 
@@ -263,145 +272,151 @@ namespace ProntoMVC.Controllers
             //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
             //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
 
-            base.OnActionExecuting(filterContext);
+            MiniProfiler profiler = MiniProfiler.Current;
 
-
-
-
-
-
-            if (this.Session["BasePronto"] == null)
+            using (profiler.Step("En el OnActionExecuting"))
             {
 
-                // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
-                // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
+                base.OnActionExecuting(filterContext);
 
-                // -ok, pero pasá la información de en qué página estaba antes!!!!
 
-                AccountController a = new AccountController();
-                if (a.BuscarUltimaBaseAccedida() != "")
+
+
+
+
+                if (this.Session["BasePronto"] == null)
                 {
-                    this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
 
-                }
+                    // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
+                    // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
 
-                else
-                {
-                    filterContext.Result = new RedirectToRouteResult(
-                              new System.Web.Routing.RouteValueDictionary { { "controller", "Account" }, { "action", "ElegirBase" }, { "area", "" }
+                    // -ok, pero pasá la información de en qué página estaba antes!!!!
+
+                    AccountController a = new AccountController();
+                    if (a.BuscarUltimaBaseAccedida() != "")
+                    {
+                        this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
+
+                    }
+
+                    else
+                    {
+                        filterContext.Result = new RedirectToRouteResult(
+                                  new System.Web.Routing.RouteValueDictionary { { "controller", "Account" }, { "action", "ElegirBase" }, { "area", "" }
                               , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
                           });
-                    return;
+                        return;
+                    }
                 }
-            }
 
-            if (!VerificarPassBase(filterContext))
-            {
-                //filterContext.Result = new RedirectResult(  AppDom  );
-                filterContext.Result = new RedirectToRouteResult(
-                        new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } 
+                if (!VerificarPassBase(filterContext))
+                {
+                    //filterContext.Result = new RedirectResult(  AppDom  );
+                    filterContext.Result = new RedirectToRouteResult(
+                            new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } 
                                 , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
                         });
 
-                return;
-            }
+                    return;
+                }
 
 
 
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
 
 
 
 
 
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
 
 
-            bool ok;
+                bool ok;
 
-            try
-            {
+                try
+                {
 
-                //ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
-                ok = true;
-
-            }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
-            }
-
-
-
-            try
-            {
-                if ((filterContext.RouteData.Values["action"].NullSafeToString() == "Edit" &&
-                     filterContext.HttpContext.Request.HttpMethod == "POST") ||
-                    filterContext.RouteData.Values["id"].NullSafeToString() == "-1")
-
+                    //ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
                     ok = true;
-                // ok = (PuedeEditar(filterContext.RouteData.Values["controller"].ToString()));
-                else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
+                }
+
+
+
+                try
+                {
+                    if ((filterContext.RouteData.Values["action"].NullSafeToString() == "Edit" &&
+                         filterContext.HttpContext.Request.HttpMethod == "POST") ||
+                        filterContext.RouteData.Values["id"].NullSafeToString() == "-1")
+
+                        ok = true;
+                    // ok = (PuedeEditar(filterContext.RouteData.Values["controller"].ToString()));
+                    else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de edición para el modulo " + filterContext.RouteData.Values["controller"].ToString());
+                }
+
+
+
+
+                try
+                {
+                    if (filterContext.RouteData.Values["action"].ToString().Contains("Delete"))
+                        ok = (PuedeBorrar(filterContext.RouteData.Values["controller"].ToString()));
+                    else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de borrado para el modulo " + filterContext.RouteData.Values["controller"].ToString());
+                }
 
             }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de edición para el modulo " + filterContext.RouteData.Values["controller"].ToString());
-            }
-
-
-
-
-            try
-            {
-                if (filterContext.RouteData.Values["action"].ToString().Contains("Delete"))
-                    ok = (PuedeBorrar(filterContext.RouteData.Values["controller"].ToString()));
-                else ok = true;
-
-            }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de borrado para el modulo " + filterContext.RouteData.Values["controller"].ToString());
-            }
-
         }
 
 
