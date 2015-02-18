@@ -97,6 +97,7 @@ namespace ProntoMVC.Controllers
 
             var Fac4 = (from u in users
                         join n in emp on u.UserName equals n.UsuarioNT
+                        where !usersext.Select(x => x.UserName).Contains(u.UserName)   
                         select new c
                         {
                             IdFactura = u.UserId,
@@ -220,7 +221,7 @@ namespace ProntoMVC.Controllers
                                 
                             a.leyenda!="sin usuario"  ? 
                             
-                            "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web</>" :
+                            "<a href="+ Url.Action("Details",  "UserAdministration",new {id = a.UserId, area="MvcMembership" } )  +">Web" +   (a.leyenda=="usuario externo!"  ? " externo"  : ""  ) +  "</>" :         
                             
                             "<a href="+ Url.Action("CreateUser",  "UserAdministration",new {id = -1, area="MvcMembership" } )  +">CREAR USUARIO</>",
 
