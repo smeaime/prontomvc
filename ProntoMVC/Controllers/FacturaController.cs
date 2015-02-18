@@ -384,29 +384,52 @@ namespace ProntoMVC.Controllers
                                     }
                                 }
                             }
+                            
+                            ////////////////////////////////////////////// ARTICULOS //////////////////////////////////////////////
+                            //foreach (var d in Factura.DetalleFacturas)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleFacturas.Where(c => c.IdDetalleFactura == d.IdDetalleFactura && d.IdDetalleFactura > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleFacturas.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleFacturas.Where(c => c.IdDetalleFactura != 0).ToList())
+                            //{
+                            //    if (!Factura.DetalleFacturas.Any(c => c.IdDetalleFactura == DetalleEntidadOriginal.IdDetalleFactura))
+                            //    {
+                            //        EntidadOriginal.DetalleFacturas.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
-                            ////////////////////////////////////////////// CONCEPTOS //////////////////////////////////////////////
-                            foreach (var d in Factura.DetalleFacturas)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleFacturas.Where(c => c.IdDetalleFactura == d.IdDetalleFactura && d.IdDetalleFactura > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleFacturas.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleFacturas.Where(c => c.IdDetalleFactura != 0).ToList())
-                            {
-                                if (!Factura.DetalleFacturas.Any(c => c.IdDetalleFactura == DetalleEntidadOriginal.IdDetalleFactura))
-                                {
-                                    EntidadOriginal.DetalleFacturas.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //////////////////////////////////////////// ORDENES COMPRA ////////////////////////////////////////////
+                            //foreach (var d in Factura.DetalleFacturasOrdenesCompras)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleFacturasOrdenesCompras.Where(c => c.IdDetalleFacturaOrdenesCompra == d.IdDetalleFacturaOrdenesCompra && d.IdDetalleFacturaOrdenesCompra > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleFacturasOrdenesCompras.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleFacturasOrdenesCompras.Where(c => c.IdDetalleFacturaOrdenesCompra != 0).ToList())
+                            //{
+                            //    if (!Factura.DetalleFacturasOrdenesCompras.Any(c => c.IdDetalleFacturaOrdenesCompra == DetalleEntidadOriginal.IdDetalleFacturaOrdenesCompra))
+                            //    {
+                            //        EntidadOriginal.DetalleFacturasOrdenesCompras.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
                             db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
@@ -426,12 +449,8 @@ namespace ProntoMVC.Controllers
                                     LogComprobantesElectronico log = new LogComprobantesElectronico();
                                     Logica_FacturaElectronica(ref Factura, ref log);
                                     db.LogComprobantesElectronicos.Add(log);
-                                    PuntoVenta.ProximoNumero = Factura.NumeroFactura + 1;
                                 }
-                                else
-                                {
-                                    PuntoVenta.ProximoNumero = Factura.NumeroFactura + 1;
-                                }
+                                PuntoVenta.ProximoNumero = Factura.NumeroFactura + 1;
                                 db.Entry(PuntoVenta).State = System.Data.Entity.EntityState.Modified;
                             }
 
@@ -440,7 +459,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
-                        if (!mAnulada && mAplicarEnCtaCte)
+                        if (mIdFactura <= 0 && !mAnulada && mAplicarEnCtaCte)
                         {
                             CuentasCorrientesDeudor CtaCte = new CuentasCorrientesDeudor();
                             CtaCte.IdCliente = Factura.IdCliente;
@@ -475,14 +494,14 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
-                        if (mIdFactura > 0 || mAnulada)
+                        if (mAnulada)
                         {
                             var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == mIdTipoComprobante && c.IdComprobante == mIdFactura).ToList();
                             if (Subdiarios != null) { foreach (Subdiario s in Subdiarios) { db.Entry(s).State = System.Data.Entity.EntityState.Deleted; } }
                             db.SaveChanges();
                         }
 
-                        if (!mAnulada)
+                        if (mIdFactura <= 0 && !mAnulada)
                         {
                             Subdiario s;
 
@@ -1006,7 +1025,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                        .OrderByDescending(x => x.FechaFactura)
+                        .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -1092,6 +1111,10 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Det
                         from b in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
+                        from c in db.DetalleFacturasOrdenesCompras.Where(o => o.IdDetalleFactura == a.IdDetalleFactura).DefaultIfEmpty()
+                        from d in db.DetalleOrdenesCompras.Where(o => o.IdDetalleOrdenCompra == c.IdDetalleOrdenCompra).DefaultIfEmpty()
+                        from e in db.DetalleFacturasRemitos.Where(o => o.IdDetalleFactura == a.IdDetalleFactura).DefaultIfEmpty()
+                        from f in db.DetalleRemitos.Where(o => o.IdDetalleRemito == e.IdDetalleRemito).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleFactura,
@@ -1099,15 +1122,24 @@ namespace ProntoMVC.Controllers
                             a.IdUnidad,
                             a.IdColor,
                             a.OrigenDescripcion,
+                            TipoCancelacion = (d != null ? d.TipoCancelacion : 1),
+                            IdDetalleOrdenCompra = (c != null ? c.IdDetalleOrdenCompra : 0),
+                            IdDetalleRemito = 0,
                             Codigo = a.Articulo.Codigo,
                             Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
                             a.Cantidad,
                             Unidad = a.Unidade.Abreviatura,
+                            a.PorcentajeCertificacion,
                             Costo = Math.Round((double)a.Costo,2),
                             PrecioUnitario = Math.Round((double)a.PrecioUnitario,2),
                             a.Bonificacion,
                             Importe = Math.Round((double)a.Cantidad * (double)a.PrecioUnitario * (double)(1 - (a.Bonificacion ?? 0) / 100), 2),
-                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : ""))
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            a.Observaciones,
+                            OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
+                            OrdenCompraItem = d.NumeroItem,
+                            RemitoNumero = f.Remito.NumeroRemito,
+                            RemitoItem = f.NumeroItem
                         }).OrderBy(x => x.IdDetalleFactura).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -1126,15 +1158,22 @@ namespace ProntoMVC.Controllers
                             a.IdUnidad.NullSafeToString(),
                             a.IdColor.NullSafeToString(),
                             a.OrigenDescripcion.NullSafeToString(),
+                            a.TipoCancelacion.NullSafeToString(),
+                            a.IdDetalleOrdenCompra.NullSafeToString(),
+                            a.IdDetalleRemito.NullSafeToString(),
                             a.Codigo.NullSafeToString(),
                             a.Articulo.NullSafeToString(),
                             a.Cantidad.NullSafeToString(),
                             a.Unidad.NullSafeToString(),
+                            a.PorcentajeCertificacion.NullSafeToString(),
                             a.Costo.NullSafeToString(),
                             a.PrecioUnitario.NullSafeToString(),
                             a.Bonificacion.NullSafeToString(),
                             a.Importe.NullSafeToString(),
-                            a.TiposDeDescripcion.NullSafeToString()
+                            a.TiposDeDescripcion.NullSafeToString(),
+                            a.Observaciones.NullSafeToString(),
+                            a.OrdenCompraNumero == null ? "" : a.OrdenCompraNumero.ToString().PadLeft(8,'0') + "/" + a.OrdenCompraItem.ToString().PadLeft(2,'0'),
+                            a.RemitoNumero == null ? "" : a.RemitoNumero.ToString().PadLeft(8,'0') + "/" + a.RemitoItem.ToString().PadLeft(2,'0')
                             }
                         }).ToArray()
             };
@@ -1357,7 +1396,7 @@ namespace ProntoMVC.Controllers
             Int32 mDetalleTributoItemCantidad = 0;
             Int32 mIndiceItem = 0;
             Int32 mTipoIvaAFIP = 0;
-            Int32 mNumeroFacturaElectronica = 0;
+            Int32 mNumeroComprobanteElectronico = 0;
             
             decimal mImporteTotal = 0;
             decimal mSubTotal = 0;
@@ -1375,12 +1414,15 @@ namespace ProntoMVC.Controllers
             decimal mOtrasPercepciones3 = 0;
 
             bool mResul;
-            bool glbDebugFacturaElectronica = true;
+            bool glbDebugFacturaElectronica = false;
 
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdMonedaPesos = parametros.IdMoneda ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            var Parametros2 = db.Parametros2.Where(p => p.Campo == "DebugFacturaElectronica").FirstOrDefault();
+            if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
 
             var Empresa = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
             mCuitEmpresa = (Empresa.Cuit ?? "").Replace("-","");
@@ -1434,17 +1476,17 @@ namespace ProntoMVC.Controllers
 
             FE = new WSAFIPFE.Factura();
             //WSAFIPFE.Factura FEx = new WSAFIPFE.Factura();
+            //esto en modo test tambien debería devolver true  https://sites.google.com/site/facturaelectronicax/documentacion-wsfev1/wsfev1/wsfev1-ejemplos/ejemplo-wsfev1-visual-basic-net-para-cae
 
             if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
             {
                 mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
+                if (glbDebugFacturaElectronica) { Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
                 
-                //if (glbPathPlantillas.Contains("TestProject")) glbPathPlantillas = "E:\\Backup\\BDL\\ProntoWeb\\ProntoMVC\\ProntoMVC\\Documentos";
                 mResul = FE.iniciar(WSAFIPFE.Factura.modoFiscal.Fiscal, mCuitEmpresa, glbPathPlantillas + "\\" + mArchivoAFIP + ".pfx", glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic");
 
                 if (mResul) mResul = FE.f1ObtenerTicketAcceso();
-                //esto en modo test tambien debería devolver true  https://sites.google.com/site/facturaelectronicax/documentacion-wsfev1/wsfev1/wsfev1-ejemplos/ejemplo-wsfev1-visual-basic-net-para-cae
-                //Console.Write(FE.UltimoMensajeError);
+                if (glbDebugFacturaElectronica) { Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
 
                 if (mResul)
                 {
@@ -1591,6 +1633,7 @@ namespace ProntoMVC.Controllers
                     FE.ArchivoXMLRecibido = mArchivoXMLRecibido;
 
                     mResul = FE.F1CAESolicitar();
+                    if (glbDebugFacturaElectronica) { Console.Write("F1CAESolicitar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg + " - CAE : " + FE.F1RespuestaDetalleCae); }
 
                     if (mResul && FE.F1RespuestaDetalleCae.Length > 0)
                     {
@@ -1610,8 +1653,8 @@ namespace ProntoMVC.Controllers
                             var s = "Error al obtener CAE : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
                             throw new Exception(s);
                         }
-                        mNumeroFacturaElectronica = Convert.ToInt32(FE.F1RespuestaDetalleCbteDesdeS);
-                        if (mNumeroFacturaElectronica == 0)
+                        mNumeroComprobanteElectronico = Convert.ToInt32(FE.F1RespuestaDetalleCbteDesdeS);
+                        if (mNumeroComprobanteElectronico == 0)
                         {
                             var s = "El Web service devuelve 0 como numero de factura : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
                             throw new Exception(s);
@@ -1620,7 +1663,7 @@ namespace ProntoMVC.Controllers
                         log.Letra = mTipoABC;
                         log.Tipo = "FA";
                         log.PuntoVenta = mPuntoVenta;
-                        log.NumeroComprobante = mNumeroFacturaElectronica;
+                        log.NumeroComprobante = mNumeroComprobanteElectronico;
                         log.Identificador = 0;
                         log.Enviado = mArchivoXMLEnviado2;
                         log.Recibido = mArchivoXMLRecibido2;
@@ -1632,7 +1675,7 @@ namespace ProntoMVC.Controllers
                             mFechaString = mFechaVencimientoORechazoCAE.Substring(6, 2) + "/" + mFechaVencimientoORechazoCAE.Substring(4, 2) + "/" + mFechaVencimientoORechazoCAE.Substring(0, 4);
                             o.FechaVencimientoORechazoCAE = Convert.ToDateTime(mFechaString);
                         }
-                        o.NumeroFactura = mNumeroFacturaElectronica;
+                        o.NumeroFactura = mNumeroComprobanteElectronico;
                     }
                     else
                     {
@@ -1660,15 +1703,15 @@ namespace ProntoMVC.Controllers
             string mArchivoXMLRecibido2 = "";
 
             Int32 mPuntoVenta = 0;
-            Int32 mNumeroFacturaElectronica = 0;
+            Int32 mNumeroComprobanteElectronico = 0;
 
             DateTime mFecha;
 
             glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
 
-            mNumeroFacturaElectronica = 2020;
-            mArchivoXMLEnviado = glbPathPlantillas + "\\FACTURA_" + mNumeroFacturaElectronica.ToString() + "_Enviado.xml";
-            mArchivoXMLRecibido = glbPathPlantillas + "\\FACTURA_" + mNumeroFacturaElectronica.ToString() + "_Recibido.xml";
+            mNumeroComprobanteElectronico = 2020;
+            mArchivoXMLEnviado = glbPathPlantillas + "\\FACTURA_" + mNumeroComprobanteElectronico.ToString() + "_Enviado.xml";
+            mArchivoXMLRecibido = glbPathPlantillas + "\\FACTURA_" + mNumeroComprobanteElectronico.ToString() + "_Recibido.xml";
 
             if (System.IO.File.Exists(mArchivoXMLEnviado)) { mArchivoXMLEnviado2 = System.IO.File.ReadAllText(mArchivoXMLEnviado); }
             if (System.IO.File.Exists(mArchivoXMLRecibido)) { mArchivoXMLRecibido2 = System.IO.File.ReadAllText(mArchivoXMLRecibido); }
@@ -1681,15 +1724,12 @@ namespace ProntoMVC.Controllers
             log.Letra = "A";
             log.Tipo = "FA";
             log.PuntoVenta = 11;
-            log.NumeroComprobante = mNumeroFacturaElectronica;
+            log.NumeroComprobante = mNumeroComprobanteElectronico;
             log.Identificador = 0;
             log.Enviado = mArchivoXMLEnviado2;
             log.Recibido = mArchivoXMLRecibido2;
             db.LogComprobantesElectronicos.Add(log);
             db.SaveChanges();
-
-
-
 
         }
 

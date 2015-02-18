@@ -106,16 +106,19 @@ namespace ProntoMVC.Controllers
             ViewBag.IdObra3 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra3);
             ViewBag.IdObra4 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra4);
             ViewBag.IdObra5 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra5);
-            ViewBag.IdCuenta1 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == -1), "IdCuenta", "Descripcion", o.IdCuenta1);
-            ViewBag.IdCuenta2 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == -1), "IdCuenta", "Descripcion", o.IdCuenta2);
-            ViewBag.IdCuenta3 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == -1), "IdCuenta", "Descripcion", o.IdCuenta3);
-            ViewBag.IdCuenta4 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == -1), "IdCuenta", "Descripcion", o.IdCuenta4);
-            ViewBag.IdCuenta5 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == -1), "IdCuenta", "Descripcion", o.IdCuenta5);
+            ViewBag.IdCuenta = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta), "IdCuenta", "Descripcion", o.IdCuenta);
+            ViewBag.IdCuenta1 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta1), "IdCuenta", "Descripcion", o.IdCuenta1);
+            ViewBag.IdCuenta2 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta2), "IdCuenta", "Descripcion", o.IdCuenta2);
+            ViewBag.IdCuenta3 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta3), "IdCuenta", "Descripcion", o.IdCuenta3);
+            ViewBag.IdCuenta4 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta4), "IdCuenta", "Descripcion", o.IdCuenta4);
+            ViewBag.IdCuenta5 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta5), "IdCuenta", "Descripcion", o.IdCuenta5);
+            ViewBag.IdCuentaGasto = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto);
             ViewBag.IdCuentaGasto1 = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto1);
             ViewBag.IdCuentaGasto2 = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto2);
             ViewBag.IdCuentaGasto3 = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto3);
             ViewBag.IdCuentaGasto4 = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto4);
             ViewBag.IdCuentaGasto5 = new SelectList(db.CuentasGastos.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdCuentaGasto", "Descripcion", o.IdCuentaGasto5);
+            ViewBag.IdTipoCuentaGrupo = new SelectList(db.TiposCuentaGrupos.OrderBy(x => x.Descripcion), "IdTipoCuentaGrupo", "Descripcion");
             ViewBag.IdTipoCuentaGrupo1 = new SelectList(db.TiposCuentaGrupos.OrderBy(x => x.Descripcion), "IdTipoCuentaGrupo", "Descripcion");
             ViewBag.IdTipoCuentaGrupo2 = new SelectList(db.TiposCuentaGrupos.OrderBy(x => x.Descripcion), "IdTipoCuentaGrupo", "Descripcion");
             ViewBag.IdTipoCuentaGrupo3 = new SelectList(db.TiposCuentaGrupos.OrderBy(x => x.Descripcion), "IdTipoCuentaGrupo", "Descripcion");
@@ -359,7 +362,7 @@ namespace ProntoMVC.Controllers
                 mIdCuentaCajaTitulo = parametros.IdCuentaCajaTitulo ?? 0;
 
                 var Parametros2 = db.Parametros2.Where(p => p.Campo == "IdTipoComprobanteDocumento").FirstOrDefault();
-                if (Parametros2 != null) { mIdTipoComprobanteDocumento = Convert.ToInt32(Parametros2.Valor ?? "0"); }
+                if (Parametros2 != null) { if (Parametros2.Valor.Length > 0) { mIdTipoComprobanteDocumento = Convert.ToInt32(Parametros2.Valor ?? "0"); } }
 
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();

@@ -6,5 +6,7 @@ Funciones de sql (Linq to SQL)
 
 Botones de aceptar flotantes en todos los formularios
 
+Filtros y ordenamiento de grillas generales
+
 
 
