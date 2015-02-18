@@ -143,7 +143,6 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<TiposCuentaGrupos> TiposCuentaGrupos { get; set; }
         public virtual DbSet<Titulo> Titulos { get; set; }
         public virtual DbSet<DescripcionIva> DescripcionIvas { get; set; }
-        public virtual DbSet<Conjunto> Conjuntos { get; set; }
         public virtual DbSet<Subrubro> Subrubros { get; set; }
         public virtual DbSet<DetalleOrdenesPagoImpuesto> DetalleOrdenesPagoImpuestos { get; set; }
         public virtual DbSet<Subdiario> Subdiarios { get; set; }
@@ -191,6 +190,9 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<Devolucione> Devoluciones { get; set; }
         public virtual DbSet<Chofere> Choferes { get; set; }
         public virtual DbSet<LogComprobantesElectronico> LogComprobantesElectronicos { get; set; }
+        public virtual DbSet<PlazosFijo> PlazosFijos { get; set; }
+        public virtual DbSet<Conjunto> Conjuntos { get; set; }
+        public virtual DbSet<DetalleConjunto> DetalleConjuntos { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

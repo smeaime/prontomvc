@@ -258,7 +258,7 @@ namespace ProntoMVC.Controllers
         {
             Dictionary<int, string> ubicaciones = new Dictionary<int, string>();
             foreach (ProntoMVC.Data.Models.Ubicacion u in db.Ubicaciones.OrderBy(x => x.Descripcion).ToList())
-                ubicaciones.Add(u.IdUbicacion, u.Descripcion);
+                ubicaciones.Add(u.IdUbicacion, (u.Deposito.Abreviatura != null ? " " + u.Deposito.Abreviatura : "") + (u.Descripcion != null ? " " + u.Descripcion : "") + (u.Estanteria != null ? " Est.:" + u.Estanteria : "") + (u.Modulo != null ? " Mod.:" + u.Modulo : "") + (u.Gabeta != null ? " Gab.:" + u.Gabeta : ""));
 
             return PartialView("Select", ubicaciones);
         }

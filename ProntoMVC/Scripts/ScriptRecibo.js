@@ -7,6 +7,7 @@ $(function () {
     var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mOtrosConceptos, mTotalDiferenciaBalanceo, IdObra, IdCuentaGasto, newOptions;
 
     pageLayout.show('east');
+    pageLayout.close('east');
 
     if ($("#Anulada").val() == "SI") {
         $("#grabar2").prop("disabled", true);
@@ -19,6 +20,7 @@ $(function () {
     }
     TraerCotizacion()
     TraerNumeroComprobante()
+    TraerCodigosCuentas()
 
     //$('.collapse').on('shown.bs.collapse', function () {
     //    $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
@@ -255,8 +257,8 @@ $(function () {
         datatype: 'json',
         mtype: 'POST',
         colNames: ['Acciones', 'IdDetalleReciboValores', 'IdTipoValor', 'IdBanco', 'IdCuentaBancariaTransferencia', 'IdCaja', 'IdTarjetaCredito',
-                    'Tipo', 'Fecha Vto.', 'Nro. int.', 'Nro. valor', 'Importe', 'Banco', 'Cuit del librador', 'Cuenta bancaria (transferencias)', 'Nro. transf.', 'Caja',
-                    'Tarjeta de credito', 'Nro. tarjeta', 'Expiracion tarjeta', 'Cuotas'],
+                    'Tipo', 'Fecha Vto.', 'Nro. int.', 'Nro. valor', 'Importe', 'Banco', 'Cuit librador', 'Cuenta bancaria (transferencias)', 'Nro. transf.', 'Caja',
+                    'Tarjeta de credito', 'Nro. tarjeta', 'Exp. tarjeta', 'Cuotas'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleReciboValores', index: 'IdDetalleReciboValores', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
@@ -880,7 +882,7 @@ $(function () {
                     {
                         name: 'CuentaGasto', index: 'CuentaGasto', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
-                            dataUrl: ROOT + 'Obra/GetCuentasGasto',
+                            dataUrl: ROOT + 'CuentaGasto/GetCuentasGasto',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },
@@ -915,7 +917,7 @@ $(function () {
                     {
                         name: 'TipoCuentaGrupo', index: 'TipoCuentaGrupo', formoptions: { rowpos: 3, colpos: 2 }, align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
-                            dataUrl: ROOT + 'Obra/GetTiposCuentaGrupos',
+                            dataUrl: ROOT + 'TiposCuentaGrupos/GetTiposCuentaGrupos',
                             dataInit: function (elem) {
                                 $(elem).width(190);
                             },
@@ -1187,7 +1189,7 @@ $(function () {
         //var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
 
         dataIds = $gridDestino.jqGrid('getDataIDs');
-        for (i = 0; i < dataIds.length; i++) {
+        for (i = 1; i < dataIds.length; i++) {
             data2 = $gridDestino.jqGrid('getRowData', dataIds[i]);
             if (data2.IdImputacion == IdCtaCte) {
                 if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
@@ -1249,12 +1251,19 @@ $(function () {
 
     //////////////////////////////////// CHANGES ///////////////////////////////////////////////
 
+    $("#IdPuntoVenta").change(function () {
+        TraerNumeroComprobante()
+    });
+
     $("#AsientoManual").change(function () {
         ActivarAsientoManual($("#AsientoManual").is(':checked'));
     });
 
+    $('select#IdCuenta').change(function () {
+        DatosCuenta($(this).val(), "p", 0, "Codigo","");
+    });
     $('select#IdCuenta1').change(function () {
-        DatosCuenta($(this).val(), "p", 0, "Codigo","1");
+        DatosCuenta($(this).val(), "p", 0, "Codigo", "1");
     });
     $('select#IdCuenta2').change(function () {
         DatosCuenta($(this).val(), "p", 0, "Codigo", "2");
@@ -1269,6 +1278,17 @@ $(function () {
         DatosCuenta($(this).val(), "p", 0, "Codigo", "5");
     });
 
+    $('#CodigoCuenta').change(function () {
+        var CodigoCuenta = $(this).val();
+        var IdCuenta = TraerCuentaPorCodigo(CodigoCuenta);
+        $('select#IdCuenta').val(IdCuenta);
+
+        newOptions = TraerCuentaPorCodigo2(CodigoCuenta);
+        if (newOptions.length > 0) {
+            $("select#IdCuenta").empty();
+            $("select#IdCuenta").append(newOptions);
+        }
+    });
     $('#CodigoCuenta1').change(function () {
         var CodigoCuenta = $(this).val();
         var IdCuenta = TraerCuentaPorCodigo(CodigoCuenta);
@@ -1325,6 +1345,17 @@ $(function () {
         }
     });
 
+    $('select#IdObra').change(function () {
+        IdObra = $(this).val();
+        IdCuentaGasto = $('select#IdCuentaGasto').val() || 0;
+        $("#CodigoCuenta").val("");
+
+        newOptions = TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, "p", "");
+        if (newOptions.length > 0) {
+            $("select#IdCuenta").empty();
+            $("select#IdCuenta").append(newOptions);
+        }
+    });
     $('select#IdObra1').change(function () {
         IdObra = $(this).val();
         IdCuentaGasto = $('select#IdCuentaGasto1').val() || 0;
@@ -1381,6 +1412,17 @@ $(function () {
         }
     });
 
+    $('select#IdCuentaGasto').change(function () {
+        IdCuentaGasto = $(this).val();
+        IdObra = $('select#IdObra').val() || 0;
+        $("#CodigoCuenta").val("");
+
+        newOptions = TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, "p", "");
+        if (newOptions.length > 0) {
+            $("select#IdCuenta").empty();
+            $("select#IdCuenta").append(newOptions);
+        }
+    });
     $('select#IdCuentaGasto1').change(function () {
         IdCuentaGasto = $(this).val();
         IdObra = $('select#IdObra1').val() || 0;
@@ -1437,6 +1479,16 @@ $(function () {
         }
     });
 
+    $('select#IdTipoCuentaGrupo').change(function () {
+        IdTipoCuentaGrupo = $(this).val();
+        $("#CodigoCuenta").val("");
+
+        newOptions = TraerCuentasPorIdTipoCuentaGrupo(IdTipoCuentaGrupo, "p", "");
+        if (newOptions.length > 0) {
+            $("select#IdCuenta").empty();
+            $("select#IdCuenta").append(newOptions);
+        }
+    });
     $('select#IdTipoCuentaGrupo1').change(function () {
         IdTipoCuentaGrupo = $(this).val();
         $("#CodigoCuenta1").val("");
@@ -1499,10 +1551,16 @@ $(function () {
 
     function SerializaForm() {
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
+
+        var TipoOperacionOtros = $("input[name='TipoOperacionOtros']:checked").val();
+
         var cabecera = $("#formid").serializeObject();
         cabecera.IdCliente = $("#IdCliente").val();
         cabecera.IdCuenta = $("#IdCuenta").val();
         cabecera.GastosGenerales = $("#Diferencia").val() || 0;
+        cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
+        cabecera.PuntoVenta = $("#IdPuntoVenta").find('option:selected').text();
+        cabecera.Cliente = "";
 
         var chk = $('#AsientoManual').is(':checked');
         if (chk) {
@@ -1511,7 +1569,7 @@ $(function () {
             cabecera.AsientoManual = "NO";
         };
 
-        cabecera.DetalleRecibos = [];
+        cabecera.DetalleRecibosImputaciones = [];
         $grid = $('#Lista');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -1537,7 +1595,7 @@ $(function () {
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetalleRecibos.push(data2);
+                cabecera.DetalleRecibosImputaciones.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -1628,7 +1686,7 @@ $(function () {
                 }
 
                 data1 = '{"IdDetalleReciboRubrosContables":"' + iddeta + '",';
-                data1 = data1 + '"IdRecibo":"' + $("#IdReciboIdRecibo").val() + '",';
+                data1 = data1 + '"IdRecibo":"' + $("#IdRecibo").val() + '",';
                 for (j = 0; j < colModel.length; j++) {
                     cm = colModel[j]
                     if (cm.label === 'TB') {
@@ -1706,38 +1764,49 @@ $(function () {
     });
 
     function ActualizarDatosContables() {
-        var datos = "";
-        var cabecera = SerializaForm();
-        $.ajax({
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Recibo/CalcularAsiento',
-            dataType: 'json',
-            async: false,
-            data: JSON.stringify(cabecera),
-            success: function (result) {
-                if (result) {
-                    datos = JSON.parse(result);
-                    $("#ListaContable").jqGrid("clearGridData", true)
-                    $("#ListaContable").jqGrid().setGridParam({ data: datos }).trigger("reloadGrid");
-                } else { alert('No se pudo calcular el comprobante.'); }
-            },
-            beforeSend: function () {
-            },
-            error: function (xhr, textStatus, exceptionThrown) {
-                try {
-                    var errorData = $.parseJSON(xhr.responseText);
-                    var errorMessages = [];
-                    for (var key in errorData) { errorMessages.push(errorData[key]); }
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                    $("#mensajeAlerta").show();
-                } catch (e) {
-                    $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show();
+        var AsientoManual = $("input[name='AsientoManual']:checked").val();
+        if (AsientoManual != "true") {
+            var datos = "";
+            var cabecera = SerializaForm();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: ROOT + 'Recibo/CalcularAsiento',
+                dataType: 'json',
+                async: false,
+                data: JSON.stringify(cabecera),
+                success: function (result) {
+                    if (result) {
+                        datos = JSON.parse(result);
+                        $("#ListaContable").jqGrid("clearGridData", true)
+                        $("#ListaContable").jqGrid().setGridParam({ data: datos }).trigger("reloadGrid");
+                    } else { alert('No se pudo calcular el comprobante.'); }
+                },
+                beforeSend: function () {
+                },
+                error: function (xhr, textStatus, exceptionThrown) {
+                    try {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        for (var key in errorData) { errorMessages.push(errorData[key]); }
+                        $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                        $("#mensajeAlerta").show();
+                    } catch (e) {
+                        $("#textoMensajeAlerta").html(xhr.responseText);
+                        $("#mensajeAlerta").show();
+                    }
                 }
-            }
-        });
+            });
+        }
     };
+
+    $('#ActualizarDatos').click(function () {
+        $('#ActualizarDatos').attr("disabled", true).val("Espere...");
+        $('html, body').css('cursor', 'wait');
+        ActualizarDatosContables();
+        $('html, body').css('cursor', 'auto');
+        $('#ActualizarDatos').attr("disabled", false).val("Recalcular");
+    });
 
 });
 
@@ -1901,7 +1970,7 @@ function DatosCuenta(IdCuenta, origen, rowid, campo, indice) {
             if (data.length > 0) {
                 var EsCajaBanco = data[0].EsCajaBanco;
                 if (origen == "p") {
-                    $("#IdCuenta").val(IdCuenta);
+                    $("#IdCuenta" + indice).val(IdCuenta);
                     if (campo == "Codigo") { $("#CodigoCuenta" + indice).val(data[0].codigo); }
                     if (indice.length > 0) {
                         $("#IdObra" + indice).val(data[0].IdObra);
@@ -1924,7 +1993,7 @@ function DatosCuenta(IdCuenta, origen, rowid, campo, indice) {
             }
             else {
                 if (origen == "p") {
-                    if (campo == "Codigo") { $("#CodigoCuenta").val(""); }
+                    if (campo == "Codigo" + indice) { $("#CodigoCuenta").val(""); }
                 } else {
                     if (origen == "f") {
                         if (campo == "Codigo") { $("#Codigo").val(""); }
@@ -2020,6 +2089,29 @@ function TraerCuentaPorCodigo2(CodigoCuenta) {
         }
     });
     return OpcionesSelect;
+}
+
+function TraerCodigosCuentas() {
+    var IdCuenta = 0, indice;
+    for (var i = 0; i <= 5; i++) {
+        if (i == 0) { indice = ""; } else { indice = i.toString();}
+        IdCuenta = $("#IdCuenta" + indice).val();
+        if (IdCuenta.length > 0) {
+            $.ajax({
+                type: "GET",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Cuenta/TraerUna/',
+                data: { IdCuenta: IdCuenta },
+                dataType: "json",
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#CodigoCuenta" + indice).val(data[0].codigo); 
+                    }
+                }
+            });
+        }
+    }
 }
 
 function TraerCuentasPorIdObraIdCuentaGasto(IdObra, IdCuentaGasto, Origen, indice) {
@@ -2515,7 +2607,7 @@ function MostrarDatosCliente(Id) {
 
 function TraerCotizacion() {
     var fecha, IdMoneda, datos1, mIdMonedaPrincipal = 1, mIdMonedaDolar = 2, mCotizacionDolar = 0;
-    fecha = $("#FechaNotaCredito").val();
+    fecha = $("#FechaRecibo").val();
     IdMoneda = $("#IdMoneda").val();
     $.ajax({
         type: "GET",
@@ -2541,12 +2633,12 @@ function TraerCotizacion() {
 
     if (IdMoneda == mIdMonedaPrincipal) {
         $('#CotizacionMoneda').val("1");
-        if (mCotizacionDolar != 0) { $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2)); }
+        if (mCotizacionDolar != 0) { $("#Cotizacion").val(mCotizacionDolar.toFixed(2)); }
     }
     else {
         if (IdMoneda == mIdMonedaDolar) {
             $("#CotizacionMoneda").val(mCotizacionDolar.toFixed(2));
-            $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2));
+            $("#Cotizacion").val(mCotizacionDolar.toFixed(2));
         }
     }
 };

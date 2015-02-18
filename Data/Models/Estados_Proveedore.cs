@@ -17,6 +17,7 @@ namespace ProntoMVC.Data.Models
         public Estados_Proveedore()
         {
             this.Clientes = new HashSet<Cliente>();
+            this.Proveedores = new HashSet<Proveedor>();
         }
     
         public int IdEstado { get; set; }
@@ -24,5 +25,6 @@ namespace ProntoMVC.Data.Models
         public string Activo { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual ICollection<Proveedor> Proveedores { get; set; }
     }
 }

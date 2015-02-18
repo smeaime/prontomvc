@@ -20,6 +20,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdDetalleOrdenCompra { get; set; }
         public Nullable<byte> EnviarEmail { get; set; }
     
+        public virtual Factura Factura { get; set; }
         public virtual DetalleFactura DetalleFactura { get; set; }
     }
 }

@@ -14,5 +14,18 @@
         <elementListCompartment Id="a5e14b64-f44b-4662-935e-e1038212a996" absoluteBounds="0.51500000000000012, 1.835, 1.9700000000000002, 18.1334228515625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="6b39cec7-0951-4942-9791-92ccc56985a5" absoluteBounds="6, 4, 2, 15.039695638020833">
+      <DataClassMoniker Name="/LinqToSQL_ProntoDataContext/DetalleRequerimientos" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ab2da1f2-d277-4d3c-85d0-939425e327a5" absoluteBounds="6.015, 4.4600000000000009, 1.9700000000000002, 14.479695638020832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.25 : 9.84199137369792); (6 : 9.84199137369792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/LinqToSQL_ProntoDataContext/Requerimientos/Requerimientos_DetalleRequerimientos" />
+      <nodes>
+        <classShapeMoniker Id="44321e8a-73cd-4579-bd1c-57b7040a4922" />
+        <classShapeMoniker Id="6b39cec7-0951-4942-9791-92ccc56985a5" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

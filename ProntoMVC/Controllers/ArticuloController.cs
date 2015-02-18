@@ -1495,8 +1495,6 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetArticulosAutocomplete2(string term)
         {
-
-
             Parametros parametros = db.Parametros.Find(1);
             int mvarIdUnidadCU = parametros.IdUnidadPorUnidad ?? 0;
             string mvarIdUnidadCUdesc;
@@ -1514,8 +1512,6 @@ namespace ProntoMVC.Controllers
             var s = parametros.IdControlCalidadStandar;
             var s2 = parametros.ControlCalidadDefault;
 
-
-
             var q = (from item in db.Articulos
                      where item.Descripcion.ToLower().Contains(term.ToLower())   //.StartsWith(term.ToLower())
                      //            where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term) ||
@@ -1532,14 +1528,46 @@ namespace ProntoMVC.Controllers
                          CostoReposicion = (item.CostoReposicion ?? 0).ToString()
                      }).Take(MAXLISTA).ToList();
 
-
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
                 q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "", CostoReposicion = "0" });
             }
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
 
+        public virtual JsonResult GetArticulosAutocompletePorIdTransportista(string term, Int32 IdTransportista = 0)
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int mvarIdUnidadCU = parametros.IdUnidadPorUnidad ?? 0;
+            string mvarIdUnidadCUdesc;
 
+            try
+            {
+                mvarIdUnidadCUdesc = mvarIdUnidadCU > 0 ? (db.Unidades.Find(mvarIdUnidadCU) ?? new Unidad()).Abreviatura : "";
+            }
+            catch (Exception ex)
+            {
+                ErrHandler.WriteError(ex);
+                mvarIdUnidadCUdesc = "";
+            }
 
+            var s = parametros.IdControlCalidadStandar;
+            var s2 = parametros.ControlCalidadDefault;
+
+            var q = (from item in db.Articulos
+                     where item.Descripcion.ToLower().Contains(term.ToLower()) && (IdTransportista < 0 || (item.IdTransportista ?? -1) == IdTransportista)
+                     orderby item.Descripcion
+                     select new
+                     {
+                         id = item.IdArticulo,
+                         value = item.Descripcion,
+                         codigo = item.Codigo
+                     }).Take(MAXLISTA).ToList();
+
+            if (q.Count == 0 && term != "No se encontraron resultados")
+            {
+                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "" });
+            }
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 

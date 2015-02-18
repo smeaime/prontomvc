@@ -883,6 +883,32 @@ namespace ProntoMVC.Controllers
             }
         }
 
+        public virtual JsonResult GetProveedorPorId(int Id)
+        {
+            var filtereditems = (from a in db.Proveedores
+                                 where (a.IdProveedor == Id)
+                                 select new
+                                 {
+                                     id = a.IdProveedor,
+                                     value = a.RazonSocial.Trim(),
+                                     a.CodigoEmpresa,
+                                     a.Direccion,
+                                     Localidad = a.Localidad.Nombre,
+                                     a.CodigoPostal,
+                                     Provincia = a.Provincia.Nombre,
+                                     Pais = a.Pais.Descripcion,
+                                     Telefono = a.Telefono1,
+                                     a.Fax,
+                                     a.Email,
+                                     a.Cuit,
+                                     DescripcionIva = a.DescripcionIva.Descripcion
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual JsonResult GetProveedoresAutocomplete2(string term)
         {
             var q = (from item in db.Proveedores
@@ -893,11 +919,13 @@ namespace ProntoMVC.Controllers
                          id = item.IdProveedor,
                          value = item.RazonSocial,
                          codigo = item.CodigoEmpresa,
-                         IdCondicionCompra = item.IdCondicionCompra,
+                         IdCodigoIva = item.IdCodigoIva.ToString(),
+                         IdCondicionCompra = item.IdCondicionCompra.ToString(),
                          Contacto = item.Contacto
                      }).Take(20).ToList();
 
-            if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+            if (q.Count == 0 && term != "No se encontraron resultados") { q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", IdCodigoIva = "", IdCondicionCompra = "", Contacto = "" }); }
+            //if (q.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
 
             return Json(q, JsonRequestBehavior.AllowGet);
         }

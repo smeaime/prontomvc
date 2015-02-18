@@ -51,6 +51,8 @@
                     <div>@Html.Hidden("Anulada", Model.Anulada)</div>
                     <div>@Html.Hidden("FechaAnulacion", Model.FechaAnulacion)</div>
                     <div>@Html.Hidden("IdAutorizaAnulacion", Model.IdUsuarioAnulacion)</div>
+                    <div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+                    <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
                 </div>
                 <div class="span1 lightblue">
                 </div>
@@ -110,7 +112,7 @@
                     @Html.ValidationMessageFor(model => model.NumeroOrdenCompra)
                 </div>
                 <div class="span1 lightblue">
-                    @Html.LabelFor(model => model.NumeroOrdenCompraCliente, "Numero cliente")
+                    @Html.LabelFor(model => model.NumeroOrdenCompraCliente, "Nro. OC cliente")
                     @Html.TextBoxFor(model => model.NumeroOrdenCompraCliente, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12" })
                     @Html.ValidationMessageFor(model => model.NumeroOrdenCompraCliente)
                 </div>
@@ -141,7 +143,7 @@
 
             <div class="row-fluid">
                 <div class="span4 lightblue">
-                    <label for="ArticuloAsociado">Cliente</label>
+                    <label for="Cliente">Cliente</label>
                     <input type="text" name="Cliente" id="Cliente" style="font-size: 15px; text-align: left;" class="span12" />
                     <script type="text/jscript">
                         $("#Cliente").autocomplete({
