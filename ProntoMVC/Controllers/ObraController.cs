@@ -617,5 +617,15 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", Datacombo);
         }
 
+        public virtual ActionResult GetObrasCodigo()
+        {
+            Dictionary<int, string> Datacombo = new Dictionary<int, string>();
+
+            foreach (Obra u in db.Obras.Where(x => x.Activa == "SI").OrderBy(x => x.NumeroObra).ToList())
+                Datacombo.Add(u.IdObra, u.NumeroObra);
+
+            return PartialView("Select", Datacombo);
+        }
+
     }
 }

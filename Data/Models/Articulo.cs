@@ -26,7 +26,6 @@ namespace ProntoMVC.Data.Models
             this.DetalleArticulosImagenes = new HashSet<DetalleArticulosImagene>();
             this.DetalleArticulosUnidades = new HashSet<DetalleArticulosUnidade>();
             this.DetalleComparativas = new HashSet<DetalleComparativa>();
-            this.Conjuntos = new HashSet<Conjunto>();
             this.ListasPreciosDetalles = new HashSet<ListasPreciosDetalle>();
         }
     
@@ -289,7 +288,6 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleArticulosImagene> DetalleArticulosImagenes { get; set; }
         public virtual ICollection<DetalleArticulosUnidade> DetalleArticulosUnidades { get; set; }
         public virtual ICollection<DetalleComparativa> DetalleComparativas { get; set; }
-        public virtual ICollection<Conjunto> Conjuntos { get; set; }
         public virtual Subrubro Subrubro { get; set; }
         public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
     }

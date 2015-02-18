@@ -19,5 +19,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdProvinciaDestino { get; set; }
         public Nullable<decimal> Porcentaje { get; set; }
         public Nullable<byte> EnviarEmail { get; set; }
+    
+        public virtual Factura Factura { get; set; }
     }
 }

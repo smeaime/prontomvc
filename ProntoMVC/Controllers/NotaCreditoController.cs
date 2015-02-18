@@ -547,7 +547,8 @@ namespace ProntoMVC.Controllers
                 
                 string errs = "";
                 string warnings = "";
-
+                string mWebService = "";
+                
                 bool mAnulada = false;
                 bool mAplicarEnCtaCte = true;
                 bool mBorrarEnValores = false;
@@ -611,110 +612,110 @@ namespace ProntoMVC.Controllers
                             EntidadoEntry.CurrentValues.SetValues(NotaCredito);
 
                             // Restiruir los saldos de las imputaciones ya registradas
-                            foreach (var d in EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones != 0).ToList())
-                            {
-                                CuentasCorrientesDeudor CtaCteAnterior = db.CuentasCorrientesDeudores.Where(c => c.IdDetalleNotaCreditoImputaciones == d.IdDetalleNotaCreditoImputaciones).FirstOrDefault();
-                                if (CtaCteAnterior != null)
-                                {
-                                    mImportePesos = (CtaCteAnterior.ImporteTotal ?? 0) - (CtaCteAnterior.Saldo ?? 0);
-                                    mImporteDolares = (CtaCteAnterior.ImporteTotalDolar ?? 0) - (CtaCteAnterior.SaldoDolar ?? 0);
-                                    mIdImputacion = d.IdImputacion ?? 0;
+                            //foreach (var d in EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones != 0).ToList())
+                            //{
+                            //    CuentasCorrientesDeudor CtaCteAnterior = db.CuentasCorrientesDeudores.Where(c => c.IdDetalleNotaCreditoImputaciones == d.IdDetalleNotaCreditoImputaciones).FirstOrDefault();
+                            //    if (CtaCteAnterior != null)
+                            //    {
+                            //        mImportePesos = (CtaCteAnterior.ImporteTotal ?? 0) - (CtaCteAnterior.Saldo ?? 0);
+                            //        mImporteDolares = (CtaCteAnterior.ImporteTotalDolar ?? 0) - (CtaCteAnterior.SaldoDolar ?? 0);
+                            //        mIdImputacion = d.IdImputacion ?? 0;
 
-                                    if (mIdImputacion > 0)
-                                    {
-                                        CuentasCorrientesDeudor CtaCteImputadaAnterior = db.CuentasCorrientesDeudores.Where(c => c.IdCtaCte == mIdImputacion).SingleOrDefault();
-                                        if (CtaCteImputadaAnterior != null)
-                                        {
-                                            CtaCteImputadaAnterior.Saldo += mImportePesos;
-                                            CtaCteImputadaAnterior.SaldoDolar += mImporteDolares;
+                            //        if (mIdImputacion > 0)
+                            //        {
+                            //            CuentasCorrientesDeudor CtaCteImputadaAnterior = db.CuentasCorrientesDeudores.Where(c => c.IdCtaCte == mIdImputacion).SingleOrDefault();
+                            //            if (CtaCteImputadaAnterior != null)
+                            //            {
+                            //                CtaCteImputadaAnterior.Saldo += mImportePesos;
+                            //                CtaCteImputadaAnterior.SaldoDolar += mImporteDolares;
 
-                                            db.Entry(CtaCteImputadaAnterior).State = System.Data.Entity.EntityState.Modified;
-                                        }
-                                    }
-                                    db.Entry(CtaCteAnterior).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //                db.Entry(CtaCteImputadaAnterior).State = System.Data.Entity.EntityState.Modified;
+                            //            }
+                            //        }
+                            //        db.Entry(CtaCteAnterior).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
-                            foreach (var d in EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito != 0).ToList())
-                            {
-                                var Valores = db.Valores.Where(c => c.IdDetalleNotaCredito == d.IdDetalleNotaCredito).ToList();
-                                if (Valores != null)
-                                {
-                                    foreach (Valore v in Valores)
-                                    {
-                                        db.Entry(v).State = System.Data.Entity.EntityState.Deleted;
-                                    }
-                                }
-                            }
+                            //foreach (var d in EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito != 0).ToList())
+                            //{
+                            //    var Valores = db.Valores.Where(c => c.IdDetalleNotaCredito == d.IdDetalleNotaCredito).ToList();
+                            //    if (Valores != null)
+                            //    {
+                            //        foreach (Valore v in Valores)
+                            //        {
+                            //            db.Entry(v).State = System.Data.Entity.EntityState.Deleted;
+                            //        }
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// CONCEPTOS //////////////////////////////////////////////
-                            foreach (var d in NotaCredito.DetalleNotasCreditoes)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito == d.IdDetalleNotaCredito && d.IdDetalleNotaCredito > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoes.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito != 0).ToList())
-                            {
-                                if (!NotaCredito.DetalleNotasCreditoes.Any(c => c.IdDetalleNotaCredito == DetalleEntidadOriginal.IdDetalleNotaCredito))
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoes.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //foreach (var d in NotaCredito.DetalleNotasCreditoes)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito == d.IdDetalleNotaCredito && d.IdDetalleNotaCredito > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoes.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoes.Where(c => c.IdDetalleNotaCredito != 0).ToList())
+                            //{
+                            //    if (!NotaCredito.DetalleNotasCreditoes.Any(c => c.IdDetalleNotaCredito == DetalleEntidadOriginal.IdDetalleNotaCredito))
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoes.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// IMPUTACIONES //////////////////////////////////////////////
-                            foreach (var d in NotaCredito.DetalleNotasCreditoImputaciones)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones == d.IdDetalleNotaCreditoImputaciones && d.IdDetalleNotaCreditoImputaciones > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoImputaciones.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones != 0).ToList())
-                            {
-                                if (!NotaCredito.DetalleNotasCreditoImputaciones.Any(c => c.IdDetalleNotaCreditoImputaciones == DetalleEntidadOriginal.IdDetalleNotaCreditoImputaciones))
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoImputaciones.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //foreach (var d in NotaCredito.DetalleNotasCreditoImputaciones)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones == d.IdDetalleNotaCreditoImputaciones && d.IdDetalleNotaCreditoImputaciones > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoImputaciones.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoImputaciones.Where(c => c.IdDetalleNotaCreditoImputaciones != 0).ToList())
+                            //{
+                            //    if (!NotaCredito.DetalleNotasCreditoImputaciones.Any(c => c.IdDetalleNotaCreditoImputaciones == DetalleEntidadOriginal.IdDetalleNotaCreditoImputaciones))
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoImputaciones.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// PROVINCIAS //////////////////////////////////////////////
-                            foreach (var d in NotaCredito.DetalleNotasCreditoProvincias)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoProvincias.Where(c => c.IdDetalleNotaCreditoProvincias == d.IdDetalleNotaCreditoProvincias && d.IdDetalleNotaCreditoProvincias > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoProvincias.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoProvincias.Where(c => c.IdDetalleNotaCreditoProvincias != 0).ToList())
-                            {
-                                if (!NotaCredito.DetalleNotasCreditoProvincias.Any(c => c.IdDetalleNotaCreditoProvincias == DetalleEntidadOriginal.IdDetalleNotaCreditoProvincias))
-                                {
-                                    EntidadOriginal.DetalleNotasCreditoProvincias.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //foreach (var d in NotaCredito.DetalleNotasCreditoProvincias)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasCreditoProvincias.Where(c => c.IdDetalleNotaCreditoProvincias == d.IdDetalleNotaCreditoProvincias && d.IdDetalleNotaCreditoProvincias > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoProvincias.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasCreditoProvincias.Where(c => c.IdDetalleNotaCreditoProvincias != 0).ToList())
+                            //{
+                            //    if (!NotaCredito.DetalleNotasCreditoProvincias.Any(c => c.IdDetalleNotaCreditoProvincias == DetalleEntidadOriginal.IdDetalleNotaCreditoProvincias))
+                            //    {
+                            //        EntidadOriginal.DetalleNotasCreditoProvincias.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
                             db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
@@ -729,6 +730,14 @@ namespace ProntoMVC.Controllers
                                 {
                                     if (mNumeroElectronico == 0) { mNumero = PuntoVenta.ProximoNumero ?? 1; }
                                     else { mNumero = mNumeroElectronico; }
+
+                                    mWebService = PuntoVenta.WebService ?? "";
+                                    if (mWebService.Length > 0)
+                                    {
+                                        LogComprobantesElectronico log = new LogComprobantesElectronico();
+                                        Logica_FacturaElectronica(ref NotaCredito, ref log);
+                                        db.LogComprobantesElectronicos.Add(log);
+                                    }
                                     PuntoVenta.ProximoNumero = mNumero + 1;
                                     db.Entry(PuntoVenta).State = System.Data.Entity.EntityState.Modified;
                                 }
@@ -742,15 +751,12 @@ namespace ProntoMVC.Controllers
                             }
                             NotaCredito.NumeroNotaCredito = mNumero;
 
-
-                            // HACER REGISTRO ELECTRONICO
-
                             db.NotasCreditoes.Add(NotaCredito);
                             db.SaveChanges();
                         }
 
                         ////////////////////////////////////////////// IMPUTACIONES //////////////////////////////////////////////
-                        if (!mAnulada && mAplicarEnCtaCte)
+                        if (mIdNotaCredito <= 0 && !mAnulada && mAplicarEnCtaCte)
                         {
                             foreach (var d in NotaCredito.DetalleNotasCreditoImputaciones)
                             {
@@ -831,7 +837,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// VALORES //////////////////////////////////////////////
-                        if (!mAnulada)
+                        if (mIdNotaCredito <= 0 && !mAnulada)
                         {
                             foreach (var d in NotaCredito.DetalleNotasCreditoes)
                             {
@@ -908,14 +914,14 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
-                        if (mIdNotaCredito > 0 || mAnulada)
+                        if (mAnulada)
                         {
                             var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == mIdTipoComprobante && c.IdComprobante == mIdNotaCredito).ToList();
                             if (Subdiarios != null) { foreach (Subdiario s in Subdiarios) { db.Entry(s).State = System.Data.Entity.EntityState.Deleted; } }
                             db.SaveChanges();
                         }
 
-                        if (!mAnulada)
+                        if (mIdNotaCredito <= 0 && !mAnulada)
                         {
                             Subdiario s;
 
@@ -1217,6 +1223,328 @@ namespace ProntoMVC.Controllers
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return Json(errors);
+            }
+        }
+
+        public void Logica_FacturaElectronica(ref ProntoMVC.Data.Models.NotasCredito o, ref ProntoMVC.Data.Models.LogComprobantesElectronico log)
+        {
+            WSAFIPFE.Factura FE;
+
+            string glbCuit;
+            string mCodigoMoneda1 = "";
+            string mTipoABC = "";
+            string mWebService = "";
+            string mCuitEmpresa = "";
+            string mArchivoAFIP = "";
+            string mFecha = "";
+            string glbPathPlantillas = "";
+            string mCAE = "";
+            string mOtrasPercepciones1Desc = "";
+            string mOtrasPercepciones2Desc = "";
+            string mOtrasPercepciones3Desc = "";
+            string mFechaVencimientoORechazoCAE = "";
+            string mFechaString = "";
+            string mArchivoXMLEnviado = "";
+            string mArchivoXMLRecibido = "";
+            string mArchivoXMLEnviado2 = "";
+            string mArchivoXMLRecibido2 = "";
+
+            Int32 mIdPuntoVenta = 0;
+            Int32 mPuntoVenta = 0;
+            Int32 mIdMoneda = 0;
+            Int32 mIdMonedaPesos = 1;
+            Int32 mIdMonedaDolar = 2;
+            Int32 mIdMonedaEuro = 0;
+            Int32 mCodigoMoneda = 0;
+            Int32 mDetalleTributoItemCantidad = 0;
+            Int32 mIndiceItem = 0;
+            Int32 mTipoIvaAFIP = 0;
+            Int32 mNumeroComprobanteElectronico = 0;
+
+            decimal mImporteTotal = 0;
+            decimal mSubTotal = 0;
+            decimal mImporteIva1 = 0;
+            decimal mIVANoDiscriminado = 0;
+            decimal mPercepcionIVA = 0;
+            decimal mRetencionIBrutos1 = 0;
+            decimal mRetencionIBrutos2 = 0;
+            decimal mRetencionIBrutos3 = 0;
+            decimal mPorcentajeIBrutos1 = 0;
+            decimal mPorcentajeIBrutos2 = 0;
+            decimal mPorcentajeIBrutos3 = 0;
+            decimal mOtrasPercepciones1 = 0;
+            decimal mOtrasPercepciones2 = 0;
+            decimal mOtrasPercepciones3 = 0;
+
+            bool mResul;
+            bool glbDebugFacturaElectronica = true;
+
+            Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            mIdMonedaPesos = parametros.IdMoneda ?? 0;
+            mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
+            mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
+
+            var Parametros2 = db.Parametros2.Where(p => p.Campo == "DebugFacturaElectronica").FirstOrDefault();
+            if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { glbDebugFacturaElectronica = true; } }
+
+            var Empresa = db.Empresas.Where(p => p.IdEmpresa == 1).FirstOrDefault();
+            mCuitEmpresa = (Empresa.Cuit ?? "").Replace("-", "");
+            mArchivoAFIP = (Empresa.ArchivoAFIP ?? "");
+
+            mIdPuntoVenta = o.IdPuntoVenta ?? 0;
+            mPuntoVenta = o.PuntoVenta ?? 0;
+            mIdMoneda = o.IdMoneda ?? 1;
+            mTipoABC = o.TipoABC;
+            mFecha = String.Format("{0:yyyyMMdd}", o.FechaNotaCredito);
+
+            mSubTotal = (o.ImporteTotal ?? 0) - (o.ImporteIva1 ?? 0) - (o.PercepcionIVA ?? 0) - (o.RetencionIBrutos1 ?? 0) - (o.RetencionIBrutos2 ?? 0) - (o.RetencionIBrutos3 ?? 0) - (o.OtrasPercepciones1 ?? 0) - (o.OtrasPercepciones2 ?? 0) - (o.OtrasPercepciones3 ?? 0);
+            mImporteIva1 = o.ImporteIva1 ?? 0;
+            mIVANoDiscriminado = o.IVANoDiscriminado ?? 0;
+
+            mRetencionIBrutos1 = o.RetencionIBrutos1 ?? 0;
+            mRetencionIBrutos2 = o.RetencionIBrutos2 ?? 0;
+            mRetencionIBrutos3 = o.RetencionIBrutos3 ?? 0;
+            mPorcentajeIBrutos1 = o.PorcentajeIBrutos1 ?? 0;
+            mPorcentajeIBrutos2 = o.PorcentajeIBrutos2 ?? 0;
+            mPorcentajeIBrutos3 = o.PorcentajeIBrutos3 ?? 0;
+
+            mOtrasPercepciones1 = o.OtrasPercepciones1 ?? 0;
+            mOtrasPercepciones2 = o.OtrasPercepciones2 ?? 0;
+            mOtrasPercepciones3 = o.OtrasPercepciones3 ?? 0;
+            mOtrasPercepciones1Desc = o.OtrasPercepciones1Desc ?? "";
+            mOtrasPercepciones2Desc = o.OtrasPercepciones2Desc ?? "";
+            mOtrasPercepciones3Desc = o.OtrasPercepciones3Desc ?? "";
+
+            mPercepcionIVA = o.PercepcionIVA ?? 0;
+
+            mTipoIvaAFIP = 0;
+            if ((double)(o.PorcentajeIva1 ?? 0) == 21) { mTipoIvaAFIP = 5; }
+            if ((double)(o.PorcentajeIva1 ?? 0) == 10.5) { mTipoIvaAFIP = 4; }
+            if ((double)(o.PorcentajeIva1 ?? 0) == 27) { mTipoIvaAFIP = 6; }
+
+            mImporteTotal = o.ImporteTotal ?? 0;
+            if (o.IdMoneda == mIdMonedaPesos) { mCodigoMoneda1 = "PES"; }
+            if (o.IdMoneda == mIdMonedaDolar) { mCodigoMoneda1 = "DOL"; }
+
+            //var Moneda = db.Monedas.Where(c => c.IdMoneda == mIdMoneda).SingleOrDefault();
+            //if (Moneda != null) { mCodigoMoneda = Convert.ToInt32(Moneda.CodigoAFIP ?? "0"); }
+            if (mCodigoMoneda == 0) { if (o.IdMoneda == mIdMonedaPesos) { mCodigoMoneda = 1; } }
+            if (mCodigoMoneda == 0) { if (o.IdMoneda == mIdMonedaDolar) { mCodigoMoneda = 2; } }
+            if (mCodigoMoneda == 0) { if (o.IdMoneda == mIdMonedaEuro) { mCodigoMoneda = 60; } }
+
+            var PuntoVenta = db.PuntosVentas.Where(c => c.IdPuntoVenta == mIdPuntoVenta).SingleOrDefault();
+            if (PuntoVenta != null) { mWebService = PuntoVenta.WebService ?? ""; }
+
+            glbPathPlantillas = AppDomain.CurrentDomain.BaseDirectory + "Documentos";
+
+            FE = new WSAFIPFE.Factura();
+            //WSAFIPFE.Factura FEx = new WSAFIPFE.Factura();
+
+            if (mWebService == "WSFE1" && (mTipoABC == "A" || mTipoABC == "B"))
+            {
+                mResul = FE.ActivarLicenciaSiNoExiste(mCuitEmpresa, glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic", "pronto.wsfex@gmail.com", "bdlconsultores");
+                if (glbDebugFacturaElectronica) { Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
+
+                mResul = FE.iniciar(WSAFIPFE.Factura.modoFiscal.Fiscal, mCuitEmpresa, glbPathPlantillas + "\\" + mArchivoAFIP + ".pfx", glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic");
+
+                if (mResul) mResul = FE.f1ObtenerTicketAcceso();
+                if (glbDebugFacturaElectronica) { Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
+
+                if (mResul)
+                {
+                    try
+                    {
+                        FE.F1CabeceraCantReg = 1;
+                        FE.indice = 0;
+                        FE.F1CabeceraPtoVta = (int)o.PuntoVenta;
+                        if (mTipoABC == "A")
+                        {
+                            FE.F1CabeceraCbteTipo = 3;
+                        }
+                        else
+                        {
+                            FE.F1CabeceraCbteTipo = 8;
+                        }
+
+                        FE.f1Indice = 0;
+                        FE.F1DetalleConcepto = 3;
+                        FE.F1DetalleDocTipo = 80;
+                        FE.F1DetalleDocNro = db.Clientes.Find(o.IdCliente).Cuit.Replace("-", "");
+                        FE.F1DetalleCbteDesde = o.NumeroNotaCredito ?? 0;
+                        FE.F1DetalleCbteHasta = o.NumeroNotaCredito ?? 0;
+                        FE.F1DetalleCbteFch = mFecha;
+                        FE.F1DetalleImpTotal = Math.Round((double)mImporteTotal, 2);
+                        FE.F1DetalleImpTotalConc = 0;
+                        FE.F1DetalleImpNeto = Math.Round((double)mSubTotal - (double)mIVANoDiscriminado, 2);
+                        FE.F1DetalleImpOpEx = 0;
+                        FE.F1DetalleImpTrib = Math.Round((double)mRetencionIBrutos1 + (double)mRetencionIBrutos2 + (double)mRetencionIBrutos3 + (double)mOtrasPercepciones1 + (double)mOtrasPercepciones2 + (double)mOtrasPercepciones3 + (double)mPercepcionIVA, 2);
+                        FE.F1DetalleImpIva = (double)mImporteIva1 + (double)mIVANoDiscriminado;
+                        FE.F1DetalleFchServDesde = mFecha;
+                        FE.F1DetalleFchServHasta = mFecha;
+                        FE.F1DetalleFchVtoPago = mFecha;
+                        FE.F1DetalleMonIdS = mCodigoMoneda1;
+                        FE.F1DetalleMonCotiz = (double)(o.CotizacionMoneda ?? 0);
+                        FE.F1DetalleCbtesAsocItemCantidad = 0;
+                        FE.F1DetalleOpcionalItemCantidad = 0;
+
+                        mDetalleTributoItemCantidad = 0;
+                        if (mRetencionIBrutos1 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mRetencionIBrutos2 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mRetencionIBrutos3 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mOtrasPercepciones1 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mOtrasPercepciones2 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mOtrasPercepciones3 != 0) { mDetalleTributoItemCantidad++; }
+                        if (mPercepcionIVA != 0) { mDetalleTributoItemCantidad++; }
+
+                        if (mDetalleTributoItemCantidad > 0)
+                        {
+                            mIndiceItem = 0;
+                            FE.F1DetalleTributoItemCantidad = mDetalleTributoItemCantidad;
+                            if (mRetencionIBrutos1 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = "Ingresos Brutos";
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = Math.Round((double)mPorcentajeIBrutos1, 2);
+                                FE.F1DetalleTributoImporte = Math.Round((double)mRetencionIBrutos1, 2);
+                            }
+                            if (mRetencionIBrutos2 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = "Ingresos Brutos";
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = Math.Round((double)mPorcentajeIBrutos2, 2);
+                                FE.F1DetalleTributoImporte = Math.Round((double)mRetencionIBrutos2, 2);
+                            }
+                            if (mRetencionIBrutos3 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = "Ingresos Brutos";
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = Math.Round((double)mPorcentajeIBrutos3, 2);
+                                FE.F1DetalleTributoImporte = Math.Round((double)mRetencionIBrutos3, 2);
+                            }
+                            if (mOtrasPercepciones1 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = mOtrasPercepciones1Desc;
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = 0;
+                                FE.F1DetalleTributoImporte = Math.Round((double)mOtrasPercepciones1, 2);
+                            }
+                            if (mOtrasPercepciones2 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = mOtrasPercepciones1Desc;
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = 0;
+                                FE.F1DetalleTributoImporte = Math.Round((double)mOtrasPercepciones2, 2);
+                            }
+                            if (mOtrasPercepciones3 != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 2;
+                                FE.F1DetalleTributoDesc = mOtrasPercepciones1Desc;
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = 0;
+                                FE.F1DetalleTributoImporte = Math.Round((double)mOtrasPercepciones3, 2);
+                            }
+                            if (mPercepcionIVA != 0)
+                            {
+                                mIndiceItem++;
+                                FE.f1IndiceItem = mIndiceItem - 1;
+                                FE.F1DetalleTributoId = 1;
+                                FE.F1DetalleTributoDesc = "Percepcion IVA";
+                                FE.F1DetalleTributoBaseImp = Math.Round((double)mSubTotal, 2);
+                                FE.F1DetalleTributoAlic = 0;
+                                FE.F1DetalleTributoImporte = Math.Round((double)mPercepcionIVA, 2);
+                            }
+                        }
+
+                        if (mImporteIva1 + mIVANoDiscriminado != 0)
+                        {
+                            FE.F1DetalleIvaItemCantidad = 1;
+                            FE.f1IndiceItem = 0;
+                            FE.F1DetalleIvaId = mTipoIvaAFIP;
+                            FE.F1DetalleIvaBaseImp = Math.Round((double)mSubTotal - (double)mIVANoDiscriminado, 2);
+                            FE.F1DetalleIvaImporte = Math.Round((double)mImporteIva1 + (double)mIVANoDiscriminado, 2);
+                        }
+
+                        FE.F1DetalleCbtesAsocItemCantidad = 0;
+                        FE.F1DetalleOpcionalItemCantidad = 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+
+                    mArchivoXMLEnviado = glbPathPlantillas + "\\NOTACREDITO_" + o.NumeroNotaCredito.ToString() + "_Enviado.xml";
+                    mArchivoXMLRecibido = glbPathPlantillas + "\\NOTACREDITO_" + o.NumeroNotaCredito.ToString() + "_Recibido.xml";
+
+                    FE.ArchivoXMLEnviado = mArchivoXMLEnviado;
+                    FE.ArchivoXMLRecibido = mArchivoXMLRecibido;
+
+                    mResul = FE.F1CAESolicitar();
+                    if (glbDebugFacturaElectronica) { Console.Write("F1CAESolicitar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg + " - CAE : " + FE.F1RespuestaDetalleCae); }
+
+                    if (mResul && FE.F1RespuestaDetalleCae.Length > 0)
+                    {
+                        mCAE = FE.F1RespuestaDetalleCae;
+                        mFechaVencimientoORechazoCAE = FE.F1RespuestaDetalleCAEFchVto ?? "";
+
+                        if (System.IO.File.Exists(mArchivoXMLEnviado)) { mArchivoXMLEnviado2 = System.IO.File.ReadAllText(mArchivoXMLEnviado); }
+                        if (System.IO.File.Exists(mArchivoXMLRecibido)) { mArchivoXMLRecibido2 = System.IO.File.ReadAllText(mArchivoXMLRecibido); }
+
+                        if (mCAE.Trim().Length == 0)
+                        {
+                            var s = "Error al obtener CAE : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
+                            throw new Exception(s);
+                        }
+                        mNumeroComprobanteElectronico = Convert.ToInt32(FE.F1RespuestaDetalleCbteDesdeS);
+                        if (mNumeroComprobanteElectronico == 0)
+                        {
+                            var s = "El Web service devuelve 0 como numero de comprobante : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
+                            throw new Exception(s);
+                        }
+
+                        log.Letra = mTipoABC;
+                        log.Tipo = "NC";
+                        log.PuntoVenta = mPuntoVenta;
+                        log.NumeroComprobante = mNumeroComprobanteElectronico;
+                        log.Identificador = 0;
+                        log.Enviado = mArchivoXMLEnviado2;
+                        log.Recibido = mArchivoXMLRecibido2;
+
+                        o.CAE = mCAE;
+                        o.IdIdentificacionCAE = 0;
+                        if (mFechaVencimientoORechazoCAE.Length > 0)
+                        {
+                            mFechaString = mFechaVencimientoORechazoCAE.Substring(6, 2) + "/" + mFechaVencimientoORechazoCAE.Substring(4, 2) + "/" + mFechaVencimientoORechazoCAE.Substring(0, 4);
+                            o.FechaVencimientoORechazoCAE = Convert.ToDateTime(mFechaString);
+                        }
+                        o.NumeroNotaCredito = mNumeroComprobanteElectronico;
+                    }
+                    else
+                    {
+                        var s = "Error al obtener CAE : " + FE.UltimoMensajeError + " - Ultimo numero " + FE.F1CompUltimoAutorizado(FE.F1CabeceraPtoVta, FE.F1CabeceraCbteTipo);
+                        throw new Exception(s);
+                    }
+                }
+                else
+                {
+                }
+                FE = null;
             }
         }
 

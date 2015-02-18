@@ -255,6 +255,7 @@
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\GruposObraControlles.cs" />
     <Compile Include="Controllers\ColorController.cs" />
+    <Compile Include="Controllers\CuentaGastoController.cs" />
     <Compile Include="Controllers\TiposPolizaController.cs" />
     <Compile Include="Controllers\TiposCuentaGruposController.cs" />
     <Compile Include="Controllers\UnidadesOperativaController.cs" />
@@ -847,6 +848,7 @@
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Scripts\ScriptCliente.js" />
+    <Content Include="Scripts\ScriptRemito.js" />
     <Content Include="Scripts\ScriptOrdenCompra.js" />
     <Content Include="Scripts\ScriptNotaCredito.js" />
     <Content Include="Scripts\ScriptFactura.js" />
@@ -888,6 +890,9 @@
     <Content Include="Views\Factura\Edit.cshtml" />
     <Content Include="Views\OrdenCompra\Index.cshtml" />
     <Content Include="Views\OrdenCompra\Edit.cshtml" />
+    <Content Include="Views\Remito\Edit.cshtml" />
+    <Content Include="Views\Remito\Index.cshtml" />
+    <Content Include="Views\Recibo\EditOT.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1279,7 +1284,6 @@
     <Content Include="Views\ErrorPages\PageNotFound.cshtml" />
     <Content Include="Views\ErrorPages\Error.cshtml" />
     <Content Include="Views\Account\RecuperarPassword.cshtml" />
-    <Content Include="Views\Recibo\Edit.cshtml" />
     <Content Include="Views\Recibo\Index.cshtml" />
     <Content Include="Views\Comparativa\Details.cshtml" />
     <Content Include="Views\Comparativa\Edit.cshtml" />
@@ -1309,10 +1313,6 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\CotizacionMoneda\Index.cshtml" />
-    <Content Include="Views\Remito\Edit.cshtml" />
-    <Content Include="Views\Remito\EditExterno.cshtml" />
-    <Content Include="Views\Remito\Index.cshtml" />
-    <Content Include="Views\Remito\IndexExterno.cshtml" />
     <Content Include="Views\Subdiario\Edit.cshtml" />
     <Content Include="Views\Subdiario\EditExterno.cshtml" />
     <Content Include="Views\Subdiario\Index.cshtml" />
@@ -1345,6 +1345,7 @@
     <Content Include="Views\UnidadesOperativa\Index.cshtml" />
     <Content Include="Views\GruposObra\Index.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
+    <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
     <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
     <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
@@ -1631,7 +1632,6 @@
     <Content Include="Views\Presupuesto\Index.cshtml" />
     <Content Include="Views\Presupuesto\Edit.cshtml" />
     <None Include="Models\SchemaCompare1.scmp" />
-    <Content Include="Views\Cliente\IndexResumido.cshtml" />
     <Content Include="Views\ListaPrecio\EditDetalle.cshtml" />
     <Content Include="Views\ListaPrecio\GridDemo.cshtml" />
     <Content Include="Views\ListaPrecio\EditSinJqgrid.cshtml" />
