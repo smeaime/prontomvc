@@ -430,7 +430,7 @@
 
 
             <div>
-                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+                <table id="Lista" class="" cellpadding="0" cellspacing="0"></table>
                 <div id="ListaPager" class="scroll" style="text-align: center;">
                 </div>
                 <script>
@@ -486,8 +486,8 @@
                             { name: 'nombre', index: 'act', align: 'left', width: 100, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                             { name: 'web', index: 'Imprimir', align: 'center', width: 200, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Imprimir")'} },
                             { name: 'empleado', index: 'IdFactura', align: 'center', width: 200, editable: false, hidden: false },
-                            { name: 'TipoABC', index: 'TipoABC', align: 'center', hidden: true, width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                            { name: 'PV', index: 'PuntoVenta', align: 'center', hidden: true, width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                            { name: '', index: '', align: 'center', hidden: true, width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                            { name: 'leyenda', index: 'leyenda', align: 'center', hidden: false, width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
 
        { name: '', index: '', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
        { name: '', index: '', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -557,7 +557,7 @@
                         shrinkToFit: false,
                         //////////////////////////////
 
-                        height: $(window).height() - ALTOLISTADO, // '100%'
+                        height: '110%', // $(window).height() - ALTOLISTADO, // '100%'
                         altRows: false,
                         footerrow: false, //true,
                         userDataOnFooter: true
