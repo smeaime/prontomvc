@@ -2522,7 +2522,7 @@ namespace ProntoMVC.Controllers
             if (esExterno)
             {
                 var n = new Tablas.Tree();
-                if (Roles.IsUserInRole(usuario, "Externo"))
+                if (esExterno)
                 {
                     string nombreproveedor = "";
                     try
