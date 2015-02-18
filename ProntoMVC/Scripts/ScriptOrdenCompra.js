@@ -763,6 +763,49 @@ $(function () {
         });
     });
 
+    //$("#Upload").click(function () {
+    //    var formData = new FormData();
+    //    var totalFiles = document.getElementById("FileUpload").files.length;
+    //    for (var i = 0; i < totalFiles; i++) {
+    //        var file = document.getElementById("FileUpload").files[i];
+    //        formData.append("FileUpload", file);
+    //    }
+    //    $.ajax({
+    //        type: "POST",
+    //        url: ROOT + 'OrdenCompra/Upload',
+    //        data: formData,
+    //        dataType: 'json',
+    //        contentType: false,
+    //        processData: false,
+    //        success: function (response) {
+    //            alert('succes!!');
+    //        },
+    //        error: function (error) {
+    //            alert("errror");
+    //        }
+    //    });
+    //});
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        url: ROOT + 'Home/UploadFiles',
+        autoUpload: true,
+        done: function (e, data) {
+            var i = ProximoAdjuntoLibre();
+            if (i==0){
+                alert("No hay mas adjuntos disponibles");
+                return
+            }
+            $("#ArchivoAdjunto"+i).val(data.result.name)
+            //$('.file_name').html(data.result.name);
+            //$('.file_type').html(data.result.type);
+            //$('.file_size').html(data.result.size);
+        }
+    }).on('fileuploadprogressall', function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('.progress .progress-bar').css('width', progress + '%');
+    });
+
 });
 
 function ActualizarDatos() {
@@ -817,6 +860,14 @@ function CalcularTotales() {
     $("#Bonificacion").val(mImporteBonificacion.toFixed(2));
     $("#ImporteTotal").val(mImporteTotal.toFixed(2));
 };
+
+function ProximoAdjuntoLibre() {
+    for (i = 1; i <= 10; i++) {
+        var adj = $("#ArchivoAdjunto" + i).val();
+        if (adj.length == 0) { return i;}
+    }
+    return 0;
+}
 
 function pickdates(id) {
     jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });

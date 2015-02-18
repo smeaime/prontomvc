@@ -1,16 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ProntoMVC.Data.Models;
-using ProntoMVC.Models;
-using ProntoMVC.Models;
-
-using Pronto.ERP.Bll;
-using System.Web.Security;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+using System.Data.Objects;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Transactions;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.Security;
+
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
+using jqGrid.Models;
+using Lib.Web.Mvc.JQuery.JqGrid;
+using Pronto.ERP.Bll;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ProntoMVC.Controllers
 {
@@ -875,5 +890,67 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public void Upload()
+        {
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                var file = Request.Files[i];
+
+                var fileName = Path.GetFileName(file.FileName);
+
+                var path = Path.Combine(Server.MapPath("~/Documentos/"), fileName);
+                file.SaveAs(path);
+            }
+
+        }
+
+        public FilePathResult Image()
+        {
+            string filename = Request.Url.AbsolutePath.Replace("/home/image", "");
+            string contentType = "";
+            var filePath = new FileInfo(Server.MapPath("~/App_Data") + filename);
+
+            var index = filename.LastIndexOf(".") + 1;
+            var extension = filename.Substring(index).ToUpperInvariant();
+
+            // Fix for IE not handling jpg image types
+            contentType = string.Compare(extension, "JPG") == 0 ? "image/jpeg" : string.Format("image/{0}", extension);
+
+            return File(filePath.FullName, contentType);
+        }
+
+        [HttpPost]
+        public ContentResult UploadFiles()
+        {
+            var r = new List<UploadFilesResult>();
+
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                if (hpf.ContentLength == 0)
+                    continue;
+
+                string savedFileName = Path.Combine(Server.MapPath("~/Adjuntos"), Path.GetFileName(hpf.FileName));
+                hpf.SaveAs(savedFileName);
+
+                r.Add(new UploadFilesResult()
+                {
+                    Name = hpf.FileName,
+                    Length = hpf.ContentLength,
+                    Type = hpf.ContentType
+                });
+            }
+            return Content("{\"name\":\"" + r[0].Name + "\",\"type\":\"" + r[0].Type + "\",\"size\":\"" + string.Format("{0} bytes", r[0].Length) + "\"}", "application/json");
+        }
+
+        public class UploadFilesResult
+        {
+            public string Name { get; set; }
+            public int Length { get; set; }
+            public string Type { get; set; }
+        }
+
     }
 }
