@@ -92,8 +92,8 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="ALTERTABLE 2011 Modulo WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
@@ -158,9 +158,9 @@
           <FullPath>Nuevos_Func WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevos_SP WEB desarrollo.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Nuevos_SP WEB desarrollo.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevos_SP WEB drops.sql">
