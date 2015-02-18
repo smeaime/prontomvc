@@ -52,7 +52,7 @@
                     <div>@Html.Hidden("Tipo", Model.Tipo)</div>
 
                     <div class="row-fluid">
-                        <div class="span1 lightblue">
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.NumeroOrdenPago, "Numero")
                             @Html.TextBoxFor(model => model.NumeroOrdenPago, new { style = "font-weight: bold; font-size: 18px;", @class = "span12", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model.NumeroOrdenPago)
@@ -70,7 +70,7 @@
                                 });
                             </script>
                         </div>
-                        <div class="span4 lightblue">
+                        <div class="span3 lightblue">
                             @Html.HiddenFor(model => model.IdProveedor)
                             @Html.LabelFor(model => model.IdProveedor, "Proveedor")
                             @Html.TextBoxFor(m => m.Proveedore.RazonSocial, new { id = "DescripcionProveedor", @class = "span12" })
@@ -356,10 +356,10 @@
                         </div>
                         <div class="span11 pull-right">
 
-                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary   pull-right" usesubmitbehavior="false" />
                             <input type="button" id="ActualizarDatos" value="Calcular" class="btn  btn-large   pull-right" usesubmitbehavior="false" />
                             @if (Model.IdOrdenPago > 0)
                             {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary  pull-right" />}
+                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary   pull-right" usesubmitbehavior="false" />
 
                         </div>
 
