@@ -500,6 +500,7 @@
     <Content Include="Content\jquery-ui\redmond\images\ui-icons_f9bd01_256x240.png" />
     <Content Include="Content\jquery-ui\redmond\jquery-ui-1.8.14.custom.css" />
     <Content Include="Content\jquery.alerts.css" />
+    <Content Include="Content\jquery.fileupload.css" />
     <Content Include="Content\jquery.treeview.css" />
     <Content Include="Content\MvcMembership.css" />
     <Content Include="Content\PagedList.css" />
@@ -839,6 +840,7 @@
     <Content Include="Scripts\jquery-grid\grid.locale-es.js" />
     <Content Include="Scripts\jquery-layout\jquery.layout-latest.js" />
     <Content Include="Scripts\jquery-layout\jquery.layout-latest.min.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Scripts\ScriptCliente.js" />
@@ -1566,6 +1568,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Adjuntos\" />
     <Folder Include="App_Data\uploads\" />
     <Folder Include="Novedades\" />
     <Folder Include="Views\Reportes\" />
