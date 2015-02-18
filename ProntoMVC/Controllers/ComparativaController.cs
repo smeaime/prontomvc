@@ -2077,6 +2077,11 @@ namespace ProntoMVC.Controllers
 
                 //    You must use the DocumentFormat.OpenXml.dll v2.0 (not v2.5)
 
+                //                https://closedxml.codeplex.com/discussions/405533
+
+                //                You have to use OpenXML dll 2.0 with ClosedXML for .Net 3.5 
+                //OpenXML dll 2.5 works fine with ClosedXML for .Net 4+
+
 
                 throw;
             }
