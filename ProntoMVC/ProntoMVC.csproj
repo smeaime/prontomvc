@@ -736,6 +736,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
+    <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET - Copia.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Pedido_DemoProntoWeb_PUNTONET.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
