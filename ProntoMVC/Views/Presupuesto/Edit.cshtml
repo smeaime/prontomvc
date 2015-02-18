@@ -339,10 +339,22 @@
                     </table>
                 </form>
                 <br />
-                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
-                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+                
             </div>
 
+            <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
+                width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
+                <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                    <div class="span1 pull-right">
+                    </div>
+                    <div class="span11 pull-right">
+                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
+                        <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" />
+                       
+                    </div>
+                    </div>
+            </div>
 
         </div>
 
