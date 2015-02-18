@@ -263,7 +263,7 @@
                     },
                     { name: 'CondicionRecupero', index: 'CondicionRecupero', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                     { name: 'MotivoDeContratacionSeguro', index: 'MotivoDeContratacionSeguro', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                    { name: 'Observaciones', index: 'Observaciones', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' }
+                    { name: 'Observaciones', index: 'Observaciones', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);

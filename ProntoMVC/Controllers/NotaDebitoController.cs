@@ -621,50 +621,50 @@ namespace ProntoMVC.Controllers
                             }
 
                             ////////////////////////////////////////////// CONCEPTOS //////////////////////////////////////////////
-                            foreach (var d in NotaDebito.DetalleNotasDebitoes)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasDebitoes.Where(c => c.IdDetalleNotaDebito == d.IdDetalleNotaDebito && d.IdDetalleNotaDebito > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleNotasDebitoes.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasDebitoes.Where(c => c.IdDetalleNotaDebito != 0).ToList())
-                            {
-                                if (!NotaDebito.DetalleNotasDebitoes.Any(c => c.IdDetalleNotaDebito == DetalleEntidadOriginal.IdDetalleNotaDebito))
-                                {
-                                    EntidadOriginal.DetalleNotasDebitoes.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //foreach (var d in NotaDebito.DetalleNotasDebitoes)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasDebitoes.Where(c => c.IdDetalleNotaDebito == d.IdDetalleNotaDebito && d.IdDetalleNotaDebito > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleNotasDebitoes.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasDebitoes.Where(c => c.IdDetalleNotaDebito != 0).ToList())
+                            //{
+                            //    if (!NotaDebito.DetalleNotasDebitoes.Any(c => c.IdDetalleNotaDebito == DetalleEntidadOriginal.IdDetalleNotaDebito))
+                            //    {
+                            //        EntidadOriginal.DetalleNotasDebitoes.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// PROVINCIAS //////////////////////////////////////////////
-                            foreach (var d in NotaDebito.DetalleNotasDebitoProvincias)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasDebitoProvincias.Where(c => c.IdDetalleNotaDebitoProvincias == d.IdDetalleNotaDebitoProvincias && d.IdDetalleNotaDebitoProvincias > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleNotasDebitoProvincias.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasDebitoProvincias.Where(c => c.IdDetalleNotaDebitoProvincias != 0).ToList())
-                            {
-                                if (!NotaDebito.DetalleNotasDebitoProvincias.Any(c => c.IdDetalleNotaDebitoProvincias == DetalleEntidadOriginal.IdDetalleNotaDebitoProvincias))
-                                {
-                                    EntidadOriginal.DetalleNotasDebitoProvincias.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
+                            //foreach (var d in NotaDebito.DetalleNotasDebitoProvincias)
+                            //{
+                            //    var DetalleEntidadOriginal = EntidadOriginal.DetalleNotasDebitoProvincias.Where(c => c.IdDetalleNotaDebitoProvincias == d.IdDetalleNotaDebitoProvincias && d.IdDetalleNotaDebitoProvincias > 0).SingleOrDefault();
+                            //    if (DetalleEntidadOriginal != null)
+                            //    {
+                            //        var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
+                            //        DetalleEntidadEntry.CurrentValues.SetValues(d);
+                            //    }
+                            //    else
+                            //    {
+                            //        EntidadOriginal.DetalleNotasDebitoProvincias.Add(d);
+                            //    }
+                            //}
+                            //foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleNotasDebitoProvincias.Where(c => c.IdDetalleNotaDebitoProvincias != 0).ToList())
+                            //{
+                            //    if (!NotaDebito.DetalleNotasDebitoProvincias.Any(c => c.IdDetalleNotaDebitoProvincias == DetalleEntidadOriginal.IdDetalleNotaDebitoProvincias))
+                            //    {
+                            //        EntidadOriginal.DetalleNotasDebitoProvincias.Remove(DetalleEntidadOriginal);
+                            //        db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
+                            //    }
+                            //}
 
                             ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
                             db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
@@ -700,7 +700,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
-                        if (!mAnulada && mAplicarEnCtaCte)
+                        if (mIdNotaDebito <= 0 && !mAnulada && mAplicarEnCtaCte)
                         {
                             CuentasCorrientesDeudor CtaCte = new CuentasCorrientesDeudor();
                             CtaCte.IdCliente = NotaDebito.IdCliente;
@@ -735,7 +735,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// VALORES //////////////////////////////////////////////
-                        if (!mAnulada)
+                        if (mIdNotaDebito <= 0 && !mAnulada)
                         {
                             foreach (var d in NotaDebito.DetalleNotasDebitoes)
                             {
@@ -811,14 +811,14 @@ namespace ProntoMVC.Controllers
                         }
 
                         ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
-                        if (mIdNotaDebito > 0 || mAnulada)
+                        if (mAnulada)
                         {
                             var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == mIdTipoComprobante && c.IdComprobante == mIdNotaDebito).ToList();
                             if (Subdiarios != null) { foreach (Subdiario s in Subdiarios) { db.Entry(s).State = System.Data.Entity.EntityState.Deleted; } }
                             db.SaveChanges();
                         }
 
-                        if (!mAnulada)
+                        if (mIdNotaDebito <= 0 && !mAnulada)
                         {
                             Subdiario s;
 

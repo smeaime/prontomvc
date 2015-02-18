@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Pronto" Class="LinqToSQL_ProntoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=SERVERSQL3\Testing;Initial Catalog=Pronto;User ID=sa" SettingsObjectName="ProntoMVC.Data.Properties.Settings" SettingsPropertyName="ProntoConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SERVERSQL3\TESTING;Initial Catalog=Pronto;Integrated Security=True" SettingsObjectName="ProntoMVC.Data.Properties.Settings" SettingsPropertyName="ProntoConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Requerimientos" Member="Requerimientos">
     <Type Name="Requerimientos">
       <Column Name="IdRequerimiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -67,6 +67,7 @@
       <Column Name="Pedidos" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Recepciones" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="SalidasMateriales" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Requerimientos_DetalleRequerimientos" Member="DetalleRequerimientos" ThisKey="IdRequerimiento" OtherKey="IdRequerimiento" Type="DetalleRequerimientos" />
     </Type>
   </Table>
   <Table Name="dbo.Pedidos" Member="Pedidos">
@@ -166,6 +167,85 @@
       <Column Name="IdUsuarioEnvioProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.DetalleRequerimientos" Member="DetalleRequerimientos">
+    <Type Name="DetalleRequerimientos">
+      <Column Name="IdDetalleRequerimiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdRequerimiento" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumeroItem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cantidad" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IdUnidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdArticulo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaEntrega" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Observaciones" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Cantidad1" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Cantidad2" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IdDetalleLMateriales" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdControlCalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Adjunto" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdCentroCosto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdComprador" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumeroFacturaCompra1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaFacturaCompra" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ImporteFacturaCompra" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IdProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumeroFacturaCompra2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EsBienDeUso" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="IdCuenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cumplido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Usuario1" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="FechaIngreso1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto3" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto4" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto5" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto6" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto7" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto8" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto9" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ArchivoAdjunto10" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Descripcionmanual" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="EnviarEmail" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="IdRequerimientoOriginal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdDetalleRequerimientoOriginal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdOrigenTransmision" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdLlamadoAProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaLlamadoAProveedor" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdLlamadoRegistradoPor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaRegistracionLlamada" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ObservacionesLlamada" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdAutorizoCumplido" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdDioPorCumplido" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaDadoPorCumplido" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ObservacionesCumplido" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdAproboAlmacen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdEquipo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaEntrega_Tel" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PRESTOConcepto" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Costo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OrigenDescripcion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TipoDesignacion" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="IdLiberoParaCompras" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaLiberacionParaCompras" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Recepcionado" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Pagina" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Item" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Figura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoDistribucion" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="IdEquipoDestino" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Entregado" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="FechaAsignacionComprador" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MoP" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="IdDetalleObraDestino" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdPresupuestoObraRubro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ObservacionesFirmante" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdFirmanteObservo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaUltimaObservacionFirmante" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdPresupuestoObrasNodo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Requerimientos_DetalleRequerimientos" Member="Requerimientos" ThisKey="IdRequerimiento" OtherKey="IdRequerimiento" Type="Requerimientos" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.Pedidos_Requerimientos" Method="Pedidos_Requerimientos" IsComposable="true">
     <Parameter Name="IdPedido" Parameter="idPedido" Type="System.Int32" DbType="Int" />
     <Return Type="System.String" />
@@ -180,6 +260,10 @@
   </Function>
   <Function Name="dbo.Requerimientos_Pedidos" Method="Requerimientos_Pedidos" IsComposable="true">
     <Parameter Name="IdRequerimiento" Parameter="idRequerimiento" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Facturas_Remitos" Method="Facturas_Remitos" IsComposable="true">
+    <Parameter Name="IdFactura" Parameter="idFactura" Type="System.Int32" DbType="Int" />
     <Return Type="System.String" />
   </Function>
 </Database>

@@ -12,22 +12,19 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Conjunto
+    public partial class DetalleConjunto
     {
-        public Conjunto()
-        {
-            this.DetalleConjuntos = new HashSet<DetalleConjunto>();
-        }
-    
-        public int IdConjunto { get; set; }
+        public int IdDetalleConjunto { get; set; }
+        public Nullable<int> IdConjunto { get; set; }
         public Nullable<int> IdArticulo { get; set; }
+        public Nullable<decimal> Cantidad { get; set; }
+        public Nullable<int> IdUnidad { get; set; }
+        public Nullable<decimal> Cantidad1 { get; set; }
+        public Nullable<decimal> Cantidad2 { get; set; }
         public string Observaciones { get; set; }
-        public Nullable<int> IdRealizo { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
-        public string CodigoConjunto { get; set; }
-        public Nullable<int> IdObra { get; set; }
-        public Nullable<int> Version { get; set; }
+        public Nullable<System.DateTime> FechaAlta { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
     
-        public virtual ICollection<DetalleConjunto> DetalleConjuntos { get; set; }
+        public virtual Conjunto Conjunto { get; set; }
     }
 }
