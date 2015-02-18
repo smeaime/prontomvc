@@ -418,7 +418,7 @@
     @if (Model.BasesPronto != null)
     {
 
-        if (Roles.IsUserInRole("SuperAdmin"))
+        if (Roles.IsUserInRole("SuperAdmin") || Roles.IsUserInRole("Administrador"))
         {
 
 
@@ -589,6 +589,14 @@
             </style>
 
 
+
+
+
+
+        }
+
+        if (Roles.IsUserInRole("SuperAdmin"))
+        {
             <br />
             <div class="mvcMembership-allRoles">
                 <div class="row-fluid">
