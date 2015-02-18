@@ -4,39 +4,44 @@
 }
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 <br />
-<div class="row-fluid">
-    <div class="span12 lightblue">
-        <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'"  class="btn btn-primary span2"  >
-            Nuevo
-        </button>
-        <div class="span4">
-            <div class="input-append span4">
-                <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+
+<div style=" padding-left: 15px;  padding-right: 15px ;">
+    <div>
+        <div class="row-fluid">
+            <div class="span12 lightblue">
+                <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2">
+                    Nuevo
+                </button>
+                <div class="span4">
+                    <div class="input-append span4">
+                        <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                        {
+                            <select id="campos " class="span4 append">
+                                <option>Número</option>
+                                <option>Fecha</option>
+                            </select>
+                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                                ...
+                            </button>
+
+                        }
+                    </div>
+                </div>
                 @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                 {
-                    <select id="campos " class="span4 append">
-                        <option>Número</option>
-                        <option>Fecha</option>
-                    </select>
-                    <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                        ...</button>
-
+                    <div class="span2">
+                        <button onclick=" exportExcel($('#Lista')) " class="btn span12">
+                            Excel
+                        </button>
+                    </div>
                 }
             </div>
         </div>
-        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
-        {
-            <div class="span2">
-                <button onclick=" exportExcel($('#Lista')) " class="btn span12">
-                    Excel
-                </button>
-            </div>
-        }
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+        <div id="ListaPager" class="scroll" style="text-align: center;">
+        </div>
     </div>
-</div>
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0">
-</table>
-<div id="ListaPager" class="scroll" style="text-align: center;">
 </div>
 <script type="text/javascript">
     $().ready(function () {
@@ -47,7 +52,8 @@
             url: ROOT + 'Articulo/ArticulosGridData', // '@Url.Action("ArticulosGridData", "Articulo")',
             datatype: 'json',
             mtype: 'POST',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); },
+            postData: {
+                'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
                 'IdObra': function () { return $("#IdObra").val(); }
             },
@@ -82,7 +88,8 @@
             { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
             { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
             { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
-            { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+            {
+                name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
                 editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
 
                 , search: true, searchoptions: { sopt: ['cn'] }
@@ -125,12 +132,12 @@
 
                 //edicion inline
                 // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){ 
-                //                    jQuery('#Lista').restoreRow(lastSel); 
-                //                    lastSel=id; 
+                //                if(id && id!==lastSel){
+                //                    jQuery('#Lista').restoreRow(lastSel);
+                //                    lastSel=id;
                 //                }
-                //                jQuery('#Lista').editRow(id, true); 
-                //   
+                //                jQuery('#Lista').editRow(id, true);
+                //
 
             },
             pager: $('#ListaPager'),
@@ -219,18 +226,19 @@
             var grid = jQuery("#Lista");
             var postdata = grid.jqGrid('getGridParam', 'postData');
             jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'Descripcion', // $("#CampoParaBuscar").val(), // 'Descripcion',   // Codigo
                    searchOper: 'contains',
                    searchString: $("#BuscadorListado").val()
                });
             grid.jqGrid('setGridParam', { search: true, postData: postdata });
-            grid.trigger("reloadGrid", [{ page: 1}]);
+            grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
             // http: //stackoverflow.com/questions/8501679/jqgrid-auto-filter-highlighting-search-result
             //            $("'>tbody>tr.jqgrow>td  [id*='" + $("#BuscadorListado").val() + "']").show().effect('highlight');
-            //                               
+            //
             //                $('>tbody>tr.jqgrow>td:nth-child(' + (iCol + 1) +
             //                        ')', this).highlight(rule.data);
 
