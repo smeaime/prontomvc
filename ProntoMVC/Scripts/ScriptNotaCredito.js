@@ -7,8 +7,6 @@
     var headerRow, rowHight, resizeSpanHeight, idaux = 0, detalle = "", mTotalImputaciones, mTotalConceptos, mImporteIva1, mPercepcionIIBB1, mPercepcionIIBB2, mPercepcionIIBB3, mPercepcionIVA;
     var mImporteTotal, mIVANoDiscriminado, mPorcentajePercepcionIIBB1, mPorcentajePercepcionIIBB2, mPorcentajePercepcionIIBB3;
 
-    pageLayout.show('east');
-
     if ($("#Anulada").val() == "SI") {
         $("#grabar2").prop("disabled", true);
         $("#anular").prop("disabled", true);
@@ -443,7 +441,7 @@
         //var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
 
         dataIds = $gridDestino.jqGrid('getDataIDs');
-        for (i = 0; i < dataIds.length; i++) {
+        for (i = 1; i < dataIds.length; i++) {
             data2 = $gridDestino.jqGrid('getRowData', dataIds[i]);
             if (data2.IdImputacion == IdCtaCte) {
                 if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
@@ -542,7 +540,16 @@
         cabecera.NumeroNotaCredito = $("#NumeroNotaCredito").val();
         cabecera.CAE = $("#CAE").val();
         cabecera.FechaVencimientoORechazoCAE = $("#FechaVencimientoORechazoCAE").val();
+        cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
+        cabecera.PuntoVenta = $("#IdPuntoVenta").find('option:selected').text();
+        cabecera.CotizacionMoneda = $("#CotizacionMoneda").val();
+        cabecera.CotizacionDolar = $("#CotizacionDolar").val();
+        cabecera.FechaNotaCredito = $("#FechaNotaCredito").val();
+        cabecera.IdMoneda = $("#IdMoneda").val();
+        cabecera.CtaCte = CtaCte;
         cabecera.Cliente = "";
+        cabecera.Provincia = "";
+
         if (CtaCte == "SI") {
             cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
             cabecera.PuntoVenta = $("#IdPuntoVenta").find('option:selected').text();
@@ -679,6 +686,12 @@
         });
     });
 
+    idaux = $("#IdNotaCredito").val();
+    if (idaux <= 0) {
+        ActivarControles(true);
+    } else {
+        ActivarControles(false);
+    }
 });
 
 function ActualizarDatos() {
@@ -1018,7 +1031,7 @@ function MostrarDatosCliente(Id) {
                 $("#IdIBCondicion").val(result[0].IdIBCondicionPorDefecto);
                 $("#IdIBCondicion2").val(result[0].IdIBCondicionPorDefecto2);
                 $("#IdIBCondicion3").val(result[0].IdIBCondicionPorDefecto3);
-
+                $("#IdCodigoIva").val(result[0].IdCodigoIva);
             }
         }
     });
@@ -1120,5 +1133,33 @@ function TraerNumeroComprobante() {
         $("#IdPuntoVenta").prop("disabled", true);
         $("#CAE").prop("disabled", true);
         $("#FechaVencimientoORechazoCAE").prop("disabled", true);
+    }
+}
+
+function ActivarControles(Activar) {
+    var $td;
+    if (Activar) {
+        pageLayout.show('east');
+        pageLayout.close('east');
+
+        $("#Lista").unblock({ message: "", theme: true, });
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');        $td.show();        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+
+        $("#ListaConceptos").unblock({ message: "", theme: true, });
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.show();        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+    } else {
+        pageLayout.hide('east');
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');        $td.hide();        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.hide();        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+        $("#ListaConceptos").block({ message: "", theme: true, });
+        $("#Cliente").prop("disabled", true);
+        $("#FechaNotaCredito").prop("disabled", true);
+        $("#IdMoneda").prop("disabled", true);
+        $("#CotizacionMoneda").prop("disabled", true);
+        $("#CotizacionDolar").prop("disabled", true);
+        $("#AplicarEnCtaCte").prop("disabled", true);
+        jQuery("input[name='CtaCte']").each(function (i) {
+            jQuery(this).prop("disabled", true);
+        })
     }
 }

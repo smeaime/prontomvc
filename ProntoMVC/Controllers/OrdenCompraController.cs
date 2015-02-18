@@ -147,6 +147,10 @@ namespace ProntoMVC.Controllers
             foreach (ProntoMVC.Data.Models.DetalleOrdenesCompra x in o.DetalleOrdenesCompras)
             {
                 if ((x.IdArticulo ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen articulo"; }
+                if ((x.IdUnidad ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen unidad"; }
+                if ((x.OrigenDescripcion ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen el origen de la descripcion"; }
+                if ((x.TipoCancelacion ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen definido el tipo de cancelacion"; }
+                
                 mImporteDetalle = (x.Cantidad ?? 0) * (x.Precio ?? 0);
                 mSubtotal += mImporteDetalle;
             }
@@ -313,11 +317,12 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
+            decimal cien = 100;
 
             var data = (from a in db.OrdenesCompras
                         from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
@@ -330,6 +335,11 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             a.IdOrdenCompra,
+                            a.IdCliente,
+                            a.IdObra,
+                            a.IdCondicionVenta,
+                            a.IdListaPrecios,
+                            a.IdMoneda,
                             a.NumeroOrdenCompraCliente,
                             a.NumeroOrdenCompra,
                             a.FechaOrdenCompra,
@@ -363,9 +373,22 @@ namespace ProntoMVC.Controllers
                              //(Select Max(Det.FechaEntrega) From DetalleOrdenesCompra Det Where Det.IdOrdenCompra=OrdenesCompra.IdOrdenCompra) as [Mayor fecha entrega],
                              MayorFechaEntrega = "",
                             ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
+                            a.PorcentajeBonificacion,
                             a.ImporteTotal,
                             Moneda = a.Moneda.Abreviatura,
-                            a.Observaciones
+                            a.Observaciones,
+                            PendienteRemitir = PendienteRemito == "SI"
+                                                ? ((db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) - (db.DetalleRemitos.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0)
+                                                : 1,
+                            PendienteFacturar = PendienteFactura == "SI"
+                                                ? (db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) -
+                                                        (db.DetalleFacturasOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0) +
+                                                        (db.DetalleNotasCreditoOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0
+                                                : 1
                         }).AsQueryable();
 
             if (FechaInicial != string.Empty)
@@ -379,6 +402,7 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
+                        .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroOrdenCompra)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
@@ -395,6 +419,11 @@ namespace ProntoMVC.Controllers
                                 "<a href="+ Url.Action("Edit",new {id = a.IdOrdenCompra} ) + ">Editar</>",
                                 "<a href="+ Url.Action("Imprimir",new {id = a.IdOrdenCompra} ) + ">Emitir</a> ",
                                 a.IdOrdenCompra.ToString(),
+                                a.IdCliente.NullSafeToString(),
+                                a.IdObra.NullSafeToString(),
+                                a.IdCondicionVenta.NullSafeToString(),
+                                a.IdListaPrecios.NullSafeToString(),
+                                a.IdMoneda.NullSafeToString(),
                                 a.NumeroOrdenCompraCliente.NullSafeToString(),
                                 a.NumeroOrdenCompra.NullSafeToString(),
                                 a.FechaOrdenCompra == null ? "" : a.FechaOrdenCompra.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -422,6 +451,7 @@ namespace ProntoMVC.Controllers
                                 a.TipoOC.NullSafeToString(),
                                 a.MayorFechaEntrega.NullSafeToString(),
                                 a.ListaDePrecio.NullSafeToString(),
+                                a.PorcentajeBonificacion.NullSafeToString(),
                                 a.ImporteTotal.NullSafeToString(),
                                 a.Moneda.NullSafeToString(),
                                 a.Observaciones.NullSafeToString()
@@ -465,7 +495,8 @@ namespace ProntoMVC.Controllers
                             a.FacturacionAutomatica,
                             a.FechaComienzoFacturacion,
                             a.CantidadMesesAFacturar,
-                            a.FacturacionCompletaMensual
+                            a.FacturacionCompletaMensual,
+                            a.Observaciones
                         }).OrderBy(x => x.NumeroItem).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var jsonData = new jqGridJson()
@@ -500,11 +531,63 @@ namespace ProntoMVC.Controllers
                             a.FacturacionAutomatica.NullSafeToString(),
                             a.FechaComienzoFacturacion == null ? "" : a.FechaComienzoFacturacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                             a.CantidadMesesAFacturar.NullSafeToString(),
-                            a.FacturacionCompletaMensual.NullSafeToString()
+                            a.FacturacionCompletaMensual.NullSafeToString(),
+                            a.Observaciones.NullSafeToString()
                             }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult DetOrdenesCompraSinFormato(int IdOrdenCompra)
+        {
+            Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+            decimal mPorcentajeIva = parametros.Iva1 ?? 0;
+
+            var Det = db.DetalleOrdenesCompras.Where(p => p.IdOrdenCompra == IdOrdenCompra).AsQueryable();
+
+            var data = (from a in Det
+                        from b in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
+                        from c in db.Obras.Where(v => v.IdObra == a.OrdenesCompra.IdObra).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleOrdenCompra,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdColor,
+                            a.OrigenDescripcion,
+                            a.TipoCancelacion,
+                            a.OrdenesCompra.IdObra,
+                            a.NumeroItem,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
+                            a.Cantidad,
+                            PendienteRemitir = (a.TipoCancelacion ?? 1) == 1 
+                                                ? a.Cantidad - (db.DetalleRemitos.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => z.Cantidad) ?? 0) 
+                                                : 100 - (db.DetalleRemitos.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => z.PorcentajeCertificacion) ?? 0),
+                            PendienteFacturar = (a.TipoCancelacion ?? 1) == 1
+                                                ? a.Cantidad - (db.DetalleFacturasOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => z.DetalleFactura.Cantidad) ?? 0) + (db.DetalleNotasCreditoOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => z.Cantidad) ?? 0)
+                                                : 100 - (db.DetalleFacturasOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => z.DetalleFactura.PorcentajeCertificacion) ?? 0) + (db.DetalleNotasCreditoOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == a.IdDetalleOrdenCompra && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => z.PorcentajeCertificacion) ?? 0),
+                            Unidad = a.Unidade.Abreviatura,
+                            Precio = Math.Round((double)a.Precio, 2),
+                            a.PorcentajeBonificacion,
+                            Importe = Math.Round((double)a.Cantidad * (double)a.Precio * (double)(1 - (a.PorcentajeBonificacion ?? 0) / 100), 2),
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            TiposCancelacion = (a.TipoCancelacion ?? 1) == 1 ? "Por cantidad" : ((a.TipoCancelacion ?? 1) == 2 ? "Por certificacion" : ""),
+                            a.FechaNecesidad,
+                            a.FechaEntrega,
+                            a.FacturacionAutomatica,
+                            a.FechaComienzoFacturacion,
+                            a.CantidadMesesAFacturar,
+                            a.FacturacionCompletaMensual,
+                            a.Observaciones,
+                            Obra = c != null ? c.NumeroObra : "",
+                            OrdenCompraNumero = a.OrdenesCompra.NumeroOrdenCompra.ToString() + "/" + a.NumeroItem.ToString(),
+                            PorcentajeIva = mPorcentajeIva,
+                            IdCodigoIva = a.OrdenesCompra.Cliente.IdCodigoIva
+                        }).OrderBy(p => p.NumeroItem).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

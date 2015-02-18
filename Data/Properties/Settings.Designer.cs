@@ -33,5 +33,15 @@ namespace ProntoMVC.Data.Properties {
                 return ((string)(this["ProntoConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SERVERSQL3\\TESTING;Initial Catalog=Pronto;Integrated Security=True")]
+        public string ProntoConnectionString1 {
+            get {
+                return ((string)(this["ProntoConnectionString1"]));
+            }
+        }
     }
 }

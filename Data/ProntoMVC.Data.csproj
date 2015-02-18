@@ -281,6 +281,9 @@
     <Compile Include="Models\DetalleConciliacionesNoContable.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleConjunto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleCuenta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -531,6 +534,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlazosEntrega.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlazosFijo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Presupuesto.cs">

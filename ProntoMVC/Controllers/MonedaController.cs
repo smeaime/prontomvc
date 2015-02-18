@@ -263,10 +263,11 @@ namespace ProntoMVC.Controllers
             return Json(cotizacion, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult CotizacionesPorFecha(DateTime? fecha)
+        public virtual JsonResult CotizacionesPorFecha(string fecha)
         {
+            DateTime fecha1;
             if (db == null) return null;
-            if (fecha == null) fecha = DateTime.Now;
+            fecha1 = Convert.ToDateTime(fecha);
 
             decimal mCotizacionDolar = 0;
             decimal mCotizacionEuro = 0;
@@ -275,19 +276,20 @@ namespace ProntoMVC.Controllers
             Int32 mIdMonedaDolar;
             Int32 mIdMonedaEuro;
 
-            DateTime desde = fecha.Value.Date;
-            DateTime hasta = desde.AddDays(1);
+            //DateTime desde = fecha1;
+            //DateTime hasta = desde.AddDays(1);
 
             Parametros parametros = db.Parametros.Find(1);
-
             mIdMonedaPrincipal = parametros.IdMonedaPrincipal ?? 0;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
             mIdMonedaEuro = parametros.IdMonedaEuro ?? 0;
 
-            var Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaDolar).FirstOrDefault();
+            //var Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaDolar).FirstOrDefault();
+            var Cotizacion = db.Cotizaciones.Where(x => x.Fecha == fecha1 && x.IdMoneda == mIdMonedaDolar).FirstOrDefault();
             if (Cotizacion != null) { mCotizacionDolar = (Cotizacion.CotizacionLibre ?? Cotizacion.Cotizacion) ?? 0; }
 
-            Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaEuro).FirstOrDefault();
+            //Cotizacion = db.Cotizaciones.Where(x => x.Fecha >= desde && x.Fecha <= hasta && x.IdMoneda == mIdMonedaEuro).FirstOrDefault();
+            Cotizacion = db.Cotizaciones.Where(x => x.Fecha == fecha1 && x.IdMoneda == mIdMonedaEuro).FirstOrDefault();
             if (Cotizacion != null) { mCotizacionEuro = (Cotizacion.CotizacionLibre ?? Cotizacion.Cotizacion) ?? 0; }
 
             DatosJson data = new DatosJson();
