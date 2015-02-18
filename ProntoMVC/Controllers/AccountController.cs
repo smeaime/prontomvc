@@ -103,6 +103,24 @@ namespace ProntoMVC.Controllers
                         }
                        ).ToList();
 
+
+
+            var Fac8 = (from u in users
+                        join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
+                        join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
+                        where !emp.Select(x => x.UsuarioNT).Contains(u.UserName)
+                            && (r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
+                        select new c
+                        {
+                            IdFactura = u.UserId,
+                            UserId = u.UserId,
+                            UserName = u.UserName,
+                            IdEmpleado = 0,
+                            leyenda = "usuario externo!"
+                        }
+                       ).ToList();
+
+
             var Fac3 = (from e in emp
                         where !users.Select(x => x.UserName).Contains(e.UsuarioNT)
                         select new c
@@ -116,7 +134,8 @@ namespace ProntoMVC.Controllers
                        ).ToList();
 
 
-            var Fac = Fac3.Union(Fac2).Union(Fac4);
+            var Fac = Fac3.Union(Fac2).Union(Fac4).Union(Fac8);
+            
 
 
 
