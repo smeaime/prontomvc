@@ -83,13 +83,17 @@ namespace ProntoMVC.Controllers
                             select new { u.UserId, u.UserName }
                 ).Distinct().ToList();
 
-            var users = (from u in bdlmaster.aspnet_Users
-                         join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
-                         join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
-                         where 
-                            // !emp.Select(x => x.UsuarioNT).Contains(u.UserName) && 
-                            !(r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
+            var users1 = (from u in bdlmaster.aspnet_Users
+                         //join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
+                         //join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
+                      //   where !usersext.Select(x => x.UserName).Contains(u.UserName) 
+                       //     && 
+                            //!(r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
                          select new { u.UserId, u.UserName }).Distinct().ToList();
+
+            var users = (from u in users1 
+                         where !usersext.Select(x => x.UserName).Contains(u.UserName)
+                            select u).ToList();
 
 
             // Verificar que No tienen Roles externos
@@ -135,7 +139,7 @@ namespace ProntoMVC.Controllers
 
 
             var Fac3 = (from e in emp
-                        where !users.Select(x => x.UserName).Contains(e.UsuarioNT)
+                        where !users.Select(x => x.UserName).Contains(e.UsuarioNT) && !usersext.Select(x => x.UserName).Contains(e.UsuarioNT)
                         select new c
                         {
                             IdFactura = new Guid(),
