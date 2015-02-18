@@ -41,7 +41,7 @@
 
 
 
-                if (!rolesexternos.Contains(role.Key)) { continue; }
+                if (!rolesexternos.Contains(role.Key) && !Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) { continue; }
 
 
                 if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") ||

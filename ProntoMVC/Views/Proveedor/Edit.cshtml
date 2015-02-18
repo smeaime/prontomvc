@@ -28,12 +28,12 @@
                             @Html.TextBox("CopiaPuntoVenta", Model.RazonSocial, new { style = "font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 24px; border: 0; padding: 0 ; text-align: left; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif'; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; ", @class = "span8", @readonly = "readonly" })
                         </div>
                         <script>
-                        $(function () {
-                            function resizeInput() {
-                                // $(this).attr('size', $(this).val().length + 2);
-                                $(this).css('width', $(this).val().length * 32);
-                            }
-                        })
+                            $(function () {
+                                function resizeInput() {
+                                    // $(this).attr('size', $(this).val().length + 2);
+                                    $(this).css('width', $(this).val().length * 32);
+                                }
+                            })
                         </script>
 
                     </div>
@@ -126,17 +126,17 @@
                                     @Html.LabelFor(model => model.IdLocalidad, "Localidad")
                                     @Html.TextBox("Localidad", (Model.Localidad == null ? "" : Model.Localidad.Nombre), new { @class = "span12" })
                                     <script type="text/jscript">
-                                    $("#Localidad").autocomplete({
-                                        source: '@Url.Action("GetLocalidadesAutocomplete","Localidad")',
-                                        minLength: 0,
-                                        messages: { noResults: "", results: function () { } },
-                                        select: function (event, ui) {
-                                            $("#IdLocalidad").val(ui.item.id);
-                                            $("#Localidad").val(ui.item.value);
-                                            $("#IdProvincia").val(ui.item.idprovincia);
-                                            event.preventDefault();
-                                        }
-                                    });
+                                        $("#Localidad").autocomplete({
+                                            source: '@Url.Action("GetLocalidadesAutocomplete","Localidad")',
+                                            minLength: 0,
+                                            messages: { noResults: "", results: function () { } },
+                                            select: function (event, ui) {
+                                                $("#IdLocalidad").val(ui.item.id);
+                                                $("#Localidad").val(ui.item.value);
+                                                $("#IdProvincia").val(ui.item.idprovincia);
+                                                event.preventDefault();
+                                            }
+                                        });
                                     </script>
                                 </div>
                                 <div class="span2 lightblue">
@@ -166,12 +166,12 @@
                                     @Html.TextBoxFor(model => model.FechaLimiteCondicionIVA, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                     @Html.ValidationMessageFor(model => model.FechaLimiteCondicionIVA)
                                     <script>
-                                    $("#FechaLimiteCondicionIVA").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
+                                        $("#FechaLimiteCondicionIVA").datepicker({
+                                            changeMonth: true,
+                                            changeYear: true,
+                                            dateFormat: 'dd/mm/yy'
+                                            //numberOfMonths: 2,
+                                        });
                                     </script>
                                 </div>
                                 <div class="span2 lightblue">
@@ -179,12 +179,12 @@
                                     @Html.TextBoxFor(model => model.FechaInicialControlComprobantes, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                     @Html.ValidationMessageFor(model => model.FechaInicialControlComprobantes)
                                     <script>
-                                    $("#FechaInicialControlComprobantes").datepicker({
-                                        changeMonth: true,
-                                        changeYear: true,
-                                        dateFormat: 'dd/mm/yy'
-                                        //numberOfMonths: 2,
-                                    });
+                                        $("#FechaInicialControlComprobantes").datepicker({
+                                            changeMonth: true,
+                                            changeYear: true,
+                                            dateFormat: 'dd/mm/yy'
+                                            //numberOfMonths: 2,
+                                        });
                                     </script>
                                 </div>
                             </div>
@@ -293,12 +293,12 @@
                                         @Html.TextBoxFor(model => model.FechaLimiteExentoGanancias, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaLimiteExentoGanancias)
                                         <script>
-                                        $("#FechaLimiteExentoGanancias").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaLimiteExentoGanancias").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                 </div>
@@ -321,12 +321,12 @@
                                         @Html.TextBoxFor(model => model.IvaFechaInicioExencion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.IvaFechaInicioExencion)
                                         <script>
-                                        $("#IvaFechaInicioExencion").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#IvaFechaInicioExencion").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span2 lightblue">
@@ -334,12 +334,12 @@
                                         @Html.TextBoxFor(model => model.IvaFechaCaducidadExencion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.IvaFechaCaducidadExencion)
                                         <script>
-                                        $("#IvaFechaCaducidadExencion").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#IvaFechaCaducidadExencion").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span4 lightblue">
@@ -381,12 +381,12 @@
                                         @Html.TextBoxFor(model => model.SUSSFechaCaducidadExencion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.SUSSFechaCaducidadExencion)
                                         <script>
-                                        $("#SUSSFechaCaducidadExencion").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#SUSSFechaCaducidadExencion").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span4 lightblue">
@@ -394,12 +394,12 @@
                                         @Html.TextBoxFor(model => model.SUSSFechaInicioVigencia, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.SUSSFechaInicioVigencia)
                                         <script>
-                                        $("#SUSSFechaInicioVigencia").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#SUSSFechaInicioVigencia").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                 </div>
@@ -432,12 +432,12 @@
                                         @Html.TextBoxFor(model => model.FechaLimiteExentoIIBB, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaLimiteExentoIIBB)
                                         <script>
-                                        $("#FechaLimiteExentoIIBB").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaLimiteExentoIIBB").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span3 lightblue">
@@ -486,12 +486,12 @@
                                         @Html.TextBoxFor(model => model.FechaInicioVigenciaIBDirecto, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaInicioVigenciaIBDirecto)
                                         <script type="text/jscript">
-                                        $("#FechaInicioVigenciaIBDirecto").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaInicioVigenciaIBDirecto").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span3 lightblue">
@@ -499,12 +499,12 @@
                                         @Html.TextBoxFor(model => model.FechaFinVigenciaIBDirecto, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaFinVigenciaIBDirecto)
                                         <script type="text/jscript">
-                                        $("#FechaFinVigenciaIBDirecto").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaFinVigenciaIBDirecto").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span2 lightblue">
@@ -528,12 +528,12 @@
                                         @Html.TextBoxFor(model => model.FechaInicioVigenciaIBDirectoCapital, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaInicioVigenciaIBDirectoCapital)
                                         <script type="text/jscript">
-                                        $("#FechaInicioVigenciaIBDirectoCapital").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaInicioVigenciaIBDirectoCapital").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span3 lightblue">
@@ -541,12 +541,12 @@
                                         @Html.TextBoxFor(model => model.FechaFinVigenciaIBDirectoCapital, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaFinVigenciaIBDirectoCapital)
                                         <script type="text/jscript">
-                                        $("#FechaFinVigenciaIBDirectoCapital").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaFinVigenciaIBDirectoCapital").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                     <div class="span2 lightblue">
@@ -572,12 +572,12 @@
                                         @Html.TextBoxFor(model => model.FechaUltimaPresentacionDocumentacion, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                                         @Html.ValidationMessageFor(model => model.FechaUltimaPresentacionDocumentacion)
                                         <script>
-                                        $("#FechaUltimaPresentacionDocumentacion").datepicker({
-                                            changeMonth: true,
-                                            changeYear: true,
-                                            dateFormat: 'dd/mm/yy'
-                                            //numberOfMonths: 2,
-                                        });
+                                            $("#FechaUltimaPresentacionDocumentacion").datepicker({
+                                                changeMonth: true,
+                                                changeYear: true,
+                                                dateFormat: 'dd/mm/yy'
+                                                //numberOfMonths: 2,
+                                            });
                                         </script>
                                     </div>
                                 </div>
@@ -744,11 +744,17 @@
                 <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
                 width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
-                    <div class="span3 lightblue">
-                        <input type="button" id="grabar2" value="Aceptar" class="btn btn-primary" />
-                        @if (Model.IdProveedor > 0)
-                    { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdProveedor }, new { @class = "btn  btn-default" }) }
-                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link" })
+                    <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                        <div class="span1 pull-right">
+                        </div>
+                        <div class="span11 lightblue">
+                            @if (Model.IdProveedor > 0)
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdProveedor }, new { @class = "btn btn-large   btn-default pull-right" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link pull-right" }
+                        )
+                            <input type="button" id="grabar2" value="Aceptar" class="btn btn-large  btn-primary pull-right" />
+
+                        </div>
                     </div>
                 </div>
             </div>
