@@ -92,14 +92,14 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="ALTERTABLE 2011 Modulo WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql</FullPath>
         </FileNode>
@@ -194,9 +194,9 @@
           <FullPath>SQLQuery1.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQuery13333.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>SQLQuery13333.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQuery1asdasd.sql">
@@ -217,9 +217,15 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
         </FileNode>
+        <FileNode Name="monitoreo_ las 10 peores .sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>monitoreo_ las 10 peores .sql</FullPath>
+        </FileNode>
         <FileNode Name="wFacturas_TXFecha.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wFacturas_TXFecha.sql</FullPath>
         </FileNode>
@@ -277,11 +283,11 @@
           <AssociatedConnUserName />
           <FullPath>factura mala de williams.sql</FullPath>
         </FileNode>
-        <FileNode Name="fk williams.sql">
+        <FileNode Name="fk e indices williams.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
-          <FullPath>fk williams.sql</FullPath>
+          <FullPath>fk e indices williams.sql</FullPath>
         </FileNode>
         <FileNode Name="funcDetalleFactura.sql">
           <AssociatedConnectionMoniker />
@@ -307,34 +313,34 @@
           <AssociatedConnUserName />
           <FullPath>sp who.sql</FullPath>
         </FileNode>
-        <FileNode Name="superbuscador  wFuncionBusqueda wBusqueda   .sql">
+        <FileNode Name="superbuscador  generico (inlcluyendo rms etc) wFuncionBusqueda wBusqueda   .sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
-          <FullPath>superbuscador  wFuncionBusqueda wBusqueda   .sql</FullPath>
+          <FullPath>superbuscador  generico (inlcluyendo rms etc) wFuncionBusqueda wBusqueda   .sql</FullPath>
         </FileNode>
         <FileNode Name="superbuscador version vieja.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>superbuscador version vieja.sql</FullPath>
         </FileNode>
         <FileNode Name="superbuscador williams.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>superbuscador williams.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_InformesCorregido.sql">

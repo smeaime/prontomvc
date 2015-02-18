@@ -23,6 +23,8 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq.Expressions;
 using System.Data.Entity;
 
+using StackExchange.Profiling;
+
 
 namespace ProntoMVC.Controllers
 {
@@ -212,47 +214,54 @@ namespace ProntoMVC.Controllers
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
-            base.Initialize(rc);
 
-            // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
-            // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
-            ROOT = ConfigurationManager.AppSettings["Root"];
-            asignacadena((string)rc.HttpContext.Session["BasePronto"]);
+            MiniProfiler profiler = MiniProfiler.Current;
 
-
-
-            string us = Membership.GetUser().ProviderUserKey.ToString();
-
-            string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
-            System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                                     "SELECT * FROM BASES " +
-                                                     "join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
-                                                     "where UserId='" + us + "'");
-            //DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
-            // List<string> baselistado = new List<string>();
-            List<SelectListItem> baselistado = new List<SelectListItem>();
-            foreach (DataRow r in dt.Rows)
+            using (profiler.Step("En el Initialize"))
             {
-                baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
+
+
+                base.Initialize(rc);
+
+                // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
+                // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
+                ROOT = ConfigurationManager.AppSettings["Root"];
+                asignacadena((string)rc.HttpContext.Session["BasePronto"]);
+
+
+
+                string us = Membership.GetUser().ProviderUserKey.ToString();
+
+                string sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+                System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                                         "SELECT * FROM BASES " +
+                                                         "join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                         "where UserId='" + us + "'");
+                //DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster, "SELECT * FROM BASES");
+                // List<string> baselistado = new List<string>();
+                List<SelectListItem> baselistado = new List<SelectListItem>();
+                foreach (DataRow r in dt.Rows)
+                {
+                    baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
+                }
+
+
+                ViewBag.Bases = baselistado;
+
+
+                //try
+                //{
+                //    if (!PuedeLeer(rc.RouteData.Values["controller"].ToString())) db = null;
+
+                //}
+                //catch (Exception)
+                //{
+
+                //  //  throw;
+                //}
+
+                //PuedeLeer(rc.RouteData.Values["action"])
             }
-
-
-            ViewBag.Bases = baselistado;
-
-
-            //try
-            //{
-            //    if (!PuedeLeer(rc.RouteData.Values["controller"].ToString())) db = null;
-
-            //}
-            //catch (Exception)
-            //{
-
-            //  //  throw;
-            //}
-
-            //PuedeLeer(rc.RouteData.Values["action"])
-
         }
 
 
@@ -263,145 +272,151 @@ namespace ProntoMVC.Controllers
             //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
             //http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
 
-            base.OnActionExecuting(filterContext);
+            MiniProfiler profiler = MiniProfiler.Current;
 
-
-
-
-
-
-            if (this.Session["BasePronto"] == null)
+            using (profiler.Step("En el OnActionExecuting"))
             {
 
-                // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
-                // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
+                base.OnActionExecuting(filterContext);
 
-                // -ok, pero pasá la información de en qué página estaba antes!!!!
 
-                AccountController a = new AccountController();
-                if (a.BuscarUltimaBaseAccedida() != "")
+
+
+
+
+                if (this.Session["BasePronto"] == null)
                 {
-                    this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
 
-                }
+                    // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
+                    // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
 
-                else
-                {
-                    filterContext.Result = new RedirectToRouteResult(
-                              new System.Web.Routing.RouteValueDictionary { { "controller", "Account" }, { "action", "ElegirBase" }, { "area", "" }
+                    // -ok, pero pasá la información de en qué página estaba antes!!!!
+
+                    AccountController a = new AccountController();
+                    if (a.BuscarUltimaBaseAccedida() != "")
+                    {
+                        this.Session["BasePronto"] = a.BuscarUltimaBaseAccedida();
+
+                    }
+
+                    else
+                    {
+                        filterContext.Result = new RedirectToRouteResult(
+                                  new System.Web.Routing.RouteValueDictionary { { "controller", "Account" }, { "action", "ElegirBase" }, { "area", "" }
                               , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
                           });
-                    return;
+                        return;
+                    }
                 }
-            }
 
-            if (!VerificarPassBase(filterContext))
-            {
-                //filterContext.Result = new RedirectResult(  AppDom  );
-                filterContext.Result = new RedirectToRouteResult(
-                        new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } 
+                if (!VerificarPassBase(filterContext))
+                {
+                    //filterContext.Result = new RedirectResult(  AppDom  );
+                    filterContext.Result = new RedirectToRouteResult(
+                            new System.Web.Routing.RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } 
                                 , { "returnUrl",    filterContext.HttpContext.Request.RawUrl }
                         });
 
-                return;
-            }
+                    return;
+                }
 
 
 
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-            // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
+                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
 
 
 
 
 
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
-            if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
+                if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
 
 
-            bool ok;
+                bool ok;
 
-            try
-            {
+                try
+                {
 
-                //ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
-                ok = true;
-
-            }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
-            }
-
-
-
-            try
-            {
-                if ((filterContext.RouteData.Values["action"].NullSafeToString() == "Edit" &&
-                     filterContext.HttpContext.Request.HttpMethod == "POST") ||
-                    filterContext.RouteData.Values["id"].NullSafeToString() == "-1")
-
+                    //ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
                     ok = true;
-                // ok = (PuedeEditar(filterContext.RouteData.Values["controller"].ToString()));
-                else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
+                }
+
+
+
+                try
+                {
+                    if ((filterContext.RouteData.Values["action"].NullSafeToString() == "Edit" &&
+                         filterContext.HttpContext.Request.HttpMethod == "POST") ||
+                        filterContext.RouteData.Values["id"].NullSafeToString() == "-1")
+
+                        ok = true;
+                    // ok = (PuedeEditar(filterContext.RouteData.Values["controller"].ToString()));
+                    else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de edición para el modulo " + filterContext.RouteData.Values["controller"].ToString());
+                }
+
+
+
+
+                try
+                {
+                    if (filterContext.RouteData.Values["action"].ToString().Contains("Delete"))
+                        ok = (PuedeBorrar(filterContext.RouteData.Values["controller"].ToString()));
+                    else ok = true;
+
+                }
+                catch (Exception)
+                {
+                    ok = true;
+                    //  throw;
+                }
+
+
+                if (!ok)
+                {
+                    db = null;
+                    //throw new Exception("Permisos insuficientes de borrado para el modulo " + filterContext.RouteData.Values["controller"].ToString());
+                }
 
             }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de edición para el modulo " + filterContext.RouteData.Values["controller"].ToString());
-            }
-
-
-
-
-            try
-            {
-                if (filterContext.RouteData.Values["action"].ToString().Contains("Delete"))
-                    ok = (PuedeBorrar(filterContext.RouteData.Values["controller"].ToString()));
-                else ok = true;
-
-            }
-            catch (Exception)
-            {
-                ok = true;
-                //  throw;
-            }
-
-
-            if (!ok)
-            {
-                db = null;
-                //throw new Exception("Permisos insuficientes de borrado para el modulo " + filterContext.RouteData.Values["controller"].ToString());
-            }
-
         }
 
 
@@ -1996,7 +2011,7 @@ namespace ProntoMVC.Controllers
         public List<string> LeerArchivoAPP(int IdUsuario, string sBase, string usuario, DemoProntoEntities dbcontext, Guid userGuid)
         {
             //string glbArchivoAyuda = dbcontext.Parametros.Find(1).ArchivoAyuda;
-            string glbArchivoAyuda = dbcontext.Parametros.Select(x=>x.ArchivoAyuda).FirstOrDefault();
+            string glbArchivoAyuda = dbcontext.Parametros.Select(x => x.ArchivoAyuda).FirstOrDefault();
             string glbPathPlantillas = "";
             //string s = dbcontext.Parametros.Find(1).PathPlantillas;
             string s = dbcontext.Parametros.Select(x => x.PathPlantillas).FirstOrDefault();
@@ -2122,7 +2137,53 @@ namespace ProntoMVC.Controllers
 
         public IQueryable<Tablas.Tree> TablaTree(string parentId)
         {
+
+            // cómo filtrar esto?, en especial en el nodo raíz (parentId="01")
+            //    y si es externo?
+
+            string usuario = ViewBag.NombreUsuario;
+            int IdUsuario;
+            try
+            {
+                IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw; // Exception("No se encuentra el usuario");
+            }
+
+
+
+            bool essuperadmin = Roles.IsUserInRole(usuario, "SuperAdmin");
+            bool esadmin = Roles.IsUserInRole(usuario, "Administrador");
+            bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
+            bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
+            bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                            Roles.IsUserInRole(usuario, "Externo") ||
+                            Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                            Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                            Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+            bool escompras = Roles.IsUserInRole(usuario, "Compras");
+            bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
+
+
+            if (esExterno)
+            {
+
+                // agregarExterno() // hasta que metas el agregar externa, deberás usar TablaTree
+                return TablaTree().AsQueryable();
+
+            }
+
+
+            var permisos = (from i in db.EmpleadosAccesos where i.IdEmpleado == IdUsuario select i); //.ToList();
+
+
+
             var q = from n in db.Trees
+                    join p in permisos on n.Clave equals p.Nodo
                     where (n.ParentId == parentId)
                     select new Tablas.Tree()
                     {
@@ -2135,7 +2196,7 @@ namespace ProntoMVC.Controllers
                         Link = n.Link.Replace("Pronto2", ROOT),
                         Imagen = n.Imagen,
                         EsPadre = n.EsPadre,
-                        nivel = 1
+                        nivel = p.Nivel ?? 9
 
                         // , Orden = n.Orden
                     };
@@ -2144,6 +2205,137 @@ namespace ProntoMVC.Controllers
 
 
             return q;
+        }
+
+
+
+        void agregarExterno(string usuario, List<Tablas.Tree> TreeDest)
+        {
+
+
+            var n = new Tablas.Tree();
+            if (Roles.IsUserInRole(usuario, "Externo"))
+            {
+                string nombreproveedor = "";
+                try
+                {
+                    Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
+                    string cuit = DatosExtendidosDelUsuario_GrupoUsuarios(oGuid);
+                    int idproveedor = buscaridproveedorporcuit(cuit);
+                    if (idproveedor <= 0)
+                    {
+                        idproveedor = buscaridclienteporcuit(cuit);
+                        if (idproveedor > 0) nombreproveedor = db.Clientes.Find(idproveedor).RazonSocial;
+                    }
+                    else
+                    {
+                        nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    nombreproveedor = "Sin CUIT";
+                }
+
+                n.Link = nombreproveedor; // "<a href=\"#\">" + nombreproveedor + "</a>";
+                n.Descripcion = "CUIT";
+                n.Clave = "CUIT";
+                n.EsPadre = "NO"; // "SI";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
+
+            n = new Tablas.Tree();
+            if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
+            {
+                n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
+                n.Descripcion = "Presupuesto";
+                n.Clave = "Presupuesto";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
+            {
+
+                //n = new Tablas.Tree();
+                //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                //n.Descripcion = "CuentasDeudor";
+                //n.Clave = "CuentasDeudor";
+                //n.EsPadre = "NO";
+                //n.IdItem = "1";
+                //n.ParentId = "";
+                //n.Orden = 1;
+                //TreeDest.Add(n);
+
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
+                n.Descripcion = "CuentasAcreedor";
+                n.Clave = "CuentasAcreedor";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+            if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
+            {
+
+                //n = new Tablas.Tree();
+                //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                //n.Descripcion = "CuentasDeudor";
+                //n.Clave = "CuentasDeudor";
+                //n.EsPadre = "NO";
+                //n.IdItem = "1";
+                //n.ParentId = "";
+                //n.Orden = 1;
+                //TreeDest.Add(n);
+
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
+                n.Descripcion = "CuentasDeudor";
+                n.Clave = "CuentasDeudor";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+            }
+
+
+            if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
+            {
+
+                n = new Tablas.Tree();
+                n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
+                n.Descripcion = "OrdenesPago";
+                n.Clave = "OrdenesPago";
+                n.EsPadre = "NO";
+                n.IdItem = "1";
+                n.ParentId = "01";
+                n.Orden = 1;
+                TreeDest.Add(n);
+
+
+            }
+
+
+
+
         }
 
 
@@ -2189,7 +2381,12 @@ namespace ProntoMVC.Controllers
             bool escomercial = Roles.IsUserInRole(usuario, "Comercial");
             bool esfactura = Roles.IsUserInRole(usuario, "FacturaElectronica");
             bool esreq = Roles.IsUserInRole(usuario, "Requerimientos");
-            bool esExterno = Roles.IsUserInRole(usuario, "Externo");
+            bool esExterno = Roles.IsUserInRole(usuario, "AdminExterno") ||
+                        Roles.IsUserInRole(usuario, "Externo") ||
+                        Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
+                        Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
+                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
             bool escompras = Roles.IsUserInRole(usuario, "Compras");
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
@@ -2340,7 +2537,7 @@ namespace ProntoMVC.Controllers
             if (esExterno)
             {
                 var n = new Tablas.Tree();
-                if (Roles.IsUserInRole(usuario, "Externo"))
+                if (esExterno)
                 {
                     string nombreproveedor = "";
                     try

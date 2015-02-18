@@ -1,4 +1,6 @@
-Partial Class CartasDePorte
+
+Partial Class LinqCartasPorteDataContext
 
 End Class
+
 

@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         $.post(ROOT + "Acceso/ArbolConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
 
-            // la cuestion es: si no lo ves (el superadmin te puso nivel mínimo) , tampoco lo debés poder administrar (aunque seas administrador)
+            // la cuestion es: si no lo ves (el superadmin te puso nivel mï¿½nimo) , tampoco lo debï¿½s poder administrar (aunque seas administrador)
 
 
             var menu_html = '<ul id="Tablas64646" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
@@ -151,7 +151,7 @@ $(document).ready(function () {
             /////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // este post está incluido en el primer post, para que el reemplazo de treeviews se haga con los dos terminados de ejecutar
+            // este post estï¿½ incluido en el primer post, para que el reemplazo de treeviews se haga con los dos terminados de ejecutar
             $.post(ROOT + "Acceso/MenuConNiveles", { IdUsuario: $("#IdEmpleado").val() }, function (data) {
                 var menu_html = '<ul id="TablasMenu" class="treeviewMod treeviewMod-famfamfam filetree treeview-famfamfam"  style="margin: 30px !important;" >';
                 var longitud = 0
@@ -245,7 +245,7 @@ $(document).ready(function () {
 
 
                 if (true) {
-                    //cómo optimizar la creación de tantos controlcitos??
+                    //cï¿½mo optimizar la creaciï¿½n de tantos controlcitos??
 
 
                     // creo los sliders
@@ -371,9 +371,9 @@ $(document).ready(function () {
 
         //sacarDeEditMode();
         jQuery('#arbolpermisos').jqGrid('saveCell', lastRowIndex, lastColIndex);
+  
 
-
-
+ 
         GrabarGrillaLocal()
 
         var cabecera = SerializaForm();
@@ -382,6 +382,9 @@ $(document).ready(function () {
         //var count = Object.keys(d).length
         //console.log(count);
 
+   
+
+        
         $('html, body').css('cursor', 'wait');
         $.ajax({
             type: 'POST',
@@ -401,10 +404,13 @@ $(document).ready(function () {
                     $('html, body').css('cursor', 'auto');
 
 
-                    if (true) {
+                    if (false) {
                         //window.location = (ROOT + "Pedido/index");
                         //window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
+
+
                         location.reload();
+
 
                     } else {
 
@@ -494,139 +500,88 @@ $(document).ready(function () {
 
 
 
-    $("#grabar3").click(function () {
-        //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
-        //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
+    //$("#grabar3").click(function () {
+    //    //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
+    //    //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
 
-        $('#grabar2').attr("disabled", true).html("Espere...").val("Espere...");
-
-
-        var griddata = $("#Lista").jqGrid('getGridParam', 'data');
-        var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
-
-
-        //  var aaa = $.toJSON(formdata);
-
-        var fullData = jQuery("#Lista").jqGrid('getRowData');
-
-        //        var gd = $('#ListaLugaresEntrega').jqGrid('getRowData'); // use preferred interface
-        //        for (var i = 0; i < gd.length; ++i) {
-        //            for (var f in gd[i]) res.push({ name: '_detail[' + i + '].' + f, value: gd[i][f] });
-        //        }
-
-        // var grid1 = $("#Lista");
-        //var colModel = grid1.jqGrid('getGridParam', 'colModel');
-
-        var items = [];
-
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-
-
-        cabecera.EmpleadosAccesos = [];
-        //        var eacc = { Nodo: 'aaaa', Nivel: 3 };
-        //        cabecera.EmpleadosAccesos.push(eacc);
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
+    //    //este lo usaba cuando tenï¿½a los slider. es obsoleto
 
 
 
-        // var dataIds = grilla1.jqGrid('getDataIDs');
-
-        var prueba = $.map(
-                        $('[name^="slider"]'), // $("#Tablas64646 :input"),
-                        function (n, i) {
-                            var a = {
-                                IdEmpleadoAcceso: null, //parseInt($(n).attr("id")) ojo con pasar a int un nodo como "80-01", porque te quedará idempleadoacceso=80  ,  // $(n).attr("name"),
-                                Nivel: $(n).slider('value'), // $(n).val() ,
-                                Nodo: $(n).attr("id")
-                            };
-                            cabecera.EmpleadosAccesos.push(a);
-                        }
-                     );
+    //    $('#grabar2').attr("disabled", true).html("Espere...").val("Espere...");
 
 
-
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////
+    //    var griddata = $("#Lista").jqGrid('getGridParam', 'data');
+    //    var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
 
 
+    //    //  var aaa = $.toJSON(formdata);
+
+    //    var fullData = jQuery("#Lista").jqGrid('getRowData');
+
+    //    //        var gd = $('#ListaLugaresEntrega').jqGrid('getRowData'); // use preferred interface
+    //    //        for (var i = 0; i < gd.length; ++i) {
+    //    //            for (var f in gd[i]) res.push({ name: '_detail[' + i + '].' + f, value: gd[i][f] });
+    //    //        }
+
+    //    // var grid1 = $("#Lista");
+    //    //var colModel = grid1.jqGrid('getGridParam', 'colModel');
+
+    //    var items = [];
+
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
 
 
-        var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
-
-
-
-
+    //    cabecera.EmpleadosAccesos = [];
+    //    //        var eacc = { Nodo: 'aaaa', Nivel: 3 };
+    //    //        cabecera.EmpleadosAccesos.push(eacc);
 
 
 
-        $("#mensajeLocal").hide()
+    //    // var dataIds = grilla1.jqGrid('getDataIDs');
+
+    //    var prueba = $.map(
+    //                    $('[name^="slider"]'), // $("#Tablas64646 :input"),
+    //                    function (n, i) {
+    //                        var a = {
+    //                            IdEmpleadoAcceso: null, //parseInt($(n).attr("id")) ojo con pasar a int un nodo como "80-01", porque te quedarï¿½ idempleadoacceso=80  ,  // $(n).attr("name"),
+    //                            Nivel: $(n).slider('value'), // $(n).val() ,
+    //                            Nodo: $(n).attr("id")
+    //                        };
+    //                        cabecera.EmpleadosAccesos.push(a);
+    //                    }
+    //                 );
 
 
 
-
-        $.ajax({
-            type: 'POST',
-            // contentType: 'application/json; charset=utf-8',
-            contentType: 'application/json; charset=utf-8', // http://stackoverflow.com/a/2281875/1054200
-            url: ROOT + 'Acceso/Edit',   // 'Factura/UpdateAwesomeGridData',
-            dataType: 'json',
-            // data:JSON.stringify( {formulario: colData , grilla: dataToSend })
-            data: dataToSend,
-            //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
-            success: function (result) {
-                if (result) {
-                    $('#mensajeLocal').show();
-                    //$(".alert").alert();
-                    $('#grabar2').attr("disabled", false).val("Guardar").html("Guardar");
-
-                    // armarArbol();
-                    // armarMenu();
-
-                    location.reload();
-
-                    // grid1.trigger('reloadGrid');
-
-                    //window.location.replace(ROOT + "Cliente/index");
-                    //window.location = (ROOT + "Acceso/index");
-
-                } else {
-                    // window.location.replace(ROOT + "Cliente/index");
-                    alert('No se pudo grabar el comprobante.');
-                }
-
-            },
-
-
-            error: function (xhr, textStatus, exceptionThrown) {
-                var errorData = $.parseJSON(xhr.responseText);
-                var errorMessages = [];
-                //this ugly loop is because List<> is serialized to an object instead of an array
-                for (var key in errorData) {
-                    errorMessages.push(errorData[key]);
-                }
-                $('#result').html(errorMessages.join("<br />"));
-                $('html, body').css('cursor', 'auto');
-                $('#grabar2').attr("disabled", false).val("Guardar").html("Guardar");
-                alert(errorMessages.join("<br />"));
-
-            }
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
+    //    /////////////////////////////////////////////////////////////////
 
 
 
 
-
-        });
+    //    var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
 
 
 
@@ -634,7 +589,71 @@ $(document).ready(function () {
 
 
 
-    });
+    //    $("#mensajeLocal").hide()
+
+
+
+
+    //    $.ajax({
+    //        type: 'POST',
+    //        // contentType: 'application/json; charset=utf-8',
+    //        contentType: 'application/json; charset=utf-8', // http://stackoverflow.com/a/2281875/1054200
+    //        url: ROOT + 'Acceso/Edit',   // 'Factura/UpdateAwesomeGridData',
+    //        dataType: 'json',
+    //        // data:JSON.stringify( {formulario: colData , grilla: dataToSend })
+    //        data: dataToSend,
+    //        //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
+    //        success: function (result) {
+    //            if (result) {
+    //                $('#mensajeLocal').show();
+    //                //$(".alert").alert();
+    //                $('#grabar2').attr("disabled", false).val("Guardar").html("Guardar");
+
+    //                // armarArbol();
+    //                // armarMenu();
+
+    //                location.reload();
+
+    //                // grid1.trigger('reloadGrid');
+
+    //                //window.location.replace(ROOT + "Cliente/index");
+    //                //window.location = (ROOT + "Acceso/index");
+
+    //            } else {
+    //                // window.location.replace(ROOT + "Cliente/index");
+    //                alert('No se pudo grabar el comprobante.');
+    //            }
+
+    //        },
+
+
+    //        error: function (xhr, textStatus, exceptionThrown) {
+    //            var errorData = $.parseJSON(xhr.responseText);
+    //            var errorMessages = [];
+    //            //this ugly loop is because List<> is serialized to an object instead of an array
+    //            for (var key in errorData) {
+    //                errorMessages.push(errorData[key]);
+    //            }
+    //            $('#result').html(errorMessages.join("<br />"));
+    //            $('html, body').css('cursor', 'auto');
+    //            $('#grabar2').attr("disabled", false).val("Guardar").html("Guardar");
+    //            alert(errorMessages.join("<br />"));
+
+    //        }
+
+
+
+
+
+    //    });
+
+
+
+
+
+
+
+    //});
 
 
 
@@ -698,7 +717,7 @@ $(document).ready(function () {
 
     var $grid = $('#arbolpermisos')
 
-    // creo que la posta está por acá
+    // creo que la posta estï¿½ por acï¿½
     // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
 
     var idsOfExpandedRows = []
@@ -708,7 +727,7 @@ $(document).ready(function () {
 
         //columns names
         colNames: ['descripcion', 'id', 'link', 'nivel (1 max ... 9 min)', 'clave'
-            // el controlador me está devolviendo datos en estas columnas que impiden que las agrupe!!!!
+            // el controlador me estï¿½ devolviendo datos en estas columnas que impiden que las agrupe!!!!
             //, 'puede ver', 'editar', 'borrar'
         ],
         //columns model
@@ -741,9 +760,9 @@ $(document).ready(function () {
                                     }
 
 
-                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden: false }
+                                    , { name: 'Nodo', index: 'Nodo', align: 'left', width: 240, hidden: true }
 
-// el controlador me está devolviendo datos en estas columnas que impiden que las agrupe!!!!
+// el controlador me estï¿½ devolviendo datos en estas columnas que impiden que las agrupe!!!!
     //, { name: 'ver', index: 'Aktiasdv', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false }, hidden: true }
     //, { name: 'editar', index: 'Aktasdddiv', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false }, hidden: true }
     //, { name: 'borrar', index: 'Aktidaav', width: 100, edittype: 'checkbox', align: 'center', formatter: "checkbox", editable: true, formatoptions: { disabled: false } , hidden:true}
@@ -796,7 +815,7 @@ $(document).ready(function () {
         //                var rows = data.rows, i, l = rows.length, row, index;
         //                for (i = 0; i < l; i++) {
         //                    row = rows[i].cell;
-        //                    // cambié los indices en los tres renglones!
+        //                    // cambiï¿½ los indices en los tres renglones!
         //                    index = $.inArray(row[1], idsOfExpandedRows);
         //                    row[7] = index >= 0; // set expanded column
         //                    row[8] = true;       // set loaded column
@@ -817,7 +836,7 @@ $(document).ready(function () {
         afterEditCell: function (rowid, cellname, value, iRow, iCol) {
 
             var $input = $("#" + iRow + "_" + cellname);
-            $input.select(); // acá me marca el texto
+            $input.select(); // acï¿½ me marca el texto
 
             //http://jsfiddle.net/ironicmuffin/7dGrp/
             //http://fiddle.jshell.net/qLQRA/show/
@@ -859,7 +878,7 @@ $(document).ready(function () {
 
         col: false,
         gridview: true,
-        height: 500, //'auto',
+        height: 4000, //'auto',
         pager: "parbolpermisos", // "#parbolpermisos",
         treeGrid: true,
         rowNum: 10000,
