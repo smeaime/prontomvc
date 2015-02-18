@@ -2065,9 +2065,22 @@ namespace ProntoMVC.Controllers
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            try
+            {
+                wb.Save();
+            }
+            catch (Exception)
+            {
+                //            http://closedxml.codeplex.com/workitem/8972
+                //            Error occurs while using saveAs method:
+                //Could not load type 'DocumentFormat.OpenXml.Spreadsheet.SmartTags' from assembly 'DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.
+
+                //    You must use the DocumentFormat.OpenXml.dll v2.0 (not v2.5)
 
 
-            wb.Save();
+                throw;
+            }
+
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
