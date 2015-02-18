@@ -2065,9 +2065,27 @@ namespace ProntoMVC.Controllers
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            try
+            {
+                wb.Save();
+            }
+            catch (Exception)
+            {
+                //            http://closedxml.codeplex.com/workitem/8972
+                //            Error occurs while using saveAs method:
+                //Could not load type 'DocumentFormat.OpenXml.Spreadsheet.SmartTags' from assembly 'DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'.
+
+                //    You must use the DocumentFormat.OpenXml.dll v2.0 (not v2.5)
+
+                //                https://closedxml.codeplex.com/discussions/405533
+
+                //                You have to use OpenXML dll 2.0 with ClosedXML for .Net 3.5 
+                //OpenXML dll 2.5 works fine with ClosedXML for .Net 4+
 
 
-            wb.Save();
+                throw;
+            }
+
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
