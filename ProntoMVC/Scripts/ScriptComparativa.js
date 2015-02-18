@@ -1038,7 +1038,7 @@ $(document).ready(function () {
 
         colNames: ['Acciones', 'IdDetalleFactura', 'IdArticulo', 'IdPresupuesto', '#',
 
-                       'cod.', 'Descripcion', 'Cantidad', 'Un.',
+                       'cód.', 'Descripcion', 'cant.', 'Un.',
 
                         '', '', '',
                         '', '', '',
