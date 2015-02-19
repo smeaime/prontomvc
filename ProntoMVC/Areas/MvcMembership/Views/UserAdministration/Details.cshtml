@@ -1,3 +1,4 @@
+
 @using System.Globalization
 @model ProntoMVC.Areas.MvcMembership.Models.UserAdministration.DetailsViewModel
 @{
@@ -100,7 +101,7 @@
                         {
                             <p>
                                 <label for="grupo">
-                                    Grupo
+                                    Grupo (o CUIT con o sin guiones)
                                 </label>
                                 @Html.TextBox("grupo", Model.Grupo)
                             </p>
@@ -113,6 +114,22 @@
             </div>
         </div>
 
+        <div class="row-fluid">
+            <div class="alert fade in span12 " id="mensajeAlerta" style="display: none;">
+                <button type="button" class="close">
+                    &times;
+                </button>
+                <p id="textoMensajeAlerta">
+                    @TempData["Alerta"]
+                </p>
+                @if ((@TempData["Alerta"] ?? "") != "")
+                {
+                    <script>
+                        $("#mensajeAlerta").show();
+                    </script>
+                }
+            </div>
+        </div>
 
 
 

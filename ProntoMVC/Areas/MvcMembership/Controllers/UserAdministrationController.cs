@@ -466,9 +466,9 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual ViewResult Details(Guid id)
         {
-            
+
             var user = _userService.Get(id);
-            if (user==null)
+            if (user == null)
             {
 
                 throw new Exception("No se encontró el usuario en la BDLmaster");
@@ -502,6 +502,35 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
+
+            string nombreproveedor = "";
+            try
+            {
+                int idproveedor = buscaridproveedorporcuit(grupo);
+                if (idproveedor <= 0)
+                {
+                    idproveedor = buscaridclienteporcuit(grupo);
+                    if (idproveedor > 0) nombreproveedor = db.Clientes.Find(idproveedor).RazonSocial;
+                }
+                else
+                {
+
+                    nombreproveedor = db.Proveedores.Find(idproveedor).RazonSocial;
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+            if (grupo != "")
+            {
+                if (nombreproveedor == "") TempData["Alerta"] = "El CUIT no existe!";
+                else TempData["Alerta"] = "CUIT de " + nombreproveedor;
+            }
+
+
+
             return View(new DetailsViewModel
                             {
                                 CanResetPassword = _membershipSettings.Password.ResetOrRetrieval.CanReset,
@@ -527,10 +556,11 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         }
 
-        public int UsuarioEquivalente(Guid id)
-        {
-            return -1;
-        }
+    
+
+
+
+
 
         public virtual ViewResult Password(Guid id)
         {
@@ -624,7 +654,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual ViewResult CreateUserExterno()
         {
-                   string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+            string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
                                                     "ExternoCuentaCorrienteProveedor",
                                                     "ExternoOrdenesPagoListas",
                                                     "ExternoPresupuestos", "AdminExterno", "Externo"};
@@ -633,7 +663,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             var model = new CreateUserViewModel
             {
                 // InitialRoles = _rolesService.FindAll().ToDictionary(k => k, v => false)
-                InitialRoles =  Roles.GetAllRoles().Where(x=>rolesexternos.Contains(x)).ToDictionary(k =>  k , v => false)
+                InitialRoles = Roles.GetAllRoles().Where(x => rolesexternos.Contains(x)).ToDictionary(k => k, v => false)
             };
 
 
@@ -684,7 +714,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
-        
+
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateUserExterno(CreateUserViewModel createUserViewModel)
         {
@@ -1801,7 +1831,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
             parametros.ArchivoAyuda = configuracionViewModel.ArchivoAyuda;
             parametros.PathPlantillas = configuracionViewModel.PathPlantillas;
-            
+
             db.SaveChanges();
 
 

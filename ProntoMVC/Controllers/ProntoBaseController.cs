@@ -1814,6 +1814,34 @@ namespace ProntoMVC.Controllers
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        public int UsuarioEquivalente(Guid id)
+        {
+            return -1;
+        }
+
+        public Guid EmpleadoEquivalente(int id)
+        {
+
+
+
+            string usuario = db.Empleados.Find(id).UsuarioNT.ToLower();
+
+
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+
+
+            var guid = dbMaster.aspnet_Users.Where(x => x.LoweredUserName == usuario).FirstOrDefault().UserId;
+
+
+            return guid;
+        }
+
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2164,7 +2192,7 @@ namespace ProntoMVC.Controllers
                             Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
                             Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
                             Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
-                            Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+                            Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");
             bool escompras = Roles.IsUserInRole(usuario, "Compras");
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
@@ -2386,7 +2414,7 @@ namespace ProntoMVC.Controllers
                         Roles.IsUserInRole(usuario, "ExternoPresupuestos") ||
                         Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor") ||
                         Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente") ||
-                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");  
+                        Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas");
             bool escompras = Roles.IsUserInRole(usuario, "Compras");
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
