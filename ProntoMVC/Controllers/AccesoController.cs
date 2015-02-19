@@ -170,6 +170,8 @@ namespace ProntoMVC.Controllers
             string usuario = ViewBag.NombreUsuario;
 
 
+            ViewBag.EmpleadoEquivalente = EmpleadoEquivalente(id);
+
 
             if (!(
                    Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") ||
@@ -277,6 +279,10 @@ namespace ProntoMVC.Controllers
 
             }
 
+
+
+
+    
 
             try
             {
