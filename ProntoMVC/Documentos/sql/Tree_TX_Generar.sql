@@ -1,3 +1,5 @@
+
+
 ALTER Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
@@ -902,6 +904,7 @@ INSERT INTO #Auxiliar0 Select '80-01-09-17-07','mnuSubCo16__','Subdiario de iva 
 INSERT INTO #Auxiliar0 Select '80-01-09-18','mnuSubCo17','Diario IGJ','80-01-09',18,Null,'',Null,'NO','Horizontal'  
 
 INSERT INTO #Auxiliar0 Select '80-02','mnuMaster4','Seguridad',Null,1,Null,Null,Null,'SI','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-02-20','mnuSeg0','Usuarios Web','80-02',1,Null,'<a href="/' + @directorio + '/MvcMembership/UserAdministration">Usuarios Web</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-01','mnuSeg0','Definicion de accesos','80-02',1,Null,'<a href="/' + @directorio + '/Acceso/Edit/-1">Definicion de accesos</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-02','mnuSeg1','Definicion de autorizaciones','80-02',2,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-02-03','mnuSeg2','Autorizacion de documentos','80-02',3,Null,'<a href="/' + @directorio + '/Autorizacion">Autorizacion de documentos</a>',Null,'NO','Horizontal'  
@@ -982,3 +985,9 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
     
 DROP TABLE #Auxiliar0    
 DROP TABLE #Auxiliar1    
+go
+
+
+
+exec Tree_TX_Generar
+go
