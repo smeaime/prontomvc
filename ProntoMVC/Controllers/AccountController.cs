@@ -30,6 +30,12 @@ namespace ProntoMVC.Controllers
         public void GrabarUltimaBaseAccedida(string usuario, string sBase)
         {
 
+            if (sBase == "")
+            {
+                throw new Exception("La base no existe");
+            }
+
+
             MembershipUser membershipUser;
             membershipUser = Membership.GetUser(usuario);
 
@@ -77,23 +83,23 @@ namespace ProntoMVC.Controllers
             var usersext = (from u in bdlmaster.aspnet_Users
                             join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
                             join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
-                            where 
-                               // !emp.Select(x => x.UsuarioNT).Contains(u.UserName)  && 
+                            where
+                                // !emp.Select(x => x.UsuarioNT).Contains(u.UserName)  && 
                                 (r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
                             select new { u.UserId, u.UserName }
                 ).Distinct().ToList();
 
             var users1 = (from u in bdlmaster.aspnet_Users
-                         //join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
-                         //join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
-                      //   where !usersext.Select(x => x.UserName).Contains(u.UserName) 
-                       //     && 
-                            //!(r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
-                         select new { u.UserId, u.UserName }).Distinct().ToList();
+                          //join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
+                          //join r in bdlmaster.aspnet_Roles on ur.RoleId equals r.RoleId
+                          //   where !usersext.Select(x => x.UserName).Contains(u.UserName) 
+                          //     && 
+                          //!(r.RoleName == "AdminExterno" || r.RoleName == "Externo" || r.RoleName == "ExternoOrdenesPagoListas" || r.RoleName == "ExternoCuentaCorrienteProveedor" || r.RoleName == "ExternoCuentaCorrienteCliente" || r.RoleName == "ExternoCotizaciones")
+                          select new { u.UserId, u.UserName }).Distinct().ToList();
 
-            var users = (from u in users1 
+            var users = (from u in users1
                          where !usersext.Select(x => x.UserName).Contains(u.UserName)
-                            select u).ToList();
+                         select u).ToList();
 
 
             // Verificar que No tienen Roles externos
@@ -101,7 +107,7 @@ namespace ProntoMVC.Controllers
 
             var Fac4 = (from u in users
                         join n in emp on u.UserName equals n.UsuarioNT
-                        where !usersext.Select(x => x.UserName).Contains(u.UserName)   
+                        where !usersext.Select(x => x.UserName).Contains(u.UserName)
                         select new c
                         {
                             IdFactura = u.UserId,

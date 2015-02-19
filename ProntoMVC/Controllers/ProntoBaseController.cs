@@ -2536,10 +2536,11 @@ namespace ProntoMVC.Controllers
 
             if (esExterno)
             {
+                string nombreproveedor = "";
                 var n = new Tablas.Tree();
+
                 if (esExterno)
                 {
-                    string nombreproveedor = "";
                     try
                     {
                         Guid oGuid = (Guid)Membership.GetUser().ProviderUserKey;
@@ -2562,6 +2563,8 @@ namespace ProntoMVC.Controllers
                         nombreproveedor = "Sin CUIT";
                     }
 
+                    if (nombreproveedor == "") nombreproveedor = "Sin CUIT";
+
                     n.Link = nombreproveedor; // "<a href=\"#\">" + nombreproveedor + "</a>";
                     n.Descripcion = "CUIT";
                     n.Clave = "CUIT";
@@ -2573,86 +2576,90 @@ namespace ProntoMVC.Controllers
                 }
 
 
-                string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
-
-                n = new Tablas.Tree();
-                if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
-                {
-                    n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
-                    n.Descripcion = "Presupuesto";
-                    n.Clave = "Presupuesto";
-                    n.EsPadre = "NO";
-                    n.IdItem = "1";
-                    n.ParentId = "01";
-                    n.Orden = 1;
-                    TreeDest.Add(n);
-                }
-
-                if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
+                if (nombreproveedor != "Sin CUIT")
                 {
 
-                    //n = new Tablas.Tree();
-                    //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
-                    //n.Descripcion = "CuentasDeudor";
-                    //n.Clave = "CuentasDeudor";
-                    //n.EsPadre = "NO";
-                    //n.IdItem = "1";
-                    //n.ParentId = "";
-                    //n.Orden = 1;
-                    //TreeDest.Add(n);
 
+                    string urldominio = ConfigurationManager.AppSettings["UrlDominio"];
 
                     n = new Tablas.Tree();
-                    n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
-                    n.Descripcion = "CuentasAcreedor";
-                    n.Clave = "CuentasAcreedor";
-                    n.EsPadre = "NO";
-                    n.IdItem = "1";
-                    n.ParentId = "01";
-                    n.Orden = 1;
-                    TreeDest.Add(n);
+                    if (Roles.IsUserInRole(usuario, "ExternoPresupuestos"))
+                    {
+                        n.Link = "<a href='" + urldominio + "Presupuesto/IndexExterno'>Mis Presupuestos</a>";
+                        n.Descripcion = "Presupuesto";
+                        n.Clave = "Presupuesto";
+                        n.EsPadre = "NO";
+                        n.IdItem = "1";
+                        n.ParentId = "01";
+                        n.Orden = 1;
+                        TreeDest.Add(n);
+                    }
+
+                    if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteProveedor"))
+                    {
+
+                        //n = new Tablas.Tree();
+                        //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                        //n.Descripcion = "CuentasDeudor";
+                        //n.Clave = "CuentasDeudor";
+                        //n.EsPadre = "NO";
+                        //n.IdItem = "1";
+                        //n.ParentId = "";
+                        //n.Orden = 1;
+                        //TreeDest.Add(n);
+
+
+                        n = new Tablas.Tree();
+                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Acreedores'>Mi Cuenta Corriente</a>";
+                        n.Descripcion = "CuentasAcreedor";
+                        n.Clave = "CuentasAcreedor";
+                        n.EsPadre = "NO";
+                        n.IdItem = "1";
+                        n.ParentId = "01";
+                        n.Orden = 1;
+                        TreeDest.Add(n);
+                    }
+
+                    if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
+                    {
+
+                        //n = new Tablas.Tree();
+                        //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
+                        //n.Descripcion = "CuentasDeudor";
+                        //n.Clave = "CuentasDeudor";
+                        //n.EsPadre = "NO";
+                        //n.IdItem = "1";
+                        //n.ParentId = "";
+                        //n.Orden = 1;
+                        //TreeDest.Add(n);
+
+
+                        n = new Tablas.Tree();
+                        n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
+                        n.Descripcion = "CuentasDeudor";
+                        n.Clave = "CuentasDeudor";
+                        n.EsPadre = "NO";
+                        n.IdItem = "1";
+                        n.ParentId = "01";
+                        n.Orden = 1;
+                        TreeDest.Add(n);
+                    }
+                    if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
+                    {
+
+                        n = new Tablas.Tree();
+                        n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
+                        n.Descripcion = "OrdenesPago";
+                        n.Clave = "OrdenesPago";
+                        n.EsPadre = "NO";
+                        n.IdItem = "1";
+                        n.ParentId = "01";
+                        n.Orden = 1;
+                        TreeDest.Add(n);
+
+
+                    }
                 }
-
-                if (Roles.IsUserInRole(usuario, "ExternoCuentaCorrienteCliente"))
-                {
-
-                    //n = new Tablas.Tree();
-                    //n.Link = "<a href=\"/Pronto2/CuentaCorriente/IndexExterno\">Mi Cuenta Corriente</a>";
-                    //n.Descripcion = "CuentasDeudor";
-                    //n.Clave = "CuentasDeudor";
-                    //n.EsPadre = "NO";
-                    //n.IdItem = "1";
-                    //n.ParentId = "";
-                    //n.Orden = 1;
-                    //TreeDest.Add(n);
-
-
-                    n = new Tablas.Tree();
-                    n.Link = "<a href='" + urldominio + "Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores'>Mi Cuenta Corriente</a>";
-                    n.Descripcion = "CuentasDeudor";
-                    n.Clave = "CuentasDeudor";
-                    n.EsPadre = "NO";
-                    n.IdItem = "1";
-                    n.ParentId = "01";
-                    n.Orden = 1;
-                    TreeDest.Add(n);
-                }
-                if (Roles.IsUserInRole(usuario, "ExternoOrdenesPagoListas"))
-                {
-
-                    n = new Tablas.Tree();
-                    n.Link = "<a href='" + urldominio + "OrdenPago/IndexExterno'>Mis Pagos en Caja</a>";
-                    n.Descripcion = "OrdenesPago";
-                    n.Clave = "OrdenesPago";
-                    n.EsPadre = "NO";
-                    n.IdItem = "1";
-                    n.ParentId = "01";
-                    n.Orden = 1;
-                    TreeDest.Add(n);
-
-
-                }
-
 
 
             }

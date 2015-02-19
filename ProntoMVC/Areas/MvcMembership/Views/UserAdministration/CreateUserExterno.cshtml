@@ -6,24 +6,25 @@
 <div class="container-fluid">
     <link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
     @*    <ul class="breadcrumb">
-        <li><a href="#">Inicio</a> <span class="divider">/</span></li>
-        <li><a href="/Pronto2/MvcMembership/UserAdministration">Usuarios</a> <span class="divider">
-            /</span></li>
-        <li class="active">Nuevo usuario</li>
-    </ul>*@
+            <li><a href="#">Inicio</a> <span class="divider">/</span></li>
+            <li><a href="/Pronto2/MvcMembership/UserAdministration">Usuarios</a> <span class="divider">
+                /</span></li>
+            <li class="active">Nuevo usuario</li>
+        </ul>*@
     <br />
     <div class="span8" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
         text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-        Nuevo Usuario Externo</div>
+        Nuevo Usuario Externo
+    </div>
     <br />
     @*<legend>Nuevo Usuario</legend>*@
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid", @autocomplete = "off" }))
-    { 
-        
+    {
 
 
 
-        
+
+
         <div class="row-fluid">
             @*http://stackoverflow.com/questions/15738259/disabling-chrome-autofill?lq=1*@
             <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
@@ -53,23 +54,56 @@
                 <div>
                     @if (Model.InitialRoles.Count > 0)
                     {
-                            
-                            
+
+
                         <fieldset>
                             Roles
-                            @for (var i = 0; i < Model.InitialRoles.Count; i++)
+
+                            @if (true)
                             {
-                                var role = Model.InitialRoles.ElementAt(i);
-                                if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") ||
-                                    Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") && Roles.IsUserInRole(ViewBag.NombreUsuario, role.Key))
+
+                                for (var i = 0; i < Model.InitialRoles.Count; i++)
                                 {
-                                     
-                                <div>
-                                    <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
-                                    <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
-                                </div>
+
+                                    // solo permitir Roles externos
+                                    string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+                                                    "ExternoCuentaCorrienteProveedor",
+                                                    "ExternoOrdenesPagoListas",
+                                                    "ExternoPresupuestos", "AdminExterno", "Externo"};
+
+                                    var role = Model.InitialRoles.ElementAt(i);
+
+                                    if (!rolesexternos.Contains(role.Key) && !Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) { continue; }
+
+
+                                    <div>
+                                        <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
+                                        <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
+                                    </div>
+
+                                }
+
+                            }
+
+                            else
+                            {
+
+                                for (var i = 0; i < Model.InitialRoles.Count; i++)
+                                {
+                                    var role = Model.InitialRoles.ElementAt(i);
+                                    if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") ||
+                                        Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") && Roles.IsUserInRole(ViewBag.NombreUsuario, role.Key))
+                                    {
+
+                                        <div>
+                                            <input name="InitialRoles[@i].Key" type="hidden" value="@role.Key" />
+                                            <label>@Html.CheckBox("InitialRoles[" + i + "].Value", role.Value) @role.Key</label>
+                                        </div>
+                                    }
                                 }
                             }
+
+
                         </fieldset>
                     }
                 </div>
@@ -85,7 +119,7 @@
                 @{
                     string[] listItems = { "1", "2" };
                     SelectList selectList = new SelectList(listItems);
-@*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
+                    @*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
                 }
                 @*@Html.DropDownListFor(x => x.EmpresaDefault, (IEnumerable<SelectListItem>)ViewData["Bases"], new { @style = "width: 260px", @class = "" })*@
                 <br />
@@ -102,7 +136,7 @@
                             @* <input type="button" value="Crearle base" class="btn" />*@
                         </div>
                     </div>
-                   
+
                     <div class="row-fluid">
                         Empleados en esa base
                         @Html.DropDownList("Empleados", null, new { @class = "span12" })
