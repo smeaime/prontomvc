@@ -401,7 +401,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             if (id == Guid.Empty) id = guiduser;
             MembershipUser u = Membership.GetUser(id);
             var c = new ProntoMVC.Controllers.AccountController();
-            string nombrebase = c.BuscarUltimaBaseAccedida(u.UserName);
+            string nombrebase = (Session["BasePronto"].NullSafeToString() == "") ? c.BuscarUltimaBaseAccedida(u.UserName) : Session["BasePronto"].NullSafeToString();
             ViewBag.EmpresaDefault = new SelectList(baselistado.ToList(), "Value", "Text", nombrebase);
 
             try
@@ -624,9 +624,16 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         public virtual ViewResult CreateUserExterno()
         {
+                   string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+                                                    "ExternoCuentaCorrienteProveedor",
+                                                    "ExternoOrdenesPagoListas",
+                                                    "ExternoPresupuestos", "AdminExterno", "Externo"};
+
+
             var model = new CreateUserViewModel
             {
-                InitialRoles = _rolesService.FindAll().ToDictionary(k => k, v => false)
+                // InitialRoles = _rolesService.FindAll().ToDictionary(k => k, v => false)
+                InitialRoles =  Roles.GetAllRoles().Where(x=>rolesexternos.Contains(x)).ToDictionary(k =>  k , v => false)
             };
 
 
@@ -734,7 +741,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 }
                 else
                 {
-                    Roles.AddUserToRole(user.UserName, "Externo");
+                    // Roles.AddUserToRole(user.UserName, "Externo");
                 }
 
 
