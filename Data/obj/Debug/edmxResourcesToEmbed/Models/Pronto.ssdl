@@ -1368,6 +1368,21 @@
     <Property Name="Ingresos" Type="numeric" Precision="18" Scale="2" />
     <Property Name="Egresos" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
+  <EntityType Name="DetalleConjuntos">
+    <Key>
+      <PropertyRef Name="IdDetalleConjunto" />
+    </Key>
+    <Property Name="IdDetalleConjunto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdConjunto" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="3" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="Cantidad1" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Cantidad2" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="DetalleCuentas">
     <Key>
       <PropertyRef Name="IdDetalleCuenta" />
@@ -1390,7 +1405,7 @@
     <Property Name="PuntoVenta" Type="int" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="CodigoArticulo" Type="varchar" MaxLength="20" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="3" />
     <Property Name="Partida" Type="varchar" MaxLength="20" />
     <Property Name="Costo" Type="numeric" Precision="19" Scale="8" />
     <Property Name="PrecioUnitario" Type="numeric" Precision="19" Scale="8" />
@@ -1469,7 +1484,7 @@
     <Property Name="PuntoVenta" Type="int" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="CodigoArticulo" Type="varchar" MaxLength="20" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="3" />
     <Property Name="Costo" Type="numeric" Precision="19" Scale="8" />
     <Property Name="PrecioUnitario" Type="numeric" Precision="19" Scale="8" />
     <Property Name="Bonificacion" Type="numeric" Precision="6" Scale="2" />
@@ -1649,7 +1664,7 @@
     <Property Name="IdDetalleOrdenCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdOrdenCompra" Type="int" />
     <Property Name="NumeroItem" Type="int" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="3" />
     <Property Name="IdUnidad" Type="int" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="Precio" Type="numeric" Precision="19" Scale="8" />
@@ -2000,7 +2015,7 @@
     <Property Name="IdDetalleRemito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdRemito" Type="int" />
     <Property Name="NumeroItem" Type="int" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="3" />
     <Property Name="IdUnidad" Type="int" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
@@ -3364,6 +3379,41 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdPlazoEntrega" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="Detalle" Type="ntext" />
+  </EntityType>
+  <EntityType Name="PlazosFijos">
+    <Key>
+      <PropertyRef Name="IdPlazoFijo" />
+    </Key>
+    <Property Name="IdPlazoFijo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBanco" Type="int" />
+    <Property Name="NumeroCertificado1" Type="int" />
+    <Property Name="NumeroCertificado2" Type="varchar" MaxLength="20" />
+    <Property Name="DireccionEmisionYPago" Type="varchar" MaxLength="50" />
+    <Property Name="Titulares" Type="varchar" MaxLength="50" />
+    <Property Name="CodigoDeposito" Type="int" />
+    <Property Name="CodigoClase" Type="int" />
+    <Property Name="PlazoEnDias" Type="int" />
+    <Property Name="TasaNominalAnual" Type="numeric" Precision="18" Scale="3" />
+    <Property Name="Importe" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="TasaEfectivaMensual" Type="numeric" Precision="18" Scale="3" />
+    <Property Name="FechaVencimiento" Type="datetime" />
+    <Property Name="ImporteIntereses" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Orden" Type="varchar" MaxLength="50" />
+    <Property Name="Detalle" Type="varchar" MaxLength="50" />
+    <Property Name="IdPlazoFijoOrigen" Type="int" />
+    <Property Name="FechaInicioPlazoFijo" Type="datetime" />
+    <Property Name="IdMoneda" Type="int" />
+    <Property Name="CotizacionMonedaAlInicio" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="CotizacionMonedaAlFinal" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="Finalizado" Type="varchar" MaxLength="2" />
+    <Property Name="IdCajaOrigen" Type="int" />
+    <Property Name="IdCuentaBancariaOrigen" Type="int" />
+    <Property Name="IdCajaDestino" Type="int" />
+    <Property Name="IdCuentaBancariaDestino" Type="int" />
+    <Property Name="RetencionGanancia" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Anulado" Type="varchar" MaxLength="2" />
+    <Property Name="AcreditarInteresesAlFinalizar" Type="varchar" MaxLength="2" />
+    <Property Name="NoExigirRubroContable" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="Presupuestos">
     <Key>
@@ -4849,6 +4899,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleConjuntos_Conjuntos">
+    <End Role="Conjuntos" Type="Self.Conjuntos" Multiplicity="0..1" />
+    <End Role="DetalleConjuntos" Type="Self.DetalleConjuntos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conjuntos">
+        <PropertyRef Name="IdConjunto" />
+      </Principal>
+      <Dependent Role="DetalleConjuntos">
+        <PropertyRef Name="IdConjunto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleDevoluciones_Devoluciones">
     <End Role="Devoluciones" Type="Self.Devoluciones" Multiplicity="0..1" />
     <End Role="DetalleDevoluciones" Type="Self.DetalleDevoluciones" Multiplicity="*" />
@@ -4969,6 +5031,30 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleFacturasOrdenesCompra_Facturas">
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+    <End Role="DetalleFacturasOrdenesCompra" Type="Self.DetalleFacturasOrdenesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facturas">
+        <PropertyRef Name="IdFactura" />
+      </Principal>
+      <Dependent Role="DetalleFacturasOrdenesCompra">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleFacturasProvincias_Facturas">
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+    <End Role="DetalleFacturasProvincias" Type="Self.DetalleFacturasProvincias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facturas">
+        <PropertyRef Name="IdFactura" />
+      </Principal>
+      <Dependent Role="DetalleFacturasProvincias">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleFacturasRemitos_DetalleFacturas">
     <End Role="DetalleFacturas" Type="Self.DetalleFacturas" Multiplicity="0..1" />
     <End Role="DetalleFacturasRemitos" Type="Self.DetalleFacturasRemitos" Multiplicity="*" />
@@ -4978,6 +5064,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="DetalleFacturasRemitos">
         <PropertyRef Name="IdDetalleFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleFacturasRemitos_Facturas">
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+    <End Role="DetalleFacturasRemitos" Type="Self.DetalleFacturasRemitos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facturas">
+        <PropertyRef Name="IdFactura" />
+      </Principal>
+      <Dependent Role="DetalleFacturasRemitos">
+        <PropertyRef Name="IdFactura" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5641,6 +5739,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Proveedores_EstadosProveedores">
+    <End Role="Estados Proveedores" Type="Self.Estados Proveedores" Multiplicity="0..1" />
+    <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados Proveedores">
+        <PropertyRef Name="IdEstado" />
+      </Principal>
+      <Dependent Role="Proveedores">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PuntosVenta_TiposComprobante">
     <End Role="TiposComprobante" Type="Self.TiposComprobante" Multiplicity="0..1" />
     <End Role="PuntosVenta" Type="Self.PuntosVenta" Multiplicity="*" />
@@ -5737,6 +5847,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ubicaciones_Depositos">
+    <End Role="Depositos" Type="Self.Depositos" Multiplicity="0..1" />
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Depositos">
+        <PropertyRef Name="IdDeposito" />
+      </Principal>
+      <Dependent Role="Ubicaciones">
+        <PropertyRef Name="IdDeposito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Valores_Monedas_IdMoneda">
     <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
     <End Role="Valores" Type="Self.Valores" Multiplicity="*" />
@@ -5806,6 +5928,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
   </Function>
+  <Function Name="Facturas_OrdenesCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdFactura" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Facturas_Remitos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdFactura" Type="int" Mode="In" />
+  </Function>
   <Function Name="LogComprobantesElectronicos_InsertarRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PuntoVenta" Type="int" Mode="In" />
     <Parameter Name="NumeroComprobante" Type="int" Mode="In" />
@@ -5824,6 +5952,22 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="IdUsuario" Type="int" Mode="In" />
   </Function>
   <Function Name="Remitos_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Requerimientos_ActualizarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
+    <Parameter Name="IdDetalleRequerimiento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Requerimientos_Pedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Requerimientos_Presupuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Requerimientos_Recepciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Requerimientos_SalidasMateriales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
+  </Function>
   <Function Name="Valores_BorrarPorIdDetalleOrdenPagoCuentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdDetalleOrdenPagoCuentas" Type="int" Mode="In" />
   </Function>
@@ -5888,6 +6032,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleComprobantesProveedoresProvincias" EntityType="Self.DetalleComprobantesProveedoresProvincias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleConciliaciones" EntityType="Self.DetalleConciliaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleConjuntos" EntityType="Self.DetalleConjuntos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
@@ -5962,6 +6107,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PlazosEntrega" EntityType="Self.PlazosEntrega" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlazosFijos" EntityType="Self.PlazosFijos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProntoIni" EntityType="Self.ProntoIni" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProntoIniClaves" EntityType="Self.ProntoIniClaves" Schema="dbo" store:Type="Tables" />
@@ -6191,6 +6337,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Conciliaciones" EntitySet="Conciliaciones" />
       <End Role="DetalleConciliacionesNoContables" EntitySet="DetalleConciliacionesNoContables" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleConjuntos_Conjuntos" Association="Self.FK_DetalleConjuntos_Conjuntos">
+      <End Role="Conjuntos" EntitySet="Conjuntos" />
+      <End Role="DetalleConjuntos" EntitySet="DetalleConjuntos" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleDevoluciones_Devoluciones" Association="Self.FK_DetalleDevoluciones_Devoluciones">
       <End Role="Devoluciones" EntitySet="Devoluciones" />
       <End Role="DetalleDevoluciones" EntitySet="DetalleDevoluciones" />
@@ -6231,8 +6381,20 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
       <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleFacturasOrdenesCompra_Facturas" Association="Self.FK_DetalleFacturasOrdenesCompra_Facturas">
+      <End Role="Facturas" EntitySet="Facturas" />
+      <End Role="DetalleFacturasOrdenesCompra" EntitySet="DetalleFacturasOrdenesCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleFacturasProvincias_Facturas" Association="Self.FK_DetalleFacturasProvincias_Facturas">
+      <End Role="Facturas" EntitySet="Facturas" />
+      <End Role="DetalleFacturasProvincias" EntitySet="DetalleFacturasProvincias" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleFacturasRemitos_DetalleFacturas" Association="Self.FK_DetalleFacturasRemitos_DetalleFacturas">
       <End Role="DetalleFacturas" EntitySet="DetalleFacturas" />
+      <End Role="DetalleFacturasRemitos" EntitySet="DetalleFacturasRemitos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleFacturasRemitos_Facturas" Association="Self.FK_DetalleFacturasRemitos_Facturas">
+      <End Role="Facturas" EntitySet="Facturas" />
       <End Role="DetalleFacturasRemitos" EntitySet="DetalleFacturasRemitos" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleLugaresEntrega_Clientes" Association="Self.FK_DetalleLugaresEntrega_Clientes">
@@ -6455,6 +6617,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Empleados" EntitySet="Empleados" />
       <End Role="Presupuestos" EntitySet="Presupuestos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Proveedores_EstadosProveedores" Association="Self.FK_Proveedores_EstadosProveedores">
+      <End Role="Estados Proveedores" EntitySet="Estados Proveedores" />
+      <End Role="Proveedores" EntitySet="Proveedores" />
+    </AssociationSet>
     <AssociationSet Name="FK_PuntosVenta_TiposComprobante" Association="Self.FK_PuntosVenta_TiposComprobante">
       <End Role="TiposComprobante" EntitySet="TiposComprobante" />
       <End Role="PuntosVenta" EntitySet="PuntosVenta" />
@@ -6486,6 +6652,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
       <End Role="Localidades" EntitySet="Localidades" />
       <End Role="Transportistas" EntitySet="Transportistas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ubicaciones_Depositos" Association="Self.FK_Ubicaciones_Depositos">
+      <End Role="Depositos" EntitySet="Depositos" />
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
     </AssociationSet>
     <AssociationSet Name="FK_Valores_Monedas_IdMoneda" Association="Self.FK_Valores_Monedas_IdMoneda">
       <End Role="Monedas" EntitySet="Monedas" />
