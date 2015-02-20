@@ -320,6 +320,7 @@ go
 
 CREATE PROCEDURE wBusquedaMVC
     @q VARCHAR(50)
+    with recompile 
 AS
 
 	SELECT top 20 * 
