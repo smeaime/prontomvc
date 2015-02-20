@@ -600,7 +600,7 @@
 
         if (Roles.IsUserInRole("SuperAdmin") || Roles.IsUserInRole("Administrador"))
         {
-            <br /><br />><br />
+            <br /><br /><br />
             <div class="mvcMembership-allRoles">
                 <div class="row-fluid">
                     <div class="span2 ">
@@ -641,7 +641,7 @@
                     "Data Source=192.168.66.6;Initial Catalog=BDLMaster;Uid=sa; PWD=3D1consultore5;" providerName="System.Data.SqlClient"
 
                              Que el superadmin pueda cambiar la conexion de la bdlmaster*@
-                
+
                 <div style="">
                     <div>
                         @* base default<br />*@ @*Bases crear base nueva, agregar conexion. Crear/ver reclamo.
@@ -654,17 +654,35 @@
                         <div>
                             <div class="row-fluid">
                                 <div class="span2 lightblue">
+                                    Empresa
+                                </div>
+                                <div class="span8 lightblue">
+                                    Cadena de conexión
+                                </div>
+                                <div class="span2 lightblue">
+
+                                </div>
+                            </div>
+
+
+                            <div class="row-fluid">
+                                <div class="span2 lightblue">
                                     @Html.TextBox("NuevaBase")
                                 </div>
                                 <div class="span8 lightblue">
                                     @Html.TextBox("NuevaConexion", "", new { @class = "span12" })
                                 </div>
-                                <input type="button" class="btn span1"
-                                       id="-1"
-                                       value="guardaconex" name="-1"
-                                       onclick="guardaconex('-1')" />
+                                <div class="span2 lightblue">
+                                    <input type="button" class="btn span12"
+                                           id="-1"
+                                           value="crear" name="-1"
+                                           onclick="guardaconex('-1')" />
 
+                                </div>
                             </div>
+
+
+
 
                             @for (int i = 0; i < Model.BasesPronto.Count(); i++)
                             {
@@ -672,7 +690,7 @@
                                 {
                                     <div class="row-fluid">
                                         <div class="span2 lightblue">
-                                            <label id="Empresa_@i" >@Model.BasesPronto[i].Descripcion</label>
+                                            <label id="Empresa_@i">@Model.BasesPronto[i].Descripcion</label>
                                             @*@Html.Label("", Model.BasesPronto[i].Descripcion)*@
                                         </div>
                                         <div class="span8 lightblue">
@@ -691,10 +709,10 @@
 
                                             <input type="button" class="btn "
                                                    id="@i"
-                                                   value="guarda" name="@i"
+                                                   value="cambiar" name="@i"
                                                    onclick="guardaconex('@i')" />
 
-                                            @Html.ActionLink("borrar", "BorrarConexion", new { id = Model.BasesPronto[i].Descripcion })
+                                            @*@Html.ActionLink("borrar", "BorrarConexion", new { id = Model.BasesPronto[i].Descripcion, @class = "span1 btn" })*@
 
 
                                         </div>
@@ -716,8 +734,14 @@
 
                                     var cabecera = {
                                         conexSql: $("#BasesPronto_" + id + "__StringConection").val(),
-                                        nombreBase: $("#Empresa_"+id).text()
+                                        nombreBase: $("#Empresa_" + id).text()
                                     };
+
+                                    if (id == -1) {
+                                        cabecera.conexSql = $("#NuevaConexion").val();
+                                        cabecera.nombreBase = $("#NuevaBase").val();
+                                    }
+
 
 
                                     $('html, body').css('cursor', 'wait');
@@ -735,7 +759,7 @@
                                                 if (true) {
                                                     //window.location = (ROOT + "Pedido/index");
                                                     // window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
-
+                                                    if (id == -1) { window.location.reload(true) };
                                                 } else {
 
                                                     var dt = new Date();
