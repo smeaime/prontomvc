@@ -82,13 +82,13 @@ namespace ProntoMVC.Controllers
             try
             {
                 var mailcomp = db.Empleados.Where(e => e.IdEmpleado == presupuesto.IdComprador).Select(e => e.Email).FirstOrDefault();
-                Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
+                if (mailcomp.NullSafeToString()!="")                Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                //throw;
+                ErrHandler.WriteError(ex);
             }
 
 
@@ -298,6 +298,14 @@ namespace ProntoMVC.Controllers
             //if (o.IdCodigoIva == null) sErrorMsg += "\n" + "Falta el codigo de IVA";
             //if (o.IdCondicionVenta == null) sErrorMsg += "\n" + "Falta la condicion venta";
             //if (o.IdListaPrecios == null) sErrorMsg += "\n" + "Falta la lista de precios";
+
+
+            var reqsToDelete = o.DetallePresupuestos.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetallePresupuestos.Remove(deleteReq);
+            }
+            
             if (o.DetallePresupuestos.Count <= 0) sErrorMsg += "\n" + "El presupuesto no tiene items";
 
             //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
