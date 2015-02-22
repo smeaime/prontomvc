@@ -1174,6 +1174,274 @@ namespace ProntoMVC.Controllers
 
 
 
+                [HttpPost]
+        public virtual JsonResult BatchUpdate_CuentaCorriente(ViewModelComprobanteProveedor ComprobanteProveedor)
+        {
+            if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
+
+
+            if (!System.Diagnostics.Debugger.IsAttached && (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "FondosFijos") &&
+                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+                ))
+            {
+
+                int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+
+                if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
+                //throw new Exception("No tenés permisos");
+
+            }
+
+
+
+            //ComprobanteProveedor.mail
+
+            try
+            {
+                //var mailcomp = fondoFijoService.Empleados.Where(e => e.IdEmpleado == ComprobanteProveedor.IdComprador).Select(e => e.Email).FirstOrDefault();
+                //Generales.enviarmailAlComprador(mailcomp   ,ComprobanteProveedor.IdComprobanteProveedor );
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+
+
+            string errs = "";
+            string warnings = "";
+
+
+            AutoMapper.Mapper.CreateMap<ViewModelComprobanteProveedor, Data.Models.ComprobanteProveedor>();
+            ComprobanteProveedor o = new ComprobanteProveedor();
+            AutoMapper.Mapper.Map(ComprobanteProveedor, o);
+
+
+            if (!Validar_CuentaCorriente(o, ref errs, ref warnings))
+            {
+                try
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+
+                }
+                catch (Exception)
+                {
+
+                    //    throw;
+                }
+
+
+
+                JsonResponse res = new JsonResponse();
+                res.Status = Status.Error;
+
+                //List<string> errors = new List<string>();
+                //errors.Add(errs);
+                string[] words = errs.Split('\n');
+                res.Errors = words.ToList(); // GetModelStateErrorsAsString(this.ModelState);
+                res.Message = "El ComprobanteProveedor es inválido";
+
+
+
+                return Json(res);
+            }
+
+
+
+
+            if ((o.IdProveedor ?? 0) <= 0 && (o.IdProveedorEventual ?? 0) <= 0
+                && (o.Proveedor ?? new Proveedor()).RazonSocial != "")
+            {
+
+
+                crearProveedor(o);
+
+
+
+
+            }
+
+
+
+
+
+
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    // var usuario = fondoFijoService.ObtenerUsuarioLogueado();
+                    // Acá iría el mapeo entre el viewmodel y el modelo de la base. por ahora uso directo el modelo
+                    //meow.Fecha = DateTime.Now;
+                    //meow.Texto = vm.Meow;
+                    //meow.CodigoUsuario = usuario.Codigo;
+                    //meow.Usuario = usuario;
+
+                    fondoFijoService.Guardar(o);
+                    //fondoFijoService.Guardar((ComprobanteProveedor)ComprobanteProveedor);
+
+                    unitOfWork.Save();
+
+
+                    if (!System.Diagnostics.Debugger.IsAttached)
+                    {
+                        try
+                        {
+                            TempData["Alerta"] = "<a href='" + Url.Action("EditFF", new { id = o.IdComprobanteProveedor }) + "' target='' >" +
+                                             " Grabado " + DateTime.Now.ToShortTimeString() +
+                                             " Comprobante " +
+                                             o.Letra + '-' + o.NumeroComprobante1.NullSafeToString().PadLeft(4, '0')
+                                             + '-' + o.NumeroComprobante2.NullSafeToString().PadLeft(8, '0') +
+                                             "</a>";
+                        }
+                        catch (Exception e)
+                        {
+
+                            ErrHandler.WriteError(e);
+                        }
+
+                    }
+
+
+
+                    //try
+                    //{
+                    //    //  ActivarUsuarioYContacto(ComprobanteProveedor.IdComprobanteProveedor);
+                    //}
+                    //catch (Exception)
+                    //{
+
+                    //    //throw;
+                    //}
+
+
+
+                    /*
+                 // http://stackoverflow.com/questions/10668946/stored-procedures-in-entity-framework-and-savechanges
+                 //  http://stackoverflow.com/questions/6219643/how-to-call-stored-procedure-in-mvc-by-ef
+                 // http://social.msdn.microsoft.com/Forums/en-US/78e5f472-9d14-494c-b8c7-e80f7ccc3894/how-to-fire-a-savechanges-and-stored-procedure-in-a-single-transaction?forum=adodotnetentityframework
+                 //  http://stackoverflow.com/questions/19248523/call-stored-procedure-inside-transaction-using-entity-framework
+
+                 // combinar el unitOfWork con la llamada al store
+                 
+                 using (TransactionScope scope = new  TransactionScope())
+                 {
+
+                     //do stuff with context
+
+                     fondoFijoService.SaveChanges(false); // i.e. try to save changes... but remember the changes in case the transaction aborts
+
+
+
+                     //call your stored proc either via the Context or via the StoreConnection of the Context directly
+                     fondoFijoService.wActualizacionesVariasPorComprobante(104, ComprobanteProveedor.IdComprobanteProveedor, tipomovimiento);
+
+                     //if everything goes okay
+
+                     scope.Complete();
+
+                     fondoFijoService.AcceptAllChanges();
+
+                 }
+                  * */
+
+
+
+
+
+                    //try
+                    //{
+                    //    List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
+
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    ErrHandler.WriteError(ex);
+                    //    //                        throw;
+                    //}
+                    //// TODO: acá se regenera el arbol???
+
+
+                    return Json(new { Success = 1, Errors = "", IdComprobanteProveedor = o.IdComprobanteProveedor, ex = "" });
+
+                    // return RedirectToAction(MVC.Cuenta.Index());
+                }
+                else
+                {
+
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El ComprobanteProveedor es inválido";
+                    //return Json(res);
+                    //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+
+                    return Json(res);
+                }
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                //http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                //throw new System.Data.Entity.Validation.DbEntityValidationException(
+                //    "Entity Validation Failed - errors follow:\n" +
+                //    sb.ToString(), ex
+                //); // Add the original exception as the innerException
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                JsonResponse res = new JsonResponse();
+                res.Status = Status.Error;
+                res.Errors = GetModelStateErrorsAsString(this.ModelState);
+
+                res.Errors.Add(sb.ToString());
+                res.Errors.Add(ex.ToString());
+                res.Message = "El ComprobanteProveedor es inválido. " + ex.ToString();
+                //return Json(res);
+                //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+                return Json(res);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                JsonResponse res = new JsonResponse();
+                res.Status = Status.Error;
+                res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                res.Errors.Add(ex.ToString());
+                res.Message = "El ComprobanteProveedor es inválido. " + ex.ToString();
+                //return Json(res);
+                //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+                return Json(res);
+
+                // return Json(new { Success = 0, ex = ex.Message.ToString() });
+            }
+            return Json(new { Success = 0, Errors = "", ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+
+        }
+
+
         [HttpPost]
         public virtual JsonResult BatchUpdate(ViewModelComprobanteProveedor ComprobanteProveedor)
         //public virtual JsonResult BatchUpdate(ComprobanteProveedor ComprobanteProveedor)
@@ -4718,6 +4986,757 @@ namespace ProntoMVC.Controllers
 
         }
 
+        private bool Validar_CuentaCorriente(ProntoMVC.Data.Models.ComprobanteProveedor o, ref string sErrorMsg, ref string sWarningMsg)
+        {
+            // una opcion es extender el modelo autogenerado, para ensoquetar ahí las validaciones
+            // si no, podemos usar una funcion como esta, y devolver los  errores de dos maneras:
+            // con ModelState.AddModelError si los devolvemos en una ViewResult,
+            // o con un array de strings si es una JsonResult.
+            //
+            // if you are returning JSON, you cannot use ModelState.
+            // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
+
+
+
+            //res.Errors = GetModelStateErrorsAsString(this.ModelState);
+
+
+
+
+            List<int> duplicates = o.DetalleComprobantesProveedores.Where(s => (s.IdDetalleComprobanteProveedor) > 0).GroupBy(s => s.IdDetalleComprobanteProveedor)
+                         .Where(g => g.Count() > 1)
+                         .Select(g => g.Key)
+                         .ToList();
+
+
+            if (duplicates.Count > 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+
+                foreach (int? i in duplicates)
+                {
+                    List<DetalleComprobantesProveedore> q = o.DetalleComprobantesProveedores.Where(x => x.IdDetalleComprobanteProveedor == i).Select(x => x).Skip(1).ToList();
+                    foreach (DetalleComprobantesProveedore x in q)
+                    {
+
+                        // tacharlo de la grilla, no eliminarlo de pantalla
+                        // tacharlo de la grilla, no eliminarlo de pantalla
+                        //string nombre = x.NumeroItem + " El item " + x.NumeroItem + "  (" + fondoFijoService.Articulos.Find(x.IdArticulo).Descripcion + ") ";
+                        //sErrorMsg += "\n" + nombre + " usa un item de requerimiento que ya se está usando ";  // tacharlo de la grilla, no eliminarlo de pantalla
+                        //// tacharlo de la grilla, no eliminarlo de pantalla
+                        // tacharlo de la grilla, no eliminarlo de pantalla
+
+                    }
+
+
+                }
+
+                // verificar tambien si el  item ya se usa enum otro peddido
+                //sss
+
+                // return false;
+            }
+
+            //  if (!PuedeEditar(enumNodos.Facturas")) sErrorMsg += "\n" + "No tiene permisos de edición";
+
+
+
+
+
+            if ((o.IdTipoComprobante ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta el tipo de comprobante";
+                // return false;
+            }
+
+
+
+            if (o.IdProveedor != null)          // cta cte
+            {
+                //var aa = fondoFijoService.Proveedores.Find(o.IdProveedor);
+                //mvarCuentaProveedor = aa.IdCuenta ?? 0;
+            }
+            else if (o.IdCuenta != null)        // fondo fijo
+            {
+                //mvarCuentaProveedor = o.IdCuenta ?? 0;
+            }
+            else if (o.IdCuentaOtros != null)   // otros
+            {
+                //mvarCuentaProveedor = o.IdCuentaOtros ?? 0;
+            }
+            else
+            {
+                //  throw new Exception("asdasd");
+            }
+
+
+
+
+            o.Observaciones = o.Observaciones ?? "";
+
+
+            string usuario = ViewBag.NombreUsuario;
+            if (Debugger.IsAttached) usuario = "Mariano";
+
+            int IdUsuario = fondoFijoService.Empleados_Listado().Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+            if (o.IdComprobanteProveedor > 0)
+            {
+                o.IdUsuarioModifico = IdUsuario;
+                o.FechaModifico = DateTime.Now;
+            }
+            else
+            {
+                o.IdUsuarioIngreso = IdUsuario;
+                o.FechaIngreso = DateTime.Now;
+
+            }
+
+
+            o.TotalIva2 = 0;
+            o.IdCodigoIva = 1; // o.Proveedore.IdCodigoIva;
+            o.Dolarizada = "NO";
+            o.PorcentajeIVAParaMonotributistas = 0;
+            o.CircuitoFirmasCompleto = "SI";
+            o.TotalIvaNoDiscriminado = 0;
+            o.DestinoPago = "A"; // adm y obra
+            o.FechaAsignacionPresupuesto = DateTime.Now;
+
+            // if (o.FechaComprobante == null) sErrorMsg += "\n" + "FechaComprobante";
+            if (o.FechaVencimiento == null) sErrorMsg += "\n" + "FechaVencimiento";
+            //if (o.TotalBruto == null) sErrorMsg += "\n" + "TotalBruto";
+            if (o.TotalIva2 == null) sErrorMsg += "\n" + "TotalIva2";
+            if (o.Observaciones == null) sErrorMsg += "\n" + "Observaciones";
+            if (o.TotalIvaNoDiscriminado == null) sErrorMsg += "\n" + "TotalIvaNoDiscriminado";
+            //if (o.IdUsuarioModifico == null) sErrorMsg += "\n" + "IdUsuarioModifico";
+            //if (o.FechaModifico == null) sErrorMsg += "\n" + "FechaModifico";
+            if (o.IdCodigoIva == null) sErrorMsg += "\n" + "IdCodigoIva";
+            //if (o.CotizacionEuro == null) sErrorMsg += "\n" + "";
+            if (o.DestinoPago == null) sErrorMsg += "\n" + "DestinoPago";
+            if (o.Dolarizada == null) sErrorMsg += "\n" + "Dolarizada";
+            if (o.PorcentajeIVAParaMonotributistas == null) sErrorMsg += "\n" + "PorcentajeIVAParaMonotributistas";
+            if (o.CircuitoFirmasCompleto == null) sErrorMsg += "\n" + "CircuitoFirmasCompleto";
+
+
+
+
+
+
+
+            if ((o.IdProveedorEventual ?? 0) <= 0)
+            {
+
+                //         Case 	When cp.IdProveedor is not null Then 'Cta. cte.' 
+                //When cp.IdCuenta is not null Then 'F.fijo' 
+                //When cp.IdCuentaOtros is not null Then 'Otros' 
+
+
+                //    // se pone el proveedor de ff en el idproveedoreventual???????
+            }
+
+
+            if (o.IdComprobanteProveedor <= 0)
+            {
+                //  string connectionString = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
+                //  o.NumeroFactura = (int)Pronto.ERP.Bll.FacturaManager.ProximoNumeroFacturaPorIdCodigoIvaYNumeroDePuntoVenta(connectionString,o.IdCodigoIva ?? 0,o.PuntoVenta ?? 0);
+            }
+
+
+
+            //if ((o.IdProveedor ?? 0) <= 0 && (o.IdProveedorEventual ?? 0) <= 0
+            // && (o.Proveedor ?? new Proveedor()).RazonSocial != "")
+            //{
+
+            //    // verifico si está haciendo un alta al vuelo de proveedor
+
+
+            //    //   verifico el nombre del proveedor , alta al vuelo y cuit
+
+
+            //    //if (ComprobanteProveedor.Proveedor.RazonSocial != "")
+
+            //    if (false)
+            //    {
+
+            //        if ((o.Proveedor ?? new Proveedor()).RazonSocial == "")
+            //        {
+            //            // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+            //            sErrorMsg += "\n" + "Falta el proveedor";
+            //            // return false;
+            //        }
+
+
+            //        if ((o.Cuit ?? "") == "")
+            //        {
+            //            // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+            //            sErrorMsg += "\n" + "Falta el CUIT del nuevo proveedor";
+            //            // return false;
+            //        }
+            //    }
+            //    // verifico que NoAsyncTimeoutAttribute exista
+
+
+
+
+
+            //    try
+            //    {
+            //        sErrorMsg += crearProveedor(o);
+            //    }
+            //    catch (Exception e)
+            //    {
+
+            //        sErrorMsg += e.ToString();
+            //    }
+
+            //}
+            //else
+            //{
+            //    // vino el id del proveedor
+            //}
+
+
+
+            if ((o.IdCondicionCompra ?? 0) <= 0) o.IdCondicionCompra = 247;
+
+
+
+
+
+            if ((o.IdCuenta ?? 0) <= 0) // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+           //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
+
+            }
+
+            if ((o.NumeroRendicionFF ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+            //    sErrorMsg += "\n" + "Falta el número de rendición";
+                // return false;
+            }
+
+
+
+            if ((o.Letra ?? "") == "")
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta la Letra";
+                // return false;
+            }
+
+            if ((o.NumeroComprobante1 ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta el número de punto de venta";
+                // return false;
+            }
+
+            if ((o.NumeroComprobante2 ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta el número de comprobante";
+                // return false;
+            }
+
+            if ((o.IdCondicionCompra ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta la condición de compra";
+                // return false;
+            }
+
+
+
+            // if (Generales.Val(o.NumeroCAI) <= 0) // no puedo usar Val con el CAI, es muy grande
+            if (o.NumeroCAI == "") // no puedo usar Val con el CAI, es muy grande
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta el número de CAI";
+                // return false;
+            }
+
+
+
+            if (o.FechaRecepcion == null)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta la fecha de recepción";
+                // return false;
+            }
+
+
+
+            if (o.FechaVencimientoCAI < DateTime.Today)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "La fecha de CAI está vencida";
+                // return false;
+            }
+
+
+
+
+            if ((o.IdObra ?? 0) <= 0)
+            {
+                // sErrorMsg += "\n" + "Falta la obra";
+            }
+
+
+
+            if ((o.CotizacionDolar ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta la cotización";
+                // return false;
+            }
+
+
+            if ((o.IdMoneda ?? 0) <= 0)
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                sErrorMsg += "\n" + "Falta la moneda";
+                // return false;
+            }
+            //if (o.NumeroFactura == null) sErrorMsg +="\n"+ "\n" + "Falta el número de factura";
+            //// if (o.IdPuntoVenta== null) sErrorMsg +="\n"+ "\n" + "Falta el punto de venta";
+            //if (o.IdCodigoIva == null) sErrorMsg +="\n"+ "\n" + "Falta el codigo de IVA";
+            //if (o.IdCondicionVenta == null) sErrorMsg +="\n"+ "\n" + "Falta la condicion venta";
+            //if (o.IdListaPrecios == null) sErrorMsg +="\n"+ "\n" + "Falta la lista de precios";
+
+            //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
+
+
+            //         Dim mvarImprime As Integer, mvarNumero As Integer, i As Integer
+            //         Dim mvarErr As String, mvarControlFechaNecesidad As String, mAuxS5 As String, mAuxS6 As String
+            //         Dim PorObra As Boolean, mTrasabilidad_RM_LA As Boolean, mConAdjuntos As Boolean
+
+            bool mExigirTrasabilidad_RMLA_PE = false, PorObra, mTrasabilidad_RM_LA = false;
+            string mvarControlFechaNecesidad = "";
+            string mAuxS5 = "";
+            int mIdObra = 0;
+            int mIdTipoCuenta = 0;
+
+
+
+            string usuarionombre;
+
+            if (Debugger.IsAttached) usuarionombre = "Mariano";
+            else usuarionombre = Membership.GetUser().UserName;
+
+
+            var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
+
+            if (o.TotalComprobante <= 0)
+            {
+                sErrorMsg += "\n" + "El importe total debe ser mayor a 0";
+            }
+
+            mvarControlFechaNecesidad = fondoFijoService.BuscarClaveINI("Quitar control fecha necesidad en ComprobantesProveedores", usuarionombre);
+            mAuxS5 = fondoFijoService.BuscarClaveINI("Deshabilitar control de cuentas de obras", usuarionombre);
+
+
+
+
+            var reqsToDelete = o.DetalleComprobantesProveedores.Where(x => (x.IdCuenta ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetalleComprobantesProveedores.Remove(deleteReq);
+                sWarningMsg += "\n" + "El item no tiene cuenta. Se borra";
+            }
+
+            if (o.DetalleComprobantesProveedores.Count <= 0) sErrorMsg += "\n" + "El comprobante no tiene items";
+
+            decimal tot = 0;
+
+            foreach (ProntoMVC.Data.Models.DetalleComprobantesProveedore x in o.DetalleComprobantesProveedores)
+            {
+                //x.Adjunto = x.Adjunto ?? "NO";
+                //if (x.FechaEntrega < o.FechaRequerimiento) sErrorMsg +="\n"+ "\n" + "La fecha de entrega de " + fondoFijoService.Articulos.Find(x.IdArticulo).Descripcion + " es anterior a la del requerimiento";
+
+                string nombre = "";
+
+
+
+                if ((o.IdObra ?? 0) > 0) x.IdObra = o.IdObra;
+
+                Cuenta cuenta;
+
+                try
+                {
+                    cuenta = fondoFijoService.CuentasById(x.IdCuenta);
+                    nombre = " El item  (" + cuenta.Descripcion + ") ";
+
+
+
+                    x.CodigoCuenta = cuenta.Codigo.ToString();
+                    x.IdCuentaGasto = cuenta.IdCuentaGasto;
+
+                }
+                catch (Exception ex)
+                {
+                    ErrHandler.WriteError(ex);
+                    nombre = " El item ";
+                    sErrorMsg += "\n " + nombre + " no tiene una cuenta válida";
+
+                }
+
+                x.TomarEnCalculoDeImpuestos = "SI";
+                x.IdProvinciaDestino1 = 2; //16
+                x.PorcentajeProvinciaDestino1 = 100;
+
+
+                if (x.CodigoCuenta == null) sErrorMsg += "\n " + nombre + " no CodigoCuenta";
+                // if (x.IdCuentaGasto == null) sErrorMsg += "\n " + nombre + " no tiene cuenta de gasto asociada";
+                // if (x.IdCuentaIvaCompras1 == null) sErrorMsg += "\n " + nombre + " no IdCuentaIvaCompras1";
+                if (x.AplicarIVA1 == null) sErrorMsg += "\n " + nombre + " no AplicarIVA1";
+                if (x.TomarEnCalculoDeImpuestos == null) sErrorMsg += "\n " + nombre + " no TomarEnCalculoDeImpuestos";
+                if (x.IdProvinciaDestino1 == null) sErrorMsg += "\n " + nombre + " no IdProvinciaDestino1";
+                if (x.PorcentajeProvinciaDestino1 == null) sErrorMsg += "\n " + nombre + " no PorcentajeProvinciaDestino1";
+
+
+
+                x.IVAComprasPorcentaje1 = x.IVAComprasPorcentaje1 ?? 0;
+                x.ImporteIVA1 = x.ImporteIVA1 ?? 0;
+                x.AplicarIVA1 = x.AplicarIVA1 ?? "NO";
+                x.IdCuentaIvaCompras1 = (x.IdCuentaIvaCompras1 <= 0) ? null : x.IdCuentaIvaCompras1;
+
+                x.IVAComprasPorcentaje2 = x.IVAComprasPorcentaje2 ?? 0;
+                x.ImporteIVA2 = x.ImporteIVA2 ?? 0;
+                x.AplicarIVA2 = x.AplicarIVA2 ?? "NO";
+                x.IdCuentaIvaCompras2 = (x.IdCuentaIvaCompras2 <= 0) ? null : x.IdCuentaIvaCompras2;
+
+                x.IVAComprasPorcentaje3 = x.IVAComprasPorcentaje3 ?? 0;
+                x.ImporteIVA3 = x.ImporteIVA3 ?? 0;
+                x.AplicarIVA3 = x.AplicarIVA3 ?? "NO";
+                x.IdCuentaIvaCompras3 = (x.IdCuentaIvaCompras3 <= 0) ? null : x.IdCuentaIvaCompras3;
+
+                x.IVAComprasPorcentaje4 = x.IVAComprasPorcentaje4 ?? 0;
+                x.ImporteIVA4 = x.ImporteIVA4 ?? 0;
+                x.AplicarIVA4 = x.AplicarIVA4 ?? "NO";
+                x.IdCuentaIvaCompras4 = (x.IdCuentaIvaCompras4 <= 0) ? null : x.IdCuentaIvaCompras4;
+
+                x.IVAComprasPorcentaje5 = x.IVAComprasPorcentaje5 ?? 0;
+                x.ImporteIVA5 = x.ImporteIVA5 ?? 0;
+                x.AplicarIVA5 = x.AplicarIVA5 ?? "NO";
+                x.IdCuentaIvaCompras5 = (x.IdCuentaIvaCompras5 <= 0) ? null : x.IdCuentaIvaCompras5;
+
+                x.IVAComprasPorcentaje6 = x.IVAComprasPorcentaje6 ?? 0;
+                x.ImporteIVA6 = x.ImporteIVA6 ?? 0;
+                x.AplicarIVA6 = x.AplicarIVA6 ?? "NO";
+                x.IdCuentaIvaCompras6 = (x.IdCuentaIvaCompras6 <= 0) ? null : x.IdCuentaIvaCompras6;
+
+                x.IVAComprasPorcentaje7 = x.IVAComprasPorcentaje7 ?? 0;
+                x.ImporteIVA7 = x.ImporteIVA7 ?? 0;
+                x.AplicarIVA7 = x.AplicarIVA7 ?? "NO";
+                x.IdCuentaIvaCompras7 = (x.IdCuentaIvaCompras7 <= 0) ? null : x.IdCuentaIvaCompras7;
+
+                x.IVAComprasPorcentaje8 = x.IVAComprasPorcentaje8 ?? 0;
+                x.ImporteIVA8 = x.ImporteIVA8 ?? 0;
+                x.AplicarIVA8 = x.AplicarIVA8 ?? "NO";
+                x.IdCuentaIvaCompras8 = (x.IdCuentaIvaCompras8 <= 0) ? null : x.IdCuentaIvaCompras8;
+
+                x.IVAComprasPorcentaje9 = x.IVAComprasPorcentaje9 ?? 0;
+                x.ImporteIVA9 = x.ImporteIVA9 ?? 0;
+                x.AplicarIVA9 = x.AplicarIVA9 ?? "NO";
+                x.IdCuentaIvaCompras9 = (x.IdCuentaIvaCompras9 <= 0) ? null : x.IdCuentaIvaCompras9;
+
+                x.IVAComprasPorcentaje10 = x.IVAComprasPorcentaje10 ?? 0;
+                x.ImporteIVA10 = x.ImporteIVA10 ?? 0;
+                x.AplicarIVA10 = x.AplicarIVA10 ?? "NO";
+                x.IdCuentaIvaCompras10 = (x.IdCuentaIvaCompras10 <= 0) ? null : x.IdCuentaIvaCompras10;
+
+
+
+                // if ((x.Cantidad ?? 0) <= 0) sErrorMsg += "\n" + nombre + " no tiene una cantidad válida";
+
+                //if (OrigenDescripcionDefault == "SI" && (x.Observaciones ?? "") != "") x.OrigenDescripcion = 3;
+                //      if (x.ArchivoAdjunto == null && x.ArchivoAdjunto1 == null) x.Adjunto = "NO";
+
+
+                //if ((x.Precio ?? 0) <= 0 && o.IdComprobanteProveedorAbierto == null)
+                //{
+                //    if (o.Aprobo != null)
+                //    {
+                //        sErrorMsg += "\n " + nombre + " no tiene precio unitario";
+                //    }
+                //    else
+                //    {
+                //        // solo un aviso
+                //        sWarningMsg += "\n " + nombre + " no tiene precio unitario. Cuando libere el ComprobanteProveedor deberá ingresarse.";
+                //    }
+                //    //break;
+                //}
+
+                //if (x.IdControlCalidad == null)
+                //{
+                //    // sErrorMsg +="\n"+ "Hay items de ComprobanteProveedor que no tienen indicado control de calidad";
+                //    //break;
+                //}
+
+                //if (x.FechaEntrega < o.FechaComprobanteProveedor)
+                //{
+                //    sErrorMsg += "\n " + nombre + " tiene una fecha de entrega anterior a la del ComprobanteProveedor";
+                //    //break;
+                //}
+
+                //if (x.FechaNecesidad != null && x.FechaNecesidad < o.FechaComprobanteProveedor && mvarControlFechaNecesidad != "SI")
+                //{
+                //    sErrorMsg += "\n " + nombre + " tiene una fecha de necesidad anterior a la del ComprobanteProveedor";
+                //    //break;
+                //}
+
+                //if (x.IdCentroCosto == null)
+                //{
+                //    PorObra = false;
+                //    mTrasabilidad_RM_LA = false;
+
+                //    if (x.IdDetalleAcopios != null || x.IdDetalleLMateriales != null)
+                //    {
+                //        PorObra = true;
+                //    }
+
+                //    if (x.IdDetalleRequerimiento != null)
+                //    {
+
+                //        var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Requerimientos_TX_DatosObra, x.IdDetalleRequerimiento);
+
+                //        if (oRsx.Rows.Count > 0)
+                //        {
+                //            if (oRsx.Rows[0]["Obra"] != null) PorObra = true;
+                //            mIdObra = (int)oRsx.Rows[0]["IdObra"];
+                //        }
+
+                //    }
+
+
+                if (mIdObra > 0 && mAuxS5 != "SI")
+                {
+                    var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Articulos_TX_DatosConCuenta, x.IdArticulo);
+
+                    mIdTipoCuenta = 0;
+                    //no anda, arreglar    if (oRsx.Rows.Count > 0) mIdTipoCuenta = (int)oRsx.Rows[0]["IdTipoCuentaCompras"];
+
+                    if (mIdTipoCuenta == 4)
+                    {
+                        var oRs = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Cuentas_TX_PorObraCuentaMadre,
+                                    mIdObra, 0, x.IdArticulo, o.FechaComprobante);
+                        if (oRs.Rows.Count == 0)
+                        {
+                            sErrorMsg += "\n" + nombre + " no tiene una cuenta contable para la obra-cuenta de compras";
+                            //break;
+                        }
+
+                    }
+                }
+
+                if (false && !PorObra)
+                {
+                    sErrorMsg += "\n" + nombre + " no tiene indicado centro de costo";
+                    //break;
+                }
+
+
+
+                //if (mExigirTrasabilidad_RMLA_PE && x.IdDetalleAcopios == null && x.IdDetalleRequerimiento == null)
+                //{
+                //    sErrorMsg += "\n" + nombre + " no tiene trazabilidad a RM o LA";
+                //    //break;
+                //}
+
+
+
+                tot += (x.Importe ?? 0) + (x.ImporteIVA1 ?? 0);
+            }
+
+
+
+            if (tot != o.TotalComprobante && false)
+            {
+                // ojo q puede estar chillando porque está en blanco una cuenta
+
+                string s = "\n Hay problemas en el recálculo del total. renglon con importe pero sin cuenta de gasto elegida? Por favor, [pagina de error, metodos de error] total calculado " + tot + "      total en el comprobante" + (o.TotalComprobante ?? 0);
+                sWarningMsg += s;
+                sErrorMsg += s;
+                o.TotalComprobante = tot;
+
+            }
+
+
+            //if ((o.Aprobo ?? 0) > 0 && o.FechaAprobacion == null) o.FechaAprobacion = DateTime.Now;
+
+
+            //if (fondoFijoService.ObtenerTodos().Any(p => p.NumeroComprobanteProveedor == o.NumeroComprobanteProveedor && p.SubNumero == o.SubNumero && p.IdComprobanteProveedor != o.IdComprobanteProveedor))
+            //{
+
+            //    sErrorMsg += "\n" + "Numero/Subnumero de ComprobanteProveedor ya existente";
+            //}
+
+
+
+
+
+            //         if Len(mvarErr) {
+            //            if mIdAprobo = 0 {
+            //               mvarErr = mvarErr & vbCrLf & "Cuando libere el ComprobanteProveedor estos errores deberan estar corregidos"
+            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
+            //            Else
+            //               MsgBox "Errores encontrados :" & vbCrLf & mvarErr, vbExclamation
+            //               GoTo Salida
+            //            }
+            //         }
+
+
+            //if Not mNumeracionPorPuntoVenta {
+            //            if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroComprobanteProveedor.Text = mNumeroComprobanteProveedorOriginal {
+            //               Set oPar = oAp.Parametros.Item(1)
+            //               if Check2.Value = 0 {
+            //                  mNum = oPar.Registrox.ProximoNumeroComprobanteProveedor").Value
+            //               Else
+            //                  mNum = oPar.Registrox.ProximoNumeroComprobanteProveedorExterior").Value
+            //               }
+            //               origen.Registrox.NumeroComprobanteProveedor").Value = mNum
+            //               mNumeroComprobanteProveedorOriginal = mNum
+            //               Set oPar = Nothing
+            //            }
+
+            //            Set oRs = oAp.ObtenerTodos().TraerFiltrado("_PorNumero", Array(Val(txtNumeroComprobanteProveedor.Text), Val(txtSubnumero.Text), -1, Check2.Value))
+            //            if oRs.RecordCount > 0 {
+            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
+            //                  oRs.Close
+            //                  Set oRs = Nothing
+            //                  mvarNumero = MsgBox("Numero/Subnumero de ComprobanteProveedor ya existente" & vbCrLf & "Desea actualizar el numero ?", vbYesNo, "Numero de ComprobanteProveedor")
+            //                  if mvarNumero = vbYes {
+            //                     Set oPar = oAp.Parametros.Item(1)
+            //                     if Check2.Value = 0 {
+            //                        mNum = oPar.Registrox.ProximoNumeroComprobanteProveedor").Value
+            //                     Else
+            //                        mNum = oPar.Registrox.ProximoNumeroComprobanteProveedorExterior").Value
+            //                     }
+            //                     origen.Registrox.NumeroComprobanteProveedor").Value = mNum
+            //                     Set oPar = Nothing
+            //                  }
+            //                  GoTo Salida
+            //               }
+            //            }
+            //            oRs.Close
+            //            Set oRs = Nothing
+            //         Else
+            //            Set oRs = oAp.ObtenerTodos().TraerFiltrado("_PorNwemero", Array(Val(txtNumeroComprobanteProveedor.Text), Val(txtSubnumero.Text), dcfields(10).BoundText))
+            //            if oRs.RecordCount > 0 {
+            //               if mvarId < 0 Or (mvarId > 0 And oRs.Fields(0).Value <> mvarId) {
+            //                  oRs.Close
+            //                  Set oRs = Nothing
+            //                  MsgBox "Numero/Subnumero de ComprobanteProveedor ya existente", vbExclamation
+            //                  GoTo Salida
+            //               }
+            //            }
+            //            oRs.Close
+            //         }
+
+            //         mAuxS6 = fondoFijoService.BuscarClaveINI("Exigir adjunto en ComprobantesProveedores con subcontrato")
+
+            //            if mAuxS6 = "SI" And Iif(IsNull(x.NumeroSubcontrato").Value), 0, x.NumeroSubcontrato").Value) > 0 {
+            //               mConAdjuntos = False
+            //               For i = 1 To 10
+            //                  if Len(Iif(IsNull(x.ArchivoAdjunto" & i).Value), "", x.ArchivoAdjunto" & i).Value)) > 0 {
+            //                     mConAdjuntos = True
+            //                     Exit For
+            //                  }
+            //               Next
+            //               if Not mConAdjuntos {
+            //                  MsgBox "Para un ComprobanteProveedor - subcontrato es necesario ingresar como adjunto las condiciones generales", vbExclamation
+            //                  GoTo Salida
+            //               }
+            //            }
+
+            //            if Not IsNull(x.IdComprobanteProveedorAbierto").Value) {
+            //               mTotalComprobanteProveedorAbierto = 0
+            //               mvarTotalComprobanteProveedors = 0
+            //               mFechaLimite = 0
+            //               Set oRs1 = Aplicacion.ComprobanteProveedorsAbiertos.TraerFiltrado("_Control", x.IdComprobanteProveedorAbierto").Value)
+            //               if oRs1.RecordCount > 0 {
+            //                  mTotalComprobanteProveedorAbierto = Iif(IsNull(oRs1x.ImporteLimite").Value), 0, oRs1x.ImporteLimite").Value)
+            //                  mvarTotalComprobanteProveedors = Iif(IsNull(oRs1x.SumaComprobanteProveedors").Value), 0, oRs1x.SumaComprobanteProveedors").Value)
+            //                  mFechaLimite = Iif(IsNull(oRs1x.FechaLimite").Value), 0, oRs1x.FechaLimite").Value)
+            //               }
+            //               oRs1.Close
+            //               if mvarId > 0 {
+            //                  Set oRs1 = Aplicacion.ObtenerTodos().TraerFiltrado("_PorId", mvarId)
+            //                  if oRs1.RecordCount > 0 {
+            //                     mvarTotalComprobanteProveedors = mvarTotalComprobanteProveedors - Iif(IsNull(oRs1x.TotalComprobanteProveedor").Value), 0, oRs1x.TotalComprobanteProveedor").Value)
+            //                  }
+            //                  oRs1.Close
+            //               }
+            //               mvarTotalComprobanteProveedors = mvarTotalComprobanteProveedors + mvarTotalComprobanteProveedor
+            //               if mTotalComprobanteProveedorAbierto > 0 And mTotalComprobanteProveedorAbierto < mvarTotalComprobanteProveedors {
+            //                  MsgBox "Se supero el importe limite del ComprobanteProveedor abierto : " & mTotalComprobanteProveedorAbierto, vbCritical
+            //                  GoTo Salida
+            //               }
+            //               if mFechaLimite > 0 And mFechaLimite < DTFields(0).Value {
+            //                  MsgBox "Se supero la fecha limite del ComprobanteProveedor abierto : " & mFechaLimite, vbCritical
+            //                  GoTo Salida
+            //               }
+            //            }
+            //            if mNumeracionPorPuntoVenta {
+            //               x.PuntoVenta").Value = Val(dcfields(10).Text)
+            //            Else
+            //               if mvarId = -1 And mNumeracionAutomatica <> "SI" And txtNumeroComprobanteProveedor.Text = mNumeroComprobanteProveedorOriginal {
+            //                  Set oPar = oAp.Parametros.Item(1)
+            //                  if Check2.Value = 0 {
+            //                     mNum = oPar.Registrox.ProximoNumeroComprobanteProveedor").Value
+            //                     x.NumeroComprobanteProveedor").Value = mNum
+            //                     oPar.Registrox.ProximoNumeroComprobanteProveedor").Value = mNum + 1
+            //                  Else
+            //                     mNum = oPar.Registrox.ProximoNumeroComprobanteProveedorExterior").Value
+            //                     x.NumeroComprobanteProveedor").Value = mNum
+            //                     oPar.Registrox.ProximoNumeroComprobanteProveedorExterior").Value = mNum + 1
+            //                  }
+            //                  oPar.Guardar
+            //                  Set oPar = Nothing
+            //               }
+            //            }
+            //            x.Bonificacion").Value = mvarBonificacion
+            //            if IsNumeric(txtPorcentajeBonificacion.Text) { x.PorcentajeBonificacion").Value = Val(txtPorcentajeBonificacion.Text)
+            //            x.TotalIva1").Value = mvarIVA1
+            //            'x.TotalIva2").Value = mvarIVA2
+            //            x.TotalComprobanteProveedor").Value = mvarTotalComprobanteProveedor
+            //            x.PorcentajeIva1").Value = mvarP_IVA1
+            //            x.PorcentajeIva2").Value = mvarP_IVA2
+            //            x.TipoCompra").Value = Combo1(0).ListIndex + 1
+            //            x.CotizacionMoneda").Value = txtCotizacionMoneda.Text
+            //            x.CotizacionDolar").Value = txtCotizacionDolar.Text
+            //            if Check2.Value = 1 {
+            //               x.ComprobanteProveedorExterior").Value = "SI"
+            //            Else
+            //               x.ComprobanteProveedorExterior").Value = "NO"
+            //            }
+            //            if Not IsNull(x.NumeroSubcontrato").Value) {
+            //               x.Subcontrato").Value = "SI"
+            //            Else
+            //               x.Subcontrato").Value = "NO"
+            //            }
+            //            if Check4.Value = 1 {
+            //               x.Transmitir_a_SAT").Value = "SI"
+            //            Else
+            //               x.Transmitir_a_SAT").Value = "NO"
+            //            }
+            //            x.EnviarEmail").Value = 1
+            //            if mvarId <= 0 { x.NumeracionAutomatica").Value = mNumeracionAutomatica
+            //            x.Observaciones").Value = rchObservaciones.Text
+            //            x.IdTipoCompraRM").Value = origen.IdTipoCompraRM
+
+
+
+
+
+
+            sErrorMsg = sErrorMsg.Replace("\n", "<br/>"); //     ,"&#13;&#10;"); // "<br/>");
+            if (sErrorMsg != "") return false;
+            return true;
+
+        }
 
 
 

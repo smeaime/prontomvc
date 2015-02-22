@@ -2440,25 +2440,31 @@ Released   : 20120723
 
 
 
-
-                                <input type="button" class="btn btn-small " id="btnConmutarPanelDerecho"
-                                       value="Buscar" style="position:absolute; top: 400px; text-align: right; margin-right: 0px; float: right;"
-                                       onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+                                
+                                    <button type="button" class="btn btn-small clearfix"
+                                            id="btnConmutarPanelDerecho"
+                                            value="Buscar"
+                                            style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                            onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
                                         pageLayout.hide('north');
-                                        RefrescaAnchoGrillaDetalle(); " />
+                                        RefrescaAnchoGrillaDetalle(); ">
+                                        Grillas
+                                    </button>
 
-                                <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                                        style="display: none; "></button>
+                                
+
+                                    <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
+                                            style="display: none; "></button>
 
 
-                                <script>
+                                    <script>
 
 
 
-                                    $('.alert .close').live("click", function (e) {
-                                        $(this).parent().hide();
-                                    });</script>
-                            </div>
+                                        $('.alert .close').live("click", function (e) {
+                                            $(this).parent().hide();
+                                        });</script>
+                                </div>
                             @*<span class="span1 lightblue"></span>*@
                         </span>
                     </div>
