@@ -2230,6 +2230,7 @@ Released   : 20120723
                 }
 
 
+
                 function conmutarPanelesDerecho() {
 
                     //pageLayout.toggle('east');
@@ -2241,8 +2242,12 @@ Released   : 20120723
 
                         pageLayout.show('east', true);
                         pageLayout.open('east');
+
+                        $("#btnConmutarPanelDerecho").hide();
                     }
                     else {
+
+                        $("#btnConmutarPanelDerecho").show();
 
                         pageLayout.hide('east');
 
@@ -2434,15 +2439,27 @@ Released   : 20120723
                                 @RenderBody()
 
 
+
+
+                                <input type="button" class="btn btn-small " id="btnConmutarPanelDerecho"
+                                       value="Buscar" style="position:absolute; top: 400px; text-align: right; margin-right: 0px; float: right;"
+                                       onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+                                        pageLayout.hide('north');
+                                        RefrescaAnchoGrillaDetalle(); " />
+
+                                <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
+                                        style="display: none; "></button>
+
+
+                                <script>
+
+
+
+                                    $('.alert .close').live("click", function (e) {
+                                        $(this).parent().hide();
+                                    });</script>
                             </div>
                             @*<span class="span1 lightblue"></span>*@
-                            <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                                    style="display: none;"></button>
-                            </button>
-                            <script>
-                                $('.alert .close').live("click", function (e) {
-                                    $(this).parent().hide();
-                                });</script>
                         </span>
                     </div>
                 </div>
@@ -2925,5 +2942,10 @@ Released   : 20120723
         <script>
             $(function () {
                 estiloArbol();
+
+                if (!(pageLayout.state.east.isHidden || pageLayout.state.east.isClosed)) {
+                    $("#btnConmutarPanelDerecho").hide();
+                }
+
             })
         </script>
