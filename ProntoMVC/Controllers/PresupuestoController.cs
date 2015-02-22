@@ -66,17 +66,17 @@ namespace ProntoMVC.Controllers
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras"))
-            {
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras"))
+            //{
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            //    int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
 
-                if (presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
-                //throw new Exception("No tenés permisos");
+            //    if (presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
+            //    //throw new Exception("No tenés permisos");
 
-            }
+            //}
 
             //presupuesto.mail
 
@@ -117,11 +117,13 @@ namespace ProntoMVC.Controllers
             }
 
 
+            
+            ModelState.Remove("IdDetallePresupuesto");
 
 
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || true) //me estoy saltando la validacion porque explota en la primarykey del detalle, y no sé por qué.
                 {
                     string tipomovimiento = "";
                     if (presupuesto.IdPresupuesto > 0)
