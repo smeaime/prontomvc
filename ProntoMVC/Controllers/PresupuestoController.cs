@@ -60,7 +60,8 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual JsonResult BatchUpdate(Presupuesto presupuesto)
+        public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetallePresupuesto")]  Presupuesto presupuesto) // el Exclude es para las altas, donde el Id viene en 0
+
         {
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
