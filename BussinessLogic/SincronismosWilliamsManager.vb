@@ -2783,12 +2783,35 @@ Namespace Pronto.ERP.Bll
 
 
                 If cdp.Establecimiento = "" Then
+                   
+                    ' sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Establecimiento</a>; <br/> "
+                End If
+
+                If cdp.ProcedenciaLocalidadONCCA_SAGPYA = "" Then
                     'si no tiene codigo ni está ya en sErrores, lo meto
 
                     'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
 
-                    sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Establecimiento</a>; "
+                    'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
+
+                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Código</a>; <br/>"
                 End If
+
+
+                If cdp.ProcedenciaPartidoONCCA = "" Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+
+                    'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
+
+                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Partido con código asignado</a>; <br/>"
+                End If
+
 
 
 

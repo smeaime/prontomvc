@@ -187,6 +187,7 @@ Public Class CartaDePorteManager
         Public DestinatarioCUIT As String
 
 
+        Public IdProcedencia As String
         Public ProcedenciaDesc As String
         Public DestinoDesc As String
         Public CalidadDesc As String
@@ -306,18 +307,23 @@ Public Class CartaDePorteManager
     Public Shared Function excepciones(SC) As String()
         'Get
 
-        If False Then
+        If True Then
             'Dim SC As String = ""
             Dim cli As Integer
 
+            If SC = "" Then Return {""}
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
             Dim q = From i In db.CartasPorteAcopios1 _
                     Where (True Or i.IdCliente = cli)
                     Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
 
-
-            Return q.Select(Function(x) x.Descripcion).ToArray
+            Try
+                Return q.OrderBy(Function(x) x.IdAcopio).Select(Function(x) x.Descripcion).ToArray
+            Catch ex As Exception
+                Dim s As String() = {""}
+                Return s
+            End Try
 
 
         Else
@@ -338,15 +344,39 @@ Public Class CartaDePorteManager
 
     Shared Function BuscarIdAcopio(descripcionAcopio As String, SC As String) As Integer
         'excepciones.Where(Function(x) x = descripcionAcopio).FirstOrDefault()
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim q = (From i In db.CartasPorteAcopios1 _
+                Where (i.Descripcion = descripcionAcopio)
+                Select i.IdAcopio).FirstOrDefault
+
+        Return q
+
+
         Dim s As String() = excepciones(SC)
         For n = 0 To excepciones(SC).Count - 1
             If s(n) = descripcionAcopio Then Return n
         Next
+
+
+
         Return -1
     End Function
 
     Shared Function BuscarTextoAcopio(IdAcopio As Integer, SC As String) As String
-        If IdAcopio < 0 Then Return ""
+        If IdAcopio <= 0 Then Return ""
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim q = (From i In db.CartasPorteAcopios1 _
+                Where (i.IdAcopio = IdAcopio)
+                Select i.Descripcion).FirstOrDefault
+
+        Return q
+
+
+
+        If IdAcopio <= 0 Then Return ""
         Try
             Return excepciones(SC)(IdAcopio)
         Catch ex As Exception
@@ -1742,6 +1772,7 @@ Public Class CartaDePorteManager
 
         db.ObjectTrackingEnabled = False
 
+        If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
 
         '       Remember, the query is nothing more than an object which represents the query. Think of it 
         'like a SQL query string, just way smarter. Passing a query string around doesn't execute the query; executing 
@@ -1832,6 +1863,7 @@ Public Class CartaDePorteManager
  _
              .Producto = art.Descripcion, _
              .ProductoSagpya = art.AuxiliarString6, _
+             .IdProcedencia = cdp.Procedencia, _
              .ProcedenciaDesc = loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
              .CalidadDesc = cdp.Calidad, _
@@ -2776,7 +2808,7 @@ Public Class CartaDePorteManager
             ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
-            ElseIf NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+            ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
 
