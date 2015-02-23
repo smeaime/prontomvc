@@ -904,16 +904,21 @@ namespace ProntoMVC.Controllers
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
                 ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
+
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            baseP = "Vialagro";
+
+
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             string plantilla;
             if (db.Facturas.Find(id).TipoABC == "A")
             {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_A_" + this.HttpContext.Session["BasePronto"] + "";
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_A_" + baseP + "";
             }
             else
             {
-                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_B_" + this.HttpContext.Session["BasePronto"] + "";
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Factura_B_" + baseP + "";
             }
 
             if (db.Facturas.Find(id).CAE.NullSafeToString() != "")
