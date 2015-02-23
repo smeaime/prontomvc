@@ -1845,16 +1845,16 @@ Public Class CartaDePorteManager
             .NobleChamico2 = cdp.NobleChamico2, _
             .NobleRevolcado = cdp.NobleRevolcado, _
             .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleObjetables, _
+            .NobleAmohosados = cdp.NobleAmohosados, _
             .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleObjetables, _
+            .NobleCarbon = cdp.NobleHectolitrico, _
              .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NobleObjetables, _
-            .NobleMGrasa = cdp.NobleObjetables, _
-            .NobleAcidezGrasa = cdp.NobleObjetables, _
-            .NobleVerdes = cdp.NobleObjetables, _
-            .NobleGrado = cdp.NobleObjetables, _
-            .NobleConforme = cdp.NobleObjetables, _
+            .NoblePicados = cdp.NoblePicados, _
+            .NobleMGrasa = cdp.NobleMGrasa, _
+            .NobleAcidezGrasa = cdp.NobleAcidezGrasa, _
+            .NobleVerdes = cdp.NobleVerdes, _
+            .NobleGrado = cdp.NobleGrado, _
+            .NobleConforme = cdp.NobleConforme, _
             .NobleACamara = (cdp.NobleACamara = "SI"), _
             .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
             .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
@@ -7242,9 +7242,29 @@ Public Class CartaDePorteManager
 
     End Function
 
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String)
+
+    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer, _
+                                ByVal SC As String, ByVal nombreUsuario As String, renglonimputado As Integer)
 
 
 
@@ -7263,17 +7283,36 @@ Public Class CartaDePorteManager
 
 
 
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim a = (From f In db.linqDetalleFacturas _
+                Where f.IdFactura = idfactura _
+                Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
+
+        Dim iddetallefact As Long = a(renglonimputado)
+
+
+
+
+
         Dim dt = EntidadManager.ExecDinamico(SC, "SELECT IdFacturaImputada from CartasPorteMovimientos WHERE IdCDPMovimiento=" & idMov)
         If iisNull(dt(0)("IdFacturaimputada"), 0) > 0 Then
             Err.Raise(6464, , "Ya tiene una factura imputada")
         End If
 
         EntidadManager.ExecDinamico(SC, "UPDATE CartasPorteMovimientos SET IdFacturaImputada=" & idfactura & "  WHERE IdCDPMovimiento=" & idMov)
+        EntidadManager.ExecDinamico(SC, "UPDATE CartasPorteMovimientos SET IdDetalleFactura=" & iddetallefact & "  WHERE IdCDPMovimiento=" & idMov)
+
 
         EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCPorteMovimiento " & idMov & " IdFacturaImputada " & idfactura, nombreUsuario)
 
 
     End Sub
+
+
+
+
 
     Shared Sub ImputoLaCDP(ByVal oCDP As Pronto.ERP.BO.CartaDePorte, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String, imput As List(Of LogicaFacturacion.grup))
 
@@ -7335,6 +7374,18 @@ Public Class CartaDePorteManager
 
     End Sub
 
+
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Shared Function EsteTitularSeleFacturaAlCorredorPorSeparadoId(ByVal idCDP As Long, ByVal SC As String) As Long
 
@@ -13657,9 +13708,14 @@ Public Class LogicaFacturacion
 
                     Next
 
-                    For Each o In listEmbarques
-                        CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName))
+
+                    Dim imp = imputaciones.Count
+                    For n = 0 To listEmbarques.Count - 1
+                        Dim o As DataRow = listEmbarques(n)
+                        Dim renglonimputado = imp + n
+                        CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName), renglonimputado)
                     Next
+
 
                     EntidadManager.LogPronto(SC, idFactura, "Factura De CartasPorte: id" & idFactura & " " & optFacturarA & " AGR:" & agruparArticulosPor & " busc:" & txtBuscar, Session(SESSIONPRONTO_UserName))
 
@@ -14699,6 +14755,62 @@ Public Class LogicaFacturacion
 
 
 
+
+
+                    For Each dr In listEmbarques
+
+                        
+                        With .DetFacturas.Item(-1)
+                            With .Registro
+                                'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
+                                'Debug.Print(dr.item("IdArticulo"))
+
+
+                                .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
+                                .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+                                .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
+                                .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
+                                .Fields("Costo").Value = 0
+                                .Fields("Bonificacion").Value = 0
+                                .Fields("OrigenDescripcion").Value = 1
+
+
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
+                                'En el primero imprimir la leyenda \"ATENCION BUQUE\"
+                                'En el segundo: Nombre del Buque - Cereal - Puerto
+
+                                Dim obsEmbarque As String = "BUQUE " & dr.Item("Corredor") & SEPAR & "  " & dr.Item("DestinoDesc")
+
+
+                                .Fields("Observaciones").Value = obsEmbarque
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+
+
+                            End With
+                            .Modificado = True
+
+                        End With
+                    Next
+
+
+
+
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+
+
+
+
                     If Not dtRenglonesManuales Is Nothing Then
 
                         Dim K_idartcambio As Integer = GetIdArticuloParaCambioDeCartaPorte(SC)
@@ -14760,52 +14872,6 @@ Public Class LogicaFacturacion
 
 
 
-                    For Each dr In listEmbarques
-
-                        With .DetFacturas.Item(-1)
-                            With .Registro
-                                'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
-                                'Debug.Print(dr.item("IdArticulo"))
-
-
-                                .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
-                                .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
-                                .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
-                                .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
-                                .Fields("Costo").Value = 0
-                                .Fields("Bonificacion").Value = 0
-                                .Fields("OrigenDescripcion").Value = 1
-
-
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
-                                'En el primero imprimir la leyenda \"ATENCION BUQUE\"
-                                'En el segundo: Nombre del Buque - Cereal - Puerto
-
-                                Dim obsEmbarque As String = "BUQUE " & dr.Item("Corredor") & SEPAR & "  " & dr.Item("DestinoDesc")
-
-
-                                .Fields("Observaciones").Value = obsEmbarque
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-
-
-                            End With
-                            .Modificado = True
-
-                        End With
-                    Next
-
-
-
-
-
-                    '////////////////////////////////////////////////////////////////////////////
-                    '////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////
                     'agregar renglon de "Gastos administrativos"

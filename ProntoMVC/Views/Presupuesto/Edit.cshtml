@@ -207,7 +207,7 @@
                 <div class="row-fluid">
                     <div class="span4 lightblue">
                         @Html.LabelFor(model => model.IdComprador, "Comprador")
-                        @Html.DropDownList("IdComprador", String.Empty)
+                        @Html.DropDownList("IdComprador", null, String.Empty, new { @class = "span12" })
                         @Html.ValidationMessageFor(model => model.IdComprador)
                     </div>
                     <!--/span-->
@@ -231,7 +231,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                        @Html.DropDownList("Aprobo", String.Empty)
+                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.Aprobo)
                                     </div>
                                     <!--/span-->
@@ -246,7 +246,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                        @Html.DropDownList("IdCondicionCompra", String.Empty)
+                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                     </div>
                                     <!--/span-->
@@ -267,7 +267,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                        @Html.DropDownList("IdPlazoEntrega", String.Empty)
+                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
                                     </div>
                                     <!--/span-->
@@ -397,7 +397,7 @@
                                 MONEDA :
                             </td>
                             <td width="100">
-                                @Html.DropDownList("IdMoneda", String.Empty)
+                                @Html.DropDownList("IdMoneda", null, String.Empty, new { @class = "span12" })
                             </td>
                         </tr>
                         <tr>
