@@ -1087,23 +1087,24 @@ ALTER TABLE  CartasPorteAcopios  ADD
 GO
 
 select * from CartasPorteAcopios
+delete CartasPorteAcopios 
 
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  1, 'AGRO', 4333              ) --syngenta 4333
+VALUES  (  1, 'Agro', 4333              ) --syngenta 4333
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  2, 'SEEDS', 4333              ) --syngenta 4333
+VALUES  (  2, 'Seeds', 4333              ) --syngenta 4333
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  3, 'PEHUA', 10              ) --syngenta 4333
+VALUES  (  3, 'CDC Pehua.', 10              ) --syngenta 4333
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  4, 'OLAVARR', 10              ) --syngenta 4333
+VALUES  (  4, 'CDC Olavar', 10              ) --syngenta 4333
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  5, 'NAON', 10) --A.C.A. LTDA   id10
+VALUES  (  5, 'CDC Naon', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  6, 'G.VILL', 10) --A.C.A. LTDA   id10
+VALUES  (  6, 'CDC G.Vill', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  7, 'IRIARTE', 10) --A.C.A. LTDA   id10
+VALUES  (  7, 'CDC Iriart', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  8, 'WRIGHT', 10) --A.C.A. LTDA   id10
+VALUES  (  8, 'CDC Wright', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  9, 'CDC ACA', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
@@ -1111,20 +1112,23 @@ VALUES  (  10, 'GUALEGUAY', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
 VALUES  (  11, 'GLGUAYCHU', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  12, 'RUFINO', 10) --A.C.A. LTDA   id10
+VALUES  (  12, 'Rufino', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  13, 'BRAGADO', 10) --A.C.A. LTDA   id10
+VALUES  (  13, 'Bragado', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  14, 'LAS FLORES', 10) --A.C.A. LTDA   id10
+VALUES  (  14, 'Las Flores', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  15, 'OTROS', 10) --A.C.A. LTDA   id10
+VALUES  (  15, ',E.CASTEX', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  16, 'CDC Eduardo Castex', 10) --A.C.A. LTDA   id10
-
+VALUES  (  16, 'HUANGUELEN', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  17, 'LDC acopio1', 2775) --ldc   id2775
+VALUES  (  17, '16 DE JULI', 10) --A.C.A. LTDA   id10
 INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
-VALUES  (  18, 'LDC acopio2', 2775) --ldc   id2775
+VALUES  (  18, 'OTROS', 10) --A.C.A. LTDA   id10
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  19, 'LDC acopio1', 2775) --ldc   id2775
+INSERT  INTO CartasPorteAcopios ( IdAcopio, Descripcion,IdCliente) 
+VALUES  (  20, 'LDC acopio2', 2775) --ldc   id2775
 --select * from clientes where razonsocial like '%ldc%'
 
 
