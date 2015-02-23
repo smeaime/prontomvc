@@ -304,6 +304,12 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     'por ahora están en una lista, hay que pasarlos a una tabla
 
+    Class aaa
+        Public idacopio As Integer
+        Public desc As String
+        Public idcliente As Integer?
+    End Class
+
     Public Shared Function excepciones(SC) As String()
         'Get
 
@@ -314,12 +320,22 @@ Public Class CartaDePorteManager
             If SC = "" Then Return {""}
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim q = From i In db.CartasPorteAcopios1 _
+
+
+            Dim q = (From i In db.CartasPorteAcopios1 _
                     Where (True Or i.IdCliente = cli)
-                    Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
+                    Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
+
+            Dim x As New aaa
+            x.idacopio = 0
+            x.desc = ""
+            x.idcliente = 0
+
+            q.Add(x)
+
 
             Try
-                Return q.OrderBy(Function(x) x.IdAcopio).Select(Function(x) x.Descripcion).ToArray
+                Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) y.desc).ToArray
             Catch ex As Exception
                 Dim s As String() = {""}
                 Return s
