@@ -2752,24 +2752,25 @@ Namespace Pronto.ERP.Bll
 
 
                 'el titulardesc lo uso en la columna de "cuit de proveedor", y la segunda columna es el "cuit titular
+
                 cdp.TitularDesc = cdp.TitularCUIT
-                If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
-                If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
+                If cdp.RComercialCUIT <> cuitYPF And cdp.RComercialCUIT <> "" Then cdp.TitularDesc = cdp.RComercialCUIT
+                If cdp.IntermediarioCUIT <> cuitYPF And cdp.IntermediarioCUIT <> "" Then cdp.TitularDesc = cdp.IntermediarioCUIT
                 If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
 
 
 
                 Dim sCalidad As String = cdp.CalidadDesc
                 If InStr(cdp.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
-                    sCalidad = "G1"
+                    sCalidad = "1"
                 ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "grado 2") > 0 Then
-                    sCalidad = "G2"
+                    sCalidad = "2"
                 ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "grado 3") > 0 Then
-                    sCalidad = "G3"
+                    sCalidad = "3"
                 ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "camara") > 0 Then
-                    sCalidad = "CC"
+                    sCalidad = "2"
                 Else
-                    sCalidad = "FE"
+                    sCalidad = "2"
                 End If
                 cdp.CalidadDesc = sCalidad
 
