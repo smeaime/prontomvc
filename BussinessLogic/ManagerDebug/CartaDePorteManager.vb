@@ -2630,7 +2630,7 @@ Public Class CartaDePorteManager
                               iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
                               iisValidSqlDate(fechadesde, #1/1/1753#), _
                              iisValidSqlDate(fechahasta, #1/1/2100#), _
-                              puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos, True)
+                              puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
 
                 Dim dt = EntidadManager.ExecDinamico(SC, count)
                 lineasGeneradas = dt.Rows(0).Item(0)
