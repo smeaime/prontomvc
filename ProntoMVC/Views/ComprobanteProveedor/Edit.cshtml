@@ -135,8 +135,8 @@
                                         </div>*@
                                             <div class="span2 lightblue">
                                                 <select class="span12" id="MetaTipo">
-                                                    <option>Cta Cte </option>
-                                                    <option selected="true">Fondo fijo </option>
+                                                    <option selected="true">Cta Cte </option>
+                                                    @*<option>Fondo fijo </option>*@
                                                     <option>Otros </option>
                                                 </select>
                                             </div>
@@ -364,11 +364,11 @@
                                     </div>
                                     <div class="row-fluid">
                                         <div class="span2 lightblue">
-                                            @Html.LabelFor(model => model.IdProveedorEventual, "Proveedor de FF") @*para que quede el espacio*@
+                                            @*@Html.LabelFor(model => model.IdProveedorEventual, "Proveedor de FF")*@ @*para que quede el espacio*@
                                         </div>
                                         <div class="span6 lightblue">
                                             <div class="input-prepend input-append span12" style="margin: 0;">
-                                                @Html.TextBoxFor(m => m.Proveedore.RazonSocial, new { id = "DescripcionProveedor", @class = "span12" })
+                                                @*@Html.TextBoxFor(m => m.Proveedore.RazonSocial, new { id = "DescripcionProveedor", @class = "span12" })*@
                                             </div>
                                         </div>
                                         <div class="span2 lightblue">
@@ -449,19 +449,21 @@
                                     </div>
 
 
+@if (false) {
+
                                     <div class="row-fluid">
                                         <div class="span2 lightblue">
-                                            @Html.LabelFor(model => model.IdCuenta, "Fondo Fijo") @*para que quede el espacio*@
+                                            @*@Html.LabelFor(model => model.IdCuenta, "Fondo Fijo")*@ @*para que quede el espacio*@
                                         </div>
                                         <div class="span4 lightblue">
-                                            @Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })
+                                            @*@Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })*@
                                         </div>
                                         <div class="span2 lightblue">
-                                            @Html.LabelFor(model => model.IdCuenta, "Cuenta") @*para que quede el espacio*@
+                                            @*@Html.LabelFor(model => model.IdCuenta, "Cuenta")*@ @*para que quede el espacio*@
                                         </div>
                                         <div class="span4 lightblue">
                                             <div class="input-prepend input-append span12" style="margin: 0; border: 0">
-                                                @Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })
+                                                @*@Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })*@
 
                                             </div>
                                             <script type="text/jscript">
@@ -490,7 +492,7 @@
 
 
 
-
+                                        }
 
 
 
@@ -504,7 +506,7 @@
                                             @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                         </div>
                                         <div class="span1 lightblue">
-                                            @Html.Label("Autoriz.")
+                                            @Html.Label("lblAutoriz", "Autoriz.")
                                         </div>
                                         <div class="span1 lightblue">
 

@@ -1987,7 +1987,7 @@
                         </Actions>
                       </ActionInfo>
                       <Visibility>
-                        <Hidden>=Not ((Fields!PathImagen.Value Is Nothing AndAlso Fields!PathImagen.Value &lt;&gt; ""))</Hidden>
+                        <Hidden>=Not (Fields!PathImagen.Value IsNot Nothing  AndAlso Fields!PathImagen.Value&lt;&gt;"" )</Hidden>
                       </Visibility>
                       <Style>
                         <Border>
@@ -5630,7 +5630,7 @@
         <Top>15.00746mm</Top>
         <Left>3.12769mm</Left>
         <Height>17.47089mm</Height>
-        <Width>1246.29211mm</Width>
+        <Width>1246.29212mm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5758,7 +5758,7 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>1249.4198mm</Width>
+  <Width>1299.41981mm</Width>
   <Page>
     <PageFooter>
       <Height>10.90083mm</Height>

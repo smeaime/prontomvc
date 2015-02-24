@@ -1,4 +1,9 @@
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1f23b664b51a33953d8dd6c5c50814e8efb9ee06
 ALTER Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
@@ -328,12 +333,16 @@ INSERT INTO #Auxiliar0 Select '01-11-11','ConceptosOP','Conceptos p/OP otros','0
 
 INSERT INTO #Auxiliar0 Select '01-11-12','Presupuestos','Solicitudes de cotizacion','01-11',12,Null,Null,'Presupuestos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-12-01','PresupuestosAgrupados','Por Períodos','01-11-12',1,Null,Null,'Presupuestos','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-12-02','PresupuestosTodos','Todos','01-11-12',2,Null,Null,'Presupuestos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-11-12-02','PresupuestosTodos','Todos','01-11-12',2,Null,'<a href="/' + @Directorio + '/Presupuesto/Index">Todos</a>','Presupuestos','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-11-12-03','PresupuestosNuevo','Nuevo','01-11-12',3,Null,'<a href="/' + @Directorio + '/Presupuesto/Edit/-1">Nuevo</a>','Presupuestos','NO','Principal'    
+
   
 --INSERT INTO #Auxiliar0 Select '01-11-13','Comparativas','Comparativas','01-11',13,Null,'<a href="/' + @directorio + '/Comparativa/Index">Comparativas (Todos)</a>','Comparativas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-13','Comparativas','Comparativas','01-11',13,Null,Null,'Comparativas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-13-01','ComparativasAgrupadas','Por Períodos','01-11-13',1,Null,Null,'Comparativas','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-11-13-02','ComparativasTodas','Todas','01-11-13',2,Null,Null,'<a href="/' + @Directorio + '/Comparativa/Index">Todos</a>','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-11-13-02','ComparativasTodas','Todos','01-11-13',2,Null,'<a href="/' + @Directorio + '/Comparativa/Index">Todos</a>','Comparativas','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-11-13-03','ComparativasNuevo','Nuevo','01-11-13',3,Null,'<a href="/' + @Directorio + '/Comparativa/Edit/-1">Nuevo</a>','Comparativas','NO','Principal'    
+
   
 INSERT INTO #Auxiliar0 Select '01-11-14','Pedidos','Notas de pedido','01-11',14,Null,Null,'Pedidos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-14-01','PedidosAgrupados','Por Períodos','01-11-14',1,Null,Null,'Pedidos','SI','Principal'  

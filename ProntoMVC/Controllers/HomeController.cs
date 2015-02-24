@@ -769,7 +769,7 @@ namespace ProntoMVC.Controllers
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
             var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
-            DataTable lista2 = EntidadManager.GetStoreProcedure(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc), "wbusqueda", term);
+            DataTable lista2 = EntidadManager.GetStoreProcedure(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sc), "wBusquedaMVC", term);
 
             foreach (DataRow dr in lista2.Rows)
             {

@@ -26,6 +26,7 @@ CREATE  PROCEDURE [dbo].wCartasDePorte_TX_InformesCorregido
 @Estado INT = NULL
 
 
+with recompile 
 AS 
 
     SET @IdCartaDePorte = ISNULL(@IdCartaDePorte, -1)
