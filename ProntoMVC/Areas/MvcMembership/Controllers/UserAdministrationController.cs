@@ -556,7 +556,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
         }
 
-    
+
 
 
 
@@ -1423,7 +1423,53 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        [HttpPost]
+        public virtual JsonResult EditarConexion(string conexSql, string nombreBase)
+        {
+
+            string sc = Generales.FormatearConexParaEntityFrameworkBDLMASTER();
+            ProntoMVC.Data.Models.BDLMasterEntities dbMaster = new ProntoMVC.Data.Models.BDLMasterEntities(sc);
+
+
+            Bases b = (from i in dbMaster.Bases
+                     where (i.Descripcion == nombreBase)
+                     select i).FirstOrDefault();
+     
+
+            if (b==null)
+            {
+                b = new Bases();
+
+                b.Descripcion = nombreBase;
+                b.StringConection = conexSql;
+
+                dbMaster.Bases.Add(b);
+            }
+            else
+            {
+                b.StringConection = conexSql;
+                dbMaster.Bases.Attach(b);
+
+                //todo
+                dbMaster.Entry(b).State = System.Data.Entity.EntityState.Modified;
+            }
+
+
+            dbMaster.SaveChanges();
+
+
+            return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+
+        }
+
+
+
+
+        /////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1445,13 +1491,13 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                                                 {  "Williams" ,true},
                                                 {  "Autotrol",false },
                                             };
-
+            
             string usuario = ViewBag.NombreUsuario;
             Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey;
 
 
             emp = BasesPorUsuarioColeccion2(id, guiduser);
-
+            
 
 
             var user = _userService.Get(id);

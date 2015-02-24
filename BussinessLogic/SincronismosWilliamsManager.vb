@@ -2683,7 +2683,8 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
-        Public Shared Function Sincronismo_YPF_ConLINQ(q As Generic.List(Of CartasConCalada), ByRef sErrores As String, ByVal titulo As String, SC As String) As String
+        Public Shared Function Sincronismo_YPF_ConLINQ(q As Generic.List(Of CartasConCalada), _
+                                    ByRef sErrores As String, ByVal titulo As String, SC As String) As String
 
 
             'Los de LosGrobo y TomasHnos, creo que usan el esquema de AlgoritmoSoftHouse. Algún otro lo hace?
@@ -2724,7 +2725,7 @@ Namespace Pronto.ERP.Bll
             FileOpen(nF, vFileName, OpenMode.Output)
             Dim sb As String = ""
             Dim dc As DataColumn
- 
+
             'PrintLine(nF, sb) 'encabezado
             Dim i As Integer = 0
             Dim dr As DataRow
@@ -2751,18 +2752,97 @@ Namespace Pronto.ERP.Bll
 
 
                 'el titulardesc lo uso en la columna de "cuit de proveedor", y la segunda columna es el "cuit titular
+
                 cdp.TitularDesc = cdp.TitularCUIT
-                If cdp.RComercialCUIT <> cuitYPF Then cdp.TitularDesc = cdp.RComercialCUIT
-                If cdp.IntermediarioCUIT <> cuitYPF Then cdp.TitularDesc = cdp.IntermediarioCUIT
+                If cdp.RComercialCUIT <> cuitYPF And cdp.RComercialCUIT <> "" Then cdp.TitularDesc = cdp.RComercialCUIT
+                If cdp.IntermediarioCUIT <> cuitYPF And cdp.IntermediarioCUIT <> "" Then cdp.TitularDesc = cdp.IntermediarioCUIT
                 If cdp.Producto = "SOJA" Then cdp.TitularDesc = cuitYPF
+
+
+
+                Dim sCalidad As String = cdp.CalidadDesc
+                If InStr(cdp.CalidadDesc.ToString.ToLower, "grado 1") > 0 Then
+                    sCalidad = "1"
+                ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "grado 2") > 0 Then
+                    sCalidad = "2"
+                ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "grado 3") > 0 Then
+                    sCalidad = "3"
+                ElseIf InStr(cdp.CalidadDesc.ToString.ToLower, "camara") > 0 Then
+                    sCalidad = "2"
+                Else
+                    sCalidad = "2"
+                End If
+                cdp.CalidadDesc = sCalidad
+
 
 
 
                 cdp.Patente = cdp.Patente.Replace(" ", "")
                 cdp.Acoplado = cdp.Acoplado.Replace(" ", "")
 
+
+
+                If cdp.Establecimiento = "" Then
+                   
+                    ' sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Establecimiento</a>; <br/> "
+                End If
+
+                If cdp.ProcedenciaLocalidadONCCA_SAGPYA = "" Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+
+                    'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
+
+                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Código</a>; <br/>"
+                End If
+
+
+                If cdp.ProcedenciaPartidoONCCA = "" Then
+                    'si no tiene codigo ni está ya en sErrores, lo meto
+
+                    'ErrHandler.WriteError("El establecimiento " & cdp.Establecimiento)
+
+                    'sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Código de Localidad</a>; <br/> "
+
+                    'ErrHandler.WriteError("La localidad " & dr("Procedcia.").ToString & " es usada en el sincro de LosGrobo y no tiene codigo LosGrobo")
+
+                    sErrores &= "<a href=""Localidades.aspx?Id=" & cdp.IdProcedencia & """ target=""_blank"">Localidad " & cdp.ProcedenciaDesc & " sin Partido con código asignado</a>; <br/>"
+                End If
+
+
+
+
+                '                Hoja CCPP
+                'Columna B: Se debe colocar CUIT PROVEEDOR
+                'Columna F: Si hay Corredor se debe colocar el CUIT caso contrario debe ir vacía
+                'Columna I: Debe ir en formato TEXTO y comienzan con 08
+                'Columna P: Debe ir vacía si no tienen el código de establecimiento
+                'Columna Q: Colocar código de Procedencia
+                'Columna U: Formato texto y el año tiene que tener 4 cifras
+                'Columna V : Formato General
+                'Columna X : Formato General
+                'Columna Y : Formato General
+
+                'Hoja Calidad
+                'Columna C: Formato texto y el año tiene que tener 4 cifras
+                'Columna D : Formato General
+                'Columna Grado: Colocar grado (1, 2 ó 3). En caso de no tener grado colocar 2
+                'Columna Humedad: Debe ir con Punto (no coma)
             Next
 
+
+
+
+            ' sErrores = "Procedencias sin código LosGrobo:<br/> " & sErroresProcedencia & "<br/>Destinos sin código LosGrobo: <br/>" & sErroresDestinos
+            'sErrores &= sErroresOtros
+
+            If sErrores <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+
+            'Return vFileName
+            'Return TextToExcel(vFileName, titulo)
 
 
         End Function

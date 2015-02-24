@@ -485,7 +485,7 @@ public static class Generales
 
         DemoProntoEntities db = new DemoProntoEntities(sc);
 
-        int? nivel = db.EmpleadosAccesos.Where(e => e.IdEmpleado == idUsuario && e.Nodo == "MnuSeg3").Select(e => e.Nivel).FirstOrDefault();
+        int? nivel = db.EmpleadosAccesos.Where(e => e.IdEmpleado == idUsuario && e.Nodo == "MnuSeg2").Select(e => e.Nivel).FirstOrDefault();
 
 
         if ((nivel ?? 9) <= 5 || Roles.IsUserInRole("Firmas")) //  || Roles.IsUserInRole("Requerimiento"))

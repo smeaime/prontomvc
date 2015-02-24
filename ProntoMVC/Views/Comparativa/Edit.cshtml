@@ -400,17 +400,19 @@
                         <div id="divGrilla" class="span12 lightblue" style="padding-left: 0px; padding-right: 2px;
                     min-height: 150px">
                             <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                   style="font-size: 12px;"></table>
+                                   style="font-size: 14px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
                         </div>
+
+
                     </div>
                     <input type="button" class="btn btn-small" id="addData" value="+ Agregar" style="display: none" />
                     <input type="button" class="btn btn-small" id="edtData" value="Modificar" style="display: none" />
                     <input type="button" class="btn btn-small" id="delData" value="Borrar" style="display: none" />
                     <input type="button" class="btn btn-small" id="btnMenorPrecio" value="Resaltar menor precio" />
                     <input type="button" class="btn btn-small" id="btnDesmarcarTodo" value="Desmarcar todo" />
-                    <input type="button" class="btn btn-small" id="btnOrdenarArt" value="Ordenar por artículo" />
+                    @*<input type="button" class="btn btn-small" id="btnOrdenarArt" value="Ordenar por artículo" />*@
                     <div class="btn-group" data-toggle="buttons-radio">
-                        <input type="button" class="btn btn-small" id="btnMultiPresupuesto" value="Multipresupuesto" />
+                        <input type="button" class="btn btn-small active" id="btnMultiPresupuesto" value="Multipresupuesto" />
                         <input type="button" class="btn btn-small" id="btnMonoPresupuesto" value="Elegir un solo presupuesto" />
                     </div>
                     @*  <input type="button " class="btn btn-small pull-right span1" id="" value="<" onclick="conmutarPanelesDerecho();   pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />*@
@@ -490,7 +492,11 @@
 
 
                                     $.each(rows, function (index, item) {
-                                        ret.push($(item).text().replace(",", "."));
+                                        var n= parseFloat($(item).text().replace(",", "."))
+
+                                        if (!isNaN(n)) {
+                                            ret.push(n);
+                                        }
                                     });
                                     var m = Math.min.apply(0, ret)
 
