@@ -153,7 +153,6 @@
     $("#ListaContactos").jqGrid('setGridWidth', 500);
     
 
-
     $('#ListaRubros').jqGrid({
         url: ROOT + 'Proveedor/DetProveedoresRubros/',
         postData: { 'IdProveedor': function () { return $("#IdProveedor").val(); } },
@@ -244,6 +243,7 @@
                                      },
                                  });
     jQuery("#ListaRubros").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
+
 
     $('#ListaIIBB').jqGrid({
         url: ROOT + 'Proveedor/DetProveedoresIIBB/',
@@ -359,7 +359,10 @@
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
     function SerializaForm() {
+        saveEditedCell("");
+
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
+
         var cabecera = $("#formid").serializeObject();
         //cabecera.IdProveedor = $("#IdProveedor").val();
 

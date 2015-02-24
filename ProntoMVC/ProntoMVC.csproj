@@ -256,6 +256,7 @@
     <Compile Include="Controllers\GruposObraControlles.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\CuentaGastoController.cs" />
+    <Compile Include="Controllers\TiposComprobanteController.cs" />
     <Compile Include="Controllers\TiposPolizaController.cs" />
     <Compile Include="Controllers\TiposCuentaGruposController.cs" />
     <Compile Include="Controllers\UnidadesOperativaController.cs" />
@@ -895,6 +896,7 @@
     <Content Include="Views\Remito\Edit.cshtml" />
     <Content Include="Views\Remito\Index.cshtml" />
     <Content Include="Views\Recibo\EditOT.cshtml" />
+    <Content Include="Views\TiposComprobante\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />

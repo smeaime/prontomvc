@@ -38,6 +38,11 @@
                 }
             </div>
         </div>
+        <div class="span1">
+            <div>
+                <input id="IdRubro" name="IdRubro" type="hidden" value=@Request.QueryString["IdRubro"]>
+            </div>
+        </div>
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center;">
         </div>
@@ -53,174 +58,81 @@
             datatype: 'json',
             mtype: 'POST',
             postData: {
-                'FechaInicial': function () { return $("#FechaInicial").val(); },
-                'FechaFinal': function () { return $("#FechaFinal").val(); },
-                'IdObra': function () { return $("#IdObra").val(); }
+                'IdRubro': function () { return $("#IdRubro").val(); },
+                //'FechaFinal': function () { return $("#FechaFinal").val(); },
+                //'IdObra': function () { return $("#IdObra").val(); }
             },
             //            cellEdit: true,
             //            cellurl: '@Url.Action("UpdateArticuloProperty")',
-            colNames: ['', '', 'Codigo', 'Descripcion'
-
-
-            , 'Rubro'
-                        , 'Subrubro'
-            , 'Nro.inv.'
-            , '% IVA'
-
-            , 'CostoPPP'
-            , 'Costo u$s'
-            , 'CostoRep'
-            , 'CostoRepu$s'
-            , 'Stock Min.'
-            , 'Stock Rep.'
-            , 'Stock actual'
-            , 'En'
-            , 'Ubicacion'
-            , 'Fecha alta'
-            , 'Usuario alta'
-            , 'Fecha ult.modif.'
-            , 'p/mant.'
-              , 'NMC'
-
-
+            colNames: ['', '', 'IdArticulo', 'Codigo', 'Nro. inventario', 'Descripcion', 'Rubro', 'Subrubro', '% IVA', 'Costo PPP', 'Costo PPP u$s', 'Costo Rep', 'Costo rep u$s', 'Stock minimo',
+                       'Stock reposicion', 'Stock actual', 'En', 'Ubicacion', 'Marca', 'Modelo', 'Para mant.?', 'Cuenta para compra', 'Fecha alta', 'Usuario alta', 'Fecha ult. modif.'
             ],
             colModel: [
-            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-            { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
-            {
-                name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-
-                , search: true, searchoptions: { sopt: ['cn'] }
-            },
-
-
-
-            { name: 'Rubro', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 50, align: 'left', search: true, stype: 'text' },
-
-            { name: 'CostoPPP', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-                        { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-                                    { name: '', index: '', width: 80, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: 'Ubicacion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' },
-            { name: '', index: '', width: 0, align: 'left', search: true, stype: 'text' }
-
+                        { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+                        { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+                        { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', search: true, stype: 'text' },
+                        { name: 'NumeroInventario', index: 'NumeroInventario', width: 130, align: 'left', search: true, stype: 'text' },
+                        { name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Rubro', index: 'Rubro', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'Subrubro', index: 'Subrubro', width: 150, align: 'left', search: true, stype: 'text' },
+                        { name: 'AlicuotaIVA', index: 'AlicuotaIVA', width: 50, align: 'center', search: true, stype: 'text' },
+                        { name: 'CostoPPP', index: 'CostoPPP', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'CostoPPPDolar', index: 'CostoPPPDolar', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'CostoReposicion', index: 'CostoReposicion', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'CostoReposicionDolar', index: 'CostoReposicionDolar', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'StockMinimo', index: 'StockMinimo', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'StockReposicion', index: 'StockReposicion', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'StockActual', index: 'StockActual', width: 80, align: 'right', search: true, stype: 'text' },
+                        { name: 'Unidad', index: 'Unidad', width: 50, align: 'center', search: true, stype: 'text' },
+                        { name: 'Ubicacion', index: 'Ubicacion', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'Marca', index: 'Marca', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'Modelo', index: 'Modelo', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'ParaMantenimiento', index: 'ParaMantenimiento', width: 50, align: 'center', search: true, stype: 'text' },
+                        { name: 'CuentaCompra', index: 'CuentaCompra', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'FechaAlta', index: 'FechaAlta', width: 120, align: 'center', search: true, stype: 'text' },
+                        { name: 'UsuarioAlta', index: 'UsuarioAlta', width: 200, align: 'left', search: true, stype: 'text' },
+                        { name: 'FechaUltimaModificacion', index: 'FechaUltimaModificacion', width: 120, align: 'center', search: true, stype: 'text' }
             ],
-
-
-
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'Articulo/Edit/' + idrow;
-
-
-                // $("#edtData").click();
-
-                //edicion inline
-                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){
-                //                    jQuery('#Lista').restoreRow(lastSel);
-                //                    lastSel=id;
-                //                }
-                //                jQuery('#Lista').editRow(id, true);
-                //
-
             },
             pager: $('#ListaPager'),
-            rowNum: 50,
+            rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'IdArticulo',
-            sortorder: "desc",
+            sortname: 'Descripcion',
+            sortorder: "asc",
             viewrecords: true,
-            toppager: true,
-
+            //toppager: true,
             emptyrecords: 'No hay registros para mostrar',
-
-
-
-            ///////////////////////////////
             width: 'auto', // 'auto',
+            height: 'auto',
             autowidth: true,
             shrinkToFit: false,
-            //////////////////////////////
-
-            height: $(window).height() - 300, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
-
-
-              , multiboxonly: true
+            userDataOnFooter: true,
+            caption: '<b>ARTICULOS</b>',
+            multiboxonly: true
         })
-        //        .navGrid("#ListaPager",
-        //            { refresh: true, add: false, edit: false, del: false },
-        //                {}, // settings for edit
-        //                {}, // settings for add
-        //                {}, // settings for delete
-        //                {closeAfterSearch: true, closeOnEscape: true },
-        //                { sopt: ["cn"]} // Search options. Some options can be set on column level
-        //         );
-
-
-
-
-
 
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
              { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
             );
 
-        //        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
-        //$("#Lista").setFrozenColumns();
-
         jQuery("#Lista").jqGrid('bindKeys');
 
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-
-
-
-
         $("#BuscadorListado").keyup(function () {
-
-
             filtrar()
-
         });
-
 
         $("#BuscadorListado").change(function () {
-
             filtrar()
-
-
         });
-
-
 
         $("#BuscarProximoNoFiltra").change(function () {
-
             buscar()
-
-
         });
-
-
 
         function filtrar() {
             var grid = jQuery("#Lista");
@@ -244,7 +156,6 @@
 
         }
 
-
         function RefrescaAnchoGrillaDetalle() {
             // $("#Lista").setGridWidth($(window).width());
             // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
@@ -255,29 +166,9 @@
             //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
         }
 
-
-
-
-
-
-
-
         pageLayout.hide('east');
         pageLayout.hide('south');
-
-
-
-
     });
-
-
-
-
-
-
-
-
-
 
     function exportExcel($id) {
         var keys = [], ii = 0, rows = "";
@@ -315,4 +206,3 @@
     }
 
 </script>
-@*</div>*@

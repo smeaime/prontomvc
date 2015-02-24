@@ -1,9 +1,8 @@
 
-
 ALTER Procedure [dbo].[Tree_TX_Generar]  
   
 AS   
-  
+
 DECLARE @Directorio as varchar(50), @BasePRONTOMANT varchar(50), @TipoComprobante int, @IdObra int, @Año int, @Mes int, @Obra varchar(30), @NombreMes varchar(15),   
 		@Parent varchar(30), @Clave varchar(30), @FechaInicial varchar(10), @FechaFinal varchar(10), @Fecha datetime    
     
@@ -35,6 +34,13 @@ CREATE TABLE #Auxiliar1
    )    
 CREATE NONCLUSTERED INDEX IX__Auxiliar1 ON #Auxiliar1 (TipoComprobante, Obra, IdObra, Año, Mes) ON [PRIMARY]    
     
+CREATE TABLE #Auxiliar2     
+   (    
+    IdRubro INTEGER,    
+    Rubro VARCHAR(50)    
+   )    
+CREATE NONCLUSTERED INDEX IX__Auxiliar2 ON #Auxiliar2 (IdRubro) ON [PRIMARY]    
+    
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT 103, Null, Null, Year(FechaRequerimiento), Month(FechaRequerimiento)   
  FROM Requerimientos   
@@ -58,6 +64,18 @@ INSERT INTO #Auxiliar1
  SELECT DISTINCT 1, Null, Null, Year(FechaFactura), Month(FechaFactura) FROM Facturas ORDER BY Year(FechaFactura), Month(FechaFactura) desc    
     
 INSERT INTO #Auxiliar1     
+ SELECT DISTINCT 2, Null, Null, Year(FechaRecibo), Month(FechaRecibo) FROM Recibos ORDER BY Year(FechaRecibo), Month(FechaRecibo) desc    
+    
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT 3, Null, Null, Year(FechaNotaDebito), Month(FechaNotaDebito) FROM NotasDebito ORDER BY Year(FechaNotaDebito), Month(FechaNotaDebito) desc    
+    
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT 4, Null, Null, Year(FechaNotaCredito), Month(FechaNotaCredito) FROM NotasCredito ORDER BY Year(FechaNotaCredito), Month(FechaNotaCredito) desc    
+    
+INSERT INTO #Auxiliar1     
+ SELECT DISTINCT 17, Null, Null, Year(FechaOrdenPago), Month(FechaOrdenPago) FROM OrdenesPago ORDER BY Year(FechaOrdenPago), Month(FechaOrdenPago) desc    
+    
+INSERT INTO #Auxiliar1     
  SELECT DISTINCT 51, Null, Null, Year(FechaPedido), Month(FechaPedido) FROM Pedidos  ORDER BY Year(FechaPedido), Month(FechaPedido) desc    
     
 INSERT INTO #Auxiliar1     
@@ -76,7 +94,6 @@ INSERT INTO #Auxiliar1
  FROM ComprobantesProveedores   
  LEFT OUTER JOIN  cuentas on cuentas.idcuenta=ComprobantesProveedores.idcuenta  
  WHERE IdProveedor is null and ComprobantesProveedores.IdCuenta is not null   
-  
    
 INSERT INTO #Auxiliar1     
  SELECT DISTINCT 91002, isnull(ComprobantesProveedores.NumeroRendicionFF,0), Left(cuentas.descripcion,30), ComprobantesProveedores.IdCuenta, null  
@@ -84,7 +101,15 @@ INSERT INTO #Auxiliar1
  LEFT OUTER JOIN  cuentas on cuentas.idcuenta=ComprobantesProveedores.idcuenta  
  WHERE IdProveedor is null and ComprobantesProveedores.IdCuenta is not null   
   
---TRUNCATE TABLE tree    
+
+INSERT INTO #Auxiliar2
+ SELECT DISTINCT IsNull(Articulos.IdRubro,0), Rubros.Descripcion
+ FROM Articulos
+ LEFT OUTER JOIN Rubros ON Rubros.IdRubro=Articulos.IdRubro  
+ ORDER BY Rubros.Descripcion
+
+
+--TRUNCATE TABLE tree
 --INSERT INTO #Auxiliar0 Select '01','Ppal','PRINCIPAL',Null,1,Null,Null,'Ppal','SI','Principal'    
   
 INSERT INTO #Auxiliar0 Select '01-01','Tablas Generales','Generales','01',1,Null,Null,'TablasG','SI','Principal'  
@@ -93,22 +118,20 @@ INSERT INTO #Auxiliar0 Select '01-01-02','Localidades','Localidades','01-01',2,N
 INSERT INTO #Auxiliar0 Select '01-01-03','Monedas','Monedas','01-01',3,Null,'<a href="/' + @Directorio + '/Moneda/Index">Monedas</a>','Monedas','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-04','Paises','Paises','01-01',4,Null,'<a href="/' + @Directorio + '/Pais/Index">Paises</a>','Paises','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-05','Provincias','Provincias','01-01',5,Null,'<a href="/' + @Directorio + '/Provincia/Index">Provincias</a>','Provincias','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-01-06','TiposComprobante','Tipos de comprobante','01-01',6,Null,Null,'TiposComprobante','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-01-06','TiposComprobante','Tipos de comprobante','01-01',6,Null,'<a href="/' + @Directorio + '/TiposComprobante/Index">Tipos de comprobante</a>','TiposComprobante','NO','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-01-07','Traducciones','Traducciones','01-01',7,Null,Null,'Traducciones','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-01-08','Transportistas','Transportistas','01-01',8,Null,'<a href="/' + @Directorio + '/Transportista/Index">Transportistas</a>','Transportistas','NO','Principal'  
   
---INSERT INTO #Auxiliar0 Select '01-02','Articulos','Artículos','01',1,Null,'<a href="/' + @directorio + '/Articulo/Index">Artículos</a>','Articulos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02','Articulos','Artículos','01',1,Null,Null,'Articulos','SI','Principal'  
-  
 INSERT INTO #Auxiliar0 Select '01-02-01','ArticulosTodos','Todos','01-02',1,Null,Null,'Articulos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-01-02','ArticulosTodosDetallados','Detallados','01-02-01',2,Null,'<a href="/' + @directorio + '/Articulo/Index">Detallados</a>','Detallados','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-01-03','ArticulosTodosResumidos','Resumidos','01-02-01',3,Null,'<a href="/' + @directorio + '/Articulo/IndexResumido">Resumidos</a>','Resumidos','NO','Principal'  
-  
-INSERT INTO #Auxiliar0 Select '01-02-04','ArticulosRubros','Por rubros','01-02',4,Null,Null,'Articulos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-04','ArticulosRubros','Por rubros','01-02',4,Null,Null,'Articulos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-05','ArticulosEquiposTerceros','Equipos de terceros','01-02',5,Null,Null,'Articulos','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-06','ArticulosInactivos','Inactivos','01-02',6,Null,Null,'Articulos','NO','Principal'  
 If Len(@BasePRONTOMANT)>0   
- INSERT INTO #Auxiliar0 Select '01-02-07','ArticulosProntoMantenimiento','Mantenimiento','01-02',7,Null,Null,'Articulos','NO','Principal'  
+	INSERT INTO #Auxiliar0 Select '01-02-07','ArticulosProntoMantenimiento','Mantenimiento','01-02',7,Null,Null,'Articulos','NO','Principal'  
+
 INSERT INTO #Auxiliar0 Select '01-02-08','DefinicionesArt','Máscaras','01-02',8,Null,Null,'DefinicionesArt','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-08-01','DefinicionesArtTodos','Todas','01-02-08',1,Null,Null,'DefinicionesArt','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-08-02','DefinicionesArtRubros','Por rubros','01-02-08',2,Null,Null,'DefinicionesArt','NO','Principal'  
@@ -256,7 +279,6 @@ INSERT INTO #Auxiliar0 Select '01-10-10-02','RemitosTodos','Todos','01-10-10',2,
   
 INSERT INTO #Auxiliar0 Select '01-10-11','Facturas','Facturas','01-10',11,Null,Null,'Facturas','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-11-01','FacturasAgrupadas','Por Períodos','01-10-11',1,Null,Null,'Facturas','SI','Principal'  
---INSERT INTO #Auxiliar0 Select '01-10-11-01-00','FacturasAgrupadas','factura dummy','01-10-11-01',1,Null,Null,'factura dummy','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-11-02','FacturasTodas','Todas','01-10-11',2,Null,'<a href="/' + @directorio + '/Factura/Index">Todas</a>','Facturas','NO','Principal'  
   
 INSERT INTO #Auxiliar0 Select '01-10-12','FacturasContado','Facturas contado','01-10',12,Null,Null,'Facturas','SI','Principal'  
@@ -267,26 +289,26 @@ INSERT INTO #Auxiliar0 Select '01-10-13','Devoluciones','Devoluciones','01-10',1
 INSERT INTO #Auxiliar0 Select '01-10-13-01','DevolucionesAgrupadas','Devoluciones (por períodos)','01-10-13',1,Null,Null,'Devoluciones','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-13-02','DevolucionesTodas','Devoluciones (Todas)','01-10-13',2,Null,Null,'Devoluciones','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-14','Recibos','Recibos','01-10',14,Null,Null,'Recibos','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-14-01','RecibosAgrupados','Recibos (por períodos)','01-10-14',1,Null,Null,'Recibos','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-10-14-01','RecibosAgrupados','Por Períodos','01-10-14',1,Null,Null,'Recibos','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-14-02','RecibosTodos','Recibos (Todos)','01-10-14',2,Null,'<a href="/' + @directorio + '/Recibo/Index">Todos</a>','Recibos','NO','Principal'  
 
 INSERT INTO #Auxiliar0 Select '01-10-15','NotasDebito','Notas de Debito','01-10',15,Null,Null,'NotasDebito','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-15-01','NotasDebitoAgrupadas','Por Períodos','01-10-15',1,Null,Null,'NotasDebito','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-10-15-01','NotasDebitoAgrupadas','Por Períodos','01-10-15',1,Null,Null,'NotasDebito','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-15-02','NotasDebitoTodas','Todas','01-10-15',2,Null,'<a href="/' + @directorio + '/NotaDebito/Index">Todas</a>','NotasDebito','NO','Principal'  
 
 INSERT INTO #Auxiliar0 Select '01-10-16','NotasCredito','Notas de Credito','01-10',16,Null,Null,'NotasCredito','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-16-01','NotasCreditoAgrupadas','Notas de Credito (por períodos)','01-10-16',1,Null,Null,'NotasCredito','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-10-16-01','NotasCreditoAgrupadas','Por Períodos','01-10-16',1,Null,Null,'NotasCredito','SI','Principal'  
 INSERT INTO #Auxiliar0 Select '01-10-16-02','NotasCreditoTodas','Todas','01-10-16',2,Null,'<a href="/' + @directorio + '/NotaCredito/Index">Todas</a>','NotasCredito','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-17','DiferenciasCambio_C','Difer. de cambio (cobranzas)','01-10',17,Null,Null,'DiferenciasCambio_C','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-17-01','DiferenciasCambio_CP','Pendientes','01-10-17',1,Null,Null,'DiferenciasCambio_C','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-17-02','DiferenciasCambio_CG','Generadas - Anuladas','01-10-17',2,Null,Null,'DiferenciasCambio_C','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-18','VentasCuotas','Ventas en cuotas fijas','01-10',18,Null,Null,'VentasCuotas','SI','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-18-01','VentasCuotasOperacion','Ingreso de operacion de venta','01-10-18',1,Null,Null,'VentasCuotasOperacion','NO','Principal'  
-INSERT INTO #Auxiliar0 Select '01-10-18-02','VentasCuotasGeneracion','Generacion de comprobantes','01-10-18',2,Null,Null,'VentasCuotasOperacion','NO','Principal'    
-INSERT INTO #Auxiliar0 Select '01-10-18-03','VentasCuotasCobranzas','Registro de cobranzas','01-10-18',3,Null,Null,'VentasCuotasCobranzas','NO','Principal'    
+
+--INSERT INTO #Auxiliar0 Select '01-10-17','DiferenciasCambio_C','Difer. de cambio (cobranzas)','01-10',17,Null,Null,'DiferenciasCambio_C','SI','Principal'  
+--INSERT INTO #Auxiliar0 Select '01-10-17-01','DiferenciasCambio_CP','Pendientes','01-10-17',1,Null,Null,'DiferenciasCambio_C','NO','Principal'  
+--INSERT INTO #Auxiliar0 Select '01-10-17-02','DiferenciasCambio_CG','Generadas - Anuladas','01-10-17',2,Null,Null,'DiferenciasCambio_C','NO','Principal'  
+--INSERT INTO #Auxiliar0 Select '01-10-18','VentasCuotas','Ventas en cuotas fijas','01-10',18,Null,Null,'VentasCuotas','SI','Principal'  
+--INSERT INTO #Auxiliar0 Select '01-10-18-01','VentasCuotasOperacion','Ingreso de operacion de venta','01-10-18',1,Null,Null,'VentasCuotasOperacion','NO','Principal'  
+--INSERT INTO #Auxiliar0 Select '01-10-18-02','VentasCuotasGeneracion','Generacion de comprobantes','01-10-18',2,Null,Null,'VentasCuotasOperacion','NO','Principal'    
+--INSERT INTO #Auxiliar0 Select '01-10-18-03','VentasCuotasCobranzas','Registro de cobranzas','01-10-18',3,Null,Null,'VentasCuotasCobranzas','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-10-19','CtasCtesD','Resumen Cta. Cte.','01-10',19,Null,'<a href="/' + @Directorio + '/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Deudores">Cta Cte Deudores</a>','CtasCtesD','NO','Principal'    
-    
-    
+
 INSERT INTO #Auxiliar0 Select '01-11','Compras','Compras','01',1,Null,Null,'Compras','SI','Principal'    
 INSERT INTO #Auxiliar0 Select '01-11-01','Proveedores','Proveedores','01-11',1,Null,Null,'Proveedores','SI','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-11-01-01','ProveedoresResumen','Resumido','01-11-01',1,Null,Null,'Proveedores','NO','Principal'  
@@ -349,12 +371,12 @@ INSERT INTO #Auxiliar0 Select '01-11-17-03','ComprobantesPrvTodos','Todos','01-1
 --INSERT INTO #Auxiliar0 Select '01-11-17-08','ComprobantesPrvTodos','Todos','01-11-17',8,Null,'<a href="/' + @Directorio + '/ComprobanteProveedor/IndexFF">Todos</a>','ComprobantesPrv','NO','Principal'    
   
 INSERT INTO #Auxiliar0 Select '01-11-18','OPago','Ordenes de Pago','01-11',18,Null,Null,'OPago','SI','Principal'    
-INSERT INTO #Auxiliar0 Select '01-11-18-01','OPagoPorMes','Por Períodos','01-11-18',1,Null,Null,'OPago','NO','Principal'    
+INSERT INTO #Auxiliar0 Select '01-11-18-01','OPagoPorMes','Por Períodos','01-11-18',1,Null,Null,'OPago','SI','Principal'    
 INSERT INTO #Auxiliar0 Select '01-11-18-02','OPagoALaFirma','A la firma','01-11-18',2,Null, '<a href="/' + @Directorio + '/OrdenPago/Index">A la firma</a>'         ,'OPago','NO','Principal'    
 INSERT INTO #Auxiliar0 Select '01-11-18-03','OPagoEnCaja',      'En caja','01-11-18',  3,Null,'<a href="/' + @Directorio + '/OrdenPago/IndexExterno">En caja</a>'     ,'OPago','NO','Principal'    
 IF Isnull((Select Top 1 ProntoIni.Valor From ProntoIni   
-  Left Outer Join ProntoIniClaves pic On pic.IdProntoIniClave=ProntoIni.IdProntoIniClave  
-  Where pic.Clave='Habilitar caja obra en OP'),'')='SI'  
+			Left Outer Join ProntoIniClaves pic On pic.IdProntoIniClave=ProntoIni.IdProntoIniClave  
+			Where pic.Clave='Habilitar caja obra en OP'),'')='SI'  
 INSERT INTO #Auxiliar0 Select '01-11-18-04','OPagoEnCajaObra', 'En caja obra','01-11-18', 4,Null,Null,'OPago','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-18-05','OPagoAConfirmar', 'A Confirmar','01-11-18', 5,Null,'<a href="/' + @Directorio + '/OrdenPago/Index?bAConfirmar=true">A Confirmar</a>' ,'OPago','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-18-06','OPagoTodas', 'Todas','01-11-18', 6, Null,'<a href="/' + @Directorio + '/OrdenPago/Index">Todos</a>','OPago','NO','Principal'  
@@ -462,253 +484,341 @@ INSERT INTO #Auxiliar0 Select '01-16-05','HChequeras','Chequeras','01-16',5,Null
 --INSERT INTO #Auxiliar0 Select '01-17','PpalSAT','Comprob Pronto SAT','01',1,Null,Null,'PpalSAT','SI','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-17-01','RecepcionesSAT','Recepciones','01-17',1,Null,Null,'RecepcionesSAT','NO','Principal'  
   
-IF 1=1   
+DECLARE @AñoAnt103 int, @Contador103 int, @Contador1030 int, @AñoAnt1 int, @Contador1 int, @AñoAnt104 int, @Contador104 int, @AñoAnt900 int ,@Contador900 int,   
+		@Contador9100 int, @Contador91002 int, @TipoComprobanteAnt int
+
+SET @AñoAnt103=-1  
+SET @AñoAnt900=-1  
+SET @TipoComprobanteAnt=-1  
+SET @Contador103=0  
+SET @Contador1=0  
+SET @Contador1030=0  
+SET @Contador900=0  
+SET @Contador9100=0  
+SET @AñoAnt104=-1  
+SET @Contador104=0  
+
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT TipoComprobante, Obra, IdObra, Año, Mes FROM #Auxiliar1 ORDER BY TipoComprobante, Obra, IdObra, Año desc, Mes asc  
+OPEN Cur  
+FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
+WHILE @@FETCH_STATUS = 0  
   BEGIN  
-	DECLARE @AñoAnt103 int, @Contador103 int, @Contador1030 int, @AñoAnt1 int, @Contador1 int, @AñoAnt104 int, @Contador104 int, @AñoAnt900 int ,@Contador900 int,   
-			@Contador9100 int, @Contador91002 int, @TipoComprobanteAnt int
-	SET @AñoAnt103=-1  
-	SET @AñoAnt900=-1  
-	SET @TipoComprobanteAnt=-1  
-	SET @Contador103=0  
-	SET @Contador1=0  
-	SET @Contador1030=0  
-	SET @Contador900=0  
-	set @Contador9100=0  
+	IF @TipoComprobante<>@TipoComprobanteAnt
+	  BEGIN
+		SET @AñoAnt1=-1  
+		SET @TipoComprobanteAnt=@TipoComprobante 
+	  END
 
-	SET @AñoAnt104=-1  
-	SET @Contador104=0  
-  
-	DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT TipoComprobante, Obra, IdObra, Año, Mes FROM #Auxiliar1 ORDER BY TipoComprobante, Obra, IdObra, Año desc, Mes asc  
-	OPEN Cur  
-	FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
-	WHILE @@FETCH_STATUS = 0  
+	SELECT @NombreMes = Case When @Mes=1 Then 'Enero' When @Mes=2 Then 'Febrero' When @Mes=3 Then 'Marzo' When @Mes=4 Then 'Abril'   
+								When @Mes=5 Then 'Mayo' When @Mes=6 Then 'Junio' When @Mes=7 Then 'Julio' When @Mes=8 Then 'Agosto'  
+								When @Mes=9 Then 'Septiembre' When @Mes=10 Then 'Octubre' When @Mes=11 Then 'Noviembre' When @Mes=12 Then 'Diciembre'  
+						End  
+	SET @FechaInicial='01/'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)+'/'+Convert(varchar,@Año)  
+	SET @Fecha=DateAdd(d,-1,DateAdd(m,1,Convert(datetime,@FechaInicial,103)))  
+	SET @FechaFinal=Substring('00',1,2-Len(Convert(varchar,Day(@Fecha))))+Convert(varchar,Day(@Fecha))+'/'+  
+					Substring('00',1,2-Len(Convert(varchar,Month(@Fecha))))+Convert(varchar,Month(@Fecha))+'/'+Convert(varchar,Year(@Fecha))  
+
+	--REQUERIMIENTOS  
+	IF @TipoComprobante=103  
 	  BEGIN  
-		IF @TipoComprobante<>@TipoComprobanteAnt
-		  BEGIN
-			SET @AñoAnt1=-1  
-			SET @TipoComprobanteAnt=@TipoComprobante 
-		  END
-
-		SELECT @NombreMes = Case When @Mes=1 Then 'Enero' When @Mes=2 Then 'Febrero' When @Mes=3 Then 'Marzo' When @Mes=4 Then 'Abril'   
-									When @Mes=5 Then 'Mayo' When @Mes=6 Then 'Junio' When @Mes=7 Then 'Julio' When @Mes=8 Then 'Agosto'  
-									When @Mes=9 Then 'Septiembre' When @Mes=10 Then 'Octubre' When @Mes=11 Then 'Noviembre' When @Mes=12 Then 'Diciembre'  
-							End  
-		SET @FechaInicial='01/'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)+'/'+Convert(varchar,@Año)  
-		SET @Fecha=DateAdd(d,-1,DateAdd(m,1,Convert(datetime,@FechaInicial,103)))  
-		SET @FechaFinal=Substring('00',1,2-Len(Convert(varchar,Day(@Fecha))))+Convert(varchar,Day(@Fecha))+'/'+  
-						Substring('00',1,2-Len(Convert(varchar,Month(@Fecha))))+Convert(varchar,Month(@Fecha))+'/'+Convert(varchar,Year(@Fecha))  
-  
-		--REQUERIMIENTOS  
-		IF @TipoComprobante=103  
+		IF @AñoAnt103<>@Año  
 		  BEGIN  
-			IF @AñoAnt103<>@Año  
-			  BEGIN  
-				SET @AñoAnt103=@Año  
-				SET @Contador103=@Contador103+1  
-				SET @Parent='01-06-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador103)))+Convert(varchar,@Contador103)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'RequerimientosAgrupados'+Convert(varchar,@AñoAnt103),Convert(varchar,@AñoAnt103),'01-06-01', @Contador103, Null,  
-				  '<a href="/' + @directorio + '/Requerimiento/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt103)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt103)+'">'+Convert(varchar,@AñoAnt103)+'</a>', 'Requerimientos', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+			SET @AñoAnt103=@Año  
+			SET @Contador103=@Contador103+1  
+			SET @Parent='01-06-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador103)))+Convert(varchar,@Contador103)  
 			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'RequerimientosAgrupados'+Convert(varchar,@AñoAnt103)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/Requerimiento/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Requerimientos', 'NO','Principal'  
+			 SELECT @Parent, 'RequerimientosAgrupados'+Convert(varchar,@AñoAnt103),Convert(varchar,@AñoAnt103),'01-06-01', @Contador103, Null,  
+			  '<a href="/' + @directorio + '/Requerimiento/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt103)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt103)+'">'+Convert(varchar,@AñoAnt103)+'</a>', 'Requerimientos', 'SI','Principal'  
 		  END  
-	  
-		IF @TipoComprobante=1030  
-		  BEGIN  
-			SET @Contador1030=@Contador1030+1  
-			SET @Clave='01-06-02-'+Substring('0000',1,4-Len(Convert(varchar,@Contador1030)))+Convert(varchar,@Contador1030)  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'RequerimientosPorObra'+Convert(varchar,@IdObra), @Obra, '01-06-02', @Contador1030, Null,   
-					'<a href="/' + @directorio + '/Requerimiento/Index?idobra='+Convert(varchar,@IdObra)+'">'+@Obra+'</a>', 'Requerimientos', 'NO','Principal'  
-		  END  
-	  
-		--PRESUPUESTO (SOLICITUD DE COTIZACION)  
-		IF @TipoComprobante=104  
-		  BEGIN  
-			IF @AñoAnt104<>@Año  
-			  BEGIN  
-				SET @AñoAnt104=@Año  
-				SET @Contador104=@Contador104+1  
-				SET @Parent='01-11-12-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador104)))+Convert(varchar,@Contador104)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'PresupuestosAgrupados'+Convert(varchar,@AñoAnt104),Convert(varchar,@AñoAnt104),'01-11-12-01', @Contador104, Null,  
-						'<a href="/' + @directorio + '/Presupuesto/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt104)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt104)+'">'+Convert(varchar,@AñoAnt104)+'</a>', 'Presupuestos', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'PresupuestosAgrupados'+Convert(varchar,@AñoAnt104)+Convert(varchar,@Mes), @NombreMes, @Parent, @Mes, Null,  
-					'<a href="/' + @directorio + '/Presupuesto/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Presupuestos', 'NO','Principal'  
-		  END  
-	  
-		--ORDENES DE COMPRA
-		IF @TipoComprobante=140
-		  BEGIN  
-			IF @AñoAnt1<>@Año  
-			  BEGIN  
-				SET @AñoAnt1=@Año  
-				SET @Contador1=@Contador1+1  
-				SET @Parent='01-10-09-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'OrdenesCompraAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-09-01', @Contador1, Null,  
-						'<a href="/' + @directorio + '/OrdenCompra/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'OrdenesCompra', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'OrdenesCompraAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/OrdenCompra/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'OrdenesCompra', 'NO','Principal'  
-		  END  
-	  
-		--REMITOS
-		IF @TipoComprobante=41
-		  BEGIN  
-			IF @AñoAnt1<>@Año  
-			  BEGIN  
-				SET @AñoAnt1=@Año  
-				SET @Contador1=@Contador1+1  
-				SET @Parent='01-10-10-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'RemitosAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-10-01', @Contador1, Null,  
-						'<a href="/' + @directorio + '/Remito/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Remitos', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'RemitosAgrupados'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/Remito/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Remitos', 'NO','Principal'  
-		  END  
-	  
-		--FACTURAS DE VENTA   
-		IF @TipoComprobante=1
-		  BEGIN  
-			IF @AñoAnt1<>@Año  
-			  BEGIN  
-				SET @AñoAnt1=@Año  
-				SET @Contador1=@Contador1+1  
-				SET @Parent='01-10-11-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'FacturasAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-11-01', @Contador1, Null,  
-						'<a href="/' + @directorio + '/Factura/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Facturas', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'FacturasAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/Factura/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Facturas', 'NO','Principal'  
-		  END  
-	  
-		--PEDIDO   
-		IF @TipoComprobante=51  
-		  BEGIN  
-			IF @AñoAnt1<>@Año  
-			  BEGIN  
-				SET @AñoAnt1=@Año  
-				SET @Contador1=@Contador1+1  
-				SET @Parent='01-11-14-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'PedidosAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-11-14-01', @Contador1, Null,  
-						'<a href="/' + @directorio + '/Pedido/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Pedidos', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'PedidosAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/Pedido/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Pedidos', 'NO','Principal'  
-		  END  
-	  
-		--COMPROBANTES PROVEEDOR  
-		IF @TipoComprobante=900   --and 1=0  
-		  BEGIN  
-			IF @AñoAnt900<>@Año  
-			  BEGIN  
-				SET @AñoAnt900=@Año  
-				SET @Contador900=@Contador900+1  
-				SET @Parent='01-11-17-01-'+ Substring('00',1,2-Len(Convert(varchar,@Contador900)))+Convert(varchar,@Contador900)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'ComprobanteProveedorAgrupadas'+Convert(varchar,@AñoAnt900), Convert(varchar,@AñoAnt900),'01-11-17-01', @Contador900, Null,  
-						'<a href="/' + @directorio + '/ComprobanteProveedor/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt900)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt900)+'">'+Convert(varchar,@AñoAnt900)+'</a>', 'ComprobanteProveedor', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'ComprobanteProveedorAgrupadas'+Convert(varchar,@AñoAnt900)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/ComprobanteProveedor/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Pedidos', 'NO','Principal'  
-		  END  
-	  
-		--COMPROBANTES PROVEEDOR Fondo fijo  
-		IF @TipoComprobante=910  
-		  BEGIN  
-			IF @AñoAnt1<>@Año  
-			  BEGIN  
-				SET @AñoAnt1=@Año  
-				SET @Contador1=@Contador1+1  
-				SET @Parent='01-11-16-03-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'FondoFijoAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-11-16-03', @Contador1, Null,  
-						'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'FondoFijo', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'FondoFijoAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'FondoFijo', 'NO','Principal'  
-		  END  
-	  
-		--por cuentaff/rendicion: 1 nivel  (cuentaff)  
-		IF @TipoComprobante=9100  
-		  BEGIN  
-			SET @Contador9100=@Contador9100+1  
-			SET @Clave='01-11-16-07-'+Substring('0000',1,4-Len(Convert(varchar,@Contador9100)))+Convert(varchar,@Contador9100)  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'FondoFijoPorRendicion'+Convert(varchar,@Obra), @Obra, '01-11-16-07', @Contador9100, Null,   
-					'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?rendicion='+Convert(varchar,@Obra)+'">'+@Obra+'</a>', 'FondoFijo', 'SI','Principal'  
-	    
-			--por cuentaff/rendicion: 2do nivel (rendicion)  
-			--IF @TipoComprobante=91002 --and 1=0  
-			--  BEGIN  
-			-- SET @Contador91002=@Contador91002+1  
-			-- DECLARE @IdCuentaFF int  
-			-- set @IdCuentaFF=@Año  
-			-- SET @Clave='01-11-16-07-'+Substring('0000',1,4-Len(Convert(varchar,@IdCuentaFF)))+Convert(varchar,@IdCuentaFF)  
-	  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave+'-'+Convert(varchar,#Auxiliar1.IdObra), 'FondoFijoPorRendicion'+Convert(varchar,#Auxiliar1.Obra)+'-'+Convert(varchar,#Auxiliar1.IdObra),   
-					Convert(varchar,#Auxiliar1.IdObra)+' - ' + #Auxiliar1.Obra, @Clave, #Auxiliar1.IdObra, Null,   
-					'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?rendicion='+Convert(varchar,#Auxiliar1.IdObra)+ '&idcuenta=' + Convert(varchar,#auxiliar1.Año) + '">.' +Convert(varchar,#Auxiliar1.IdObra)+ '</a>', 'FondoFijo', 'NO','Principal'  
-			 FROM #Auxiliar1  
-			 WHERE #Auxiliar1.TipoComprobante=91002 and #auxiliar1.Año=@IdObra  
-		  END  
-	  
-		--COMPARATIVAS  
-		IF @TipoComprobante=105  
-		  BEGIN  
-			IF @AñoAnt103<>@Año  
-			  BEGIN  
-				SET @AñoAnt103=@Año  
-				SET @Contador103=@Contador103+1  
-				SET @Parent='01-11-13-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador103)))+Convert(varchar,@Contador103)  
-				INSERT INTO #Auxiliar0   
-				 SELECT @Parent, 'ComparativasAgrupados'+Convert(varchar,@AñoAnt103),Convert(varchar,@AñoAnt103),'01-11-13-01', @Contador103, Null,  
-						'<a href="/' + @directorio + '/Comparativa/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt103)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt103)+'">'+Convert(varchar,@AñoAnt103)+'</a>', 'Comparativas', 'SI','Principal'  
-			  END  
-			SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'ComparativasAgrupados'+Convert(varchar,@AñoAnt103)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
-					'<a href="/' + @directorio + '/Comparativa/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Comparativas', 'NO','Principal'  
-		  END  
-	      
-		IF @TipoComprobante=1050  
-		  BEGIN  
-			SET @Contador1030=@Contador1030+1  
-			SET @Clave='01-11-13-02-'+Substring('00',1,2-Len(Convert(varchar,@Contador1030)))+Convert(varchar,@Contador1030)  
-			INSERT INTO #Auxiliar0   
-			 SELECT @Clave, 'ComparativasPorObra'+Convert(varchar,@IdObra), @Obra, '01-11-13-02', @Contador1030, Null,   
-					'<a href="/' + @directorio + '/Comparativa/Index?idobra='+Convert(varchar,@IdObra)+'">'+@Obra+'</a>', 'Comparativas', 'NO','Principal'  
-		  END  
-  
-		FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'RequerimientosAgrupados'+Convert(varchar,@AñoAnt103)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Requerimiento/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Requerimientos', 'NO','Principal'  
 	  END  
-	CLOSE Cur  
-	DEALLOCATE Cur  
-  END  
   
+	IF @TipoComprobante=1030  
+	  BEGIN  
+		SET @Contador1030=@Contador1030+1  
+		SET @Clave='01-06-02-'+Substring('0000',1,4-Len(Convert(varchar,@Contador1030)))+Convert(varchar,@Contador1030)  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'RequerimientosPorObra'+Convert(varchar,@IdObra), @Obra, '01-06-02', @Contador1030, Null,   
+				'<a href="/' + @directorio + '/Requerimiento/Index?idobra='+Convert(varchar,@IdObra)+'">'+@Obra+'</a>', 'Requerimientos', 'NO','Principal'  
+	  END  
+  
+	--PRESUPUESTO (SOLICITUD DE COTIZACION)  
+	IF @TipoComprobante=104  
+	  BEGIN  
+		IF @AñoAnt104<>@Año  
+		  BEGIN  
+			SET @AñoAnt104=@Año  
+			SET @Contador104=@Contador104+1  
+			SET @Parent='01-11-12-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador104)))+Convert(varchar,@Contador104)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'PresupuestosAgrupados'+Convert(varchar,@AñoAnt104),Convert(varchar,@AñoAnt104),'01-11-12-01', @Contador104, Null,  
+					'<a href="/' + @directorio + '/Presupuesto/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt104)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt104)+'">'+Convert(varchar,@AñoAnt104)+'</a>', 'Presupuestos', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,@Mes)))+Convert(varchar,@Mes)  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'PresupuestosAgrupados'+Convert(varchar,@AñoAnt104)+Convert(varchar,@Mes), @NombreMes, @Parent, @Mes, Null,  
+				'<a href="/' + @directorio + '/Presupuesto/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Presupuestos', 'NO','Principal'  
+	  END  
+  
+	--ORDENES DE COMPRA
+	IF @TipoComprobante=140
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-09-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'OrdenesCompraAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-09-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/OrdenCompra/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'OrdenesCompra', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'OrdenesCompraAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/OrdenCompra/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'OrdenesCompra', 'NO','Principal'  
+	  END  
+  
+	--REMITOS
+	IF @TipoComprobante=41
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-10-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'RemitosAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-10-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Remito/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Remitos', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'RemitosAgrupados'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Remito/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Remitos', 'NO','Principal'  
+	  END  
+  
+	--FACTURAS DE VENTA   
+	IF @TipoComprobante=1
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-11-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'FacturasAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-11-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Factura/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Facturas', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'FacturasAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Factura/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Facturas', 'NO','Principal'  
+	  END  
+  
+	--RECIBOS
+	IF @TipoComprobante=2
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-14-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'RecibosAgrupados'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-14-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Recibo/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Recibos', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'RecibosAgrupados'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Recibo/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Recibos', 'NO','Principal'  
+	  END  
+  
+	--NOTAS DE DEBITO
+	IF @TipoComprobante=3
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-15-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'NotasDebitoAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-15-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/NotaDebito/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'NotasDebito', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'NotasDebitoAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/NotaDebito/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'NotasDebito', 'NO','Principal'  
+	  END  
+
+	--NOTAS DE CREDITO
+	IF @TipoComprobante=4
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-10-16-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'NotasCreditoAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-10-16-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/NotaCredito/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'NotasCredito', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'NotasCreditoAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/NotaCredito/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'NotasCredito', 'NO','Principal'  
+	  END  
+
+	--ORDENES DE PAGO
+	IF @TipoComprobante=17
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-11-18-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'OPagoPorMes'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-11-18-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/OrdenPago/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'OPago', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'OPagoPorMes'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/OrdenPago/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'OPago', 'NO','Principal'  
+	  END  
+
+	--PEDIDO   
+	IF @TipoComprobante=51  
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-11-14-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'PedidosAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-11-14-01', @Contador1, Null,  
+					'<a href="/' + @directorio + '/Pedido/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'Pedidos', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'PedidosAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Pedido/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Pedidos', 'NO','Principal'  
+	  END  
+  
+	--COMPROBANTES PROVEEDOR  
+	IF @TipoComprobante=900   --and 1=0  
+	  BEGIN  
+		IF @AñoAnt900<>@Año  
+		  BEGIN  
+			SET @AñoAnt900=@Año  
+			SET @Contador900=@Contador900+1  
+			SET @Parent='01-11-17-01-'+ Substring('00',1,2-Len(Convert(varchar,@Contador900)))+Convert(varchar,@Contador900)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'ComprobanteProveedorAgrupadas'+Convert(varchar,@AñoAnt900), Convert(varchar,@AñoAnt900),'01-11-17-01', @Contador900, Null,  
+					'<a href="/' + @directorio + '/ComprobanteProveedor/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt900)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt900)+'">'+Convert(varchar,@AñoAnt900)+'</a>', 'ComprobanteProveedor', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'ComprobanteProveedorAgrupadas'+Convert(varchar,@AñoAnt900)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/ComprobanteProveedor/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Pedidos', 'NO','Principal'  
+	  END  
+  
+	--COMPROBANTES PROVEEDOR Fondo fijo  
+	IF @TipoComprobante=910  
+	  BEGIN  
+		IF @AñoAnt1<>@Año  
+		  BEGIN  
+			SET @AñoAnt1=@Año  
+			SET @Contador1=@Contador1+1  
+			SET @Parent='01-11-16-03-'+Substring('00',1,2-Len(Convert(varchar,@Contador1)))+Convert(varchar,@Contador1)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'FondoFijoAgrupadas'+Convert(varchar,@AñoAnt1), Convert(varchar,@AñoAnt1),'01-11-16-03', @Contador1, Null,  
+					'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?fechainicial=01/01/'+Convert(varchar,@AñoAnt1)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt1)+'">'+Convert(varchar,@AñoAnt1)+'</a>', 'FondoFijo', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'FondoFijoAgrupadas'+Convert(varchar,@AñoAnt1)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'FondoFijo', 'NO','Principal'  
+	  END  
+  
+	--por cuentaff/rendicion: 1 nivel  (cuentaff)  
+	IF @TipoComprobante=9100  
+	  BEGIN  
+		SET @Contador9100=@Contador9100+1  
+		SET @Clave='01-11-16-07-'+Substring('0000',1,4-Len(Convert(varchar,@Contador9100)))+Convert(varchar,@Contador9100)  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'FondoFijoPorRendicion'+Convert(varchar,@Obra), @Obra, '01-11-16-07', @Contador9100, Null,   
+				'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?rendicion='+Convert(varchar,@Obra)+'">'+@Obra+'</a>', 'FondoFijo', 'SI','Principal'  
+    
+		--por cuentaff/rendicion: 2do nivel (rendicion)  
+		--IF @TipoComprobante=91002 --and 1=0  
+		--  BEGIN  
+		-- SET @Contador91002=@Contador91002+1  
+		-- DECLARE @IdCuentaFF int  
+		-- set @IdCuentaFF=@Año  
+		-- SET @Clave='01-11-16-07-'+Substring('0000',1,4-Len(Convert(varchar,@IdCuentaFF)))+Convert(varchar,@IdCuentaFF)  
+  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave+'-'+Convert(varchar,#Auxiliar1.IdObra), 'FondoFijoPorRendicion'+Convert(varchar,#Auxiliar1.Obra)+'-'+Convert(varchar,#Auxiliar1.IdObra),   
+				Convert(varchar,#Auxiliar1.IdObra)+' - ' + #Auxiliar1.Obra, @Clave, #Auxiliar1.IdObra, Null,   
+				'<a href="/' + @directorio + '/ComprobanteProveedor/IndexFF?rendicion='+Convert(varchar,#Auxiliar1.IdObra)+ '&idcuenta=' + Convert(varchar,#auxiliar1.Año) + '">.' +Convert(varchar,#Auxiliar1.IdObra)+ '</a>', 'FondoFijo', 'NO','Principal'  
+		 FROM #Auxiliar1  
+		 WHERE #Auxiliar1.TipoComprobante=91002 and #auxiliar1.Año=@IdObra  
+	  END  
+  
+	--COMPARATIVAS  
+	IF @TipoComprobante=105  
+	  BEGIN  
+		IF @AñoAnt103<>@Año  
+		  BEGIN  
+			SET @AñoAnt103=@Año  
+			SET @Contador103=@Contador103+1  
+			SET @Parent='01-11-13-01-'+Substring('00',1,2-Len(Convert(varchar,@Contador103)))+Convert(varchar,@Contador103)  
+			INSERT INTO #Auxiliar0   
+			 SELECT @Parent, 'ComparativasAgrupados'+Convert(varchar,@AñoAnt103),Convert(varchar,@AñoAnt103),'01-11-13-01', @Contador103, Null,  
+					'<a href="/' + @directorio + '/Comparativa/Index?fechainicial=01/01/'+Convert(varchar,@AñoAnt103)+'&fechafinal=31/12/'+Convert(varchar,@AñoAnt103)+'">'+Convert(varchar,@AñoAnt103)+'</a>', 'Comparativas', 'SI','Principal'  
+		  END  
+		SET @Clave=@Parent+'-'+Substring('00',1,2-Len(Convert(varchar,abs(12-@Mes))))+Convert(varchar,abs(12-@Mes))  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'ComparativasAgrupados'+Convert(varchar,@AñoAnt103)+Convert(varchar,abs(12-@Mes)), @NombreMes, @Parent, abs(12-@Mes), Null,  
+				'<a href="/' + @directorio + '/Comparativa/Index?fechainicial='+@FechaInicial+'&fechafinal='+@FechaFinal+'">'+@NombreMes+'</a>', 'Comparativas', 'NO','Principal'  
+	  END  
+      
+	IF @TipoComprobante=1050  
+	  BEGIN  
+		SET @Contador1030=@Contador1030+1  
+		SET @Clave='01-11-13-02-'+Substring('00',1,2-Len(Convert(varchar,@Contador1030)))+Convert(varchar,@Contador1030)  
+		INSERT INTO #Auxiliar0   
+		 SELECT @Clave, 'ComparativasPorObra'+Convert(varchar,@IdObra), @Obra, '01-11-13-02', @Contador1030, Null,   
+				'<a href="/' + @directorio + '/Comparativa/Index?idobra='+Convert(varchar,@IdObra)+'">'+@Obra+'</a>', 'Comparativas', 'NO','Principal'  
+	  END  
+
+	FETCH NEXT FROM Cur INTO @TipoComprobante, @Obra, @IdObra, @Año, @Mes  
+  END  
+CLOSE Cur  
+DEALLOCATE Cur  
+  
+
+DECLARE @IdRubro int, @Contador int, @Rubro varchar(50)
+SET @Contador=0
+DECLARE Cur CURSOR LOCAL FORWARD_ONLY FOR SELECT IdRubro, Rubro FROM #Auxiliar2 ORDER BY Rubro
+OPEN Cur  
+FETCH NEXT FROM Cur INTO @IdRubro, @Rubro
+WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+	SET @Contador=@Contador+1  
+	SET @Parent='01-02-04-'+Substring('00',1,2-Len(Convert(varchar,@Contador)))+Convert(varchar,@Contador)  
+	INSERT INTO #Auxiliar0   
+	 SELECT @Parent, 'ArticulosRubros'+Convert(varchar,@IdRubro),@Rubro,'01-02-04', @Contador, Null,  
+			'<a href="/' + @directorio + '/Articulo/Index?IdRubro='+Convert(varchar,@IdRubro)+'">'+@Rubro+'</a>', 'Articulos', 'NO','Principal'  
+	FETCH NEXT FROM Cur INTO @IdRubro, @Rubro
+  END  
+CLOSE Cur  
+DEALLOCATE Cur  
+  
+
 INSERT INTO #Auxiliar0 Select '01-11-12-01-99','PresupuestosAgrupados','','01-11-12-01',1,Null,Null,'','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-11-13-01-00','ComparativasAgrupadas','','01-11-13-01',1,Null,Null,'','NO','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-11-14-01-00','PedidosAgrupados','','01-11-14-01',1,Null,Null,'','NO','Principal'  
@@ -983,11 +1093,6 @@ INSERT INTO Tree
    
 SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden    
     
-DROP TABLE #Auxiliar0    
-DROP TABLE #Auxiliar1    
-go
-
-
-
-exec Tree_TX_Generar
-go
+DROP TABLE #Auxiliar0
+DROP TABLE #Auxiliar1
+DROP TABLE #Auxiliar2
