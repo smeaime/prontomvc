@@ -655,7 +655,8 @@ Public Class CartaDePorteManager
             Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
             Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
             Optional bInsertarEnTablaTemporal As Boolean = False, _
-            Optional ByVal optCamionVagon As String = "Ambas" _
+            Optional ByVal optCamionVagon As String = "Ambas", _
+        Optional sqlCount As Boolean = False _
                     ) As String
 
         'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
@@ -722,7 +723,14 @@ Public Class CartaDePorteManager
         '///////////////////////////////////////////////////////////////////////////////////////
 
 
-        Dim sqlString As String = GetListDataTableDinamicoConWHERE_2_CadenaSQL(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        Dim sqlString As String
+
+        If sqlCount Then
+            sqlString = GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        Else
+            sqlString = GetListDataTableDinamicoConWHERE_2_CadenaSQL(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        End If
+
 
 
         Return sqlString
@@ -2612,6 +2620,24 @@ Public Class CartaDePorteManager
                 '(quizas en blanco en una celda perdida) para control nuestro
 
 
+
+
+                Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                              "", "", "", 1, 10000, _
+                              estado, "", idVendedor, idCorredor, _
+                              idDestinatario, idIntermediario, _
+                              idRemComercial, idArticulo, idProcedencia, idDestino, _
+                              iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
+                              iisValidSqlDate(fechadesde, #1/1/1753#), _
+                             iisValidSqlDate(fechahasta, #1/1/2100#), _
+                              puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos, True)
+
+                Dim dt = EntidadManager.ExecDinamico(SC, count)
+                lineasGeneradas = dt.Rows(0).Item(0)
+                If lineasGeneradas = 0 Then Return -1
+
+
+
                 strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                "", "", "", 1, 10000, _
                                estado, "", idVendedor, idCorredor, _
@@ -2621,6 +2647,8 @@ Public Class CartaDePorteManager
                                iisValidSqlDate(fechadesde, #1/1/1753#), _
                               iisValidSqlDate(fechahasta, #1/1/2100#), _
                                puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos)
+
+
 
 
                 stopWatch.Stop()
@@ -2718,7 +2746,9 @@ Public Class CartaDePorteManager
                 sExcelFileName = Path.GetTempPath & "Listado general " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
-                lineasGeneradas = 0 ' dt.Rows.Count
+                'lineasGeneradas = 0 ' dt.Rows.Count
+
+
 
                 'If System.Diagnostics.Debugger.IsAttached() And dt.Rows.Count > 50000 Then
                 '    'Err.Raise(32434, "generarNotasDeEntrega", "Modo IDE. Mail muy grande. No se enviará")
@@ -4288,6 +4318,69 @@ Public Class CartaDePorteManager
 
     End Function
 
+
+
+    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                   ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+                                                   Optional maxrows As Integer = 0) As String
+
+
+        'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
+
+        If maxrows > 0 Then
+            maxrows = Min(maxrows, _CONST_MAXROWS)
+        Else
+            maxrows = _CONST_MAXROWS
+        End If
+
+        'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
+
+
+        Dim strSQL = String.Format("  SELECT count(*) ")
+
+        Dim strFROM = _
+        "   FROM    CartasDePorte CDP " & _
+        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
+        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
+        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
+        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
+        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
+        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
+        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
+        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
+        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
+        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
+
+
+
+
+        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
+
+
+        strSQL += strFROM + strWHERE
+        Debug.Print(strWHERE)
+
+
+        Return strSQL
+
+
+
+
+    End Function
 
 
     Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
@@ -7377,7 +7470,7 @@ Public Class CartaDePorteManager
                     (From p In imput _
                     Where p.cartas.Any(Function(x) x.Id = oCDP.Id) _
                     Select p).First
-        
+
         Dim ind As Integer = imput.IndexOf(q)
 
 
@@ -19095,7 +19188,10 @@ Public Class LogicaImportador
 
                     dr = dt.NewRow()
                     For i As Integer = 0 To currentRow.Length - 1
-                        If i = 43 Then currentRow(i) = currentRow(i).Substring(0, 50)
+                        If i = 43 Then
+                            currentRow(i) = currentRow(i).Substring(0, IIf(currentRow(i).Length > 50, 50, currentRow(i).Length))
+                        End If
+
                         dr(i) = currentRow(i)
                     Next
                     dt.Rows.Add(dr)
