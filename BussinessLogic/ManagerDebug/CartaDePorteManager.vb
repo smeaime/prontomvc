@@ -187,6 +187,7 @@ Public Class CartaDePorteManager
         Public DestinatarioCUIT As String
 
 
+        Public IdProcedencia As String
         Public ProcedenciaDesc As String
         Public DestinoDesc As String
         Public CalidadDesc As String
@@ -303,21 +304,42 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     'por ahora están en una lista, hay que pasarlos a una tabla
 
+    Class aaa
+        Public idacopio As Integer
+        Public desc As String
+        Public idcliente As Integer?
+    End Class
+
     Public Shared Function excepciones(SC) As String()
         'Get
 
-        If False Then
+        If True Then
             'Dim SC As String = ""
             Dim cli As Integer
 
+            If SC = "" Then Return {""}
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim q = From i In db.CartasPorteAcopios1 _
+
+
+            Dim q = (From i In db.CartasPorteAcopios1 _
                     Where (True Or i.IdCliente = cli)
-                    Select New With {i.IdAcopio, i.Descripcion, i.IdCliente}
+                    Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
+
+            Dim x As New aaa
+            x.idacopio = 0
+            x.desc = ""
+            x.idcliente = 0
+
+            q.Add(x)
 
 
-            Return q.Select(Function(x) x.Descripcion).ToArray
+            Try
+                Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) y.desc).ToArray
+            Catch ex As Exception
+                Dim s As String() = {""}
+                Return s
+            End Try
 
 
         Else
@@ -338,15 +360,39 @@ Public Class CartaDePorteManager
 
     Shared Function BuscarIdAcopio(descripcionAcopio As String, SC As String) As Integer
         'excepciones.Where(Function(x) x = descripcionAcopio).FirstOrDefault()
+
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim q = (From i In db.CartasPorteAcopios1 _
+                Where (i.Descripcion = descripcionAcopio)
+                Select i.IdAcopio).FirstOrDefault
+
+        Return q
+
+
         Dim s As String() = excepciones(SC)
         For n = 0 To excepciones(SC).Count - 1
             If s(n) = descripcionAcopio Then Return n
         Next
+
+
+
         Return -1
     End Function
 
     Shared Function BuscarTextoAcopio(IdAcopio As Integer, SC As String) As String
-        If IdAcopio < 0 Then Return ""
+        If IdAcopio <= 0 Then Return ""
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim q = (From i In db.CartasPorteAcopios1 _
+                Where (i.IdAcopio = IdAcopio)
+                Select i.Descripcion).FirstOrDefault
+
+        Return q
+
+
+
+        If IdAcopio <= 0 Then Return ""
         Try
             Return excepciones(SC)(IdAcopio)
         Catch ex As Exception
@@ -609,7 +655,8 @@ Public Class CartaDePorteManager
             Optional ByVal AgrupadorDeTandaPeriodos As Integer = -1, _
             Optional ByVal Vagon As Integer = Nothing, Optional ByVal Patente As String = "", _
             Optional bInsertarEnTablaTemporal As Boolean = False, _
-            Optional ByVal optCamionVagon As String = "Ambas" _
+            Optional ByVal optCamionVagon As String = "Ambas", _
+        Optional sqlCount As Boolean = False _
                     ) As String
 
         'ojo al agregar parametros opcionales http://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
@@ -676,7 +723,14 @@ Public Class CartaDePorteManager
         '///////////////////////////////////////////////////////////////////////////////////////
 
 
-        Dim sqlString As String = GetListDataTableDinamicoConWHERE_2_CadenaSQL(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        Dim sqlString As String
+
+        If sqlCount Then
+            sqlString = GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        Else
+            sqlString = GetListDataTableDinamicoConWHERE_2_CadenaSQL(SC, estado, sWHERE, bInsertarEnTablaTemporal, maximumRows)  'de ultima se puede safar con esto tambien...
+        End If
+
 
 
         Return sqlString
@@ -1742,6 +1796,7 @@ Public Class CartaDePorteManager
 
         db.ObjectTrackingEnabled = False
 
+        If System.Diagnostics.Debugger.IsAttached Then maximumRows = 300
 
         '       Remember, the query is nothing more than an object which represents the query. Think of it 
         'like a SQL query string, just way smarter. Passing a query string around doesn't execute the query; executing 
@@ -1832,6 +1887,7 @@ Public Class CartaDePorteManager
  _
              .Producto = art.Descripcion, _
              .ProductoSagpya = art.AuxiliarString6, _
+             .IdProcedencia = cdp.Procedencia, _
              .ProcedenciaDesc = loc.Nombre, _
              .DestinoDesc = dest.Descripcion, _
              .CalidadDesc = cdp.Calidad, _
@@ -1845,16 +1901,16 @@ Public Class CartaDePorteManager
             .NobleChamico2 = cdp.NobleChamico2, _
             .NobleRevolcado = cdp.NobleRevolcado, _
             .NobleObjetables = cdp.NobleObjetables, _
-            .NobleAmohosados = cdp.NobleObjetables, _
+            .NobleAmohosados = cdp.NobleAmohosados, _
             .NobleHectolitrico = cdp.NobleObjetables, _
-            .NobleCarbon = cdp.NobleObjetables, _
+            .NobleCarbon = cdp.NobleHectolitrico, _
              .NoblePanzaBlanca = cdp.NoblePanzaBlanca, _
-            .NoblePicados = cdp.NobleObjetables, _
-            .NobleMGrasa = cdp.NobleObjetables, _
-            .NobleAcidezGrasa = cdp.NobleObjetables, _
-            .NobleVerdes = cdp.NobleObjetables, _
-            .NobleGrado = cdp.NobleObjetables, _
-            .NobleConforme = cdp.NobleObjetables, _
+            .NoblePicados = cdp.NoblePicados, _
+            .NobleMGrasa = cdp.NobleMGrasa, _
+            .NobleAcidezGrasa = cdp.NobleAcidezGrasa, _
+            .NobleVerdes = cdp.NobleVerdes, _
+            .NobleGrado = cdp.NobleGrado, _
+            .NobleConforme = cdp.NobleConforme, _
             .NobleACamara = (cdp.NobleACamara = "SI"), _
             .CalidadPuntaSombreada = If(cdp.CalidadPuntaSombreada, 0), _
             .CalidadGranosQuemados = If(cdp.CalidadGranosQuemados, 0), _
@@ -2564,6 +2620,24 @@ Public Class CartaDePorteManager
                 '(quizas en blanco en una celda perdida) para control nuestro
 
 
+
+
+                Dim count = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
+                              "", "", "", 1, 10000, _
+                              estado, "", idVendedor, idCorredor, _
+                              idDestinatario, idIntermediario, _
+                              idRemComercial, idArticulo, idProcedencia, idDestino, _
+                              iisNull(dr.Item("AplicarANDuORalFiltro"), 0), iisNull(dr.Item("modo")), _
+                              iisValidSqlDate(fechadesde, #1/1/1753#), _
+                             iisValidSqlDate(fechahasta, #1/1/2100#), _
+                              puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos, , , , , True)
+
+                Dim dt = EntidadManager.ExecDinamico(SC, count)
+                lineasGeneradas = dt.Rows(0).Item(0)
+                If lineasGeneradas = 0 Then Return -1
+
+
+
                 strSQL = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(SC, _
                                "", "", "", 1, 10000, _
                                estado, "", idVendedor, idCorredor, _
@@ -2573,6 +2647,8 @@ Public Class CartaDePorteManager
                                iisValidSqlDate(fechadesde, #1/1/1753#), _
                               iisValidSqlDate(fechahasta, #1/1/2100#), _
                                puntoventa, titulo, EnumSyngentaDivision, , contrato, , IdClienteAuxiliar, AgrupadorDeTandaPeriodos)
+
+
 
 
                 stopWatch.Stop()
@@ -2670,7 +2746,9 @@ Public Class CartaDePorteManager
                 sExcelFileName = Path.GetTempPath & "Listado general " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
-                lineasGeneradas = 0 ' dt.Rows.Count
+                'lineasGeneradas = 0 ' dt.Rows.Count
+
+
 
                 'If System.Diagnostics.Debugger.IsAttached() And dt.Rows.Count > 50000 Then
                 '    'Err.Raise(32434, "generarNotasDeEntrega", "Modo IDE. Mail muy grande. No se enviará")
@@ -2776,7 +2854,7 @@ Public Class CartaDePorteManager
             ElseIf NombreCliente(SC, idVendedor) = "CRESUD SACIF Y A" Or NombreCliente(SC, idRemComercial) = "CRESUD SACIF Y A" Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl"
-            ElseIf NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
+            ElseIf NombreCliente(SC, IdClienteAuxiliar) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idVendedor) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idRemComercial) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idDestinatario) = "MULTIGRAIN ARGENTINA S.A." Or NombreCliente(SC, idIntermediario) = "MULTIGRAIN ARGENTINA S.A." Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11373
                 rdl = AppDomain.CurrentDomain.BaseDirectory & "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl"
 
@@ -4240,6 +4318,69 @@ Public Class CartaDePorteManager
 
     End Function
 
+
+
+    Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL_COUNT(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
+                                                   ByVal strWHERE As String, bInsertarEnTablaTemporal As Boolean, _
+                                                   Optional maxrows As Integer = 0) As String
+
+
+        'lo que sea dinámico, lo tendré que migrar para evitar inyeccion
+
+        If maxrows > 0 Then
+            maxrows = Min(maxrows, _CONST_MAXROWS)
+        Else
+            maxrows = _CONST_MAXROWS
+        End If
+
+        'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
+
+
+        Dim strSQL = String.Format("  SELECT count(*) ")
+
+        Dim strFROM = _
+        "   FROM    CartasDePorte CDP " & _
+        "          LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTREG ON CDP.IdClienteEntregador= CLIENTREG.IdCliente " & _
+        "       LEFT OUTER JOIN Clientes CLIENTFLET ON CDP.IdClientePagadorFlete= CLIENTFLET.IdCliente " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor " & _
+        "       LEFT OUTER JOIN Vendedores CLICOR2 ON CDP.Corredor2 = CLICOR2.IdVendedor " & _
+        "       LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente " & _
+        "        LEFT OUTER JOIN Clientes CLISC1 ON CDP.Subcontr1 = CLISC1.IdCliente " & _
+        "         LEFT OUTER JOIN Clientes CLISC2 ON CDP.Subcontr2 = CLISC2.IdCliente " & _
+        "         LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
+        "          LEFT OUTER JOIN Calidades ON CDP.CalidadDe = Calidades.IdCalidad " & _
+        "           LEFT OUTER JOIN Transportistas ON CDP.IdTransportista = Transportistas.IdTransportista " & _
+        "			LEFT OUTER JOIN Choferes ON CDP.IdChofer = Choferes.IdChofer " & _
+        "           LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+        "           LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia " & _
+        "           LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
+        "           LEFT OUTER JOIN CDPEstablecimientos ESTAB ON CDP.IdEstablecimiento = ESTAB.IdEstablecimiento " & _
+        "            LEFT OUTER JOIN Facturas FAC ON CDP.idFacturaImputada = FAC.IdFactura " & _
+        "            LEFT OUTER JOIN Clientes CLIFAC ON CLIFAC.IdCliente = FAC.IdCliente " & _
+        "            LEFT OUTER JOIN Partidos PARTORI ON LOCORI.IdPartido = PARTORI.IdPartido " & _
+        "            LEFT OUTER JOIN Provincias PROVDEST ON LOCDES.IdProvincia = PROVDEST.IdProvincia " & _
+        "  LEFT OUTER JOIN Empleados E1 ON CDP.IdUsuarioIngreso = E1.IdEmpleado "
+
+
+
+
+        strWHERE += CartaDePorteManager.EstadoWHERE(estado, "CDP.").Replace("#", "'")
+
+
+        strSQL += strFROM + strWHERE
+        Debug.Print(strWHERE)
+
+
+        Return strSQL
+
+
+
+
+    End Function
 
 
     Shared Function GetListDataTableDinamicoConWHERE_2_CadenaSQL(ByVal SC As String, ByVal estado As CartaDePorteManager.enumCDPestado, _
@@ -7242,9 +7383,29 @@ Public Class CartaDePorteManager
 
     End Function
 
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String)
+
+    Shared Sub ImputoElEmbarque(ByVal idMov As Integer, ByVal idfactura As Integer, _
+                                ByVal SC As String, ByVal nombreUsuario As String, renglonimputado As Integer)
 
 
 
@@ -7263,17 +7424,36 @@ Public Class CartaDePorteManager
 
 
 
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+        Dim a = (From f In db.linqDetalleFacturas _
+                Where f.IdFactura = idfactura _
+                Order By f.IdDetalleFactura Select f.IdDetalleFactura).ToList
+
+        Dim iddetallefact As Long = a(renglonimputado)
+
+
+
+
+
         Dim dt = EntidadManager.ExecDinamico(SC, "SELECT IdFacturaImputada from CartasPorteMovimientos WHERE IdCDPMovimiento=" & idMov)
         If iisNull(dt(0)("IdFacturaimputada"), 0) > 0 Then
             Err.Raise(6464, , "Ya tiene una factura imputada")
         End If
 
         EntidadManager.ExecDinamico(SC, "UPDATE CartasPorteMovimientos SET IdFacturaImputada=" & idfactura & "  WHERE IdCDPMovimiento=" & idMov)
+        EntidadManager.ExecDinamico(SC, "UPDATE CartasPorteMovimientos SET IdDetalleFactura=" & iddetallefact & "  WHERE IdCDPMovimiento=" & idMov)
+
 
         EntidadManager.LogPronto(SC, idfactura, "Imputacion de IdCPorteMovimiento " & idMov & " IdFacturaImputada " & idfactura, nombreUsuario)
 
 
     End Sub
+
+
+
+
 
     Shared Sub ImputoLaCDP(ByVal oCDP As Pronto.ERP.BO.CartaDePorte, ByVal idfactura As Integer, ByVal SC As String, ByVal nombreUsuario As String, imput As List(Of LogicaFacturacion.grup))
 
@@ -7290,7 +7470,7 @@ Public Class CartaDePorteManager
                     (From p In imput _
                     Where p.cartas.Any(Function(x) x.Id = oCDP.Id) _
                     Select p).First
-        
+
         Dim ind As Integer = imput.IndexOf(q)
 
 
@@ -7335,6 +7515,18 @@ Public Class CartaDePorteManager
 
     End Sub
 
+
+
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Shared Function EsteTitularSeleFacturaAlCorredorPorSeparadoId(ByVal idCDP As Long, ByVal SC As String) As Long
 
@@ -13657,9 +13849,14 @@ Public Class LogicaFacturacion
 
                     Next
 
-                    For Each o In listEmbarques
-                        CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName))
+
+                    Dim imp = imputaciones.Count
+                    For n = 0 To listEmbarques.Count - 1
+                        Dim o As DataRow = listEmbarques(n)
+                        Dim renglonimputado = imp + n
+                        CartaDePorteManager.ImputoElEmbarque(o("SubnumeroVagon"), idFactura, SC, Session(SESSIONPRONTO_UserName), renglonimputado)
                     Next
+
 
                     EntidadManager.LogPronto(SC, idFactura, "Factura De CartasPorte: id" & idFactura & " " & optFacturarA & " AGR:" & agruparArticulosPor & " busc:" & txtBuscar, Session(SESSIONPRONTO_UserName))
 
@@ -14699,6 +14896,62 @@ Public Class LogicaFacturacion
 
 
 
+
+
+                    For Each dr In listEmbarques
+
+                        
+                        With .DetFacturas.Item(-1)
+                            With .Registro
+                                'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
+                                'Debug.Print(dr.item("IdArticulo"))
+
+
+                                .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
+                                .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
+                                .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
+                                .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
+                                .Fields("Costo").Value = 0
+                                .Fields("Bonificacion").Value = 0
+                                .Fields("OrigenDescripcion").Value = 1
+
+
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
+                                'En el primero imprimir la leyenda \"ATENCION BUQUE\"
+                                'En el segundo: Nombre del Buque - Cereal - Puerto
+
+                                Dim obsEmbarque As String = "BUQUE " & dr.Item("Corredor") & SEPAR & "  " & dr.Item("DestinoDesc")
+
+
+                                .Fields("Observaciones").Value = obsEmbarque
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+                                '////////////////////////////////////////////////////////////////
+
+
+                            End With
+                            .Modificado = True
+
+                        End With
+                    Next
+
+
+
+
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+                    '////////////////////////////////////////////////////////////////////////////
+
+
+
+
                     If Not dtRenglonesManuales Is Nothing Then
 
                         Dim K_idartcambio As Integer = GetIdArticuloParaCambioDeCartaPorte(SC)
@@ -14760,52 +15013,6 @@ Public Class LogicaFacturacion
 
 
 
-                    For Each dr In listEmbarques
-
-                        With .DetFacturas.Item(-1)
-                            With .Registro
-                                'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
-                                'Debug.Print(dr.item("IdArticulo"))
-
-
-                                .Fields("IdArticulo").Value = BuscaIdArticuloPreciso(dr.Item("Producto"), SC) 'mIdArticuloParaImportacionFacturas
-                                .Fields("Cantidad").Value = dr.Item("KgNetos") / 1000 'le pasé la división por mil a la tarifa porque acá hacen un truco, y en el Pronto solo tengo 2 decimales
-                                .Fields("PrecioUnitario").Value = dr.Item("TarifaFacturada")
-                                .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value
-                                .Fields("Costo").Value = 0
-                                .Fields("Bonificacion").Value = 0
-                                .Fields("OrigenDescripcion").Value = 1
-
-
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=8946
-                                'En el primero imprimir la leyenda \"ATENCION BUQUE\"
-                                'En el segundo: Nombre del Buque - Cereal - Puerto
-
-                                Dim obsEmbarque As String = "BUQUE " & dr.Item("Corredor") & SEPAR & "  " & dr.Item("DestinoDesc")
-
-
-                                .Fields("Observaciones").Value = obsEmbarque
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-                                '////////////////////////////////////////////////////////////////
-
-
-                            End With
-                            .Modificado = True
-
-                        End With
-                    Next
-
-
-
-
-
-                    '////////////////////////////////////////////////////////////////////////////
-                    '////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////
                     'agregar renglon de "Gastos administrativos"
@@ -18981,7 +19188,10 @@ Public Class LogicaImportador
 
                     dr = dt.NewRow()
                     For i As Integer = 0 To currentRow.Length - 1
-                        If i = 43 Then currentRow(i) = currentRow(i).Substring(0, 50)
+                        If i = 43 Then
+                            currentRow(i) = currentRow(i).Substring(0, IIf(currentRow(i).Length > 50, 50, currentRow(i).Length))
+                        End If
+
                         dr(i) = currentRow(i)
                     Next
                     dt.Rows.Add(dr)

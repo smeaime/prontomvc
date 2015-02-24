@@ -517,6 +517,96 @@ function SerializaForm() {
     return cabecera;
 
 }
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarCuenta(acceptId, ui) {
+
+
+
+    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+    var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
+    var j = 0, tmpdata = {}, dropname;
+    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    //var prox = ProximoNumeroItem();
+    try {
+        //					for (var key in getdata) {
+        //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
+        //							dropname = dropmodel[j].name;
+        //							tmpdata[dropname] = getdata[key];
+        //						}
+        //						j++;
+        //					}
+        tmpdata['IdDetalleComprobanteProveedor'] = 0;
+
+        tmpdata['IdCuenta'] = getdata['IdCuenta'];
+        tmpdata['Codigo'] = getdata['Codigo'];
+        tmpdata['Descripcion'] = getdata['Cuenta'];
+        //        tmpdata['OrigenDescripcion'] = 1;
+        //        var now = new Date();
+        //        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+        //        tmpdata['FechaEntrega'] = currentDate;
+        //        tmpdata['IdUnidad'] = getdata['IdUnidad'];
+        //        tmpdata['Unidad'] = getdata['Unidad'];
+        //        tmpdata['IdDetalleRequerimiento'] = 0;
+        //        tmpdata['Cantidad'] = 0;
+        //        tmpdata['NumeroItem'] = prox++;
+        getdata = tmpdata;
+    } catch (e) { }
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+
+
+    // o agarrar la primera linea vacía:
+    $("#Lista").jqGrid('addRowData', grid, getdata);
+    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
+
+
+
+
+
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
+
+
+    RefrescarOrigenDescripcion();
+    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+
+
+    //   var rows = $("#Lista").getGridParam("reccount");
+    //    if (rows > 4) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+    // Validar();
+
+
+
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 $(function () {
 
 
@@ -535,10 +625,9 @@ function DeSerializaForm() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1695,79 +1784,6 @@ function CopiarComparativa(acceptId, ui) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarCuenta(acceptId, ui) {
-
-
-
-    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-    var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
-    var j = 0, tmpdata = {}, dropname;
-    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    //var prox = ProximoNumeroItem();
-    try {
-        //					for (var key in getdata) {
-        //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
-        //							dropname = dropmodel[j].name;
-        //							tmpdata[dropname] = getdata[key];
-        //						}
-        //						j++;
-        //					}
-        tmpdata['IdDetalleComprobanteProveedor'] = 0;
-
-        tmpdata['IdCuenta'] = getdata['IdCuenta'];
-        tmpdata['Codigo'] = getdata['Codigo'];
-        tmpdata['Descripcion'] = getdata['Cuenta'];
-        //        tmpdata['OrigenDescripcion'] = 1;
-        //        var now = new Date();
-        //        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        //        tmpdata['FechaEntrega'] = currentDate;
-        //        tmpdata['IdUnidad'] = getdata['IdUnidad'];
-        //        tmpdata['Unidad'] = getdata['Unidad'];
-        //        tmpdata['IdDetalleRequerimiento'] = 0;
-        //        tmpdata['Cantidad'] = 0;
-        //        tmpdata['NumeroItem'] = prox++;
-        getdata = tmpdata;
-    } catch (e) { }
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-
-
-    // o agarrar la primera linea vacía:
-    $("#Lista").jqGrid('addRowData', grid, getdata);
-    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
-
-
-
-
-
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-
-
-
-
-    RefrescarOrigenDescripcion();
-    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-
-
-    //   var rows = $("#Lista").getGridParam("reccount");
-    //    if (rows > 4) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-    // Validar();
-
-
-
-}
-
-
 
 
 
@@ -1821,7 +1837,7 @@ function CopiarCuenta(acceptId, ui) {
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'ComprobanteProveedor/BatchUpdate',
+            url: ROOT + 'ComprobanteProveedor/BatchUpdate_CuentaCorriente',
             dataType: 'json',
             data: JSON.stringify(cabecera), // $.toJSON(cabecera),
             success: function (result) {

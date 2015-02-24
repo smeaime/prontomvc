@@ -40,6 +40,121 @@
         }
 
 
+
+        <div class="modal" id="loading">
+            <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
+            Cargando...
+        </div>
+        <style>
+            /* probando cómo zafar del color en los border del arbol de la izquierda */
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-color: rgb(234, 234, 234) /* rgba(213, 175, 175, 0); */;
+            }
+        </style>
+        <style>
+            .container-fluid {
+                /*    margin-right: 15px; */
+                padding-left: 0; /* padding-right: 0px ; */
+            }
+
+            form {
+                margin: 0 0 2px;
+            }
+        </style>
+        <style>
+            .ui-jqgrid tr.footrow-ltr td {
+                border-right-color: transparent !important;
+                border: 0 transparent !important;
+            }
+        </style>
+        <style>
+            .accordion-heading {
+                /*   font-size: 25px !important;  */
+            }
+
+            /* http://stackoverflow.com/questions/13778703/adding-open-closed-icon-to-twitter-bootstrap-collapsibles-accordions */
+            .accordion-caret .accordion-toggle:hover {
+                text-decoration: none;
+            }
+
+                .accordion-caret .accordion-toggle:hover span, .accordion-caret .accordion-toggle:hover strong {
+                    text-decoration: underline;
+                }
+
+            .accordion-caret .accordion-toggle:before {
+                font-size: 20px;
+                vertical-align: -3px;
+            }
+
+            .accordion-caret .accordion-toggle:not(.collapsed):before {
+                content: "▾";
+                margin-right: 0px;
+            }
+
+            .accordion-caret .accordion-toggle.collapsed:before {
+                content: "▸";
+                margin-right: 0px;
+            }
+        </style>
+        @if (false)
+        {
+
+
+            <style>
+                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+
+                .ui-jqgrid {
+                    border-right-width: 0px;
+                    border-left-width: 0px;
+                }
+                    /* If you need to remove all grid's borders you can use
+
+                .ui-jqgrid { border-width: 0px; }
+                If you want additionally remove vertical border between the cells in the grid you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        /* border-right-color: transparent; */
+                        border-right-color: #E4E4E4;
+                    }
+
+
+
+
+                    /*To remove horizontal border between the rows you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        /* border-right-color: transparent; */
+                        border-right-color: #E4E4E4;
+                    }
+                /*To remove vertical borders between the column headers you can use */
+
+                th.ui-th-column {
+                    /*    border-right-color: transparent !important; */
+                    border-right-color: rgb(234, 234, 234) !important;
+                }
+                /* or alternatively (without the usage of !important) */
+
+                .ui-jqgrid-labels .ui-th-column {
+                    /* border-right-color: transparent;*/
+                    border-right-color: #E4E4E4;
+                }
+            </style>
+        }
+        <style>
+            /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
+            tr.jqgrow > td.textInDiv > div {
+                max-height: 30px;
+                height: 30px;
+                overflow: auto;
+            }
+
+            td.form-view-data > span > div {
+                max-height: 30px;
+                height: 30px;
+                overflow: auto;
+            }
+        </style>
+
         <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
 
             @*http://stackoverflow.com/questions/6431881/css-layout-for-fixed-header-and-100-content-height*@
@@ -54,7 +169,7 @@
                         @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            <span class="span1" style="padding-top: 15px; width: 110px">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+                            <span class="span1" style="padding-top: 15px; width: 110px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
                             @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
                             <span class="" style="padding-top: 15px; width: 10px">/ </span>
                             @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
@@ -92,7 +207,7 @@
                 <div class="row-fluid">
                     <div class="span4 lightblue">
                         @Html.LabelFor(model => model.IdComprador, "Comprador")
-                        @Html.DropDownList("IdComprador", String.Empty)
+                        @Html.DropDownList("IdComprador", null, String.Empty, new { @class = "span12" })
                         @Html.ValidationMessageFor(model => model.IdComprador)
                     </div>
                     <!--/span-->
@@ -116,7 +231,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                        @Html.DropDownList("Aprobo", String.Empty)
+                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.Aprobo)
                                     </div>
                                     <!--/span-->
@@ -131,7 +246,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                        @Html.DropDownList("IdCondicionCompra", String.Empty)
+                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                     </div>
                                     <!--/span-->
@@ -152,7 +267,7 @@
                                 <div class="row-fluid">
                                     <div class="span3 lightblue">
                                         @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                        @Html.DropDownList("IdPlazoEntrega", String.Empty)
+                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
                                         @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
                                     </div>
                                     <!--/span-->
@@ -244,8 +359,12 @@
                                 /*  background-image: none; */
                             }
                         </style>
+                     
+
                         <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                               style="font-size: 17px;"></table>
+                               style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
+                            @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
+                        </table>
                     </div>
                 </div>
                 @* <div id="ListaPager" class="scroll">
@@ -278,7 +397,7 @@
                                 MONEDA :
                             </td>
                             <td width="100">
-                                @Html.DropDownList("IdMoneda", String.Empty)
+                                @Html.DropDownList("IdMoneda", null, String.Empty, new { @class = "span12" })
                             </td>
                         </tr>
                         <tr>
@@ -758,6 +877,14 @@
                 try {
                     $('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
                     var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+
+
+
+                    var iddeta = data['IdDetallePresupuesto'];
+                    //alert(iddeta);
+                    if (!iddeta) continue;
+
 
                     data1 = '{"IdPresupuesto":"' + $("#IdPresupuesto").val() + '",'
                     for (var j = 0; j < colModel.length; j++) {

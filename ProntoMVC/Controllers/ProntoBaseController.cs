@@ -1824,7 +1824,7 @@ namespace ProntoMVC.Controllers
         public Guid EmpleadoEquivalente(int id)
         {
 
-
+            if (id <= 0) return new Guid();
 
             string usuario = db.Empleados.Find(id).UsuarioNT.ToLower();
 

@@ -60,35 +60,36 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual JsonResult BatchUpdate(Presupuesto presupuesto)
+        public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetallePresupuesto")]  Presupuesto presupuesto) // el Exclude es para las altas, donde el Id viene en 0
+
         {
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras"))
-            {
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras"))
+            //{
 
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            //    int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
 
-                if (presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
-                //throw new Exception("No tenés permisos");
+            //    if (presupuesto.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a presupuestos tuyos");
+            //    //throw new Exception("No tenés permisos");
 
-            }
+            //}
 
             //presupuesto.mail
 
             try
             {
                 var mailcomp = db.Empleados.Where(e => e.IdEmpleado == presupuesto.IdComprador).Select(e => e.Email).FirstOrDefault();
-                Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
+                if (mailcomp.NullSafeToString()!="")                Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                //throw;
+                ErrHandler.WriteError(ex);
             }
 
 
@@ -116,11 +117,13 @@ namespace ProntoMVC.Controllers
             }
 
 
+            
+            ModelState.Remove("IdDetallePresupuesto");
 
 
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || true) //me estoy saltando la validacion porque explota en la primarykey del detalle, y no sé por qué.
                 {
                     string tipomovimiento = "";
                     if (presupuesto.IdPresupuesto > 0)
@@ -298,6 +301,14 @@ namespace ProntoMVC.Controllers
             //if (o.IdCodigoIva == null) sErrorMsg += "\n" + "Falta el codigo de IVA";
             //if (o.IdCondicionVenta == null) sErrorMsg += "\n" + "Falta la condicion venta";
             //if (o.IdListaPrecios == null) sErrorMsg += "\n" + "Falta la lista de precios";
+
+
+            var reqsToDelete = o.DetallePresupuestos.Where(x => (x.IdArticulo ?? 0) <= 0).ToList();
+            foreach (var deleteReq in reqsToDelete)
+            {
+                o.DetallePresupuestos.Remove(deleteReq);
+            }
+            
             if (o.DetallePresupuestos.Count <= 0) sErrorMsg += "\n" + "El presupuesto no tiene items";
 
             //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");

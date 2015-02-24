@@ -1253,6 +1253,9 @@ Released   : 20120723
     </script>
 </head>
 <body>
+
+
+
     <style>
         .nav .dropdown-toggle .caret {
             margin-top: 11px;
@@ -1644,6 +1647,8 @@ Released   : 20120723
                                                     Mi cuenta
                                                 </a>
                                             </li>
+
+                                            <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Monitoreo: google analytics, traza de sql profiler, sqlnexus, perfmon.exe </a></li>
 
                                             <li><a href="@Url.Content("~")Acceso\\Edit\\-1">Enviar comentario/captura </a></li>
                                             <li>
@@ -2227,6 +2232,7 @@ Released   : 20120723
                 }
 
 
+
                 function conmutarPanelesDerecho() {
 
                     //pageLayout.toggle('east');
@@ -2238,8 +2244,12 @@ Released   : 20120723
 
                         pageLayout.show('east', true);
                         pageLayout.open('east');
+
+                        $("#btnConmutarPanelDerecho").hide();
                     }
                     else {
+
+                        $("#btnConmutarPanelDerecho").show();
 
                         pageLayout.hide('east');
 
@@ -2431,15 +2441,33 @@ Released   : 20120723
                                 @RenderBody()
 
 
-                            </div>
+
+                                
+                                    <button type="button" class="btn btn-small clearfix"
+                                            id="btnConmutarPanelDerecho"
+                                            value="Buscar"
+                                            style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                            onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+                                        pageLayout.hide('north');
+                                        RefrescaAnchoGrillaDetalle(); ">
+                                        Grillas
+                                    </button>
+
+                                
+
+                                    <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
+                                            style="display: none; "></button>
+
+
+                                    <script>
+
+
+
+                                        $('.alert .close').live("click", function (e) {
+                                            $(this).parent().hide();
+                                        });</script>
+                                </div>
                             @*<span class="span1 lightblue"></span>*@
-                            <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                                    style="display: none;"></button>
-                            </button>
-                            <script>
-                                $('.alert .close').live("click", function (e) {
-                                    $(this).parent().hide();
-                                });</script>
                         </span>
                     </div>
                 </div>
@@ -2802,12 +2830,23 @@ Released   : 20120723
 
 
 
+                @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
 
-                @MiniProfiler.RenderIncludes(position: RenderPosition.Right )
+
+
+
+
+
+
+
 
 
             </body>
         </html>
+
+
+
+
         <style>
             /*  .ui-layout-west
                     {
@@ -2822,7 +2861,7 @@ Released   : 20120723
         </style>
         <script>
 
-         
+
 
 
 
@@ -2911,5 +2950,10 @@ Released   : 20120723
         <script>
             $(function () {
                 estiloArbol();
+
+                if (!(pageLayout.state.east.isHidden || pageLayout.state.east.isClosed)) {
+                    $("#btnConmutarPanelDerecho").hide();
+                }
+
             })
         </script>
