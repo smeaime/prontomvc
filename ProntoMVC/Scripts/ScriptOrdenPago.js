@@ -1742,6 +1742,7 @@ $(function () {
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
     function SerializaForm() {
+        saveEditedCell("");
         var cm, colModel, dataIds, data1, data2, valor, iddeta, i, j, nuevo;
         var cabecera = $("#formid").serializeObject();
         cabecera.IdProveedor = $("#IdProveedor").val();
