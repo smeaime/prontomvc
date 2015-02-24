@@ -94,6 +94,70 @@ Namespace Pronto.ERP.Bll
             End Try
 
         End Sub
+
+
+
+        Shared Sub CambiarElNombreDeLaPrimeraHojaDeYPF(ByVal fileName As String)
+            'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+            Dim oXL As Excel.Application
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+            Dim oRng As Excel.Range
+            Dim oWBs As Excel.Workbooks
+
+            Try
+                '  creat a Application object
+                oXL = New Excel.ApplicationClass()
+                '   get   WorkBook  object
+                oWBs = oXL.Workbooks
+
+                Try
+                    oWB = oWBs.Open(fileName, Reflection.Missing.Value, Reflection.Missing.Value, _
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+        Reflection.Missing.Value, Reflection.Missing.Value)
+                Catch ex As Exception
+
+                End Try
+
+                'dejé de usar .Sheets
+                oSheet = CType(oWB.Worksheets(1), Microsoft.Office.Interop.Excel.Worksheet)
+                oSheet.Name = "CCPP"
+
+                oSheet = CType(oWB.Worksheets(2), Microsoft.Office.Interop.Excel.Worksheet)
+                oSheet.Name = "Calidad"
+
+
+                oXL.ActiveWorkbook.Save()
+
+
+
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Finally
+                Try
+                    'The service (excel.exe) will continue to run
+                    If Not oWB Is Nothing Then oWB.Close(False)
+                    NAR(oWB)
+                    oWBs.Close()
+                    NAR(oWBs)
+                    'quit and dispose app
+                    oXL.Quit()
+                    NAR(oXL)
+                    'VERY IMPORTANT
+                    GC.Collect()
+
+                    'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+                Catch ex As Exception
+                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                End Try
+            End Try
+
+        End Sub
+
         'Private Shared _iisValidSqlDate As Object
 
         'Private Shared Property iisValidSqlDate(ByVal p1 As Date) As Object
@@ -2737,6 +2801,20 @@ Namespace Pronto.ERP.Bll
 
 
 
+                '                	Las solapas no tienen el nombre que corresponde , la primera debe ser “CCPP” y la segunda “Calidad”.
+                '•	Hay celdas pintadas , deben ir sin color.
+                '•	En Cuit de Corredor hay números erróneos
+                '•	Los destinos (centros) son incorrectos. (Adjunto te envío el listado)
+
+
+                '•	Patente camión y patente acoplado , las letras deben ir en mayúscula 
+                '•	La fecha de descarga debe tener formato fecha 
+
+                '                •	En Cuit de Corredor hay números erróneos - Evidentemente es por los corredores directos (CUIT: 88000000122)
+                '•	Los destinos (centros) son incorrectos. (Adjunto te envío el listado) - Por lo que veo tiene que ir el dato de la columna "Centro" del archivo Centros todos LP2.xlsx y está yendo el codigo ONCCA, tenemos el dato del código de "Centro" ?
+                If cdp.CorredorCUIT = "88000000122" Then cdp.CorredorCUIT = ""
+
+
 
                 '  Las columnas Destino (Centro),  Fecha Descarga SIEMPRE deben tener formato TEXTO. El resto de las columnas, formato GENERAL
 
@@ -2777,13 +2855,13 @@ Namespace Pronto.ERP.Bll
 
 
 
-                cdp.Patente = cdp.Patente.Replace(" ", "")
-                cdp.Acoplado = cdp.Acoplado.Replace(" ", "")
+                cdp.Patente = cdp.Patente.Replace(" ", "").ToUpper
+                cdp.Acoplado = cdp.Acoplado.Replace(" ", "").ToUpper
 
 
 
                 If cdp.Establecimiento = "" Then
-                   
+
                     ' sErrores &= "<a href=""CartaDePorte.aspx?Id=" & cdp.IdCartaDePorte & """ target=""_blank"">" & cdp.NumeroCartaDePorte & " sin Establecimiento</a>; <br/> "
                 End If
 
