@@ -10794,10 +10794,17 @@ declare @PrecioEmbarque money
 declare @PrecioEmbarque2 money
 declare @MaximaCantidadParaPrecioEmbarque NUMERIC(18, 2)
 
+declare @FechaVigencia Datetime
+
+
+
 	
             SELECT TOP 1 @idlistaPrecio=idListaPrecios FROM Clientes WHERE idCliente=@idCliente
 
- 
+            SELECT TOP 1 @FechaVigencia=idListaPrecios FROM ListasPrecios WHERE IdListaPrecios=@idlistaPrecio
+
+			if   @FechaVigencia<GetDate() return 0
+	
 
 			SELECT TOP 1 @Precio=precio,@PrecioRepetidoPeroConPrecision=PrecioRepetidoPeroConPrecision
 						,@PrecioExportacion=PrecioExportacion, @PrecioEmbarque=PrecioEmbarque, @PrecioEmbarque2=PrecioEmbarque2, 
@@ -10831,7 +10838,7 @@ end
 						
 go
 
---print dbo.wTarifaWilliams 1,1,1
+--print dbo.wTarifaWilliams (1,1,1,null,null)
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -438,6 +438,8 @@ GO
 
 
 
+
+
 --exec  sp_help 'listaspreciosdetalle'
 alter table listaspreciosdetalle add 
 	PrecioExportacion	money null,
