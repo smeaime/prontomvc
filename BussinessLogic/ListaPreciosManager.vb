@@ -223,7 +223,7 @@ Namespace Pronto.ERP.Bll
            "  Descripcion as [Descripcion], " & _
             " IdListaPrecios as [IdAux1], " & _
            "  NumeroLista as [Numero], " & _
-            " FechaVigencia as [Fecha vig.], " & _
+            " FechaVigencia, " & _
             " Activa as [Activa?], " & _
             " Monedas.Nombre as [Moneda] " & _
             " FROM ListasPrecios " & _
