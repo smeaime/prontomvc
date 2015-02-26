@@ -92,8 +92,8 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="ALTERTABLE 2011 Modulo WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
@@ -140,8 +140,8 @@
           <FullPath>Insert into Parametros 2010 WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevas_Tablas WEB.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Nuevas_Tablas WEB.sql</FullPath>
         </FileNode>
@@ -158,8 +158,8 @@
           <FullPath>Nuevos_Func WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="Nuevos_SP WEB desarrollo.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>Nuevos_SP WEB desarrollo.sql</FullPath>
         </FileNode>
@@ -188,8 +188,8 @@
           <FullPath>Nuevos_SP en BdlMaster WEB.sql</FullPath>
         </FileNode>
         <FileNode Name="SQLQuery1.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>SQLQuery1.sql</FullPath>
         </FileNode>
@@ -216,6 +216,12 @@
           <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wTarifaWilliams.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>wTarifaWilliams.sql</FullPath>
         </FileNode>
         <FileNode Name="monitoreo_ las 10 peores .sql">
           <AssociatedConnectionMoniker />
@@ -338,8 +344,8 @@
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
         </FileNode>

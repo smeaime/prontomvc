@@ -39,9 +39,13 @@ declare @FechaVigencia Datetime
 	
             SELECT TOP 1 @idlistaPrecio=idListaPrecios FROM Clientes WHERE idCliente=@idCliente
 
-            SELECT TOP 1 @FechaVigencia=idListaPrecios FROM ListasPrecios WHERE IdListaPrecios=@idlistaPrecio
+            SELECT TOP 1 @FechaVigencia=FechaVigencia FROM ListasPrecios WHERE IdListaPrecios=@idlistaPrecio
 
-			if   @FechaVigencia<GetDate() return 0
+			if ((  @FechaVigencia<GetDate() ) and (@FechaVigencia is not null) )
+			begin
+				return 0
+				--set @FechaVigencia=@FechaVigencia
+			end
 	
 
 			SELECT TOP 1 @Precio=precio,@PrecioRepetidoPeroConPrecision=PrecioRepetidoPeroConPrecision
@@ -77,6 +81,8 @@ end
 go
 
 --print dbo.wTarifaWilliams (1,1,1,null,null)
+
+--select * from ListasPrecios
 
 --/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
