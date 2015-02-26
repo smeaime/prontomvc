@@ -17255,6 +17255,8 @@ Public Class barras
 
         For Each idfac In Facturas 'GetListaDeFacturasTildadas()
 
+            Dim bMarcar As Boolean = True
+
             ErrHandler.WriteError("idfac " & idfac)
 
 
@@ -17301,7 +17303,11 @@ Public Class barras
             ErrHandler.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
 
 
-            If destinatario.ToString = "" Then sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
+            If destinatario.ToString = "" Then
+                sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
+                bMarcar = False
+            End If
+
 
 
             If bVistaPrevia Then
@@ -17374,7 +17380,7 @@ Public Class barras
                      ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", "Factura Electrónica Williams Entregas", "", True)
 
 
-            MarcarEnviada(SC, idfac)
+            If bMarcar Then MarcarEnviada(SC, idfac)
 
         Next
 

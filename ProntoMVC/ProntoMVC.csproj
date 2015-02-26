@@ -897,6 +897,8 @@
     <Content Include="Views\Remito\Index.cshtml" />
     <Content Include="Views\Recibo\EditOT.cshtml" />
     <Content Include="Views\TiposComprobante\Index.cshtml" />
+    <Content Include="Views\Recepcion\Edit.cshtml" />
+    <Content Include="Views\Recepcion\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
