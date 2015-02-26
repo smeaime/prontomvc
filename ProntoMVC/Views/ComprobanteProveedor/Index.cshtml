@@ -75,8 +75,15 @@ If you want additionally remove vertical border between the cells in the grid yo
     <div class="row-fluid ">
         <div class="span12 lightblue">
             <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary span2 ">
-                Nuevo
+                Nuevo de Cta Cte
             </button>
+            <button onclick="window.location.href='@Url.Action("EditOT", new { id = -1 })'" class="btn btn-default span2 ">
+                Nuevo de Otros
+            </button>
+            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-default span2 ">
+                Nuevo Fondo fijo
+            </button>
+
             <div class="span4">
                 <div class="input-prepend input-append">
                     @* <div class="btn-group ">
