@@ -13,7 +13,8 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Reflection;
-using ProntoMVC.Data.Models; using ProntoMVC.Models;
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
@@ -21,7 +22,7 @@ using System.Web.Security;
 
 namespace ProntoMVC.Controllers
 {
- //   [Authorize(Roles = "Administrador,SuperAdmin,Compras,Externo,AdminExterno")]
+    //   [Authorize(Roles = "Administrador,SuperAdmin,Compras,Externo,AdminExterno")]
     public partial class PresupuestoController : ProntoBaseController
     {
         public virtual ViewResult Index()
@@ -61,7 +62,6 @@ namespace ProntoMVC.Controllers
 
         [HttpPost]
         public virtual JsonResult BatchUpdate([Bind(Exclude = "IdDetallePresupuesto")]  Presupuesto presupuesto) // el Exclude es para las altas, donde el Id viene en 0
-
         {
             if (!PuedeEditar(enumNodos.Presupuestos)) throw new Exception("No tenés permisos");
 
@@ -83,7 +83,7 @@ namespace ProntoMVC.Controllers
             try
             {
                 var mailcomp = db.Empleados.Where(e => e.IdEmpleado == presupuesto.IdComprador).Select(e => e.Email).FirstOrDefault();
-                if (mailcomp.NullSafeToString()!="")                Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
+                if (mailcomp.NullSafeToString() != "") Generales.enviarmailAlComprador(mailcomp, presupuesto.IdPresupuesto);
 
             }
             catch (Exception ex)
@@ -117,7 +117,7 @@ namespace ProntoMVC.Controllers
             }
 
 
-            
+
             ModelState.Remove("IdDetallePresupuesto");
 
 
@@ -165,14 +165,17 @@ namespace ProntoMVC.Controllers
                     }
                     db.SaveChanges();
 
-                    try
+                    if (false)
                     {
-                        ActivarUsuarioYContacto(presupuesto.IdPresupuesto);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            ActivarUsuarioYContacto(presupuesto.IdPresupuesto);
+                        }
+                        catch (Exception)
+                        {
 
-                        //throw;
+                            //throw;
+                        }
                     }
                     db.wActualizacionesVariasPorComprobante(104, presupuesto.IdPresupuesto, tipomovimiento);
                     try
@@ -308,7 +311,7 @@ namespace ProntoMVC.Controllers
             {
                 o.DetallePresupuestos.Remove(deleteReq);
             }
-            
+
             if (o.DetallePresupuestos.Count <= 0) sErrorMsg += "\n" + "El presupuesto no tiene items";
 
             //string OrigenDescripcionDefault = BuscaINI("OrigenDescripcion en 3 cuando hay observaciones");
