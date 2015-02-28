@@ -7491,7 +7491,7 @@ Public Class CartaDePorteManager
             'verificar que no tiene nada imputado
             Dim dt = EntidadManager.ExecDinamico(SC, "SELECT IdFacturaImputada from CartasDePorte WHERE IdCartaDePorte=" & oCDP.Id)
             If iisNull(dt(0)("IdFacturaimputada"), 0) > 0 Then
-                Err.Raise(6464, , "Ya tiene una factura imputada")
+                Err.Raise(6464, , "Ya tiene una factura imputada. Carta ID= " & oCDP.Id & "  numero " & oCDP.NumeroCartaDePorte)
             End If
 
             EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdFacturaImputada=" & idfactura & "  WHERE IdCartaDePorte=" & oCDP.Id)
@@ -10336,7 +10336,7 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Sub PreProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                            SC As String, desde As String, hasta As String, _
                            puntoVenta As String, ByRef slinks As Object)
 
@@ -10422,7 +10422,7 @@ Public Class LogicaFacturacion
 
     End Sub
 
-    Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Sub PostProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                                         optFacturarA As String, agruparArticulosPor As String, sc As String)
 
 
@@ -11021,9 +11021,10 @@ Public Class LogicaFacturacion
                             ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
                             ByVal sLista As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String)
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, _
+                            ByRef slinks As Object, sesionIdposta As String)
 
-        ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
+        ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId.ToString)
 
         Try
             Dim tildadosEnPrimerPaso As String() = Split(sLista, ",")
@@ -13385,9 +13386,6 @@ Public Class LogicaFacturacion
                                 IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)), _
                                 IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
                         ).Distinct.ToList
-
-
-
 
 
 

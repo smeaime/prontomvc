@@ -512,7 +512,7 @@ Namespace Pronto.ERP.Bll
             Dim dt1 As DataTable = EntidadManager.ExecDinamico(SC, _
                                  "SELECT FechaVigencia  FROM ListasPrecios WHERE idListaPrecios= " & idListaPrecio)
 
-            Dim fechavigencia As Date? = dt1.Rows(0).Item("FechaVigencia")
+            Dim fechavigencia As Date? = iisNull(dt1.Rows(0).Item("FechaVigencia"), Nothing)
 
             If fechavigencia IsNot Nothing And fechavigencia < Now Then
                 Throw New Exception("La tarifa de la lista está vencida")
