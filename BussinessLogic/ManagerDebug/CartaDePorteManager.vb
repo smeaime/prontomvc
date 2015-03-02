@@ -28,6 +28,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports ClaseMigrar.SQLdinamico
 
+Imports System.Drawing
 'Namespace Pronto.ERP.Bll
 
 Imports System.Collections.Generic
@@ -3155,6 +3156,329 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String) As String
+
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        Else
+            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+
+
+            If imagenpathcp <> "" Then
+
+                Try
+                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
+                    If fcp.Exists Then
+                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                    End If
+                    wordFiles.Add(nombrecp)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathcp + " " + nombrecp)
+                End Try
+            End If
+
+
+
+            If imagenpathtk <> "" Then
+
+                Try
+
+                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
+                    If ftk.Exists Then
+                        ftk.CopyTo(sDirFTP + nombretk, True)
+                    End If
+                    wordFiles.Add(nombretk)
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathtk + " " + nombretk)
+                End Try
+            End If
+
+
+
+
+
+            If False Then
+                'juntar las imagenes para DOW
+                'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+                Try
+
+                    Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+
+                    Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                        grfx.DrawImage(oImg2, 100, 100)
+
+
+                    End Using
+
+                    oImg.Save(sDirFTP + nombrecp)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+            End If
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTP + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler.WriteError(s)
+                    ErrHandler.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+        Return output
+
+    End Function
+
+
+
+    Public Shared Function MergeTwoImages(firstImage As System.Drawing.Image, secondImage As System.Drawing.Image) As Bitmap
+
+        'If (firstImage = null) Then Throw New ArgumentNullException("firstImage")
+
+
+        'If (secondImage = null) Then Throw New ArgumentNullException("secondImage")
+
+
+        'int outputImageWidth = firstImage.Width > secondImage.Width ? firstImage.Width : secondImage.Width
+
+        'int outputImageHeight = firstImage.Height + secondImage.Height + 1;
+
+        'Bitmap outputImage = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+
+        'using (Graphics graphics = Graphics.FromImage(outputImage))
+        '{
+        '    graphics.DrawImage(firstImage, new Rectangle(new Point(), firstImage.Size),
+        '        new Rectangle(new Point(), firstImage.Size), GraphicsUnit.Pixel);
+        '    graphics.DrawImage(secondImage, new Rectangle(new Point(0, firstImage.Height + 1), secondImage.Size),
+        '        new Rectangle(new Point(), secondImage.Size), GraphicsUnit.Pixel);
+        '}
+
+        '    Return outputImage
+    End Function
+
+
+
+
+
+
+
+    Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String)
+
+
+        ErrHandler.WriteError("PDFcon_iTextSharp " & filejpg & "   " & filejpg2)
+
+
+
+        Dim document As iTextSharp.text.Document = New iTextSharp.text.Document()
+
+        Using stream = New FileStream(filepdf, FileMode.Create, FileAccess.Write, FileShare.None)
+
+            iTextSharp.text.pdf.PdfWriter.GetInstance(document, stream)
+            document.Open()
+
+
+            If filejpg <> "" Then
+                Using imageStream = New FileStream(filejpg, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                    'Image.SetAbsolutePosition(0, 0)
+                    'Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                    Dim percentage As Decimal = 0.0F
+                    percentage = 540 / Image.Width
+                    Image.ScalePercent(percentage * 100)
+                    document.Add(Image)
+                End Using
+            End If
+            If filejpg2 <> "" Then
+                Using imageStream = New FileStream(filejpg2, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                    Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                    Dim percentage As Decimal = 0.0F
+                    percentage = 540 / Image.Width
+                    Image.ScalePercent(percentage * 100)
+                    document.Add(Image)
+                End Using
+            End If
+
+
+            Try
+                document.Close()
+            Catch ex As Exception
+                ' The document has no pages.
+                'Stack(Trace) : at(iTextSharp.text.pdf.PdfPages.WritePageTree())
+                'at(iTextSharp.text.pdf.PdfWriter.Close())
+                'at(iTextSharp.text.pdf.PdfDocument.Close())
+                'at(iTextSharp.text.Document.Close())
+
+                MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
+                ErrHandler.WriteError(ex)
+                'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
+                Throw
+            End Try
+
+
+
+
+
+        End Using
+
+    End Function
+
+
+
+    'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
+    Public Shared Sub ResizeImage(image As String, Okey As String, key As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+        'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
+        'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
+
+
+        Dim sDir As String
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+        Else
+            sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        End If
+
+
+        ErrHandler.WriteError("ResizeImage " & sDir & image)
+
+
+
+        'Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings(Okey) & image))
+        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(sDir & image)
+
+        'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
+        oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+
+
+        Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
+        ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
+        Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
+
+        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality
+
+        'set smoothing mode to high quality
+        oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        'set the interpolation mode
+        oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+        'set the offset mode
+        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality
+
+        Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
+
+        oGraphic.DrawImage(oImg, oRectangle)
+
+
+
+
+
+        If newimagename = "" Then
+            If image.Substring(image.LastIndexOf(".")) <> ".png" Then
+                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Else
+                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+            End If
+        Else
+            If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
+                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Else
+                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+            End If
+        End If
+        oImg.Dispose()
+    End Sub
+
+
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
