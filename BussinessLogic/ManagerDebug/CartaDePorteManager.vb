@@ -742,7 +742,7 @@ Public Class CartaDePorteManager
 
     End Function
 
-    
+
 
 
     'ReadOnly s_compQuery = CompiledQuery.Compile(Of CartasDePortes, Decimal, IQueryable(Of CartasDePorte))( _
@@ -3173,7 +3173,8 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String) As String
+    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
@@ -3188,6 +3189,10 @@ Public Class CartaDePorteManager
             'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
             'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
+
+
+
+
 
 
 
@@ -3258,26 +3263,45 @@ Public Class CartaDePorteManager
 
 
 
-            If False Then
-                'juntar las imagenes para DOW
-                'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+            If bJuntarCPconTK Then
                 Try
 
-                    Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                    If True Then
+                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
 
-                    Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
                         Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
-                        grfx.DrawImage(oImg2, 100, 100)
+
+                        Dim bimp = MergeTwoImages(oImg, oImg2)
 
 
-                    End Using
+                        bimp.Save(sDirFTP + nombrecp)
 
-                    oImg.Save(sDirFTP + nombrecp)
 
+                        wordFiles.Remove(nombretk)
+                    Else
+
+
+                        'juntar las imagenes para DOW
+                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+
+                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
+
+
+                        End Using
+
+                        oImg.Save(sDirFTP + nombrecp)
+
+
+
+                    End If
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
-
             End If
 
 
@@ -3322,27 +3346,29 @@ Public Class CartaDePorteManager
 
     Public Shared Function MergeTwoImages(firstImage As System.Drawing.Image, secondImage As System.Drawing.Image) As Bitmap
 
-        'If (firstImage = null) Then Throw New ArgumentNullException("firstImage")
+        If (firstImage Is Nothing) Then Throw New ArgumentNullException("firstImage")
 
 
-        'If (secondImage = null) Then Throw New ArgumentNullException("secondImage")
+        If (secondImage Is Nothing) Then Throw New ArgumentNullException("secondImage")
 
 
-        'int outputImageWidth = firstImage.Width > secondImage.Width ? firstImage.Width : secondImage.Width
+        Dim outputImageWidth As Integer = IIf(firstImage.Width > secondImage.Width, firstImage.Width, secondImage.Width)
 
-        'int outputImageHeight = firstImage.Height + secondImage.Height + 1;
+        Dim outputImageHeight = firstImage.Height + secondImage.Height + 1
 
-        'Bitmap outputImage = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+        Dim outputImage As Bitmap = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
 
-        'using (Graphics graphics = Graphics.FromImage(outputImage))
-        '{
-        '    graphics.DrawImage(firstImage, new Rectangle(new Point(), firstImage.Size),
-        '        new Rectangle(new Point(), firstImage.Size), GraphicsUnit.Pixel);
-        '    graphics.DrawImage(secondImage, new Rectangle(new Point(0, firstImage.Height + 1), secondImage.Size),
-        '        new Rectangle(new Point(), secondImage.Size), GraphicsUnit.Pixel);
-        '}
+        Using graphics As Graphics = graphics.FromImage(outputImage)
 
-        '    Return outputImage
+            graphics.DrawImage(firstImage, New Rectangle(New Point(), firstImage.Size),
+                New Rectangle(New Point(), firstImage.Size), GraphicsUnit.Pixel)
+
+            graphics.DrawImage(secondImage, New Rectangle(New Point(0, firstImage.Height + 1), secondImage.Size),
+                New Rectangle(New Point(), secondImage.Size), GraphicsUnit.Pixel)
+
+        End Using
+
+        Return outputImage
     End Function
 
 
@@ -15222,7 +15248,7 @@ Public Class LogicaFacturacion
 
                     For Each dr In listEmbarques
 
-                        
+
                         With .DetFacturas.Item(-1)
                             With .Registro
                                 'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
@@ -19421,7 +19447,7 @@ Public Class LogicaImportador
         dr(26) = "CARTA PORTE"
 
 
-        
+
 
 
 
