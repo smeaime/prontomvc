@@ -110,7 +110,7 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        var idprincipal = dataFromTheRow['IdTipoOperacion'];
+        var idprincipal = dataFromTheRow['IdLocalidad'];
         if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {

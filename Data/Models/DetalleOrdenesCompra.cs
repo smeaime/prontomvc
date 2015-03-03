@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class DetalleOrdenesCompra
     {
+        public DetalleOrdenesCompra()
+        {
+            this.DetalleRemitos = new HashSet<DetalleRemito>();
+        }
+    
         public int IdDetalleOrdenCompra { get; set; }
         public Nullable<int> IdOrdenCompra { get; set; }
         public Nullable<int> NumeroItem { get; set; }
@@ -44,5 +49,6 @@ namespace ProntoMVC.Data.Models
         public virtual Articulo Articulo { get; set; }
         public virtual OrdenesCompra OrdenesCompra { get; set; }
         public virtual Unidad Unidade { get; set; }
+        public virtual ICollection<DetalleRemito> DetalleRemitos { get; set; }
     }
 }

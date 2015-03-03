@@ -51,7 +51,21 @@
     });
 
     function GrabarFila(gridId) {
-        var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+        var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
+
+        //var dataIds = $('#Lista').jqGrid('getDataIDs');
+        //for (i = 0; i < dataIds.length; i++) {
+        //    try {
+        //        //Save row only to the grid 
+        //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+        //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+        //    }
+        //    catch (ex) {
+        //        //If you are using editRules it might end up with exception
+        //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+        //    }
+        //}
+
         var datos = $("#formid").serializeObject();
         var err;
 
@@ -110,7 +124,7 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        var idprincipal = dataFromTheRow['IdTipoOperacion'];
+        var idprincipal = dataFromTheRow['IdCotizacion'];
         if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
@@ -178,6 +192,8 @@
         var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + Id + "');\"  />";
         var data, j, cm;
 
+        if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
+
         data = '{';
         for (j = 1; j < colModel.length; j++) {
             cm = colModel[j];
@@ -189,6 +205,35 @@
         grid.jqGrid('setRowData', Id, { act: se });
     };
 
+    // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
+    //getColumnIndexByName = function (grid, columnName) {
+    //    var cm = grid.jqGrid('getGridParam', 'colModel');
+    //    for (var i = 0, l = cm.length; i < l; i++) {
+    //        if (cm[i].name === columnName) {
+    //            return i; // return the index
+    //        }
+    //    }
+    //    return -1;
+    //},
+    //getTextFromCell = function (cellNode) {
+    //    return cellNode.childNodes[0].nodeName === "INPUT" ?
+    //            cellNode.childNodes[0].value :
+    //            cellNode.textContent || cellNode.innerText;
+    //},
+    //calculateTotal = function () {
+    //    var totalAmount = 0, totalTax = 0,
+    //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
+    //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+    //        totalAmount += Number(getTextFromCell(this));
+    //    });
+
+    //    i = getColumnIndexByName(grid, 'tax');
+    //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+    //        totalTax += Number(getTextFromCell(this));
+    //    });
+
+    //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
+    //};
     $().ready(function () {
     'use strict';
 

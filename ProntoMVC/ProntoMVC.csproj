@@ -256,7 +256,9 @@
     <Compile Include="Controllers\GruposObraControlles.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\CuentaGastoController.cs" />
+    <Compile Include="Controllers\AjusteStockController.cs" />
     <Compile Include="Controllers\TiposComprobanteController.cs" />
+    <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Controllers\TiposPolizaController.cs" />
     <Compile Include="Controllers\TiposCuentaGruposController.cs" />
     <Compile Include="Controllers\UnidadesOperativaController.cs" />
@@ -851,6 +853,7 @@
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
     <Content Include="Scripts\ScriptCliente.js" />
+    <Content Include="Scripts\ScriptAjusteStock.js" />
     <Content Include="Scripts\ScriptRemito.js" />
     <Content Include="Scripts\ScriptOrdenCompra.js" />
     <Content Include="Scripts\ScriptNotaCredito.js" />
@@ -897,6 +900,11 @@
     <Content Include="Views\Remito\Index.cshtml" />
     <Content Include="Views\Recibo\EditOT.cshtml" />
     <Content Include="Views\TiposComprobante\Index.cshtml" />
+    <Content Include="Views\ControlCalidad\Index.cshtml" />
+    <Content Include="Views\Tipo\IndexGenericos.cshtml" />
+    <Content Include="Views\Tipo\IndexArticulos.cshtml" />
+    <Content Include="Views\AjusteStock\Edit.cshtml" />
+    <Content Include="Views\AjusteStock\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
