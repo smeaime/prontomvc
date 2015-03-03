@@ -13734,11 +13734,13 @@ Public Class LogicaFacturacion
                       Select Factura = CInt(Val(i("Factura").ToString)), _
                                 Cliente = i("Cliente").ToString, _
                                 IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)), _
-                                IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
+                                IdClienteSeparado = i("IdClienteSeparado").ToString() _
                         ).Distinct.ToList
 
 
-
+        ' IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
+        ' IdClienteSeparado = Convert.ToInt32(Val(       System.Text.RegularExpressions.Regex.Replace(i("IdClienteSeparado"), "[^0-9]", ""))
+  
 
         '/////////////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////////////
@@ -13756,7 +13758,7 @@ Public Class LogicaFacturacion
         Dim tablaEditadaDeFacturasParaGenerarComoLista = (From i In tablaEditadaDeFacturasParaGenerar.AsEnumerable _
                                 Select _
                                         FacturarselaA = i("FacturarselaA").ToString, _
-                                        ClienteSeparado = CInt(Val(i("ClienteSeparado"))), _
+                                        ClienteSeparado = CStr(i("ClienteSeparado")), _
                                         idCartaDePorte = CInt(iisNull(i("idCartaDePorte"), -1)), _
                                         NumeroCartaDePorte = CLng(iisNull(i("NumeroCartaDePorte"), -1)), _
                                         TarifaFacturada = CDbl(i("TarifaFacturada")), _
@@ -14081,6 +14083,11 @@ Public Class LogicaFacturacion
                             If dtaa.Rows.Count > 1 Then
                                 ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro. " & strwhere)
                             ElseIf dtaa.Rows.Count < 1 Then
+
+
+                                'si hay acopios (por ejemplo, el renglon dice en ClienteSeparado="acopiosepara 7") no tengo manera de
+                                'saber a qué agrupamiento le corresponde el item manual........
+
                                 ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Ningún renglon cumple el filtro. " & strwhere)
                             End If
 
