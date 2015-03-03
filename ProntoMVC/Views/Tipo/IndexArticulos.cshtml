@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Ganancia>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Tipos>
 @{
-    ViewBag.Title = "Tabla de Ganancias";
+    ViewBag.Title = "Tipos articulos";
 }
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
 <div class="row-fluid">
-    <div class="span10 lightblue">
+    <div class="span6 lightblue">
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
@@ -55,20 +55,14 @@
         var datos = $("#formid").serializeObject();
         var err;
 
-        datos.IdGanancia = gridId;
-        datos.IdTipoRetencionGanancia = dataFromTheRow.IdTipoRetencionGanancia;
-        datos.Desde = dataFromTheRow.Desde;
-        datos.Hasta = dataFromTheRow.Hasta;
-        datos.SumaFija = dataFromTheRow.SumaFija;
-        datos.PorcentajeAdicional = dataFromTheRow.PorcentajeAdicional;
-        datos.MinimoNoImponible = dataFromTheRow.MinimoNoImponible;
-        datos.MinimoARetener = dataFromTheRow.MinimoARetener;
+        datos.IdTipo = gridId;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Abreviatura = dataFromTheRow.Abreviatura;
+        datos.Codigo = dataFromTheRow.Codigo;
+        datos.Grupo = 1;
 
         err = ""
-        if (datos.IdTipoRetencionGanancia == "" || datos.IdTipoRetencionGanancia == undefined) err = err + "Falta definir la categoria de ganancias.\n"
-        if (datos.Desde == "" || datos.Desde == undefined) err = err + "Falta definir la fecha desde.\n"
-        if (datos.Hasta == "" || datos.Hasta == undefined) err = err + "Falta definir la fecha hasta.\n"
-        if (datos.SumaFija == "" || datos.SumaFija == undefined) err = err + "No ingreso la suma fija\n"
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "Falta definir el nombre.\n"
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -77,16 +71,16 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Ganancia/BatchUpdate',
+                url: ROOT + 'Tipo/BatchUpdate',
                 dataType: 'json',
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
-                        var valor = result.IdGanancia;
+                        var valor = result.IdTipo;
                         if (valor == "") { valor = "0"; }
-                        $('#Lista').jqGrid('setCell', rowid, 'IdGanancia', valor);
+                        $('#Lista').jqGrid('setCell', rowid, 'IdTipo', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
@@ -114,14 +108,14 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        var idprincipal = dataFromTheRow['IdGanancia'];
+        var idprincipal = dataFromTheRow['IdTipo'];
         if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Ganancia/Delete',
+                url: ROOT + 'Tipo/Delete',
                 dataType: 'json',
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
@@ -197,52 +191,18 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Ganancia/TT/',
-            postData: {},
+            url: ROOT + 'Tipo/TT/',
+            postData: { 'Grupo': 1 },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdGanancia', 'IdTipoRetencionGanancia', 'CategoriaGanancias', 'Desde', 'Hasta', 'Suma fija', '% Adicional', 'Min. no imponible', 'Minimo a retener'],
+            colNames: ['Acciones', 'IdTipo', 'Descripcion', 'Abreviatura', 'Codigo', 'Grupo'],
             colModel: [
+                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
+                        { name: 'IdTipo', index: 'IdTipo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                         {
-                            name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false, //classes: "myLink",
-                            //formatter: function (cellValue, options, rowObject) {
-                            //    var converted = rowObject.converted === undefined ? $(rowObject).find(">converted").text() : rowObject.converted;
-                            //    var updateDate = rowObject.updateDate === undefined ? $(rowObject).find(">updateDate").text(): rowObject.updateDate;
-                            //    var IdCotizacion = $(rowObject)[1]
-                            //    return (IdCotizacion >= 0 ? convertIcon : ""); // + "<span>" + cellValue + "</span>";
-                            //},
-                            //cellattr: function () {
-                            //    return " title=\"Graba el registro\"";
-                            //}
-                        },
-                        { name: 'IdGanancia', index: 'IdGanancia', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'IdTipoRetencionGanancia', index: 'IdTipoRetencionGanancia', align: 'left', width: 100, editable: false, hidden: true },
-                        {
-                            name: 'CategoriaGanancias', index: 'CategoriaGanancias', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
-                            editoptions: {
-                                dataUrl: ROOT + 'TipoRetencionGanancia/GetCategoriasGanancia',
-                                dataEvents: [{
-                                    type: 'change', fn: function (e) {
-                                        var $this = $(e.target), $td;
-                                        if ($this.hasClass("FormElement")) {
-                                            // form editing
-                                            $('#IdTipoRetencionGanancia').val(this.value);
-                                        } else {
-                                            $td = $this.closest("td");
-                                            if ($td.hasClass("edit-cell")) {
-                                                // cell editing
-                                                var rowid = $('#Lista').getGridParam('selrow');
-                                                $('#Lista').jqGrid('setCell', rowid, 'IdTipoRetencionGanancia', this.value);
-                                            } else {
-                                                // inline editing
-                                            }
-                                        }
-                                    }
-                                }]
-                            },
-                        },
-                        {
-                            name: 'Desde', index: 'Desde', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                            name: 'Codigo', index: 'Codigo', width: 80, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                             editoptions: {
                                 maxlength: 20, defaultValue: '0.00',
                                 dataEvents: [
@@ -256,81 +216,7 @@
                                 }]
                             }
                         },
-                        {
-                            name: 'Hasta', index: 'Hasta', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                            }
-                        },
-                        {
-                            name: 'SumaFija', index: 'SumaFija', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                            }
-                        },
-                        {
-                            name: 'PorcentajeAdicional', index: 'PorcentajeAdicional', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                            }
-                        },
-                        {
-                            name: 'MinimoNoImponible', index: 'MinimoNoImponible', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                            }
-                        },
-                        {
-                            name: 'MinimoARetener', index: 'MinimoARetener', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                            }
-                        }
+                        { name: 'Grupo', index: 'Grupo', width: 200, align: 'left', editable: false, hidden: true, edittype: 'text', label: 'TB' }
             ],
             //gridComplete: function () {
             //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
@@ -361,7 +247,7 @@
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'CategoriaGanancias,Desde',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
@@ -371,7 +257,7 @@
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>TABLA DE GANANCIAS</b>',
+            caption: '<b>TIPOS ARTICULOS</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
             editurl: ROOT + 'Empleado/EditGridData/'

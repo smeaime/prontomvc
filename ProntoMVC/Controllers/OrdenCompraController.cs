@@ -439,7 +439,7 @@ namespace ProntoMVC.Controllers
                                 a.Remitos.NullSafeToString(),
                                 a.Facturas.NullSafeToString(),
                                 a.CondicionVenta.NullSafeToString(),
-                                a.Items.NullSafeToString(),
+                                db.DetalleOrdenesCompras.Where(x=>x.IdOrdenCompra==a.IdOrdenCompra).Select(x=>x.IdDetalleOrdenCompra).Distinct().Count().ToString(),
                                 a.FacturarA.NullSafeToString(),
                                 a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.UsuarioAnulo.NullSafeToString(),

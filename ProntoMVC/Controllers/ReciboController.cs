@@ -42,8 +42,8 @@ namespace ProntoMVC.Controllers
             {
                 Recibo Recibo = new Recibo();
 
-                inic(ref Recibo);
                 Recibo.Tipo = "CC";
+                inic(ref Recibo);
                 CargarViewBag(Recibo);
                 return View(Recibo);
             }
@@ -62,8 +62,8 @@ namespace ProntoMVC.Controllers
             {
                 Recibo Recibo = new Recibo();
 
-                inic(ref Recibo);
                 Recibo.Tipo = "OT";
+                inic(ref Recibo);
                 CargarViewBag(Recibo);
                 return View(Recibo);
             }
@@ -90,6 +90,10 @@ namespace ProntoMVC.Controllers
             o.FechaIngreso = DateTime.Today;
             o.FechaRecibo = DateTime.Today;
             o.CotizacionMoneda = 1;
+            if (o.Tipo == "OT")
+            {
+                o.TipoOperacionOtros = 0;
+            }
 
             Cotizacione Cotizaciones = db.Cotizaciones.Where(x => x.IdMoneda == mIdMonedaDolar && x.Fecha == DateTime.Today).FirstOrDefault();
             if (Cotizaciones != null) { o.Cotizacion = Cotizaciones.Cotizacion ?? 0; }
@@ -106,7 +110,9 @@ namespace ProntoMVC.Controllers
             ViewBag.IdObra3 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra3);
             ViewBag.IdObra4 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra4);
             ViewBag.IdObra5 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra5);
-            ViewBag.IdCuenta = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta), "IdCuenta", "Descripcion", o.IdCuenta);
+            if (o.Tipo=="OT"){
+                ViewBag.IdCuenta = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta), "IdCuenta", "Descripcion", o.IdCuenta);
+            }
             ViewBag.IdCuenta1 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta1), "IdCuenta", "Descripcion", o.IdCuenta1);
             ViewBag.IdCuenta2 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta2), "IdCuenta", "Descripcion", o.IdCuenta2);
             ViewBag.IdCuenta3 = new SelectList(db.Cuentas.Where(x => x.IdCuenta == o.IdCuenta3), "IdCuenta", "Descripcion", o.IdCuenta3);

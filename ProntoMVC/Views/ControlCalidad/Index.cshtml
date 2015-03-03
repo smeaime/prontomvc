@@ -1,12 +1,13 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Calle>
+﻿@model IEnumerable<ProntoMVC.Data.Models.ControlCalidad>
 @{
-    ViewBag.Title = "Calle";
+    ViewBag.Title = "Controles de calidad";
 }
+@*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
 
 <div class="row-fluid">
-    <div class="span6 lightblue">
+    <div class="span9 lightblue">
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
@@ -17,7 +18,8 @@
         text-decoration: underline;
         cursor: pointer;
     }
-</style>
+</style >
+
 
 <script type="text/javascript">
 
@@ -54,11 +56,16 @@
         var datos = $("#formid").serializeObject();
         var err;
 
-        datos.IdCalle = gridId;
-        datos.Nombre = dataFromTheRow.Nombre;
+        datos.IdControlCalidad = gridId;
+        datos.Descripcion = dataFromTheRow.Descripcion;
+        datos.Abreviatura = dataFromTheRow.Abreviatura;
+        datos.Inspeccion = dataFromTheRow.Inspeccion;
+        datos.Detalle = dataFromTheRow.Detalle;
 
         err = ""
-        if (datos.Nombre == "" || datos.Nombre == undefined) err = err + "Falta definir el nombre.\n"
+        if (datos.Descripcion == "" || datos.Descripcion == undefined) err = err + "No ingreso la descripcion\n"
+        if (datos.Abreviatura == "" || datos.Abreviatura == undefined) err = err + "No ingreso la abreviatura\n"
+        if (datos.Inspeccion == "" || datos.Inspeccion == undefined) err = err + "No ingreso la inspeccion\n"
 
         if (err != "") {
             alert('No se pudo grabar el registro.\n' + err);
@@ -67,16 +74,16 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Calle/BatchUpdate',
+                url: ROOT + 'ControlCalidad/BatchUpdate',
                 dataType: 'json',
                 data: JSON.stringify(datos),
                 success: function (result) {
                     if (result) {
                         $grid.jqGrid('setRowData', gridId, { act: "" });
                         var rowid = $('#Lista').getGridParam('selrow');
-                        var valor = result.IdCalle;
+                        var valor = result.IdControlCalidad;
                         if (valor == "") { valor = "0"; }
-                        $('#Lista').jqGrid('setCell', rowid, 'IdCalle', valor);
+                        $('#Lista').jqGrid('setCell', rowid, 'IdControlCalidad', valor);
                     } else {
                         alert('No se pudo grabar el registro.');
                     }
@@ -104,14 +111,14 @@
 
     function EliminarFila(gridId) {
         var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-        var idprincipal = dataFromTheRow['IdCalle'];
+        var idprincipal = dataFromTheRow['IdControlCalidad'];
         if (idprincipal <= 0) {
             $grid.jqGrid('delRowData', gridId);
         } else {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url: ROOT + 'Calle/Delete',
+                url: ROOT + 'ControlCalidad/Delete',
                 dataType: 'json',
                 data: JSON.stringify({ id: idprincipal }),
                 success: function (result) {
@@ -187,15 +194,18 @@
         'use strict';
 
         $('#Lista').jqGrid({
-            url: ROOT + 'Calle/TT/',
+            url: ROOT + 'ControlCalidad/TT/',
             postData: {},
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdCalle', 'Nombre'],
+            colNames: [' ', 'IdControlCalidad', 'Descripcion', 'Abreviatura', 'Se inspecciona?', 'Detalle'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: false },
-                        { name: 'IdCalle', index: 'IdCalle', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Nombre', index: 'Nombre', width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' }
+                        { name: 'act', index: 'act', align: 'center', width: 30, editable: false, hidden: false },
+                        { name: 'IdControlCalidad', index: 'IdCotizacion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Abreviatura', index: 'Abreviatura', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                        { name: 'Inspeccion', index: 'Inspeccion', width: 120, align: 'left', editable: true, editrules: { required: false }, editoptions: { value: "SI:NO" }, edittype: 'checkbox', label: 'TB' },
+                        { name: 'Detalle', index: 'Detalle', width: 500, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
             ],
             //gridComplete: function () {
             //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
@@ -203,6 +213,15 @@
             //        var cl = ids[i];
             //        var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + cl + "'); \"  />";
             //        jQuery("#Lista").jqGrid('setRowData', ids[i], { act: se });
+            //    }
+            //},
+            //loadComplete: function() {
+            //    var ids = jQuery("#Lista").jqGrid('getDataIDs');
+            //    for (var i=0;i<ids.length;i++) {
+            //        var id=ids[i];
+            //        if (jQuery("#Lista").jqGrid('getCell', id, 'name') === 'test') {
+            //            jQuery("#Lista").jqGrid('setCell', id, 'name', '', 'not-editable-cell');
+            //        }
             //    }
             //},
             onCellSelect: function (rowid, iCol, cellcontent, e) {
@@ -226,17 +245,17 @@
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
-            sortname: 'Nombre',
+            sortname: 'Descripcion',
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
-            shrinkToFit: true,
+            shrinkToFit: false,
             width: 'auto',
             height: '100%',
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>CALLES</b>',
+            caption: '<b>CONTROLES DE CALIDAD</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
             editurl: ROOT + 'Empleado/EditGridData/'

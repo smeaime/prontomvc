@@ -6,6 +6,8 @@ $(function () {
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
     var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo, mTotalGastosFF;
 
+    TraerCotizacion()
+
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
         for (i = 0; i < l; i++) {
@@ -1525,6 +1527,10 @@ $(function () {
         var tipo = $(this).val();
     });
 
+    $("#IdMoneda").change(function () {
+        TraerCotizacion()
+    })
+
     function ActualizarTodo() {
         var cabecera = SerializaForm();
 
@@ -2135,6 +2141,48 @@ function CalcularImportePagadoSinImpuestos(IdTipoComprobante, IdComprobante, Pag
         }
     });
     return [respuesta];
+};
+
+function TraerCotizacion() {
+    var fecha, IdMoneda, datos1, mIdMonedaPrincipal = 1, mIdMonedaDolar = 2, mCotizacionDolar = 0, mCotizacionEuro = 0;
+    fecha = $("#FechaOrdenPago").val();
+    IdMoneda = $("#IdMoneda").val();
+    $.ajax({
+        type: "GET",
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'Moneda/CotizacionesPorFecha',
+        data: { fecha: fecha },
+        dataType: "json",
+        success: function (result) {
+            if (result) {
+                datos = JSON.parse(result);
+                mIdMonedaPrincipal = datos.campo1;
+                mIdMonedaDolar = datos.campo2;
+                datos1 = datos.campo3;
+                mCotizacionDolar = parseFloat(datos1.replace(",", ".") || 0) || 0;
+                datos1 = datos.campo5;
+                mCotizacionEuro = parseFloat(datos1.replace(",", ".") || 0) || 0;
+            } else { alert('No se pudo completar la operacion.'); }
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+            alert('No hay cotizacion, ingresela manualmente');
+            $('#CotizacionMoneda').val("");
+        }
+    });
+
+    if (IdMoneda == mIdMonedaPrincipal) {
+        $('#CotizacionMoneda').val("1");
+        $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2));
+        $("#CotizacionEuro").val(mCotizacionEuro.toFixed(2));
+    }
+    else {
+        if (IdMoneda == mIdMonedaDolar) {
+            $("#CotizacionMoneda").val(mCotizacionDolar.toFixed(2));
+            $("#CotizacionDolar").val(mCotizacionDolar.toFixed(2));
+            $("#CotizacionEuro").val(mCotizacionEuro.toFixed(2));
+        }
+    }
 };
 
 // Para usar en la edicion de una fila afterSubmit:processAddEdit,

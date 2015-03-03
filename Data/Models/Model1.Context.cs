@@ -193,6 +193,15 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<PlazosFijo> PlazosFijos { get; set; }
         public virtual DbSet<Conjunto> Conjuntos { get; set; }
         public virtual DbSet<DetalleConjunto> DetalleConjuntos { get; set; }
+        public virtual DbSet<Tipos> Tipos { get; set; }
+        public virtual DbSet<AjustesStock> AjustesStocks { get; set; }
+        public virtual DbSet<DetalleAjustesStock> DetalleAjustesStocks { get; set; }
+        public virtual DbSet<DetalleOtrosIngresosAlmacen> DetalleOtrosIngresosAlmacens { get; set; }
+        public virtual DbSet<DetalleRecepcione> DetalleRecepciones { get; set; }
+        public virtual DbSet<DetalleSalidasMateriale> DetalleSalidasMateriales { get; set; }
+        public virtual DbSet<OtrosIngresosAlmacen> OtrosIngresosAlmacens { get; set; }
+        public virtual DbSet<Recepcione> Recepciones { get; set; }
+        public virtual DbSet<SalidasMateriale> SalidasMateriales { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

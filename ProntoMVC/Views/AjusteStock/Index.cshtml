@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.AjustesStock>
+@{
+    ViewBag.Title = "Ajuste de stock";
+}
+
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo ajuste</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("TT", "AjusteStock")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', '', 'IdAjusteStock', 'IdRealizo', 'IdAprobo', 'TipoAjuste', 'Numero de ajuste', 'Fecha', 'Tipo de ajuste', 'Realizo', 'Aprobo', 'Items', 'Ingreso',
+                       'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Observaciones', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Imputa a solicitudes de material'],
+            colModel: [
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                        { name: 'IdAjusteStock', index: 'IdAjusteStock', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdRealizo', index: 'IdRealizo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdAprobo', index: 'IdAprobo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'TipoAjuste', index: 'TipoAjuste', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'NumeroAjusteStock', index: 'NumeroAjusteStock', align: 'right', width: 80, editable: false, hidden: false },
+                        { name: 'FechaAjuste', index: 'FechaAjuste', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'TipoAjusteStock', index: 'TipoAjusteStock', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Realizo', index: 'Realizo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'FechaModifico', index: 'FechaModifico', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false },
+                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'SolicitudesMaterial', index: 'SolicitudesMaterial', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'NumeroAjusteStock',
+            sortorder: 'desc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>AJUSTES DE STOCK</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+</script>

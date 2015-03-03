@@ -2098,7 +2098,7 @@ function TraerCodigosCuentas() {
     for (var i = 0; i <= 5; i++) {
         if (i == 0) { indice = ""; } else { indice = i.toString();}
         IdCuenta = $("#IdCuenta" + indice).val();
-        if (IdCuenta.length > 0) {
+        if (Math.floor(IdCuenta) == IdCuenta && $.isNumeric(IdCuenta)) {
             $.ajax({
                 type: "GET",
                 async: false,

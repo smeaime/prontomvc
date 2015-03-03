@@ -437,7 +437,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var data = (from a in db.Remitos
+            var data = (from a in db.Remitos.Include(x => x.DetalleRemitos)
                         from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.Cliente.IdCodigoIva).DefaultIfEmpty()
                         from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
                         from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
@@ -447,6 +447,7 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             a.IdRemito,
+                            a.DetalleRemitos,
                             a.IdCliente,
                             a.IdProveedor,
                             a.IdObra,
@@ -471,6 +472,7 @@ namespace ProntoMVC.Controllers
                             //#Auxiliar7.Articulos as [Materiales],
                             Obras = "",
                             OCompras = "",
+                            //OCompras = (from x in a.DetalleRemitos.ToList() select new { String.Join(", ", x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString().ToArray()) }),
                             Facturas = "",
                             Materiales = "",
                             TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" : ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
@@ -480,7 +482,6 @@ namespace ProntoMVC.Controllers
                             Obra = c != null ? c.NumeroObra : "",
                             a.TotalBultos,
                             a.ValorDeclarado,
-                            //(Select Count(*) From DetalleRemitos df Where df.IdRemito=Remitos.IdRemito) as [Cant.Items],
                             CantidadItems = 0,
                             a.Chofer,
                             a.HoraSalida,
@@ -501,7 +502,7 @@ namespace ProntoMVC.Controllers
 
             int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
+            
             var data1 = (from a in data select a)
                         .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroRemito)
@@ -539,6 +540,13 @@ namespace ProntoMVC.Controllers
                                 a.ProveedorNombre.NullSafeToString(),
                                 a.ProveedorCuit.NullSafeToString(),
                                 a.Obras.NullSafeToString(),
+
+                                //string.Join(",", a.DetalleRemitos
+                                //    .SelectMany(x =>
+                                //        (x.DetalleOrdenesCompra == null) ?
+                                //        null :
+                                //        x.DetalleOrdenesCompra.NumeroItem.NullSafeToString()).Distinct()
+                                //),
                                 a.OCompras.NullSafeToString(),
                                 a.Facturas.NullSafeToString(),
                                 a.Materiales.NullSafeToString(),
@@ -549,7 +557,7 @@ namespace ProntoMVC.Controllers
                                 a.Obra.NullSafeToString(),
                                 a.TotalBultos.NullSafeToString(),
                                 a.ValorDeclarado.NullSafeToString(),
-                                a.CantidadItems.NullSafeToString(),
+                                db.DetalleRemitos.Where(x=>x.IdRemito==a.IdRemito).Select(x=>x.IdDetalleRemito).Distinct().Count().ToString(),
                                 a.Chofer.NullSafeToString(),
                                 a.HoraSalida.NullSafeToString(),
                                 a.Observaciones.NullSafeToString(),

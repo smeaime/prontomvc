@@ -39,5 +39,6 @@ namespace ProntoMVC.Data.Models
         public virtual Unidad Unidade { get; set; }
         public virtual Remito Remito { get; set; }
         public virtual Ubicacion Ubicacione { get; set; }
+        public virtual DetalleOrdenesCompra DetalleOrdenesCompra { get; set; }
     }
 }
