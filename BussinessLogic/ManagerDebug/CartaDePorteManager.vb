@@ -28,6 +28,7 @@ Imports Pronto.ERP.Bll.EntidadManager
 
 Imports ClaseMigrar.SQLdinamico
 
+Imports System.Drawing
 'Namespace Pronto.ERP.Bll
 
 Imports System.Collections.Generic
@@ -741,7 +742,7 @@ Public Class CartaDePorteManager
 
     End Function
 
-    
+
 
 
     'ReadOnly s_compQuery = CompiledQuery.Compile(Of CartasDePortes, Decimal, IQueryable(Of CartasDePorte))( _
@@ -3155,6 +3156,355 @@ Public Class CartaDePorteManager
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    Shared Function DescargarImagenesAdjuntas(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
+
+
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        Else
+            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+
+
+
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+
+
+            If imagenpathcp <> "" Then
+
+                Try
+                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
+                    If fcp.Exists Then
+                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                    End If
+                    wordFiles.Add(nombrecp)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathcp + " " + nombrecp)
+                End Try
+            End If
+
+
+
+            If imagenpathtk <> "" Then
+
+                Try
+
+                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
+                    If ftk.Exists Then
+                        ftk.CopyTo(sDirFTP + nombretk, True)
+                    End If
+                    wordFiles.Add(nombretk)
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathtk + " " + nombretk)
+                End Try
+            End If
+
+
+
+
+
+            If bJuntarCPconTK Then
+                Try
+
+                    If True Then
+                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+
+                        Dim bimp = MergeTwoImages(oImg, oImg2)
+
+
+                        bimp.Save(sDirFTP + nombrecp)
+
+
+                        wordFiles.Remove(nombretk)
+                    Else
+
+
+                        'juntar las imagenes para DOW
+                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+
+                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
+
+
+                        End Using
+
+                        oImg.Save(sDirFTP + nombrecp)
+
+
+
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+            End If
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTP + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler.WriteError(s)
+                    ErrHandler.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+        Return output
+
+    End Function
+
+
+
+    Public Shared Function MergeTwoImages(firstImage As System.Drawing.Image, secondImage As System.Drawing.Image) As Bitmap
+
+        If (firstImage Is Nothing) Then Throw New ArgumentNullException("firstImage")
+
+
+        If (secondImage Is Nothing) Then Throw New ArgumentNullException("secondImage")
+
+
+        Dim outputImageWidth As Integer = IIf(firstImage.Width > secondImage.Width, firstImage.Width, secondImage.Width)
+
+        Dim outputImageHeight = firstImage.Height + secondImage.Height + 1
+
+        Dim outputImage As Bitmap = New Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+
+        Using graphics As Graphics = graphics.FromImage(outputImage)
+
+            graphics.DrawImage(firstImage, New Rectangle(New Point(), firstImage.Size),
+                New Rectangle(New Point(), firstImage.Size), GraphicsUnit.Pixel)
+
+            graphics.DrawImage(secondImage, New Rectangle(New Point(0, firstImage.Height + 1), secondImage.Size),
+                New Rectangle(New Point(), secondImage.Size), GraphicsUnit.Pixel)
+
+        End Using
+
+        Return outputImage
+    End Function
+
+
+
+
+
+
+
+    Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String)
+
+
+        ErrHandler.WriteError("PDFcon_iTextSharp " & filejpg & "   " & filejpg2)
+
+
+
+        Dim document As iTextSharp.text.Document = New iTextSharp.text.Document()
+
+        Using stream = New FileStream(filepdf, FileMode.Create, FileAccess.Write, FileShare.None)
+
+            iTextSharp.text.pdf.PdfWriter.GetInstance(document, stream)
+            document.Open()
+
+
+            If filejpg <> "" Then
+                Using imageStream = New FileStream(filejpg, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                    'Image.SetAbsolutePosition(0, 0)
+                    'Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                    Dim percentage As Decimal = 0.0F
+                    percentage = 540 / Image.Width
+                    Image.ScalePercent(percentage * 100)
+                    document.Add(Image)
+                End Using
+            End If
+            If filejpg2 <> "" Then
+                Using imageStream = New FileStream(filejpg2, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                    Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                    Dim percentage As Decimal = 0.0F
+                    percentage = 540 / Image.Width
+                    Image.ScalePercent(percentage * 100)
+                    document.Add(Image)
+                End Using
+            End If
+
+
+            Try
+                document.Close()
+            Catch ex As Exception
+                ' The document has no pages.
+                'Stack(Trace) : at(iTextSharp.text.pdf.PdfPages.WritePageTree())
+                'at(iTextSharp.text.pdf.PdfWriter.Close())
+                'at(iTextSharp.text.pdf.PdfDocument.Close())
+                'at(iTextSharp.text.Document.Close())
+
+                MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
+                ErrHandler.WriteError(ex)
+                'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
+                Throw
+            End Try
+
+
+
+
+
+        End Using
+
+    End Function
+
+
+
+    'http://www.codeproject.com/Questions/362618/How-to-reduce-image-size-in-asp-net-with-same-clar
+    Public Shared Sub ResizeImage(image As String, Okey As String, key As String, width As Integer, height As Integer, newimagename As String, sDirVirtual As String)
+        'Dim sDir = AppDomain.CurrentDomain.BaseDirectory & "DataBackupear\"
+        'Dim sDir = ConfigurationManager.AppSettings("sDirFTP") ' & "DataBackupear\"
+
+
+        Dim sDir As String
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
+        Else
+            sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        End If
+
+
+        ErrHandler.WriteError("ResizeImage " & sDir & image)
+
+
+
+        'Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/" + ConfigurationManager.AppSettings(Okey) & image))
+        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromFile(sDir & image)
+
+        'http://siderite.blogspot.com/2009/09/outofmemoryexception-in.html
+        oImg = oImg.GetThumbnailImage(oImg.Width, oImg.Height, Nothing, IntPtr.Zero)
+
+
+        Dim oThumbNail As System.Drawing.Image = New System.Drawing.Bitmap(width, height)
+        ', System.Drawing.Imaging.PixelFormat.Format24bppRgb
+        Dim oGraphic As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oThumbNail)
+
+        oGraphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality
+
+        'set smoothing mode to high quality
+        oGraphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        'set the interpolation mode
+        oGraphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+        'set the offset mode
+        oGraphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality
+
+        Dim oRectangle As New System.Drawing.Rectangle(0, 0, width, height)
+
+        oGraphic.DrawImage(oImg, oRectangle)
+
+
+
+
+
+        If newimagename = "" Then
+            If image.Substring(image.LastIndexOf(".")) <> ".png" Then
+                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Else
+                oThumbNail.Save(sDir & image, System.Drawing.Imaging.ImageFormat.Png)
+            End If
+        Else
+            If newimagename.Substring(newimagename.LastIndexOf(".")) <> ".png" Then
+                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Jpeg)
+            Else
+                oThumbNail.Save(sDir & newimagename, System.Drawing.Imaging.ImageFormat.Png)
+            End If
+        End If
+        oImg.Dispose()
+    End Sub
+
+
+
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7491,7 +7841,7 @@ Public Class CartaDePorteManager
             'verificar que no tiene nada imputado
             Dim dt = EntidadManager.ExecDinamico(SC, "SELECT IdFacturaImputada from CartasDePorte WHERE IdCartaDePorte=" & oCDP.Id)
             If iisNull(dt(0)("IdFacturaimputada"), 0) > 0 Then
-                Err.Raise(6464, , "Ya tiene una factura imputada")
+                Err.Raise(6464, , "Ya tiene una factura imputada. Carta ID= " & oCDP.Id & "  numero " & oCDP.NumeroCartaDePorte)
             End If
 
             EntidadManager.ExecDinamico(SC, "UPDATE CartasDePorte SET IdFacturaImputada=" & idfactura & "  WHERE IdCartaDePorte=" & oCDP.Id)
@@ -10336,7 +10686,7 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Sub PreProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Sub PreProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                            SC As String, desde As String, hasta As String, _
                            puntoVenta As String, ByRef slinks As Object)
 
@@ -10422,7 +10772,7 @@ Public Class LogicaFacturacion
 
     End Sub
 
-    Shared Sub PostProcesos(lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
+    Shared Sub PostProcesos(ByRef lista As Generic.List(Of wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult), _
                                         optFacturarA As String, agruparArticulosPor As String, sc As String)
 
 
@@ -11021,9 +11371,10 @@ Public Class LogicaFacturacion
                             ByVal iPageSize As Long, _
                             ByVal puntoVenta As Integer, ByVal desde As DateTime, ByVal hasta As DateTime, _
                             ByVal sLista As String, bNoUsarLista As Boolean, _
-                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, ByRef slinks As Object, sesionIdposta As String)
+                            optFacturarA As Long, agruparArticulosPor As String, ByRef filas As Object, _
+                            ByRef slinks As Object, sesionIdposta As String)
 
-        ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId)
+        ErrHandler.WriteError("entrando en generar tabla. tanda " & sesionId.ToString)
 
         Try
             Dim tildadosEnPrimerPaso As String() = Split(sLista, ",")
@@ -13383,14 +13734,13 @@ Public Class LogicaFacturacion
                       Select Factura = CInt(Val(i("Factura").ToString)), _
                                 Cliente = i("Cliente").ToString, _
                                 IdCliente = Convert.ToInt32(iisNull(BuscaIdClientePreciso(i("Cliente").ToString, SC), -1)), _
-                                IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
+                                IdClienteSeparado = i("IdClienteSeparado").ToString() _
                         ).Distinct.ToList
 
 
-
-
-
-
+        ' IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
+        ' IdClienteSeparado = Convert.ToInt32(Val(       System.Text.RegularExpressions.Regex.Replace(i("IdClienteSeparado"), "[^0-9]", ""))
+  
 
         '/////////////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////////////
@@ -13408,7 +13758,7 @@ Public Class LogicaFacturacion
         Dim tablaEditadaDeFacturasParaGenerarComoLista = (From i In tablaEditadaDeFacturasParaGenerar.AsEnumerable _
                                 Select _
                                         FacturarselaA = i("FacturarselaA").ToString, _
-                                        ClienteSeparado = CInt(Val(i("ClienteSeparado"))), _
+                                        ClienteSeparado = CStr(i("ClienteSeparado")), _
                                         idCartaDePorte = CInt(iisNull(i("idCartaDePorte"), -1)), _
                                         NumeroCartaDePorte = CLng(iisNull(i("NumeroCartaDePorte"), -1)), _
                                         TarifaFacturada = CDbl(i("TarifaFacturada")), _
@@ -13733,6 +14083,11 @@ Public Class LogicaFacturacion
                             If dtaa.Rows.Count > 1 Then
                                 ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Más de un renglon cumple el filtro. " & strwhere)
                             ElseIf dtaa.Rows.Count < 1 Then
+
+
+                                'si hay acopios (por ejemplo, el renglon dice en ClienteSeparado="acopiosepara 7") no tengo manera de
+                                'saber a qué agrupamiento le corresponde el item manual........
+
                                 ErrHandler.WriteAndRaiseError("No se pudo incrustar el renglon manual. Ningún renglon cumple el filtro. " & strwhere)
                             End If
 
@@ -14900,7 +15255,7 @@ Public Class LogicaFacturacion
 
                     For Each dr In listEmbarques
 
-                        
+
                         With .DetFacturas.Item(-1)
                             With .Registro
                                 'If iisNull(dr.item("IdArticulo")) = "" Then Continue For
@@ -17255,6 +17610,8 @@ Public Class barras
 
         For Each idfac In Facturas 'GetListaDeFacturasTildadas()
 
+            Dim bMarcar As Boolean = True
+
             ErrHandler.WriteError("idfac " & idfac)
 
 
@@ -17301,7 +17658,11 @@ Public Class barras
             ErrHandler.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
 
 
-            If destinatario.ToString = "" Then sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
+            If destinatario.ToString = "" Then
+                sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
+                bMarcar = False
+            End If
+
 
 
             If bVistaPrevia Then
@@ -17374,7 +17735,7 @@ Public Class barras
                      ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", "Factura Electrónica Williams Entregas", "", True)
 
 
-            MarcarEnviada(SC, idfac)
+            If bMarcar Then MarcarEnviada(SC, idfac)
 
         Next
 
@@ -19093,7 +19454,7 @@ Public Class LogicaImportador
         dr(26) = "CARTA PORTE"
 
 
-        
+
 
 
 

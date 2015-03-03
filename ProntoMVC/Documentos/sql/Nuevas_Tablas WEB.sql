@@ -378,6 +378,13 @@ ALTER TABLE ListasPreciosDetalle
 ALTER TABLE ListasPreciosDetalle 
 	ALTER COLUMN PrecioCaladaExportacion money NULL 
 go
+ALTER TABLE ListasPreciosDetalle 
+	ALTER COLUMN PrecioRepetidoPeroConPrecision money NULL 
+go
+
+
+
+
 
 
 ALTER TABLE ListasPreciosDetalle 

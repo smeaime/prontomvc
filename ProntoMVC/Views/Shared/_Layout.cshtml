@@ -2442,31 +2442,31 @@ Released   : 20120723
 
 
 
-                                
-                                    <button type="button" class="btn btn-small clearfix"
-                                            id="btnConmutarPanelDerecho"
-                                            value="Buscar"
-                                            style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
-                                            onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+
+                                <button type="button" class="btn btn-small clearfix"
+                                        id="btnConmutarPanelDerecho"
+                                        value="Buscar"
+                                        style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                        onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
                                         pageLayout.hide('north');
                                         RefrescaAnchoGrillaDetalle(); ">
-                                        Grillas
-                                    </button>
-
-                                
-
-                                    <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                                            style="display: none; "></button>
-
-
-                                    <script>
+                                    Grillas
+                                </button>
 
 
 
-                                        $('.alert .close').live("click", function (e) {
-                                            $(this).parent().hide();
-                                        });</script>
-                                </div>
+                                <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
+                                        style="display: none; "></button>
+
+
+                                <script>
+
+
+
+                                    $('.alert .close').live("click", function (e) {
+                                        $(this).parent().hide();
+                                    });</script>
+                            </div>
                             @*<span class="span1 lightblue"></span>*@
                         </span>
                     </div>
@@ -2829,9 +2829,10 @@ Released   : 20120723
                 </div>
 
 
-
-                @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
-
+                @if (false)
+                {
+                    @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
+                }
 
 
 
