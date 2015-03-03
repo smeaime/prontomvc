@@ -127,6 +127,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClaseMigrar\obj\x86\Debug\ClaseMigrar.dll</HintPath>
     </Reference>
+    <Reference Include="ClearImageNet.70, Version=7.0.0.0, Culture=neutral, PublicKeyToken=71e5888be264aae0, processorArchitecture=MSIL" />
     <Reference Include="CodeEngine.Framework.QueryBuilder, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\CodeEngine.Framework.QueryBuilder.dll</HintPath>
