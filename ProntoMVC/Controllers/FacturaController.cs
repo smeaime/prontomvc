@@ -327,6 +327,8 @@ namespace ProntoMVC.Controllers
                 {
                     Factura.IdUsuarioIngreso = IdUsuario;
                     Factura.FechaIngreso = DateTime.Now;
+                    Factura.ImporteIva2 = Factura.ImporteIva2 ?? 0;
+                    Factura.ImporteBonificacion = Factura.ImporteBonificacion ?? 0;
                 }
 
                 if (!Validar(Factura, ref errs, ref warnings))
@@ -998,7 +1000,6 @@ namespace ProntoMVC.Controllers
                             Obra = c != null ? c.NumeroObra : "",
                             Vendedor = d != null ? d.Nombre : "",
                             ProvinciaDestino = g != null ? g.Nombre : "",
- //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura) as [Cant.Items],
  //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
  //'Grupo '+Convert(varchar,
  //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
@@ -1087,7 +1088,7 @@ namespace ProntoMVC.Controllers
                                 a.Obra.NullSafeToString(),
                                 a.Vendedor.NullSafeToString(),
                                 a.ProvinciaDestino.NullSafeToString(),
-                                a.CantidadItems.NullSafeToString(),
+                                db.DetalleFacturas.Where(x=>x.IdFactura==a.IdFactura).Select(x=>x.IdDetalleFactura).Distinct().Count().ToString(),
                                 a.CantidadAbonos.NullSafeToString(),
                                 a.GrupoFacturacionAutomatica.NullSafeToString(),
                                 a.FechaContabilizacion == null ? "" : a.FechaContabilizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),

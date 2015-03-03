@@ -95,6 +95,7 @@ namespace ProntoMVC.Data.Models
         public string TextoAuxiliar3 { get; set; }
         public string IdsComprobanteProveedorRetenidosIva { get; set; }
         public string TotalesImportesRetenidosIva { get; set; }
+        public string ReversionContablePorAnulacion { get; set; }
     
         public virtual Proveedor Proveedore { get; set; }
         public virtual ICollection<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }

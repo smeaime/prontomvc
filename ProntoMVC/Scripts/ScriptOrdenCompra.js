@@ -864,7 +864,7 @@ function CalcularTotales() {
 };
 
 function ProximoAdjuntoLibre() {
-    for (i = 1; i <= 10; i++) {
+    for (i = 1; i <= 6; i++) {
         var adj = $("#ArchivoAdjunto" + i).val();
         if (adj.length == 0) { return i;}
     }
