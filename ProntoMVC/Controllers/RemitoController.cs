@@ -437,7 +437,33 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
+
+            var Entidad = db.Remitos
+                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
+                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
+                //.Include(x => x.DetallePedidos. .moneda)
+                //   .Include("DetallePedidos.Unidad") // funciona tambien
+                        .Include(x => x.Proveedore)
+                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
+                      .Include(xxx => xxx.DetalleRemitos
+                                    .Select(y => y.DetalleOrdenesCompra.OrdenesCompra
+                                            
+                                        )
+                                )
+               //  .Include(r => r.DetalleRemitos.Select(dr => dr.DetalleOrdenesCompra.Select(dt => dt.OrdenesCompra))) // esto en requerimientos funciona
+               .Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                // .Include(x => x.Aprobo)
+                                            .AsQueryable();
+
+
+
             var data = (from a in db.Remitos.Include(x => x.DetalleRemitos)
+                                            //.Include("DetalleRemitos")
+                                            //.Include("DetalleRemitos.DetalleOrdenesCompra")
+                                            //.Include("DetalleRemitos.DetalleOrdenesCompra.OrdenesCompra")
+
+                   
+
                         from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.Cliente.IdCodigoIva).DefaultIfEmpty()
                         from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
                         from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
@@ -541,12 +567,19 @@ namespace ProntoMVC.Controllers
                                 a.ProveedorCuit.NullSafeToString(),
                                 a.Obras.NullSafeToString(),
 
-                                //string.Join(",", a.DetalleRemitos
-                                //    .SelectMany(x =>
-                                //        (x.DetalleOrdenesCompra == null) ?
-                                //        null :
-                                //        x.DetalleOrdenesCompra.NumeroItem.NullSafeToString()).Distinct()
-                                //),
+                                string.Join(",", 
+                                //    (a.DetalleRemitos == null) ?  "" :
+                                //    (
+                                        a.DetalleRemitos
+                                        .SelectMany(x => 
+                                        (x.DetalleOrdenesCompra == null) ?
+                                        "" :
+                                        ((   x.DetalleOrdenesCompra.OrdenesCompra == null) ? 
+                                            "" :
+                                            x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()).Distinct()
+                                        )
+                                        
+                                ),
                                 a.OCompras.NullSafeToString(),
                                 a.Facturas.NullSafeToString(),
                                 a.Materiales.NullSafeToString(),

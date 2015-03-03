@@ -2358,6 +2358,8 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_SalidasMateriales" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAjustesStock_AjustesStock" />
 >>>>>>> 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
         </edmx:Diagram>
     </edmx:Diagrams>
