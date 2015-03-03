@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ProntoMVC.Data.Models.Remito>
+@{
+    ViewBag.Title = "Remito";
+}
+
+<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+
+<br />
+
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo Remito</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var lastSelectedId;
+        var inEdit;
+        grid = $("#Lista");
+
+        //Para que haga wrap en las celdas
+        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+        $('#Lista').jqGrid({
+            url: '@Url.Action("TT", "Remito")',
+            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['', '', 'IdRemito', 'IdCliente', 'IdProveedor', 'IdObra', 'IdTransportista', 'IdCondicionVenta', 'IdListaPrecios', 'Destino', 'Punto venta', 'Numero', 'Fecha', 'Anulado',
+                       'Codigo cliente', 'Cliente', 'CUIT cliente', 'Condicion iva cliente', 'Codigo proveedor', 'Proveedor', 'CUIT proveedor', 'Obras', 'OCompras', 'Facturas', 'Materiales', 'Tipo de remito',
+                       'Condicion de venta', 'Transportista', 'Lista de precio', 'Obra', 'Total bultos', 'Valor declarado', 'Items', 'Chofer', 'Hora salida', 'Observaciones'],
+            colModel: [
+                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                        { name: 'IdRemito', index: 'IdRemito', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCliente', index: 'IdCliente', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdProveedor', index: 'IdProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdTransportista', index: 'IdTransportista', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdCondicionVenta', index: 'IdCondicionVenta', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'IdListaPrecios', index: 'IdListaPrecios', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'Destino', index: 'Destino', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroRemito', index: 'NumeroRemito', align: 'right', width: 80, editable: false, hidden: false },
+                        { name: 'FechaRemito', index: 'FechaRemito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ProveedorCodigo', index: 'ProveedorCodigo', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ProveedorNombre', index: 'ProveedorNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ProveedorCuit', index: 'ProveedorCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Obras', index: 'Obras', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'OCompras', index: 'OCompras', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Materiales', index: 'Materiales', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'TipoRemito', index: 'TipoRemito', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'CondicionVenta', index: 'CondicionVenta', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ListaDePrecio', index: 'ListaDePrecio', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Obra', index: 'Obra', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'TotalBultos', index: 'TotalBultos', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ValorDeclarado', index: 'ValorDeclarado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Chofer', index: 'Chofer', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'HoraSalida', index: 'HoraSalida', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
+            ],
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                }
+            },
+            pager: $('#ListaPager'),
+            rowNum: 15,
+            rowList: [10, 20, 50, 20000],
+            sortname: 'NumeroRemito',
+            sortorder: 'desc',
+            viewrecords: true,
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            height: '100%',
+            altRows: false,
+            footerrow: false,
+            userDataOnFooter: true,
+            caption: '<b>REMITOS</b>'
+        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
+
+        pageLayout.hide('east');
+        pageLayout.hide('south');
+    });
+
+</script>

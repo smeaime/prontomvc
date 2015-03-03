@@ -223,7 +223,7 @@ Namespace Pronto.ERP.Bll
            "  Descripcion as [Descripcion], " & _
             " IdListaPrecios as [IdAux1], " & _
            "  NumeroLista as [Numero], " & _
-            " FechaVigencia as [Fecha vig.], " & _
+            " FechaVigencia, " & _
             " Activa as [Activa?], " & _
             " Monedas.Nombre as [Moneda] " & _
             " FROM ListasPrecios " & _
@@ -433,6 +433,8 @@ Namespace Pronto.ERP.Bll
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
 
+           
+
             'busca la lista del cliente
             Dim idListaPrecio As Long
             Dim dt1 As DataTable = EntidadManager.ExecDinamico(SC, _
@@ -504,11 +506,24 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
+
+        Shared Function VerificarVencimientoLista(idListaPrecio As Long, SC As String)
+
+            Dim dt1 As DataTable = EntidadManager.ExecDinamico(SC, _
+                                 "SELECT FechaVigencia  FROM ListasPrecios WHERE idListaPrecios= " & idListaPrecio)
+
+            Dim fechavigencia As Date? = iisNull(dt1.Rows(0).Item("FechaVigencia"), Nothing)
+
+            If fechavigencia IsNot Nothing And fechavigencia < Now Then
+                Throw New Exception("La tarifa de la lista está vencida")
+            End If
+        End Function
+
+
         Public Shared Function SavePrecioPorCliente(ByVal SC As String, ByVal IdCliente As Long, ByVal IdArticulo As Long, ByVal Precio As Double, Optional ByVal IdDestino As Long = -1)
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
-
 
 
             'busca la lista del cliente
@@ -528,6 +543,8 @@ Namespace Pronto.ERP.Bll
                 idListaPrecio = CrearleListaAlCliente(SC, IdCliente)
             End If
 
+
+            VerificarVencimientoLista(idListaPrecio, SC)
 
 
             '//////////////////////////////////////////////////////////////////////
@@ -569,6 +586,7 @@ Namespace Pronto.ERP.Bll
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
 
+          
             'busca la lista del cliente
             Dim idListaPrecio As Long
             Dim dt1 As DataTable = EntidadManager.ExecDinamico(SC, _
@@ -587,6 +605,8 @@ Namespace Pronto.ERP.Bll
             End If
 
 
+
+            VerificarVencimientoLista(idListaPrecio, SC)
 
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
@@ -623,6 +643,7 @@ Namespace Pronto.ERP.Bll
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////
 
+
             'busca la lista del cliente
             Dim idListaPrecio As Long
             Dim dt1 As DataTable = EntidadManager.ExecDinamico(SC, _
@@ -641,6 +662,8 @@ Namespace Pronto.ERP.Bll
             End If
 
 
+
+            VerificarVencimientoLista(idListaPrecio, SC)
 
             '//////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////

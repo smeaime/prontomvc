@@ -1216,12 +1216,10 @@ namespace ProntoMVC.Controllers
             string warnings = "";
 
 
-            AutoMapper.Mapper.CreateMap<ViewModelComprobanteProveedor, Data.Models.ComprobanteProveedor>();
-            ComprobanteProveedor o = new ComprobanteProveedor();
-            AutoMapper.Mapper.Map(ComprobanteProveedor, o);
 
 
-            if (!Validar_CuentaCorriente(o, ref errs, ref warnings))
+
+            if (!Validar_CuentaCorriente(ComprobanteProveedor, ref errs, ref warnings))
             {
                 try
                 {
@@ -1253,8 +1251,13 @@ namespace ProntoMVC.Controllers
 
 
 
+            AutoMapper.Mapper.CreateMap<ViewModelComprobanteProveedor, Data.Models.ComprobanteProveedor>();
+            ComprobanteProveedor o = new ComprobanteProveedor();
+            AutoMapper.Mapper.Map(ComprobanteProveedor, o);
+
+
             if ((o.IdProveedor ?? 0) <= 0 && (o.IdProveedorEventual ?? 0) <= 0
-                && (o.Proveedor ?? new Proveedor()).RazonSocial != "")
+                && (o.Proveedor ?? new Proveedor()).RazonSocial.NullSafeToString() != "")
             {
 
 
@@ -4986,7 +4989,7 @@ namespace ProntoMVC.Controllers
 
         }
 
-        private bool Validar_CuentaCorriente(ProntoMVC.Data.Models.ComprobanteProveedor o, ref string sErrorMsg, ref string sWarningMsg)
+        private bool Validar_CuentaCorriente(ViewModelComprobanteProveedor o, ref string sErrorMsg, ref string sWarningMsg)
         {
             // una opcion es extender el modelo autogenerado, para ensoquetar ahí las validaciones
             // si no, podemos usar una funcion como esta, y devolver los  errores de dos maneras:
@@ -5051,6 +5054,21 @@ namespace ProntoMVC.Controllers
             }
 
 
+
+            
+            //acá tengo que ver  el tipo del viewmodel
+
+            if (o.MetaTipo=="Cta Cte")
+            {
+
+
+                //if ((o.Proveedor.RazonSocial ?? 0) <= 0)
+                //{
+                //    // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                //    sErrorMsg += "\n" + "Falta el tipo de comprobante";
+                //    // return false;
+                //}
+            }
 
             if (o.IdProveedor != null)          // cta cte
             {

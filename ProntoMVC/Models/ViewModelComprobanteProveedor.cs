@@ -22,6 +22,8 @@ namespace ProntoMVC.ViewModels
         public Nullable<int> IdTipoComprobante { get; set; }
         public Nullable<System.DateTime> FechaComprobante { get; set; }
 
+        public string MetaTipo { get; set; }
+
         [Required]
         [Display(Name = "Letra del Comprobante")]
         public string Letra { get; set; }
