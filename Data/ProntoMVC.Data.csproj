@@ -377,9 +377,6 @@
     <Compile Include="Models\DetalleOrdenesPagoValore.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleOtrosIngresosAlmacen.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DetallePedido.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -393,9 +390,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleProveedoresRubro.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DetalleRecepcione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleRecibo.cs">
@@ -414,9 +408,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleRequerimiento.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DetalleSalidasMateriale.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetalleUserBD.cs">
@@ -536,9 +527,6 @@
     <Compile Include="Models\OrdenPago.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OtrosIngresosAlmacen.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Pais.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -580,9 +568,6 @@
     <Compile Include="Models\PuntosVenta.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Recepcione.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Recibo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -602,9 +587,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RubrosValore.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SalidasMateriale.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sector.cs">
