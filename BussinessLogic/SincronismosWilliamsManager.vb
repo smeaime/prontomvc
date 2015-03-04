@@ -1563,6 +1563,13 @@ Namespace Pronto.ERP.Bll
 
 
 
+                    'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13245
+                    'NECESITAN QUE SALGAN LOS CODIGOS DE ONNCA Y PROCEDENCIA.
+                    sb &= "," & Int(.ProcedenciaCodigoONCAA).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+
+                    sb &= "," & Int(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+
+
 
 
 
