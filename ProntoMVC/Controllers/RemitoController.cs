@@ -568,16 +568,16 @@ namespace ProntoMVC.Controllers
                                 a.Obras.NullSafeToString(),
 
                                 string.Join(",", 
-                                //    (a.DetalleRemitos == null) ?  "" :
-                                //    (
+                               
                                         a.DetalleRemitos
-                                        .SelectMany(x => 
-                                        (x.DetalleOrdenesCompra == null) ?
-                                        "" :
-                                        ((   x.DetalleOrdenesCompra.OrdenesCompra == null) ? 
-                                            "" :
-                                            x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()).Distinct()
-                                        )
+                                        .Select(x => 
+                                            (x.DetalleOrdenesCompra == null) ?
+                                            "   " :
+                                            ((   x.DetalleOrdenesCompra.OrdenesCompra == null) ? 
+                                                "   " :
+                                                x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()
+                                            )
+                                        ).Distinct()
                                         
                                 ),
                                 a.OCompras.NullSafeToString(),
