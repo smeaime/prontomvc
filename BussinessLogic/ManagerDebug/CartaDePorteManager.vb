@@ -12172,16 +12172,18 @@ Public Class LogicaFacturacion
 
                     'Dim acopioseparado As Integer? = If(If(If(If(If(cartamapeada.AcopioFacturarleA, cartamapeada.Acopio1), cartamapeada.Acopio2), cartamapeada.Acopio3), cartamapeada.Acopio4), cartamapeada.Acopio5)
 
+                    If False Then 'desactivar por ahora la separacion por acopio
 
-                    Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
-                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
-                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio2
-                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio3
-                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio4
-                    If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio5
 
-                    If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & acopioseparado
+                        Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio1
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio2
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio3
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio4
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio5
 
+                        If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & acopioseparado
+                    End If
                 End If
 
             Next
@@ -17745,13 +17747,22 @@ Public Class barras
             Dim Usuario As String = ConfigurationManager.AppSettings("SmtpUserFact") ' "facturacion@williamsentregas.com.ar"
             Dim pass As String = ConfigurationManager.AppSettings("SmtpPassFact") '"3dPifF"  'ConfigurationManager.AppSettings("SmtpPass")
 
-            MandaEmail(destinatario, "Factura Electrónica Williams Entregas. " & numerodefactura, cuerpo, _
+
+            '            http://190.17.29.12/Consultas/Admin/verConsultas1.php?recordid=13573
+            '            Por favor en el asunto de los mails de facturacion que figure ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar
+            'Por favor si puede estar para la facturación del 2 de marzo.
+
+            MandaEmail(destinatario, "Factura Electrónica Williams Entregas. " & numerodefactura & _
+                       "  " & "ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar ", _
+                     cuerpo, _
                       Usuario, _
                     ConfigurationManager.AppSettings("SmtpServer"), _
                     Usuario, _
                   pass, _
                             "", _
-                     ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", "Factura Electrónica Williams Entregas", "", True)
+                      ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", _
+                      "Factura Electrónica Williams Entregas", _
+                      "ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar", True)
 
 
             If bMarcar Then MarcarEnviada(SC, idfac)
