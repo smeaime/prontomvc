@@ -3776,13 +3776,15 @@ Public Class CartaDePorteManager
 
             '  strWHERE += "  AND (NumeroCartaDePorte LIKE  '%" & QueContenga & "%'" & ") "
 
+            strWHERE += "AND (1=0  "
+
             If idVendedorQueContiene <> -1 Then
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 'no hay que agregar el prefijo .CDP acá para que funcione?????
                 strWHERE += "  " & _
-                 "           AND (Vendedor = " & idVendedorQueContiene & _
+                 "           OR (Vendedor = " & idVendedorQueContiene & _
                 "           OR CuentaOrden1 = " & idVendedorQueContiene & _
                 "           OR CuentaOrden2 = " & idVendedorQueContiene & _
                 "             OR Entregador=" & idVendedorQueContiene & _
@@ -3792,11 +3794,15 @@ Public Class CartaDePorteManager
 
             If idCorredorQueContiene <> -1 Then
                 strWHERE += "  " & _
-                "    AND (   Corredor=" & idCorredorQueContiene & _
+                "    OR (   Corredor=" & idCorredorQueContiene & _
                 "             OR Corredor2=" & idCorredorQueContiene & _
                 "           )"
 
+
             End If
+
+
+            strWHERE += ") "
 
 
         End If
@@ -17727,6 +17733,7 @@ Public Class barras
                         "Nos ponemos en contacto con usted para hacerle llegar la factura " & numerodefactura & ",  " & linkalafacturaelectronica & "<br/> " + vbCrLf & _
                        IIf(cli.CartaPorteTipoDeAdjuntoDeFacturacion > 0, "<br/>Si desea ver un detalle de las cartas de porte correspondientes a esta factura, " & linkalosadjuntos, "") & "<br/> " + vbCrLf & _
                         "<br/> Los documentos son PDF, para poder verlos, es necesario que tenga instalado el Acrobat Reader, si no lo tiene, hágalo desde " & "<a href='http://get.adobe.com/es/reader/?no_ab=1'> AQUÍ</a>" & "<br/> " + vbCrLf & _
+                        "<br/>ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar <br/>" & _
                         "<br/>Atentamente, <br/>" & _
                         "Williams Entregas SA "
 
@@ -17753,7 +17760,7 @@ Public Class barras
             'Por favor si puede estar para la facturación del 2 de marzo.
 
             MandaEmail(destinatario, "Factura Electrónica Williams Entregas. " & numerodefactura & _
-                       "  " & "ATENCION: NO RESPONDER A ESTA DIRECCION DE MAIL, HACERLO A ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar ", _
+                       "", _
                      cuerpo, _
                       Usuario, _
                     ConfigurationManager.AppSettings("SmtpServer"), _
@@ -17762,7 +17769,7 @@ Public Class barras
                             "", _
                       ConfigurationManager.AppSettings("SmtpPort"), , "facturacion@williamsentregas.com.ar", "", _
                       "Factura Electrónica Williams Entregas", _
-                      "ciglesias@williamsentregas.com.ar; sgomez@williamsentregas.com.ar", True)
+                      "ciglesias@williamsentregas.com.ar, sgomez@williamsentregas.com.ar", True)
 
 
             If bMarcar Then MarcarEnviada(SC, idfac)
