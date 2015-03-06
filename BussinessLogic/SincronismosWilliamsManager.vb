@@ -7161,7 +7161,9 @@ Namespace Pronto.ERP.Bll
 
 
             If True Then
-                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Or sErroresOtros <> "" Then vFileName = ""
+                'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+                '-no hacerlo acá, que decida el front end
             End If
 
             Return vFileName
