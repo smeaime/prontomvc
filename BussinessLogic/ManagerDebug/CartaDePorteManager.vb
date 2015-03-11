@@ -8245,7 +8245,7 @@ Public Class CartaDePorteManager
     End Function
 
 
-    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, nombrenuevo As String, ByRef sError As String, DirApp As String) As String
+    Shared Function GrabarImagen(forzarID As Long, SC As String, numeroCarta As Long, vagon As Long, nombrenuevo As String, ByRef sError As String, DirApp As String, Optional bForzarCasillaCP As Boolean = False) As String
 
         'quien se encarga de borrar la imagen que no se pudo adjuntar?
 
@@ -8324,7 +8324,7 @@ Public Class CartaDePorteManager
 
             oCarta.PathImagen = nombrenuevo
         Else
-            If oCarta.PathImagen = "" Then
+            If oCarta.PathImagen = "" Or bForzarCasillaCP Then
                 oCarta.PathImagen = nombrenuevo 'nombrenuevo
             ElseIf oCarta.PathImagen2 = "" Then
                 oCarta.PathImagen2 = nombrenuevo 'nombrenuevo

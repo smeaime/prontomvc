@@ -1359,7 +1359,6 @@ Namespace Pronto.ERP.Bll
             Dim i As Integer = 0
             Dim dr As DataRow
 
-
             '            Dim a = pDataTable(1)
 
 
@@ -1474,9 +1473,9 @@ Namespace Pronto.ERP.Bll
                     sb &= ","       '13       6605,
                     sb &= ","""""   '14       "",
 
-                    sb &= "," & Int(.BrutoFinal).ToString               '15       45000, bruto
-                    sb &= "," & Int(.TaraFinal).ToString '16       14340,  tara
-                    sb &= "," & Int(.NetoFinal).ToString '17       30660, neto
+                    sb &= "," & IntVal(.BrutoFinal).ToString               '15       45000, bruto
+                    sb &= "," & IntVal(.TaraFinal).ToString '16       14340,  tara
+                    sb &= "," & IntVal(.NetoFinal).ToString '17       30660, neto
 
                     If .IsFechaArriboNull Then .FechaArribo = Nothing
                     sb &= "," & FechaChica(iisNull(.FechaArribo, "")) '18       23/08/2011,
@@ -1525,7 +1524,7 @@ Namespace Pronto.ERP.Bll
 
 
                     '<PosicionKgsNetoDescargados>35</PosicionKgsNetoDescargados>
-                    sb &= "," & Int(.NetoFinal).ToString.PadLeft(10)
+                    sb &= "," & IntVal(.NetoFinal).ToString.PadLeft(10)
 
                     sb &= "," '36           6605,????
                     sb &= ",0:00" '37           0:00, hora?
@@ -1557,17 +1556,17 @@ Namespace Pronto.ERP.Bll
                     sb &= "," & _cc(.DestinoDesc)
                     sb &= "," & FechaChica(.FechaArribo)
 
-                    sb &= "," & Int(.BrutoPto).ToString 'PesoBrut	STRING(10)	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.)    616)    625
-                    sb &= "," & Int(.TaraPto).ToString 'PesoEgre	STRING(10)	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales)    626)    635
-                    sb &= "," & Int(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+                    sb &= "," & IntVal(.BrutoPto).ToString 'PesoBrut	STRING(10)	Bruto Ingreso ( Peso del camión cargado (TARA + MERCADERÍA)) Sin.Dec.)    616)    625
+                    sb &= "," & IntVal(.TaraPto).ToString 'PesoEgre	STRING(10)	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales)    626)    635
+                    sb &= "," & IntVal(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
 
 
                     'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13245
                     'NECESITAN QUE SALGAN LOS CODIGOS DE ONNCA Y PROCEDENCIA.
-                    sb &= "," & Int(.ProcedenciaCodigoONCAA).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+                    sb &= "," & IntVal(.ProcedenciaCodigoONCAA).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
-                    sb &= "," & Int(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
+                    sb &= "," & IntVal(.NetoPto).ToString 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
 
 
@@ -1584,6 +1583,11 @@ Namespace Pronto.ERP.Bll
             Return vFileName
             'Return TextToExcel(vFileName, titulo)
         End Function
+
+        Shared Function IntVal(x As Object) As Integer
+            Return Int(Val(x))
+        End Function
+
 
         Public Shared Function Sincronismo_FYO_Posicion(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
 
@@ -1927,6 +1931,8 @@ Namespace Pronto.ERP.Bll
 
                 sb &= "&" & IIf(dr("LiquidaViaje").ToString = "SI", "Si", "Si")                         '15 - Liquida Viaje	Alfa	2	Acepta los valores Sí/No
                 sb &= "&" & IIf(dr("CobraAcarreo").ToString = "SI", "Si", "Si")                        '16 - Cobra Acarreo	Alfa	2	Acepta los valores Sí/No
+
+
 
 
                 'Columna 17 tarifa de flete es obligatorio, cuando no tienen el dato poner 1
