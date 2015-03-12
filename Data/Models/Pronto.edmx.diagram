@@ -2358,9 +2358,20 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_SalidasMateriales" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAjustesStock_AjustesStock" />
->>>>>>> 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasGruposMateriale" Width="1.5" PointX="2.2339509698720423" PointY="13.55760083233826" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodo" Width="1.5" PointX="10.365741876124284" PointY="10.048009862214331" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosConsumo" Width="1.5" PointX="6.7116673470994774" PointY="25.992912870828487" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosDato" Width="1.5" PointX="0.6114384013281382" PointY="8.6630817096042829" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPresupuesto" Width="1.5" PointX="9.8324923877755612" PointY="26.017480087474677" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuesto" Width="1.5" PointX="6.4744203381586916" PointY="25.592412677403733" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuestoPorDia" Width="1.5" PointX="8.2913414278493" PointY="12.512190541491002" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRedeterminacione" Width="1.5" PointX="9.8067209803530577" PointY="17.247599803492239" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRubro" Width="1.5" PointX="5.3271697542291" PointY="7.356644395439254" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_DetalleRemitos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" />
+        
+        
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
