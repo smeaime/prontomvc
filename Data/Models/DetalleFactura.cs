@@ -56,5 +56,6 @@ namespace ProntoMVC.Data.Models
         public virtual Unidad Unidade { get; set; }
         public virtual ICollection<DetalleFacturasOrdenesCompra> DetalleFacturasOrdenesCompras { get; set; }
         public virtual ICollection<DetalleFacturasRemito> DetalleFacturasRemitos { get; set; }
+        public virtual DetalleRemito DetalleRemito { get; set; }
     }
 }
