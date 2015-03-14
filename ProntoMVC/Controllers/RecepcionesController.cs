@@ -118,8 +118,8 @@ namespace ProntoMVC.Controllers
 
             if (IdObra != string.Empty)
             {
-                int IdObra1 = Convert.ToInt32(IdObra);
-                Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
+                //int IdObra1 = Convert.ToInt32(IdObra);
+                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
             }
             if (FechaInicial != string.Empty)
             {
