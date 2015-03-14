@@ -118,8 +118,8 @@ namespace ProntoMVC.Controllers
 
             if (IdObra != string.Empty)
             {
-                int IdObra1 = Convert.ToInt32(IdObra);
-                Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
+                //int IdObra1 = Convert.ToInt32(IdObra);
+                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
             }
             if (FechaInicial != string.Empty)
             {
@@ -334,3 +334,78 @@ namespace ProntoMVC.Controllers
 
 
 }
+
+
+
+
+
+
+
+llenado
+  ElseIf oControl.Tag = "PresupuestoObrasNodos" Then
+                  Set oRs = Aplicacion.PresupuestoObrasNodos.TraerFiltrado("_EtapasImputablesPorObraParaCombo", Array(mIdObra, "*"))
+                  If oRs.RecordCount = 0 And Not mTomarCuentaDePresupuesto Then
+                     origen.Registro.Fields(DataCombo1(16).DataField).Value = Null
+                     DataCombo1(16).Enabled = False
+                     cmdPresu.Enabled = False
+                  ElseIf oRs.RecordCount = 1 Then
+                     DataCombo1(16).Enabled = True
+                     cmdPresu.Enabled = True
+                     Set DataCombo1(16).RowSource = oRs
+                     origen.Registro.Fields(DataCombo1(16).DataField).Value = oRs.Fields(0).Value
+                  Else
+                     DataCombo1(16).Enabled = True
+                     cmdPresu.Enabled = True
+                     Set DataCombo1(16).RowSource = oRs
+                  End If
+               Else
+
+
+
+
+
+change
+         Case 16
+            If IsNumeric(DataCombo1(Index).BoundText) Then
+               Set oRs = Aplicacion.TablasGenerales.TraerUno("PresupuestoObrasNodos", DataCombo1(Index).BoundText)
+               With origen.Registro
+                  .Fields(DataCombo1(Index).DataField).Value = DataCombo1(Index).BoundText
+                  If oRs.RecordCount > 0 Then
+                     If IIf(IsNull(oRs.Fields("IdCuenta").Value), 0, oRs.Fields("IdCuenta").Value) > 0 Then
+                        If IIf(IsNull(.Fields("IdCuenta").Value), 0, .Fields("IdCuenta").Value) > 0 Then
+                           If .Fields("IdCuenta").Value <> oRs.Fields("IdCuenta").Value And Not mTomarCuentaDePresupuesto Then
+                              DoEvents
+                              MsgBox "La cuenta contable asignada al item presupuesto de obra es distinta a la cuenta seleccionada", vbExclamation
+                              .Fields(DataCombo1(Index).DataField).Value = Null
+                              oRs.Close
+                              Set oRs = Nothing
+                              Exit Sub
+                           End If
+                        End If
+                        .Fields("IdCuenta").Value = oRs.Fields("IdCuenta").Value
+                        'DataCombo1(0).BoundText = oRs.Fields("IdCuenta").Value
+                     Else
+                        If mTomarCuentaDePresupuesto Then
+                           DoEvents
+                           MsgBox "El item presupuesto de obra no tiene cuenta contable asignada", vbExclamation
+                           .Fields(DataCombo1(Index).DataField).Value = Null
+                           oRs.Close
+                           Set oRs = Nothing
+                           Exit Sub
+                        End If
+                     End If
+                  End If
+               End With
+               oRs.Close
+            End If
+
+
+
+
+
+
+_EtapasImputablesPorObraParaCombo
+
+
+
+
