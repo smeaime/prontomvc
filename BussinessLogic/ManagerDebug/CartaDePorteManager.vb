@@ -20734,6 +20734,7 @@ Public Class ExcelImportadorManager
 
         'If cmbFormato.SelectedValue = "Toepfer Transito" Then
 
+        s = s.ToUpper.Trim
 
         Select Case FormatoDelArchivo
             Case BungeRamallo
