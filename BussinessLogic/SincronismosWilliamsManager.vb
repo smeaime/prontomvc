@@ -505,9 +505,11 @@ Namespace Pronto.ERP.Bll
                     '    i += 1
                     'Next
 
+                    'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13649
+                    'El pedido es que al final de cada linea del sincronismo agreguemos Razon Social del Intermediario y Cuit del Intermediario
 
-
-
+                    sb &= Left(.IntermediarioCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITEntregador	STRING(14)	CUIT Entregador)    219)    232
+                    sb &= Left(.IntermediarioDesc.ToString, 30).PadRight(30) 'NomEntregador	STRING(30)	Nombre Entregador)    233)    262
 
 
                     PrintLine(nF, sb)
@@ -11351,11 +11353,22 @@ Namespace Pronto.ERP.Bll
                 Dim cartas '= db.CartasDePortes.Where(sWHERE)
 
 
-                PrintLine(nF, "CartaPorte;IdRubro;DRubro;DescuentoFinal;ResFinal;")
+                PrintLine(nF, "CartaPorte;IdRubro;TipoRubro;DRubro;ResFinal;DescuentoFinal;KilosMerma")
+
+
+                'CartaPorte	IdRubro	TipoRubro	DRubro	ResFinal	 DescuentoFinal 	 KilosMerma 
+                '43818919	181	Arbitrado	Grado 2		 -   	 -   
+                '43818918	181	Arbitrado	Grado 2		 -   	 -   
+
+
 
                 'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
                 For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In pDataTable.Select(sWHERE)
                     'For Each cdp In cartas
+
+                    Dim carta As CartasDePorte = db.CartasDePortes.Where(Function(x) x.IdCartaDePorte = cdp.IdCartaDePorte).FirstOrDefault()
+
+
                     With cdp
 
                         i = 0 : sb = ""
@@ -11450,7 +11463,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
 
                             '65	2	Dañado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
 
                             '66	2	Granos Amohosados	Arbitrado
                             sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
@@ -11474,7 +11487,11 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '266	2	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
+
+                            'no tengo los datos de rebaja por extraños en el dataset
+
+
 
                             '267	2	Granos Dañados	Arbitrado
                             sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
@@ -11504,7 +11521,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                             '76	3	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
 
                             '19	3	Granos Amohosados	Arbitrado
                             sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
@@ -11525,7 +11542,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                             '263	3	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_sorgo Then
 
@@ -11546,7 +11563,7 @@ Namespace Pronto.ERP.Bll
 
                             sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
-                            sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
 
                             sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
@@ -11559,7 +11576,7 @@ Namespace Pronto.ERP.Bll
                             sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_girasol Then
                             '194	5	Grado 2	Arbitrado
@@ -11584,9 +11601,9 @@ Namespace Pronto.ERP.Bll
                             '265	6	Gastos de Fumigación	Arbitrado
 
 
-                            sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
                             sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-                            sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
                             sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
 
@@ -11977,6 +11994,11 @@ Namespace Pronto.ERP.Bll
                 '18488770	169	Grado 2	0
 
 
+                'CartaPorte	IdRubro	TipoRubro	DRubro	                ResFinal	 DescuentoFinal 	 KilosMerma 
+                '43818919	181 	Arbitrado	Grado 2		                                       -   	 -   
+                '43818918	181	    Arbitrado	Grado 2		                                       -   	 -   
+                '43716160	122	    Merma FísicaGranos amohosados MF		                      -4.00 	 1176 
+                '43716160	75	    Arbitrado	Grado 3		                                      -1.50 	 -   
 
 
 
@@ -11993,7 +12015,16 @@ Namespace Pronto.ERP.Bll
                     'sb &= LeftMasPadLeft(CodigoRubroBLD(.Calidad, .Producto), 2) & SEPARADOR                 'Cereal 				2	39	40	N
                     sb &= LeftMasPadLeft(CodigoEnsayo, 2) & SEPARADOR
 
+                    Dim tiporubro As String = IIf(descripcion.ToUpper.Contains("GRADO"), "Arbitrado", "Merma_Física")
+
+                    sb &= tiporubro & SEPARADOR
+
                     sb &= descripcion & SEPARADOR
+
+
+
+                    sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
+
 
                     Dim desc As Double
                     If Not .IsCalidadDescuentoFinalNull Then
@@ -12003,9 +12034,16 @@ Namespace Pronto.ERP.Bll
                     End If
                     sb &= LeftMasPadLeft(desc, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
 
-                    sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
 
 
+                    Dim kilosmerma As Decimal
+                    If descripcion.ToUpper.Contains("HUM") Then
+                        kilosmerma = .HumedadDesnormalizada
+                    Else
+                        kilosmerma = .Merma
+                    End If
+
+                    sb &= kilosmerma & SEPARADOR
 
 
                     'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
@@ -12027,7 +12065,7 @@ Namespace Pronto.ERP.Bll
                     'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
                     'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
 
-                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+                    'sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
 
 
 

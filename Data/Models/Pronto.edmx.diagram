@@ -2368,10 +2368,11 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRedeterminacione" Width="1.5" PointX="9.8067209803530577" PointY="17.247599803492239" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRubro" Width="1.5" PointX="5.3271697542291" PointY="7.356644395439254" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_DetalleRemitos" />
-        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" />
+        
         
         
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
+        &gt;&gt;&gt;&gt;&gt;&gt;&gt; 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
         </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
