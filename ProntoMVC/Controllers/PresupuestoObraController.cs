@@ -62,17 +62,52 @@ namespace ProntoMVC.Controllers
 
             }
 
-            var Req = db.PresupuestoObrasNodos
+
+            // var Req = db.PresupuestoObrasNodos_TX_EtapasImputablesPorObraParaCombo(null, "", null, "", "");
+
+
+            int? IdObra2 = null;
+            string PresupuestoObraRubro = "*"; // varchar(1) = Null,  
+            int? CodigoPresupuesto = null;
+            string ConHijos = null; // varchar(2)
+            string Resumen = null; //varchar(30) = Null  
+
+
+            DataTable dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SCsql(), "PresupuestoObrasNodos_TX_EtapasImputablesPorObraParaCombo",
+                                    IdObra2, PresupuestoObraRubro, CodigoPresupuesto, ConHijos, Resumen);
+
+
+            var Req = from DataRow r in dt.Rows
+                      select new
+                      {
+                          IdPresupuestoObrasNodo = r["IdPresupuestoObrasNodo"],
+                          IdCuenta = r["IdCuenta"],
+                          IdNodoPadre = r["IdNodoPadre"],
+                          IdObra = r["IdObra"],
+                          Descripcion = r["Descripcion"],
+                          IdUnidad = r["IdUnidad"],
+                          CantidadAvanzada = r["CantidadAvanzada"],
+                          Importe = r["Importe"],
+                          Cantidad = r["Cantidad"]
+                      };
+
+
+
+            // ("_EtapasImputablesPorObraParaCombo", Array(mIdObra, "*"))
+
+
+
+
+            var Req2 = db.PresupuestoObrasNodos
                 // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
                 // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
                 //.Include(x => x.DetallePedidos. .moneda)
                 //   .Include("DetallePedidos.Unidad") // funciona tambien
                 //    .Include(x => x.Moneda)
-                    //.Include(x => x.Obra)
-
-                    //.Include(x => x.SolicitoRequerimiento)
-                    //.Include(x => x.AproboRequerimiento)
-                    //.Include(x => x.Sectores)
+                //.Include(x => x.Obra)
+                //.Include(x => x.Tipos)
+                //.Include(x => x.AproboRequerimiento)
+                //.Include(x => x.Sectores)
                 //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
                 //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
                 //.Include(x => x.DetalleRequerimientos)
@@ -92,6 +127,18 @@ namespace ProntoMVC.Controllers
                 //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
                 // .Include(x => x.Aprobo)
                           .AsQueryable();
+
+            //            SELECT P.IdPresupuestoObrasNodo, RTrim(LTrim(IsNull(P.Descripcion,Obras.Descripcion))), RTrim(LTrim(IsNull(R.Descripcion,'Varios')))  
+            //FROM PresupuestoObrasNodos P  
+            //LEFT OUTER JOIN Obras ON Obras.IdObra=P.IdObra  
+            //LEFT OUTER JOIN Tipos R On R.IdTipo=P.IdPresupuestoObraRubro  
+            //LEFT OUTER JOIN #Auxiliar10 a ON a.IdPresupuestoObrasNodo=P.IdPresupuestoObrasNodo  
+            //WHERE (@IdObra=-1 or P.IdObra=@IdObra or IsNull(Obras.IdObraRelacionada,0)=@IdObra) and P.IdNodoPadre is not null and   
+            // (@ConHijos='*' or (@ConHijos='NO' and a.Hijos='SI') or (@ConHijos='SI' and a.Hijos='NO')) and   
+            // (@IdPresupuestoObraRubro1=-1 or P.IdPresupuestoObraRubro=@IdPresupuestoObraRubro1 or P.IdPresupuestoObraRubro=@IdPresupuestoObraRubro2)  
+
+
+
 
 
             // Requerimiento test = Req.Where(x => x.IdRequerimiento == 4).ToList().FirstOrDefault();
@@ -163,7 +210,7 @@ namespace ProntoMVC.Controllers
             try
             {
 
-                var Req1 = from a in Req.Where(campo) select a.IdPresupuestoObrasNodo;
+                var Req1 = Req; //.Where(campo) select a.IdPresupuestoObrasNodo;
 
                 totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -227,7 +274,7 @@ namespace ProntoMVC.Controllers
             //}
 
             var data = from a in Req//.Where(campo)
-                           .OrderBy(sidx + " " + sord)
+                           // .OrderBy(sidx + " " + sord)
                            .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
@@ -246,6 +293,10 @@ namespace ProntoMVC.Controllers
                                 "<a href="+ Url.Action("Edit",new {id = a.IdPresupuestoObrasNodo} ) + "  >Editar</>" ,
 							    "<a href="+ Url.Action("Imprimir",new {id = a.IdPresupuestoObrasNodo} )  +">Imprimir</>" ,
                                 a.IdPresupuestoObrasNodo.ToString(), 
+                                a.Descripcion.ToString(), 
+                                a.Cantidad.ToString(), 
+                                a.CantidadAvanzada.ToString(), 
+                                
                               //  a.NumeroRequerimiento.ToString(), 
                               //  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
                               //  a.Cumplido,
@@ -336,7 +387,7 @@ namespace ProntoMVC.Controllers
 }
 
 
-
+/*
 
 
 
@@ -640,12 +691,7 @@ IF @Resumen='SoloHijosPorRubroConCostos' or @Resumen='SoloHijosPorRubroConCostos
    Sum(Case When IsNull(CantidadRealPadre,0)<>0 Then IsNull(CantidadTeoricaTotalPadre,0) Else 0 End), Sum(IsNull(CantidadRealPadre,0)), Sum(IsNull(CantidadProporcionalConPadre,0))  
   FROM #Auxiliar91  
   GROUP BY Etapa, Rubro, Año, Mes  
-  
-/*  
- UPDATE #Auxiliar92  
- SET PrecioUnitarioTeorico=Case When IsNull(SumaConPrecioUnitarioTeorico,0)<>0 Then SumaPrecioUnitarioTeorico/SumaConPrecioUnitarioTeorico Else 0 End,   
-  PrecioUnitarioReal=Case When IsNull(SumaConPrecioUnitarioReal,0)<>0 Then SumaPrecioUnitarioReal/SumaConPrecioUnitarioReal Else 0 End  
-*/  
+    
    
  UPDATE #Auxiliar92  
  SET PrecioUnitarioTeorico = Case When IsNull((Select Sum(IsNull(a91.CantidadTeorica,0)) From #Auxiliar91 a91 Where a91.Etapa=#Auxiliar92.Etapa and a91.Rubro=#Auxiliar92.Rubro and a91.Año=#Auxiliar92.Año and a91.Mes=#Auxiliar92.Mes),0)<>0   
@@ -696,3 +742,4 @@ DROP TABLE #Auxiliar10
 
 
 
+*/
