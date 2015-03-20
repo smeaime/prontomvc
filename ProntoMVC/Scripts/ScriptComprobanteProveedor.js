@@ -616,71 +616,40 @@ function CopiarItemDeObra(acceptId, ui) {
     var longitud = data.length;
 
 
-    tmpdata['IdCuenta'] = data[i].IdCuenta;
-    tmpdata['Codigo'] = data[i].Codigo;
-    tmpdata['Descripcion'] = data[i].Descripcion;
-    tmpdata['IdUnidad'] = data[i].IdUnidad;
-    tmpdata['Unidad'] = data[i].Unidad;
-    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-    tmpdata['Cantidad'] = data[i].Cantidad;
-    tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-
+    tmpdata['IdCuenta'] = data.IdCuenta;
+    tmpdata['Descripcion'] = data.Descripcion;
+    tmpdata['Cantidad'] = data.Cantidad;
 
 
     ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
-    tmpdata['Observaciones'] = data[i].Observaciones;
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    if (true) {
-        // fecha de hoy
-        var now = new Date();
-        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-        tmpdata['FechaEntrega'] = currentDate;
-
-
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaNecesidad'] = displayDate;
-    }
-    else {
-        // fecha del rm
-        var date = new Date(parseInt((data[i].FechaEntrega || "").substr(6)));
-        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-        tmpdata['FechaEntrega'] = displayDate;
-    }
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-
-    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-    ///////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
 
 
 
-    getdata = tmpdata;
-    gridceil = Math.ceil(Math.random() * 1000000);
-    $("#Lista").jqGrid('addRowData', gridceil, getdata);
 
 
 
-    rows = $("#Lista").getGridParam("reccount");
-    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+
+
+    // o agarrar la primera linea vacía:
+    $("#Lista").jqGrid('addRowData', grid, data);
+    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
+
+
+
+
+
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
+
+
+    RefrescarOrigenDescripcion();
+    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
 
 
 
@@ -2668,16 +2637,16 @@ $(function () {     // lo mismo que $(document).ready(function () {
                       ],
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdDetalleRequerimiento', index: 'IdRequerimiento', align: 'left', width: 40, editable: false, hidden: false },
-                        { name: 'IdArticulo', index: 'NumeroRequerimiento', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'IdUnidad', index: '', width: 30 },
-                        { name: 'NumeroItem', index: '', width: 80 },
-                        { name: 'Cantidad', index: '', width: 40 },
-                        { name: 'Abreviatura', index: '', width: 40 },
-                        { name: 'Codigo', index: '', width: 40 },
+                        { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdPresupuestoObrasNodo', index: 'IdPresupuestoObrasNodo', align: 'left', width: 40, editable: false, hidden: false },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Cantidad', index: '', width: 30 },
+                        { name: 'CantidadAvanzada', index: '', width: 80 },
+                        { name: 'IdCuenta', index: '', width: 40 },
+                        { name: 'IdObra', index: '', width: 40 },
+                        { name: 'Importe', index: '', width: 40 },
                         { name: '', index: '', width: 40 },
 
-                           { name: 'Descripcion', index: '', width: 80 },
                         { name: 'FechaEntrega', index: '', width: 40 },
                         { name: 'Observaciones', index: '', width: 40 },
                         { name: 'Cumplido', index: '', width: 40 },

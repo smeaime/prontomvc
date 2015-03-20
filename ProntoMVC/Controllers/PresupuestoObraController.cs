@@ -296,6 +296,12 @@ namespace ProntoMVC.Controllers
                                 a.Descripcion.ToString(), 
                                 a.Cantidad.ToString(), 
                                 a.CantidadAvanzada.ToString(), 
+                                a.IdCuenta.ToString(), 
+
+                                a.IdObra.ToString(), 
+
+                                a.Importe.ToString(), 
+
                                 
                               //  a.NumeroRequerimiento.ToString(), 
                               //  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
