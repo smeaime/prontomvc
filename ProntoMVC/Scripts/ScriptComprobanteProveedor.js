@@ -86,24 +86,24 @@ function CalcularTodos() {
             if (data['AplicarIVA' + ii] == "True") {
 
 
-              //  metodo normal
-              //   pi += parseFloat(data['IVAComprasPorcentaje' + ii].replace(",", ".") || 0);
+                //  metodo normal
+                //   pi += parseFloat(data['IVAComprasPorcentaje' + ii].replace(",", ".") || 0);
 
 
-              // metodo feo: en lugar de tomar el porcentaje de iva desde la celda adyacente, lo traigo del encabezado. en realidad, este metodo es 
-              // más feo, pero me libera, por ahora, de agregar datos al poner renglones en blanco del lado del cliente
+                // metodo feo: en lugar de tomar el porcentaje de iva desde la celda adyacente, lo traigo del encabezado. en realidad, este metodo es 
+                // más feo, pero me libera, por ahora, de agregar datos al poner renglones en blanco del lado del cliente
                 var index = getColumnSrcIndexByName($("#Lista"), 'AplicarIVA' + ii);
                 //está desfasado el indice por lo que dice Oleg: http://stackoverflow.com/questions/5476068/jqgrid-get-all-grids-column-names
                 //The only small problem is that the array columnNames will contain up to three empty first elements in case of you use rownumbers:true, multiselect:true or subGrid:true parameters. 
-                pi += parseFloat(colnames[index+2].replace(",", ".") || 0);
+                pi += parseFloat(colnames[index + 2].replace(",", ".") || 0);
 
             }
         }
 
-//        if (data['AplicarIVA2'] == "True") pi += parseFloat(data['IVAComprasPorcentaje2'].replace(",", "."));
-//        if (data['AplicarIVA3'] == "True") pi += parseFloat(data['IVAComprasPorcentaje3'].replace(",", "."));
-//        if (data['AplicarIVA4'] == "True") pi += parseFloat(data['IVAComprasPorcentaje4'].replace(",", "."));
-//        // pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
+        //        if (data['AplicarIVA2'] == "True") pi += parseFloat(data['IVAComprasPorcentaje2'].replace(",", "."));
+        //        if (data['AplicarIVA3'] == "True") pi += parseFloat(data['IVAComprasPorcentaje3'].replace(",", "."));
+        //        if (data['AplicarIVA4'] == "True") pi += parseFloat(data['IVAComprasPorcentaje4'].replace(",", "."));
+        //        // pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
         data['PorcentajeIva'] = pi.toFixed(DECIMALES) || 0;
         ////////////////////////////////////////////////////
 
@@ -139,7 +139,8 @@ function CalcularTodos() {
 
 
 
-    $('#Lista').jqGrid('footerData', 'set', { NumeroObra: 'TOTALES', Importe: totalCantidad.toFixed(DECIMALES),
+    $('#Lista').jqGrid('footerData', 'set', {
+        NumeroObra: 'TOTALES', Importe: totalCantidad.toFixed(DECIMALES),
         ImporteBonificacion: ib1.toFixed(DECIMALES),
         ImporteIva: ii1.toFixed(DECIMALES),
         ImporteTotalItem: tg.toFixed(DECIMALES)
@@ -250,7 +251,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
         $.post(ROOT + 'Cuenta/GetCuentasAutocomplete',  // ?term=' + val
-                {term: val }, // JSON.stringify(val)},
+                { term: val }, // JSON.stringify(val)},
                 function (data) {
                     if (data.length > 0) {
                         var ui = data[0];
@@ -275,7 +276,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
                         $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
- FinRefresco();
+                        FinRefresco();
                     }
                     else {
 
@@ -293,11 +294,11 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
         $.post(ROOT + 'Cuenta/GetCodigosCuentasAutocomplete2',  // ?term=' + val
-                {term: val }, // JSON.stringify(val)},
+                { term: val }, // JSON.stringify(val)},
                 function (data) {
                     if (data.length > 0) {
                         var ui = data[0];
-  sacarDeEditMode();
+                        sacarDeEditMode();
                         // alert(ui.value);
 
 
@@ -345,7 +346,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 function FinRefresco() {
     CalcularTodos();
     RefrescarOrigenDescripcion();
-            AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
+    AgregarRenglonesEnBlanco({ "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
 
 }
 
@@ -662,6 +663,345 @@ function CopiarItemDeObra(acceptId, ui) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+
+function CopiarRecepcion(acceptId, ui) {
+
+
+    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+    sacarDeEditMode();
+
+
+    GrabarGrillaLocal()
+
+    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+    var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
+
+    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    var grid;
+    try {
+
+        // estos son datos de cabecera que ya tengo en la grilla auxiliar
+        $("#Observaciones").val(getdata['Observaciones']);
+        $("#LugarEntrega").val(getdata['LugarEntrega']);
+        $("#IdObra").val(getdata['IdObra']);
+        $("#IdSector").val(getdata['IdSector']);
+
+        $("#IdProveedor").val(getdata['IdProveedor']);
+        $("#Proveedor").val(getdata['IdProveedor']);
+        $("#DescripcionProveedor").val(getdata['Proveedor']);
+        $("#IdComprador").val(getdata['IdComprador']);
+
+
+        $("#NumeroPedido").val(getdata['Numero']);
+        $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
+
+
+        //me traigo los datos de detalle
+        var IdRecepcion = getdata['IdRecepcion']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+
+
+
+
+
+
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Recepcion/DetRecepcionesSinFormato/',
+            data: { IdRecepcion: IdRecepcion },
+            dataType: "Json",
+            error: function (xhr, textStatus, exceptionThrown) {
+                alert('error');
+            },
+            success: function (data) {
+
+                var prox = ProximoNumeroItem();
+                // agrego los items a la grilla de detalle
+                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                // venido el objeto devuelto (jsoneado) ?
+
+                var longitud = data.length;
+                for (var i = 0; i < data.length; i++) {
+                    var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                    tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    tmpdata['Codigo'] = data[i].Codigo;
+                    tmpdata['Descripcion'] = data[i].Descripcion;
+                    tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    //tmpdata['Unidad'] = data[i].Unidad;
+                    tmpdata['Unidad'] = data[i].Abreviatura;
+                    tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                    tmpdata['Cantidad'] = data[i].Cantidad;
+                    tmpdata['NumeroObra'] = data[i].NumeroObra;
+                    tmpdata['FechaEntrega'] = displayDate;
+                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+
+                    //tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                    tmpdata['NumeroItem'] = prox;
+                    prox++;
+
+                    tmpdata['Precio'] = data[i].Precio;;
+
+                    getdata = tmpdata;
+                    var idazar = Math.ceil(Math.random() * 1000000);
+
+
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    ///////////////
+                    // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+                    ///////////////
+                    var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+                    // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+                    //alert(segundorenglon);
+                    if (segundorenglon.indexOf("dnd") != -1) {
+                        // tiró el renglon en modo dragdrop, no hizo dobleclic
+                        $("#Lista").jqGrid('delRowData', segundorenglon);
+                    }
+                    //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                    //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+                    ///////////////
+                    // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+                    ///////////////
+
+                    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+                    var pos = TraerPosicionLibre();
+                    if (pos == null) {
+                        $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+                    }
+                    else {
+                        $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+                    }
+                    //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+                    // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+                    // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                }
+
+
+                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                //                rows = $("#Lista").getGridParam("reccount");
+                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+                Validar();
+            }
+
+        })
+
+
+
+
+    } catch (e) {
+
+        alert(e.message);
+
+    }
+
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+function CopiarPedido(acceptId, ui) {
+
+
+    jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+    sacarDeEditMode();
+
+
+    GrabarGrillaLocal()
+
+    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+    var getdata = jQuery("#ListaDrag5").jqGrid('getRowData', acceptId);
+
+    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+    // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+    var grid;
+    try {
+
+        // estos son datos de cabecera que ya tengo en la grilla auxiliar
+        $("#Observaciones").val(getdata['Observaciones']);
+        $("#LugarEntrega").val(getdata['LugarEntrega']);
+        $("#IdObra").val(getdata['IdObra']);
+        $("#IdSector").val(getdata['IdSector']);
+
+        $("#IdProveedor").val(getdata['IdProveedor']);
+        $("#Proveedor").val(getdata['IdProveedor']);
+        $("#DescripcionProveedor").val(getdata['Proveedor']);
+        $("#IdComprador").val(getdata['IdComprador']);
+
+
+        $("#NumeroPedido").val(getdata['Numero']);
+        $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
+
+
+        //me traigo los datos de detalle
+        var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+
+
+
+
+
+
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: ROOT + 'Pedido/DetPedidosSinFormato/',
+            data: { IdPedido: IdPedido },
+            dataType: "Json",
+            error: function (xhr, textStatus, exceptionThrown) {
+                alert('error');
+            },
+            success: function (data) {
+
+                var prox = ProximoNumeroItem();
+                // agrego los items a la grilla de detalle
+                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                // venido el objeto devuelto (jsoneado) ?
+
+                var longitud = data.length;
+                for (var i = 0; i < data.length; i++) {
+                    var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                    tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    tmpdata['Codigo'] = data[i].Codigo;
+                    tmpdata['Descripcion'] = data[i].Descripcion;
+                    tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    //tmpdata['Unidad'] = data[i].Unidad;
+                    tmpdata['Unidad'] = data[i].Abreviatura;
+                    tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                    tmpdata['Cantidad'] = data[i].Cantidad;
+                    tmpdata['NumeroObra'] = data[i].NumeroObra;
+                    tmpdata['FechaEntrega'] = displayDate;
+                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+
+                    //tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                    tmpdata['NumeroItem'] = prox;
+                    prox++;
+
+                    tmpdata['Precio'] = data[i].Precio;;
+
+                    getdata = tmpdata;
+                    var idazar = Math.ceil(Math.random() * 1000000);
+
+
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    ///////////////
+                    // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+                    ///////////////
+                    var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+                    // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+                    //alert(segundorenglon);
+                    if (segundorenglon.indexOf("dnd") != -1) {
+                        // tiró el renglon en modo dragdrop, no hizo dobleclic
+                        $("#Lista").jqGrid('delRowData', segundorenglon);
+                    }
+                    //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                    //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+                    ///////////////
+                    // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+                    ///////////////
+
+                    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+                    var pos = TraerPosicionLibre();
+                    if (pos == null) {
+                        $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+                    }
+                    else {
+                        $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+                    }
+                    //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+                    // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+                    // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+                }
+
+
+                AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                //                rows = $("#Lista").getGridParam("reccount");
+                //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+
+
+
+                Validar();
+            }
+
+        })
+
+
+
+
+    } catch (e) {
+
+        alert(e.message);
+
+    }
+
+    var grid;
+    grid = Math.ceil(Math.random() * 1000000);
+    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+    //resetAltRows.call(this);
+    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+}
+
+
+
 
 
 
@@ -673,106 +1013,106 @@ $(function () {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function DeSerializaForm() {
-    var cm, data1, data2, valor;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+    function DeSerializaForm() {
+        var cm, data1, data2, valor;
+    }
 
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-function Validar() {
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-    //quiz�s no est� esperando que vuelva la llamada.....
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    // valido el nuevo comprobante
 
-    var cabecera = SerializaForm();
+    function Validar() {
 
-    $.ajax({
 
-        type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
-        contentType: 'application/json; charset=utf-8',
-        url: ROOT + 'Pedido/ValidarJson',
 
-        dataType: 'json',
-        data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+        //quiz�s no est� esperando que vuelva la llamada.....
 
-        beforeSend: function () {
-            $("#loading").show();
-        },
-        complete: function () {
-            $("#loading").hide();
-        },
-        error: function (xhr, textStatus, exceptionThrown) {
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        // valido el nuevo comprobante
 
-            // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
+        var cabecera = SerializaForm();
 
-            try {
-                var errorData = $.parseJSON(xhr.responseText);
-                //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
-                //  Podría mostrar directamente el Messages?
+        $.ajax({
 
-                var errorMessages = [];
+            type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'Pedido/ValidarJson',
 
-                //this ugly loop is because List<> is serialized to an object instead of an array
-                for (var key in errorData.Errors) {
-                    errorMessages.push(errorData[key]);
+            dataType: 'json',
+            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+            error: function (xhr, textStatus, exceptionThrown) {
+
+                // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
+
+                try {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
+                    //  Podría mostrar directamente el Messages?
+
+                    var errorMessages = [];
+
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData.Errors) {
+                        errorMessages.push(errorData[key]);
+                    }
+                    //      $('#result').html(errorMessages.join("<br />"));
+
+                    //       $('html, body').css('cursor', 'auto');
+                    //       $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                    $("#textoMensajeAlerta").html(errorData.Message);
+                    //$("#textoMensajeAlerta").html(errorMessages.join());
+                    $("#mensajeAlerta").show();
+                    QuitarRenglones(errorData.Errors);
+
+                    // alert(errorMessages.join("<br />"));
+
+                } catch (e) {
+                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                    $('html, body').css('cursor', 'auto');
+                    $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                    $("#textoMensajeAlerta").html(xhr.responseText);
+                    $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
+                    //$(".alert").alert();
+                    //   alert(xhr.responseText);
                 }
-                //      $('#result').html(errorMessages.join("<br />"));
+            },
+            success: function (data) {
+                // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
+                // si falta uno, lo borro.
 
-                //       $('html, body').css('cursor', 'auto');
-                //       $('#grabar2').attr("disabled", false).val("Aceptar");
+                var arraydemensajes = xhr.responseText;
+                QuitarRenglones(arraydemensajes);
 
-                $("#textoMensajeAlerta").html(errorData.Message);
-                //$("#textoMensajeAlerta").html(errorMessages.join());
-                $("#mensajeAlerta").show();
-                QuitarRenglones(errorData.Errors);
-
-                // alert(errorMessages.join("<br />"));
-
-            } catch (e) {
-                // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                $('html, body').css('cursor', 'auto');
-                $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                $("#textoMensajeAlerta").html(xhr.responseText);
-                $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
-                //$(".alert").alert();
-                //   alert(xhr.responseText);
             }
-        },
-        success: function (data) {
-            // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
-            // si falta uno, lo borro.
+        });
 
-            var arraydemensajes = xhr.responseText;
-            QuitarRenglones(arraydemensajes);
-
-        }
-    });
-
-}
+    }
 
 
 
@@ -786,9 +1126,9 @@ function Validar() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    
+
+
+
 
     $('#Lista').jqGrid({
         url: ROOT + 'ComprobanteProveedor/DetComprobantesProveedor/',
@@ -817,22 +1157,26 @@ function Validar() {
                        'IdDetalleRequerimiento', 'IdDetallePresupuesto', 'OrigenDescripcion', 'IdCentroCosto'
 
 
-                       ],
+        ],
         colModel: [
                         { name: 'act', formoptions: { rowpos: 1, colpos: 1 }, index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                        { name: 'IdDetalleComprobanteProveedor', formoptions: { rowpos: 2, colpos: 1 },
+                        {
+                            name: 'IdDetalleComprobanteProveedor', formoptions: { rowpos: 2, colpos: 1 },
                             index: 'IdDetalleComprobanteProveedor', label: 'TB', align: 'left', width: 85, editable: true,
                             hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }
                         },
-                        { name: 'IdCuenta', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdCuenta', label: 'TB',
+                        {
+                            name: 'IdCuenta', formoptions: { rowpos: 3, colpos: 1 }, index: 'IdCuenta', label: 'TB',
                             align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
                         },
-                        { name: 'IdUnidad', formoptions: { rowpos: 4, colpos: 1 },
+                        {
+                            name: 'IdUnidad', formoptions: { rowpos: 4, colpos: 1 },
                             index: 'IdUnidad', label: 'TB', align: 'left', width: 85, editable: true,
                             hidden: true, editrules: { edithidden: true, required: false }
                         },
 
-                        { name: 'NumeroItem', formoptions: { rowpos: 5, colpos: 1 },
+                        {
+                            name: 'NumeroItem', formoptions: { rowpos: 5, colpos: 1 },
                             editoptions: { disabled: true },
                             index: 'NumeroItem', label: 'TB',
                             align: 'right', width: 20, hidden: true, editable: true, edittype: 'text', editrules: { required: false }
@@ -840,9 +1184,11 @@ function Validar() {
 
                         { name: 'NumeroObra', formoptions: { rowpos: 6, colpos: 1 }, index: 'NumeroObra', label: 'TB', align: 'center', width: 60, sortable: false, hidden: true, editable: false },
 
-                        { name: 'Cantidad', formoptions: { rowpos: 7, colpos: 1 }, index: 'Cantidad', label: 'TB'
+                        {
+                            name: 'Cantidad', formoptions: { rowpos: 7, colpos: 1 }, index: 'Cantidad', label: 'TB'
                             , align: 'right', width: 80, editable: true, hidden: true, edittype: 'currency',
-                            editoptions: { maxlength: 20,
+                            editoptions: {
+                                maxlength: 20,
                                 defaultValue: '0.00',
                                 dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } }]
                             }
@@ -859,7 +1205,8 @@ function Validar() {
 
 
 
-                        { name: 'Unidad', formoptions: { rowpos: 7, colpos: 2 }, index: 'Unidad', align: 'center',
+                        {
+                            name: 'Unidad', formoptions: { rowpos: 7, colpos: 2 }, index: 'Unidad', align: 'center',
                             width: 60, editable: true, hidden: true, edittype: 'select', editrules: { required: false },
                             editoptions: {
 
@@ -867,7 +1214,8 @@ function Validar() {
                                 dataEvents: [{ type: 'change', fn: function (e) { $('#IdUnidad').val(this.value); } }]
                             }
                         },
-                        { name: 'Codigo', formoptions: { rowpos: 8, colpos: 1 }, index: 'Codigo', align: 'center', width: 80, editable: true, edittype: 'text',
+                        {
+                            name: 'Codigo', formoptions: { rowpos: 8, colpos: 1 }, index: 'Codigo', align: 'center', width: 80, editable: true, edittype: 'text',
                             editoptions: {
                                 dataInit: function (elem) {
                                     $(elem).autocomplete({
@@ -891,14 +1239,17 @@ function Validar() {
                             },
                             editrules: { required: false }
                         },
-                            { formoptions: { rowpos: 9, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, hidden: true, width: 400,
+                            {
+                                formoptions: { rowpos: 9, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, hidden: true, width: 400,
                                 editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
                             },
 
-                        { name: 'Descripcion', formoptions: { rowpos: 8, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 400,
+                        {
+                            name: 'Descripcion', formoptions: { rowpos: 8, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 400,
                             hidden: false,
                             editable: true, edittype: 'text',
-                            editoptions: { rows: '1', cols: '1',
+                            editoptions: {
+                                rows: '1', cols: '1',
                                 dataInit: function (elem) {
                                     $(elem).autocomplete({
 
@@ -932,11 +1283,13 @@ function Validar() {
                             },
                             editrules: { required: false }
                         },
-                        { name: 'Importe', formoptions: { rowpos: 9, colpos: 1 },
+                        {
+                            name: 'Importe', formoptions: { rowpos: 9, colpos: 1 },
                             index: 'Importe', label: 'TB', align: 'right', width: 100, editable: true, edittype: 'text',
                             //formatter: 'number',
                             formatter: numFormat, unformat: numUnformat,
-                            editoptions: { defaultValue: '0.00', maxlength: 20,
+                            editoptions: {
+                                defaultValue: '0.00', maxlength: 20,
 
 
 
@@ -983,7 +1336,8 @@ function Validar() {
 
 
 
-                    , { name: 'AplicarIVA1', index: 'Check_1', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA1', index: 'Check_1', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', width: 30, classes: 'cvteste', align: 'center', label: 'TB',
 
                         formatter: "checkbox", //boolformatter, // cboxFormatter, // "checkbox",
@@ -1000,7 +1354,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje1', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA2', index: 'Check_2', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA2', index: 'Check_2', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", // cboxFormatter,
                         formatoptions: { disabled: false }
@@ -1012,7 +1367,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje2', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA3', index: 'Check_2', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA3', index: 'Check_2', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                    , formoptions: { rowpos: 31, colpos: 1 }
@@ -1023,7 +1379,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje3', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA4', index: 'Check_4', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA4', index: 'Check_4', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                         , formoptions: { rowpos: 32, colpos: 1 }
@@ -1033,7 +1390,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje4', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA5', index: 'Check_5', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA5', index: 'Check_5', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                            , formoptions: { rowpos: 33, colpos: 1 }
@@ -1043,7 +1401,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje5', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA6', index: 'Check_6', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA6', index: 'Check_6', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                           , formoptions: { rowpos: 34, colpos: 1 }
@@ -1053,7 +1412,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje6', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA7', index: 'Check_7', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA7', index: 'Check_7', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                             , formoptions: { rowpos: 35, colpos: 1 }
@@ -1063,7 +1423,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje7', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA8', index: 'Check_8', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA8', index: 'Check_8', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                            , formoptions: { rowpos: 36, colpos: 1 }
@@ -1073,7 +1434,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje8', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA9', index: 'Check_9', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA9', index: 'Check_9', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                            , formoptions: { rowpos: 37, colpos: 1 }
@@ -1083,7 +1445,8 @@ function Validar() {
                     , { name: 'IVAComprasPorcentaje9', index: '', hidden: true, editable: false, edittype: 'text' }
 
 
-                    , { name: 'AplicarIVA10', index: 'Check_10', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
+                    , {
+                        name: 'AplicarIVA10', index: 'Check_10', // http://stackoverflow.com/questions/928919/jqgrid-with-an-editable-checkbox-column
                         editable: true, edittype: 'checkbox', editoptions: { value: "True:False" }, width: 30, classes: 'cvteste', align: 'center', label: 'TB',
                         formatter: "checkbox", formatoptions: { disabled: false }
                                            , formoptions: { rowpos: 38, colpos: 1 }
@@ -1099,18 +1462,20 @@ function Validar() {
 
 
                         {
-                        name: 'PorcentajeBonificacion',
-                        formoptions: { rowpos: 10, colpos: 1 },
-                        index: 'PorcentajeBonificacion', label: 'TB', align: 'right', width: 50,
-                        editable: true, edittype: 'text',
-                        editoptions: { maxlength: 20,
-                            defaultValue: '0.00'
-                        },
-                        dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } }]
-                    }
+                            name: 'PorcentajeBonificacion',
+                            formoptions: { rowpos: 10, colpos: 1 },
+                            index: 'PorcentajeBonificacion', label: 'TB', align: 'right', width: 50,
+                            editable: true, edittype: 'text',
+                            editoptions: {
+                                maxlength: 20,
+                                defaultValue: '0.00'
+                            },
+                            dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } }]
+                        }
                         ,
-                        { name: 'ImporteBonificacion', formoptions: { rowpos: 11, colpos: 1 }, index: 'ImporteBonificacion', label: 'TB', align: 'right', width: 50, editable: true, editoptions: { disabled: 'disabled'} },
-                        { name: 'PorcentajeIva', formoptions: { rowpos: 12, colpos: 1 }, index: 'PorcentajeIva', label: 'TB',
+                        { name: 'ImporteBonificacion', formoptions: { rowpos: 11, colpos: 1 }, index: 'ImporteBonificacion', label: 'TB', align: 'right', width: 50, editable: true, editoptions: { disabled: 'disabled' } },
+                        {
+                            name: 'PorcentajeIva', formoptions: { rowpos: 12, colpos: 1 }, index: 'PorcentajeIva', label: 'TB',
                             align: 'right', width: 100, editable: false,
                             editoptions: {
                                 defaultValue: '21.00',
@@ -1119,52 +1484,60 @@ function Validar() {
                             dataEvents: [{ type: 'change', fn: function (e) { CalcularItem(); } }]
                         },
 
-                        { name: 'ImporteIva', formoptions: { rowpos: 13, colpos: 1 }, index: 'ImporteIva', label: 'TB', align: 'right', width: 100, editable: true, editoptions: { disabled: 'disabled'} },
-                        { name: 'ImporteTotalItem', formoptions: { rowpos: 14, colpos: 1 }, index: 'ImporteTotalItem', label: 'TB', align: 'right', width: 100, editable: true, editoptions: { disabled: 'disabled'} },
-                        { name: 'FechaEntrega', formoptions: { rowpos: 15, colpos: 1 },
+                        { name: 'ImporteIva', formoptions: { rowpos: 13, colpos: 1 }, index: 'ImporteIva', label: 'TB', align: 'right', width: 100, editable: true, editoptions: { disabled: 'disabled' } },
+                        { name: 'ImporteTotalItem', formoptions: { rowpos: 14, colpos: 1 }, index: 'ImporteTotalItem', label: 'TB', align: 'right', width: 100, editable: true, editoptions: { disabled: 'disabled' } },
+                        {
+                            name: 'FechaEntrega', formoptions: { rowpos: 15, colpos: 1 },
                             index: 'FechaEntrega', label: 'TB', width: 300, align: 'center',
                             sorttype: 'date', editable: true,
                             formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
-                        { name: 'FechaNecesidad', formoptions: { rowpos: 15, colpos: 2 },
+                        {
+                            name: 'FechaNecesidad', formoptions: { rowpos: 15, colpos: 2 },
                             index: 'FechaNecesidad', label: 'TB', width: 300, align: 'center',
                             sorttype: 'date', editable: true,
                             formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
                             editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit }, editrules: { required: false }
                         },
-                        { name: 'Observaciones', formoptions: { rowpos: 16, colpos: 1 }, index: 'Observaciones',
+                        {
+                            name: 'Observaciones', formoptions: { rowpos: 16, colpos: 1 }, index: 'Observaciones',
                             label: 'TB', align: 'left', width: 600, editable: true,
                             // edittype: 'textarea', no se como evitar que el inline de textarea no me haga muy alto el renglon
                             editoptions: { rows: '1', cols: '40' }
                         }, //editoptions: { dataInit: function (elem) { $(elem).val(inEdit ? "Modificado" : "Nuevo"); }
 
-                        {name: 'NumeroRequerimiento', formoptions: { rowpos: 1, colpos: 2 }, hidden: true,
-                        editoptions: { rows: '1', cols: '1', disabled: true },
-                        index: 'NumeroRequerimiento', label: 'TB', edittype: 'text',
-                        align: 'right', width: 40, sortable: false, editable: false, editrules: { readonly: 'readonly' }
-                    },
-                        { name: 'NumeroItemRM', hidden: true, formoptions: { rowpos: 1, colpos: 3 },
+                        {
+                            name: 'NumeroRequerimiento', formoptions: { rowpos: 1, colpos: 2 }, hidden: true,
+                            editoptions: { rows: '1', cols: '1', disabled: true },
+                            index: 'NumeroRequerimiento', label: 'TB', edittype: 'text',
+                            align: 'right', width: 40, sortable: false, editable: false, editrules: { readonly: 'readonly' }
+                        },
+                        {
+                            name: 'NumeroItemRM', hidden: true, formoptions: { rowpos: 1, colpos: 3 },
                             editoptions: { rows: '1', cols: '1', disabled: true },
                             index: 'NumeroItemRM', label: 'TB', align: 'right', edittype: 'text',
                             width: 50, sortable: false, editable: false, editrules: { readonly: 'readonly' }
                         },
 
-                        { name: 'Adj. 1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
-                            editoptions: { enctype: "multipart/form-data", dataEvents: [{ type: 'change', fn: function (e) {
-                                var thisval = $(e.target).val();
-                                if ($(this).val() != "") {
-                                    $("#Adjunto").checked = true;
-                                }
-                                else {
-                                    $("#Adjunto").checked = false;
-                                }
-                            }
-                            }]
+                        {
+                            name: 'Adj. 1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
+                            editoptions: {
+                                enctype: "multipart/form-data", dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var thisval = $(e.target).val();
+                                        if ($(this).val() != "") {
+                                            $("#Adjunto").checked = true;
+                                        }
+                                        else {
+                                            $("#Adjunto").checked = false;
+                                        }
+                                    }
+                                }]
                             }
                         },
-                        { name: 'IdDetalleRequerimiento', label: 'TB', hidden: true, editoptions: { defaultValue: '-1'} },
-                        { name: 'IdDetallePresupuesto', label: 'TB', hidden: true, editoptions: { defaultValue: '-1'} },
+                        { name: 'IdDetalleRequerimiento', label: 'TB', hidden: true, editoptions: { defaultValue: '-1' } },
+                        { name: 'IdDetallePresupuesto', label: 'TB', hidden: true, editoptions: { defaultValue: '-1' } },
 
         //////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////
@@ -1172,29 +1545,31 @@ function Validar() {
 
         // radio buttons en el popup del jqgrid
         // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:common_rules#custom
-                        {name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar"}  // "Tomar la descripción de" }
+                        {
+                            name: 'OrigenDescripcion', label: 'TB', formoptions: { rowpos: 11, colpos: 2, label: "Tomar" }  // "Tomar la descripción de" }
                         , index: 'OrigenDescripcion',
-                        align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
-                        // formatter: radioFormatter, unformat: unformatRadio,
-                        editrules: { required: true
-                            //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  ) 
-                            //                                      , disabled: 'disabled'
-                        },
+                            align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
+                            // formatter: radioFormatter, unformat: unformatRadio,
+                            editrules: {
+                                required: true
+                                //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  ) 
+                                //                                      , disabled: 'disabled'
+                            },
 
-                        editoptions: {
-                            //                         readonly: true,
-                            //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
-                            defaultValue: OrigenDescripcionDefault,
-                            value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
-                            //,
-                            //     custom_element: myelem, custom_value: myvalue
-                        }
-                    },
+                            editoptions: {
+                                //                         readonly: true,
+                                //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
+                                defaultValue: OrigenDescripcionDefault,
+                                value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
+                                //,
+                                //     custom_element: myelem, custom_value: myvalue
+                            }
+                        },
                     { name: 'IdCentroCosto', label: 'TB', hidden: true }
 
 
 
-                    ],
+        ],
 
 
 
@@ -1303,7 +1678,7 @@ function Validar() {
 
 
         afterEditCell: function (rowid, cellname, value, iRow, iCol) {
-        
+
             var $input = $("#" + iRow + "_" + cellname);
             $input.select(); // acá me marca el texto
 
@@ -1426,308 +1801,85 @@ function Validar() {
     /////////////////////////FIN DE DEFINICION DE GRILLALISTA   ////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
-
-function QuitarRenglones(data) {
-
-    var longitud = data.length;
-    for (var i = 0; i < data.length; i++) {
-
-        if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
-
-        var renglonrepe = parseInt(data[i]);
-        // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
-        var index = 6; // la columna esta es la que tiene el numero de item
-        var str = renglonrepe;
-        var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
 
 
+    function QuitarRenglones(data) {
+
+        var longitud = data.length;
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].indexOf("usa un item de requerimiento que ya se") == -1) continue;
+
+            var renglonrepe = parseInt(data[i]);
+            // http://stackoverflow.com/questions/3791020/how-to-search-for-a-row-and-then-select-it-in-jqgrid
+            var index = 6; // la columna esta es la que tiene el numero de item
+            var str = renglonrepe;
+            var reng = $("#Lista > tbody > tr > td:nth-child(" + index + "):contains('" + str + "')").parent();
 
 
-        // podemos quitarlo o pintarlo
-        if (true) {
-            // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
-            // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
-            //            
-            //              $("tr.jqgrow:odd").addClass('myAltRowClass');
-            //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
-            //                .addClass('myAltRowClass');
 
-            //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
 
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
-            $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
+            // podemos quitarlo o pintarlo
+            if (true) {
+                // jQuery("#Lista").jqGrid('rowattr', reng[0].id);
+                // $("#6 td:eq(2)", grid[0]).css({ color: 'red' });
+                //            
+                //              $("tr.jqgrow:odd").addClass('myAltRowClass');
+                //        $("#" + rowsToColor[i]).find("td").css("background-color", "red");
+                //                .addClass('myAltRowClass');
 
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
-            // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
-        } else {
-            try {
-                jQuery("#Lista").jqGrid('delRowData', reng[0].id);
-            } catch (e) {
+                //                 jQuery("#Lista").jqGrid('setRowData', reng[0].id, "0", "", { color: 'red' });
 
+                $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'background': '#FAB1B1' });
+                $("#Lista").jqGrid('setRowData', reng[0].id, false, { 'text-decoration': 'line-through' });
+
+                // jQuery("#Lista").jqGrid('setCell', reng[0].id, "0", "", { color: 'red' });
+                // jQuery("#Lista").jqGrid('setCell', reng[0].id, "4", "", { color: 'red' });
+            } else {
+                try {
+                    jQuery("#Lista").jqGrid('delRowData', reng[0].id);
+                } catch (e) {
+
+                }
             }
+
+
         }
 
-
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarPresupuesto(acceptId, ui) {
 
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
 
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
 
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
 
-        $("#IdProveedor").val(getdata['IdProveedor']);
-        $("#DescripcionProveedor").val(getdata['Proveedor']);
 
 
 
-        //me traigo los datos de detalle
-        IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
 
 
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
-            data: { IdPresupuesto: IdPresupuesto },
-            dataType: "Json",
-            success: function (data) {
 
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
 
-                    ///////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////
 
-                    if (true) {
-                        // fecha de hoy
-                        var now = new Date();
-                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-                        tmpdata['FechaEntrega'] = currentDate;
-                    }
-                    else {
-                        // fecha del rm
-                        var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                        var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                        tmpdata['FechaEntrega'] = displayDate;
-                    }
-                    tmpdata['FechaNecesidad'] = displayDate;
 
-                    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                    tmpdata['Importe'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-                    tmpdata['Observaciones'] = data[i].Observaciones;
-
-
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                rows = $("#Lista").getGridParam("reccount");
-                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) { }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-function CopiarComparativa(acceptId, ui) {
-
-    // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-    var getdata = jQuery("#ListaDrag4").jqGrid('getRowData', acceptId);
-
-    var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-    var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-    var grid;
-    try {
-
-        // estos son datos de cabecera que ya tengo en la grilla auxiliar
-        $("#Observaciones").val(getdata['Observaciones']);
-        $("#LugarEntrega").val(getdata['LugarEntrega']);
-        $("#IdObra").val(getdata['IdObra']);
-        $("#IdSector").val(getdata['IdSector']);
-
-        //me traigo los datos de detalle
-        IdComparativa = getdata['IdFactura']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            url: ROOT + 'Comparativa/DetComparativasSinFormato/',
-            data: { IdComparativa: IdComparativa },
-            dataType: "Json",
-            success: function (data) {
-
-                // agrego los items a la grilla de detalle
-                // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                // venido el objeto devuelto (jsoneado) ?
-
-                var longitud = data.length;
-                for (var i = 0; i < data.length; i++) {
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
-                    tmpdata['Unidad'] = data[i].Unidad;
-                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                    tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-
-
-                    tmpdata['Importe'] = data[i].Precio;
-                    tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                    tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                    tmpdata['ImporteIva'] = data[i].ImporteIva;
-                    tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                    getdata = tmpdata;
-                    grid = Math.ceil(Math.random() * 1000000);
-                    $("#Lista").jqGrid('addRowData', grid, getdata);
-                }
-
-
-                rows = $("#Lista").getGridParam("reccount");
-                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-
-
-
-
-                Validar();
-            }
-
-        });
-
-
-
-
-    } catch (e) { }
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
-    // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-    //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-    //resetAltRows.call(this);
-    $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-}
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1896,7 +2048,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -2114,9 +2266,9 @@ $(function () {     // lo mismo que $(document).ready(function () {
         var parentHeight = parentDiv.height();
 
         var left = (screen.width / 2) - (dlgWidth / 2) + "px";
-        var top =( (screen.height / 2) - (dlgHeight / 2)  + 50 )+ "px";
+        var top = ((screen.height / 2) - (dlgHeight / 2) + 50) + "px";
 
-        dlgDiv[0].style.top = top ; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
+        dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
         dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
 
     }
@@ -2126,7 +2278,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
     $("#addData").click(function () {
-        jQuery("#Lista").jqGrid('editGridRow', "new", { addCaption: "Agregar item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
+        jQuery("#Lista").jqGrid('editGridRow', "new", {
+            addCaption: "Agregar item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true, closeAfterAdd: true,
             recreateForm: true,
             beforeShowForm: function (form) {
 
@@ -2181,7 +2334,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
         var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
-        if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, { editCaption: "Modificacion item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
+        if (gr != null) jQuery("#Lista").jqGrid('editGridRow', gr, {
+            editCaption: "Modificacion item de solicitud", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false, closeOnEscape: true,
             closeAfterEdit: true, recreateForm: true, Top: 0,
             beforeShowForm: function (form) {
                 PopupCentrar();
@@ -2219,7 +2373,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
         var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
         if (gr != null) {
             jQuery("#Lista").jqGrid('delGridRow', gr,
-            { caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar",
+            {
+                caption: "Borrar", msg: "Elimina el registro seleccionado?", bSubmit: "Borrar", bCancel: "Cancelar",
                 width: 300, closeOnEscape: true, reloadAfterSubmit: false,
 
                 beforeShowForm: function (form) {
@@ -2405,7 +2560,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
     myGrid.jqGrid({
         //        url: ROOT + 'Cuenta/Cuentas',
         url: ROOT + 'jqGridPaginacion/DynamicGridData',
-        postData: { 'FechaInicial': function () { return ""; },
+        postData: {
+            'FechaInicial': function () { return ""; },
             'FechaFinal': function () { return ""; },
             'IdObra': function () { return ""; }
         },
@@ -2425,18 +2581,20 @@ $(function () {     // lo mismo que $(document).ready(function () {
                        'Observaciones', 'Lugar de entrega', 'IdObra', 'IdSector'],
         colModel: [
                         { name: 'accion', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: '', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Cuenta', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn']} },
-                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['eq']} },
+                        { name: '', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Cuenta', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['eq'] } },
 
 
-                        { name: 'TiposCuentaGrupos',     // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
+                        {
+                            name: 'TiposCuentaGrupos',     // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
 
                             index: 'TiposCuentaGrupos', align: 'center', width: 100, editable: false, search: true,
 
                             //formatter:'select',     stype: 'select', // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
-                            searchoptions: { sopt: ['cn']
+                            searchoptions: {
+                                sopt: ['cn']
 
                                 //, value: categoriesStr
                             }, hidden: false
@@ -2445,7 +2603,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
                         },
-                        { name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: false, search: true, hidden: false,
+                        {
+                            name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: false, search: true, hidden: false,
                             searchoptions: {
                                 sopt: ['cn'],
                                 dataInit: function (elem) {
@@ -2490,16 +2649,16 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         },
                         { name: 'CdeGasto', index: 'CuentasGasto', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: '', index: '', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: '', index: '', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: '', index: '', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
 
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'nc', 'bw', 'bn', 'eq', 'ne', 'ew', 'en', 'lt', 'le', 'gt', 'ge'] }, hidden: false },
                         { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: 'Entregado', index: 'Entregado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: 'Impresa', index: 'Impresa', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 85, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 85, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
@@ -2507,16 +2666,16 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'Salidas', index: 'Salidas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Libero', index: 'Libero', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: [''] }, hidden: true },
                         { name: 'Solicito', index: 'Solicito', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Sector', index: 'Sector', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Sector', index: 'Sector', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true }
-                    ],
+        ],
 
 
         onSelectRow: function (id, status, e) {
@@ -2591,7 +2750,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
     myGrid.filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
     //myGrid.filterToolbar({  });
     myGrid.jqGrid('navButtonAdd', '#ListaDragPager',
-            { caption: "Filter", title: "Toggle Searching Toolbar",
+            {
+                caption: "Filter", title: "Toggle Searching Toolbar",
                 buttonicon: 'ui-icon-pin-s',
                 onClickButton: function () { myGrid[0].toggleToolbar(); }
             });
@@ -2629,18 +2789,20 @@ $(function () {     // lo mismo que $(document).ready(function () {
         datatype: 'json',
         mtype: 'POST',
         cellEdit: false,
-        colNames: ['Acciones', 'IdDetalleRequerimiento',
-                         'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
+        colNames: ['', 'act2',
+                         'Cuenta',
+                         'Descripcion', 'cant.', 'avance', 'IdCuenta.',
                            'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
                             'N�', 'Fecha', 'Cump.', 'Recep.', 'Entreg.',
                          'Impresa', 'Detalle'
-                      ],
+        ],
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'IdPresupuestoObrasNodo', index: 'IdPresupuestoObrasNodo', align: 'left', width: 40, editable: false, hidden: false },
-                        { name: 'Descripcion', index: 'Descripcion', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Cantidad', index: '', width: 30 },
+                        { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdPresupuestoObrasNodo', index: 'IdPresupuestoObrasNodo', align: 'left', width: 40, editable: false, hidden: true },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'right', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Cantidad', index: '', width: 100 },
+
                         { name: 'CantidadAvanzada', index: '', width: 80 },
                         { name: 'IdCuenta', index: '', width: 40 },
                         { name: 'IdObra', index: '', width: 40 },
@@ -2660,7 +2822,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
 
 
-                    ],
+        ],
         ondblClickRow: function (id) {
             CopiarItemDeObra(id);
         },
@@ -2698,42 +2860,45 @@ $(function () {     // lo mismo que $(document).ready(function () {
         datatype: 'json',
         mtype: 'POST',
         cellEdit: false,
-        colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
-                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
+        colNames: ['Acciones', 'Acciones', 'IdPresupuesto', '', 'Numero',
+                    'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
+                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega',
+                       'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 20, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdRecepcion', index: 'IdRecepcion', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden:true , searchoptions: { sopt: ['eq'] } },
+                        { name: 'Orden', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
-                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Comprador', index: 'Comprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comprador', index: 'Comprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'IdProveedor', index: 'IdProveedor' }
-                    ],
+        ],
         ondblClickRow: function (id) {
-            CopiarPresupuesto(id);
+            CopiarRecepcion(id);
         },
         pager: $('#ListaDragPager3'),
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'NumeroRecepcion1',
+        sortname: 'IdRecepcion',
         sortorder: "desc",
         viewrecords: true,
         ///////////////////////////////
@@ -2869,60 +3034,62 @@ $(function () {     // lo mismo que $(document).ready(function () {
                      '', '', '', '', '',
                     '', '', '', '', '', ''
 
-                    ],
+        ],
         colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 300, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                         { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 50, editable: false, hidden: true },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                         { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Comprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-
-
-                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Auxiliar1', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'IdProveedor', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
 
-                    ],
+
+                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Auxiliar1', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'IdProveedor', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+
+
+        ],
         ondblClickRow: function (id) {
             CopiarPedido(id);
         },
         loadComplete: function () {
             grid = $("ListaDrag5");
-            $("#ListaDrag5 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+            // $("#ListaDrag5 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
+
+
 
         pager: $('#ListaDragPager5'),
         rowNum: 15,
@@ -2930,11 +3097,23 @@ $(function () {     // lo mismo que $(document).ready(function () {
         sortname: 'NumeroPedido',
         sortorder: "desc",
         viewrecords: true,
-        width: 'auto',
+        ///////////////////////////////
+
+
+
+
+
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        //////////////////////////////
         height: '100%',
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar' //,
+        emptyrecords: 'No hay registros para mostrar' // ,
+
         //caption: '<b>PEDIDOS</b>' 
+
+
     })
     jQuery("#ListaDrag5").jqGrid('navGrid', '#ListaDragPager5', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     // jQuery("#ListaDrag5").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
@@ -2976,13 +3155,14 @@ $(function () {     // lo mismo que $(document).ready(function () {
         var grid = jQuery("#ListaDrag");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'Descripcion', // Codigo
                    searchOper: 'eq',
                    searchString: $("#BuscadorPanelDerecho").val()
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
         //        http://stackoverflow.com/questions/11247191/searchstring-searchfield-and-searchoper-returned-as-empty-from-jqgrid-in-asp-ne
         //        You use multipleSearch: true searching option. It allows to create more powerful queries, but it uses another format 
@@ -2998,50 +3178,54 @@ $(function () {     // lo mismo que $(document).ready(function () {
         var grid = jQuery("#ListaDrag2");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'NumeroRequerimiento',
                    searchOper: 'eq',
                    searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
 
         var grid = jQuery("#ListaDrag3");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'Numero',
                    searchOper: 'eq',
                    searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
         var grid = jQuery("#ListaDrag4");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'Numero',
                    searchOper: 'eq',
                    searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
         var grid = jQuery("#ListaDrag5");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'NumeroPedido',
                    searchOper: 'eq',
                    searchString: parseInt($("#BuscadorPanelDerecho").val(), 10) || 0
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
 
@@ -3292,7 +3476,7 @@ function ConectarGrillas2() {
             var acceptId = $(ui.draggable).attr("id");
             CopiarItemDeObra(acceptId, ui);
         }
-        
+
     });
 }
 
@@ -3305,51 +3489,15 @@ function ConectarGrillas3() {
                         .css({ border: "5px ridge tomato" });
             $("#gbox_grid2").css("border", "3px solid #aaaaaa");
         },
+
         ondrop: function (ev, ui, getdata) {
             var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdPedido;
-            var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Numero").val(getdata['Numero']);
-                $("#SubNumero").val("99");
-                IdPedido = getdata['IdPedido'];
-                BuscarOrden(getdata['Numero']);
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: ROOT + 'Pedido/DetPedidosSinFormato/',
-                    data: { IdPedido: IdPedido },
-                    dataType: "Json",
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItemRM;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['Observaciones'] = data[i].Observaciones;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+            CopiarRecepcion(acceptId, ui);
         }
+
+
+
+        
     });
 }
 
@@ -3421,53 +3569,16 @@ function ConectarGrillas5() {
                         .css({ border: "5px ridge tomato" });
             $("#gbox_grid5").css("border", "3px solid #aaaaaa");
         },
+
+
+        
         ondrop: function (ev, ui, getdata) {
             var acceptId = $(ui.draggable).attr("id");
-            var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-            var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-            var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-            var grid;
-            try {
-                $("#Observaciones").val(getdata['Observaciones']);
-                $("#LugarEntrega").val(getdata['LugarEntrega']);
-                $("#IdObra").val(getdata['IdObra']);
-                $("#IdSector").val(getdata['IdSector']);
-
-                IdRequerimiento = getdata['IdRequerimiento'];
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
-                    data: { IdRequerimiento: IdRequerimiento },
-                    dataType: "Json",
-                    success: function (data) {
-                        var longitud = data.length;
-                        for (var i = 0; i < data.length; i++) {
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['Codigo'] = data[i].Codigo;
-                            tmpdata['Descripcion'] = data[i].Descripcion;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['IdDetalleComprobanteProveedor'] = 0;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                            tmpdata['Cantidad'] = data[i].Cantidad;
-                            tmpdata['NumeroObra'] = data[i].NumeroObra;
-                            tmpdata['FechaEntrega'] = displayDate;
-                            tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                            tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                            getdata = tmpdata;
-                            grid = Math.ceil(Math.random() * 1000000);
-                            $("#Lista").jqGrid('addRowData', grid, getdata);
-                        }
-                    }
-                });
-            } catch (e) { }
-            $("#gbox_grid5").css("border", "1px solid #aaaaaa");
+            CopiarPedido(acceptId, ui);
         }
+
+
+
     });
 }
 
