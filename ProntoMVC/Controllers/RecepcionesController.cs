@@ -41,6 +41,38 @@ namespace ProntoMVC.Controllers
     {
 
 
+
+        public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
+        {
+            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).AsQueryable();
+
+            var data = (from a in Det
+                        select new
+                        {
+                            a.IdDetallePedido,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdDetalleRequerimiento,
+                            // a.NumeroItem,
+                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
+                            a.Cantidad,
+                            //a.Unidad.Abreviatura,
+                            //a.Articulo.Codigo,
+                            //a.Articulo.Descripcion,
+                            //a.FechaEntrega,
+                            a.Observaciones,
+                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
+                            //a.Adjunto,
+                            //a.ArchivoAdjunto1,
+                            //a.ArchivoAdjunto2,
+                            //a.ArchivoAdjunto3,
+                            //a.Precio
+                        }).OrderBy(p => p.IdArticulo).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+ 
         public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                             string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
@@ -240,12 +272,12 @@ namespace ProntoMVC.Controllers
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdRequerimiento.ToString(),
+                            id = a.IdRecepcion.ToString(),
                             cell = new string[] { 
                                 //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(), 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + "  >Editar</>" ,
+							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} )  +">Imprimir</>" ,
+                                a.IdRecepcion.ToString(), 
                                 a.NumeroRecepcion1.ToString(), 
                                 a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                               //  a.Cumplido,
