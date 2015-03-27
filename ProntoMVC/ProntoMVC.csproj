@@ -1360,7 +1360,7 @@
     <Content Include="Views\GruposObra\Index.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
     <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
-    <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
+    <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frmzz" />
     <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
   </ItemGroup>
