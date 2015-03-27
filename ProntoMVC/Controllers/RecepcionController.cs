@@ -46,6 +46,22 @@ namespace ProntoMVC.Controllers
         {
             var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).AsQueryable();
 
+            Parametros parametros = db.Parametros.Find(1);
+            var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
+            string cuentadesc;
+
+            try
+            {
+                cuentadesc = db.Cuentas.Find(mIdCuentaDiferenciaCambio).Descripcion;
+            }
+            catch (Exception)
+            {
+
+                cuentadesc = "";
+            }
+
+
+
             var data = (from a in Det
                         select new
                         {
@@ -68,11 +84,13 @@ namespace ProntoMVC.Controllers
                             //a.ArchivoAdjunto2,
                             //a.ArchivoAdjunto3,
                             //a.Precio
+                            idcuenta = mIdCuentaDiferenciaCambio,
+                            cuentadescripcion = cuentadesc
                         }).OrderBy(p => p.IdArticulo).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
- 
+
         public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                             string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
@@ -100,11 +118,11 @@ namespace ProntoMVC.Controllers
                 //.Include(x => x.DetallePedidos. .moneda)
                 //   .Include("DetallePedidos.Unidad") // funciona tambien
                 //    .Include(x => x.Moneda)
-                    //.Include(x => x.Obra)
+                //.Include(x => x.Obra)
 
                     //.Include(x => x.SolicitoRequerimiento)
-                    //.Include(x => x.AproboRequerimiento)
-                    //.Include(x => x.Sectores)
+                //.Include(x => x.AproboRequerimiento)
+                //.Include(x => x.Sectores)
                 //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
                 //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
                 //.Include(x => x.DetalleRequerimientos)
@@ -279,6 +297,7 @@ namespace ProntoMVC.Controllers
 							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} )  +">Imprimir</>" ,
                                 a.IdRecepcion.ToString(), 
                                 a.NumeroRecepcion1.ToString(), 
+                                a.NumeroRecepcion2.ToString(), 
                                 a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                               //  a.Cumplido,
                               //  a.Recepcionado,

@@ -257,7 +257,7 @@
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\CuentaGastoController.cs" />
     <Compile Include="Controllers\AjusteStockController.cs" />
-    <Compile Include="Controllers\RecepcionesController.cs" />
+    <Compile Include="Controllers\RecepcionController.cs" />
     <Compile Include="Controllers\PresupuestoObraController.cs" />
     <Compile Include="Controllers\TiposComprobanteController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
