@@ -729,28 +729,30 @@ function CopiarRecepcion(acceptId, ui) {
 
                 var longitud = data.length;
                 for (var i = 0; i < data.length; i++) {
-                    var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                    // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                    // var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
                     tmpdata['IdArticulo'] = data[i].IdArticulo;
                     tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
-                    tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    tmpdata['Descripcion'] = data[i].cuentadescripcion;
+                    //tmpdata['IdUnidad'] = data[i].IdUnidad;
+                    tmpdata['IdCuenta'] = data[i].IdCuenta;
+                    
                     //tmpdata['Unidad'] = data[i].Unidad;
-                    tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                    tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['FechaEntrega'] = displayDate;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                    //tmpdata['Unidad'] = data[i].Abreviatura;
+                    // tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                    // tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    // tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    // tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                     tmpdata['Cantidad'] = data[i].Cantidad;
+                    // tmpdata['NumeroObra'] = data[i].NumeroObra;
+                    // tmpdata['FechaEntrega'] = displayDate;
+                    // tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
 
                     //tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                     tmpdata['NumeroItem'] = prox;
                     prox++;
 
-                    tmpdata['Precio'] = data[i].Precio;;
+                    
 
                     getdata = tmpdata;
                     var idazar = Math.ceil(Math.random() * 1000000);
@@ -899,22 +901,22 @@ function CopiarPedido(acceptId, ui) {
 
                 var longitud = data.length;
                 for (var i = 0; i < data.length; i++) {
-                    var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                    var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                    tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                    //var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                    // tmpdata['IdArticulo'] = data[i].IdArticulo;
                     tmpdata['Codigo'] = data[i].Codigo;
                     tmpdata['Descripcion'] = data[i].Descripcion;
                     tmpdata['IdUnidad'] = data[i].IdUnidad;
                     //tmpdata['Unidad'] = data[i].Unidad;
                     tmpdata['Unidad'] = data[i].Abreviatura;
-                    tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
-                    tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                    tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                    tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                    // tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                    //tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                    // tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                    //tmpdata['NumeroItemRM'] = data[i].NumeroItem;
                     tmpdata['Cantidad'] = data[i].Cantidad;
-                    tmpdata['NumeroObra'] = data[i].NumeroObra;
-                    tmpdata['FechaEntrega'] = displayDate;
-                    tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                    // tmpdata['NumeroObra'] = data[i].NumeroObra;
+                    // tmpdata['FechaEntrega'] = displayDate;
+                    // tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
 
                     //tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                     tmpdata['NumeroItem'] = prox;
@@ -1006,113 +1008,113 @@ function CopiarPedido(acceptId, ui) {
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function DeSerializaForm() {
+    var cm, data1, data2, valor;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function Validar() {
+
+
+
+    //quiz�s no est� esperando que vuelva la llamada.....
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // valido el nuevo comprobante
+
+    var cabecera = SerializaForm();
+
+    $.ajax({
+
+        type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
+        contentType: 'application/json; charset=utf-8',
+        url: ROOT + 'Pedido/ValidarJson',
+
+        dataType: 'json',
+        data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+
+        beforeSend: function () {
+            $("#loading").show();
+        },
+        complete: function () {
+            $("#loading").hide();
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+
+            // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
+
+            try {
+                var errorData = $.parseJSON(xhr.responseText);
+                //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
+                //  Podría mostrar directamente el Messages?
+
+                var errorMessages = [];
+
+                //this ugly loop is because List<> is serialized to an object instead of an array
+                for (var key in errorData.Errors) {
+                    errorMessages.push(errorData[key]);
+                }
+                //      $('#result').html(errorMessages.join("<br />"));
+
+                //       $('html, body').css('cursor', 'auto');
+                //       $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                $("#textoMensajeAlerta").html(errorData.Message);
+                //$("#textoMensajeAlerta").html(errorMessages.join());
+                $("#mensajeAlerta").show();
+                QuitarRenglones(errorData.Errors);
+
+                // alert(errorMessages.join("<br />"));
+
+            } catch (e) {
+                // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                $('html, body').css('cursor', 'auto');
+                $('#grabar2').attr("disabled", false).val("Aceptar");
+
+                $("#textoMensajeAlerta").html(xhr.responseText);
+                $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
+                //$(".alert").alert();
+                //   alert(xhr.responseText);
+            }
+        },
+        success: function (data) {
+            // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
+            // si falta uno, lo borro.
+
+            var arraydemensajes = xhr.responseText;
+            QuitarRenglones(arraydemensajes);
+
+        }
+    });
+
+}
+
+
+
+
 
 
 $(function () {
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    function DeSerializaForm() {
-        var cm, data1, data2, valor;
-    }
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    function Validar() {
-
-
-
-        //quiz�s no est� esperando que vuelva la llamada.....
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////
-        // valido el nuevo comprobante
-
-        var cabecera = SerializaForm();
-
-        $.ajax({
-
-            type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
-            contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'Pedido/ValidarJson',
-
-            dataType: 'json',
-            data: JSON.stringify(cabecera), // $.toJSON(cabecera),
-
-            beforeSend: function () {
-                $("#loading").show();
-            },
-            complete: function () {
-                $("#loading").hide();
-            },
-            error: function (xhr, textStatus, exceptionThrown) {
-
-                // ac� se podr�a restaurar el estado de la grilla como antes de haber hecho el envio
-
-                try {
-                    var errorData = $.parseJSON(xhr.responseText);
-                    //el xhr.responseText es el JsonResult que mande, y adentro tiene el Status, Messages y Errors.
-                    //  Podría mostrar directamente el Messages?
-
-                    var errorMessages = [];
-
-                    //this ugly loop is because List<> is serialized to an object instead of an array
-                    for (var key in errorData.Errors) {
-                        errorMessages.push(errorData[key]);
-                    }
-                    //      $('#result').html(errorMessages.join("<br />"));
-
-                    //       $('html, body').css('cursor', 'auto');
-                    //       $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                    $("#textoMensajeAlerta").html(errorData.Message);
-                    //$("#textoMensajeAlerta").html(errorMessages.join());
-                    $("#mensajeAlerta").show();
-                    QuitarRenglones(errorData.Errors);
-
-                    // alert(errorMessages.join("<br />"));
-
-                } catch (e) {
-                    // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
-                    // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
-
-                    $('html, body').css('cursor', 'auto');
-                    $('#grabar2').attr("disabled", false).val("Aceptar");
-
-                    $("#textoMensajeAlerta").html(xhr.responseText);
-                    $("#mensajeAlerta").show(); //http://stackoverflow.com/questions/8965018/dynamically-creating-bootstrap-css-alert-messages?rq=1
-                    //$(".alert").alert();
-                    //   alert(xhr.responseText);
-                }
-            },
-            success: function (data) {
-                // me paseo por el objeto devuelto, y verifico que esten todos los renglones de la grilla
-                // si falta uno, lo borro.
-
-                var arraydemensajes = xhr.responseText;
-                QuitarRenglones(arraydemensajes);
-
-            }
-        });
-
-    }
 
 
 
@@ -2860,7 +2862,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
         datatype: 'json',
         mtype: 'POST',
         cellEdit: false,
-        colNames: ['Acciones', 'Acciones', 'IdPresupuesto', '', 'Numero',
+        colNames: ['Acciones', 'Acciones', 'IdPresupuesto', 'Numero', 'Fecha',
                     'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
                        'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega',
                        'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
@@ -2868,7 +2870,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRecepcion', index: 'IdRecepcion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden:true , searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden:false , searchoptions: { sopt: ['eq'] } },
                         { name: 'Orden', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
