@@ -44,11 +44,38 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
         {
-            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).AsQueryable();
+            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).ToList(); //.AsQueryable();
 
             Parametros parametros = db.Parametros.Find(1);
             var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
             string cuentadesc;
+
+
+
+            Det.ToList();
+
+            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Recepciones_TX_DetallesParaComprobantesProveedores", IdRecepcion);
+
+            
+            //var q= from i in Det
+            //       from mappings in dt.AsEnumerable()
+            //                .Where(mapping => mapping["IdCuentaContable"].NullSafeToString() == IdRecepcion.ToString() ).DefaultIfEmpty() 
+            //        select i;
+ 
+
+            
+
+
+            //foreach (DataRow dr in dt)
+            //{
+
+
+
+            //}
+
+
+
+
 
             try
             {
@@ -63,7 +90,9 @@ namespace ProntoMVC.Controllers
 
 
             var data = (from a in Det
-                        select new
+                        from mappings in dt.AsEnumerable()
+                             .Where(mapping => mapping["IdDetalleRecepcion"].NullSafeToString() == a.IdDetalleRecepcion.ToString()).DefaultIfEmpty()
+                                          select new
                         {
                             a.IdDetallePedido,
                             a.IdArticulo,
@@ -84,8 +113,15 @@ namespace ProntoMVC.Controllers
                             //a.ArchivoAdjunto2,
                             //a.ArchivoAdjunto3,
                             //a.Precio
-                            idcuenta = mIdCuentaDiferenciaCambio,
-                            cuentadescripcion = cuentadesc
+
+                            //idcuenta = mIdCuentaDiferenciaCambio,
+                            //cuentadescripcion = cuentadesc
+
+                            idcuenta = mappings["IdCuenta"].NullSafeToString(),
+                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
+                            cuentadescripcion = db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())).Descripcion
+
+
                         }).OrderBy(p => p.IdArticulo).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }

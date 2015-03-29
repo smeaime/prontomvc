@@ -79,12 +79,12 @@ namespace ProntoMVC.Controllers
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.docx"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
             //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_ESUCO_PUNTONET.docx";
-            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_" +   this.HttpContext.Session["BasePronto"].ToString() + "_PUNTONET.docx";
+            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_" + this.HttpContext.Session["BasePronto"].ToString() + "_PUNTONET.docx";
             //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Pedido_ESUCO_PUNTONET.docx";
 
-            
-            
-            
+
+
+
             ErrHandler.WriteError(plantilla);
             CartaDePorteManager.MandarMailDeError(plantilla);
 
@@ -105,7 +105,7 @@ namespace ProntoMVC.Controllers
                 catch (Exception e)
                 {
                     ErrHandler.WriteError(e);
-            
+
                 }
 
 
@@ -1029,19 +1029,19 @@ namespace ProntoMVC.Controllers
             // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11061
 
 
-             foreach (DetallePedido i in o.DetallePedidos)
+            foreach (DetallePedido i in o.DetallePedidos)
             {
                 var a = db.DetalleRequerimientos.Where(r => r.IdDetalleRequerimiento == i.IdDetalleRequerimiento).FirstOrDefault();
-       
-               
-                 
-                 
-                 if (a != null) // el item del pedido está imputado a un rm?
+
+
+
+
+                if (a != null) // el item del pedido está imputado a un rm?
                 {
 
                     decimal requerida = a.Cantidad ?? 0;
 
-                    decimal pedidoaca = i.Cantidad ?? 0 ; // o.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i.IdDetalleRequerimiento).Sum(z => z.Cantidad) ?? 0;
+                    decimal pedidoaca = i.Cantidad ?? 0; // o.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i.IdDetalleRequerimiento).Sum(z => z.Cantidad) ?? 0;
 
                     decimal pedidoafuera = db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i.IdDetalleRequerimiento
                                                               && ((x.Cumplido ?? "NO") != "AN") && x.IdPedido != i.IdPedido)
@@ -1202,7 +1202,7 @@ namespace ProntoMVC.Controllers
             var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal) (mvarCotizacion ?? 0);
+            o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
 
             //o.DetalleFacturas.Add(new DetalleFactura());
             //o.DetalleFacturas.Add(new DetalleFactura());
@@ -1497,7 +1497,7 @@ namespace ProntoMVC.Controllers
                 {
 
                     decimal requerida = db.DetalleRequerimientos.Find(i.IdDetalleRequerimiento).Cantidad ?? 0;
-                    
+
                     decimal pedidoaca = o.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i.IdDetalleRequerimiento).Sum(z => z.Cantidad) ?? 0;
 
                     decimal pedidoafuera = db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == i.IdDetalleRequerimiento
@@ -1508,10 +1508,10 @@ namespace ProntoMVC.Controllers
                     {
                         var nombre = i.NumeroItem + " El item " + i.NumeroItem + "  (" + db.Articulos.Find(i.IdArticulo).Descripcion.SafeSubstring(0, 15) + ") ";
 
-                        sErrorMsg += "\n   " + nombre + " solo tiene  " + (requerida-pedidoafuera).NullSafeToString()  
-                                    + " pendiente  ( Requerido: " + requerida.NullSafeToString() 
-                                    + ". En otros pedidos:" + pedidoafuera.NullSafeToString() 
-                                    + ". En este pedido: " + pedidoaca.NullSafeToString() 
+                        sErrorMsg += "\n   " + nombre + " solo tiene  " + (requerida - pedidoafuera).NullSafeToString()
+                                    + " pendiente  ( Requerido: " + requerida.NullSafeToString()
+                                    + ". En otros pedidos:" + pedidoafuera.NullSafeToString()
+                                    + ". En este pedido: " + pedidoaca.NullSafeToString()
                                     + ")";
                     }
 
@@ -2038,8 +2038,54 @@ namespace ProntoMVC.Controllers
                         //.Include(x => x.DetallePedidos.Select(y => y. y.IdDetalleRequerimiento))
                         // .Include(x => x.Aprobo)
                         select
+                        new
+            { 
+                a.NumeroPedido,
+                a.IdPedido,
+                                a.SubNumero, 
+                                a.FechaPedido,
+                                a.FechaSalida,
+                                a.Cumplido, 
 
-                        a
+                                a.DetallePedidos,
+                                
+                                //(i.DetalleRequerimiento == null ? "" : i.DetalleRequerimiento.Requerimientos.NumeroRequerimiento));
+                                //"", //a.detallepedidos.select (obras,
+                                
+                                
+                                
+                                a.Proveedor, 
+                                a.TotalPedido, 
+                                a.TotalIva1,
+                                a.Bonificacion,
+                                a.ImpuestosInternos,
+                                a.OtrosConceptos1,
+                                a.OtrosConceptos2,
+                                a.OtrosConceptos3,
+                                a.OtrosConceptos4,
+                                a.OtrosConceptos5,
+                                a.Moneda.Abreviatura,  
+                                a.Comprador,  
+                                a.Empleado,
+                               a.Moneda,
+
+                                a.NumeroComparativa,  
+                                a.IdTipoCompraRM, 
+                                a.Observaciones,   
+                                a.DetalleCondicionCompra,   
+                                a.PedidoExterior,  
+                                a.IdPedidoAbierto, 
+                                a.NumeroLicitacion , 
+                                a.Impresa, 
+                                a.UsuarioAnulacion, 
+                                a.FechaAnulacion,  
+                                a.MotivoAnulacion,  
+                                a.CircuitoFirmasCompleto, 
+                                a.IdComprador,
+                                a.IdProveedor,
+                                a.ConfirmadoPorWeb_1
+
+        }
                 //                        new
                 //                        {
                 //                            IdPedido = a.IdPedido,
@@ -2074,7 +2120,13 @@ namespace ProntoMVC.Controllers
 //                        }
 
 
-                        ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
+
+
+
+
+
 
             var jsonData = new jqGridJson()
             {
@@ -2384,9 +2436,20 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult DetPedidosSinFormato(int IdPedido)
         {
-            var Det = db.DetallePedidos.Where(p => p.IdPedido == IdPedido).AsQueryable();
+            var Det = db.DetallePedidos.Where(p => p.IdPedido == IdPedido).ToList(); // .AsQueryable();
+
+
+            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Pedidos_TX_DetallesParaComprobantesProveedores", IdPedido);
+
+
+
+            
+
+            
 
             var data = (from a in Det
+                        from mappings in dt.AsEnumerable()
+                           .Where(mapping => mapping["IdDetallePedido"].NullSafeToString() == a.IdDetallePedido.ToString()).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetallePedido,
@@ -2407,7 +2470,10 @@ namespace ProntoMVC.Controllers
                             a.ArchivoAdjunto1,
                             a.ArchivoAdjunto2,
                             a.ArchivoAdjunto3,
-                            a.Precio
+                            a.Precio,
+                            IdCuentaContable= mappings["IdCuentaContable"].NullSafeToString() ,
+                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
+                            cuentadescripcion = db.Cuentas.Find(Generales.Val(mappings["IdCuentaContable"].NullSafeToString())).Descripcion
                         }).OrderBy(p => p.NumeroItem).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
