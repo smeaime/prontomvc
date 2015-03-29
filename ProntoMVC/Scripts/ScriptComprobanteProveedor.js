@@ -732,7 +732,7 @@ function CopiarRecepcion(acceptId, ui) {
                     // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                     // var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
                     tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
+                    tmpdata['Codigo'] = data[i].CodigoCuenta;
                     tmpdata['Descripcion'] = data[i].cuentadescripcion;
                     //tmpdata['IdUnidad'] = data[i].IdUnidad;
                     tmpdata['IdCuenta'] = data[i].IdCuenta;
@@ -856,6 +856,8 @@ function CopiarPedido(acceptId, ui) {
     var grid;
     try {
 
+
+        /*
         // estos son datos de cabecera que ya tengo en la grilla auxiliar
         $("#Observaciones").val(getdata['Observaciones']);
         $("#LugarEntrega").val(getdata['LugarEntrega']);
@@ -870,16 +872,13 @@ function CopiarPedido(acceptId, ui) {
 
         $("#NumeroPedido").val(getdata['Numero']);
         $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
-
+        */
 
         //me traigo los datos de detalle
         var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
 
 
-
-
-
-
+        
 
 
 
@@ -904,8 +903,9 @@ function CopiarPedido(acceptId, ui) {
                     // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                     //var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
                     // tmpdata['IdArticulo'] = data[i].IdArticulo;
-                    tmpdata['Codigo'] = data[i].Codigo;
-                    tmpdata['Descripcion'] = data[i].Descripcion;
+                    tmpdata['IdCuenta'] = data[i].IdCuentaContable;
+                    tmpdata['Codigo'] = data[i].CodigoCuenta;
+                    tmpdata['Descripcion'] = data[i].cuentadescripcion;
                     tmpdata['IdUnidad'] = data[i].IdUnidad;
                     //tmpdata['Unidad'] = data[i].Unidad;
                     tmpdata['Unidad'] = data[i].Abreviatura;
@@ -3696,5 +3696,713 @@ function RefrescarOrigenDescripcion() {
     }
 
 }
+
+
+
+
+
+
+
+
+/*
+
+
+Public Sub IncorporarDesdeRecepcion(ByVal Filas As Variant, ByRef mError As String)
+
+   Dim oAp As ComPronto.Aplicacion
+   Dim oPr As ComPronto.ComprobanteProveedor
+   Dim oRsPre As ADOR.Recordset
+   Dim oRs As ADOR.Recordset
+   Dim oRs1 As ADOR.Recordset
+   Dim oRsDet As ADOR.Recordset
+   Dim oF As frm_Aux
+   Dim mIdCodigoIva As Integer, mvarPosicionCuentaIva As Integer
+   Dim iFilas As Long, iColumnas As Long, mSubNumero As Long, mIdCuentaIvaCompras1 As Long, mIdTipoComprobante As Long, mIdCuentaDiferenciaCambio As Long, i As Long, j As Long
+   Dim mCodigoCuentaDiferenciaCambio As Long, mIdMoneda As Long, mIdTipoComprobanteNDInternaAcreedores As Long, mIdTipoComprobanteNCInternaAcreedores As Long, mCodBar As Long
+   Dim mIdObraDefault As Long, mIdProveedor As Long
+   Dim mIdCuentaIvaCompras(10) As Long
+   Dim mIVAComprasPorcentaje(10) As Single
+   Dim mIVAComprasPorcentaje1 As Single
+   Dim mvarImporte As Double, mvarImpuestosInternos As Double
+   Dim s As String, mvarConIVA As String, mAplicaIVA As String, mAuxS1 As String, mControl1 As String, mControl2 As String
+   Dim mProcesar As Boolean, mOk As Boolean
+   Dim Columnas, mAux1
+   
+   mControl1 = BuscarClaveINI("Control por codigo recepcion a comprobante")
+   mControl2 = BuscarClaveINI("Legajos para recepcion a comprobante sin pedido")
+   
+   Set oAp = Aplicacion
+   
+   Set oRs = oAp.Parametros.Item(1).Registro
+   For i = 1 To 10
+      If Not IsNull(oRs.Fields("IdCuentaIvaCompras" & i).Value) Then
+         mIdCuentaIvaCompras(i) = oRs.Fields("IdCuentaIvaCompras" & i).Value
+         mIVAComprasPorcentaje(i) = oRs.Fields("IVAComprasPorcentaje" & i).Value
+      Else
+         mIdCuentaIvaCompras(i) = 0
+         mIVAComprasPorcentaje(i) = 0
+      End If
+   Next
+   oRs.Close
+   
+   mAux1 = TraerValorParametro2("IdObraDefault")
+   mIdObraDefault = IIf(IsNull(mAux1), 0, mAux1)
+   
+   mIdProveedor = -1
+   s = ""
+   For iFilas = 1 To UBound(Filas)
+      Columnas = Split(Filas(iFilas), vbTab)
+      s = s & "(" & Columnas(12) & ")"
+   Next
+   Set oRs = oAp.Recepciones.TraerFiltrado("_PorListaId", s)
+   If oRs.RecordCount = 1 Then
+      mIdProveedor = IIf(IsNull(oRs.Fields("IdProveedor").Value), -1, oRs.Fields("IdProveedor").Value)
+   ElseIf oRs.RecordCount > 1 Then
+      Dim oL As ListItem
+      Set oF = New frm_Aux
+      With oF
+         .Caption = "Elegir proveedor"
+         .Text1.Visible = False
+         .Width = .Width * 1.5
+         .Height = .Height * 1.5
+         With .Label1
+            .Left = 50
+            .Top = 100
+            .Width = 5000
+            .Caption = "Seleccione un proveedor y pulse Elegir ..."
+         End With
+         With .Lista
+            .MultiSelect = False
+            .Left = 50
+            .Top = 500
+            .Width = 5000
+            .Height = 2000
+            Set .DataSource = oRs
+            .Visible = True
+         End With
+         With .cmd(0)
+            .Top = 2500
+            .Left = oF.Lista.Left
+            .Caption = "Elegir"
+         End With
+         .cmd(1).Top = .cmd(0).Top
+         .Show vbModal, Me
+         mOk = .Ok
+         If mOk Then
+            For Each oL In .Lista.ListItems
+               If oL.Selected Then mIdProveedor = oL.Tag
+            Next
+         Else
+            MsgBox "Proceso de seleccion de recepcion cancelado", vbInformation
+            GoTo Salida
+         End If
+      End With
+      Unload oF
+      Set oF = Nothing
+   End If
+   oRs.Close
+   
+   For iFilas = 1 To UBound(Filas)
+      Columnas = Split(Filas(iFilas), vbTab)
+      
+      Set oRs = oAp.Recepciones.Item(Columnas(12)).Registro
+      Set oRsDet = oAp.Recepciones.TraerFiltrado("_DetallesParaComprobantesProveedores", Columnas(12))
+      
+      mProcesar = True
+      mIdMoneda = 0
+      mvarImpuestosInternos = 0
+      
+      With origen.Registro
+         If Not IsNull(oRs.Fields("IdPedido").Value) Then
+            Set oRs1 = oAp.Pedidos.TraerFiltrado("_PorId", oRs.Fields("IdPedido").Value)
+            If oRs1.RecordCount > 0 Then
+               .Fields("IdMoneda").Value = oRs1.Fields("IdMoneda").Value
+               mvarImpuestosInternos = IIf(IsNull(oRs1.Fields("ImpuestosInternos").Value), 0, oRs1.Fields("ImpuestosInternos").Value)
+               If mControl1 = "SI" And Not IsNull(oRs1.Fields("CodigoControl").Value) Then
+                  Set oF = New frm_Aux
+                  oF.Label1.Caption = "Codigo de barras :"
+                  oF.Show vbModal, Me
+                  mCodBar = Val(oF.Text1.Text)
+                  mOk = oF.Ok
+                  Unload oF
+                  Set oF = Nothing
+                  If (Not mOk Or oRs1.Fields("CodigoControl").Value <> mCodBar) And _
+                        mCodBar <> 0 Then
+                     oRs1.Close
+                     MsgBox "Codigo de control incorrecto, proceso cancelado", vbExclamation
+                     GoTo Salida
+                     Exit Sub
+                  End If
+               End If
+            End If
+            oRs1.Close
+         Else
+            If Len(mControl2) > 0 Then
+               If InStr(1, mControl2, "(" & glbLegajo & ")") = 0 Then
+                  MsgBox "Permiso insuficiente para la tarea seleccionada, proceso cancelado", vbExclamation
+                  GoTo Salida
+                  Exit Sub
+               End If
+            End If
+            mvarImpuestosInternos = IIf(IsNull(oRs.Fields("ImpuestosInternos").Value), 0, oRs.Fields("ImpuestosInternos").Value)
+         End If
+         If Not IsNull(.Fields("IdProveedor").Value) And .Fields("IdProveedor").Value <> oRs.Fields("IdProveedor").Value And Lista.ListItems.Count > 0 Then
+            mError = mError & "La recepcion " & oRsDet.Fields("Remito").Value & " no se tomo porque no es" & vbCrLf & "del proveedor actual." & vbCrLf
+            mProcesar = False
+         Else
+            If mIdProveedor <= 0 Then
+               .Fields("IdProveedor").Value = oRs.Fields("IdProveedor").Value
+            Else
+               .Fields("IdProveedor").Value = mIdProveedor
+            End If
+         End If
+         If Not IsNull(oRs.Fields("Anulada").Value) And oRs.Fields("Anulada").Value = "SI" Then
+            mError = mError & "La recepcion " & oRs.Fields("NumeroRecepcionAlmacen").Value & " ha sido anulada." & vbCrLf
+            mProcesar = False
+         End If
+      End With
+   
+      If mProcesar Then
+         mAplicaIVA = "SI"
+         mIdCodigoIva = 0
+         If Not IsNull(origen.Registro.Fields("IdProveedor").Value) Then
+            Set oRs1 = oAp.Proveedores.TraerFiltrado("_PorId", origen.Registro.Fields("IdProveedor").Value)
+            If oRs1.RecordCount > 0 Then
+               If Not IsNull(oRs1.Fields("IdCodigoIva").Value) And _
+                     (oRs1.Fields("IdCodigoIva").Value = 3 Or oRs1.Fields("IdCodigoIva").Value = 5 Or _
+                      oRs1.Fields("IdCodigoIva").Value = 8 Or oRs1.Fields("IdCodigoIva").Value = 9) Then
+                  mAplicaIVA = "NO"
+               End If
+               mIdCodigoIva = IIf(IsNull(oRs1.Fields("IdCodigoIva").Value), 0, oRs1.Fields("IdCodigoIva").Value)
+            End If
+            oRs1.Close
+         End If
+         
+         Do While Not oRsDet.EOF
+            mProcesar = True
+            
+            If mIdProveedor > 0 And mIdProveedor <> oRsDet.Fields("IdProveedor").Value Then mProcesar = False
+            
+            If mProcesar Then
+               Set oRs1 = oAp.ComprobantesProveedores.TraerFiltrado("_DetallePorIdDetalleRecepcion", oRsDet.Fields("IdDetalleRecepcion").Value)
+               If oRs1.RecordCount > 0 Then
+                  mError = mError & "El articulo " & oRs1.Fields("CodigoArticulo").Value & " no se tomo porque ya fue incorporado en el comprobante " & _
+                           oRs1.Fields("Comprobante").Value & " del " & oRs1.Fields("Fecha").Value & vbCrLf
+                  mProcesar = False
+               End If
+               oRs1.Close
+            End If
+            
+            If mProcesar Then
+               Set oRs1 = origen.DetComprobantesProveedores.Registros
+               If oRs1.Fields.Count > 0 Then
+                  If oRs1.RecordCount > 0 Then
+                     oRs1.MoveFirst
+                     Do While Not oRs1.EOF
+                        If oRs1.Fields("IdDetalleRecepcion").Value = oRsDet.Fields("IdDetalleRecepcion").Value Then
+                           mProcesar = False
+                           Exit Do
+                        End If
+                        oRs1.MoveNext
+                     Loop
+                  End If
+               End If
+               oRs1.Close
+            End If
+            Set oRs1 = Nothing
+            
+            If mProcesar Then
+               mIdCuentaIvaCompras1 = 0
+               mIVAComprasPorcentaje1 = 0
+               mvarPosicionCuentaIva = 1
+               If Not IsNull(oRsDet.Fields("PorcentajeIVA").Value) Then
+                  If oRsDet.Fields("PorcentajeIVA").Value <> 0 Then
+                     For i = 1 To 10
+                        If mIVAComprasPorcentaje(i) = oRsDet.Fields("PorcentajeIVA").Value Then
+                           mIdCuentaIvaCompras1 = mIdCuentaIvaCompras(i)
+                           mIVAComprasPorcentaje1 = mIVAComprasPorcentaje(i)
+                           mvarPosicionCuentaIva = i
+                           Exit For
+                        End If
+                     Next
+                  End If
+               End If
+               
+               If Not IsNull(oRsDet.Fields("IdCondicionCompra").Value) Then
+                  mCondicionDesdePedido = True
+                  origen.Registro.Fields("IdCondicionCompra").Value = oRsDet.Fields("IdCondicionCompra").Value
+               End If
+               If mIdObraDefault = 0 Then
+                  If Not IsNull(oRsDet.Fields("IdObra").Value) Then
+                     origen.Registro.Fields("IdObra").Value = oRsDet.Fields("IdObra").Value
+                  End If
+               Else
+                  If Not IsNull(oRsDet.Fields("IdObraRM").Value) Then
+                     origen.Registro.Fields("IdObra").Value = oRsDet.Fields("IdObraRM").Value
+                  End If
+               End If
+               
+               mvarImporte = IIf(IsNull(oRsDet.Fields("Importe").Value), 0, oRsDet.Fields("Importe").Value)
+               
+               With origen.DetComprobantesProveedores.Item(-1)
+                  With .Registro
+                     .Fields("IdDetalleRecepcion").Value = oRsDet.Fields("IdDetalleRecepcion").Value
+                     .Fields("IdArticulo").Value = oRsDet.Fields("IdArticulo").Value
+                     If mIdObraDefault = 0 Then
+                        .Fields("IdObra").Value = oRsDet.Fields("IdObra").Value
+                     Else
+                        .Fields("IdObra").Value = IIf(IsNull(oRsDet.Fields("IdObraRM").Value), oRsDet.Fields("IdObra").Value, oRsDet.Fields("IdObraRM").Value)
+                     End If
+                     If Not mTomarCuentaDePresupuesto Then
+                        .Fields("IdCuenta").Value = oRsDet.Fields("IdCuenta").Value
+                        .Fields("CodigoCuenta").Value = oRsDet.Fields("CodigoCuenta").Value
+                     End If
+                     .Fields("Importe").Value = mvarImporte
+                     For i = 1 To 10
+                        .Fields("IdCuentaIvaCompras" & i).Value = Null
+                        .Fields("IVAComprasPorcentaje" & i).Value = 0
+                        .Fields("ImporteIVA" & i).Value = 0
+                        .Fields("AplicarIVA" & i).Value = "NO"
+                     Next
+                     If mIdCuentaIvaCompras1 <> 0 And mAplicaIVA = "SI" Then
+                        .Fields("IdCuentaIvaCompras" & mvarPosicionCuentaIva).Value = mIdCuentaIvaCompras1
+                        .Fields("IVAComprasPorcentaje" & mvarPosicionCuentaIva).Value = mIVAComprasPorcentaje1
+                        If mIdCodigoIva <> 1 Then
+                           .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mvarImporte - (mvarImporte / (1 + (mIVAComprasPorcentaje1 / 100))), mvarDecimales)
+                        Else
+                           .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mvarImporte * mIVAComprasPorcentaje1 / 100, mvarDecimales)
+                        End If
+                        .Fields("AplicarIVA" & mvarPosicionCuentaIva).Value = "SI"
+                     End If
+                     .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+                     .Fields("Cantidad").Value = oRsDet.Fields("Cantidad").Value
+                     .Fields("IdDetalleObraDestino").Value = oRsDet.Fields("IdDetalleObraDestino").Value
+                     .Fields("IdPresupuestoObraRubro").Value = oRsDet.Fields("IdPresupuestoObraRubro").Value
+                     .Fields("NumeroSubcontrato").Value = oRsDet.Fields("NumeroSubcontrato").Value
+                     .Fields("IdRubroContable").Value = oRsDet.Fields("IdRubroFinanciero").Value
+                  End With
+                  .Modificado = True
+               End With
+            End If
+            
+            oRsDet.MoveNext
+         Loop
+      End If
+      
+      If mvarImpuestosInternos <> 0 Then
+         With origen.DetComprobantesProveedores.Item(-1)
+            With .Registro
+               .Fields("IdDetalleRecepcion").Value = Null
+               .Fields("IdArticulo").Value = Null
+               .Fields("IdObra").Value = Null
+               .Fields("IdCuenta").Value = Null
+               .Fields("CodigoCuenta").Value = Null
+               .Fields("Importe").Value = mvarImpuestosInternos
+               For i = 1 To 10
+                  .Fields("IdCuentaIvaCompras" & i).Value = Null
+                  .Fields("IVAComprasPorcentaje" & i).Value = 0
+                  .Fields("ImporteIVA" & i).Value = 0
+                  .Fields("AplicarIVA" & i).Value = "NO"
+               Next
+               .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+            End With
+            .Modificado = True
+         End With
+      End If
+      
+      If Not IsNull(oRs.Fields("PercepcionIIBB").Value) And oRs.Fields("PercepcionIIBB").Value <> 0 Then
+         With origen.DetComprobantesProveedores.Item(-1)
+            With .Registro
+               .Fields("IdDetalleRecepcion").Value = Null
+               .Fields("IdArticulo").Value = Null
+               .Fields("IdObra").Value = Null
+               .Fields("IdCuenta").Value = Null
+               .Fields("CodigoCuenta").Value = Null
+               .Fields("Importe").Value = IIf(IsNull(oRs.Fields("PercepcionIIBB").Value), 0, oRs.Fields("PercepcionIIBB").Value)
+               For i = 1 To 10
+                  .Fields("IdCuentaIvaCompras" & i).Value = Null
+                  .Fields("IVAComprasPorcentaje" & i).Value = 0
+                  .Fields("ImporteIVA" & i).Value = 0
+                  .Fields("AplicarIVA" & i).Value = "NO"
+               Next
+               .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+            End With
+            .Modificado = True
+         End With
+      End If
+      
+      If Not IsNull(oRs.Fields("PercepcionIVA").Value) And oRs.Fields("PercepcionIVA").Value <> 0 Then
+         With origen.DetComprobantesProveedores.Item(-1)
+            With .Registro
+               .Fields("IdDetalleRecepcion").Value = Null
+               .Fields("IdArticulo").Value = Null
+               .Fields("IdObra").Value = Null
+               .Fields("IdCuenta").Value = Null
+               .Fields("CodigoCuenta").Value = Null
+               .Fields("Importe").Value = IIf(IsNull(oRs.Fields("PercepcionIVA").Value), 0, oRs.Fields("PercepcionIVA").Value)
+               For i = 1 To 10
+                  .Fields("IdCuentaIvaCompras" & i).Value = Null
+                  .Fields("IVAComprasPorcentaje" & i).Value = 0
+                  .Fields("ImporteIVA" & i).Value = 0
+                  .Fields("AplicarIVA" & i).Value = "NO"
+               Next
+               .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+            End With
+            .Modificado = True
+         End With
+      End If
+      oRs.Close
+      oRsDet.Close
+   Next
+   
+Salida:
+   Set oRs = Nothing
+   Set oRs1 = Nothing
+   Set oRsDet = Nothing
+   Set oAp = Nothing
+   
+   Set Lista.DataSource = origen.DetComprobantesProveedores.RegistrosConFormato
+   
+   MostrarDatos 0
+   CalculaComprobanteProveedor
+
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Public Sub IncorporarDesdePedido(ByVal Filas As Variant, ByRef mError As String)
+
+   Dim oAp As ComPronto.Aplicacion
+   Dim oPr As ComPronto.ComprobanteProveedor
+   Dim oRsPre As ADOR.Recordset
+   Dim oRs As ADOR.Recordset
+   Dim oRs1 As ADOR.Recordset
+   Dim oRsDet As ADOR.Recordset
+   Dim oF As frm_Aux
+   Dim mIdCodigoIva As Integer, mvarPosicionCuentaIva As Integer
+   Dim iFilas As Long, iColumnas As Long, mSubNumero As Long, mIdCuentaIvaCompras1 As Long, mIdTipoComprobante As Long, mIdCuentaDiferenciaCambio As Long, i As Long, j As Long
+   Dim mCodigoCuentaDiferenciaCambio As Long, mIdMoneda As Long, mCodBar As Long, mIdTipoComprobanteNDInternaAcreedores As Long, mIdTipoComprobanteNCInternaAcreedores As Long
+   Dim mIdCuentaIvaCompras(10) As Long
+   Dim mIVAComprasPorcentaje(10) As Single
+   Dim mIVAComprasPorcentaje1 As Single
+   Dim mvarImporte As Double
+   Dim s As String, mvarConIVA As String, mAplicaIVA As String, mAuxS1 As String
+   Dim mProcesar As Boolean, mOk As Boolean
+   Dim Columnas
+   
+   Set oAp = Aplicacion
+   
+   Set oRs = oAp.Parametros.Item(1).Registro
+   For i = 1 To 10
+      If Not IsNull(oRs.Fields("IdCuentaIvaCompras" & i).Value) Then
+         mIdCuentaIvaCompras(i) = oRs.Fields("IdCuentaIvaCompras" & i).Value
+         mIVAComprasPorcentaje(i) = oRs.Fields("IVAComprasPorcentaje" & i).Value
+      Else
+         mIdCuentaIvaCompras(i) = 0
+         mIVAComprasPorcentaje(i) = 0
+      End If
+   Next
+   oRs.Close
+   
+   Columnas = Split(Filas(1), vbTab)
+   
+   Set oRs = oAp.Pedidos.Item(Columnas(17)).Registro
+   Set oRsDet = oAp.Pedidos.TraerFiltrado("_DetallesParaComprobantesProveedores", Columnas(17))
+   
+   mProcesar = True
+   mIdMoneda = 0
+   
+   If IsNull(oRs.Fields("Aprobo").Value) Then
+      If BuscarClaveINI("Permitir emision de pedido sin liberar") <> "SI" Then
+         mError = mError & "El pedido todavia no esta autorizado!" & vbCrLf
+         mProcesar = False
+      End If
+   End If
+   
+   If Not CircuitoFirmasCompleto(NotaPedido, Columnas(17), oRs.Fields("TotalPedido").Value) Then
+      If BuscarClaveINI("Permitir emision de pedido sin liberar") <> "SI" Then
+         mError = mError & "El pedido no tiene completo el circuito de firmas" & vbCrLf
+         mProcesar = False
+      End If
+   End If
+   
+   With origen.Registro
+      .Fields("IdMoneda").Value = oRs.Fields("IdMoneda").Value
+      If BuscarClaveINI("Control por codigo recepcion a comprobante") = "SI" And Not IsNull(oRs.Fields("CodigoControl").Value) Then
+         Set oF = New frm_Aux
+         oF.Label1.Caption = "Codigo de barras :"
+         oF.Show vbModal, Me
+         mCodBar = Val(oF.Text1.Text)
+         mOk = oF.Ok
+         Unload oF
+         Set oF = Nothing
+         If (Not mOk Or oRs.Fields("CodigoControl").Value <> mCodBar) And mCodBar <> 0 Then
+            MsgBox "Codigo de control incorrecto, proceso cancelado", vbExclamation
+            GoTo Salida
+         End If
+      End If
+      If Not IsNull(.Fields("IdProveedor").Value) And _
+         .Fields("IdProveedor").Value <> oRs.Fields("IdProveedor").Value And Lista.ListItems.Count > 0 Then
+         mError = mError & "El pedido no se tomo porque no es" & vbCrLf & "del proveedor actual." & vbCrLf
+         mProcesar = False
+      Else
+         .Fields("IdProveedor").Value = oRs.Fields("IdProveedor").Value
+      End If
+      If Not IsNull(oRs.Fields("Cumplido").Value) And oRs.Fields("Cumplido").Value = "AN" Then
+         mError = mError & "El pedido ha sido anulado." & vbCrLf
+         mProcesar = False
+      End If
+   End With
+
+   If mProcesar Then
+      mAplicaIVA = "SI"
+      mIdCodigoIva = 0
+      If Not IsNull(origen.Registro.Fields("IdProveedor").Value) Then
+         Set oRs1 = oAp.Proveedores.TraerFiltrado("_PorId", origen.Registro.Fields("IdProveedor").Value)
+         If oRs1.RecordCount > 0 Then
+            If Not IsNull(oRs1.Fields("IdCodigoIva").Value) And _
+                  (oRs1.Fields("IdCodigoIva").Value = 3 Or oRs1.Fields("IdCodigoIva").Value = 5 Or oRs1.Fields("IdCodigoIva").Value = 8 Or oRs1.Fields("IdCodigoIva").Value = 9) Then
+               mAplicaIVA = "NO"
+            End If
+            mIdCodigoIva = IIf(IsNull(oRs1.Fields("IdCodigoIva").Value), 0, oRs1.Fields("IdCodigoIva").Value)
+         End If
+         oRs1.Close
+      End If
+      
+      Do While Not oRsDet.EOF
+         mProcesar = True
+         Set oRs1 = origen.DetComprobantesProveedores.Registros
+         If oRs1.Fields.Count > 0 Then
+            If oRs1.RecordCount > 0 Then
+               oRs1.MoveFirst
+               Do While Not oRs1.EOF
+                  If oRs1.Fields("IdDetallePedido").Value = oRsDet.Fields("IdDetallePedido").Value Then
+                     mProcesar = False
+                     Exit Do
+                  End If
+                  oRs1.MoveNext
+               Loop
+            End If
+         End If
+         oRs1.Close
+         Set oRs1 = Nothing
+         
+         If mProcesar Then
+            mIdCuentaIvaCompras1 = 0
+            mIVAComprasPorcentaje1 = 0
+            mvarPosicionCuentaIva = 1
+            If Not IsNull(oRsDet.Fields("PorcentajeIVA").Value) Then
+               If oRsDet.Fields("PorcentajeIVA").Value <> 0 Then
+                  For i = 1 To 10
+                     If mIVAComprasPorcentaje(i) = oRsDet.Fields("PorcentajeIVA").Value Then
+                        mIdCuentaIvaCompras1 = mIdCuentaIvaCompras(i)
+                        mIVAComprasPorcentaje1 = mIVAComprasPorcentaje(i)
+                        mvarPosicionCuentaIva = i
+                        Exit For
+                     End If
+                  Next
+               End If
+            End If
+            
+            If Not IsNull(oRsDet.Fields("IdCondicionCompra").Value) Then
+               mCondicionDesdePedido = True
+               origen.Registro.Fields("IdCondicionCompra").Value = oRsDet.Fields("IdCondicionCompra").Value
+            End If
+            If Not IsNull(oRsDet.Fields("IdObra").Value) Then
+               origen.Registro.Fields("IdObra").Value = oRsDet.Fields("IdObra").Value
+            End If
+            
+            mvarImporte = IIf(IsNull(oRsDet.Fields("Importe").Value), 0, oRsDet.Fields("Importe").Value)
+            
+            With origen.DetComprobantesProveedores.Item(-1)
+               With .Registro
+                  .Fields("IdDetallePedido").Value = oRsDet.Fields("IdDetallePedido").Value
+                  .Fields("IdArticulo").Value = oRsDet.Fields("IdArticulo").Value
+                  .Fields("IdObra").Value = oRsDet.Fields("IdObra").Value
+                  If Not mTomarCuentaDePresupuesto Then
+                     .Fields("IdCuenta").Value = oRsDet.Fields("IdCuentaContable").Value
+                     .Fields("CodigoCuenta").Value = oRsDet.Fields("CodigoCuenta").Value
+                  End If
+                  .Fields("Importe").Value = mvarImporte
+                  For i = 1 To 10
+                     .Fields("IdCuentaIvaCompras" & i).Value = Null
+                     .Fields("IVAComprasPorcentaje" & i).Value = 0
+                     .Fields("ImporteIVA" & i).Value = 0
+                     .Fields("AplicarIVA" & i).Value = "NO"
+                  Next
+                  If mIdCuentaIvaCompras1 <> 0 And mAplicaIVA = "SI" Then
+                     .Fields("IdCuentaIvaCompras" & mvarPosicionCuentaIva).Value = mIdCuentaIvaCompras1
+                     .Fields("IVAComprasPorcentaje" & mvarPosicionCuentaIva).Value = mIVAComprasPorcentaje1
+                     If mIdCodigoIva <> 1 Then
+                        .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mvarImporte - (mvarImporte / (1 + (mIVAComprasPorcentaje1 / 100))), mvarDecimales)
+                     Else
+                        .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mvarImporte * mIVAComprasPorcentaje1 / 100, mvarDecimales)
+                     End If
+                     .Fields("AplicarIVA" & mvarPosicionCuentaIva).Value = "SI"
+                  End If
+                  .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+                  .Fields("Cantidad").Value = oRsDet.Fields("Cantidad").Value
+                  .Fields("IdDetalleObraDestino").Value = oRsDet.Fields("IdDetalleObraDestino").Value
+                  .Fields("IdPresupuestoObraRubro").Value = oRsDet.Fields("IdPresupuestoObraRubro").Value
+                  .Fields("NumeroSubcontrato").Value = oRs.Fields("NumeroSubcontrato").Value
+                  .Fields("IdRubroContable").Value = oRsDet.Fields("IdRubroFinanciero").Value
+               End With
+               .Modificado = True
+            End With
+         End If
+         
+         oRsDet.MoveNext
+      Loop
+   End If
+   
+   If Not IsNull(oRs.Fields("ImpuestosInternos").Value) And oRs.Fields("ImpuestosInternos").Value <> 0 Then
+      With origen.DetComprobantesProveedores.Item(-1)
+         With .Registro
+            .Fields("IdDetalleRecepcion").Value = Null
+            .Fields("IdArticulo").Value = Null
+            .Fields("IdObra").Value = Null
+            .Fields("IdCuenta").Value = Null
+            .Fields("CodigoCuenta").Value = Null
+            .Fields("Importe").Value = IIf(IsNull(oRs.Fields("ImpuestosInternos").Value), 0, oRs.Fields("ImpuestosInternos").Value)
+            For i = 1 To 10
+               .Fields("IdCuentaIvaCompras" & i).Value = Null
+               .Fields("IVAComprasPorcentaje" & i).Value = 0
+               .Fields("ImporteIVA" & i).Value = 0
+               .Fields("AplicarIVA" & i).Value = "NO"
+            Next
+            .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+         End With
+         .Modificado = True
+      End With
+   End If
+   
+   For i = 1 To 5
+      If Not IsNull(oRs.Fields("OtrosConceptos" & i).Value) And oRs.Fields("OtrosConceptos" & i).Value <> 0 Then
+         With origen.DetComprobantesProveedores.Item(-1)
+            With .Registro
+               .Fields("IdDetalleRecepcion").Value = Null
+               .Fields("IdArticulo").Value = Null
+               .Fields("IdObra").Value = Null
+               .Fields("IdCuenta").Value = Null
+               .Fields("CodigoCuenta").Value = Null
+               .Fields("Importe").Value = IIf(IsNull(oRs.Fields("OtrosConceptos" & i).Value), 0, oRs.Fields("OtrosConceptos" & i).Value)
+               For j = 1 To 10
+                  .Fields("IdCuentaIvaCompras" & j).Value = Null
+                  .Fields("IVAComprasPorcentaje" & j).Value = 0
+                  .Fields("ImporteIVA" & j).Value = 0
+                  .Fields("AplicarIVA" & j).Value = "NO"
+               Next
+               .Fields("IdPedido").Value = oRs.Fields("IdPedido").Value
+            End With
+            .Modificado = True
+         End With
+      End If
+   Next
+   
+Salida:
+   oRs.Close
+   oRsDet.Close
+   
+   Set oRs = Nothing
+   Set oRs1 = Nothing
+   Set oRsDet = Nothing
+   Set oAp = Nothing
+   
+   Set Lista.DataSource = origen.DetComprobantesProveedores.RegistrosConFormato
+   
+   MostrarDatos 0
+   CalculaComprobanteProveedor
+
+End Sub
+
+Public Sub AnticipoAProveedores()
+
+   Dim oF As Form
+   Dim oRs As ADOR.Recordset
+   Dim mIdPedido As Long, mIdProveedor As Long, mIdObra As Long, mIdCuentaContable As Long
+   Dim mPorcentaje As Double
+   Dim mOk As Boolean
+   Dim mTipo As String
+   
+   Set oF = New frmConsulta3
+   With oF
+      If IsNumeric(dcfields(0).BoundText) Then
+         .IdProveedor = dcfields(0).BoundText
+      Else
+         .IdProveedor = -1
+      End If
+      .Id = 111
+      .lblInfo.Visible = True
+      .Show vbModal, Me
+      mIdPedido = .IdPedido
+      mIdProveedor = .IdProveedor
+   End With
+   Unload oF
+   Set oF = Nothing
+   
+   If mIdPedido <= 0 Then Exit Sub
+   
+   Set oF = New frm_Aux
+   With oF
+      .Id = 15
+      .Show vbModal, Me
+      mPorcentaje = Val(.Text1.Text)
+      mTipo = "C"
+      If .Option1.Value Then mTipo = "A"
+      mOk = .Ok
+   End With
+   Unload oF
+   Set oF = Nothing
+   
+   If Not mOk Then Exit Sub
+   
+   Set oRs = Aplicacion.Pedidos.TraerFiltrado("_DetallesParaComprobantesProveedores", mIdPedido)
+   mIdObra = 0
+   mIdCuentaContable = 0
+   If oRs.RecordCount > 0 Then
+      mIdObra = IIf(IsNull(oRs.Fields("IdObra").Value), 0, oRs.Fields("IdObra").Value)
+      mIdCuentaContable = IIf(IsNull(oRs.Fields("IdCuentaContable").Value), 0, oRs.Fields("IdCuentaContable").Value)
+   End If
+   oRs.Close
+   
+   Me.IdPedidoAnticipo = mIdPedido
+   Me.PorcentajeAnticipo = mPorcentaje
+   Me.Anticipo_O_Devolucion = mTipo
+   Me.IdCuentaContable = mIdCuentaContable
+   With origen.Registro
+      If IsNull(.Fields("IdProveedor").Value) Then .Fields("IdProveedor").Value = mIdProveedor
+      If mIdObra <> 0 And IsNull(.Fields("IdObra").Value) Then .Fields("IdObra").Value = mIdObra
+   End With
+   Editar -1
+
+End Sub
+
+
+
+
+
+*/
+
+
+
 
 
