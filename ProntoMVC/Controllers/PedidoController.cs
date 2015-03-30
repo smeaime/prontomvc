@@ -1667,7 +1667,8 @@ namespace ProntoMVC.Controllers
             if ((o.Aprobo ?? 0) > 0 && o.FechaAprobacion == null) o.FechaAprobacion = DateTime.Now;
 
 
-            if (db.Pedidos.Any(p => p.NumeroPedido == o.NumeroPedido && p.SubNumero == o.SubNumero && p.IdPedido != o.IdPedido && p.PedidoExterior == o.PedidoExterior))
+            o.PedidoExterior = (o.PedidoExterior ?? "NO");
+            if (db.Pedidos.Any(p => p.NumeroPedido == o.NumeroPedido && p.SubNumero == o.SubNumero && p.IdPedido != o.IdPedido && (p.PedidoExterior ?? "NO") == o.PedidoExterior))
             {
 
                 sErrorMsg += "\n" + "Numero/Subnumero de pedido ya existente";
@@ -1829,6 +1830,9 @@ namespace ProntoMVC.Controllers
 
 
 
+            
+
+            
 
 
 

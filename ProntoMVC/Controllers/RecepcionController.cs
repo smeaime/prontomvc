@@ -117,7 +117,7 @@ namespace ProntoMVC.Controllers
                             //idcuenta = mIdCuentaDiferenciaCambio,
                             //cuentadescripcion = cuentadesc
 
-                            idcuenta = mappings["IdCuenta"].NullSafeToString(),
+                            IdCuenta = mappings["IdCuenta"].NullSafeToString(),
                             CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
                             cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())) ?? new Cuenta())  .Descripcion
                             

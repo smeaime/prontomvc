@@ -4175,7 +4175,7 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-        void CargarViewBag(ComprobanteProveedor o)
+        void CargarViewBag(ViewModelComprobanteProveedor o)
         {
 
 
