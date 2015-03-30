@@ -2463,7 +2463,7 @@ namespace ProntoMVC.Controllers
                             a.NumeroItem,
                             //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
                             a.Cantidad,
-                            a.Unidad.Abreviatura,
+                            (a.Unidad ?? new  Unidad()).Abreviatura,
                             a.Articulo.Codigo,
                             a.Articulo.Descripcion,
                             a.FechaEntrega,
