@@ -2473,7 +2473,8 @@ namespace ProntoMVC.Controllers
                             a.Precio,
                             IdCuentaContable= mappings["IdCuentaContable"].NullSafeToString() ,
                             CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
-                            cuentadescripcion = db.Cuentas.Find(Generales.Val(mappings["IdCuentaContable"].NullSafeToString())).Descripcion
+                            cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuentaContable"].NullSafeToString())) ?? new Cuenta())  .Descripcion
+                            
                         }).OrderBy(p => p.NumeroItem).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
