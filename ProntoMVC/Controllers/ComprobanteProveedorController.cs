@@ -42,7 +42,7 @@ using System.IO;
 namespace ProntoMVC.Controllers
 {
 
-   // [Authorize(Roles = "Administrador,SuperAdmin,Compras,FondosFijos")] //ojo que el web.config tambien te puede bochar hacia el login
+    // [Authorize(Roles = "Administrador,SuperAdmin,Compras,FondosFijos")] //ojo que el web.config tambien te puede bochar hacia el login
     public partial class ComprobanteProveedorController : ProntoBaseController2 // ProntoBaseController
     {
 
@@ -147,7 +147,7 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
-           // if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
+            // if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
@@ -1174,7 +1174,7 @@ namespace ProntoMVC.Controllers
 
 
 
-                [HttpPost]
+        [HttpPost]
         public virtual JsonResult BatchUpdate_CuentaCorriente(ViewModelComprobanteProveedor ComprobanteProveedor)
         {
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
@@ -1816,7 +1816,12 @@ namespace ProntoMVC.Controllers
 
         }
 
+        public virtual ActionResult EditOtros(int id)
+        {
+            if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
+            return Edit(id);
 
+        }
 
 
 
@@ -5055,10 +5060,10 @@ namespace ProntoMVC.Controllers
 
 
 
-            
+
             //acá tengo que ver  el tipo del viewmodel
 
-            if (o.MetaTipo=="Cta Cte")
+            if (o.MetaTipo == "Cta Cte")
             {
 
 
@@ -5224,14 +5229,14 @@ namespace ProntoMVC.Controllers
             if ((o.IdCuenta ?? 0) <= 0) // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
             {
                 // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-           //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
+                //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
 
             }
 
             if ((o.NumeroRendicionFF ?? 0) <= 0)
             {
                 // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-            //    sErrorMsg += "\n" + "Falta el número de rendición";
+                //    sErrorMsg += "\n" + "Falta el número de rendición";
                 // return false;
             }
 
@@ -5396,7 +5401,7 @@ namespace ProntoMVC.Controllers
                 {
                     ErrHandler.WriteError(ex);
                     nombre = " El item ";
-                    sErrorMsg += "\n " + nombre + " no tiene una cuenta válida";
+                    sErrorMsg += "\n " + nombre + " (importe " + x.Importe.NullSafeToString() + ")  no tiene una cuenta válida";
 
                 }
 
