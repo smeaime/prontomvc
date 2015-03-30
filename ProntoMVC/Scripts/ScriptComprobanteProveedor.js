@@ -616,6 +616,7 @@ function CopiarItemDeObra(acceptId, ui) {
 
     var longitud = data.length;
 
+    tmpdata['IdDetalleComprobanteProveedor'] = 0;
 
     tmpdata['IdCuenta'] = data.IdCuenta;
     tmpdata['Descripcion'] = data.Descripcion;
@@ -624,20 +625,55 @@ function CopiarItemDeObra(acceptId, ui) {
 
     ///////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-    var grid;
-    grid = Math.ceil(Math.random() * 1000000);
+    var idazar;
+    idazar = Math.ceil(Math.random() * 1000000);
     // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
 
 
-    // o agarrar la primera linea vacía:
-    $("#Lista").jqGrid('addRowData', grid, data);
-    //$("#Lista").jqGrid('addRowData', grid, getdata, "first");
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+    ///////////////
+    // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+    ///////////////
+    var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+    // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+    //alert(segundorenglon);
+    if (segundorenglon.indexOf("dnd") != -1) {
+        // tiró el renglon en modo dragdrop, no hizo dobleclic
+        $("#Lista").jqGrid('delRowData', segundorenglon);
+    }
+    //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+    //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+    ///////////////
+    // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+    ///////////////
+
+    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+    var pos = TraerPosicionLibre();
+    if (pos == null) {
+        $("#Lista").jqGrid('addRowData', idazar, tmpdata, "first")
+    }
+    else {
+        $("#Lista").jqGrid('addRowData', idazar, tmpdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+    }
+    //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+    // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+    // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -717,6 +753,14 @@ function CopiarRecepcion(acceptId, ui) {
             url: ROOT + 'Recepcion/DetRecepcionesSinFormato/',
             data: { IdRecepcion: IdRecepcion },
             dataType: "Json",
+
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+
             error: function (xhr, textStatus, exceptionThrown) {
                 alert('error');
             },
@@ -731,6 +775,10 @@ function CopiarRecepcion(acceptId, ui) {
                 for (var i = 0; i < data.length; i++) {
                     // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                     // var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+
+                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
+
+
                     tmpdata['IdArticulo'] = data[i].IdArticulo;
                     tmpdata['Codigo'] = data[i].CodigoCuenta;
                     tmpdata['Descripcion'] = data[i].cuentadescripcion;
@@ -857,7 +905,7 @@ function CopiarPedido(acceptId, ui) {
     try {
 
 
-        /*
+        
         // estos son datos de cabecera que ya tengo en la grilla auxiliar
         $("#Observaciones").val(getdata['Observaciones']);
         $("#LugarEntrega").val(getdata['LugarEntrega']);
@@ -872,7 +920,7 @@ function CopiarPedido(acceptId, ui) {
 
         $("#NumeroPedido").val(getdata['Numero']);
         $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
-        */
+        
 
         //me traigo los datos de detalle
         var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
@@ -888,10 +936,22 @@ function CopiarPedido(acceptId, ui) {
             url: ROOT + 'Pedido/DetPedidosSinFormato/',
             data: { IdPedido: IdPedido },
             dataType: "Json",
+
+
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            complete: function () {
+                $("#loading").hide();
+            },
+
             error: function (xhr, textStatus, exceptionThrown) {
                 alert('error');
             },
+
             success: function (data) {
+
+                var pos = TraerPosicionLibre();
 
                 var prox = ProximoNumeroItem();
                 // agrego los items a la grilla de detalle
@@ -903,6 +963,8 @@ function CopiarPedido(acceptId, ui) {
                     // var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                     //var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
                     // tmpdata['IdArticulo'] = data[i].IdArticulo;
+                    tmpdata['IdDetalleComprobanteProveedor'] = 0;
+
                     tmpdata['IdCuenta'] = data[i].IdCuentaContable;
                     tmpdata['Codigo'] = data[i].CodigoCuenta;
                     tmpdata['Descripcion'] = data[i].cuentadescripcion;
@@ -953,13 +1015,15 @@ function CopiarPedido(acceptId, ui) {
 
                     //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
 
-                    var pos = TraerPosicionLibre();
                     if (pos == null) {
                         $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
                     }
                     else {
                         $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
                     }
+
+                    pos++;
+
                     //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
                     // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
                     // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
@@ -1046,7 +1110,7 @@ function Validar() {
 
         type: "POST", //deber�a ser "GET", pero me queda muy larga la url http://stackoverflow.com/questions/6269683/ajax-post-request-will-not-send-json-data
         contentType: 'application/json; charset=utf-8',
-        url: ROOT + 'Pedido/ValidarJson',
+        url: ROOT + 'ComprobanteProveedor/ValidarJson',
 
         dataType: 'json',
         data: JSON.stringify(cabecera), // $.toJSON(cabecera),
