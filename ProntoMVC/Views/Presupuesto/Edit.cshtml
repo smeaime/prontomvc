@@ -220,83 +220,89 @@
                 </div>
                 <!--/row-->
                 <div class="accordion" id="accordion2">
-                    <div class="accordion-group" style="border: 0px; padding: 0px;">
-                        <div class="accordion-heading" style="border: 0px; padding: 0px;">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                               style="border: 0px; padding: 0px;">más...</a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
-                            @*si pones "collapse in" empieza abierto*@
-                            <div class="accordion-inner" style="border: 0px; padding: 0px;">
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Aprobo)
+
+
+
+
+                        <div class="accordion-group" style="border: 0px; padding: 0px;">
+                            <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
+                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
+                                    más...
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
+                                @*si pones "collapse in" empieza abierto*@
+                                <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Aprobo, "Aprobo")
+                                            @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Aprobo)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span8 lightblue">
+                                            @Html.LabelFor(model => model.Detalle)
+                                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Detalle)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span8 lightblue">
-                                        @Html.LabelFor(model => model.Detalle)
-                                        @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Detalle)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
+                                            @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.IdCondicionCompra)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Validez, "Validez")
+                                            @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Validez)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Referencia, "Referencia")
+                                            @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Referencia)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.IdCondicionCompra)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
+                                            @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Garantia, "Garantia")
+                                            @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Garantia)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Contacto, "Contacto")
+                                            @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Contacto)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Validez, "Validez")
-                                        @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Validez)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span12 lightblue">
+                                            @Html.LabelFor(model => model.Observaciones)
+                                            @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Observaciones)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Referencia, "Referencia")
-                                        @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Referencia)
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
-                                    </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Garantia, "Garantia")
-                                        @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Garantia)
-                                    </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Contacto, "Contacto")
-                                        @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Contacto)
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span11 lightblue">
-                                        @Html.LabelFor(model => model.Observaciones)
-                                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Observaciones)
-                                    </div>
-                                    <!--/span-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <!--/row-->
                 <div class="row-fluid">
                     <div id="divGrilla" class="span12 lightblue">
