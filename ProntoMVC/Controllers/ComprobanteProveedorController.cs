@@ -6719,13 +6719,13 @@ namespace ProntoMVC.Controllers
 
 
 
-            if (IdComprobanteProveedor <= 0)
-            {
-                // le agrego un renglon vacío para pasarle los ivas para el encabezado
-                var item = new DetalleComprobantesProveedore();
-                item.IdDetalleComprobanteProveedor = -1;
-                data.Add(item);
-            }
+            //if (IdComprobanteProveedor <= 0)
+            //{
+            //    // le agrego un renglon vacío para pasarle los ivas para el encabezado
+            //    var item = new DetalleComprobantesProveedore();
+            //    item.IdDetalleComprobanteProveedor = -1;
+            //    data.Add(item);
+            //}
 
 
 
