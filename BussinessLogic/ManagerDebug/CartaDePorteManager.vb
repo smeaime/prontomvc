@@ -12428,14 +12428,19 @@ Public Class LogicaFacturacion
         'se debe ejecutar despues del filtro de cartas conflictivas
         Dim total As Decimal = 0
         Dim reasignador As Integer = 0
-        Dim ClienteSeparadoanterior As String
+        Dim ClienteSeparadoanterior As String = ""
         listaDeCartasPorteAFacturar = listaDeCartasPorteAFacturar.OrderBy(Function(x) x.FacturarselaA).ThenBy(Function(x) x.ClienteSeparado).ToList()
         For n = 0 To listaDeCartasPorteAFacturar.Count - 1
             Dim x = listaDeCartasPorteAFacturar(n)
             Dim xant = listaDeCartasPorteAFacturar(IIf(n > 0, n - 1, 0))
 
 
-            If x.ClienteSeparado <> ClienteSeparadoanterior Or x.IdFacturarselaA <> xant.IdFacturarselaA Then
+            '/////////////////////////////////////////////////////////////////////
+            If x.ClienteSeparado = "-1" Then x.ClienteSeparado = ""
+            '////////////////////////////////////////////////////////////////////////
+
+
+            If (x.ClienteSeparado <> ClienteSeparadoanterior And x.ClienteSeparado <> x.IdFacturarselaA.ToString) Or x.IdFacturarselaA <> xant.IdFacturarselaA Then
                 total = 0
             End If
 
