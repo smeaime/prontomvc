@@ -211,15 +211,61 @@ function CalcularItem() {
 
 function InvisibilizarChecks() {
     var ids = jQuery("#Lista").jqGrid('getDataIDs');
-    for (var i = 1; i <= 10; i++) {
 
-        var data = $('#Lista').jqGrid('getRowData', ids[0]);
-        // la idea es que en el primer renglon, levanto qué columnas de checks
-        // se muestran y cuáles no.
 
-        jQuery("#Lista").jqGrid('setLabel', 'AplicarIVA' + i, data['IVAComprasPorcentaje' + i]);
-        if (!data['IdCuentaIvaCompras' + i]) $("#Lista").hideCol("AplicarIVA" + i);
-    }
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: ROOT + 'ComprobanteProveedor/ListaPorcentajesIVA2/',
+        dataType: "Json",
+        error: function (xhr, textStatus, exceptionThrown) {
+            alert('error');
+        },
+        success: function (datax) {
+
+
+
+
+
+            var data = $('#Lista').jqGrid('getRowData', ids[0]);
+            // la idea es que en el primer renglon, levanto qué columnas de checks
+            // se muestran y cuáles no.
+            // -no tendrías que hacer una llamada ajax para averiguarlo?
+            // -pero no entiendo: AplicarIVA es si está el check marcado o no; y NO es si es visible o no!
+            // -claro... el que dice si se muestra o no es el null en "IdCuentaIvaCompras..n" 
+            // cuando haces el drop, el renglon mágico (con los datas de IdCuentaIVACompras) deja de estar primero.
+            // -cómo hacer entonces para propagar esos datos?
+            // -lo que pasa es que esos son metadatos... no tienen que venir con los datos de la grilla, sino en su 
+            // esquema. Lo tenes que llamar APARTE con ajax...
+
+
+            for (var i = 1; i <= 10; i++) {
+
+               var result= $.grep(datax, function(e){ return e.aa == i; })
+
+
+                if (result.length==0) {
+
+                    $("#Lista").hideCol("AplicarIVA" + i);
+                }
+                else {
+                    
+                    $("#Lista").jqGrid('setLabel', 'AplicarIVA' + i, result[0].s);
+                }
+                /*
+                $("#Lista").jqGrid('setLabel', 'AplicarIVA' + i, data['IVAComprasPorcentaje' + i]);
+                if (!data['IdCuentaIvaCompras' + i]) $("#Lista").hideCol("AplicarIVA" + i);
+                */
+            }
+
+
+
+
+        }
+
+    });
+
+
 
 }
 
@@ -834,14 +880,14 @@ function CopiarRecepcion(acceptId, ui) {
                     tmpdata['Descripcion'] = data[i].cuentadescripcion;
                     //tmpdata['IdUnidad'] = data[i].IdUnidad;
                     tmpdata['IdCuenta'] = data[i].IdCuenta;
-                    
+
                     //tmpdata['Unidad'] = data[i].Unidad;
                     //tmpdata['Unidad'] = data[i].Abreviatura;
                     // tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
                     // tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
                     // tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
                     // tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                     tmpdata['Cantidad'] = data[i].Cantidad;
+                    tmpdata['Cantidad'] = data[i].Cantidad;
                     // tmpdata['NumeroObra'] = data[i].NumeroObra;
                     // tmpdata['FechaEntrega'] = displayDate;
                     // tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
@@ -850,7 +896,7 @@ function CopiarRecepcion(acceptId, ui) {
                     tmpdata['NumeroItem'] = prox;
                     prox++;
 
-                    
+
 
                     getdata = tmpdata;
                     var idazar = Math.ceil(Math.random() * 1000000);
@@ -955,7 +1001,7 @@ function CopiarPedido(acceptId, ui) {
     try {
 
 
-        
+
         // estos son datos de cabecera que ya tengo en la grilla auxiliar
         $("#Observaciones").val(getdata['Observaciones']);
         $("#LugarEntrega").val(getdata['LugarEntrega']);
@@ -970,13 +1016,13 @@ function CopiarPedido(acceptId, ui) {
 
         $("#NumeroPedido").val(getdata['Numero']);
         $("#SubNumero").val(parseInt(getdata['SubNumero']) + 1);
-        
+
 
         //me traigo los datos de detalle
         var IdPedido = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
 
 
-        
+
 
 
 
@@ -1788,7 +1834,7 @@ $(function () {
 
             InvisibilizarChecks();
 
-            
+
 
 
         },
@@ -1920,8 +1966,8 @@ $(function () {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    
- 
+
+
 
     function QuitarRenglones(data) {
 
@@ -2988,7 +3034,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRecepcion', index: 'IdRecepcion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden:false , searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'Orden', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -3617,7 +3663,7 @@ function ConectarGrillas3() {
 
 
 
-        
+
     });
 }
 
@@ -3691,7 +3737,7 @@ function ConectarGrillas5() {
         },
 
 
-        
+
         ondrop: function (ev, ui, getdata) {
             var acceptId = $(ui.draggable).attr("id");
             CopiarPedido(acceptId, ui);

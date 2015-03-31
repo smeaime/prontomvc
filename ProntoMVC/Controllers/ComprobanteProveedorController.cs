@@ -3629,6 +3629,79 @@ namespace ProntoMVC.Controllers
 
         }
 
+
+
+
+
+
+        class ss
+        {
+
+            public int aa;
+            public string s;
+
+        }
+
+
+        public virtual JsonResult ListaPorcentajesIVA2()
+        {
+
+
+
+
+
+
+            List<ss> combo2 = new List<ss>();
+            Dictionary<int, string> combo = new Dictionary<int, string>();
+            //Dictionary<string, string> combo = new Dictionary<string, string>();
+            //foreach (ControlCalidad u in fondoFijoService.ControlesCalidads.OrderBy(x => x.Descripcion).ToList())
+            //                combo.Add(u.IdControlCalidad, u.Descripcion);
+
+            string s = " 0:0 ";
+
+
+
+            Parametros parametros = fondoFijoService.Parametros();
+
+            combo.Add(0, "0");
+            //combo.Add("0", "0");
+
+            for (int n = 1; n <= 10; n++)
+            {
+
+
+                var pIVAComprasPorcentaje = parametros.GetType().GetProperty("IVAComprasPorcentaje" + n);
+                decimal IVAComprasPorcentajeval = (decimal)(pIVAComprasPorcentaje.GetValue(parametros, null) ?? 0M);
+
+                var pIdCuentaIVACompras = parametros.GetType().GetProperty("IdCuentaIvaCompras" + n);
+                int? IdCuentaIVACompras = (int?)pIdCuentaIVACompras.GetValue(parametros, null);
+
+
+                if (IdCuentaIVACompras == null)
+                {
+                    continue;
+                }
+
+                //  combo.Add(IdCuentaIVACompras ?? 0, IVAComprasPorcentajeval.ToString());
+                // combo.Add(IVAComprasPorcentajeval.ToString(), IVAComprasPorcentajeval.ToString());
+                combo.Add(n, IVAComprasPorcentajeval.ToString());
+
+                ss sd = new ss();
+                sd.aa = n;
+                sd.s = IVAComprasPorcentajeval.ToString();
+
+                combo2.Add(sd);
+
+                s += "; " + n + ":" + IVAComprasPorcentajeval.ToString() + " ";
+            }
+
+
+            //return " 21:21 ; 10.5:10.5 ; 27:27; 0:0; 18.5:18.5 ; 9.5:9.5 ";
+
+
+            return Json(combo2, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult PorcentajesIVAaaa()
         {
 
