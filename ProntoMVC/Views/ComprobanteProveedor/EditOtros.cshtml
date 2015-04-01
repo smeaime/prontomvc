@@ -136,7 +136,7 @@
                                         <div class="span2 lightblue">
                                             
                                             @*@Html.DropDownList("MetaTipo", new SelectList(new string[] { "Cta Cte ", "Otros" }), "Otros", new { @class = "span12" })*@
-
+                                             @Html.Hidden("MetaTipo","Otros")
                                         </div>
                                         <div class="span2 lightblue" style="text-align: right;">
                                             @Html.LabelFor(model => model.IdTipoComprobante, "Número")
@@ -169,7 +169,7 @@
 
                                     <div class="row-fluid">
                                         <div class="span2 lightblue">
-                                            @Html.LabelFor(model => model.IdCuenta, "Cuenta")
+                                            @Html.LabelFor(model => model.IdCuentaOtros, "Cuenta")
                                         </div>
                                         <div class="span6 lightblue">
                                             @Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })
@@ -187,7 +187,7 @@
 
                                                 function cuentaSeleccionado(event, ui) {
 
-                                                    $("#IdCuenta").val(ui.item.id);
+                                                    $("#IdCuentaOtros").val(ui.item.id);
                                                     $("#DescripcionCuenta").val(ui.item.value || "");
                                                     ///////////////////////
                                                     event.preventDefault();
