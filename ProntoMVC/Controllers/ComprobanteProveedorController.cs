@@ -5148,6 +5148,35 @@ namespace ProntoMVC.Controllers
                 //}
             }
 
+
+
+            if (o.IdProveedor == null && o.MetaTipo == "Cta Cte")
+            {
+
+                sErrorMsg += "\n" + "Falta el proveedor";
+            }
+
+
+            if ((o.IdCuentaOtros ?? 0) <= 0 && o.MetaTipo == "Otros") // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
+
+            }
+
+            if ((o.IdCuenta ?? 0) <= 0 && o.MetaTipo == "Fondo fijo")
+            {
+
+                //         Case 	When cp.IdProveedor is not null Then 'Cta. cte.' 
+                //When cp.IdCuenta is not null Then 'F.fijo' 
+                //When cp.IdCuentaOtros is not null Then 'Otros' 
+
+
+                //    // se pone el proveedor de ff en el idproveedoreventual???????
+            }
+
+
+
             if (o.IdProveedor != null)          // cta cte
             {
                 //var aa = fondoFijoService.Proveedores.Find(o.IdProveedor);
@@ -5219,18 +5248,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            if ((o.IdProveedorEventual ?? 0) <= 0)
-            {
 
-                //         Case 	When cp.IdProveedor is not null Then 'Cta. cte.' 
-                //When cp.IdCuenta is not null Then 'F.fijo' 
-                //When cp.IdCuentaOtros is not null Then 'Otros' 
-
-
-                //    // se pone el proveedor de ff en el idproveedoreventual???????
-            }
-
-
+            
             if (o.IdComprobanteProveedor <= 0)
             {
                 //  string connectionString = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
@@ -5272,8 +5291,8 @@ namespace ProntoMVC.Controllers
             //    // verifico que NoAsyncTimeoutAttribute exista
 
 
-
-
+            
+        
 
             //    try
             //    {
@@ -5295,16 +5314,6 @@ namespace ProntoMVC.Controllers
 
             if ((o.IdCondicionCompra ?? 0) <= 0) o.IdCondicionCompra = 247;
 
-
-
-
-
-            if ((o.IdCuenta ?? 0) <= 0) // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-                //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
-
-            }
 
             if ((o.NumeroRendicionFF ?? 0) <= 0)
             {

@@ -206,7 +206,7 @@ namespace Servicio
 
             // Logica_RecalcularTotales(ref ComprobanteProveedor);
             Logica_ActualizarCuentaCorriente(ComprobanteProveedor);
-            Logica_AsientoRegistroContable(ComprobanteProveedor, db);
+            Logica_AsientoRegistroContable(ComprobanteProveedor, comprobantesproveedorRepositorio.HACKEADOcontext);
             Logica_Actualizaciones(ComprobanteProveedor);
 
 
@@ -724,6 +724,864 @@ namespace Servicio
         }
 
 
+
+        public void Logica_AsientoRegistroContable(ComprobanteProveedor o, DemoProntoEntities db)
+        {
+
+            try
+            {
+
+                long mvarCuentaReventas, mvarCuentaIvaInscripto1 = 0, mvarCuentaPercepcionIIBB;
+                Double mvarIvaNoDiscriminado, mvarSubtotal, mvarNetoGravadoItem, mvarAjusteIva;
+
+
+                Parametros parametros = db.Parametros.Find(1);
+                var mvarEjercicio = parametros.EjercicioActual ?? 0;
+                var mvarCuentaVentas = parametros.IdCuentaVentas ?? 0;
+                var mvarCuentaVentasTitulo = parametros.IdCuentaVentasTitulo ?? 0;
+                var mvarCuentaBonificaciones = parametros.IdCuentaBonificaciones ?? 0;
+                var mvarCuentaIvaInscripto = parametros.IdCuentaIvaInscripto ?? 0;
+                var mvarCuentaIvaNoInscripto = parametros.IdCuentaIvaNoInscripto ?? 0;
+                var mvarCuentaIvaSinDiscriminar = parametros.IdCuentaIvaSinDiscriminar ?? 0;
+                var mvarCuentaRetencionIBrutosBsAs = parametros.IdCuentaRetencionIBrutosBsAs ?? 0;
+                var mvarCuentaRetencionIBrutosCap = parametros.IdCuentaRetencionIBrutosCap ?? 0;
+                mvarCuentaReventas = parametros.IdCuentaReventas ?? 0;
+                var mvarCuentaOtrasPercepciones1 = parametros.IdCuentaOtrasPercepciones1 ?? 0;
+                var mvarCuentaOtrasPercepciones2 = parametros.IdCuentaOtrasPercepciones2 ?? 0;
+                var mvarCuentaOtrasPercepciones3 = parametros.IdCuentaOtrasPercepciones3 ?? 0;
+                var mvarCuentaPercepcionesIVA = parametros.IdCuentaPercepcionesIVA ?? 0;
+                var mvarCuentaCliente = parametros.IdCuentaDeudoresVarios ?? 0;
+                var mvarIdMonedaPesos = parametros.IdMoneda ?? 1;
+
+
+
+
+
+                //ProntoMVC.Data.Models.Subdiario oRs = new Subdiario();
+
+                //var mvarFecha = o.FechaVencimiento ;
+
+                //mvarSubtotal = (double)(o.ImporteTotal ?? 0 - o.ImporteIva1 ?? 0 -
+                //                   o.ImporteIva2 ?? 0 - o.RetencionIBrutos1 -
+                //                   o.RetencionIBrutos2 ?? 0 - o.RetencionIBrutos3 ?? 0 -
+                //                   o.OtrasPercepciones1 ?? 0 -
+                //                    o.OtrasPercepciones2 ?? 0 -
+                //                    o.OtrasPercepciones3 ?? 0 -
+                //                   o.PercepcionIVA ?? 0 -
+                //                   o.AjusteIva ?? 0 +
+                //                   o.ImporteBonificacion ?? 0);
+                //var mvarNetoGravadoItemSuma = 0;
+
+
+
+                var s = new Subdiario();
+
+
+                //s.Ejercicio = mvarEjercicio;
+                //s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+                //s.IdCuenta = mvarCuentaCliente;
+                //s.IdTipoComprobante = 1;
+                //s.NumeroComprobante = o.NumeroFactura;
+                //s.FechaComprobante = mvarFecha;
+                //s.IdComprobante = o.IdFactura;
+                //s.Debe = o.ImporteTotal;
+                //s.IdMoneda = o.IdMoneda;
+                //s.CotizacionMoneda = o.CotizacionMoneda;
+                //if (s.Debe > 0) db.Subdiarios.Add(s);
+
+
+
+
+                ////     If o.ImporteBonificacion <> 0 Then
+                ////        With oRsCont
+                //s = new Subdiario();
+                //s.Ejercicio = mvarEjercicio;
+                //s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+                //s.IdCuenta = mvarCuentaBonificaciones;
+                //s.IdTipoComprobante = 1;
+                //s.NumeroComprobante = o.NumeroFactura;
+                //s.FechaComprobante = mvarFecha;
+                //s.IdComprobante = o.IdFactura;
+                //s.Debe = o.ImporteBonificacion;
+                //s.IdMoneda = o.IdMoneda;
+                //s.CotizacionMoneda = o.CotizacionMoneda;
+                //if (s.Debe > 0) db.Subdiarios.Add(s);
+                ////           .Update
+                ////        End With
+                ////     End If
+
+
+
+                //if (o.ImporteIva1 != 0)
+                //{
+                //    mvarCuentaIvaInscripto1 = mvarCuentaIvaInscripto;
+                //    for (int i = 1; i <= 4; i++)
+                //    {
+                //        //if (o.PorcentajeIva1 = mvarCuentaIvaVenta(i, 1))
+                //        //{
+                //        //    mvarCuentaIvaInscripto1 = mvarCuentaIvaVenta(i, 0);
+                //        //    break;
+
+                //        //}
+                //    }
+                //}
+                //s = new Subdiario();
+
+                //s.Ejercicio = mvarEjercicio;
+                //s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+                //s.IdCuenta = (int)mvarCuentaIvaInscripto1;
+                //s.IdTipoComprobante = 1;
+                //s.NumeroComprobante = o.NumeroFactura;
+                //s.FechaComprobante = mvarFecha;
+                //s.IdComprobante = o.IdFactura;
+                //s.Haber = o.ImporteIva1;
+                //s.IdMoneda = o.IdMoneda;
+                //s.CotizacionMoneda = o.CotizacionMoneda;
+                //if (s.Haber > 0) db.Subdiarios.Add(s);
+                ////         .Update
+                ////      End With
+                ////   End If
+
+
+
+                //mvarIvaNoDiscriminado = 0
+                //   if (o.IvaNoDiscriminado > 0) {
+                //      mvarIvaNoDiscriminado = o.IvaNoDiscriminado
+                //s = new Subdiario();
+
+                //s.Ejercicio = mvarEjercicio;
+                //s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+                //s.IdCuenta = mvarCuentaIvaInscripto;
+                //s.IdTipoComprobante = 1;
+                //s.NumeroComprobante = o.NumeroFactura;
+                //s.FechaComprobante = mvarFecha;
+                //s.IdComprobante = o.IdFactura;
+                //s.Haber = (decimal)(o.IVANoDiscriminado ?? 0);
+                //s.IdMoneda = o.IdMoneda;
+                //s.CotizacionMoneda = o.CotizacionMoneda;
+                //if (s.Haber > 0) db.Subdiarios.Add(s);
+
+                ////mvarAjusteIva = 0
+                ////   if (o.AjusteIva <> 0) {
+                ////      mvarAjusteIva = o.AjusteIva
+                //s = new Subdiario();
+
+                //s.Ejercicio = mvarEjercicio;
+                //s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+                //s.IdCuenta = mvarCuentaIvaInscripto;
+                //s.IdTipoComprobante = 1;
+                //s.NumeroComprobante = o.NumeroFactura;
+                //s.FechaComprobante = mvarFecha;
+                //s.IdComprobante = o.IdFactura;
+                //s.Haber = (decimal?)o.AjusteIva;
+                //s.IdMoneda = o.IdMoneda;
+                //s.CotizacionMoneda = o.CotizacionMoneda;
+                //if (s.Haber > 0) db.Subdiarios.Add(s);
+                ////         .Update
+                ////      End With
+                ////   }
+
+
+
+                //s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+                //if (s != null) db.Subdiarios.Add(s);
+
+
+                //   If Not IsNull(o.RetencionIBrutos1) Then
+                //      If o.RetencionIBrutos1 <> 0 Then
+                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion)
+                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
+                //         If Not IsNull(oRs.Fields("IdProvincia) Then
+                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
+                //            If oRsAux.RecordCount > 0 Then
+                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
+                //               End If
+                //               If o.ConvenioMultilateral = "SI" And _
+                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
+                //               End If
+                //            End If
+                //            oRsAux.Close
+                //         End If
+                //         oRs.Close
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaPercepcionIIBB
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.RetencionIBrutos1
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+
+                //s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+                //if (s != null) db.Subdiarios.Add(s);
+
+
+                //   If Not IsNull(o.RetencionIBrutos2) Then
+                //      If o.RetencionIBrutos2 <> 0 Then
+                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion2)
+                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
+                //         If Not IsNull(oRs.Fields("IdProvincia) Then
+                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
+                //            If oRsAux.RecordCount > 0 Then
+                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
+                //               End If
+                //               If o.ConvenioMultilateral = "SI" And _
+                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
+                //               End If
+                //            End If
+                //            oRsAux.Close
+                //         End If
+                //         oRs.Close
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaPercepcionIIBB
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.RetencionIBrutos2
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+                //                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+                //                if (s != null) db.Subdiarios.Add(s);
+
+                //   If Not IsNull(o.RetencionIBrutos3) Then
+                //      If o.RetencionIBrutos3 <> 0 Then
+                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion3)
+                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
+                //         If Not IsNull(oRs.Fields("IdProvincia) Then
+                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
+                //            If oRsAux.RecordCount > 0 Then
+                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
+                //               End If
+                //               If o.ConvenioMultilateral = "SI" And _
+                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
+                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
+                //               End If
+                //            End If
+                //            oRsAux.Close
+                //         End If
+                //         oRs.Close
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaPercepcionIIBB
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.RetencionIBrutos3
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+
+                //                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+                //              if (s != null) db.Subdiarios.Add(s);
+
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                //   If Not IsNull(o.OtrasPercepciones1) Then
+                //      If o.OtrasPercepciones1 <> 0 Then
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaOtrasPercepciones1
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.OtrasPercepciones1
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+
+                //   If Not IsNull(o.OtrasPercepciones2) Then
+                //      If o.OtrasPercepciones2 <> 0 Then
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaOtrasPercepciones2
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.OtrasPercepciones2
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+                //s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+                //if (s != null) db.Subdiarios.Add(s);
+
+
+                //   If Not IsNull(o.OtrasPercepciones3) Then
+                //      If o.OtrasPercepciones3 <> 0 Then
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaOtrasPercepciones3
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.OtrasPercepciones3
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+
+                //   If Not IsNull(o.PercepcionIVA) Then
+                //      If o.PercepcionIVA <> 0 Then
+                //         With oRsCont
+                //            .AddNew
+                //           s.Ejercicio = mvarEjercicio
+                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //           s.IdCuenta = mvarCuentaPercepcionesIVA
+                //           s.IdTipoComprobante = 1
+                //           s.NumeroComprobante = o.NumeroFactura
+                //           s.FechaComprobante = mvarFecha
+                //           s.IdComprobante = Registro.Fields(0).Value
+                //           s.Haber = o.PercepcionIVA
+                //           s.IdMoneda = o.IdMoneda
+                //           s.CotizacionMoneda = o.CotizacionMoneda
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+                //            movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
+
+
+
+
+
+
+                foreach (DetalleComprobantesProveedore i in o.DetalleComprobantesProveedores)
+                {
+                    s = new Subdiario();
+
+
+                    //var a= s.  db.Articulos.Include(x=>x.Cuenta).Where(
+                    //                   Set oRs = oSrv.TraerFiltrado("Articulos", "_DatosConCuenta",s.IdArticulo)
+                    //mvarNetoGravadoItem = (double)((i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0) * (1 - (i.Bonificacion ?? 0 / 100)));
+                    //                    mvarNetoGravadoItem = 0;
+                    //if (mvarIvaNoDiscriminado > 0 ) {
+                    //   mvarNetoGravadoItem = Round(mvarNetoGravadoItem * (mvarSubtotal - mvarIvaNoDiscriminado) / mvarSubtotal, 2)
+                    //   mvarNetoGravadoItemSuma = mvarNetoGravadoItemSuma + mvarNetoGravadoItem
+                    //}
+
+
+                    s.Ejercicio = mvarEjercicio;
+                    s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
+
+                    var q = db.Articulos.Include("Rubro").Include("Cuenta").SingleOrDefault(x => x.IdArticulo == i.IdArticulo);
+
+                    s.IdCuenta = q.Rubro.IdCuenta; // db.Articulos_TX_DatosConCuenta(i.IdArticulo).Select(x => x.IdCuenta).FirstOrDefault();
+                    s.IdTipoComprobante = 1;
+                    //s.NumeroComprobante = o.NumeroFactura;
+                    //s.FechaComprobante = mvarFecha;
+                    //s.IdComprobante = o.IdFactura;
+                    //if (mvarNetoGravadoItem >= 0)
+                    //{ s.Haber = (decimal)mvarNetoGravadoItem; }
+                    //else
+                    //{ s.Debe = (decimal)mvarNetoGravadoItem * -1; }
+
+                    s.IdMoneda = o.IdMoneda;
+                    s.CotizacionMoneda = o.CotizacionMoneda;
+
+                    //if (mvarNetoGravadoItem > 0) db.Subdiarios.Add(s);
+                }
+
+
+
+
+
+                // modifica los registros nuevos
+
+                //   Set oRsDetBD = oSrv.TraerFiltrado("DetFacturas", "_PorIdCabecera", Registro.Fields(0).Value)
+                //            If Not mvarEsta Then
+                //               Set oRs = oSrv.TraerFiltrado("Articulos", "_DatosConCuenta",s.IdArticulo)
+                //               mvarNetoGravadoItem = Round(oRsDetBD.Fields("Cantidad * _
+                //                                       IIf(IsNull(oRsDetBD.Fields("PrecioUnitario), 0, oRsDetBD.Fields("PrecioUnitario) * _
+                //                                       (1 - IIf(IsNull(oRsDetBD.Fields("Bonificacion), 0, oRsDetBD.Fields("Bonificacion) / 100), 2)
+                //               If mvarIvaNoDiscriminado > 0 Then
+                //                  mvarNetoGravadoItem = Round(mvarNetoGravadoItem * (mvarSubtotal - mvarIvaNoDiscriminado) / mvarSubtotal, 2)
+                //                  mvarNetoGravadoItemSuma = mvarNetoGravadoItemSuma + mvarNetoGravadoItem
+                //               End If
+                //               With oRsCont
+                //                  .AddNew
+                //                 s.Ejercicio = mvarEjercicio
+                //                 s.IdCuentaSubdiario = mvarCuentaVentasTitulo
+                //                 s.IdCuenta = oRs.Fields("IdCuenta
+                //                 s.IdTipoComprobante = 1
+                //                 s.NumeroComprobante = o.NumeroFactura
+                //                 s.FechaComprobante = mvarFecha
+                //                 s.IdComprobante = Registro.Fields(0).Value
+                //                  If mvarNetoGravadoItem >= 0 Then
+                //                    s.Haber = mvarNetoGravadoItem
+                //                  Else
+                //                    s.Debe = mvarNetoGravadoItem * -1
+                //                  End If
+                //                 s.IdMoneda = o.IdMoneda
+                //                 s.CotizacionMoneda = o.CotizacionMoneda
+                //                  .Update
+                //               End With
+
+
+
+                //   If mvarIvaNoDiscriminado > 0 Then
+                //      If Round(mvarNetoGravadoItemSuma + mvarIvaNoDiscriminado, 2) <> mvarSubtotal Then
+                //         With oRsCont
+                //           s.Haber =s.Haber + (mvarSubtotal - (mvarNetoGravadoItemSuma + mvarIvaNoDiscriminado))
+                //            .Update
+                //         End With
+                //      End If
+                //   End If
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+            // verificar que el asiento da 0
+            // http://stackoverflow.com/questions/3627801/is-it-possible-to-see-added-entities-from-an-unsaved-ef4-context
+            //var addedCustomers = from se in db.ObjectContext.get db.ObjectStateManager.GetObjectStateEntries(System.Data.Entity.EntityState.Added)
+            //     where se.Entity is Subdiario
+            //     select se.Entity;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //            Public Function RegistroContable() As ador.Recordset
+
+            //   Dim oSrv As InterFazMTS.iCompMTS
+            //   Dim oRs As ador.Recordset
+            //   Dim oRsCont As ador.Recordset
+            //   Dim oRsDet As ador.Recordset
+            //   Dim oRsDetBD As ador.Recordset
+            //   Dim oFld As ador.Field
+            //   Dim mvarEjercicio As Long, mvarCuentaCompras As Long, mvarCuentaProveedor As Long
+            //   Dim mvarCuentaBonificaciones As Long, mvarCuentaIvaInscripto As Long
+            //   Dim mvarCuentaIvaNoInscripto As Long, mvarCuentaIvaSinDiscriminar As Long
+            //   Dim mvarCuentaComprasTitulo As Long, mvarIdCuenta As Long
+            //   Dim mvarCuentaReintegros As Long
+            //   Dim mvarTotalCompra As Double, mvarImporte As Double, mvarDecimales As Double
+            //   Dim mvarPorcentajeIVA As Double, mvarIVA1 As Double, mvarAjusteIVA As Double
+            //   Dim mvarTotalIVANoDiscriminado As Double, mvarDebe As Double, mvarHaber As Double
+            //   Dim mIdTipoComprobante As Integer, mCoef As Integer, i As Integer
+            //   Dim mvarEsta As Boolean, mvarSubdiarios_ResumirRegistros As Boolean
+
+            //   Set oSrv = CreateObject("MTSPronto.General")
+
+            //   mIdTipoComprobante = Registro.Fields("IdTipoComprobante").Value
+            //   Set oRs = oSrv.LeerUno("TiposComprobante", mIdTipoComprobante)
+            //   mCoef = oRs.Fields("Coeficiente").Value
+            //   oRs.Close
+
+            //   Set oRs = oSrv.LeerUno("Parametros", 1)
+            //   mvarEjercicio = oRs.Fields("EjercicioActual").Value
+            //   mvarCuentaCompras = oRs.Fields("IdCuentaCompras").Value
+            //   mvarCuentaComprasTitulo = oRs.Fields("IdCuentaComprasTitulo").Value
+            //   mvarCuentaBonificaciones = oRs.Fields("IdCuentaBonificaciones").Value
+            //   mvarCuentaIvaInscripto = oRs.Fields("IdCuentaIvaCompras").Value
+            //   mvarCuentaIvaNoInscripto = oRs.Fields("IdCuentaIvaCompras").Value
+            //   mvarCuentaIvaSinDiscriminar = oRs.Fields("IdCuentaIvaSinDiscriminar").Value
+            //   mvarDecimales = oRs.Fields("Decimales").Value
+            //   mvarCuentaProveedor = IIf(IsNull(oRs.Fields("IdCuentaAcreedoresVarios").Value), 0, oRs.Fields("IdCuentaAcreedoresVarios").Value)
+            //   If IsNull(oRs.Fields("Subdiarios_ResumirRegistros").Value) Or oRs.Fields("Subdiarios_ResumirRegistros").Value = "SI" Then
+            //      mvarSubdiarios_ResumirRegistros = True
+            //   Else
+            //      mvarSubdiarios_ResumirRegistros = False
+            //   End If
+            //   mvarCuentaReintegros = IIf(IsNull(oRs.Fields("IdCuentaReintegros").Value), 0, oRs.Fields("IdCuentaReintegros").Value)
+            //   oRs.Close
+
+            //   If Not IsNull(Registro.Fields("IdProveedor").Value) Then
+            //      Set oRs = oSrv.LeerUno("Proveedores", Registro.Fields("IdProveedor").Value)
+            //      If Not IsNull(oRs.Fields("IdCuenta").Value) Then mvarCuentaProveedor = oRs.Fields("IdCuenta").Value
+            //      oRs.Close
+            //   ElseIf Not IsNull(Registro.Fields("IdCuenta").Value) Then
+            //      mvarCuentaProveedor = Registro.Fields("IdCuenta").Value
+            //   ElseIf Not IsNull(Registro.Fields("IdCuentaOtros").Value) Then
+            //      mvarCuentaProveedor = Registro.Fields("IdCuentaOtros").Value
+            //   End If
+
+            //   mvarAjusteIVA = IIf(IsNull(Registro.Fields("AjusteIVA").Value), 0, Registro.Fields("AjusteIVA").Value)
+
+            //   Set oRsCont = CreateObject("ADOR.Recordset")
+            //   Set oRs = oSrv.TraerFiltrado("Subdiarios", "_Estructura")
+
+            //   With oRs
+            //      For Each oFld In .Fields
+            //         With oFld
+            //            oRsCont.Fields.Append .Name, .Type, .DefinedSize, .Attributes
+            //            oRsCont.Fields.Item(.Name).Precision = .Precision
+            //            oRsCont.Fields.Item(.Name).NumericScale = .NumericScale
+            //         End With
+            //      Next
+            //      oRsCont.Open
+            //   End With
+            //   oRs.Close
+
+            //   If Not IsNull(Registro.Fields("Confirmado").Value) And Registro.Fields("Confirmado").Value = "NO" Then
+            //      GoTo Salida
+            //   End If
+
+            //   With oRsCont
+            //      .AddNew
+            //      .Fields("Ejercicio").Value = mvarEjercicio
+            //      .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //      .Fields("IdCuenta").Value = mvarCuentaProveedor
+            //      .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //      .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //      .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //      .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //      If mCoef = 1 Then
+            //         .Fields("Haber").Value = Registro.Fields("TotalComprobante").Value
+            //      Else
+            //         .Fields("Debe").Value = Registro.Fields("TotalComprobante").Value
+            //      End If
+            //      .Update
+            //   End With
+
+            //   If Not IsNull(Registro.Fields("TotalBonificacion").Value) Then
+            //      If Registro.Fields("TotalBonificacion").Value <> 0 Then
+            //         With oRsCont
+            //            .AddNew
+            //            .Fields("Ejercicio").Value = mvarEjercicio
+            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //            .Fields("IdCuenta").Value = mvarCuentaBonificaciones
+            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //            If mCoef = 1 Then
+            //               .Fields("Haber").Value = Registro.Fields("TotalBonificacion").Value
+            //            Else
+            //               .Fields("Debe").Value = Registro.Fields("TotalBonificacion").Value
+            //            End If
+            //            .Update
+            //         End With
+            //      End If
+            //   End If
+
+            //   Set oRsDet = Me.DetComprobantesProveedores.Registros
+            //   With oRsDet
+            //      If .Fields.Count > 0 Then
+            //         If .RecordCount > 0 Then
+            //            .MoveFirst
+            //            Do While Not .EOF
+            //               If Not .Fields("Eliminado").Value Then
+            //                  With oRsCont
+
+            //                     mvarTotalIVANoDiscriminado = 0
+
+            //                     For i = 1 To 10
+            //                        If oRsDet.Fields("AplicarIVA" & i).Value = "SI" Then
+            //                           mvarImporte = oRsDet.Fields("Importe").Value
+            //                           mvarPorcentajeIVA = IIf(IsNull(oRsDet.Fields("IVAComprasPorcentaje" & i).Value), 0, oRsDet.Fields("IVAComprasPorcentaje" & i).Value)
+            //                           If Registro.Fields("Letra").Value = "A" Or Registro.Fields("Letra").Value = "M" Then
+            //                              mvarIVA1 = Round(mvarImporte * mvarPorcentajeIVA / 100, mvarDecimales)
+            //                           Else
+            //                              mvarIVA1 = Round((mvarImporte / (1 + (mvarPorcentajeIVA / 100))) * (mvarPorcentajeIVA / 100), mvarDecimales)
+            //                              mvarTotalIVANoDiscriminado = mvarTotalIVANoDiscriminado + mvarIVA1
+            //                           End If
+            //                           If mvarAjusteIVA <> 0 Then
+            //                              mvarIVA1 = mvarIVA1 + mvarAjusteIVA
+            //                              mvarAjusteIVA = 0
+            //                              Registro.Fields("PorcentajeIVAAplicacionAjuste").Value = mvarPorcentajeIVA
+            //                              Registro.Update
+            //                           End If
+            //                           mvarDebe = 0
+            //                           mvarHaber = 0
+            //                           If mCoef = 1 Then
+            //                              If mvarIVA1 >= 0 Then
+            //                                 mvarDebe = mvarIVA1
+            //                              Else
+            //                                 mvarHaber = mvarIVA1 * -1
+            //                              End If
+            //                           Else
+            //                              If mvarIVA1 >= 0 Then
+            //                                 mvarHaber = mvarIVA1
+            //                              Else
+            //                                 mvarDebe = mvarIVA1 * -1
+            //                              End If
+            //                           End If
+            //                           mvarEsta = False
+            //                           If .RecordCount > 0 Then
+            //                              .MoveFirst
+            //                              Do While Not .EOF
+            //                                 If .Fields("IdCuenta").Value = oRsDet.Fields("IdCuentaIvaCompras" & i).Value And _
+            //                                       ((mvarDebe <> 0 And Not IsNull(.Fields("Debe").Value)) Or _
+            //                                          (mvarHaber <> 0 And Not IsNull(.Fields("Haber").Value))) Then
+            //                                    mvarEsta = True
+            //                                    Exit Do
+            //                                 End If
+            //                                 .MoveNext
+            //                              Loop
+            //                           End If
+            //                           If Not mvarEsta Or Not mvarSubdiarios_ResumirRegistros Then .AddNew
+            //                           .Fields("Ejercicio").Value = mvarEjercicio
+            //                           .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //                           .Fields("IdCuenta").Value = oRsDet.Fields("IdCuentaIvaCompras" & i).Value
+            //                           .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //                           .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //                           .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //                           .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //                           If mvarDebe <> 0 Then
+            //                              .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + mvarDebe
+            //                           Else
+            //                              .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + mvarHaber
+            //                           End If
+            //                           If Not mvarSubdiarios_ResumirRegistros Then
+            //                              .Fields("IdDetalleComprobante").Value = oRsDet.Fields(0).Value
+            //                           End If
+            //                           .Update
+            //                        End If
+            //                     Next
+
+            //                     mvarDebe = 0
+            //                     mvarHaber = 0
+            //                     If mCoef = 1 Then
+            //                        mvarDebe = oRsDet.Fields("Importe").Value - mvarTotalIVANoDiscriminado
+            //                     Else
+            //                        mvarHaber = oRsDet.Fields("Importe").Value - mvarTotalIVANoDiscriminado
+            //                     End If
+            //                     mvarIdCuenta = mvarCuentaCompras
+            //                     If Not IsNull(oRsDet.Fields("IdCuenta").Value) Then
+            //                        mvarIdCuenta = oRsDet.Fields("IdCuenta").Value
+            //                     End If
+            //                     mvarEsta = False
+            //                     If .RecordCount > 0 Then
+            //                        .MoveFirst
+            //                        Do While Not .EOF
+            //                           If .Fields("IdCuenta").Value = mvarIdCuenta And _
+            //                                 ((mvarDebe <> 0 And Not IsNull(.Fields("Debe").Value)) Or _
+            //                                    (mvarHaber <> 0 And Not IsNull(.Fields("Haber").Value))) Then
+            //                              mvarEsta = True
+            //                              Exit Do
+            //                           End If
+            //                           .MoveNext
+            //                        Loop
+            //                     End If
+            //                     If Not mvarEsta Or Not mvarSubdiarios_ResumirRegistros Then .AddNew
+            //                     .Fields("Ejercicio").Value = mvarEjercicio
+            //                     .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //                     .Fields("IdCuenta").Value = mvarIdCuenta
+            //                     .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //                     .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //                     .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //                     .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //                     If mvarDebe <> 0 Then
+            //                        If mvarDebe > 0 Then
+            //                           .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + mvarDebe
+            //                        Else
+            //                           .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + (mvarDebe * -1)
+            //                        End If
+            //                     Else
+            //                        If mvarHaber > 0 Then
+            //                           .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + mvarHaber
+            //                        Else
+            //                           .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + (mvarHaber * -1)
+            //                        End If
+            //                     End If
+            //                     If Not mvarSubdiarios_ResumirRegistros Then
+            //                        .Fields("IdDetalleComprobante").Value = oRsDet.Fields(0).Value
+            //                     End If
+            //                     .Update
+
+            //                  End With
+            //               End If
+            //               .MoveNext
+            //            Loop
+            //         End If
+            //      End If
+            //   End With
+
+            //   Set oRsDetBD = oSrv.TraerFiltrado("DetComprobantesProveedores", "_PorIdCabecera", Registro.Fields(0).Value)
+            //   With oRsDetBD
+            //      If .RecordCount > 0 Then
+            //         .MoveFirst
+            //         Do While Not .EOF
+            //            mvarEsta = False
+            //            If oRsDet.Fields.Count > 0 Then
+            //               If oRsDet.RecordCount > 0 Then
+            //                  oRsDet.MoveFirst
+            //                  Do While Not oRsDet.EOF
+            //                     If .Fields(0).Value = oRsDet.Fields(0).Value Then
+            //                        mvarEsta = True
+            //                        Exit Do
+            //                     End If
+            //                     oRsDet.MoveNext
+            //                  Loop
+            //               End If
+            //            End If
+            //            If Not mvarEsta Then
+            //               With oRsCont
+            //                  .AddNew
+            //                  .Fields("Ejercicio").Value = mvarEjercicio
+            //                  .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //                  If Not IsNull(oRsDetBD.Fields("IdCuenta").Value) Then
+            //                     .Fields("IdCuenta").Value = oRsDetBD.Fields("IdCuenta").Value
+            //                  Else
+            //                     .Fields("IdCuenta").Value = mvarCuentaCompras
+            //                  End If
+            //                  .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //                  .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //                  .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //                  .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //                  If mCoef = 1 Then
+            //                     .Fields("Debe").Value = oRsDetBD.Fields("Importe").Value - mvarTotalIVANoDiscriminado
+            //                  Else
+            //                     .Fields("Haber").Value = oRsDetBD.Fields("Importe").Value - mvarTotalIVANoDiscriminado
+            //                  End If
+            //                  If Not mvarSubdiarios_ResumirRegistros Then
+            //                     .Fields("IdDetalleComprobante").Value = oRsDetBD.Fields(0).Value
+            //                  End If
+            //                  .Update
+
+            //                  mvarTotalIVANoDiscriminado = 0
+
+            //                  For i = 1 To 10
+            //                     If oRsDetBD.Fields("AplicarIVA" & i).Value = "SI" Then
+            //                        mvarImporte = oRsDetBD.Fields("Importe").Value
+            //                        mvarPorcentajeIVA = IIf(IsNull(oRsDetBD.Fields("IVAComprasPorcentaje" & i).Value), 0, oRsDetBD.Fields("IVAComprasPorcentaje" & i).Value)
+            //                        If Registro.Fields("Letra").Value = "A" Or Registro.Fields("Letra").Value = "M" Then
+            //                           mvarIVA1 = Round(mvarImporte * mvarPorcentajeIVA / 100, mvarDecimales)
+            //                        Else
+            //                           mvarIVA1 = Round((mvarImporte / (1 + (mvarPorcentajeIVA / 100))) * (mvarPorcentajeIVA / 100), mvarDecimales)
+            //                           mvarTotalIVANoDiscriminado = mvarTotalIVANoDiscriminado + mvarIVA1
+            //                        End If
+            //                        If mvarAjusteIVA <> 0 Then
+            //                           mvarIVA1 = mvarIVA1 + mvarAjusteIVA
+            //                           mvarAjusteIVA = 0
+            //                           Registro.Fields("PorcentajeIVAAplicacionAjuste").Value = mvarPorcentajeIVA
+            //                           Registro.Update
+            //                        End If
+            //                        .AddNew
+            //                        .Fields("Ejercicio").Value = mvarEjercicio
+            //                        .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //                        .Fields("IdCuenta").Value = oRsDetBD.Fields("IdCuentaIvaCompras" & i).Value
+            //                        .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //                        .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //                        .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //                        .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //                        If mCoef = 1 Then
+            //                           If mvarIVA1 >= 0 Then
+            //                              .Fields("Debe").Value = mvarIVA1
+            //                           Else
+            //                              .Fields("Haber").Value = mvarIVA1 * -1
+            //                           End If
+            //                        Else
+            //                           If mvarIVA1 >= 0 Then
+            //                              .Fields("Haber").Value = mvarIVA1
+            //                           Else
+            //                              .Fields("Debe").Value = mvarIVA1 * -1
+            //                           End If
+            //                        End If
+            //                        If Not mvarSubdiarios_ResumirRegistros Then
+            //                           .Fields("IdDetalleComprobante").Value = oRsDetBD.Fields(0).Value
+            //                        End If
+            //                        .Update
+            //                     End If
+            //                  Next
+
+            //               End With
+            //            End If
+            //            .MoveNext
+            //         Loop
+            //      End If
+            //      .Close
+            //   End With
+            //   Set oRsDetBD = Nothing
+
+            //   If oRsDet.Fields.Count > 0 Then oRsDet.Close
+
+            //   If Not IsNull(Registro.Fields("ReintegroIdCuenta").Value) Then
+            //      If Registro.Fields("ReintegroImporte").Value <> 0 Then
+            //         With oRsCont
+            //            .AddNew
+            //            .Fields("Ejercicio").Value = mvarEjercicio
+            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //            .Fields("IdCuenta").Value = mvarCuentaReintegros
+            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //            If mCoef = 1 Then
+            //               .Fields("Haber").Value = Registro.Fields("ReintegroImporte").Value
+            //            Else
+            //               .Fields("Debe").Value = Registro.Fields("ReintegroImporte").Value
+            //            End If
+            //            .Update
+            //            .AddNew
+            //            .Fields("Ejercicio").Value = mvarEjercicio
+            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
+            //            .Fields("IdCuenta").Value = Registro.Fields("ReintegroIdCuenta").Value
+            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
+            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
+            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
+            //            If mCoef = 1 Then
+            //               .Fields("Debe").Value = Registro.Fields("ReintegroImporte").Value
+            //            Else
+            //               .Fields("Haber").Value = Registro.Fields("ReintegroImporte").Value
+            //            End If
+            //            .Update
+            //         End With
+            //      End If
+            //   End If
+
+
+        }
 
 
         /// <summary>
@@ -1421,6 +2279,11 @@ namespace Servicio
             // log
         }
 
+        public void Logica_AsientoRegistroContable(ComprobanteProveedor o)
+        {
+
+
+        }
 
 
 
@@ -1495,904 +2358,6 @@ namespace Servicio
         }
 
 
-
-        public void Logica_AsientoRegistroContable(ComprobanteProveedor o, DemoProntoEntities db)
-        {
-
-            try
-            {
-
-                //        Public Function RegistroContable() As ador.Recordset
-
-                //   Dim oSrv As InterFazMTS.iCompMTS
-                //   Dim oRs As ador.Recordset
-                //   Dim oRsAux As ador.Recordset
-                //   Dim oRsCont As ador.Recordset
-                //   Dim oRsDet As ador.Recordset
-                //   Dim oRsDetBD As ador.Recordset
-                //   Dim oFld As ador.Field
-                //   Dim mvarEjercicio As Long, mvarCuentaVentas As Long, mvarCuentaCliente As Long, mvarCuentaBonificaciones As Long
-                //   Dim mvarCuentaIvaInscripto As Long, mvarCuentaIvaNoInscripto As Long, mvarCuentaIvaSinDiscriminar As Long
-                //   Dim mvarCuentaRetencionIBrutosBsAs As Long, mvarCuentaRetencionIBrutosCap As Long, mvarCuentaVentasTitulo As Long
-                long mvarCuentaReventas, mvarCuentaIvaInscripto1 = 0, mvarCuentaPercepcionIIBB;
-                //   Dim mvarCuentaOtrasPercepciones1 As Long, mvarCuentaOtrasPercepciones2 As Long, mvarCuentaOtrasPercepciones3 As Long
-                //   Dim mvarCuentaPercepcionesIVA As Long
-                //   Dim mvarCuentaIvaVenta(4, 2) As Long
-                //   Dim i As Integer, mvarIdMonedaPesos As Integer
-                Double mvarIvaNoDiscriminado, mvarSubtotal, mvarNetoGravadoItem, mvarAjusteIva;
-                //   Dim mvarNetoGravadoItemSuma As Double
-
-
-                //   Dim mvarEsta As Boolean
-                //   Dim mvarFecha As Date
-
-                //   Set oSrv = CreateObject("MTSPronto.General")
-
-                Parametros parametros = db.Parametros.Find(1);
-                var mvarEjercicio = parametros.EjercicioActual ?? 0;
-                var mvarCuentaVentas = parametros.IdCuentaVentas ?? 0;
-                var mvarCuentaVentasTitulo = parametros.IdCuentaVentasTitulo ?? 0;
-                var mvarCuentaBonificaciones = parametros.IdCuentaBonificaciones ?? 0;
-                var mvarCuentaIvaInscripto = parametros.IdCuentaIvaInscripto ?? 0;
-                var mvarCuentaIvaNoInscripto = parametros.IdCuentaIvaNoInscripto ?? 0;
-                var mvarCuentaIvaSinDiscriminar = parametros.IdCuentaIvaSinDiscriminar ?? 0;
-                var mvarCuentaRetencionIBrutosBsAs = parametros.IdCuentaRetencionIBrutosBsAs ?? 0;
-                var mvarCuentaRetencionIBrutosCap = parametros.IdCuentaRetencionIBrutosCap ?? 0;
-                mvarCuentaReventas = parametros.IdCuentaReventas ?? 0;
-                var mvarCuentaOtrasPercepciones1 = parametros.IdCuentaOtrasPercepciones1 ?? 0;
-                var mvarCuentaOtrasPercepciones2 = parametros.IdCuentaOtrasPercepciones2 ?? 0;
-                var mvarCuentaOtrasPercepciones3 = parametros.IdCuentaOtrasPercepciones3 ?? 0;
-                var mvarCuentaPercepcionesIVA = parametros.IdCuentaPercepcionesIVA ?? 0;
-                var mvarCuentaCliente = parametros.IdCuentaDeudoresVarios ?? 0;
-                var mvarIdMonedaPesos = parametros.IdMoneda ?? 1;
-
-                //   For i = 1 To 4
-                //      If Not IsNull(oRs.Fields("IdCuentaIvaVentas" & i).Value) Then
-                //         mvarCuentaIvaVenta(i, 0) = oRs.Fields("IdCuentaIvaVentas" & i).Value
-                //         mvarCuentaIvaVenta(i, 1) = oRs.Fields("IVAVentasPorcentaje" & i).Value
-                //      Else
-                //         mvarCuentaIvaVenta(i, 0) = 0
-                //         mvarCuentaIvaVenta(i, 1) = -1
-                //      End If
-                //   Next
-                //   oRs.Close
-
-                //   If Not IsNull(o.IdCliente) Then
-                //      Set oRs = oSrv.LeerUno("Clientes", o.IdCliente)
-                //      mvarCuentaCliente = IIf(IsNull(oRs.Fields("IdCuenta), 0, oRs.Fields("IdCuenta)
-                //      If o.IdMoneda <> mvarIdMonedaPesos And _
-                //            Not IsNull(oRs.Fields("IdCuentaMonedaExt) Then
-                //         mvarCuentaCliente = oRs.Fields("IdCuentaMonedaExt
-                //      End If
-                //      oRs.Close
-                //   End If
-
-                //   Set oRsCont = CreateObject("ADOR.Recordset")
-                //   Set oRs = oSrv.TraerFiltrado("Subdiarios", "_Estructura")
-
-                ProntoMVC.Data.Models.Subdiario oRs = new Subdiario();
-
-                var mvarFecha = o.ContabilizarAFechaVencimiento == "SI" ? o.FechaVencimiento : o.FechaFactura;
-
-                mvarSubtotal = (double)(o.ImporteTotal ?? 0 - o.ImporteIva1 ?? 0 -
-                                   o.ImporteIva2 ?? 0 - o.RetencionIBrutos1 -
-                                   o.RetencionIBrutos2 ?? 0 - o.RetencionIBrutos3 ?? 0 -
-                                   o.OtrasPercepciones1 ?? 0 -
-                                    o.OtrasPercepciones2 ?? 0 -
-                                    o.OtrasPercepciones3 ?? 0 -
-                                   o.PercepcionIVA ?? 0 -
-                                   o.AjusteIva ?? 0 +
-                                   o.ImporteBonificacion ?? 0);
-                var mvarNetoGravadoItemSuma = 0;
-
-
-
-                var s = new Subdiario();
-                s.Ejercicio = mvarEjercicio;
-                s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-                s.IdCuenta = mvarCuentaCliente;
-                s.IdTipoComprobante = 1;
-                s.NumeroComprobante = o.NumeroFactura;
-                s.FechaComprobante = mvarFecha;
-                s.IdComprobante = o.IdFactura;
-                s.Debe = o.ImporteTotal;
-                s.IdMoneda = o.IdMoneda;
-                s.CotizacionMoneda = o.CotizacionMoneda;
-                if (s.Debe > 0) db.Subdiarios.Add(s);
-
-
-
-
-                //     If o.ImporteBonificacion <> 0 Then
-                //        With oRsCont
-                s = new Subdiario();
-                s.Ejercicio = mvarEjercicio;
-                s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-                s.IdCuenta = mvarCuentaBonificaciones;
-                s.IdTipoComprobante = 1;
-                s.NumeroComprobante = o.NumeroFactura;
-                s.FechaComprobante = mvarFecha;
-                s.IdComprobante = o.IdFactura;
-                s.Debe = o.ImporteBonificacion;
-                s.IdMoneda = o.IdMoneda;
-                s.CotizacionMoneda = o.CotizacionMoneda;
-                if (s.Debe > 0) db.Subdiarios.Add(s);
-                //           .Update
-                //        End With
-                //     End If
-
-
-
-                if (o.ImporteIva1 != 0)
-                {
-                    mvarCuentaIvaInscripto1 = mvarCuentaIvaInscripto;
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        //if (o.PorcentajeIva1 = mvarCuentaIvaVenta(i, 1))
-                        //{
-                        //    mvarCuentaIvaInscripto1 = mvarCuentaIvaVenta(i, 0);
-                        //    break;
-
-                        //}
-                    }
-                }
-                s = new Subdiario();
-
-                s.Ejercicio = mvarEjercicio;
-                s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-                s.IdCuenta = (int)mvarCuentaIvaInscripto1;
-                s.IdTipoComprobante = 1;
-                s.NumeroComprobante = o.NumeroFactura;
-                s.FechaComprobante = mvarFecha;
-                s.IdComprobante = o.IdFactura;
-                s.Haber = o.ImporteIva1;
-                s.IdMoneda = o.IdMoneda;
-                s.CotizacionMoneda = o.CotizacionMoneda;
-                if (s.Haber > 0) db.Subdiarios.Add(s);
-                //         .Update
-                //      End With
-                //   End If
-
-
-
-                //mvarIvaNoDiscriminado = 0
-                //   if (o.IvaNoDiscriminado > 0) {
-                //      mvarIvaNoDiscriminado = o.IvaNoDiscriminado
-                s = new Subdiario();
-
-                s.Ejercicio = mvarEjercicio;
-                s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-                s.IdCuenta = mvarCuentaIvaInscripto;
-                s.IdTipoComprobante = 1;
-                s.NumeroComprobante = o.NumeroFactura;
-                s.FechaComprobante = mvarFecha;
-                s.IdComprobante = o.IdFactura;
-                s.Haber = (decimal)(o.IVANoDiscriminado ?? 0);
-                s.IdMoneda = o.IdMoneda;
-                s.CotizacionMoneda = o.CotizacionMoneda;
-                if (s.Haber > 0) db.Subdiarios.Add(s);
-
-                //mvarAjusteIva = 0
-                //   if (o.AjusteIva <> 0) {
-                //      mvarAjusteIva = o.AjusteIva
-                s = new Subdiario();
-
-                s.Ejercicio = mvarEjercicio;
-                s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-                s.IdCuenta = mvarCuentaIvaInscripto;
-                s.IdTipoComprobante = 1;
-                s.NumeroComprobante = o.NumeroFactura;
-                s.FechaComprobante = mvarFecha;
-                s.IdComprobante = o.IdFactura;
-                s.Haber = (decimal?)o.AjusteIva;
-                s.IdMoneda = o.IdMoneda;
-                s.CotizacionMoneda = o.CotizacionMoneda;
-                if (s.Haber > 0) db.Subdiarios.Add(s);
-                //         .Update
-                //      End With
-                //   }
-
-
-
-                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-                if (s != null) db.Subdiarios.Add(s);
-
-
-                //   If Not IsNull(o.RetencionIBrutos1) Then
-                //      If o.RetencionIBrutos1 <> 0 Then
-                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion)
-                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
-                //         If Not IsNull(oRs.Fields("IdProvincia) Then
-                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
-                //            If oRsAux.RecordCount > 0 Then
-                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
-                //               End If
-                //               If o.ConvenioMultilateral = "SI" And _
-                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
-                //               End If
-                //            End If
-                //            oRsAux.Close
-                //         End If
-                //         oRs.Close
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaPercepcionIIBB
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.RetencionIBrutos1
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-
-                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-                if (s != null) db.Subdiarios.Add(s);
-
-
-                //   If Not IsNull(o.RetencionIBrutos2) Then
-                //      If o.RetencionIBrutos2 <> 0 Then
-                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion2)
-                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
-                //         If Not IsNull(oRs.Fields("IdProvincia) Then
-                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
-                //            If oRsAux.RecordCount > 0 Then
-                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
-                //               End If
-                //               If o.ConvenioMultilateral = "SI" And _
-                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
-                //               End If
-                //            End If
-                //            oRsAux.Close
-                //         End If
-                //         oRs.Close
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaPercepcionIIBB
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.RetencionIBrutos2
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-                if (s != null) db.Subdiarios.Add(s);
-
-                //   If Not IsNull(o.RetencionIBrutos3) Then
-                //      If o.RetencionIBrutos3 <> 0 Then
-                //         Set oRs = oSrv.LeerUno("IBCondiciones", o.IdIBCondicion3)
-                //         mvarCuentaPercepcionIIBB = IIf(IsNull(oRs.Fields("IdCuentaPercepcionIIBB), 0, oRs.Fields("IdCuentaPercepcionIIBB)
-                //         If Not IsNull(oRs.Fields("IdProvincia) Then
-                //            Set oRsAux = oSrv.LeerUno("Provincias", oRs.Fields("IdProvincia)
-                //            If oRsAux.RecordCount > 0 Then
-                //               If Not IsNull(oRsAux.Fields("IdCuentaPercepcionIBrutos) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIBrutos
-                //               End If
-                //               If o.ConvenioMultilateral = "SI" And _
-                //                     Not IsNull(oRsAux.Fields("IdCuentaPercepcionIIBBConvenio) Then
-                //                  mvarCuentaPercepcionIIBB = oRsAux.Fields("IdCuentaPercepcionIIBBConvenio
-                //               End If
-                //            End If
-                //            oRsAux.Close
-                //         End If
-                //         oRs.Close
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaPercepcionIIBB
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.RetencionIBrutos3
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-
-                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-                if (s != null) db.Subdiarios.Add(s);
-
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                //   If Not IsNull(o.OtrasPercepciones1) Then
-                //      If o.OtrasPercepciones1 <> 0 Then
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaOtrasPercepciones1
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.OtrasPercepciones1
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-
-                //   If Not IsNull(o.OtrasPercepciones2) Then
-                //      If o.OtrasPercepciones2 <> 0 Then
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaOtrasPercepciones2
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.OtrasPercepciones2
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-                s = movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-                if (s != null) db.Subdiarios.Add(s);
-
-
-                //   If Not IsNull(o.OtrasPercepciones3) Then
-                //      If o.OtrasPercepciones3 <> 0 Then
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaOtrasPercepciones3
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.OtrasPercepciones3
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-
-                //   If Not IsNull(o.PercepcionIVA) Then
-                //      If o.PercepcionIVA <> 0 Then
-                //         With oRsCont
-                //            .AddNew
-                //           s.Ejercicio = mvarEjercicio
-                //           s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //           s.IdCuenta = mvarCuentaPercepcionesIVA
-                //           s.IdTipoComprobante = 1
-                //           s.NumeroComprobante = o.NumeroFactura
-                //           s.FechaComprobante = mvarFecha
-                //           s.IdComprobante = Registro.Fields(0).Value
-                //           s.Haber = o.PercepcionIVA
-                //           s.IdMoneda = o.IdMoneda
-                //           s.CotizacionMoneda = o.CotizacionMoneda
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-                movimient(mvarEjercicio, mvarCuentaVentasTitulo, mvarCuentaIvaInscripto, 1, o.NumeroFactura, mvarFecha, o.IdFactura, o.ImporteIva2, o.IdMoneda, o.CotizacionMoneda);
-
-
-
-
-
-
-                foreach (DetalleFactura i in o.DetalleFacturas)
-                {
-                    s = new Subdiario();
-
-
-                    //var a= s.  db.Articulos.Include(x=>x.Cuenta).Where(
-                    //                   Set oRs = oSrv.TraerFiltrado("Articulos", "_DatosConCuenta",s.IdArticulo)
-                    mvarNetoGravadoItem = (double)((i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0) * (1 - (i.Bonificacion ?? 0 / 100)));
-                    //                    mvarNetoGravadoItem = 0;
-                    //if (mvarIvaNoDiscriminado > 0 ) {
-                    //   mvarNetoGravadoItem = Round(mvarNetoGravadoItem * (mvarSubtotal - mvarIvaNoDiscriminado) / mvarSubtotal, 2)
-                    //   mvarNetoGravadoItemSuma = mvarNetoGravadoItemSuma + mvarNetoGravadoItem
-                    //}
-
-
-                    s.Ejercicio = mvarEjercicio;
-                    s.IdCuentaSubdiario = mvarCuentaVentasTitulo;
-
-                    var q = db.Articulos.Include("Rubro").Include("Cuenta").SingleOrDefault(x => x.IdArticulo == i.IdArticulo);
-
-                    s.IdCuenta = q.Rubro.IdCuenta; // db.Articulos_TX_DatosConCuenta(i.IdArticulo).Select(x => x.IdCuenta).FirstOrDefault();
-                    s.IdTipoComprobante = 1;
-                    s.NumeroComprobante = o.NumeroFactura;
-                    s.FechaComprobante = mvarFecha;
-                    s.IdComprobante = o.IdFactura;
-                    if (mvarNetoGravadoItem >= 0)
-                    { s.Haber = (decimal)mvarNetoGravadoItem; }
-                    else
-                    { s.Debe = (decimal)mvarNetoGravadoItem * -1; }
-
-                    s.IdMoneda = o.IdMoneda;
-                    s.CotizacionMoneda = o.CotizacionMoneda;
-
-                    if (mvarNetoGravadoItem > 0) db.Subdiarios.Add(s);
-                }
-
-
-
-
-
-                // modifica los registros nuevos
-
-                //   Set oRsDetBD = oSrv.TraerFiltrado("DetFacturas", "_PorIdCabecera", Registro.Fields(0).Value)
-                //            If Not mvarEsta Then
-                //               Set oRs = oSrv.TraerFiltrado("Articulos", "_DatosConCuenta",s.IdArticulo)
-                //               mvarNetoGravadoItem = Round(oRsDetBD.Fields("Cantidad * _
-                //                                       IIf(IsNull(oRsDetBD.Fields("PrecioUnitario), 0, oRsDetBD.Fields("PrecioUnitario) * _
-                //                                       (1 - IIf(IsNull(oRsDetBD.Fields("Bonificacion), 0, oRsDetBD.Fields("Bonificacion) / 100), 2)
-                //               If mvarIvaNoDiscriminado > 0 Then
-                //                  mvarNetoGravadoItem = Round(mvarNetoGravadoItem * (mvarSubtotal - mvarIvaNoDiscriminado) / mvarSubtotal, 2)
-                //                  mvarNetoGravadoItemSuma = mvarNetoGravadoItemSuma + mvarNetoGravadoItem
-                //               End If
-                //               With oRsCont
-                //                  .AddNew
-                //                 s.Ejercicio = mvarEjercicio
-                //                 s.IdCuentaSubdiario = mvarCuentaVentasTitulo
-                //                 s.IdCuenta = oRs.Fields("IdCuenta
-                //                 s.IdTipoComprobante = 1
-                //                 s.NumeroComprobante = o.NumeroFactura
-                //                 s.FechaComprobante = mvarFecha
-                //                 s.IdComprobante = Registro.Fields(0).Value
-                //                  If mvarNetoGravadoItem >= 0 Then
-                //                    s.Haber = mvarNetoGravadoItem
-                //                  Else
-                //                    s.Debe = mvarNetoGravadoItem * -1
-                //                  End If
-                //                 s.IdMoneda = o.IdMoneda
-                //                 s.CotizacionMoneda = o.CotizacionMoneda
-                //                  .Update
-                //               End With
-
-
-
-                //   If mvarIvaNoDiscriminado > 0 Then
-                //      If Round(mvarNetoGravadoItemSuma + mvarIvaNoDiscriminado, 2) <> mvarSubtotal Then
-                //         With oRsCont
-                //           s.Haber =s.Haber + (mvarSubtotal - (mvarNetoGravadoItemSuma + mvarIvaNoDiscriminado))
-                //            .Update
-                //         End With
-                //      End If
-                //   End If
-
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-
-
-            // verificar que el asiento da 0
-            // http://stackoverflow.com/questions/3627801/is-it-possible-to-see-added-entities-from-an-unsaved-ef4-context
-            //var addedCustomers = from se in db.ObjectContext.get db.ObjectStateManager.GetObjectStateEntries(System.Data.Entity.EntityState.Added)
-            //     where se.Entity is Subdiario
-            //     select se.Entity;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //            Public Function RegistroContable() As ador.Recordset
-
-            //   Dim oSrv As InterFazMTS.iCompMTS
-            //   Dim oRs As ador.Recordset
-            //   Dim oRsCont As ador.Recordset
-            //   Dim oRsDet As ador.Recordset
-            //   Dim oRsDetBD As ador.Recordset
-            //   Dim oFld As ador.Field
-            //   Dim mvarEjercicio As Long, mvarCuentaCompras As Long, mvarCuentaProveedor As Long
-            //   Dim mvarCuentaBonificaciones As Long, mvarCuentaIvaInscripto As Long
-            //   Dim mvarCuentaIvaNoInscripto As Long, mvarCuentaIvaSinDiscriminar As Long
-            //   Dim mvarCuentaComprasTitulo As Long, mvarIdCuenta As Long
-            //   Dim mvarCuentaReintegros As Long
-            //   Dim mvarTotalCompra As Double, mvarImporte As Double, mvarDecimales As Double
-            //   Dim mvarPorcentajeIVA As Double, mvarIVA1 As Double, mvarAjusteIVA As Double
-            //   Dim mvarTotalIVANoDiscriminado As Double, mvarDebe As Double, mvarHaber As Double
-            //   Dim mIdTipoComprobante As Integer, mCoef As Integer, i As Integer
-            //   Dim mvarEsta As Boolean, mvarSubdiarios_ResumirRegistros As Boolean
-
-            //   Set oSrv = CreateObject("MTSPronto.General")
-
-            //   mIdTipoComprobante = Registro.Fields("IdTipoComprobante").Value
-            //   Set oRs = oSrv.LeerUno("TiposComprobante", mIdTipoComprobante)
-            //   mCoef = oRs.Fields("Coeficiente").Value
-            //   oRs.Close
-
-            //   Set oRs = oSrv.LeerUno("Parametros", 1)
-            //   mvarEjercicio = oRs.Fields("EjercicioActual").Value
-            //   mvarCuentaCompras = oRs.Fields("IdCuentaCompras").Value
-            //   mvarCuentaComprasTitulo = oRs.Fields("IdCuentaComprasTitulo").Value
-            //   mvarCuentaBonificaciones = oRs.Fields("IdCuentaBonificaciones").Value
-            //   mvarCuentaIvaInscripto = oRs.Fields("IdCuentaIvaCompras").Value
-            //   mvarCuentaIvaNoInscripto = oRs.Fields("IdCuentaIvaCompras").Value
-            //   mvarCuentaIvaSinDiscriminar = oRs.Fields("IdCuentaIvaSinDiscriminar").Value
-            //   mvarDecimales = oRs.Fields("Decimales").Value
-            //   mvarCuentaProveedor = IIf(IsNull(oRs.Fields("IdCuentaAcreedoresVarios").Value), 0, oRs.Fields("IdCuentaAcreedoresVarios").Value)
-            //   If IsNull(oRs.Fields("Subdiarios_ResumirRegistros").Value) Or oRs.Fields("Subdiarios_ResumirRegistros").Value = "SI" Then
-            //      mvarSubdiarios_ResumirRegistros = True
-            //   Else
-            //      mvarSubdiarios_ResumirRegistros = False
-            //   End If
-            //   mvarCuentaReintegros = IIf(IsNull(oRs.Fields("IdCuentaReintegros").Value), 0, oRs.Fields("IdCuentaReintegros").Value)
-            //   oRs.Close
-
-            //   If Not IsNull(Registro.Fields("IdProveedor").Value) Then
-            //      Set oRs = oSrv.LeerUno("Proveedores", Registro.Fields("IdProveedor").Value)
-            //      If Not IsNull(oRs.Fields("IdCuenta").Value) Then mvarCuentaProveedor = oRs.Fields("IdCuenta").Value
-            //      oRs.Close
-            //   ElseIf Not IsNull(Registro.Fields("IdCuenta").Value) Then
-            //      mvarCuentaProveedor = Registro.Fields("IdCuenta").Value
-            //   ElseIf Not IsNull(Registro.Fields("IdCuentaOtros").Value) Then
-            //      mvarCuentaProveedor = Registro.Fields("IdCuentaOtros").Value
-            //   End If
-
-            //   mvarAjusteIVA = IIf(IsNull(Registro.Fields("AjusteIVA").Value), 0, Registro.Fields("AjusteIVA").Value)
-
-            //   Set oRsCont = CreateObject("ADOR.Recordset")
-            //   Set oRs = oSrv.TraerFiltrado("Subdiarios", "_Estructura")
-
-            //   With oRs
-            //      For Each oFld In .Fields
-            //         With oFld
-            //            oRsCont.Fields.Append .Name, .Type, .DefinedSize, .Attributes
-            //            oRsCont.Fields.Item(.Name).Precision = .Precision
-            //            oRsCont.Fields.Item(.Name).NumericScale = .NumericScale
-            //         End With
-            //      Next
-            //      oRsCont.Open
-            //   End With
-            //   oRs.Close
-
-            //   If Not IsNull(Registro.Fields("Confirmado").Value) And Registro.Fields("Confirmado").Value = "NO" Then
-            //      GoTo Salida
-            //   End If
-
-            //   With oRsCont
-            //      .AddNew
-            //      .Fields("Ejercicio").Value = mvarEjercicio
-            //      .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //      .Fields("IdCuenta").Value = mvarCuentaProveedor
-            //      .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //      .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //      .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //      .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //      If mCoef = 1 Then
-            //         .Fields("Haber").Value = Registro.Fields("TotalComprobante").Value
-            //      Else
-            //         .Fields("Debe").Value = Registro.Fields("TotalComprobante").Value
-            //      End If
-            //      .Update
-            //   End With
-
-            //   If Not IsNull(Registro.Fields("TotalBonificacion").Value) Then
-            //      If Registro.Fields("TotalBonificacion").Value <> 0 Then
-            //         With oRsCont
-            //            .AddNew
-            //            .Fields("Ejercicio").Value = mvarEjercicio
-            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //            .Fields("IdCuenta").Value = mvarCuentaBonificaciones
-            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //            If mCoef = 1 Then
-            //               .Fields("Haber").Value = Registro.Fields("TotalBonificacion").Value
-            //            Else
-            //               .Fields("Debe").Value = Registro.Fields("TotalBonificacion").Value
-            //            End If
-            //            .Update
-            //         End With
-            //      End If
-            //   End If
-
-            //   Set oRsDet = Me.DetComprobantesProveedores.Registros
-            //   With oRsDet
-            //      If .Fields.Count > 0 Then
-            //         If .RecordCount > 0 Then
-            //            .MoveFirst
-            //            Do While Not .EOF
-            //               If Not .Fields("Eliminado").Value Then
-            //                  With oRsCont
-
-            //                     mvarTotalIVANoDiscriminado = 0
-
-            //                     For i = 1 To 10
-            //                        If oRsDet.Fields("AplicarIVA" & i).Value = "SI" Then
-            //                           mvarImporte = oRsDet.Fields("Importe").Value
-            //                           mvarPorcentajeIVA = IIf(IsNull(oRsDet.Fields("IVAComprasPorcentaje" & i).Value), 0, oRsDet.Fields("IVAComprasPorcentaje" & i).Value)
-            //                           If Registro.Fields("Letra").Value = "A" Or Registro.Fields("Letra").Value = "M" Then
-            //                              mvarIVA1 = Round(mvarImporte * mvarPorcentajeIVA / 100, mvarDecimales)
-            //                           Else
-            //                              mvarIVA1 = Round((mvarImporte / (1 + (mvarPorcentajeIVA / 100))) * (mvarPorcentajeIVA / 100), mvarDecimales)
-            //                              mvarTotalIVANoDiscriminado = mvarTotalIVANoDiscriminado + mvarIVA1
-            //                           End If
-            //                           If mvarAjusteIVA <> 0 Then
-            //                              mvarIVA1 = mvarIVA1 + mvarAjusteIVA
-            //                              mvarAjusteIVA = 0
-            //                              Registro.Fields("PorcentajeIVAAplicacionAjuste").Value = mvarPorcentajeIVA
-            //                              Registro.Update
-            //                           End If
-            //                           mvarDebe = 0
-            //                           mvarHaber = 0
-            //                           If mCoef = 1 Then
-            //                              If mvarIVA1 >= 0 Then
-            //                                 mvarDebe = mvarIVA1
-            //                              Else
-            //                                 mvarHaber = mvarIVA1 * -1
-            //                              End If
-            //                           Else
-            //                              If mvarIVA1 >= 0 Then
-            //                                 mvarHaber = mvarIVA1
-            //                              Else
-            //                                 mvarDebe = mvarIVA1 * -1
-            //                              End If
-            //                           End If
-            //                           mvarEsta = False
-            //                           If .RecordCount > 0 Then
-            //                              .MoveFirst
-            //                              Do While Not .EOF
-            //                                 If .Fields("IdCuenta").Value = oRsDet.Fields("IdCuentaIvaCompras" & i).Value And _
-            //                                       ((mvarDebe <> 0 And Not IsNull(.Fields("Debe").Value)) Or _
-            //                                          (mvarHaber <> 0 And Not IsNull(.Fields("Haber").Value))) Then
-            //                                    mvarEsta = True
-            //                                    Exit Do
-            //                                 End If
-            //                                 .MoveNext
-            //                              Loop
-            //                           End If
-            //                           If Not mvarEsta Or Not mvarSubdiarios_ResumirRegistros Then .AddNew
-            //                           .Fields("Ejercicio").Value = mvarEjercicio
-            //                           .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //                           .Fields("IdCuenta").Value = oRsDet.Fields("IdCuentaIvaCompras" & i).Value
-            //                           .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //                           .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //                           .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //                           .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //                           If mvarDebe <> 0 Then
-            //                              .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + mvarDebe
-            //                           Else
-            //                              .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + mvarHaber
-            //                           End If
-            //                           If Not mvarSubdiarios_ResumirRegistros Then
-            //                              .Fields("IdDetalleComprobante").Value = oRsDet.Fields(0).Value
-            //                           End If
-            //                           .Update
-            //                        End If
-            //                     Next
-
-            //                     mvarDebe = 0
-            //                     mvarHaber = 0
-            //                     If mCoef = 1 Then
-            //                        mvarDebe = oRsDet.Fields("Importe").Value - mvarTotalIVANoDiscriminado
-            //                     Else
-            //                        mvarHaber = oRsDet.Fields("Importe").Value - mvarTotalIVANoDiscriminado
-            //                     End If
-            //                     mvarIdCuenta = mvarCuentaCompras
-            //                     If Not IsNull(oRsDet.Fields("IdCuenta").Value) Then
-            //                        mvarIdCuenta = oRsDet.Fields("IdCuenta").Value
-            //                     End If
-            //                     mvarEsta = False
-            //                     If .RecordCount > 0 Then
-            //                        .MoveFirst
-            //                        Do While Not .EOF
-            //                           If .Fields("IdCuenta").Value = mvarIdCuenta And _
-            //                                 ((mvarDebe <> 0 And Not IsNull(.Fields("Debe").Value)) Or _
-            //                                    (mvarHaber <> 0 And Not IsNull(.Fields("Haber").Value))) Then
-            //                              mvarEsta = True
-            //                              Exit Do
-            //                           End If
-            //                           .MoveNext
-            //                        Loop
-            //                     End If
-            //                     If Not mvarEsta Or Not mvarSubdiarios_ResumirRegistros Then .AddNew
-            //                     .Fields("Ejercicio").Value = mvarEjercicio
-            //                     .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //                     .Fields("IdCuenta").Value = mvarIdCuenta
-            //                     .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //                     .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //                     .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //                     .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //                     If mvarDebe <> 0 Then
-            //                        If mvarDebe > 0 Then
-            //                           .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + mvarDebe
-            //                        Else
-            //                           .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + (mvarDebe * -1)
-            //                        End If
-            //                     Else
-            //                        If mvarHaber > 0 Then
-            //                           .Fields("Haber").Value = IIf(IsNull(.Fields("Haber").Value), 0, .Fields("Haber").Value) + mvarHaber
-            //                        Else
-            //                           .Fields("Debe").Value = IIf(IsNull(.Fields("Debe").Value), 0, .Fields("Debe").Value) + (mvarHaber * -1)
-            //                        End If
-            //                     End If
-            //                     If Not mvarSubdiarios_ResumirRegistros Then
-            //                        .Fields("IdDetalleComprobante").Value = oRsDet.Fields(0).Value
-            //                     End If
-            //                     .Update
-
-            //                  End With
-            //               End If
-            //               .MoveNext
-            //            Loop
-            //         End If
-            //      End If
-            //   End With
-
-            //   Set oRsDetBD = oSrv.TraerFiltrado("DetComprobantesProveedores", "_PorIdCabecera", Registro.Fields(0).Value)
-            //   With oRsDetBD
-            //      If .RecordCount > 0 Then
-            //         .MoveFirst
-            //         Do While Not .EOF
-            //            mvarEsta = False
-            //            If oRsDet.Fields.Count > 0 Then
-            //               If oRsDet.RecordCount > 0 Then
-            //                  oRsDet.MoveFirst
-            //                  Do While Not oRsDet.EOF
-            //                     If .Fields(0).Value = oRsDet.Fields(0).Value Then
-            //                        mvarEsta = True
-            //                        Exit Do
-            //                     End If
-            //                     oRsDet.MoveNext
-            //                  Loop
-            //               End If
-            //            End If
-            //            If Not mvarEsta Then
-            //               With oRsCont
-            //                  .AddNew
-            //                  .Fields("Ejercicio").Value = mvarEjercicio
-            //                  .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //                  If Not IsNull(oRsDetBD.Fields("IdCuenta").Value) Then
-            //                     .Fields("IdCuenta").Value = oRsDetBD.Fields("IdCuenta").Value
-            //                  Else
-            //                     .Fields("IdCuenta").Value = mvarCuentaCompras
-            //                  End If
-            //                  .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //                  .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //                  .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //                  .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //                  If mCoef = 1 Then
-            //                     .Fields("Debe").Value = oRsDetBD.Fields("Importe").Value - mvarTotalIVANoDiscriminado
-            //                  Else
-            //                     .Fields("Haber").Value = oRsDetBD.Fields("Importe").Value - mvarTotalIVANoDiscriminado
-            //                  End If
-            //                  If Not mvarSubdiarios_ResumirRegistros Then
-            //                     .Fields("IdDetalleComprobante").Value = oRsDetBD.Fields(0).Value
-            //                  End If
-            //                  .Update
-
-            //                  mvarTotalIVANoDiscriminado = 0
-
-            //                  For i = 1 To 10
-            //                     If oRsDetBD.Fields("AplicarIVA" & i).Value = "SI" Then
-            //                        mvarImporte = oRsDetBD.Fields("Importe").Value
-            //                        mvarPorcentajeIVA = IIf(IsNull(oRsDetBD.Fields("IVAComprasPorcentaje" & i).Value), 0, oRsDetBD.Fields("IVAComprasPorcentaje" & i).Value)
-            //                        If Registro.Fields("Letra").Value = "A" Or Registro.Fields("Letra").Value = "M" Then
-            //                           mvarIVA1 = Round(mvarImporte * mvarPorcentajeIVA / 100, mvarDecimales)
-            //                        Else
-            //                           mvarIVA1 = Round((mvarImporte / (1 + (mvarPorcentajeIVA / 100))) * (mvarPorcentajeIVA / 100), mvarDecimales)
-            //                           mvarTotalIVANoDiscriminado = mvarTotalIVANoDiscriminado + mvarIVA1
-            //                        End If
-            //                        If mvarAjusteIVA <> 0 Then
-            //                           mvarIVA1 = mvarIVA1 + mvarAjusteIVA
-            //                           mvarAjusteIVA = 0
-            //                           Registro.Fields("PorcentajeIVAAplicacionAjuste").Value = mvarPorcentajeIVA
-            //                           Registro.Update
-            //                        End If
-            //                        .AddNew
-            //                        .Fields("Ejercicio").Value = mvarEjercicio
-            //                        .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //                        .Fields("IdCuenta").Value = oRsDetBD.Fields("IdCuentaIvaCompras" & i).Value
-            //                        .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //                        .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //                        .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //                        .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //                        If mCoef = 1 Then
-            //                           If mvarIVA1 >= 0 Then
-            //                              .Fields("Debe").Value = mvarIVA1
-            //                           Else
-            //                              .Fields("Haber").Value = mvarIVA1 * -1
-            //                           End If
-            //                        Else
-            //                           If mvarIVA1 >= 0 Then
-            //                              .Fields("Haber").Value = mvarIVA1
-            //                           Else
-            //                              .Fields("Debe").Value = mvarIVA1 * -1
-            //                           End If
-            //                        End If
-            //                        If Not mvarSubdiarios_ResumirRegistros Then
-            //                           .Fields("IdDetalleComprobante").Value = oRsDetBD.Fields(0).Value
-            //                        End If
-            //                        .Update
-            //                     End If
-            //                  Next
-
-            //               End With
-            //            End If
-            //            .MoveNext
-            //         Loop
-            //      End If
-            //      .Close
-            //   End With
-            //   Set oRsDetBD = Nothing
-
-            //   If oRsDet.Fields.Count > 0 Then oRsDet.Close
-
-            //   If Not IsNull(Registro.Fields("ReintegroIdCuenta").Value) Then
-            //      If Registro.Fields("ReintegroImporte").Value <> 0 Then
-            //         With oRsCont
-            //            .AddNew
-            //            .Fields("Ejercicio").Value = mvarEjercicio
-            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //            .Fields("IdCuenta").Value = mvarCuentaReintegros
-            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //            If mCoef = 1 Then
-            //               .Fields("Haber").Value = Registro.Fields("ReintegroImporte").Value
-            //            Else
-            //               .Fields("Debe").Value = Registro.Fields("ReintegroImporte").Value
-            //            End If
-            //            .Update
-            //            .AddNew
-            //            .Fields("Ejercicio").Value = mvarEjercicio
-            //            .Fields("IdCuentaSubdiario").Value = mvarCuentaComprasTitulo
-            //            .Fields("IdCuenta").Value = Registro.Fields("ReintegroIdCuenta").Value
-            //            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-            //            .Fields("NumeroComprobante").Value = Registro.Fields("NumeroReferencia").Value
-            //            .Fields("FechaComprobante").Value = Registro.Fields("FechaRecepcion").Value
-            //            .Fields("IdComprobante").Value = Registro.Fields(0).Value
-            //            If mCoef = 1 Then
-            //               .Fields("Debe").Value = Registro.Fields("ReintegroImporte").Value
-            //            Else
-            //               .Fields("Haber").Value = Registro.Fields("ReintegroImporte").Value
-            //            End If
-            //            .Update
-            //         End With
-            //      End If
-            //   End If
-
-
-        }
 
 
         public void Logica_EliminarRegistroAnterior(ComprobanteProveedor o) { }

@@ -140,8 +140,8 @@
                                                     <option>Otros </option>
                                                 </select>*@
 
-                                            @Html.DropDownList("MetaTipo", new SelectList(new string[] { "Cta Cte ", "Otros" }), "Elija el tipo", new { @class = "span12" })
-
+                                            @*@Html.DropDownList("MetaTipo", new SelectList(new string[] { "Cta Cte ", "Otros" }), "Elija el tipo", new { @class = "span12" })*@
+                                            @Html.Hidden("MetaTipo", "Cta Cte")
                                         </div>
                                         <div class="span2 lightblue" style="text-align: right;">
                                             @Html.LabelFor(model => model.IdTipoComprobante, "Número")
