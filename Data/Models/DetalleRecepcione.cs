@@ -67,5 +67,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdProduccionTerminado { get; set; }
     
         public virtual Recepcione Recepcione { get; set; }
+        public virtual Articulo Articulo { get; set; }
+        public virtual DetallePedido DetallePedido { get; set; }
+        public virtual DetalleRequerimiento DetalleRequerimiento { get; set; }
+        public virtual Ubicacion Ubicacione { get; set; }
     }
 }

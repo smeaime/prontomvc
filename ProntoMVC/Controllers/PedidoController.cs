@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+//using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -20,6 +20,24 @@ using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Web.Security;
 
 using Pronto.ERP.Bll;
+
+
+using System.Linq;
+using System.Linq.Dynamic;
+using System.Web.Mvc;
+//using jqGridWeb.Models;
+using ProntoMVC.Data.Models;
+using ClassLibrary2;
+using ProntoMVC.Models;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
+using System.Web.Script.Serialization;
+using System.Collections.Generic;
+using System.Text;
+using System;
+using System.Reflection;
+
+
+
 
 
 // using ProntoMVC.Controllers.Logica;
@@ -2193,6 +2211,99 @@ namespace ProntoMVC.Controllers
             };
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+        public virtual JsonResult DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+            // Oleg: filtros avanzados con jqgrid y LINQ    http://stackoverflow.com/questions/5500805/asp-net-mvc-2-0-implementation-of-searching-in-jqgrid/5501644#5501644
+            // usando dbcontext en lugar de objectcontext   http://stackoverflow.com/questions/9027150/jqgrid-asp-net-4-mvc-how-to-make-search-implementation-on-a-dbcontext-reposit
+
+            //var sc = Generales.sCadenaConex("Autotrol");
+            //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+            var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
+            var set = context.CreateObjectSet<ProntoMVC.Data.Models.Cuenta>().Include("Obra,CuentasGasto,TiposCuentaGrupos");
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+            ObjectQuery<ProntoMVC.Data.Models.Cuenta> filteredQuery =
+                (f == null ? (ObjectQuery<ProntoMVC.Data.Models.Cuenta>)set : 
+                f.FilterObjectSet((ObjectQuery<ProntoMVC.Data.Models.Cuenta>)set));
+
+            filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
+
+            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
+
+            var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
+
+            var totalRecords = filteredQuery.Count();
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            var pagedQuery = filteredQuery
+                                        .Skip("it." + sidx + " " + sord, "@skip",
+                                                new ObjectParameter("skip", (page - 1) * rows))
+                                         .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            var queryDetails = (from item in pagedQuery
+                                select new
+                                {
+                                    item.IdCuenta,
+                                    item.Descripcion,
+                                    item.Codigo,
+                                    item.TiposCuentaGrupos,
+                                    item.CuentasGasto,
+                                    item.Obra
+                                })
+
+                                .ToList(); //.Where(x => x.CuentasGasto != null );
+
+
+
+            var jsonData = new ProntoMVC.Controllers.jqGridJson()
+            {
+                total = (totalRecords + rows - 1) / rows,
+                page = page,
+                records = totalRecords,
+                rows = (from a in queryDetails
+                        select new ProntoMVC.Controllers.jqGridRowJson
+                        {
+                            id = a.IdCuenta.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
+							    "<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
+                                a.IdCuenta.ToString(), 
+                                a.Descripcion.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                              
+                                (a.TiposCuentaGrupos==null) ? "" : a.TiposCuentaGrupos.Descripcion.NullSafeToString(),
+                                (a.Obra==null) ? "" : a.Obra.Descripcion.NullSafeToString(),
+                                (a.CuentasGasto==null) ? "" : a.CuentasGasto.Descripcion.NullSafeToString(),
+                                
+                                
+
+                                    }
+                        }
+                        ).ToArray()
+            };
+
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+
         }
 
 

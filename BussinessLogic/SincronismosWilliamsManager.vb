@@ -11285,6 +11285,182 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
+
+        Public Shared Function Sincronismo_BLD_ExcelToCSV_SincroBLD2(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
+            'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
+
+            'ErrHandler.WriteError("huyo sin hacer nada")
+            'Return ""
+
+            Dim oXL As Excel.Application
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+            Dim oRng As Excel.Range
+            Dim oWBs As Excel.Workbooks
+
+
+
+
+            'dimensiones. Letra condensada (supongo que el alto es el mismo y el ancho es 
+            'la mitad de la normal, naturalmente los 80 clasicos)
+            'Notas de Entrega: 160 ancho x 36 alt
+            'Facturas y Adjuntos: 160 ancho x 78 alto
+
+
+
+            Const MAXFILAS = 2000
+            Const MAXSHEETS = 1
+            Const SEPARADOR = ";"
+
+            Try
+                '  creat a Application object
+                oXL = New Excel.ApplicationClass()
+                '   get   WorkBook  object
+                oWBs = oXL.Workbooks
+
+
+
+                Try
+                    oWB = oWBs.Open(fileExcelName, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, Reflection.Missing.Value, _
+                        Reflection.Missing.Value, Reflection.Missing.Value)
+                Catch ex As Exception
+
+                    'problemas al abrir T6
+
+                    ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                    'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+                    ErrHandler.WriteError("No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+
+                    ErrHandler.WriteError(ex)
+
+                End Try
+
+                Dim nf = FreeFile()
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                Dim output As String = fileExcelName + ".csv" 'que el usuario asocie esta extension con el PRINT.EXE (Windows\System32\)
+                FileOpen(nf, output, OpenMode.Output)
+
+
+
+                Dim maxsht As Integer = IIf(oWB.Worksheets.Count > MAXSHEETS, MAXSHEETS, oWB.Worksheets.Count)
+                Dim sht As Integer
+
+                For sht = 1 To maxsht
+
+                    'dejé de usar .Sheets 'http://stackoverflow.com/questions/2695229/why-cant-set-cast-an-object-from-excel-interop
+                    oSheet = CType(oWB.Worksheets(sht), Microsoft.Office.Interop.Excel.Worksheet) 'usá .Worksheets, NO .Sheets
+
+
+
+                    Dim dt As New Data.DataTable("dtExcel")
+
+                    '  creo las columnas
+                    For j As Integer = 1 To MAXCOLS
+                        dt.Columns.Add("column" & j, _
+                                       System.Type.GetType("System.String"))
+                    Next j
+
+
+                    Dim ds As New DataSet()
+                    ds.Tables.Add(dt)
+                    Dim dr As DataRow
+
+
+                    Dim NumeroFilas As Integer = IIf(oSheet.UsedRange.Cells.Rows.Count > MAXFILAS, MAXFILAS, oSheet.UsedRange.Cells.Rows.Count)
+                    NumeroFilas -= 1 'el ReportBuilder parece que agrega un renglon al final
+
+
+
+
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////////////////////////////////////////////
+                    '  get data in cell
+                    'copio los datos nomás
+
+                    For i As Integer = 1 To NumeroFilas
+                        dr = ds.Tables("dtExcel").NewRow()
+                        Dim sb As String = ""
+
+                        For j As Integer = 1 To MAXCOLS
+
+                            'traigo la celda y la pongo en una variable Range (no sé por qué)
+                            oRng = CType(oSheet.Cells(i, j), Microsoft.Office.Interop.Excel.Range)
+
+
+
+                            'Range.Text << Formatted value - datatype is always "string"
+                            'Range.Value << actual datatype ex: double, datetime etc
+                            'Range.Value2 << actual datatype. slightly different than "Value" property.
+
+                            If IsNumeric(oRng.Value) And False Then 'me fijo si es numerica, por el asuntillo de la coma
+                                sb &= oRng.Value.ToString.Replace(SEPARADOR, "_") & SEPARADOR
+                            Else
+
+                                Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...
+                                sb &= Left(strValue, 50).Replace(SEPARADOR, "_") & SEPARADOR
+                            End If
+
+
+
+                        Next j
+
+                        If InStr(sb, ";;;;;;;;;;;;;;") > 0 Then Continue For 'saltar renglones invalidos
+                        sb = sb.Replace(vbCrLf, "").Replace(vbCr, "").Replace(vbLf, "")
+
+                        PrintLine(nf, sb)
+                    Next i
+
+                Next sht
+
+                FileClose(nf)
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+                '///////////////////////////////////////////////////////////////////////////////////
+
+
+                Return output
+
+
+            Catch ex As Exception
+                ErrHandler.WriteError("No pudo extraer el excel. " + ex.ToString)
+                Return Nothing
+
+
+                '            1. In DCOMCNFG, right click on the My Computer and select properties.
+                '2. Choose the COM Securities tab
+                '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+                '  \Users.
+                '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. 
+                '   Do the same for <Machine_name>
+                '    \Users
+                '   Press OK and thats it. i can run my application now
+            Finally
+                Try
+                    'The service (excel.exe) will continue to run
+                    If Not oWB Is Nothing Then oWB.Close(False)
+                    NAR(oWB)
+                    oWBs.Close()
+                    NAR(oWBs)
+                    'quit and dispose app
+                    oXL.Quit()
+                    NAR(oXL)
+                    'VERY IMPORTANT
+                    GC.Collect()
+
+                    'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+                Catch ex As Exception
+                    ErrHandler.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+                End Try
+            End Try
+        End Function
+
         Public Shared Function Sincronismo_BLDCalidades(ByVal SC As String, ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
 
             '            Nombre(RESULTA.TXT)

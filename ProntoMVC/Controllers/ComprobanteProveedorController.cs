@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -1794,10 +1794,15 @@ namespace ProntoMVC.Controllers
             {
                 return View(vm);
             }
-            else if (ComprobanteProveedor.IdCuenta != null && ComprobanteProveedor.IdProveedor == null)
+            else if (ComprobanteProveedor.IdCuenta != null && ComprobanteProveedor.IdProveedor == null && ComprobanteProveedor.IdCuentaOtros == null)
             {
                 // return View("EditFF", (ViewModelComprobanteProveedor)ComprobanteProveedor);
                 return View("EditFF", vm);
+            }
+            else if (ComprobanteProveedor.IdCuentaOtros != null)
+            {
+                // return View("EditFF", (ViewModelComprobanteProveedor)ComprobanteProveedor);
+                return View("EditOtros", vm);
             }
             else
             {
@@ -5161,6 +5166,7 @@ namespace ProntoMVC.Controllers
             {
                 // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
                 //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
+                sErrorMsg += "\n" + "Falta la cuenta";
 
             }
 
@@ -6058,7 +6064,7 @@ namespace ProntoMVC.Controllers
                 .Include(x => x.Proveedor)
                 .Include(x => x.Proveedore)
                 .Include(x => x.Obra)
-                .Where(x => (x.Confirmado ?? "SI") != "NO")
+                //.Where(x => (x.Confirmado ?? "SI") != "NO") // verificar si lo de "confirmado" solo se debe revisar para fondos fijos
                           .AsQueryable();
 
 

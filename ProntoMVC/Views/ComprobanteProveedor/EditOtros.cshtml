@@ -74,6 +74,7 @@
                     @*  <legend>Solicitud de cotizacion</legend>*@
                     <div>@Html.Hidden("IdComprobanteProveedor", Model.IdComprobanteProveedor)</div>
                     <div>@Html.Hidden("IdProveedor", Model.IdProveedor)</div>
+                    <div>@Html.Hidden("IdCuentaOtros", Model.IdCuentaOtros)</div>
                     <br />
 
 
@@ -172,7 +173,7 @@
                                             @Html.LabelFor(model => model.IdCuentaOtros, "Cuenta")
                                         </div>
                                         <div class="span6 lightblue">
-                                            @Html.TextBoxFor(m => m.Cuenta.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })
+                                            @Html.TextBoxFor(m => m.Cuenta1.Descripcion, new { id = "DescripcionCuenta", @class = "span12" })
                                   
                                            
                                             <script type="text/jscript">
@@ -197,24 +198,24 @@
 
                                             </script>
                                         </div>
-                                    
-                                        <div class="span1 lightblue">
-                                            @Html.LabelFor(model => model.FechaIngreso, "Fecha")
-                                        </div>
-                                        <div class="span2 lightblue">
-                                            @Html.TextBox("FechaIngreso", Model.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"), new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                                            @Html.ValidationMessageFor(model => model.FechaIngreso)
-                                            <script>
+                                        <div class="span1 lightblue"></div>
+                                            <div class="span1 lightblue">
+                                                @Html.LabelFor(model => model.FechaIngreso, "Fecha")
+                                            </div>
+                                            <div class="span2 lightblue">
+                                                @Html.TextBox("FechaIngreso", Model.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"), new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
+                                                @Html.ValidationMessageFor(model => model.FechaIngreso)
+                                                <script>
 
-                                                $("#FechaIngreso").datepicker({
-                                                    changeMonth: true,
-                                                    changeYear: true,
-                                                    dateFormat: 'dd/mm/yy'
-                                                    //numberOfMonths: 2,
-                                                });
-                                            </script>
+                                                    $("#FechaIngreso").datepicker({
+                                                        changeMonth: true,
+                                                        changeYear: true,
+                                                        dateFormat: 'dd/mm/yy'
+                                                        //numberOfMonths: 2,
+                                                    });
+                                                </script>
+                                            </div>
                                         </div>
-                                    </div>
                                     <div class="row-fluid">
                                         <div class="span2 lightblue">
                                             @*@Html.LabelFor(model => model.IdProveedorEventual, "Proveedor de FF")*@ @*para que quede el espacio*@
