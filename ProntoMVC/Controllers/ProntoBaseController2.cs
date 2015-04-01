@@ -11,7 +11,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Security;
 
-using System.Data.Entity.Core.Objects; // using System.Data.Objects;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 
 using Pronto.ERP.Bll;
 
