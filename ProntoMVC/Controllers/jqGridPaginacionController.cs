@@ -12,7 +12,7 @@ using ProntoMVC.Models;
 
 
 
-using System.Data.Entity.Core.Objects; // using System.Data.Objects;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
@@ -159,6 +159,11 @@ namespace jqGridWeb.Controllers
                 if (rule.field == "Obra")
                 {
                     sb.AppendFormat(FormatMapping[(int)rule.op], "Obra.Descripcion", iParam);
+
+                    // no puedo usar como nombre "Obra.Descripcion" en lugar de "Obra" en el field de la jqgrid ?
+
+
+
                     // necesito el NumeroObra tambien....
                     //sb.AppendFormat(FormatMapping[(int)rule.op], "Obra.NumeroObra", iParam);
                     //"(it.{0} LIKE (@p{1}+'%'))",        // "bw" - begins with
@@ -264,11 +269,7 @@ namespace jqGridWeb.Controllers
     [HandleJsonException]
     public partial class jqGridPaginacionController : ProntoMVC.Controllers.ProntoBaseController
     {
-        public virtual ActionResult Index()
-        {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-            return View();
-        }
+      
 
         public virtual JsonResult DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
@@ -308,6 +309,8 @@ namespace jqGridWeb.Controllers
                                                 new ObjectParameter("skip", (page - 1) * rows))
                                          .Top("@limit", new ObjectParameter("limit", rows));
             // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
             var queryDetails = (from item in pagedQuery
                                 select new
                                 {
@@ -356,7 +359,7 @@ namespace jqGridWeb.Controllers
         }
 
 
-        public virtual JsonResult grilladinamica_CuentasFF(string sidx, string sord, int page, int rows
+        public virtual JsonResult grilladinamica_CuentasFF_OBSOLETA(string sidx, string sord, int page, int rows
                                     , bool _search, string searchField, string searchOper, string searchString
                                     , string filters)
         {

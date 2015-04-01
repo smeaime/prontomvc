@@ -49,6 +49,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdCuentaPercepcionIIBBComprasJurisdiccionLocal { get; set; }
         public string CodigoESRI_1 { get; set; }
         public Nullable<int> Codigo2 { get; set; }
+        public Nullable<int> IdCuentaRetencionIBrutos2 { get; set; }
     
         public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual ICollection<Cliente> Clientes1 { get; set; }

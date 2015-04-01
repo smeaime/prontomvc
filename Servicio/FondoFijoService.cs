@@ -557,6 +557,7 @@ namespace Servicio
                .Include(x => x.Proveedore)
                .Include(x => x.Obra)
                .Include(x => x.Cuenta)
+               .Include(x => x.Cuenta1)
                .SingleOrDefault(x => x.IdComprobanteProveedor == id);
 
 
@@ -599,7 +600,7 @@ namespace Servicio
                      .Include(x => x.Proveedor)
                      .Include(x => x.Proveedore)
                      .Include(x => x.Obra)
-                         .Where(x => x.IdCuenta != null)
+                       //  .Where(x => x.IdCuenta != null)
                                .AsQueryable();
         }
 
@@ -2232,7 +2233,7 @@ namespace Servicio
                      .Include(x => x.Proveedor)
                      .Include(x => x.Proveedore)
                      .Include(x => x.Obra)
-                         .Where(x => x.IdCuenta != null)
+                       //  .Where(x => x.IdCuenta != null)
                                .AsQueryable();
         }
 
