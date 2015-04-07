@@ -1,5 +1,4 @@
-
-Partial Class LinqCartasPorteDataContext
+<Serializable()> _Partial Class CartasDePorte
 
 End Class
 
