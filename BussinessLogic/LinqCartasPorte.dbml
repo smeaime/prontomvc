@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WilliamsEntregas" Class="LinqCartasPorteDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WilliamsEntregas" Class="LinqCartasPorteDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=serversql1;Initial Catalog=WilliamsEntregas;User ID=sa" SettingsObjectName="My.MySettings" SettingsPropertyName="WilliamsEntregasConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.wTempCartasPorteFacturacionAutomatica" Member="wTempCartasPorteFacturacionAutomaticas">
     <Type Name="wTempCartasPorteFacturacionAutomatica">
@@ -640,7 +640,7 @@
       <Association Name="Localidade_WilliamsDestino" Member="WilliamsDestinos" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="WilliamsDestino" />
       <Association Name="Localidade_linqCliente" Member="Clientes" ThisKey="IdLocalidad" OtherKey="IdLocalidadEntrega" Type="linqCliente" />
       <Association Name="Localidade_linqCliente1" Member="linqClientes" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="linqCliente" />
-      <Association Name="Partido_Localidade" Member="linqPartido" Storage="_Partido1" ThisKey="IdPartido" OtherKey="IdPartido" Type="linqPartido" IsForeignKey="true" />
+      <Association Name="linqPartido_Localidade" Member="linqPartido" Storage="_Partido1" ThisKey="IdPartido" OtherKey="IdPartido" Type="linqPartido" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Partidos" Member="linqPartido">
@@ -651,7 +651,7 @@
       <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CodigoONCCA" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="CodigoPostal" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Association Name="Partido_Localidade" Member="Localidades" ThisKey="IdPartido" OtherKey="IdPartido" Type="Localidade" />
+      <Association Name="linqPartido_Localidade" Member="Localidades" ThisKey="IdPartido" OtherKey="IdPartido" Type="Localidade" />
     </Type>
   </Table>
   <Table Name="dbo.WilliamsDestinos" Member="WilliamsDestinos">
@@ -1170,6 +1170,25 @@
       <Column Name="AcopioFacturarleA" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CalidadGranosDanadosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CalidadGranosExtranosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadGranosExtranosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadQuebradosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadDanadosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadChamicoMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadRevolcadosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadObjetablesMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadAmohosadosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPuntaSombreadaMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadHectolitricoMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadCarbonMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPanzaBlancaMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPicadosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadVerdesMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadQuemadosMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadTierraMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadZarandeoMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadDescuentoFinalMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadHumedadMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadGastosFumigacionMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="linqCliente_CartasDePorte" Member="linqCliente" ThisKey="IdClienteAuxiliar" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte1" Member="linqCliente1" ThisKey="IdClienteEntregador" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte2" Member="linqCliente2" ThisKey="Vendedor" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
