@@ -1165,3 +1165,35 @@ go
 
 
 
+
+
+
+
+
+
+
+alter table cartasdeporte ADD
+	CalidadGranosExtranosMerma numeric(18,2) NULL,
+	CalidadQuebradosMerma numeric(18,2) NULL,
+	CalidadDanadosMerma numeric(18,2) NULL,
+	CalidadChamicoMerma numeric(18,2) NULL,
+	CalidadRevolcadosMerma numeric(18,2) NULL,
+
+	CalidadObjetablesMerma numeric(18,2) NULL,
+	CalidadAmohosadosMerma numeric(18,2) NULL,
+	CalidadPuntaSombreadaMerma numeric(18,2) NULL,
+	CalidadHectolitricoMerma numeric(18,2) NULL,
+	CalidadCarbonMerma numeric(18,2) NULL,
+	CalidadPanzaBlancaMerma numeric(18,2) NULL,
+	CalidadPicadosMerma numeric(18,2) NULL,
+	CalidadVerdesMerma numeric(18,2) NULL,
+	CalidadQuemadosMerma numeric(18,2) NULL,
+	CalidadTierraMerma numeric(18,2) NULL,
+	CalidadZarandeoMerma numeric(18,2) NULL,
+	CalidadDescuentoFinalMerma numeric(18,2) NULL,
+	CalidadHumedadMerma numeric(18,2) NULL,
+	CalidadGastosFumigacionMerma numeric(18,2) NULL
+go
+
+
+
