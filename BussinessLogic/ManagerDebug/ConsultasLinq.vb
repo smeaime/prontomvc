@@ -1056,7 +1056,6 @@ Public Class ConsultasLinq
         'ListaEmbarquesQueryable
 
 
-
         Dim q = (From cdp In db.CartasDePortes _
                 Join cli In db.linqClientes On cli.IdCliente Equals cdp.Vendedor _
                 Join art In db.linqArticulos On art.IdArticulo Equals cdp.IdArticulo _

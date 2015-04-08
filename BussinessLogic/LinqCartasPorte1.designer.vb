@@ -23267,6 +23267,44 @@ Partial Public Class CartasDePorte
 	
 	Private _CalidadGastosFumigacionMerma As System.Nullable(Of Decimal)
 	
+	Private _CalidadQuebradosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadChamicoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadRevolcadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadObjetablesRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadAmohosadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPuntaSombreadaRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHectolitricoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadCarbonRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPanzaBlancaRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPicadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadVerdesRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadQuemadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadTierraRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadZarandeoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadDescuentoFinalRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHumedadRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadGastosFumigacionRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHumedadResultado As System.Nullable(Of Decimal)
+	
+	Private _CalidadGastosFumigacionResultado As System.Nullable(Of Decimal)
+	
 	Private _linqCliente As EntityRef(Of linqCliente)
 	
 	Private _linqCliente1 As EntityRef(Of linqCliente)
@@ -23903,6 +23941,82 @@ Partial Public Class CartasDePorte
     Partial Private Sub OnCalidadGastosFumigacionMermaChanging(value As System.Nullable(Of Decimal))
     End Sub
     Partial Private Sub OnCalidadGastosFumigacionMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuebradosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuebradosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadChamicoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadChamicoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadObjetablesRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadObjetablesRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadCarbonRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadCarbonRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPicadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPicadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadVerdesRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadVerdesRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuemadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuemadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadTierraRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadTierraRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadZarandeoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadZarandeoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHumedadRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHumedadRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHumedadResultadoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHumedadResultadoChanged()
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionResultadoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionResultadoChanged()
     End Sub
     #End Region
 	
@@ -26558,6 +26672,329 @@ Partial Public Class CartasDePorte
 				Me._CalidadGastosFumigacionMerma = value
 				Me.SendPropertyChanged("CalidadGastosFumigacionMerma")
 				Me.OnCalidadGastosFumigacionMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuebradosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=156)>  _
+	Public Property CalidadQuebradosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuebradosRebaja
+		End Get
+		Set
+			If (Me._CalidadQuebradosRebaja.Equals(value) = false) Then
+				Me.OnCalidadQuebradosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuebradosRebaja = value
+				Me.SendPropertyChanged("CalidadQuebradosRebaja")
+				Me.OnCalidadQuebradosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadChamicoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=157)>  _
+	Public Property CalidadChamicoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadChamicoRebaja
+		End Get
+		Set
+			If (Me._CalidadChamicoRebaja.Equals(value) = false) Then
+				Me.OnCalidadChamicoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadChamicoRebaja = value
+				Me.SendPropertyChanged("CalidadChamicoRebaja")
+				Me.OnCalidadChamicoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadRevolcadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=158)>  _
+	Public Property CalidadRevolcadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadRevolcadosRebaja
+		End Get
+		Set
+			If (Me._CalidadRevolcadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadRevolcadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadRevolcadosRebaja = value
+				Me.SendPropertyChanged("CalidadRevolcadosRebaja")
+				Me.OnCalidadRevolcadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadObjetablesRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=159)>  _
+	Public Property CalidadObjetablesRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadObjetablesRebaja
+		End Get
+		Set
+			If (Me._CalidadObjetablesRebaja.Equals(value) = false) Then
+				Me.OnCalidadObjetablesRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadObjetablesRebaja = value
+				Me.SendPropertyChanged("CalidadObjetablesRebaja")
+				Me.OnCalidadObjetablesRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadAmohosadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=160)>  _
+	Public Property CalidadAmohosadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadAmohosadosRebaja
+		End Get
+		Set
+			If (Me._CalidadAmohosadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadAmohosadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadAmohosadosRebaja = value
+				Me.SendPropertyChanged("CalidadAmohosadosRebaja")
+				Me.OnCalidadAmohosadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreadaRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=161)>  _
+	Public Property CalidadPuntaSombreadaRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPuntaSombreadaRebaja
+		End Get
+		Set
+			If (Me._CalidadPuntaSombreadaRebaja.Equals(value) = false) Then
+				Me.OnCalidadPuntaSombreadaRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPuntaSombreadaRebaja = value
+				Me.SendPropertyChanged("CalidadPuntaSombreadaRebaja")
+				Me.OnCalidadPuntaSombreadaRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHectolitricoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=162)>  _
+	Public Property CalidadHectolitricoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHectolitricoRebaja
+		End Get
+		Set
+			If (Me._CalidadHectolitricoRebaja.Equals(value) = false) Then
+				Me.OnCalidadHectolitricoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHectolitricoRebaja = value
+				Me.SendPropertyChanged("CalidadHectolitricoRebaja")
+				Me.OnCalidadHectolitricoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadCarbonRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=163)>  _
+	Public Property CalidadCarbonRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadCarbonRebaja
+		End Get
+		Set
+			If (Me._CalidadCarbonRebaja.Equals(value) = false) Then
+				Me.OnCalidadCarbonRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadCarbonRebaja = value
+				Me.SendPropertyChanged("CalidadCarbonRebaja")
+				Me.OnCalidadCarbonRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPanzaBlancaRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=164)>  _
+	Public Property CalidadPanzaBlancaRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPanzaBlancaRebaja
+		End Get
+		Set
+			If (Me._CalidadPanzaBlancaRebaja.Equals(value) = false) Then
+				Me.OnCalidadPanzaBlancaRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPanzaBlancaRebaja = value
+				Me.SendPropertyChanged("CalidadPanzaBlancaRebaja")
+				Me.OnCalidadPanzaBlancaRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPicadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=165)>  _
+	Public Property CalidadPicadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPicadosRebaja
+		End Get
+		Set
+			If (Me._CalidadPicadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadPicadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPicadosRebaja = value
+				Me.SendPropertyChanged("CalidadPicadosRebaja")
+				Me.OnCalidadPicadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadVerdesRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=166)>  _
+	Public Property CalidadVerdesRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadVerdesRebaja
+		End Get
+		Set
+			If (Me._CalidadVerdesRebaja.Equals(value) = false) Then
+				Me.OnCalidadVerdesRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadVerdesRebaja = value
+				Me.SendPropertyChanged("CalidadVerdesRebaja")
+				Me.OnCalidadVerdesRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuemadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=167)>  _
+	Public Property CalidadQuemadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuemadosRebaja
+		End Get
+		Set
+			If (Me._CalidadQuemadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadQuemadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuemadosRebaja = value
+				Me.SendPropertyChanged("CalidadQuemadosRebaja")
+				Me.OnCalidadQuemadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=168)>  _
+	Public Property CalidadTierraRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadTierraRebaja
+		End Get
+		Set
+			If (Me._CalidadTierraRebaja.Equals(value) = false) Then
+				Me.OnCalidadTierraRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadTierraRebaja = value
+				Me.SendPropertyChanged("CalidadTierraRebaja")
+				Me.OnCalidadTierraRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadZarandeoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=169)>  _
+	Public Property CalidadZarandeoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadZarandeoRebaja
+		End Get
+		Set
+			If (Me._CalidadZarandeoRebaja.Equals(value) = false) Then
+				Me.OnCalidadZarandeoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadZarandeoRebaja = value
+				Me.SendPropertyChanged("CalidadZarandeoRebaja")
+				Me.OnCalidadZarandeoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinalRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=170)>  _
+	Public Property CalidadDescuentoFinalRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadDescuentoFinalRebaja
+		End Get
+		Set
+			If (Me._CalidadDescuentoFinalRebaja.Equals(value) = false) Then
+				Me.OnCalidadDescuentoFinalRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDescuentoFinalRebaja = value
+				Me.SendPropertyChanged("CalidadDescuentoFinalRebaja")
+				Me.OnCalidadDescuentoFinalRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHumedadRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=171)>  _
+	Public Property CalidadHumedadRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHumedadRebaja
+		End Get
+		Set
+			If (Me._CalidadHumedadRebaja.Equals(value) = false) Then
+				Me.OnCalidadHumedadRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHumedadRebaja = value
+				Me.SendPropertyChanged("CalidadHumedadRebaja")
+				Me.OnCalidadHumedadRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGastosFumigacionRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=172)>  _
+	Public Property CalidadGastosFumigacionRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGastosFumigacionRebaja
+		End Get
+		Set
+			If (Me._CalidadGastosFumigacionRebaja.Equals(value) = false) Then
+				Me.OnCalidadGastosFumigacionRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGastosFumigacionRebaja = value
+				Me.SendPropertyChanged("CalidadGastosFumigacionRebaja")
+				Me.OnCalidadGastosFumigacionRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHumedadResultado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=173)>  _
+	Public Property CalidadHumedadResultado() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHumedadResultado
+		End Get
+		Set
+			If (Me._CalidadHumedadResultado.Equals(value) = false) Then
+				Me.OnCalidadHumedadResultadoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHumedadResultado = value
+				Me.SendPropertyChanged("CalidadHumedadResultado")
+				Me.OnCalidadHumedadResultadoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGastosFumigacionResultado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=174)>  _
+	Public Property CalidadGastosFumigacionResultado() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGastosFumigacionResultado
+		End Get
+		Set
+			If (Me._CalidadGastosFumigacionResultado.Equals(value) = false) Then
+				Me.OnCalidadGastosFumigacionResultadoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGastosFumigacionResultado = value
+				Me.SendPropertyChanged("CalidadGastosFumigacionResultado")
+				Me.OnCalidadGastosFumigacionResultadoChanged
 			End If
 		End Set
 	End Property
