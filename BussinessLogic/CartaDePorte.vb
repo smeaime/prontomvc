@@ -222,8 +222,15 @@ Namespace Pronto.ERP.BO
         Public CalidadGranosDanadosRebaja As Double = 0
 
 
-        Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)
-        'no... parecería no bastar.... probaré agregando un  " <Serializable()> _ Partial Class CartasDePorte " en un archivo aparte
+        'Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)
+        '-no... parecería no bastar.... probaré agregando un  " <Serializable()> _ Partial Class CartasDePorte " en un archivo aparte
+        '-sigo teniendo problemas. Al final, Mark Gravell me desanima:
+        'If this is profile serialization.... I honestly don't know if you can write your own plugin 
+        'serialization layer - I've never had need to look; but in this case I would write a 
+        'simple, non-LINQ object (a DTO) for the object properties that I actually need in my profile, and 
+        'just populate that object from LINQ, and serialize that.
+
+
 
         Public Property Id() As Integer
             Get
