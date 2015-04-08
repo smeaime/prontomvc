@@ -1189,6 +1189,25 @@
       <Column Name="CalidadDescuentoFinalMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CalidadHumedadMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CalidadGastosFumigacionMerma" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadQuebradosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadChamicoRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadRevolcadosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadObjetablesRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadAmohosadosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPuntaSombreadaRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadHectolitricoRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadCarbonRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPanzaBlancaRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadPicadosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadVerdesRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadQuemadosRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadTierraRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadZarandeoRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadDescuentoFinalRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadHumedadRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadGastosFumigacionRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadHumedadResultado" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CalidadGastosFumigacionResultado" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="linqCliente_CartasDePorte" Member="linqCliente" ThisKey="IdClienteAuxiliar" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte1" Member="linqCliente1" ThisKey="IdClienteEntregador" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte2" Member="linqCliente2" ThisKey="Vendedor" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />

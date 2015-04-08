@@ -4557,14 +4557,14 @@ Public Class CartaDePorteManager
         'hace falta levantar la cantidad de filas que levanto, no teniendo paginacion?
 
         Dim strSQL = String.Format("  SELECT TOP " & maxrows & _
-      "  [CDP.IdCartaDePorte], [CDP.NumeroCartaDePorte], [CDP.IdUsuarioIngreso], [CDP.FechaIngreso], [CDP.Anulada], [CDP.IdUsuarioAnulo], [CDP.FechaAnulacion], [CDP.Observaciones], [CDP.FechaTimeStamp], [CDP.Vendedor], [CDP.CuentaOrden1], [CDP.CuentaOrden2], [CDP.Corredor], [CDP.Entregador], [CDP.Procedencia], [CDP.Patente], [CDP.IdArticulo], [CDP.IdStock], [CDP.Partida], [CDP.IdUnidad], [CDP.IdUbicacion], [CDP.Cantidad], [CDP.Cupo], [CDP.NetoProc], [CDP.Calidad] " & _
-"      ,[CDP.BrutoPto]      ,[CDP.TaraPto]      ,[CDP.NetoPto]      ,[CDP.Acoplado]      ,[CDP.Humedad]      ,[CDP.Merma]      ,[CDP.NetoFinal]      ,[CDP.FechaDeCarga]      ,[CDP.FechaVencimiento]      ,[CDP.CEE]      ,[CDP.IdTransportista]      ,[CDP.TransportistaCUITdesnormalizado]      ,[CDP.IdChofer]      ,[CDP.ChoferCUITdesnormalizado]      ,[CDP.CTG]      ,[CDP.Contrato]      ,[CDP.Destino]      ,[CDP.Subcontr1]      ,[CDP.Subcontr2]      ,[CDP.Contrato1] " & _
-"      ,[CDP.contrato2]      ,[CDP.KmARecorrer]      ,[CDP.Tarifa]      ,[CDP.FechaDescarga]      ,[CDP.Hora]      ,[CDP.NRecibo]      ,[CDP.CalidadDe]      ,[CDP.TaraFinal]      ,[CDP.BrutoFinal]      ,[CDP.Fumigada]      ,[CDP.Secada]      ,[CDP.Exporta]      ,[CDP.NobleExtranos]      ,[CDP.NobleNegros]      ,[CDP.NobleQuebrados]      ,[CDP.NobleDaniados]      ,[CDP.NobleChamico]      ,[CDP.NobleChamico2]      ,[CDP.NobleRevolcado]      ,[CDP.NobleObjetables]      ,[CDP.NobleAmohosados]      ,[CDP.NobleHectolitrico]      ,[CDP.NobleCarbon] " & _
-"      ,[CDP.NoblePanzaBlanca]      ,[CDP.NoblePicados]      ,[CDP.NobleMGrasa]      ,[CDP.NobleAcidezGrasa]      ,[CDP.NobleVerdes]      ,[CDP.NobleGrado]      ,[CDP.NobleConforme]      ,[CDP.NobleACamara]      ,[CDP.Cosecha]      ,[CDP.HumedadDesnormalizada]      ,[CDP.Factor]      ,[CDP.IdFacturaImputada]      ,[CDP.PuntoVenta]      ,[CDP.SubnumeroVagon]      ,[CDP.TarifaFacturada]      ,[CDP.TarifaSubcontratista1]      ,[CDP.TarifaSubcontratista2]      ,[CDP.FechaArribo]      ,[CDP.Version]      ,[CDP.MotivoAnulacion] " & _
-"      ,[CDP.NumeroSubfijo]      ,[CDP.IdEstablecimiento]      ,[CDP.EnumSyngentaDivision]      ,[CDP.Corredor2]      ,[CDP.IdUsuarioModifico]      ,[CDP.FechaModificacion]      ,[CDP.FechaEmision]      ,[CDP.EstaArchivada]      ,[CDP.ExcluirDeSubcontratistas]      ,[CDP.IdTipoMovimiento]      ,[CDP.IdClienteAFacturarle]      ,[CDP.SubnumeroDeFacturacion]      ,[CDP.AgregaItemDeGastosAdministrativos]      ,[CDP.CalidadGranosQuemados]      ,[CDP.CalidadGranosQuemadosBonifica_o_Rebaja]      ,[CDP.CalidadTierra]      ,[CDP.CalidadTierraBonifica_o_Rebaja]      ,[CDP.CalidadMermaChamico] " & _
-"      ,[CDP.CalidadMermaChamicoBonifica_o_Rebaja]      ,[CDP.CalidadMermaZarandeo]      ,[CDP.CalidadMermaZarandeoBonifica_o_Rebaja]      ,[CDP.FueraDeEstandar]      ,[CDP.CalidadPuntaSombreada]      ,[CDP.CobraAcarreo]      ,[CDP.LiquidaViaje]      ,[CDP.IdClienteAuxiliar]      ,[CDP.CalidadDescuentoFinal]      ,[CDP.PathImagen]      ,[CDP.PathImagen2] " & _
-"      ,[CDP.AgrupadorDeTandaPeriodos]      ,[CDP.ClaveEncriptada]      ,[CDP.NumeroCartaEnTextoParaBusqueda]      ,[CDP.IdClienteEntregador]      ,[CDP.IdDetalleFactura]      ,[CDP.SojaSustentableCodCondicion]      ,[CDP.SojaSustentableCondicion]      ,[CDP.SojaSustentableNroEstablecimientoDeProduccion]      ,[CDP.IdClientePagadorFlete]      ,[CDP.SubnumeroVagonEnTextoParaBusqueda]      ,[CDP.IdCorredor2] " & _
-"      ,[CDP.Acopio1]      ,[CDP.Acopio2]      ,[CDP.Acopio3]      ,[CDP.Acopio4]      ,[CDP.Acopio5]      ,[CDP.AcopioFacturarleA]      ,[CDP.CalidadGranosDanadosRebaja]      ,[CDP.CalidadGranosExtranosRebaja] , " & _
+      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " & _
+"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " & _
+"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " & _
+"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " & _
+"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
+"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
+"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
 "			cast (cdp.NumeroCartaDePorte as varchar) +" & _
 "					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
 "           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
@@ -4791,14 +4791,14 @@ Public Class CartaDePorteManager
 
 
         Dim strSQL = String.Format("  SELECT TOP " & maxrows & _
-                                         "  [CDP.IdCartaDePorte], [CDP.NumeroCartaDePorte], [CDP.IdUsuarioIngreso], [CDP.FechaIngreso], [CDP.Anulada], [CDP.IdUsuarioAnulo], [CDP.FechaAnulacion], [CDP.Observaciones], [CDP.FechaTimeStamp], [CDP.Vendedor], [CDP.CuentaOrden1], [CDP.CuentaOrden2], [CDP.Corredor], [CDP.Entregador], [CDP.Procedencia], [CDP.Patente], [CDP.IdArticulo], [CDP.IdStock], [CDP.Partida], [CDP.IdUnidad], [CDP.IdUbicacion], [CDP.Cantidad], [CDP.Cupo], [CDP.NetoProc], [CDP.Calidad] " & _
-"      ,[CDP.BrutoPto]      ,[CDP.TaraPto]      ,[CDP.NetoPto]      ,[CDP.Acoplado]      ,[CDP.Humedad]      ,[CDP.Merma]      ,[CDP.NetoFinal]      ,[CDP.FechaDeCarga]      ,[CDP.FechaVencimiento]      ,[CDP.CEE]      ,[CDP.IdTransportista]      ,[CDP.TransportistaCUITdesnormalizado]      ,[CDP.IdChofer]      ,[CDP.ChoferCUITdesnormalizado]      ,[CDP.CTG]      ,[CDP.Contrato]      ,[CDP.Destino]      ,[CDP.Subcontr1]      ,[CDP.Subcontr2]      ,[CDP.Contrato1] " & _
-"      ,[CDP.contrato2]      ,[CDP.KmARecorrer]      ,[CDP.Tarifa]      ,[CDP.FechaDescarga]      ,[CDP.Hora]      ,[CDP.NRecibo]      ,[CDP.CalidadDe]      ,[CDP.TaraFinal]      ,[CDP.BrutoFinal]      ,[CDP.Fumigada]      ,[CDP.Secada]      ,[CDP.Exporta]      ,[CDP.NobleExtranos]      ,[CDP.NobleNegros]      ,[CDP.NobleQuebrados]      ,[CDP.NobleDaniados]      ,[CDP.NobleChamico]      ,[CDP.NobleChamico2]      ,[CDP.NobleRevolcado]      ,[CDP.NobleObjetables]      ,[CDP.NobleAmohosados]      ,[CDP.NobleHectolitrico]      ,[CDP.NobleCarbon] " & _
-"      ,[CDP.NoblePanzaBlanca]      ,[CDP.NoblePicados]      ,[CDP.NobleMGrasa]      ,[CDP.NobleAcidezGrasa]      ,[CDP.NobleVerdes]      ,[CDP.NobleGrado]      ,[CDP.NobleConforme]      ,[CDP.NobleACamara]      ,[CDP.Cosecha]      ,[CDP.HumedadDesnormalizada]      ,[CDP.Factor]      ,[CDP.IdFacturaImputada]      ,[CDP.PuntoVenta]      ,[CDP.SubnumeroVagon]      ,[CDP.TarifaFacturada]      ,[CDP.TarifaSubcontratista1]      ,[CDP.TarifaSubcontratista2]      ,[CDP.FechaArribo]      ,[CDP.Version]      ,[CDP.MotivoAnulacion] " & _
-"      ,[CDP.NumeroSubfijo]      ,[CDP.IdEstablecimiento]      ,[CDP.EnumSyngentaDivision]      ,[CDP.Corredor2]      ,[CDP.IdUsuarioModifico]      ,[CDP.FechaModificacion]      ,[CDP.FechaEmision]      ,[CDP.EstaArchivada]      ,[CDP.ExcluirDeSubcontratistas]      ,[CDP.IdTipoMovimiento]      ,[CDP.IdClienteAFacturarle]      ,[CDP.SubnumeroDeFacturacion]      ,[CDP.AgregaItemDeGastosAdministrativos]      ,[CDP.CalidadGranosQuemados]      ,[CDP.CalidadGranosQuemadosBonifica_o_Rebaja]      ,[CDP.CalidadTierra]      ,[CDP.CalidadTierraBonifica_o_Rebaja]      ,[CDP.CalidadMermaChamico] " & _
-"      ,[CDP.CalidadMermaChamicoBonifica_o_Rebaja]      ,[CDP.CalidadMermaZarandeo]      ,[CDP.CalidadMermaZarandeoBonifica_o_Rebaja]      ,[CDP.FueraDeEstandar]      ,[CDP.CalidadPuntaSombreada]      ,[CDP.CobraAcarreo]      ,[CDP.LiquidaViaje]      ,[CDP.IdClienteAuxiliar]      ,[CDP.CalidadDescuentoFinal]      ,[CDP.PathImagen]      ,[CDP.PathImagen2] " & _
-"      ,[CDP.AgrupadorDeTandaPeriodos]      ,[CDP.ClaveEncriptada]      ,[CDP.NumeroCartaEnTextoParaBusqueda]      ,[CDP.IdClienteEntregador]      ,[CDP.IdDetalleFactura]      ,[CDP.SojaSustentableCodCondicion]      ,[CDP.SojaSustentableCondicion]      ,[CDP.SojaSustentableNroEstablecimientoDeProduccion]      ,[CDP.IdClientePagadorFlete]      ,[CDP.SubnumeroVagonEnTextoParaBusqueda]      ,[CDP.IdCorredor2] " & _
-"      ,[CDP.Acopio1]      ,[CDP.Acopio2]      ,[CDP.Acopio3]      ,[CDP.Acopio4]      ,[CDP.Acopio5]      ,[CDP.AcopioFacturarleA]      ,[CDP.CalidadGranosDanadosRebaja]      ,[CDP.CalidadGranosExtranosRebaja], " & _
+      "  CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad " & _
+"      ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1 " & _
+"      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon " & _
+"      ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion " & _
+"      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
+"      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
+"      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
 "			cast (cdp.NumeroCartaDePorte as varchar) +" & _
 "					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
 "           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
@@ -6017,6 +6017,48 @@ Public Class CartaDePorteManager
 
 
 
+                .CalidadGranosExtranosMerma = iisNull(oCarta.CalidadGranosExtranosMerma, 0)
+                .CalidadQuebradosMerma = iisNull(oCarta.CalidadQuebradosMerma, 0)
+                .CalidadDanadosMerma = iisNull(oCarta.CalidadDanadosMerma, 0)
+                .CalidadChamicoMerma = iisNull(oCarta.CalidadChamicoMerma, 0)
+                .CalidadRevolcadosMerma = iisNull(oCarta.CalidadRevolcadosMerma, 0)
+                .CalidadObjetablesMerma = iisNull(oCarta.CalidadObjetablesMerma, 0)
+                .CalidadAmohosadosMerma = iisNull(oCarta.CalidadAmohosadosMerma, 0)
+                .CalidadPuntaSombreadaMerma = iisNull(oCarta.CalidadPuntaSombreadaMerma, 0)
+                .CalidadHectolitricoMerma = iisNull(oCarta.CalidadHectolitricoMerma, 0)
+                .CalidadCarbonMerma = iisNull(oCarta.CalidadCarbonMerma, 0)
+                .CalidadPanzaBlancaMerma = iisNull(oCarta.CalidadPanzaBlancaMerma, 0)
+                .CalidadPicadosMerma = iisNull(oCarta.CalidadPicadosMerma, 0)
+                .CalidadVerdesMerma = iisNull(oCarta.CalidadVerdesMerma, 0)
+                .CalidadQuemadosMerma = iisNull(oCarta.CalidadQuemadosMerma, 0)
+                .CalidadTierraMerma = iisNull(oCarta.CalidadTierraMerma, 0)
+                .CalidadZarandeoMerma = iisNull(oCarta.CalidadZarandeoMerma, 0)
+                .CalidadDescuentoFinalMerma = iisNull(oCarta.CalidadDescuentoFinalMerma, 0)
+                .CalidadHumedadMerma = iisNull(oCarta.CalidadHumedadMerma, 0)
+                .CalidadGastosFumigacionMerma = iisNull(oCarta.CalidadGastosFumigacionMerma, 0)
+
+
+                '.CalidadQuebradosRebaja = iisNull(oCarta.CalidadQuebradosRebaja, 0)
+                '.CalidadChamicoRebaja = iisNull(oCarta.CalidadChamicoRebaja, 0)
+                '.CalidadRevolcadosRebaja = iisNull(oCarta.CalidadRevolcadosRebaja, 0)
+                '.CalidadObjetablesRebaja = iisNull(oCarta.CalidadObjetablesRebaja, 0)
+                '.CalidadAmohosadosRebaja = iisNull(oCarta.CalidadAmohosadosRebaja, 0)
+                '.CalidadPuntaSombreadaRebaja = iisNull(oCarta.CalidadPuntaSombreadaRebaja, 0)
+                '.CalidadHectolitricoRebaja = iisNull(oCarta.CalidadHectolitricoRebaja, 0)
+                '.CalidadCarbonRebaja = iisNull(oCarta.CalidadCarbonRebaja, 0)
+                '.CalidadPanzaBlancaRebaja = iisNull(oCarta.CalidadPanzaBlancaRebaja, 0)
+                '.CalidadPicadosRebaja = iisNull(oCarta.CalidadPicadosRebaja, 0)
+                '.CalidadVerdesRebaja = iisNull(oCarta.CalidadVerdesRebaja, 0)
+                '.CalidadQuemadosRebaja = iisNull(oCarta.CalidadQuemadosRebaja, 0)
+                '.CalidadTierraRebaja = iisNull(oCarta.CalidadTierraRebaja, 0)
+                '.CalidadZarandeoRebaja = iisNull(oCarta.CalidadZarandeoRebaja, 0)
+                '.CalidadDescuentoFinalRebaja = iisNull(oCarta.CalidadDescuentoFinalRebaja, 0)
+                '.CalidadHumedadRebaja = iisNull(oCarta.CalidadHumedadRebaja, 0)
+                '.CalidadGastosFumigacionRebaja = iisNull(oCarta.CalidadGastosFumigacionRebaja, 0)
+
+                '.CalidadHumedadResultado = iisNull(oCarta.CalidadHumedadResultado, 0)
+
+
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
@@ -6287,6 +6329,53 @@ Public Class CartaDePorteManager
 
                     oCarta.CalidadGranosExtranosRebaja = .CalidadGranosExtranosRebaja
                     oCarta.CalidadGranosDanadosRebaja = .CalidadGranosDanadosRebaja
+
+
+
+
+                    oCarta.CalidadGranosExtranosMerma = .CalidadGranosExtranosMerma
+                    oCarta.CalidadQuebradosMerma = .CalidadQuebradosMerma
+                    oCarta.CalidadDanadosMerma = .CalidadDanadosMerma
+                    oCarta.CalidadChamicoMerma = .CalidadChamicoMerma
+                    oCarta.CalidadRevolcadosMerma = .CalidadRevolcadosMerma
+                    oCarta.CalidadObjetablesMerma = .CalidadObjetablesMerma
+                    oCarta.CalidadAmohosadosMerma = .CalidadAmohosadosMerma
+                    oCarta.CalidadPuntaSombreadaMerma = .CalidadPuntaSombreadaMerma
+                    oCarta.CalidadHectolitricoMerma = .CalidadHectolitricoMerma
+                    oCarta.CalidadCarbonMerma = .CalidadCarbonMerma
+                    oCarta.CalidadPanzaBlancaMerma = .CalidadPanzaBlancaMerma
+                    oCarta.CalidadPicadosMerma = .CalidadPicadosMerma
+                    oCarta.CalidadVerdesMerma = .CalidadVerdesMerma
+                    oCarta.CalidadQuemadosMerma = .CalidadQuemadosMerma
+                    oCarta.CalidadTierraMerma = .CalidadTierraMerma
+                    oCarta.CalidadZarandeoMerma = .CalidadZarandeoMerma
+                    oCarta.CalidadDescuentoFinalMerma = .CalidadDescuentoFinalMerma
+                    oCarta.CalidadHumedadMerma = .CalidadHumedadMerma
+                    oCarta.CalidadGastosFumigacionMerma = .CalidadGastosFumigacionMerma
+
+
+                    'oCarta.CalidadQuebradosRebaja = .CalidadQuebradosRebaja
+                    'oCarta.CalidadChamicoRebaja = .CalidadChamicoRebaja
+                    'oCarta.CalidadRevolcadosRebaja = .CalidadRevolcadosRebaja
+                    'oCarta.CalidadObjetablesRebaja = .CalidadObjetablesRebaja
+                    'oCarta.CalidadAmohosadosRebaja = .CalidadAmohosadosRebaja
+                    'oCarta.CalidadPuntaSombreadaRebaja = .CalidadPuntaSombreadaRebaja
+                    'oCarta.CalidadHectolitricoRebaja = .CalidadHectolitricoRebaja
+                    'oCarta.CalidadCarbonRebaja = .CalidadCarbonRebaja
+                    'oCarta.CalidadPanzaBlancaRebaja = .CalidadPanzaBlancaRebaja
+                    'oCarta.CalidadPicadosRebaja = .CalidadPicadosRebaja
+                    'oCarta.CalidadVerdesRebaja = .CalidadVerdesRebaja
+                    'oCarta.CalidadQuemadosRebaja = .CalidadQuemadosRebaja
+                    'oCarta.CalidadTierraRebaja = .CalidadTierraRebaja
+                    'oCarta.CalidadZarandeoRebaja = .CalidadZarandeoRebaja
+                    'oCarta.CalidadDescuentoFinalRebaja = .CalidadDescuentoFinalRebaja
+                    'oCarta.CalidadHumedadRebaja = .CalidadHumedadRebaja
+                    'oCarta.CalidadGastosFumigacionRebaja = .CalidadGastosFumigacionRebaja
+
+                    'oCarta.CalidadHumedadResultado = .CalidadHumedadResultado
+
+
+
 
 
                     'If IsNothing(ue) Then
@@ -21734,14 +21823,7 @@ Public Class CDPMailFiltrosManager2
 
         
         Return ExecDinamico(SC, String.Format("SELECT TOP 120 " & _
-        "  [CDP.IdCartaDePorte], [CDP.NumeroCartaDePorte], [CDP.IdUsuarioIngreso], [CDP.FechaIngreso], [CDP.Anulada], [CDP.IdUsuarioAnulo], [CDP.FechaAnulacion], [CDP.Observaciones], [CDP.FechaTimeStamp], [CDP.Vendedor], [CDP.CuentaOrden1], [CDP.CuentaOrden2], [CDP.Corredor], [CDP.Entregador], [CDP.Procedencia], [CDP.Patente], [CDP.IdArticulo], [CDP.IdStock], [CDP.Partida], [CDP.IdUnidad], [CDP.IdUbicacion], [CDP.Cantidad], [CDP.Cupo], [CDP.NetoProc], [CDP.Calidad] " & _
-"      ,[CDP.BrutoPto]      ,[CDP.TaraPto]      ,[CDP.NetoPto]      ,[CDP.Acoplado]      ,[CDP.Humedad]      ,[CDP.Merma]      ,[CDP.NetoFinal]      ,[CDP.FechaDeCarga]      ,[CDP.FechaVencimiento]      ,[CDP.CEE]      ,[CDP.IdTransportista]      ,[CDP.TransportistaCUITdesnormalizado]      ,[CDP.IdChofer]      ,[CDP.ChoferCUITdesnormalizado]      ,[CDP.CTG]      ,[CDP.Contrato]      ,[CDP.Destino]      ,[CDP.Subcontr1]      ,[CDP.Subcontr2]      ,[CDP.Contrato1] " & _
-"      ,[CDP.contrato2]      ,[CDP.KmARecorrer]      ,[CDP.Tarifa]      ,[CDP.FechaDescarga]      ,[CDP.Hora]      ,[CDP.NRecibo]      ,[CDP.CalidadDe]      ,[CDP.TaraFinal]      ,[CDP.BrutoFinal]      ,[CDP.Fumigada]      ,[CDP.Secada]      ,[CDP.Exporta]      ,[CDP.NobleExtranos]      ,[CDP.NobleNegros]      ,[CDP.NobleQuebrados]      ,[CDP.NobleDaniados]      ,[CDP.NobleChamico]      ,[CDP.NobleChamico2]      ,[CDP.NobleRevolcado]      ,[CDP.NobleObjetables]      ,[CDP.NobleAmohosados]      ,[CDP.NobleHectolitrico]      ,[CDP.NobleCarbon] " & _
-"      ,[CDP.NoblePanzaBlanca]      ,[CDP.NoblePicados]      ,[CDP.NobleMGrasa]      ,[CDP.NobleAcidezGrasa]      ,[CDP.NobleVerdes]      ,[CDP.NobleGrado]      ,[CDP.NobleConforme]      ,[CDP.NobleACamara]      ,[CDP.Cosecha]      ,[CDP.HumedadDesnormalizada]      ,[CDP.Factor]      ,[CDP.IdFacturaImputada]      ,[CDP.PuntoVenta]      ,[CDP.SubnumeroVagon]      ,[CDP.TarifaFacturada]      ,[CDP.TarifaSubcontratista1]      ,[CDP.TarifaSubcontratista2]      ,[CDP.FechaArribo]      ,[CDP.Version]      ,[CDP.MotivoAnulacion] " & _
-"      ,[CDP.NumeroSubfijo]      ,[CDP.IdEstablecimiento]      ,[CDP.EnumSyngentaDivision]      ,[CDP.Corredor2]      ,[CDP.IdUsuarioModifico]      ,[CDP.FechaModificacion]      ,[CDP.FechaEmision]      ,[CDP.EstaArchivada]      ,[CDP.ExcluirDeSubcontratistas]      ,[CDP.IdTipoMovimiento]      ,[CDP.IdClienteAFacturarle]      ,[CDP.SubnumeroDeFacturacion]      ,[CDP.AgregaItemDeGastosAdministrativos]      ,[CDP.CalidadGranosQuemados]      ,[CDP.CalidadGranosQuemadosBonifica_o_Rebaja]      ,[CDP.CalidadTierra]      ,[CDP.CalidadTierraBonifica_o_Rebaja]      ,[CDP.CalidadMermaChamico] " & _
-"      ,[CDP.CalidadMermaChamicoBonifica_o_Rebaja]      ,[CDP.CalidadMermaZarandeo]      ,[CDP.CalidadMermaZarandeoBonifica_o_Rebaja]      ,[CDP.FueraDeEstandar]      ,[CDP.CalidadPuntaSombreada]      ,[CDP.CobraAcarreo]      ,[CDP.LiquidaViaje]      ,[CDP.IdClienteAuxiliar]      ,[CDP.CalidadDescuentoFinal]      ,[CDP.PathImagen]      ,[CDP.PathImagen2] " & _
-"      ,[CDP.AgrupadorDeTandaPeriodos]      ,[CDP.ClaveEncriptada]      ,[CDP.NumeroCartaEnTextoParaBusqueda]      ,[CDP.IdClienteEntregador]      ,[CDP.IdDetalleFactura]      ,[CDP.SojaSustentableCodCondicion]      ,[CDP.SojaSustentableCondicion]      ,[CDP.SojaSustentableNroEstablecimientoDeProduccion]      ,[CDP.IdClientePagadorFlete]      ,[CDP.SubnumeroVagonEnTextoParaBusqueda]      ,[CDP.IdCorredor2] " & _
-"      ,[CDP.Acopio1]      ,[CDP.Acopio2]      ,[CDP.Acopio3]      ,[CDP.Acopio4]      ,[CDP.Acopio5]      ,[CDP.AcopioFacturarleA]      ,[CDP.CalidadGranosDanadosRebaja]      ,[CDP.CalidadGranosExtranosRebaja] , " & _
+                        "     CDP.*, " & _
                       " CLIVEN.Razonsocial as VendedorDesc, " & _
                       " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
                       " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
@@ -21775,14 +21857,7 @@ Public Class CDPMailFiltrosManager2
 
 
         Return ExecDinamico(SC, String.Format("SELECT " & _
-              "  [CDP.IdCartaDePorte], [CDP.NumeroCartaDePorte], [CDP.IdUsuarioIngreso], [CDP.FechaIngreso], [CDP.Anulada], [CDP.IdUsuarioAnulo], [CDP.FechaAnulacion], [CDP.Observaciones], [CDP.FechaTimeStamp], [CDP.Vendedor], [CDP.CuentaOrden1], [CDP.CuentaOrden2], [CDP.Corredor], [CDP.Entregador], [CDP.Procedencia], [CDP.Patente], [CDP.IdArticulo], [CDP.IdStock], [CDP.Partida], [CDP.IdUnidad], [CDP.IdUbicacion], [CDP.Cantidad], [CDP.Cupo], [CDP.NetoProc], [CDP.Calidad] " & _
-"      ,[CDP.BrutoPto]      ,[CDP.TaraPto]      ,[CDP.NetoPto]      ,[CDP.Acoplado]      ,[CDP.Humedad]      ,[CDP.Merma]      ,[CDP.NetoFinal]      ,[CDP.FechaDeCarga]      ,[CDP.FechaVencimiento]      ,[CDP.CEE]      ,[CDP.IdTransportista]      ,[CDP.TransportistaCUITdesnormalizado]      ,[CDP.IdChofer]      ,[CDP.ChoferCUITdesnormalizado]      ,[CDP.CTG]      ,[CDP.Contrato]      ,[CDP.Destino]      ,[CDP.Subcontr1]      ,[CDP.Subcontr2]      ,[CDP.Contrato1] " & _
-"      ,[CDP.contrato2]      ,[CDP.KmARecorrer]      ,[CDP.Tarifa]      ,[CDP.FechaDescarga]      ,[CDP.Hora]      ,[CDP.NRecibo]      ,[CDP.CalidadDe]      ,[CDP.TaraFinal]      ,[CDP.BrutoFinal]      ,[CDP.Fumigada]      ,[CDP.Secada]      ,[CDP.Exporta]      ,[CDP.NobleExtranos]      ,[CDP.NobleNegros]      ,[CDP.NobleQuebrados]      ,[CDP.NobleDaniados]      ,[CDP.NobleChamico]      ,[CDP.NobleChamico2]      ,[CDP.NobleRevolcado]      ,[CDP.NobleObjetables]      ,[CDP.NobleAmohosados]      ,[CDP.NobleHectolitrico]      ,[CDP.NobleCarbon] " & _
-"      ,[CDP.NoblePanzaBlanca]      ,[CDP.NoblePicados]      ,[CDP.NobleMGrasa]      ,[CDP.NobleAcidezGrasa]      ,[CDP.NobleVerdes]      ,[CDP.NobleGrado]      ,[CDP.NobleConforme]      ,[CDP.NobleACamara]      ,[CDP.Cosecha]      ,[CDP.HumedadDesnormalizada]      ,[CDP.Factor]      ,[CDP.IdFacturaImputada]      ,[CDP.PuntoVenta]      ,[CDP.SubnumeroVagon]      ,[CDP.TarifaFacturada]      ,[CDP.TarifaSubcontratista1]      ,[CDP.TarifaSubcontratista2]      ,[CDP.FechaArribo]      ,[CDP.Version]      ,[CDP.MotivoAnulacion] " & _
-"      ,[CDP.NumeroSubfijo]      ,[CDP.IdEstablecimiento]      ,[CDP.EnumSyngentaDivision]      ,[CDP.Corredor2]      ,[CDP.IdUsuarioModifico]      ,[CDP.FechaModificacion]      ,[CDP.FechaEmision]      ,[CDP.EstaArchivada]      ,[CDP.ExcluirDeSubcontratistas]      ,[CDP.IdTipoMovimiento]      ,[CDP.IdClienteAFacturarle]      ,[CDP.SubnumeroDeFacturacion]      ,[CDP.AgregaItemDeGastosAdministrativos]      ,[CDP.CalidadGranosQuemados]      ,[CDP.CalidadGranosQuemadosBonifica_o_Rebaja]      ,[CDP.CalidadTierra]      ,[CDP.CalidadTierraBonifica_o_Rebaja]      ,[CDP.CalidadMermaChamico] " & _
-"      ,[CDP.CalidadMermaChamicoBonifica_o_Rebaja]      ,[CDP.CalidadMermaZarandeo]      ,[CDP.CalidadMermaZarandeoBonifica_o_Rebaja]      ,[CDP.FueraDeEstandar]      ,[CDP.CalidadPuntaSombreada]      ,[CDP.CobraAcarreo]      ,[CDP.LiquidaViaje]      ,[CDP.IdClienteAuxiliar]      ,[CDP.CalidadDescuentoFinal]      ,[CDP.PathImagen]      ,[CDP.PathImagen2] " & _
-"      ,[CDP.AgrupadorDeTandaPeriodos]      ,[CDP.ClaveEncriptada]      ,[CDP.NumeroCartaEnTextoParaBusqueda]      ,[CDP.IdClienteEntregador]      ,[CDP.IdDetalleFactura]      ,[CDP.SojaSustentableCodCondicion]      ,[CDP.SojaSustentableCondicion]      ,[CDP.SojaSustentableNroEstablecimientoDeProduccion]      ,[CDP.IdClientePagadorFlete]      ,[CDP.SubnumeroVagonEnTextoParaBusqueda]      ,[CDP.IdCorredor2] " & _
-"      ,[CDP.Acopio1]      ,[CDP.Acopio2]      ,[CDP.Acopio3]      ,[CDP.Acopio4]      ,[CDP.Acopio5]      ,[CDP.AcopioFacturarleA]      ,[CDP.CalidadGranosDanadosRebaja]      ,[CDP.CalidadGranosExtranosRebaja] , " & _
+                        "     CDP.*, " & _
                             " CLIVEN.Razonsocial as VendedorDesc, " & _
                             " CLICO1.Razonsocial as CuentaOrden1Desc, " & _
                             " CLICO2.Razonsocial as CuentaOrden2Desc, " & _
