@@ -11106,55 +11106,55 @@ Namespace Pronto.ERP.Bll
 
 
                         '39	2	Olores Comerciales Objetables	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                         '40	2	Punta Sombreada	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                         '41	2	Revolcado en Tierra	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
 
                         '42	2	Punta Negra por Carbón	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
 
                         '65	2	Dañado	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                         '66	2	Granos Amohosados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                         '72	2	Grado 3	Arbitrado
-                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                         '73	2	Proteina	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
 
                         '79	2	Grado 1	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                         '90	2	Bajo PH	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                         '179	2	Grano Picado	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                         '181	2	Grado 2	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                         '266	2	Cuerpos Extraños	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                         '267	2	Granos Dañados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
 
                         '269	2	Granos Quebrados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                         '270	2	Granos Picados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
 
                         '295	2	Grado 1	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
 
                     ElseIf .IdArticulo = id_maiz Then
@@ -11169,31 +11169,31 @@ Namespace Pronto.ERP.Bll
 
 
                         '18	3	Olores Comerciales Objetables	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                         '76	3	Granos Dañados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                         '19	3	Granos Amohosados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                         '55	3	Grado 1	Arbitrado
-                        If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                         '169	3	Grado 2	Arbitrado
-                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
                         '75	3	Grado 3	Arbitrado
-                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                         '67	3	Granos Quebrados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                         '298	3	Granos Picados	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                         '263	3	Cuerpos Extraños	Arbitrado
-                        sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                     ElseIf .IdArticulo = id_sorgo Then
 
@@ -11212,26 +11212,26 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
-                        sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
-                        sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
-                        If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
-                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
-                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                        If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
-                        sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                        sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                     ElseIf .IdArticulo = id_girasol Then
                         '194	5	Grado 2	Arbitrado
-                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                        If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
 
                     ElseIf .IdArticulo = id_soja Then
@@ -11252,17 +11252,17 @@ Namespace Pronto.ERP.Bll
                         '265	6	Gastos de Fumigación	Arbitrado
 
 
-                        sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
-                        sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-                        sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
-                        sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
 
-                        sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
-                        sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
-                        sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+                        sb = RenglonBLDCalidad_VersionVieja(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
 
 
                     End If
@@ -11618,179 +11618,217 @@ Namespace Pronto.ERP.Bll
                         'dependiendo del cruce Calidad + Articulo, tenes el IdRubro de BLD
 
                         If Not .IsCalidadDescuentoFinalNull Then
-                            If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
+                            '    If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
                         End If
 
 
 
-                        If .IdArticulo = id_trigocandeal Or .IdArticulo = id_trigopan Or .IdArticulo = id_trigoforraj Then
+                        'If .IdArticulo = id_trigocandeal Or .IdArticulo = id_trigopan Or .IdArticulo = id_trigoforraj Then
 
 
-                            '39	2	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        '    '39	2	Olores Comerciales Objetables	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
-                            '40	2	Punta Sombreada	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        '    '40	2	Punta Sombreada	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
-                            '41	2	Revolcado en Tierra	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
+                        '    '41	2	Revolcado en Tierra	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
 
-                            '42	2	Punta Negra por Carbón	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
+                        '    '42	2	Punta Negra por Carbón	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
 
-                            '65	2	Dañado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
+                        '    '65	2	Dañado	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
 
-                            '66	2	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        '    '66	2	Granos Amohosados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
-                            '72	2	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                        '    '72	2	Grado 3	Arbitrado
+                        '    If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
-                            '73	2	Proteina	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
+                        '    '73	2	Proteina	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
 
-                            '79	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        '    '79	2	Grado 1	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
-                            '90	2	Bajo PH	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        '    '90	2	Bajo PH	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
-                            '179	2	Grano Picado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                        '    '179	2	Grano Picado	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
-                            '181	2	Grado 2	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                        '    '181	2	Grado 2	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
-                            '266	2	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
+                        '    '266	2	Cuerpos Extraños	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
 
-                            'no tengo los datos de rebaja por extraños en el dataset
-
-
-
-                            '267	2	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
-
-                            '269	2	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
-
-                            '270	2	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
-
-                            '295	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
-
-
-                        ElseIf .IdArticulo = id_maiz Then
-                            '298	3	Granos Picados	Arbitrado
-                            '260	3	MCV Hdad/Ins V.	Arbitrado
-                            '327	3	FACTOR	Arbitrado
-                            '290	3	Bajo PH	Arbitrado
-                            '263	3	Cuerpos Extraños	Arbitrado
-                            '183	3	Chamico	Arbitrado
-                            '169	3	Grado 2	Arbitrado
+                        '    'no tengo los datos de rebaja por extraños en el dataset
 
 
 
-                            '18	3	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        '    '267	2	Granos Dañados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
 
-                            '76	3	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
+                        '    '269	2	Granos Quebrados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
-                            '19	3	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        '    '270	2	Granos Picados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
 
-                            '55	3	Grado 1	Arbitrado
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                        '    '295	2	Grado 1	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
-                            '169	3	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
-                            '75	3	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
-
-                            '67	3	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
-
-                            '298	3	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
-
-                            '263	3	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
-
-                        ElseIf .IdArticulo = id_sorgo Then
-
-                            '128	4	Olores Comerciales Objetables	Arbitrado
-                            '135	4	Grado 3	Arbitrado
-                            '170	4	Grado 2	Arbitrado
-                            '151	4	Grado 1	Arbitrado
-                            '253	4	Quebrados	Arbitrado
-                            '228	4	Granos amohosados	Arbitrado
-                            '229	4	Dañado	Arbitrado
-                            '230	4	Granos Amohosados	Arbitrado
-                            '231	4	C. Extraños 	Arbitrado
-                            '232	4	MCV Olor/Quebra	Arbitrado
+                        'ElseIf .IdArticulo = id_maiz Then
+                        '    '298	3	Granos Picados	Arbitrado
+                        '    '260	3	MCV Hdad/Ins V.	Arbitrado
+                        '    '327	3	FACTOR	Arbitrado
+                        '    '290	3	Bajo PH	Arbitrado
+                        '    '263	3	Cuerpos Extraños	Arbitrado
+                        '    '183	3	Chamico	Arbitrado
+                        '    '169	3	Grado 2	Arbitrado
 
 
 
+                        '    '18	3	Olores Comerciales Objetables	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+
+                        '    '76	3	Granos Dañados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
+
+                        '    '19	3	Granos Amohosados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+
+                        '    '55	3	Grado 1	Arbitrado
+                        '    If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+
+                        '    '169	3	Grado 2	Arbitrado
+                        '    If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+
+                        '    '75	3	Grado 3	Arbitrado
+                        '    If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+
+                        '    '67	3	Granos Quebrados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+
+                        '    '298	3	Granos Picados	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+
+                        '    '263	3	Cuerpos Extraños	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
+
+                        'ElseIf .IdArticulo = id_sorgo Then
+
+                        '    '128	4	Olores Comerciales Objetables	Arbitrado
+                        '    '135	4	Grado 3	Arbitrado
+                        '    '170	4	Grado 2	Arbitrado
+                        '    '151	4	Grado 1	Arbitrado
+                        '    '253	4	Quebrados	Arbitrado
+                        '    '228	4	Granos amohosados	Arbitrado
+                        '    '229	4	Dañado	Arbitrado
+                        '    '230	4	Granos Amohosados	Arbitrado
+                        '    '231	4	C. Extraños 	Arbitrado
+                        '    '232	4	MCV Olor/Quebra	Arbitrado
 
 
-                            sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-
-                            sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
-
-                            sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
-
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
-
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
-
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
-
-                            sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
 
-                        ElseIf .IdArticulo = id_girasol Then
-                            '194	5	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                        '    sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
+                        '    sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
 
-                        ElseIf .IdArticulo = id_soja Then
-                            '136	6	Tierra	Arbitrado
-                            '150	6	Avería	Arbitrado
-                            '64	6	Granos Quebrados	Arbitrado
-                            '116	6	Granos dañados por calor y ardidos	Arbitrado
-                            '28	6	Olores Comerciales Objetables	Arbitrado
-                            '29	6	Revolcado en Tierra	Arbitrado
-                            '30	6	Granos Amohosados	Arbitrado
-                            '51	6	Dañados	Arbitrado
-                            '54	6	Cuerpos Extraños	Arbitrado
-                            '69	6	Total Dañados	Arbitrado
-                            '259	6	Merma Conv. ( olor, moho y revolc)	Arbitrado
-                            '200	6	Granos Verdes	Arbitrado
-                            '224	6	Multa por Incump. Cupos	Arbitrado
-                            '341	6	Gastos de Secada	Arbitrado
-                            '265	6	Gastos de Fumigación	Arbitrado
+                        '    sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+
+                        '    If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+
+                        '    If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+
+                        '    If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+
+                        '    sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
-                            sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-                            sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
-                            sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                        '    sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
+
+                        'ElseIf .IdArticulo = id_girasol Then
+                        '    '194	5	Grado 2	Arbitrado
+                        '    If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
 
-                            sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                        'ElseIf .IdArticulo = id_soja Then
+                        '    '136	6	Tierra	Arbitrado
+                        '    '150	6	Avería	Arbitrado
+                        '    '64	6	Granos Quebrados	Arbitrado
+                        '    '116	6	Granos dañados por calor y ardidos	Arbitrado
+                        '    '28	6	Olores Comerciales Objetables	Arbitrado
+                        '    '29	6	Revolcado en Tierra	Arbitrado
+                        '    '30	6	Granos Amohosados	Arbitrado
+                        '    '51	6	Dañados	Arbitrado
+                        '    '54	6	Cuerpos Extraños	Arbitrado
+                        '    '69	6	Total Dañados	Arbitrado
+                        '    '259	6	Merma Conv. ( olor, moho y revolc)	Arbitrado
+                        '    '200	6	Granos Verdes	Arbitrado
+                        '    '224	6	Multa por Incump. Cupos	Arbitrado
+                        '    '341	6	Gastos de Secada	Arbitrado
+                        '    '265	6	Gastos de Fumigación	Arbitrado
 
-                            sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
-                            sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+                        '    sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños")
+                        '    sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                        '    sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, carta.CalidadGranosDanadosRebaja, 0, nF, "01", "Dañado")
+                        '    sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
 
-                        End If
+                        '    sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+
+                        '    sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+
+                        '    sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+
+
+
+                        'Else
+                        sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma)
+                        sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma)
+                        sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma)
+
+
+                        sb = RenglonBLDCalidad(cdp, 0, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Dañado", carta.CalidadChamicoMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadPicadosMerma)
+
+
+                        sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma)
+                        sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadAmohosadosRebaja, nF, "01", "Amohosados", carta.CalidadAmohosadosMerma)
+
+
+                        sb = RenglonBLDCalidad(cdp, 0, .CalidadPuntaSombreada, carta.CalidadGranosDanadosRebaja, carta.CalidadPuntaSombreadaRebaja, nF, "01", "Dañado", carta.CalidadPuntaSombreadaMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .NobleHectolitrico, carta.CalidadGranosDanadosRebaja, carta.CalidadHectolitricoRebaja, nF, "01", "Dañado", carta.CalidadHectolitricoMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .NobleCarbon, carta.CalidadGranosDanadosRebaja, carta.CalidadCarbonRebaja, nF, "01", "Dañado", carta.CalidadPanzaBlancaMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .NoblePanzaBlanca, carta.CalidadGranosDanadosRebaja, carta.CalidadPanzaBlancaRebaja, nF, "01", "Dañado", carta.CalidadPanzaBlancaMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .NoblePicados, carta.CalidadGranosDanadosRebaja, carta.CalidadPicadosRebaja, nF, "01", "Dañado", carta.CalidadPicadosMerma)
+
+
+                        sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadVerdesRebaja, nF, "01", "Granos Verdes", carta.CalidadVerdesMerma)
+
+                        sb = RenglonBLDCalidad(cdp, 0, .CalidadGranosQuemados, carta.CalidadGranosDanadosRebaja, carta.CalidadQuemadosRebaja, nF, "01", "Dañado", carta.CalidadQuemadosMerma)
+
+
+                        sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Picado", carta.CalidadTierraMerma)
+
+                        sb = RenglonBLDCalidad(cdp, 0, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Dañado", carta.CalidadZarandeoMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "Dañado", carta.CalidadDescuentoFinalMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Dañado", carta.CalidadHumedadMerma)
+                        sb = RenglonBLDCalidad(cdp, 0, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Dañado", carta.CalidadGastosFumigacionMerma)
+
+
+
+
+
+                        'End If
 
 
 
@@ -11958,7 +11996,7 @@ Namespace Pronto.ERP.Bll
                         'dependiendo del cruce Calidad + Articulo, tenes el IdRubro de BLD
 
                         If Not .IsCalidadDescuentoFinalNull Then
-                            If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
+                            If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
                         End If
 
 
@@ -11967,55 +12005,55 @@ Namespace Pronto.ERP.Bll
 
 
                             '39	2	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                             '40	2	Punta Sombreada	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '41	2	Revolcado en Tierra	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
 
                             '42	2	Punta Negra por Carbón	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
 
                             '65	2	Dañado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                             '66	2	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '72	2	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '73	2	Proteina	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
 
                             '79	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             '90	2	Bajo PH	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '179	2	Grano Picado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                             '181	2	Grado 2	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '266	2	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                             '267	2	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
 
                             '269	2	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                             '270	2	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
 
                             '295	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
 
                         ElseIf .IdArticulo = id_maiz Then
@@ -12030,31 +12068,31 @@ Namespace Pronto.ERP.Bll
 
 
                             '18	3	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                             '76	3	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                             '19	3	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '55	3	Grado 1	Arbitrado
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             '169	3	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
                             '75	3	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '67	3	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                             '298	3	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                             '263	3	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_sorgo Then
 
@@ -12073,26 +12111,26 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
-                            sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
-                            sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
-                            sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_girasol Then
                             '194	5	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
 
                         ElseIf .IdArticulo = id_soja Then
@@ -12113,17 +12151,20 @@ Namespace Pronto.ERP.Bll
                             '265	6	Gastos de Fumigación	Arbitrado
 
 
-                            sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
-                            sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-                            sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
-                            sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
-                            sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
-                            sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+
+
+
 
 
                         End If
@@ -12148,7 +12189,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        Public Shared Function RenglonBLDCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow, ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, ByVal bonif_O_rebaja As String, ByVal Rebaja As Double, ByVal nf As Integer, ByVal numresultado As String, Optional ByVal descripcion As String = "") As String
+        Public Shared Function RenglonBLDCalidad_VersionVieja(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow, ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, ByVal bonif_O_rebaja As String, ByVal Rebaja As Double, ByVal nf As Integer, ByVal numresultado As String, Optional ByVal descripcion As String = "") As String
             Dim sb = ""
 
 
@@ -12209,6 +12250,116 @@ Namespace Pronto.ERP.Bll
                         desc = 0
                     End If
                     sb &= LeftMasPadLeft(desc, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
+
+
+
+                    Dim kilosmerma As Decimal
+                    If descripcion.ToUpper.Contains("HUM") Then
+                        kilosmerma = .HumedadDesnormalizada
+                    Else
+                        kilosmerma = .Merma
+                    End If
+
+                    sb &= kilosmerma & SEPARADOR
+
+
+                    'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
+                    'sb &= .FechaDescarga.ToString("ddMMyy")         'Fecha	de descarga		6	1	6	N	ddmmaa
+                    'sb &= LeftMasPadLeft(numresultado, 2)                   'Número de resultado	2	18	19	N  "01,02,03,04"
+                    'sb &= LeftMasPadLeft(CodigoEnsayo, 5)                   'Código de ensayo		5	20	24	N
+                    'sb &= LeftMasPadLeft(Int(.NetoFinal), 7)             'Kilos  				7	32	38	N
+                    'sb &= LeftMasPadLeft(.SubnumeroVagon, 8)        'Número de Vagón		8	41	48	N
+                    'sb &= LeftMasPadLeft(cero, 9)                   'Importe de honorarios	9	49	57	N
+                    'sb &= IIf(iisNull(bonif_O_rebaja, 0) = 0, "B", "R")                       'Bonifica o Rebaja		1	58	58	A	B-Bonifica	R-Rebaja
+                    'sb &= LeftMasPadLeft((0).ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5)                   'Total de bonif/rebaj	5	59	63	N	
+                    'sb &= IIf(.FueraDeEstandar <> "SI", "N", "S")                       'Fuera de standard		1	64	64	A	S-Si	N-No
+                    'sb &= LeftMasPadLeft(.IdCartaDePorte, 7)                   'Número de certif   	7	65	71	N	
+                    'sb &= LeftMasPadLeft(.DestinoCodigoONCAA, 5)
+
+
+                    sb = Replace(sb, " ", "0")
+
+                    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
+                    'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
+
+                    'sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+
+
+
+
+                    PrintLine(nf, sb)
+                End If
+            End With
+            Return sb
+
+        End Function
+
+
+        Public Shared Function RenglonBLDCalidad(ByVal cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow, _
+                                                 ByVal CodigoEnsayo As Integer, ByVal Resultado As Double, ByVal bonif_O_rebaja As String, _
+                                                 ByVal Rebaja As Double, ByVal nf As Integer, ByVal numresultado As String, _
+                                                 ByVal descripcion As String, _
+                                                 ByVal Merma As Double) As String
+            Dim sb = ""
+
+
+
+            Dim SEPARADOR = ";"
+
+
+            With cdp
+
+
+                '            CartaPorte	IdRubro	DRubro	ResFinal
+                '18383242	151	Grado 1	1
+                '17960754	55	Grado 1	1
+                '18230959	55	Grado 1	1
+                '18126000	55	Grado 1	1
+                '18424881	54	Cuerpos Extraños	-0.6
+                '17835569	55	Grado 1	1
+                '18488771	169	Grado 2	0
+                '18488770	169	Grado 2	0
+
+
+                'CartaPorte	IdRubro	TipoRubro	DRubro	                ResFinal	 DescuentoFinal 	 KilosMerma 
+                '43818919	181 	Arbitrado	Grado 2		                                       -   	 -   
+                '43818918	181	    Arbitrado	Grado 2		                                       -   	 -   
+                '43716160	122	    Merma FísicaGranos amohosados MF		                      -4.00 	 1176 
+                '43716160	75	    Arbitrado	Grado 3		                                      -1.50 	 -   
+
+
+
+                If Resultado <> 0 Or Rebaja <> 0 Then
+
+
+                    Dim cero = 0
+
+
+                    ForzarPrefijo5(.NumeroCartaDePorte)
+
+
+                    sb &= LeftMasPadLeft(.NumeroCartaDePorte, 11) & SEPARADOR   'Carta de porte			11	7	17	N	
+                    'sb &= LeftMasPadLeft(CodigoRubroBLD(.Calidad, .Producto), 2) & SEPARADOR                 'Cereal 				2	39	40	N
+                    sb &= LeftMasPadLeft(CodigoEnsayo, 2) & SEPARADOR
+
+                    Dim tiporubro As String = IIf(descripcion.ToUpper.Contains("GRADO"), "Arbitrado", "Merma_Física")
+
+                    sb &= tiporubro & SEPARADOR
+
+                    sb &= descripcion & SEPARADOR
+
+
+
+                    sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
+
+
+                    'Dim desc As Double
+                    'If Not .IsCalidadDescuentoFinalNull Then
+                    '    desc = .CalidadDescuentoFinal
+                    'Else
+                    '    desc = 0
+                    'End If
+                    sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
 
 
 
@@ -15864,7 +16015,7 @@ Namespace Pronto.ERP.Bll
             ''            Kg(Merma)
             ''% de humedad y Kg merma x Humedad
             ''Kg netos de descarga ( final incluido mermas )
-            
+
             Dim sErroresCartas As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
@@ -17577,7 +17728,7 @@ Namespace Pronto.ERP.Bll
                         'dependiendo del cruce Calidad + Articulo, tenes el IdRubro de BLD
 
                         If Not .IsCalidadDescuentoFinalNull Then
-                            If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
+                            If .CalidadDescuentoFinal > 0 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 0, .CalidadDescuentoFinal, "", 0, nF, "01", "DescuentoFinal")
                         End If
 
 
@@ -17586,55 +17737,55 @@ Namespace Pronto.ERP.Bll
 
 
                             '39	2	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 39, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                             '40	2	Punta Sombreada	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 40, .CalidadPuntaSombreada, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '41	2	Revolcado en Tierra	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 41, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Tierra")
 
                             '42	2	Punta Negra por Carbón	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 42, .NobleCarbon, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Carbón")
 
                             '65	2	Dañado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 65, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                             '66	2	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 66, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '72	2	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 72, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '73	2	Proteina	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 73, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Proteina")
 
                             '79	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 79, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             '90	2	Bajo PH	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 90, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '179	2	Grano Picado	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 179, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                             '181	2	Grado 2	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 181, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "PuntaSombreada")
 
                             '266	2	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 266, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                             '267	2	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 267, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañados")
 
                             '269	2	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 269, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                             '270	2	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 270, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picados")
 
                             '295	2	Grado 1	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 295, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
 
                         ElseIf .IdArticulo = id_maiz Then
@@ -17649,31 +17800,31 @@ Namespace Pronto.ERP.Bll
 
 
                             '18	3	Olores Comerciales Objetables	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 18, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
                             '76	3	Granos Dañados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 76, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
                             '19	3	Granos Amohosados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 19, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
                             '55	3	Grado 1	Arbitrado
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 55, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
                             '169	3	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
                             '75	3	Grado 3	Arbitrado
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 75, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
                             '67	3	Granos Quebrados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 67, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
                             '298	3	Granos Picados	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 298, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
                             '263	3	Cuerpos Extraños	Arbitrado
-                            sb = RenglonBLDCalidad(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 263, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_sorgo Then
 
@@ -17692,26 +17843,26 @@ Namespace Pronto.ERP.Bll
 
 
 
-                            sb = RenglonBLDCalidad(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 128, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
 
-                            sb = RenglonBLDCalidad(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 229, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
 
-                            sb = RenglonBLDCalidad(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 230, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
-                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
+                            If .NobleGrado = 1 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 151, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado1")
 
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 170, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
-                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
+                            If .NobleGrado = 3 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 135, .NobleGrado, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado3")
 
-                            sb = RenglonBLDCalidad(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 253, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 231, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
 
                         ElseIf .IdArticulo = id_girasol Then
                             '194	5	Grado 2	Arbitrado
-                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
+                            If .NobleGrado = 2 Then sb = RenglonBLDCalidad_VersionVieja(cdp, 169, .NoblePicados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Grado2")
 
 
                         ElseIf .IdArticulo = id_soja Then
@@ -17732,17 +17883,17 @@ Namespace Pronto.ERP.Bll
                             '265	6	Gastos de Fumigación	Arbitrado
 
 
-                            sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
-                            sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
-                            sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
-                            sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 54, .NobleExtranos, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Extraños")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Objetables")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 116, .NobleDaniados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Dañado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Amohosados")
 
 
-                            sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Quebrados")
 
-                            sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Picado")
 
-                            sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
+                            sb = RenglonBLDCalidad_VersionVieja(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, 0, nF, "01", "Granos Verdes")
 
 
                         End If
