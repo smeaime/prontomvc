@@ -3485,6 +3485,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdTipoCompraRM" Type="int" />
     <Property Name="FechaEnvioProveedor" Type="datetime" />
     <Property Name="IdUsuarioEnvioProveedor" Type="int" />
+    <Property Name="IdPlazoEntrega" Type="int" />
   </EntityType>
   <EntityType Name="PlazosEntrega">
     <Key>
@@ -3870,6 +3871,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="IdCuentaPercepcionIIBBComprasJurisdiccionLocal" Type="int" />
     <Property Name="CodigoESRI" Type="varchar" MaxLength="2" />
     <Property Name="Codigo2" Type="int" />
+    <Property Name="IdCuentaRetencionIBrutos2" Type="int" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -4959,6 +4961,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ComprobantesProveedores_CuentaOtros">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="ComprobantesProveedores">
+        <PropertyRef Name="IdCuentaOtros" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ComprobantesProveedores_DescripcionIva">
     <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
     <End Role="ComprobantesProveedores" Type="Self.ComprobantesProveedores" Multiplicity="*" />
@@ -5703,6 +5717,42 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleRecepciones_Articulos">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="DetalleRecepciones">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRecepciones_DetallePedidos">
+    <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="0..1" />
+    <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetallePedidos">
+        <PropertyRef Name="IdDetallePedido" />
+      </Principal>
+      <Dependent Role="DetalleRecepciones">
+        <PropertyRef Name="IdDetallePedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRecepciones_DetalleRequerimientos">
+    <End Role="DetalleRequerimientos" Type="Self.DetalleRequerimientos" Multiplicity="0..1" />
+    <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalleRequerimientos">
+        <PropertyRef Name="IdDetalleRequerimiento" />
+      </Principal>
+      <Dependent Role="DetalleRecepciones">
+        <PropertyRef Name="IdDetalleRequerimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetalleRecepciones_Recepciones">
     <End Role="Recepciones" Type="Self.Recepciones" Multiplicity="0..1" />
     <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="*" />
@@ -5712,6 +5762,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="DetalleRecepciones">
         <PropertyRef Name="IdRecepcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleRecepciones_Ubicaciones">
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
+    <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicaciones">
+        <PropertyRef Name="IdUbicacion" />
+      </Principal>
+      <Dependent Role="DetalleRecepciones">
+        <PropertyRef Name="IdUbicacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6781,6 +6843,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
     </AssociationSet>
+    <AssociationSet Name="FK_ComprobantesProveedores_CuentaOtros" Association="Self.FK_ComprobantesProveedores_CuentaOtros">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
+    </AssociationSet>
     <AssociationSet Name="FK_ComprobantesProveedores_DescripcionIva" Association="Self.FK_ComprobantesProveedores_DescripcionIva">
       <End Role="DescripcionIva" EntitySet="DescripcionIva" />
       <End Role="ComprobantesProveedores" EntitySet="ComprobantesProveedores" />
@@ -7029,8 +7095,24 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
       <End Role="DetallePedidos" EntitySet="DetallePedidos" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleRecepciones_Articulos" Association="Self.FK_DetalleRecepciones_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleRecepciones_DetallePedidos" Association="Self.FK_DetalleRecepciones_DetallePedidos">
+      <End Role="DetallePedidos" EntitySet="DetallePedidos" />
+      <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleRecepciones_DetalleRequerimientos" Association="Self.FK_DetalleRecepciones_DetalleRequerimientos">
+      <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
+      <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetalleRecepciones_Recepciones" Association="Self.FK_DetalleRecepciones_Recepciones">
       <End Role="Recepciones" EntitySet="Recepciones" />
+      <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleRecepciones_Ubicaciones" Association="Self.FK_DetalleRecepciones_Ubicaciones">
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
     </AssociationSet>
     <AssociationSet Name="FK_DetalleRecibos_Recibos" Association="Self.FK_DetalleRecibos_Recibos">
