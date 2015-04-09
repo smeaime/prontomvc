@@ -11792,37 +11792,37 @@ Namespace Pronto.ERP.Bll
 
 
                         'Else
-                        sb = RenglonBLDCalidad(cdp, 54, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma)
-                        sb = RenglonBLDCalidad(cdp, 64, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma)
-                        sb = RenglonBLDCalidad(cdp, 116, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma)
+                        sb = RenglonBLDCalidad(cdp, 2, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma)
+                        sb = RenglonBLDCalidad(cdp, 3, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma)
 
 
-                        sb = RenglonBLDCalidad(cdp, 0, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Dañado", carta.CalidadChamicoMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadPicadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 4, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Chamico", carta.CalidadChamicoMerma)
+                        sb = RenglonBLDCalidad(cdp, 5, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Revolcados", carta.CalidadRevolcadosMerma)
 
 
-                        sb = RenglonBLDCalidad(cdp, 28, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma)
-                        sb = RenglonBLDCalidad(cdp, 30, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadAmohosadosRebaja, nF, "01", "Amohosados", carta.CalidadAmohosadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 6, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma)
+                        sb = RenglonBLDCalidad(cdp, 7, .NobleAmohosados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadAmohosadosRebaja, nF, "01", "Amohosados", carta.CalidadAmohosadosMerma)
 
 
-                        sb = RenglonBLDCalidad(cdp, 0, .CalidadPuntaSombreada, carta.CalidadGranosDanadosRebaja, carta.CalidadPuntaSombreadaRebaja, nF, "01", "Dañado", carta.CalidadPuntaSombreadaMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .NobleHectolitrico, carta.CalidadGranosDanadosRebaja, carta.CalidadHectolitricoRebaja, nF, "01", "Dañado", carta.CalidadHectolitricoMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .NobleCarbon, carta.CalidadGranosDanadosRebaja, carta.CalidadCarbonRebaja, nF, "01", "Dañado", carta.CalidadPanzaBlancaMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .NoblePanzaBlanca, carta.CalidadGranosDanadosRebaja, carta.CalidadPanzaBlancaRebaja, nF, "01", "Dañado", carta.CalidadPanzaBlancaMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .NoblePicados, carta.CalidadGranosDanadosRebaja, carta.CalidadPicadosRebaja, nF, "01", "Dañado", carta.CalidadPicadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 8, .CalidadPuntaSombreada, carta.CalidadGranosDanadosRebaja, carta.CalidadPuntaSombreadaRebaja, nF, "01", "PuntaSombreada", carta.CalidadPuntaSombreadaMerma)
+                        sb = RenglonBLDCalidad(cdp, 9, .NobleHectolitrico, carta.CalidadGranosDanadosRebaja, carta.CalidadHectolitricoRebaja, nF, "01", "Hectolítrico", carta.CalidadHectolitricoMerma)
+                        sb = RenglonBLDCalidad(cdp, 10, .NobleCarbon, carta.CalidadGranosDanadosRebaja, carta.CalidadCarbonRebaja, nF, "01", "Carbon", carta.CalidadCarbonMerma)
+                        sb = RenglonBLDCalidad(cdp, 11, .NoblePanzaBlanca, carta.CalidadGranosDanadosRebaja, carta.CalidadPanzaBlancaRebaja, nF, "01", "PanzaBlanca", carta.CalidadPanzaBlancaMerma)
+                        sb = RenglonBLDCalidad(cdp, 12, .NoblePicados, carta.CalidadGranosDanadosRebaja, carta.CalidadPicadosRebaja, nF, "01", "Picados", carta.CalidadPicadosMerma)
 
 
-                        sb = RenglonBLDCalidad(cdp, 200, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadVerdesRebaja, nF, "01", "Granos Verdes", carta.CalidadVerdesMerma)
+                        sb = RenglonBLDCalidad(cdp, 13, .NobleVerdes, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadVerdesRebaja, nF, "01", "Granos Verdes", carta.CalidadVerdesMerma)
 
-                        sb = RenglonBLDCalidad(cdp, 0, .CalidadGranosQuemados, carta.CalidadGranosDanadosRebaja, carta.CalidadQuemadosRebaja, nF, "01", "Dañado", carta.CalidadQuemadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 14, .CalidadGranosQuemados, carta.CalidadGranosDanadosRebaja, carta.CalidadQuemadosRebaja, nF, "01", "Quemados", carta.CalidadQuemadosMerma)
 
 
-                        sb = RenglonBLDCalidad(cdp, 136, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Picado", carta.CalidadTierraMerma)
+                        sb = RenglonBLDCalidad(cdp, 15, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Tierra", carta.CalidadTierraMerma)
 
-                        sb = RenglonBLDCalidad(cdp, 0, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Dañado", carta.CalidadZarandeoMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "Dañado", carta.CalidadDescuentoFinalMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Dañado", carta.CalidadHumedadMerma)
-                        sb = RenglonBLDCalidad(cdp, 0, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Dañado", carta.CalidadGastosFumigacionMerma)
+                        sb = RenglonBLDCalidad(cdp, 16, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Zarandeo", carta.CalidadZarandeoMerma)
+                        sb = RenglonBLDCalidad(cdp, 17, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "DescuentoFinal", carta.CalidadDescuentoFinalMerma)
+                        sb = RenglonBLDCalidad(cdp, 18, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Humedad", carta.CalidadHumedadMerma)
+                        sb = RenglonBLDCalidad(cdp, 19, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "GastosFumigacion", carta.CalidadGastosFumigacionMerma)
 
 
 
@@ -12370,7 +12370,7 @@ Namespace Pronto.ERP.Bll
                         kilosmerma = .Merma
                     End If
 
-                    sb &= kilosmerma & SEPARADOR
+                    sb &= Merma & SEPARADOR
 
 
                     'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
