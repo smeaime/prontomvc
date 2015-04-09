@@ -3382,8 +3382,298 @@ Public Class CartaDePorteManager
     End Function
 
 
+    Shared Function DescargarImagenesAdjuntas_PDF(dt As DataTable, SC As String, bJuntarCPconTK As Boolean) As String
 
 
+
+        'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
+        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
+            'sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+            'sDirFTP = "http://localhost:48391/ProntoWeb/DataBackupear/"
+        Else
+            'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
+            'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
+            'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+        End If
+
+
+
+
+
+
+
+        Dim wordFiles As New List(Of String)
+
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        'Dim idorig = _
+        '                 (From c In db.CartasDePortes _
+        '                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+
+        For Each c As DataRow In dt.Rows
+            Dim id As Long = c.Item("IdCartaDePorte")
+            Dim myCartaDePorte = CartaDePorteManager.GetItem(SC, id)
+
+
+
+
+
+            'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13193
+            '            La cosa sería que en la opcion de descargar imagenes en el zip renombrar los archivos para que se llamen
+            '000123456789-cp
+            '000123456789-tk
+            'Donde 123456789 es el numero de CP y se debe completar con ceros a la izquierda hasta los 12 dígitos.
+
+            Dim imagenpathcp = myCartaDePorte.PathImagen
+            Dim nombrecp As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-cp" + Path.GetExtension(imagenpathcp)
+
+            Dim imagenpathtk = myCartaDePorte.PathImagen2
+            Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
+
+
+            If imagenpathcp <> "" Then
+
+                Try
+                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
+                    If fcp.Exists Then
+                        fcp.CopyTo(sDirFTP + nombrecp, True)
+                    End If
+                    wordFiles.Add(nombrecp)
+
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathcp + " " + nombrecp)
+                End Try
+            End If
+
+
+
+            If imagenpathtk <> "" Then
+
+                Try
+
+                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
+                    If ftk.Exists Then
+                        ftk.CopyTo(sDirFTP + nombretk, True)
+                    End If
+                    wordFiles.Add(nombretk)
+                Catch ex As Exception
+                    ErrHandler.WriteError(imagenpathtk + " " + nombretk)
+                End Try
+            End If
+
+
+
+
+
+            If bJuntarCPconTK Then
+                Try
+
+                    If True Then
+                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+
+                        Dim bimp = MergeTwoImages(oImg, oImg2)
+
+                        btnDescargaPDF()
+
+                        bimp.Save(sDirFTP + nombrecp)
+
+
+                        wordFiles.Remove(nombretk)
+                    Else
+
+
+                        'juntar las imagenes para DOW
+                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
+
+                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
+
+                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
+                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
+                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
+
+
+                        End Using
+
+                        oImg.Save(sDirFTP + nombrecp)
+
+
+
+                    End If
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+            End If
+
+
+        Next
+
+
+
+
+
+
+        '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
+
+        Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
+        Dim MyFile1 = New FileInfo(output)
+        If MyFile1.Exists Then
+            MyFile1.Delete()
+        End If
+        Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
+        For Each s In wordFiles
+            If s = "" Then Continue For
+            s = sDirFTP + s
+            Dim MyFile2 = New FileInfo(s)
+            If MyFile2.Exists Then
+                Try
+                    zip.AddFile(s, "")
+                Catch ex As Exception
+                    ErrHandler.WriteError(s)
+                    ErrHandler.WriteError(ex)
+                End Try
+
+            End If
+
+        Next
+
+        zip.Save()
+
+        Return output
+
+    End Function
+
+
+
+
+    Shared Function btnDescargaPDF() As String
+
+
+
+        'Dim myCartaDePorte As CartaDePorte
+
+
+        'If System.Diagnostics.Debugger.IsAttached() And False Then
+        '    myCartaDePorte = New CartaDePorte
+        '    myCartaDePorte.PathImagen = "9675224abr2013_071802_30868007-CP.jpg"
+        '    myCartaDePorte.PathImagen2 = "4088624abr2013_071803_30868007-TK.jpg"
+        'Else
+        '    myCartaDePorte = CartaDePorteManager.GetItem(SC, IdCartaDePorte, True)
+        '    If True Then
+        '        reloadimagen()
+        '        'refrescaIdEncriptados(SC)
+        '    End If
+
+        'End If
+
+
+
+        'If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
+        '    'verificar la carta de porte original a ver si tiene las imagenes
+        '    If myCartaDePorte.SubnumeroDeFacturacion > 0 Then
+
+        '        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+        '        Dim idorig = _
+        '                         (From c In db.CartasDePortes _
+        '                         Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+        '                         And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+        '                          And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
+
+        '        If idorig > 0 Then
+        '            myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig)
+
+        '            btnDescargaPDF.Text = "Descargar PDF  (carta original " & myCartaDePorte.NumeroCartaDePorte.ToString & " id " & idorig.ToString & ")"
+
+        '            IdCartaDePorte = idorig
+        '            reloadimagen()
+        '        End If
+
+        '    End If
+        'End If
+
+
+
+        'If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
+
+
+        '    Dim s = "La carta " & myCartaDePorte.NumeroCartaDePorte.ToString & " fue modificada y ya no tiene imágenes adjuntas (" & IdCartaDePorte.ToString & ")"
+        '    MsgBoxAjax(Me, s)
+        '    btnDescargaPDF.Enabled = False
+        '    btnDescargaPDF.Text = s
+        'End If
+
+
+        ''///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+        'Dim output As String
+        'If True Then
+        '    'myCartaDePorte.PathImagen = "4225mar2013_111151_29950530 104 TK.jpg"
+        '    'myCartaDePorte.PathImagen2 = "91408abr2013_164618_Tulips.jpg"
+
+        '    output = Path.GetTempPath & "ImagenesCartaPorte " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+
+
+
+
+
+        '    If System.Diagnostics.Debugger.IsAttached() Then
+        '        CartaDePorteManager.PDFcon_iTextSharp(output, _
+        '                           HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen, _
+        '                         HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 _
+        '                          )
+        '    Else
+
+        '        sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+
+        '        Try
+        '            CartaDePorteManager.PDFcon_iTextSharp(output, _
+        '                              IIf(myCartaDePorte.PathImagen <> "", sDirFTP + myCartaDePorte.PathImagen, ""), _
+        '                            IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + myCartaDePorte.PathImagen2, "") _
+        '                              )
+
+        '        Catch ex As Exception
+
+        '            ErrHandler.WriteError(ex)
+        '            'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
+        '            MsgBoxAjax(Me, "La carta " & myCartaDePorte.NumeroCartaDePorte & " fue modificada y ya no tiene imágenes adjuntas")
+        '            Return
+
+        '        End Try
+
+        '    End If
+
+
+
+
+
+        'Else
+        '    ' output = generarInformeFotosConReportViewerPDF(SC, pa + myCartaDePorte.PathImagen, pa + myCartaDePorte.PathImagen2)
+        'End If
+
+        'Return output
+
+    End Function
 
 
 
@@ -19936,7 +20226,17 @@ Public Class LogicaImportador
                     Or _
                     (.CuentaOrden2 > 0 AndAlso InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) Then
                     Dim excep = CartaDePorteManager.excepciones(SC)
-                    Const otros = 15
+
+                    'Const otros = Array.FindIndex(excep, AddressOf EsOTROS)
+                    Dim otros As Long
+                    For n = 0 To excep.Length - 1
+                        If excep(n) = "OTROS" Then
+                            otros = n
+                            Exit For
+                        End If
+                    Next
+
+
                     .EnumSyngentaDivision = excep(otros) 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
                     .Acopio1 = otros
                     .Acopio2 = otros
@@ -20239,6 +20539,19 @@ Public Class LogicaImportador
         Return 0
     End Function
 
+
+    Private Shared Function EsOTROS(ByVal s As String) _
+        As Boolean
+
+        ' AndAlso prevents evaluation of the second Boolean 
+        ' expression if the string is so short that an error 
+        ' would occur. 
+        If (s = "OTROS") Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 
     '////////////////////////////////////////////////////////////
     '////////////////////////////////////////////////////////////
@@ -20618,7 +20931,7 @@ Public Class ExcelImportadorManager
                 'mermas y neto total final
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "HUMEDAD", "H", "GDO/HUM", "HUM"
+            Case "HUMEDAD", "GDO/HUM", "HUM" ',  "H"
                 Return "column15"
             Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA"
                 Return "column16"

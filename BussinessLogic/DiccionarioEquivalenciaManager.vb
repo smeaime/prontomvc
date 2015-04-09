@@ -66,7 +66,7 @@ Namespace Pronto.ERP.Bll
 
         Public Shared Function TraerMetadata(ByVal SC As String, ByVal Descripcion As String) As Data.DataTable
 
-            Dim dtBuscar = ExecDinamico(SC, "SELECT * FROM DiccionarioEquivalencias WHERE Palabra='" & _c(Descripcion) & "'")
+            Dim dtBuscar = ExecDinamico(SC, "SELECT * FROM DiccionarioEquivalencias WHERE Palabra=" & _c(Descripcion) & "")
 
             If dtBuscar.Rows.Count = 0 Then
                 Return ExecDinamico(SC, "select * from " & Tabla & " where 1=0")
