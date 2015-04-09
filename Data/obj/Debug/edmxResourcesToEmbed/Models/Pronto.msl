@@ -1268,6 +1268,7 @@
     <EntitySetMapping Name="Pedidos">
       <EntityTypeMapping TypeName="DemoProntoModel.Pedido">
         <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="IdPlazoEntrega" ColumnName="IdPlazoEntrega" />
           <ScalarProperty Name="IdUsuarioEnvioProveedor" ColumnName="IdUsuarioEnvioProveedor" />
           <ScalarProperty Name="FechaEnvioProveedor" ColumnName="FechaEnvioProveedor" />
           <ScalarProperty Name="IdTipoCompraRM" ColumnName="IdTipoCompraRM" />
@@ -1490,6 +1491,7 @@
     <EntitySetMapping Name="Provincias">
       <EntityTypeMapping TypeName="DemoProntoModel.Provincia">
         <MappingFragment StoreEntitySet="Provincias">
+          <ScalarProperty Name="IdCuentaRetencionIBrutos2" ColumnName="IdCuentaRetencionIBrutos2" />
           <ScalarProperty Name="Codigo2" ColumnName="Codigo2" />
           <ScalarProperty Name="CodigoESRI_1" ColumnName="CodigoESRI" />
           <ScalarProperty Name="IdCuentaPercepcionIIBBComprasJurisdiccionLocal" ColumnName="IdCuentaPercepcionIIBBComprasJurisdiccionLocal" />
