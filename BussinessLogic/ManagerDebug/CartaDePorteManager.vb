@@ -6038,26 +6038,26 @@ Public Class CartaDePorteManager
                 .CalidadGastosFumigacionMerma = iisNull(oCarta.CalidadGastosFumigacionMerma, 0)
 
 
-                '.CalidadQuebradosRebaja = iisNull(oCarta.CalidadQuebradosRebaja, 0)
-                '.CalidadChamicoRebaja = iisNull(oCarta.CalidadChamicoRebaja, 0)
-                '.CalidadRevolcadosRebaja = iisNull(oCarta.CalidadRevolcadosRebaja, 0)
-                '.CalidadObjetablesRebaja = iisNull(oCarta.CalidadObjetablesRebaja, 0)
-                '.CalidadAmohosadosRebaja = iisNull(oCarta.CalidadAmohosadosRebaja, 0)
-                '.CalidadPuntaSombreadaRebaja = iisNull(oCarta.CalidadPuntaSombreadaRebaja, 0)
-                '.CalidadHectolitricoRebaja = iisNull(oCarta.CalidadHectolitricoRebaja, 0)
-                '.CalidadCarbonRebaja = iisNull(oCarta.CalidadCarbonRebaja, 0)
-                '.CalidadPanzaBlancaRebaja = iisNull(oCarta.CalidadPanzaBlancaRebaja, 0)
-                '.CalidadPicadosRebaja = iisNull(oCarta.CalidadPicadosRebaja, 0)
-                '.CalidadVerdesRebaja = iisNull(oCarta.CalidadVerdesRebaja, 0)
-                '.CalidadQuemadosRebaja = iisNull(oCarta.CalidadQuemadosRebaja, 0)
-                '.CalidadTierraRebaja = iisNull(oCarta.CalidadTierraRebaja, 0)
-                '.CalidadZarandeoRebaja = iisNull(oCarta.CalidadZarandeoRebaja, 0)
-                '.CalidadDescuentoFinalRebaja = iisNull(oCarta.CalidadDescuentoFinalRebaja, 0)
-                '.CalidadHumedadRebaja = iisNull(oCarta.CalidadHumedadRebaja, 0)
-                '.CalidadGastosFumigacionRebaja = iisNull(oCarta.CalidadGastosFumigacionRebaja, 0)
+                .CalidadQuebradosRebaja = iisNull(oCarta.CalidadQuebradosRebaja, 0)
+                .CalidadChamicoRebaja = iisNull(oCarta.CalidadChamicoRebaja, 0)
+                .CalidadRevolcadosRebaja = iisNull(oCarta.CalidadRevolcadosRebaja, 0)
+                .CalidadObjetablesRebaja = iisNull(oCarta.CalidadObjetablesRebaja, 0)
+                .CalidadAmohosadosRebaja = iisNull(oCarta.CalidadAmohosadosRebaja, 0)
+                .CalidadPuntaSombreadaRebaja = iisNull(oCarta.CalidadPuntaSombreadaRebaja, 0)
+                .CalidadHectolitricoRebaja = iisNull(oCarta.CalidadHectolitricoRebaja, 0)
+                .CalidadCarbonRebaja = iisNull(oCarta.CalidadCarbonRebaja, 0)
+                .CalidadPanzaBlancaRebaja = iisNull(oCarta.CalidadPanzaBlancaRebaja, 0)
+                .CalidadPicadosRebaja = iisNull(oCarta.CalidadPicadosRebaja, 0)
+                .CalidadVerdesRebaja = iisNull(oCarta.CalidadVerdesRebaja, 0)
+                .CalidadQuemadosRebaja = iisNull(oCarta.CalidadQuemadosRebaja, 0)
+                .CalidadTierraRebaja = iisNull(oCarta.CalidadTierraRebaja, 0)
+                .CalidadZarandeoRebaja = iisNull(oCarta.CalidadZarandeoRebaja, 0)
+                .CalidadDescuentoFinalRebaja = iisNull(oCarta.CalidadDescuentoFinalRebaja, 0)
+                .CalidadHumedadRebaja = iisNull(oCarta.CalidadHumedadRebaja, 0)
+                .CalidadGastosFumigacionRebaja = iisNull(oCarta.CalidadGastosFumigacionRebaja, 0)
 
-                '.CalidadHumedadResultado = iisNull(oCarta.CalidadHumedadResultado, 0)
-
+                .CalidadHumedadResultado = iisNull(oCarta.CalidadHumedadResultado, 0)
+                .CalidadGastosFumigacionResultado = iisNull(oCarta.CalidadGastosFumigacionResultado, 0)
 
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
@@ -6354,25 +6354,26 @@ Public Class CartaDePorteManager
                     oCarta.CalidadGastosFumigacionMerma = .CalidadGastosFumigacionMerma
 
 
-                    'oCarta.CalidadQuebradosRebaja = .CalidadQuebradosRebaja
-                    'oCarta.CalidadChamicoRebaja = .CalidadChamicoRebaja
-                    'oCarta.CalidadRevolcadosRebaja = .CalidadRevolcadosRebaja
-                    'oCarta.CalidadObjetablesRebaja = .CalidadObjetablesRebaja
-                    'oCarta.CalidadAmohosadosRebaja = .CalidadAmohosadosRebaja
-                    'oCarta.CalidadPuntaSombreadaRebaja = .CalidadPuntaSombreadaRebaja
-                    'oCarta.CalidadHectolitricoRebaja = .CalidadHectolitricoRebaja
-                    'oCarta.CalidadCarbonRebaja = .CalidadCarbonRebaja
-                    'oCarta.CalidadPanzaBlancaRebaja = .CalidadPanzaBlancaRebaja
-                    'oCarta.CalidadPicadosRebaja = .CalidadPicadosRebaja
-                    'oCarta.CalidadVerdesRebaja = .CalidadVerdesRebaja
-                    'oCarta.CalidadQuemadosRebaja = .CalidadQuemadosRebaja
-                    'oCarta.CalidadTierraRebaja = .CalidadTierraRebaja
-                    'oCarta.CalidadZarandeoRebaja = .CalidadZarandeoRebaja
-                    'oCarta.CalidadDescuentoFinalRebaja = .CalidadDescuentoFinalRebaja
-                    'oCarta.CalidadHumedadRebaja = .CalidadHumedadRebaja
-                    'oCarta.CalidadGastosFumigacionRebaja = .CalidadGastosFumigacionRebaja
+                    oCarta.CalidadQuebradosRebaja = .CalidadQuebradosRebaja
+                    oCarta.CalidadChamicoRebaja = .CalidadChamicoRebaja
+                    oCarta.CalidadRevolcadosRebaja = .CalidadRevolcadosRebaja
+                    oCarta.CalidadObjetablesRebaja = .CalidadObjetablesRebaja
+                    oCarta.CalidadAmohosadosRebaja = .CalidadAmohosadosRebaja
+                    oCarta.CalidadPuntaSombreadaRebaja = .CalidadPuntaSombreadaRebaja
+                    oCarta.CalidadHectolitricoRebaja = .CalidadHectolitricoRebaja
+                    oCarta.CalidadCarbonRebaja = .CalidadCarbonRebaja
+                    oCarta.CalidadPanzaBlancaRebaja = .CalidadPanzaBlancaRebaja
+                    oCarta.CalidadPicadosRebaja = .CalidadPicadosRebaja
+                    oCarta.CalidadVerdesRebaja = .CalidadVerdesRebaja
+                    oCarta.CalidadQuemadosRebaja = .CalidadQuemadosRebaja
+                    oCarta.CalidadTierraRebaja = .CalidadTierraRebaja
+                    oCarta.CalidadZarandeoRebaja = .CalidadZarandeoRebaja
+                    oCarta.CalidadDescuentoFinalRebaja = .CalidadDescuentoFinalRebaja
+                    oCarta.CalidadHumedadRebaja = .CalidadHumedadRebaja
+                    oCarta.CalidadGastosFumigacionRebaja = .CalidadGastosFumigacionRebaja
 
-                    'oCarta.CalidadHumedadResultado = .CalidadHumedadResultado
+                    oCarta.CalidadHumedadResultado = .CalidadHumedadResultado
+                    oCarta.CalidadGastosFumigacionResultado = .CalidadGastosFumigacionResultado
 
 
 
