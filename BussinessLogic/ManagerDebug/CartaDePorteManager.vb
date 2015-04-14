@@ -9099,6 +9099,10 @@ Public Class CartaDePorteManager
     ' To search and replace content in a document part. 
     Public Shared Sub FacturaXML_DOCX_Williams(ByVal document As String, ByVal oFac As Pronto.ERP.BO.Factura, ByVal SC As String)
 
+
+
+
+
         'Dim oFac As Pronto.ERP.BO.Requerimiento = CType(Me.ViewState(mKey), Pronto.ERP.BO.Requerimiento)
 
         'Try
@@ -10255,15 +10259,48 @@ Public Class CartaDePorteManager
         posx = InStr(mvarArticulo, "__")
         If posx > 2 Then mvarArticulo = Left(mvarArticulo, posx - 2)
         mvarArticulo = Trim(mvarArticulo)
-        regexReplace(texto, "#ObsItem#", mvarArticulo)
+        regexReplace(texto, "#ObsItem#", mvarArticulo.Replace("&", ""))
 
 
 
         '///////////////////////////////////////////
 
 
-        row.InnerXml = texto
 
+
+        '        Log Entry
+        '04/13/2015 10:20:20
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=69458. Error Message:System.Xml.XmlException
+        'An error occurred while parsing EntityName. Line 1, position 790.
+        '   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+        '   at System.Xml.XmlTextReaderImpl.HandleEntityReference(Boolean isInAttributeValue, EntityExpandType expandType, Int32& charRefEndPos)
+        '   at System.Xml.XmlTextReaderImpl.ParseText(Int32& startPos, Int32& endPos, Int32& outOrChars)
+        '        at System.Xml.XmlTextReaderImpl.FinishPartialValue()
+        '        at System.Xml.XmlTextReaderImpl.get_Value()
+        '   at DocumentFormat.OpenXml.OpenXmlLeafTextElement.Populate(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlElement.Load(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlCompositeElement.Populate(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlElement.Load(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlCompositeElement.Populate(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlElement.Load(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlCompositeElement.Populate(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlElement.Load(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '   at DocumentFormat.OpenXml.OpenXmlCompositeElement.Populate(XmlReader xmlReader, OpenXmlLoadMode loadMode)
+        '        at DocumentFormat.OpenXml.OpenXmlElement.ParseXml()
+        '        at DocumentFormat.OpenXml.OpenXmlElement.MakeSureParsed()
+        '        at DocumentFormat.OpenXml.OpenXmlCompositeElement.get_FirstChild()
+        '   at DocumentFormat.OpenXml.OpenXmlCompositeElement.set_InnerXml(String value)
+        '   at CartaDePorteManager.CeldaReemplazosFactura_Williams(TableRow& row, Int32 numcelda, FacturaItem itemFactura, Boolean IncluyeTarifaEnFactura)
+        '   at CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC)
+        '        System.Xml()
+
+        'creo que explota acá -explotó por el "&"
+        Try
+            row.InnerXml = texto
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+            ErrHandler.WriteError(texto)
+        End Try
 
 
     End Sub
@@ -14177,7 +14214,7 @@ Public Class LogicaFacturacion
 
         ' IdClienteSeparado = Convert.ToInt32(Val(i("IdClienteSeparado"))) _
         ' IdClienteSeparado = Convert.ToInt32(Val(       System.Text.RegularExpressions.Regex.Replace(i("IdClienteSeparado"), "[^0-9]", ""))
-  
+
 
         '/////////////////////////////////////////////////////////////////////////////
         '/////////////////////////////////////////////////////////////////////////////
@@ -15070,13 +15107,42 @@ Public Class LogicaFacturacion
         '()
 
 
+
+
+        '        Log Entry
+        '04/13/2015 10:20:20
+        'Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=69458. Error Message:System.NotSupportedException
+        'Constructed arrays are only supported for Contains.
+        '   at System.Data.Linq.SqlClient.QueryConverter.CoerceToSequence(SqlNode node)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitSelectMany(Expression sequence, LambdaExpression colSelector, LambdaExpression resultSelector)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitSequenceOperatorCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitMethodCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitInner(Expression node)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitDistinct(Expression sequence)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitSequenceOperatorCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitMethodCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitInner(Expression node)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitAggregate(Expression sequence, LambdaExpression lambda, SqlNodeType aggType, Type returnType)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitSequenceOperatorCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitMethodCall(MethodCallExpression mc)
+        '   at System.Data.Linq.SqlClient.QueryConverter.VisitInner(Expression node)
+        '   at System.Data.Linq.SqlClient.QueryConverter.ConvertOuter(Expression node)
+        '   at System.Data.Linq.SqlClient.SqlProvider.BuildQuery(Expression query, SqlNodeAnnotations annotations)
+        '   at System.Data.Linq.SqlClient.SqlProvider.System.Data.Linq.Provider.IProvider.Execute(Expression query)
+        '   at System.Data.Linq.DataQuery`1.System.Linq.IQueryProvider.Execute[S](Expression expression)
+        '   at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+        '   at LogicaFacturacion.LeyendaAcopio(Int64 idfactura, String SC)
+        '   at CartaDePorteManager.FacturaXML_DOCX_Williams(String document, Factura oFac, String SC)
+        '        System.Data.Linq()
+        '        __________________________()
+
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
         Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
         Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
-        Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.AcopioFacturarleA}).Distinct
+        Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.AcopioFacturarleA}).Distinct.ToList
 
 
         'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
@@ -22135,7 +22201,7 @@ Public Class CDPMailFiltrosManager2
         'se está trayenda la tabla de filtros, no la de cartas de porte, ojo. Es un asqueroso select *, hay
         'que cambiarlo, pero por lo menos no te asustes, no es la tabla de cartas de porte
 
-        
+
         Return ExecDinamico(SC, String.Format("SELECT TOP 120 " & _
                         "     CDP.*, " & _
                       " CLIVEN.Razonsocial as VendedorDesc, " & _
