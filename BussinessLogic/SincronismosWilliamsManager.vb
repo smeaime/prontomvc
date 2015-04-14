@@ -11792,13 +11792,13 @@ Namespace Pronto.ERP.Bll
 
 
                         'Else
-                        sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, 0, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma)
+                        sb = RenglonBLDCalidad(cdp, 1, .NobleExtranos, carta.CalidadGranosExtranosRebaja, carta.CalidadGranosExtranosRebaja, nF, "01", "Extraños", carta.CalidadGranosExtranosMerma)
                         sb = RenglonBLDCalidad(cdp, 2, .NobleQuebrados, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadQuebradosRebaja, nF, "01", "Quebrados", carta.CalidadQuebradosMerma)
                         sb = RenglonBLDCalidad(cdp, 3, .NobleDaniados, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Dañado", carta.CalidadDanadosMerma)
 
 
                         sb = RenglonBLDCalidad(cdp, 4, .NobleChamico, carta.CalidadGranosDanadosRebaja, carta.NobleChamico2, nF, "01", "Chamico", carta.CalidadChamicoMerma)
-                        sb = RenglonBLDCalidad(cdp, 5, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadGranosDanadosRebaja, nF, "01", "Revolcados", carta.CalidadRevolcadosMerma)
+                        sb = RenglonBLDCalidad(cdp, 5, .NobleRevolcado, carta.CalidadGranosDanadosRebaja, carta.CalidadRevolcadosRebaja, nF, "01", "Revolcados", carta.CalidadRevolcadosMerma)
 
 
                         sb = RenglonBLDCalidad(cdp, 6, .NobleObjetables, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadObjetablesRebaja, nF, "01", "Objetables", carta.CalidadObjetablesMerma)
@@ -12359,19 +12359,28 @@ Namespace Pronto.ERP.Bll
                     'Else
                     '    desc = 0
                     'End If
-                    sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
 
 
+                    If descripcion = "DescuentoFinal" Then
 
-                    Dim kilosmerma As Decimal
-                    If descripcion.ToUpper.Contains("HUM") Then
-                        kilosmerma = .HumedadDesnormalizada
+                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR
                     Else
-                        kilosmerma = .Merma
+
+
+                        sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
+
+
+
+                        Dim kilosmerma As Decimal
+                        If descripcion.ToUpper.Contains("HUM") Then
+                            kilosmerma = .HumedadDesnormalizada
+                        Else
+                            kilosmerma = .Merma
+                        End If
+
+                        sb &= Merma & SEPARADOR
+
                     End If
-
-                    sb &= Merma & SEPARADOR
-
 
                     'If .IsFechaDescargaNull Then .FechaDescarga = Nothing
                     'sb &= .FechaDescarga.ToString("ddMMyy")         'Fecha	de descarga		6	1	6	N	ddmmaa
