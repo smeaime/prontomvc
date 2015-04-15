@@ -3437,82 +3437,12 @@ Public Class CartaDePorteManager
             Dim imagenpathtk = myCartaDePorte.PathImagen2
             Dim nombretk As String = JustificadoDerecha(myCartaDePorte.NumeroCartaDePorte, 12, "0") + "-tk" + Path.GetExtension(imagenpathtk)
 
-
-            If imagenpathcp <> "" Then
-
-                Try
-                    Dim fcp = New FileInfo(sDirFTP + imagenpathcp)
-                    If fcp.Exists Then
-                        fcp.CopyTo(sDirFTP + nombrecp, True)
-                    End If
-                    wordFiles.Add(nombrecp)
-
-                Catch ex As Exception
-                    ErrHandler.WriteError(imagenpathcp + " " + nombrecp)
-                End Try
-            End If
+            Dim archivopdf = ImagenPDF(SC, id)
 
 
-
-            If imagenpathtk <> "" Then
-
-                Try
-
-                    Dim ftk = New FileInfo(sDirFTP + imagenpathtk)
-                    If ftk.Exists Then
-                        ftk.CopyTo(sDirFTP + nombretk, True)
-                    End If
-                    wordFiles.Add(nombretk)
-                Catch ex As Exception
-                    ErrHandler.WriteError(imagenpathtk + " " + nombretk)
-                End Try
-            End If
+            wordFiles.Add(archivopdf)
 
 
-
-
-
-            If bJuntarCPconTK Then
-                Try
-
-                    If True Then
-                        'http://bdlconsultores.sytes.net/Consultas/Admin/verConsultas1.php?recordid=13607
-
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-                        Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
-
-                        Dim bimp = MergeTwoImages(oImg, oImg2)
-
-                        ImagenPDF(SC, id)
-
-                        bimp.Save(sDirFTP + nombrecp)
-
-
-                        wordFiles.Remove(nombretk)
-                    Else
-
-
-                        'juntar las imagenes para DOW
-                        'http://stackoverflow.com/questions/465172/merging-two-images-in-c-net
-
-                        Dim oImg As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombretk)))
-
-                        Using grfx As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(oImg)
-                            Dim oImg2 As System.Drawing.Image = System.Drawing.Image.FromStream(New MemoryStream(File.ReadAllBytes(sDirFTP + nombrecp)))
-                            grfx.DrawImage(oImg2, 0, oImg.Height, oImg2.Width, oImg.Height + oImg2.Height)
-
-
-                        End Using
-
-                        oImg.Save(sDirFTP + nombrecp)
-
-
-
-                    End If
-                Catch ex As Exception
-                    ErrHandler.WriteError(ex)
-                End Try
-            End If
 
 
         Next
@@ -3525,14 +3455,14 @@ Public Class CartaDePorteManager
         '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
 
         Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
-        Dim MyFile1 = New FileInfo(output)
+        Dim MyFile1 = New FileInfo(output) kkk
         If MyFile1.Exists Then
             MyFile1.Delete()
         End If
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s
+            s = sDirFTP + s    lkjlkjlkj
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -3616,7 +3546,7 @@ Public Class CartaDePorteManager
 
 
         If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
+            sDirFTP = "~/" + "DataBackupear\"
 
 
             CartaDePorteManager.PDFcon_iTextSharp(output, _
