@@ -3483,7 +3483,7 @@ Public Class CartaDePorteManager
 
                         Dim bimp = MergeTwoImages(oImg, oImg2)
 
-                        btnDescargaPDF()
+                        ImagenPDF(SC, id)
 
                         bimp.Save(sDirFTP + nombrecp)
 
@@ -3555,66 +3555,48 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function btnDescargaPDF() As String
+    Shared Function ImagenPDF(SC As String, IdCarta As Long) As String
+
+        Dim sDirFTP As String
+
+        Dim myCartaDePorte As CartaDePorte
+
+
+        If System.Diagnostics.Debugger.IsAttached() And False Then
+            myCartaDePorte = New CartaDePorte
+            myCartaDePorte.PathImagen = "9675224abr2013_071802_30868007-CP.jpg"
+            myCartaDePorte.PathImagen2 = "4088624abr2013_071803_30868007-TK.jpg"
+        Else
+            myCartaDePorte = CartaDePorteManager.GetItem(SC, IdCarta, True)
+
+
+        End If
 
 
 
-        'Dim myCartaDePorte As CartaDePorte
+        If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
+            'verificar la carta de porte original a ver si tiene las imagenes
+            If myCartaDePorte.SubnumeroDeFacturacion > 0 Then
+
+                Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
-        'If System.Diagnostics.Debugger.IsAttached() And False Then
-        '    myCartaDePorte = New CartaDePorte
-        '    myCartaDePorte.PathImagen = "9675224abr2013_071802_30868007-CP.jpg"
-        '    myCartaDePorte.PathImagen2 = "4088624abr2013_071803_30868007-TK.jpg"
-        'Else
-        '    myCartaDePorte = CartaDePorteManager.GetItem(SC, IdCartaDePorte, True)
-        '    If True Then
-        '        reloadimagen()
-        '        'refrescaIdEncriptados(SC)
-        '    End If
+                Dim idorig = _
+                                 (From c In db.CartasDePortes _
+                                 Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
+                                 And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
+                                  And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
 
-        'End If
+                If idorig > 0 Then
+                    myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig)
 
 
+                    IdCarta = idorig
 
-        'If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
-        '    'verificar la carta de porte original a ver si tiene las imagenes
-        '    If myCartaDePorte.SubnumeroDeFacturacion > 0 Then
+                End If
 
-        '        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-
-
-        '        Dim idorig = _
-        '                         (From c In db.CartasDePortes _
-        '                         Where c.NumeroCartaDePorte = myCartaDePorte.NumeroCartaDePorte _
-        '                         And c.SubnumeroVagon = myCartaDePorte.SubnumeroVagon _
-        '                          And c.SubnumeroDeFacturacion = 0 Select c.IdCartaDePorte).FirstOrDefault
-
-        '        If idorig > 0 Then
-        '            myCartaDePorte = CartaDePorteManager.GetItem(SC, idorig)
-
-        '            btnDescargaPDF.Text = "Descargar PDF  (carta original " & myCartaDePorte.NumeroCartaDePorte.ToString & " id " & idorig.ToString & ")"
-
-        '            IdCartaDePorte = idorig
-        '            reloadimagen()
-        '        End If
-
-        '    End If
-        'End If
-
-
-
-        'If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
-
-
-        '    Dim s = "La carta " & myCartaDePorte.NumeroCartaDePorte.ToString & " fue modificada y ya no tiene imágenes adjuntas (" & IdCartaDePorte.ToString & ")"
-        '    MsgBoxAjax(Me, s)
-        '    btnDescargaPDF.Enabled = False
-        '    btnDescargaPDF.Text = s
-        'End If
-
-
-        ''///////////////////////////////////////////////////////////////////////////////////////////////////////
+            End If
+        End If
 
 
 
@@ -3624,54 +3606,49 @@ Public Class CartaDePorteManager
 
 
 
+        Dim output As String
 
-        'Dim output As String
-        'If True Then
-        '    'myCartaDePorte.PathImagen = "4225mar2013_111151_29950530 104 TK.jpg"
-        '    'myCartaDePorte.PathImagen2 = "91408abr2013_164618_Tulips.jpg"
-
-        '    output = Path.GetTempPath & "ImagenesCartaPorte " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+        output = Path.GetTempPath & "ImagenesCartaPorte " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
 
 
 
 
-        '    If System.Diagnostics.Debugger.IsAttached() Then
-        '        CartaDePorteManager.PDFcon_iTextSharp(output, _
-        '                           HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen, _
-        '                         HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 _
-        '                          )
-        '    Else
-
-        '        sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-
-        '        Try
-        '            CartaDePorteManager.PDFcon_iTextSharp(output, _
-        '                              IIf(myCartaDePorte.PathImagen <> "", sDirFTP + myCartaDePorte.PathImagen, ""), _
-        '                            IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + myCartaDePorte.PathImagen2, "") _
-        '                              )
-
-        '        Catch ex As Exception
-
-        '            ErrHandler.WriteError(ex)
-        '            'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
-        '            MsgBoxAjax(Me, "La carta " & myCartaDePorte.NumeroCartaDePorte & " fue modificada y ya no tiene imágenes adjuntas")
-        '            Return
-
-        '        End Try
-
-        '    End If
+        If System.Diagnostics.Debugger.IsAttached() Then
+            sDirFTP = "~/" + "..\ProntoWeb\DataBackupear\"
 
 
+            CartaDePorteManager.PDFcon_iTextSharp(output, _
+                               HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen, _
+                             HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 _
+                              )
+        Else
+
+            sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+
+            Try
+                CartaDePorteManager.PDFcon_iTextSharp(output, _
+                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP + myCartaDePorte.PathImagen, ""), _
+                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + myCartaDePorte.PathImagen2, "") _
+                                  )
+
+            Catch ex As Exception
+
+                ErrHandler.WriteError(ex)
+                'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
+                Return ""
+
+            End Try
+
+        End If
 
 
 
-        'Else
-        '    ' output = generarInformeFotosConReportViewerPDF(SC, pa + myCartaDePorte.PathImagen, pa + myCartaDePorte.PathImagen2)
-        'End If
 
-        'Return output
+
+
+        Return output
 
     End Function
 
