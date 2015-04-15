@@ -230,8 +230,8 @@
           <FullPath>monitoreo_ las 10 peores .sql</FullPath>
         </FileNode>
         <FileNode Name="wFacturas_TXFecha.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wFacturas_TXFecha.sql</FullPath>
         </FileNode>
