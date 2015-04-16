@@ -4,7 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="841b50e2159d4f1d9da33acd76d8c974" Name="Diagram1" />
+      <Diagram DiagramId="a6c73c494e494ce4a4d9bb06b1f90a8d" Name="Diagram1">
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.Consumos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasAseguradasEquipos" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasEquipo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasStandar" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.OrdenesTrabajo" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiarios" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiariosEmpleados" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

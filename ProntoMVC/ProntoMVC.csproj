@@ -1362,7 +1362,7 @@
     <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
     <Content Include="Views\ComprobanteProveedor\EditOtros.cshtml" />
     <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frmzz" />
-    <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
+    <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frmxxx" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
   </ItemGroup>
   <ItemGroup>
