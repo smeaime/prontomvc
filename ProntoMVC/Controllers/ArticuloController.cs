@@ -350,7 +350,7 @@ namespace ProntoMVC.Controllers
 
             //var data1 = (from a in data select a).OrderBy(x => x.Descripcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
             var data1 = from a in data.OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
-                       select a; 
+                        select a;
 
             var jsonData = new jqGridJson()
             {
@@ -1257,6 +1257,81 @@ namespace ProntoMVC.Controllers
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public virtual JsonResult Articulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords=0;
+
+            ObjectQuery<Data.Models.Articulo> pagedQuery = (ObjectQuery<Data.Models.Articulo>)
+                                        Filters.FiltroGenerico<Data.Models.Articulo>
+                                        ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            var queryDetails = (from item in pagedQuery
+                                select new
+                                {
+                                    item.IdArticulo,
+                                    item.Descripcion,
+                                    item.Codigo,
+                                    item.Rubro,
+                                    item.Subrubro,
+                                    item.NumeroInventario
+                                })
+
+                                .ToList(); //.Where(x => x.CuentasGasto != null );
+
+
+
+            var jsonData = new ProntoMVC.Controllers.jqGridJson()
+            {
+                total = (totalRecords + rows - 1) / rows,
+                page = page,
+                records = totalRecords,
+                rows = (from a in queryDetails
+
+
+
+                        select new ProntoMVC.Controllers.jqGridRowJson
+                        {
+                            id = a.IdArticulo.ToString(),
+                            cell = new string[] { 
+                            //"<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +" target='_blank' >Editar</>",
+                            "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
+                            "",
+                            a.Codigo.NullSafeToString(), 
+                            a.Descripcion.NullSafeToString(), 
+                            
+                            (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
+                            (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
+ 
+                            a.NumeroInventario  
+                        
+                            }
+                        }
+                        ).ToArray()
+            };
+
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+
+        }
+
+
 
         public virtual JsonResult GetStoreProc(string sp, string p1, string p2, string p3, string p4, string p5, string p6, string p7)
         {

@@ -121,6 +121,7 @@ namespace jqGridWeb.Controllers
             foreach (Rule rule in rules)
             {
 
+                // http://stackoverflow.com/questions/1954746/using-reflection-in-c-sharp-to-get-properties-of-a-nested-object
 
                 if (rule.field.IndexOf('.') >= 0)
                 {
@@ -161,6 +162,8 @@ namespace jqGridWeb.Controllers
                     sb.AppendFormat(FormatMapping[(int)rule.op], "Obra.Descripcion", iParam);
 
                     // no puedo usar como nombre "Obra.Descripcion" en lugar de "Obra" en el field de la jqgrid ?
+                    // -no, por la cuestion del rulefieldPunto... No hay una typeof(T).GetProperty() que sea "Obra.Descripcion"
+                    // -y no se puede usar la diferencia entre name e index?
 
 
 

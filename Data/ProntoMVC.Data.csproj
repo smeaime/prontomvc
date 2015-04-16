@@ -191,6 +191,9 @@
     <Compile Include="Models\Conjunto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Consumos.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ControlCalidad.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -464,6 +467,15 @@
     <Compile Include="Models\GruposObra.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HorasAseguradasEquipos.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HorasEquipo.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HorasStandar.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IBCondicion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -527,6 +539,9 @@
     <Compile Include="Models\OrdenesPago_TX_EnCaja_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenesTrabajo.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrdenPago.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -538,6 +553,12 @@
     </Compile>
     <Compile Include="Models\Parametros2.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartesDiarios.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PartesDiariosEmpleados.cs">
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -606,6 +627,21 @@
     </Compile>
     <Compile Include="Models\ProntoIniClaves.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProntoMantenimiento.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProntoMantenimiento.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProntoMantenimiento.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProntoMantenimiento.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProntoMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -766,6 +802,23 @@
     </None>
     <None Include="Models\Pronto.edmx.diagram">
       <DependentUpon>Pronto.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Models\ProntoMantenimiento.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProntoMantenimiento.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\ProntoMantenimiento.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
+      <LastGenOutput>ProntoMantenimiento.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\ProntoMantenimiento.edmx.diagram">
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
+    </None>
+    <None Include="Models\ProntoMantenimiento.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
+      <LastGenOutput>ProntoMantenimiento.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
