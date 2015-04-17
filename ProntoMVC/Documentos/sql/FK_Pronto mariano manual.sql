@@ -1006,3 +1006,11 @@ go
 
 
 
+
+alter table  ComprobantesProveedores
+		ADD CONSTRAINT FK_ComprobantesProveedores_CuentaOtros
+		FOREIGN KEY (IdCuentaOtros) REFERENCES Cuentas(IdCuenta)
+go
+
+
+

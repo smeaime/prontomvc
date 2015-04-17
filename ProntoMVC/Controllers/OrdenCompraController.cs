@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -80,9 +80,9 @@ namespace ProntoMVC.Controllers
 
         void CargarViewBag(OrdenesCompra o)
         {
-            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
+            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre",o.Aprobo);
+            //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
+            //ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
             ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
             ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
             ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
@@ -141,6 +141,10 @@ namespace ProntoMVC.Controllers
             if (Cliente != null)
             {
                 if (Cliente.Estados_Proveedores != null) { if ((Cliente.Estados_Proveedores.Activo ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
+            }
+            else
+            {
+                { sErrorMsg += "\n" + "Falta el cliente"; }
             }
 
             if (o.DetalleOrdenesCompras.Count <= 0) sErrorMsg += "\n" + "La orden de compra no tiene items";

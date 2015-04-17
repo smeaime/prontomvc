@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -262,6 +262,53 @@ namespace ProntoMVC.Controllers
 
             return PartialView("Select", ubicaciones);
         }
+
+        public virtual ActionResult GetUbicacionesPorObra(int IdObra, int IdDeposito, int IdArticulo, int IdUsuario)
+        {
+            Dictionary<int, string> ubicaciones = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.Ubicacion u in
+                db.Ubicaciones.Where(x =>
+                    (x.Deposito.IdObra == IdObra || IdObra <= 0) &&
+                    (x.IdDeposito == IdDeposito || IdDeposito <= 0) &&
+                    ((db.Empleados.Where(y => y.IdEmpleado == IdUsuario).Select(y => y.PermitirAccesoATodasLasObras).FirstOrDefault() ?? "") == "SI" ||
+                     (db.DetalleEmpleadosObras.Where(y => y.IdEmpleado == IdUsuario && y.IdObra == IdObra).Select(y => y.IdObra).FirstOrDefault() ?? 0) > 0 ||
+                     IdUsuario <= 0)
+                ).OrderBy(x => x.Descripcion).ToList())
+
+                ubicaciones.Add(u.IdUbicacion, (u.Deposito.Abreviatura != null ? " " + u.Deposito.Abreviatura : "") + (u.Descripcion != null ? " " + u.Descripcion : "") + (u.Estanteria != null ? " Est.:" + u.Estanteria : "") + (u.Modulo != null ? " Mod.:" + u.Modulo : "") + (u.Gabeta != null ? " Gab.:" + u.Gabeta : ""));
+
+            return PartialView("Select", ubicaciones);
+        }
+
+        public virtual JsonResult GetUbicacionesPorObra2(int IdObra, int IdDeposito, int IdArticulo, int IdUsuario)
+        {
+            var filtereditems = (from x in db.Ubicaciones
+                                 where (x.Deposito.IdObra == IdObra || IdObra <= 0) &&
+                                        (x.IdDeposito == IdDeposito || IdDeposito <= 0) &&
+                                        ((db.Empleados.Where(y => y.IdEmpleado == IdUsuario).Select(y => y.PermitirAccesoATodasLasObras).FirstOrDefault() ?? "") == "SI" ||
+                                         (db.DetalleEmpleadosObras.Where(y => y.IdEmpleado == IdUsuario && y.IdObra == IdObra).Select(y => y.IdObra).FirstOrDefault() ?? 0) > 0 || IdUsuario <= 0)
+                                 orderby x.Descripcion
+                                 select new
+                                 {
+                                     id = x.IdUbicacion,
+                                     value = (x.Deposito.Abreviatura != null ? " " + x.Deposito.Abreviatura : "") + (x.Descripcion != null ? " " + x.Descripcion : "") + (x.Estanteria != null ? " Est." + x.Estanteria : "") + (x.Modulo != null ? " Mod." + x.Modulo : "") + (x.Gabeta != null ? " Gab." + x.Gabeta : "")
+                                 }).ToList();
+
+            //Dictionary<int, string> ubicaciones = new Dictionary<int, string>();
+            //foreach (ProntoMVC.Data.Models.Ubicacion u in 
+            //    db.Ubicaciones.Where(x => 
+            //        (x.Deposito.IdObra == IdObra || IdObra <= 0) && 
+            //        (x.IdDeposito == IdDeposito || IdDeposito <= 0) &&
+            //        ((db.Empleados.Where(y => y.IdEmpleado == IdUsuario).Select(y => y.PermitirAccesoATodasLasObras).FirstOrDefault() ?? "") == "SI" ||
+            //         (db.DetalleEmpleadosObras.Where(y => y.IdEmpleado == IdUsuario && y.IdObra == IdObra).Select(y => y.IdObra).FirstOrDefault() ?? 0) > 0 || 
+            //         IdUsuario <= 0)
+            //    ).OrderBy(x => x.Descripcion).ToList())
+
+            //    ubicaciones.Add(u.IdUbicacion, (u.Deposito.Abreviatura != null ? " " + u.Deposito.Abreviatura : "") + (u.Descripcion != null ? " " + u.Descripcion : "") + (u.Estanteria != null ? " Est.:" + u.Estanteria : "") + (u.Modulo != null ? " Mod.:" + u.Modulo : "") + (u.Gabeta != null ? " Gab.:" + u.Gabeta : ""));
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

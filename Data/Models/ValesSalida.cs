@@ -12,32 +12,34 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OtrosIngresosAlmacen
+    public partial class ValesSalida
     {
-        public OtrosIngresosAlmacen()
+        public ValesSalida()
         {
-            this.DetalleOtrosIngresosAlmacens = new HashSet<DetalleOtrosIngresosAlmacen>();
+            this.DetalleValesSalidas = new HashSet<DetalleValesSalida>();
         }
     
-        public int IdOtroIngresoAlmacen { get; set; }
-        public Nullable<int> NumeroOtroIngresoAlmacen { get; set; }
-        public Nullable<System.DateTime> FechaOtroIngresoAlmacen { get; set; }
+        public int IdValeSalida { get; set; }
+        public Nullable<int> NumeroValeSalida { get; set; }
+        public Nullable<System.DateTime> FechaValeSalida { get; set; }
         public Nullable<int> IdObra { get; set; }
         public string Observaciones { get; set; }
+        public Nullable<int> IdCentroCosto { get; set; }
         public Nullable<int> Aprobo { get; set; }
-        public Nullable<int> TipoIngreso { get; set; }
-        public Nullable<int> Emitio { get; set; }
-        public Nullable<System.DateTime> FechaRegistracion { get; set; }
+        public Nullable<int> NumeroValePreimpreso { get; set; }
+        public string Cumplido { get; set; }
         public Nullable<byte> EnviarEmail { get; set; }
-        public Nullable<int> IdOtroIngresoAlmacenOriginal { get; set; }
+        public Nullable<int> IdValeSalidaOriginal { get; set; }
         public Nullable<int> IdOrigenTransmision { get; set; }
         public Nullable<System.DateTime> FechaImportacionTransmision { get; set; }
-        public string Anulado { get; set; }
-        public Nullable<int> IdAutorizaAnulacion { get; set; }
+        public Nullable<int> IdUsuarioAnulo { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public Nullable<int> IdSalidaMateriales { get; set; }
+        public string MotivoAnulacion { get; set; }
         public string CircuitoFirmasCompleto { get; set; }
+        public Nullable<int> IdUsuarioDioPorCumplido { get; set; }
+        public Nullable<System.DateTime> FechaDioPorCumplido { get; set; }
+        public string MotivoDioPorCumplido { get; set; }
     
-        public virtual ICollection<DetalleOtrosIngresosAlmacen> DetalleOtrosIngresosAlmacens { get; set; }
+        public virtual ICollection<DetalleValesSalida> DetalleValesSalidas { get; set; }
     }
 }

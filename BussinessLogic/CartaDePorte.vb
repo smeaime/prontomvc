@@ -223,6 +223,61 @@ Namespace Pronto.ERP.BO
 
 
 
+        Public CalidadGranosExtranosMerma As Double = 0
+        Public CalidadQuebradosMerma As Double = 0
+        Public CalidadDanadosMerma As Double = 0
+        Public CalidadChamicoMerma As Double = 0
+        Public CalidadRevolcadosMerma As Double = 0
+        Public CalidadObjetablesMerma As Double = 0
+        Public CalidadAmohosadosMerma As Double = 0
+        Public CalidadPuntaSombreadaMerma As Double = 0
+        Public CalidadHectolitricoMerma As Double = 0
+        Public CalidadCarbonMerma As Double = 0
+        Public CalidadPanzaBlancaMerma As Double = 0
+        Public CalidadPicadosMerma As Double = 0
+        Public CalidadVerdesMerma As Double = 0
+        Public CalidadQuemadosMerma As Double = 0
+        Public CalidadTierraMerma As Double = 0
+        Public CalidadZarandeoMerma As Double = 0
+        Public CalidadDescuentoFinalMerma As Double = 0
+        Public CalidadHumedadMerma As Double = 0
+        Public CalidadGastosFumigacionMerma As Double = 0
+
+
+        Public CalidadQuebradosRebaja As Double = 0
+        Public CalidadChamicoRebaja As Double = 0
+        Public CalidadRevolcadosRebaja As Double = 0
+        Public CalidadObjetablesRebaja As Double = 0
+        Public CalidadAmohosadosRebaja As Double = 0
+        Public CalidadPuntaSombreadaRebaja As Double = 0
+        Public CalidadHectolitricoRebaja As Double = 0
+        Public CalidadCarbonRebaja As Double = 0
+        Public CalidadPanzaBlancaRebaja As Double = 0
+        Public CalidadPicadosRebaja As Double = 0
+        Public CalidadVerdesRebaja As Double = 0
+        Public CalidadQuemadosRebaja As Double = 0
+        Public CalidadTierraRebaja As Double = 0
+        Public CalidadZarandeoRebaja As Double = 0
+        Public CalidadDescuentoFinalRebaja As Double = 0
+        Public CalidadHumedadRebaja As Double = 0
+        Public CalidadGastosFumigacionRebaja As Double = 0
+
+        Public CalidadGastosFumigacionResultado As Double = 0
+        Public CalidadHumedadResultado As Double = 0
+
+
+
+
+        'Public CartaLINQ As New CartasDePorte 'probar poniendo el "Serialization Mode" del .dbml en "Unidirectional" (porque explota al intentar meterlo en el Viewstate)
+        '-no... parecería no bastar.... probaré agregando un  " <Serializable()> _ Partial Class CartasDePorte " en un archivo aparte
+        '-sigo teniendo problemas. Al final, Mark Gravell me desanima:
+        'If this is profile serialization.... I honestly don't know if you can write your own plugin 
+        'serialization layer - I've never had need to look; but in this case I would write a 
+        'simple, non-LINQ object (a DTO) for the object properties that I actually need in my profile, and 
+        'just populate that object from LINQ, and serialize that.
+
+
+
         Public Property Id() As Integer
             Get
                 Return _Id

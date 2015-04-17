@@ -288,7 +288,7 @@ public static class Generales
         string sConexBDLMaster;
         bool esSuperadmin;
 
-        if (System.Diagnostics.Debugger.IsAttached)
+        if (System.Diagnostics.Debugger.IsAttached && false)
         {
             sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
             esSuperadmin = true;
