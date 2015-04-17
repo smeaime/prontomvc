@@ -8,6 +8,11 @@
 
     pageLayout.show('east');
 
+    if ($("#Anulada").val() == "SI") {
+        $("#grabar2").prop("disabled", true);
+        $("#anular").prop("disabled", true);
+    }
+
     ActualizarDatos()
 
     TraerNumeroComprobante()
@@ -77,6 +82,7 @@
         data = data.substring(0, data.length - 1) + '}';
         data = data.replace(/(\r\n|\n|\r)/gm, "");
         grid.jqGrid('addRowData', Id, data);
+        grid.jqGrid('setCell', Id, 'Cantidad', 1);
     };
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,21 +90,29 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $('#ListaArticulos').jqGrid({
-        url: ROOT + 'AjusteStock/DetAjusteStock/',
-        postData: { 'IdAjusteStock': function () { return $("#IdAjusteStock").val(); } },
-        editurl: ROOT + 'AjusteStock/EditGridData/',
+        url: ROOT + 'Recepcion/DetRecepcion/',
+        postData: { 'IdRecepcion': function () { return $("#IdRecepcion").val(); } },
+        editurl: ROOT + 'Recepcion/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleAjusteStock', 'IdArticulo', 'IdUnidad', 'IdColor', 'IdUbicacion', 'IdObra', 'Codigo', 'Articulo', 'Cantidad', 'Unidad', 'Partida', 'Nro. caja', 'Obra',
-                   'Ubicacion', 'Observaciones'],
+        colNames: ['Acciones', 'IdDetalleRecepcion', 'IdArticulo', 'IdUnidad', 'IdColor', 'IdUbicacion', 'IdObra', 'IdControlCalidad', 'IdDetalleRequerimiento', 'IdDetallePedido',
+                   'Numero RM', 'Item RM', 'Numero Pedido', 'Item PE', 'Codigo', 'Articulo', 'Cantidad', 'Unidad', 'Ubicacion', 'Obra', 'Partida', 'Recepcionado', 'Control de calidad',
+                   'Observaciones'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                    { name: 'IdDetalleAjusteStock', index: 'IdDetalleAjusteStock', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdDetalleRecepcion', index: 'IdDetalleRecepcion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdArticulo', index: 'IdArticulo', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdColor', index: 'IdColor', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdUbicacion', index: 'IdUbicacion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdObra', index: 'IdObra', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'IdControlCalidad', index: 'IdControlCalidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'IdDetallePedido', index: 'IdDetallePedido', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', width: 80, align: 'right', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'ItemRM', index: 'ItemRM', width: 30, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'NumeroPedido', index: 'NumeroPedido', width: 80, align: 'right', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'ItemPE', index: 'ItemPE', width: 30, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
                     {
                         name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -173,7 +187,7 @@
                         }
                     },
                     {
-                        name: 'CantidadUnidades', index: 'CantidadUnidades', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Cantidad', index: 'Cantidad', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 12, defaultValue: '',
                             dataEvents: [
@@ -182,7 +196,7 @@
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
                                     if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39 && key !== 45) { return false; }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
                         }
@@ -202,21 +216,20 @@
                             }]
                         },
                     },
-                    { name: 'Partida', index: 'Partida', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                     {
-                        name: 'NumeroCaja', index: 'NumeroCaja', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
                         editoptions: {
-                            maxlength: 3, defaultValue: '',
-                            dataEvents: [
-                            {
-                                type: 'keypress',
-                                fn: function (e) {
-                                    var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                            dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
+                            dataInit: function (elem) {
+                                $(elem).width(115);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
+                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUbicacion', this.value);
                                 }
                             }]
-                        }
+                        },
                     },
                     {
                         name: 'Obra', index: 'Obra', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
@@ -233,21 +246,9 @@
                             }]
                         },
                     },
-                    {
-                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
-                        editoptions: {
-                            dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
-                            dataInit: function (elem) {
-                                $(elem).width(115);
-                            },
-                            dataEvents: [{
-                                type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUbicacion', this.value);
-                                }
-                            }]
-                        },
-                    },
+                    { name: 'Partida', index: 'Partida', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
+                    { name: 'Recepcionado', index: 'Recepcionado', width: 100, align: 'right', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'ControlCalidad', index: 'ControlCalidad', width: 100, align: 'left', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
                     { name: 'Observaciones', index: 'Observaciones', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
@@ -273,7 +274,7 @@
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
-        sortname: 'IdDetalleAjusteStock',
+        sortname: 'IdDetalleRecepcion',
         sortorder: 'asc',
         viewrecords: true,
         width: 'auto', // 'auto',
@@ -312,44 +313,191 @@
     jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
 
+    $("#ListaDrag").jqGrid({
+        url: ROOT + 'Pedido/PedidosPendientes',
+        //postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteRecepcion': "SI" },
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['', 'IdDetallePedido', 'IdPedido', 'IdProveedor', 'IdObra', 'IdArticulo', 'IdUnidad', 'Numero Pedido', 'Sub', 'Item PE', 'Fecha pedido', 'Proveedor', 'Obra', 'Comprador',
+                   'Solicito RM', 'Fecha entrega', 'Codigo', 'Descripcion', 'Observaciones RM', 'Observaciones PE', 'Cantidad', 'Un.', 'Entregado', 'Pendiente', 'Numero RM', 'Item RM', 'Cump',
+                   'Tipo compra', 'Firmas', 'Control de calidad'],
+        colModel: [
+                    { name: 'ver', index: 'ver', hidden: true, width: 50 },
+                    { name: 'IdDetallePedido', index: 'IdDetallePedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdPedido', index: 'IdPedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdProveedor', index: 'IdProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdUnidad', index: 'IdUnidad', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'SubNumero', index: 'SubNumero', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ItemPE', index: 'ItemPE', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'FechaPedido', index: 'FechaPedido', width: 70, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false, hidden: false },
+                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 130, editable: false, hidden: false },
+                    { name: 'SolicitoRM', index: 'SolicitoRM', align: 'left', width: 130, editable: false, hidden: false },
+                    { name: 'FechaEntrega', index: 'FechaEntrega', width: 70, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'ArticuloCodigo', index: 'ArticuloCodigo', align: 'center', width: 100, editable: false, hidden: false },
+                    { name: 'ArticuloDescripcion', index: 'ArticuloDescripcion', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'ObservacionesRM', index: 'ObservacionesRM', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'ObservacionesPE', index: 'ObservacionesPE', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Unidad', index: 'Unidad', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Entregado', index: 'Entregado', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Pendiente', index: 'Pendiente', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ItemRM', index: 'ItemRM', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'TipoCompra', index: 'TipoCompra', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ControlCalidad', index: 'ControlCalidad', align: 'left', width: 150, editable: false, hidden: false }
+        ],
+        ondblClickRow: function (id) {
+            Copiar1(id, "Dbl");
+        },
+        loadComplete: function () {
+            grid = $(this);
+            $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+        },
+        pager: $('#ListaDragPager'),
+        rowNum: 15,
+        rowList: [10, 20, 50],
+        sortname: 'FechaPedido,NumeroPedido,SubNumero',
+        sortorder: "desc",
+        viewrecords: true,
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: '100%',
+        altRows: false,
+        emptyrecords: 'No hay registros para mostrar'//,
+    })
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+
+    //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
+    $('a#a_panel_este_tab1').text('Pedidos pendientes');
+    //$('a#a_panel_este_tab5').remove();  //    
+
+    ConectarGrillas1();
+
+    $('#a_panel_este_tab1').click(function () {
+        ConectarGrillas1();
+    });
+
+    function ConectarGrillas1() {
+        $("#ListaDrag").jqGrid('gridDnD', {
+            connectWith: '#ListaArticulos',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                            .addClass("ui-state-error ui-widget")
+                            .css({ border: "5px ridge tomato" });
+                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                Copiar1($(ui.draggable).attr("id"), "DnD");
+                //var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+                //var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+            }
+        });
+    }
+
+    function Copiar1(idsource, Origen) {
+        var acceptId = idsource, IdEntidad = 0, mPrimerItem = true, IdObra = 0;
+        var $gridOrigen = $("#ListaDrag"), $gridDestino = $("#ListaArticulos");
+
+        var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
+        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+
+        try {
+            IdEntidad = getdata['IdDetallePedido'];
+            IdObra = getdata['IdObra'];
+
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#Proveedor").val(getdata['Proveedor']);
+            $("#IdObra").val(getdata['IdObra']);
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Pedido/DetPedidosSinFormato/',
+                data: { IdDetallePedido: IdEntidad },
+                dataType: "Json",
+                success: function (data) {
+                    var longitud = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+                        if (data[i].Pendiente > 0) {
+                            tmpdata['IdDetalleRecepcion'] = Id2;
+                            tmpdata['IdArticulo'] = data[i].IdArticulo;
+                            tmpdata['IdUnidad'] = data[i].IdUnidad;
+                            tmpdata['IdColor'] = data[i].IdColor;
+                            tmpdata['IdObra'] = data[i].IdObra;
+                            tmpdata['Obra'] = data[i].Obra;
+                            tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
+                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                            tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+                            tmpdata['Codigo'] = data[i].ArticuloCodigo;
+                            tmpdata['Articulo'] = data[i].ArticuloDescripcion;
+                            tmpdata['Cantidad'] = data[i].Pendiente;
+                            tmpdata['Unidad'] = data[i].Unidad;
+                            tmpdata['Observaciones'] = data[i].ObservacionesPE;
+                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                            tmpdata['ItemRM'] = data[i].ItemRM;
+                            tmpdata['NumeroPedido'] = data[i].NumeroPedido;
+                            tmpdata['ItemPE'] = data[i].ItemPE;
+                            tmpdata['Recepcionado'] = data[i].Entregado;
+                            tmpdata['ControlCalidad'] = data[i].ControlCalidad;
+                            
+                            getdata = tmpdata;
+
+                            if (Origen == "DnD") {
+                                if (mPrimerItem) {
+                                    dataIds = $gridDestino.jqGrid('getDataIDs');
+                                    Id = dataIds[0];
+                                    $gridDestino.jqGrid('setRowData', Id, getdata);
+                                    mPrimerItem = false;
+                                } else {
+                                    Id = Id2
+                                    $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+                                }
+                            } else {
+                                Id = Id2
+                                $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+                            };
+                        }
+                    }
+                    ActualizarDatos();
+                }
+            });
+        } catch (e) { }
+
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
     ////////////////////////////////////////////////////////// CHANGES //////////////////////////////////////////////////////////
 
-    //$("input[name=Destino]:radio").change(function () {
-    //    valor = $("input[name='Destino']:checked").val();
-    //    if (valor == "2") {
-    //        $('#EntidadLabel').html("Proveedor");
-    //        $("#Cliente").css("display", "none");
-    //        $("#Proveedor").css("display", "block");
-    //        $('#Cliente').val("");
-    //        $('#IdCliente').val("");
-    //    } else {
-    //        $('#EntidadLabel').html("Cliente");
-    //        $("#Proveedor").css("display", "none");
-    //        $("#Cliente").css("display", "block");
-    //        $('#Proveedor').val("");
-    //        $('#IdProveedor').val("");
-    //    }
-    //    $("#CondicionIva").val("");
-    //    $("#Cuit").val("");
-    //    $("#Direccion").val("");
-    //    $("#Localidad").val("");
-    //    $("#Provincia").val("");
-    //    $("#CodigoPostal").val("");
-    //    $("#Email").val("");
-    //    $("#Telefono").val("");
-    //})
+    $("input[name=TipoRecepcion]:radio").change(function () {
+        valor = $("input[name='TipoRecepcion']:checked").val();
+        if (valor == "1") {
+            //$("#Proveedor").css("display", "block");
+            $('#Proveedor:input').removeAttr('disabled');
+            $('#IdProveedor').val("");
+        } else {
+            //$("#Proveedor").css("display", "none");
+            $('#Proveedor').val("");
+            $('#Proveedor:input').attr('disabled', 'disabled');
+            $('#IdProveedor').val("");
+        }
+        $("#Cuit").val("");
+        $("#Direccion").val("");
+        $("#Localidad").val("");
+        $("#Provincia").val("");
+        $("#CodigoPostal").val("");
+        $("#Email").val("");
+        $("#Telefono").val("");
 
-    $("#IdAprobo").change(function () {
-        var IdAprobo = $("#IdAprobo > option:selected").attr("value");
-        var Aprobo = $("#IdAprobo > option:selected").html();
-        $("#Aux1").val(IdAprobo);
-        $("#Aux2").val(Aprobo);
-        $("#Aux3").val("");
-        $("#Aux10").val("");
-        $('#dialog-password').data('Combo', 'Aprobo');
-        $('#dialog-password').dialog('open');
-        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
-    });
+    })
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
@@ -360,9 +508,10 @@
 
         var cabecera = $("#formid").serializeObject();
 
-        cabecera.NumeroAjusteStock = $("#NumeroAjusteStock").val();
+        cabecera.NumeroRecepcionAlmacen = $("#NumeroRecepcionAlmacen").val();
+        cabecera.Obra = "";
 
-        cabecera.DetalleAjustesStocks = [];
+        cabecera.DetalleRecepciones = [];
         $grid = $('#ListaArticulos');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -370,14 +519,14 @@
         for (i = 0; i < dataIds.length; i++) {
             try {
                 data = $grid.jqGrid('getRowData', dataIds[i]);
-                iddeta = data['IdDetalleAjusteStock'];
+                iddeta = data['IdDetalleRecepcion'];
                 if (!iddeta) {
                     iddeta = nuevo;
                     nuevo--;
                 }
 
-                data1 = '{"IdDetalleAjusteStock":"' + iddeta + '",';
-                data1 = data1 + '"IdAjusteStock":"' + $("#IdAjusteStock").val() + '",';
+                data1 = '{"IdDetalleRecepcion":"' + iddeta + '",';
+                data1 = data1 + '"IdRecepcion":"' + $("#IdRecepcion").val() + '",';
                 for (j = 0; j < colModel.length; j++) {
                     cm = colModel[j]
                     if (cm.label === 'TB') {
@@ -388,7 +537,7 @@
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetalleAjustesStocks.push(data2);
+                cabecera.DetalleRecepciones.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -406,13 +555,13 @@
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'AjusteStock/BatchUpdate',
+            url: ROOT + 'Recepcion/BatchUpdate',
             dataType: 'json',
-            data: JSON.stringify({ AjusteStock: cabecera }),
+            data: JSON.stringify({ Recepcion: cabecera }),
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "AjusteStock/Edit/" + result.IdAjusteStock);
+                    window.location = (ROOT + "Recepcion/Edit/" + result.IdRecepcion);
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');
@@ -447,42 +596,13 @@
         });
     });
 
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        url: ROOT + 'Home/UploadFiles',
-        autoUpload: true,
-        done: function (e, data) {
-            var i = ProximoAdjuntoLibre();
-            if (i == 0) {
-                alert("No hay mas adjuntos disponibles");
-                return
-            }
-            $("#ArchivoAdjunto" + i).val(data.result.name)
-            //$('.file_name').html(data.result.name);
-            //$('.file_type').html(data.result.type);
-            //$('.file_size').html(data.result.size);
-        }
-    }).on('fileuploadprogressall', function (e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('.progress .progress-bar').css('width', progress + '%');
-    });
-
 });
 
 function ActualizarDatos() {
-    var IdCodigoIva = 0, id = 0;
+    var id = 0;
 
-    //id = $("#IdCliente").val();
-    //if (id.length > 0) { MostrarDatosCliente(id); }
-
-}
-
-function ProximoAdjuntoLibre() {
-    for (i = 1; i <= 2; i++) {
-        var adj = $("#ArchivoAdjunto" + i).val();
-        if (adj.length == 0) { return i; }
-    }
-    return 0;
+    id = $("#IdProveedor").val();
+    if (id.length > 0) { MostrarDatosProveedor(id); }
 }
 
 function pickdates(id) {
@@ -555,8 +675,32 @@ function CheckValidationErrorResponse(response, form, summaryElement) {
     });
 }
 
+function MostrarDatosProveedor(Id) {
+    var Entidad = "";
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Proveedor/GetProveedorPorId/',
+        data: { Id: Id },
+        success: function (result) {
+            if (result.length > 0) {
+                Entidad = result[0].value;
+                $("#Proveedor").val(Entidad);
+                $("#Cuit").val(result[0].Cuit);
+                $("#Direccion").val(result[0].Direccion);
+                $("#Localidad").val(result[0].Localidad);
+                $("#Provincia").val(result[0].Provincia);
+                $("#CodigoPostal").val(result[0].CodigoPostal);
+                $("#Email").val(result[0].Email);
+                $("#Telefono").val(result[0].Telefono);
+            }
+        }
+    });
+    return Entidad;
+}
+
 function TraerNumeroComprobante() {
-    var Id = $("#IdAjusteStock").val();
+    var Id = $("#IdRecepcion").val();
 
     if (Id <= 0) {
         $.ajax({
@@ -567,8 +711,8 @@ function TraerNumeroComprobante() {
             dataType: "json",
             success: function (result) {
                 if (result.length > 0) {
-                    var ProximoNumero = result[0]["ProximoNumeroAjusteStock"];
-                    $("#NumeroAjusteStock").val(ProximoNumero);
+                    var ProximoNumero = result[0]["ProximoNumeroInternoRecepcion"];
+                    $("#NumeroRecepcionAlmacen").val(ProximoNumero);
                 }
             }
         });

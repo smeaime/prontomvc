@@ -84,21 +84,22 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $('#ListaArticulos').jqGrid({
-        url: ROOT + 'AjusteStock/DetAjusteStock/',
-        postData: { 'IdAjusteStock': function () { return $("#IdAjusteStock").val(); } },
-        editurl: ROOT + 'AjusteStock/EditGridData/',
+        url: ROOT + 'OtroIngresoAlmacen/DetOtroIngresoAlmacen/',
+        postData: { 'IdOtroIngresoAlmacen': function () { return $("#IdOtroIngresoAlmacen").val(); } },
+        editurl: ROOT + 'OtroIngresoAlmacen/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleAjusteStock', 'IdArticulo', 'IdUnidad', 'IdColor', 'IdUbicacion', 'IdObra', 'Codigo', 'Articulo', 'Cantidad', 'Unidad', 'Partida', 'Nro. caja', 'Obra',
-                   'Ubicacion', 'Observaciones'],
+        colNames: ['Acciones', 'IdDetalleOtroIngresoAlmacen', 'IdArticulo', 'IdUnidad', 'IdColor', 'IdUbicacion', 'IdObra', 'IdMoneda', 'Codigo', 'Articulo', 'Cantidad', 'Unidad',
+                   'Partida', 'Obra', 'Ubicacion', 'CostoUnitario', 'Moneda', 'Observaciones'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                    { name: 'IdDetalleAjusteStock', index: 'IdDetalleAjusteStock', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+                    { name: 'IdDetalleOtroIngresoAlmacen', index: 'IdDetalleOtroIngresoAlmacen', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdArticulo', index: 'IdArticulo', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdColor', index: 'IdColor', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdUbicacion', index: 'IdUbicacion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdObra', index: 'IdObra', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'IdMoneda', index: 'IdMoneda', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     {
                         name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -173,7 +174,7 @@
                         }
                     },
                     {
-                        name: 'CantidadUnidades', index: 'CantidadUnidades', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Cantidad', index: 'Cantidad', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 12, defaultValue: '',
                             dataEvents: [
@@ -204,21 +205,6 @@
                     },
                     { name: 'Partida', index: 'Partida', width: 80, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
                     {
-                        name: 'NumeroCaja', index: 'NumeroCaja', width: 100, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
-                        editoptions: {
-                            maxlength: 3, defaultValue: '',
-                            dataEvents: [
-                            {
-                                type: 'keypress',
-                                fn: function (e) {
-                                    var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                }
-                            }]
-                        }
-                    },
-                    {
                         name: 'Obra', index: 'Obra', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
                         editoptions: {
                             dataUrl: ROOT + 'Obra/GetObrasCodigo',
@@ -248,6 +234,36 @@
                             }]
                         },
                     },
+                    {
+                        name: 'CostoUnitario', index: 'CostoUnitario', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        editoptions: {
+                            maxlength: 12, defaultValue: '',
+                            dataEvents: [
+                            {
+                                type: 'keypress',
+                                fn: function (e) {
+                                    var key = e.charCode || e.keyCode;
+                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39 && key !== 45) { return false; }
+                                }
+                            }]
+                        }
+                    },
+                    {
+                        name: 'Moneda', index: 'Moneda', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        editoptions: {
+                            dataUrl: ROOT + 'Moneda/GetMonedas',
+                            dataInit: function (elem) {
+                                $(elem).width(115);
+                            },
+                            dataEvents: [{
+                                type: 'change', fn: function (e) {
+                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
+                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdMoneda', this.value);
+                                }
+                            }]
+                        },
+                    },
                     { name: 'Observaciones', index: 'Observaciones', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'textarea', label: 'TB' }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
@@ -273,7 +289,7 @@
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
-        sortname: 'IdDetalleAjusteStock',
+        sortname: 'IdDetalleOtroIngresoAlmacen',
         sortorder: 'asc',
         viewrecords: true,
         width: 'auto', // 'auto',
@@ -339,9 +355,21 @@
     //    $("#Telefono").val("");
     //})
 
-    $("#IdAprobo").change(function () {
-        var IdAprobo = $("#IdAprobo > option:selected").attr("value");
-        var Aprobo = $("#IdAprobo > option:selected").html();
+    $("#Emitio").change(function () {
+        var IdEmitio = $("#Emitio > option:selected").attr("value");
+        var Emitio = $("#Emitio > option:selected").html();
+        $("#Aux1").val(IdEmitio);
+        $("#Aux2").val(Emitio);
+        $("#Aux3").val("");
+        $("#Aux10").val("");
+        $('#dialog-password').data('Combo', 'Emitio');
+        $('#dialog-password').dialog('open');
+        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+    });
+
+    $("#Aprobo").change(function () {
+        var IdAprobo = $("#Aprobo > option:selected").attr("value");
+        var Aprobo = $("#Aprobo > option:selected").html();
         $("#Aux1").val(IdAprobo);
         $("#Aux2").val(Aprobo);
         $("#Aux3").val("");
@@ -360,9 +388,9 @@
 
         var cabecera = $("#formid").serializeObject();
 
-        cabecera.NumeroAjusteStock = $("#NumeroAjusteStock").val();
+        cabecera.NumeroOtroIngresoAlmacen = $("#NumeroOtroIngresoAlmacen").val();
 
-        cabecera.DetalleAjustesStocks = [];
+        cabecera.DetalleOtrosIngresosAlmacens = [];
         $grid = $('#ListaArticulos');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
@@ -370,14 +398,14 @@
         for (i = 0; i < dataIds.length; i++) {
             try {
                 data = $grid.jqGrid('getRowData', dataIds[i]);
-                iddeta = data['IdDetalleAjusteStock'];
+                iddeta = data['IdDetalleOtroIngresoAlmacen'];
                 if (!iddeta) {
                     iddeta = nuevo;
                     nuevo--;
                 }
 
-                data1 = '{"IdDetalleAjusteStock":"' + iddeta + '",';
-                data1 = data1 + '"IdAjusteStock":"' + $("#IdAjusteStock").val() + '",';
+                data1 = '{"IdDetalleOtroIngresoAlmacen":"' + iddeta + '",';
+                data1 = data1 + '"IdOtroIngresoAlmacen":"' + $("#IdOtroIngresoAlmacen").val() + '",';
                 for (j = 0; j < colModel.length; j++) {
                     cm = colModel[j]
                     if (cm.label === 'TB') {
@@ -388,7 +416,7 @@
                 data1 = data1.substring(0, data1.length - 1) + '}';
                 data1 = data1.replace(/(\r\n|\n|\r)/gm, "");
                 data2 = JSON.parse(data1);
-                cabecera.DetalleAjustesStocks.push(data2);
+                cabecera.DetalleOtrosIngresosAlmacens.push(data2);
             }
             catch (ex) {
                 alert("SerializaForm(): No se pudo serializar el comprobante. Quizas convenga grabar todos los renglones de la jqgrid (saverow) antes de hacer el post ajax. En cuanto sacas los renglones del modo edicion, no tira más este error  " + ex);
@@ -406,13 +434,13 @@
         $.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: ROOT + 'AjusteStock/BatchUpdate',
+            url: ROOT + 'OtroIngresoAlmacen/BatchUpdate',
             dataType: 'json',
-            data: JSON.stringify({ AjusteStock: cabecera }),
+            data: JSON.stringify({ OtroIngresoAlmacen: cabecera }),
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "AjusteStock/Edit/" + result.IdAjusteStock);
+                    window.location = (ROOT + "OtroIngresoAlmacen/Edit/" + result.IdOtroIngresoAlmacen);
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');
@@ -556,7 +584,7 @@ function CheckValidationErrorResponse(response, form, summaryElement) {
 }
 
 function TraerNumeroComprobante() {
-    var Id = $("#IdAjusteStock").val();
+    var Id = $("#IdOtroIngresoAlmacen").val();
 
     if (Id <= 0) {
         $.ajax({
@@ -567,8 +595,8 @@ function TraerNumeroComprobante() {
             dataType: "json",
             success: function (result) {
                 if (result.length > 0) {
-                    var ProximoNumero = result[0]["ProximoNumeroAjusteStock"];
-                    $("#NumeroAjusteStock").val(ProximoNumero);
+                    var ProximoNumero = result[0]["ProximoNumeroOtroIngresoAlmacen"];
+                    $("#NumeroOtroIngresoAlmacen").val(ProximoNumero);
                 }
             }
         });
