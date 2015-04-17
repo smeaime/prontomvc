@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -42,7 +42,7 @@ using System.IO;
 namespace ProntoMVC.Controllers
 {
 
-   // [Authorize(Roles = "Administrador,SuperAdmin,Compras,FondosFijos")] //ojo que el web.config tambien te puede bochar hacia el login
+    // [Authorize(Roles = "Administrador,SuperAdmin,Compras,FondosFijos")] //ojo que el web.config tambien te puede bochar hacia el login
     public partial class ComprobanteProveedorController : ProntoBaseController2 // ProntoBaseController
     {
 
@@ -147,7 +147,7 @@ namespace ProntoMVC.Controllers
         }
         public virtual ViewResult IndexExterno()
         {
-           // if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
+            // if (!PuedeLeer(enumNodos)) throw new Exception("No tenés permisos");
 
             //var ComprobantesProveedores = fondoFijoService.ObtenerTodos().Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
@@ -1174,7 +1174,7 @@ namespace ProntoMVC.Controllers
 
 
 
-                [HttpPost]
+        [HttpPost]
         public virtual JsonResult BatchUpdate_CuentaCorriente(ViewModelComprobanteProveedor ComprobanteProveedor)
         {
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
@@ -1794,10 +1794,15 @@ namespace ProntoMVC.Controllers
             {
                 return View(vm);
             }
-            else if (ComprobanteProveedor.IdCuenta != null && ComprobanteProveedor.IdProveedor == null)
+            else if (ComprobanteProveedor.IdCuenta != null && ComprobanteProveedor.IdProveedor == null && ComprobanteProveedor.IdCuentaOtros == null)
             {
                 // return View("EditFF", (ViewModelComprobanteProveedor)ComprobanteProveedor);
                 return View("EditFF", vm);
+            }
+            else if (ComprobanteProveedor.IdCuentaOtros != null)
+            {
+                // return View("EditFF", (ViewModelComprobanteProveedor)ComprobanteProveedor);
+                return View("EditOtros", vm);
             }
             else
             {
@@ -1816,7 +1821,12 @@ namespace ProntoMVC.Controllers
 
         }
 
+        public virtual ActionResult EditOtros(int id)
+        {
+            if (!PuedeLeer(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
+            return Edit(id);
 
+        }
 
 
 
@@ -3624,6 +3634,79 @@ namespace ProntoMVC.Controllers
 
         }
 
+
+
+
+
+
+        class ss
+        {
+
+            public int aa;
+            public string s;
+
+        }
+
+
+        public virtual JsonResult ListaPorcentajesIVA2()
+        {
+
+
+
+
+
+
+            List<ss> combo2 = new List<ss>();
+            Dictionary<int, string> combo = new Dictionary<int, string>();
+            //Dictionary<string, string> combo = new Dictionary<string, string>();
+            //foreach (ControlCalidad u in fondoFijoService.ControlesCalidads.OrderBy(x => x.Descripcion).ToList())
+            //                combo.Add(u.IdControlCalidad, u.Descripcion);
+
+            string s = " 0:0 ";
+
+
+
+            Parametros parametros = fondoFijoService.Parametros();
+
+            combo.Add(0, "0");
+            //combo.Add("0", "0");
+
+            for (int n = 1; n <= 10; n++)
+            {
+
+
+                var pIVAComprasPorcentaje = parametros.GetType().GetProperty("IVAComprasPorcentaje" + n);
+                decimal IVAComprasPorcentajeval = (decimal)(pIVAComprasPorcentaje.GetValue(parametros, null) ?? 0M);
+
+                var pIdCuentaIVACompras = parametros.GetType().GetProperty("IdCuentaIvaCompras" + n);
+                int? IdCuentaIVACompras = (int?)pIdCuentaIVACompras.GetValue(parametros, null);
+
+
+                if (IdCuentaIVACompras == null)
+                {
+                    continue;
+                }
+
+                //  combo.Add(IdCuentaIVACompras ?? 0, IVAComprasPorcentajeval.ToString());
+                // combo.Add(IVAComprasPorcentajeval.ToString(), IVAComprasPorcentajeval.ToString());
+                combo.Add(n, IVAComprasPorcentajeval.ToString());
+
+                ss sd = new ss();
+                sd.aa = n;
+                sd.s = IVAComprasPorcentajeval.ToString();
+
+                combo2.Add(sd);
+
+                s += "; " + n + ":" + IVAComprasPorcentajeval.ToString() + " ";
+            }
+
+
+            //return " 21:21 ; 10.5:10.5 ; 27:27; 0:0; 18.5:18.5 ; 9.5:9.5 ";
+
+
+            return Json(combo2, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult PorcentajesIVAaaa()
         {
 
@@ -4175,7 +4258,7 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-        void CargarViewBag(ComprobanteProveedor o)
+        void CargarViewBag(ViewModelComprobanteProveedor o)
         {
 
 
@@ -5055,10 +5138,10 @@ namespace ProntoMVC.Controllers
 
 
 
-            
+
             //acá tengo que ver  el tipo del viewmodel
 
-            if (o.MetaTipo=="Cta Cte")
+            if (o.MetaTipo == "Cta Cte")
             {
 
 
@@ -5069,6 +5152,36 @@ namespace ProntoMVC.Controllers
                 //    // return false;
                 //}
             }
+
+
+
+            if (o.IdProveedor == null && o.MetaTipo == "Cta Cte")
+            {
+
+                sErrorMsg += "\n" + "Falta el proveedor";
+            }
+
+
+            if ((o.IdCuentaOtros ?? 0) <= 0 && o.MetaTipo == "Otros") // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
+            {
+                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
+                //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
+                sErrorMsg += "\n" + "Falta la cuenta";
+
+            }
+
+            if ((o.IdCuenta ?? 0) <= 0 && o.MetaTipo == "Fondo fijo")
+            {
+
+                //         Case 	When cp.IdProveedor is not null Then 'Cta. cte.' 
+                //When cp.IdCuenta is not null Then 'F.fijo' 
+                //When cp.IdCuentaOtros is not null Then 'Otros' 
+
+
+                //    // se pone el proveedor de ff en el idproveedoreventual???????
+            }
+
+
 
             if (o.IdProveedor != null)          // cta cte
             {
@@ -5141,18 +5254,8 @@ namespace ProntoMVC.Controllers
 
 
 
-            if ((o.IdProveedorEventual ?? 0) <= 0)
-            {
 
-                //         Case 	When cp.IdProveedor is not null Then 'Cta. cte.' 
-                //When cp.IdCuenta is not null Then 'F.fijo' 
-                //When cp.IdCuentaOtros is not null Then 'Otros' 
-
-
-                //    // se pone el proveedor de ff en el idproveedoreventual???????
-            }
-
-
+            
             if (o.IdComprobanteProveedor <= 0)
             {
                 //  string connectionString = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
@@ -5194,8 +5297,8 @@ namespace ProntoMVC.Controllers
             //    // verifico que NoAsyncTimeoutAttribute exista
 
 
-
-
+            
+        
 
             //    try
             //    {
@@ -5218,20 +5321,10 @@ namespace ProntoMVC.Controllers
             if ((o.IdCondicionCompra ?? 0) <= 0) o.IdCondicionCompra = 247;
 
 
-
-
-
-            if ((o.IdCuenta ?? 0) <= 0) // && o.IdTipoComprobante == 1) // agregar al modelo de la vista (porque es un dato que no está en el modelo sql) si es ctacte/fondofijo/otros
-            {
-                // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-           //     sErrorMsg += "\n" + "Falta la cuenta de fondo fijo";
-
-            }
-
             if ((o.NumeroRendicionFF ?? 0) <= 0)
             {
                 // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
-            //    sErrorMsg += "\n" + "Falta el número de rendición";
+                //    sErrorMsg += "\n" + "Falta el número de rendición";
                 // return false;
             }
 
@@ -5396,7 +5489,7 @@ namespace ProntoMVC.Controllers
                 {
                     ErrHandler.WriteError(ex);
                     nombre = " El item ";
-                    sErrorMsg += "\n " + nombre + " no tiene una cuenta válida";
+                    sErrorMsg += "\n " + nombre + " (importe " + x.Importe.NullSafeToString() + ")  no tiene una cuenta válida";
 
                 }
 
@@ -5971,7 +6064,7 @@ namespace ProntoMVC.Controllers
                 .Include(x => x.Proveedor)
                 .Include(x => x.Proveedore)
                 .Include(x => x.Obra)
-                .Where(x => (x.Confirmado ?? "SI") != "NO")
+                //.Where(x => (x.Confirmado ?? "SI") != "NO") // verificar si lo de "confirmado" solo se debe revisar para fondos fijos
                           .AsQueryable();
 
 
@@ -6641,13 +6734,13 @@ namespace ProntoMVC.Controllers
 
 
 
-            if (IdComprobanteProveedor <= 0)
-            {
-                // le agrego un renglon vacío para pasarle los ivas para el encabezado
-                var item = new DetalleComprobantesProveedore();
-                item.IdDetalleComprobanteProveedor = -1;
-                data.Add(item);
-            }
+            //if (IdComprobanteProveedor <= 0)
+            //{
+            //    // le agrego un renglon vacío para pasarle los ivas para el encabezado
+            //    var item = new DetalleComprobantesProveedore();
+            //    item.IdDetalleComprobanteProveedor = -1;
+            //    data.Add(item);
+            //}
 
 
 

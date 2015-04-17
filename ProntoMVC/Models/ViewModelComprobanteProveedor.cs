@@ -156,6 +156,7 @@ namespace ProntoMVC.ViewModels
         public virtual Proveedor Proveedor { get; set; }
         public virtual Proveedor Proveedore { get; set; }
         public virtual Cuenta Cuenta { get; set; }
+        public virtual Cuenta Cuenta1 { get; set; }
         public virtual Obra Obra { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
     }
