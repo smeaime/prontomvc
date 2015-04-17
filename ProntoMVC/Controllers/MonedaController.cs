@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -307,6 +307,15 @@ namespace ProntoMVC.Controllers
             Dictionary<int, string> monedas = new Dictionary<int, string>();
             foreach (Moneda u in db.Monedas.OrderBy(x => x.Nombre).ToList())
                 monedas.Add(u.IdMoneda, u.Nombre);
+
+            return PartialView("Select", monedas);
+        }
+
+        public virtual ActionResult GetMonedas2()
+        {
+            Dictionary<int, string> monedas = new Dictionary<int, string>();
+            foreach (Moneda u in db.Monedas.OrderBy(x => x.Nombre).ToList())
+                monedas.Add(u.IdMoneda, u.Abreviatura);
 
             return PartialView("Select", monedas);
         }

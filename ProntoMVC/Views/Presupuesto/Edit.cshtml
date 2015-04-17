@@ -220,83 +220,89 @@
                 </div>
                 <!--/row-->
                 <div class="accordion" id="accordion2">
-                    <div class="accordion-group" style="border: 0px; padding: 0px;">
-                        <div class="accordion-heading" style="border: 0px; padding: 0px;">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                               style="border: 0px; padding: 0px;">más...</a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
-                            @*si pones "collapse in" empieza abierto*@
-                            <div class="accordion-inner" style="border: 0px; padding: 0px;">
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Aprobo)
+
+
+
+
+                        <div class="accordion-group" style="border: 0px; padding: 0px;">
+                            <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
+                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
+                                    más...
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
+                                @*si pones "collapse in" empieza abierto*@
+                                <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Aprobo, "Aprobo")
+                                            @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Aprobo)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span8 lightblue">
+                                            @Html.LabelFor(model => model.Detalle)
+                                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Detalle)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span8 lightblue">
-                                        @Html.LabelFor(model => model.Detalle)
-                                        @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Detalle)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
+                                            @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.IdCondicionCompra)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Validez, "Validez")
+                                            @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Validez)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Referencia, "Referencia")
+                                            @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Referencia)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.IdCondicionCompra)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
+                                            @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Garantia, "Garantia")
+                                            @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Garantia)
+                                        </div>
+                                        <!--/span-->
+                                        <div class="span4 lightblue">
+                                            @Html.LabelFor(model => model.Contacto, "Contacto")
+                                            @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Contacto)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Validez, "Validez")
-                                        @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Validez)
+                                    <!--/row-->
+                                    <div class="row-fluid">
+                                        <div class="span12 lightblue">
+                                            @Html.LabelFor(model => model.Observaciones)
+                                            @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                                            @Html.ValidationMessageFor(model => model.Observaciones)
+                                        </div>
+                                        <!--/span-->
                                     </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Referencia, "Referencia")
-                                        @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Referencia)
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span3 lightblue">
-                                        @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
-                                    </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Garantia, "Garantia")
-                                        @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Garantia)
-                                    </div>
-                                    <!--/span-->
-                                    <div class="span4 lightblue">
-                                        @Html.LabelFor(model => model.Contacto, "Contacto")
-                                        @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Contacto)
-                                    </div>
-                                    <!--/span-->
-                                </div>
-                                <!--/row-->
-                                <div class="row-fluid">
-                                    <div class="span11 lightblue">
-                                        @Html.LabelFor(model => model.Observaciones)
-                                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
-                                        @Html.ValidationMessageFor(model => model.Observaciones)
-                                    </div>
-                                    <!--/span-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <!--/row-->
                 <div class="row-fluid">
                     <div id="divGrilla" class="span12 lightblue">
@@ -704,6 +710,18 @@
             userDataOnFooter: true
             //loadonce: true,
             // caption: '<b>ITEMS DE LA SOLICITUD DE COTIZACION</b>'
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            // http://stackoverflow.com/questions/14662632/jqgrid-celledit-in-json-data-shows-url-not-set-alert
+         ,
+            cellEdit: true,
+            cellsubmit: 'clientArray'
+        , editurl: ROOT + 'Presupuesto/EditGridData/' // pinta que esta es la papa: editurl con la url, y cellsubmit en clientarray
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 
@@ -1318,6 +1336,123 @@
         return [success, message, new_id];
     }
 
+
+
+
+    function copiarArticulo(id) {
+
+
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+            LogJavaScript("Error en Script copiarArticulo   ", e);
+        }
+
+        //sacarDeEditMode();
+
+        GrabarGrillaLocal()
+
+
+
+        var acceptId = id;
+        var getdata = $("#ListaDrag").jqGrid('getRowData', acceptId);
+        var j = 0, tmpdata = {}, dropname;
+        var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
+        var prox = ProximoNumeroItem();
+        try {
+            //					for (var key in getdata) {
+            //						if(getdata.hasOwnProperty(key) && dropmodel[j]) {
+            //							dropname = dropmodel[j].name;
+            //							tmpdata[dropname] = getdata[key];
+            //						}
+            //						j++;
+            //					}
+            tmpdata['IdArticulo'] = getdata['IdArticulo'];
+            tmpdata['Codigo'] = getdata['Codigo'];
+            tmpdata['Descripcion'] = getdata['Descripcion'];
+            tmpdata['OrigenDescripcion'] = 1;
+            var now = new Date();
+            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+            tmpdata['FechaEntrega'] = currentDate;
+            tmpdata['IdUnidad'] = getdata['IdUnidad'];
+            tmpdata['Unidad'] = getdata['Unidad'];
+            tmpdata['IdDetallePresupuesto'] = 0;
+            tmpdata['NumeroItem'] = prox++;
+
+
+            tmpdata['PorcentajeIva'] = getdata['Iva'].replace(",", ".");
+            tmpdata['Cantidad'] = 1;
+            tmpdata['FechaEntrega'] = $("#FechaIngreso").val();
+
+
+            getdata = tmpdata;
+        } catch (e) { }
+
+        var idazar = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+        ///////////////
+        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+        ///////////////
+        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+        //alert(segundorenglon);
+        if (segundorenglon.indexOf("dnd") != -1) {
+            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            $("#Lista").jqGrid('delRowData', segundorenglon);
+        }
+        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+        ///////////////
+        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+        ///////////////
+
+        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+        var pos = TraerPosicionLibre();
+        if (pos == null) {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+        }
+        else {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+        }
+        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+        //RefrescarOrigenDescripcion();
+
+        AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+        //        rows = $("#Lista").getGridParam("reccount");
+        //        if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+    }
+
+
     function ConectarGrillas1() {
         // connect grid1 with grid2
         $("#ListaDrag").jqGrid('gridDnD', {
@@ -1331,10 +1466,19 @@
             beforedrop: function (ev, ui, getdata, $source, $target) {
             },
             ondrop: function (ev, ui, getdata) {
+
                 var acceptId = $(ui.draggable).attr("id");
                 var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
                 var j = 0, tmpdata = {}, dropname;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+
+                var IdArticulo = getdata['IdArticulo'];
+                copiarArticulo(IdArticulo);
+                $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+                return;
+
+
+
                 try {
                     tmpdata['IdArticulo'] = getdata['IdArticulo'];
                     tmpdata['Codigo'] = getdata['Codigo'];
@@ -1463,8 +1607,33 @@
                                 tmpdata['FechaEntrega'] = displayDate;
                                 tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                                 getdata = tmpdata;
-                                grid = Math.ceil(Math.random() * 1000000);
-                                $("#Lista").jqGrid('addRowData', grid, getdata);
+                                idazar = Math.ceil(Math.random() * 1000000);
+
+                                //    $("#Lista").jqGrid('addRowData', idazar, getdata);
+
+
+                                ///////////////
+                                // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+                                ///////////////
+
+                                //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+                                var pos = TraerPosicionLibre();
+                                if (pos == null) {
+                                    $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+                                }
+                                else {
+                                    $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+                                }
+                                //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+                                // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+                                // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+                                //////////////////////////////////////////////////////////////////////////////////
+                                //////////////////////////////////////////////////////////////////////////////////
+                                //////////////////////////////////////////////////////////////////////////////////
+
+
                             }
                         }
                     });
@@ -1473,6 +1642,133 @@
             }
         });
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    function CopiarPresupuesto(acceptId, ui) {
+
+
+        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+        GrabarGrillaLocal()
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#DescripcionProveedor").val(getdata['Proveedor']);
+
+
+
+            //me traigo los datos de detalle
+            var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
+                data: { IdPresupuesto: IdPresupuesto },
+                dataType: "Json",
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
+                    for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        tmpdata['Unidad'] = data[i].Abreviatura;
+                        tmpdata['IdDetallePedido'] = 0;
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+                        if (true) {
+                            // fecha de hoy
+                            var now = new Date();
+                            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                            tmpdata['FechaEntrega'] = currentDate;
+                        }
+                        else {
+                            // fecha del rm
+                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                            var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                            tmpdata['FechaEntrega'] = displayDate;
+                        }
+                        tmpdata['FechaNecesidad'] = displayDate;
+
+                        ///////////////////////////////////////////////////////////////////
+
+
+                        tmpdata['Precio'] = data[i].Precio;
+                        tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                        tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                        tmpdata['ImporteIva'] = data[i].ImporteIva;
+                        tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                        tmpdata['Observaciones'] = data[i].Observaciones;
+
+
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                        tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                        getdata = tmpdata;
+                        grid = Math.ceil(Math.random() * 1000000);
+                        $("#Lista").jqGrid('addRowData', grid, getdata);
+                    }
+
+
+                    //                rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+
+                    Validar();
+                }
+
+            });
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+        var grid;
+        grid = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
 
     function proveedorSeleccionado(event, ui) {
         //			var producto = ui.item.value;

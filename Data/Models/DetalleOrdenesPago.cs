@@ -23,6 +23,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> ImportePagadoSinImpuestos { get; set; }
         public Nullable<int> IdTipoRetencionGanancia { get; set; }
         public Nullable<int> IdIBCondicion { get; set; }
+        public Nullable<decimal> ImporteRetencionSUSS { get; set; }
     
         public virtual OrdenPago OrdenesPago { get; set; }
     }

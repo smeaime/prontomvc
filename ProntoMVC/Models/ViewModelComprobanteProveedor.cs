@@ -22,6 +22,8 @@ namespace ProntoMVC.ViewModels
         public Nullable<int> IdTipoComprobante { get; set; }
         public Nullable<System.DateTime> FechaComprobante { get; set; }
 
+        public string MetaTipo { get; set; }
+
         [Required]
         [Display(Name = "Letra del Comprobante")]
         public string Letra { get; set; }
@@ -154,6 +156,7 @@ namespace ProntoMVC.ViewModels
         public virtual Proveedor Proveedor { get; set; }
         public virtual Proveedor Proveedore { get; set; }
         public virtual Cuenta Cuenta { get; set; }
+        public virtual Cuenta Cuenta1 { get; set; }
         public virtual Obra Obra { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
     }
