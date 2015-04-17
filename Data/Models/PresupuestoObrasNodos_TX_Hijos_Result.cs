@@ -10,19 +10,9 @@
 namespace ProntoMVC.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PresupuestoObrasNodo
+    public partial class PresupuestoObrasNodos_TX_Hijos_Result
     {
-        public PresupuestoObrasNodo()
-        {
-            this.PresupuestoObrasNodosConsumos = new HashSet<PresupuestoObrasNodosConsumo>();
-            this.PresupuestoObrasNodosDatos = new HashSet<PresupuestoObrasNodosDato>();
-            this.PresupuestoObrasNodosPxQxPresupuestoes = new HashSet<PresupuestoObrasNodosPxQxPresupuesto>();
-            this.PresupuestoObrasNodosPxQxPresupuestoPorDias = new HashSet<PresupuestoObrasNodosPxQxPresupuestoPorDia>();
-            this.PresupuestoObrasRedeterminaciones = new HashSet<PresupuestoObrasRedeterminacione>();
-        }
-    
         public int IdPresupuestoObrasNodo { get; set; }
         public Nullable<int> IdNodoPadre { get; set; }
         public Nullable<byte> Depth { get; set; }
@@ -46,11 +36,5 @@ namespace ProntoMVC.Data.Models
         public string SubItem5 { get; set; }
         public Nullable<int> IdCuenta { get; set; }
         public Nullable<int> IdArticulo { get; set; }
-    
-        public virtual ICollection<PresupuestoObrasNodosConsumo> PresupuestoObrasNodosConsumos { get; set; }
-        public virtual ICollection<PresupuestoObrasNodosDato> PresupuestoObrasNodosDatos { get; set; }
-        public virtual ICollection<PresupuestoObrasNodosPxQxPresupuesto> PresupuestoObrasNodosPxQxPresupuestoes { get; set; }
-        public virtual ICollection<PresupuestoObrasNodosPxQxPresupuestoPorDia> PresupuestoObrasNodosPxQxPresupuestoPorDias { get; set; }
-        public virtual ICollection<PresupuestoObrasRedeterminacione> PresupuestoObrasRedeterminaciones { get; set; }
     }
 }

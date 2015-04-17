@@ -1165,3 +1165,59 @@ go
 
 
 
+
+
+
+
+
+
+
+alter table cartasdeporte ADD
+	CalidadGranosExtranosMerma numeric(18,2) NULL,
+	CalidadQuebradosMerma numeric(18,2) NULL,
+	CalidadDanadosMerma numeric(18,2) NULL,
+	CalidadChamicoMerma numeric(18,2) NULL,
+	CalidadRevolcadosMerma numeric(18,2) NULL,
+	CalidadObjetablesMerma numeric(18,2) NULL,
+	CalidadAmohosadosMerma numeric(18,2) NULL,
+	CalidadPuntaSombreadaMerma numeric(18,2) NULL,
+	CalidadHectolitricoMerma numeric(18,2) NULL,
+	CalidadCarbonMerma numeric(18,2) NULL,
+	CalidadPanzaBlancaMerma numeric(18,2) NULL,
+	CalidadPicadosMerma numeric(18,2) NULL,
+	CalidadVerdesMerma numeric(18,2) NULL,
+	CalidadQuemadosMerma numeric(18,2) NULL,
+	CalidadTierraMerma numeric(18,2) NULL,
+	CalidadZarandeoMerma numeric(18,2) NULL,
+	CalidadDescuentoFinalMerma numeric(18,2) NULL,
+	CalidadHumedadMerma numeric(18,2) NULL,
+	CalidadGastosFumigacionMerma numeric(18,2) NULL
+go
+
+
+alter table cartasdeporte ADD
+--	CalidadGranosExtranosRebaja numeric(18,2) NULL,
+	CalidadQuebradosRebaja numeric(18,2) NULL,
+--  CalidadDanadosRebaja numeric(18,2) NULL,
+	CalidadChamicoRebaja numeric(18,2) NULL,
+	CalidadRevolcadosRebaja numeric(18,2) NULL,
+	CalidadObjetablesRebaja numeric(18,2) NULL,
+	CalidadAmohosadosRebaja numeric(18,2) NULL,
+	CalidadPuntaSombreadaRebaja numeric(18,2) NULL,
+	CalidadHectolitricoRebaja numeric(18,2) NULL,
+	CalidadCarbonRebaja numeric(18,2) NULL,
+	CalidadPanzaBlancaRebaja numeric(18,2) NULL,
+	CalidadPicadosRebaja numeric(18,2) NULL,
+	CalidadVerdesRebaja numeric(18,2) NULL,
+	CalidadQuemadosRebaja numeric(18,2) NULL,
+	CalidadTierraRebaja numeric(18,2) NULL,
+	CalidadZarandeoRebaja numeric(18,2) NULL,
+	CalidadDescuentoFinalRebaja numeric(18,2) NULL,
+	CalidadHumedadRebaja numeric(18,2) NULL,
+	CalidadGastosFumigacionRebaja numeric(18,2) NULL,
+	
+	CalidadHumedadResultado numeric(18,2) NULL,
+	CalidadGastosFumigacionResultado numeric(18,2) NULL
+go
+
+
