@@ -130,11 +130,17 @@ Released   : 20120723
 
 
 
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script> @*hay que cargarlo antes que la jqgrid*@
 
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
 
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.addons.js"></script>
+        @*con este no funciona el popup de filtros de la jqgrid
+            http://stackoverflow.com/questions/28366355/jqgrid-search-filter-popup-not-appearing
+
+                It's quite simple, really... I'm not sure what triggered it. The solution was to move my jquery.jqGrid.src.js reference below all the plugin references above it.
+                    Sigh. So it's that old javascript gotcha of making sure the script references come in the right order.
+        *@
+
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.postext.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.setcolumns.js"></script>
         <script src=" http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
@@ -143,6 +149,11 @@ Released   : 20120723
 
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+
+
+
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+
 
         @*  <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>*@
 
@@ -306,8 +317,6 @@ Released   : 20120723
             line-height: 14px;
             font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
             color: #9C0000 !important;
-
-
             vertical-align: middle;
             display: inline;
         }

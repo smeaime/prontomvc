@@ -1269,9 +1269,8 @@ namespace ProntoMVC.Controllers
 
             int totalRecords=0;
 
-            ObjectQuery<Data.Models.Articulo> pagedQuery = (ObjectQuery<Data.Models.Articulo>)
-                                        Filters.FiltroGenerico<Data.Models.Articulo>
-                                        ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
+                                ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
