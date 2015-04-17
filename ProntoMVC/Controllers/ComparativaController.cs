@@ -15,7 +15,7 @@ using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
 using System.Text;
 using System.Data.Entity.SqlServer;
-using System.Data.Entity.Core.Objects; // using System.Data.Objects;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 using System.Reflection;
 using System.Configuration;
 using Pronto.ERP.Bll;

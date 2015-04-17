@@ -11,7 +11,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Security;
 
-using System.Data.Entity.Core.Objects; // using System.Data.Objects;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 
 using Pronto.ERP.Bll;
 
@@ -31,6 +31,7 @@ namespace ProntoMVC.Controllers
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
     {
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
+        public ProntoMantenimientoEntities dbmant;
 
         public string SC;
 

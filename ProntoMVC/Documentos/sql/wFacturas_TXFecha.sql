@@ -64,8 +64,22 @@ SELECT
  Facturas.RechazoCAE as [Rech.CAE],  
  Facturas.FechaVencimientoORechazoCAE as [Fecha vto.CAE],  
  Facturas.FueEnviadoCorreoConFacturaElectronica,
+ 
+ 
+(select count (*) -- idfactura,idnotacredito 
+from [DetalleNotasCreditoImputaciones] 
+inner join  CuentasCorrientesDeudores 
+	on CuentasCorrientesDeudores.IdCtaCte=[DetalleNotasCreditoImputaciones].idImputacion and IdTipoComp=1 
+inner join  Facturas FACSUB
+	on CuentasCorrientesDeudores.IdComprobante=Facturas.idfactura and IdTipoComp=1
+where FACSUB.idfactura=Facturas.idfactura) as TieneNotaDeCredito
+,
+
+ 
  @Vector_T as Vector_T,  
  @Vector_X as Vector_X  
+ 
+ 
 FROM Facturas   
 LEFT OUTER JOIN Clientes ON Facturas.IdCliente = Clientes.IdCliente  
 LEFT OUTER JOIN DescripcionIva ON IsNull(Facturas.IdCodigoIva,Clientes.IdCodigoIva) = DescripcionIva.IdCodigoIva   
@@ -81,5 +95,23 @@ go
 
 
 
+[wFacturas_TXFecha] '1/1/2015','1/1/2016',null
+
+
 --/////////////////////////////////////////////////////////////////////////////////////////////
 --/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+--select idfactura,
+--(
+--select count (*) -- idfactura,idnotacredito 
+--from [DetalleNotasCreditoImputaciones] 
+--inner join  CuentasCorrientesDeudores 
+--	on CuentasCorrientesDeudores.IdCtaCte=[DetalleNotasCreditoImputaciones].idImputacion and IdTipoComp=1 
+--inner join  Facturas 
+--	on CuentasCorrientesDeudores.IdComprobante=Facturas.idfactura and IdTipoComp=1
+--where idfactura=idfactura) as TieneNotaDeCredito
+
+--from facturas 
+
+

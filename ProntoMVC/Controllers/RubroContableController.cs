@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
