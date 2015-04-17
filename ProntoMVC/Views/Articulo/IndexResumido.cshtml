@@ -91,12 +91,15 @@
                     colModel: [
                     { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
                     { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-                    { name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text'  , search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn']} } ,
+                    {
+                        name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
+                    },
                     {
                         name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
                         editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
 
-                        , search: true, searchoptions: { sopt: ['cn'] }
+                        , search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
                     },
                     {
                         name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
@@ -156,7 +159,13 @@
                       , multiboxonly: true
 
                       , multipleSearch: true
-
+                    //,
+                    //search : { caption: "Search...", Find: "Find", Reset: "Reset",
+                    //odata : ['equal', 'not equal', 'less'],
+                    //groupOps: [ { op: "AND", text: "all" },
+                    //            { op: "OR", text: "any" }],
+                    //matchText: " match",
+                    //rulesText: " rules" },
 
                 })
                 //        .navGrid("#ListaPager",
@@ -172,9 +181,11 @@
 
                 jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
                      { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-                     { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
+                     { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true , multipleSearch: true, overlay: false}
                     );
+
                 
+
           //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
           //{}, {}, {}, { multipleSearch: true, overlay: false });
 
