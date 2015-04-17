@@ -129,19 +129,34 @@ Released   : 20120723
         }
 
 
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
 
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.addons.js"></script>
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.postext.js"></script>
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.setcolumns.js"></script>
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script> @*hay que cargarlo antes que la jqgrid*@
+
+
+        @*<script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.addons.js"></script>*@
+        @*con este no funciona el popup de filtros de la jqgrid
+            http://stackoverflow.com/questions/28366355/jqgrid-search-filter-popup-not-appearing
+
+                It's quite simple, really... I'm not sure what triggered it. The solution was to move my jquery.jqGrid.src.js reference below all the plugin references above it.
+                    Sigh. So it's that old javascript gotcha of making sure the script references come in the right order.
+        *@
+
+        @*<script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.postext.js"></script>*@
+        @*<script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/grid.setcolumns.js"></script>*@
         <script src=" http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
         <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
-        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
 
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
         <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
 
+
+
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+
+
+        
+        
         @*  <script src="@Url.Content("~/Scripts/jquery-grid/grid.custom.js")" type="text/javascript"></script>*@
 
         @*    <script src="@Url.Content("~/Scripts/jquery-grid/grid.base.js")" type="text/javascript"></script>
@@ -304,6 +319,8 @@ Released   : 20120723
             line-height: 14px;
             font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
             color: #9C0000 !important;
+            vertical-align: middle;
+            display: inline;
         }
     </style>
     <style>
@@ -2442,31 +2459,31 @@ Released   : 20120723
 
 
 
-                                
-                                    <button type="button" class="btn btn-small clearfix"
-                                            id="btnConmutarPanelDerecho"
-                                            value="Buscar"
-                                            style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
-                                            onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+
+                                <button type="button" class="btn btn-small clearfix"
+                                        id="btnConmutarPanelDerecho"
+                                        value="Buscar"
+                                        style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                        onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
                                         pageLayout.hide('north');
                                         RefrescaAnchoGrillaDetalle(); ">
-                                        Grillas
-                                    </button>
-
-                                
-
-                                    <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
-                                            style="display: none; "></button>
-
-
-                                    <script>
+                                    Grillas
+                                </button>
 
 
 
-                                        $('.alert .close').live("click", function (e) {
-                                            $(this).parent().hide();
-                                        });</script>
-                                </div>
+                                <button onclick="pageLayout.show('west'); $(this).hide(); " class="btn btn-link pull-left"
+                                        style="display: none; "></button>
+
+
+                                <script>
+
+
+
+                                    $('.alert .close').live("click", function (e) {
+                                        $(this).parent().hide();
+                                    });</script>
+                            </div>
                             @*<span class="span1 lightblue"></span>*@
                         </span>
                     </div>
@@ -2829,9 +2846,10 @@ Released   : 20120723
                 </div>
 
 
-
-                @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
-
+                @if (true)
+                {
+                    @MiniProfiler.RenderIncludes(position: RenderPosition.Right)
+                }
 
 
 

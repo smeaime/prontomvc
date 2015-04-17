@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -747,8 +747,9 @@ namespace ProntoMVC.Controllers
 
             Dictionary<string, string> dic = new Dictionary<string, string> { };
 
-            dic.Add("Comprobantes de Proveedor", "/ProntoWeb/ComprobantesPrv.aspx");
-            dic.Add("CP Nuevo Comprobante de Proveedor", "/ProntoWeb/ComprobantePrv.aspx?Id=-1");
+            dic.Add("Comprobantes de Proveedor", "ComprobanteProveedor/");
+            dic.Add("Fondo Fijo", "ComprobanteProveedor/IndexFF");
+            dic.Add("CP Nuevo Comprobante de Proveedor", "ComprobanteProveedor/Edit/-1");
             dic.Add("Conceptos", "Concepto/");
             dic.Add("Tabla de ganancias", "Ganancia/");
             dic.Add("Categorias Ganancias", "Categoria/");
@@ -761,8 +762,11 @@ namespace ProntoMVC.Controllers
             dic.Add("Comparativas", "Comparativa/");
             dic.Add("Proveedores", "Proveedor/");
             dic.Add("Facturas", "Factura/");
+            dic.Add("Remitos", "Remito/");
             dic.Add("Requerimientos", "Requerimiento/");
+            dic.Add("OP Ordenes de Pago", "OrdenPago/");
             dic.Add("Notas de Pedidos", "Pedido/");
+            dic.Add("Recibos", "Recibo/");
             dic.Add("Cuenta Corriente Deudores - Ctas. Ctes.", "Reporte.aspx");
             dic.Add("Solicitudes de Cotización - Presupuestos ", "Presupuesto/");
 

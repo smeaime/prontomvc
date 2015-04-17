@@ -20,6 +20,7 @@ Imports System.Data.Linq.Mapping
 Imports System.Linq
 Imports System.Linq.Expressions
 Imports System.Reflection
+Imports System.Runtime.Serialization
 
 
 <Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="WilliamsEntregas")>  _
@@ -417,7 +418,8 @@ Partial Public Class LinqCartasPorteDataContext
 	End Function
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.wTempCartasPorteFacturacionAutomatica")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.wTempCartasPorteFacturacionAutomatica"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class wTempCartasPorteFacturacionAutomatica
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -620,10 +622,11 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTempCartasPorteFacturacionAutomatica", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTempCartasPorteFacturacionAutomatica", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdTempCartasPorteFacturacionAutomatica() As Integer
 		Get
 			Return Me._IdTempCartasPorteFacturacionAutomatica
@@ -640,7 +643,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSesion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSesion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdSesion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSesion
@@ -656,7 +660,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdCartaDePorte() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaDePorte
@@ -672,7 +677,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdFacturarselaA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturarselaA
@@ -688,7 +694,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property ColumnaTilde() As System.Nullable(Of Integer)
 		Get
 			Return Me._ColumnaTilde
@@ -704,7 +711,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -720,7 +728,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property NumeroCartaDePorte() As System.Nullable(Of Long)
 		Get
 			Return Me._NumeroCartaDePorte
@@ -736,7 +745,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property SubNumeroVagon() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubNumeroVagon
@@ -752,7 +762,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubnumeroDeFacturacion
@@ -768,7 +779,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property FechaArribo() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaArribo
@@ -784,7 +796,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property FechaDescarga() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaDescarga
@@ -800,7 +813,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property FacturarselaA() As String
 		Get
 			Return Me._FacturarselaA
@@ -816,7 +830,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property Confirmado() As String
 		Get
 			Return Me._Confirmado
@@ -832,7 +847,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property IdCodigoIVA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIVA
@@ -848,7 +864,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property CUIT() As String
 		Get
 			Return Me._CUIT
@@ -864,7 +881,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property ClienteSeparado() As String
 		Get
 			Return Me._ClienteSeparado
@@ -880,7 +898,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property TarifaFacturada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TarifaFacturada
@@ -896,7 +915,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property Producto() As String
 		Get
 			Return Me._Producto
@@ -912,7 +932,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property KgNetos() As System.Nullable(Of Decimal)
 		Get
 			Return Me._KgNetos
@@ -928,7 +949,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdCorredor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCorredor
@@ -944,7 +966,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdTitular() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTitular
@@ -960,7 +983,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property IdIntermediario() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIntermediario
@@ -976,7 +1000,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property IdRComercial() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRComercial
@@ -992,7 +1017,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property Titular() As String
 		Get
 			Return Me._Titular
@@ -1008,7 +1034,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RComercial", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RComercial", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property RComercial() As String
 		Get
 			Return Me._RComercial
@@ -1024,7 +1051,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property Corredor() As String
 		Get
 			Return Me._Corredor
@@ -1040,7 +1068,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property Destinatario() As String
 		Get
 			Return Me._Destinatario
@@ -1056,7 +1085,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedcia", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedcia", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property Procedcia() As String
 		Get
 			Return Me._Procedcia
@@ -1072,7 +1102,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property DestinoDesc() As String
 		Get
 			Return Me._DestinoDesc
@@ -1088,7 +1119,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property IdDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestino
@@ -1104,7 +1136,8 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property AgregaItemDeGastosAdministrativos() As String
 		Get
 			Return Me._AgregaItemDeGastosAdministrativos
@@ -1137,9 +1170,20 @@ Partial Public Class wTempCartasPorteFacturacionAutomatica
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.InformesWeb")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.InformesWeb"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class InformesWeb
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -1186,10 +1230,11 @@ Partial Public Class InformesWeb
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdInformeWeb", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdInformeWeb", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdInformeWeb() As Integer
 		Get
 			Return Me._IdInformeWeb
@@ -1206,7 +1251,8 @@ Partial Public Class InformesWeb
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NombreUnico", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NombreUnico", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property NombreUnico() As String
 		Get
 			Return Me._NombreUnico
@@ -1222,7 +1268,8 @@ Partial Public Class InformesWeb
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_URL", DbType:="VarChar(300)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_URL", DbType:="VarChar(300)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property URL() As String
 		Get
 			Return Me._URL
@@ -1238,7 +1285,8 @@ Partial Public Class InformesWeb
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -1254,7 +1302,8 @@ Partial Public Class InformesWeb
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RolExigidoParaLectura", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RolExigidoParaLectura", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property RolExigidoParaLectura() As String
 		Get
 			Return Me._RolExigidoParaLectura
@@ -1287,9 +1336,20 @@ Partial Public Class InformesWeb
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteMovimientos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteMovimientos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class CartasPorteMovimiento
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -1464,11 +1524,11 @@ Partial Public Class CartasPorteMovimiento
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCDPMovimiento", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCDPMovimiento", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdCDPMovimiento() As Integer
 		Get
 			Return Me._IdCDPMovimiento
@@ -1485,7 +1545,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCDPMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCDPMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property NumeroCDPMovimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroCDPMovimiento
@@ -1501,7 +1562,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioIngreso
@@ -1517,7 +1579,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property FechaIngreso() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaIngreso
@@ -1533,7 +1596,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Anulada() As String
 		Get
 			Return Me._Anulada
@@ -1549,7 +1613,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdUsuarioAnulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioAnulo
@@ -1565,7 +1630,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaAnulacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaAnulacion
@@ -1581,7 +1647,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -1597,7 +1664,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FechaTimeStamp() As System.Data.Linq.Binary
 		Get
 			Return Me._FechaTimeStamp
@@ -1613,7 +1681,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAjusteStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAjusteStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property IdAjusteStock() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAjusteStock
@@ -1629,7 +1698,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property IdCartaDePorte() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaDePorte
@@ -1645,7 +1715,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entrada_o_Salida", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entrada_o_Salida", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property Entrada_o_Salida() As System.Nullable(Of Integer)
 		Get
 			Return Me._Entrada_o_Salida
@@ -1661,7 +1732,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdExportadorOrigen", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdExportadorOrigen", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property IdExportadorOrigen() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdExportadorOrigen
@@ -1677,7 +1749,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdExportadorDestino", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdExportadorDestino", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property IdExportadorDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdExportadorDestino
@@ -1693,7 +1766,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tipo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tipo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property Tipo() As System.Nullable(Of Integer)
 		Get
 			Return Me._Tipo
@@ -1709,7 +1783,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Contrato() As String
 		Get
 			Return Me._Contrato
@@ -1725,7 +1800,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Puerto", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Puerto", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property Puerto() As System.Nullable(Of Integer)
 		Get
 			Return Me._Puerto
@@ -1741,7 +1817,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vapor", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vapor", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property Vapor() As String
 		Get
 			Return Me._Vapor
@@ -1757,7 +1834,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Numero", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Numero", DbType:="VarChar(40)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property Numero() As String
 		Get
 			Return Me._Numero
@@ -1773,7 +1851,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -1792,7 +1871,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property Cantidad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Cantidad
@@ -1808,7 +1888,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property IdStock() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdStock
@@ -1824,7 +1905,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Partida() As String
 		Get
 			Return Me._Partida
@@ -1840,7 +1922,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property IdUnidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidad
@@ -1856,7 +1939,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property IdUbicacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUbicacion
@@ -1872,7 +1956,8 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property IdFacturaImputada() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturaImputada
@@ -1933,9 +2018,21 @@ Partial Public Class CartasPorteMovimiento
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Articulos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Articulos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqArticulo
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -2430,6 +2527,8 @@ Partial Public Class linqArticulo
 	Private _CartasPorteMovimientos As EntitySet(Of CartasPorteMovimiento)
 	
 	Private _linqDetalleFacturas As EntitySet(Of linqDetalleFacturas)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -3414,12 +3513,11 @@ Partial Public Class linqArticulo
 	
 	Public Sub New()
 		MyBase.New
-		Me._CartasPorteMovimientos = New EntitySet(Of CartasPorteMovimiento)(AddressOf Me.attach_CartasPorteMovimientos, AddressOf Me.detach_CartasPorteMovimientos)
-		Me._linqDetalleFacturas = New EntitySet(Of linqDetalleFacturas)(AddressOf Me.attach_linqDetalleFacturas, AddressOf Me.detach_linqDetalleFacturas)
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdArticulo() As Integer
 		Get
 			Return Me._IdArticulo
@@ -3436,7 +3534,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRubro", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRubro", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdRubro() As Integer
 		Get
 			Return Me._IdRubro
@@ -3453,7 +3552,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSubrubro", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSubrubro", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdSubrubro() As Integer
 		Get
 			Return Me._IdSubrubro
@@ -3470,7 +3570,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFamilia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFamilia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdFamilia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFamilia
@@ -3486,7 +3587,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(256)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(256)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -3502,7 +3604,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Productivo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Productivo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property Productivo() As String
 		Get
 			Return Me._Productivo
@@ -3518,7 +3621,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Ancho", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Ancho", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property Ancho() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Ancho
@@ -3534,7 +3638,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property IdCalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCalidad
@@ -3550,7 +3655,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Diametro", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Diametro", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Diametro() As String
 		Get
 			Return Me._Diametro
@@ -3566,7 +3672,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Espesor", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Espesor", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Espesor() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Espesor
@@ -3582,7 +3689,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property IdGrado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdGrado
@@ -3598,7 +3706,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Largo", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Largo", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property Largo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Largo
@@ -3614,7 +3723,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMaterial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMaterial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property IdMaterial() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMaterial
@@ -3630,7 +3740,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcabado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcabado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property IdAcabado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAcabado
@@ -3646,7 +3757,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property IdTipo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipo
@@ -3662,7 +3774,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Serie", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Serie", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Serie() As String
 		Get
 			Return Me._Serie
@@ -3678,7 +3791,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTratamiento", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTratamiento", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property IdTratamiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTratamiento
@@ -3694,7 +3808,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdUnidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidad
@@ -3710,7 +3825,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Autorizacion", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Autorizacion", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property Autorizacion() As String
 		Get
 			Return Me._Autorizacion
@@ -3726,7 +3842,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdInventario", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdInventario", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdInventario() As System.Nullable(Of Byte)
 		Get
 			Return Me._IdInventario
@@ -3742,7 +3859,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdCuenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuenta
@@ -3758,7 +3876,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdScheduler", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdScheduler", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property IdScheduler() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdScheduler
@@ -3774,7 +3893,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Unidad1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad1
@@ -3790,7 +3910,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property Unidad2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad2
@@ -3806,7 +3927,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property Unidad3() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad3
@@ -3822,7 +3944,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad4", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad4", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property Unidad4() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad4
@@ -3838,7 +3961,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad5", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad5", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property Unidad5() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad5
@@ -3854,7 +3978,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad6", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad6", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property Unidad6() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad6
@@ -3870,7 +3995,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad7", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad7", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property Unidad7() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad7
@@ -3886,7 +4012,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad8", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad8", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property Unidad8() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad8
@@ -3902,7 +4029,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad9", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad9", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property Unidad9() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad9
@@ -3918,7 +4046,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad10", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad10", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property Unidad10() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad10
@@ -3934,7 +4063,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Peso", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Peso", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property Peso() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Peso
@@ -3950,7 +4080,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiametroInterno", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiametroInterno", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property DiametroInterno() As System.Nullable(Of Decimal)
 		Get
 			Return Me._DiametroInterno
@@ -3966,7 +4097,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoUniversal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoUniversal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property IdCodigoUniversal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoUniversal
@@ -3982,7 +4114,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRelacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRelacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property IdRelacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRelacion
@@ -3998,7 +4131,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdForma", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdForma", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property IdForma() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdForma
@@ -4014,7 +4148,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSerie", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSerie", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property IdSerie() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSerie
@@ -4030,7 +4165,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Altura", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Altura", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property Altura() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Altura
@@ -4046,7 +4182,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Diametro2", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Diametro2", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property Diametro2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Diametro2
@@ -4062,7 +4199,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdColor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdColor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property IdColor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdColor
@@ -4078,7 +4216,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdNorma", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdNorma", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property IdNorma() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdNorma
@@ -4094,7 +4233,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Capacidad", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Capacidad", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=43)>  _
 	Public Property Capacidad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Capacidad
@@ -4110,7 +4250,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Potencia", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Potencia", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=44)>  _
 	Public Property Potencia() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Potencia
@@ -4126,7 +4267,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRango", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRango", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=45)>  _
 	Public Property IdRango() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRango
@@ -4142,7 +4284,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAlimentacionElectrica", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAlimentacionElectrica", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=46)>  _
 	Public Property IdAlimentacionElectrica() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAlimentacionElectrica
@@ -4158,7 +4301,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdModelo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdModelo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=47)>  _
 	Public Property IdModelo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdModelo
@@ -4174,7 +4318,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMarca", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMarca", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=48)>  _
 	Public Property IdMarca() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMarca
@@ -4190,7 +4335,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAnioNorma", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAnioNorma", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=49)>  _
 	Public Property IdAnioNorma() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAnioNorma
@@ -4206,7 +4352,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad11", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad11", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=50)>  _
 	Public Property Unidad11() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad11
@@ -4222,7 +4369,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad12", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad12", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=51)>  _
 	Public Property Unidad12() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad12
@@ -4238,7 +4386,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad13", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad13", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=52)>  _
 	Public Property Unidad13() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad13
@@ -4254,7 +4403,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad14", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad14", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=53)>  _
 	Public Property Unidad14() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad14
@@ -4270,7 +4420,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad15", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad15", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=54)>  _
 	Public Property Unidad15() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad15
@@ -4286,7 +4437,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuantificacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuantificacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=55)>  _
 	Public Property IdCuantificacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuantificacion
@@ -4302,7 +4454,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdControlCalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdControlCalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=56)>  _
 	Public Property IdControlCalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdControlCalidad
@@ -4318,7 +4471,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=57)>  _
 	Public Property IdCodigo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigo
@@ -4334,7 +4488,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Charpy", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Charpy", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=58)>  _
 	Public Property Charpy() As String
 		Get
 			Return Me._Charpy
@@ -4350,7 +4505,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCentroCosto", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCentroCosto", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=59)>  _
 	Public Property IdCentroCosto() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCentroCosto
@@ -4366,7 +4522,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UsuarioAlta", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UsuarioAlta", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=60)>  _
 	Public Property UsuarioAlta() As String
 		Get
 			Return Me._UsuarioAlta
@@ -4382,7 +4539,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAlta", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAlta", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=61)>  _
 	Public Property FechaAlta() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaAlta
@@ -4398,7 +4556,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaModificacion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaModificacion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=62)>  _
 	Public Property FechaUltimaModificacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaUltimaModificacion
@@ -4414,7 +4573,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EspesorBase", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EspesorBase", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=63)>  _
 	Public Property EspesorBase() As System.Nullable(Of Decimal)
 		Get
 			Return Me._EspesorBase
@@ -4430,7 +4590,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EspesorRevestimiento", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EspesorRevestimiento", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=64)>  _
 	Public Property EspesorRevestimiento() As System.Nullable(Of Decimal)
 		Get
 			Return Me._EspesorRevestimiento
@@ -4446,7 +4607,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadBase", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadBase", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=65)>  _
 	Public Property IdCalidadBase() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCalidadBase
@@ -4462,7 +4624,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadRevestimiento", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadRevestimiento", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=66)>  _
 	Public Property IdCalidadRevestimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCalidadRevestimiento
@@ -4478,7 +4641,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGradoBase", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGradoBase", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=67)>  _
 	Public Property IdGradoBase() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdGradoBase
@@ -4494,7 +4658,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGradoRevestimiento", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGradoRevestimiento", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=68)>  _
 	Public Property IdGradoRevestimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdGradoRevestimiento
@@ -4510,7 +4675,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBiselado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBiselado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=69)>  _
 	Public Property IdBiselado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdBiselado
@@ -4526,7 +4692,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadClad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidadClad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=70)>  _
 	Public Property IdCalidadClad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCalidadClad
@@ -4542,7 +4709,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoRosca", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoRosca", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=71)>  _
 	Public Property IdTipoRosca() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipoRosca
@@ -4558,7 +4726,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDensidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDensidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=72)>  _
 	Public Property IdDensidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDensidad
@@ -4574,7 +4743,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Rpm", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Rpm", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=73)>  _
 	Public Property Rpm() As System.Nullable(Of Integer)
 		Get
 			Return Me._Rpm
@@ -4590,7 +4760,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos1", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos1", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=74)>  _
 	Public Property Datos1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos1
@@ -4606,7 +4777,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos2", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos2", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=75)>  _
 	Public Property Datos2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos2
@@ -4622,7 +4794,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos3", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos3", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=76)>  _
 	Public Property Datos3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos3
@@ -4638,7 +4811,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos4", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos4", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=77)>  _
 	Public Property Datos4() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos4
@@ -4654,7 +4828,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos5", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos5", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=78)>  _
 	Public Property Datos5() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos5
@@ -4670,7 +4845,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos6", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos6", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=79)>  _
 	Public Property Datos6() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos6
@@ -4686,7 +4862,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos7", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos7", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=80)>  _
 	Public Property Datos7() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos7
@@ -4702,7 +4879,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos8", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos8", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=81)>  _
 	Public Property Datos8() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos8
@@ -4718,7 +4896,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos9", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos9", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=82)>  _
 	Public Property Datos9() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos9
@@ -4734,7 +4913,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos10", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Datos10", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=83)>  _
 	Public Property Datos10() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Datos10
@@ -4750,7 +4930,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad16", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad16", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=84)>  _
 	Public Property Unidad16() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad16
@@ -4766,7 +4947,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad17", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad17", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=85)>  _
 	Public Property Unidad17() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad17
@@ -4782,7 +4964,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad18", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad18", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=86)>  _
 	Public Property Unidad18() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad18
@@ -4798,7 +4981,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad19", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad19", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=87)>  _
 	Public Property Unidad19() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad19
@@ -4814,7 +4998,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad20", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Unidad20", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=88)>  _
 	Public Property Unidad20() As System.Nullable(Of Integer)
 		Get
 			Return Me._Unidad20
@@ -4830,7 +5015,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=89)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -4846,7 +5032,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=90)>  _
 	Public Property Codigo() As String
 		Get
 			Return Me._Codigo
@@ -4862,7 +5049,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistrarStock", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistrarStock", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=91)>  _
 	Public Property RegistrarStock() As String
 		Get
 			Return Me._RegistrarStock
@@ -4878,7 +5066,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_StockMinimo", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_StockMinimo", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=92)>  _
 	Public Property StockMinimo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._StockMinimo
@@ -4894,7 +5083,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DefineKit", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DefineKit", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=93)>  _
 	Public Property DefineKit() As String
 		Get
 			Return Me._DefineKit
@@ -4910,7 +5100,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPPP", DbType:="Decimal(18,4)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPPP", DbType:="Decimal(18,4)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=94)>  _
 	Public Property CostoPPP() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoPPP
@@ -4926,7 +5117,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AlicuotaIVA", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AlicuotaIVA", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=95)>  _
 	Public Property AlicuotaIVA() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AlicuotaIVA
@@ -4942,7 +5134,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPPPDolar", DbType:="Decimal(18,4)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoPPPDolar", DbType:="Decimal(18,4)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=96)>  _
 	Public Property CostoPPPDolar() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoPPPDolar
@@ -4958,7 +5151,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacionStandar", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacionStandar", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=97)>  _
 	Public Property IdUbicacionStandar() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUbicacionStandar
@@ -4974,7 +5168,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoReposicion", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoReposicion", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=98)>  _
 	Public Property CostoReposicion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoReposicion
@@ -4990,7 +5185,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoReposicionDolar", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoReposicionDolar", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=99)>  _
 	Public Property CostoReposicionDolar() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoReposicionDolar
@@ -5006,7 +5202,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=100)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -5022,7 +5219,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=101)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -5038,7 +5236,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=102)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -5054,7 +5253,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=103)>  _
 	Public Property IdPais() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPais
@@ -5070,7 +5270,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=104)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -5086,7 +5287,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroManzana", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroManzana", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=105)>  _
 	Public Property NumeroManzana() As String
 		Get
 			Return Me._NumeroManzana
@@ -5102,7 +5304,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroLote", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroLote", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=106)>  _
 	Public Property NumeroLote() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroLote
@@ -5118,7 +5321,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivoFijo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivoFijo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=107)>  _
 	Public Property ActivoFijo() As String
 		Get
 			Return Me._ActivoFijo
@@ -5134,7 +5338,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstadoActivoFijo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstadoActivoFijo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=108)>  _
 	Public Property EstadoActivoFijo() As String
 		Get
 			Return Me._EstadoActivoFijo
@@ -5150,7 +5355,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroActivoFijo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroActivoFijo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=109)>  _
 	Public Property NumeroActivoFijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroActivoFijo
@@ -5166,7 +5372,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrupoActivoFijo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrupoActivoFijo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=110)>  _
 	Public Property IdGrupoActivoFijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdGrupoActivoFijo
@@ -5182,7 +5389,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BienImpositivo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BienImpositivo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=111)>  _
 	Public Property BienImpositivo() As String
 		Get
 			Return Me._BienImpositivo
@@ -5198,7 +5406,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BienContable", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BienContable", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=112)>  _
 	Public Property BienContable() As String
 		Get
 			Return Me._BienContable
@@ -5214,7 +5423,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Amortiza", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Amortiza", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=113)>  _
 	Public Property Amortiza() As String
 		Get
 			Return Me._Amortiza
@@ -5230,7 +5440,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCompra", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCompra", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=114)>  _
 	Public Property FechaCompra() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCompra
@@ -5246,7 +5457,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaAmortizacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaAmortizacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=115)>  _
 	Public Property IdCuentaAmortizacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaAmortizacion
@@ -5262,7 +5474,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilImpositiva", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilImpositiva", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=116)>  _
 	Public Property VidaUtilImpositiva() As System.Nullable(Of Integer)
 		Get
 			Return Me._VidaUtilImpositiva
@@ -5278,7 +5491,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilContable", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilContable", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=117)>  _
 	Public Property VidaUtilContable() As System.Nullable(Of Integer)
 		Get
 			Return Me._VidaUtilContable
@@ -5294,7 +5508,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorOrigenContable", DbType:="Decimal(19,6)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorOrigenContable", DbType:="Decimal(19,6)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=118)>  _
 	Public Property ValorOrigenContable() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorOrigenContable
@@ -5310,7 +5525,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorOrigenImpositivo", DbType:="Decimal(19,6)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorOrigenImpositivo", DbType:="Decimal(19,6)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=119)>  _
 	Public Property ValorOrigenImpositivo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorOrigenImpositivo
@@ -5326,7 +5542,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorActualizado", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorActualizado", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=120)>  _
 	Public Property ValorActualizado() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorActualizado
@@ -5342,7 +5559,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorResidual", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorResidual", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=121)>  _
 	Public Property ValorResidual() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorResidual
@@ -5358,7 +5576,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorResidualActualizado", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorResidualActualizado", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=122)>  _
 	Public Property ValorResidualActualizado() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorResidualActualizado
@@ -5374,7 +5593,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionEjercicio", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionEjercicio", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=123)>  _
 	Public Property AmortizacionEjercicio() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AmortizacionEjercicio
@@ -5390,7 +5610,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionEjercicioActualizada", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionEjercicioActualizada", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=124)>  _
 	Public Property AmortizacionEjercicioActualizada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AmortizacionEjercicioActualizada
@@ -5406,7 +5627,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionesAcumuladas", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionesAcumuladas", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=125)>  _
 	Public Property AmortizacionesAcumuladas() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AmortizacionesAcumuladas
@@ -5422,7 +5644,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionesAcumuladasActualizada", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AmortizacionesAcumuladasActualizada", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=126)>  _
 	Public Property AmortizacionesAcumuladasActualizada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AmortizacionesAcumuladasActualizada
@@ -5438,7 +5661,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilImpositivaRestante", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilImpositivaRestante", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=127)>  _
 	Public Property VidaUtilImpositivaRestante() As System.Nullable(Of Integer)
 		Get
 			Return Me._VidaUtilImpositivaRestante
@@ -5454,7 +5678,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilContableRestante", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilContableRestante", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=128)>  _
 	Public Property VidaUtilContableRestante() As System.Nullable(Of Integer)
 		Get
 			Return Me._VidaUtilContableRestante
@@ -5470,7 +5695,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaPrimeraAmortizacionImpositiva", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaPrimeraAmortizacionImpositiva", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=129)>  _
 	Public Property FechaPrimeraAmortizacionImpositiva() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaPrimeraAmortizacionImpositiva
@@ -5486,7 +5712,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaPrimeraAmortizacionContable", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaPrimeraAmortizacionContable", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=130)>  _
 	Public Property FechaPrimeraAmortizacionContable() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaPrimeraAmortizacionContable
@@ -5502,7 +5729,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacionActivoFijo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacionActivoFijo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=131)>  _
 	Public Property IdUbicacionActivoFijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUbicacionActivoFijo
@@ -5518,7 +5746,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=132)>  _
 	Public Property IdSector() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector
@@ -5534,7 +5763,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaBajaAmortizacion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaBajaAmortizacion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=133)>  _
 	Public Property FechaBajaAmortizacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaBajaAmortizacion
@@ -5550,7 +5780,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaMantenimiento", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaMantenimiento", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=134)>  _
 	Public Property ParaMantenimiento() As String
 		Get
 			Return Me._ParaMantenimiento
@@ -5566,7 +5797,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidadLecturaMantenimiento", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidadLecturaMantenimiento", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=135)>  _
 	Public Property IdUnidadLecturaMantenimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidadLecturaMantenimiento
@@ -5582,7 +5814,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LecturaAcumulada", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LecturaAcumulada", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=136)>  _
 	Public Property LecturaAcumulada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._LecturaAcumulada
@@ -5598,7 +5831,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LecturaBase", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LecturaBase", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=137)>  _
 	Public Property LecturaBase() As System.Nullable(Of Decimal)
 		Get
 			Return Me._LecturaBase
@@ -5614,7 +5848,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UltimaLectura", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UltimaLectura", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=138)>  _
 	Public Property UltimaLectura() As System.Nullable(Of Decimal)
 		Get
 			Return Me._UltimaLectura
@@ -5630,7 +5865,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaLectura", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaLectura", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=139)>  _
 	Public Property FechaUltimaLectura() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaUltimaLectura
@@ -5646,7 +5882,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstimadoAnual", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstimadoAnual", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=140)>  _
 	Public Property EstimadoAnual() As System.Nullable(Of Decimal)
 		Get
 			Return Me._EstimadoAnual
@@ -5662,7 +5899,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroInventario", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroInventario", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=141)>  _
 	Public Property NumeroInventario() As String
 		Get
 			Return Me._NumeroInventario
@@ -5678,7 +5916,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModeloMotor", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModeloMotor", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=142)>  _
 	Public Property ModeloMotor() As String
 		Get
 			Return Me._ModeloMotor
@@ -5694,7 +5933,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EquipoEnObra", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EquipoEnObra", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=143)>  _
 	Public Property EquipoEnObra() As String
 		Get
 			Return Me._EquipoEnObra
@@ -5710,7 +5950,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstadoEquipo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstadoEquipo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=144)>  _
 	Public Property EstadoEquipo() As String
 		Get
 			Return Me._EstadoEquipo
@@ -5726,7 +5967,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsConsumible", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsConsumible", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=145)>  _
 	Public Property EsConsumible() As String
 		Get
 			Return Me._EsConsumible
@@ -5742,7 +5984,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaModificacionArticulo", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimaModificacionArticulo", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=146)>  _
 	Public Property FechaUltimaModificacionArticulo() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaUltimaModificacionArticulo
@@ -5758,7 +6001,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EntidadOrigen", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EntidadOrigen", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=147)>  _
 	Public Property EntidadOrigen() As String
 		Get
 			Return Me._EntidadOrigen
@@ -5774,7 +6018,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ComprobanteCompra", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ComprobanteCompra", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=148)>  _
 	Public Property ComprobanteCompra() As String
 		Get
 			Return Me._ComprobanteCompra
@@ -5790,7 +6035,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModeloEspecifico", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModeloEspecifico", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=149)>  _
 	Public Property ModeloEspecifico() As String
 		Get
 			Return Me._ModeloEspecifico
@@ -5806,7 +6052,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPatente", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPatente", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=150)>  _
 	Public Property NumeroPatente() As String
 		Get
 			Return Me._NumeroPatente
@@ -5822,7 +6069,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroMotor", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroMotor", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=151)>  _
 	Public Property NumeroMotor() As String
 		Get
 			Return Me._NumeroMotor
@@ -5838,7 +6086,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroChasis", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroChasis", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=152)>  _
 	Public Property NumeroChasis() As String
 		Get
 			Return Me._NumeroChasis
@@ -5854,7 +6103,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñoFabricacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñoFabricacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=153)>  _
 	Public Property AñoFabricacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._AñoFabricacion
@@ -5870,7 +6120,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñosAmortizacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñosAmortizacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=154)>  _
 	Public Property AñosAmortizacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._AñosAmortizacion
@@ -5886,7 +6137,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñoAlta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AñoAlta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=155)>  _
 	Public Property AñoAlta() As System.Nullable(Of Integer)
 		Get
 			Return Me._AñoAlta
@@ -5902,7 +6154,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Caracteristicas", DbType:="VarChar(70)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Caracteristicas", DbType:="VarChar(70)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=156)>  _
 	Public Property Caracteristicas() As String
 		Get
 			Return Me._Caracteristicas
@@ -5918,7 +6171,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroGarantia", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroGarantia", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=157)>  _
 	Public Property NumeroGarantia() As String
 		Get
 			Return Me._NumeroGarantia
@@ -5934,7 +6188,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCaducidadGarantia", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCaducidadGarantia", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=158)>  _
 	Public Property FechaCaducidadGarantia() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCaducidadGarantia
@@ -5950,7 +6205,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCoberturaSeguro", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCoberturaSeguro", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=159)>  _
 	Public Property TipoCoberturaSeguro() As String
 		Get
 			Return Me._TipoCoberturaSeguro
@@ -5966,7 +6222,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPolizaSeguro", DbType:="Decimal(18,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPolizaSeguro", DbType:="Decimal(18,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=160)>  _
 	Public Property NumeroPolizaSeguro() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NumeroPolizaSeguro
@@ -5982,7 +6239,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CompañiaSeguro", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CompañiaSeguro", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=161)>  _
 	Public Property CompañiaSeguro() As String
 		Get
 			Return Me._CompañiaSeguro
@@ -5998,7 +6256,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVigenciaSeguro", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVigenciaSeguro", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=162)>  _
 	Public Property FechaVigenciaSeguro() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVigenciaSeguro
@@ -6014,7 +6273,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoVerificacionTecnica", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoVerificacionTecnica", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=163)>  _
 	Public Property FechaVencimientoVerificacionTecnica() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVencimientoVerificacionTecnica
@@ -6030,7 +6290,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaAmortizacion", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaAmortizacion", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=164)>  _
 	Public Property CalculaAmortizacion() As String
 		Get
 			Return Me._CalculaAmortizacion
@@ -6046,7 +6307,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UltimoRevaluoContable", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UltimoRevaluoContable", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=165)>  _
 	Public Property UltimoRevaluoContable() As System.Nullable(Of Decimal)
 		Get
 			Return Me._UltimoRevaluoContable
@@ -6062,7 +6324,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimoRevaluo", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimoRevaluo", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=166)>  _
 	Public Property FechaUltimoRevaluo() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaUltimoRevaluo
@@ -6078,7 +6341,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLoteo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLoteo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=167)>  _
 	Public Property CodigoLoteo() As String
 		Get
 			Return Me._CodigoLoteo
@@ -6094,7 +6358,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Adrema", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Adrema", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=168)>  _
 	Public Property Adrema() As String
 		Get
 			Return Me._Adrema
@@ -6110,7 +6375,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=169)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -6126,7 +6392,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConsumoStandarCombustible", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConsumoStandarCombustible", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=170)>  _
 	Public Property ConsumoStandarCombustible() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ConsumoStandarCombustible
@@ -6142,7 +6409,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UbicacionActivoFijo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UbicacionActivoFijo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=171)>  _
 	Public Property UbicacionActivoFijo() As String
 		Get
 			Return Me._UbicacionActivoFijo
@@ -6158,7 +6426,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaValorActualizado", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaValorActualizado", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=172)>  _
 	Public Property CalculaValorActualizado() As String
 		Get
 			Return Me._CalculaValorActualizado
@@ -6174,7 +6443,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaPRONTO_MANTENIMIENTO", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaPRONTO_MANTENIMIENTO", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=173)>  _
 	Public Property ParaPRONTO_MANTENIMIENTO() As String
 		Get
 			Return Me._ParaPRONTO_MANTENIMIENTO
@@ -6190,7 +6460,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PosicionAduana", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PosicionAduana", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=174)>  _
 	Public Property PosicionAduana() As String
 		Get
 			Return Me._PosicionAduana
@@ -6206,7 +6477,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Alquilado", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Alquilado", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=175)>  _
 	Public Property Alquilado() As String
 		Get
 			Return Me._Alquilado
@@ -6222,7 +6494,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMarcaMotor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMarcaMotor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=176)>  _
 	Public Property IdMarcaMotor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMarcaMotor
@@ -6238,7 +6511,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSerieMotor", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSerieMotor", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=177)>  _
 	Public Property NumeroSerieMotor() As String
 		Get
 			Return Me._NumeroSerieMotor
@@ -6254,7 +6528,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilTecnica", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VidaUtilTecnica", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=178)>  _
 	Public Property VidaUtilTecnica() As System.Nullable(Of Integer)
 		Get
 			Return Me._VidaUtilTecnica
@@ -6270,7 +6545,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorCompra", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorCompra", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=179)>  _
 	Public Property ValorCompra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorCompra
@@ -6286,7 +6562,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMonedaCompra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMonedaCompra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=180)>  _
 	Public Property IdMonedaCompra() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMonedaCompra
@@ -6302,7 +6579,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaBaja", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaBaja", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=181)>  _
 	Public Property FechaBaja() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaBaja
@@ -6318,7 +6596,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DocumentoAlta", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DocumentoAlta", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=182)>  _
 	Public Property DocumentoAlta() As String
 		Get
 			Return Me._DocumentoAlta
@@ -6334,7 +6613,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DocumentoBaja", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DocumentoBaja", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=183)>  _
 	Public Property DocumentoBaja() As String
 		Get
 			Return Me._DocumentoBaja
@@ -6350,7 +6630,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticuloAsociado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticuloAsociado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=184)>  _
 	Public Property IdArticuloAsociado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticuloAsociado
@@ -6366,7 +6647,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistroUnicoTransporteAutomotor", DbType:="Decimal(16,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistroUnicoTransporteAutomotor", DbType:="Decimal(16,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=185)>  _
 	Public Property RegistroUnicoTransporteAutomotor() As System.Nullable(Of Decimal)
 		Get
 			Return Me._RegistroUnicoTransporteAutomotor
@@ -6382,7 +6664,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TieneGPS", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TieneGPS", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=186)>  _
 	Public Property TieneGPS() As String
 		Get
 			Return Me._TieneGPS
@@ -6398,7 +6681,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CondicionActual", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CondicionActual", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=187)>  _
 	Public Property CondicionActual() As String
 		Get
 			Return Me._CondicionActual
@@ -6414,7 +6698,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SituacionActual", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SituacionActual", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=188)>  _
 	Public Property SituacionActual() As String
 		Get
 			Return Me._SituacionActual
@@ -6430,7 +6715,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=189)>  _
 	Public Property Activo() As String
 		Get
 			Return Me._Activo
@@ -6446,7 +6732,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=190)>  _
 	Public Property Auxiliar1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar1
@@ -6462,7 +6749,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=191)>  _
 	Public Property Auxiliar2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar2
@@ -6478,7 +6766,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=192)>  _
 	Public Property Auxiliar3() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar3
@@ -6494,7 +6783,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar4", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar4", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=193)>  _
 	Public Property Auxiliar4() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar4
@@ -6510,7 +6800,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar5", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar5", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=194)>  _
 	Public Property Auxiliar5() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar5
@@ -6526,7 +6817,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar6", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar6", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=195)>  _
 	Public Property Auxiliar6() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar6
@@ -6542,7 +6834,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar7", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar7", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=196)>  _
 	Public Property Auxiliar7() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar7
@@ -6558,7 +6851,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar8", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar8", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=197)>  _
 	Public Property Auxiliar8() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar8
@@ -6574,7 +6868,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar9", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar9", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=198)>  _
 	Public Property Auxiliar9() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar9
@@ -6590,7 +6885,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar10", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar10", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=199)>  _
 	Public Property Auxiliar10() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar10
@@ -6606,7 +6902,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar11", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar11", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=200)>  _
 	Public Property Auxiliar11() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar11
@@ -6622,7 +6919,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar12", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar12", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=201)>  _
 	Public Property Auxiliar12() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar12
@@ -6638,7 +6936,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar13", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar13", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=202)>  _
 	Public Property Auxiliar13() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar13
@@ -6654,7 +6953,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar14", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar14", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=203)>  _
 	Public Property Auxiliar14() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar14
@@ -6670,7 +6970,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar15", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar15", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=204)>  _
 	Public Property Auxiliar15() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar15
@@ -6686,7 +6987,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar16", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar16", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=205)>  _
 	Public Property Auxiliar16() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar16
@@ -6702,7 +7004,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar17", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar17", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=206)>  _
 	Public Property Auxiliar17() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar17
@@ -6718,7 +7021,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar18", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar18", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=207)>  _
 	Public Property Auxiliar18() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar18
@@ -6734,7 +7038,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar19", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar19", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=208)>  _
 	Public Property Auxiliar19() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar19
@@ -6750,7 +7055,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar20", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar20", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=209)>  _
 	Public Property Auxiliar20() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar20
@@ -6766,7 +7072,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar21", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar21", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=210)>  _
 	Public Property Auxiliar21() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar21
@@ -6782,7 +7089,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar22", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar22", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=211)>  _
 	Public Property Auxiliar22() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar22
@@ -6798,7 +7106,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar23", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar23", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=212)>  _
 	Public Property Auxiliar23() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar23
@@ -6814,7 +7123,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar24", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar24", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=213)>  _
 	Public Property Auxiliar24() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar24
@@ -6830,7 +7140,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar25", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar25", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=214)>  _
 	Public Property Auxiliar25() As System.Nullable(Of Integer)
 		Get
 			Return Me._Auxiliar25
@@ -6846,7 +7157,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=215)>  _
 	Public Property AuxiliarString1() As String
 		Get
 			Return Me._AuxiliarString1
@@ -6862,7 +7174,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=216)>  _
 	Public Property AuxiliarString2() As String
 		Get
 			Return Me._AuxiliarString2
@@ -6878,7 +7191,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=217)>  _
 	Public Property AuxiliarString3() As String
 		Get
 			Return Me._AuxiliarString3
@@ -6894,7 +7208,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString4", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString4", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=218)>  _
 	Public Property AuxiliarString4() As String
 		Get
 			Return Me._AuxiliarString4
@@ -6910,7 +7225,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString5", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString5", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=219)>  _
 	Public Property AuxiliarString5() As String
 		Get
 			Return Me._AuxiliarString5
@@ -6926,7 +7242,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString6", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString6", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=220)>  _
 	Public Property AuxiliarString6() As String
 		Get
 			Return Me._AuxiliarString6
@@ -6942,7 +7259,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString7", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString7", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=221)>  _
 	Public Property AuxiliarString7() As String
 		Get
 			Return Me._AuxiliarString7
@@ -6958,7 +7276,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString8", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString8", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=222)>  _
 	Public Property AuxiliarString8() As String
 		Get
 			Return Me._AuxiliarString8
@@ -6974,7 +7293,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString9", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString9", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=223)>  _
 	Public Property AuxiliarString9() As String
 		Get
 			Return Me._AuxiliarString9
@@ -6990,7 +7310,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString10", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString10", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=224)>  _
 	Public Property AuxiliarString10() As String
 		Get
 			Return Me._AuxiliarString10
@@ -7006,7 +7327,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAlternativo", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAlternativo", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=225)>  _
 	Public Property CodigoAlternativo() As String
 		Get
 			Return Me._CodigoAlternativo
@@ -7022,7 +7344,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaCompras", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaCompras", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=226)>  _
 	Public Property IdCuentaCompras() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaCompras
@@ -7038,7 +7361,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_StockReposicion", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_StockReposicion", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=227)>  _
 	Public Property StockReposicion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._StockReposicion
@@ -7054,7 +7378,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MarcaStock", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MarcaStock", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=228)>  _
 	Public Property MarcaStock() As String
 		Get
 			Return Me._MarcaStock
@@ -7070,7 +7395,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoInicial", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CostoInicial", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=229)>  _
 	Public Property CostoInicial() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CostoInicial
@@ -7086,7 +7412,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConsumirPorOT", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConsumirPorOT", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=230)>  _
 	Public Property ConsumirPorOT() As String
 		Get
 			Return Me._ConsumirPorOT
@@ -7102,7 +7429,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=231)>  _
 	Public Property IdTransportista() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTransportista
@@ -7118,7 +7446,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoEquipo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoEquipo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=232)>  _
 	Public Property IdTipoEquipo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipoEquipo
@@ -7134,7 +7463,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Replica", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Replica", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=233)>  _
 	Public Property Replica() As String
 		Get
 			Return Me._Replica
@@ -7150,7 +7480,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPresupuestoObraRubro", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPresupuestoObraRubro", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=234)>  _
 	Public Property IdPresupuestoObraRubro() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPresupuestoObraRubro
@@ -7166,7 +7497,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=235)>  _
 	Public Property IdTipoArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipoArticulo
@@ -7182,7 +7514,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimoCostoReposicion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaUltimoCostoReposicion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=236)>  _
 	Public Property FechaUltimoCostoReposicion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaUltimoCostoReposicion
@@ -7198,7 +7531,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ADistribuirEnPresupuestoDeObra", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ADistribuirEnPresupuestoDeObra", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=237)>  _
 	Public Property ADistribuirEnPresupuestoDeObra() As String
 		Get
 			Return Me._ADistribuirEnPresupuestoDeObra
@@ -7214,7 +7548,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaComprasActivo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaComprasActivo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=238)>  _
 	Public Property IdCuentaComprasActivo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaComprasActivo
@@ -7230,7 +7565,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico1", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico1", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=239)>  _
 	Public Property AuxiliarNumerico1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxiliarNumerico1
@@ -7246,7 +7582,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico2", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico2", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=240)>  _
 	Public Property AuxiliarNumerico2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxiliarNumerico2
@@ -7262,7 +7599,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico3", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico3", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=241)>  _
 	Public Property AuxiliarNumerico3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxiliarNumerico3
@@ -7278,7 +7616,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico4", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico4", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=242)>  _
 	Public Property AuxiliarNumerico4() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxiliarNumerico4
@@ -7294,7 +7633,8 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico5", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarNumerico5", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=243)>  _
 	Public Property AuxiliarNumerico5() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxiliarNumerico5
@@ -7310,9 +7650,14 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasPorteMovimiento", Storage:="_CartasPorteMovimientos", ThisKey:="IdArticulo", OtherKey:="IdArticulo")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_CartasPorteMovimiento", Storage:="_CartasPorteMovimientos", ThisKey:="IdArticulo", OtherKey:="IdArticulo"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=244, EmitDefaultValue:=false)>  _
 	Public Property CartasPorteMovimientos() As EntitySet(Of CartasPorteMovimiento)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasPorteMovimientos.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasPorteMovimientos
 		End Get
 		Set
@@ -7320,9 +7665,14 @@ Partial Public Class linqArticulo
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_linqDetalleFacturas", Storage:="_linqDetalleFacturas", ThisKey:="IdArticulo", OtherKey:="IdArticulo")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqArticulo_linqDetalleFacturas", Storage:="_linqDetalleFacturas", ThisKey:="IdArticulo", OtherKey:="IdArticulo"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=245, EmitDefaultValue:=false)>  _
 	Public Property linqDetalleFacturas() As EntitySet(Of linqDetalleFacturas)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqDetalleFacturas.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqDetalleFacturas
 		End Get
 		Set
@@ -7367,9 +7717,34 @@ Partial Public Class linqArticulo
 		Me.SendPropertyChanging
 		entity.linqArticulo = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._CartasPorteMovimientos = New EntitySet(Of CartasPorteMovimiento)(AddressOf Me.attach_CartasPorteMovimientos, AddressOf Me.detach_CartasPorteMovimientos)
+		Me._linqDetalleFacturas = New EntitySet(Of linqDetalleFacturas)(AddressOf Me.attach_linqDetalleFacturas, AddressOf Me.detach_linqDetalleFacturas)
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.wGrillaPersistencia")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.wGrillaPersistencia"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class wGrillaPersistencia
 	
 	Private _IdRenglon As Integer
@@ -7382,7 +7757,8 @@ Partial Public Class wGrillaPersistencia
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRenglon", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRenglon", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdRenglon() As Integer
 		Get
 			Return Me._IdRenglon
@@ -7395,7 +7771,8 @@ Partial Public Class wGrillaPersistencia
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Sesion", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Sesion", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Sesion() As String
 		Get
 			Return Me._Sesion
@@ -7407,7 +7784,8 @@ Partial Public Class wGrillaPersistencia
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tilde", DbType:="Bit NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tilde", DbType:="Bit NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Tilde() As Boolean
 		Get
 			Return Me._Tilde
@@ -7421,7 +7799,8 @@ Partial Public Class wGrillaPersistencia
 	End Property
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CDPEstablecimientos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CDPEstablecimientos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqCDPEstablecimiento
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -7486,10 +7865,11 @@ Partial Public Class linqCDPEstablecimiento
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdEstablecimiento() As Integer
 		Get
 			Return Me._IdEstablecimiento
@@ -7506,7 +7886,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -7522,7 +7903,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -7538,7 +7920,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdTitular() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTitular
@@ -7554,7 +7937,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property CUIT() As String
 		Get
 			Return Me._CUIT
@@ -7570,7 +7954,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property AuxiliarString1() As String
 		Get
 			Return Me._AuxiliarString1
@@ -7586,7 +7971,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property AuxiliarString2() As String
 		Get
 			Return Me._AuxiliarString2
@@ -7602,7 +7988,8 @@ Partial Public Class linqCDPEstablecimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property AuxiliarString3() As String
 		Get
 			Return Me._AuxiliarString3
@@ -7635,9 +8022,20 @@ Partial Public Class linqCDPEstablecimiento
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.[Log]")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.[Log]"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Log
 	
 	Private _Tipo As String
@@ -7686,7 +8084,8 @@ Partial Public Class Log
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tipo", DbType:="VarChar(5)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tipo", DbType:="VarChar(5)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property Tipo() As String
 		Get
 			Return Me._Tipo
@@ -7698,7 +8097,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdComprobante", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdComprobante", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdComprobante() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdComprobante
@@ -7710,7 +8110,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleComprobante", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleComprobante", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdDetalleComprobante() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDetalleComprobante
@@ -7722,7 +8123,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaRegistro", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaRegistro", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property FechaRegistro() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaRegistro
@@ -7734,7 +8136,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Cantidad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Cantidad
@@ -7746,7 +8149,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Detalle", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Detalle", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property Detalle() As String
 		Get
 			Return Me._Detalle
@@ -7758,7 +8162,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString1", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString1", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property AuxString1() As String
 		Get
 			Return Me._AuxString1
@@ -7770,7 +8175,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString2", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString2", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property AuxString2() As String
 		Get
 			Return Me._AuxString2
@@ -7782,7 +8188,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString3", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString3", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property AuxString3() As String
 		Get
 			Return Me._AuxString3
@@ -7794,7 +8201,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString4", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString4", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property AuxString4() As String
 		Get
 			Return Me._AuxString4
@@ -7806,7 +8214,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString5", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxString5", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property AuxString5() As String
 		Get
 			Return Me._AuxString5
@@ -7818,7 +8227,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate1", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate1", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property AuxDate1() As System.Nullable(Of Date)
 		Get
 			Return Me._AuxDate1
@@ -7830,7 +8240,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate2", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate2", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property AuxDate2() As System.Nullable(Of Date)
 		Get
 			Return Me._AuxDate2
@@ -7842,7 +8253,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate3", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate3", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property AuxDate3() As System.Nullable(Of Date)
 		Get
 			Return Me._AuxDate3
@@ -7854,7 +8266,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate4", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate4", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property AuxDate4() As System.Nullable(Of Date)
 		Get
 			Return Me._AuxDate4
@@ -7866,7 +8279,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate5", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxDate5", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property AuxDate5() As System.Nullable(Of Date)
 		Get
 			Return Me._AuxDate5
@@ -7878,7 +8292,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum1", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum1", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property AuxNum1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxNum1
@@ -7890,7 +8305,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum2", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum2", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property AuxNum2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxNum2
@@ -7902,7 +8318,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum3", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum3", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property AuxNum3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxNum3
@@ -7914,7 +8331,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum4", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum4", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property AuxNum4() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxNum4
@@ -7926,7 +8344,8 @@ Partial Public Class Log
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum5", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxNum5", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property AuxNum5() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AuxNum5
@@ -7939,7 +8358,8 @@ Partial Public Class Log
 	End Property
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Facturas")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Facturas"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqFactura
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -8612,11 +9032,11 @@ Partial Public Class linqFactura
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFactura", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFactura", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdFactura() As Integer
 		Get
 			Return Me._IdFactura
@@ -8633,7 +9053,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFactura", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFactura", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property NumeroFactura() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroFactura
@@ -8649,7 +9070,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoABC", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoABC", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property TipoABC() As String
 		Get
 			Return Me._TipoABC
@@ -8665,7 +9087,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property PuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVenta
@@ -8681,7 +9104,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property IdCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCliente
@@ -8700,7 +9124,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFactura", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFactura", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property FechaFactura() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaFactura
@@ -8716,7 +9141,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCondicionVenta", DbType:="SmallInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCondicionVenta", DbType:="SmallInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property IdCondicionVenta() As System.Nullable(Of Short)
 		Get
 			Return Me._IdCondicionVenta
@@ -8732,7 +9158,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdVendedor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdVendedor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property IdVendedor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdVendedor
@@ -8748,7 +9175,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista1", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista1", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property IdTransportista1() As System.Nullable(Of Byte)
 		Get
 			Return Me._IdTransportista1
@@ -8764,7 +9192,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista2", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista2", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property IdTransportista2() As System.Nullable(Of Byte)
 		Get
 			Return Me._IdTransportista2
@@ -8780,7 +9209,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ItemDireccion", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ItemDireccion", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property ItemDireccion() As System.Nullable(Of Byte)
 		Get
 			Return Me._ItemDireccion
@@ -8796,7 +9226,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrdenCompra", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrdenCompra", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property OrdenCompra() As String
 		Get
 			Return Me._OrdenCompra
@@ -8812,7 +9243,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoPedidoConsignacion", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoPedidoConsignacion", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property TipoPedidoConsignacion() As String
 		Get
 			Return Me._TipoPedidoConsignacion
@@ -8828,7 +9260,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property Anulada() As String
 		Get
 			Return Me._Anulada
@@ -8844,7 +9277,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property FechaAnulacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaAnulacion
@@ -8860,7 +9294,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -8876,7 +9311,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRemito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRemito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property IdRemito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRemito
@@ -8892,7 +9328,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroRemito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroRemito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property NumeroRemito() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroRemito
@@ -8908,7 +9345,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPedido", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPedido", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property IdPedido() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPedido
@@ -8924,7 +9362,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPedido", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroPedido", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property NumeroPedido() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroPedido
@@ -8940,7 +9379,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteTotal", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteTotal", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property ImporteTotal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteTotal
@@ -8956,7 +9396,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIva1", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIva1", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property ImporteIva1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteIva1
@@ -8972,7 +9413,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIva2", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIva2", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property ImporteIva2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteIva2
@@ -8988,7 +9430,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteBonificacion", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteBonificacion", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property ImporteBonificacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteBonificacion
@@ -9004,7 +9447,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos1", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos1", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property RetencionIBrutos1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._RetencionIBrutos1
@@ -9020,7 +9464,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos1", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos1", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property PorcentajeIBrutos1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIBrutos1
@@ -9036,7 +9481,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos2", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos2", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property RetencionIBrutos2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._RetencionIBrutos2
@@ -9052,7 +9498,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos2", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos2", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property PorcentajeIBrutos2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIBrutos2
@@ -9068,7 +9515,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConvenioMultilateral", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ConvenioMultilateral", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property ConvenioMultilateral() As String
 		Get
 			Return Me._ConvenioMultilateral
@@ -9084,7 +9532,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos3", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RetencionIBrutos3", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property RetencionIBrutos3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._RetencionIBrutos3
@@ -9100,7 +9549,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos3", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBrutos3", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property PorcentajeIBrutos3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIBrutos3
@@ -9116,7 +9566,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoVentaC", DbType:="SmallInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoVentaC", DbType:="SmallInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property IdTipoVentaC() As System.Nullable(Of Short)
 		Get
 			Return Me._IdTipoVentaC
@@ -9132,7 +9583,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIvaIncluido", DbType:="Decimal(19,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteIvaIncluido", DbType:="Decimal(19,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property ImporteIvaIncluido() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteIvaIncluido
@@ -9148,7 +9600,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionDolar", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionDolar", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property CotizacionDolar() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CotizacionDolar
@@ -9164,7 +9617,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsMuestra", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsMuestra", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property EsMuestra() As String
 		Get
 			Return Me._EsMuestra
@@ -9180,7 +9634,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionADolarFijo", DbType:="Decimal(18,3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionADolarFijo", DbType:="Decimal(18,3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property CotizacionADolarFijo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CotizacionADolarFijo
@@ -9196,7 +9651,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteParteEnDolares", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteParteEnDolares", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property ImporteParteEnDolares() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteParteEnDolares
@@ -9212,7 +9668,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteParteEnPesos", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteParteEnPesos", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property ImporteParteEnPesos() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteParteEnPesos
@@ -9228,7 +9685,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIva1", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIva1", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property PorcentajeIva1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIva1
@@ -9244,7 +9702,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIva2", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIva2", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property PorcentajeIva2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIva2
@@ -9260,7 +9719,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property FechaVencimiento() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVencimiento
@@ -9276,7 +9736,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IVANoDiscriminado", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IVANoDiscriminado", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property IVANoDiscriminado() As System.Nullable(Of Decimal)
 		Get
 			Return Me._IVANoDiscriminado
@@ -9292,7 +9753,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=43)>  _
 	Public Property IdMoneda() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMoneda
@@ -9308,7 +9770,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionMoneda", DbType:="Decimal(18,4)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CotizacionMoneda", DbType:="Decimal(18,4)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=44)>  _
 	Public Property CotizacionMoneda() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CotizacionMoneda
@@ -9324,7 +9787,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeBonificacion", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeBonificacion", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=45)>  _
 	Public Property PorcentajeBonificacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeBonificacion
@@ -9340,7 +9804,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones1", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones1", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=46)>  _
 	Public Property OtrasPercepciones1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._OtrasPercepciones1
@@ -9356,7 +9821,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones1Desc", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones1Desc", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=47)>  _
 	Public Property OtrasPercepciones1Desc() As String
 		Get
 			Return Me._OtrasPercepciones1Desc
@@ -9372,7 +9838,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones2", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones2", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=48)>  _
 	Public Property OtrasPercepciones2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._OtrasPercepciones2
@@ -9388,7 +9855,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones2Desc", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones2Desc", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=49)>  _
 	Public Property OtrasPercepciones2Desc() As String
 		Get
 			Return Me._OtrasPercepciones2Desc
@@ -9404,7 +9872,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaDestino", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaDestino", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=50)>  _
 	Public Property IdProvinciaDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvinciaDestino
@@ -9420,7 +9889,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=51)>  _
 	Public Property IdIBCondicion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicion
@@ -9436,7 +9906,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAutorizaAnulacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAutorizaAnulacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=52)>  _
 	Public Property IdAutorizaAnulacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAutorizaAnulacion
@@ -9452,7 +9923,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPuntoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPuntoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=53)>  _
 	Public Property IdPuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPuntoVenta
@@ -9468,7 +9940,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI", DbType:="Decimal(19,0)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI", DbType:="Decimal(19,0)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=54)>  _
 	Public Property NumeroCAI() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NumeroCAI
@@ -9484,7 +9957,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoCAI", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoCAI", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=55)>  _
 	Public Property FechaVencimientoCAI() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVencimientoCAI
@@ -9500,7 +9974,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCertificadoPercepcionIIBB", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCertificadoPercepcionIIBB", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=56)>  _
 	Public Property NumeroCertificadoPercepcionIIBB() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroCertificadoPercepcionIIBB
@@ -9516,7 +9991,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroTicketInicial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroTicketInicial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=57)>  _
 	Public Property NumeroTicketInicial() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroTicketInicial
@@ -9532,7 +10008,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroTicketFinal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroTicketFinal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=58)>  _
 	Public Property NumeroTicketFinal() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroTicketFinal
@@ -9548,7 +10025,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=59)>  _
 	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioIngreso
@@ -9564,7 +10042,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=60)>  _
 	Public Property FechaIngreso() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaIngreso
@@ -9580,7 +10059,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=61)>  _
 	Public Property IdObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdObra
@@ -9596,7 +10076,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=62)>  _
 	Public Property IdIBCondicion2() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicion2
@@ -9612,7 +10093,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicion3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=63)>  _
 	Public Property IdIBCondicion3() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicion3
@@ -9628,7 +10110,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=64)>  _
 	Public Property IdCodigoIva() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIva
@@ -9644,7 +10127,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FOB", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FOB", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=65)>  _
 	Public Property Exportacion_FOB() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Exportacion_FOB
@@ -9660,7 +10144,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_PosicionAduana", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_PosicionAduana", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=66)>  _
 	Public Property Exportacion_PosicionAduana() As String
 		Get
 			Return Me._Exportacion_PosicionAduana
@@ -9676,7 +10161,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_Despacho", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_Despacho", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=67)>  _
 	Public Property Exportacion_Despacho() As String
 		Get
 			Return Me._Exportacion_Despacho
@@ -9692,7 +10178,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_Guia", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_Guia", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=68)>  _
 	Public Property Exportacion_Guia() As String
 		Get
 			Return Me._Exportacion_Guia
@@ -9708,7 +10195,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_IdPaisDestino", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_IdPaisDestino", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=69)>  _
 	Public Property Exportacion_IdPaisDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._Exportacion_IdPaisDestino
@@ -9724,7 +10212,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FechaEmbarque", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FechaEmbarque", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=70)>  _
 	Public Property Exportacion_FechaEmbarque() As System.Nullable(Of Date)
 		Get
 			Return Me._Exportacion_FechaEmbarque
@@ -9740,7 +10229,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FechaOficializacion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exportacion_FechaOficializacion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=71)>  _
 	Public Property Exportacion_FechaOficializacion() As System.Nullable(Of Date)
 		Get
 			Return Me._Exportacion_FechaOficializacion
@@ -9756,7 +10246,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones3", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones3", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=72)>  _
 	Public Property OtrasPercepciones3() As System.Nullable(Of Decimal)
 		Get
 			Return Me._OtrasPercepciones3
@@ -9772,7 +10263,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones3Desc", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OtrasPercepciones3Desc", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=73)>  _
 	Public Property OtrasPercepciones3Desc() As String
 		Get
 			Return Me._OtrasPercepciones3Desc
@@ -9788,7 +10280,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoIncluirEnCubos", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoIncluirEnCubos", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=74)>  _
 	Public Property NoIncluirEnCubos() As String
 		Get
 			Return Me._NoIncluirEnCubos
@@ -9804,7 +10297,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PercepcionIVA", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PercepcionIVA", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=75)>  _
 	Public Property PercepcionIVA() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PercepcionIVA
@@ -9820,7 +10314,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajePercepcionIVA", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajePercepcionIVA", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=76)>  _
 	Public Property PorcentajePercepcionIVA() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajePercepcionIVA
@@ -9836,7 +10331,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivarRecuperoGastos", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivarRecuperoGastos", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=77)>  _
 	Public Property ActivarRecuperoGastos() As String
 		Get
 			Return Me._ActivarRecuperoGastos
@@ -9852,7 +10348,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAutorizoRecuperoGastos", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAutorizoRecuperoGastos", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=78)>  _
 	Public Property IdAutorizoRecuperoGastos() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdAutorizoRecuperoGastos
@@ -9868,7 +10365,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ContabilizarAFechaVencimiento", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ContabilizarAFechaVencimiento", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=79)>  _
 	Public Property ContabilizarAFechaVencimiento() As String
 		Get
 			Return Me._ContabilizarAFechaVencimiento
@@ -9884,7 +10382,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturaContado", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturaContado", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=80)>  _
 	Public Property FacturaContado() As String
 		Get
 			Return Me._FacturaContado
@@ -9900,7 +10399,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdReciboContado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdReciboContado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=81)>  _
 	Public Property IdReciboContado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdReciboContado
@@ -9916,7 +10416,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=82)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -9932,7 +10433,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdOrigenTransmision", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdOrigenTransmision", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=83)>  _
 	Public Property IdOrigenTransmision() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdOrigenTransmision
@@ -9948,7 +10450,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=84)>  _
 	Public Property IdFacturaOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturaOriginal
@@ -9964,7 +10467,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaImportacionTransmision", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaImportacionTransmision", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=85)>  _
 	Public Property FechaImportacionTransmision() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaImportacionTransmision
@@ -9980,7 +10484,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuitClienteTransmision", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuitClienteTransmision", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=86)>  _
 	Public Property CuitClienteTransmision() As String
 		Get
 			Return Me._CuitClienteTransmision
@@ -9996,7 +10501,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdReciboContadoOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdReciboContadoOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=87)>  _
 	Public Property IdReciboContadoOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdReciboContadoOriginal
@@ -10012,7 +10518,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DevolucionAnticipo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DevolucionAnticipo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=88)>  _
 	Public Property DevolucionAnticipo() As String
 		Get
 			Return Me._DevolucionAnticipo
@@ -10028,7 +10535,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeDevolucionAnticipo", DbType:="Decimal(12,6)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeDevolucionAnticipo", DbType:="Decimal(12,6)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=89)>  _
 	Public Property PorcentajeDevolucionAnticipo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeDevolucionAnticipo
@@ -10044,7 +10552,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CAE", DbType:="VarChar(14)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CAE", DbType:="VarChar(14)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=90)>  _
 	Public Property CAE() As String
 		Get
 			Return Me._CAE
@@ -10060,7 +10569,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RechazoCAE", DbType:="VarChar(11)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RechazoCAE", DbType:="VarChar(11)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=91)>  _
 	Public Property RechazoCAE() As String
 		Get
 			Return Me._RechazoCAE
@@ -10076,7 +10586,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoORechazoCAE", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimientoORechazoCAE", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=92)>  _
 	Public Property FechaVencimientoORechazoCAE() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVencimientoORechazoCAE
@@ -10092,7 +10603,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=93)>  _
 	Public Property IdListaPrecios() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdListaPrecios
@@ -10108,7 +10620,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIdentificacionCAE", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIdentificacionCAE", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=94)>  _
 	Public Property IdIdentificacionCAE() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIdentificacionCAE
@@ -10124,7 +10637,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AjusteIva", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AjusteIva", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=95)>  _
 	Public Property AjusteIva() As System.Nullable(Of Decimal)
 		Get
 			Return Me._AjusteIva
@@ -10140,7 +10654,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoExportacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoExportacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=96)>  _
 	Public Property TipoExportacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoExportacion
@@ -10156,7 +10671,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PermisoEmbarque", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PermisoEmbarque", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=97)>  _
 	Public Property PermisoEmbarque() As String
 		Get
 			Return Me._PermisoEmbarque
@@ -10172,7 +10688,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFacturaInicial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFacturaInicial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=98)>  _
 	Public Property NumeroFacturaInicial() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroFacturaInicial
@@ -10188,7 +10705,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFacturaFinal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFacturaFinal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=99)>  _
 	Public Property NumeroFacturaFinal() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroFacturaFinal
@@ -10204,7 +10722,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoIdAuxiliar", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoIdAuxiliar", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=100)>  _
 	Public Property CodigoIdAuxiliar() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoIdAuxiliar
@@ -10220,7 +10739,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCertificadoObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCertificadoObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=101)>  _
 	Public Property NumeroCertificadoObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroCertificadoObra
@@ -10236,7 +10756,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteCertificacionObra", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ImporteCertificacionObra", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=102)>  _
 	Public Property ImporteCertificacionObra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ImporteCertificacionObra
@@ -10252,7 +10773,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FondoReparoCertificacionObra", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FondoReparoCertificacionObra", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=103)>  _
 	Public Property FondoReparoCertificacionObra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._FondoReparoCertificacionObra
@@ -10268,7 +10790,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeRetencionesEstimadasCertificacionObra", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeRetencionesEstimadasCertificacionObra", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=104)>  _
 	Public Property PorcentajeRetencionesEstimadasCertificacionObra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeRetencionesEstimadasCertificacionObra
@@ -10284,7 +10807,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroExpedienteCertificacionObra", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroExpedienteCertificacionObra", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=105)>  _
 	Public Property NumeroExpedienteCertificacionObra() As String
 		Get
 			Return Me._NumeroExpedienteCertificacionObra
@@ -10300,7 +10824,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroProyecto", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroProyecto", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=106)>  _
 	Public Property NumeroProyecto() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroProyecto
@@ -10316,7 +10841,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCertificacionObras", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCertificacionObras", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=107)>  _
 	Public Property IdCertificacionObras() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCertificacionObras
@@ -10332,7 +10858,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCertificacionObraDatos", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCertificacionObraDatos", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=108)>  _
 	Public Property IdCertificacionObraDatos() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCertificacionObraDatos
@@ -10348,7 +10875,8 @@ Partial Public Class linqFactura
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaRecepcionCliente", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaRecepcionCliente", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=109)>  _
 	Public Property FechaRecepcionCliente() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaRecepcionCliente
@@ -10409,9 +10937,21 @@ Partial Public Class linqFactura
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Vendedores")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Vendedores"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqCorredor
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -10448,6 +10988,8 @@ Partial Public Class linqCorredor
 	Private _linqClientes As EntitySet(Of linqCliente)
 	
 	Private _CartasDePorte As EntitySet(Of CartasDePorte)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -10512,13 +11054,11 @@ Partial Public Class linqCorredor
 	
 	Public Sub New()
 		MyBase.New
-		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
-		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
-		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdVendedor", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdVendedor", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdVendedor() As Integer
 		Get
 			Return Me._IdVendedor
@@ -10535,7 +11075,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoVendedor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoVendedor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property CodigoVendedor() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoVendedor
@@ -10551,7 +11092,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -10567,7 +11109,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -10583,7 +11126,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="SmallInt NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="SmallInt NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property IdLocalidad() As Short
 		Get
 			Return Me._IdLocalidad
@@ -10600,7 +11144,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoPostal() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoPostal
@@ -10616,7 +11161,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="TinyInt NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="TinyInt NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property IdProvincia() As Byte
 		Get
 			Return Me._IdProvincia
@@ -10633,7 +11179,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Telefono() As String
 		Get
 			Return Me._Telefono
@@ -10649,7 +11196,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Fax() As String
 		Get
 			Return Me._Fax
@@ -10665,7 +11213,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -10681,7 +11230,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Comision", DbType:="Decimal(7,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Comision", DbType:="Decimal(7,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Comision() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Comision
@@ -10697,7 +11247,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpleado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpleado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdEmpleado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdEmpleado
@@ -10713,7 +11264,8 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property Cuit() As String
 		Get
 			Return Me._Cuit
@@ -10729,9 +11281,14 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente", Storage:="_Clientes", ThisKey:="IdVendedor", OtherKey:="Cobrador")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente", Storage:="_Clientes", ThisKey:="IdVendedor", OtherKey:="Cobrador"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14, EmitDefaultValue:=false)>  _
 	Public Property Clientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._Clientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._Clientes
 		End Get
 		Set
@@ -10739,9 +11296,14 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente1", Storage:="_linqClientes", ThisKey:="IdVendedor", OtherKey:="Vendedor1")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente1", Storage:="_linqClientes", ThisKey:="IdVendedor", OtherKey:="Vendedor1"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15, EmitDefaultValue:=false)>  _
 	Public Property linqClientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqClientes
 		End Get
 		Set
@@ -10749,9 +11311,14 @@ Partial Public Class linqCorredor
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdVendedor", OtherKey:="IdCorredor2")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdVendedor", OtherKey:="IdCorredor2"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorte.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorte
 		End Get
 		Set
@@ -10806,9 +11373,35 @@ Partial Public Class linqCorredor
 		Me.SendPropertyChanging
 		entity.linqCorredor = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
+		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Calidades")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Calidades"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Calidade
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -10837,10 +11430,11 @@ Partial Public Class Calidade
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdCalidad() As Integer
 		Get
 			Return Me._IdCalidad
@@ -10857,7 +11451,8 @@ Partial Public Class Calidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -10890,9 +11485,20 @@ Partial Public Class Calidade
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Transportistas")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Transportistas"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Transportista
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -11017,10 +11623,11 @@ Partial Public Class Transportista
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdTransportista() As Integer
 		Get
 			Return Me._IdTransportista
@@ -11037,7 +11644,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RazonSocial", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RazonSocial", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property RazonSocial() As String
 		Get
 			Return Me._RazonSocial
@@ -11053,7 +11661,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -11069,7 +11678,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -11085,7 +11695,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -11101,7 +11712,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -11117,7 +11729,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property IdPais() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPais
@@ -11133,7 +11746,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Telefono() As String
 		Get
 			Return Me._Telefono
@@ -11149,7 +11763,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Fax() As String
 		Get
 			Return Me._Fax
@@ -11165,7 +11780,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -11181,7 +11797,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property IdCodigoIva() As System.Nullable(Of Byte)
 		Get
 			Return Me._IdCodigoIva
@@ -11197,7 +11814,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property Cuit() As String
 		Get
 			Return Me._Cuit
@@ -11213,7 +11831,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property Contacto() As String
 		Get
 			Return Me._Contacto
@@ -11229,7 +11848,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -11245,7 +11865,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Horario", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Horario", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property Horario() As String
 		Get
 			Return Me._Horario
@@ -11261,7 +11882,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Celular", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Celular", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Celular() As String
 		Get
 			Return Me._Celular
@@ -11277,7 +11899,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -11293,7 +11916,8 @@ Partial Public Class Transportista
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProveedor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProveedor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdProveedor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProveedor
@@ -11326,9 +11950,20 @@ Partial Public Class Transportista
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Choferes")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Choferes"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Chofere
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -11375,10 +12010,11 @@ Partial Public Class Chofere
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdChofer() As Integer
 		Get
 			Return Me._IdChofer
@@ -11395,7 +12031,8 @@ Partial Public Class Chofere
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -11411,7 +12048,8 @@ Partial Public Class Chofere
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen1", DbType:="VarChar(200)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen1", DbType:="VarChar(200)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property PathImagen1() As String
 		Get
 			Return Me._PathImagen1
@@ -11427,7 +12065,8 @@ Partial Public Class Chofere
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIL", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIL", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property CUIL() As String
 		Get
 			Return Me._CUIL
@@ -11443,7 +12082,8 @@ Partial Public Class Chofere
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroDocumento", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroDocumento", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property NumeroDocumento() As String
 		Get
 			Return Me._NumeroDocumento
@@ -11476,9 +12116,20 @@ Partial Public Class Chofere
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Empleados")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Empleados"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqEmpleado
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -11555,6 +12206,8 @@ Partial Public Class linqEmpleado
 	Private _Clientes As EntitySet(Of linqCliente)
 	
 	Private _linqClientes As EntitySet(Of linqCliente)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -11703,12 +12356,11 @@ Partial Public Class linqEmpleado
 	
 	Public Sub New()
 		MyBase.New
-		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
-		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpleado", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpleado", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdEmpleado() As Integer
 		Get
 			Return Me._IdEmpleado
@@ -11725,7 +12377,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Legajo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Legajo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Legajo() As System.Nullable(Of Integer)
 		Get
 			Return Me._Legajo
@@ -11741,7 +12394,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -11757,7 +12411,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UsuarioNT", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_UsuarioNT", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property UsuarioNT() As String
 		Get
 			Return Me._UsuarioNT
@@ -11773,7 +12428,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property IdSector() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector
@@ -11789,7 +12445,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdCargo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCargo
@@ -11805,7 +12462,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -11821,7 +12479,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Interno", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Interno", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Interno() As String
 		Get
 			Return Me._Interno
@@ -11837,7 +12496,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Administrador", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Administrador", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Administrador() As String
 		Get
 			Return Me._Administrador
@@ -11853,7 +12513,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Iniciales", DbType:="VarChar(6)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Iniciales", DbType:="VarChar(6)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Iniciales() As String
 		Get
 			Return Me._Iniciales
@@ -11869,7 +12530,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Password", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Password", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Password() As String
 		Get
 			Return Me._Password
@@ -11885,7 +12547,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SisMan", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SisMan", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property SisMan() As String
 		Get
 			Return Me._SisMan
@@ -11901,7 +12564,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HorasJornada", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HorasJornada", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property HorasJornada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._HorasJornada
@@ -11917,7 +12581,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property IdSector1() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector1
@@ -11933,7 +12598,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property IdCargo1() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCargo1
@@ -11949,7 +12615,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property IdSector2() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector2
@@ -11965,7 +12632,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property IdCargo2() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCargo2
@@ -11981,7 +12649,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdSector3() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector3
@@ -11997,7 +12666,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property IdCargo3() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCargo3
@@ -12013,7 +12683,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector4", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSector4", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdSector4() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSector4
@@ -12029,7 +12700,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo4", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCargo4", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdCargo4() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCargo4
@@ -12045,7 +12717,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Dominio", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Dominio", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property Dominio() As String
 		Get
 			Return Me._Dominio
@@ -12061,7 +12734,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SisMat", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SisMat", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property SisMat() As String
 		Get
 			Return Me._SisMat
@@ -12077,7 +12751,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaNacimiento", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaNacimiento", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property FechaNacimiento() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaNacimiento
@@ -12093,7 +12768,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoUsuario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoUsuario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property TipoUsuario() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoUsuario
@@ -12109,7 +12785,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoDeCarga", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoDeCarga", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property GrupoDeCarga() As System.Nullable(Of Integer)
 		Get
 			Return Me._GrupoDeCarga
@@ -12125,7 +12802,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaBancaria", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaBancaria", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property CuentaBancaria() As String
 		Get
 			Return Me._CuentaBancaria
@@ -12141,7 +12819,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InformacionAuxiliar", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InformacionAuxiliar", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property InformacionAuxiliar() As String
 		Get
 			Return Me._InformacionAuxiliar
@@ -12157,7 +12836,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaFondoFijo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaFondoFijo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property IdCuentaFondoFijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaFondoFijo
@@ -12173,7 +12853,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObraAsignada", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObraAsignada", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property IdObraAsignada() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdObraAsignada
@@ -12189,7 +12870,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property Activo() As String
 		Get
 			Return Me._Activo
@@ -12205,7 +12887,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Idioma", DbType:="VarChar(3)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Idioma", DbType:="VarChar(3)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property Idioma() As String
 		Get
 			Return Me._Idioma
@@ -12221,7 +12904,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVentaAsociado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVentaAsociado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property PuntoVentaAsociado() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVentaAsociado
@@ -12237,7 +12921,8 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLugarEntregaAsignado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLugarEntregaAsignado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property IdLugarEntregaAsignado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLugarEntregaAsignado
@@ -12253,9 +12938,14 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqEmpleado_linqCliente", Storage:="_Clientes", ThisKey:="IdEmpleado", OtherKey:="IdUsuarioIngreso")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqEmpleado_linqCliente", Storage:="_Clientes", ThisKey:="IdEmpleado", OtherKey:="IdUsuarioIngreso"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35, EmitDefaultValue:=false)>  _
 	Public Property Clientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._Clientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._Clientes
 		End Get
 		Set
@@ -12263,9 +12953,14 @@ Partial Public Class linqEmpleado
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqEmpleado_linqCliente1", Storage:="_linqClientes", ThisKey:="IdEmpleado", OtherKey:="IdUsuarioModifico")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqEmpleado_linqCliente1", Storage:="_linqClientes", ThisKey:="IdEmpleado", OtherKey:="IdUsuarioModifico"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36, EmitDefaultValue:=false)>  _
 	Public Property linqClientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqClientes
 		End Get
 		Set
@@ -12310,9 +13005,34 @@ Partial Public Class linqEmpleado
 		Me.SendPropertyChanging
 		entity.linqEmpleado1 = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
+		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ListasPrecios")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ListasPrecios"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class ListasPrecio
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -12331,6 +13051,8 @@ Partial Public Class ListasPrecio
 	Private _IdMoneda As System.Nullable(Of Integer)
 	
 	Private _linqClientes As EntitySet(Of linqCliente)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -12367,11 +13089,11 @@ Partial Public Class ListasPrecio
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdListaPrecios() As Integer
 		Get
 			Return Me._IdListaPrecios
@@ -12388,7 +13110,8 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -12404,7 +13127,8 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroLista", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroLista", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property NumeroLista() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroLista
@@ -12420,7 +13144,8 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVigencia", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVigencia", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property FechaVigencia() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVigencia
@@ -12436,7 +13161,8 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activa", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activa", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Activa() As String
 		Get
 			Return Me._Activa
@@ -12452,7 +13178,8 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdMoneda() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMoneda
@@ -12468,9 +13195,14 @@ Partial Public Class ListasPrecio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ListasPrecio_linqCliente", Storage:="_linqClientes", ThisKey:="IdListaPrecios", OtherKey:="IdListaPrecios")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="ListasPrecio_linqCliente", Storage:="_linqClientes", ThisKey:="IdListaPrecios", OtherKey:="IdListaPrecios"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7, EmitDefaultValue:=false)>  _
 	Public Property linqClientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqClientes
 		End Get
 		Set
@@ -12505,9 +13237,33 @@ Partial Public Class ListasPrecio
 		Me.SendPropertyChanging
 		entity.ListasPrecio = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ListasPreciosDetalle")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.ListasPreciosDetalle"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class ListasPreciosDetalle
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -12596,10 +13352,11 @@ Partial Public Class ListasPreciosDetalle
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPreciosDetalle", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPreciosDetalle", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdListaPreciosDetalle() As Integer
 		Get
 			Return Me._IdListaPreciosDetalle
@@ -12616,7 +13373,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdListaPrecios() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdListaPrecios
@@ -12632,7 +13390,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -12648,7 +13407,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Precio", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Precio", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Precio() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Precio
@@ -12664,7 +13424,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinoDeCartaDePorte", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinoDeCartaDePorte", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property IdDestinoDeCartaDePorte() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestinoDeCartaDePorte
@@ -12680,7 +13441,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioDescargaLocal", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioDescargaLocal", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property PrecioDescargaLocal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioDescargaLocal
@@ -12696,7 +13458,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioDescargaExportacion", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioDescargaExportacion", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property PrecioDescargaExportacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioDescargaExportacion
@@ -12712,7 +13475,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioCaladaLocal", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioCaladaLocal", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property PrecioCaladaLocal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioCaladaLocal
@@ -12728,7 +13492,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioCaladaExportacion", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioCaladaExportacion", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property PrecioCaladaExportacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioCaladaExportacion
@@ -12744,7 +13509,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioRepetidoPeroConPrecision", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioRepetidoPeroConPrecision", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property PrecioRepetidoPeroConPrecision() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioRepetidoPeroConPrecision
@@ -12760,7 +13526,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioExportacion", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioExportacion", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property PrecioExportacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioExportacion
@@ -12776,7 +13543,8 @@ Partial Public Class ListasPreciosDetalle
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioEmbarque", DbType:="Money")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioEmbarque", DbType:="Money"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property PrecioEmbarque() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioEmbarque
@@ -12809,9 +13577,20 @@ Partial Public Class ListasPreciosDetalle
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorteReglasDeFacturacion")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorteReglasDeFacturacion"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class CartasDePorteReglasDeFacturacion
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -12902,11 +13681,11 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRegla", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRegla", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdRegla() As Integer
 		Get
 			Return Me._IdRegla
@@ -12923,7 +13702,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCliente
@@ -12942,7 +13722,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property PuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVenta
@@ -12958,7 +13739,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoTitular", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoTitular", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property SeLeFacturaCartaPorteComoTitular() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoTitular
@@ -12974,7 +13756,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoIntermediario", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoIntermediario", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property SeLeFacturaCartaPorteComoIntermediario() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoIntermediario
@@ -12990,7 +13773,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoRemcomercial", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoRemcomercial", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property SeLeFacturaCartaPorteComoRemcomercial() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoRemcomercial
@@ -13006,7 +13790,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoCorredor", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoCorredor", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property SeLeFacturaCartaPorteComoCorredor() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoCorredor
@@ -13022,7 +13807,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatario", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatario", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property SeLeFacturaCartaPorteComoDestinatario() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoDestinatario
@@ -13038,7 +13824,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatarioExportador", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatarioExportador", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property SeLeFacturaCartaPorteComoDestinatarioExportador() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoDestinatarioExportador
@@ -13054,7 +13841,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeDerivaSuFacturaAlCorredorDeLaCarta", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeDerivaSuFacturaAlCorredorDeLaCarta", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property SeLeDerivaSuFacturaAlCorredorDeLaCarta() As String
 		Get
 			Return Me._SeLeDerivaSuFacturaAlCorredorDeLaCarta
@@ -13070,7 +13858,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoClienteAuxiliar", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoClienteAuxiliar", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property SeLeFacturaCartaPorteComoClienteAuxiliar() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoClienteAuxiliar
@@ -13086,7 +13875,8 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsEntregador", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsEntregador", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property EsEntregador() As String
 		Get
 			Return Me._EsEntregador
@@ -13147,9 +13937,21 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Localidades")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Localidades"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Localidade
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -13186,6 +13988,8 @@ Partial Public Class Localidade
 	Private _linqClientes As EntitySet(Of linqCliente)
 	
 	Private _Partido1 As EntityRef(Of linqPartido)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -13246,14 +14050,11 @@ Partial Public Class Localidade
 	
 	Public Sub New()
 		MyBase.New
-		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
-		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
-		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
-		Me._Partido1 = CType(Nothing, EntityRef(Of linqPartido))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdLocalidad() As Integer
 		Get
 			Return Me._IdLocalidad
@@ -13270,7 +14071,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -13286,7 +14088,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -13302,7 +14105,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -13318,7 +14122,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -13334,7 +14139,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoONCAA() As String
 		Get
 			Return Me._CodigoONCAA
@@ -13350,7 +14156,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property CodigoWilliams() As String
 		Get
 			Return Me._CodigoWilliams
@@ -13366,7 +14173,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property CodigoLosGrobo() As String
 		Get
 			Return Me._CodigoLosGrobo
@@ -13382,7 +14190,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoESRI", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoESRI", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property CodigoESRI() As String
 		Get
 			Return Me._CodigoESRI
@@ -13398,7 +14207,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partido", DbType:="VarChar(60)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partido", DbType:="VarChar(60)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Partido() As String
 		Get
 			Return Me._Partido
@@ -13414,7 +14224,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Codigo() As System.Nullable(Of Integer)
 		Get
 			Return Me._Codigo
@@ -13430,7 +14241,8 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdPartido() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPartido
@@ -13449,9 +14261,14 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_WilliamsDestino", Storage:="_WilliamsDestinos", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_WilliamsDestino", Storage:="_WilliamsDestinos", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13, EmitDefaultValue:=false)>  _
 	Public Property WilliamsDestinos() As EntitySet(Of WilliamsDestino)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._WilliamsDestinos.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._WilliamsDestinos
 		End Get
 		Set
@@ -13459,9 +14276,14 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_Clientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidadEntrega")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_Clientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidadEntrega"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14, EmitDefaultValue:=false)>  _
 	Public Property Clientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._Clientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._Clientes
 		End Get
 		Set
@@ -13469,9 +14291,14 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente1", Storage:="_linqClientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente1", Storage:="_linqClientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15, EmitDefaultValue:=false)>  _
 	Public Property linqClientes() As EntitySet(Of linqCliente)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqClientes
 		End Get
 		Set
@@ -13479,7 +14306,7 @@ Partial Public Class Localidade
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Partido_Localidade", Storage:="_Partido1", ThisKey:="IdPartido", OtherKey:="IdPartido", IsForeignKey:=true)>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqPartido_Localidade", Storage:="_Partido1", ThisKey:="IdPartido", OtherKey:="IdPartido", IsForeignKey:=true)>  _
 	Public Property linqPartido() As linqPartido
 		Get
 			Return Me._Partido1.Entity
@@ -13554,9 +14381,36 @@ Partial Public Class Localidade
 		Me.SendPropertyChanging
 		entity.Localidade1 = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
+		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
+		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		Me._Partido1 = CType(Nothing, EntityRef(Of linqPartido))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Partidos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Partidos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqPartido
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -13575,6 +14429,8 @@ Partial Public Class linqPartido
 	Private _CodigoPostal As String
 	
 	Private _Localidades As EntitySet(Of Localidade)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -13611,11 +14467,11 @@ Partial Public Class linqPartido
 	
 	Public Sub New()
 		MyBase.New
-		Me._Localidades = New EntitySet(Of Localidade)(AddressOf Me.attach_Localidades, AddressOf Me.detach_Localidades)
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdPartido() As Integer
 		Get
 			Return Me._IdPartido
@@ -13632,7 +14488,8 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -13648,7 +14505,8 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(15) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(15) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Codigo() As String
 		Get
 			Return Me._Codigo
@@ -13664,7 +14522,8 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -13680,7 +14539,8 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCCA", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCCA", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property CodigoONCCA() As String
 		Get
 			Return Me._CodigoONCCA
@@ -13696,7 +14556,8 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(15)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(15)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -13712,9 +14573,14 @@ Partial Public Class linqPartido
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Partido_Localidade", Storage:="_Localidades", ThisKey:="IdPartido", OtherKey:="IdPartido")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqPartido_Localidade", Storage:="_Localidades", ThisKey:="IdPartido", OtherKey:="IdPartido"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7, EmitDefaultValue:=false)>  _
 	Public Property Localidades() As EntitySet(Of Localidade)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._Localidades.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._Localidades
 		End Get
 		Set
@@ -13749,9 +14615,33 @@ Partial Public Class linqPartido
 		Me.SendPropertyChanging
 		entity.linqPartido = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._Localidades = New EntitySet(Of Localidade)(AddressOf Me.attach_Localidades, AddressOf Me.detach_Localidades)
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.WilliamsDestinos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.WilliamsDestinos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class WilliamsDestino
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -13888,13 +14778,11 @@ Partial Public Class WilliamsDestino
 	
 	Public Sub New()
 		MyBase.New
-		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
-		Me._Cliente = CType(Nothing, EntityRef(Of linqCliente))
-		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdWilliamsDestino", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdWilliamsDestino", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdWilliamsDestino() As Integer
 		Get
 			Return Me._IdWilliamsDestino
@@ -13911,7 +14799,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -13927,7 +14816,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Codigo() As String
 		Get
 			Return Me._Codigo
@@ -13943,7 +14833,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontratista1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontratista1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Subcontratista1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Subcontratista1
@@ -13962,7 +14853,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontratista2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontratista2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Subcontratista2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Subcontratista2
@@ -13981,7 +14873,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoSAJPYA", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoSAJPYA", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoSAJPYA() As String
 		Get
 			Return Me._CodigoSAJPYA
@@ -13997,7 +14890,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property CodigoONCAA() As String
 		Get
 			Return Me._CodigoONCAA
@@ -14013,7 +14907,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SincronismoNoble1", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SincronismoNoble1", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property SincronismoNoble1() As String
 		Get
 			Return Me._SincronismoNoble1
@@ -14029,7 +14924,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SincronismoNoble2", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SincronismoNoble2", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property SincronismoNoble2() As String
 		Get
 			Return Me._SincronismoNoble2
@@ -14045,7 +14941,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString1", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property AuxiliarString1() As String
 		Get
 			Return Me._AuxiliarString1
@@ -14061,7 +14958,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString2", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property AuxiliarString2() As String
 		Get
 			Return Me._AuxiliarString2
@@ -14077,7 +14975,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarString3", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property AuxiliarString3() As String
 		Get
 			Return Me._AuxiliarString3
@@ -14093,7 +14992,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property CodigoWilliams() As String
 		Get
 			Return Me._CodigoWilliams
@@ -14109,7 +15009,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -14125,7 +15026,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property CUIT() As String
 		Get
 			Return Me._CUIT
@@ -14141,7 +15043,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property CodigoLosGrobo() As String
 		Get
 			Return Me._CodigoLosGrobo
@@ -14157,7 +15060,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoYPF", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoYPF", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property CodigoYPF() As String
 		Get
 			Return Me._CodigoYPF
@@ -14173,7 +15077,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -14189,7 +15094,8 @@ Partial Public Class WilliamsDestino
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -14309,9 +15215,23 @@ Partial Public Class WilliamsDestino
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
+		Me._Cliente = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class CartasPorteAcopio
 	
 	Private _IdAcopio As Integer
@@ -14322,7 +15242,8 @@ Partial Public Class CartasPorteAcopio
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcopio", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcopio", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdAcopio() As Integer
 		Get
 			Return Me._IdAcopio
@@ -14335,7 +15256,8 @@ Partial Public Class CartasPorteAcopio
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(60) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(60) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -14348,7 +15270,8 @@ Partial Public Class CartasPorteAcopio
 	End Property
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.DetalleFacturas")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.DetalleFacturas"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqDetalleFacturas
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -14417,6 +15340,8 @@ Partial Public Class linqDetalleFacturas
 	Private _CartasDePorte As EntitySet(Of CartasDePorte)
 	
 	Private _linqArticulo As EntityRef(Of linqArticulo)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -14549,12 +15474,11 @@ Partial Public Class linqDetalleFacturas
 	
 	Public Sub New()
 		MyBase.New
-		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
-		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdDetalleFactura() As Integer
 		Get
 			Return Me._IdDetalleFactura
@@ -14571,7 +15495,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFactura", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFactura", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdFactura() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFactura
@@ -14587,7 +15512,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFactura", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroFactura", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property NumeroFactura() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroFactura
@@ -14603,7 +15529,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoABC", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoABC", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property TipoABC() As String
 		Get
 			Return Me._TipoABC
@@ -14619,7 +15546,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property PuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVenta
@@ -14635,7 +15563,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -14654,7 +15583,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoArticulo", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoArticulo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property CodigoArticulo() As String
 		Get
 			Return Me._CodigoArticulo
@@ -14670,7 +15600,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Cantidad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Cantidad
@@ -14686,7 +15617,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Costo", DbType:="Decimal(19,8)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Costo", DbType:="Decimal(19,8)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Costo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Costo
@@ -14702,7 +15634,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioUnitario", DbType:="Decimal(19,8)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioUnitario", DbType:="Decimal(19,8)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property PrecioUnitario() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioUnitario
@@ -14718,7 +15651,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Bonificacion", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Bonificacion", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Bonificacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Bonificacion
@@ -14734,7 +15668,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleRemito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleRemito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdDetalleRemito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDetalleRemito
@@ -14750,7 +15685,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParteDolar", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParteDolar", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property ParteDolar() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ParteDolar
@@ -14766,7 +15702,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PartePesos", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PartePesos", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property PartePesos() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PartePesos
@@ -14782,7 +15719,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeCertificacion", DbType:="Decimal(12,6)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeCertificacion", DbType:="Decimal(12,6)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property PorcentajeCertificacion() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeCertificacion
@@ -14798,7 +15736,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrigenDescripcion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrigenDescripcion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property OrigenDescripcion() As System.Nullable(Of Integer)
 		Get
 			Return Me._OrigenDescripcion
@@ -14814,7 +15753,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCancelacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCancelacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property TipoCancelacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoCancelacion
@@ -14830,7 +15770,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdUnidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidad
@@ -14846,7 +15787,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioUnitarioTotal", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PrecioUnitarioTotal", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property PrecioUnitarioTotal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PrecioUnitarioTotal
@@ -14862,7 +15804,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -14878,7 +15821,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NotaAclaracion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NotaAclaracion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property NotaAclaracion() As String
 		Get
 			Return Me._NotaAclaracion
@@ -14894,7 +15838,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -14910,7 +15855,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdOrigenTransmision", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdOrigenTransmision", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property IdOrigenTransmision() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdOrigenTransmision
@@ -14926,7 +15872,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property IdFacturaOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturaOriginal
@@ -14942,7 +15889,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFacturaOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFacturaOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property IdDetalleFacturaOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDetalleFacturaOriginal
@@ -14958,7 +15906,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaImportacionTransmision", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaImportacionTransmision", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property FechaImportacionTransmision() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaImportacionTransmision
@@ -14974,7 +15923,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Talle", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Talle", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property Talle() As String
 		Get
 			Return Me._Talle
@@ -14990,7 +15940,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdColor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdColor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property IdColor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdColor
@@ -15006,7 +15957,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetallePresupuestoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetallePresupuestoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property IdDetallePresupuestoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDetallePresupuestoVenta
@@ -15022,7 +15974,8 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrigenRegistro", DbType:="VarChar(12)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrigenRegistro", DbType:="VarChar(12)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property OrigenRegistro() As String
 		Get
 			Return Me._OrigenRegistro
@@ -15038,9 +15991,14 @@ Partial Public Class linqDetalleFacturas
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqDetalleFacturas_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdDetalleFactura", OtherKey:="IdDetalleFactura")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqDetalleFacturas_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdDetalleFactura", OtherKey:="IdDetalleFactura"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorte.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorte
 		End Get
 		Set
@@ -15103,9 +16061,34 @@ Partial Public Class linqDetalleFacturas
 		Me.SendPropertyChanging
 		entity.linqDetalleFacturas = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
+		Me._linqArticulo = CType(Nothing, EntityRef(Of linqArticulo))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Empresa")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Empresa"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Empresa
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -15260,10 +16243,11 @@ Partial Public Class Empresa
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpresa", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEmpresa", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdEmpresa() As Integer
 		Get
 			Return Me._IdEmpresa
@@ -15280,7 +16264,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Nombre() As String
 		Get
 			Return Me._Nombre
@@ -15296,7 +16281,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DetalleNombre", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DetalleNombre", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property DetalleNombre() As String
 		Get
 			Return Me._DetalleNombre
@@ -15312,7 +16298,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -15328,7 +16315,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Localidad", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Localidad", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Localidad() As String
 		Get
 			Return Me._Localidad
@@ -15344,7 +16332,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -15360,7 +16349,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Provincia", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Provincia", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property Provincia() As String
 		Get
 			Return Me._Provincia
@@ -15376,7 +16366,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono1", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono1", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Telefono1() As String
 		Get
 			Return Me._Telefono1
@@ -15392,7 +16383,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono2", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono2", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Telefono2() As String
 		Get
 			Return Me._Telefono2
@@ -15408,7 +16400,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -15424,7 +16417,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Cuit() As String
 		Get
 			Return Me._Cuit
@@ -15440,7 +16434,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CondicionIva", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CondicionIva", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property CondicionIva() As String
 		Get
 			Return Me._CondicionIva
@@ -15456,7 +16451,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales1", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales1", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property DatosAdicionales1() As String
 		Get
 			Return Me._DatosAdicionales1
@@ -15472,7 +16468,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales2", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales2", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property DatosAdicionales2() As String
 		Get
 			Return Me._DatosAdicionales2
@@ -15488,7 +16485,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales3", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DatosAdicionales3", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property DatosAdicionales3() As String
 		Get
 			Return Me._DatosAdicionales3
@@ -15504,7 +16502,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property IdCodigoIva() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIva
@@ -15520,7 +16519,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAFIP", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAFIP", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property ArchivoAFIP() As String
 		Get
 			Return Me._ArchivoAFIP
@@ -15536,7 +16536,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroAgentePercepcionIIBB", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroAgentePercepcionIIBB", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property NumeroAgentePercepcionIIBB() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroAgentePercepcionIIBB
@@ -15552,7 +16553,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DigitoVerificadorNumeroAgentePercepcionIIBB", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DigitoVerificadorNumeroAgentePercepcionIIBB", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property DigitoVerificadorNumeroAgentePercepcionIIBB() As System.Nullable(Of Integer)
 		Get
 			Return Me._DigitoVerificadorNumeroAgentePercepcionIIBB
@@ -15568,7 +16570,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModalidadFacturacionAPrueba", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ModalidadFacturacionAPrueba", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property ModalidadFacturacionAPrueba() As String
 		Get
 			Return Me._ModalidadFacturacionAPrueba
@@ -15584,7 +16587,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoActividadIIBB", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoActividadIIBB", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property CodigoActividadIIBB() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoActividadIIBB
@@ -15600,7 +16604,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActividadComercializacionGranos", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActividadComercializacionGranos", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property ActividadComercializacionGranos() As String
 		Get
 			Return Me._ActividadComercializacionGranos
@@ -15616,7 +16621,8 @@ Partial Public Class Empresa
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoActividadComercializacionGranos", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoActividadComercializacionGranos", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property TipoActividadComercializacionGranos() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoActividadComercializacionGranos
@@ -15649,9 +16655,20 @@ Partial Public Class Empresa
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.TiposComprobante")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.TiposComprobante"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class TiposComprobante
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -15866,10 +16883,11 @@ Partial Public Class TiposComprobante
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoComprobante", DbType:="Int NOT NULL", IsPrimaryKey:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoComprobante", DbType:="Int NOT NULL", IsPrimaryKey:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdTipoComprobante() As Integer
 		Get
 			Return Me._IdTipoComprobante
@@ -15886,7 +16904,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -15902,7 +16921,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Coeficiente", DbType:="SmallInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Coeficiente", DbType:="SmallInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Coeficiente() As System.Nullable(Of Short)
 		Get
 			Return Me._Coeficiente
@@ -15918,7 +16938,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DescripcionAb", DbType:="VarChar(5)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DescripcionAb", DbType:="VarChar(5)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property DescripcionAb() As String
 		Get
 			Return Me._DescripcionAb
@@ -15934,7 +16955,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsValor", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsValor", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property EsValor() As String
 		Get
 			Return Me._EsValor
@@ -15950,7 +16972,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoDgi", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoDgi", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property CodigoDgi() As String
 		Get
 			Return Me._CodigoDgi
@@ -15966,7 +16989,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Agrupacion1", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Agrupacion1", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property Agrupacion1() As String
 		Get
 			Return Me._Agrupacion1
@@ -15982,7 +17006,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaDiferenciaCambio", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalculaDiferenciaCambio", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property CalculaDiferenciaCambio() As String
 		Get
 			Return Me._CalculaDiferenciaCambio
@@ -15998,7 +17023,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlLibro", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlLibro", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property VaAlLibro() As String
 		Get
 			Return Me._VaAlLibro
@@ -16014,7 +17040,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PideBancoCuenta", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PideBancoCuenta", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property PideBancoCuenta() As String
 		Get
 			Return Me._PideBancoCuenta
@@ -16030,7 +17057,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PideCuenta", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PideCuenta", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property PideCuenta() As String
 		Get
 			Return Me._PideCuenta
@@ -16046,7 +17074,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaDefault", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaDefault", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdCuentaDefault() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaDefault
@@ -16062,7 +17091,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAConciliacionBancaria", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAConciliacionBancaria", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property VaAConciliacionBancaria() As String
 		Get
 			Return Me._VaAConciliacionBancaria
@@ -16078,7 +17108,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LlevarAPesosEnValores", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LlevarAPesosEnValores", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property LlevarAPesosEnValores() As String
 		Get
 			Return Me._LlevarAPesosEnValores
@@ -16094,7 +17125,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CoeficienteParaFondoFijo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CoeficienteParaFondoFijo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property CoeficienteParaFondoFijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._CoeficienteParaFondoFijo
@@ -16110,7 +17142,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CoeficienteParaConciliaciones", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CoeficienteParaConciliaciones", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property CoeficienteParaConciliaciones() As System.Nullable(Of Integer)
 		Get
 			Return Me._CoeficienteParaConciliaciones
@@ -16126,7 +17159,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlCiti", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlCiti", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property VaAlCiti() As String
 		Get
 			Return Me._VaAlCiti
@@ -16142,7 +17176,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlRegistroComprasAFIP", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_VaAlRegistroComprasAFIP", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property VaAlRegistroComprasAFIP() As String
 		Get
 			Return Me._VaAlRegistroComprasAFIP
@@ -16158,7 +17193,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_A", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_A", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property CodigoAFIP_Letra_A() As String
 		Get
 			Return Me._CodigoAFIP_Letra_A
@@ -16174,7 +17210,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_B", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_B", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property CodigoAFIP_Letra_B() As String
 		Get
 			Return Me._CodigoAFIP_Letra_B
@@ -16190,7 +17227,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_C", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_C", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property CodigoAFIP_Letra_C() As String
 		Get
 			Return Me._CodigoAFIP_Letra_C
@@ -16206,7 +17244,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_E", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP_Letra_E", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property CodigoAFIP_Letra_E() As String
 		Get
 			Return Me._CodigoAFIP_Letra_E
@@ -16222,7 +17261,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InformacionAuxiliar", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InformacionAuxiliar", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property InformacionAuxiliar() As String
 		Get
 			Return Me._InformacionAuxiliar
@@ -16238,7 +17278,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExigirCAI", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExigirCAI", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property ExigirCAI() As String
 		Get
 			Return Me._ExigirCAI
@@ -16254,7 +17295,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeradorAuxiliar", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeradorAuxiliar", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property NumeradorAuxiliar() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeradorAuxiliar
@@ -16270,7 +17312,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_A", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_A", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property CodigoAFIP2_Letra_A() As String
 		Get
 			Return Me._CodigoAFIP2_Letra_A
@@ -16286,7 +17329,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_B", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_B", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property CodigoAFIP2_Letra_B() As String
 		Get
 			Return Me._CodigoAFIP2_Letra_B
@@ -16302,7 +17346,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_C", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_C", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property CodigoAFIP2_Letra_C() As String
 		Get
 			Return Me._CodigoAFIP2_Letra_C
@@ -16318,7 +17363,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_E", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP2_Letra_E", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property CodigoAFIP2_Letra_E() As String
 		Get
 			Return Me._CodigoAFIP2_Letra_E
@@ -16334,7 +17380,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_A", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_A", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property CodigoAFIP3_Letra_A() As String
 		Get
 			Return Me._CodigoAFIP3_Letra_A
@@ -16350,7 +17397,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_B", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_B", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property CodigoAFIP3_Letra_B() As String
 		Get
 			Return Me._CodigoAFIP3_Letra_B
@@ -16366,7 +17414,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_C", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_C", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property CodigoAFIP3_Letra_C() As String
 		Get
 			Return Me._CodigoAFIP3_Letra_C
@@ -16382,7 +17431,8 @@ Partial Public Class TiposComprobante
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_E", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAFIP3_Letra_E", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property CodigoAFIP3_Letra_E() As String
 		Get
 			Return Me._CodigoAFIP3_Letra_E
@@ -16415,9 +17465,20 @@ Partial Public Class TiposComprobante
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Depositos")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Depositos"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class Deposito
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -16458,10 +17519,11 @@ Partial Public Class Deposito
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDeposito", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDeposito", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdDeposito() As Integer
 		Get
 			Return Me._IdDeposito
@@ -16478,7 +17540,8 @@ Partial Public Class Deposito
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -16494,7 +17557,8 @@ Partial Public Class Deposito
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Abreviatura", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Abreviatura", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Abreviatura() As String
 		Get
 			Return Me._Abreviatura
@@ -16510,7 +17574,8 @@ Partial Public Class Deposito
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdObra
@@ -16543,9 +17608,20 @@ Partial Public Class Deposito
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.PuntosVenta")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.PuntosVenta"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class PuntosVenta
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -16814,10 +17890,11 @@ Partial Public Class PuntosVenta
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPuntoVenta", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPuntoVenta", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdPuntoVenta() As Integer
 		Get
 			Return Me._IdPuntoVenta
@@ -16834,7 +17911,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Letra", DbType:="VarChar(1)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Letra", DbType:="VarChar(1)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Letra() As String
 		Get
 			Return Me._Letra
@@ -16850,7 +17928,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property PuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVenta
@@ -16866,7 +17945,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoComprobante", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoComprobante", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdTipoComprobante() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipoComprobante
@@ -16882,7 +17962,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property ProximoNumero() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero
@@ -16898,7 +17979,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_A", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_A", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property NumeroCAI_R_A() As String
 		Get
 			Return Me._NumeroCAI_R_A
@@ -16914,7 +17996,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_A", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_A", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaCAI_R_A() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_R_A
@@ -16930,7 +18013,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_A", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_A", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property NumeroCAI_F_A() As String
 		Get
 			Return Me._NumeroCAI_F_A
@@ -16946,7 +18030,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_A", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_A", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FechaCAI_F_A() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_F_A
@@ -16962,7 +18047,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_A", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_A", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property NumeroCAI_D_A() As String
 		Get
 			Return Me._NumeroCAI_D_A
@@ -16978,7 +18064,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_A", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_A", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property FechaCAI_D_A() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_D_A
@@ -16994,7 +18081,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_A", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_A", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property NumeroCAI_C_A() As String
 		Get
 			Return Me._NumeroCAI_C_A
@@ -17010,7 +18098,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_A", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_A", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property FechaCAI_C_A() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_C_A
@@ -17026,7 +18115,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_B", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_B", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property NumeroCAI_R_B() As String
 		Get
 			Return Me._NumeroCAI_R_B
@@ -17042,7 +18132,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_B", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_B", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property FechaCAI_R_B() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_R_B
@@ -17058,7 +18149,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_B", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_B", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property NumeroCAI_F_B() As String
 		Get
 			Return Me._NumeroCAI_F_B
@@ -17074,7 +18166,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_B", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_B", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property FechaCAI_F_B() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_F_B
@@ -17090,7 +18183,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_B", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_B", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property NumeroCAI_D_B() As String
 		Get
 			Return Me._NumeroCAI_D_B
@@ -17106,7 +18200,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_B", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_B", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property FechaCAI_D_B() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_D_B
@@ -17122,7 +18217,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_B", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_B", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property NumeroCAI_C_B() As String
 		Get
 			Return Me._NumeroCAI_C_B
@@ -17138,7 +18234,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_B", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_B", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property FechaCAI_C_B() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_C_B
@@ -17154,7 +18251,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_E", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_R_E", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property NumeroCAI_R_E() As String
 		Get
 			Return Me._NumeroCAI_R_E
@@ -17170,7 +18268,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_E", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_R_E", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property FechaCAI_R_E() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_R_E
@@ -17186,7 +18285,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_E", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_F_E", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property NumeroCAI_F_E() As String
 		Get
 			Return Me._NumeroCAI_F_E
@@ -17202,7 +18302,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_E", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_F_E", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property FechaCAI_F_E() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_F_E
@@ -17218,7 +18319,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_E", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_D_E", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property NumeroCAI_D_E() As String
 		Get
 			Return Me._NumeroCAI_D_E
@@ -17234,7 +18336,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_E", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_D_E", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property FechaCAI_D_E() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_D_E
@@ -17250,7 +18353,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_E", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCAI_C_E", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property NumeroCAI_C_E() As String
 		Get
 			Return Me._NumeroCAI_C_E
@@ -17266,7 +18370,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_E", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaCAI_C_E", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property FechaCAI_C_E() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaCAI_C_E
@@ -17282,7 +18387,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property ProximoNumero1() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero1
@@ -17298,7 +18404,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property ProximoNumero2() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero2
@@ -17314,7 +18421,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property ProximoNumero3() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero3
@@ -17330,7 +18438,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero4", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero4", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property ProximoNumero4() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero4
@@ -17346,7 +18455,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero5", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumero5", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property ProximoNumero5() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumero5
@@ -17362,7 +18472,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -17378,7 +18489,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_WebService", DbType:="VarChar(5)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_WebService", DbType:="VarChar(5)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property WebService() As String
 		Get
 			Return Me._WebService
@@ -17394,7 +18506,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_WebServiceModoTest", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_WebServiceModoTest", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property WebServiceModoTest() As String
 		Get
 			Return Me._WebServiceModoTest
@@ -17410,7 +18523,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CAEManual", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CAEManual", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property CAEManual() As String
 		Get
 			Return Me._CAEManual
@@ -17426,7 +18540,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activo", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property Activo() As String
 		Get
 			Return Me._Activo
@@ -17442,7 +18557,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgentePercepcionIIBB", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgentePercepcionIIBB", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property AgentePercepcionIIBB() As String
 		Get
 			Return Me._AgentePercepcionIIBB
@@ -17458,7 +18574,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAuxiliar", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAuxiliar", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property CodigoAuxiliar() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoAuxiliar
@@ -17474,7 +18591,8 @@ Partial Public Class PuntosVenta
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDeposito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDeposito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property IdDeposito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDeposito
@@ -17507,9 +18625,20 @@ Partial Public Class PuntosVenta
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Obras")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Obras"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqObra
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -17868,10 +18997,11 @@ Partial Public Class linqObra
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObra", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdObra() As Integer
 		Get
 			Return Me._IdObra
@@ -17888,7 +19018,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroObra", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroObra", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property NumeroObra() As String
 		Get
 			Return Me._NumeroObra
@@ -17904,7 +19035,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCliente
@@ -17920,7 +19052,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicio", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicio", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property FechaInicio() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaInicio
@@ -17936,7 +19069,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinalizacion", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinalizacion", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property FechaFinalizacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaFinalizacion
@@ -17952,7 +19086,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -17968,7 +19103,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEntrega", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEntrega", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaEntrega() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaEntrega
@@ -17984,7 +19120,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -18000,7 +19137,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdJefe", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdJefe", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property IdJefe() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdJefe
@@ -18016,7 +19154,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property TipoObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoObra
@@ -18032,7 +19171,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HorasEstimadas", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HorasEstimadas", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property HorasEstimadas() As System.Nullable(Of Integer)
 		Get
 			Return Me._HorasEstimadas
@@ -18048,7 +19188,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Consorcial", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Consorcial", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property Consorcial() As String
 		Get
 			Return Me._Consorcial
@@ -18064,7 +19205,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -18080,7 +19222,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activa", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Activa", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property Activa() As String
 		Get
 			Return Me._Activa
@@ -18096,7 +19239,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaInformes", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ParaInformes", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property ParaInformes() As String
 		Get
 			Return Me._ParaInformes
@@ -18112,7 +19256,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidadOperativa", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidadOperativa", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property IdUnidadOperativa() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidadOperativa
@@ -18128,7 +19273,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Jerarquia", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Jerarquia", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property Jerarquia() As String
 		Get
 			Return Me._Jerarquia
@@ -18144,7 +19290,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto1", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto1", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property ArchivoAdjunto1() As String
 		Get
 			Return Me._ArchivoAdjunto1
@@ -18160,7 +19307,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto2", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto2", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property ArchivoAdjunto2() As String
 		Get
 			Return Me._ArchivoAdjunto2
@@ -18176,7 +19324,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto3", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto3", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property ArchivoAdjunto3() As String
 		Get
 			Return Me._ArchivoAdjunto3
@@ -18192,7 +19341,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto4", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto4", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property ArchivoAdjunto4() As String
 		Get
 			Return Me._ArchivoAdjunto4
@@ -18208,7 +19358,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto5", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto5", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property ArchivoAdjunto5() As String
 		Get
 			Return Me._ArchivoAdjunto5
@@ -18224,7 +19375,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto6", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto6", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property ArchivoAdjunto6() As String
 		Get
 			Return Me._ArchivoAdjunto6
@@ -18240,7 +19392,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto7", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto7", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property ArchivoAdjunto7() As String
 		Get
 			Return Me._ArchivoAdjunto7
@@ -18256,7 +19409,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto8", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto8", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property ArchivoAdjunto8() As String
 		Get
 			Return Me._ArchivoAdjunto8
@@ -18272,7 +19426,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto9", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto9", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property ArchivoAdjunto9() As String
 		Get
 			Return Me._ArchivoAdjunto9
@@ -18288,7 +19443,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto10", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ArchivoAdjunto10", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property ArchivoAdjunto10() As String
 		Get
 			Return Me._ArchivoAdjunto10
@@ -18304,7 +19460,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GeneraReservaStock", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GeneraReservaStock", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property GeneraReservaStock() As String
 		Get
 			Return Me._GeneraReservaStock
@@ -18320,7 +19477,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrupoObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdGrupoObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property IdGrupoObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdGrupoObra
@@ -18336,7 +19494,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticuloAsociado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticuloAsociado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property IdArticuloAsociado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticuloAsociado
@@ -18352,7 +19511,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones2", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones2", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property Observaciones2() As String
 		Get
 			Return Me._Observaciones2
@@ -18368,7 +19528,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones3", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones3", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property Observaciones3() As String
 		Get
 			Return Me._Observaciones3
@@ -18384,7 +19545,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSubjefe", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdSubjefe", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property IdSubjefe() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdSubjefe
@@ -18400,7 +19562,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -18416,7 +19579,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -18432,7 +19596,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -18448,7 +19613,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property IdPais() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPais
@@ -18464,7 +19630,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -18480,7 +19647,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property Telefono() As String
 		Get
 			Return Me._Telefono
@@ -18496,7 +19664,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LugarPago", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LugarPago", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property LugarPago() As String
 		Get
 			Return Me._LugarPago
@@ -18512,7 +19681,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Responsable", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Responsable", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property Responsable() As String
 		Get
 			Return Me._Responsable
@@ -18528,7 +19698,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Horario", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Horario", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property Horario() As String
 		Get
 			Return Me._Horario
@@ -18544,7 +19715,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Turnos", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Turnos", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=43)>  _
 	Public Property Turnos() As String
 		Get
 			Return Me._Turnos
@@ -18560,7 +19732,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Operarios", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Operarios", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=44)>  _
 	Public Property Operarios() As System.Nullable(Of Integer)
 		Get
 			Return Me._Operarios
@@ -18576,7 +19749,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Zona", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Zona", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=45)>  _
 	Public Property Zona() As System.Nullable(Of Integer)
 		Get
 			Return Me._Zona
@@ -18592,7 +19766,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Jurisdiccion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Jurisdiccion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=46)>  _
 	Public Property Jurisdiccion() As System.Nullable(Of Integer)
 		Get
 			Return Me._Jurisdiccion
@@ -18608,7 +19783,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaContableFF", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaContableFF", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=47)>  _
 	Public Property IdCuentaContableFF() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaContableFF
@@ -18624,7 +19800,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorObra", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ValorObra", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=48)>  _
 	Public Property ValorObra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ValorObra
@@ -18640,7 +19817,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMonedaValorObra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMonedaValorObra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=49)>  _
 	Public Property IdMonedaValorObra() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMonedaValorObra
@@ -18656,7 +19834,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdJefeRegional", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdJefeRegional", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=50)>  _
 	Public Property IdJefeRegional() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdJefeRegional
@@ -18672,7 +19851,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsPlantaDeProduccionInterna", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsPlantaDeProduccionInterna", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=51)>  _
 	Public Property EsPlantaDeProduccionInterna() As String
 		Get
 			Return Me._EsPlantaDeProduccionInterna
@@ -18688,7 +19868,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivarPresupuestoObra", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ActivarPresupuestoObra", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=52)>  _
 	Public Property ActivarPresupuestoObra() As String
 		Get
 			Return Me._ActivarPresupuestoObra
@@ -18704,7 +19885,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumeroAutorizacionCompra", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ProximoNumeroAutorizacionCompra", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=53)>  _
 	Public Property ProximoNumeroAutorizacionCompra() As System.Nullable(Of Integer)
 		Get
 			Return Me._ProximoNumeroAutorizacionCompra
@@ -18720,7 +19902,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarDeMateriales", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AuxiliarDeMateriales", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=54)>  _
 	Public Property AuxiliarDeMateriales() As String
 		Get
 			Return Me._AuxiliarDeMateriales
@@ -18736,7 +19919,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiasLiquidacionCertificados", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DiasLiquidacionCertificados", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=55)>  _
 	Public Property DiasLiquidacionCertificados() As System.Nullable(Of Integer)
 		Get
 			Return Me._DiasLiquidacionCertificados
@@ -18752,7 +19936,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObraRelacionada", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdObraRelacionada", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=56)>  _
 	Public Property IdObraRelacionada() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdObraRelacionada
@@ -18768,7 +19953,8 @@ Partial Public Class linqObra
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrdenamientoSecundario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OrdenamientoSecundario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=57)>  _
 	Public Property OrdenamientoSecundario() As System.Nullable(Of Integer)
 		Get
 			Return Me._OrdenamientoSecundario
@@ -18801,9 +19987,20 @@ Partial Public Class linqObra
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Clientes")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Clientes"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqCliente
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -19026,6 +20223,8 @@ Partial Public Class linqCliente
 	Private _Localidade1 As EntityRef(Of Localidade)
 	
 	Private _linqCorredor1 As EntityRef(Of linqCorredor)
+	
+	Private serializing As Boolean
 	
     #Region "Definiciones de métodos de extensibilidad"
     Partial Private Sub OnLoaded()
@@ -19418,24 +20617,11 @@ Partial Public Class linqCliente
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqFacturas = New EntitySet(Of linqFactura)(AddressOf Me.attach_linqFacturas, AddressOf Me.detach_linqFacturas)
-		Me._CartasDePorteReglasDeFacturacions = New EntitySet(Of CartasDePorteReglasDeFacturacion)(AddressOf Me.attach_CartasDePorteReglasDeFacturacions, AddressOf Me.detach_CartasDePorteReglasDeFacturacions)
-		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
-		Me._WilliamsDestinos1 = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos1, AddressOf Me.detach_WilliamsDestinos1)
-		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
-		Me._CartasDePorte1 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte1, AddressOf Me.detach_CartasDePorte1)
-		Me._CartasDePorte2 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte2, AddressOf Me.detach_CartasDePorte2)
-		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
-		Me._linqEmpleado = CType(Nothing, EntityRef(Of linqEmpleado))
-		Me._linqEmpleado1 = CType(Nothing, EntityRef(Of linqEmpleado))
-		Me._ListasPrecio = CType(Nothing, EntityRef(Of ListasPrecio))
-		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
-		Me._Localidade1 = CType(Nothing, EntityRef(Of Localidade))
-		Me._linqCorredor1 = CType(Nothing, EntityRef(Of linqCorredor))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdCliente() As Integer
 		Get
 			Return Me._IdCliente
@@ -19452,7 +20638,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RazonSocial", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RazonSocial", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property RazonSocial() As String
 		Get
 			Return Me._RazonSocial
@@ -19468,7 +20655,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(100)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Direccion", DbType:="VarChar(100)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Direccion() As String
 		Get
 			Return Me._Direccion
@@ -19484,7 +20672,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property IdLocalidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidad
@@ -19503,7 +20692,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property CodigoPostal() As String
 		Get
 			Return Me._CodigoPostal
@@ -19519,7 +20709,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdProvincia() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvincia
@@ -19535,7 +20726,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPais", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property IdPais() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdPais
@@ -19551,7 +20743,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Telefono() As String
 		Get
 			Return Me._Telefono
@@ -19567,7 +20760,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fax", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property Fax() As String
 		Get
 			Return Me._Fax
@@ -19583,7 +20777,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(200)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(200)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -19599,7 +20794,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cuit", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Cuit() As String
 		Get
 			Return Me._Cuit
@@ -19615,7 +20811,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIva", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdCodigoIva() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIva
@@ -19631,7 +20828,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAlta", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAlta", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property FechaAlta() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaAlta
@@ -19647,7 +20845,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property Contacto() As String
 		Get
 			Return Me._Contacto
@@ -19663,7 +20862,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property EnviarEmail() As System.Nullable(Of Byte)
 		Get
 			Return Me._EnviarEmail
@@ -19679,7 +20879,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DireccionEntrega", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DireccionEntrega", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property DireccionEntrega() As String
 		Get
 			Return Me._DireccionEntrega
@@ -19695,7 +20896,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidadEntrega", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidadEntrega", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property IdLocalidadEntrega() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidadEntrega
@@ -19714,7 +20916,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaEntrega", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaEntrega", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdProvinciaEntrega() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvinciaEntrega
@@ -19730,7 +20933,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property CodigoCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._CodigoCliente
@@ -19746,7 +20950,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdCuenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuenta
@@ -19762,7 +20967,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Saldo", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Saldo", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property Saldo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Saldo
@@ -19778,7 +20984,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SaldoDocumentos", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SaldoDocumentos", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property SaldoDocumentos() As System.Nullable(Of Decimal)
 		Get
 			Return Me._SaldoDocumentos
@@ -19794,7 +21001,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor1", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor1", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Vendedor1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Vendedor1
@@ -19813,7 +21021,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreditoMaximo", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CreditoMaximo", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property CreditoMaximo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CreditoMaximo
@@ -19829,7 +21038,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IGCondicion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IGCondicion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property IGCondicion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IGCondicion
@@ -19845,7 +21055,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCondicionVenta", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCondicionVenta", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property IdCondicionVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCondicionVenta
@@ -19861,7 +21072,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdMoneda", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property IdMoneda() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdMoneda
@@ -19877,7 +21089,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IBNumeroInscripcion", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IBNumeroInscripcion", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property IBNumeroInscripcion() As String
 		Get
 			Return Me._IBNumeroInscripcion
@@ -19893,7 +21106,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IBCondicion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IBCondicion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property IBCondicion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IBCondicion
@@ -19909,7 +21123,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TipoCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property TipoCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._TipoCliente
@@ -19925,7 +21140,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property Codigo() As String
 		Get
 			Return Me._Codigo
@@ -19941,7 +21157,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdListaPrecios", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property IdListaPrecios() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdListaPrecios
@@ -19960,7 +21177,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property IdIBCondicionPorDefecto() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicionPorDefecto
@@ -19976,7 +21194,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property Confirmado() As String
 		Get
 			Return Me._Confirmado
@@ -19992,7 +21211,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPresto", DbType:="VarChar(13)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPresto", DbType:="VarChar(13)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property CodigoPresto() As String
 		Get
 			Return Me._CodigoPresto
@@ -20008,7 +21228,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="NText", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -20024,7 +21245,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Importaciones_NumeroInscripcion", DbType:="VarChar(20)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Importaciones_NumeroInscripcion", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property Importaciones_NumeroInscripcion() As String
 		Get
 			Return Me._Importaciones_NumeroInscripcion
@@ -20040,7 +21262,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Importaciones_DenominacionInscripcion", DbType:="VarChar(10)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Importaciones_DenominacionInscripcion", DbType:="VarChar(10)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property Importaciones_DenominacionInscripcion() As String
 		Get
 			Return Me._Importaciones_DenominacionInscripcion
@@ -20056,7 +21279,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaMonedaExt", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCuentaMonedaExt", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property IdCuentaMonedaExt() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCuentaMonedaExt
@@ -20072,7 +21296,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cobrador", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cobrador", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property Cobrador() As System.Nullable(Of Integer)
 		Get
 			Return Me._Cobrador
@@ -20091,7 +21316,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Auxiliar", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property Auxiliar() As String
 		Get
 			Return Me._Auxiliar
@@ -20107,7 +21333,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto2", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto2", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property IdIBCondicionPorDefecto2() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicionPorDefecto2
@@ -20123,7 +21350,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto3", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIBCondicionPorDefecto3", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=43)>  _
 	Public Property IdIBCondicionPorDefecto3() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIBCondicionPorDefecto3
@@ -20139,7 +21367,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstado", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstado", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=44)>  _
 	Public Property IdEstado() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdEstado
@@ -20155,7 +21384,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NombreFantasia", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NombreFantasia", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=45)>  _
 	Public Property NombreFantasia() As String
 		Get
 			Return Me._NombreFantasia
@@ -20171,7 +21401,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsAgenteRetencionIVA", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsAgenteRetencionIVA", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=46)>  _
 	Public Property EsAgenteRetencionIVA() As String
 		Get
 			Return Me._EsAgenteRetencionIVA
@@ -20187,7 +21418,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BaseMinimaParaPercepcionIVA", DbType:="Decimal(18,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BaseMinimaParaPercepcionIVA", DbType:="Decimal(18,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=47)>  _
 	Public Property BaseMinimaParaPercepcionIVA() As System.Nullable(Of Decimal)
 		Get
 			Return Me._BaseMinimaParaPercepcionIVA
@@ -20203,7 +21435,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajePercepcionIVA", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajePercepcionIVA", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=48)>  _
 	Public Property PorcentajePercepcionIVA() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajePercepcionIVA
@@ -20219,7 +21452,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=49)>  _
 	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioIngreso
@@ -20238,7 +21472,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=50)>  _
 	Public Property FechaIngreso() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaIngreso
@@ -20254,7 +21489,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=51)>  _
 	Public Property IdUsuarioModifico() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioModifico
@@ -20273,7 +21509,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModifico", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModifico", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=52)>  _
 	Public Property FechaModifico() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaModifico
@@ -20289,7 +21526,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBDirecto", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBDirecto", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=53)>  _
 	Public Property PorcentajeIBDirecto() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIBDirecto
@@ -20305,7 +21543,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicioVigenciaIBDirecto", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicioVigenciaIBDirecto", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=54)>  _
 	Public Property FechaInicioVigenciaIBDirecto() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaInicioVigenciaIBDirecto
@@ -20321,7 +21560,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinVigenciaIBDirecto", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinVigenciaIBDirecto", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=55)>  _
 	Public Property FechaFinVigenciaIBDirecto() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaFinVigenciaIBDirecto
@@ -20337,7 +21577,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoIIBB", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoIIBB", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=56)>  _
 	Public Property GrupoIIBB() As System.Nullable(Of Integer)
 		Get
 			Return Me._GrupoIIBB
@@ -20353,7 +21594,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBancoDebito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBancoDebito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=57)>  _
 	Public Property IdBancoDebito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdBancoDebito
@@ -20369,7 +21611,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CBU", DbType:="VarChar(22)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CBU", DbType:="VarChar(22)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=58)>  _
 	Public Property CBU() As String
 		Get
 			Return Me._CBU
@@ -20385,7 +21628,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBDirectoCapital", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PorcentajeIBDirectoCapital", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=59)>  _
 	Public Property PorcentajeIBDirectoCapital() As System.Nullable(Of Decimal)
 		Get
 			Return Me._PorcentajeIBDirectoCapital
@@ -20401,7 +21645,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicioVigenciaIBDirectoCapital", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaInicioVigenciaIBDirectoCapital", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=60)>  _
 	Public Property FechaInicioVigenciaIBDirectoCapital() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaInicioVigenciaIBDirectoCapital
@@ -20417,7 +21662,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinVigenciaIBDirectoCapital", DbType:="DateTime")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaFinVigenciaIBDirectoCapital", DbType:="DateTime"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=61)>  _
 	Public Property FechaFinVigenciaIBDirectoCapital() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaFinVigenciaIBDirectoCapital
@@ -20433,7 +21679,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoIIBBCapital", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_GrupoIIBBCapital", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=62)>  _
 	Public Property GrupoIIBBCapital() As System.Nullable(Of Integer)
 		Get
 			Return Me._GrupoIIBBCapital
@@ -20449,7 +21696,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBancoGestionador", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdBancoGestionador", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=63)>  _
 	Public Property IdBancoGestionador() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdBancoGestionador
@@ -20465,7 +21713,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExpresionRegularNoAgruparFacturasConEstosVendedores", DbType:="VarChar(200)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExpresionRegularNoAgruparFacturasConEstosVendedores", DbType:="VarChar(200)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=64)>  _
 	Public Property ExpresionRegularNoAgruparFacturasConEstosVendedores() As String
 		Get
 			Return Me._ExpresionRegularNoAgruparFacturasConEstosVendedores
@@ -20481,7 +21730,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExigeDatosCompletosEnCartaDePorteQueLoUse", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExigeDatosCompletosEnCartaDePorteQueLoUse", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=65)>  _
 	Public Property ExigeDatosCompletosEnCartaDePorteQueLoUse() As String
 		Get
 			Return Me._ExigeDatosCompletosEnCartaDePorteQueLoUse
@@ -20497,7 +21747,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DireccionDeCorreos", DbType:="VarChar(200)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DireccionDeCorreos", DbType:="VarChar(200)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=66)>  _
 	Public Property DireccionDeCorreos() As String
 		Get
 			Return Me._DireccionDeCorreos
@@ -20513,7 +21764,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidadDeCorreos", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidadDeCorreos", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=67)>  _
 	Public Property IdLocalidadDeCorreos() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdLocalidadDeCorreos
@@ -20529,7 +21781,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaDeCorreos", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvinciaDeCorreos", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=68)>  _
 	Public Property IdProvinciaDeCorreos() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdProvinciaDeCorreos
@@ -20545,7 +21798,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostalDeCorreos", DbType:="VarChar(30)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostalDeCorreos", DbType:="VarChar(30)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=69)>  _
 	Public Property CodigoPostalDeCorreos() As String
 		Get
 			Return Me._CodigoPostalDeCorreos
@@ -20561,7 +21815,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ObservacionesDeCorreos", DbType:="VarChar(150)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ObservacionesDeCorreos", DbType:="VarChar(150)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=70)>  _
 	Public Property ObservacionesDeCorreos() As String
 		Get
 			Return Me._ObservacionesDeCorreos
@@ -20577,7 +21832,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTarjetaCredito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTarjetaCredito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=71)>  _
 	Public Property IdTarjetaCredito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTarjetaCredito
@@ -20593,7 +21849,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarjeta_NumeroTarjeta", DbType:="VarChar(16)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarjeta_NumeroTarjeta", DbType:="VarChar(16)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=72)>  _
 	Public Property Tarjeta_NumeroTarjeta() As String
 		Get
 			Return Me._Tarjeta_NumeroTarjeta
@@ -20609,7 +21866,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IncluyeTarifaEnFactura", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IncluyeTarifaEnFactura", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=73)>  _
 	Public Property IncluyeTarifaEnFactura() As String
 		Get
 			Return Me._IncluyeTarifaEnFactura
@@ -20625,7 +21883,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoTitular", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoTitular", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=74)>  _
 	Public Property SeLeFacturaCartaPorteComoTitular() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoTitular
@@ -20641,7 +21900,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoIntermediario", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoIntermediario", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=75)>  _
 	Public Property SeLeFacturaCartaPorteComoIntermediario() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoIntermediario
@@ -20657,7 +21917,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoRemcomercial", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoRemcomercial", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=76)>  _
 	Public Property SeLeFacturaCartaPorteComoRemcomercial() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoRemcomercial
@@ -20673,7 +21934,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoCorredor", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoCorredor", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=77)>  _
 	Public Property SeLeFacturaCartaPorteComoCorredor() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoCorredor
@@ -20689,7 +21951,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatario", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatario", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=78)>  _
 	Public Property SeLeFacturaCartaPorteComoDestinatario() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoDestinatario
@@ -20705,7 +21968,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatarioExportador", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoDestinatarioExportador", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=79)>  _
 	Public Property SeLeFacturaCartaPorteComoDestinatarioExportador() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoDestinatarioExportador
@@ -20721,7 +21985,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeDerivaSuFacturaAlCorredorDeLaCarta", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeDerivaSuFacturaAlCorredorDeLaCarta", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=80)>  _
 	Public Property SeLeDerivaSuFacturaAlCorredorDeLaCarta() As String
 		Get
 			Return Me._SeLeDerivaSuFacturaAlCorredorDeLaCarta
@@ -20737,7 +22002,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HabilitadoParaCartaPorte", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HabilitadoParaCartaPorte", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=81)>  _
 	Public Property HabilitadoParaCartaPorte() As String
 		Get
 			Return Me._HabilitadoParaCartaPorte
@@ -20753,7 +22019,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoClienteAuxiliar", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SeLeFacturaCartaPorteComoClienteAuxiliar", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=82)>  _
 	Public Property SeLeFacturaCartaPorteComoClienteAuxiliar() As String
 		Get
 			Return Me._SeLeFacturaCartaPorteComoClienteAuxiliar
@@ -20769,7 +22036,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsAcondicionadoraDeCartaPorte", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsAcondicionadoraDeCartaPorte", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=83)>  _
 	Public Property EsAcondicionadoraDeCartaPorte() As String
 		Get
 			Return Me._EsAcondicionadoraDeCartaPorte
@@ -20785,7 +22053,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contactos", DbType:="VarChar(400)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contactos", DbType:="VarChar(400)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=84)>  _
 	Public Property Contactos() As String
 		Get
 			Return Me._Contactos
@@ -20801,7 +22070,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TelefonosFijosOficina", DbType:="VarChar(400)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TelefonosFijosOficina", DbType:="VarChar(400)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=85)>  _
 	Public Property TelefonosFijosOficina() As String
 		Get
 			Return Me._TelefonosFijosOficina
@@ -20817,7 +22087,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TelefonosCelulares", DbType:="VarChar(400)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TelefonosCelulares", DbType:="VarChar(400)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=86)>  _
 	Public Property TelefonosCelulares() As String
 		Get
 			Return Me._TelefonosCelulares
@@ -20833,7 +22104,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CorreosElectronicos", DbType:="VarChar(400)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CorreosElectronicos", DbType:="VarChar(400)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=87)>  _
 	Public Property CorreosElectronicos() As String
 		Get
 			Return Me._CorreosElectronicos
@@ -20849,7 +22121,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=88)>  _
 	Public Property IdTransportista() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTransportista
@@ -20865,7 +22138,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRegion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRegion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=89)>  _
 	Public Property IdRegion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRegion
@@ -20881,7 +22155,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCategoriaCredito", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCategoriaCredito", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=90)>  _
 	Public Property IdCategoriaCredito() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCategoriaCredito
@@ -20897,7 +22172,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistrarMovimientosEnCuentaCorriente", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_RegistrarMovimientosEnCuentaCorriente", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=91)>  _
 	Public Property RegistrarMovimientosEnCuentaCorriente() As String
 		Get
 			Return Me._RegistrarMovimientosEnCuentaCorriente
@@ -20913,7 +22189,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ComisionDiferenciada", DbType:="Decimal(6,2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ComisionDiferenciada", DbType:="Decimal(6,2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=92)>  _
 	Public Property ComisionDiferenciada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._ComisionDiferenciada
@@ -20929,7 +22206,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsEntregador", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EsEntregador", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=93)>  _
 	Public Property EsEntregador() As String
 		Get
 			Return Me._EsEntregador
@@ -20945,7 +22223,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OperacionesMercadoInternoEntidadVinculada", DbType:="VarChar(2)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_OperacionesMercadoInternoEntidadVinculada", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=94)>  _
 	Public Property OperacionesMercadoInternoEntidadVinculada() As String
 		Get
 			Return Me._OperacionesMercadoInternoEntidadVinculada
@@ -20961,7 +22240,8 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CartaPorteTipoDeAdjuntoDeFacturacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CartaPorteTipoDeAdjuntoDeFacturacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=95)>  _
 	Public Property CartaPorteTipoDeAdjuntoDeFacturacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._CartaPorteTipoDeAdjuntoDeFacturacion
@@ -20977,9 +22257,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_linqFactura", Storage:="_linqFacturas", ThisKey:="IdCliente", OtherKey:="IdCliente")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_linqFactura", Storage:="_linqFacturas", ThisKey:="IdCliente", OtherKey:="IdCliente"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=96, EmitDefaultValue:=false)>  _
 	Public Property linqFacturas() As EntitySet(Of linqFactura)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqFacturas.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._linqFacturas
 		End Get
 		Set
@@ -20987,9 +22272,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorteReglasDeFacturacion", Storage:="_CartasDePorteReglasDeFacturacions", ThisKey:="IdCliente", OtherKey:="IdCliente")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorteReglasDeFacturacion", Storage:="_CartasDePorteReglasDeFacturacions", ThisKey:="IdCliente", OtherKey:="IdCliente"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=97, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorteReglasDeFacturacions() As EntitySet(Of CartasDePorteReglasDeFacturacion)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorteReglasDeFacturacions.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorteReglasDeFacturacions
 		End Get
 		Set
@@ -20997,9 +22287,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_WilliamsDestino", Storage:="_WilliamsDestinos", ThisKey:="IdCliente", OtherKey:="Subcontratista1")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_WilliamsDestino", Storage:="_WilliamsDestinos", ThisKey:="IdCliente", OtherKey:="Subcontratista1"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=98, EmitDefaultValue:=false)>  _
 	Public Property WilliamsDestinos() As EntitySet(Of WilliamsDestino)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._WilliamsDestinos.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._WilliamsDestinos
 		End Get
 		Set
@@ -21007,9 +22302,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_WilliamsDestino1", Storage:="_WilliamsDestinos1", ThisKey:="IdCliente", OtherKey:="Subcontratista2")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_WilliamsDestino1", Storage:="_WilliamsDestinos1", ThisKey:="IdCliente", OtherKey:="Subcontratista2"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=99, EmitDefaultValue:=false)>  _
 	Public Property WilliamsDestinos1() As EntitySet(Of WilliamsDestino)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._WilliamsDestinos1.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._WilliamsDestinos1
 		End Get
 		Set
@@ -21017,9 +22317,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdCliente", OtherKey:="IdClienteAuxiliar")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte", Storage:="_CartasDePorte", ThisKey:="IdCliente", OtherKey:="IdClienteAuxiliar"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=100, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorte() As EntitySet(Of CartasDePorte)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorte.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorte
 		End Get
 		Set
@@ -21027,9 +22332,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte1", Storage:="_CartasDePorte1", ThisKey:="IdCliente", OtherKey:="IdClienteEntregador")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte1", Storage:="_CartasDePorte1", ThisKey:="IdCliente", OtherKey:="IdClienteEntregador"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=101, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorte1() As EntitySet(Of CartasDePorte)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorte1.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorte1
 		End Get
 		Set
@@ -21037,9 +22347,14 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte2", Storage:="_CartasDePorte2", ThisKey:="IdCliente", OtherKey:="Vendedor")>  _
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCliente_CartasDePorte2", Storage:="_CartasDePorte2", ThisKey:="IdCliente", OtherKey:="Vendedor"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=102, EmitDefaultValue:=false)>  _
 	Public Property CartasDePorte2() As EntitySet(Of CartasDePorte)
 		Get
+			If (Me.serializing  _
+						AndAlso (Me._CartasDePorte2.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
 			Return Me._CartasDePorte2
 		End Get
 		Set
@@ -21330,9 +22645,46 @@ Partial Public Class linqCliente
 		Me.SendPropertyChanging
 		entity.linqCliente2 = Nothing
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqFacturas = New EntitySet(Of linqFactura)(AddressOf Me.attach_linqFacturas, AddressOf Me.detach_linqFacturas)
+		Me._CartasDePorteReglasDeFacturacions = New EntitySet(Of CartasDePorteReglasDeFacturacion)(AddressOf Me.attach_CartasDePorteReglasDeFacturacions, AddressOf Me.detach_CartasDePorteReglasDeFacturacions)
+		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
+		Me._WilliamsDestinos1 = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos1, AddressOf Me.detach_WilliamsDestinos1)
+		Me._CartasDePorte = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte, AddressOf Me.detach_CartasDePorte)
+		Me._CartasDePorte1 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte1, AddressOf Me.detach_CartasDePorte1)
+		Me._CartasDePorte2 = New EntitySet(Of CartasDePorte)(AddressOf Me.attach_CartasDePorte2, AddressOf Me.detach_CartasDePorte2)
+		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
+		Me._linqEmpleado = CType(Nothing, EntityRef(Of linqEmpleado))
+		Me._linqEmpleado1 = CType(Nothing, EntityRef(Of linqEmpleado))
+		Me._ListasPrecio = CType(Nothing, EntityRef(Of ListasPrecio))
+		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
+		Me._Localidade1 = CType(Nothing, EntityRef(Of Localidade))
+		Me._linqCorredor1 = CType(Nothing, EntityRef(Of linqCorredor))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.DetalleClientes")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.DetalleClientes"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class DetalleClientes
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -21391,10 +22743,11 @@ Partial Public Class DetalleClientes
 	
 	Public Sub New()
 		MyBase.New
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleCliente", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleCliente", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdDetalleCliente() As Integer
 		Get
 			Return Me._IdDetalleCliente
@@ -21411,7 +22764,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCliente
@@ -21427,7 +22781,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contacto", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property Contacto() As String
 		Get
 			Return Me._Contacto
@@ -21443,7 +22798,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Puesto", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Puesto", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property Puesto() As String
 		Get
 			Return Me._Puesto
@@ -21459,7 +22815,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Telefono", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Telefono() As String
 		Get
 			Return Me._Telefono
@@ -21475,7 +22832,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Email", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property Email() As String
 		Get
 			Return Me._Email
@@ -21491,7 +22849,8 @@ Partial Public Class DetalleClientes
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acciones", DbType:="VarChar(500)")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acciones", DbType:="VarChar(500)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property Acciones() As String
 		Get
 			Return Me._Acciones
@@ -21524,9 +22883,20 @@ Partial Public Class DetalleClientes
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasPorteAcopios"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class CartasPorteAcopios
 	
 	Private _IdAcopio As Integer
@@ -21539,7 +22909,8 @@ Partial Public Class CartasPorteAcopios
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcopio", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdAcopio", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdAcopio() As Integer
 		Get
 			Return Me._IdAcopio
@@ -21552,7 +22923,8 @@ Partial Public Class CartasPorteAcopios
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(60) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Descripcion", DbType:="VarChar(60) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property Descripcion() As String
 		Get
 			Return Me._Descripcion
@@ -21564,7 +22936,8 @@ Partial Public Class CartasPorteAcopios
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCliente", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdCliente() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCliente
@@ -21577,7 +22950,8 @@ Partial Public Class CartasPorteAcopios
 	End Property
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorte")>  _
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.CartasDePorte"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class CartasDePorte
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	
@@ -21854,6 +23228,82 @@ Partial Public Class CartasDePorte
 	Private _CalidadGranosDanadosRebaja As System.Nullable(Of Decimal)
 	
 	Private _CalidadGranosExtranosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadGranosExtranosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadQuebradosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadDanadosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadChamicoMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadRevolcadosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadObjetablesMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadAmohosadosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadPuntaSombreadaMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadHectolitricoMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadCarbonMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadPanzaBlancaMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadPicadosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadVerdesMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadQuemadosMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadTierraMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadZarandeoMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadDescuentoFinalMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadHumedadMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadGastosFumigacionMerma As System.Nullable(Of Decimal)
+	
+	Private _CalidadQuebradosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadChamicoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadRevolcadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadObjetablesRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadAmohosadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPuntaSombreadaRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHectolitricoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadCarbonRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPanzaBlancaRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadPicadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadVerdesRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadQuemadosRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadTierraRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadZarandeoRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadDescuentoFinalRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHumedadRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadGastosFumigacionRebaja As System.Nullable(Of Decimal)
+	
+	Private _CalidadHumedadResultado As System.Nullable(Of Decimal)
+	
+	Private _CalidadGastosFumigacionResultado As System.Nullable(Of Decimal)
 	
 	Private _linqCliente As EntityRef(Of linqCliente)
 	
@@ -22416,19 +23866,167 @@ Partial Public Class CartasDePorte
     End Sub
     Partial Private Sub OnCalidadGranosExtranosRebajaChanged()
     End Sub
+    Partial Private Sub OnCalidadGranosExtranosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGranosExtranosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuebradosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuebradosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadDanadosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadDanadosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadChamicoMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadChamicoMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadObjetablesMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadObjetablesMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadCarbonMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadCarbonMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPicadosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPicadosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadVerdesMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadVerdesMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuemadosMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuemadosMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadTierraMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadTierraMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadZarandeoMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadZarandeoMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHumedadMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHumedadMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionMermaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionMermaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuebradosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuebradosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadChamicoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadChamicoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadRevolcadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadObjetablesRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadObjetablesRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadAmohosadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPuntaSombreadaRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHectolitricoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadCarbonRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadCarbonRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPanzaBlancaRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadPicadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadPicadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadVerdesRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadVerdesRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadQuemadosRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadQuemadosRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadTierraRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadTierraRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadZarandeoRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadZarandeoRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadDescuentoFinalRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHumedadRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHumedadRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionRebajaChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionRebajaChanged()
+    End Sub
+    Partial Private Sub OnCalidadHumedadResultadoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadHumedadResultadoChanged()
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionResultadoChanging(value As System.Nullable(Of Decimal))
+    End Sub
+    Partial Private Sub OnCalidadGastosFumigacionResultadoChanged()
+    End Sub
     #End Region
 	
 	Public Sub New()
 		MyBase.New
-		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
-		Me._linqCliente1 = CType(Nothing, EntityRef(Of linqCliente))
-		Me._linqCliente2 = CType(Nothing, EntityRef(Of linqCliente))
-		Me._linqDetalleFacturas = CType(Nothing, EntityRef(Of linqDetalleFacturas))
-		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
-		OnCreated
+		Me.Initialize
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true, UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property IdCartaDePorte() As Integer
 		Get
 			Return Me._IdCartaDePorte
@@ -22445,7 +24043,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property NumeroCartaDePorte() As System.Nullable(Of Long)
 		Get
 			Return Me._NumeroCartaDePorte
@@ -22461,7 +24060,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioIngreso", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdUsuarioIngreso() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioIngreso
@@ -22477,7 +24077,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaIngreso", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property FechaIngreso() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaIngreso
@@ -22493,7 +24094,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Anulada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property Anulada() As String
 		Get
 			Return Me._Anulada
@@ -22509,7 +24111,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioAnulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property IdUsuarioAnulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioAnulo
@@ -22525,7 +24128,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaAnulacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaAnulacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaAnulacion
@@ -22541,7 +24145,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Observaciones", DbType:="VarChar(200)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property Observaciones() As String
 		Get
 			Return Me._Observaciones
@@ -22557,7 +24162,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FechaTimeStamp() As System.Data.Linq.Binary
 		Get
 			Return Me._FechaTimeStamp
@@ -22573,7 +24179,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Vendedor", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property Vendedor() As System.Nullable(Of Integer)
 		Get
 			Return Me._Vendedor
@@ -22592,7 +24199,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden1", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property CuentaOrden1() As System.Nullable(Of Integer)
 		Get
 			Return Me._CuentaOrden1
@@ -22608,7 +24216,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CuentaOrden2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property CuentaOrden2() As System.Nullable(Of Integer)
 		Get
 			Return Me._CuentaOrden2
@@ -22624,7 +24233,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property Corredor() As System.Nullable(Of Integer)
 		Get
 			Return Me._Corredor
@@ -22640,7 +24250,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Entregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property Entregador() As System.Nullable(Of Integer)
 		Get
 			Return Me._Entregador
@@ -22656,7 +24267,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedencia", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Procedencia", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property Procedencia() As String
 		Get
 			Return Me._Procedencia
@@ -22672,7 +24284,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Patente", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Patente", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Patente() As String
 		Get
 			Return Me._Patente
@@ -22688,7 +24301,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -22704,7 +24318,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdStock", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdStock() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdStock
@@ -22720,7 +24335,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partida", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property Partida() As String
 		Get
 			Return Me._Partida
@@ -22736,7 +24352,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUnidad", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdUnidad() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUnidad
@@ -22752,7 +24369,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUbicacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdUbicacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUbicacion
@@ -22768,7 +24386,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cantidad", DbType:="Decimal(12,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property Cantidad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Cantidad
@@ -22784,7 +24403,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cupo", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cupo", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Cupo() As String
 		Get
 			Return Me._Cupo
@@ -22800,7 +24420,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoProc", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoProc", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property NetoProc() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NetoProc
@@ -22816,7 +24437,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Calidad", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Calidad", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property Calidad() As String
 		Get
 			Return Me._Calidad
@@ -22832,7 +24454,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property BrutoPto() As System.Nullable(Of Decimal)
 		Get
 			Return Me._BrutoPto
@@ -22848,7 +24471,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property TaraPto() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TaraPto
@@ -22864,7 +24488,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoPto", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property NetoPto() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NetoPto
@@ -22880,7 +24505,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acoplado", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acoplado", DbType:="VarChar(30)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property Acoplado() As String
 		Get
 			Return Me._Acoplado
@@ -22896,7 +24522,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Humedad", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Humedad", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property Humedad() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Humedad
@@ -22912,7 +24539,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Merma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Merma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property Merma() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Merma
@@ -22928,7 +24556,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NetoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property NetoFinal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NetoFinal
@@ -22944,7 +24573,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDeCarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDeCarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=33)>  _
 	Public Property FechaDeCarga() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaDeCarga
@@ -22960,7 +24590,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaVencimiento", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=34)>  _
 	Public Property FechaVencimiento() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaVencimiento
@@ -22976,7 +24607,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CEE", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CEE", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=35)>  _
 	Public Property CEE() As String
 		Get
 			Return Me._CEE
@@ -22992,7 +24624,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTransportista", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=36)>  _
 	Public Property IdTransportista() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTransportista
@@ -23008,7 +24641,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TransportistaCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TransportistaCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=37)>  _
 	Public Property TransportistaCUITdesnormalizado() As String
 		Get
 			Return Me._TransportistaCUITdesnormalizado
@@ -23024,7 +24658,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdChofer", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=38)>  _
 	Public Property IdChofer() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdChofer
@@ -23040,7 +24675,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChoferCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ChoferCUITdesnormalizado", DbType:="VarChar(13)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=39)>  _
 	Public Property ChoferCUITdesnormalizado() As String
 		Get
 			Return Me._ChoferCUITdesnormalizado
@@ -23056,7 +24692,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CTG", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CTG", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=40)>  _
 	Public Property CTG() As System.Nullable(Of Integer)
 		Get
 			Return Me._CTG
@@ -23072,7 +24709,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=41)>  _
 	Public Property Contrato() As String
 		Get
 			Return Me._Contrato
@@ -23088,7 +24726,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destino", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destino", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=42)>  _
 	Public Property Destino() As System.Nullable(Of Integer)
 		Get
 			Return Me._Destino
@@ -23104,7 +24743,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr1", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=43)>  _
 	Public Property Subcontr1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Subcontr1
@@ -23120,7 +24760,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Subcontr2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=44)>  _
 	Public Property Subcontr2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Subcontr2
@@ -23136,7 +24777,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Contrato1", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=45)>  _
 	Public Property Contrato1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Contrato1
@@ -23152,7 +24794,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contrato2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_contrato2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=46)>  _
 	Public Property contrato2() As System.Nullable(Of Integer)
 		Get
 			Return Me._contrato2
@@ -23168,7 +24811,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KmARecorrer", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KmARecorrer", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=47)>  _
 	Public Property KmARecorrer() As System.Nullable(Of Decimal)
 		Get
 			Return Me._KmARecorrer
@@ -23184,7 +24828,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarifa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Tarifa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=48)>  _
 	Public Property Tarifa() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Tarifa
@@ -23200,7 +24845,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=49)>  _
 	Public Property FechaDescarga() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaDescarga
@@ -23216,7 +24862,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Hora", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Hora", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=50)>  _
 	Public Property Hora() As System.Nullable(Of Date)
 		Get
 			Return Me._Hora
@@ -23232,7 +24879,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NRecibo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NRecibo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=51)>  _
 	Public Property NRecibo() As System.Nullable(Of Integer)
 		Get
 			Return Me._NRecibo
@@ -23248,7 +24896,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDe", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDe", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=52)>  _
 	Public Property CalidadDe() As System.Nullable(Of Integer)
 		Get
 			Return Me._CalidadDe
@@ -23264,7 +24913,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TaraFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=53)>  _
 	Public Property TaraFinal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TaraFinal
@@ -23280,7 +24930,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_BrutoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=54)>  _
 	Public Property BrutoFinal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._BrutoFinal
@@ -23296,7 +24947,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fumigada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Fumigada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=55)>  _
 	Public Property Fumigada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Fumigada
@@ -23312,7 +24964,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Secada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Secada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=56)>  _
 	Public Property Secada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Secada
@@ -23328,7 +24981,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exporta", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Exporta", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=57)>  _
 	Public Property Exporta() As String
 		Get
 			Return Me._Exporta
@@ -23344,7 +24998,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleExtranos", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleExtranos", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=58)>  _
 	Public Property NobleExtranos() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleExtranos
@@ -23360,7 +25015,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleNegros", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleNegros", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=59)>  _
 	Public Property NobleNegros() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleNegros
@@ -23376,7 +25032,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleQuebrados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleQuebrados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=60)>  _
 	Public Property NobleQuebrados() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleQuebrados
@@ -23392,7 +25049,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleDaniados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleDaniados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=61)>  _
 	Public Property NobleDaniados() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleDaniados
@@ -23408,7 +25066,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=62)>  _
 	Public Property NobleChamico() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleChamico
@@ -23424,7 +25083,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleChamico2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=63)>  _
 	Public Property NobleChamico2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleChamico2
@@ -23440,7 +25100,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleRevolcado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleRevolcado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=64)>  _
 	Public Property NobleRevolcado() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleRevolcado
@@ -23456,7 +25117,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleObjetables", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleObjetables", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=65)>  _
 	Public Property NobleObjetables() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleObjetables
@@ -23472,7 +25134,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAmohosados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAmohosados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=66)>  _
 	Public Property NobleAmohosados() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleAmohosados
@@ -23488,7 +25151,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleHectolitrico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleHectolitrico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=67)>  _
 	Public Property NobleHectolitrico() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleHectolitrico
@@ -23504,7 +25168,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleCarbon", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleCarbon", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=68)>  _
 	Public Property NobleCarbon() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleCarbon
@@ -23520,7 +25185,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePanzaBlanca", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePanzaBlanca", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=69)>  _
 	Public Property NoblePanzaBlanca() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NoblePanzaBlanca
@@ -23536,7 +25202,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePicados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NoblePicados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=70)>  _
 	Public Property NoblePicados() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NoblePicados
@@ -23552,7 +25219,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleMGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleMGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=71)>  _
 	Public Property NobleMGrasa() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleMGrasa
@@ -23568,7 +25236,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAcidezGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleAcidezGrasa", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=72)>  _
 	Public Property NobleAcidezGrasa() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleAcidezGrasa
@@ -23584,7 +25253,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleVerdes", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleVerdes", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=73)>  _
 	Public Property NobleVerdes() As System.Nullable(Of Decimal)
 		Get
 			Return Me._NobleVerdes
@@ -23600,7 +25270,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleGrado", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleGrado", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=74)>  _
 	Public Property NobleGrado() As System.Nullable(Of Integer)
 		Get
 			Return Me._NobleGrado
@@ -23616,7 +25287,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleConforme", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleConforme", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=75)>  _
 	Public Property NobleConforme() As String
 		Get
 			Return Me._NobleConforme
@@ -23632,7 +25304,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleACamara", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NobleACamara", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=76)>  _
 	Public Property NobleACamara() As String
 		Get
 			Return Me._NobleACamara
@@ -23648,7 +25321,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cosecha", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Cosecha", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=77)>  _
 	Public Property Cosecha() As String
 		Get
 			Return Me._Cosecha
@@ -23664,7 +25338,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HumedadDesnormalizada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_HumedadDesnormalizada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=78)>  _
 	Public Property HumedadDesnormalizada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._HumedadDesnormalizada
@@ -23680,7 +25355,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Factor", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Factor", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=79)>  _
 	Public Property Factor() As System.Nullable(Of Decimal)
 		Get
 			Return Me._Factor
@@ -23696,7 +25372,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturaImputada", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=80)>  _
 	Public Property IdFacturaImputada() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturaImputada
@@ -23712,7 +25389,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PuntoVenta", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=81)>  _
 	Public Property PuntoVenta() As System.Nullable(Of Integer)
 		Get
 			Return Me._PuntoVenta
@@ -23728,7 +25406,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagon", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagon", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=82)>  _
 	Public Property SubnumeroVagon() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubnumeroVagon
@@ -23744,7 +25423,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=83)>  _
 	Public Property TarifaFacturada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TarifaFacturada
@@ -23760,7 +25440,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista1", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista1", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=84)>  _
 	Public Property TarifaSubcontratista1() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TarifaSubcontratista1
@@ -23776,7 +25457,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaSubcontratista2", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=85)>  _
 	Public Property TarifaSubcontratista2() As System.Nullable(Of Decimal)
 		Get
 			Return Me._TarifaSubcontratista2
@@ -23792,7 +25474,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=86)>  _
 	Public Property FechaArribo() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaArribo
@@ -23808,7 +25491,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Version", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Version", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=87)>  _
 	Public Property Version() As System.Nullable(Of Integer)
 		Get
 			Return Me._Version
@@ -23824,7 +25508,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MotivoAnulacion", DbType:="VarChar(100)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_MotivoAnulacion", DbType:="VarChar(100)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=88)>  _
 	Public Property MotivoAnulacion() As String
 		Get
 			Return Me._MotivoAnulacion
@@ -23840,7 +25525,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSubfijo", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroSubfijo", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=89)>  _
 	Public Property NumeroSubfijo() As System.Nullable(Of Integer)
 		Get
 			Return Me._NumeroSubfijo
@@ -23856,7 +25542,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdEstablecimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=90)>  _
 	Public Property IdEstablecimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdEstablecimiento
@@ -23872,7 +25559,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnumSyngentaDivision", DbType:="VarChar(10)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnumSyngentaDivision", DbType:="VarChar(10)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=91)>  _
 	Public Property EnumSyngentaDivision() As String
 		Get
 			Return Me._EnumSyngentaDivision
@@ -23888,7 +25576,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=92)>  _
 	Public Property Corredor2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Corredor2
@@ -23904,7 +25593,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdUsuarioModifico", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=93)>  _
 	Public Property IdUsuarioModifico() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdUsuarioModifico
@@ -23920,7 +25610,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModificacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaModificacion", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=94)>  _
 	Public Property FechaModificacion() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaModificacion
@@ -23936,7 +25627,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEmision", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaEmision", DbType:="DateTime", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=95)>  _
 	Public Property FechaEmision() As System.Nullable(Of Date)
 		Get
 			Return Me._FechaEmision
@@ -23952,7 +25644,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstaArchivada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EstaArchivada", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=96)>  _
 	Public Property EstaArchivada() As String
 		Get
 			Return Me._EstaArchivada
@@ -23968,7 +25661,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExcluirDeSubcontratistas", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ExcluirDeSubcontratistas", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=97)>  _
 	Public Property ExcluirDeSubcontratistas() As String
 		Get
 			Return Me._ExcluirDeSubcontratistas
@@ -23984,7 +25678,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTipoMovimiento", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=98)>  _
 	Public Property IdTipoMovimiento() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTipoMovimiento
@@ -24000,7 +25695,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAFacturarle", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAFacturarle", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=99)>  _
 	Public Property IdClienteAFacturarle() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdClienteAFacturarle
@@ -24016,7 +25712,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=100)>  _
 	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubnumeroDeFacturacion
@@ -24032,7 +25729,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=101)>  _
 	Public Property AgregaItemDeGastosAdministrativos() As String
 		Get
 			Return Me._AgregaItemDeGastosAdministrativos
@@ -24048,7 +25746,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemados", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=102)>  _
 	Public Property CalidadGranosQuemados() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadGranosQuemados
@@ -24064,7 +25763,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemadosBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosQuemadosBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=103)>  _
 	Public Property CalidadGranosQuemadosBonifica_o_Rebaja() As String
 		Get
 			Return Me._CalidadGranosQuemadosBonifica_o_Rebaja
@@ -24080,7 +25780,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierra", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierra", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=104)>  _
 	Public Property CalidadTierra() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadTierra
@@ -24096,7 +25797,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=105)>  _
 	Public Property CalidadTierraBonifica_o_Rebaja() As String
 		Get
 			Return Me._CalidadTierraBonifica_o_Rebaja
@@ -24112,7 +25814,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamico", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=106)>  _
 	Public Property CalidadMermaChamico() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadMermaChamico
@@ -24128,7 +25831,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamicoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaChamicoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=107)>  _
 	Public Property CalidadMermaChamicoBonifica_o_Rebaja() As String
 		Get
 			Return Me._CalidadMermaChamicoBonifica_o_Rebaja
@@ -24144,7 +25848,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeo", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeo", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=108)>  _
 	Public Property CalidadMermaZarandeo() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadMermaZarandeo
@@ -24160,7 +25865,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadMermaZarandeoBonifica_o_Rebaja", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=109)>  _
 	Public Property CalidadMermaZarandeoBonifica_o_Rebaja() As String
 		Get
 			Return Me._CalidadMermaZarandeoBonifica_o_Rebaja
@@ -24176,7 +25882,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FueraDeEstandar", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FueraDeEstandar", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=110)>  _
 	Public Property FueraDeEstandar() As String
 		Get
 			Return Me._FueraDeEstandar
@@ -24192,7 +25899,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreada", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=111)>  _
 	Public Property CalidadPuntaSombreada() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadPuntaSombreada
@@ -24208,7 +25916,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CobraAcarreo", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CobraAcarreo", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=112)>  _
 	Public Property CobraAcarreo() As String
 		Get
 			Return Me._CobraAcarreo
@@ -24224,7 +25933,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LiquidaViaje", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_LiquidaViaje", DbType:="VarChar(2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=113)>  _
 	Public Property LiquidaViaje() As String
 		Get
 			Return Me._LiquidaViaje
@@ -24240,7 +25950,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAuxiliar", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteAuxiliar", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=114)>  _
 	Public Property IdClienteAuxiliar() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdClienteAuxiliar
@@ -24259,7 +25970,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinal", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=115)>  _
 	Public Property CalidadDescuentoFinal() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadDescuentoFinal
@@ -24275,7 +25987,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=116)>  _
 	Public Property PathImagen() As String
 		Get
 			Return Me._PathImagen
@@ -24291,7 +26004,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen2", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_PathImagen2", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=117)>  _
 	Public Property PathImagen2() As String
 		Get
 			Return Me._PathImagen2
@@ -24307,7 +26021,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgrupadorDeTandaPeriodos", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgrupadorDeTandaPeriodos", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=118)>  _
 	Public Property AgrupadorDeTandaPeriodos() As System.Nullable(Of Integer)
 		Get
 			Return Me._AgrupadorDeTandaPeriodos
@@ -24323,7 +26038,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClaveEncriptada", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClaveEncriptada", DbType:="VarChar(150)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=119)>  _
 	Public Property ClaveEncriptada() As String
 		Get
 			Return Me._ClaveEncriptada
@@ -24339,7 +26055,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaEnTextoParaBusqueda", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaEnTextoParaBusqueda", DbType:="VarChar(20)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=120)>  _
 	Public Property NumeroCartaEnTextoParaBusqueda() As String
 		Get
 			Return Me._NumeroCartaEnTextoParaBusqueda
@@ -24355,7 +26072,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteEntregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClienteEntregador", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=121)>  _
 	Public Property IdClienteEntregador() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdClienteEntregador
@@ -24374,7 +26092,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDetalleFactura", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=122)>  _
 	Public Property IdDetalleFactura() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDetalleFactura
@@ -24393,7 +26112,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCodCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCodCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=123)>  _
 	Public Property SojaSustentableCodCondicion() As String
 		Get
 			Return Me._SojaSustentableCodCondicion
@@ -24409,7 +26129,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableCondicion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=124)>  _
 	Public Property SojaSustentableCondicion() As String
 		Get
 			Return Me._SojaSustentableCondicion
@@ -24425,7 +26146,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableNroEstablecimientoDeProduccion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SojaSustentableNroEstablecimientoDeProduccion", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=125)>  _
 	Public Property SojaSustentableNroEstablecimientoDeProduccion() As String
 		Get
 			Return Me._SojaSustentableNroEstablecimientoDeProduccion
@@ -24441,7 +26163,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClientePagadorFlete", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdClientePagadorFlete", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=126)>  _
 	Public Property IdClientePagadorFlete() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdClientePagadorFlete
@@ -24457,7 +26180,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagonEnTextoParaBusqueda", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroVagonEnTextoParaBusqueda", DbType:="VarChar(50)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=127)>  _
 	Public Property SubnumeroVagonEnTextoParaBusqueda() As String
 		Get
 			Return Me._SubnumeroVagonEnTextoParaBusqueda
@@ -24473,7 +26197,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=128)>  _
 	Public Property IdCorredor2() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCorredor2
@@ -24492,7 +26217,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio1", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio1", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=129)>  _
 	Public Property Acopio1() As System.Nullable(Of Integer)
 		Get
 			Return Me._Acopio1
@@ -24508,7 +26234,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio2", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio2", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=130)>  _
 	Public Property Acopio2() As System.Nullable(Of Integer)
 		Get
 			Return Me._Acopio2
@@ -24524,7 +26251,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio3", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio3", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=131)>  _
 	Public Property Acopio3() As System.Nullable(Of Integer)
 		Get
 			Return Me._Acopio3
@@ -24540,7 +26268,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio4", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio4", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=132)>  _
 	Public Property Acopio4() As System.Nullable(Of Integer)
 		Get
 			Return Me._Acopio4
@@ -24556,7 +26285,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio5", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Acopio5", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=133)>  _
 	Public Property Acopio5() As System.Nullable(Of Integer)
 		Get
 			Return Me._Acopio5
@@ -24572,7 +26302,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AcopioFacturarleA", DbType:="Int", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AcopioFacturarleA", DbType:="Int", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=134)>  _
 	Public Property AcopioFacturarleA() As System.Nullable(Of Integer)
 		Get
 			Return Me._AcopioFacturarleA
@@ -24588,7 +26319,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosDanadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosDanadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=135)>  _
 	Public Property CalidadGranosDanadosRebaja() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadGranosDanadosRebaja
@@ -24604,7 +26336,8 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosExtranosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosExtranosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=136)>  _
 	Public Property CalidadGranosExtranosRebaja() As System.Nullable(Of Decimal)
 		Get
 			Return Me._CalidadGranosExtranosRebaja
@@ -24616,6 +26349,652 @@ Partial Public Class CartasDePorte
 				Me._CalidadGranosExtranosRebaja = value
 				Me.SendPropertyChanged("CalidadGranosExtranosRebaja")
 				Me.OnCalidadGranosExtranosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGranosExtranosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=137)>  _
+	Public Property CalidadGranosExtranosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGranosExtranosMerma
+		End Get
+		Set
+			If (Me._CalidadGranosExtranosMerma.Equals(value) = false) Then
+				Me.OnCalidadGranosExtranosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGranosExtranosMerma = value
+				Me.SendPropertyChanged("CalidadGranosExtranosMerma")
+				Me.OnCalidadGranosExtranosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuebradosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=138)>  _
+	Public Property CalidadQuebradosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuebradosMerma
+		End Get
+		Set
+			If (Me._CalidadQuebradosMerma.Equals(value) = false) Then
+				Me.OnCalidadQuebradosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuebradosMerma = value
+				Me.SendPropertyChanged("CalidadQuebradosMerma")
+				Me.OnCalidadQuebradosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDanadosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=139)>  _
+	Public Property CalidadDanadosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadDanadosMerma
+		End Get
+		Set
+			If (Me._CalidadDanadosMerma.Equals(value) = false) Then
+				Me.OnCalidadDanadosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDanadosMerma = value
+				Me.SendPropertyChanged("CalidadDanadosMerma")
+				Me.OnCalidadDanadosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadChamicoMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=140)>  _
+	Public Property CalidadChamicoMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadChamicoMerma
+		End Get
+		Set
+			If (Me._CalidadChamicoMerma.Equals(value) = false) Then
+				Me.OnCalidadChamicoMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadChamicoMerma = value
+				Me.SendPropertyChanged("CalidadChamicoMerma")
+				Me.OnCalidadChamicoMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadRevolcadosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=141)>  _
+	Public Property CalidadRevolcadosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadRevolcadosMerma
+		End Get
+		Set
+			If (Me._CalidadRevolcadosMerma.Equals(value) = false) Then
+				Me.OnCalidadRevolcadosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadRevolcadosMerma = value
+				Me.SendPropertyChanged("CalidadRevolcadosMerma")
+				Me.OnCalidadRevolcadosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadObjetablesMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=142)>  _
+	Public Property CalidadObjetablesMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadObjetablesMerma
+		End Get
+		Set
+			If (Me._CalidadObjetablesMerma.Equals(value) = false) Then
+				Me.OnCalidadObjetablesMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadObjetablesMerma = value
+				Me.SendPropertyChanged("CalidadObjetablesMerma")
+				Me.OnCalidadObjetablesMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadAmohosadosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=143)>  _
+	Public Property CalidadAmohosadosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadAmohosadosMerma
+		End Get
+		Set
+			If (Me._CalidadAmohosadosMerma.Equals(value) = false) Then
+				Me.OnCalidadAmohosadosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadAmohosadosMerma = value
+				Me.SendPropertyChanged("CalidadAmohosadosMerma")
+				Me.OnCalidadAmohosadosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreadaMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=144)>  _
+	Public Property CalidadPuntaSombreadaMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPuntaSombreadaMerma
+		End Get
+		Set
+			If (Me._CalidadPuntaSombreadaMerma.Equals(value) = false) Then
+				Me.OnCalidadPuntaSombreadaMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPuntaSombreadaMerma = value
+				Me.SendPropertyChanged("CalidadPuntaSombreadaMerma")
+				Me.OnCalidadPuntaSombreadaMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHectolitricoMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=145)>  _
+	Public Property CalidadHectolitricoMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHectolitricoMerma
+		End Get
+		Set
+			If (Me._CalidadHectolitricoMerma.Equals(value) = false) Then
+				Me.OnCalidadHectolitricoMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHectolitricoMerma = value
+				Me.SendPropertyChanged("CalidadHectolitricoMerma")
+				Me.OnCalidadHectolitricoMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadCarbonMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=146)>  _
+	Public Property CalidadCarbonMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadCarbonMerma
+		End Get
+		Set
+			If (Me._CalidadCarbonMerma.Equals(value) = false) Then
+				Me.OnCalidadCarbonMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadCarbonMerma = value
+				Me.SendPropertyChanged("CalidadCarbonMerma")
+				Me.OnCalidadCarbonMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPanzaBlancaMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=147)>  _
+	Public Property CalidadPanzaBlancaMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPanzaBlancaMerma
+		End Get
+		Set
+			If (Me._CalidadPanzaBlancaMerma.Equals(value) = false) Then
+				Me.OnCalidadPanzaBlancaMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPanzaBlancaMerma = value
+				Me.SendPropertyChanged("CalidadPanzaBlancaMerma")
+				Me.OnCalidadPanzaBlancaMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPicadosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=148)>  _
+	Public Property CalidadPicadosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPicadosMerma
+		End Get
+		Set
+			If (Me._CalidadPicadosMerma.Equals(value) = false) Then
+				Me.OnCalidadPicadosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPicadosMerma = value
+				Me.SendPropertyChanged("CalidadPicadosMerma")
+				Me.OnCalidadPicadosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadVerdesMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=149)>  _
+	Public Property CalidadVerdesMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadVerdesMerma
+		End Get
+		Set
+			If (Me._CalidadVerdesMerma.Equals(value) = false) Then
+				Me.OnCalidadVerdesMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadVerdesMerma = value
+				Me.SendPropertyChanged("CalidadVerdesMerma")
+				Me.OnCalidadVerdesMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuemadosMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=150)>  _
+	Public Property CalidadQuemadosMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuemadosMerma
+		End Get
+		Set
+			If (Me._CalidadQuemadosMerma.Equals(value) = false) Then
+				Me.OnCalidadQuemadosMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuemadosMerma = value
+				Me.SendPropertyChanged("CalidadQuemadosMerma")
+				Me.OnCalidadQuemadosMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=151)>  _
+	Public Property CalidadTierraMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadTierraMerma
+		End Get
+		Set
+			If (Me._CalidadTierraMerma.Equals(value) = false) Then
+				Me.OnCalidadTierraMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadTierraMerma = value
+				Me.SendPropertyChanged("CalidadTierraMerma")
+				Me.OnCalidadTierraMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadZarandeoMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=152)>  _
+	Public Property CalidadZarandeoMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadZarandeoMerma
+		End Get
+		Set
+			If (Me._CalidadZarandeoMerma.Equals(value) = false) Then
+				Me.OnCalidadZarandeoMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadZarandeoMerma = value
+				Me.SendPropertyChanged("CalidadZarandeoMerma")
+				Me.OnCalidadZarandeoMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinalMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=153)>  _
+	Public Property CalidadDescuentoFinalMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadDescuentoFinalMerma
+		End Get
+		Set
+			If (Me._CalidadDescuentoFinalMerma.Equals(value) = false) Then
+				Me.OnCalidadDescuentoFinalMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDescuentoFinalMerma = value
+				Me.SendPropertyChanged("CalidadDescuentoFinalMerma")
+				Me.OnCalidadDescuentoFinalMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHumedadMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=154)>  _
+	Public Property CalidadHumedadMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHumedadMerma
+		End Get
+		Set
+			If (Me._CalidadHumedadMerma.Equals(value) = false) Then
+				Me.OnCalidadHumedadMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHumedadMerma = value
+				Me.SendPropertyChanged("CalidadHumedadMerma")
+				Me.OnCalidadHumedadMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGastosFumigacionMerma", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=155)>  _
+	Public Property CalidadGastosFumigacionMerma() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGastosFumigacionMerma
+		End Get
+		Set
+			If (Me._CalidadGastosFumigacionMerma.Equals(value) = false) Then
+				Me.OnCalidadGastosFumigacionMermaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGastosFumigacionMerma = value
+				Me.SendPropertyChanged("CalidadGastosFumigacionMerma")
+				Me.OnCalidadGastosFumigacionMermaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuebradosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=156)>  _
+	Public Property CalidadQuebradosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuebradosRebaja
+		End Get
+		Set
+			If (Me._CalidadQuebradosRebaja.Equals(value) = false) Then
+				Me.OnCalidadQuebradosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuebradosRebaja = value
+				Me.SendPropertyChanged("CalidadQuebradosRebaja")
+				Me.OnCalidadQuebradosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadChamicoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=157)>  _
+	Public Property CalidadChamicoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadChamicoRebaja
+		End Get
+		Set
+			If (Me._CalidadChamicoRebaja.Equals(value) = false) Then
+				Me.OnCalidadChamicoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadChamicoRebaja = value
+				Me.SendPropertyChanged("CalidadChamicoRebaja")
+				Me.OnCalidadChamicoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadRevolcadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=158)>  _
+	Public Property CalidadRevolcadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadRevolcadosRebaja
+		End Get
+		Set
+			If (Me._CalidadRevolcadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadRevolcadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadRevolcadosRebaja = value
+				Me.SendPropertyChanged("CalidadRevolcadosRebaja")
+				Me.OnCalidadRevolcadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadObjetablesRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=159)>  _
+	Public Property CalidadObjetablesRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadObjetablesRebaja
+		End Get
+		Set
+			If (Me._CalidadObjetablesRebaja.Equals(value) = false) Then
+				Me.OnCalidadObjetablesRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadObjetablesRebaja = value
+				Me.SendPropertyChanged("CalidadObjetablesRebaja")
+				Me.OnCalidadObjetablesRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadAmohosadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=160)>  _
+	Public Property CalidadAmohosadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadAmohosadosRebaja
+		End Get
+		Set
+			If (Me._CalidadAmohosadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadAmohosadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadAmohosadosRebaja = value
+				Me.SendPropertyChanged("CalidadAmohosadosRebaja")
+				Me.OnCalidadAmohosadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPuntaSombreadaRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=161)>  _
+	Public Property CalidadPuntaSombreadaRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPuntaSombreadaRebaja
+		End Get
+		Set
+			If (Me._CalidadPuntaSombreadaRebaja.Equals(value) = false) Then
+				Me.OnCalidadPuntaSombreadaRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPuntaSombreadaRebaja = value
+				Me.SendPropertyChanged("CalidadPuntaSombreadaRebaja")
+				Me.OnCalidadPuntaSombreadaRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHectolitricoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=162)>  _
+	Public Property CalidadHectolitricoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHectolitricoRebaja
+		End Get
+		Set
+			If (Me._CalidadHectolitricoRebaja.Equals(value) = false) Then
+				Me.OnCalidadHectolitricoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHectolitricoRebaja = value
+				Me.SendPropertyChanged("CalidadHectolitricoRebaja")
+				Me.OnCalidadHectolitricoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadCarbonRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=163)>  _
+	Public Property CalidadCarbonRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadCarbonRebaja
+		End Get
+		Set
+			If (Me._CalidadCarbonRebaja.Equals(value) = false) Then
+				Me.OnCalidadCarbonRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadCarbonRebaja = value
+				Me.SendPropertyChanged("CalidadCarbonRebaja")
+				Me.OnCalidadCarbonRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPanzaBlancaRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=164)>  _
+	Public Property CalidadPanzaBlancaRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPanzaBlancaRebaja
+		End Get
+		Set
+			If (Me._CalidadPanzaBlancaRebaja.Equals(value) = false) Then
+				Me.OnCalidadPanzaBlancaRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPanzaBlancaRebaja = value
+				Me.SendPropertyChanged("CalidadPanzaBlancaRebaja")
+				Me.OnCalidadPanzaBlancaRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadPicadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=165)>  _
+	Public Property CalidadPicadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadPicadosRebaja
+		End Get
+		Set
+			If (Me._CalidadPicadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadPicadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadPicadosRebaja = value
+				Me.SendPropertyChanged("CalidadPicadosRebaja")
+				Me.OnCalidadPicadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadVerdesRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=166)>  _
+	Public Property CalidadVerdesRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadVerdesRebaja
+		End Get
+		Set
+			If (Me._CalidadVerdesRebaja.Equals(value) = false) Then
+				Me.OnCalidadVerdesRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadVerdesRebaja = value
+				Me.SendPropertyChanged("CalidadVerdesRebaja")
+				Me.OnCalidadVerdesRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadQuemadosRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=167)>  _
+	Public Property CalidadQuemadosRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadQuemadosRebaja
+		End Get
+		Set
+			If (Me._CalidadQuemadosRebaja.Equals(value) = false) Then
+				Me.OnCalidadQuemadosRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadQuemadosRebaja = value
+				Me.SendPropertyChanged("CalidadQuemadosRebaja")
+				Me.OnCalidadQuemadosRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadTierraRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=168)>  _
+	Public Property CalidadTierraRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadTierraRebaja
+		End Get
+		Set
+			If (Me._CalidadTierraRebaja.Equals(value) = false) Then
+				Me.OnCalidadTierraRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadTierraRebaja = value
+				Me.SendPropertyChanged("CalidadTierraRebaja")
+				Me.OnCalidadTierraRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadZarandeoRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=169)>  _
+	Public Property CalidadZarandeoRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadZarandeoRebaja
+		End Get
+		Set
+			If (Me._CalidadZarandeoRebaja.Equals(value) = false) Then
+				Me.OnCalidadZarandeoRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadZarandeoRebaja = value
+				Me.SendPropertyChanged("CalidadZarandeoRebaja")
+				Me.OnCalidadZarandeoRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadDescuentoFinalRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=170)>  _
+	Public Property CalidadDescuentoFinalRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadDescuentoFinalRebaja
+		End Get
+		Set
+			If (Me._CalidadDescuentoFinalRebaja.Equals(value) = false) Then
+				Me.OnCalidadDescuentoFinalRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadDescuentoFinalRebaja = value
+				Me.SendPropertyChanged("CalidadDescuentoFinalRebaja")
+				Me.OnCalidadDescuentoFinalRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHumedadRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=171)>  _
+	Public Property CalidadHumedadRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHumedadRebaja
+		End Get
+		Set
+			If (Me._CalidadHumedadRebaja.Equals(value) = false) Then
+				Me.OnCalidadHumedadRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHumedadRebaja = value
+				Me.SendPropertyChanged("CalidadHumedadRebaja")
+				Me.OnCalidadHumedadRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGastosFumigacionRebaja", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=172)>  _
+	Public Property CalidadGastosFumigacionRebaja() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGastosFumigacionRebaja
+		End Get
+		Set
+			If (Me._CalidadGastosFumigacionRebaja.Equals(value) = false) Then
+				Me.OnCalidadGastosFumigacionRebajaChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGastosFumigacionRebaja = value
+				Me.SendPropertyChanged("CalidadGastosFumigacionRebaja")
+				Me.OnCalidadGastosFumigacionRebajaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadHumedadResultado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=173)>  _
+	Public Property CalidadHumedadResultado() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadHumedadResultado
+		End Get
+		Set
+			If (Me._CalidadHumedadResultado.Equals(value) = false) Then
+				Me.OnCalidadHumedadResultadoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadHumedadResultado = value
+				Me.SendPropertyChanged("CalidadHumedadResultado")
+				Me.OnCalidadHumedadResultadoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CalidadGastosFumigacionResultado", DbType:="Decimal(18,2)", UpdateCheck:=UpdateCheck.Never),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=174)>  _
+	Public Property CalidadGastosFumigacionResultado() As System.Nullable(Of Decimal)
+		Get
+			Return Me._CalidadGastosFumigacionResultado
+		End Get
+		Set
+			If (Me._CalidadGastosFumigacionResultado.Equals(value) = false) Then
+				Me.OnCalidadGastosFumigacionResultadoChanging(value)
+				Me.SendPropertyChanging
+				Me._CalidadGastosFumigacionResultado = value
+				Me.SendPropertyChanged("CalidadGastosFumigacionResultado")
+				Me.OnCalidadGastosFumigacionResultadoChanged
 			End If
 		End Set
 	End Property
@@ -24777,8 +27156,24 @@ Partial Public Class CartasDePorte
 			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
 		End If
 	End Sub
+	
+	Private Sub Initialize()
+		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente1 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqCliente2 = CType(Nothing, EntityRef(Of linqCliente))
+		Me._linqDetalleFacturas = CType(Nothing, EntityRef(Of linqDetalleFacturas))
+		Me._linqCorredor = CType(Nothing, EntityRef(Of linqCorredor))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
 End Class
 
+<Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 	
 	Private _ColumnaTilde As Integer
@@ -24849,7 +27244,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property ColumnaTilde() As Integer
 		Get
 			Return Me._ColumnaTilde
@@ -24862,7 +27258,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdCartaDePorte() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaDePorte
@@ -24874,7 +27271,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -24886,7 +27284,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property NumeroCartaDePorte() As Long
 		Get
 			Return Me._NumeroCartaDePorte
@@ -24899,7 +27298,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property SubNumeroVagon() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubNumeroVagon
@@ -24911,7 +27311,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubnumeroDeFacturacion
@@ -24923,7 +27324,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaArribo() As Date
 		Get
 			Return Me._FechaArribo
@@ -24936,7 +27338,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property FechaDescarga() As Date
 		Get
 			Return Me._FechaDescarga
@@ -24949,7 +27352,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FacturarselaA() As String
 		Get
 			Return Me._FacturarselaA
@@ -24961,7 +27365,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property IdFacturarselaA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturarselaA
@@ -24973,7 +27378,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Confirmado() As String
 		Get
 			Return Me._Confirmado
@@ -24985,7 +27391,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdCodigoIVA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIVA
@@ -24997,7 +27404,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property CUIT() As String
 		Get
 			Return Me._CUIT
@@ -25009,7 +27417,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(1) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(1) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property ClienteSeparado() As String
 		Get
 			Return Me._ClienteSeparado
@@ -25021,7 +27430,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Money NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Money NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property TarifaFacturada() As Decimal
 		Get
 			Return Me._TarifaFacturada
@@ -25034,7 +27444,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(256) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(256) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Producto() As String
 		Get
 			Return Me._Producto
@@ -25046,7 +27457,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2) NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2) NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property KgNetos() As Decimal
 		Get
 			Return Me._KgNetos
@@ -25059,7 +27471,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdCorredor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCorredor
@@ -25071,7 +27484,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property IdTitular() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTitular
@@ -25083,7 +27497,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdIntermediario() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIntermediario
@@ -25095,7 +27510,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdRComercial() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRComercial
@@ -25107,7 +27523,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinatario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinatario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property IdDestinatario() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestinatario
@@ -25119,7 +27536,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Titular() As String
 		Get
 			Return Me._Titular
@@ -25131,7 +27549,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Intermediario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Intermediario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property Intermediario() As String
 		Get
 			Return Me._Intermediario
@@ -25143,7 +27562,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[R. Comercial]", Storage:="_R__Comercial", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[R. Comercial]", Storage:="_R__Comercial", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property R__Comercial() As String
 		Get
 			Return Me._R__Comercial
@@ -25155,7 +27575,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property Corredor() As String
 		Get
 			Return Me._Corredor
@@ -25167,7 +27588,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property Destinatario() As String
 		Get
 			Return Me._Destinatario
@@ -25179,7 +27601,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property DestinoDesc() As String
 		Get
 			Return Me._DestinoDesc
@@ -25191,7 +27614,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[Procedcia.]", Storage:="_Procedcia_", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[Procedcia.]", Storage:="_Procedcia_", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property Procedcia_() As String
 		Get
 			Return Me._Procedcia_
@@ -25203,7 +27627,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property IdDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestino
@@ -25215,7 +27640,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property IdCartaOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaOriginal
@@ -25227,7 +27653,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property AgregaItemDeGastosAdministrativos() As String
 		Get
 			Return Me._AgregaItemDeGastosAdministrativos
@@ -25240,6 +27667,7 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomaticaResult
 	End Property
 End Class
 
+<Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult
 	
 	Private _ColumnaTilde As Integer
@@ -25310,7 +27738,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		MyBase.New
 	End Sub
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ColumnaTilde", DbType:="Int NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
 	Public Property ColumnaTilde() As Integer
 		Get
 			Return Me._ColumnaTilde
@@ -25323,7 +27752,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaDePorte", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
 	Public Property IdCartaDePorte() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaDePorte
@@ -25335,7 +27765,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdArticulo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
 	Public Property IdArticulo() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdArticulo
@@ -25347,7 +27778,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_NumeroCartaDePorte", DbType:="BigInt NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
 	Public Property NumeroCartaDePorte() As Long
 		Get
 			Return Me._NumeroCartaDePorte
@@ -25360,7 +27792,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubNumeroVagon", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
 	Public Property SubNumeroVagon() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubNumeroVagon
@@ -25372,7 +27805,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_SubnumeroDeFacturacion", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
 	Public Property SubnumeroDeFacturacion() As System.Nullable(Of Integer)
 		Get
 			Return Me._SubnumeroDeFacturacion
@@ -25384,7 +27818,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaArribo", DbType:="DateTime NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
 	Public Property FechaArribo() As Date
 		Get
 			Return Me._FechaArribo
@@ -25397,7 +27832,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaDescarga", DbType:="DateTime NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
 	Public Property FechaDescarga() As Date
 		Get
 			Return Me._FechaDescarga
@@ -25410,7 +27846,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FacturarselaA", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FacturarselaA() As String
 		Get
 			Return Me._FacturarselaA
@@ -25422,7 +27859,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdFacturarselaA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
 	Public Property IdFacturarselaA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdFacturarselaA
@@ -25434,7 +27872,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Confirmado", DbType:="VarChar(2) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
 	Public Property Confirmado() As String
 		Get
 			Return Me._Confirmado
@@ -25446,7 +27885,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCodigoIVA", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
 	Public Property IdCodigoIVA() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCodigoIVA
@@ -25458,7 +27898,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CUIT", DbType:="VarChar(13) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
 	Public Property CUIT() As String
 		Get
 			Return Me._CUIT
@@ -25470,7 +27911,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(1) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_ClienteSeparado", DbType:="VarChar(1) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14)>  _
 	Public Property ClienteSeparado() As String
 		Get
 			Return Me._ClienteSeparado
@@ -25482,7 +27924,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Money NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_TarifaFacturada", DbType:="Money NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15)>  _
 	Public Property TarifaFacturada() As Decimal
 		Get
 			Return Me._TarifaFacturada
@@ -25495,7 +27938,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(256) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Producto", DbType:="VarChar(256) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=16)>  _
 	Public Property Producto() As String
 		Get
 			Return Me._Producto
@@ -25507,7 +27951,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2) NOT NULL")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_KgNetos", DbType:="Decimal(18,2) NOT NULL"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=17)>  _
 	Public Property KgNetos() As Decimal
 		Get
 			Return Me._KgNetos
@@ -25520,7 +27965,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCorredor", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=18)>  _
 	Public Property IdCorredor() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCorredor
@@ -25532,7 +27978,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdTitular", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=19)>  _
 	Public Property IdTitular() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdTitular
@@ -25544,7 +27991,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdIntermediario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=20)>  _
 	Public Property IdIntermediario() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdIntermediario
@@ -25556,7 +28004,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdRComercial", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=21)>  _
 	Public Property IdRComercial() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdRComercial
@@ -25568,7 +28017,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinatario", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestinatario", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=22)>  _
 	Public Property IdDestinatario() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestinatario
@@ -25580,7 +28030,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Titular", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=23)>  _
 	Public Property Titular() As String
 		Get
 			Return Me._Titular
@@ -25592,7 +28043,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Intermediario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Intermediario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=24)>  _
 	Public Property Intermediario() As String
 		Get
 			Return Me._Intermediario
@@ -25604,7 +28056,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[R. Comercial]", Storage:="_R__Comercial", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[R. Comercial]", Storage:="_R__Comercial", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=25)>  _
 	Public Property R__Comercial() As String
 		Get
 			Return Me._R__Comercial
@@ -25616,7 +28069,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Corredor", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=26)>  _
 	Public Property Corredor() As String
 		Get
 			Return Me._Corredor
@@ -25628,7 +28082,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Destinatario", DbType:="VarChar(100) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=27)>  _
 	Public Property Destinatario() As String
 		Get
 			Return Me._Destinatario
@@ -25640,7 +28095,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_DestinoDesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=28)>  _
 	Public Property DestinoDesc() As String
 		Get
 			Return Me._DestinoDesc
@@ -25652,7 +28108,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[Procedcia.]", Storage:="_Procedcia_", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="[Procedcia.]", Storage:="_Procedcia_", DbType:="VarChar(50) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=29)>  _
 	Public Property Procedcia_() As String
 		Get
 			Return Me._Procedcia_
@@ -25664,7 +28121,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdDestino", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=30)>  _
 	Public Property IdDestino() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdDestino
@@ -25676,7 +28134,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaOriginal", DbType:="Int")>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdCartaOriginal", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=31)>  _
 	Public Property IdCartaOriginal() As System.Nullable(Of Integer)
 		Get
 			Return Me._IdCartaOriginal
@@ -25688,7 +28147,8 @@ Partial Public Class wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersiste
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2) NOT NULL", CanBeNull:=false)>  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_AgregaItemDeGastosAdministrativos", DbType:="VarChar(2) NOT NULL", CanBeNull:=false),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=32)>  _
 	Public Property AgregaItemDeGastosAdministrativos() As String
 		Get
 			Return Me._AgregaItemDeGastosAdministrativos
