@@ -30,6 +30,7 @@ namespace ProntoMVC.Data.Models
         public string CodigoAFIP { get; set; }
         public Nullable<decimal> CoeficienteAuxiliar_1 { get; set; }
         public string GeneraComision { get; set; }
+        public string NoTomarEnRanking { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
         public virtual ICollection<DetalleNotasCredito> DetalleNotasCreditoes { get; set; }

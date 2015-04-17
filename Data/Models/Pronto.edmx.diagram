@@ -2,14 +2,14 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
-      <edmx:Diagram Name="Pronto" ZoomLevel="40">
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="false" />
+      <edmx:Diagram Name="Pronto" ZoomLevel="45">
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="0.5" PointY="35.625" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="2.75" PointX="19.625" PointY="40.625" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Obra" Width="2.5" PointX="0.75" PointY="7.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Requerimiento" Width="2.875" PointX="16" PointY="39.875" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Sector" Width="2.25" PointX="4" PointY="102.125" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Unidad" Width="1.875" PointX="0.875" PointY="35.875" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Unidad" Width="1.875" PointX="0.5" PointY="34.875" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Unidades" ManuallyRouted="false">
           <edmx:ConnectorPoint PointX="1.8125" PointY="35.875" />
           <edmx:ConnectorPoint PointX="1.8125" PointY="28.7" />
@@ -491,7 +491,7 @@
           <edmx:ConnectorPoint PointX="7.75" PointY="109.825" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Localidad" Width="1.5" PointX="7.75" PointY="93.625" Height="0.4" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Moneda" Width="1.5" PointX="1.875" PointY="81.875" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Moneda" Width="1.5" PointX="4.625" PointY="77.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Pais" Width="1.5" PointX="3.25" PointY="111.875" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Provincia" Width="1.5" PointX="5.5" PointY="110.125" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposComprobante" Width="1.5" PointX="15.5" PointY="59.375" Height="0.4" IsExpanded="false" />
@@ -677,7 +677,7 @@
           <edmx:ConnectorPoint PointX="17" PointY="59.375" />
           <edmx:ConnectorPoint PointX="17.750000000000007" PointY="58.775" />
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFactura" Width="1.5" PointX="26.25" PointY="79.125" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFactura" Width="1.875" PointX="26.25" PointY="79.125" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Factura" Width="1.5" PointX="17" PointY="70.375" Height="0.4" IsExpanded="true" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_Articulos">
           <edmx:ConnectorPoint PointX="6.25" PointY="28.831252499999991" />
@@ -836,21 +836,33 @@
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePresupuestos_DetalleRequerimientos" ManuallyRouted="true">
           <edmx:ConnectorPoint PointX="20.3749975" PointY="41.025" />
-          <edmx:ConnectorPoint PointX="20.3749975" PointY="71.1875" />
-          <edmx:ConnectorPoint PointX="19.958333333333332" PointY="71.1875" />
-          <edmx:ConnectorPoint PointX="19.416666666666668" PointY="71.1875" />
-          <edmx:ConnectorPoint PointX="19.183296741984272" PointY="71.1875" />
-          <edmx:ConnectorPoint PointX="19.183296741984272" PointY="97.032369791666667" />
-          <edmx:ConnectorPoint PointX="15.59375" PointY="97.032369791666667" />
-          <edmx:ConnectorPoint PointX="15.59375" PointY="95.140000000000015" />
-          <edmx:ConnectorPoint PointX="15.5" PointY="94.9" />
+          <edmx:ConnectorPoint PointX="20.3749975" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.958333333333332" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.666666666666668" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.645833333333332" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.291666666666668" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.091515474331704" PointY="73.827499999999986" />
+          <edmx:ConnectorPoint PointX="19.091515474331704" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="19.054038123373576" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.887371456706912" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.870722439082112" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.704055772415447" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.356209701916256" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.189543035249592" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="18.137460201916259" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="17.970793535249594" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="17.954144767624793" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="17.787478100958129" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="15.59375" PointY="99.672369791666654" />
+          <edmx:ConnectorPoint PointX="15.59375" PointY="97.78" />
+          <edmx:ConnectorPoint PointX="14.468749999999856" PointY="94.9" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedor" Width="1.5" PointX="20" PointY="98.875" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedoresIB" Width="1.5" PointX="20" PointY="108.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedoresRubro" Width="1.5" PointX="20" PointY="95.75" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.PlazosEntrega" Width="1.5" PointX="2" PointY="90.875" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PlazosEntrega" Width="1.5" PointX="4.375" PointY="82.875" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Proveedor" Width="1.5" PointX="17.75" PointY="97.125" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Rubro" Width="1.5" PointX="1.25" PointY="67.125" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Rubro" Width="1.5" PointX="4.125" PointY="65.875" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Rubros">
           <edmx:ConnectorPoint PointX="2.75" PointY="67.325" />
           <edmx:ConnectorPoint PointX="3.3854166666666665" PointY="67.325" />
@@ -1261,7 +1273,7 @@
           <edmx:ConnectorPoint PointX="20" PointY="102.075" />
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesCompra" Width="2.5" PointX="26.25" PointY="87.625" Height="0.4" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRemito" Width="2.25" PointX="22.25" PointY="69.125" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRemito" Width="2.25" PointX="22.375" PointY="68.875" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenesCompra" Width="1.5" PointX="20" PointY="85.375" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Remito" Width="1.5" PointX="20" PointY="71.25" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesCompra_Articulos">
@@ -1595,7 +1607,7 @@
           <edmx:ConnectorPoint PointX="26.114583333333336" PointY="79.21875" />
           <edmx:ConnectorPoint PointX="26.25" PointY="79.21875" />
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasClientesPRESTO" Width="1.5" PointX="9" PointY="3.75" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasClientesPRESTO" Width="1.5" PointX="9.25" PointY="2.5" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasOrdenesCompra" Width="2.375" PointX="28.25" PointY="80.625" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasProvincia" Width="1.5" PointX="11.875" PointY="5.75" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasRemito" Width="2.625" PointX="28.5" PointY="83.375" Height="0.4" IsExpanded="false" />
@@ -1688,9 +1700,9 @@
           <edmx:ConnectorPoint PointX="11.578125" PointY="67.385744793895043" />
           <edmx:ConnectorPoint PointX="11.578125" PointY="56.275" />
         </edmx:AssociationConnector>
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Deposito" Width="1.5" PointX="2" PointY="87" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Deposito" Width="1.5" PointX="4.25" PointY="81.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Stock" Width="1.5" PointX="14.875" PointY="4.75" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Ubicacion" Width="1.5" PointX="1.25" PointY="63.625" Height="0.4" IsExpanded="false" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Ubicacion" Width="1.5" PointX="4" PointY="63.125" Height="0.4" IsExpanded="false" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Ubicaciones_Depositos">
           <edmx:ConnectorPoint PointX="3.46875" PointY="87" />
           <edmx:ConnectorPoint PointX="3.46875" PointY="63.825" />
@@ -2185,51 +2197,36 @@
           <edmx:ConnectorPoint PointX="25" PointY="46.90625" />
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_DescripcionIva" ManuallyRouted="true">
-          <edmx:ConnectorPoint PointX="2.25" PointY="12.134095052083334" />
-          <edmx:ConnectorPoint PointX="2.3113813460023556" PointY="12.279708345184414" />
-          <edmx:ConnectorPoint PointX="2.3761206539976452" PointY="12.433287639941451" />
-          <edmx:ConnectorPoint PointX="4.3426303460023554" PointY="17.09838495072724" />
-          <edmx:ConnectorPoint PointX="4.4073696539976455" PointY="17.251964245484277" />
-          <edmx:ConnectorPoint PointX="4.4363813460023565" PointY="17.320787891206841" />
-          <edmx:ConnectorPoint PointX="4.547369653997646" PointY="17.584082427339872" />
-          <edmx:ConnectorPoint PointX="4.5538803460023551" PointY="17.599527564420058" />
-          <edmx:ConnectorPoint PointX="4.6186196539976452" PointY="17.753106859177095" />
-          <edmx:ConnectorPoint PointX="4.6551303460023554" PointY="17.839720178083482" />
-          <edmx:ConnectorPoint PointX="4.7198696539976455" PointY="17.993299472840519" />
-          <edmx:ConnectorPoint PointX="4.7488813460023556" PointY="18.062123118563079" />
-          <edmx:ConnectorPoint PointX="4.8136206539976456" PointY="18.215702413320116" />
-          <edmx:ConnectorPoint PointX="4.8973198460023557" PointY="18.414259723830021" />
-          <edmx:ConnectorPoint PointX="4.9620591539976457" PointY="18.567839018587058" />
-          <edmx:ConnectorPoint PointX="5.045758346002355" PointY="18.76639632909696" />
-          <edmx:ConnectorPoint PointX="5.110497653997645" PointY="18.919975623853997" />
-          <edmx:ConnectorPoint PointX="7.045130346002356" PointY="23.509451996903998" />
-          <edmx:ConnectorPoint PointX="7.109869653997646" PointY="23.663031291661035" />
-          <edmx:ConnectorPoint PointX="10.530130346002355" PointY="31.77682245238077" />
-          <edmx:ConnectorPoint PointX="10.594869653997645" PointY="31.930401747137807" />
-          <edmx:ConnectorPoint PointX="11.595630346002356" PointY="34.3044790435746" />
-          <edmx:ConnectorPoint PointX="11.660369653997645" PointY="34.458058338331639" />
-          <edmx:ConnectorPoint PointX="14.717630346002355" PointY="41.710714498954381" />
-          <edmx:ConnectorPoint PointX="14.782369653997645" PointY="41.864293793711418" />
-          <edmx:ConnectorPoint PointX="15.467630346002355" PointY="43.489919044609351" />
-          <edmx:ConnectorPoint PointX="15.782369653997646" PointY="44.23656652125139" />
-          <edmx:ConnectorPoint PointX="18.5" PointY="50.683526874607765" />
-          <edmx:ConnectorPoint PointX="18.5" PointY="18.6875" />
-          <edmx:ConnectorPoint PointX="18.9375" PointY="18.6875" />
-          <edmx:ConnectorPoint PointX="18.9375" PointY="21.6875" />
-          <edmx:ConnectorPoint PointX="18.583333333333332" PointY="21.6875" />
-          <edmx:ConnectorPoint PointX="18.416666666666668" PointY="21.6875" />
-          <edmx:ConnectorPoint PointX="17.6875" PointY="21.6875" />
-          <edmx:ConnectorPoint PointX="17.6875" PointY="39.8125" />
-          <edmx:ConnectorPoint PointX="18.416666666666668" PointY="39.8125" />
-          <edmx:ConnectorPoint PointX="18.583333333333332" PointY="39.8125" />
-          <edmx:ConnectorPoint PointX="18.9375" PointY="39.8125" />
-          <edmx:ConnectorPoint PointX="18.9375" PointY="58.3125" />
-          <edmx:ConnectorPoint PointX="17.6875" PointY="58.3125" />
-          <edmx:ConnectorPoint PointX="17.6875" PointY="70.3125" />
-          <edmx:ConnectorPoint PointX="19.062721616289881" PointY="70.3125" />
-          <edmx:ConnectorPoint PointX="19.062721616289881" PointY="97.03125" />
-          <edmx:ConnectorPoint PointX="18.1562505" PointY="97.03125" />
-          <edmx:ConnectorPoint PointX="18.1562505" PointY="97.125" />
+          <edmx:ConnectorPoint PointX="0.75" PointY="12.134095052083334" />
+          <edmx:ConnectorPoint PointX="0.50198640918716175" PointY="22.535741817284752" />
+          <edmx:ConnectorPoint PointX="0.49801359081283886" PointY="22.702361127365975" />
+          <edmx:ConnectorPoint PointX="0.375" PointY="27.861529682446378" />
+          <edmx:ConnectorPoint PointX="0.375" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="1.0221311666666668" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="1.1887978333333333" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="3.4010416666666665" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="3.8333333333333335" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="4.916666666666667" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="5.208333333333333" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="6.6510429166666682" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="7.3645833333333321" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="9.3854166666666661" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="9.5520833333333339" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="9.6354166666666661" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="9.8177083333333339" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="11.587561291666665" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="11.754227958333333" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="11.758460916666666" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="12.395833333333334" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="12.541666666666666" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="12.770833333333334" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="12.791666666666666" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="13.067708333333334" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="15.510416666666666" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="15.677083333333334" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="17.375" PointY="98.614807942708353" />
+          <edmx:ConnectorPoint PointX="17.375" PointY="97.244984000000386" />
+          <edmx:ConnectorPoint PointX="17.75" PointY="97.244984000000386" />
         </edmx:AssociationConnector>
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_BancoChequeras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Monedas" />
@@ -2241,7 +2238,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Subrubro" Width="1.5" PointX="9.375" PointY="7.875" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Subrubros" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoImpuesto" Width="1.5" PointX="5.375" PointY="14.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Subdiario" Width="1.5" PointX="12.375" PointY="14.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Subdiario" Width="1.5" PointX="14.5" PointY="13.375" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ListasPreciosDetalle" Width="1.5" PointX="10" PointY="57.625" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_ListasPreciosDetalle_Articulos" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_ListasPreciosDetalle_ListasPrecios" />
@@ -2286,7 +2283,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="12.75" PointY="11.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="14.5" PointY="10.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ImpuestosDirecto" Width="1.5" PointX="14.75" PointY="18.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Marca" Width="1.5" PointX="17.75" PointY="5.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Materiale" Width="1.5" PointX="0.75" PointY="18.75" />
@@ -2305,11 +2302,11 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_Cuentas" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Tree" Width="1.5" PointX="19.375" PointY="17.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calle" Width="1.5" PointX="9.75" PointY="19.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Feriado" Width="1.5" PointX="11.75" PointY="20.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calle" Width="1.5" PointX="9.75" PointY="19.25" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Feriado" Width="1.5" PointX="10.75" PointY="21.25" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposCompra" Width="1.5" PointX="4.75" PointY="21.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposNegociosVenta" Width="1.5" PointX="13.75" PointY="23.75" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacione" Width="1.5" PointX="15.75" PointY="23.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposNegociosVenta" Width="1.5" PointX="14.375" PointY="23.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacione" Width="1.5" PointX="16.25" PointY="23.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacionesGrupos" Width="1.5" PointX="0.75" PointY="25.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.GruposObra" Width="1.5" PointX="25.375" PointY="2.75" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.UnidadesOperativa" Width="1.5" PointX="25.375" PointY="5.75" />
@@ -2327,7 +2324,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDevolucione" Width="1.5" PointX="27.625" PointY="19.125" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDevolucione" Width="1.5" PointX="28" PointY="23" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Devolucione" Width="1.5" PointX="25.375" PointY="16.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" />
 <<<<<<< HEAD
@@ -2338,7 +2335,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.PlazosFijo" Width="1.5" PointX="5.4481525465138967" PointY="21.430253143156996" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_EstadosProveedores" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Conjunto" Width="1.5" PointX="8.924236685467994" PointY="27.2998821117449" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleConjunto" Width="1.5" PointX="1.4942446451141707" PointY="6.8919294508602142" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleConjunto" Width="1.5" PointX="4.5" PointY="5.25" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleConjuntos_Conjuntos" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_Facturas" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasProvincias_Facturas" />
@@ -2352,12 +2349,40 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecepcione" Width="1.5" PointX="7.484363753108477" PointY="15.486086688696448" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleSalidasMateriale" Width="1.5" PointX="0.78196172266358577" PointY="20.200948054064508" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.OtrosIngresosAlmacen" Width="1.5" PointX="5.0257621263273808" PointY="19.905539954037192" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recepcione" Width="1.5" PointX="11.803128775117514" PointY="10.427924608079682" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recepcione" Width="1.5" PointX="12.5" PointY="10.375" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAjustesStock_AjustesStock" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOtrosIngresosAlmacen_OtrosIngresosAlmacen" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_SalidasMateriales" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_DetalleRemitos" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleValesSalida" Width="1.5" PointX="11.774597044929209" PointY="12.909639602950607" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ValesSalida" Width="1.5" PointX="9.57475672176795" PointY="23.287445347424338" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetallePedidos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleRequerimientos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_ValesSalida" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Articulos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Ubicaciones" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_Articulos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_CuentaOtros" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleValesSalida" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_Ubicaciones" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_DetalleRequerimientos" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarifasFlete" Width="1.5" PointX="7.25" PointY="2.25" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleRecepciones" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_Articulos" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenesTrabajo" Width="1.5" PointX="14.875" PointY="1.375" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodo" Width="1.5" PointX="3.716348565982817" PointY="25.364980545530553" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosConsumo" Width="1.5" PointX="2.6015042469843777" PointY="9.8493166015713083" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosDato" Width="1.5" PointX="1.9038889733626923" PointY="8.3957531044239886" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuesto" Width="1.5" PointX="10.524988883419422" PointY="4.9173805885563517" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuestoPorDia" Width="1.5" PointX="0.1581724305442406" PointY="8.62523703678755" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRedeterminacione" Width="1.5" PointX="1.5434075694267673" PointY="21.899497578805079" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosConsumos_PresupuestoObrasNodos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosPxQxPresupuesto_PresupuestoObrasNodos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos" />
 >>>>>>> 5d18a4c6024da684e9237b4dd6b7609b20d1c02f
         </edmx:Diagram>
     </edmx:Diagrams>

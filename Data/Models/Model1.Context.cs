@@ -202,6 +202,16 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<OtrosIngresosAlmacen> OtrosIngresosAlmacens { get; set; }
         public virtual DbSet<Recepcione> Recepciones { get; set; }
         public virtual DbSet<SalidasMateriale> SalidasMateriales { get; set; }
+        public virtual DbSet<DetalleValesSalida> DetalleValesSalidas { get; set; }
+        public virtual DbSet<ValesSalida> ValesSalidas { get; set; }
+        public virtual DbSet<TarifasFlete> TarifasFletes { get; set; }
+        public virtual DbSet<OrdenesTrabajo> OrdenesTrabajoes { get; set; }
+        public virtual DbSet<PresupuestoObrasNodo> PresupuestoObrasNodos { get; set; }
+        public virtual DbSet<PresupuestoObrasNodosConsumo> PresupuestoObrasNodosConsumos { get; set; }
+        public virtual DbSet<PresupuestoObrasNodosDato> PresupuestoObrasNodosDatos { get; set; }
+        public virtual DbSet<PresupuestoObrasNodosPxQxPresupuesto> PresupuestoObrasNodosPxQxPresupuestoes { get; set; }
+        public virtual DbSet<PresupuestoObrasNodosPxQxPresupuestoPorDia> PresupuestoObrasNodosPxQxPresupuestoPorDias { get; set; }
+        public virtual DbSet<PresupuestoObrasRedeterminacione> PresupuestoObrasRedeterminaciones { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -424,6 +434,15 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("Letra", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter);
+        }
+    
+        public virtual int Articulos_TX_BD_ProntoMantenimientoTodos(Nullable<int> idObraPronto)
+        {
+            var idObraProntoParameter = idObraPronto.HasValue ?
+                new ObjectParameter("IdObraPronto", idObraPronto) :
+                new ObjectParameter("IdObraPronto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Articulos_TX_BD_ProntoMantenimientoTodos", idObraProntoParameter);
         }
     }
 }

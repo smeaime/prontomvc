@@ -311,6 +311,15 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", monedas);
         }
 
+        public virtual ActionResult GetMonedas2()
+        {
+            Dictionary<int, string> monedas = new Dictionary<int, string>();
+            foreach (Moneda u in db.Monedas.OrderBy(x => x.Nombre).ToList())
+                monedas.Add(u.IdMoneda, u.Abreviatura);
+
+            return PartialView("Select", monedas);
+        }
+
         class DatosJson
         {
             public string campo1 { get; set; }

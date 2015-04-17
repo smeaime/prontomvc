@@ -158,5 +158,6 @@ namespace ProntoMVC.Data.Models
         public virtual Obra Obra { get; set; }
         public virtual DescripcionIva DescripcionIva { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual Cuenta Cuenta1 { get; set; }
     }
 }

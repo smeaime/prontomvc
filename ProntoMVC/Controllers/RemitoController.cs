@@ -466,13 +466,8 @@ namespace ProntoMVC.Controllers
                             ProveedorCodigo = a.Proveedore.CodigoEmpresa,
                             ProveedorNombre = a.Proveedore.RazonSocial,
                             ProveedorCuit = a.Proveedore.Cuit,
-                            //#Auxiliar1.Obras as [Obras],
-                            //#Auxiliar3.OCompras as [Ordenes de compra],
-                            //#Auxiliar5.Facturas as [Facturas],
-                            //#Auxiliar7.Articulos as [Materiales],
                             Obras = "",
                             OCompras = "",
-                            //OCompras = (from x in a.DetalleRemitos.ToList() select new { String.Join(", ", x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString().ToArray()) }),
                             Facturas = "",
                             Materiales = "",
                             TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" : ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
@@ -539,17 +534,50 @@ namespace ProntoMVC.Controllers
                                 a.ProveedorCodigo.NullSafeToString(),
                                 a.ProveedorNombre.NullSafeToString(),
                                 a.ProveedorCuit.NullSafeToString(),
-                                a.Obras.NullSafeToString(),
-
-                                //string.Join(",", a.DetalleRemitos
-                                //    .SelectMany(x =>
-                                //        (x.DetalleOrdenesCompra == null) ?
-                                //        null :
-                                //        x.DetalleOrdenesCompra.NumeroItem.NullSafeToString()).Distinct()
-                                //),
-                                a.OCompras.NullSafeToString(),
-                                a.Facturas.NullSafeToString(),
-                                a.Materiales.NullSafeToString(),
+                                string.Join(",", 
+                                       a.DetalleRemitos
+                                       .Select(x => 
+                                           (x.Obra == null) ?
+                                           "" :
+                                           ((   x.Obra.NumeroObra == null) ? 
+                                               "" :
+                                               x.Obra.NumeroObra.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                string.Join(",", 
+                                       a.DetalleRemitos
+                                       .Select(x => 
+                                           (x.DetalleOrdenesCompra == null) ?
+                                           "" :
+                                           ((   x.DetalleOrdenesCompra.OrdenesCompra == null) ? 
+                                               "" :
+                                               x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                string.Join(",",  a.DetalleRemitos
+                                    .SelectMany(x =>
+                                        (x.DetalleFacturas == null) ?
+                                        null :
+                                        x.DetalleFacturas.Select(y =>
+                                                    (y.Factura == null) ?
+                                                    "" :
+                                                    y.Factura.NumeroFactura.NullSafeToString()
+                                            )
+                                    ).Distinct()
+                                ),
+                                string.Join(",", 
+                                       a.DetalleRemitos
+                                       .Select(x => 
+                                           (x.Articulo == null) ?
+                                           "" :
+                                           ((   x.Articulo.Codigo == null) ? 
+                                               "" :
+                                               x.Articulo.Codigo.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
                                 a.TipoRemito.NullSafeToString(),
                                 a.CondicionVenta.NullSafeToString(),
                                 a.Transportista.NullSafeToString(),
