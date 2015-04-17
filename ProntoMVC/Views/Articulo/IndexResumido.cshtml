@@ -93,13 +93,16 @@
                     { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
                     {
                         name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
-                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
+                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq','cn'] }
                     },
                     {
                         name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
                         editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
 
-                        , search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['cn'] }
+                        , search: true, searchoptions: {
+                            clearSearch: true,
+                            searchOperators: true, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
+                        }
                     },
                     {
                         name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
@@ -181,7 +184,11 @@
 
                 jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
                      { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-                     { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true , multipleSearch: true, overlay: false}
+                     {
+                         //sopt: ["cn"]
+                         sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
+                         , width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+                     }
                     );
 
                 
