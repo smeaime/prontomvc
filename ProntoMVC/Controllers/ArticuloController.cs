@@ -1387,5 +1387,30 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", TiposDeDescripcion);
         }
 
+
+            public virtual JsonResult GetEquiposPorObra(int IdObra)
+        {
+            //var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Articulos_TX_BD_ProntoMantenimientoTodos, IdObra);
+            //if (oRsx.Rows.Count > 0)
+            //{
+            //    if (oRsx.Rows[0]["Obra"] != null) PorObra = true;
+            //    mIdObra = (int)oRsx.Rows[0]["IdObra"];
+            //}
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Articulos_TX_BD_ProntoMantenimientoTodos", IdObra); 
+            IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            id = a["IdArticulo"].ToString(),
+                            value = a["Titulo"].ToString()
+                        }).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
