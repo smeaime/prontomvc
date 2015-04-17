@@ -27,6 +27,9 @@ namespace ProntoMVC.Data.Models
             this.DetalleArticulosUnidades = new HashSet<DetalleArticulosUnidade>();
             this.DetalleComparativas = new HashSet<DetalleComparativa>();
             this.ListasPreciosDetalles = new HashSet<ListasPreciosDetalle>();
+            this.DetalleRecepciones = new HashSet<DetalleRecepcione>();
+            this.DetalleSalidasMateriales = new HashSet<DetalleSalidasMateriale>();
+            this.DetalleValesSalidas = new HashSet<DetalleValesSalida>();
         }
     
         public int IdArticulo { get; set; }
@@ -271,6 +274,7 @@ namespace ProntoMVC.Data.Models
         public string GenerarConsumosAutomaticamente { get; set; }
         public string TalleCambioPrecio { get; set; }
         public string TalleCambioPrecio2 { get; set; }
+        public Nullable<int> IdCuentaComprasActivo { get; set; }
     
         public virtual Unidad Unidad { get; set; }
         public virtual ICollection<DetalleRequerimiento> DetalleRequerimientos { get; set; }
@@ -290,5 +294,8 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleComparativa> DetalleComparativas { get; set; }
         public virtual Subrubro Subrubro { get; set; }
         public virtual ICollection<ListasPreciosDetalle> ListasPreciosDetalles { get; set; }
+        public virtual ICollection<DetalleRecepcione> DetalleRecepciones { get; set; }
+        public virtual ICollection<DetalleSalidasMateriale> DetalleSalidasMateriales { get; set; }
+        public virtual ICollection<DetalleValesSalida> DetalleValesSalidas { get; set; }
     }
 }

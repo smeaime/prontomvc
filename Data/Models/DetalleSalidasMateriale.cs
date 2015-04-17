@@ -83,5 +83,9 @@ namespace ProntoMVC.Data.Models
         public string ImputarConsumoAObraActualEquipoMantenimiento { get; set; }
     
         public virtual SalidasMateriale SalidasMateriale { get; set; }
+        public virtual Articulo Articulo { get; set; }
+        public virtual DetalleValesSalida DetalleValesSalida { get; set; }
+        public virtual Ubicacion Ubicacione { get; set; }
+        public virtual DetalleRecepcione DetalleRecepcione { get; set; }
     }
 }

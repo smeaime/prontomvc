@@ -339,6 +339,18 @@
     //    $("#Telefono").val("");
     //})
 
+    $("#IdAprobo").change(function () {
+        var IdAprobo = $("#IdAprobo > option:selected").attr("value");
+        var Aprobo = $("#IdAprobo > option:selected").html();
+        $("#Aux1").val(IdAprobo);
+        $("#Aux2").val(Aprobo);
+        $("#Aux3").val("");
+        $("#Aux10").val("");
+        $('#dialog-password').data('Combo', 'Aprobo');
+        $('#dialog-password').dialog('open');
+        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+    });
+
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
     function SerializaForm() {

@@ -245,6 +245,10 @@
     <Compile Include="Areas\MvcMembership\Models\UserAdministration\RoleViewModel.cs" />
     <Compile Include="Areas\MvcMembership\MvcMembershipAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PresupuestoObraController.cs" />
+    <Compile Include="Controllers\OrdenTrabajoController.cs" />
+    <Compile Include="Controllers\ValeSalidaController.cs" />
+    <Compile Include="Controllers\OtrosIngresosAlmacenController.cs" />
     <Compile Include="Controllers\ArticuloController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -257,6 +261,8 @@
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\CuentaGastoController.cs" />
     <Compile Include="Controllers\AjusteStockController.cs" />
+    <Compile Include="Controllers\SalidaMaterialesController.cs" />
+    <Compile Include="Controllers\RecepcionController.cs" />
     <Compile Include="Controllers\TiposComprobanteController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Controllers\TiposPolizaController.cs" />
@@ -852,8 +858,11 @@
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\js\jquery.alerts.js" />
     <Content Include="Scripts\Movimiento %28javascript de tango%29.js" />
+    <Content Include="Scripts\ScriptOtroIngresoAlmacen.js" />
     <Content Include="Scripts\ScriptCliente.js" />
     <Content Include="Scripts\ScriptAjusteStock.js" />
+    <Content Include="Scripts\ScriptSalidaMateriales.js" />
+    <Content Include="Scripts\ScriptRecepcion.js" />
     <Content Include="Scripts\ScriptRemito.js" />
     <Content Include="Scripts\ScriptOrdenCompra.js" />
     <Content Include="Scripts\ScriptNotaCredito.js" />
@@ -905,6 +914,10 @@
     <Content Include="Views\Tipo\IndexArticulos.cshtml" />
     <Content Include="Views\AjusteStock\Edit.cshtml" />
     <Content Include="Views\AjusteStock\Index.cshtml" />
+    <Content Include="Views\Recepcion\Edit.cshtml" />
+    <Content Include="Views\Recepcion\Index.cshtml" />
+    <Content Include="Views\SalidaMateriales\Edit.cshtml" />
+    <Content Include="Views\SalidaMateriales\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\FondoFijo.ts" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
     <Content Include="Scripts\ScriptRequerimiento.js" />
@@ -1358,6 +1371,8 @@
     <Content Include="Views\GruposObra\Index.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
     <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
+    <Content Include="Views\OtroIngresoAlmacen\Edit.cshtml" />
+    <Content Include="Views\OtroIngresoAlmacen\Index.cshtml" />
     <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
     <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
