@@ -3455,14 +3455,14 @@ Public Class CartaDePorteManager
         '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
 
         Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
-        Dim MyFile1 = New FileInfo(output) kkk
+        Dim MyFile1 = New FileInfo(output)
         If MyFile1.Exists Then
             MyFile1.Delete()
         End If
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s    lkjlkjlkj
+            s = sDirFTP + s
             Dim MyFile2 = New FileInfo(s)
             If MyFile2.Exists Then
                 Try
@@ -20807,13 +20807,13 @@ Public Class ExcelImportadorManager
             Case "PRODUCTO", "PROD.", "MERC.", "MER", "GRANO", "MERCADERIA", "PROD"
                 Return "Producto"
 
-            Case "VENDEDOR", "CARGADOR", "TITULAR DE CARTA DE PORTE", "REMITENTE", "TITULAR CP", "TITULAR"
+            Case "VENDEDOR", "CARGADOR", "TITULAR DE CARTA DE PORTE", "REMITENTE", "TITULAR CP", "TITULAR", "TITULAR_CP"
                 Return "Titular" 'fijate que si está "remitente" solito, se usa Titular
 
             Case "CUENTA ORDEN 1", "1º CTA./ORDEN", "1º CTA./ORD.", "CY O 1", "C Y O 1", "CYO 1", "C/ORDEN 1", "C/O 1", "INTERMEDIARIO"
                 Return "Intermediario"
 
-            Case "CUENTA ORDEN 2", "2º CTA./ORDEN", "2º CTA./ORD.", "CY O 2", "C Y O 2", "CYO 2", "C/ORDEN 2", "C/O 2", "REMITENTE COMERCIAL", "REMIT COMERC", "RTE. COMERCIAL", "RTE.COMERCIAL", "R.COMERCIAL", "REMIT COMERCIAL"
+            Case "CUENTA ORDEN 2", "2º CTA./ORDEN", "2º CTA./ORD.", "CY O 2", "C Y O 2", "CYO 2", "C/ORDEN 2", "C/O 2", "REMITENTE COMERCIAL", "REMIT COMERC", "RTE. COMERCIAL", "RTE.COMERCIAL", "R.COMERCIAL", "REMIT COMERCIAL", "RTE_COMERCIAL"
 
                 Return "RComercial"
 
@@ -20826,7 +20826,8 @@ Public Class ExcelImportadorManager
             Case "DESTINATARIO", "EXPORTADOR", "EXPORT.", "COMPRADOR", "EXP", "EXP.", "DEST."
                 Return "Comprador"
 
-            Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE"
+            Case "CARTA PORTE", "C/PORTE", "C. PORTE", "C.PORTE", "C. P.", "CP.", "CCPP", "CC PP", "CARTA DE PORTE", "CP", "C PORTE", "NROCP"
+
 
                 Return "NumeroCDP"
 
