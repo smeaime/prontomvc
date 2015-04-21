@@ -425,6 +425,9 @@
     <Compile Include="Models\DetalleUserPermisos.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleValesSalida.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Devolucione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -533,7 +536,6 @@
     <Compile Include="Models\OrdenesPago_TX_EnCaja_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\OrdenesTrabajo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -541,9 +543,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OtrosIngresosAlmacen.cs">
-=======
-    <Compile Include="Models\OrdenPago.cs">
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pais.cs">
@@ -567,12 +566,6 @@
     <Compile Include="Models\Presupuesto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
-    <Compile Include="Models\PresupuestoObrasGruposMateriale.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
     <Compile Include="Models\PresupuestoObrasNodo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -582,48 +575,15 @@
     <Compile Include="Models\PresupuestoObrasNodosDato.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
-    <Compile Include="Models\PresupuestoObrasNodosPresupuesto.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
     <Compile Include="Models\PresupuestoObrasNodosPxQxPresupuesto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PresupuestoObrasNodosPxQxPresupuestoPorDia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\PresupuestoObrasRedeterminacione.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-=======
-    <Compile Include="Models\PresupuestoObrasNodos_TX_Hijos_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasNodos_TX_ParaTransmitir_Todos_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasNodos_TX_PorItemConHijos_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasNodos_TX_PorItem_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasNodos_TX_PorNodoPadre_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasNodos_TX_PorNodo_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasRedeterminacione.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PresupuestoObrasRubro.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
     <Compile Include="Models\Pronto.Designer.cs">
       <DependentUpon>Pronto.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -681,6 +641,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subrubro.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TarifasFlete.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TarjetasCredito.cs">
@@ -742,6 +705,9 @@
     </Compile>
     <Compile Include="Models\UserDatosExtendidos.cs">
       <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ValesSalida.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Valore.cs">
       <DependentUpon>Model1.tt</DependentUpon>
