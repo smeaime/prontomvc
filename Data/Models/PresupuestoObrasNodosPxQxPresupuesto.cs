@@ -26,11 +26,8 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> CantidadAvance { get; set; }
         public Nullable<decimal> CantidadTeorica { get; set; }
         public Nullable<decimal> Certificado { get; set; }
-<<<<<<< HEAD
         public Nullable<decimal> PrecioVentaUnitario { get; set; }
     
         public virtual PresupuestoObrasNodo PresupuestoObrasNodo { get; set; }
-=======
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
     }
 }

@@ -12,18 +12,15 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PresupuestoObrasNodosDato
+    public partial class PresupuestoObrasNodosPxQxPresupuestoPorDia
     {
-        public int IdPresupuestoObrasNodoDatos { get; set; }
+        public int IdPresupuestoObrasNodosPxQxPresupuestoPorDia { get; set; }
         public Nullable<int> IdPresupuestoObrasNodo { get; set; }
         public Nullable<int> CodigoPresupuesto { get; set; }
-        public Nullable<decimal> Importe { get; set; }
-        public Nullable<decimal> Cantidad { get; set; }
-        public Nullable<decimal> CantidadBase { get; set; }
-        public Nullable<decimal> Rendimiento { get; set; }
-        public Nullable<decimal> Incidencia { get; set; }
-        public Nullable<decimal> Costo { get; set; }
-        public Nullable<decimal> PrecioVentaUnitario { get; set; }
+        public Nullable<int> Dia { get; set; }
+        public Nullable<int> Mes { get; set; }
+        public Nullable<int> Año { get; set; }
+        public Nullable<decimal> CantidadAvance { get; set; }
     
         public virtual PresupuestoObrasNodo PresupuestoObrasNodo { get; set; }
     }
