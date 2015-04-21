@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
-=======
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.SqlServer;
 using System.Data.Entity.Core.Objects;
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
+
+
 using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
-<<<<<<< HEAD
+
+
+
+
+
 using System.Reflection;
 using System.Text;
 using System.Web;
@@ -31,6 +30,29 @@ using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using Pronto.ERP.Bll;
 using Newtonsoft.Json;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Text;
+using System.Reflection;
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
+using jqGrid.Models;
+using Lib.Web.Mvc.JQuery.JqGrid;
+using System.Web.Security;
+
+using Pronto.ERP.Bll;
+
+
+// using ProntoMVC.Controllers.Logica;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Spreadsheet;
+using OpenXmlPowerTools;
+using System.Diagnostics;
+using ClosedXML.Excel;
+using System.IO;
+
 
 namespace ProntoMVC.Controllers
 {
@@ -117,40 +139,10 @@ namespace ProntoMVC.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
-    }
-}
-=======
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Text;
-using System.Reflection;
-using ProntoMVC.Data.Models;
-using ProntoMVC.Models;
-using jqGrid.Models;
-using Lib.Web.Mvc.JQuery.JqGrid;
-using System.Web.Security;
-
-using Pronto.ERP.Bll;
 
 
-// using ProntoMVC.Controllers.Logica;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Spreadsheet;
-using OpenXmlPowerTools;
-using System.Diagnostics;
-using ClosedXML.Excel;
-using System.IO;
-
-namespace ProntoMVC.Controllers
-{
 
     // [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
-
-
-    public partial class PresupuestoObraController : ProntoBaseController
-    {
 
 
         public virtual ActionResult PresupuestosObra(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
@@ -861,4 +853,3 @@ DROP TABLE #Auxiliar10
 
 
 */
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
