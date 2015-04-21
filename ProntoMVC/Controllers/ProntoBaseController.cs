@@ -31,7 +31,7 @@ namespace ProntoMVC.Controllers
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
     {
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
-        public ProntoMantenimientoEntities dbmant;
+        //public ProntoMantenimientoEntities dbmant;
 
         public string SC;
 
