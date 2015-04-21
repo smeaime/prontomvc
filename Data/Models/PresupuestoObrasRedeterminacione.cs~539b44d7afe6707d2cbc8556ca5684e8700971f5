@@ -12,15 +12,16 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TarifasFlete
+    public partial class PresupuestoObrasRedeterminacione
     {
-        public int IdTarifaFlete { get; set; }
-        public string Descripcion { get; set; }
-        public Nullable<decimal> ValorUnitario { get; set; }
-        public string Codigo { get; set; }
-        public Nullable<decimal> LimiteInferior { get; set; }
-        public Nullable<decimal> LimiteSuperior { get; set; }
-        public Nullable<int> IdUnidad { get; set; }
-        public Nullable<System.DateTime> FechaVigencia { get; set; }
+        public int IdPresupuestoObraRedeterminacion { get; set; }
+        public Nullable<int> IdObra { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<int> NumeroCertificado { get; set; }
+        public Nullable<decimal> Importe { get; set; }
+        public Nullable<int> Año { get; set; }
+        public Nullable<int> Mes { get; set; }
+        public Nullable<int> IdPresupuestoObrasNodo { get; set; }
+        public string Observaciones { get; set; }
     }
 }
