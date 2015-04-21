@@ -1,25 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using System.Configuration;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.SqlServer;
-using System.Data.Objects;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Dynamic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Transactions;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Web.Security;
 
-=======
+using System.Transactions;
+
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
@@ -33,12 +16,34 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Reflection;
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
+
+
+
+
+
 using ProntoMVC.Data.Models;
 using ProntoMVC.Models;
 using jqGrid.Models;
 using Lib.Web.Mvc.JQuery.JqGrid;
-<<<<<<< HEAD
+
+
+using System.Web.Security;
+
+using Pronto.ERP.Bll;
+
+
+// using ProntoMVC.Controllers.Logica;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Spreadsheet;
+using OpenXmlPowerTools;
+using System.Diagnostics;
+using ClosedXML.Excel;
+using System.IO;
+
+
+
+
 using Pronto.ERP.Bll;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -47,6 +52,461 @@ namespace ProntoMVC.Controllers
 {
     public partial class RecepcionController : ProntoBaseController
     {
+
+
+        
+        [HttpPost]
+        public void EditGridData(int? IdRecepcion, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
+        {
+            switch (oper)
+            {
+                case "add": //Validate Input ; Add Method
+                    break;
+                case "edit":  //Validate Input ; Edit Method
+                    break;
+                case "del": //Validate Input ; Delete Method
+                    break;
+                default: break;
+            }
+
+        }
+
+        [HttpPost]
+        public virtual ActionResult Uploadfile(System.ComponentModel.Container containers, HttpPostedFileBase file)
+        {
+
+            if (file.ContentLength > 0)
+            {
+                var fileName = System.IO.Path.GetFileName(file.FileName);
+                var path = ""; //  = System.IO.Path.Combine(Server.MapPath("~/App_Data/Uploads"), containers.ContainerNo);
+                file.SaveAs(path);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+    
+
+
+        public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
+        {
+            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).ToList(); //.AsQueryable();
+
+            Parametros parametros = db.Parametros.Find(1);
+            var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
+            string cuentadesc;
+
+
+
+            Det.ToList();
+
+            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Recepciones_TX_DetallesParaComprobantesProveedores", IdRecepcion);
+
+            
+            //var q= from i in Det
+            //       from mappings in dt.AsEnumerable()
+            //                .Where(mapping => mapping["IdCuentaContable"].NullSafeToString() == IdRecepcion.ToString() ).DefaultIfEmpty() 
+            //        select i;
+ 
+
+            
+
+
+            //foreach (DataRow dr in dt)
+            //{
+
+
+
+            //}
+
+
+
+
+
+            try
+            {
+                cuentadesc = db.Cuentas.Find(mIdCuentaDiferenciaCambio).Descripcion;
+            }
+            catch (Exception)
+            {
+
+                cuentadesc = "";
+            }
+
+
+
+            var data = (from a in Det
+                        from mappings in dt.AsEnumerable()
+                             .Where(mapping => mapping["IdDetalleRecepcion"].NullSafeToString() == a.IdDetalleRecepcion.ToString()).DefaultIfEmpty()
+                                          select new
+                        {
+                            a.IdDetallePedido,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdDetalleRequerimiento,
+                            // a.NumeroItem,
+                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
+                            a.Cantidad,
+                            //a.Unidad.Abreviatura,
+                            //a.Articulo.Codigo,
+                            //a.Articulo.Descripcion,
+                            //a.FechaEntrega,
+                            a.Observaciones,
+                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
+                            //a.Adjunto,
+                            //a.ArchivoAdjunto1,
+                            //a.ArchivoAdjunto2,
+                            //a.ArchivoAdjunto3,
+                            //a.Precio
+
+                            //idcuenta = mIdCuentaDiferenciaCambio,
+                            //cuentadescripcion = cuentadesc
+
+                            IdCuenta = mappings["IdCuenta"].NullSafeToString(),
+                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
+                            cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())) ?? new Cuenta())  .Descripcion
+                            
+
+                        }).OrderBy(p => p.IdArticulo).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
+                                            string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
+        {
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            int totalRecords = 0;
+            int totalPages = 0;
+
+
+            if (true)
+            {
+                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
+                var qq = (from rm in l2sqlPronto.Requerimientos
+                          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
+                          ).Take(100).ToList();
+
+
+            }
+
+            var Req = db.Recepciones
+                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
+                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
+                //.Include(x => x.DetallePedidos. .moneda)
+                //   .Include("DetallePedidos.Unidad") // funciona tambien
+                //    .Include(x => x.Moneda)
+                //.Include(x => x.Obra)
+
+                    //.Include(x => x.SolicitoRequerimiento)
+                //.Include(x => x.AproboRequerimiento)
+                //.Include(x => x.Sectores)
+                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
+                //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                //.Include(x => x.DetalleRequerimientos)
+
+                        //.Include(x => x.DetalleRequerimientos
+                //            .Select(y => y.DetallePedidos
+                //                )
+                //        )
+                //.Include(x => x.DetalleRequerimientos
+                //            .Select(y => y.DetallePresupuestos
+                //                )
+                //        )
+
+                 //       .Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
+
+           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
+                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
+                // .Include(x => x.Aprobo)
+                          .AsQueryable();
+
+
+            // Requerimiento test = Req.Where(x => x.IdRequerimiento == 4).ToList().FirstOrDefault();
+
+
+            //if (bAConfirmar)
+            //{
+
+            //    Req = (from a in Req where (a.Confirmado ?? "SI") == "NO" select a).AsQueryable();
+            //    //            WHERE  IsNull(Confirmado,'SI')='NO' and 
+            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
+
+            //}
+            //if (bALiberar)
+            //{
+            //    Req = (from a in Req where a.Aprobo == null select a).AsQueryable();
+            //    //            WHERE  Requerimientos.Aprobo is null and 
+            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
+
+            //}
+
+
+
+
+            if (IdObra != string.Empty)
+            {
+                //int IdObra1 = Convert.ToInt32(IdObra);
+                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
+            }
+
+
+
+
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
+            }
+
+            totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            
+            var data1 = (from a in data select a)
+                        .OrderByDescending(x => x.NumeroRecepcionAlmacen)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdRecepcion.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + ">Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
+                                a.IdRecepcion.ToString(),
+                                a.IdProveedor.NullSafeToString(),
+                                a.IdObra.NullSafeToString(),
+                                a.IdTransportista.NullSafeToString(),
+                                a.NumeroRecepcionAlmacen.NullSafeToString(),
+                                a.NumeroRecepcion1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroRecepcion2.NullSafeToString().PadLeft(8,'0'),
+                                a.FechaRecepcion == null ? "" : a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Anulada.NullSafeToString(),
+                                a.ProveedorCodigo.NullSafeToString(),
+                                a.ProveedorNombre.NullSafeToString(),
+                                a.ProveedorCuit.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                string.Join(",", 
+                                       a.DetalleRecepciones
+                                       .Select(x => 
+                                           (x.DetalleRequerimiento == null) ?
+                                           "" :
+                                           ((   x.DetalleRequerimiento.Requerimientos == null) ? 
+                                               "" :
+                                               x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                a.Solicitantes.NullSafeToString(),
+                                string.Join(",", 
+                                       a.DetalleRecepciones
+                                       .Select(x => 
+                                           (x.DetallePedido == null) ?
+                                           "" :
+                                           ((   x.DetallePedido.Pedido == null) ? 
+                                               "" :
+                                               x.DetallePedido.Pedido.NumeroPedido.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                db.DetalleRecepciones.Where(x=>x.IdRecepcion==a.IdRecepcion).Select(x=>x.IdDetalleRecepcion).Distinct().Count().ToString(),
+                                a.Transportista.NullSafeToString(),
+                                a.Emitio.NullSafeToString(),
+                                a.Confecciono.NullSafeToString(),
+                                a.FechaIngreso.NullSafeToString(),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaUltimaModificacion.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion.NullSafeToString(),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.Chofer.NullSafeToString(),
+                                a.Patente.NullSafeToString(),
+                                a.NumeroRemitoTransporte1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroRemitoTransporte2.NullSafeToString().PadLeft(8,'0'),
+                                a.Observaciones.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DetRecepcion(string sidx, string sord, int? page, int? rows, int? IdRecepcion)
+        {
+            int IdRecepcion1 = IdRecepcion ?? 0;
+            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion1).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        from c in db.Depositos.Where(o => o.IdDeposito == a.Ubicacione.IdDeposito).DefaultIfEmpty()
+                        from d in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
+                        from e in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
+                        from f in db.ControlesCalidads.Where(o => o.IdControlCalidad == a.IdControlCalidad).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleRecepcion,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdColor,
+                            a.IdUbicacion,
+                            a.IdObra,
+                            a.IdControlCalidad,
+                            a.IdDetalleRequerimiento,
+                            a.IdDetallePedido,
+                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            ItemRM = a.DetalleRequerimiento.NumeroItem,
+                            a.DetallePedido.Pedido.NumeroPedido,
+                            ItemPE = a.DetallePedido.NumeroItem,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
+                            a.Cantidad,
+                            Unidad = b != null ? b.Abreviatura : "",
+                            Ubicacion = (c != null ? c.Abreviatura : "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
+                            Obra = e != null ? e.NumeroObra : "",
+                            a.Partida,
+                            ControlCalidad = f != null ? f.Descripcion : "",
+                            a.Observaciones
+                        }).OrderBy(x => x.IdDetalleRecepcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleRecepcion.ToString(),
+                            cell = new string[] { 
+                            string.Empty, 
+                            a.IdDetalleRecepcion.ToString(), 
+                            a.IdArticulo.NullSafeToString(),
+                            a.IdUnidad.NullSafeToString(),
+                            a.IdColor.NullSafeToString(),
+                            a.IdUbicacion.NullSafeToString(),
+                            a.IdObra.NullSafeToString(),
+                            a.IdControlCalidad.NullSafeToString(),
+                            a.IdDetalleRequerimiento.NullSafeToString(),
+                            a.IdDetallePedido.NullSafeToString(),
+                            a.NumeroRequerimiento.NullSafeToString(),
+                            a.ItemRM.NullSafeToString(),
+                            a.NumeroPedido.NullSafeToString(),
+                            a.ItemPE.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.Articulo.NullSafeToString(),
+                            a.Cantidad.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Ubicacion.NullSafeToString(),
+                            a.Obra.NullSafeToString(),
+                            a.Partida.NullSafeToString(),
+                            db.DetalleRecepciones.Where(x=>x.IdDetallePedido==a.IdDetallePedido && (x.Recepcione.Anulada ?? "") != "SI").Select(x=>x.Cantidad).Sum().ToString(),
+                            a.ControlCalidad.NullSafeToString(),
+                            a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult DetRecepcionesSinFormato(int? IdRecepcion, int? IdDetalleRecepcion)
+        {
+            int IdRecepcion1 = IdRecepcion ?? 0;
+            int IdDetalleRecepcion1 = IdDetalleRecepcion ?? 0;
+            var Det = db.DetalleRecepciones.Where(p => (IdRecepcion1 <= 0 || p.IdRecepcion == IdRecepcion1) && (IdDetalleRecepcion1 <= 0 || p.IdDetalleRecepcion == IdDetalleRecepcion1)).AsQueryable();
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        from c in db.Obras.Where(y => y.IdObra == a.IdObra).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleRecepcion,
+                            a.IdRecepcion,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdColor,
+                            a.IdUbicacion,
+                            a.IdObra,
+                            a.IdDetalleRequerimiento,
+                            a.Recepcione.NumeroRecepcionAlmacen,
+                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            a.DetalleRequerimiento.NumeroItem,
+                            ArticuloCodigo = a.Articulo.Codigo,
+                            ArticuloDescripcion = a.Articulo.Descripcion,
+                            a.Cantidad,
+                            Unidad = b != null ? b.Abreviatura : "",
+                            Obra = c != null ? c.NumeroObra : "",
+                            a.Partida,
+                            a.Observaciones
+                        }).OrderBy(p => p.IdDetalleRecepcion).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult RecepcionesPendientesDeSalidaMateriales(string sidx, string sord, int? page, int? rows)
+        {
+            var Det = db.DetalleRecepciones.Where(p => (p.Recepcione.Anulada ?? "") != "SI" && (db.DetalleSalidasMateriales.Where(x => x.IdDetalleRecepcion == p.IdDetalleRecepcion && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0) < p.Cantidad).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        from c in db.Depositos.Where(o => o.IdDeposito == a.Ubicacione.IdDeposito).DefaultIfEmpty()
+                        from d in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
+                        from e in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
+                        from f in db.ControlesCalidads.Where(o => o.IdControlCalidad == a.IdControlCalidad).DefaultIfEmpty()
+                        from g in db.Proveedores.Where(o => o.IdProveedor == a.Recepcione.IdProveedor).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleRecepcion,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.IdColor,
+                            a.IdUbicacion,
+                            a.IdObra,
+                            a.IdControlCalidad,
+                            a.IdDetalleRequerimiento,
+                            a.IdDetallePedido,
+                            a.Recepcione.IdProveedor,
+                            a.Recepcione.NumeroRecepcionAlmacen,
+                            a.Recepcione.NumeroRecepcion1,
+                            a.Recepcione.NumeroRecepcion2,
+                            a.Recepcione.FechaRecepcion,
+                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            ItemRM = a.DetalleRequerimiento.NumeroItem,
+                            a.DetallePedido.Pedido.NumeroPedido,
+                            ItemPE = a.DetallePedido.NumeroItem,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
+                            a.Cantidad,
+                            Unidad = b != null ? b.Abreviatura : "",
+                            Ubicacion = (c != null ? c.Abreviatura : "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
+                            Obra = e != null ? e.NumeroObra : "",
+                            Proveedor = g != null ? g.RazonSocial : "",
+                            a.Partida,
+                            ControlCalidad = f != null ? f.Descripcion : "",
+                            a.Observaciones
+                        }).OrderByDescending(x => x.NumeroRecepcionAlmacen).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+
+
+
+
+
+
         public virtual ViewResult Index()
         {
             if (!PuedeLeer(enumNodos.Recepciones)) throw new Exception("No tenés permisos");
@@ -523,7 +983,8 @@ namespace ProntoMVC.Controllers
             }
         }
 
-        public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+
+       public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
@@ -573,203 +1034,10 @@ namespace ProntoMVC.Controllers
                             a.Observaciones
                         }).AsQueryable();
 
-=======
-using System.Web.Security;
-
-using Pronto.ERP.Bll;
-
-
-// using ProntoMVC.Controllers.Logica;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;//using DocumentFormat.OpenXml.Spreadsheet;
-using OpenXmlPowerTools;
-using System.Diagnostics;
-using ClosedXML.Excel;
-using System.IO;
-
-namespace ProntoMVC.Controllers
-{
-
-    // [Authorize(Roles = "Administrador,SuperAdmin,Compras")] //ojo que el web.config tambien te puede bochar hacia el login
-
-
-    public partial class RecepcionController : ProntoBaseController
-    {
-
-
-
-        public virtual JsonResult DetRecepcionesSinFormato(int IdRecepcion)
-        {
-            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion).ToList(); //.AsQueryable();
-
-            Parametros parametros = db.Parametros.Find(1);
-            var mIdCuentaDiferenciaCambio = parametros.IdCuentaDiferenciaCambio ?? 0;
-            string cuentadesc;
-
-
-
-            Det.ToList();
-
-            DataTable dt = EntidadManager.GetStoreProcedure(SCsql(), "Recepciones_TX_DetallesParaComprobantesProveedores", IdRecepcion);
-
-            
-            //var q= from i in Det
-            //       from mappings in dt.AsEnumerable()
-            //                .Where(mapping => mapping["IdCuentaContable"].NullSafeToString() == IdRecepcion.ToString() ).DefaultIfEmpty() 
-            //        select i;
- 
-
-            
-
-
-            //foreach (DataRow dr in dt)
-            //{
-
-
-
-            //}
-
-
-
-
-
-            try
-            {
-                cuentadesc = db.Cuentas.Find(mIdCuentaDiferenciaCambio).Descripcion;
-            }
-            catch (Exception)
-            {
-
-                cuentadesc = "";
-            }
-
-
-
-            var data = (from a in Det
-                        from mappings in dt.AsEnumerable()
-                             .Where(mapping => mapping["IdDetalleRecepcion"].NullSafeToString() == a.IdDetalleRecepcion.ToString()).DefaultIfEmpty()
-                                          select new
-                        {
-                            a.IdDetallePedido,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdDetalleRequerimiento,
-                            // a.NumeroItem,
-                            //a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            //a.Unidad.Abreviatura,
-                            //a.Articulo.Codigo,
-                            //a.Articulo.Descripcion,
-                            //a.FechaEntrega,
-                            a.Observaciones,
-                            //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            //NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
-                            //a.Adjunto,
-                            //a.ArchivoAdjunto1,
-                            //a.ArchivoAdjunto2,
-                            //a.ArchivoAdjunto3,
-                            //a.Precio
-
-                            //idcuenta = mIdCuentaDiferenciaCambio,
-                            //cuentadescripcion = cuentadesc
-
-                            IdCuenta = mappings["IdCuenta"].NullSafeToString(),
-                            CodigoCuenta = mappings["CodigoCuenta"].NullSafeToString(),
-                            cuentadescripcion = (db.Cuentas.Find(Generales.Val(mappings["IdCuenta"].NullSafeToString())) ?? new Cuenta())  .Descripcion
-                            
-
-                        }).OrderBy(p => p.IdArticulo).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public virtual ActionResult Recepciones(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
-                                            string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
-        {
-            string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
-
-            int totalRecords = 0;
-            int totalPages = 0;
-
-
-            if (true)
-            {
-                LinqToSQL_ProntoDataContext l2sqlPronto = new LinqToSQL_ProntoDataContext(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCsql()));
-                var qq = (from rm in l2sqlPronto.Requerimientos
-                          select l2sqlPronto.Requerimientos_Pedidos(rm.IdRequerimiento)
-                          ).Take(100).ToList();
-
-
-            }
-
-            var Req = db.Recepciones
-                // .Include(x => x.DetallePedidos.Select(y => y.Unidad))
-                // .Include(x => x.DetallePedidos.Select(y => y.Moneda))
-                //.Include(x => x.DetallePedidos. .moneda)
-                //   .Include("DetallePedidos.Unidad") // funciona tambien
-                //    .Include(x => x.Moneda)
-                //.Include(x => x.Obra)
-
-                    //.Include(x => x.SolicitoRequerimiento)
-                //.Include(x => x.AproboRequerimiento)
-                //.Include(x => x.Sectores)
-                //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //.Include(x => x.DetalleRequerimientos)
-
-                        //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePedidos
-                //                )
-                //        )
-                //.Include(x => x.DetalleRequerimientos
-                //            .Select(y => y.DetallePresupuestos
-                //                )
-                //        )
-
-                 //       .Include(r => r.DetalleRequerimientos.Select(dr => dr.DetallePedidos.Select(dt => dt.Pedido)))
-
-           //  .Include("DetalleRequerimientos.DetallePedidos.Pedido") // funciona tambien
-                //   .Include("DetalleRequerimientos.DetallePresupuestos.Presupuesto") // funciona tambien
-                // .Include(x => x.Aprobo)
-                          .AsQueryable();
-
-
-            // Requerimiento test = Req.Where(x => x.IdRequerimiento == 4).ToList().FirstOrDefault();
-
-
-            //if (bAConfirmar)
-            //{
-
-            //    Req = (from a in Req where (a.Confirmado ?? "SI") == "NO" select a).AsQueryable();
-            //    //            WHERE  IsNull(Confirmado,'SI')='NO' and 
-            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
-
-            //}
-            //if (bALiberar)
-            //{
-            //    Req = (from a in Req where a.Aprobo == null select a).AsQueryable();
-            //    //            WHERE  Requerimientos.Aprobo is null and 
-            //    //(@IdObraAsignadaUsuario=-1 or Requerimientos.IdObra=@IdObraAsignadaUsuario)
-
-            //}
-
-
-
-
-            if (IdObra != string.Empty)
-            {
-                //int IdObra1 = Convert.ToInt32(IdObra);
-                //Req = (from a in Req where a.IdObra == IdObra1 select a).AsQueryable();
-            }
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
             if (FechaInicial != string.Empty)
             {
                 DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
                 DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-<<<<<<< HEAD
                 data = (from a in data where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
             }
 
@@ -847,447 +1115,5 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult DetRecepcion(string sidx, string sord, int? page, int? rows, int? IdRecepcion)
-        {
-            int IdRecepcion1 = IdRecepcion ?? 0;
-            var Det = db.DetalleRecepciones.Where(p => p.IdRecepcion == IdRecepcion1).AsQueryable();
-            int pageSize = rows ?? 20;
-            int totalRecords = Det.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            int currentPage = page ?? 1;
-
-            var data = (from a in Det
-                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        from c in db.Depositos.Where(o => o.IdDeposito == a.Ubicacione.IdDeposito).DefaultIfEmpty()
-                        from d in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
-                        from e in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
-                        from f in db.ControlesCalidads.Where(o => o.IdControlCalidad == a.IdControlCalidad).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleRecepcion,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdColor,
-                            a.IdUbicacion,
-                            a.IdObra,
-                            a.IdControlCalidad,
-                            a.IdDetalleRequerimiento,
-                            a.IdDetallePedido,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            ItemRM = a.DetalleRequerimiento.NumeroItem,
-                            a.DetallePedido.Pedido.NumeroPedido,
-                            ItemPE = a.DetallePedido.NumeroItem,
-                            Codigo = a.Articulo.Codigo,
-                            Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
-                            a.Cantidad,
-                            Unidad = b != null ? b.Abreviatura : "",
-                            Ubicacion = (c != null ? c.Abreviatura : "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
-                            Obra = e != null ? e.NumeroObra : "",
-                            a.Partida,
-                            ControlCalidad = f != null ? f.Descripcion : "",
-                            a.Observaciones
-                        }).OrderBy(x => x.IdDetalleRecepcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-                            id = a.IdDetalleRecepcion.ToString(),
-                            cell = new string[] { 
-                            string.Empty, 
-                            a.IdDetalleRecepcion.ToString(), 
-                            a.IdArticulo.NullSafeToString(),
-                            a.IdUnidad.NullSafeToString(),
-                            a.IdColor.NullSafeToString(),
-                            a.IdUbicacion.NullSafeToString(),
-                            a.IdObra.NullSafeToString(),
-                            a.IdControlCalidad.NullSafeToString(),
-                            a.IdDetalleRequerimiento.NullSafeToString(),
-                            a.IdDetallePedido.NullSafeToString(),
-                            a.NumeroRequerimiento.NullSafeToString(),
-                            a.ItemRM.NullSafeToString(),
-                            a.NumeroPedido.NullSafeToString(),
-                            a.ItemPE.NullSafeToString(),
-                            a.Codigo.NullSafeToString(),
-                            a.Articulo.NullSafeToString(),
-                            a.Cantidad.NullSafeToString(),
-                            a.Unidad.NullSafeToString(),
-                            a.Ubicacion.NullSafeToString(),
-                            a.Obra.NullSafeToString(),
-                            a.Partida.NullSafeToString(),
-                            db.DetalleRecepciones.Where(x=>x.IdDetallePedido==a.IdDetallePedido && (x.Recepcione.Anulada ?? "") != "SI").Select(x=>x.Cantidad).Sum().ToString(),
-                            a.ControlCalidad.NullSafeToString(),
-                            a.Observaciones.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual JsonResult DetRecepcionesSinFormato(int? IdRecepcion, int? IdDetalleRecepcion)
-        {
-            int IdRecepcion1 = IdRecepcion ?? 0;
-            int IdDetalleRecepcion1 = IdDetalleRecepcion ?? 0;
-            var Det = db.DetalleRecepciones.Where(p => (IdRecepcion1 <= 0 || p.IdRecepcion == IdRecepcion1) && (IdDetalleRecepcion1 <= 0 || p.IdDetalleRecepcion == IdDetalleRecepcion1)).AsQueryable();
-
-            var data = (from a in Det
-                        from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        from c in db.Obras.Where(y => y.IdObra == a.IdObra).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleRecepcion,
-                            a.IdRecepcion,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdColor,
-                            a.IdUbicacion,
-                            a.IdObra,
-                            a.IdDetalleRequerimiento,
-                            a.Recepcione.NumeroRecepcionAlmacen,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            a.DetalleRequerimiento.NumeroItem,
-                            ArticuloCodigo = a.Articulo.Codigo,
-                            ArticuloDescripcion = a.Articulo.Descripcion,
-                            a.Cantidad,
-                            Unidad = b != null ? b.Abreviatura : "",
-                            Obra = c != null ? c.NumeroObra : "",
-                            a.Partida,
-                            a.Observaciones
-                        }).OrderBy(p => p.IdDetalleRecepcion).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual ActionResult RecepcionesPendientesDeSalidaMateriales(string sidx, string sord, int? page, int? rows)
-        {
-            var Det = db.DetalleRecepciones.Where(p => (p.Recepcione.Anulada ?? "") != "SI" && (db.DetalleSalidasMateriales.Where(x => x.IdDetalleRecepcion == p.IdDetalleRecepcion && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0) < p.Cantidad).AsQueryable();
-
-            int pageSize = rows ?? 20;
-            int totalRecords = Det.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            int currentPage = page ?? 1;
-
-            var data = (from a in Det
-                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        from c in db.Depositos.Where(o => o.IdDeposito == a.Ubicacione.IdDeposito).DefaultIfEmpty()
-                        from d in db.Colores.Where(o => o.IdColor == a.IdColor).DefaultIfEmpty()
-                        from e in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
-                        from f in db.ControlesCalidads.Where(o => o.IdControlCalidad == a.IdControlCalidad).DefaultIfEmpty()
-                        from g in db.Proveedores.Where(o => o.IdProveedor == a.Recepcione.IdProveedor).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleRecepcion,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdColor,
-                            a.IdUbicacion,
-                            a.IdObra,
-                            a.IdControlCalidad,
-                            a.IdDetalleRequerimiento,
-                            a.IdDetallePedido,
-                            a.Recepcione.IdProveedor,
-                            a.Recepcione.NumeroRecepcionAlmacen,
-                            a.Recepcione.NumeroRecepcion1,
-                            a.Recepcione.NumeroRecepcion2,
-                            a.Recepcione.FechaRecepcion,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            ItemRM = a.DetalleRequerimiento.NumeroItem,
-                            a.DetallePedido.Pedido.NumeroPedido,
-                            ItemPE = a.DetallePedido.NumeroItem,
-                            Codigo = a.Articulo.Codigo,
-                            Articulo = a.Articulo.Descripcion + (b != null ? " " + b.Descripcion : ""),
-                            a.Cantidad,
-                            Unidad = b != null ? b.Abreviatura : "",
-                            Ubicacion = (c != null ? c.Abreviatura : "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
-                            Obra = e != null ? e.NumeroObra : "",
-                            Proveedor = g != null ? g.RazonSocial : "",
-                            a.Partida,
-                            ControlCalidad = f != null ? f.Descripcion : "",
-                            a.Observaciones
-                        }).OrderByDescending(x => x.NumeroRecepcionAlmacen).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-=======
-                Req = (from a in Req where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
-            }
-            if (_search)
-            {
-                switch (searchField.ToLower())
-                {
-                    case "numerorequerimiento":
-                        campo = String.Format("Obra.NumeroObra.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
-
-                        //if (searchString != "")
-                        //{
-                        //    campo = String.Format("{0} = {1}", searchField, Generales.Val(searchString));
-                        //}
-                        //else
-                        //{
-                        //    campo = "true";
-                        //}
-                        break;
-                    case "fecharequerimiento":
-                        //No anda
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                    default:
-                        campo = String.Format("Obra.Descripcion.Contains(\"{0}\") OR NumeroRequerimiento = {1} ", searchString, Generales.Val(searchString));
-
-                        //campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                }
-            }
-            else
-            {
-                campo = "true";
-            }
-
-
-            try
-            {
-
-                var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
-
-                totalRecords = Req1.Count();
-                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            }
-            catch (Exception)
-            {
-
-                //                throw;
-            }
-
-            //switch (sidx.ToLower())
-            //{
-            //    case "numerorequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //    case "fecharequerimiento":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
-            //        break;
-            //    case "numeroobra":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
-            //        else
-            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
-            //        break;
-            //    case "libero":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
-            //        break;
-            //    case "aprobo":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
-            //        else
-            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
-            //        break;
-            //    case "sector":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
-            //        else
-            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
-            //        break;
-            //    case "detalle":
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.Detalle);
-            //        else
-            //            Req = Req.OrderBy(a => a.Detalle);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
-            //        else
-            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
-            //        break;
-            //}
-
-            var data = from a in Req  // .Where(campo)
-                           .OrderBy(sidx + " " + sord)
-                           .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
-                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
-
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
-
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-<<<<<<< HEAD
-                            id = a.IdDetalleRecepcion.ToString(),
-                            cell = new string[] { 
-                            string.Empty, 
-                            a.IdDetalleRecepcion.ToString(), 
-                            a.IdArticulo.NullSafeToString(),
-                            a.IdUnidad.NullSafeToString(),
-                            a.IdColor.NullSafeToString(),
-                            a.IdUbicacion.NullSafeToString(),
-                            a.IdObra.NullSafeToString(),
-                            a.IdControlCalidad.NullSafeToString(),
-                            a.IdDetalleRequerimiento.NullSafeToString(),
-                            a.IdDetallePedido.NullSafeToString(),
-                            a.IdProveedor.NullSafeToString(),
-                            a.NumeroRecepcionAlmacen.NullSafeToString(),
-                            a.NumeroRecepcion1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroRecepcion2.NullSafeToString().PadLeft(8,'0'),
-                            a.FechaRecepcion == null ? "" : a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                            a.NumeroRequerimiento.NullSafeToString(),
-                            a.ItemRM.NullSafeToString(),
-                            a.NumeroPedido.NullSafeToString(),
-                            a.ItemPE.NullSafeToString(),
-                            a.Codigo.NullSafeToString(),
-                            a.Articulo.NullSafeToString(),
-                            a.Cantidad.NullSafeToString(),
-                            a.Unidad.NullSafeToString(),
-                            a.Ubicacion.NullSafeToString(),
-                            a.Obra.NullSafeToString(),
-                            a.Proveedor.NullSafeToString(),
-                            a.Partida.NullSafeToString(),
-                            a.ControlCalidad.NullSafeToString(),
-                            a.Observaciones.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public void EditGridData(int? IdRecepcion, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
-        {
-            switch (oper)
-            {
-                case "add": //Validate Input ; Add Method
-                    break;
-                case "edit":  //Validate Input ; Edit Method
-                    break;
-                case "del": //Validate Input ; Delete Method
-                    break;
-                default: break;
-            }
-
-        }
-
-        [HttpPost]
-        public virtual ActionResult Uploadfile(System.ComponentModel.Container containers, HttpPostedFileBase file)
-        {
-
-            if (file.ContentLength > 0)
-            {
-                var fileName = System.IO.Path.GetFileName(file.FileName);
-                var path = ""; //  = System.IO.Path.Combine(Server.MapPath("~/App_Data/Uploads"), containers.ContainerNo);
-                file.SaveAs(path);
-            }
-
-            return RedirectToAction("Index");
-        }
-
     }
-
-=======
-                            id = a.IdRecepcion.ToString(),
-                            cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + "  >Editar</>" ,
-							    "<a href="+ Url.Action("Imprimir",new {id = a.IdRecepcion} )  +">Imprimir</>" ,
-                                a.IdRecepcion.ToString(), 
-                                a.NumeroRecepcion1.ToString(), 
-                                a.NumeroRecepcion2.ToString(), 
-                                a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                              //  a.Cumplido,
-                              //  a.Recepcionado,
-                              //  a.Entregado,
-                              //  a.Impresa,
-                              //  a.Detalle,
-                              //  //a.Obra.Descripcion, 
-                              //(a.Obra==null) ?  "" :  a.Obra.NumeroObra,
-
-                                //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
-                                // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
-
-
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-
-                                //string.Join(",",  a.DetalleRequerimientos
-                                //    .SelectMany(x =>
-                                //        (x.DetallePresupuestos == null) ?
-                                //        null :
-                                //        x.DetallePresupuestos.Select(y =>
-                                //                    (y.Presupuesto == null) ?
-                                //                    null :
-                                //                    y.Presupuesto.Numero.NullSafeToString()
-                                //            )
-                                //    ).Distinct()
-                                //),
-
-
-                                //"",
-
-                                 
-
-                                //string.Join(",",  a.DetalleRequerimientos
-                                //    .SelectMany(x =>
-                                //        (x.DetallePedidos == null) ?
-                                //        null :
-                                //        x.DetallePedidos.Select(y =>
-                                //                    (y.Pedido == null) ?
-                                //                    null :
-                                //                    "<a href="+ Url.Action("Edit", "Pedido",new {id = y.Pedido.IdPedido} ) + "  >" + y.Pedido.NumeroPedido.NullSafeToString() + "</>"
-                                                    
-                                //            )
-                                //    ).Distinct()
-                                //),
-
-
-                                "", //recepciones
-                                "", // salidas
-
-                                //a.Comparativas,
-                                //string.Join(" ",  a.DetalleRequerimientos.Select(x=> x.DetallePedidos.Count ))  ,
-
-
-                                ////string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePedidos   ==null) ? "" : x.DetallePedidos.Select(z=>z.Pedido.NumeroPedido.ToString()).NullSafeToString() ).Distinct()),
-                                //a.Recepciones,
-                                
-                                
-                                
-                                //(a.SolicitoRequerimiento==null) ?  "" :   a.SolicitoRequerimiento.Nombre,
-                                //(a.AproboRequerimiento==null) ?  "" :  a.AproboRequerimiento.Nombre,
-                                //(a.Sectores==null) ?  "" : a.Sectores.Descripcion,
-
-                                //a.UsuarioAnulacion,
-                                //a.FechaAnulacion.NullSafeToString(),
-                                //a.MotivoAnulacion,
-                                //a.FechasLiberacion,
-                             
-                                //a.Observaciones,
-                                //a.LugarEntrega,
-                                //a.IdObra.ToString(),
-                                //a.IdSector.ToString(),
-                                //a.ConfirmadoPorWeb.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
-
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }
-
-
-    }
-
-
->>>>>>> 539b44d7afe6707d2cbc8556ca5684e8700971f5
 }
