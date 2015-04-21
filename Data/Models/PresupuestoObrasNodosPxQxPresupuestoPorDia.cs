@@ -12,16 +12,16 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HorasEquipo
+    public partial class PresupuestoObrasNodosPxQxPresupuestoPorDia
     {
-        public int IdHoraEquipo { get; set; }
-        public Nullable<int> IdEquipo { get; set; }
-        public Nullable<int> IdObra { get; set; }
+        public int IdPresupuestoObrasNodosPxQxPresupuestoPorDia { get; set; }
         public Nullable<int> IdPresupuestoObrasNodo { get; set; }
-        public Nullable<int> IdDetalleObraSector { get; set; }
-        public Nullable<int> IdCuadrilla { get; set; }
-        public Nullable<System.DateTime> HoraInicial { get; set; }
-        public Nullable<System.DateTime> HoraFinal { get; set; }
-        public Nullable<int> IdTarea { get; set; }
+        public Nullable<int> CodigoPresupuesto { get; set; }
+        public Nullable<int> Dia { get; set; }
+        public Nullable<int> Mes { get; set; }
+        public Nullable<int> Año { get; set; }
+        public Nullable<decimal> CantidadAvance { get; set; }
+    
+        public virtual PresupuestoObrasNodo PresupuestoObrasNodo { get; set; }
     }
 }

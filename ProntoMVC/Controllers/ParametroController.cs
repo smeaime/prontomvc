@@ -75,9 +75,9 @@ namespace ProntoMVC.Controllers
                         if (mAuxI3 == TipoSalida)
                         {
                             Parametros2 = db.Parametros2.Where(p => p.Campo == Opcion + "_2").FirstOrDefault();
-                            if (Parametros2 != null) { mAuxI1 = Convert.ToInt32(Parametros2.Valor ?? "1"); }
+                            if (Parametros2 != null) { mAuxI1 = Convert.ToInt32(Parametros2.Valor ?? "1"); } else { mAuxI1 = 1; }
                             Parametros2 = db.Parametros2.Where(p => p.Campo == Opcion + "_1").FirstOrDefault();
-                            if (Parametros2 != null) { mAuxI2 = Convert.ToInt32(Parametros2.Valor ?? "1"); }
+                            if (Parametros2 != null) { mAuxI2 = Convert.ToInt32(Parametros2.Valor ?? "1"); } else { mAuxI2 = 1; }
                         }
                         mAuxI3 = mAuxI3 + 1;
                     }
