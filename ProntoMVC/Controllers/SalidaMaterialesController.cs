@@ -173,8 +173,8 @@ namespace ProntoMVC.Controllers
             if ((o.NumeroSalidaMateriales ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de salida"; }
             if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; }
             
-            SalidasMateriale SalidaMateriales = db.SalidasMateriales.Where(c => (c.NumeroSalidaMateriales2 ?? 0) == mNumero1 && (c.NumeroSalidaMateriales ?? 0) == mNumero2).FirstOrDefault();
-            if (SalidaMateriales != null) { sErrorMsg += "\n" + "Salida ya ingresada"; }
+            //SalidasMateriale SalidaMateriales = db.SalidasMateriales.Where(c => (c.NumeroSalidaMateriales2 ?? 0) == mNumero1 && (c.NumeroSalidaMateriales ?? 0) == mNumero2).FirstOrDefault();
+            //if (SalidaMateriales != null) { sErrorMsg += "\n" + "Salida ya ingresada"; }
             
             mProntoIni_InhabilitarUbicaciones = BuscarClaveINI("Inhabilitar ubicaciones en movimientos de stock", -1) ?? "";
 
