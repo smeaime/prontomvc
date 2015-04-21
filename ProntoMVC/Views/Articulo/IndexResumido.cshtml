@@ -1,9 +1,64 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.Articulo>
 @{
     ViewBag.Title = "Artículos";
+    // Layout = "";
 }
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 <br />
+
+@if (false)
+{
+
+
+    <script>
+        var ROOT = '@Url.Content("~/")';
+        var ALTOLISTADO = 300;
+
+    </script>
+
+
+    <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script crossorigin="anonymous" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+
+    @*<link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js" type="text/javascript" />*@
+    @*<script href="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-en.js"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery-grid/grid.locale-es.js")" type="text/javascript"></script>
+
+
+
+
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+
+    <link href="@Url.Content("~/Content/jquery-grid/css/custom-theme/jquery-ui-1.10.3.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.autocomplete.css")" rel="stylesheet" type="text/css" />
+
+    
+        <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script> @*hay que cargarlo antes que la jqgrid*@
+
+
+
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+
+
+}
+
+
+
+
 <div style=" padding-left: 15px;  padding-right: 15px ;">
     <div>
         <div class="row-fluid">
@@ -61,278 +116,290 @@
 </div>
 
 <script type="text/javascript">
-            $().ready(function () {
-
-                $('#BuscadorListado').focus();
-
-                $("#Lista").jqGrid({
-                    //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
-                    url: ROOT + 'Articulo/Articulos_DynamicGridData',
-
-
-                    datatype: 'json',
-                    mtype: 'POST',
-                    postData: {
-                        'FechaInicial': function () { return $("#FechaInicial").val(); },
-                        'FechaFinal': function () { return $("#FechaFinal").val(); },
-                        'IdObra': function () { return $("#IdObra").val(); }
-                    },
-                    //            cellEdit: true,
-                    //            cellurl: '@Url.Action("UpdateArticuloProperty")',
-                    colNames: ['', '', 'Codigo', 'Descripcion'
-
-                    , 'Rubro'
-
-                    , 'Subrubro'
-                    , 'Nro.inv.'
-
-
-                    ],
-                    colModel: [
-                    { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
-                    { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
-                    {
-                        name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
-                        search: true, searchoptions: { clearSearch: true, searchOperators: true, sopt: ['eq','cn'] }
-                    },
-                    {
-                        name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
-                        editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-
-                        , search: true, searchoptions: {
-                            clearSearch: true,
-                            searchOperators: true, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
-                        }
-                    },
-                    {
-                        name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
-                        editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
-                        , search: true, searchoptions: { sopt: ['cn'] }
-                    },
-
-
-                    { name: 'Subrubro', index: '', width: 200, align: 'left', search: true, stype: 'text' },
-                    { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
-
-                    ],
-
-
-
-                    ondblClickRow: function (idrow) {
-                        window.location.href = ROOT + 'Articulo/Edit/' + idrow;
-
-
-                        // $("#edtData").click();
-
-                        //edicion inline
-                        // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                        //                if(id && id!==lastSel){
-                        //                    jQuery('#Lista').restoreRow(lastSel);
-                        //                    lastSel=id;
-                        //                }
-                        //                jQuery('#Lista').editRow(id, true);
-                        //
-
-                    },
-                    pager: $('#ListaPager'),
-                    rowNum: 50,
-                    rowList: [10, 20, 50, 100],
-                    sortname: 'IdArticulo',
-                    sortorder: "desc",
-                    viewrecords: true,
-                    //toppager: true,
-
-                    emptyrecords: 'No hay registros para mostrar',
-
-
-
-                    ///////////////////////////////
-                    width: 'auto', // 'auto',
-                    autowidth: true,
-                    shrinkToFit: false,
-                    //////////////////////////////
-
-                    height: $(window).height() - ALTOLISTADO, // '100%'
-                    altRows: false,
-                    footerrow: false, //true,
-                    userDataOnFooter: true
-                    // ,caption: '<b>PEDIDOS</b>'
-
-
-                      , multiboxonly: true
-
-                      , multipleSearch: true
-                    //,
-                    //search : { caption: "Search...", Find: "Find", Reset: "Reset",
-                    //odata : ['equal', 'not equal', 'less'],
-                    //groupOps: [ { op: "AND", text: "all" },
-                    //            { op: "OR", text: "any" }],
-                    //matchText: " match",
-                    //rulesText: " rules" },
-
-                })
-                //        .navGrid("#ListaPager",
-                //            { refresh: true, add: false, edit: false, del: false },
-                //                {}, // settings for edit
-                //                {}, // settings for add
-                //                {}, // settings for delete
-                //                {closeAfterSearch: true, closeOnEscape: true },
-                //                { sopt: ["cn"]} // Search options. Some options can be set on column level
-                //         );
-
-
-                //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-                //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-                //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
-
-                jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-                     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-                     {
-                         //sopt: ["cn"]
-                         sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
-                         , width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-                     }
-                    );
-
-                
-
-          //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
-          //{}, {}, {}, { multipleSearch: true, overlay: false });
-
-                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager', {
-                    caption: "",
-                    buttonicon: "ui-icon-calculator",
-                    title: "Choose columns",
-                    onClickButton: function () {
-                        $(this).jqGrid('columnChooser',
-                            { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
-                        $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
-                            .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
-                    }
-                });
-
-
-
-                jQuery("#Lista").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-                //myGrid.filterToolbar({  });
-                jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                        {
-                            caption: "Filter", title: "Toggle Searching Toolbar",
-                            buttonicon: 'ui-icon-pin-s',
-                            onClickButton: function () { myGrid[0].toggleToolbar(); }
-                        });
-
-
-
-                //$("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
-                //$("#Lista").setFrozenColumns();
-
-
-                //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
-
-
-
-
-                $("#BuscadorListado").keyup(function () {
-
-
-                    filtrar()
-
-                });
-
-
-                $("#BuscadorListado").change(function () {
-
-                    filtrar()
-
-
-                });
-
-
-
-                $("#BuscarProximoNoFiltra").change(function () {
-
-                    buscar()
-
-
-                });
-
-
-
-                function filtrar() {
-                    var grid = jQuery("#Lista");
-                    var postdata = grid.jqGrid('getGridParam', 'postData');
-                    jQuery.extend(postdata,
-                       {
-                           filters: '',
-                           searchField: 'Descripcion', // $("#CampoParaBuscar").val(), // 'Descripcion',   // Codigo
-                           searchOper: 'contains',
-                           searchString: $("#BuscadorListado").val()
-                       });
-                    grid.jqGrid('setGridParam', { search: true, postData: postdata });
-                    grid.trigger("reloadGrid", [{ page: 1 }]);
-
+    $().ready(function () {
+
+        $('#BuscadorListado').focus();
+
+        $("#Lista").jqGrid({
+            //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
+            url: ROOT + 'Articulo/Articulos_DynamicGridData',
+
+
+            datatype: 'json',
+            mtype: 'POST',
+            postData: {
+                'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); },
+                'IdObra': function () { return $("#IdObra").val(); }
+            },
+            //            cellEdit: true,
+            //            cellurl: '@Url.Action("UpdateArticuloProperty")',
+            colNames: ['', '', 'Codigo', 'Descripcion'
+
+            , 'Rubro'
+
+            , 'Subrubro'
+            , 'Nro.inv.'
+
+
+            ],
+            colModel: [
+            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+            {
+                name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+                search: true, searchoptions: {
+                    clearSearch: true, searchOperators: true
+                    , sopt: ['eq', 'cn']
                 }
+            },
+            {
+                name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
 
-
-                function RefrescaAnchoGrillaDetalle() {
-                    // $("#Lista").setGridWidth($(window).width());
-                    // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
-
-                    $("#Lista").setGridWidth($("#divGrilla").width());
-
-                    //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
-                    //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
+                , search: true, searchoptions: {
+                    clearSearch: true,
+                    searchOperators: true
+                    , sopt: ['eq', 'cn']
+                    //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
                 }
-
-
-
-            });
-
-
-
-
-
-
-
-
-
-
-            function exportExcel($id) {
-                var keys = [], ii = 0, rows = "";
-                var ids = $id.getDataIDs();  // Get All IDs
-                var row = $id.getRowData(ids[0]);     // Get First row to get the labels
-                for (var k in row) {
-                    keys[ii++] = k;    // capture col names
-                    rows = rows + k + "\t";     // output each Column as tab delimited
+            },
+            {
+                name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
+                editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+                , search: true, searchoptions: {
+                    //sopt: ['cn']
                 }
-                rows = rows + "\n";   // Output header with end of line
-                for (i = 0; i < ids.length; i++) {
-                    row = $id.getRowData(ids[i]); // get each row
-                    for (j = 0; j < keys.length; j++) rows = rows + row[keys[j]] + "\t"; // output each Row as tab delimited
-                    rows = rows + "\n";  // output each row with end of line
-                }
-                rows = rows + "\n";  // end of line at the end
-                var form = "<form name='csvexportform' action='" + php_path + "csvexport.php' method='post'>";
-                form = form + "<input type='hidden' name='csvBuffer' value='" + rows + "'>";
-                form = form + "</form><script>document.csvexportform.submit();</sc" + "ript>";
-                OpenWindow = window.open('', '');
-                OpenWindow.document.write(form);
-                OpenWindow.document.close();
+            },
+
+
+            { name: 'Subrubro', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+            { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+
+            ],
+
+
+
+            ondblClickRow: function (idrow) {
+                window.location.href = ROOT + 'Articulo/Edit/' + idrow;
+
+
+                // $("#edtData").click();
+
+                //edicion inline
+                // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
+                //                if(id && id!==lastSel){
+                //                    jQuery('#Lista').restoreRow(lastSel);
+                //                    lastSel=id;
+                //                }
+                //                jQuery('#Lista').editRow(id, true);
+                //
+
+            },
+            pager:'#ListaPager', // $(),
+            rowNum: 50,
+            rowList: [10, 20, 50, 100],
+            sortname: 'IdArticulo',
+            sortorder: "desc",
+            viewrecords: true,
+            //toppager: true,
+
+            emptyrecords: 'No hay registros para mostrar',
+
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>PEDIDOS</b>'
+
+              ,gridview: true
+
+              , multiboxonly: true
+
+              , multipleSearch: true
+            //,
+            //search : { caption: "Search...", Find: "Find", Reset: "Reset",
+            //odata : ['equal', 'not equal', 'less'],
+            //groupOps: [ { op: "AND", text: "all" },
+            //            { op: "OR", text: "any" }],
+            //matchText: " match",
+            //rulesText: " rules" },
+
+        })
+        //        .navGrid("#ListaPager",
+        //            { refresh: true, add: false, edit: false, del: false },
+        //                {}, // settings for edit
+        //                {}, // settings for add
+        //                {}, // settings for delete
+        //                {closeAfterSearch: true, closeOnEscape: true },
+        //                { sopt: ["cn"]} // Search options. Some options can be set on column level
+        //         );
+
+
+        //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
+        //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
+        //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+             {
+                 //sopt: ["cn"]
+                 //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                 width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+             }
+            );
+
+
+
+        //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
+        //{}, {}, {}, { multipleSearch: true, overlay: false });
+
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager', {
+            caption: "",
+            buttonicon: "ui-icon-calculator",
+            title: "Choose columns",
+            onClickButton: function () {
+                $(this).jqGrid('columnChooser',
+                    { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+                $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
+                    .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
             }
+        });
 
-            function gridcsvexport(id) {
-                $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
-                    caption: '',
-                    title: 'export',
-                    buttonicon: 'ui-icon-newwin',
-                    position: 'last',
-                    onClickButton: function () {
-                        exportExcel($(this));
-                    }
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        //myGrid.filterToolbar({  });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                {
+                    caption: "Filter", title: "Toggle Searching Toolbar",
+                    buttonicon: 'ui-icon-pin-s',
+                    onClickButton: function () { myGrid[0].toggleToolbar(); }
                 });
+
+
+
+        //$("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
+        //$("#Lista").setFrozenColumns();
+
+
+        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+
+        $("#BuscadorListado").keyup(function () {
+
+
+            filtrar()
+
+        });
+
+
+        $("#BuscadorListado").change(function () {
+
+            filtrar()
+
+
+        });
+
+
+
+        $("#BuscarProximoNoFiltra").change(function () {
+
+            buscar()
+
+
+        });
+
+
+
+        function filtrar() {
+            var grid = jQuery("#Lista");
+            var postdata = grid.jqGrid('getGridParam', 'postData');
+            jQuery.extend(postdata,
+               {
+                   filters: '',
+                   searchField: 'Descripcion', // $("#CampoParaBuscar").val(), // 'Descripcion',   // Codigo
+                   searchOper: 'contains',
+                   searchString: $("#BuscadorListado").val()
+               });
+            grid.jqGrid('setGridParam', { search: true, postData: postdata });
+            grid.trigger("reloadGrid", [{ page: 1 }]);
+
+        }
+
+
+        function RefrescaAnchoGrillaDetalle() {
+            // $("#Lista").setGridWidth($(window).width());
+            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
+
+            $("#Lista").setGridWidth($("#divGrilla").width());
+
+            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
+            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
+        }
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+    function exportExcel($id) {
+        var keys = [], ii = 0, rows = "";
+        var ids = $id.getDataIDs();  // Get All IDs
+        var row = $id.getRowData(ids[0]);     // Get First row to get the labels
+        for (var k in row) {
+            keys[ii++] = k;    // capture col names
+            rows = rows + k + "\t";     // output each Column as tab delimited
+        }
+        rows = rows + "\n";   // Output header with end of line
+        for (i = 0; i < ids.length; i++) {
+            row = $id.getRowData(ids[i]); // get each row
+            for (j = 0; j < keys.length; j++) rows = rows + row[keys[j]] + "\t"; // output each Row as tab delimited
+            rows = rows + "\n";  // output each row with end of line
+        }
+        rows = rows + "\n";  // end of line at the end
+        var form = "<form name='csvexportform' action='" + php_path + "csvexport.php' method='post'>";
+        form = form + "<input type='hidden' name='csvBuffer' value='" + rows + "'>";
+        form = form + "</form><script>document.csvexportform.submit();</sc" + "ript>";
+        OpenWindow = window.open('', '');
+        OpenWindow.document.write(form);
+        OpenWindow.document.close();
+    }
+
+    function gridcsvexport(id) {
+        $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
+            caption: '',
+            title: 'export',
+            buttonicon: 'ui-icon-newwin',
+            position: 'last',
+            onClickButton: function () {
+                exportExcel($(this));
             }
+        });
+    }
 
 </script>
 @*</div>*@
