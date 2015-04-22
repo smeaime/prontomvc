@@ -6740,12 +6740,14 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
-    [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
-    [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
-    [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
-    FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
+      <DefiningQuery>
+              SELECT
+              [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo],
+              [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio],
+              [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio],
+              [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
+              FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]
+            </DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
       <End Role="Rubros" EntitySet="Rubros" />
