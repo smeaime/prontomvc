@@ -1221,3 +1221,11 @@ alter table cartasdeporte ADD
 go
 
 
+
+
+
+
+
+
+alter table CartasPorteAcopios add primary key (IdAcopio)
+go
