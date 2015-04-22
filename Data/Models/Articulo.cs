@@ -274,7 +274,6 @@ namespace ProntoMVC.Data.Models
         public string GenerarConsumosAutomaticamente { get; set; }
         public string TalleCambioPrecio { get; set; }
         public string TalleCambioPrecio2 { get; set; }
-        public Nullable<int> IdCuentaComprasActivo { get; set; }
     
         public virtual Unidad Unidad { get; set; }
         public virtual ICollection<DetalleRequerimiento> DetalleRequerimientos { get; set; }

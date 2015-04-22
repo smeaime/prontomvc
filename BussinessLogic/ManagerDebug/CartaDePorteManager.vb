@@ -3397,6 +3397,7 @@ Public Class CartaDePorteManager
             'sDirFTP = HttpContext.Current.Server.MapPath("https://prontoweb.williamsentregas.com.ar/DataBackupear/")
             'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
             'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+            sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
 
 
@@ -3455,15 +3456,33 @@ Public Class CartaDePorteManager
         '   sDirFTP = HttpContext.Current.Server.MapPath(sDirFTP)
 
         Dim output = Path.GetTempPath & "ImagenesCartaPorte" & "_" + Now.ToString("ddMMMyyyy_HHmmss") & ".zip"
-        Dim MyFile1 = New FileInfo(output)
-        If MyFile1.Exists Then
-            MyFile1.Delete()
-        End If
+
+        Try
+            Dim MyFile1 = New FileInfo(output)
+            If MyFile1.Exists Then
+                MyFile1.Delete()
+            End If
+
+        Catch ex As Exception
+            ErrHandler.WriteError(output)
+            ErrHandler.WriteError(ex)
+            Throw
+        End Try
+
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
-            s = sDirFTP + s
-            Dim MyFile2 = New FileInfo(s)
+            's = sDirFTP + s
+
+            Dim MyFile2 As FileInfo
+            Try
+                MyFile2 = New FileInfo(s)
+            Catch ex2 As Exception
+                ErrHandler.WriteError(s)
+                ErrHandler.WriteError(ex2)
+                Throw
+            End Try
+
             If MyFile2.Exists Then
                 Try
                     zip.AddFile(s, "")
@@ -3478,6 +3497,7 @@ Public Class CartaDePorteManager
 
         zip.Save()
 
+        ErrHandler.WriteError(output)
         Return output
 
     End Function
@@ -3526,12 +3546,18 @@ Public Class CartaDePorteManager
                 End If
 
             End If
+
+
+
+
         End If
 
 
+        If myCartaDePorte.PathImagen = "" And myCartaDePorte.PathImagen2 = "" Then
 
-
-
+            ErrHandler.WriteError("sin imagenes")
+            Return ""
+        End If
 
 
 
@@ -3543,37 +3569,45 @@ Public Class CartaDePorteManager
 
 
 
+        Try
+
+            If System.Diagnostics.Debugger.IsAttached() Then
+                sDirFTP = "~/" + "DataBackupear\"
 
 
-        If System.Diagnostics.Debugger.IsAttached() Then
-            sDirFTP = "~/" + "DataBackupear\"
+                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
 
 
-            CartaDePorteManager.PDFcon_iTextSharp(output, _
-                               HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + myCartaDePorte.PathImagen, _
-                             HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + myCartaDePorte.PathImagen2 _
-                              )
-        Else
-
-            sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
-
-            Try
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
-                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP + myCartaDePorte.PathImagen, ""), _
-                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + myCartaDePorte.PathImagen2, "") _
-                                  )
+                                   HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen, _
+                                 HttpContext.Current.Server.MapPath(IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP, "")) + "temp_" + myCartaDePorte.PathImagen2 _
+                                , 5)
+            Else
 
-            Catch ex As Exception
-
-                ErrHandler.WriteError(ex)
-                'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
-                Return ""
-
-            End Try
-
-        End If
+                sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
 
 
+                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+
+
+                CartaDePorteManager.PDFcon_iTextSharp(output, _
+                                  IIf(myCartaDePorte.PathImagen <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen, ""), _
+                                IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen2, "") _
+                                , 5)
+
+
+            End If
+
+
+        Catch ex As Exception
+
+            ErrHandler.WriteError(ex)
+            'MsgBoxAjax(Me, "La carta " & myCartaDePorte.Numero & " fue modificada y ya no tiene imágenes adjuntas")
+            Return ""
+
+        End Try
 
 
 
@@ -3584,7 +3618,7 @@ Public Class CartaDePorteManager
 
 
 
-    Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String)
+    Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String, Optional propor As Decimal = 1)
 
 
         ErrHandler.WriteError("PDFcon_iTextSharp " & filejpg & "   " & filejpg2)
@@ -3598,28 +3632,55 @@ Public Class CartaDePorteManager
             iTextSharp.text.pdf.PdfWriter.GetInstance(document, stream)
             document.Open()
 
+            Try
 
-            If filejpg <> "" Then
-                Using imageStream = New FileStream(filejpg, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
-                    'Image.SetAbsolutePosition(0, 0)
-                    'Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
-                    Dim percentage As Decimal = 0.0F
-                    percentage = 540 / Image.Width
-                    Image.ScalePercent(percentage * 100)
-                    document.Add(Image)
-                End Using
-            End If
-            If filejpg2 <> "" Then
-                Using imageStream = New FileStream(filejpg2, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-                    Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
-                    Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
-                    Dim percentage As Decimal = 0.0F
-                    percentage = 540 / Image.Width
-                    Image.ScalePercent(percentage * 100)
-                    document.Add(Image)
-                End Using
-            End If
+
+
+
+
+                If filejpg <> "" Then
+                    Using imageStream = New FileStream(filejpg, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                        Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                        'Image.SetAbsolutePosition(0, 0)
+                        'Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                        Dim percentage As Decimal = 0.0F
+                        percentage = 540 / Image.Width
+                        Image.ScalePercent(percentage * 100 / propor)
+                        'Image.ScaleAbsolute(Image.Width / 5, Image.Height / 5)
+
+
+
+                        '// Image.SetDpi(30, 30)
+
+
+                        document.Add(Image)
+                    End Using
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+
+            End Try
+
+            Try
+
+                If filejpg2 <> "" Then
+                    Using imageStream = New FileStream(filejpg2, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+                        Dim Image = iTextSharp.text.Image.GetInstance(imageStream)
+                        Image.ScaleToFit(document.PageSize.Width, document.PageSize.Height)
+                        Dim percentage As Decimal = 0.0F
+                        percentage = 540 / Image.Width
+                        Image.ScalePercent(percentage * 100 / propor)
+                        'Image.SetDpi(30, 30)
+
+                        document.Add(Image)
+                    End Using
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+
+            End Try
 
 
             Try
