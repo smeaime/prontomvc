@@ -675,6 +675,7 @@ namespace ProntoMVC.Controllers
                         from h in db.Depositos.Where(o => o.IdDeposito == g.IdDeposito).DefaultIfEmpty()
                         from i in db.PresupuestoObrasNodos.Where(o => o.IdPresupuestoObrasNodo == a.IdPresupuestoObrasNodo).DefaultIfEmpty()
                         from j in db.PresupuestoObrasNodos.Where(o => o.IdPresupuestoObrasNodo == i.IdNodoPadre).DefaultIfEmpty()
+                        from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleSalidaMateriales,
@@ -708,7 +709,7 @@ namespace ProntoMVC.Controllers
                             Moneda = f != null ? f.Abreviatura : "",
                             a.FechaImputacion,
                             EquipoDestino = "",
-                            OrdenTrabajo = "",
+                            OrdenTrabajo = k != null ? k.NumeroOrdenTrabajo : null,
                             PresupuestoObrasEtapa = (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
