@@ -1758,6 +1758,7 @@
     <Property Name="IdTipoRetencionGanancia" Type="int" />
     <Property Name="IdIBCondicion" Type="int" />
     <Property Name="ImporteRetencionSUSS" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="SaldoAFondoDeReparo" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoCuentas">
     <Key>
@@ -1839,6 +1840,51 @@
     <Property Name="FechaAnulacion" Type="datetime" />
     <Property Name="MotivoAnulacion" Type="varchar" MaxLength="30" />
     <Property Name="IdTarjetaCredito" Type="int" />
+  </EntityType>
+  <EntityType Name="DetalleOtrosIngresosAlmacen">
+    <Key>
+      <PropertyRef Name="IdDetalleOtroIngresoAlmacen" />
+    </Key>
+    <Property Name="IdDetalleOtroIngresoAlmacen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOtroIngresoAlmacen" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdStock" Type="int" />
+    <Property Name="Partida" Type="varchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CantidadAdicional" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="Cantidad1" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Cantidad2" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Adjunto" Type="varchar" MaxLength="2" />
+    <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="IdUbicacion" Type="int" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdDetalleOtroIngresoAlmacenOriginal" Type="int" />
+    <Property Name="IdOtroIngresoAlmacenOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdMoneda" Type="int" />
+    <Property Name="IdControlCalidad" Type="int" />
+    <Property Name="Controlado" Type="varchar" MaxLength="2" />
+    <Property Name="CantidadCC" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="CantidadRechazadaCC" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdDetalleSalidaMateriales" Type="int" />
+    <Property Name="IdEquipoDestino" Type="int" />
+    <Property Name="IdOrdenTrabajo" Type="int" />
+    <Property Name="IdDetalleObraDestino" Type="int" />
+    <Property Name="Talle" Type="varchar" MaxLength="2" />
+    <Property Name="IdColor" Type="int" />
   </EntityType>
   <EntityType Name="DetallePedidos">
     <Key>
@@ -2223,6 +2269,127 @@
     <Property Name="IdFirmanteObservo" Type="int" />
     <Property Name="FechaUltimaObservacionFirmante" Type="datetime" />
     <Property Name="IdPresupuestoObrasNodo" Type="int" />
+  </EntityType>
+  <EntityType Name="DetalleSalidasMateriales">
+    <Key>
+      <PropertyRef Name="IdDetalleSalidaMateriales" />
+    </Key>
+    <Property Name="IdDetalleSalidaMateriales" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSalidaMateriales" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdStock" Type="int" />
+    <Property Name="Partida" Type="varchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CantidadAdicional" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="Cantidad1" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Cantidad2" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdDetalleValeSalida" Type="int" />
+    <Property Name="Adjunto" Type="varchar" MaxLength="2" />
+    <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
+    <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="IdUbicacion" Type="int" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="IdMoneda" Type="int" />
+    <Property Name="CotizacionDolar" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="CotizacionMoneda" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="IdEquipoDestino" Type="int" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdDetalleSalidaMaterialesOriginal" Type="int" />
+    <Property Name="IdSalidaMaterialesOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="DescargaPorKit" Type="varchar" MaxLength="2" />
+    <Property Name="FechaImputacion" Type="datetime" />
+    <Property Name="IdOrdenTrabajo" Type="int" />
+    <Property Name="IdDetalleObraDestino" Type="int" />
+    <Property Name="IdDetalleSalidaMaterialesPRONTOaSAT" Type="int" />
+    <Property Name="IdPresupuestoObraRubro" Type="int" />
+    <Property Name="IdCuenta" Type="int" />
+    <Property Name="IdCuentaGasto" Type="int" />
+    <Property Name="IdPresupuestoObrasNodo" Type="int" />
+    <Property Name="NumeroCaja" Type="int" />
+    <Property Name="IdUbicacionDestino" Type="int" />
+    <Property Name="IdFlete" Type="int" />
+    <Property Name="IdDetalleRecepcion" Type="int" />
+    <Property Name="CostoOriginal" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="IdUsuarioModificoCosto" Type="int" />
+    <Property Name="FechaModificacionCosto" Type="datetime" />
+    <Property Name="ObservacionModificacionCosto" Type="ntext" />
+    <Property Name="IdMonedaOriginal" Type="int" />
+    <Property Name="IdDetalleProduccionOrden" Type="int" />
+    <Property Name="IdDetalleLiquidacionFlete" Type="int" />
+    <Property Name="IdUsuarioDioPorCumplidoLiquidacionFletes" Type="int" />
+    <Property Name="FechaDioPorCumplidoLiquidacionFletes" Type="datetime" />
+    <Property Name="ObservacionDioPorCumplidoLiquidacionFletes" Type="ntext" />
+    <Property Name="Talle" Type="varchar" MaxLength="2" />
+    <Property Name="IdColor" Type="int" />
+    <Property Name="IdPresupuestoObrasNodoFleteLarga" Type="int" />
+    <Property Name="IdPresupuestoObrasNodoFleteInterno" Type="int" />
+    <Property Name="CostoFleteLarga" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="CostoFleteInterno" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdUsuarioDioPorRecepcionado" Type="int" />
+    <Property Name="FechaDioPorRecepcionado" Type="datetime" />
+    <Property Name="ObservacionDioPorRecepcionado" Type="ntext" />
+    <Property Name="ImputarConsumoAObraActualEquipoMantenimiento" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="DetalleSalidasMaterialesKits">
+    <Key>
+      <PropertyRef Name="IdDetalleSalidaMaterialesKit" />
+    </Key>
+    <Property Name="IdDetalleSalidaMaterialesKit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDetalleSalidaMateriales" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="4" />
+  </EntityType>
+  <EntityType Name="DetalleSalidasMaterialesPresupuestosObras">
+    <Key>
+      <PropertyRef Name="IdDetalleSalidaMaterialesPresupuestosObras" />
+    </Key>
+    <Property Name="IdDetalleSalidaMaterialesPresupuestosObras" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDetalleSalidaMateriales" Type="int" />
+    <Property Name="IdPresupuestoObrasNodo" Type="int" />
+    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdDetalleSalidaMaterialesKit" Type="int" />
+    <Property Name="IdPresupuestoObrasNodoNoMateriales" Type="int" />
+  </EntityType>
+  <EntityType Name="DetalleValesSalida">
+    <Key>
+      <PropertyRef Name="IdDetalleValeSalida" />
+    </Key>
+    <Property Name="IdDetalleValeSalida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdValeSalida" Type="int" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="IdStock" Type="int" />
+    <Property Name="Partida" Type="varchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CantidadAdicional" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="Cantidad1" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Cantidad2" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdDetalleReserva" Type="int" />
+    <Property Name="IdDetalleLMateriales" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="2" />
+    <Property Name="IdCentroCosto" Type="int" />
+    <Property Name="Cumplido" Type="varchar" MaxLength="2" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdDetalleValeSalidaOriginal" Type="int" />
+    <Property Name="IdValeSalidaOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="IdEquipoDestino" Type="int" />
+    <Property Name="IdDetalleSolicitudEntrega" Type="int" />
+    <Property Name="IdDetalleRequerimiento" Type="int" />
   </EntityType>
   <EntityType Name="Devoluciones">
     <Key>
@@ -3063,6 +3230,45 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="TotalesImportesRetenidosIva" Type="varchar" MaxLength="100" />
     <Property Name="ReversionContablePorAnulacion" Type="varchar" MaxLength="2" />
   </EntityType>
+  <EntityType Name="OrdenesTrabajo">
+    <Key>
+      <PropertyRef Name="IdOrdenTrabajo" />
+    </Key>
+    <Property Name="IdOrdenTrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroOrdenTrabajo" Type="varchar" MaxLength="20" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaInicio" Type="datetime" />
+    <Property Name="FechaEntrega" Type="datetime" />
+    <Property Name="FechaFinalizacion" Type="datetime" />
+    <Property Name="TrabajosARealizar" Type="ntext" />
+    <Property Name="IdOrdeno" Type="int" />
+    <Property Name="IdSuperviso" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="IdEquipoDestino" Type="int" />
+  </EntityType>
+  <EntityType Name="OtrosIngresosAlmacen">
+    <Key>
+      <PropertyRef Name="IdOtroIngresoAlmacen" />
+    </Key>
+    <Property Name="IdOtroIngresoAlmacen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroOtroIngresoAlmacen" Type="int" />
+    <Property Name="FechaOtroIngresoAlmacen" Type="datetime" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="Aprobo" Type="int" />
+    <Property Name="TipoIngreso" Type="int" />
+    <Property Name="Emitio" Type="int" />
+    <Property Name="FechaRegistracion" Type="datetime" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdOtroIngresoAlmacenOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="FechaImportacionTransmision" Type="datetime" />
+    <Property Name="Anulado" Type="varchar" MaxLength="2" />
+    <Property Name="IdAutorizaAnulacion" Type="int" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="IdSalidaMateriales" Type="int" />
+    <Property Name="CircuitoFirmasCompleto" Type="varchar" MaxLength="2" />
+  </EntityType>
   <EntityType Name="Paises">
     <Key>
       <PropertyRef Name="IdPais" />
@@ -3622,6 +3828,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="CantidadAvance" Type="numeric" Precision="18" Scale="8" />
     <Property Name="CantidadTeorica" Type="numeric" Precision="18" Scale="8" />
     <Property Name="Certificado" Type="numeric" Precision="18" Scale="4" />
+    <Property Name="PrecioVentaUnitario" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="PresupuestoObrasNodosPxQxPresupuestoPorDia">
     <Key>
@@ -3872,6 +4079,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="CodigoESRI" Type="varchar" MaxLength="2" />
     <Property Name="Codigo2" Type="int" />
     <Property Name="IdCuentaRetencionIBrutos2" Type="int" />
+    <Property Name="ProximoNumeroCertificadoRetencionIIBB2" Type="int" />
   </EntityType>
   <EntityType Name="PuntosVenta">
     <Key>
@@ -4274,6 +4482,97 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Codigo" Type="varchar" MaxLength="5" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="SalidasMateriales">
+    <Key>
+      <PropertyRef Name="IdSalidaMateriales" />
+    </Key>
+    <Property Name="IdSalidaMateriales" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroSalidaMateriales" Type="int" />
+    <Property Name="FechaSalidaMateriales" Type="datetime" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="Aprobo" Type="int" />
+    <Property Name="TipoSalida" Type="int" />
+    <Property Name="IdTransportista1" Type="int" />
+    <Property Name="IdTransportista2" Type="int" />
+    <Property Name="Cliente" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Localidad" Type="varchar" MaxLength="50" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+    <Property Name="CondicionIva" Type="varchar" MaxLength="30" />
+    <Property Name="Cuit" Type="varchar" MaxLength="13" />
+    <Property Name="NumeroSalidaMateriales2" Type="int" />
+    <Property Name="Acargo" Type="varchar" MaxLength="1" />
+    <Property Name="Emitio" Type="int" />
+    <Property Name="ValePreimpreso" Type="int" />
+    <Property Name="Referencia" Type="varchar" MaxLength="50" />
+    <Property Name="NumeroDocumento" Type="varchar" MaxLength="30" />
+    <Property Name="Patente1" Type="varchar" MaxLength="25" />
+    <Property Name="Patente2" Type="varchar" MaxLength="25" />
+    <Property Name="Patente3" Type="varchar" MaxLength="25" />
+    <Property Name="Patente4" Type="varchar" MaxLength="25" />
+    <Property Name="IdProveedor" Type="int" />
+    <Property Name="Chofer" Type="varchar" MaxLength="50" />
+    <Property Name="IdCentroCosto" Type="int" />
+    <Property Name="FechaRegistracion" Type="datetime" />
+    <Property Name="Anulada" Type="varchar" MaxLength="2" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="IdUsuarioAnulo" Type="int" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdSalidaMaterialesOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="FechaImportacionTransmision" Type="datetime" />
+    <Property Name="MotivoAnulacion" Type="ntext" />
+    <Property Name="NumeroOrdenProduccion" Type="int" />
+    <Property Name="IdDepositoOrigen" Type="int" />
+    <Property Name="IdUsuarioIngreso" Type="int" />
+    <Property Name="FechaIngreso" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
+    <Property Name="FechaModifico" Type="datetime" />
+    <Property Name="IdRecepcionSAT" Type="int" />
+    <Property Name="ClaveTipoSalida" Type="varchar" MaxLength="30" />
+    <Property Name="SalidaADepositoEnTransito" Type="varchar" MaxLength="2" />
+    <Property Name="ValorDeclarado" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Bultos" Type="int" />
+    <Property Name="IdColor" Type="int" />
+    <Property Name="Embalo" Type="varchar" MaxLength="50" />
+    <Property Name="CircuitoFirmasCompleto" Type="varchar" MaxLength="2" />
+    <Property Name="IdPuntoVenta" Type="int" />
+    <Property Name="NumeroRemitoTransporte" Type="varchar" MaxLength="15" />
+    <Property Name="IdEquipo" Type="int" />
+    <Property Name="IdSalidaMaterialesSAT" Type="int" />
+    <Property Name="IdObraOrigen" Type="int" />
+    <Property Name="NumeroRemitoPreimpreso1" Type="int" />
+    <Property Name="NumeroRemitoPreimpreso2" Type="int" />
+    <Property Name="IdFlete" Type="int" />
+    <Property Name="IdChofer" Type="int" />
+    <Property Name="DestinoDeObra" Type="varchar" MaxLength="50" />
+    <Property Name="PesoBruto" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="PesoNeto" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Tara" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="CantidadEnOrigen" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="DistanciaRecorrida" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="CodigoTarifador" Type="varchar" MaxLength="10" />
+    <Property Name="IdPesada" Type="int" />
+    <Property Name="IdTarifaFlete" Type="int" />
+    <Property Name="TarifaFlete" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Detalle" Type="varchar" MaxLength="30" />
+    <Property Name="IdProduccionOrden" Type="int" />
+    <Property Name="IdDepositoIntermedio" Type="int" />
+    <Property Name="NumeroPesada" Type="int" />
+    <Property Name="Progresiva1" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Progresiva2" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="FechaPesada" Type="datetime" />
+    <Property Name="ObservacionesPesada" Type="varchar" MaxLength="200" />
+    <Property Name="NumeroRemitoTransporte1" Type="int" />
+    <Property Name="NumeroRemitoTransporte2" Type="int" />
+    <Property Name="RecibidosEnDestino" Type="varchar" MaxLength="2" />
+    <Property Name="RecibidosEnDestinoFecha" Type="datetime" />
+    <Property Name="RecibidosEnDestinoIdUsuario" Type="int" />
+    <Property Name="IdCalle1" Type="int" />
+    <Property Name="IdCalle2" Type="int" />
+    <Property Name="IdCalle3" Type="int" />
+  </EntityType>
   <EntityType Name="Sectores">
     <Key>
       <PropertyRef Name="IdSector" />
@@ -4340,6 +4639,19 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Abreviatura" Type="varchar" MaxLength="15" />
     <Property Name="EnviarEmail" Type="tinyint" />
     <Property Name="Codigo" Type="int" />
+  </EntityType>
+  <EntityType Name="TarifasFletes">
+    <Key>
+      <PropertyRef Name="IdTarifaFlete" />
+    </Key>
+    <Property Name="IdTarifaFlete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="ValorUnitario" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+    <Property Name="LimiteInferior" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="LimiteSuperior" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="IdUnidad" Type="int" />
+    <Property Name="FechaVigencia" Type="datetime" />
   </EntityType>
   <EntityType Name="TarjetasCredito">
     <Key>
@@ -4562,6 +4874,31 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="EnviarEmail" Type="tinyint" />
     <Property Name="Codigo" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ValesSalida">
+    <Key>
+      <PropertyRef Name="IdValeSalida" />
+    </Key>
+    <Property Name="IdValeSalida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroValeSalida" Type="int" />
+    <Property Name="FechaValeSalida" Type="datetime" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="IdCentroCosto" Type="int" />
+    <Property Name="Aprobo" Type="int" />
+    <Property Name="NumeroValePreimpreso" Type="int" />
+    <Property Name="Cumplido" Type="varchar" MaxLength="2" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdValeSalidaOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+    <Property Name="FechaImportacionTransmision" Type="datetime" />
+    <Property Name="IdUsuarioAnulo" Type="int" />
+    <Property Name="FechaAnulacion" Type="datetime" />
+    <Property Name="MotivoAnulacion" Type="ntext" />
+    <Property Name="CircuitoFirmasCompleto" Type="varchar" MaxLength="2" />
+    <Property Name="IdUsuarioDioPorCumplido" Type="int" />
+    <Property Name="FechaDioPorCumplido" Type="datetime" />
+    <Property Name="MotivoDioPorCumplido" Type="ntext" />
   </EntityType>
   <EntityType Name="Valores">
     <Key>
@@ -5681,6 +6018,18 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DetalleOtrosIngresosAlmacen_OtrosIngresosAlmacen">
+    <End Role="OtrosIngresosAlmacen" Type="Self.OtrosIngresosAlmacen" Multiplicity="0..1" />
+    <End Role="DetalleOtrosIngresosAlmacen" Type="Self.DetalleOtrosIngresosAlmacen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OtrosIngresosAlmacen">
+        <PropertyRef Name="IdOtroIngresoAlmacen" />
+      </Principal>
+      <Dependent Role="DetalleOtrosIngresosAlmacen">
+        <PropertyRef Name="IdOtroIngresoAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DetallePedidos_ControlCalidad">
     <End Role="ControlesCalidad" Type="Self.ControlesCalidad" Multiplicity="0..1" />
     <End Role="DetallePedidos" Type="Self.DetallePedidos" Multiplicity="*" />
@@ -5870,6 +6219,102 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="DetalleRemitos">
         <PropertyRef Name="IdRemito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSalidasMateriales_Articulos">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="DetalleSalidasMateriales" Type="Self.DetalleSalidasMateriales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="DetalleSalidasMateriales">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSalidasMateriales_DetalleRecepciones">
+    <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="0..1" />
+    <End Role="DetalleSalidasMateriales" Type="Self.DetalleSalidasMateriales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalleRecepciones">
+        <PropertyRef Name="IdDetalleRecepcion" />
+      </Principal>
+      <Dependent Role="DetalleSalidasMateriales">
+        <PropertyRef Name="IdDetalleRecepcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSalidasMateriales_DetalleValesSalida">
+    <End Role="DetalleValesSalida" Type="Self.DetalleValesSalida" Multiplicity="0..1" />
+    <End Role="DetalleSalidasMateriales" Type="Self.DetalleSalidasMateriales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalleValesSalida">
+        <PropertyRef Name="IdDetalleValeSalida" />
+      </Principal>
+      <Dependent Role="DetalleSalidasMateriales">
+        <PropertyRef Name="IdDetalleValeSalida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSalidasMateriales_SalidasMateriales">
+    <End Role="SalidasMateriales" Type="Self.SalidasMateriales" Multiplicity="0..1" />
+    <End Role="DetalleSalidasMateriales" Type="Self.DetalleSalidasMateriales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalidasMateriales">
+        <PropertyRef Name="IdSalidaMateriales" />
+      </Principal>
+      <Dependent Role="DetalleSalidasMateriales">
+        <PropertyRef Name="IdSalidaMateriales" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleSalidasMateriales_Ubicaciones">
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
+    <End Role="DetalleSalidasMateriales" Type="Self.DetalleSalidasMateriales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicaciones">
+        <PropertyRef Name="IdUbicacion" />
+      </Principal>
+      <Dependent Role="DetalleSalidasMateriales">
+        <PropertyRef Name="IdUbicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValesSalida_Articulos">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="DetalleValesSalida" Type="Self.DetalleValesSalida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="IdArticulo" />
+      </Principal>
+      <Dependent Role="DetalleValesSalida">
+        <PropertyRef Name="IdArticulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValesSalida_DetalleRequerimientos">
+    <End Role="DetalleRequerimientos" Type="Self.DetalleRequerimientos" Multiplicity="0..1" />
+    <End Role="DetalleValesSalida" Type="Self.DetalleValesSalida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalleRequerimientos">
+        <PropertyRef Name="IdDetalleRequerimiento" />
+      </Principal>
+      <Dependent Role="DetalleValesSalida">
+        <PropertyRef Name="IdDetalleRequerimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleValesSalida_ValesSalida">
+    <End Role="ValesSalida" Type="Self.ValesSalida" Multiplicity="0..1" />
+    <End Role="DetalleValesSalida" Type="Self.DetalleValesSalida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ValesSalida">
+        <PropertyRef Name="IdValeSalida" />
+      </Principal>
+      <Dependent Role="DetalleValesSalida">
+        <PropertyRef Name="IdValeSalida" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6170,6 +6615,66 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Principal>
       <Dependent Role="Pedidos">
         <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresupuestoObrasNodosConsumos_PresupuestoObrasNodos">
+    <End Role="PresupuestoObrasNodos" Type="Self.PresupuestoObrasNodos" Multiplicity="0..1" />
+    <End Role="PresupuestoObrasNodosConsumos" Type="Self.PresupuestoObrasNodosConsumos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresupuestoObrasNodos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Principal>
+      <Dependent Role="PresupuestoObrasNodosConsumos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos">
+    <End Role="PresupuestoObrasNodos" Type="Self.PresupuestoObrasNodos" Multiplicity="0..1" />
+    <End Role="PresupuestoObrasNodosDatos" Type="Self.PresupuestoObrasNodosDatos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresupuestoObrasNodos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Principal>
+      <Dependent Role="PresupuestoObrasNodosDatos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresupuestoObrasNodosPxQxPresupuesto_PresupuestoObrasNodos">
+    <End Role="PresupuestoObrasNodos" Type="Self.PresupuestoObrasNodos" Multiplicity="0..1" />
+    <End Role="PresupuestoObrasNodosPxQxPresupuesto" Type="Self.PresupuestoObrasNodosPxQxPresupuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresupuestoObrasNodos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Principal>
+      <Dependent Role="PresupuestoObrasNodosPxQxPresupuesto">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos">
+    <End Role="PresupuestoObrasNodos" Type="Self.PresupuestoObrasNodos" Multiplicity="0..1" />
+    <End Role="PresupuestoObrasNodosPxQxPresupuestoPorDia" Type="Self.PresupuestoObrasNodosPxQxPresupuestoPorDia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresupuestoObrasNodos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Principal>
+      <Dependent Role="PresupuestoObrasNodosPxQxPresupuestoPorDia">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos">
+    <End Role="PresupuestoObrasNodos" Type="Self.PresupuestoObrasNodos" Multiplicity="0..1" />
+    <End Role="PresupuestoObrasRedeterminaciones" Type="Self.PresupuestoObrasRedeterminaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresupuestoObrasNodos">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
+      </Principal>
+      <Dependent Role="PresupuestoObrasRedeterminaciones">
+        <PropertyRef Name="IdPresupuestoObrasNodo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6644,6 +7149,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleOrdenesPagoRendicionesFF" EntityType="Self.DetalleOrdenesPagoRendicionesFF" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleOrdenesPagoRubrosContables" EntityType="Self.DetalleOrdenesPagoRubrosContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleOrdenesPagoValores" EntityType="Self.DetalleOrdenesPagoValores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleOtrosIngresosAlmacen" EntityType="Self.DetalleOtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetallePresupuestos" EntityType="Self.DetallePresupuestos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleProveedores" EntityType="Self.DetalleProveedores" Schema="dbo" store:Type="Tables" />
@@ -6656,6 +7162,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="DetalleRecibosValores" EntityType="Self.DetalleRecibosValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleRemitos" EntityType="Self.DetalleRemitos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DetalleRequerimientos" EntityType="Self.DetalleRequerimientos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleSalidasMateriales" EntityType="Self.DetalleSalidasMateriales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleSalidasMaterialesKits" EntityType="Self.DetalleSalidasMaterialesKits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleSalidasMaterialesPresupuestosObras" EntityType="Self.DetalleSalidasMaterialesPresupuestosObras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleValesSalida" EntityType="Self.DetalleValesSalida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Devoluciones" EntityType="Self.Devoluciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiferenciasCambio" EntityType="Self.DiferenciasCambio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ejercicios" EntityType="Self.Ejercicios" Schema="dbo" store:Type="Tables" />
@@ -6685,6 +7195,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrdenesCompra" EntityType="Self.OrdenesCompra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrdenesPago" EntityType="Self.OrdenesPago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OtrosIngresosAlmacen" EntityType="Self.OtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" />
@@ -6714,10 +7226,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RubrosContables" EntityType="Self.RubrosContables" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RubrosValores" EntityType="Self.RubrosValores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalidasMateriales" EntityType="Self.SalidasMateriales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subdiarios" EntityType="Self.Subdiarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subrubros" EntityType="Self.Subrubros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TarifasFletes" EntityType="Self.TarifasFletes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tipos" EntityType="Self.Tipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposCompra" EntityType="Self.TiposCompra" Schema="dbo" store:Type="Tables" />
@@ -6737,17 +7251,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ValesSalida" EntityType="Self.ValesSalida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>
-              SELECT
-              [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo],
-              [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio],
-              [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio],
-              [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
-              FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]
-            </DefiningQuery>
+      <DefiningQuery>SELECT 
+    [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
+    [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
+    [EjerciciosPeriodos].[FechaInicio] AS [FechaInicio], 
+    [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
+    FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
       <End Role="Rubros" EntitySet="Rubros" />
@@ -7085,6 +7598,10 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       <End Role="OrdenesPago" EntitySet="OrdenesPago" />
       <End Role="DetalleOrdenesPagoValores" EntitySet="DetalleOrdenesPagoValores" />
     </AssociationSet>
+    <AssociationSet Name="FK_DetalleOtrosIngresosAlmacen_OtrosIngresosAlmacen" Association="Self.FK_DetalleOtrosIngresosAlmacen_OtrosIngresosAlmacen">
+      <End Role="OtrosIngresosAlmacen" EntitySet="OtrosIngresosAlmacen" />
+      <End Role="DetalleOtrosIngresosAlmacen" EntitySet="DetalleOtrosIngresosAlmacen" />
+    </AssociationSet>
     <AssociationSet Name="FK_DetallePedidos_ControlCalidad" Association="Self.FK_DetallePedidos_ControlCalidad">
       <End Role="ControlesCalidad" EntitySet="ControlesCalidad" />
       <End Role="DetallePedidos" EntitySet="DetallePedidos" />
@@ -7148,6 +7665,38 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_DetalleRemitos_Remitos" Association="Self.FK_DetalleRemitos_Remitos">
       <End Role="Remitos" EntitySet="Remitos" />
       <End Role="DetalleRemitos" EntitySet="DetalleRemitos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSalidasMateriales_Articulos" Association="Self.FK_DetalleSalidasMateriales_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="DetalleSalidasMateriales" EntitySet="DetalleSalidasMateriales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSalidasMateriales_DetalleRecepciones" Association="Self.FK_DetalleSalidasMateriales_DetalleRecepciones">
+      <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+      <End Role="DetalleSalidasMateriales" EntitySet="DetalleSalidasMateriales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSalidasMateriales_DetalleValesSalida" Association="Self.FK_DetalleSalidasMateriales_DetalleValesSalida">
+      <End Role="DetalleValesSalida" EntitySet="DetalleValesSalida" />
+      <End Role="DetalleSalidasMateriales" EntitySet="DetalleSalidasMateriales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSalidasMateriales_SalidasMateriales" Association="Self.FK_DetalleSalidasMateriales_SalidasMateriales">
+      <End Role="SalidasMateriales" EntitySet="SalidasMateriales" />
+      <End Role="DetalleSalidasMateriales" EntitySet="DetalleSalidasMateriales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleSalidasMateriales_Ubicaciones" Association="Self.FK_DetalleSalidasMateriales_Ubicaciones">
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+      <End Role="DetalleSalidasMateriales" EntitySet="DetalleSalidasMateriales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValesSalida_Articulos" Association="Self.FK_DetalleValesSalida_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="DetalleValesSalida" EntitySet="DetalleValesSalida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValesSalida_DetalleRequerimientos" Association="Self.FK_DetalleValesSalida_DetalleRequerimientos">
+      <End Role="DetalleRequerimientos" EntitySet="DetalleRequerimientos" />
+      <End Role="DetalleValesSalida" EntitySet="DetalleValesSalida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleValesSalida_ValesSalida" Association="Self.FK_DetalleValesSalida_ValesSalida">
+      <End Role="ValesSalida" EntitySet="ValesSalida" />
+      <End Role="DetalleValesSalida" EntitySet="DetalleValesSalida" />
     </AssociationSet>
     <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
       <End Role="Cargos" EntitySet="Cargos" />
@@ -7248,6 +7797,26 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <AssociationSet Name="FK_Pedidos_Monedas" Association="Self.FK_Pedidos_Monedas">
       <End Role="Monedas" EntitySet="Monedas" />
       <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresupuestoObrasNodosConsumos_PresupuestoObrasNodos" Association="Self.FK_PresupuestoObrasNodosConsumos_PresupuestoObrasNodos">
+      <End Role="PresupuestoObrasNodos" EntitySet="PresupuestoObrasNodos" />
+      <End Role="PresupuestoObrasNodosConsumos" EntitySet="PresupuestoObrasNodosConsumos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos" Association="Self.FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos">
+      <End Role="PresupuestoObrasNodos" EntitySet="PresupuestoObrasNodos" />
+      <End Role="PresupuestoObrasNodosDatos" EntitySet="PresupuestoObrasNodosDatos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresupuestoObrasNodosPxQxPresupuesto_PresupuestoObrasNodos" Association="Self.FK_PresupuestoObrasNodosPxQxPresupuesto_PresupuestoObrasNodos">
+      <End Role="PresupuestoObrasNodos" EntitySet="PresupuestoObrasNodos" />
+      <End Role="PresupuestoObrasNodosPxQxPresupuesto" EntitySet="PresupuestoObrasNodosPxQxPresupuesto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos" Association="Self.FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos">
+      <End Role="PresupuestoObrasNodos" EntitySet="PresupuestoObrasNodos" />
+      <End Role="PresupuestoObrasNodosPxQxPresupuestoPorDia" EntitySet="PresupuestoObrasNodosPxQxPresupuestoPorDia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos" Association="Self.FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos">
+      <End Role="PresupuestoObrasNodos" EntitySet="PresupuestoObrasNodos" />
+      <End Role="PresupuestoObrasRedeterminaciones" EntitySet="PresupuestoObrasRedeterminaciones" />
     </AssociationSet>
     <AssociationSet Name="FK_Presupuestos_Empleados_Aprobo" Association="Self.FK_Presupuestos_Empleados_Aprobo">
       <End Role="Empleados" EntitySet="Empleados" />

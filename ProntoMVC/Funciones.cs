@@ -175,6 +175,36 @@ public static class Generales
 
     }
 
+    public static string sCadenaConexMant(string nombreEmpresa)
+    {
+        string s;
+
+        try
+        {
+            s = sCadenaConexSQL_Mant(nombreEmpresa);
+        }
+        catch (Exception ex)
+        {
+            FormsAuthentication.SignOut();
+            // return RedirectToAction("Index", "Home");
+            // LogOff()
+            return null;
+        }
+
+
+        if (s == null || s == "")
+        {
+            // FormsAuthentication.SignOut();
+            return null;
+
+        }
+
+
+        string SC = FormatearConexParaEntityFrameworkMant(s);
+
+        return SC;
+
+    }
 
     public static bool EsUsuarioControlablePorAdmin(string usuarionombre, string adminnombre)
     {
@@ -234,6 +264,30 @@ public static class Generales
     }
 
 
+    public static string FormatearConexParaEntityFrameworkMant(string s)
+    {
+
+
+        var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
+        string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
+        string basePronto = parser.InitialCatalog;  // "Autotrol";
+        string user = parser.UserID;
+        string pass = parser.Password;
+
+
+        string SC =
+               "metadata=res://*/Models.ProntoMantenimiento.csdl|res://*/Models.ProntoMantenimiento.ssdl|res://*/Models.ProntoMantenimiento.msl;" +
+               "provider=System.Data.SqlClient;provider connection string=\"" +
+               "data source=" + servidorSQL + ";" +
+               "initial catalog=" + basePronto + ";" +
+               "persist security info=True;user id=" + user + ";" +
+               "password=" + pass + ";" +
+                "multipleactiveresultsets=True;App=EntityFramework\"";
+
+        return SC;
+    }
+
+
     public static string ConexEFMaster()
     {
         return FormatearConexParaEntityFrameworkBDLMASTER();
@@ -269,6 +323,113 @@ public static class Generales
     public static string sCadenaConexSQLbdlmaster()
     {
         return ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+    }
+
+    public static string sCadenaConexSQL_Mant(string nombreEmpresa, Guid userGuid = new Guid())
+    {
+        // string datos = HttpContext.Current.Request.Session["data"] as string;
+        //var ss=ControllerContext.HttpContext.Session["{name}"];
+        nombreEmpresa = nombreEmpresa ?? "";
+        if (nombreEmpresa == "") return null;
+
+        if (userGuid == Guid.Empty) userGuid = (Guid)Membership.GetUser().ProviderUserKey;
+        //string us = Membership.GetUser().UserName;
+        string us = userGuid.ToString();
+
+        //var UsuarioExiste = Pronto.ERP.Bll.BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me);
+        //usuario.Empresa = IdEmpresa
+
+        string sConexBDLMaster;
+        bool esSuperadmin;
+
+        if (System.Diagnostics.Debugger.IsAttached && false)
+        {
+            sConexBDLMaster = @"Data Source=SERVERSQL3\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
+            esSuperadmin = true;
+        }
+        else
+        {
+            sConexBDLMaster = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            esSuperadmin = Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin");
+
+        }
+        sConexBDLMaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(sConexBDLMaster);
+
+
+
+        string s;
+
+        try
+        {
+            if (false)
+            {
+                s = BDLMasterEmpresasManager.GetConnectionStringEmpresa(us, "0", sConexBDLMaster, nombreEmpresa); //, IdEmpresa);
+            }
+            else
+            {
+
+
+                var sSQL = "SELECT * FROM BASES " +
+                                                          "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
+                                                          "where " +
+                                                          ((!esSuperadmin) ? "UserId='" + us + "' AND" : "") +
+                                                          " Descripcion='" + nombreEmpresa + "'   ";
+
+                System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
+                                                       sSQL);
+
+                //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
+                // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
+                // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
+
+
+
+                // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
+
+
+                if (dt.Rows.Count == 1)
+                {
+                    s = dt.Rows[0]["StringConection"] as string;
+                }
+                else if (dt.Rows.Count > 1)
+                {
+                    // no debería pasar...
+                    s = dt.Rows[0]["StringConection"] as string;
+                }
+                else
+                {
+                    // está haciendo circularidades cuando creo el usuario por acá
+                    //  ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController a = new ProntoMVC.Areas.MvcMembership.Controllers.UserAdministrationController();
+                    //  a.CrearUsuarioProntoEnDichaBase(nombreEmpresa, Membership.GetUser().UserName);
+
+
+                    throw new Exception("Usuario logueado pero sin empresa elegida");
+
+                    using (BDLMasterEntities bdlmaster = new BDLMasterEntities(Generales.FormatearConexParaEntityFrameworkBDLMASTER()))
+                    {
+                        var q = bdlmaster.Bases.Where(x => x.Descripcion == nombreEmpresa).FirstOrDefault();
+                        return q.StringConection;
+                    }
+
+
+
+                }
+
+            }
+
+
+
+        }
+        catch (Exception ex)
+        {
+            // FormsAuthentication.SignOut();
+            // return RedirectToAction("Index", "Home");
+            // LogOff()
+            return null;
+        }
+
+        return s;
+
     }
 
     public static string sCadenaConexSQL(string nombreEmpresa, Guid userGuid = new Guid())

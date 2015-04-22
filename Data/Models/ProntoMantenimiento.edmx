@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProntoMantenimientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Consumos">
+          <Key>
+            <PropertyRef Name="IdConsumo" />
+          </Key>
+          <Property Name="IdConsumo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroConsumo" Type="int" />
+          <Property Name="FechaConsumo" Type="datetime" />
+          <Property Name="IdObra" Type="int" />
+          <Property Name="IdResponsable" Type="int" />
+          <Property Name="IdConsumoOriginal" Type="int" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+          <Property Name="FechaImportacion" Type="datetime" />
+          <Property Name="IdSalidaMaterialesPRONTO" Type="int" />
+          <Property Name="NumeroSalidaMaterialesPRONTO" Type="int" />
+          <Property Name="BDOrigenSalidaPRONTO" Type="varchar" MaxLength="100" />
+          <Property Name="Observaciones" Type="ntext" />
+        </EntityType>
+        <EntityType Name="HorasAseguradasEquipos">
+          <Key>
+            <PropertyRef Name="IdHorasAseguradasEquipos" />
+          </Key>
+          <Property Name="IdHorasAseguradasEquipos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEquipo" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdObra" Type="int" />
+          <Property Name="HorasReales" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="HorasAseguradas" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="HorasAPagar" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="HorasInoperativas" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="IdDetalleParteDiario" Type="int" />
+        </EntityType>
+        <EntityType Name="HorasEquipo">
+          <Key>
+            <PropertyRef Name="IdHoraEquipo" />
+          </Key>
+          <Property Name="IdHoraEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEquipo" Type="int" />
+          <Property Name="IdObra" Type="int" />
+          <Property Name="IdPresupuestoObrasNodo" Type="int" />
+          <Property Name="IdDetalleObraSector" Type="int" />
+          <Property Name="IdCuadrilla" Type="int" />
+          <Property Name="HoraInicial" Type="smalldatetime" />
+          <Property Name="HoraFinal" Type="smalldatetime" />
+          <Property Name="IdTarea" Type="int" />
+        </EntityType>
+        <EntityType Name="HorasStandar">
+          <Key>
+            <PropertyRef Name="IdHoraStandar" />
+          </Key>
+          <Property Name="IdHoraStandar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaDesde" Type="datetime" />
+          <Property Name="FechaHasta" Type="datetime" />
+          <Property Name="HorasStandar" Type="numeric" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="Materiales">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Abreviatura" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="OrdenesTrabajo">
+          <Key>
+            <PropertyRef Name="IdOrdenTrabajo" />
+          </Key>
+          <Property Name="IdOrdenTrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdArticulo" Type="int" />
+          <Property Name="NumeroOrdenTrabajo" Type="int" />
+          <Property Name="FechaOrdenTrabajo" Type="datetime" />
+          <Property Name="TipoOrdenTrabajo" Type="varchar" MaxLength="1" />
+          <Property Name="IdResponsable" Type="int" />
+          <Property Name="Impreso" Type="varchar" MaxLength="2" />
+          <Property Name="FechaInicial" Type="datetime" />
+          <Property Name="FechaFinal" Type="datetime" />
+          <Property Name="Observaciones" Type="ntext" />
+          <Property Name="Anulada" Type="varchar" MaxLength="2" />
+          <Property Name="IdAnulo" Type="int" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="Cumplida" Type="varchar" MaxLength="2" />
+          <Property Name="FechaTerminacion" Type="datetime" />
+          <Property Name="IdOrdenTrabajoOriginal" Type="int" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+          <Property Name="FechaImportacion" Type="datetime" />
+          <Property Name="HsKm" Type="int" />
+          <Property Name="IdTipoOT" Type="int" />
+          <Property Name="TrabajosARealizar" Type="ntext" />
+          <Property Name="IdObra" Type="int" />
+          <Property Name="Directa" Type="varchar" MaxLength="2" />
+          <Property Name="Contratista" Type="varchar" MaxLength="50" />
+          <Property Name="ResponsableContratista" Type="varchar" MaxLength="50" />
+          <Property Name="TipoTrabajo" Type="varchar" MaxLength="50" />
+          <Property Name="FirmaEjecuto" Type="int" />
+          <Property Name="FechaEjecuto" Type="datetime" />
+          <Property Name="FirmaResponsable" Type="int" />
+          <Property Name="FechaResponsable" Type="datetime" />
+          <Property Name="ReparacionACargoDe" Type="varchar" MaxLength="2" />
+          <Property Name="IdUsuarioIngreso" Type="int" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="IdUsuarioModifico" Type="int" />
+          <Property Name="FechaModifico" Type="datetime" />
+          <Property Name="Prioridad" Type="varchar" MaxLength="1" />
+          <Property Name="DiasParoEquipo" Type="int" />
+          <Property Name="Service" Type="int" />
+        </EntityType>
+        <EntityType Name="PartesDiarios">
+          <Key>
+            <PropertyRef Name="IdParteDiario" />
+          </Key>
+          <Property Name="IdParteDiario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroParteDiario" Type="int" />
+          <Property Name="FechaParteDiario" Type="datetime" />
+          <Property Name="IdObra" Type="int" />
+          <Property Name="IdResponsable" Type="int" />
+          <Property Name="Observaciones" Type="ntext" />
+          <Property Name="IdParteDiarioOriginal" Type="int" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+          <Property Name="FechaImportacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PartesDiariosEmpleados">
+          <Key>
+            <PropertyRef Name="IdParteDiarioEmpleados" />
+          </Key>
+          <Property Name="IdParteDiarioEmpleados" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroParteDiarioEmpleados" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+          <Property Name="FechaImportacion" Type="datetime" />
+          <Property Name="Cerrado" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityContainer Name="ProntoMantenimientoModelStoreContainer">
+          <EntitySet Name="Consumos" EntityType="Self.Consumos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasAseguradasEquipos" EntityType="Self.HorasAseguradasEquipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasEquipo" EntityType="Self.HorasEquipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasStandar" EntityType="Self.HorasStandar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartesDiarios" EntityType="Self.PartesDiarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartesDiariosEmpleados" EntityType="Self.PartesDiariosEmpleados" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProntoMantenimientoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Consumos">
+          <Key>
+            <PropertyRef Name="IdConsumo" />
+          </Key>
+          <Property Name="IdConsumo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroConsumo" Type="Int32" />
+          <Property Name="FechaConsumo" Type="DateTime" Precision="3" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="IdResponsable" Type="Int32" />
+          <Property Name="IdConsumoOriginal" Type="Int32" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="FechaImportacion" Type="DateTime" Precision="3" />
+          <Property Name="IdSalidaMaterialesPRONTO" Type="Int32" />
+          <Property Name="NumeroSalidaMaterialesPRONTO" Type="Int32" />
+          <Property Name="BDOrigenSalidaPRONTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HorasAseguradasEquipos">
+          <Key>
+            <PropertyRef Name="IdHorasAseguradasEquipos" />
+          </Key>
+          <Property Name="IdHorasAseguradasEquipos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEquipo" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="HorasReales" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="HorasAseguradas" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="HorasAPagar" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="HorasInoperativas" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IdDetalleParteDiario" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HorasEquipo">
+          <Key>
+            <PropertyRef Name="IdHoraEquipo" />
+          </Key>
+          <Property Name="IdHoraEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEquipo" Type="Int32" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="IdPresupuestoObrasNodo" Type="Int32" />
+          <Property Name="IdDetalleObraSector" Type="Int32" />
+          <Property Name="IdCuadrilla" Type="Int32" />
+          <Property Name="HoraInicial" Type="DateTime" Precision="0" />
+          <Property Name="HoraFinal" Type="DateTime" Precision="0" />
+          <Property Name="IdTarea" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HorasStandar">
+          <Key>
+            <PropertyRef Name="IdHoraStandar" />
+          </Key>
+          <Property Name="IdHoraStandar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDesde" Type="DateTime" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="3" />
+          <Property Name="HorasStandar1" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="OrdenesTrabajo">
+          <Key>
+            <PropertyRef Name="IdOrdenTrabajo" />
+          </Key>
+          <Property Name="IdOrdenTrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdArticulo" Type="Int32" />
+          <Property Name="NumeroOrdenTrabajo" Type="Int32" />
+          <Property Name="FechaOrdenTrabajo" Type="DateTime" Precision="3" />
+          <Property Name="TipoOrdenTrabajo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdResponsable" Type="Int32" />
+          <Property Name="Impreso" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Anulada" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdAnulo" Type="Int32" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="Cumplida" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTerminacion" Type="DateTime" Precision="3" />
+          <Property Name="IdOrdenTrabajoOriginal" Type="Int32" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="FechaImportacion" Type="DateTime" Precision="3" />
+          <Property Name="HsKm" Type="Int32" />
+          <Property Name="IdTipoOT" Type="Int32" />
+          <Property Name="TrabajosARealizar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="Directa" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Contratista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ResponsableContratista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoTrabajo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaEjecuto" Type="Int32" />
+          <Property Name="FechaEjecuto" Type="DateTime" Precision="3" />
+          <Property Name="FirmaResponsable" Type="Int32" />
+          <Property Name="FechaResponsable" Type="DateTime" Precision="3" />
+          <Property Name="ReparacionACargoDe" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioIngreso" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="FechaModifico" Type="DateTime" Precision="3" />
+          <Property Name="Prioridad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DiasParoEquipo" Type="Int32" />
+          <Property Name="Service" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PartesDiarios">
+          <Key>
+            <PropertyRef Name="IdParteDiario" />
+          </Key>
+          <Property Name="IdParteDiario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroParteDiario" Type="Int32" />
+          <Property Name="FechaParteDiario" Type="DateTime" Precision="3" />
+          <Property Name="IdObra" Type="Int32" />
+          <Property Name="IdResponsable" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdParteDiarioOriginal" Type="Int32" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="FechaImportacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PartesDiariosEmpleados">
+          <Key>
+            <PropertyRef Name="IdParteDiarioEmpleados" />
+          </Key>
+          <Property Name="IdParteDiarioEmpleados" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroParteDiarioEmpleados" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="FechaImportacion" Type="DateTime" Precision="3" />
+          <Property Name="Cerrado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="ProntoMantenimientoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consumos" EntityType="Self.Consumos" />
+          <EntitySet Name="HorasAseguradasEquipos" EntityType="Self.HorasAseguradasEquipos" />
+          <EntitySet Name="HorasEquipo" EntityType="Self.HorasEquipo" />
+          <EntitySet Name="HorasStandar" EntityType="Self.HorasStandar" />
+          <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" />
+          <EntitySet Name="PartesDiarios" EntityType="Self.PartesDiarios" />
+          <EntitySet Name="PartesDiariosEmpleados" EntityType="Self.PartesDiariosEmpleados" />
+          <EntitySet Name="Materiales" EntityType="ProntoMantenimientoModel.Materiales" />
+        </EntityContainer>
+        <EntityType Name="Materiales">
+          <Key>
+            <PropertyRef Name="IdMaterial" />
+          </Key>
+          <Property Name="IdMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Abreviatura" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProntoMantenimientoModelStoreContainer" CdmEntityContainer="ProntoMantenimientoEntities">
+          <EntitySetMapping Name="Consumos">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.Consumos">
+              <MappingFragment StoreEntitySet="Consumos">
+                <ScalarProperty Name="IdConsumo" ColumnName="IdConsumo" />
+                <ScalarProperty Name="NumeroConsumo" ColumnName="NumeroConsumo" />
+                <ScalarProperty Name="FechaConsumo" ColumnName="FechaConsumo" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="IdConsumoOriginal" ColumnName="IdConsumoOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="FechaImportacion" ColumnName="FechaImportacion" />
+                <ScalarProperty Name="IdSalidaMaterialesPRONTO" ColumnName="IdSalidaMaterialesPRONTO" />
+                <ScalarProperty Name="NumeroSalidaMaterialesPRONTO" ColumnName="NumeroSalidaMaterialesPRONTO" />
+                <ScalarProperty Name="BDOrigenSalidaPRONTO" ColumnName="BDOrigenSalidaPRONTO" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorasAseguradasEquipos">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.HorasAseguradasEquipos">
+              <MappingFragment StoreEntitySet="HorasAseguradasEquipos">
+                <ScalarProperty Name="IdHorasAseguradasEquipos" ColumnName="IdHorasAseguradasEquipos" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="HorasReales" ColumnName="HorasReales" />
+                <ScalarProperty Name="HorasAseguradas" ColumnName="HorasAseguradas" />
+                <ScalarProperty Name="HorasAPagar" ColumnName="HorasAPagar" />
+                <ScalarProperty Name="HorasInoperativas" ColumnName="HorasInoperativas" />
+                <ScalarProperty Name="IdDetalleParteDiario" ColumnName="IdDetalleParteDiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorasEquipo">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.HorasEquipo">
+              <MappingFragment StoreEntitySet="HorasEquipo">
+                <ScalarProperty Name="IdHoraEquipo" ColumnName="IdHoraEquipo" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="IdPresupuestoObrasNodo" ColumnName="IdPresupuestoObrasNodo" />
+                <ScalarProperty Name="IdDetalleObraSector" ColumnName="IdDetalleObraSector" />
+                <ScalarProperty Name="IdCuadrilla" ColumnName="IdCuadrilla" />
+                <ScalarProperty Name="HoraInicial" ColumnName="HoraInicial" />
+                <ScalarProperty Name="HoraFinal" ColumnName="HoraFinal" />
+                <ScalarProperty Name="IdTarea" ColumnName="IdTarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HorasStandar">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.HorasStandar">
+              <MappingFragment StoreEntitySet="HorasStandar">
+                <ScalarProperty Name="IdHoraStandar" ColumnName="IdHoraStandar" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="HorasStandar1" ColumnName="HorasStandar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesTrabajo">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.OrdenesTrabajo">
+              <MappingFragment StoreEntitySet="OrdenesTrabajo">
+                <ScalarProperty Name="IdOrdenTrabajo" ColumnName="IdOrdenTrabajo" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="NumeroOrdenTrabajo" ColumnName="NumeroOrdenTrabajo" />
+                <ScalarProperty Name="FechaOrdenTrabajo" ColumnName="FechaOrdenTrabajo" />
+                <ScalarProperty Name="TipoOrdenTrabajo" ColumnName="TipoOrdenTrabajo" />
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="Impreso" ColumnName="Impreso" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Anulada" ColumnName="Anulada" />
+                <ScalarProperty Name="IdAnulo" ColumnName="IdAnulo" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="Cumplida" ColumnName="Cumplida" />
+                <ScalarProperty Name="FechaTerminacion" ColumnName="FechaTerminacion" />
+                <ScalarProperty Name="IdOrdenTrabajoOriginal" ColumnName="IdOrdenTrabajoOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="FechaImportacion" ColumnName="FechaImportacion" />
+                <ScalarProperty Name="HsKm" ColumnName="HsKm" />
+                <ScalarProperty Name="IdTipoOT" ColumnName="IdTipoOT" />
+                <ScalarProperty Name="TrabajosARealizar" ColumnName="TrabajosARealizar" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="Directa" ColumnName="Directa" />
+                <ScalarProperty Name="Contratista" ColumnName="Contratista" />
+                <ScalarProperty Name="ResponsableContratista" ColumnName="ResponsableContratista" />
+                <ScalarProperty Name="TipoTrabajo" ColumnName="TipoTrabajo" />
+                <ScalarProperty Name="FirmaEjecuto" ColumnName="FirmaEjecuto" />
+                <ScalarProperty Name="FechaEjecuto" ColumnName="FechaEjecuto" />
+                <ScalarProperty Name="FirmaResponsable" ColumnName="FirmaResponsable" />
+                <ScalarProperty Name="FechaResponsable" ColumnName="FechaResponsable" />
+                <ScalarProperty Name="ReparacionACargoDe" ColumnName="ReparacionACargoDe" />
+                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+                <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="DiasParoEquipo" ColumnName="DiasParoEquipo" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartesDiarios">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.PartesDiarios">
+              <MappingFragment StoreEntitySet="PartesDiarios">
+                <ScalarProperty Name="IdParteDiario" ColumnName="IdParteDiario" />
+                <ScalarProperty Name="NumeroParteDiario" ColumnName="NumeroParteDiario" />
+                <ScalarProperty Name="FechaParteDiario" ColumnName="FechaParteDiario" />
+                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdParteDiarioOriginal" ColumnName="IdParteDiarioOriginal" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="FechaImportacion" ColumnName="FechaImportacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartesDiariosEmpleados">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.PartesDiariosEmpleados">
+              <MappingFragment StoreEntitySet="PartesDiariosEmpleados">
+                <ScalarProperty Name="IdParteDiarioEmpleados" ColumnName="IdParteDiarioEmpleados" />
+                <ScalarProperty Name="NumeroParteDiarioEmpleados" ColumnName="NumeroParteDiarioEmpleados" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="FechaImportacion" ColumnName="FechaImportacion" />
+                <ScalarProperty Name="Cerrado" ColumnName="Cerrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materiales">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.Materiales">
+              <MappingFragment StoreEntitySet="Materiales">
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="a709419b26f7409da9849b79235bb534" Name="Diagram1">
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.Consumos" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasAseguradasEquipos" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasEquipo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.HorasStandar" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.OrdenesTrabajo" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiarios" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiariosEmpleados" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProntoMantenimientoModel.Materiales" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
