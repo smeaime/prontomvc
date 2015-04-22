@@ -559,7 +559,7 @@ namespace ProntoMVC.Controllers
                 if (mCantidad <= 0) { sErrorMsg += "\n" + "Hay items que no tienen la cantidad mayor a cero"; }
 
                 mIdRubro = db.Articulos.Where(y => y.IdArticulo == x.IdArticulo).Select(y => y.IdRubro).FirstOrDefault() ?? 0;
-                mIdCuentaComprasActivo = db.Articulos.Where(y => y.IdArticulo == x.IdArticulo).Select(y => y.IdCuentaComprasActivo).FirstOrDefault() ?? 0;
+                //mIdCuentaComprasActivo = db.Articulos.Where(y => y.IdArticulo == x.IdArticulo).Select(y => y.idcu.IdCuentaComprasActivo).FirstOrDefault() ?? 0;
                 if (mIdCuentaComprasActivo == 0 && mIdRubro > 0) { mIdCuentaComprasActivo = db.Rubros.Where(y => y.IdRubro == mIdRubro).Select(y => y.IdCuentaComprasActivo).FirstOrDefault() ?? 0; }
                 if (mRegistroContableComprasAlActivo == "SI" && mIdCuentaComprasActivo == 0) { sErrorMsg += "\n" + "Hay items que no tienen cuenta contable al activo"; }
 

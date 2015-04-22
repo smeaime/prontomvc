@@ -42,9 +42,9 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdDetalleSolicitudEntrega { get; set; }
         public Nullable<int> IdDetalleRequerimiento { get; set; }
     
-        public virtual ValesSalida ValesSalida { get; set; }
-        public virtual ICollection<DetalleSalidasMateriale> DetalleSalidasMateriales { get; set; }
-        public virtual DetalleRequerimiento DetalleRequerimiento { get; set; }
         public virtual Articulo Articulo { get; set; }
+        public virtual DetalleRequerimiento DetalleRequerimiento { get; set; }
+        public virtual ICollection<DetalleSalidasMateriale> DetalleSalidasMateriales { get; set; }
+        public virtual ValesSalida ValesSalida { get; set; }
     }
 }

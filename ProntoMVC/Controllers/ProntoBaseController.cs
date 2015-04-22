@@ -31,7 +31,9 @@ namespace ProntoMVC.Controllers
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
     {
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
-        //public ProntoMantenimientoEntities dbmant;
+        public ProntoMantenimientoEntities dbmant;
+
+      
 
         public string SC;
 
@@ -192,7 +194,12 @@ namespace ProntoMVC.Controllers
                 //    return RedirectToAction("Index", "Home");
                 if (sc == null) throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
             }
+
+
             db = new DemoProntoEntities(sc);
+
+            dbmant = new DemoProntoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+
             SC = sc;
 
 
