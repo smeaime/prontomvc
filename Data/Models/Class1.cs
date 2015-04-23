@@ -33,4 +33,12 @@ namespace ProntoMVC.Data.Models
     }
 
 
+    public partial class  ProntoMantenimientoEntities : DbContext
+    {
+        public ProntoMantenimientoEntities(string connectionString)
+            : base(connectionString)
+        {
+        }
+    }
+
 }
