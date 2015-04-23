@@ -24,7 +24,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdTipoRetencionGanancia { get; set; }
         public Nullable<int> IdIBCondicion { get; set; }
         public Nullable<decimal> ImporteRetencionSUSS { get; set; }
-        public Nullable<decimal> SaldoAFondoDeReparo { get; set; }
     
         public virtual OrdenPago OrdenesPago { get; set; }
     }
