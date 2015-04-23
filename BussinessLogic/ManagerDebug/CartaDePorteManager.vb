@@ -58,6 +58,8 @@ Imports CDPMailFiltrosManager2
 Imports LogicaImportador.FormatosDeExcel
 
 
+'Namespace Pronto.ERP.Bll
+
 
 <DataObjectAttribute()> _
 <Transaction(TransactionOption.Required)> _
@@ -22255,3 +22257,5 @@ End Class
 'End Class
 
 
+
+'End Namespace
