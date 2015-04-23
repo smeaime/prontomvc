@@ -716,7 +716,7 @@ namespace ProntoMVC.Controllers
 
             var data2 = (from a in data
                          from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
-                         select new { a.IdOrdenTrabajo, k.NumeroOrdenTrabajo });
+                         select new { a.IdOrdenTrabajo, k.NumeroOrdenTrabajo }).ToList();
 
             var jsonData = new jqGridJson()
             {
