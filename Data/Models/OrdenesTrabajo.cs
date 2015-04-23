@@ -15,42 +15,15 @@ namespace ProntoMVC.Data.Models
     public partial class OrdenesTrabajo
     {
         public int IdOrdenTrabajo { get; set; }
-        public Nullable<int> IdArticulo { get; set; }
-        public Nullable<int> NumeroOrdenTrabajo { get; set; }
-        public Nullable<System.DateTime> FechaOrdenTrabajo { get; set; }
-        public string TipoOrdenTrabajo { get; set; }
-        public Nullable<int> IdResponsable { get; set; }
-        public string Impreso { get; set; }
-        public Nullable<System.DateTime> FechaInicial { get; set; }
-        public Nullable<System.DateTime> FechaFinal { get; set; }
-        public string Observaciones { get; set; }
-        public string Anulada { get; set; }
-        public Nullable<int> IdAnulo { get; set; }
-        public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public string Cumplida { get; set; }
-        public Nullable<System.DateTime> FechaTerminacion { get; set; }
-        public Nullable<int> IdOrdenTrabajoOriginal { get; set; }
-        public Nullable<int> IdOrigenTransmision { get; set; }
-        public Nullable<System.DateTime> FechaImportacion { get; set; }
-        public Nullable<int> HsKm { get; set; }
-        public Nullable<int> IdTipoOT { get; set; }
+        public string NumeroOrdenTrabajo { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaEntrega { get; set; }
+        public Nullable<System.DateTime> FechaFinalizacion { get; set; }
         public string TrabajosARealizar { get; set; }
-        public Nullable<int> IdObra { get; set; }
-        public string Directa { get; set; }
-        public string Contratista { get; set; }
-        public string ResponsableContratista { get; set; }
-        public string TipoTrabajo { get; set; }
-        public Nullable<int> FirmaEjecuto { get; set; }
-        public Nullable<System.DateTime> FechaEjecuto { get; set; }
-        public Nullable<int> FirmaResponsable { get; set; }
-        public Nullable<System.DateTime> FechaResponsable { get; set; }
-        public string ReparacionACargoDe { get; set; }
-        public Nullable<int> IdUsuarioIngreso { get; set; }
-        public Nullable<System.DateTime> FechaIngreso { get; set; }
-        public Nullable<int> IdUsuarioModifico { get; set; }
-        public Nullable<System.DateTime> FechaModifico { get; set; }
-        public string Prioridad { get; set; }
-        public Nullable<int> DiasParoEquipo { get; set; }
-        public Nullable<int> Service { get; set; }
+        public Nullable<int> IdOrdeno { get; set; }
+        public Nullable<int> IdSuperviso { get; set; }
+        public string Observaciones { get; set; }
+        public Nullable<int> IdEquipoDestino { get; set; }
     }
 }
