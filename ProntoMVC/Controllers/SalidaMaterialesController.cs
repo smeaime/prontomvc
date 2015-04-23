@@ -172,10 +172,10 @@ namespace ProntoMVC.Controllers
             if ((o.NumeroSalidaMateriales2 ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de sucursal"; }
             if ((o.NumeroSalidaMateriales ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de salida"; }
             if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; }
-            
+
             //SalidasMateriale SalidaMateriales = db.SalidasMateriales.Where(c => (c.NumeroSalidaMateriales2 ?? 0) == mNumero1 && (c.NumeroSalidaMateriales ?? 0) == mNumero2).FirstOrDefault();
             //if (SalidaMateriales != null) { sErrorMsg += "\n" + "Salida ya ingresada"; }
-            
+
             mProntoIni_InhabilitarUbicaciones = BuscarClaveINI("Inhabilitar ubicaciones en movimientos de stock", -1) ?? "";
 
             if (o.DetalleSalidasMateriales.Count <= 0) sErrorMsg += "\n" + "La Salida no tiene items";
@@ -188,7 +188,7 @@ namespace ProntoMVC.Controllers
                 if (mIdArticulo == 0) { sErrorMsg += "\n" + "Hay items que no tienen articulo"; }
                 if ((x.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin obra"; }
                 if ((x.IdUbicacion ?? 0) <= 0 && mProntoIni_InhabilitarUbicaciones != "SI") { sErrorMsg += "\n" + "Hay items sin ubicacion"; }
-                if (mCantidad <= 0 ) { sErrorMsg += "\n" + "Hay items que no tienen la cantidad mayor a cero"; }
+                if (mCantidad <= 0) { sErrorMsg += "\n" + "Hay items que no tienen la cantidad mayor a cero"; }
                 if ((x.IdMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin moneda"; }
                 if ((x.CostoUnitario ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin costo"; }
 
@@ -214,9 +214,9 @@ namespace ProntoMVC.Controllers
                 Int32 mIdDetalleRequerimiento = 0;
                 Int32 mTipoSalida = -1;
                 Int32 mAuxI1 = 0;
-                
+
                 decimal mCostoUnitario = 0;
-                
+
                 string errs = "";
                 string warnings = "";
                 string mAuxS1 = "";
@@ -374,13 +374,14 @@ namespace ProntoMVC.Controllers
                                             if (mAuxI1 == mTipoSalida)
                                             {
                                                 Parametros2 = db.Parametros2.Where(p => p.Campo == Opcion + "_2").FirstOrDefault();
-                                                if (Parametros2 == null) { 
-                                                    Parametros2=new Parametros2();
+                                                if (Parametros2 == null)
+                                                {
+                                                    Parametros2 = new Parametros2();
                                                     Parametros2.Campo = Opcion + "_2";
                                                     Parametros2.Valor = Convert.ToString(SalidaMateriales.NumeroSalidaMateriales2);
                                                     db.Parametros2.Add(Parametros2);
                                                 }
-                                                
+
                                                 Parametros2 = db.Parametros2.Where(p => p.Campo == Opcion + "_1").FirstOrDefault();
                                                 if (Parametros2 != null)
                                                 {
@@ -564,7 +565,7 @@ namespace ProntoMVC.Controllers
 
             int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            
+
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaSalidaMateriales)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
@@ -708,10 +709,20 @@ namespace ProntoMVC.Controllers
                             Moneda = f != null ? f.Abreviatura : "",
                             a.FechaImputacion,
                             EquipoDestino = "",
-                            OrdenTrabajo = "",
+                            // OrdenTrabajo = k != null ? k.NumeroOrdenTrabajo : null,
                             PresupuestoObrasEtapa = (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+
+
+            var data2 = from a in data
+                        from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+                        select k.NumeroOrdenTrabajo;
+
+
+
+
 
             var jsonData = new jqGridJson()
             {
@@ -754,7 +765,7 @@ namespace ProntoMVC.Controllers
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                             a.EquipoDestino.NullSafeToString(),
-                            a.OrdenTrabajo.NullSafeToString(),
+                            "", // a.OrdenTrabajo.NullSafeToString(),
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }

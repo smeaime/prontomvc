@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ProntoMVC.Data.Models;
-using ProntoMVC.Models;
-using System.Web.Security;
 using System.Configuration;
 using System.Data;
+using System.Data.Metadata.Edm;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Security;
 
-using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
-
+using ProntoMVC.Data.Models;
+using ProntoMVC.Models;
 using Pronto.ERP.Bll;
 
 using Elmah;
 
-using System.Data.Metadata.Edm;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Core.Objects.DataClasses;
-using System.Linq.Expressions;
-using System.Data.Entity;
-
 using StackExchange.Profiling;
-
 
 namespace ProntoMVC.Controllers
 {
@@ -33,22 +29,17 @@ namespace ProntoMVC.Controllers
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
         public ProntoMantenimientoEntities dbmant;
 
-      
 
         public string SC;
-
-
         public string ROOT;
-
-
 
         public int glbIdUsuario
         {
-
             get
             {
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+                
                 return IdUsuario;
             }
 
@@ -105,7 +96,6 @@ namespace ProntoMVC.Controllers
                 // in classic ASP.NET webforms applications but in ASP.NET MVC it's a disaster that takes all the fun out of this nice web framework
                 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-
                 // FormsAuthentication.SignOut();
 
                 if (Membership.GetUser() == null)
@@ -131,9 +121,6 @@ namespace ProntoMVC.Controllers
                 //{
                 // return RedirectToAction("ElegirBase", "Account");
 
-
-
-
                 if (this.Session["BasePronto"] == null)
                 {
                     // de alguna manera lo tengo que redirigir a la eleccion de la base, pero desde acá no puedo hacer 
@@ -152,11 +139,7 @@ namespace ProntoMVC.Controllers
                     // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
                     // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
                     // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-
-
-
                     // http://stackoverflow.com/questions/4793452/mvc-redirect-inside-the-constructor
-
                     //return;
                     //throw new Exception("No hay base elegida");
                 }
@@ -169,8 +152,6 @@ namespace ProntoMVC.Controllers
                     this.Session["BasePronto"] = n.BuscarUltimaBaseAccedida();
                     // return Redirect(returnUrl);
 
-
-
                     string sss2 = this.Session["BasePronto"].ToString();
                     sc = Generales.sCadenaConex(sss2);
                     if (sc == null)
@@ -178,8 +159,6 @@ namespace ProntoMVC.Controllers
                         // throw new Exception("Falta la cadena de conexion a la base Pronto (nombre de base: [" + sss + "]");
                         this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
                     }
-
-
                 }
                 else
                 {
@@ -187,8 +166,6 @@ namespace ProntoMVC.Controllers
                     this.Session["BasePronto"] = Generales.BaseDefault((Guid)Membership.GetUser().ProviderUserKey);
                 }
 
-
-                //}
                 string sss = this.Session["BasePronto"].ToString();
                 sc = Generales.sCadenaConex(sss);
                 //    return RedirectToAction("Index", "Home");
@@ -198,7 +175,7 @@ namespace ProntoMVC.Controllers
 
             db = new DemoProntoEntities(sc);
 
-            dbmant = new DemoProntoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+            dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
 
             SC = sc;
 
@@ -218,25 +195,18 @@ namespace ProntoMVC.Controllers
 
         }
 
-
-
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
-
             MiniProfiler profiler = MiniProfiler.Current;
 
             using (profiler.Step("En el Initialize"))
             {
-
-
                 base.Initialize(rc);
 
                 // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
                 // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
                 ROOT = ConfigurationManager.AppSettings["Root"];
                 asignacadena((string)rc.HttpContext.Session["BasePronto"]);
-
-
 
                 string us = Membership.GetUser().ProviderUserKey.ToString();
 
@@ -253,9 +223,7 @@ namespace ProntoMVC.Controllers
                     baselistado.Add(new SelectListItem { Text = r["Descripcion"] as string, Value = "" });
                 }
 
-
                 ViewBag.Bases = baselistado;
-
 
                 //try
                 //{
@@ -272,8 +240,6 @@ namespace ProntoMVC.Controllers
             }
         }
 
-
-
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // http://stackoverflow.com/questions/3214774/how-to-redirect-from-onactionexecuting-in-base-controller
@@ -287,17 +253,10 @@ namespace ProntoMVC.Controllers
 
                 base.OnActionExecuting(filterContext);
 
-
-
-
-
-
                 if (this.Session["BasePronto"] == null)
                 {
-
                     // se perdio la base elegida. Esto parece pasarte seguido en las Views que devolves sin haber recargado la session 
                     // -Eh? no tengo necesidad de recargar la session, solo la ViewBag, y ahí no tengo la base elegida
-
                     // -ok, pero pasá la información de en qué página estaba antes!!!!
 
                     AccountController a = new AccountController();
@@ -328,39 +287,19 @@ namespace ProntoMVC.Controllers
                     return;
                 }
 
-
-
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
                 // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
                 // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-                // http://stackoverflow.com/questions/8225930/redirect-from-controller-initialize-not-working
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-                // EN este ejemplo lo usan tambien para controlar la empresa conectada!!!!!
-
-
-
-
 
                 if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Home") return;
                 if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Acceso") return;
                 if (filterContext.RouteData.Values["controller"].NullSafeToString() == "Empleado") return;
 
-
                 bool ok;
 
                 try
                 {
-
                     //ok = PuedeLeer(filterContext.RouteData.Values["controller"].ToString());
                     ok = true;
-
                 }
                 catch (Exception)
                 {
@@ -374,8 +313,6 @@ namespace ProntoMVC.Controllers
                     db = null;
                     //throw new Exception("Permisos insuficientes de lectura para el modulo " + filterContext.RouteData.Values["controller"].ToString() );
                 }
-
-
 
                 try
                 {
@@ -468,9 +405,6 @@ namespace ProntoMVC.Controllers
             return idclava;
         }
 
-
-
-
         bool VerificarPassBase(ActionExecutingContext filterContext)
         {
             string sBasePronto = (string)filterContext.HttpContext.Session["BasePronto"];
@@ -484,7 +418,6 @@ namespace ProntoMVC.Controllers
                 // return RedirectToAction("Index", "Home");
             }
 
-
             try
             {
                 ViewBag.NombreUsuario = Membership.GetUser().UserName;
@@ -496,9 +429,6 @@ namespace ProntoMVC.Controllers
 
             return true;
         }
-
-
-
 
 
         //[HttpPost]
@@ -610,21 +540,12 @@ namespace ProntoMVC.Controllers
 
         //////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-
-
 
         protected override void Dispose(bool disposing)
         {
             if (db != null) db.Dispose();
             base.Dispose(disposing);
         }
-
-
-
 
         EmpleadosAcceso acce(string Modulo)
         {
@@ -643,8 +564,6 @@ namespace ProntoMVC.Controllers
             if (acc == null) throw new Exception("Error de permisos. No se encuentra el empleado/permiso");
             return acc;
         }
-
-
 
         public enum enumNodos
         {
@@ -1464,7 +1383,6 @@ namespace ProntoMVC.Controllers
             Acciones,
             MnuSeg11,
             MnuSubPrv17
-
         }
 
         public bool PuedeLeer(enumNodos Modulo)
@@ -1527,14 +1445,9 @@ namespace ProntoMVC.Controllers
             return false;
         }
 
-
-
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual RedirectToRouteResult AddToEmpresa(Guid id, string empresa)
         {
-
-
-
             BDLMasterEntities dbMaster = new BDLMasterEntities(Generales.ConexEFMaster());
 
             //si tengo cuidado aca
@@ -1550,9 +1463,6 @@ namespace ProntoMVC.Controllers
                 throw;
             }
 
-
-
-
             ProntoMVC.Data.Models.DetalleUserBD i = (from u in dbMaster.DetalleUserBD
                                                      join b in dbMaster.Bases on u.IdBD equals b.IdBD
                                                      where (b.Descripcion == empresa && u.UserId == id)
@@ -1561,17 +1471,13 @@ namespace ProntoMVC.Controllers
             if (i != null) return RedirectToAction("UsersEmpresas", new { id }); // ya existe
             i = new ProntoMVC.Data.Models.DetalleUserBD();
 
-
             Bases basedb = (from x in dbMaster.Bases where (x.Descripcion == empresa) select x).FirstOrDefault();
             if (i == null) return RedirectToAction("UsersEmpresas", new { id });
             i.IdBD = basedb.IdBD;
             i.UserId = id;
 
-
-
             dbMaster.DetalleUserBD.Add(i);
             dbMaster.SaveChanges();
-
 
             //return null;
             return RedirectToAction("UsersEmpresas", new { id });
@@ -1589,18 +1495,11 @@ namespace ProntoMVC.Controllers
                                                      where (b.Descripcion == empresa && u.UserId == id)
                                                      select u).FirstOrDefault();
 
-
-
             dbMaster.DetalleUserBD.Remove(i);
             dbMaster.SaveChanges();
 
-
             return RedirectToAction("UsersEmpresas", new { id });
         }
-
-
-
-
 
         public void CrearUsuarioProntoEnDichaBase(string nombrebasepronto, string nombreusuariopronto, string pass = "ldb", int? IdSector = null, int? IdObra = null)
         {
@@ -1653,7 +1552,6 @@ namespace ProntoMVC.Controllers
             dbDest.SaveChanges();
 
         }
-
 
         public static int? GetMaxLength<T>(Expression<Func<T, string>> column)
         {
@@ -3319,7 +3217,6 @@ namespace ProntoMVC.Controllers
     }
 
 }
-
 
 public static class ErrorLog2
 {
