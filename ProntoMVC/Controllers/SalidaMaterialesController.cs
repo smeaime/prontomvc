@@ -759,7 +759,7 @@ namespace ProntoMVC.Controllers
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
                             a.EquipoDestino.NullSafeToString(),
-                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo).NullSafeToString(),
+                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo).FirstOrDefault(),
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }
