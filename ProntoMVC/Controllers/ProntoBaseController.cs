@@ -175,7 +175,20 @@ namespace ProntoMVC.Controllers
 
             db = new DemoProntoEntities(sc);
 
-            dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+            try
+            {
+                dbmant = new ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
+                //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+
+            }
+            catch (Exception e)
+            {
+
+                ErrHandler.WriteError(e);
+            }
+
+
+
 
             SC = sc;
 
