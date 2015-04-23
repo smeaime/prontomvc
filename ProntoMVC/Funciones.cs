@@ -200,6 +200,11 @@ public static class Generales
         }
 
 
+        // traer la cadena desde la tabla de parametros
+        // traer la cadena desde la tabla de parametros
+        // traer la cadena desde la tabla de parametros
+        // traer la cadena desde la tabla de parametros
+
         string SC = FormatearConexParaEntityFrameworkMant(s);
 
         return SC;
