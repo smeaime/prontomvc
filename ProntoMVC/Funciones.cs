@@ -175,41 +175,61 @@ public static class Generales
 
     }
 
-    public static string sCadenaConexMant(string nombreEmpresa)
+
+
+    public static string sCadenaConexMant(DemoProntoEntities db, string nombreEmpresa)
     {
-        string s;
-
-        try
-        {
-            s = sCadenaConexSQL_Mant(nombreEmpresa);
-        }
-        catch (Exception ex)
-        {
-            FormsAuthentication.SignOut();
-            // return RedirectToAction("Index", "Home");
-            // LogOff()
-            return null;
-        }
+        string baseman = db.Parametros.Find(1).BasePRONTOMantenimiento;
 
 
-        if (s == null || s == "")
-        {
-            // FormsAuthentication.SignOut();
-            return null;
+        //por ahora usamos el mismo servidor en el que está db
 
-        }
+        string s = sCadenaConexSQL_Mant(nombreEmpresa); // traigo la cadena de conexion de la base pronto normal (no la de mantenimiento)
 
 
-        // traer la cadena desde la tabla de parametros
-        // traer la cadena desde la tabla de parametros
-        // traer la cadena desde la tabla de parametros
-        // traer la cadena desde la tabla de parametros
-
-        string SC = FormatearConexParaEntityFrameworkMant(s);
+        string SC = FormatearConexParaEntityFrameworkMant(s, baseman);
 
         return SC;
 
     }
+
+
+
+    //public static string sCadenaConexMant(string nombreEmpresa)
+    //{
+    //    string s;
+
+    //    try
+    //    {
+    //        s = sCadenaConexSQL_Mant(nombreEmpresa);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        FormsAuthentication.SignOut();
+    //        // return RedirectToAction("Index", "Home");
+    //        // LogOff()
+    //        return null;
+    //    }
+
+
+    //    if (s == null || s == "")
+    //    {
+    //        // FormsAuthentication.SignOut();
+    //        return null;
+
+    //    }
+
+
+    //    // traer la cadena desde la tabla de parametros
+    //    // traer la cadena desde la tabla de parametros
+    //    // traer la cadena desde la tabla de parametros
+    //    // traer la cadena desde la tabla de parametros
+
+    //    string SC = FormatearConexParaEntityFrameworkMant(s);
+
+    //    return SC;
+
+    //}
 
     public static bool EsUsuarioControlablePorAdmin(string usuarionombre, string adminnombre)
     {
@@ -269,11 +289,11 @@ public static class Generales
     }
 
 
-    public static string FormatearConexParaEntityFrameworkMant(string s)
+    public static string FormatearConexParaEntityFrameworkMant(string conexSQLBaseNormal, string nombreBaseMantenimiento)
     {
 
 
-        var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(s);
+        var parser = new System.Data.SqlClient.SqlConnectionStringBuilder(conexSQLBaseNormal);
         string servidorSQL = parser.DataSource; // "MARIANO-PC\\SQLEXPRESS";
         string basePronto = parser.InitialCatalog;  // "Autotrol";
         string user = parser.UserID;
@@ -284,7 +304,7 @@ public static class Generales
                "metadata=res://*/Models.ProntoMantenimiento.csdl|res://*/Models.ProntoMantenimiento.ssdl|res://*/Models.ProntoMantenimiento.msl;" +
                "provider=System.Data.SqlClient;provider connection string=\"" +
                "data source=" + servidorSQL + ";" +
-               "initial catalog=" + basePronto + ";" +
+               "initial catalog=" + nombreBaseMantenimiento + ";" +
                "persist security info=True;user id=" + user + ";" +
                "password=" + pass + ";" +
                 "multipleactiveresultsets=True;App=EntityFramework\"";
