@@ -3190,7 +3190,8 @@ Public Class CartaDePorteManager
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
-        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
         If System.Diagnostics.Debugger.IsAttached() Then
             sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
@@ -3389,7 +3390,8 @@ Public Class CartaDePorteManager
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
-        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
         If System.Diagnostics.Debugger.IsAttached() Then
             sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
@@ -3721,7 +3723,10 @@ Public Class CartaDePorteManager
         If System.Diagnostics.Debugger.IsAttached() Then
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
-            sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            sDir = "E:\Sites\Pronto\DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
+            'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
 
 
