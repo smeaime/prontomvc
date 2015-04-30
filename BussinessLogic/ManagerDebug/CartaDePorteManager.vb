@@ -107,6 +107,13 @@ Public Class CartaDePorteManager
     End Property
 
 
+    Public Shared ReadOnly Property _dirftp_fisico As String
+        Get
+            Return ConfigurationManager.AppSettings("DirFTPFisico")
+        End Get
+    End Property
+
+
 
     Public Const CONSTANTE_HTML = False
 
@@ -9023,10 +9030,10 @@ Public Class CartaDePorteManager
                 'http://stackoverflow.com/questions/11770821/save-as-pdf-using-c-sharp-and-interop-not-saving-embedded-pdf-in-a-word-document
                 'http://www.codeproject.com/Questions/607279/e-cValueplusdoesplusnotplusfallpluswithinplus
                 'http://www.microsoft.com/en-us/download/confirmation.aspx?id=7
-                'oDoc..EmbedTrueTypeFonts
-                oDoc.ExportAsFixedFormat(output, Word.WdExportFormat.wdExportFormatPDF, False, Word.WdExportOptimizeFor.wdExportOptimizeForOnScreen, _
-                    Word.WdExportRange.wdExportAllDocument, 1, 1, Word.WdExportItem.wdExportDocumentContent, True, True, _
-                    Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, True, True, False, Nothing)
+
+                'oDoc.ExportAsFixedFormat(output, Word.WdExportFormat.wdExportFormatPDF, False, Word.WdExportOptimizeFor.wdExportOptimizeForOnScreen, _
+                '    Word.WdExportRange.wdExportAllDocument, 1, 1, Word.WdExportItem.wdExportDocumentContent, True, True, _
+                '    Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, True, True, False, Nothing)
 
             Else
 
@@ -9036,7 +9043,8 @@ Public Class CartaDePorteManager
 
                 Else
                     output += ".pdf"
-                    oDoc.SaveAs(output, Word.WdSaveFormat.wdFormatPDF, , , , , , True)
+                    oDoc.SaveAs(output, 17, , , , , , True)
+                    'oDoc.SaveAs(output, Word.WdSaveFormat.wdFormatPDF, , , , , , True)
 
                 End If
             End If
