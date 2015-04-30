@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Metadata.Edm;
+using System.Data.Entity.Core.Metadata.Edm; // using System.Data.Metadata.Edm;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Objects.DataClasses;
