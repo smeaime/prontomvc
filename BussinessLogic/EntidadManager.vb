@@ -2244,7 +2244,7 @@ Salida:
 
                     'and added it to the saveas command. The extn (.doc) decides on what format
                     'the document is saved as.
-                    Const wrdFormatDocument As Object = Word.WdSaveFormat.wdFormatPDF  '(save in default format)
+                    Const wrdFormatDocument As Object = 17 'Word.WdSaveFormat.wdFormatPDF  '(save in default format)
                     'verificar que la extension es pdf
                     If Right(output, 3) <> "pdf" Then Throw New Exception("La extension debe ser pdf")
 
