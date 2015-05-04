@@ -1,66 +1,340 @@
+
 @using System.Globalization
 @model ProntoMVC.Areas.MvcMembership.Models.UserAdministration.DetailsViewModel
 @{
-	ViewBag.Title = "User Details: " + Model.DisplayName;
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Usuario " + Model.DisplayName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container-fluid">
+    <div class="modal" id="loading">
+        <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
+        Cargando...
+    </div>
+    @*    <ul class="breadcrumb">
+            <li><a href="#">Inicio</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("~")MvcMembership/UserAdministration">Usuarios</a> <span
+                class="divider">/</span></li>
+            <li class="active">@Model.DisplayName</li>
+        </ul>*@
+    <br />
+    <link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
+    <div class="" style='font-size: 34px; margin-top: 5px; height: 60px; font-weight: 400;
+        text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+        Usuario @Model.DisplayName [@Model.Status]
+        <br />
+        <br />
+    </div>
+    <ul class="mvcMembership-tabs">
+        <li>@Html.ActionLink("Contraseña", "Password", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+        <li>@Html.ActionLink("Empresas", "UsersEmpresas", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+        @if (Model.IsRolesEnabled)
+        {
+            <li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
+        }
+        @*<li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { id = ViewBag.EmpleadoEquivalente, area = "" }, null)</li>*@
+        <li>@Html.ActionLink("Accesos", "Edit", "Acceso", new { nombre = Model.User.UserName, area = "" }, null)</li>
+    </ul>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="mvcMembership-account">
+                <dl class="mvcMembership">
+                    @if (Model.User.LastActivityDate == Model.User.CreationDate)
+                    {
+                        <dt>Ultima visita:</dt>
+                        <dd>
+                            <em>Nunca</em>
+                        </dd>
+                        <dt>Ultimo Login:</dt>
+                        <dd>
+                            <em>Nunca</em>
+                        </dd>
+                    }
+                    else
+                    {
+                        <dt>Ultima actividad:</dt>
+                        <dd>@Model.User.LastActivityDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
+                        <dt>Ultimo login:</dt>
+                        <dd>@Model.User.LastLoginDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
+                    }
+                    <dt>Creado:</dt>
+                    <dd>@Model.User.CreationDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
+                </dl>
+                @using (Html.BeginForm("ChangeApproval", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+                {
+                    @Html.Hidden("isApproved", !Model.User.IsApproved)
+                    <input type="submit" value='@(Model.User.IsApproved ? "Deshabilitar" : "Habilitar")' class="btn" />
+                }
+                @using (Html.BeginForm("DeleteUser", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+                {
+                    <input type="submit" value="Eliminar" class="btn" />
+                }
+            </div>
+        </div>
+        <div class="span3">
+            <div class="mvcMembership-emailAndComments">
+                @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+                {
 
-<link href='@Url.Content("~/Content/MvcMembership.css")' rel="stylesheet" type="text/css" />
+                    <fieldset>
+                        @Html.Label("Base default")
+                        @Html.DropDownList("EmpresaDefault", null, new { @class = "span12" })
+                        @{
+                    string[] listItems = { "1", "2" };
+                    SelectList selectList = new SelectList(listItems);
+                    @*@Html.DropDownList("EmpresaDefault", (IEnumerable<SelectListItem>)ViewData["Bases"]) *@
+                        }
+                        @*@Html.DropDownListFor(x => x.EmpresaDefault, (IEnumerable<SelectListItem>)ViewData["Bases"], new { @style = "width: 260px", @class = "" })*@
+                        <br />
+                        <p>
+                            <label for="email">
+                                Email
+                            </label>
+                            @Html.TextBox("email", Model.User.Email)
+                        </p>
+                        <p>
+                            <label for="comments">
+                                Observaciones
+                            </label>
+                            @Html.TextArea("comments", Model.User.Comment)
+                        </p>
+                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin") || Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador"))
+                        {
+                            <p>
+                                <label for="grupo">
+                                    Grupo (o CUIT con o sin guiones)
+                                </label>
+                                @Html.TextBox("grupo", Model.Grupo)
+                            </p>
+                        }
+                        <button type="submit" value="Aceptar" class="btn btn-primary btn-large">
+                            Aceptar
+                        </button>
+                    </fieldset>
+                }
+            </div>
+        </div>
 
-<h2 class="mvcMembership">User Details: @Model.DisplayName [@Model.Status]</h2>
+        <div class="row-fluid">
+            <div class="alert fade in span12 " id="mensajeAlerta" style="display: none;">
+                <button type="button" class="close">
+                    &times;
+                </button>
+                <p id="textoMensajeAlerta">
+                    @TempData["Alerta"]
+                </p>
+                @if ((@TempData["Alerta"] ?? "") != "")
+                {
+                    <script>
+                        $("#mensajeAlerta").show();
+                    </script>
+                }
+            </div>
+        </div>
 
-<ul class="mvcMembership-tabs">
-	<li>Details</li>
-	<li>@Html.ActionLink("Password", "Password", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
-	@if(Model.IsRolesEnabled){
-	<li>@Html.ActionLink("Roles", "UsersRoles", "UserAdministration", new { id = Model.User.ProviderUserKey }, null)</li>
-	}
-</ul>
 
-<h3 class="mvcMembership">Account</h3>
-<div class="mvcMembership-account">
-	<dl class="mvcMembership">
-		<dt>User Name:</dt>
-			<dd>@Model.User.UserName</dd>
-		<dt>Email Address:</dt>
-			<dd><a href="mailto:@Model.User.Email">@Model.User.Email</a></dd>
-		@if(Model.User.LastActivityDate == Model.User.CreationDate){
-		<dt>Last Active:</dt>
-			<dd><em>Never</em></dd>
-		<dt>Last Login:</dt>
-			<dd><em>Never</em></dd>
-		}else{
-		<dt>Last Active:</dt>
-			<dd>@Model.User.LastActivityDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
-		<dt>Last Login:</dt>
-			<dd>@Model.User.LastLoginDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
-		}
-		<dt>Created:</dt>
-			<dd>@Model.User.CreationDate.ToString("MMMM dd, yyyy h:mm:ss tt", CultureInfo.InvariantCulture)</dd>
-	</dl>
 
-	@using(Html.BeginForm("ChangeApproval", "UserAdministration", new{ id = Model.User.ProviderUserKey })){
-		@Html.Hidden("isApproved", !Model.User.IsApproved)
-		<input type="submit" value='@(Model.User.IsApproved ? "Unapprove" : "Approve") Account' />
-	}
-	@using(Html.BeginForm("DeleteUser", "UserAdministration", new{ id = Model.User.ProviderUserKey })){
-		<input type="submit" value="Delete Account" />
-	}
+        @*///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ACCESOS
+                ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+        @*http://stackoverflow.com/questions/9395548/razor-mvc3-partial-view-to-reuse*@
+        @{ Html.RenderAction("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }); }
+
+
+
+        @*@Html.Partial("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }))
+            @using (Html.BeginForm("Edit", "Acceso", new { id = Model.User.ProviderUserKey, nombre = Model.User.UserName, area = "" }))
+            {
+                @RenderBody()
+                <br />
+
+            }*@
+
+        @*///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+
+
+        @using (Html.BeginForm("Details", "UserAdministration", new { id = Model.User.ProviderUserKey }))
+        {
+            <div class="span3">
+                @if ((Roles.IsUserInRole(ViewBag.NombreUsuario, "Administrador") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin")) && false)
+                {
+                    <br />
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            Crear base @*@Html.TextBoxFor(x => x.EmpresaNueva)*@
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            @Html.TextBox("EmpresaNueva", null, new { @class = "span12" })
+                            @* <input type="button" value="Crearle base" class="btn" />*@
+                        </div>
+                    </div>
+
+
+
+                    @Html.Hidden("UsuarioGuid", Model.User.ProviderUserKey)
+                    @*       @Html.ActionLink("Crear base", "CrearBasePronto", "UserAdministration",
+                        new { guid = Model.User.ProviderUserKey, basenueva = "dddd", EmpresaDefault = "Capen" }, null)
+
+                    *@
+
+                    <input type="button" id="crearbase" value="crear base" class="btn" />
+
+                    <script>
+
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        $(function () {
+
+
+                            $('#crearbase').click(function () {
+
+                                var cabecera = {
+                                    guid: $("#UsuarioGuid").val(),
+                                    basenueva: $("#EmpresaNueva").val(),
+                                    EmpresaDefault: $("#EmpresaDefault").val()
+                                };
+
+
+                                $('html, body').css('cursor', 'wait');
+                                $.ajax({
+                                    type: 'POST',
+                                    contentType: 'application/json; charset=utf-8',
+                                    url: ROOT + 'MvcMembership/UserAdministration/CrearBasePronto',
+                                    dataType: 'json',
+                                    data: JSON.stringify(cabecera), // $.toJSON(cabecera),
+                                    success: function (result) {
+
+                                        if (result) {
+                                            $('html, body').css('cursor', 'auto');
+
+                                            if (true) {
+                                                //window.location = (ROOT + "Pedido/index");
+                                                // window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
+
+                                            } else {
+
+                                                var dt = new Date();
+                                                var currentTime = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                                                $("#textoMensajeAlerta").html("Grabado " + currentTime);
+                                                $("#mensajeAlerta").show();
+                                                // $('#Lista').trigger('reloadGrid'); // no tenes el id!!!!!
+                                                //si graban de nuevo, va a dar un alta!!!!
+
+
+                                                $('html, body').css('cursor', 'auto');
+                                                $('#grabar2').attr("disabled", false).val("Aceptar");
+                                            }
+
+                                        } else {
+
+
+                                            alert('Base creada');
+                                            $('.loading').html('');
+                                            $('html, body').css('cursor', 'auto');
+                                            //$('#grabar2').attr("disabled", false).val("Aceptar");
+                                        }
+
+                                    },
+
+                                    beforeSend: function () {
+                                        $("#loading").show();
+                                        // $('#grabar2').attr("disabled", true).val("Espere...");
+
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    },
+
+
+                                    error: function (xhr, textStatus, exceptionThrown) {
+                                        try {
+                                            var errorData = $.parseJSON(xhr.responseText);
+                                            var errorMessages = [];
+
+                                            $('html, body').css('cursor', 'auto');
+
+                                            alert(errorData.Message);
+                                            //                                            return false;
+
+                                            //this ugly loop is because List<> is serialized to an object instead of an array
+                                            //                                            for (var key in errorData) {
+                                            //                                                errorMessages.push(errorData[key]);
+                                            //                                            }
+
+
+                                            //                                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                                            //                                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                                            //                                            $("#mensajeAlerta").show();
+                                        } catch (e) {
+                                            // http://stackoverflow.com/questions/15532667/asp-netazure-400-bad-request-doesnt-return-json-data
+                                            // si tira error de Bad Request en el II7, agregar el asombroso   <httpErrors existingResponse="PassThrough"/>
+
+                                            $('html, body').css('cursor', 'auto');
+                                            //                                            $('#grabar2').attr("disabled", false).val("Aceptar");
+                                            //                                            $("#textoMensajeAlerta").html(xhr.responseText);
+                                            //                                            $("#mensajeAlerta").show();
+                                        }
+
+                                    }
+                                });
+                            });
+
+                        });
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+                    </script>
+
+
+                }
+                <br />
+                <br />
+                <br />
+                <script type="text/javascript">
+                    $('#SubmitName').click(function () {
+                        //var first = $('#Bases').val();
+                        var first = $("#Bases option:selected").text();
+                        var path = '@Url.Content("~/Account/BaseElegida")' + "?sBase=" + first
+                        $(this).attr("href", path);
+                    });
+
+                </script>
+            </div>
+        }
+
+    </div>
 </div>
 
-<h3 class="mvcMembership">Email Address & Comments</h3>
-<div class="mvcMembership-emailAndComments">
-	@using(Html.BeginForm("Details", "UserAdministration", new{ id = Model.User.ProviderUserKey })){
-	<fieldset>
-		<p>
-			<label for="email">Email Address:</label>
-			@Html.TextBox("email", Model.User.Email)
-		</p>
-		<p>
-			<label for="comments">Comments:</label>
-			@Html.TextArea("comments", Model.User.Comment)
-		</p>
-		<input type="submit" value="Save Email Address and Comments" />
-	</fieldset>
-	}
-</div>
+
+<script>
+    $(document).ready(function () {
+
+
+
+
+        pageLayout.hide('south');
+
+        
+    })
+</script>
