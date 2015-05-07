@@ -320,20 +320,20 @@ Public Class CartaDePorteManager
         Public idcliente As Integer?
     End Class
 
-    Public Shared Function excepciones(SC) As String()
+    Public Shared Function excepciones(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
         'Get
 
         If True Then
             'Dim SC As String = ""
             Dim cli As Integer
 
-            If SC = "" Then Return {""}
+            If SC = "" Then Return Nothing '""}
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
             Dim q = (From i In db.CartasPorteAcopios1 _
-                    Where (True Or i.IdCliente = cli)
+                    Where (idcliente = 0 Or i.IdCliente = idcliente)
                     Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
 
             Dim x As New aaa
@@ -345,16 +345,25 @@ Public Class CartaDePorteManager
 
 
             Try
-                Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) y.desc).ToArray
+                Dim aaasd = (From y In q _
+                            Order By y.idacopio _
+                            ).ToList()
+
+                Return aaasd
+
+                'Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) New With {y.idacopio, y.desc})
+
+
+
             Catch ex As Exception
                 Dim s As String() = {""}
-                Return s
+                Return Nothing 's
             End Try
 
 
         Else
 
-            Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
+            'Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
 
         End If
 
@@ -380,9 +389,9 @@ Public Class CartaDePorteManager
         Return q
 
 
-        Dim s As String() = excepciones(SC)
+        Dim s = excepciones(SC)
         For n = 0 To excepciones(SC).Count - 1
-            If s(n) = descripcionAcopio Then Return n
+            If s(n).desc = descripcionAcopio Then Return s(n).idacopio
         Next
 
 
@@ -402,12 +411,12 @@ Public Class CartaDePorteManager
 
 
 
-        If IdAcopio <= 0 Then Return ""
-        Try
-            Return excepciones(SC)(IdAcopio)
-        Catch ex As Exception
-            Return ""
-        End Try
+        'If IdAcopio <= 0 Then Return ""
+        'Try
+        '    Return excepciones(SC)(IdAcopio)
+        'Catch ex As Exception
+        '    Return ""
+        'End Try
     End Function
 
 
@@ -15199,6 +15208,8 @@ Public Class LogicaFacturacion
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
 
                 Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
             ElseIf oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioSeeds Or If(c.Acopio2, -1) = IdAcopioSeeds Or If(c.Acopio3, -1) = IdAcopioSeeds Or If(c.Acopio4, -1) = IdAcopioSeeds Or If(c.Acopio5, -1) = IdAcopioSeeds) Then
@@ -15207,6 +15218,8 @@ Public Class LogicaFacturacion
 
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
             Else
 
@@ -15232,12 +15245,20 @@ Public Class LogicaFacturacion
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+
+
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
+
+
 
             ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds) Then
                 ErrHandler.WriteError("LeyendaSyngenta Seeds")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
 
             End If
@@ -20278,20 +20299,20 @@ Public Class LogicaImportador
 
                     'Const otros = Array.FindIndex(excep, AddressOf EsOTROS)
                     Dim otros As Long
-                    For n = 0 To excep.Length - 1
-                        If excep(n) = "OTROS" Then
+                    For n = 0 To excep.Count - 1
+                        If excep(n).desc = "OTROS" Then
                             otros = n
                             Exit For
                         End If
                     Next
 
 
-                    .EnumSyngentaDivision = excep(otros) 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
-                    .Acopio1 = otros
-                    .Acopio2 = otros
-                    .Acopio3 = otros
-                    .Acopio4 = otros
-                    .Acopio5 = otros
+                    .EnumSyngentaDivision = excep(otros).desc 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
+                    .Acopio1 = excep(otros).idacopio
+                    .Acopio2 = excep(otros).idacopio
+                    .Acopio3 = excep(otros).idacopio
+                    .Acopio4 = excep(otros).idacopio
+                    .Acopio5 = excep(otros).idacopio
 
 
                 End If
@@ -20909,12 +20930,13 @@ Public Class ExcelImportadorManager
 
 
 
-            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC."
+            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC.", "LOCALIDAD_ORIGEN"
+
 
                 Return "Procedencia"
 
 
-            Case "DESTINO"
+            Case "DESTINO", "DETINO"
                 Return "Destino"
 
             Case "SUBCONTRATISTAS"
@@ -20924,11 +20946,6 @@ Public Class ExcelImportadorManager
             Case "CALIDAD", "CALID."
                 Return "Calidad"
 
-            Case "F. DE CARGA"
-                Return "column18"
-
-            Case "F. DE DESCARGA", "FECHA"
-                Return "FechaDescarga"
 
 
 
@@ -20940,6 +20957,7 @@ Public Class ExcelImportadorManager
             Case "TURNO"
                 'return  
             Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
+
                 Return "Patente"
             Case "ACOPLADO", "ACOPL", "PAT.ACOP."
 
@@ -20969,11 +20987,13 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE"
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_PROC"
+
                 Return "column12"
-            Case "TARA PTO", "TARA", "TARA BUNGE"
+            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_PROC"
                 Return "column13"
-            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_PROC"
+
                 Return "column14"
 
                 '/////////////////////////////////////////////////////////////////////////
@@ -20983,13 +21003,15 @@ Public Class ExcelImportadorManager
 
             Case "HUMEDAD", "GDO/HUM", "HUM" ',  "H"
                 Return "column15"
-            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA"
+            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA", "MERMA_KG"
+
                 Return "column16"
 
             Case "OTRASMERMAS"
                 Return "Auxiliar5" '"OtrasMermas"
 
-            Case "NETO FINAL", "FINAL"
+            Case "NETO FINAL", "FINAL", "NETO_DEST"
+
                 Return "column17"
 
 
@@ -20997,11 +21019,15 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "F. DE CARGA", "FEC.CARGA"
+            Case "F. DE DESCARGA", "FECHA"
+                Return "FechaDescarga"
+
+            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA"
                 Return "column18"
-            Case "FECHA VTO.", "FEC.VTO."
+            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO"
+
                 Return "column19"
-            Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE"
+            Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE", "CEE"
                 Return "column20"
             Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
                 Return "column21"
