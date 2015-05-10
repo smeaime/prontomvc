@@ -3407,7 +3407,7 @@ Public Class CartaDePorteManager
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
         'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
-        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
+        Dim sDirFTP As String
 
         If System.Diagnostics.Debugger.IsAttached() Then
             sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
@@ -3418,6 +3418,7 @@ Public Class CartaDePorteManager
             'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
             'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
             sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+            sDirFTP = "E:\Sites\Pronto\DataBackupear\"
         End If
 
 
@@ -3492,6 +3493,8 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
+
+            ErrHandler.WriteError("agrego " & s)
             's = sDirFTP + s
 
             Dim MyFile2 As FileInfo
@@ -3584,7 +3587,8 @@ Public Class CartaDePorteManager
 
         Dim output As String
 
-        output = Path.GetTempPath & "ImagenesCartaPorte " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+        output = Path.GetTempPath & "CP" & myCartaDePorte.NumeroCartaDePorte & "__" & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
 
@@ -3594,9 +3598,13 @@ Public Class CartaDePorteManager
             If System.Diagnostics.Debugger.IsAttached() Then
                 sDirFTP = "~/" + "DataBackupear\"
 
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
 
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
@@ -3605,11 +3613,18 @@ Public Class CartaDePorteManager
                                 , 5)
             Else
 
+
+
                 sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+                sDirFTP = "E:\Sites\Pronto\DataBackupear\"
 
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
 
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
@@ -3641,7 +3656,7 @@ Public Class CartaDePorteManager
     Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String, Optional propor As Decimal = 1)
 
 
-        ErrHandler.WriteError("PDFcon_iTextSharp " & filejpg & "   " & filejpg2)
+        ErrHandler.WriteError("PDFcon_iTextSharp " & filepdf & "  " & filejpg & "   " & filejpg2)
 
 
 
