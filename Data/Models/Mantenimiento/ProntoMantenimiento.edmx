@@ -4,7 +4,227 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProntoMantenimientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProntoMantenimientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="IdArticulo" />
+          </Key>
+          <Property Name="IdArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRubro" Type="int" />
+          <Property Name="IdSubrubro" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Codigo" Type="varchar" MaxLength="20" />
+          <Property Name="RegistrarStock" Type="varchar" MaxLength="2" />
+          <Property Name="StockMinimo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DefineKit" Type="varchar" MaxLength="2" />
+          <Property Name="CostoPPP" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="CostoPPPDolar" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="CostoReposicion" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="CostoReposicionDolar" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="AlicuotaIVA" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="ModeloEspecifico" Type="varchar" MaxLength="50" />
+          <Property Name="Serie" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroPatente" Type="varchar" MaxLength="10" />
+          <Property Name="NumeroMotor" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroChasis" Type="varchar" MaxLength="30" />
+          <Property Name="AñoFabricacion" Type="int" />
+          <Property Name="AñosAmortizacion" Type="int" />
+          <Property Name="IdUbicacionStandar" Type="int" />
+          <Property Name="IdMaterial" Type="int" />
+          <Property Name="IdCalidad" Type="int" />
+          <Property Name="IdAcabado" Type="int" />
+          <Property Name="IdTipo" Type="int" />
+          <Property Name="IdTratamiento" Type="int" />
+          <Property Name="IdCuenta" Type="int" />
+          <Property Name="IdForma" Type="int" />
+          <Property Name="IdColor" Type="int" />
+          <Property Name="IdModelo" Type="int" />
+          <Property Name="IdMarca" Type="int" />
+          <Property Name="IdCuantificacion" Type="int" />
+          <Property Name="IdControlCalidad" Type="int" />
+          <Property Name="IdCentroCosto" Type="int" />
+          <Property Name="IdBiselado" Type="int" />
+          <Property Name="IdTipoRosca" Type="int" />
+          <Property Name="IdPrioridad" Type="int" />
+          <Property Name="IdGrupo" Type="int" />
+          <Property Name="Especificaciones" Type="ntext" />
+          <Property Name="Ancho" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadAncho" Type="int" />
+          <Property Name="Diametro" Type="varchar" MaxLength="10" />
+          <Property Name="IdUnidadDiametro" Type="int" />
+          <Property Name="DiametroInterno" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadDiametroInterno" Type="int" />
+          <Property Name="Diametro2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadDiametro2" Type="int" />
+          <Property Name="Espesor" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="IdUnidadEspesor" Type="int" />
+          <Property Name="EspesorBase" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadEspesorBase" Type="int" />
+          <Property Name="EspesorRevestimiento" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadEspesorRevestimiento" Type="int" />
+          <Property Name="Largo" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="IdUnidadLargo" Type="int" />
+          <Property Name="Peso" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadPeso" Type="int" />
+          <Property Name="Altura" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadAltura" Type="int" />
+          <Property Name="Capacidad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadCapacidad" Type="int" />
+          <Property Name="Potencia" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdUnidadPotencia" Type="int" />
+          <Property Name="UsuarioAlta" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="IdLocalidad" Type="int" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="IdPais" Type="int" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroManzana" Type="int" />
+          <Property Name="NumeroLote" Type="int" />
+          <Property Name="ActivoFijo" Type="varchar" MaxLength="2" />
+          <Property Name="EstadoActivoFijo" Type="varchar" MaxLength="2" />
+          <Property Name="NumeroActivoFijo" Type="int" />
+          <Property Name="IdGrupoActivoFijo" Type="int" />
+          <Property Name="BienImpositivo" Type="varchar" MaxLength="2" />
+          <Property Name="BienContable" Type="varchar" MaxLength="2" />
+          <Property Name="Amortiza" Type="varchar" MaxLength="2" />
+          <Property Name="FechaCompra" Type="datetime" />
+          <Property Name="IdCuentaAmortizacion" Type="int" />
+          <Property Name="VidaUtilImpositiva" Type="int" />
+          <Property Name="VidaUtilContable" Type="int" />
+          <Property Name="ValorOrigenContable" Type="numeric" Precision="19" Scale="6" />
+          <Property Name="ValorOrigenImpositivo" Type="numeric" Precision="19" Scale="6" />
+          <Property Name="ValorActualizado" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ValorResidual" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ValorResidualActualizado" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="AmortizacionEjercicio" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="AmortizacionEjercicioActualizada" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="AmortizacionesAcumuladas" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="AmortizacionesAcumuladasActualizada" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="VidaUtilImpositivaRestante" Type="int" />
+          <Property Name="VidaUtilContableRestante" Type="int" />
+          <Property Name="FechaPrimeraAmortizacionImpositiva" Type="datetime" />
+          <Property Name="FechaPrimeraAmortizacionContable" Type="datetime" />
+          <Property Name="IdUbicacionActivoFijo" Type="int" />
+          <Property Name="IdSector" Type="int" />
+          <Property Name="FechaBajaAmortizacion" Type="datetime" />
+          <Property Name="ParaMantenimiento" Type="varchar" MaxLength="2" />
+          <Property Name="IdUnidadLecturaMantenimiento" Type="int" />
+          <Property Name="LecturaAcumulada" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LecturaBase" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="UltimaLectura" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FechaUltimaLectura" Type="datetime" />
+          <Property Name="EstimadoAnual" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="NumeroInventario" Type="varchar" MaxLength="20" />
+          <Property Name="ModeloMotor" Type="varchar" MaxLength="30" />
+          <Property Name="EquipoEnObra" Type="varchar" MaxLength="2" />
+          <Property Name="EstadoEquipo" Type="varchar" MaxLength="2" />
+          <Property Name="EsConsumible" Type="varchar" MaxLength="2" />
+          <Property Name="FechaUltimaModificacionArticulo" Type="datetime" />
+          <Property Name="EnviarEmail" Type="tinyint" />
+          <Property Name="IdUnidad" Type="int" />
+          <Property Name="Alquilado" Type="varchar" MaxLength="2" />
+          <Property Name="AlquilerMensualEquipo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TarifaHorariaEquipo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdMarcaMotor" Type="int" />
+          <Property Name="NumeroSerieMotor" Type="varchar" MaxLength="20" />
+          <Property Name="VidaUtilTecnica" Type="int" />
+          <Property Name="ValorCompra" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IdMonedaCompra" Type="int" />
+          <Property Name="FechaBaja" Type="datetime" />
+          <Property Name="DocumentoAlta" Type="varchar" MaxLength="30" />
+          <Property Name="DocumentoBaja" Type="varchar" MaxLength="20" />
+          <Property Name="IdArticuloAsociado" Type="int" />
+          <Property Name="RegistroUnicoTransporteAutomotor" Type="numeric" Precision="16" Scale="0" />
+          <Property Name="TieneGPS" Type="varchar" MaxLength="2" />
+          <Property Name="CondicionActual" Type="varchar" MaxLength="30" />
+          <Property Name="SituacionActual" Type="varchar" MaxLength="30" />
+          <Property Name="TipoCoberturaSeguro" Type="varchar" MaxLength="50" />
+          <Property Name="CompañiaSeguro" Type="varchar" MaxLength="30" />
+          <Property Name="FechaVigenciaSeguro" Type="datetime" />
+          <Property Name="NumeroPolizaSeguro" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FechaVencimientoVerificacionTecnica" Type="datetime" />
+          <Property Name="FacturacionAObraPorLecturas" Type="varchar" MaxLength="2" />
+          <Property Name="PorcentajeAmortizacionResidual" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="ValorSeguroAnual" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ValorPatenteAnual" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CoeficienteMantenimiento" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="CoeficienteEstructura" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="ValorTarifaEquipo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Observaciones" Type="ntext" />
+          <Property Name="MinimoGarantizadoMensual" Type="int" />
+          <Property Name="IdArticuloVarios" Type="int" />
+          <Property Name="ValorVenta" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="Datos1" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Datos2" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Datos3" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Datos4" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Datos5" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Datos6" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Datos7" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Datos8" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Datos9" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="Datos10" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Auxiliar1" Type="int" />
+          <Property Name="Auxiliar2" Type="int" />
+          <Property Name="Auxiliar3" Type="int" />
+          <Property Name="Auxiliar4" Type="int" />
+          <Property Name="Auxiliar5" Type="int" />
+          <Property Name="Auxiliar6" Type="int" />
+          <Property Name="Auxiliar7" Type="int" />
+          <Property Name="Auxiliar8" Type="int" />
+          <Property Name="Auxiliar9" Type="int" />
+          <Property Name="Auxiliar10" Type="int" />
+          <Property Name="Auxiliar11" Type="int" />
+          <Property Name="Auxiliar12" Type="int" />
+          <Property Name="Auxiliar13" Type="int" />
+          <Property Name="Auxiliar14" Type="int" />
+          <Property Name="Auxiliar15" Type="int" />
+          <Property Name="Auxiliar16" Type="int" />
+          <Property Name="Auxiliar17" Type="int" />
+          <Property Name="Auxiliar18" Type="int" />
+          <Property Name="Auxiliar19" Type="int" />
+          <Property Name="Auxiliar20" Type="int" />
+          <Property Name="Auxiliar21" Type="int" />
+          <Property Name="Auxiliar22" Type="int" />
+          <Property Name="Auxiliar23" Type="int" />
+          <Property Name="Auxiliar24" Type="int" />
+          <Property Name="Auxiliar25" Type="int" />
+          <Property Name="AuxiliarString1" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString2" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString3" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString4" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString5" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString6" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString7" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString8" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString9" Type="varchar" MaxLength="50" />
+          <Property Name="AuxiliarString10" Type="varchar" MaxLength="50" />
+          <Property Name="IdModeloMotor" Type="int" />
+          <Property Name="FechaVencimientoCedulaVerde" Type="datetime" />
+          <Property Name="AuxiliarFecha1" Type="datetime" />
+          <Property Name="AuxiliarFecha2" Type="datetime" />
+          <Property Name="AuxiliarFecha3" Type="datetime" />
+          <Property Name="AuxiliarFecha4" Type="datetime" />
+          <Property Name="AuxiliarFecha5" Type="datetime" />
+          <Property Name="ValorHoraTarifaEquipo" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="EsCombustible" Type="varchar" MaxLength="2" />
+          <Property Name="EsLubricante" Type="varchar" MaxLength="2" />
+          <Property Name="EsFiltro" Type="varchar" MaxLength="2" />
+          <Property Name="IdTipoEquipo" Type="int" />
+          <Property Name="ConsumoStandar" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EsManoDeObra" Type="varchar" MaxLength="2" />
+          <Property Name="EsFlete" Type="varchar" MaxLength="2" />
+          <Property Name="Activo" Type="varchar" MaxLength="2" />
+          <Property Name="IdObraActual" Type="int" />
+          <Property Name="EsSubcontrato" Type="varchar" MaxLength="2" />
+          <Property Name="IdTransportista" Type="int" />
+          <Property Name="TarifaHorariaEquipo2" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="EsDesgastable" Type="varchar" MaxLength="2" />
+          <Property Name="IdPropietario" Type="int" />
+          <Property Name="FacturarAObra" Type="varchar" MaxLength="2" />
+        </EntityType>
         <EntityType Name="Consumos">
           <Key>
             <PropertyRef Name="IdConsumo" />
@@ -136,14 +356,15 @@
           <Property Name="Cerrado" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityContainer Name="ProntoMantenimientoModelStoreContainer">
-          <EntitySet Name="Consumos" EntityType="Self.Consumos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="HorasAseguradasEquipos" EntityType="Self.HorasAseguradasEquipos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="HorasEquipo" EntityType="Self.HorasEquipo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="HorasStandar" EntityType="Self.HorasStandar" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="PartesDiarios" EntityType="Self.PartesDiarios" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="PartesDiariosEmpleados" EntityType="Self.PartesDiariosEmpleados" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consumos" EntityType="Self.Consumos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasAseguradasEquipos" EntityType="Self.HorasAseguradasEquipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasEquipo" EntityType="Self.HorasEquipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HorasStandar" EntityType="Self.HorasStandar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartesDiarios" EntityType="Self.PartesDiarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartesDiariosEmpleados" EntityType="Self.PartesDiariosEmpleados" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -280,6 +501,7 @@
           <EntitySet Name="PartesDiarios" EntityType="Self.PartesDiarios" />
           <EntitySet Name="PartesDiariosEmpleados" EntityType="Self.PartesDiariosEmpleados" />
           <EntitySet Name="Materiales" EntityType="ProntoMantenimientoModel.Materiales" />
+          <EntitySet Name="Articulos" EntityType="ProntoMantenimientoModel.Articulo" />
         </EntityContainer>
         <EntityType Name="Materiales">
           <Key>
@@ -288,6 +510,226 @@
           <Property Name="IdMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Abreviatura" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="IdArticulo" />
+          </Key>
+          <Property Name="IdArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRubro" Type="Int32" />
+          <Property Name="IdSubrubro" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrarStock" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="StockMinimo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DefineKit" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CostoPPP" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CostoPPPDolar" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CostoReposicion" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="CostoReposicionDolar" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="AlicuotaIVA" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ModeloEspecifico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroPatente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroMotor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroChasis" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AñoFabricacion" Type="Int32" />
+          <Property Name="AñosAmortizacion" Type="Int32" />
+          <Property Name="IdUbicacionStandar" Type="Int32" />
+          <Property Name="IdMaterial" Type="Int32" />
+          <Property Name="IdCalidad" Type="Int32" />
+          <Property Name="IdAcabado" Type="Int32" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="IdTratamiento" Type="Int32" />
+          <Property Name="IdCuenta" Type="Int32" />
+          <Property Name="IdForma" Type="Int32" />
+          <Property Name="IdColor" Type="Int32" />
+          <Property Name="IdModelo" Type="Int32" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="IdCuantificacion" Type="Int32" />
+          <Property Name="IdControlCalidad" Type="Int32" />
+          <Property Name="IdCentroCosto" Type="Int32" />
+          <Property Name="IdBiselado" Type="Int32" />
+          <Property Name="IdTipoRosca" Type="Int32" />
+          <Property Name="IdPrioridad" Type="Int32" />
+          <Property Name="IdGrupo" Type="Int32" />
+          <Property Name="Especificaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ancho" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadAncho" Type="Int32" />
+          <Property Name="Diametro" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidadDiametro" Type="Int32" />
+          <Property Name="DiametroInterno" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadDiametroInterno" Type="Int32" />
+          <Property Name="Diametro2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadDiametro2" Type="Int32" />
+          <Property Name="Espesor" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="IdUnidadEspesor" Type="Int32" />
+          <Property Name="EspesorBase" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadEspesorBase" Type="Int32" />
+          <Property Name="EspesorRevestimiento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadEspesorRevestimiento" Type="Int32" />
+          <Property Name="Largo" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="IdUnidadLargo" Type="Int32" />
+          <Property Name="Peso" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadPeso" Type="Int32" />
+          <Property Name="Altura" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadAltura" Type="Int32" />
+          <Property Name="Capacidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadCapacidad" Type="Int32" />
+          <Property Name="Potencia" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUnidadPotencia" Type="Int32" />
+          <Property Name="UsuarioAlta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdLocalidad" Type="Int32" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="IdPais" Type="Int32" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroManzana" Type="Int32" />
+          <Property Name="NumeroLote" Type="Int32" />
+          <Property Name="ActivoFijo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoActivoFijo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroActivoFijo" Type="Int32" />
+          <Property Name="IdGrupoActivoFijo" Type="Int32" />
+          <Property Name="BienImpositivo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="BienContable" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Amortiza" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCompra" Type="DateTime" Precision="3" />
+          <Property Name="IdCuentaAmortizacion" Type="Int32" />
+          <Property Name="VidaUtilImpositiva" Type="Int32" />
+          <Property Name="VidaUtilContable" Type="Int32" />
+          <Property Name="ValorOrigenContable" Type="Decimal" Precision="19" Scale="6" />
+          <Property Name="ValorOrigenImpositivo" Type="Decimal" Precision="19" Scale="6" />
+          <Property Name="ValorActualizado" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ValorResidual" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ValorResidualActualizado" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="AmortizacionEjercicio" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="AmortizacionEjercicioActualizada" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="AmortizacionesAcumuladas" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="AmortizacionesAcumuladasActualizada" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="VidaUtilImpositivaRestante" Type="Int32" />
+          <Property Name="VidaUtilContableRestante" Type="Int32" />
+          <Property Name="FechaPrimeraAmortizacionImpositiva" Type="DateTime" Precision="3" />
+          <Property Name="FechaPrimeraAmortizacionContable" Type="DateTime" Precision="3" />
+          <Property Name="IdUbicacionActivoFijo" Type="Int32" />
+          <Property Name="IdSector" Type="Int32" />
+          <Property Name="FechaBajaAmortizacion" Type="DateTime" Precision="3" />
+          <Property Name="ParaMantenimiento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidadLecturaMantenimiento" Type="Int32" />
+          <Property Name="LecturaAcumulada" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LecturaBase" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UltimaLectura" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FechaUltimaLectura" Type="DateTime" Precision="3" />
+          <Property Name="EstimadoAnual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NumeroInventario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ModeloMotor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EquipoEnObra" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoEquipo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EsConsumible" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltimaModificacionArticulo" Type="DateTime" Precision="3" />
+          <Property Name="EnviarEmail" Type="Byte" />
+          <Property Name="IdUnidad" Type="Int32" />
+          <Property Name="Alquilado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="AlquilerMensualEquipo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TarifaHorariaEquipo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdMarcaMotor" Type="Int32" />
+          <Property Name="NumeroSerieMotor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VidaUtilTecnica" Type="Int32" />
+          <Property Name="ValorCompra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdMonedaCompra" Type="Int32" />
+          <Property Name="FechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="DocumentoAlta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentoBaja" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdArticuloAsociado" Type="Int32" />
+          <Property Name="RegistroUnicoTransporteAutomotor" Type="Decimal" Precision="16" Scale="0" />
+          <Property Name="TieneGPS" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CondicionActual" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SituacionActual" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TipoCoberturaSeguro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompañiaSeguro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaVigenciaSeguro" Type="DateTime" Precision="3" />
+          <Property Name="NumeroPolizaSeguro" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaVencimientoVerificacionTecnica" Type="DateTime" Precision="3" />
+          <Property Name="FacturacionAObraPorLecturas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeAmortizacionResidual" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ValorSeguroAnual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ValorPatenteAnual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CoeficienteMantenimiento" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="CoeficienteEstructura" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ValorTarifaEquipo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinimoGarantizadoMensual" Type="Int32" />
+          <Property Name="IdArticuloVarios" Type="Int32" />
+          <Property Name="ValorVenta" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Datos1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Datos2" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Datos3" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Datos4" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Datos5" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Datos6" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Datos7" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Datos8" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Datos9" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Datos10" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Auxiliar1" Type="Int32" />
+          <Property Name="Auxiliar2" Type="Int32" />
+          <Property Name="Auxiliar3" Type="Int32" />
+          <Property Name="Auxiliar4" Type="Int32" />
+          <Property Name="Auxiliar5" Type="Int32" />
+          <Property Name="Auxiliar6" Type="Int32" />
+          <Property Name="Auxiliar7" Type="Int32" />
+          <Property Name="Auxiliar8" Type="Int32" />
+          <Property Name="Auxiliar9" Type="Int32" />
+          <Property Name="Auxiliar10" Type="Int32" />
+          <Property Name="Auxiliar11" Type="Int32" />
+          <Property Name="Auxiliar12" Type="Int32" />
+          <Property Name="Auxiliar13" Type="Int32" />
+          <Property Name="Auxiliar14" Type="Int32" />
+          <Property Name="Auxiliar15" Type="Int32" />
+          <Property Name="Auxiliar16" Type="Int32" />
+          <Property Name="Auxiliar17" Type="Int32" />
+          <Property Name="Auxiliar18" Type="Int32" />
+          <Property Name="Auxiliar19" Type="Int32" />
+          <Property Name="Auxiliar20" Type="Int32" />
+          <Property Name="Auxiliar21" Type="Int32" />
+          <Property Name="Auxiliar22" Type="Int32" />
+          <Property Name="Auxiliar23" Type="Int32" />
+          <Property Name="Auxiliar24" Type="Int32" />
+          <Property Name="Auxiliar25" Type="Int32" />
+          <Property Name="AuxiliarString1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString6" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString7" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString8" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString9" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxiliarString10" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdModeloMotor" Type="Int32" />
+          <Property Name="FechaVencimientoCedulaVerde" Type="DateTime" Precision="3" />
+          <Property Name="AuxiliarFecha1" Type="DateTime" Precision="3" />
+          <Property Name="AuxiliarFecha2" Type="DateTime" Precision="3" />
+          <Property Name="AuxiliarFecha3" Type="DateTime" Precision="3" />
+          <Property Name="AuxiliarFecha4" Type="DateTime" Precision="3" />
+          <Property Name="AuxiliarFecha5" Type="DateTime" Precision="3" />
+          <Property Name="ValorHoraTarifaEquipo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EsCombustible" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EsLubricante" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EsFiltro" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoEquipo" Type="Int32" />
+          <Property Name="ConsumoStandar" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="EsManoDeObra" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EsFlete" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdObraActual" Type="Int32" />
+          <Property Name="EsSubcontrato" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdTransportista" Type="Int32" />
+          <Property Name="TarifaHorariaEquipo2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EsDesgastable" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdPropietario" Type="Int32" />
+          <Property Name="FacturarAObra" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -433,6 +875,227 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="ProntoMantenimientoModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="FacturarAObra" ColumnName="FacturarAObra" />
+                <ScalarProperty Name="IdPropietario" ColumnName="IdPropietario" />
+                <ScalarProperty Name="EsDesgastable" ColumnName="EsDesgastable" />
+                <ScalarProperty Name="TarifaHorariaEquipo2" ColumnName="TarifaHorariaEquipo2" />
+                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="EsSubcontrato" ColumnName="EsSubcontrato" />
+                <ScalarProperty Name="IdObraActual" ColumnName="IdObraActual" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="EsFlete" ColumnName="EsFlete" />
+                <ScalarProperty Name="EsManoDeObra" ColumnName="EsManoDeObra" />
+                <ScalarProperty Name="ConsumoStandar" ColumnName="ConsumoStandar" />
+                <ScalarProperty Name="IdTipoEquipo" ColumnName="IdTipoEquipo" />
+                <ScalarProperty Name="EsFiltro" ColumnName="EsFiltro" />
+                <ScalarProperty Name="EsLubricante" ColumnName="EsLubricante" />
+                <ScalarProperty Name="EsCombustible" ColumnName="EsCombustible" />
+                <ScalarProperty Name="ValorHoraTarifaEquipo" ColumnName="ValorHoraTarifaEquipo" />
+                <ScalarProperty Name="AuxiliarFecha5" ColumnName="AuxiliarFecha5" />
+                <ScalarProperty Name="AuxiliarFecha4" ColumnName="AuxiliarFecha4" />
+                <ScalarProperty Name="AuxiliarFecha3" ColumnName="AuxiliarFecha3" />
+                <ScalarProperty Name="AuxiliarFecha2" ColumnName="AuxiliarFecha2" />
+                <ScalarProperty Name="AuxiliarFecha1" ColumnName="AuxiliarFecha1" />
+                <ScalarProperty Name="FechaVencimientoCedulaVerde" ColumnName="FechaVencimientoCedulaVerde" />
+                <ScalarProperty Name="IdModeloMotor" ColumnName="IdModeloMotor" />
+                <ScalarProperty Name="AuxiliarString10" ColumnName="AuxiliarString10" />
+                <ScalarProperty Name="AuxiliarString9" ColumnName="AuxiliarString9" />
+                <ScalarProperty Name="AuxiliarString8" ColumnName="AuxiliarString8" />
+                <ScalarProperty Name="AuxiliarString7" ColumnName="AuxiliarString7" />
+                <ScalarProperty Name="AuxiliarString6" ColumnName="AuxiliarString6" />
+                <ScalarProperty Name="AuxiliarString5" ColumnName="AuxiliarString5" />
+                <ScalarProperty Name="AuxiliarString4" ColumnName="AuxiliarString4" />
+                <ScalarProperty Name="AuxiliarString3" ColumnName="AuxiliarString3" />
+                <ScalarProperty Name="AuxiliarString2" ColumnName="AuxiliarString2" />
+                <ScalarProperty Name="AuxiliarString1" ColumnName="AuxiliarString1" />
+                <ScalarProperty Name="Auxiliar25" ColumnName="Auxiliar25" />
+                <ScalarProperty Name="Auxiliar24" ColumnName="Auxiliar24" />
+                <ScalarProperty Name="Auxiliar23" ColumnName="Auxiliar23" />
+                <ScalarProperty Name="Auxiliar22" ColumnName="Auxiliar22" />
+                <ScalarProperty Name="Auxiliar21" ColumnName="Auxiliar21" />
+                <ScalarProperty Name="Auxiliar20" ColumnName="Auxiliar20" />
+                <ScalarProperty Name="Auxiliar19" ColumnName="Auxiliar19" />
+                <ScalarProperty Name="Auxiliar18" ColumnName="Auxiliar18" />
+                <ScalarProperty Name="Auxiliar17" ColumnName="Auxiliar17" />
+                <ScalarProperty Name="Auxiliar16" ColumnName="Auxiliar16" />
+                <ScalarProperty Name="Auxiliar15" ColumnName="Auxiliar15" />
+                <ScalarProperty Name="Auxiliar14" ColumnName="Auxiliar14" />
+                <ScalarProperty Name="Auxiliar13" ColumnName="Auxiliar13" />
+                <ScalarProperty Name="Auxiliar12" ColumnName="Auxiliar12" />
+                <ScalarProperty Name="Auxiliar11" ColumnName="Auxiliar11" />
+                <ScalarProperty Name="Auxiliar10" ColumnName="Auxiliar10" />
+                <ScalarProperty Name="Auxiliar9" ColumnName="Auxiliar9" />
+                <ScalarProperty Name="Auxiliar8" ColumnName="Auxiliar8" />
+                <ScalarProperty Name="Auxiliar7" ColumnName="Auxiliar7" />
+                <ScalarProperty Name="Auxiliar6" ColumnName="Auxiliar6" />
+                <ScalarProperty Name="Auxiliar5" ColumnName="Auxiliar5" />
+                <ScalarProperty Name="Auxiliar4" ColumnName="Auxiliar4" />
+                <ScalarProperty Name="Auxiliar3" ColumnName="Auxiliar3" />
+                <ScalarProperty Name="Auxiliar2" ColumnName="Auxiliar2" />
+                <ScalarProperty Name="Auxiliar1" ColumnName="Auxiliar1" />
+                <ScalarProperty Name="Datos10" ColumnName="Datos10" />
+                <ScalarProperty Name="Datos9" ColumnName="Datos9" />
+                <ScalarProperty Name="Datos8" ColumnName="Datos8" />
+                <ScalarProperty Name="Datos7" ColumnName="Datos7" />
+                <ScalarProperty Name="Datos6" ColumnName="Datos6" />
+                <ScalarProperty Name="Datos5" ColumnName="Datos5" />
+                <ScalarProperty Name="Datos4" ColumnName="Datos4" />
+                <ScalarProperty Name="Datos3" ColumnName="Datos3" />
+                <ScalarProperty Name="Datos2" ColumnName="Datos2" />
+                <ScalarProperty Name="Datos1" ColumnName="Datos1" />
+                <ScalarProperty Name="ValorVenta" ColumnName="ValorVenta" />
+                <ScalarProperty Name="IdArticuloVarios" ColumnName="IdArticuloVarios" />
+                <ScalarProperty Name="MinimoGarantizadoMensual" ColumnName="MinimoGarantizadoMensual" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="ValorTarifaEquipo" ColumnName="ValorTarifaEquipo" />
+                <ScalarProperty Name="CoeficienteEstructura" ColumnName="CoeficienteEstructura" />
+                <ScalarProperty Name="CoeficienteMantenimiento" ColumnName="CoeficienteMantenimiento" />
+                <ScalarProperty Name="ValorPatenteAnual" ColumnName="ValorPatenteAnual" />
+                <ScalarProperty Name="ValorSeguroAnual" ColumnName="ValorSeguroAnual" />
+                <ScalarProperty Name="PorcentajeAmortizacionResidual" ColumnName="PorcentajeAmortizacionResidual" />
+                <ScalarProperty Name="FacturacionAObraPorLecturas" ColumnName="FacturacionAObraPorLecturas" />
+                <ScalarProperty Name="FechaVencimientoVerificacionTecnica" ColumnName="FechaVencimientoVerificacionTecnica" />
+                <ScalarProperty Name="NumeroPolizaSeguro" ColumnName="NumeroPolizaSeguro" />
+                <ScalarProperty Name="FechaVigenciaSeguro" ColumnName="FechaVigenciaSeguro" />
+                <ScalarProperty Name="CompañiaSeguro" ColumnName="CompañiaSeguro" />
+                <ScalarProperty Name="TipoCoberturaSeguro" ColumnName="TipoCoberturaSeguro" />
+                <ScalarProperty Name="SituacionActual" ColumnName="SituacionActual" />
+                <ScalarProperty Name="CondicionActual" ColumnName="CondicionActual" />
+                <ScalarProperty Name="TieneGPS" ColumnName="TieneGPS" />
+                <ScalarProperty Name="RegistroUnicoTransporteAutomotor" ColumnName="RegistroUnicoTransporteAutomotor" />
+                <ScalarProperty Name="IdArticuloAsociado" ColumnName="IdArticuloAsociado" />
+                <ScalarProperty Name="DocumentoBaja" ColumnName="DocumentoBaja" />
+                <ScalarProperty Name="DocumentoAlta" ColumnName="DocumentoAlta" />
+                <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+                <ScalarProperty Name="IdMonedaCompra" ColumnName="IdMonedaCompra" />
+                <ScalarProperty Name="ValorCompra" ColumnName="ValorCompra" />
+                <ScalarProperty Name="VidaUtilTecnica" ColumnName="VidaUtilTecnica" />
+                <ScalarProperty Name="NumeroSerieMotor" ColumnName="NumeroSerieMotor" />
+                <ScalarProperty Name="IdMarcaMotor" ColumnName="IdMarcaMotor" />
+                <ScalarProperty Name="TarifaHorariaEquipo" ColumnName="TarifaHorariaEquipo" />
+                <ScalarProperty Name="AlquilerMensualEquipo" ColumnName="AlquilerMensualEquipo" />
+                <ScalarProperty Name="Alquilado" ColumnName="Alquilado" />
+                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
+                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
+                <ScalarProperty Name="FechaUltimaModificacionArticulo" ColumnName="FechaUltimaModificacionArticulo" />
+                <ScalarProperty Name="EsConsumible" ColumnName="EsConsumible" />
+                <ScalarProperty Name="EstadoEquipo" ColumnName="EstadoEquipo" />
+                <ScalarProperty Name="EquipoEnObra" ColumnName="EquipoEnObra" />
+                <ScalarProperty Name="ModeloMotor" ColumnName="ModeloMotor" />
+                <ScalarProperty Name="NumeroInventario" ColumnName="NumeroInventario" />
+                <ScalarProperty Name="EstimadoAnual" ColumnName="EstimadoAnual" />
+                <ScalarProperty Name="FechaUltimaLectura" ColumnName="FechaUltimaLectura" />
+                <ScalarProperty Name="UltimaLectura" ColumnName="UltimaLectura" />
+                <ScalarProperty Name="LecturaBase" ColumnName="LecturaBase" />
+                <ScalarProperty Name="LecturaAcumulada" ColumnName="LecturaAcumulada" />
+                <ScalarProperty Name="IdUnidadLecturaMantenimiento" ColumnName="IdUnidadLecturaMantenimiento" />
+                <ScalarProperty Name="ParaMantenimiento" ColumnName="ParaMantenimiento" />
+                <ScalarProperty Name="FechaBajaAmortizacion" ColumnName="FechaBajaAmortizacion" />
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+                <ScalarProperty Name="IdUbicacionActivoFijo" ColumnName="IdUbicacionActivoFijo" />
+                <ScalarProperty Name="FechaPrimeraAmortizacionContable" ColumnName="FechaPrimeraAmortizacionContable" />
+                <ScalarProperty Name="FechaPrimeraAmortizacionImpositiva" ColumnName="FechaPrimeraAmortizacionImpositiva" />
+                <ScalarProperty Name="VidaUtilContableRestante" ColumnName="VidaUtilContableRestante" />
+                <ScalarProperty Name="VidaUtilImpositivaRestante" ColumnName="VidaUtilImpositivaRestante" />
+                <ScalarProperty Name="AmortizacionesAcumuladasActualizada" ColumnName="AmortizacionesAcumuladasActualizada" />
+                <ScalarProperty Name="AmortizacionesAcumuladas" ColumnName="AmortizacionesAcumuladas" />
+                <ScalarProperty Name="AmortizacionEjercicioActualizada" ColumnName="AmortizacionEjercicioActualizada" />
+                <ScalarProperty Name="AmortizacionEjercicio" ColumnName="AmortizacionEjercicio" />
+                <ScalarProperty Name="ValorResidualActualizado" ColumnName="ValorResidualActualizado" />
+                <ScalarProperty Name="ValorResidual" ColumnName="ValorResidual" />
+                <ScalarProperty Name="ValorActualizado" ColumnName="ValorActualizado" />
+                <ScalarProperty Name="ValorOrigenImpositivo" ColumnName="ValorOrigenImpositivo" />
+                <ScalarProperty Name="ValorOrigenContable" ColumnName="ValorOrigenContable" />
+                <ScalarProperty Name="VidaUtilContable" ColumnName="VidaUtilContable" />
+                <ScalarProperty Name="VidaUtilImpositiva" ColumnName="VidaUtilImpositiva" />
+                <ScalarProperty Name="IdCuentaAmortizacion" ColumnName="IdCuentaAmortizacion" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="Amortiza" ColumnName="Amortiza" />
+                <ScalarProperty Name="BienContable" ColumnName="BienContable" />
+                <ScalarProperty Name="BienImpositivo" ColumnName="BienImpositivo" />
+                <ScalarProperty Name="IdGrupoActivoFijo" ColumnName="IdGrupoActivoFijo" />
+                <ScalarProperty Name="NumeroActivoFijo" ColumnName="NumeroActivoFijo" />
+                <ScalarProperty Name="EstadoActivoFijo" ColumnName="EstadoActivoFijo" />
+                <ScalarProperty Name="ActivoFijo" ColumnName="ActivoFijo" />
+                <ScalarProperty Name="NumeroLote" ColumnName="NumeroLote" />
+                <ScalarProperty Name="NumeroManzana" ColumnName="NumeroManzana" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+                <ScalarProperty Name="IdUnidadPotencia" ColumnName="IdUnidadPotencia" />
+                <ScalarProperty Name="Potencia" ColumnName="Potencia" />
+                <ScalarProperty Name="IdUnidadCapacidad" ColumnName="IdUnidadCapacidad" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="IdUnidadAltura" ColumnName="IdUnidadAltura" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="IdUnidadPeso" ColumnName="IdUnidadPeso" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="IdUnidadLargo" ColumnName="IdUnidadLargo" />
+                <ScalarProperty Name="Largo" ColumnName="Largo" />
+                <ScalarProperty Name="IdUnidadEspesorRevestimiento" ColumnName="IdUnidadEspesorRevestimiento" />
+                <ScalarProperty Name="EspesorRevestimiento" ColumnName="EspesorRevestimiento" />
+                <ScalarProperty Name="IdUnidadEspesorBase" ColumnName="IdUnidadEspesorBase" />
+                <ScalarProperty Name="EspesorBase" ColumnName="EspesorBase" />
+                <ScalarProperty Name="IdUnidadEspesor" ColumnName="IdUnidadEspesor" />
+                <ScalarProperty Name="Espesor" ColumnName="Espesor" />
+                <ScalarProperty Name="IdUnidadDiametro2" ColumnName="IdUnidadDiametro2" />
+                <ScalarProperty Name="Diametro2" ColumnName="Diametro2" />
+                <ScalarProperty Name="IdUnidadDiametroInterno" ColumnName="IdUnidadDiametroInterno" />
+                <ScalarProperty Name="DiametroInterno" ColumnName="DiametroInterno" />
+                <ScalarProperty Name="IdUnidadDiametro" ColumnName="IdUnidadDiametro" />
+                <ScalarProperty Name="Diametro" ColumnName="Diametro" />
+                <ScalarProperty Name="IdUnidadAncho" ColumnName="IdUnidadAncho" />
+                <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+                <ScalarProperty Name="Especificaciones" ColumnName="Especificaciones" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
+                <ScalarProperty Name="IdTipoRosca" ColumnName="IdTipoRosca" />
+                <ScalarProperty Name="IdBiselado" ColumnName="IdBiselado" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
+                <ScalarProperty Name="IdCuantificacion" ColumnName="IdCuantificacion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+                <ScalarProperty Name="IdForma" ColumnName="IdForma" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="IdAcabado" ColumnName="IdAcabado" />
+                <ScalarProperty Name="IdCalidad" ColumnName="IdCalidad" />
+                <ScalarProperty Name="IdMaterial" ColumnName="IdMaterial" />
+                <ScalarProperty Name="IdUbicacionStandar" ColumnName="IdUbicacionStandar" />
+                <ScalarProperty Name="AñosAmortizacion" ColumnName="AñosAmortizacion" />
+                <ScalarProperty Name="AñoFabricacion" ColumnName="AñoFabricacion" />
+                <ScalarProperty Name="NumeroChasis" ColumnName="NumeroChasis" />
+                <ScalarProperty Name="NumeroMotor" ColumnName="NumeroMotor" />
+                <ScalarProperty Name="NumeroPatente" ColumnName="NumeroPatente" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="ModeloEspecifico" ColumnName="ModeloEspecifico" />
+                <ScalarProperty Name="AlicuotaIVA" ColumnName="AlicuotaIVA" />
+                <ScalarProperty Name="CostoReposicionDolar" ColumnName="CostoReposicionDolar" />
+                <ScalarProperty Name="CostoReposicion" ColumnName="CostoReposicion" />
+                <ScalarProperty Name="CostoPPPDolar" ColumnName="CostoPPPDolar" />
+                <ScalarProperty Name="CostoPPP" ColumnName="CostoPPP" />
+                <ScalarProperty Name="DefineKit" ColumnName="DefineKit" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="RegistrarStock" ColumnName="RegistrarStock" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdSubrubro" ColumnName="IdSubrubro" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -464,6 +1127,7 @@
         <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiarios" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiariosEmpleados" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.Materiales" Width="1.5" PointX="1.25" PointY="7.5" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.Articulo" Width="1.5" PointX="7.375" PointY="7.75" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
