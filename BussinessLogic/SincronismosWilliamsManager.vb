@@ -48,7 +48,10 @@ Namespace Pronto.ERP.Bll
 
             Try
                 '  creat a Application object
-                oXL = New Excel.ApplicationClass()
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
                 '   get   WorkBook  object
                 oWBs = oXL.Workbooks
 
@@ -108,7 +111,10 @@ Namespace Pronto.ERP.Bll
 
             Try
                 '  creat a Application object
-                oXL = New Excel.ApplicationClass()
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
                 '   get   WorkBook  object
                 oWBs = oXL.Workbooks
 
@@ -11314,7 +11320,10 @@ Namespace Pronto.ERP.Bll
 
             Try
                 '  creat a Application object
-                oXL = New Excel.ApplicationClass()
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
                 '   get   WorkBook  object
                 oWBs = oXL.Workbooks
 

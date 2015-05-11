@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="wDemoWilliamsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+<Schema Namespace="wDemoWilliamsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="wDemoWilliamsModelStoreContainer">
-    <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.Store.ControlesCalidad" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.Store.DetalleRequerimientos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Obras" EntityType="wDemoWilliamsModel.Store.Obras" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Store.Requerimientos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Sectores" EntityType="wDemoWilliamsModel.Store.Sectores" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Unidades" EntityType="wDemoWilliamsModel.Store.Unidades" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Store.Clientes" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.Store.ControlesCalidad" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.Store.DetalleRequerimientos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Obras" EntityType="wDemoWilliamsModel.Store.Obras" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Store.Requerimientos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Sectores" EntityType="wDemoWilliamsModel.Store.Sectores" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Unidades" EntityType="wDemoWilliamsModel.Store.Unidades" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
   </EntityContainer>
   <EntityType Name="Clientes">
     <Key>
