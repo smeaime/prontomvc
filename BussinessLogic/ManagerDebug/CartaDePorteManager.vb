@@ -3620,11 +3620,20 @@ Public Class CartaDePorteManager
 
                 Try
                     CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
-
                 Catch ex As Exception
                     ErrHandler.WriteError(ex)
                 End Try
+
+
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
+
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
@@ -3726,6 +3735,11 @@ Public Class CartaDePorteManager
                 'at(iTextSharp.text.pdf.PdfWriter.Close())
                 'at(iTextSharp.text.pdf.PdfDocument.Close())
                 'at(iTextSharp.text.Document.Close())
+
+
+                'parece ser que a veces llega a acá y no se le había pasado bien el temp_imagen. Mejor dicho, el nombre estaba en el 
+                'filejpg y en el filejpg2, pero el archivo no existe.
+                'ok, en ese caso el responsable es ImagenPDF()
 
                 MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
                 ErrHandler.WriteError(ex)
@@ -18811,7 +18825,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -18982,7 +18999,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -19200,7 +19220,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
         Try
             '  creat a Application object
             If True Then
-                oXL = New Excel.ApplicationClass() 'y si uso createobject?
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
             Else
                 oXL = CreateObject("Excel.Application")
             End If
@@ -19517,7 +19540,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -20129,13 +20155,18 @@ Public Class LogicaImportador
     Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
-                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList _
+                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
+                                    NoValidarColumnas As List(Of String) _
         ) As String 'devuelve la columna del error si es que hubo
         'Dim dt = ViewstateToDatatable()
 
         'Dim dr = dt.Rows(row)
 
         Dim myCartaDePorte As New Pronto.ERP.BO.CartaDePorte
+
+
+
+
 
 
         'If existeLaCarta Then
@@ -20246,7 +20277,7 @@ Public Class LogicaImportador
             '/////////////////////////////////////////
 
             dr.Item("Titular") = iisNull(dr.Item("Titular"))
-            If dr.Item("Titular") <> "NO_VALIDAR" Then
+            If dr.Item("Titular") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Titular") Then
                 .Titular = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
                 If .Titular = -1 Then .Titular = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
                 dr.Item("IdTitular") = .Titular
@@ -20345,7 +20376,7 @@ Public Class LogicaImportador
 
 
             dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
-            If dr.Item("Procedencia") <> "NO_VALIDAR" Then
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
                 .Procedencia = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
                 If .Procedencia = -1 Then .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
                 'dt.Rows(row).Item("IdProcedencia") = .Procedencia
@@ -20355,7 +20386,7 @@ Public Class LogicaImportador
 
 
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
-            If dr.Item("Destino") <> "NO_VALIDAR" Then
+            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
                 .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
                 If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
                 'dt.Rows(row).Item("IdDestino") = .Destino
@@ -20398,7 +20429,7 @@ Public Class LogicaImportador
 
 
             dr.Item("column21") = iisNull(dr.Item("column21"))
-            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" Then
+            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" And Not NoValidarColumnas.Contains("column21") Then
                 .IdTransportista = BuscaIdTransportistaPreciso(dr.Item("column21"), SC)
                 If .IdTransportista = -1 Then .IdTransportista = BuscaIdTransportistaPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column21")), SC)
                 If .IdTransportista = -1 Then Return "column21"
@@ -20406,7 +20437,7 @@ Public Class LogicaImportador
 
 
             dr.Item("column23") = iisNull(dr.Item("column23"))
-            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" Then
+            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" And Not NoValidarColumnas.Contains("column23") Then
                 .IdChofer = BuscaIdChoferPreciso(dr.Item("column23"), SC)
                 If .IdChofer = -1 Then .IdChofer = BuscaIdChoferPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column23")), SC)
                 If .IdChofer = -1 Then Return "column23"
@@ -20417,7 +20448,7 @@ Public Class LogicaImportador
             '/////////////////////////////////////////
 
             dr.Item("Calidad") = iisNull(dr.Item("Calidad"))
-            If dr.Item("Calidad") <> "NO_VALIDAR" And dr.Item("Calidad") <> "" Then
+            If dr.Item("Calidad") <> "NO_VALIDAR" And dr.Item("Calidad") <> "" And Not NoValidarColumnas.Contains("Calidad") Then
                 .CalidadDe = BuscaIdCalidadPreciso(RTrim(iisNull(dr.Item("Calidad"))), SC)
                 If .CalidadDe = -1 Then .CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Calidad")), SC)
                 If .CalidadDe = -1 Then Return "Calidad"
