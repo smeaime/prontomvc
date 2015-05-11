@@ -33,5 +33,6 @@ namespace ProntoMVC.Data.Models.Mantenimiento
         public virtual DbSet<PartesDiarios> PartesDiarios { get; set; }
         public virtual DbSet<PartesDiariosEmpleados> PartesDiariosEmpleados { get; set; }
         public virtual DbSet<Materiales> Materiales { get; set; }
+        public virtual DbSet<Articulo> Articulos { get; set; }
     }
 }
