@@ -7574,6 +7574,11 @@ Public Class CartaDePorteManager
 
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsEPSON_A4(ByVal SC As String, ByVal IdFactura As Integer, ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
 
+
+
+        
+
+
         ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
 
         If CartaDePorteManager.UsaAcondicionadoras(SC, IdFactura) And False Then
@@ -7581,7 +7586,26 @@ Public Class CartaDePorteManager
         End If
 
 
-        Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        Dim dt As DataTable
+        Try
+            dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+
+        Catch ex As Exception
+        timeout en https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=70318 porque tiene muchas imputadas
+            está muy bloqueada la tabla de cartas?
+            exec wCartasDePorte_TX_PorIdFactura @IdFactura=70318 tardó 20 segundos!!!!
+            me reclama otro indice en cartasdeporte
+
+            CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+            ON [dbo].[CartasDePorte] ([IdFacturaImputada])
+            INCLUDE([IdCartaDePorte], [NumeroCartaDePorte], [Vendedor], [CuentaOrden1],
+            [CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
+            [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
+            GO()
+        End Try
+        
+
+
 
         If ArchivoExcelDestino = "" Then
             ArchivoExcelDestino = IO.Path.GetTempPath & "AdjuntoDeFactura " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
