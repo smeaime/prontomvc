@@ -6502,6 +6502,8 @@ Public Class CartaDePorteManager
 
 
     Shared Function VerificarConcurrenciaTimeStamp(ByVal SC As String, id As Integer, timeStamp As Long) As Boolean
+        Return True 'tuve problemas
+
         Dim ultimoTimeStamp As Long = BitConverter.ToInt64(EntidadManager.ExecDinamico(SC, "SELECT TOP 1 FechaTimeStamp from CartasDePorte where idCartaDePorte=" & id).Rows(0).Item(0), 0)
 
         Return (ultimoTimeStamp = timeStamp)
@@ -6539,7 +6541,11 @@ Public Class CartaDePorteManager
 
                         If Not VerificarConcurrenciaTimeStamp(SC, .Id, .FechaTimeStamp) Then
                             'si es un duplicado, por ahora no verifiquemos la concurrencia, porque creo que modifican primero la original
+
+
+
                             If .SubnumeroDeFacturacion = -1 Then
+
                                 Throw New Exception(". Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar")
                             End If
                         End If
@@ -22344,3 +22350,189 @@ End Class
 
 
 'End Namespace
+
+
+
+
+
+
+
+
+
+
+<Serializable()> Public Class CDPDestino
+    Public Descripcion As String
+    Public Emails As String
+
+    Public FechaDesde As Date
+    Public FechaHasta As Date
+
+    Public EsPosicion As String
+
+    Public Enviar As String
+    Public EsMailOesFax As String
+
+    Public Orden As Integer
+    Public Modo As String
+
+    Public AplicarANDuORalFiltro As String
+    Public Vendedor As Integer
+    Public CuentaOrden1 As Integer
+    Public CuentaOrden2 As Integer
+    Public Corredor As Integer
+    Public Entregador As Integer
+
+    Public IdArticulo As Integer
+    Public Contrato As Integer
+
+    Public Destino As Integer
+    Public Procedencia As Integer
+End Class
+
+Public Class CDPDestinosManager
+
+    Const Tabla = "WilliamsDestinos"
+    Const IdTabla = "IdWilliamsDestino"
+
+    '    http://www.aspdotnetcodes.com/GridView_Insert_Edit_Update_Delete.aspx
+
+
+    Public Shared Function TraerMetadata(ByVal SC As String, Optional ByVal id As Integer = -1) As DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from " & Tabla & " where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from " & Tabla & " where " & IdTabla & "=" & id)
+        End If
+    End Function
+
+    Public Shared Function Insert(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+        adapterForTable1.Update(dt)
+
+    End Function
+
+
+
+
+
+
+
+
+    Public Shared Function Fetch(ByVal SC As String) As DataTable
+
+        'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT")
+
+        Return ExecDinamico(SC, String.Format("SELECT A.*, " & _
+                    " CLICO1.Razonsocial as Subcontratista1Desc, " & _
+                    " CLICO2.Razonsocial as Subcontratista2Desc " & _
+                    " ,PROVINCIAS.Nombre as Provincia, LOCALIDADES.Nombre as Localidad " & _
+                    " FROM " & Tabla & " A " & _
+                    " LEFT OUTER JOIN Clientes CLICO1 ON A.Subcontratista1 = CLICO1.IdCliente " & _
+                    " LEFT OUTER JOIN Clientes CLICO2 ON A.Subcontratista2 = CLICO2.IdCliente " & _
+                    " LEFT OUTER JOIN LOCALIDADES  ON LOCALIDADES.IdLocalidad = A.IdLocalidad " & _
+                    " LEFT OUTER JOIN PROVINCIAS ON PROVINCIAS.IdProvincia = A.IdProvincia " & _
+                                ""))
+        '" LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+    End Function
+
+
+    Public Shared Function Update(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+        'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+        'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+        adapterForTable1.Update(dt)
+
+    End Function
+
+    Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
+                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String)
+
+
+        Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        Dim ue As WilliamsDestino = (From p In db.WilliamsDestinos _
+                       Where ((p.CodigoONCAA = oncaa And oncaa <> "") Or (p.Descripcion = planta And planta <> "")) _
+                       Select p).FirstOrDefault
+
+
+        'Centro	    Código ONCCA		Código Postal	Población	Nombre Empresa	Nombre Planta
+        '0655		MOLINOS	2200	San Lorenzo	MOLINOS RIO DE LA PLATA S.A.	Molinos Pta. Binielli
+        '0830   	21078	CARGILL	8103	Ingeniero White	CARGILL SACI	Cargill - Bahía Blanca
+        'el "codigo oncca" de cargill es 21708, pero en williams solo se usa en "codigo YPF", y en oncca pusieron 25429
+
+
+        If IsNothing(ue) Then
+            ue = New WilliamsDestino
+
+            ue.Descripcion = planta
+            ue.CodigoONCAA = oncaa
+            ue.CodigoYPF = centro ' oncaa
+            ue.CodigoPostal = codpostal
+
+
+            db.WilliamsDestinos.InsertOnSubmit(ue)
+        Else
+
+
+            ue.Descripcion = planta
+            'ue.CodigoONCAA = centro
+            ue.CodigoYPF = centro ' oncaa
+            ue.CodigoPostal = codpostal
+
+        End If
+
+
+        'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
+
+        'update establecimientos
+        'set aux1=descripcion, descripcion=
+        'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
+        '
+
+        db.SubmitChanges()
+    End Function
+
+    Public Shared Function Delete(ByVal SC As String, ByVal Id As Long)
+        '// Write your own Delete statement blocks. 
+        ExecDinamico(SC, String.Format("DELETE  " & Tabla & "  WHERE {1}={0}", Id, IdTabla))
+    End Function
+
+End Class
+
+
+
