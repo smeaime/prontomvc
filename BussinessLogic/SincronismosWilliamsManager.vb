@@ -10782,11 +10782,13 @@ Namespace Pronto.ERP.Bll
 
                     'Campo 56 CarPorte: Viene en formato alfanumérico (con ceros a la izquierda)  y va numérico (solo numero C.P. a la derecha)
                     '           Las cartas de porte de vagón deben venir de la siguiente forma, 8 dígitos CP + 6 dígitos Nro. vagón
-                    '               Ej. CP 525971853 Nro. vagón 854547, la CP a cargar es  25971853854547 (si el numero de vagón tiene solo 5 dígitos se le
+                    ' Ej. CP 525971853 Nro. vagón 854547, la CP a 
+                    'cargar es  25971853854547 (si el numero de vagón tiene solo 5 dígitos se le
                     '                agrega un cero a la izquierda para completar la 6 posiciones)
 
                     'ForzarPrefijo5(.NumeroCartaDePorte)
-                    sb &= Left(.NumeroCartaDePorte.ToString, 8).PadLeft(8, " ") _
+
+                    sb &= Right(.NumeroCartaDePorte.ToString, 8).PadLeft(8, " ") _
                     & Left(.SubnumeroVagon.ToString, 6).PadLeft(6, "0") 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
 
                     'Campo 57 TipoTrans: La cartas de Porte de vagón vienen con una “c” y corresponde “v”.
