@@ -7591,17 +7591,19 @@ Public Class CartaDePorteManager
             dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
 
         Catch ex As Exception
-        timeout en https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=70318 porque tiene muchas imputadas
-            está muy bloqueada la tabla de cartas?
-            exec wCartasDePorte_TX_PorIdFactura @IdFactura=70318 tardó 20 segundos!!!!
-            me reclama otro indice en cartasdeporte
+            ErrHandler.WriteError("tiene muchas cartas imputadas? falta un índice?")
+            ErrHandler.WriteError(ex)
+            'timeout en https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=70318 porque tiene muchas imputadas
+            '    está muy bloqueada la tabla de cartas?
+            '    exec wCartasDePorte_TX_PorIdFactura @IdFactura=70318 tardó 20 segundos!!!!
+            '    me reclama otro indice en cartasdeporte
 
-            CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
-            ON [dbo].[CartasDePorte] ([IdFacturaImputada])
-            INCLUDE([IdCartaDePorte], [NumeroCartaDePorte], [Vendedor], [CuentaOrden1],
-            [CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
-            [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
-            GO()
+            '    CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+            '    ON [dbo].[CartasDePorte] ([IdFacturaImputada])
+            '    INCLUDE([IdCartaDePorte], [NumeroCartaDePorte], [Vendedor], [CuentaOrden1],
+            '    [CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
+            '    [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
+            '    GO()
         End Try
         
 
