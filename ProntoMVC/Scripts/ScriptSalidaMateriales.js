@@ -233,7 +233,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 120, editable: true, hidden: false, formatter: 'select', stype: 'select', edittype: 'select', editrules: { required: false },
+                        name: 'Ubicacion', index: 'Ubicacion', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             //dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
                             dataInit: function (elem) {
@@ -248,7 +248,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'UbicacionDestino', index: 'UbicacionDestino', align: 'left', width: 120, editable: true, hidden: false, formatter: 'select', stype: 'select', edittype: 'select', editrules: { required: false },
+                        name: 'UbicacionDestino', index: 'UbicacionDestino', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             //dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
                             dataInit: function (elem) {
@@ -340,7 +340,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'OrdenTrabajo', index: 'OrdenTrabajo', align: 'left', width: 120, editable: true, hidden: false, formatter: 'select', stype: 'select', edittype: 'select', editrules: { required: false },
+                        name: 'OrdenTrabajo', index: 'OrdenTrabajo', align: 'left', width: 120, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             //dataUrl: ROOT + 'Ubicacion/GetUbicaciones',
                             dataInit: function (elem) {
