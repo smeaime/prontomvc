@@ -795,6 +795,9 @@
       <LastGenOutput>LinqToSQL_Pronto.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Models\Mantenimiento\ProntoMantenimiento.edmx.diagram">
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
+    </None>
     <None Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
