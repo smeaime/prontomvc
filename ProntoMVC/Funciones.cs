@@ -301,7 +301,7 @@ public static class Generales
 
 
         string SC =
-               "metadata=res://*/Models.ProntoMantenimiento.csdl|res://*/Models.ProntoMantenimiento.ssdl|res://*/Models.ProntoMantenimiento.msl;" +
+               "metadata=res://*/Models.Mantenimiento.ProntoMantenimiento.csdl|res://*/Models.Mantenimiento.ProntoMantenimiento.ssdl|res://*/Models.Mantenimiento.ProntoMantenimiento.msl;" +
                "provider=System.Data.SqlClient;provider connection string=\"" +
                "data source=" + servidorSQL + ";" +
                "initial catalog=" + nombreBaseMantenimiento + ";" +

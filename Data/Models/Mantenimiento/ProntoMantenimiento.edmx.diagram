@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <edmx:Designer>
+    <edmx:Diagrams>
+      <edmx:Diagram DiagramId="a709419b26f7409da9849b79235bb534" Name="Diagram1">
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.Consumos" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.HorasAseguradasEquipos" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.HorasEquipo" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.HorasStandar" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.OrdenesTrabajo" Width="1.5" PointX="4.75" PointY="4.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiarios" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.PartesDiariosEmpleados" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.Materiales" Width="1.5" PointX="1.25" PointY="7.5" />
+        <edmx:EntityTypeShape EntityType="ProntoMantenimientoModel.Articulo" Width="1.5" PointX="7.375" PointY="7.75" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -129,5 +129,7 @@ Namespace Pronto.ERP.Bll
             Return cs
         End Function
 
+
+
     End Class
 End Namespace

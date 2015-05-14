@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Metadata.Edm;
+using System.Data.Entity.Core.Metadata.Edm; // using System.Data.Metadata.Edm;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects; // using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Objects.DataClasses;
@@ -27,7 +27,7 @@ namespace ProntoMVC.Controllers
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
     {
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
-        public ProntoMantenimientoEntities dbmant;
+        public ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities dbmant;
 
 
         public string SC;
@@ -177,7 +177,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                dbmant = new ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
+                dbmant = new ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
                 //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
 
             }

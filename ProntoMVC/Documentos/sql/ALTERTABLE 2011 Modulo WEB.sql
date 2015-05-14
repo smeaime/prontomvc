@@ -1229,3 +1229,23 @@ go
 
 alter table CartasPorteAcopios add primary key (IdAcopio)
 go
+
+
+
+
+
+
+
+
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+ON [dbo].[Facturas] ([FechaFactura])
+INCLUDE ([IdFactura],[NumeroFactura],[TipoABC],[PuntoVenta],[IdCliente],[IdVendedor],[Anulada],[ImporteTotal],[ImporteIva1],[ImporteIva2],[ImporteBonificacion],[RetencionIBrutos1],[RetencionIBrutos2],[RetencionIBrutos3],[FechaVencimiento],[IVANoDiscriminado],[IdMoneda],[IdProvinciaDestino],[IdUsuarioIngreso],[FechaIngreso],[IdObra],[IdCodigoIva],[PercepcionIVA],[ActivarRecuperoGastos],[ContabilizarAFechaVencimiento],[FacturaContado],[CAE],[RechazoCAE],[FechaVencimientoORechazoCAE],[AjusteIva],[FueEnviadoCorreoConFacturaElectronica])
+GO
+
+
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+		ON [dbo].[CartasDePorte] ([IdFacturaImputada])
+		INCLUDE([IdCartaDePorte], [NumeroCartaDePorte], [Vendedor], [CuentaOrden1],
+		[CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
+		[Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
+GO
