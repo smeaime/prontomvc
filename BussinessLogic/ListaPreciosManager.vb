@@ -213,12 +213,12 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Fetch(ByVal SC As String) As DataTable
+        Public Shared Function Fetch(ByVal SC As String, txtBuscar As String, Optional top As Long = 20000) As DataTable
 
 
 
 
-            Dim sSql = "SELECT " & _
+            Dim sSql = "SELECT top " & top & _
             " IdListaPrecios as [IdListaPrecios], " & _
            "  Descripcion as [Descripcion], " & _
             " IdListaPrecios as [IdAux1], " & _
@@ -228,6 +228,7 @@ Namespace Pronto.ERP.Bll
             " Monedas.Nombre as [Moneda] " & _
             " FROM ListasPrecios " & _
             " LEFT OUTER JOIN Monedas ON Monedas.IdMoneda=ListasPrecios.IdMoneda " & _
+            " WHERE Descripcion LIKE '%" & txtBuscar & "%' " & _
             " ORDER by Descripcion "
 
             'Return ExecDinamico(SC, "ListasPrecios_TT")  'cambiar esto y el campo [descripcion lista precios]

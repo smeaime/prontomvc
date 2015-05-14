@@ -22,3 +22,15 @@ C:\Backup\BDL\ProntoMVC\Repositorio\bin\Debug\EntityFramework.SqlServer.xml
 C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\ProntoMVC.Repositorio.csprojResolveAssemblyReference.cache
 C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\Repositorio.dll
 C:\Backup\BDL\ProntoMVC\Repositorio\obj\Debug\Repositorio.pdb
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\Repositorio.dll.config
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\Repositorio.dll
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\Repositorio.pdb
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\ProntoMVC.Data.dll
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\ProntoMVC.Data.pdb
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\EntityFramework.xml
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\obj\Debug\ProntoMVC.Repositorio.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\obj\Debug\Repositorio.dll
+C:\Users\Administrador\Documents\bdl\pronto\Repositorio\obj\Debug\Repositorio.pdb
