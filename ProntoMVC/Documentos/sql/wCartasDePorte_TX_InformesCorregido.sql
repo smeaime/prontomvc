@@ -55,7 +55,12 @@ AS
     
    CDP.IdCartaDePorte, CDP.NumeroCartaDePorte, CDP.IdUsuarioIngreso, CDP.FechaIngreso, CDP.Anulada, CDP.IdUsuarioAnulo, CDP.FechaAnulacion, CDP.Observaciones, CDP.FechaTimeStamp, CDP.Vendedor, CDP.CuentaOrden1, CDP.CuentaOrden2, CDP.Corredor, CDP.Entregador, CDP.Procedencia, CDP.Patente, CDP.IdArticulo, CDP.IdStock, CDP.Partida, CDP.IdUnidad, CDP.IdUbicacion, CDP.Cantidad, CDP.Cupo, CDP.NetoProc, CDP.Calidad 
       ,CDP.BrutoPto      ,CDP.TaraPto      ,CDP.NetoPto      ,CDP.Acoplado      ,CDP.Humedad      ,CDP.Merma      ,CDP.NetoFinal      ,CDP.FechaDeCarga      ,CDP.FechaVencimiento      ,CDP.CEE      ,CDP.IdTransportista      ,CDP.TransportistaCUITdesnormalizado      ,CDP.IdChofer      ,CDP.ChoferCUITdesnormalizado      ,CDP.CTG      ,CDP.Contrato      ,CDP.Destino      ,CDP.Subcontr1      ,CDP.Subcontr2      ,CDP.Contrato1
-      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      ,CDP.Exporta      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon 
+      ,CDP.contrato2      ,CDP.KmARecorrer      ,CDP.Tarifa      ,CDP.FechaDescarga      ,CDP.Hora      ,CDP.NRecibo      ,CDP.CalidadDe      ,CDP.TaraFinal      ,CDP.BrutoFinal      ,CDP.Fumigada      ,CDP.Secada      
+      
+      --,CDP.Exporta      
+      ,COPIAS.Exporta      
+      
+      ,CDP.NobleExtranos      ,CDP.NobleNegros      ,CDP.NobleQuebrados      ,CDP.NobleDaniados      ,CDP.NobleChamico      ,CDP.NobleChamico2      ,CDP.NobleRevolcado      ,CDP.NobleObjetables      ,CDP.NobleAmohosados      ,CDP.NobleHectolitrico      ,CDP.NobleCarbon 
       ,CDP.NoblePanzaBlanca      ,CDP.NoblePicados      ,CDP.NobleMGrasa      ,CDP.NobleAcidezGrasa      ,CDP.NobleVerdes      ,CDP.NobleGrado      ,CDP.NobleConforme      ,CDP.NobleACamara      ,CDP.Cosecha      ,CDP.HumedadDesnormalizada      ,CDP.Factor      ,CDP.IdFacturaImputada      ,CDP.PuntoVenta      ,CDP.SubnumeroVagon      ,CDP.TarifaFacturada      ,CDP.TarifaSubcontratista1      ,CDP.TarifaSubcontratista2      ,CDP.FechaArribo      ,CDP.Version      ,CDP.MotivoAnulacion 
      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico 
       ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 
@@ -110,8 +115,8 @@ AS
  choferes.cuil as  choferCUIT,
  Transportistas.cuit as  TransportistaCUIT,
               
-            DATENAME(month, FechaDescarga) AS Mes,
-            DATEPART(year, FechaDescarga) AS Ano, 
+            DATENAME(month,  CDP.FechaDescarga) AS Mes,
+            DATEPART(year,  CDP.FechaDescarga) AS Ano, 
 
 --null as TarifaSubcontratista1,
 --null as TarifaSubcontratista2,
@@ -123,7 +128,7 @@ AS
 
             
             Calidades.Descripcion AS CalidadDesc,
-			ExcluirDeSubcontratistas
+			 CDP.ExcluirDeSubcontratistas
 
 
 --IdCartaDePorte,NumeroCartaDePorte,Arribo,Hora,Exporta,Producto, 
@@ -144,7 +149,13 @@ AS
             LEFT OUTER JOIN Facturas FAC			ON CDP.idFacturaImputada = FAC.IdFactura
 			------
             LEFT OUTER JOIN Clientes CLIFAC			ON CLIFAC.IdCliente = FAC.IdCliente
-  
+
+--http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14127
+--* -Si una carta de porte original tiene el tilde de exportacion y alguna de las copias no (o viceversa) la 
+--*carta de porte debe salir una vez en las planillas que tengan el tilde de exportacion y una vez en las planillas de descargas.
+
+LEFT OUTER JOIN  CartasDePorte COPIAS ON  
+						  COPIAS.NumeroCartaDePorte=CDP.NumeroCartaDePorte and COPIAS.SubnumeroVagon=CDP.SubnumeroVagon  
   
   
 
@@ -165,8 +176,8 @@ AS
 			
 			AND    (@Estado=3  --posicion?
 					OR
-				(	ISNULL(NetoFinal, 0) > 0
-					AND ( ISNULL(FechaDescarga, '1/1/1753') BETWEEN @FechaDesde
+				(	ISNULL( CDP.NetoFinal, 0) > 0
+					AND ( ISNULL( CDP.FechaDescarga, '1/1/1753') BETWEEN @FechaDesde
                                                     AND     @FechaHasta )
 													))
 
@@ -185,10 +196,11 @@ and
 (@idDestino=-1 or @idDestino=CDP.Destino)
 
 
+
       
 
 --solo incluir las descargas (tambien las descargas facturadas
-    ORDER BY IdCartaDePorte DESC
+    ORDER BY cdp.IdCartaDePorte DESC
 OPTION (RECOMPILE)
 
 --set rowcount 0
