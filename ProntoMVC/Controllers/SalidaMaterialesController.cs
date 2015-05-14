@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
-using System.Data.Objects;
+//using System.Data.Entity.Core.Objects.ObjectQuery; //using System.Data.Objects;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -715,6 +715,7 @@ namespace ProntoMVC.Controllers
                         }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             var data2 = (from a in data
+<<<<<<< HEAD
                          from b in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
                          from c in dbmant.Articulos.Where(o => o.IdArticulo == a.IdEquipoDestino).DefaultIfEmpty()
                          select new 
@@ -724,6 +725,10 @@ namespace ProntoMVC.Controllers
                                 IdEquipoDestino = a.IdEquipoDestino ?? 0,
                                 EquipoDestino = c.Descripcion != null ? c.Descripcion : ""
                          }).Distinct().ToList();
+=======
+                         from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+                         select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
+>>>>>>> 644e729e82221a5bfa18a4345b0bbc0ec406c3e7
 
             var jsonData = new jqGridJson()
             {
@@ -766,8 +771,13 @@ namespace ProntoMVC.Controllers
                             a.CostoUnitario.NullSafeToString(),
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+<<<<<<< HEAD
                             data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
                             data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ?? 0).FirstOrDefault().NullSafeToString(),
+=======
+                            a.EquipoDestino.NullSafeToString(),
+                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo).FirstOrDefault().NullSafeToString(),
+>>>>>>> 644e729e82221a5bfa18a4345b0bbc0ec406c3e7
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }

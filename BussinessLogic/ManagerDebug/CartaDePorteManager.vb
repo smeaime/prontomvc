@@ -107,6 +107,13 @@ Public Class CartaDePorteManager
     End Property
 
 
+    Public Shared ReadOnly Property _dirftp_fisico As String
+        Get
+            Return ConfigurationManager.AppSettings("DirFTPFisico")
+        End Get
+    End Property
+
+
 
     Public Const CONSTANTE_HTML = False
 
@@ -313,20 +320,20 @@ Public Class CartaDePorteManager
         Public idcliente As Integer?
     End Class
 
-    Public Shared Function excepciones(SC) As String()
+    Public Shared Function excepciones(SC As String, Optional idcliente As Integer = 0) As List(Of aaa)
         'Get
 
         If True Then
             'Dim SC As String = ""
             Dim cli As Integer
 
-            If SC = "" Then Return {""}
+            If SC = "" Then Return Nothing '""}
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
 
             Dim q = (From i In db.CartasPorteAcopios1 _
-                    Where (True Or i.IdCliente = cli)
+                    Where (idcliente = 0 Or i.IdCliente = idcliente)
                     Select New aaa With {.idacopio = i.IdAcopio, .desc = i.Descripcion, .idcliente = i.IdCliente}).ToList()
 
             Dim x As New aaa
@@ -338,16 +345,25 @@ Public Class CartaDePorteManager
 
 
             Try
-                Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) y.desc).ToArray
+                Dim aaasd = (From y In q _
+                            Order By y.idacopio _
+                            ).ToList()
+
+                Return aaasd
+
+                'Return q.OrderBy(Function(z) z.idacopio).Select(Function(y) New With {y.idacopio, y.desc})
+
+
+
             Catch ex As Exception
                 Dim s As String() = {""}
-                Return s
+                Return Nothing 's
             End Try
 
 
         Else
 
-            Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
+            'Return ConfigurationManager.AppSettings("WilliamsAcopios").Split(",") 'verificar que no se pasen de 10 caracteres
 
         End If
 
@@ -373,9 +389,9 @@ Public Class CartaDePorteManager
         Return q
 
 
-        Dim s As String() = excepciones(SC)
+        Dim s = excepciones(SC)
         For n = 0 To excepciones(SC).Count - 1
-            If s(n) = descripcionAcopio Then Return n
+            If s(n).desc = descripcionAcopio Then Return s(n).idacopio
         Next
 
 
@@ -395,12 +411,12 @@ Public Class CartaDePorteManager
 
 
 
-        If IdAcopio <= 0 Then Return ""
-        Try
-            Return excepciones(SC)(IdAcopio)
-        Catch ex As Exception
-            Return ""
-        End Try
+        'If IdAcopio <= 0 Then Return ""
+        'Try
+        '    Return excepciones(SC)(IdAcopio)
+        'Catch ex As Exception
+        '    Return ""
+        'End Try
     End Function
 
 
@@ -3190,7 +3206,8 @@ Public Class CartaDePorteManager
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
-        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        Dim sDirFTP As String = "E:\Sites\Pronto\DataBackupear\"
 
         If System.Diagnostics.Debugger.IsAttached() Then
             sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
@@ -3389,7 +3406,8 @@ Public Class CartaDePorteManager
 
 
         'Dim sDirFTP As String = "~/" + "..\Pronto\DataBackupear\" ' Cannot use a leading .. to exit above the top directory..
-        Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        'Dim sDirFTP As String = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+        Dim sDirFTP As String
 
         If System.Diagnostics.Debugger.IsAttached() Then
             sDirFTP = "C:\Backup\BDL\ProntoWeb\DataBackupear\"
@@ -3400,6 +3418,7 @@ Public Class CartaDePorteManager
             'sDirFTP = ConfigurationManager.AppSettings("UrlDominio") + "DataBackupear/"
             'sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
             sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+            sDirFTP = "E:\Sites\Pronto\DataBackupear\"
         End If
 
 
@@ -3474,6 +3493,8 @@ Public Class CartaDePorteManager
         Dim zip As Ionic.Zip.ZipFile = New Ionic.Zip.ZipFile(output) 'usando la .NET Zip Library
         For Each s In wordFiles
             If s = "" Then Continue For
+
+            ErrHandler.WriteError("agrego " & s)
             's = sDirFTP + s
 
             Dim MyFile2 As FileInfo
@@ -3566,7 +3587,8 @@ Public Class CartaDePorteManager
 
         Dim output As String
 
-        output = Path.GetTempPath & "ImagenesCartaPorte " & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+        output = Path.GetTempPath & "CP" & myCartaDePorte.NumeroCartaDePorte & "__" & Now.ToString("ddMMMyyyy_HHmmss") & GenerarSufijoRand() & ".pdf" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
 
 
 
@@ -3576,9 +3598,13 @@ Public Class CartaDePorteManager
             If System.Diagnostics.Debugger.IsAttached() Then
                 sDirFTP = "~/" + "DataBackupear\"
 
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
 
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
@@ -3587,11 +3613,27 @@ Public Class CartaDePorteManager
                                 , 5)
             Else
 
+
+
                 sDirFTP = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
+                sDirFTP = "E:\Sites\Pronto\DataBackupear\"
+
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
 
 
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen, sDirFTP)
-                CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Try
+                    CartaDePorteManager.ResizeImage(myCartaDePorte.PathImagen2, sDirFTP, sDirFTP, 600, 800, "temp_" + myCartaDePorte.PathImagen2, sDirFTP)
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+
+
 
 
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
@@ -3623,7 +3665,7 @@ Public Class CartaDePorteManager
     Shared Function PDFcon_iTextSharp(filepdf As String, filejpg As String, filejpg2 As String, Optional propor As Decimal = 1)
 
 
-        ErrHandler.WriteError("PDFcon_iTextSharp " & filejpg & "   " & filejpg2)
+        ErrHandler.WriteError("PDFcon_iTextSharp " & filepdf & "  " & filejpg & "   " & filejpg2)
 
 
 
@@ -3694,6 +3736,11 @@ Public Class CartaDePorteManager
                 'at(iTextSharp.text.pdf.PdfDocument.Close())
                 'at(iTextSharp.text.Document.Close())
 
+
+                'parece ser que a veces llega a acá y no se le había pasado bien el temp_imagen. Mejor dicho, el nombre estaba en el 
+                'filejpg y en el filejpg2, pero el archivo no existe.
+                'ok, en ese caso el responsable es ImagenPDF()
+
                 MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
                 ErrHandler.WriteError(ex)
                 'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
@@ -3721,7 +3768,10 @@ Public Class CartaDePorteManager
         If System.Diagnostics.Debugger.IsAttached() Then
             sDir = HttpContext.Current.Server.MapPath(sDirVirtual)
         Else
-            sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            ' sDir = "C:\Inetpub\wwwroot\Pronto\DataBackupear\"
+            sDir = "E:\Sites\Pronto\DataBackupear\"
+            'sDir = HttpContext.Current.Server.MapPath(AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\")
+            'sDir = AppDomain.CurrentDomain.BaseDirectory & "\..\Pronto\DataBackupear\"
         End If
 
 
@@ -6452,6 +6502,8 @@ Public Class CartaDePorteManager
 
 
     Shared Function VerificarConcurrenciaTimeStamp(ByVal SC As String, id As Integer, timeStamp As Long) As Boolean
+        Return True 'tuve problemas
+
         Dim ultimoTimeStamp As Long = BitConverter.ToInt64(EntidadManager.ExecDinamico(SC, "SELECT TOP 1 FechaTimeStamp from CartasDePorte where idCartaDePorte=" & id).Rows(0).Item(0), 0)
 
         Return (ultimoTimeStamp = timeStamp)
@@ -6489,7 +6541,11 @@ Public Class CartaDePorteManager
 
                         If Not VerificarConcurrenciaTimeStamp(SC, .Id, .FechaTimeStamp) Then
                             'si es un duplicado, por ahora no verifiquemos la concurrencia, porque creo que modifican primero la original
+
+
+
                             If .SubnumeroDeFacturacion = -1 Then
+
                                 Throw New Exception(". Otro usuario actualizó la carta mientras vos la editabas. Por favor, volvé a cargar la carta y hacé nuevamente las modificaciones. Es posible que no esté más disponible para editar")
                             End If
                         End If
@@ -7518,6 +7574,11 @@ Public Class CartaDePorteManager
 
     Public Shared Function InformeAdjuntoDeFacturacionWilliamsEPSON_A4(ByVal SC As String, ByVal IdFactura As Integer, ArchivoExcelDestino As String, ByRef ReportViewer2 As ReportViewer) As String
 
+
+
+        
+
+
         ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
 
         If CartaDePorteManager.UsaAcondicionadoras(SC, IdFactura) And False Then
@@ -7525,7 +7586,28 @@ Public Class CartaDePorteManager
         End If
 
 
-        Dim dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+        Dim dt As DataTable
+        Try
+            dt = EntidadManager.GetStoreProcedure(SC, "wCartasDePorte_TX_PorIdFactura", IdFactura)
+
+        Catch ex As Exception
+            ErrHandler.WriteError("tiene muchas cartas imputadas? falta un índice?")
+            ErrHandler.WriteError(ex)
+            'timeout en https://prontoweb.williamsentregas.com.ar/ProntoWeb/Factura.aspx?Id=70318 porque tiene muchas imputadas
+            '    está muy bloqueada la tabla de cartas?
+            '    exec wCartasDePorte_TX_PorIdFactura @IdFactura=70318 tardó 20 segundos!!!!
+            '    me reclama otro indice en cartasdeporte
+
+            '    CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+            '    ON [dbo].[CartasDePorte] ([IdFacturaImputada])
+            '    INCLUDE([IdCartaDePorte], [NumeroCartaDePorte], [Vendedor], [CuentaOrden1],
+            '    [CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
+            '    [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
+            '    GO()
+        End Try
+        
+
+
 
         If ArchivoExcelDestino = "" Then
             ArchivoExcelDestino = IO.Path.GetTempPath & "AdjuntoDeFactura " & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
@@ -9018,10 +9100,10 @@ Public Class CartaDePorteManager
                 'http://stackoverflow.com/questions/11770821/save-as-pdf-using-c-sharp-and-interop-not-saving-embedded-pdf-in-a-word-document
                 'http://www.codeproject.com/Questions/607279/e-cValueplusdoesplusnotplusfallpluswithinplus
                 'http://www.microsoft.com/en-us/download/confirmation.aspx?id=7
-                'oDoc..EmbedTrueTypeFonts
-                oDoc.ExportAsFixedFormat(output, Word.WdExportFormat.wdExportFormatPDF, False, Word.WdExportOptimizeFor.wdExportOptimizeForOnScreen, _
-                    Word.WdExportRange.wdExportAllDocument, 1, 1, Word.WdExportItem.wdExportDocumentContent, True, True, _
-                    Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, True, True, False, Nothing)
+
+                'oDoc.ExportAsFixedFormat(output, Word.WdExportFormat.wdExportFormatPDF, False, Word.WdExportOptimizeFor.wdExportOptimizeForOnScreen, _
+                '    Word.WdExportRange.wdExportAllDocument, 1, 1, Word.WdExportItem.wdExportDocumentContent, True, True, _
+                '    Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, True, True, False, Nothing)
 
             Else
 
@@ -9031,7 +9113,8 @@ Public Class CartaDePorteManager
 
                 Else
                     output += ".pdf"
-                    oDoc.SaveAs(output, Word.WdSaveFormat.wdFormatPDF, , , , , , True)
+                    oDoc.SaveAs(output, 17, , , , , , True)
+                    'oDoc.SaveAs(output, Word.WdSaveFormat.wdFormatPDF, , , , , , True)
 
                 End If
             End If
@@ -15186,6 +15269,8 @@ Public Class LogicaFacturacion
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
 
                 Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
             ElseIf oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioSeeds Or If(c.Acopio2, -1) = IdAcopioSeeds Or If(c.Acopio3, -1) = IdAcopioSeeds Or If(c.Acopio4, -1) = IdAcopioSeeds Or If(c.Acopio5, -1) = IdAcopioSeeds) Then
@@ -15194,6 +15279,8 @@ Public Class LogicaFacturacion
 
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, oFac.IdCliente).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
             Else
 
@@ -15219,12 +15306,20 @@ Public Class LogicaFacturacion
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+
+
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & quienautoriza
+
+
 
             ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds) Then
                 ErrHandler.WriteError("LeyendaSyngenta Seeds")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=13903
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & quienautoriza
 
             End If
@@ -18762,7 +18857,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -18933,7 +19031,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -19151,7 +19252,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
         Try
             '  creat a Application object
             If True Then
-                oXL = New Excel.ApplicationClass() 'y si uso createobject?
+                'oXL = New Excel.ApplicationClass()
+                'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+                oXL = New Excel.Application()
+
             Else
                 oXL = CreateObject("Excel.Application")
             End If
@@ -19468,7 +19572,10 @@ Public Class ImpresoraMatrizDePuntosEPSONTexto
 
         Try
             '  creat a Application object
-            oXL = New Excel.ApplicationClass()
+            'oXL = New Excel.ApplicationClass()
+            'Typically, in .Net 4 you just need to remove the 'Class' suffix and compile the code:
+            oXL = New Excel.Application()
+
             '   get   WorkBook  object
             oWBs = oXL.Workbooks
 
@@ -20080,13 +20187,18 @@ Public Class LogicaImportador
     Shared Function GrabaRenglonEnTablaCDP(ByRef dr As DataRow, SC As String, Session As System.Web.SessionState.HttpSessionState, _
                                     txtDestinatario As System.Web.UI.WebControls.TextBox, txtDestino As System.Web.UI.WebControls.TextBox, _
                                     chkAyer As System.Web.UI.WebControls.CheckBox, txtLogErrores As System.Web.UI.WebControls.TextBox, cmbPuntoVenta As System.Web.UI.WebControls.DropDownList, _
-                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList _
+                                    txtFechaArribo As System.Web.UI.WebControls.TextBox, cmbFormato As System.Web.UI.WebControls.DropDownList, _
+                                    NoValidarColumnas As List(Of String) _
         ) As String 'devuelve la columna del error si es que hubo
         'Dim dt = ViewstateToDatatable()
 
         'Dim dr = dt.Rows(row)
 
         Dim myCartaDePorte As New Pronto.ERP.BO.CartaDePorte
+
+
+
+
 
 
         'If existeLaCarta Then
@@ -20197,7 +20309,7 @@ Public Class LogicaImportador
             '/////////////////////////////////////////
 
             dr.Item("Titular") = iisNull(dr.Item("Titular"))
-            If dr.Item("Titular") <> "NO_VALIDAR" Then
+            If dr.Item("Titular") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Titular") Then
                 .Titular = BuscaIdClientePrecisoConCUIT(dr.Item("Titular"), SC)
                 If .Titular = -1 Then .Titular = BuscaIdClientePrecisoConCUIT(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Titular")), SC)
                 dr.Item("IdTitular") = .Titular
@@ -20265,20 +20377,20 @@ Public Class LogicaImportador
 
                     'Const otros = Array.FindIndex(excep, AddressOf EsOTROS)
                     Dim otros As Long
-                    For n = 0 To excep.Length - 1
-                        If excep(n) = "OTROS" Then
+                    For n = 0 To excep.Count - 1
+                        If excep(n).desc = "OTROS" Then
                             otros = n
                             Exit For
                         End If
                     Next
 
 
-                    .EnumSyngentaDivision = excep(otros) 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
-                    .Acopio1 = otros
-                    .Acopio2 = otros
-                    .Acopio3 = otros
-                    .Acopio4 = otros
-                    .Acopio5 = otros
+                    .EnumSyngentaDivision = excep(otros).desc 'tomo el tercer item por default como acopio A.C.A, que supuestamente vendría despues de los dos de syngenta
+                    .Acopio1 = excep(otros).idacopio
+                    .Acopio2 = excep(otros).idacopio
+                    .Acopio3 = excep(otros).idacopio
+                    .Acopio4 = excep(otros).idacopio
+                    .Acopio5 = excep(otros).idacopio
 
 
                 End If
@@ -20296,7 +20408,7 @@ Public Class LogicaImportador
 
 
             dr.Item("Procedencia") = iisNull(dr.Item("Procedencia"))
-            If dr.Item("Procedencia") <> "NO_VALIDAR" Then
+            If dr.Item("Procedencia") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Procedencia") Then
                 .Procedencia = BuscaIdLocalidadPreciso(RTrim(dr.Item("Procedencia")), SC)
                 If .Procedencia = -1 Then .Procedencia = BuscaIdLocalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Procedencia")), SC)
                 'dt.Rows(row).Item("IdProcedencia") = .Procedencia
@@ -20306,7 +20418,7 @@ Public Class LogicaImportador
 
 
             dr.Item("Destino") = iisNull(dr.Item("Destino"))
-            If dr.Item("Destino") <> "NO_VALIDAR" Then
+            If dr.Item("Destino") <> "NO_VALIDAR" And Not NoValidarColumnas.Contains("Destino") Then
                 .Destino = BuscaIdWilliamsDestinoPreciso(RTrim(dr.Item("Destino")), SC)
                 If .Destino = -1 Then .Destino = BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Destino")), SC)
                 'dt.Rows(row).Item("IdDestino") = .Destino
@@ -20349,7 +20461,7 @@ Public Class LogicaImportador
 
 
             dr.Item("column21") = iisNull(dr.Item("column21"))
-            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" Then
+            If dr.Item("column21") <> "NO_VALIDAR" And dr.Item("column21") <> "" And Not NoValidarColumnas.Contains("column21") Then
                 .IdTransportista = BuscaIdTransportistaPreciso(dr.Item("column21"), SC)
                 If .IdTransportista = -1 Then .IdTransportista = BuscaIdTransportistaPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column21")), SC)
                 If .IdTransportista = -1 Then Return "column21"
@@ -20357,7 +20469,7 @@ Public Class LogicaImportador
 
 
             dr.Item("column23") = iisNull(dr.Item("column23"))
-            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" Then
+            If dr.Item("column23") <> "NO_VALIDAR" And dr.Item("column23") <> "" And Not NoValidarColumnas.Contains("column23") Then
                 .IdChofer = BuscaIdChoferPreciso(dr.Item("column23"), SC)
                 If .IdChofer = -1 Then .IdChofer = BuscaIdChoferPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("column23")), SC)
                 If .IdChofer = -1 Then Return "column23"
@@ -20368,7 +20480,7 @@ Public Class LogicaImportador
             '/////////////////////////////////////////
 
             dr.Item("Calidad") = iisNull(dr.Item("Calidad"))
-            If dr.Item("Calidad") <> "NO_VALIDAR" And dr.Item("Calidad") <> "" Then
+            If dr.Item("Calidad") <> "NO_VALIDAR" And dr.Item("Calidad") <> "" And Not NoValidarColumnas.Contains("Calidad") Then
                 .CalidadDe = BuscaIdCalidadPreciso(RTrim(iisNull(dr.Item("Calidad"))), SC)
                 If .CalidadDe = -1 Then .CalidadDe = BuscaIdCalidadPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, dr.Item("Calidad")), SC)
                 If .CalidadDe = -1 Then Return "Calidad"
@@ -20896,12 +21008,13 @@ Public Class ExcelImportadorManager
 
 
 
-            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC."
+            Case "PROCEDENCIA", "PROCED", "PROCENDECIA", "PROCED.", "LOCALIDAD", "PROC", "PROC.", "LOCALIDAD_ORIGEN"
+
 
                 Return "Procedencia"
 
 
-            Case "DESTINO"
+            Case "DESTINO", "DETINO"
                 Return "Destino"
 
             Case "SUBCONTRATISTAS"
@@ -20911,11 +21024,6 @@ Public Class ExcelImportadorManager
             Case "CALIDAD", "CALID."
                 Return "Calidad"
 
-            Case "F. DE CARGA"
-                Return "column18"
-
-            Case "F. DE DESCARGA", "FECHA"
-                Return "FechaDescarga"
 
 
 
@@ -20927,6 +21035,7 @@ Public Class ExcelImportadorManager
             Case "TURNO"
                 'return  
             Case "PATENTE", "PAT CHASIS", "PTE.", "PATE", "CHASIS"
+
                 Return "Patente"
             Case "ACOPLADO", "ACOPL", "PAT.ACOP."
 
@@ -20956,11 +21065,13 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE"
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_PROC"
+
                 Return "column12"
-            Case "TARA PTO", "TARA", "TARA BUNGE"
+            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_PROC"
                 Return "column13"
-            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_PROC"
+
                 Return "column14"
 
                 '/////////////////////////////////////////////////////////////////////////
@@ -20970,13 +21081,15 @@ Public Class ExcelImportadorManager
 
             Case "HUMEDAD", "GDO/HUM", "HUM" ',  "H"
                 Return "column15"
-            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA"
+            Case "MERMA", "MERMA Y/O REBAJAS", "MMA/H", "MMA", "MERMA_KG"
+
                 Return "column16"
 
             Case "OTRASMERMAS"
                 Return "Auxiliar5" '"OtrasMermas"
 
-            Case "NETO FINAL", "FINAL"
+            Case "NETO FINAL", "FINAL", "NETO_DEST"
+
                 Return "column17"
 
 
@@ -20984,11 +21097,15 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "F. DE CARGA", "FEC.CARGA"
+            Case "F. DE DESCARGA", "FECHA"
+                Return "FechaDescarga"
+
+            Case "F. DE CARGA", "FEC.CARGA", "FECHA_CARGA"
                 Return "column18"
-            Case "FECHA VTO.", "FEC.VTO."
+            Case "FECHA VTO.", "FEC.VTO.", "FECHA_VENCIMIENTO"
+
                 Return "column19"
-            Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE"
+            Case "C.E.E", "C.E.E NRO", "NRO.CEE", "NRO. CEE", "CEE"
                 Return "column20"
             Case "TRANSPORTISTA", "TRANSP.", "TRANSPORTE"
                 Return "column21"
@@ -22259,3 +22376,189 @@ End Class
 
 
 'End Namespace
+
+
+
+
+
+
+
+
+
+
+<Serializable()> Public Class CDPDestino
+    Public Descripcion As String
+    Public Emails As String
+
+    Public FechaDesde As Date
+    Public FechaHasta As Date
+
+    Public EsPosicion As String
+
+    Public Enviar As String
+    Public EsMailOesFax As String
+
+    Public Orden As Integer
+    Public Modo As String
+
+    Public AplicarANDuORalFiltro As String
+    Public Vendedor As Integer
+    Public CuentaOrden1 As Integer
+    Public CuentaOrden2 As Integer
+    Public Corredor As Integer
+    Public Entregador As Integer
+
+    Public IdArticulo As Integer
+    Public Contrato As Integer
+
+    Public Destino As Integer
+    Public Procedencia As Integer
+End Class
+
+Public Class CDPDestinosManager
+
+    Const Tabla = "WilliamsDestinos"
+    Const IdTabla = "IdWilliamsDestino"
+
+    '    http://www.aspdotnetcodes.com/GridView_Insert_Edit_Update_Delete.aspx
+
+
+    Public Shared Function TraerMetadata(ByVal SC As String, Optional ByVal id As Integer = -1) As DataTable
+        If id = -1 Then
+            Return ExecDinamico(SC, "select * from " & Tabla & " where 1=0")
+        Else
+            Return ExecDinamico(SC, "select * from " & Tabla & " where " & IdTabla & "=" & id)
+        End If
+    End Function
+
+    Public Shared Function Insert(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+        adapterForTable1.Update(dt)
+
+    End Function
+
+
+
+
+
+
+
+
+    Public Shared Function Fetch(ByVal SC As String) As DataTable
+
+        'Return EntidadManager.ExecDinamico(SC, Tabla & "_TT")
+
+        Return ExecDinamico(SC, String.Format("SELECT A.*, " & _
+                    " CLICO1.Razonsocial as Subcontratista1Desc, " & _
+                    " CLICO2.Razonsocial as Subcontratista2Desc " & _
+                    " ,PROVINCIAS.Nombre as Provincia, LOCALIDADES.Nombre as Localidad " & _
+                    " FROM " & Tabla & " A " & _
+                    " LEFT OUTER JOIN Clientes CLICO1 ON A.Subcontratista1 = CLICO1.IdCliente " & _
+                    " LEFT OUTER JOIN Clientes CLICO2 ON A.Subcontratista2 = CLICO2.IdCliente " & _
+                    " LEFT OUTER JOIN LOCALIDADES  ON LOCALIDADES.IdLocalidad = A.IdLocalidad " & _
+                    " LEFT OUTER JOIN PROVINCIAS ON PROVINCIAS.IdProvincia = A.IdProvincia " & _
+                                ""))
+        '" LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
+    End Function
+
+
+    Public Shared Function Update(ByVal SC As String, ByVal dt As DataTable) As Integer
+        '// Write your own Insert statement blocks 
+
+
+        'ver cómo trabaja el commandBuilder   http://msdn.microsoft.com/en-us/library/4czb85fz(vs.71).aspx
+        ' acá uno más complejo para maestro+detalle http://www.codeproject.com/KB/database/relationaladonet.aspx
+        'y esto? http://www.vbforums.com/showthread.php?t=352219
+
+
+        ''convertir datarow en datatable
+        'Dim ds As New DataSet
+        'ds.Tables.Add(dr.Table.Clone())
+        'ds.Tables(0).ImportRow(dr)
+
+        Dim myConnection = New SqlConnection(encriptar(SC))
+        myConnection.Open()
+
+        Dim adapterForTable1 = New SqlDataAdapter("select * from " & Tabla & "", myConnection)
+        Dim builderForTable1 = New SqlCommandBuilder(adapterForTable1)
+        'si te tira error acá, ojito con estar usando el dataset q usaste para el 
+        'insert. Mejor, luego del insert, llamá al Traer para actualizar los datos, y recien ahí llamar al update
+        adapterForTable1.Update(dt)
+
+    End Function
+
+    Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
+                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String)
+
+
+        Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
+
+
+        Dim ue As WilliamsDestino = (From p In db.WilliamsDestinos _
+                       Where ((p.CodigoONCAA = oncaa And oncaa <> "") Or (p.Descripcion = planta And planta <> "")) _
+                       Select p).FirstOrDefault
+
+
+        'Centro	    Código ONCCA		Código Postal	Población	Nombre Empresa	Nombre Planta
+        '0655		MOLINOS	2200	San Lorenzo	MOLINOS RIO DE LA PLATA S.A.	Molinos Pta. Binielli
+        '0830   	21078	CARGILL	8103	Ingeniero White	CARGILL SACI	Cargill - Bahía Blanca
+        'el "codigo oncca" de cargill es 21708, pero en williams solo se usa en "codigo YPF", y en oncca pusieron 25429
+
+
+        If IsNothing(ue) Then
+            ue = New WilliamsDestino
+
+            ue.Descripcion = planta
+            ue.CodigoONCAA = oncaa
+            ue.CodigoYPF = centro ' oncaa
+            ue.CodigoPostal = codpostal
+
+
+            db.WilliamsDestinos.InsertOnSubmit(ue)
+        Else
+
+
+            ue.Descripcion = planta
+            'ue.CodigoONCAA = centro
+            ue.CodigoYPF = centro ' oncaa
+            ue.CodigoPostal = codpostal
+
+        End If
+
+
+        'buscar todos los establecimientos con codigos con letras y intercambiarlos con la descripcion
+
+        'update establecimientos
+        'set aux1=descripcion, descripcion=
+        'where descripcion is alfanumeric --recordar que uso descripcion por codigo 
+        '
+
+        db.SubmitChanges()
+    End Function
+
+    Public Shared Function Delete(ByVal SC As String, ByVal Id As Long)
+        '// Write your own Delete statement blocks. 
+        ExecDinamico(SC, String.Format("DELETE  " & Tabla & "  WHERE {1}={0}", Id, IdTabla))
+    End Function
+
+End Class
+
+
+

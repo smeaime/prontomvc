@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="aspnet_Applications">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -333,23 +333,23 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BDLMasterModelStoreContainer">
-          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_UsersInRoles" EntityType="Self.aspnet_UsersInRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Bases" EntityType="Self.Bases" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleUserBD" EntityType="Self.DetalleUserBD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleUserPermisos" EntityType="Self.DetalleUserPermisos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserDatosExtendidos" EntityType="Self.UserDatosExtendidos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vw_aspnet_UsersInRoles" EntityType="Self.vw_aspnet_UsersInRoles" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_UsersInRoles" EntityType="Self.aspnet_UsersInRoles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Bases" EntityType="Self.Bases" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DetalleUserBD" EntityType="Self.DetalleUserBD" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DetalleUserPermisos" EntityType="Self.DetalleUserPermisos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserDatosExtendidos" EntityType="Self.UserDatosExtendidos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="vw_aspnet_UsersInRoles" EntityType="Self.vw_aspnet_UsersInRoles" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
     [vw_aspnet_UsersInRoles].[UserId] AS [UserId], 
     [vw_aspnet_UsersInRoles].[RoleId] AS [RoleId]
@@ -403,8 +403,8 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BDLMasterModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="BDLMasterEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="BDLMasterModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="BDLMasterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bases" EntityType="BDLMasterModel.Bases" />
           <EntitySet Name="DetalleUserBD" EntityType="BDLMasterModel.DetalleUserBD" />
           <EntitySet Name="DetalleUserPermisos" EntityType="BDLMasterModel.DetalleUserPermisos" />
@@ -466,7 +466,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <Key>
             <PropertyRef Name="IdBD" />
           </Key>
-          <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="StringConection" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="ServidorSQL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -477,7 +477,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <Key>
             <PropertyRef Name="IdDetalleUserBD" />
           </Key>
-          <Property Name="IdDetalleUserBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="IdDetalleUserBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Guid" />
           <Property Name="IdBD" Type="Int32" />
         </EntityType>
@@ -485,7 +485,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
           <Key>
             <PropertyRef Name="IdDetalleUserPermisos" />
           </Key>
-          <Property Name="IdDetalleUserPermisos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="IdDetalleUserPermisos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Guid" />
           <Property Name="Modulo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="PuedeLeer" Type="Boolean" />
@@ -651,7 +651,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
             <PropertyRef Name="id" />
             <PropertyRef Name="property" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="objectid" />
           <Property Type="String" Name="property" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="value" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -783,7 +783,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BDLMasterModelStoreContainer" CdmEntityContainer="BDLMasterEntities">
           <EntitySetMapping Name="Bases"><EntityTypeMapping TypeName="BDLMasterModel.Bases"><MappingFragment StoreEntitySet="Bases">
             <ScalarProperty Name="Pass" ColumnName="Pass" />
@@ -999,7 +999,7 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
     <edmx:Diagrams>
       <edmx:Diagram Name="bdlmaster">
         <edmx:EntityTypeShape EntityType="BDLMasterModel.Bases" Width="1.5" PointX="0.5" PointY="1.25" Height="1.59568359375" IsExpanded="true" />
-        <edmx:EntityTypeShape EntityType="BDLMasterModel.DetalleUserBD" Width="1.5" PointX="2.875" PointY="1.375" Height="1.5956835937499996" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="BDLMasterModel.DetalleUserBD" Width="1.5" PointX="3.375" PointY="0.875" Height="1.5956835937499996" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="BDLMasterModel.DetalleUserPermisos" Width="1.5" PointX="0.75" PointY="3.75" Height="2.3648893229166656" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="BDLMasterModel.UserDatosExtendidos" Width="1.5" PointX="2.75" PointY="3.75" Height="1.9802864583333335" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="BDLMasterModel.aspnet_Applications" Width="1.5" PointX="5.75" PointY="7.875" Height="2.5571907552083326" />

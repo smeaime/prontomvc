@@ -78,7 +78,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado }).ToList();
+            var emp = (from n in pronto.Empleados select new { n.UsuarioNT, n.IdEmpleado , n.Nombre }).ToList();
 
             var usersext = (from u in bdlmaster.aspnet_Users
                             join ur in bdlmaster.vw_aspnet_UsersInRoles on u.UserId equals ur.UserId
@@ -150,7 +150,7 @@ namespace ProntoMVC.Controllers
                         {
                             IdFactura = new Guid(),
                             UserId = new Guid(),
-                            UserName = e.UsuarioNT,
+                            UserName =  (e.UsuarioNT ?? "")=="" ?  "sin usuario [" + e.Nombre + "]"  :  e.UsuarioNT   ,
                             IdEmpleado = e.IdEmpleado,
                             leyenda = "sin usuario"
                         }
