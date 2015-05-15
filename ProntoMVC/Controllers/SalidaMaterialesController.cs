@@ -714,21 +714,23 @@ namespace ProntoMVC.Controllers
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
+
             var data2 = (from a in data
-<<<<<<< HEAD
+
                          from b in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
                          from c in dbmant.Articulos.Where(o => o.IdArticulo == a.IdEquipoDestino).DefaultIfEmpty()
                          select new 
                          { 
-                                IdOrdenTrabajo = a.IdOrdenTrabajo ?? 0,
-                                NumeroOrdenTrabajo = b.NumeroOrdenTrabajo != null ? b.NumeroOrdenTrabajo : 0,
-                                IdEquipoDestino = a.IdEquipoDestino ?? 0,
-                                EquipoDestino = c.Descripcion != null ? c.Descripcion : ""
+                                IdOrdenTrabajo = (a==null) ? 0 :  (a.IdOrdenTrabajo ?? 0),
+                                NumeroOrdenTrabajo =  (b==null) ? 0 :  (b.NumeroOrdenTrabajo ??  0),
+                                IdEquipoDestino = (a == null) ? 0 : (a.IdEquipoDestino ?? 0),
+                                EquipoDestino = (c == null) ? "" : (c.Descripcion != null ? c.Descripcion : "")
                          }).Distinct().ToList();
-=======
-                         from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
-                         select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
->>>>>>> 644e729e82221a5bfa18a4345b0bbc0ec406c3e7
+
+            //from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+              //           select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
+
+
 
             var jsonData = new jqGridJson()
             {
@@ -771,13 +773,10 @@ namespace ProntoMVC.Controllers
                             a.CostoUnitario.NullSafeToString(),
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-<<<<<<< HEAD
                             data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
-                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ?? 0).FirstOrDefault().NullSafeToString(),
-=======
-                            a.EquipoDestino.NullSafeToString(),
-                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo).FirstOrDefault().NullSafeToString(),
->>>>>>> 644e729e82221a5bfa18a4345b0bbc0ec406c3e7
+                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ).FirstOrDefault().NullSafeToString(),
+
+
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }
