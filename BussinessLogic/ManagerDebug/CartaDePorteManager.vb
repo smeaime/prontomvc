@@ -263,6 +263,10 @@ Public Class CartaDePorteManager
         Public FechaDeCarga As Date
         Public NRecibo As String
 
+        Public ProcedenciaCodigoPostal As String
+        Public DestinoCodigoPostal As String
+
+
 
         Public CalidadGranosDanadosRebaja As Decimal
         Public CalidadGranosExtranosRebaja As Decimal
@@ -1980,6 +1984,8 @@ Public Class CartaDePorteManager
   , .NRecibo = cdp.NRecibo _
     , .CalidadGranosDanadosRebaja = If(cdp.CalidadGranosDanadosRebaja, 0) _
             , .CalidadGranosExtranosRebaja = If(cdp.CalidadGranosExtranosRebaja, 0) _
+        , .DestinoCodigoPostal = dest.CodigoPostal _
+        , .ProcedenciaCodigoPostal = loc.CodigoPostal
            }) 'cosecha2 queda 1415, cosecha queda 2014/2015, original es 2014/15
 
 
