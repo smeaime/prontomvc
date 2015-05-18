@@ -710,13 +710,27 @@ namespace ProntoMVC.Controllers
                             a.FechaImputacion,
                             EquipoDestino = "",
                             OrdenTrabajo = "",
-                            PresupuestoObrasEtapa = (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
+                            PresupuestoObrasEtapa = (i != null ? i.Item + " " : "") + (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
                             a.Observaciones
                         }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
+
             var data2 = (from a in data
-                         from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
-                         select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
+
+                         from b in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+                         from c in dbmant.Articulos.Where(o => o.IdArticulo == a.IdEquipoDestino).DefaultIfEmpty()
+                         select new 
+                         { 
+                                IdOrdenTrabajo = (a==null) ? 0 :  (a.IdOrdenTrabajo ?? 0),
+                                NumeroOrdenTrabajo =  (b==null) ? 0 :  (b.NumeroOrdenTrabajo ??  0),
+                                IdEquipoDestino = (a == null) ? 0 : (a.IdEquipoDestino ?? 0),
+                                EquipoDestino = (c == null) ? "" : (c.Descripcion != null ? c.Descripcion : "")
+                         }).Distinct().ToList();
+
+            //from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+              //           select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
+
+
 
             var jsonData = new jqGridJson()
             {
@@ -753,13 +767,16 @@ namespace ProntoMVC.Controllers
                             a.Cantidad.NullSafeToString(),
                             a.Unidad.NullSafeToString(),
                             a.Ubicacion.NullSafeToString(),
+                            a.UbicacionDestino.NullSafeToString(),
                             a.Obra.NullSafeToString(),
                             a.Partida.NullSafeToString(),
                             a.CostoUnitario.NullSafeToString(),
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                            a.EquipoDestino.NullSafeToString(),
-                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo).FirstOrDefault().NullSafeToString(),
+                            data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
+                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ).FirstOrDefault().NullSafeToString(),
+
+
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="BDLMasterModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-  <EntityContainer Name="BDLMasterEntities" annotation:LazyLoadingEnabled="true">
+<Schema Namespace="BDLMasterModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="BDLMasterEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
     <EntitySet Name="Bases" EntityType="BDLMasterModel.Bases" />
     <EntitySet Name="DetalleUserBD" EntityType="BDLMasterModel.DetalleUserBD" />
     <EntitySet Name="DetalleUserPermisos" EntityType="BDLMasterModel.DetalleUserPermisos" />
@@ -62,7 +62,7 @@
     <Key>
       <PropertyRef Name="IdBD" />
     </Key>
-    <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Name="Descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="StringConection" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="ServidorSQL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -73,7 +73,7 @@
     <Key>
       <PropertyRef Name="IdDetalleUserBD" />
     </Key>
-    <Property Name="IdDetalleUserBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDetalleUserBD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Name="UserId" Type="Guid" />
     <Property Name="IdBD" Type="Int32" />
   </EntityType>
@@ -81,7 +81,7 @@
     <Key>
       <PropertyRef Name="IdDetalleUserPermisos" />
     </Key>
-    <Property Name="IdDetalleUserPermisos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDetalleUserPermisos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Name="UserId" Type="Guid" />
     <Property Name="Modulo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="PuedeLeer" Type="Boolean" />
@@ -247,7 +247,7 @@
       <PropertyRef Name="id" />
       <PropertyRef Name="property" />
     </Key>
-    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Type="Int32" Name="objectid" />
     <Property Type="String" Name="property" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="value" MaxLength="255" FixedLength="false" Unicode="false" />
