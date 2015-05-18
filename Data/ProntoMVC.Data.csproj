@@ -624,9 +624,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pronto.Designer.cs">
-      <DependentUpon>Pronto.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Pronto.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ProntoIni.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -817,9 +817,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model2.cs</LastGenOutput>
       <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
-    </None>
-    <None Include="Models\Pronto.edmx.diagram">
-      <DependentUpon>Pronto.edmx</DependentUpon>
     </None>
     <EntityDeploy Include="Models\Mantenimiento\ProntoMantenimiento.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

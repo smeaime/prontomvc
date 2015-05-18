@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+<Schema Namespace="BDLMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="aspnet_Applications">
     <Key>
       <PropertyRef Name="ApplicationId" />
@@ -345,10 +345,12 @@ advertencia 6002: La tabla o vista 'BDLmaster.dbo.vw_aspnet_UsersInRoles' no tie
     <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
     <EntitySet Name="UserDatosExtendidos" EntityType="Self.UserDatosExtendidos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
     <EntitySet Name="vw_aspnet_UsersInRoles" EntityType="Self.vw_aspnet_UsersInRoles" store:Type="Views" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
-      <DefiningQuery>SELECT 
-    [vw_aspnet_UsersInRoles].[UserId] AS [UserId], 
-    [vw_aspnet_UsersInRoles].[RoleId] AS [RoleId]
-    FROM [dbo].[vw_aspnet_UsersInRoles] AS [vw_aspnet_UsersInRoles]</DefiningQuery>
+      <DefiningQuery>
+              SELECT
+              [vw_aspnet_UsersInRoles].[UserId] AS [UserId],
+              [vw_aspnet_UsersInRoles].[RoleId] AS [RoleId]
+              FROM [dbo].[vw_aspnet_UsersInRoles] AS [vw_aspnet_UsersInRoles]
+            </DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__aspnet_Me__Appli__0EA330E9" Association="Self.FK__aspnet_Me__Appli__0EA330E9">
       <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
