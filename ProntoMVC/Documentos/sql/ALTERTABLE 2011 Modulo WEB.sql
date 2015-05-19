@@ -1249,3 +1249,22 @@ CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
 		[CuentaOrden2], [Corredor], [Entregador], [IdArticulo], [NetoFinal], [Contrato],
 		[Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
 GO
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+alter table Localidades add 
+	 CodigoAfip int null
+go
+alter table Localidades ADD
+	constraint U_LocalidadesAFIP unique NONCLUSTERED (CodigoAfip)
+go
+
+
+
