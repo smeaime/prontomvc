@@ -3747,8 +3747,8 @@ Public Class CartaDePorteManager
                 'filejpg y en el filejpg2, pero el archivo no existe.
                 'ok, en ese caso el responsable es ImagenPDF()
 
-                MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
-                ErrHandler.WriteError(ex)
+                'MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
+                ErrHandler.WriteError(ex.ToString + " " + filejpg + " " + filejpg2)
                 'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
                 Throw
             End Try
@@ -22512,7 +22512,9 @@ Public Class CDPDestinosManager
     End Function
 
     Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
-                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String)
+                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String _
+, Optional localidadequivalente As Integer = -1 _
+)
 
 
         Dim db = New LinqCartasPorteDataContext(Encriptar(sc))
