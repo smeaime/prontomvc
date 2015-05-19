@@ -217,6 +217,18 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
         </FileNode>
+        <FileNode Name="wLocalidades_TT.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>wLocalidades_TT.sql</FullPath>
+        </FileNode>
+        <FileNode Name="wCartasDePorteMovimientos_TT.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>wCartasDePorteMovimientos_TT.sql</FullPath>
+        </FileNode>
         <FileNode Name="wTarifaWilliams.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql1:False:sa</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>serversql1</AssociatedConnSrvName>
@@ -350,8 +362,8 @@
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_InformesCorregido.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_InformesCorregido.sql</FullPath>
         </FileNode>
