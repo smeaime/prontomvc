@@ -900,11 +900,11 @@ namespace ProntoMVC.Controllers
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-            if (db.Facturas.Find(id).IdCliente != idcliente
-                 && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
-                ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
+            //if (db.Facturas.Find(id).IdCliente != idcliente
+            //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+            //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
 
             string baseP = this.HttpContext.Session["BasePronto"].ToString();
