@@ -785,6 +785,9 @@
       <LastGenOutput>bdlmaster.Context.cs</LastGenOutput>
       <DependentUpon>bdlmaster.edmx</DependentUpon>
     </None>
+    <None Include="Models\bdlmaster.edmx.diagram">
+      <DependentUpon>bdlmaster.edmx</DependentUpon>
+    </None>
     <None Include="Models\bdlmaster.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>bdlmaster.cs</LastGenOutput>
@@ -822,6 +825,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProntoMantenimiento.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Models\Pronto.edmx.diagram">
+      <DependentUpon>Pronto.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
