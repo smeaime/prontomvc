@@ -2,6 +2,7 @@
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <edmx:Designer>
     <edmx:Diagrams>
+<<<<<<< HEAD
       <edmx:Diagram Name="Pronto" ZoomLevel="24">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2.75" PointX="3.5" PointY="28.5" Height="0.4" IsExpanded="true" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="2.375" PointX="16.5" PointY="55.125" Height="0.4" IsExpanded="false" />
@@ -2314,6 +2315,418 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesDirecciones_Clientes" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" />
         </edmx:Diagram>
+=======
+      <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ControlCalidad" Width="1.5" PointX="23.75" PointY="83.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRequerimiento" Width="1.5" PointX="26" PointY="84.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Obra" Width="1.5" PointX="1.5" PointY="194.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Requerimiento" Width="1.5" PointX="23.75" PointY="86.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Sector" Width="1.5" PointX="3.75" PointY="69.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Unidad" Width="1.5" PointX="0.75" PointY="139.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Parametros" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Parametros2" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Vendedor" Width="1.5" PointX="6" PointY="93.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Cliente" Width="1.5" PointX="8.25" PointY="105.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PuntosVenta" Width="1.5" PointX="14.25" PointY="92.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Condiciones_Compra" Width="1.5" PointX="6" PointY="99.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Ganancia" Width="1.5" PointX="18" PointY="1" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.IGCondicion" Width="1.5" PointX="6" PointY="107.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ListasPrecio" Width="1.5" PointX="3" PointY="115.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposRetencionGanancia" Width="1.5" PointX="15.75" PointY="1" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Concepto" Width="1.5" PointX="22.5" PointY="105.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Cuenta" Width="1.5" PointX="0.75" PointY="147.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePedido" Width="1.5" PointX="28.25" PointY="112.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetallePresupuesto" Width="1.5" PointX="5.25" PointY="127.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Pedido" Width="1.5" PointX="11" PointY="108.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Presupuesto" Width="1.5" PointX="3" PointY="120.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.IBCondicion" Width="1.5" PointX="6" PointY="79.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Localidad" Width="1.5" PointX="6" PointY="87.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Moneda" Width="1.5" PointX="0.75" PointY="116.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Pais" Width="1.5" PointX="1.5" PointY="81.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Provincia" Width="1.5" PointX="3.75" PointY="79.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposComprobante" Width="1.5" PointX="0.75" PointY="100.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFactura" Width="1.5" PointX="27.75" PointY="103.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Factura" Width="1.5" PointX="19.5" PointY="105" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedor" Width="1.5" PointX="16.5" PointY="135.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedoresIB" Width="1.5" PointX="16.5" PointY="130.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleProveedoresRubro" Width="1.5" PointX="19.5" PointY="154.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PlazosEntrega" Width="1.5" PointX="0.75" PointY="124.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Proveedor" Width="1.5" PointX="14.25" PointY="134.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Rubro" Width="1.5" PointX="0.75" PointY="164.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleCliente" Width="1.5" PointX="10.5" PointY="99" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleClientesLugaresEntrega" Width="1.5" PointX="16.5" PointY="117" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.BancoChequera" Width="1.5" PointX="5.25" PointY="219.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Banco" Width="1.5" PointX="3" PointY="222.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarjetasCredito" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Estados_Proveedore" Width="1.5" PointX="6" PointY="110.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Cotizacione" Width="1.5" PointX="3" PointY="191.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasCorrientesAcreedor" Width="1.5" PointX="16.5" PointY="161.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasCorrientesDeudor" Width="1.5" PointX="10.5" PointY="133" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasEjerciciosContable" Width="1.5" PointX="17.75" PointY="8.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasGasto" Width="1.5" PointX="1.5" PointY="185.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleCuenta" Width="1.5" PointX="3" PointY="217" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesCompra" Width="1.5" PointX="21.75" PointY="130" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRemito" Width="1.5" PointX="30" PointY="128.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenesCompra" Width="1.5" PointX="16.5" PointY="120.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Remito" Width="1.5" PointX="16.5" PointY="106.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasClientesPRESTO" Width="1.5" PointX="17.75" PointY="13.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasOrdenesCompra" Width="1.5" PointX="34" PointY="112.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasProvincia" Width="1.5" PointX="21.75" PointY="127" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFacturasRemito" Width="1.5" PointX="34" PointY="121.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleArticulosActivosFijo" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleArticulosDocumento" Width="1.5" PointX="5.25" PointY="156" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleArticulosImagene" Width="1.5" PointX="5.25" PointY="158.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleArticulosUnidade" Width="1.5" PointX="8.25" PointY="153.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DefinicionArticulo" Width="1.5" PointX="3" PointY="230" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Deposito" Width="1.5" PointX="1.5" PointY="213.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Stock" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Ubicacion" Width="1.5" PointX="0.75" PointY="171" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.EmpleadosAcceso" Width="1.5" PointX="8.25" PointY="62" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibo" Width="1.5" PointX="12.75" PointY="161.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosCuenta" Width="1.5" PointX="12.75" PointY="166.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosRubrosContable" Width="1.5" PointX="12.75" PointY="171.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecibosValore" Width="1.5" PointX="12.75" PointY="175.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recibo" Width="1.5" PointX="10.5" PointY="160.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosContable" Width="1.5" PointX="16.5" PointY="156.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.RubrosValore" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Comparativa" Width="1.5" PointX="3.75" PointY="89.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleComparativa" Width="1.5" PointX="6" PointY="121.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Autorizacione" Width="1.5" PointX="19.75" PointY="9.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.AutorizacionesCompra" Width="1.5" PointX="19.75" PointY="12.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.AutorizacionesPorComprobante1" Width="1.5" PointX="19.75" PointY="17.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.AutorizacionesPorComprobanteADesignar" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAutorizacione" Width="1.5" PointX="10.75" PointY="20.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAutorizacionesCompra" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAutorizacionesFirmante" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ProntoIni" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ProntoIniClaves" Width="1.5" PointX="21.75" PointY="4.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPago" Width="1.5" PointX="18.75" PointY="141.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoCuenta" Width="1.5" PointX="18.75" PointY="145" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoRendicionesFF" Width="1.5" PointX="21.75" PointY="7.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoRubrosContable" Width="1.5" PointX="18.75" PointY="149.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoValore" Width="1.5" PointX="7.5" PointY="159.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenPago" Width="1.5" PointX="16.5" PointY="139.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ComprobanteProveedor" Width="1.5" PointX="14" PointY="105" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleComprobantesProveedore" Width="1.5" PointX="31.25" PointY="109.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleComprobantesProveedoresPresupuestosObra" Width="1.5" PointX="7.75" PointY="21.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleComprobantesProveedoresProvincia" Width="1.5" PointX="21.75" PointY="10.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Caja" Width="1.5" PointX="3" PointY="227.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosCuentasBancaria" Width="1.5" PointX="8.25" PointY="66.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosJornada" Width="1.5" PointX="8.25" PointY="68.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosSectore" Width="1.5" PointX="8.25" PointY="71.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasCredito" Width="1.5" PointX="24.75" PointY="107.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasCreditoImputacione" Width="1.5" PointX="24.75" PointY="126.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasCreditoOrdenesCompra" Width="1.5" PointX="24.75" PointY="129.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasCreditoProvincia" Width="1.5" PointX="24.75" PointY="132" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasDebito" Width="1.5" PointX="33.75" PointY="116.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleNotasDebitoProvincia" Width="1.5" PointX="27.75" PointY="128.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Ejercicio" Width="1.5" PointX="21.75" PointY="13.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.EjerciciosContable" Width="1.5" PointX="21.75" PointY="16.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.EjerciciosPeriodo" Width="1.5" PointX="17.75" PointY="21.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Empresa" Width="1.5" PointX="21.75" PointY="19.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Formulario" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasCredito" Width="1.5" PointX="22.5" PointY="110.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.NotasDebito" Width="1.5" PointX="25.5" PointY="111.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposValore" Width="1.5" PointX="23.75" PointY="3.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposCuenta" Width="1.5" PointX="23.75" PointY="6.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposCuentaGrupos" Width="1.5" PointX="1.5" PointY="210.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Titulo" Width="1.5" PointX="23.75" PointY="9.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DescripcionIva" Width="1.5" PointX="6" PointY="137.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Subrubro" Width="1.5" PointX="0.75" PointY="174.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOrdenesPagoImpuesto" Width="1.5" PointX="18.75" PointY="157.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Subdiario" Width="1.5" PointX="23.75" PointY="12.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ListasPreciosDetalle" Width="1.5" PointX="5.25" PointY="114.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.C_TempAutorizaciones" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Transportista" Width="1.5" PointX="8.25" PointY="87.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosObra" Width="1.5" PointX="8.25" PointY="74.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleadosUbicacione" Width="1.5" PointX="8.25" PointY="76.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Cargo" Width="1.5" PointX="3.75" PointY="72.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CuentasBancaria" Width="1.5" PointX="5.25" PointY="224.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleEmpleado" Width="1.5" PointX="8.25" PointY="79.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Empleado" Width="1.5" PointX="6" PointY="65.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Valore" Width="1.5" PointX="3" PointY="95.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CurvasTalle" Width="1.5" PointX="23.75" PointY="18.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ImpuestosDirecto" Width="1.5" PointX="23.75" PointY="21.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Marca" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Materiale" Width="1.5" PointX="2.75" PointY="24.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Modelo" Width="1.5" PointX="4.75" PointY="24.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Actividades_Proveedore" Width="1.5" PointX="6.75" PointY="24.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DiferenciasCambio" Width="1.5" PointX="17.75" PointY="24.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Asiento" Width="1.5" PointX="10.75" PointY="14.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAsiento" Width="1.5" PointX="13" PointY="13.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Conciliacione" Width="1.5" PointX="7.5" PointY="224.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleConciliacione" Width="1.5" PointX="9.75" PointY="223.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleConciliacionesNoContable" Width="1.5" PointX="9.75" PointY="226.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Tree" Width="1.5" PointX="25.75" PointY="3.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposImpuesto" Width="1.5" PointX="25.75" PointY="7.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Regione" Width="1.5" PointX="25.75" PointY="10.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleClientesDireccione" Width="1.5" PointX="10.5" PointY="213" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleClientesTelefono" Width="1.5" PointX="10.5" PointY="216.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Calle" Width="1.5" PointX="25.75" PointY="13.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Feriado" Width="1.5" PointX="25.75" PointY="16.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposCompra" Width="1.5" PointX="25.75" PointY="19.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposNegociosVenta" Width="1.5" PointX="25.75" PointY="22.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacione" Width="1.5" PointX="25.75" PointY="25.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposOperacionesGrupos" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.GruposObra" Width="1.5" PointX="19.75" PointY="26.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.UnidadesOperativa" Width="1.5" PointX="21.75" PointY="26.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Colore" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasEquiposInstalado" Width="1.5" PointX="3.75" PointY="196.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasEquiposInstalados2" Width="1.5" PointX="3.75" PointY="199.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleObrasPoliza" Width="1.5" PointX="3.75" PointY="203" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposPoliza" Width="1.5" PointX="2.75" PointY="27.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleDevolucione" Width="1.5" PointX="8" PointY="15.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Devolucione" Width="1.5" PointX="5.75" PointY="12.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Chofere" Width="1.5" PointX="27.75" PointY="3.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.LogComprobantesElectronico" Width="1.5" PointX="4.75" PointY="27.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PlazosFijo" Width="1.5" PointX="27.75" PointY="6.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Conjunto" Width="1.5" PointX="10.75" PointY="8.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleConjunto" Width="1.5" PointX="13" PointY="8" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Tipos" Width="1.5" PointX="6.75" PointY="27.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.AjustesStock" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAjustesStock" Width="1.5" PointX="13" PointY="1.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleOtrosIngresosAlmacen" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleRecepcione" Width="1.5" PointX="36.5" PointY="113.875" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleSalidasMateriale" Width="1.5" PointX="38.75" PointY="112.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OtrosIngresosAlmacen" Width="1.5" PointX="5.75" PointY="3.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Recepcione" Width="1.5" PointX="34.25" PointY="124.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.SalidasMateriale" Width="1.5" PointX="36.5" PointY="127.375" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleValesSalida" Width="1.5" PointX="36.5" PointY="104.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ValesSalida" Width="1.5" PointX="34.25" PointY="105" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarifasFlete" Width="1.5" PointX="27.75" PointY="14.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.OrdenesTrabajo" Width="1.5" PointX="27.75" PointY="18.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodo" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosConsumo" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosDato" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuesto" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasNodosPxQxPresupuestoPorDia" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRedeterminacione" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRequerimientos_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRequerimientos_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRequerimientos_ControlesCalidad" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Sectores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRequerimientos_Requerimientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Cuentas1" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Cuentas2" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePresupuestos_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Conceptos_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Condiciones_Compra" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_Pedidos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePresupuestos_Presupuestos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePresupuestos_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Ganancias_TiposRetencionGanancia" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CatIIBB" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Cobrador" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CondicionCompras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CondicionIIBB" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CuentasMonedaExt" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_IGCondiciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_listasprecio" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Vendedor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_IBCondiciones_Cuentas_IIBB" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_LocalidadEntrega" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Localidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Pais" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Paises" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Provincia" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_ProvinciaEntrega" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Provincias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_IBCondiciones_Provincias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_IBCondiciones_Provincias_Real" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ListasPrecios_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Provincias_Paises" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PuntosVenta_TiposComprobante" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_Facturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CatIIBB2" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_CatIIBB3" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_IBCondiciones_Cuentas_IIBBCompras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_IBCondiciones_Cuentas_IIBBConvenio" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePresupuestos_DetalleRequerimientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Rubros" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Rubros_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleProveedores_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleProveedoresIB_IBCondiciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleProveedoresIB_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleProveedoresRubros_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleProveedoresRubros_Rubros" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_Localidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_Paises" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_PlazosEntrega" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_Provincias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesLugaresEntrega_Localidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesLugaresEntrega_Provincias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientes_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleLugaresEntrega_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_BancoChequeras_Bancos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Bancos_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Bancos_Cuentas1" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Estados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasCorrientesDeudores_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cotizaciones_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleCuentas_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasCorrientesAcreedores_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesCompra_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_Articulos1" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesCompra_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesCompra_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_PuntosVenta" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesCompra_OrdenesCompra" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_Remitos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesCompra_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Vendedor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Obra" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Provincia" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DefinicionArticulos_Rubros" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Ubicaciones_Depositos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_Ubicaciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Ubicacion" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleArticulosUnidades_Unidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleArticulosDocumentos_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleArticulosImagenes_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleArticulosUnidades_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecibos_Recibos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecibosCuentas_Recibos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecibosRubrosContables_Recibos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecibosValores_Recibos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_RubrosContables" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_DetalleRequerimientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_ControlCalidad" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComprobantesProveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComparativas_Articulo" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComparativas_Unidad" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComparativas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Proveedor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComprobantesProveedores_Cuenta" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_Proveedor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cajas_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCredito_Conceptos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasDebito_Conceptos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Proveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetallePedidos_DetalleComparativa" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_IdTipoValor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Cuenta" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_TipoCuentaGrupos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_CuentasGastos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Obra" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_DescripcionIva" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_DescripcionIva" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_DescripcionIva" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_BancoChequeras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComparativas_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_PuntosVenta" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_IBCondiciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasCredito_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_Monedas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_Subrubros" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ListasPreciosDetalle_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ListasPreciosDetalle_ListasPrecios" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Localidades_Provincias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Transportistas_Localidades" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_CuentasBancarias_Bancos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Cargos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados_Ingreso" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Clientes_Empleados_Modifico" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleados_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Empleados_Sectores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_EmpleadoAprobo" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_EmpleadoComprador" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Pedidos_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_EmpleadosAccesos_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Presupuestos_Empleados1" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_Aprobo" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdAutorizoCumplido" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdComprador" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdDioPorCumplido" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Requerimientos_Empleados_IdSolicito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosCuentasBancarias_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosJornadas_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosObras_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosSectores_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleEmpleadosUbicaciones_Empleados" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoComprobante" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_TiposComprobante_IdTipoValor" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPago_OrdenesPago" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoCuentas_OrdenesPago" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoImpuestos_OrdenesPago" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoRubrosContables_OrdenesPago" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOrdenesPagoValores_OrdenesPago" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_Asientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Conciliaciones_CuentasBancarias" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleConciliaciones_Conciliaciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleConciliacionesNoContables_Conciliaciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Valores_Monedas_IdMoneda1" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_Cuentas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesDirecciones_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleClientesTelefonos_Clientes" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasEquiposInstalados2_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleObrasPolizas_Obras" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasDebito_NotasDebito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasDebitoProvincias_NotasDebito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCredito_NotasCredito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoImputaciones_NotasCredito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoOrdenesCompra_NotasCredito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleNotasCreditoProvincias_NotasCredito" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleDevoluciones_Devoluciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Proveedores_EstadosProveedores" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleConjuntos_Conjuntos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_Facturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasProvincias_Facturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasRemitos_Facturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleFacturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasRemitos_DetalleFacturas" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAjustesStock_AjustesStock" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleOtrosIngresosAlmacen_OtrosIngresosAlmacen" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Recepciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_SalidasMateriales" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleOrdenesCompra" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturas_DetalleRemitos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetallePedidos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRemitos_DetalleRequerimientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_ValesSalida" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleRecepciones_Ubicaciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_ComprobantesProveedores_CuentaOtros" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleValesSalida" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_Ubicaciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_DetalleRequerimientos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleRecepciones" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleValesSalida_Articulos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosConsumos_PresupuestoObrasNodos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosDatos_PresupuestoObrasNodos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosPxQxPresupuesto_PresupuestoObrasNodos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasNodosPxQxPresupuestoPorDia_PresupuestoObrasNodos" ManuallyRouted="false" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_PresupuestoObrasRedeterminaciones_PresupuestoObrasNodos" ManuallyRouted="false" />
+      </edmx:Diagram>
+>>>>>>> 33aa1d93c141ea2cc052112880d82363e40cb46b
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
