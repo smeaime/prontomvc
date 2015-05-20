@@ -3747,8 +3747,8 @@ Public Class CartaDePorteManager
                 'filejpg y en el filejpg2, pero el archivo no existe.
                 'ok, en ese caso el responsable es ImagenPDF()
 
-                MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
-                ErrHandler.WriteError(ex)
+                'MandarMailDeError(ex.ToString + " " + filejpg + " " + filejpg2)
+                ErrHandler.WriteError(ex.ToString + " " + filejpg + " " + filejpg2)
                 'MsgBoxAjax(Me, "No se pudo generar el documento PDF. Quizas las cartas fueron modificadas y ya no tienen imágenes adjuntas")
                 Throw
             End Try
@@ -4880,7 +4880,7 @@ Public Class CartaDePorteManager
 "      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
 "      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
 "      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
-"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja ,  " & _
 "			cast (cdp.NumeroCartaDePorte as varchar) +" & _
 "					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
 "           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
@@ -4935,8 +4935,9 @@ Public Class CartaDePorteManager
 "  isnull(PARTORI.Nombre,'') AS ProcedenciaPartidoNormalizada   , " & _
 "			isnull(CLICOR2.Nombre,'') AS CorredorDesc2, " & _
 "            isnull(CLICOR2.cuit,'') AS CorredorCUIT2, " & _
-"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT " _
-        )
+"			isnull(CLIENTREG.cuit,'') AS EntregadorCUIT, " & _
+"		isnull(LOCORI.CodigoAFIP,'') AS CodigoAFIP " _
+)
 
 
         Dim strFROM = _
@@ -22511,7 +22512,9 @@ Public Class CDPDestinosManager
     End Function
 
     Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
-                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String)
+                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String _
+, Optional localidadequivalente As Integer = -1 _
+)
 
 
         Dim db = New LinqCartasPorteDataContext(Encriptar(sc))

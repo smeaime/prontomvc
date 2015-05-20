@@ -570,17 +570,16 @@ namespace ProntoMVC.Controllers
                                             )
                                     ).Distinct()
                                 ),
-                                string.Join(",", 
-                                       a.DetalleRemitos
-                                       .Select(x => 
-                                           (x.Articulo == null) ?
-                                           "" :
-                                           ((   x.Articulo.Codigo == null) ? 
-                                               "" :
-                                               x.Articulo.Codigo.NullSafeToString()
-                                           )
-                                       ).Distinct()
-                                ),
+                                ""
+                                //string.Join(",", 
+                                //       a.DetalleRemitos
+                                //       .Select(x => 
+                                //          ( (x.Articulo == null) ?
+                                //                    "" :   x.Articulo.Codigo.NullSafeToString() 
+                                //           )
+                                //       ).Distinct()
+                                //)
+                                ,
                                 a.TipoRemito.NullSafeToString(),
                                 a.CondicionVenta.NullSafeToString(),
                                 a.Transportista.NullSafeToString(),

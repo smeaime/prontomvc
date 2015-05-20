@@ -232,6 +232,10 @@ namespace ProntoMVC.Controllers
                 mImporteDetalle = (x.Cantidad ?? 0) * (x.PrecioUnitario ?? 0);
                 mImporteDetalle = mImporteDetalle * (1 - (x.Bonificacion ?? 0) / 100);
                 mSubtotal += mImporteDetalle;
+
+
+
+                //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
 
@@ -319,6 +323,8 @@ namespace ProntoMVC.Controllers
                 mIdCuentaOtrasPercepciones2 = parametros.IdCuentaOtrasPercepciones2 ?? 0;
                 mIdCuentaOtrasPercepciones3 = parametros.IdCuentaOtrasPercepciones3 ?? 0;
                 mIdCuentaPercepcionesIVA = parametros.IdCuentaPercepcionesIVA ?? 0;
+
+                               
 
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -900,11 +906,11 @@ namespace ProntoMVC.Controllers
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-            if (db.Facturas.Find(id).IdCliente != idcliente
-                 && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-            !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
-                ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
+            //if (db.Facturas.Find(id).IdCliente != idcliente
+            //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+            //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
 
             string baseP = this.HttpContext.Session["BasePronto"].ToString();
