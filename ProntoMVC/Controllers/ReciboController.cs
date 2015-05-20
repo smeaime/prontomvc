@@ -194,7 +194,7 @@ namespace ProntoMVC.Controllers
             if (mTipo == "CC")
             {
                 if (o.DetalleRecibosImputaciones.Count <= 0) sErrorMsg += "\n" + "No hay imputaciones ingresadas";
-                if (mDiferenciaBalanceo != 0) { sErrorMsg += "\n" + "Hay diferencia de balanceo en el comprobante"; }
+                if (mDiferenciaBalanceo != 0) { sErrorMsg += "\n" + "Hay diferencia de balanceo en el comprobante (" + mDiferenciaBalanceo + ")"; }
 
                 if (mIdCliente <= 0)
                 {

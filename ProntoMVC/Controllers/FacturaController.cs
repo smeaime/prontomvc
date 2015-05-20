@@ -235,7 +235,7 @@ namespace ProntoMVC.Controllers
 
 
 
-                x.Articulo.AuxiliarNumerico1 = 0;
+                //x.Articulo.AuxiliarNumerico1 = 0;
             }
             if (mSubtotal <= 0) sErrorMsg += "\n" + "El subtotal de la factura debe ser mayor a cero";
 
