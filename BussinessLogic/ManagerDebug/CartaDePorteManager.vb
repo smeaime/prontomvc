@@ -4397,7 +4397,7 @@ Public Class CartaDePorteManager
                                          ByVal txtBuscar As String, ByVal cmbCriterioWHERE As String, ByVal cmbmodo As String, _
                                          ByVal optDivisionSyngenta As String, ByVal txtFechaDesde As String, ByVal txtFechaHasta As String, _
                                          ByVal cmbPuntoVenta As String, Optional ByVal sJOIN As String = "", Optional ByVal txtClienteAuxiliar As String = "", _
-                                         Optional ByVal txtFacturarA As String = "") _
+                                         Optional ByVal txtFacturarA As String = "", Optional txtCorredorObs As String = "") _
                                 As String
         'As IQueryable(Of CartasDePorte)
 
@@ -4531,6 +4531,7 @@ Public Class CartaDePorteManager
 
         Dim idVendedor = BuscaIdClientePreciso(txtTitular, HFSC)
         Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor, HFSC)
+        Dim idCorredorObs = BuscaIdVendedorPreciso(txtCorredorObs, HFSC)
         Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario, HFSC)
         Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario, HFSC)
         Dim idRComercial = BuscaIdClientePreciso(txtRcomercial, HFSC)
@@ -4602,6 +4603,8 @@ Public Class CartaDePorteManager
 
 
         strWHERE += iisIdValido(idCorredor, "             AND CDP.Corredor=" & idCorredor, "")
+        strWHERE += iisIdValido(idCorredorObs, "             AND CDP.Corredor2=" & idCorredorObs, "")
+
         strWHERE += iisIdValido(idArticulo, "           AND CDP.IdArticulo=" & idArticulo, "")
         strWHERE += iisIdValido(idProcedencia, "             AND CDP.Procedencia=" & idProcedencia, "")
         strWHERE += iisIdValido(idDestino, "             AND CDP.Destino=" & idDestino, "")
@@ -14671,7 +14674,7 @@ Public Class LogicaFacturacion
             Try
                 idFactura = CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta, dtRenglonesAgregados, SC, Session, optFacturarA, _
                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor, _
-                                             txtCorredor, chkPagaCorredor, listEmbarques, imputaciones)
+                                             txtCorredor, chkPagaCorredor, listEmbarques, imputaciones, Nothing)
 
             Catch ex As AccessViolationException
                 'http://stackoverflow.com/questions/5842985/attempted-to-read-or-write-protected-memory-error-when-accessing-com-component
@@ -15356,7 +15359,8 @@ Public Class LogicaFacturacion
                                          ByVal SeSeparaPorCorredor As Boolean, ByVal txtCorredor As String, _
                                          ByVal chkPagaCorredor As Boolean, _
                                          ByVal listEmbarques As System.Collections.Generic.List(Of DataRow), _
-                                        ByRef ImputacionDevuelta As IEnumerable(Of grup) _
+                                        ByRef ImputacionDevuelta As IEnumerable(Of grup), _
+                                        IdCorredorObservaciones As Integer _
 ) As Integer
         'Revisar tambien en
         ' Pronto el Utilidades->"Generacion de Facturas a partir de Ordenes de Compra automaticas",
@@ -15586,6 +15590,12 @@ Public Class LogicaFacturacion
 
 
 
+                        '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
+
+
+
+
+
                         .Fields("NumeroCAI").Value = Val(mCAI)
                         .Fields("FechaVencimientoCAI").Value = mFechaCAI
                         .Fields("IdUsuarioIngreso").Value = Session(SESSIONPRONTO_glbIdUsuario)
@@ -15593,6 +15603,8 @@ Public Class LogicaFacturacion
                         .Fields("IdCodigoIva").Value = mIdCodigoIva   'este no lo estas asignando (ahora)... Igual, la factura graba
                         '.Fields("PercepcionIVA").Value = 1 ' 0   'Esta linea tira error
                         .Fields("PorcentajePercepcionIVA").Value = 0
+
+
 
                     End With
 
@@ -22512,8 +22524,8 @@ Public Class CDPDestinosManager
     End Function
 
     Shared Function Update(ByVal sc As String, ByVal centro As String, ByVal oncaa As String, _
-                               asdasd As String, codpostal As String, poblacion As String, empresa As String, planta As String _
-, Optional localidadequivalente As Integer = -1 _
+                               _obsoleto As String, codpostal As String, poblacion As String, empresa As String, planta As String _
+, Optional localidadequivalente As Integer? = Nothing _
 )
 
 
@@ -22539,6 +22551,7 @@ Public Class CDPDestinosManager
             ue.CodigoYPF = centro ' oncaa
             ue.CodigoPostal = codpostal
 
+            ue.IdLocalidad = localidadequivalente
 
             db.WilliamsDestinos.InsertOnSubmit(ue)
         Else
@@ -22546,9 +22559,10 @@ Public Class CDPDestinosManager
 
             ue.Descripcion = planta
             'ue.CodigoONCAA = centro
-            ue.CodigoYPF = centro ' oncaa
-            ue.CodigoPostal = codpostal
+            If centro <> "" Then ue.CodigoYPF = centro ' oncaa
+            If codpostal <> "" Then ue.CodigoPostal = codpostal
 
+            If localidadequivalente IsNot Nothing Then ue.IdLocalidad = localidadequivalente
         End If
 
 
