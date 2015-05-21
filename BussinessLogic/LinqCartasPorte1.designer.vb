@@ -23,7 +23,7 @@ Imports System.Reflection
 Imports System.Runtime.Serialization
 
 
-<Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="WilliamsEntregas")>  _
+<Global.System.Data.Linq.Mapping.DatabaseAttribute(Name:="Williams")>  _
 Partial Public Class LinqCartasPorteDataContext
 	Inherits System.Data.Linq.DataContext
 	
@@ -116,12 +116,6 @@ Partial Public Class LinqCartasPorteDataContext
     End Sub
   Partial Private Sub DeleteCartasDePorteReglasDeFacturacion(instance As CartasDePorteReglasDeFacturacion)
     End Sub
-  Partial Private Sub InsertLocalidade(instance As Localidade)
-    End Sub
-  Partial Private Sub UpdateLocalidade(instance As Localidade)
-    End Sub
-  Partial Private Sub DeleteLocalidade(instance As Localidade)
-    End Sub
   Partial Private Sub InsertlinqPartido(instance As linqPartido)
     End Sub
   Partial Private Sub UpdatelinqPartido(instance As linqPartido)
@@ -188,10 +182,16 @@ Partial Public Class LinqCartasPorteDataContext
     End Sub
   Partial Private Sub DeleteCartasDePorte(instance As CartasDePorte)
     End Sub
+  Partial Private Sub InsertLocalidade(instance As Localidade)
+    End Sub
+  Partial Private Sub UpdateLocalidade(instance As Localidade)
+    End Sub
+  Partial Private Sub DeleteLocalidade(instance As Localidade)
+    End Sub
   #End Region
 	
 	Public Sub New()
-		MyBase.New(Global.My.MySettings.Default.WilliamsEntregasConnectionString1, mappingSource)
+		MyBase.New(Global.My.MySettings.Default.WilliamsConnectionString1, mappingSource)
 		OnCreated
 	End Sub
 	
@@ -311,12 +311,6 @@ Partial Public Class LinqCartasPorteDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property Localidades() As System.Data.Linq.Table(Of Localidade)
-		Get
-			Return Me.GetTable(Of Localidade)
-		End Get
-	End Property
-	
 	Public ReadOnly Property linqPartido() As System.Data.Linq.Table(Of linqPartido)
 		Get
 			Return Me.GetTable(Of linqPartido)
@@ -389,11 +383,17 @@ Partial Public Class LinqCartasPorteDataContext
 		End Get
 	End Property
 	
-    Public ReadOnly Property CartasDePortes() As System.Data.Linq.Table(Of CartasDePorte)
-        Get
-            Return Me.GetTable(Of CartasDePorte)()
-        End Get
-    End Property
+	Public ReadOnly Property CartasDePorte() As System.Data.Linq.Table(Of CartasDePorte)
+		Get
+			Return Me.GetTable(Of CartasDePorte)
+		End Get
+	End Property
+	
+	Public ReadOnly Property Localidades() As System.Data.Linq.Table(Of Localidade)
+		Get
+			Return Me.GetTable(Of Localidade)
+		End Get
+	End Property
 	
 	<Global.System.Data.Linq.Mapping.FunctionAttribute(Name:="dbo.wTarifaWilliamsEstimada", IsComposable:=true)>  _
 	Public Function wTarifaWilliamsEstimada(<Global.System.Data.Linq.Mapping.ParameterAttribute(DbType:="Int")> ByVal idCliente As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdArticulo", DbType:="Int")> ByVal idArticulo As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="IdDestino", DbType:="Int")> ByVal idDestino As System.Nullable(Of Integer), <Global.System.Data.Linq.Mapping.ParameterAttribute(Name:="TipoTarifa", DbType:="Int")> ByVal tipoTarifa As System.Nullable(Of Integer)) As System.Nullable(Of Decimal)
@@ -13950,465 +13950,6 @@ Partial Public Class CartasDePorteReglasDeFacturacion
 	End Sub
 End Class
 
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Localidades"),  _
- Global.System.Runtime.Serialization.DataContractAttribute()>  _
-Partial Public Class Localidade
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _IdLocalidad As Integer
-	
-	Private _Nombre As String
-	
-	Private _CodigoPostal As String
-	
-	Private _IdProvincia As System.Nullable(Of Integer)
-	
-	Private _EnviarEmail As System.Nullable(Of Byte)
-	
-	Private _CodigoONCAA As String
-	
-	Private _CodigoWilliams As String
-	
-	Private _CodigoLosGrobo As String
-	
-	Private _CodigoESRI As String
-	
-	Private _Partido As String
-	
-	Private _Codigo As System.Nullable(Of Integer)
-	
-	Private _IdPartido As System.Nullable(Of Integer)
-	
-	Private _WilliamsDestinos As EntitySet(Of WilliamsDestino)
-	
-	Private _Clientes As EntitySet(Of linqCliente)
-	
-	Private _linqClientes As EntitySet(Of linqCliente)
-	
-	Private _Partido1 As EntityRef(Of linqPartido)
-	
-	Private serializing As Boolean
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnIdLocalidadChanging(value As Integer)
-    End Sub
-    Partial Private Sub OnIdLocalidadChanged()
-    End Sub
-    Partial Private Sub OnNombreChanging(value As String)
-    End Sub
-    Partial Private Sub OnNombreChanged()
-    End Sub
-    Partial Private Sub OnCodigoPostalChanging(value As String)
-    End Sub
-    Partial Private Sub OnCodigoPostalChanged()
-    End Sub
-    Partial Private Sub OnIdProvinciaChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdProvinciaChanged()
-    End Sub
-    Partial Private Sub OnEnviarEmailChanging(value As System.Nullable(Of Byte))
-    End Sub
-    Partial Private Sub OnEnviarEmailChanged()
-    End Sub
-    Partial Private Sub OnCodigoONCAAChanging(value As String)
-    End Sub
-    Partial Private Sub OnCodigoONCAAChanged()
-    End Sub
-    Partial Private Sub OnCodigoWilliamsChanging(value As String)
-    End Sub
-    Partial Private Sub OnCodigoWilliamsChanged()
-    End Sub
-    Partial Private Sub OnCodigoLosGroboChanging(value As String)
-    End Sub
-    Partial Private Sub OnCodigoLosGroboChanged()
-    End Sub
-    Partial Private Sub OnCodigoESRIChanging(value As String)
-    End Sub
-    Partial Private Sub OnCodigoESRIChanged()
-    End Sub
-    Partial Private Sub OnPartidoChanging(value As String)
-    End Sub
-    Partial Private Sub OnPartidoChanged()
-    End Sub
-    Partial Private Sub OnCodigoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnCodigoChanged()
-    End Sub
-    Partial Private Sub OnIdPartidoChanging(value As System.Nullable(Of Integer))
-    End Sub
-    Partial Private Sub OnIdPartidoChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me.Initialize
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
-	Public Property IdLocalidad() As Integer
-		Get
-			Return Me._IdLocalidad
-		End Get
-		Set
-			If ((Me._IdLocalidad = value)  _
-						= false) Then
-				Me.OnIdLocalidadChanging(value)
-				Me.SendPropertyChanging
-				Me._IdLocalidad = value
-				Me.SendPropertyChanged("IdLocalidad")
-				Me.OnIdLocalidadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
-	Public Property Nombre() As String
-		Get
-			Return Me._Nombre
-		End Get
-		Set
-			If (String.Equals(Me._Nombre, value) = false) Then
-				Me.OnNombreChanging(value)
-				Me.SendPropertyChanging
-				Me._Nombre = value
-				Me.SendPropertyChanged("Nombre")
-				Me.OnNombreChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
-	Public Property CodigoPostal() As String
-		Get
-			Return Me._CodigoPostal
-		End Get
-		Set
-			If (String.Equals(Me._CodigoPostal, value) = false) Then
-				Me.OnCodigoPostalChanging(value)
-				Me.SendPropertyChanging
-				Me._CodigoPostal = value
-				Me.SendPropertyChanged("CodigoPostal")
-				Me.OnCodigoPostalChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
-	Public Property IdProvincia() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdProvincia
-		End Get
-		Set
-			If (Me._IdProvincia.Equals(value) = false) Then
-				Me.OnIdProvinciaChanging(value)
-				Me.SendPropertyChanging
-				Me._IdProvincia = value
-				Me.SendPropertyChanged("IdProvincia")
-				Me.OnIdProvinciaChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
-	Public Property EnviarEmail() As System.Nullable(Of Byte)
-		Get
-			Return Me._EnviarEmail
-		End Get
-		Set
-			If (Me._EnviarEmail.Equals(value) = false) Then
-				Me.OnEnviarEmailChanging(value)
-				Me.SendPropertyChanging
-				Me._EnviarEmail = value
-				Me.SendPropertyChanged("EnviarEmail")
-				Me.OnEnviarEmailChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
-	Public Property CodigoONCAA() As String
-		Get
-			Return Me._CodigoONCAA
-		End Get
-		Set
-			If (String.Equals(Me._CodigoONCAA, value) = false) Then
-				Me.OnCodigoONCAAChanging(value)
-				Me.SendPropertyChanging
-				Me._CodigoONCAA = value
-				Me.SendPropertyChanged("CodigoONCAA")
-				Me.OnCodigoONCAAChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
-	Public Property CodigoWilliams() As String
-		Get
-			Return Me._CodigoWilliams
-		End Get
-		Set
-			If (String.Equals(Me._CodigoWilliams, value) = false) Then
-				Me.OnCodigoWilliamsChanging(value)
-				Me.SendPropertyChanging
-				Me._CodigoWilliams = value
-				Me.SendPropertyChanged("CodigoWilliams")
-				Me.OnCodigoWilliamsChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
-	Public Property CodigoLosGrobo() As String
-		Get
-			Return Me._CodigoLosGrobo
-		End Get
-		Set
-			If (String.Equals(Me._CodigoLosGrobo, value) = false) Then
-				Me.OnCodigoLosGroboChanging(value)
-				Me.SendPropertyChanging
-				Me._CodigoLosGrobo = value
-				Me.SendPropertyChanged("CodigoLosGrobo")
-				Me.OnCodigoLosGroboChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoESRI", DbType:="VarChar(2)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
-	Public Property CodigoESRI() As String
-		Get
-			Return Me._CodigoESRI
-		End Get
-		Set
-			If (String.Equals(Me._CodigoESRI, value) = false) Then
-				Me.OnCodigoESRIChanging(value)
-				Me.SendPropertyChanging
-				Me._CodigoESRI = value
-				Me.SendPropertyChanged("CodigoESRI")
-				Me.OnCodigoESRIChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partido", DbType:="VarChar(60)"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
-	Public Property Partido() As String
-		Get
-			Return Me._Partido
-		End Get
-		Set
-			If (String.Equals(Me._Partido, value) = false) Then
-				Me.OnPartidoChanging(value)
-				Me.SendPropertyChanging
-				Me._Partido = value
-				Me.SendPropertyChanged("Partido")
-				Me.OnPartidoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="Int"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
-	Public Property Codigo() As System.Nullable(Of Integer)
-		Get
-			Return Me._Codigo
-		End Get
-		Set
-			If (Me._Codigo.Equals(value) = false) Then
-				Me.OnCodigoChanging(value)
-				Me.SendPropertyChanging
-				Me._Codigo = value
-				Me.SendPropertyChanged("Codigo")
-				Me.OnCodigoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", DbType:="Int"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
-	Public Property IdPartido() As System.Nullable(Of Integer)
-		Get
-			Return Me._IdPartido
-		End Get
-		Set
-			If (Me._IdPartido.Equals(value) = false) Then
-				If Me._Partido1.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
-				Me.OnIdPartidoChanging(value)
-				Me.SendPropertyChanging
-				Me._IdPartido = value
-				Me.SendPropertyChanged("IdPartido")
-				Me.OnIdPartidoChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_WilliamsDestino", Storage:="_WilliamsDestinos", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13, EmitDefaultValue:=false)>  _
-	Public Property WilliamsDestinos() As EntitySet(Of WilliamsDestino)
-		Get
-			If (Me.serializing  _
-						AndAlso (Me._WilliamsDestinos.HasLoadedOrAssignedValues = false)) Then
-				Return Nothing
-			End If
-			Return Me._WilliamsDestinos
-		End Get
-		Set
-			Me._WilliamsDestinos.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_Clientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidadEntrega"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14, EmitDefaultValue:=false)>  _
-	Public Property Clientes() As EntitySet(Of linqCliente)
-		Get
-			If (Me.serializing  _
-						AndAlso (Me._Clientes.HasLoadedOrAssignedValues = false)) Then
-				Return Nothing
-			End If
-			Return Me._Clientes
-		End Get
-		Set
-			Me._Clientes.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente1", Storage:="_linqClientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad"),  _
-	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=15, EmitDefaultValue:=false)>  _
-	Public Property linqClientes() As EntitySet(Of linqCliente)
-		Get
-			If (Me.serializing  _
-						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
-				Return Nothing
-			End If
-			Return Me._linqClientes
-		End Get
-		Set
-			Me._linqClientes.Assign(value)
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqPartido_Localidade", Storage:="_Partido1", ThisKey:="IdPartido", OtherKey:="IdPartido", IsForeignKey:=true)>  _
-	Public Property linqPartido() As linqPartido
-		Get
-			Return Me._Partido1.Entity
-		End Get
-		Set
-			Dim previousValue As linqPartido = Me._Partido1.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Partido1.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Partido1.Entity = Nothing
-					previousValue.Localidades.Remove(Me)
-				End If
-				Me._Partido1.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.Localidades.Add(Me)
-					Me._IdPartido = value.IdPartido
-				Else
-					Me._IdPartido = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("linqPartido")
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_WilliamsDestinos(ByVal entity As WilliamsDestino)
-		Me.SendPropertyChanging
-		entity.Localidade = Me
-	End Sub
-	
-	Private Sub detach_WilliamsDestinos(ByVal entity As WilliamsDestino)
-		Me.SendPropertyChanging
-		entity.Localidade = Nothing
-	End Sub
-	
-	Private Sub attach_Clientes(ByVal entity As linqCliente)
-		Me.SendPropertyChanging
-		entity.Localidade = Me
-	End Sub
-	
-	Private Sub detach_Clientes(ByVal entity As linqCliente)
-		Me.SendPropertyChanging
-		entity.Localidade = Nothing
-	End Sub
-	
-	Private Sub attach_linqClientes(ByVal entity As linqCliente)
-		Me.SendPropertyChanging
-		entity.Localidade1 = Me
-	End Sub
-	
-	Private Sub detach_linqClientes(ByVal entity As linqCliente)
-		Me.SendPropertyChanging
-		entity.Localidade1 = Nothing
-	End Sub
-	
-	Private Sub Initialize()
-		Me._WilliamsDestinos = New EntitySet(Of WilliamsDestino)(AddressOf Me.attach_WilliamsDestinos, AddressOf Me.detach_WilliamsDestinos)
-		Me._Clientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_Clientes, AddressOf Me.detach_Clientes)
-		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
-		Me._Partido1 = CType(Nothing, EntityRef(Of linqPartido))
-		OnCreated
-	End Sub
-	
-	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
-	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
-	Public Sub OnDeserializing(ByVal context As StreamingContext)
-		Me.Initialize
-	End Sub
-	
-	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
-	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
-	Public Sub OnSerializing(ByVal context As StreamingContext)
-		Me.serializing = true
-	End Sub
-	
-	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
-	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
-	Public Sub OnSerialized(ByVal context As StreamingContext)
-		Me.serializing = false
-	End Sub
-End Class
-
 <Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Partidos"),  _
  Global.System.Runtime.Serialization.DataContractAttribute()>  _
 Partial Public Class linqPartido
@@ -14684,8 +14225,6 @@ Partial Public Class WilliamsDestino
 	Private _IdProvincia As System.Nullable(Of Integer)
 	
 	Private _IdLocalidad As System.Nullable(Of Integer)
-	
-	Private _Localidade As EntityRef(Of Localidade)
 	
 	Private _Cliente As EntityRef(Of linqCliente)
 	
@@ -15102,42 +14641,11 @@ Partial Public Class WilliamsDestino
 		End Get
 		Set
 			If (Me._IdLocalidad.Equals(value) = false) Then
-				If Me._Localidade.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
 				Me.OnIdLocalidadChanging(value)
 				Me.SendPropertyChanging
 				Me._IdLocalidad = value
 				Me.SendPropertyChanged("IdLocalidad")
 				Me.OnIdLocalidadChanged
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_WilliamsDestino", Storage:="_Localidade", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad", IsForeignKey:=true)>  _
-	Public Property Localidade() As Localidade
-		Get
-			Return Me._Localidade.Entity
-		End Get
-		Set
-			Dim previousValue As Localidade = Me._Localidade.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Localidade.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Localidade.Entity = Nothing
-					previousValue.WilliamsDestinos.Remove(Me)
-				End If
-				Me._Localidade.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.WilliamsDestinos.Add(Me)
-					Me._IdLocalidad = value.IdLocalidad
-				Else
-					Me._IdLocalidad = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("Localidade")
 			End If
 		End Set
 	End Property
@@ -15217,7 +14725,6 @@ Partial Public Class WilliamsDestino
 	End Sub
 	
 	Private Sub Initialize()
-		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
 		Me._Cliente = CType(Nothing, EntityRef(Of linqCliente))
 		Me._linqCliente = CType(Nothing, EntityRef(Of linqCliente))
 		OnCreated
@@ -20218,11 +19725,9 @@ Partial Public Class linqCliente
 	
 	Private _ListasPrecio As EntityRef(Of ListasPrecio)
 	
-	Private _Localidade As EntityRef(Of Localidade)
-	
-	Private _Localidade1 As EntityRef(Of Localidade)
-	
 	Private _linqCorredor1 As EntityRef(Of linqCorredor)
+	
+	Private _Localidade As EntityRef(Of Localidade)
 	
 	Private serializing As Boolean
 	
@@ -20680,7 +20185,7 @@ Partial Public Class linqCliente
 		End Get
 		Set
 			If (Me._IdLocalidad.Equals(value) = false) Then
-				If Me._Localidade1.HasLoadedOrAssignedValue Then
+				If Me._Localidade.HasLoadedOrAssignedValue Then
 					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
 				End If
 				Me.OnIdLocalidadChanging(value)
@@ -20904,9 +20409,6 @@ Partial Public Class linqCliente
 		End Get
 		Set
 			If (Me._IdLocalidadEntrega.Equals(value) = false) Then
-				If Me._Localidade.HasLoadedOrAssignedValue Then
-					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
-				End If
 				Me.OnIdLocalidadEntregaChanging(value)
 				Me.SendPropertyChanging
 				Me._IdLocalidadEntrega = value
@@ -22474,62 +21976,6 @@ Partial Public Class linqCliente
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_Localidade", ThisKey:="IdLocalidadEntrega", OtherKey:="IdLocalidad", IsForeignKey:=true)>  _
-	Public Property Localidade() As Localidade
-		Get
-			Return Me._Localidade.Entity
-		End Get
-		Set
-			Dim previousValue As Localidade = Me._Localidade.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Localidade.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Localidade.Entity = Nothing
-					previousValue.Clientes.Remove(Me)
-				End If
-				Me._Localidade.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.Clientes.Add(Me)
-					Me._IdLocalidadEntrega = value.IdLocalidad
-				Else
-					Me._IdLocalidadEntrega = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("Localidade")
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente1", Storage:="_Localidade1", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad", IsForeignKey:=true)>  _
-	Public Property Localidade1() As Localidade
-		Get
-			Return Me._Localidade1.Entity
-		End Get
-		Set
-			Dim previousValue As Localidade = Me._Localidade1.Entity
-			If ((Object.Equals(previousValue, value) = false)  _
-						OrElse (Me._Localidade1.HasLoadedOrAssignedValue = false)) Then
-				Me.SendPropertyChanging
-				If ((previousValue Is Nothing)  _
-							= false) Then
-					Me._Localidade1.Entity = Nothing
-					previousValue.linqClientes.Remove(Me)
-				End If
-				Me._Localidade1.Entity = value
-				If ((value Is Nothing)  _
-							= false) Then
-					value.linqClientes.Add(Me)
-					Me._IdLocalidad = value.IdLocalidad
-				Else
-					Me._IdLocalidad = CType(Nothing, Nullable(Of Integer))
-				End If
-				Me.SendPropertyChanged("Localidade1")
-			End If
-		End Set
-	End Property
-	
 	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqCorredor_linqCliente1", Storage:="_linqCorredor1", ThisKey:="Vendedor1", OtherKey:="IdVendedor", IsForeignKey:=true)>  _
 	Public Property linqCorredor1() As linqCorredor
 		Get
@@ -22554,6 +22000,34 @@ Partial Public Class linqCliente
 					Me._Vendedor1 = CType(Nothing, Nullable(Of Integer))
 				End If
 				Me.SendPropertyChanged("linqCorredor1")
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_Localidade", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad", IsForeignKey:=true)>  _
+	Public Property Localidade() As Localidade
+		Get
+			Return Me._Localidade.Entity
+		End Get
+		Set
+			Dim previousValue As Localidade = Me._Localidade.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._Localidade.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._Localidade.Entity = Nothing
+					previousValue.linqClientes.Remove(Me)
+				End If
+				Me._Localidade.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.linqClientes.Add(Me)
+					Me._IdLocalidad = value.IdLocalidad
+				Else
+					Me._IdLocalidad = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("Localidade")
 			End If
 		End Set
 	End Property
@@ -22658,9 +22132,8 @@ Partial Public Class linqCliente
 		Me._linqEmpleado = CType(Nothing, EntityRef(Of linqEmpleado))
 		Me._linqEmpleado1 = CType(Nothing, EntityRef(Of linqEmpleado))
 		Me._ListasPrecio = CType(Nothing, EntityRef(Of ListasPrecio))
-		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
-		Me._Localidade1 = CType(Nothing, EntityRef(Of Localidade))
 		Me._linqCorredor1 = CType(Nothing, EntityRef(Of linqCorredor))
+		Me._Localidade = CType(Nothing, EntityRef(Of Localidade))
 		OnCreated
 	End Sub
 	
@@ -27170,6 +26643,432 @@ Partial Public Class CartasDePorte
 	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
 	Public Sub OnDeserializing(ByVal context As StreamingContext)
 		Me.Initialize
+	End Sub
+End Class
+
+<Global.System.Data.Linq.Mapping.TableAttribute(Name:="dbo.Localidades"),  _
+ Global.System.Runtime.Serialization.DataContractAttribute()>  _
+Partial Public Class Localidade
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _IdLocalidad As Integer
+	
+	Private _Nombre As String
+	
+	Private _CodigoPostal As String
+	
+	Private _IdProvincia As System.Nullable(Of Integer)
+	
+	Private _EnviarEmail As System.Nullable(Of Byte)
+	
+	Private _CodigoONCAA As String
+	
+	Private _CodigoESRI As String
+	
+	Private _CodigoWilliams As String
+	
+	Private _CodigoLosGrobo As String
+	
+	Private _Partido As String
+	
+	Private _Codigo As System.Nullable(Of Integer)
+	
+	Private _IdPartido As System.Nullable(Of Integer)
+	
+	Private _CodigoAfip As System.Nullable(Of Integer)
+	
+	Private _linqClientes As EntitySet(Of linqCliente)
+	
+	Private _linqPartido As EntityRef(Of linqPartido)
+	
+	Private serializing As Boolean
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnIdLocalidadChanging(value As Integer)
+    End Sub
+    Partial Private Sub OnIdLocalidadChanged()
+    End Sub
+    Partial Private Sub OnNombreChanging(value As String)
+    End Sub
+    Partial Private Sub OnNombreChanged()
+    End Sub
+    Partial Private Sub OnCodigoPostalChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodigoPostalChanged()
+    End Sub
+    Partial Private Sub OnIdProvinciaChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdProvinciaChanged()
+    End Sub
+    Partial Private Sub OnEnviarEmailChanging(value As System.Nullable(Of Byte))
+    End Sub
+    Partial Private Sub OnEnviarEmailChanged()
+    End Sub
+    Partial Private Sub OnCodigoONCAAChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodigoONCAAChanged()
+    End Sub
+    Partial Private Sub OnCodigoESRIChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodigoESRIChanged()
+    End Sub
+    Partial Private Sub OnCodigoWilliamsChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodigoWilliamsChanged()
+    End Sub
+    Partial Private Sub OnCodigoLosGroboChanging(value As String)
+    End Sub
+    Partial Private Sub OnCodigoLosGroboChanged()
+    End Sub
+    Partial Private Sub OnPartidoChanging(value As String)
+    End Sub
+    Partial Private Sub OnPartidoChanged()
+    End Sub
+    Partial Private Sub OnCodigoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCodigoChanged()
+    End Sub
+    Partial Private Sub OnIdPartidoChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnIdPartidoChanged()
+    End Sub
+    Partial Private Sub OnCodigoAfipChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnCodigoAfipChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdLocalidad", AutoSync:=AutoSync.OnInsert, DbType:="Int NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=1)>  _
+	Public Property IdLocalidad() As Integer
+		Get
+			Return Me._IdLocalidad
+		End Get
+		Set
+			If ((Me._IdLocalidad = value)  _
+						= false) Then
+				Me.OnIdLocalidadChanging(value)
+				Me.SendPropertyChanging
+				Me._IdLocalidad = value
+				Me.SendPropertyChanged("IdLocalidad")
+				Me.OnIdLocalidadChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Nombre", DbType:="VarChar(50)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=2)>  _
+	Public Property Nombre() As String
+		Get
+			Return Me._Nombre
+		End Get
+		Set
+			If (String.Equals(Me._Nombre, value) = false) Then
+				Me.OnNombreChanging(value)
+				Me.SendPropertyChanging
+				Me._Nombre = value
+				Me.SendPropertyChanged("Nombre")
+				Me.OnNombreChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoPostal", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=3)>  _
+	Public Property CodigoPostal() As String
+		Get
+			Return Me._CodigoPostal
+		End Get
+		Set
+			If (String.Equals(Me._CodigoPostal, value) = false) Then
+				Me.OnCodigoPostalChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoPostal = value
+				Me.SendPropertyChanged("CodigoPostal")
+				Me.OnCodigoPostalChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdProvincia", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=4)>  _
+	Public Property IdProvincia() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdProvincia
+		End Get
+		Set
+			If (Me._IdProvincia.Equals(value) = false) Then
+				Me.OnIdProvinciaChanging(value)
+				Me.SendPropertyChanging
+				Me._IdProvincia = value
+				Me.SendPropertyChanged("IdProvincia")
+				Me.OnIdProvinciaChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_EnviarEmail", DbType:="TinyInt"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=5)>  _
+	Public Property EnviarEmail() As System.Nullable(Of Byte)
+		Get
+			Return Me._EnviarEmail
+		End Get
+		Set
+			If (Me._EnviarEmail.Equals(value) = false) Then
+				Me.OnEnviarEmailChanging(value)
+				Me.SendPropertyChanging
+				Me._EnviarEmail = value
+				Me.SendPropertyChanged("EnviarEmail")
+				Me.OnEnviarEmailChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoONCAA", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=6)>  _
+	Public Property CodigoONCAA() As String
+		Get
+			Return Me._CodigoONCAA
+		End Get
+		Set
+			If (String.Equals(Me._CodigoONCAA, value) = false) Then
+				Me.OnCodigoONCAAChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoONCAA = value
+				Me.SendPropertyChanged("CodigoONCAA")
+				Me.OnCodigoONCAAChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoESRI", DbType:="VarChar(2)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=7)>  _
+	Public Property CodigoESRI() As String
+		Get
+			Return Me._CodigoESRI
+		End Get
+		Set
+			If (String.Equals(Me._CodigoESRI, value) = false) Then
+				Me.OnCodigoESRIChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoESRI = value
+				Me.SendPropertyChanged("CodigoESRI")
+				Me.OnCodigoESRIChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoWilliams", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=8)>  _
+	Public Property CodigoWilliams() As String
+		Get
+			Return Me._CodigoWilliams
+		End Get
+		Set
+			If (String.Equals(Me._CodigoWilliams, value) = false) Then
+				Me.OnCodigoWilliamsChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoWilliams = value
+				Me.SendPropertyChanged("CodigoWilliams")
+				Me.OnCodigoWilliamsChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoLosGrobo", DbType:="VarChar(20)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
+	Public Property CodigoLosGrobo() As String
+		Get
+			Return Me._CodigoLosGrobo
+		End Get
+		Set
+			If (String.Equals(Me._CodigoLosGrobo, value) = false) Then
+				Me.OnCodigoLosGroboChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoLosGrobo = value
+				Me.SendPropertyChanged("CodigoLosGrobo")
+				Me.OnCodigoLosGroboChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Partido", DbType:="VarChar(60)"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=10)>  _
+	Public Property Partido() As String
+		Get
+			Return Me._Partido
+		End Get
+		Set
+			If (String.Equals(Me._Partido, value) = false) Then
+				Me.OnPartidoChanging(value)
+				Me.SendPropertyChanging
+				Me._Partido = value
+				Me.SendPropertyChanged("Partido")
+				Me.OnPartidoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Codigo", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=11)>  _
+	Public Property Codigo() As System.Nullable(Of Integer)
+		Get
+			Return Me._Codigo
+		End Get
+		Set
+			If (Me._Codigo.Equals(value) = false) Then
+				Me.OnCodigoChanging(value)
+				Me.SendPropertyChanging
+				Me._Codigo = value
+				Me.SendPropertyChanged("Codigo")
+				Me.OnCodigoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_IdPartido", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=12)>  _
+	Public Property IdPartido() As System.Nullable(Of Integer)
+		Get
+			Return Me._IdPartido
+		End Get
+		Set
+			If (Me._IdPartido.Equals(value) = false) Then
+				If Me._linqPartido.HasLoadedOrAssignedValue Then
+					Throw New System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException()
+				End If
+				Me.OnIdPartidoChanging(value)
+				Me.SendPropertyChanging
+				Me._IdPartido = value
+				Me.SendPropertyChanged("IdPartido")
+				Me.OnIdPartidoChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_CodigoAfip", DbType:="Int"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=13)>  _
+	Public Property CodigoAfip() As System.Nullable(Of Integer)
+		Get
+			Return Me._CodigoAfip
+		End Get
+		Set
+			If (Me._CodigoAfip.Equals(value) = false) Then
+				Me.OnCodigoAfipChanging(value)
+				Me.SendPropertyChanging
+				Me._CodigoAfip = value
+				Me.SendPropertyChanged("CodigoAfip")
+				Me.OnCodigoAfipChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="Localidade_linqCliente", Storage:="_linqClientes", ThisKey:="IdLocalidad", OtherKey:="IdLocalidad"),  _
+	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=14, EmitDefaultValue:=false)>  _
+	Public Property linqClientes() As EntitySet(Of linqCliente)
+		Get
+			If (Me.serializing  _
+						AndAlso (Me._linqClientes.HasLoadedOrAssignedValues = false)) Then
+				Return Nothing
+			End If
+			Return Me._linqClientes
+		End Get
+		Set
+			Me._linqClientes.Assign(value)
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.AssociationAttribute(Name:="linqPartido_Localidade", Storage:="_linqPartido", ThisKey:="IdPartido", OtherKey:="IdPartido", IsForeignKey:=true)>  _
+	Public Property linqPartido() As linqPartido
+		Get
+			Return Me._linqPartido.Entity
+		End Get
+		Set
+			Dim previousValue As linqPartido = Me._linqPartido.Entity
+			If ((Object.Equals(previousValue, value) = false)  _
+						OrElse (Me._linqPartido.HasLoadedOrAssignedValue = false)) Then
+				Me.SendPropertyChanging
+				If ((previousValue Is Nothing)  _
+							= false) Then
+					Me._linqPartido.Entity = Nothing
+					previousValue.Localidades.Remove(Me)
+				End If
+				Me._linqPartido.Entity = value
+				If ((value Is Nothing)  _
+							= false) Then
+					value.Localidades.Add(Me)
+					Me._IdPartido = value.IdPartido
+				Else
+					Me._IdPartido = CType(Nothing, Nullable(Of Integer))
+				End If
+				Me.SendPropertyChanged("linqPartido")
+			End If
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+	
+	Private Sub attach_linqClientes(ByVal entity As linqCliente)
+		Me.SendPropertyChanging
+		entity.Localidade = Me
+	End Sub
+	
+	Private Sub detach_linqClientes(ByVal entity As linqCliente)
+		Me.SendPropertyChanging
+		entity.Localidade = Nothing
+	End Sub
+	
+	Private Sub Initialize()
+		Me._linqClientes = New EntitySet(Of linqCliente)(AddressOf Me.attach_linqClientes, AddressOf Me.detach_linqClientes)
+		Me._linqPartido = CType(Nothing, EntityRef(Of linqPartido))
+		OnCreated
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnDeserializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnDeserializing(ByVal context As StreamingContext)
+		Me.Initialize
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializingAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerializing(ByVal context As StreamingContext)
+		Me.serializing = true
+	End Sub
+	
+	<Global.System.Runtime.Serialization.OnSerializedAttribute(),  _
+	 Global.System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)>  _
+	Public Sub OnSerialized(ByVal context As StreamingContext)
+		Me.serializing = false
 	End Sub
 End Class
 
