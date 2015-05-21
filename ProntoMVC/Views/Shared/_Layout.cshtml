@@ -1642,12 +1642,16 @@ Released   : 20120723
                                                 Cambiar contraseña
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">
-                                                Notificaciones
-                                                y firmas
-                                            </a>
-                                        </li>
+
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                        {
+                                            <li>
+                                                <a href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">
+                                                    Notificaciones
+                                                    y firmas
+                                                </a>
+                                            </li>
+                                        }
                                         @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                         {
                                             <li class="divider"></li>
@@ -1655,7 +1659,7 @@ Released   : 20120723
 
                                             <li><a href="#">Administrador</a></li>
                                             <li>
-                                                <a href=' @( Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())'>
+                                                <a href=' @( Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())=) ='>
                                                     Mi cuenta
                                                 </a>
                                             </li>
