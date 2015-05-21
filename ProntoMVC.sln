@@ -70,6 +70,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1ECBCA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Report Project1", "ProntoMVC\Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj", "{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -184,6 +186,33 @@ Global
 		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.ActiveCfg = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.Build.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.Deploy.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Mixed Platforms.Build.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Mixed Platforms.Deploy.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|x86.ActiveCfg = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|x86.Build.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|x86.Deploy.0 = Debug
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Any CPU.Deploy.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Mixed Platforms.ActiveCfg = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Mixed Platforms.Build.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|Mixed Platforms.Deploy.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|x86.ActiveCfg = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|x86.Build.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.DebugLocal|x86.Deploy.0 = DebugLocal
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Any CPU.ActiveCfg = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Any CPU.Build.0 = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Any CPU.Deploy.0 = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Mixed Platforms.ActiveCfg = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Mixed Platforms.Build.0 = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|Mixed Platforms.Deploy.0 = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|x86.ActiveCfg = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|x86.Build.0 = Release
+		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Release|x86.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
