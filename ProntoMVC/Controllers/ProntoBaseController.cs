@@ -2116,7 +2116,7 @@ namespace ProntoMVC.Controllers
             bool esFondoFijo = Roles.IsUserInRole(usuario, "FondosFijos");
 
 
-            if (esExterno)
+            if (esExterno || true)
             {
 
                 // agregarExterno() // hasta que metas el agregar externa, deberás usar TablaTree
