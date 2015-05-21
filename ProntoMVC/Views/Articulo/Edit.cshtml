@@ -24,13 +24,47 @@
         </div>
         @Html.ValidationSummary(true)
         <div>@Html.HiddenFor(model => model.IdArticulo)</div>
+
+
         <div class="row-fluid">
+         
             <div class="span8 lightblue">
                 @Html.LabelFor(model => model.Descripcion, "Descripción")
                 @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
                 @Html.ValidationMessageFor(model => model.Descripcion)
             </div>
         </div>
+
+        @*<div class="row-fluid">
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.Codigo, "Código")
+                @Html.TextBoxFor(model => model.Codigo, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Codigo)
+            </div>
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.AlicuotaIVA, "Alicuota IVA")
+                @Html.TextBoxFor(model => model.AlicuotaIVA, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.AlicuotaIVA)
+            </div>
+
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.CostoReposicion, "Costo Reposición")
+                @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.Descripcion)
+            </div>
+            <div class="span2 lightblue">
+                @Html.LabelFor(model => model.IdUnidad, "Unidad")
+                @Html.DropDownList("IdUnidad", null, "", new { @class = "span12" })
+                @Html.ValidationMessageFor(model => model.IdUnidad)
+            </div>
+        </div>*@
+
+
+
+
+
+
+
         <div class="row-fluid">
             <div class="span4 lightblue">
                 @*                // verificar que pongo el cuarto parametro de SelectList que elige el item del combo *@
