@@ -13,8 +13,8 @@
   </DataSources>
   <DataSets>
     <ProjectItem>
-      <Name>DataSet1.rsd</Name>
-      <FullPath>DataSet1.rsd</FullPath>
+      <Name>IVA Ventas.rsd</Name>
+      <FullPath>IVA Ventas.rsd</FullPath>
     </ProjectItem>
   </DataSets>
   <Reports>

@@ -145,9 +145,9 @@ INSERT INTO #Auxiliar0 Select '01-02-04','ArticulosRubros','Por rubros','01-02',
 If Len(@BasePRONTOMANT)>0   
 	INSERT INTO #Auxiliar0 Select '01-02-07','ArticulosProntoMantenimiento','Mantenimiento','01-02',7,Null,Null,'Articulos','NO','Principal'  
 
---INSERT INTO #Auxiliar0 Select '01-02-08','DefinicionesArt','Máscaras','01-02',8,Null,Null,'DefinicionesArt','SI','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-08-01','DefinicionesArtTodos','Todas','01-02-08',1,Null,Null,'DefinicionesArt','NO','Principal'  
---INSERT INTO #Auxiliar0 Select '01-02-08-02','DefinicionesArtRubros','Por rubros','01-02-08',2,Null,Null,'DefinicionesArt','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-08','DefinicionesArt','Máscaras','01-02',8,Null,Null,'DefinicionesArt','SI','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-08-01','DefinicionesArtTodos','Todas','01-02-08',1,Null,Null,'DefinicionesArt','NO','Principal'  
+INSERT INTO #Auxiliar0 Select '01-02-08-02','DefinicionesArtRubros','Por rubros','01-02-08',2,Null,Null,'DefinicionesArt','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-09','Rubros','Rubros','01-02',9,Null,'<a href="/' + @Directorio + '/Rubro/Index">Rubros</a>','Rubros','NO','Principal'  
 INSERT INTO #Auxiliar0 Select '01-02-10','Subrubros','Subrubros','01-02',10,Null,'<a href="/' + @Directorio + '/Subrubro/Index">Subrubros</a>','Subrubros','NO','Principal'  
 --INSERT INTO #Auxiliar0 Select '01-02-11','Conjuntos','Conjuntos','01-02',11,Null,Null,'Conjuntos','SI','Principal'  
@@ -984,13 +984,16 @@ INSERT INTO #Auxiliar0 Select '80-01-03-16','mnuSubPrv15','Listado de saldos de 
   
 INSERT INTO #Auxiliar0 Select '80-01-04','mnuSub3','Clientes','80-01',1,Null,Null,Null,'SI','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-01','MnuSubCli0','Retenciones y Percepciones','80-01-04',1,Null,Null,Null,'SI','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-01','MnuSubCliRet0','SICORE - Generacion','80-01-04-01',1,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-02','MnuSubCliRet1','SICORE - Retenciones de IVA','80-01-04-01',2,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-03','MnuSubCliRet2','SICORE - Percepciones de IVA','80-01-04-01',3,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-04','MnuSubCliRet3','SIFERE - Percepciones IIBB (Ventas)','80-01-04-01',4,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-05','MnuSubCliRet4','SIFERE - Retenciones IIBB (Cobranzas)','80-01-04-01',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-06','MnuSubCliRet5','CITI','80-01-04-01',6,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-04-01-07','MnuSubCliRet6','SUSS','80-01-04-01',7,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-01','MnuSubCliRet0','SICORE - Generacion','80-01-04-01',1,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SICORE - Generacion">SICORE - Generacion</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-02','MnuSubCliRet1','SICORE - Retenciones de IVA','80-01-04-01',2,Null,
+						'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SICORE - Retenciones de IVA">SICORE - Retenciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-03','MnuSubCliRet2','SICORE - Percepciones de IVA','80-01-04-01',3,Null,
+						'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SICORE - Percepciones de IVA">SICORE - Percepciones de IVA</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-04','MnuSubCliRet3','SIFERE - Percepciones IIBB (Ventas)','80-01-04-01',4,Null,
+		'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SIFERE - Percepciones IIBB (Ventas)">SIFERE - Percepciones IIBB (Ventas)</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-05','MnuSubCliRet4','SIFERE - Retenciones IIBB (Cobranzas)','80-01-04-01',5,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SIFERE - Retenciones IIBB (Cobranzas)">SIFERE - Retenciones IIBB (Cobranzas)</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-06','MnuSubCliRet5','CITI','80-01-04-01',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=CITI">CITI</a>',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-04-01-07','MnuSubCliRet6','SUSS','80-01-04-01',7,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=SUSS">SUSS</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-02','MnuSubCli1','Resumen de ventas por cliente','80-01-04',2,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-03','MnuSubCli2','Ranking de ventas por cliente','80-01-04',3,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-04-04','MnuSubCli3','Listado de comprobantes ingresados','80-01-04',4,Null,'',Null,'NO','Horizontal'  
@@ -1059,7 +1062,7 @@ INSERT INTO #Auxiliar0 Select '80-01-09-02','mnuSubCo1','Mayor de cuentas detall
 INSERT INTO #Auxiliar0 Select '80-01-09-03','mnuSubCo2','Balance de sumas y saldos','80-01-09',3,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Balance2">Balance de sumas y saldos</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-04','mnuSubCo3','Balance de sumas y saldos (con apertura)','80-01-09',4,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=Balance2">Balance de sumas y saldos (con apertura)</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-05','mnuSubCo4','Resumen por rubros contables','80-01-09',5,Null,'',Null,'NO','Horizontal'  
-INSERT INTO #Auxiliar0 Select '80-01-09-06','mnuSubCo5','IVA Ventas','80-01-09',6,Null,'',Null,'NO','Horizontal'  
+INSERT INTO #Auxiliar0 Select '80-01-09-06','mnuSubCo5','IVA Ventas','80-01-09',6,Null,'<a href="/' + @directorio + '/Reporte.aspx?ReportName=IVA Ventas">IVA Ventas</a>',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-07','mnuSubCo6','IVA Compras','80-01-09',7,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-08','mnuSubCo7','IVA Compras detallado','80-01-09',8,Null,'',Null,'NO','Horizontal'  
 INSERT INTO #Auxiliar0 Select '80-01-09-09','mnuSubCo8','Resolucion 1361','80-01-09',9,Null,'',Null,'NO','Horizontal'  
@@ -1181,3 +1184,21 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar2
+
+go
+
+
+
+--select * from tree
+truncate table tree  -- o tuve problemas para actualizar desde visual studio, o tuve problemas sin usar truncate
+go
+
+[Tree_TX_Generar]
+go
+--[Tree_TX_Arbol]
+--go
+
+[Tree_TX_Arbol] 'Horizontal'
+go
+
+
