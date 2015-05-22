@@ -70,7 +70,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1ECBCA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Report Project1", "ProntoMVC\Reportes\Proyectos de reporting\Report Project1\Report Project1.rptproj", "{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}"
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Informes", "ProntoMVC\Reportes\Proyectos de reporting\Report Project1\Informes.rptproj", "{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
