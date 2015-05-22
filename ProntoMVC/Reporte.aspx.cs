@@ -575,6 +575,23 @@ namespace ProntoMVC.Reportes
 
             }
 
+            else if (this.Request.QueryString["ReportName"] == "IVA Ventas")
+            {
+
+
+                ReportParameter[] yourParams = new ReportParameter[3];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);  // false);
+                yourParams[1] = new ReportParameter("FechaDesde", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                yourParams[2] = new ReportParameter("FechaHasta", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+
+                lblTitulo.Text = "Balance";
+
+
+
+
+            }
             else if (this.Request.QueryString["ReportName"] == "Subdiario")
             {
                 idproveedor = 7; // 7 compras, 1 ventas, 4 caja y bancos
@@ -626,7 +643,7 @@ namespace ProntoMVC.Reportes
                 var db = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
 
                 var op = db.OrdenesPago.Find(Generales.Val(this.Request.QueryString["Id"].NullSafeToString()));
-                if (op.IdProveedor != idproveedor && idproveedor!=-1)
+                if (op.IdProveedor != idproveedor && idproveedor != -1)
                 {
                     throw new Exception("No tiene permisos");
                 }
