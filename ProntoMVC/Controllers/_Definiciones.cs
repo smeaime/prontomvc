@@ -176,7 +176,11 @@ namespace ProntoMVC.Controllers
 
 
                 if (propertyInfo == null)
+                {
+                    // "ojo los nombres de las columnas de la jqgrid deben ser iguales (case sensitive) a los nombres de las propiedades del entitymodel"
                     continue; // skip wrong entries
+                }
+
 
                 if (sb.Length != 0)
                     sb.Append(groupOp);

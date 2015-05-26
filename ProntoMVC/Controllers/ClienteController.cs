@@ -391,8 +391,10 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
             var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
+
+
 
             var Entidad1 = (from a in Entidad
                             select new { IdCliente = a.IdCliente }).ToList();
