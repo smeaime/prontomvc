@@ -24,12 +24,12 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Clientes", "Cliente")',
+            url: '@Url.Action("Clientes_DynamicGridData", "Cliente")',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdCliente', 'Razon social', 'Codigo', 'Subcod.', 'Direccion', 'Localidad', 'Cod. postal', 'Provincia', 'Pais', 'Telefono', 'Fax', 'Email', 'Cuit',
                        'Condicion iva', 'Contacto', 'Direccion entrega', 'Localidad entrega', 'Provincia entrega', 'Vendedor', 'Cobrador', 'Estado', 'Nombre comercial', 'Observaciones',
-                       'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modifico', 'Categoria  IIBB', 'Condicion IIBB', 'Nro. inscr. IIBB', 'Cuenta contable', 'Cuenta contable exterior', 
+                       'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modifico', 'Categoria  IIBB', 'Condicion IIBB', 'Nro. inscr. IIBB', 'Cuenta contable', 'Cuenta contable exterior',
                        'Condicion venta', 'Transportista habitual', 'Region'],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
@@ -77,6 +77,8 @@
                     lastSelectedId = id;
                 }
             },
+
+
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
@@ -84,17 +86,47 @@
             sortorder: 'asc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar',
+
+            caption: '<b>CLIENTES</b>',
+
+
+
+
+
+            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
+            //////////////////////////////
+
             height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true,
-            multiboxonly: true,
-            caption: '<b>CLIENTES</b>'
+            userDataOnFooter: true
+            // ,caption: '<b>PEDIDOS</b>'
+
+          , gridview: true
+          , multiboxonly: true
+          , multipleSearch: true
+
+
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+       { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+       {
+           //sopt: ["cn"]
+           //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+           width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+       }
+      );
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+             {
+                 caption: "Filter", title: "Toggle Searching Toolbar",
+                 buttonicon: 'ui-icon-pin-s',
+                 onClickButton: function () { jQuery("#Lista")[0].toggleToolbar(); }
+             });
+
     });
 </script>
