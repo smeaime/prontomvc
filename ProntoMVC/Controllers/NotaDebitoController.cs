@@ -39,10 +39,10 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Edit(int id)
         {
 
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-               !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-               ) throw new Exception("No tenés permisos");
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //   ) throw new Exception("No tenés permisos");
 
             if (id == -1)
             {
