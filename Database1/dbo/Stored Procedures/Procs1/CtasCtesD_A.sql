@@ -1,0 +1,97 @@
+﻿
+CREATE Procedure [dbo].[CtasCtesD_A]
+
+@IdCtaCte int  output,
+@IdCliente int,
+@Fecha datetime,
+@FechaVencimiento datetime,
+@IdTipoComp int,
+@IdComprobante int,
+@NumeroComprobante int,
+@IdImputacion int,
+@ImporteTotal  numeric(18,2),
+@Saldo  numeric(18,2),
+@ImporteParteEnDolares numeric(18,2),
+@SaldoImporteParteEnDolares numeric(18,2),
+@ImporteParteEnPesos numeric(18,2),
+@SaldoImporteParteEnPesos numeric(18,2),
+@Cotizacion numeric(18,3),
+@IdDetalleRecibo int,
+@ImporteTotalDolar numeric(18,2),
+@SaldoDolar numeric(18,2),
+@IdMoneda int,
+@CotizacionMoneda numeric(18,4),
+@IdDetalleNotaCreditoImputaciones int,
+@EnviarEmail tinyint,
+@IdOrigenTransmision int,
+@IdCtaCteOriginal int,
+@FechaImportacionTransmision datetime,
+@IdComprobanteOriginal int,
+@IdImputacionOriginal int,
+@CuitClienteTransmision varchar(13)
+
+AS 
+
+INSERT INTO CuentasCorrientesDeudores
+(
+ IdCliente,
+ Fecha,
+ FechaVencimiento,
+ IdTipoComp,
+ IdComprobante,
+ NumeroComprobante,
+ IdImputacion,
+ ImporteTotal,
+ Saldo,
+ ImporteParteEnDolares,
+ SaldoImporteParteEnDolares,
+ ImporteParteEnPesos,
+ SaldoImporteParteEnPesos,
+ Cotizacion,
+ IdDetalleRecibo,
+ ImporteTotalDolar,
+ SaldoDolar,
+ IdMoneda,
+ CotizacionMoneda,
+ IdDetalleNotaCreditoImputaciones,
+ EnviarEmail,
+ IdOrigenTransmision,
+ IdCtaCteOriginal,
+ FechaImportacionTransmision,
+ IdComprobanteOriginal,
+ IdImputacionOriginal,
+ CuitClienteTransmision
+)
+VALUES
+(
+ @IdCliente,
+ @Fecha,
+ @FechaVencimiento,
+ @IdTipoComp,
+ @IdComprobante,
+ @NumeroComprobante,
+ @IdImputacion,
+ @ImporteTotal,
+ @Saldo,
+ @ImporteParteEnDolares,
+ @SaldoImporteParteEnDolares,
+ @ImporteParteEnPesos,
+ @SaldoImporteParteEnPesos,
+ @Cotizacion,
+ @IdDetalleRecibo,
+ @ImporteTotalDolar,
+ @SaldoDolar,
+ @IdMoneda,
+ @CotizacionMoneda,
+ @IdDetalleNotaCreditoImputaciones,
+ @EnviarEmail,
+ @IdOrigenTransmision,
+ @IdCtaCteOriginal,
+ @FechaImportacionTransmision,
+ @IdComprobanteOriginal,
+ @IdImputacionOriginal,
+ @CuitClienteTransmision
+)
+
+SELECT @IdCtaCte=@@identity
+RETURN(@IdCtaCte)

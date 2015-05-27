@@ -1,0 +1,6 @@
+﻿
+CREATE PROCEDURE [dbo].[BD_TX_Host]
+
+AS
+
+SELECT HOST_NAME()+' - Server : '+@@SERVERNAME

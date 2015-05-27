@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Comparativas] (
+    [IdComparativa]               INT             IDENTITY (1, 1) NOT NULL,
+    [Numero]                      INT             NULL,
+    [Fecha]                       DATETIME        NULL,
+    [Observaciones]               NTEXT           COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdConfecciono]               INT             NULL,
+    [IdAprobo]                    INT             NULL,
+    [PresupuestoSeleccionado]     INT             NULL,
+    [SubNumeroSeleccionado]       INT             NULL,
+    [MontoPrevisto]               NUMERIC (18)    NULL,
+    [MontoParaCompra]             CHAR (10)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [NumeroRequerimiento]         INT             NULL,
+    [FechaAprobacion]             DATETIME        NULL,
+    [Obras]                       VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [CircuitoFirmasCompleto]      VARCHAR (2)     NULL,
+    [ArchivoAdjunto1]             VARCHAR (100)   NULL,
+    [ArchivoAdjunto2]             VARCHAR (100)   NULL,
+    [ImporteComparativaCalculado] NUMERIC (18, 2) NULL,
+    [Anulada]                     VARCHAR (2)     NULL,
+    [FechaAnulacion]              DATETIME        NULL,
+    [IdUsuarioAnulo]              INT             NULL,
+    [MotivoAnulacion]             NTEXT           NULL,
+    CONSTRAINT [PK_Comparativas] PRIMARY KEY CLUSTERED ([IdComparativa] ASC) WITH (FILLFACTOR = 90)
+);
+

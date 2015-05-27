@@ -1,0 +1,67 @@
+﻿CREATE  Procedure [dbo].[SubcontratosDatos_M]
+
+@IdSubcontratoDatos int,
+@NumeroSubcontrato int,
+@DescripcionSubcontrato varchar(50),
+@IdProveedor int,
+@Fecha datetime,
+@FechaInicio datetime,
+@FechaFinalizacion datetime,
+@Adjunto1 varchar(100),
+@Adjunto2 varchar(100),
+@Adjunto3 varchar(100),
+@Adjunto4 varchar(100),
+@Adjunto5 varchar(100),
+@Adjunto6 varchar(100),
+@Adjunto7 varchar(100),
+@Adjunto8 varchar(100),
+@Adjunto9 varchar(100),
+@Adjunto10 varchar(100),
+@CondicionPago varchar(50),
+@AnticipoFinanciero varchar(50),
+@Acopio varchar(50),
+@FondoReparo numeric(6,2),
+@PorcentajeAnticipoFinanciero numeric(6,2),
+@IdMoneda int,
+@Observaciones ntext,
+@Anulado varchar(2),
+@IdUsuarioAnulo int,
+@FechaAnulacion datetime,
+@MotivoAnulacion ntext,
+@IdObra int
+
+AS
+
+UPDATE SubcontratosDatos
+SET
+ NumeroSubcontrato=@NumeroSubcontrato,
+ DescripcionSubcontrato=@DescripcionSubcontrato,
+ IdProveedor=@IdProveedor,
+ Fecha=@Fecha,
+ FechaInicio=@FechaInicio,
+ FechaFinalizacion=@FechaFinalizacion,
+ Adjunto1=@Adjunto1,
+ Adjunto2=@Adjunto2,
+ Adjunto3=@Adjunto3,
+ Adjunto4=@Adjunto4,
+ Adjunto5=@Adjunto5,
+ Adjunto6=@Adjunto6,
+ Adjunto7=@Adjunto7,
+ Adjunto8=@Adjunto8,
+ Adjunto9=@Adjunto9,
+ Adjunto10=@Adjunto10,
+ CondicionPago=@CondicionPago,
+ AnticipoFinanciero=@AnticipoFinanciero,
+ Acopio=@Acopio,
+ FondoReparo=@FondoReparo,
+ PorcentajeAnticipoFinanciero=@PorcentajeAnticipoFinanciero,
+ IdMoneda=@IdMoneda,
+ Observaciones=@Observaciones,
+ Anulado=@Anulado,
+ IdUsuarioAnulo=@IdUsuarioAnulo,
+ FechaAnulacion=@FechaAnulacion,
+ MotivoAnulacion=@MotivoAnulacion,
+ IdObra=@IdObra
+WHERE (IdSubcontratoDatos=@IdSubcontratoDatos)
+
+RETURN(@IdSubcontratoDatos)

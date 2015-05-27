@@ -1,0 +1,17 @@
+﻿
+--///////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////
+
+
+CREATE Procedure ProduccionOrdenes_TX_PorIdDetalle
+
+@IdDetalleProduccionOrden int
+
+AS 
+
+SELECT ProduccionOrdenes.*, DetSal.IdArticulo
+FROM DetalleProduccionOrdenes DetSal 
+LEFT OUTER JOIN ProduccionOrdenes ON DetSal.IdProduccionOrden = ProduccionOrdenes.IdProduccionOrden
+WHERE DetSal.IdDetalleProduccionOrden=@IdDetalleProduccionOrden

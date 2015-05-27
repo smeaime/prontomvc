@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[_TempDisponibilidadMaterialesPorLM] (
+    [IdDetalleLMateriales]    INT             NULL,
+    [Codigo]                  INT             NULL,
+    [NumeroItem]              INT             NULL,
+    [NumeroOrden]             INT             NULL,
+    [NumeroLMateriales]       INT             NULL,
+    [IdArticulo]              INT             NULL,
+    [Detalle]                 VARCHAR (100)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Cantidad]                NUMERIC (18, 2) NULL,
+    [IdUnidadLM]              INT             NULL,
+    [Cantidad1]               NUMERIC (18, 2) NULL,
+    [Cantidad2]               NUMERIC (18, 2) NULL,
+    [FechaNecesidad]          DATETIME        NULL,
+    [NumeroRequerimiento]     INT             NULL,
+    [CantidadRequerida]       NUMERIC (18, 2) NULL,
+    [NumeroPedido]            INT             NULL,
+    [SubNumeroPedido]         INT             NULL,
+    [CantidadPedida]          NUMERIC (18, 2) NULL,
+    [IdUnidadNP]              INT             NULL,
+    [FechaEntrega]            DATETIME        NULL,
+    [CantidadRecibida]        NUMERIC (18, 2) NULL,
+    [FechaRecepcion]          DATETIME        NULL,
+    [CantidadAControlar]      NUMERIC (18, 2) NULL,
+    [CantidadValesEmitidos]   NUMERIC (18, 2) NULL,
+    [CantidadValesEntregados] NUMERIC (18, 2) NULL
+);
+

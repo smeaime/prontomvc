@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[FondosFijos] (
+    [IdFondoFijo]            INT             IDENTITY (1, 1) NOT NULL,
+    [IdProveedor]            INT             NULL,
+    [IdTipoComprobante]      INT             NULL,
+    [FechaComprobante]       DATETIME        NULL,
+    [Letra]                  VARCHAR (1)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [NumeroComprobante1]     INT             NULL,
+    [NumeroComprobante2]     INT             NULL,
+    [TotalBruto]             NUMERIC (18, 2) NULL,
+    [TotalIva1]              NUMERIC (18, 2) NULL,
+    [TotalComprobante]       NUMERIC (18, 2) NULL,
+    [Observaciones]          NTEXT           COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdObra]                 INT             NULL,
+    [IdProveedorEventual]    INT             NULL,
+    [IdCuenta]               INT             NULL,
+    [TotalIvaNoDiscriminado] NUMERIC (18, 2) NULL,
+    [IVAComprasImporte1]     NUMERIC (18, 2) NULL,
+    [IdCuentaIvaCompras1]    INT             NULL,
+    [IvaComprasPorcentaje1]  NUMERIC (6, 2)  NULL,
+    [NumeroCAI]              VARCHAR (20)    NULL,
+    [FechaVencimientoCAI]    DATETIME        NULL,
+    [IdUsuarioIngreso]       INT             NULL,
+    [FechaIngreso]           DATETIME        NULL,
+    [IdCodigoIva]            INT             NULL,
+    [Cuit]                   VARCHAR (13)    NULL,
+    CONSTRAINT [PK_FondosFijos] PRIMARY KEY CLUSTERED ([IdFondoFijo] ASC) WITH (FILLFACTOR = 90)
+);
+

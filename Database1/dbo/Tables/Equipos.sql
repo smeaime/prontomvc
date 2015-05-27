@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[Equipos] (
+    [IdEquipo]             INT          IDENTITY (1, 1) NOT NULL,
+    [Descripcion]          VARCHAR (60) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Tag]                  VARCHAR (40) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdObra]               INT          NULL,
+    [HorasEstimadas]       INT          NULL,
+    [FechaTerminacion]     DATETIME     NULL,
+    [IdGrupoTareaHH]       INT          NULL,
+    [IdItemDocumentacion1] INT          NULL,
+    [ItemDocumentacion1]   DATETIME     NULL,
+    [IdItemDocumentacion2] INT          NULL,
+    [ItemDocumentacion2]   DATETIME     NULL,
+    [IdItemDocumentacion3] INT          NULL,
+    [ItemDocumentacion3]   DATETIME     NULL,
+    [IdItemDocumentacion4] INT          NULL,
+    [ItemDocumentacion4]   DATETIME     NULL,
+    [IdItemDocumentacion5] INT          NULL,
+    [ItemDocumentacion5]   DATETIME     NULL,
+    [IdItemDocumentacion6] INT          NULL,
+    [ItemDocumentacion6]   DATETIME     NULL,
+    [EnviarEmail]          TINYINT      NULL,
+    [ActivoHH]             VARCHAR (2)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    CONSTRAINT [PK_Equipos] PRIMARY KEY CLUSTERED ([IdEquipo] ASC) WITH (FILLFACTOR = 90)
+);
+
