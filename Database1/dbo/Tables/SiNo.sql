@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[SiNo] (
+    [IdSiNo]   TINYINT     IDENTITY (1, 1) NOT NULL,
+    [CodigoSN] VARCHAR (1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [SiNo]     VARCHAR (2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    CONSTRAINT [PK_SiNo] PRIMARY KEY CLUSTERED ([IdSiNo] ASC) WITH (FILLFACTOR = 90)
+);
+

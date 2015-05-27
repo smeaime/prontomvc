@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[CostosPromedios] (
+    [IdCostoPromedio]             INT             IDENTITY (1, 1) NOT NULL,
+    [IdArticulo]                  INT             NULL,
+    [TipoComprobante]             VARCHAR (2)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [NumeroComprobante]           INT             NULL,
+    [Fecha]                       DATETIME        NULL,
+    [Cantidad]                    NUMERIC (18, 2) NULL,
+    [Costo]                       NUMERIC (19, 3) NULL,
+    [StockInicial]                NUMERIC (18, 2) NULL,
+    [CostoInicial]                NUMERIC (19, 3) NULL,
+    [StockFinal]                  NUMERIC (18, 3) NULL,
+    [CostoFinal]                  NUMERIC (19, 3) NULL,
+    [CostoInicialU$S]             NUMERIC (19, 3) NULL,
+    [CostoCompraU$S]              NUMERIC (19, 3) NULL,
+    [CostoFinalU$S]               NUMERIC (19, 3) NULL,
+    [IdDetalleAjusteStock]        INT             NULL,
+    [IdDetalleDevolucion]         INT             NULL,
+    [IdDetalleRecepcion]          INT             NULL,
+    [IdDetalleRemito]             INT             NULL,
+    [IdDetalleSalidaMateriales]   INT             NULL,
+    [IdDetalleValeSalida]         INT             NULL,
+    [IdOrigen]                    INT             NULL,
+    [IdDetalleOtroIngresoAlmacen] INT             NULL,
+    CONSTRAINT [PK_CostosPromedios] PRIMARY KEY NONCLUSTERED ([IdCostoPromedio] ASC) WITH (FILLFACTOR = 90)
+);
+

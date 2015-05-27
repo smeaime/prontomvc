@@ -1,0 +1,73 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE Procedure [dbo].[GruposTareasHH_TT]
+AS 
+Select 
+IdGrupoTareaHH,
+Descripcion,
+Preparacion as [% Preparacion],
+CaldereriaPlana as [% Caldereria Plana],
+Mecanica as [% Mecanica],
+Caldereria as [% Caldereria],
+Soldadura as [% Soldadura],
+Almacenes as [% Almacenes]
+FROM GruposTareasHH
+order by Descripcion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

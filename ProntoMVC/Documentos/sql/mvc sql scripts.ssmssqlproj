@@ -217,6 +217,12 @@
           <AssociatedConnUserName />
           <FullPath>SQLQuery3.sql</FullPath>
         </FileNode>
+        <FileNode Name="wRecibos_TX_PorIdConDatos.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>wRecibos_TX_PorIdConDatos.sql</FullPath>
+        </FileNode>
         <FileNode Name="Tree_TX_Arbol.sql">
           <AssociatedConnectionMoniker />
           <AssociatedConnSrvName />
@@ -296,9 +302,9 @@
           <FullPath>dbo.wCtasCtesA_TXPorTrs.StoredProcedure.sql</FullPath>
         </FileNode>
         <FileNode Name="dbo.wFacturas_TX_PorIdConDatos.StoredProcedure.sql">
-          <AssociatedConnectionMoniker />
-          <AssociatedConnSrvName />
-          <AssociatedConnUserName />
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>dbo.wFacturas_TX_PorIdConDatos.StoredProcedure.sql</FullPath>
         </FileNode>
         <FileNode Name="factura mala de williams.sql">

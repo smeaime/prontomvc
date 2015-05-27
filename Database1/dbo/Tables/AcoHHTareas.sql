@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[AcoHHTareas] (
+    [IdAcoHHTarea]   INT IDENTITY (1, 1) NOT NULL,
+    [IdGrupoTareaHH] INT NULL,
+    CONSTRAINT [PK_AcoHHTareas] PRIMARY KEY CLUSTERED ([IdAcoHHTarea] ASC) WITH (FILLFACTOR = 90)
+);
+

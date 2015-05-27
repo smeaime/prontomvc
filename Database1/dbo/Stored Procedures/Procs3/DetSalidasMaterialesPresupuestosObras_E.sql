@@ -1,0 +1,9 @@
+﻿
+CREATE Procedure [dbo].[DetSalidasMaterialesPresupuestosObras_E]
+
+@IdDetalleSalidaMaterialesPresupuestosObras int  
+
+AS 
+
+DELETE DetalleSalidasMaterialesPresupuestosObras
+WHERE IdDetalleSalidaMaterialesPresupuestosObras=@IdDetalleSalidaMaterialesPresupuestosObras

@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[_TempReservasStock] (
+    [IdComprobante]   INT             NULL,
+    [Tipo]            VARCHAR (10)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Numero]          INT             NULL,
+    [Nombre]          VARCHAR (30)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Item]            INT             NULL,
+    [IdObra]          INT             NULL,
+    [Obra]            VARCHAR (10)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Equipo]          VARCHAR (40)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Articulo]        VARCHAR (250)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Cantidad]        NUMERIC (18, 2) NULL,
+    [Unidad]          VARCHAR (15)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Stock]           NUMERIC (18, 2) NULL,
+    [Reservado]       NUMERIC (18, 2) NULL,
+    [Disponible]      NUMERIC (18, 2) NULL,
+    [Reserva]         NUMERIC (18, 2) NULL,
+    [Genero]          VARCHAR (50)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [FechaNecesidad]  DATETIME        NULL,
+    [Observaciones]   NTEXT           COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdAcopio]        INT             NULL,
+    [IdRequerimiento] INT             NULL,
+    [IdArticulo]      INT             NULL,
+    [IdUnidad]        INT             NULL
+);
+
