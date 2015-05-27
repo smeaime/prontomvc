@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[Empresa] (
+    [IdEmpresa]                                   INT           IDENTITY (1, 1) NOT NULL,
+    [Nombre]                                      VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DetalleNombre]                               VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Direccion]                                   VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Localidad]                                   VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [CodigoPostal]                                VARCHAR (10)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Provincia]                                   VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Telefono1]                                   VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Telefono2]                                   VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Email]                                       VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Cuit]                                        VARCHAR (13)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [CondicionIva]                                VARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DatosAdicionales1]                           VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DatosAdicionales2]                           VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [DatosAdicionales3]                           VARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdCodigoIva]                                 INT           NULL,
+    [ArchivoAFIP]                                 VARCHAR (50)  NULL,
+    [NumeroAgentePercepcionIIBB]                  INT           NULL,
+    [DigitoVerificadorNumeroAgentePercepcionIIBB] INT           NULL,
+    [ModalidadFacturacionAPrueba]                 VARCHAR (2)   NULL,
+    [CodigoActividadIIBB]                         INT           NULL,
+    [ActividadComercializacionGranos]             VARCHAR (2)   NULL,
+    [TipoActividadComercializacionGranos]         INT           NULL,
+    CONSTRAINT [PK_Empresa] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC) WITH (FILLFACTOR = 90)
+);
+

@@ -1,0 +1,11 @@
+﻿CREATE Procedure [dbo].[DetSalidasMaterialesPresupuestosObras_ActualizarDatos]
+
+@IdDetalleSalidaMaterialesPresupuestosObras int  output,
+@IdPresupuestoObrasNodoNoMateriales int
+
+AS 
+
+UPDATE [DetalleSalidasMaterialesPresupuestosObras]
+SET 
+ IdPresupuestoObrasNodoNoMateriales=@IdPresupuestoObrasNodoNoMateriales
+WHERE (IdDetalleSalidaMaterialesPresupuestosObras=@IdDetalleSalidaMaterialesPresupuestosObras)

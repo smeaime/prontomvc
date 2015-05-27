@@ -1,0 +1,4 @@
+﻿
+CREATE PROCEDURE [dbo].[BD_TX_BaseDeDatos]
+AS
+SELECT DB_NAME()
