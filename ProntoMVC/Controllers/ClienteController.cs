@@ -369,7 +369,148 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
-        public virtual ActionResult Clientes(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
+
+
+
+        public virtual JsonResult Clientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Cliente>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // esto filtro se debería aplicar antes que el filtrogenerico (queda mal paginado si no)
+            var Entidad = pagedQuery.Where(o => (o.Confirmado ?? "") != "NO").AsQueryable();
+
+
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdCliente = a.IdCliente }).ToList();
+
+           
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        from b in db.Localidades.Where(o => o.IdLocalidad == a.IdLocalidadEntrega).DefaultIfEmpty()
+                        from c in db.Provincias.Where(o => o.IdProvincia == a.IdProvinciaEntrega).DefaultIfEmpty()
+                        from d in db.Vendedores.Where(o => o.IdVendedor == a.Vendedor1).DefaultIfEmpty()
+                        from e in db.Vendedores.Where(o => o.IdVendedor == a.Cobrador).DefaultIfEmpty()
+                        from f in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        from g in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        from h in db.Estados_Proveedores.Where(o => o.IdEstado == a.IdEstado).DefaultIfEmpty()
+                        from i in db.IBCondiciones.Where(o => o.IdIBCondicion == a.IdIBCondicionPorDefecto).DefaultIfEmpty()
+                        from j in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from k in db.Cuentas.Where(o => o.IdCuenta == a.IdCuentaMonedaExt).DefaultIfEmpty()
+                        from l in db.Condiciones_Compras.Where(o => o.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        from m in db.Transportistas.Where(o => o.IdTransportista == a.IdTransportista).DefaultIfEmpty()
+                        from n in db.Regiones.Where(o => o.IdRegion == a.IdRegion).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdCliente,
+                            a.RazonSocial,
+                            a.Codigo,
+                            Subcodigo = a.Codigo != null ? a.Codigo.Substring(1, 2) : "",
+                            a.Direccion,
+                            Localidad = a.Localidad.Nombre,
+                            a.CodigoPostal,
+                            Provincia = a.Provincia.Nombre,
+                            Pais = a.Pais.Descripcion,
+                            a.Telefono,
+                            a.Fax,
+                            a.Email,
+                            a.Cuit,
+                            DescripcionIva = a.DescripcionIva.Descripcion,
+                            a.Contacto,
+                            a.DireccionEntrega,
+                            LocalidadEntrega = b != null ? b.Nombre : "",
+                            ProvinciaEntrega = c != null ? c.Nombre : "",
+                            Vendedor = d != null ? d.Nombre : "",
+                            Cobrador = e != null ? e.Nombre : "",
+                            Estado = h != null ? h.Descripcion : "",
+                            NombreComercial = a.NombreFantasia,
+                            a.Observaciones,
+                            Ingreso = f != null ? f.Nombre : "",
+                            a.FechaIngreso,
+                            Modifico = g != null ? g.Nombre : "",
+                            a.FechaModifico,
+                            CategoriaIIBB = (a.IBCondicion ?? 1) == 1 ? "Exento" : ((a.IBCondicion ?? 1) == 2 ? "Conv.Mult." : ((a.IBCondicion ?? 1) == 3 ? "Juris.Local" : ((a.IBCondicion ?? 1) == 4 ? "No alcanzado" : ""))),
+                            CondicionIIBB = i != null ? i.Descripcion : "",
+                            a.IBNumeroInscripcion,
+                            CuentaContable = j != null ? j.Descripcion : "",
+                            CuentaContableExterior = k != null ? k.Descripcion : "",
+                            CondicionVenta = l != null ? l.Descripcion : "",
+                            Transportista = m != null ? m.RazonSocial : "",
+                            Region = n != null ? n.Descripcion : ""
+                        }).OrderBy(sidx + " " + sord).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCliente.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdCliente} ) + ">Editar</>",
+                                // +"|" + "<a href=/Cliente/Details/" + a.IdCliente + ">Detalles</a> ","<a href="+ Url.Action("Imprimir",new {id = a.IdCliente} )  +">Imprimir</>" ,
+                                a.IdCliente.ToString(),
+                                a.RazonSocial.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                                a.Subcodigo.NullSafeToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Provincia.NullSafeToString(),
+                                a.Pais.NullSafeToString(),
+                                a.Telefono.NullSafeToString(),
+                                a.Fax.NullSafeToString(),
+                                a.Email.NullSafeToString(),
+                                a.Cuit.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.Contacto.NullSafeToString(),
+                                a.DireccionEntrega.NullSafeToString(),
+                                a.LocalidadEntrega.NullSafeToString(),
+                                a.ProvinciaEntrega.NullSafeToString(),
+                                a.Vendedor.NullSafeToString(),
+                                a.Cobrador.NullSafeToString(),
+                                a.Estado.NullSafeToString(),
+                                a.NombreComercial.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.Ingreso.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.CategoriaIIBB.NullSafeToString(),
+                                a.CondicionIIBB.NullSafeToString(),
+                                a.IBNumeroInscripcion.NullSafeToString(),
+                                a.CuentaContable.NullSafeToString(),
+                                a.CuentaContableExterior.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                a.Transportista.NullSafeToString(),
+                                a.Region.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public virtual ActionResult Clientes_obsoleto(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;

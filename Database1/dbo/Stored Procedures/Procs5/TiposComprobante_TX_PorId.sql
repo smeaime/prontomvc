@@ -1,0 +1,64 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE Procedure [dbo].[TiposComprobante_TX_PorId]
+@IdTipoComprobante int
+AS 
+SELECT *
+FROM TiposComprobante
+WHERE (IdTipoComprobante=@IdTipoComprobante)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

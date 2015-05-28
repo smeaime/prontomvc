@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[ItemsPopUpMateriales] (
+    [IdItemPopUpMateriales] INT          IDENTITY (1, 1) NOT NULL,
+    [IdRubro]               INT          NULL,
+    [IdSubrubro]            INT          NULL,
+    [IdFamilia]             INT          NULL,
+    [Campo01_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo01_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo02_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo02_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo03_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo03_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo04_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo04_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo05_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo05_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo06_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo06_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo07_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo07_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo08_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo08_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo09_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo09_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo10_Nombre]        VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Campo10_Tabla]         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    CONSTRAINT [PK_ItemsPopUpMateriales] PRIMARY KEY CLUSTERED ([IdItemPopUpMateriales] ASC) WITH (FILLFACTOR = 90)
+);
+

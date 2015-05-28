@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[WilliamsDestinos] (
+    [IdWilliamsDestino] INT          IDENTITY (1, 1) NOT NULL,
+    [Descripcion]       VARCHAR (50) NULL,
+    [Codigo]            VARCHAR (20) NULL,
+    [Subcontratista1]   INT          NULL,
+    [Subcontratista2]   INT          NULL,
+    [CodigoSAJPYA]      VARCHAR (20) NULL,
+    [CodigoONCAA]       VARCHAR (20) NULL,
+    [SincronismoNoble1] VARCHAR (20) NULL,
+    [SincronismoNoble2] VARCHAR (20) NULL,
+    [AuxiliarString1]   VARCHAR (50) NULL,
+    [AuxiliarString2]   VARCHAR (50) NULL,
+    [AuxiliarString3]   VARCHAR (50) NULL,
+    [CodigoWilliams]    VARCHAR (20) NULL,
+    [CodigoPostal]      VARCHAR (30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [CUIT]              VARCHAR (13) NULL,
+    [CodigoLosGrobo]    VARCHAR (20) NULL,
+    [CodigoYPF]         VARCHAR (20) NULL,
+    [IdProvincia]       INT          NULL,
+    [IdLocalidad]       INT          NULL,
+    PRIMARY KEY CLUSTERED ([IdWilliamsDestino] ASC) WITH (FILLFACTOR = 90),
+    FOREIGN KEY ([IdLocalidad]) REFERENCES [dbo].[Localidades] ([IdLocalidad]),
+    FOREIGN KEY ([IdProvincia]) REFERENCES [dbo].[Provincias] ([IdProvincia]),
+    FOREIGN KEY ([Subcontratista1]) REFERENCES [dbo].[Clientes] ([IdCliente]),
+    FOREIGN KEY ([Subcontratista2]) REFERENCES [dbo].[Clientes] ([IdCliente])
+);
+

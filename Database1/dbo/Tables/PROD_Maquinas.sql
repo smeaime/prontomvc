@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[PROD_Maquinas] (
+    [IdPROD_Maquina]                 INT             IDENTITY (1, 1) NOT NULL,
+    [IdArticulo]                     INT             NOT NULL,
+    [ParoFrecuencia]                 NUMERIC (18, 2) NULL,
+    [ParoIdUnidad]                   INT             NULL,
+    [ParoConcepto]                   VARCHAR (50)    NULL,
+    [FueraDeServicio]                VARCHAR (2)     NULL,
+    [FueraDeServicioConcepto]        VARCHAR (50)    NULL,
+    [FueraDeServicioFechaInicio]     SMALLDATETIME   NULL,
+    [FueraDeServicioRetornoEstimado] SMALLDATETIME   NULL,
+    [FueraDeServicioRetornoEfectivo] SMALLDATETIME   NULL,
+    [TiempoArranque]                 NUMERIC (18, 2) NULL,
+    [TiempoApagado]                  NUMERIC (18, 2) NULL,
+    [IdUnidadTiempo]                 INT             NULL,
+    [CapacidadMinima]                NUMERIC (18, 2) NULL,
+    [CapacidadNormal]                NUMERIC (18, 2) NULL,
+    [CapacidadMaxima]                NUMERIC (18, 2) NULL,
+    [IdUnidadCapacidad]              NUMERIC (18, 2) NULL,
+    [IdProduccionProceso]            INT             NULL,
+    [IdProduccionLinea]              INT             NULL,
+    [LineaOrden]                     INT             NULL,
+    PRIMARY KEY CLUSTERED ([IdPROD_Maquina] ASC) WITH (FILLFACTOR = 90),
+    FOREIGN KEY ([IdProduccionLinea]) REFERENCES [dbo].[ProduccionLineas] ([IdProduccionLinea]),
+    FOREIGN KEY ([IdProduccionProceso]) REFERENCES [dbo].[ProduccionProcesos] ([IdProduccionProceso]),
+    CONSTRAINT [U_IdArticulo] UNIQUE NONCLUSTERED ([IdArticulo] ASC) WITH (FILLFACTOR = 90)
+);
+
