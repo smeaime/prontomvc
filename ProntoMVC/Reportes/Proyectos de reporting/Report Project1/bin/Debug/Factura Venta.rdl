@@ -1258,17 +1258,41 @@
             <TextRuns>
               <TextRun>
                 <Value>Data Source=Mariano-PC\MSSQLSERVER2;Initial catalog=Autotrol;User ID=sa; Password=ok;</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Data Source=SERVERSQL3\TESTING;Initial catalog=DemoProntoWeb;User ID=sa; Password=.SistemaPronto.;</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>10.00613cm</Top>
+        <Top>10.02612cm</Top>
         <Left>0.42269cm</Left>
-        <Height>1.96438cm</Height>
-        <Width>4.21979cm</Width>
+        <Height>2.28188cm</Height>
+        <Width>8.75739cm</Width>
         <ZIndex>19</ZIndex>
         <Visibility>
           <Hidden>true</Hidden>
