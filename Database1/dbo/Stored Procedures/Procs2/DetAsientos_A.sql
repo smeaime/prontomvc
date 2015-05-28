@@ -1,0 +1,97 @@
+﻿CREATE Procedure [dbo].[DetAsientos_A]
+
+@IdDetalleAsiento int  output,
+@IdAsiento int,
+@IdCuenta int,
+@IdTipoComprobante int,
+@NumeroComprobante int,
+@FechaComprobante datetime,
+@Libro varchar(1),
+@Signo varchar(1),
+@TipoImporte varchar(1),
+@Cuit varchar(13),
+@Detalle varchar(50),
+@Debe money,
+@Haber money,
+@IdObra int,
+@IdCuentaGasto int,
+@IdMoneda int,
+@CotizacionMoneda numeric(18,4),
+@IdCuentaBancaria int,
+@IdCaja int,
+@IdMonedaDestino int,
+@CotizacionMonedaDestino numeric(18,4),
+@ImporteEnMonedaDestino numeric(18,2),
+@PorcentajeIVA numeric(6,2),
+@RegistrarEnAnalitico varchar(2),
+@Item int,
+@IdValor int,
+@IdProvinciaDestino int,
+@IdDetalleComprobanteProveedor int
+
+AS
+
+INSERT INTO [DetalleAsientos]
+(
+ IdAsiento,
+ IdCuenta,
+ IdTipoComprobante,
+ NumeroComprobante,
+ FechaComprobante,
+ Libro,
+ Signo,
+ TipoImporte,
+ Cuit,
+ Detalle,
+ Debe,
+ Haber,
+ IdObra,
+ IdCuentaGasto,
+ IdMoneda,
+ CotizacionMoneda,
+ IdCuentaBancaria,
+ IdCaja,
+ IdMonedaDestino,
+ CotizacionMonedaDestino,
+ ImporteEnMonedaDestino,
+ PorcentajeIVA,
+ RegistrarEnAnalitico,
+ Item,
+ IdValor,
+ IdProvinciaDestino,
+ IdDetalleComprobanteProveedor
+)
+VALUES
+(
+ @IdAsiento,
+ @IdCuenta,
+ @IdTipoComprobante,
+ @NumeroComprobante,
+ @FechaComprobante,
+ @Libro,
+ @Signo,
+ @TipoImporte,
+ @Cuit,
+ @Detalle,
+ @Debe,
+ @Haber,
+ @IdObra,
+ @IdCuentaGasto,
+ @IdMoneda,
+ @CotizacionMoneda,
+ @IdCuentaBancaria,
+ @IdCaja,
+ @IdMonedaDestino,
+ @CotizacionMonedaDestino,
+ @ImporteEnMonedaDestino,
+ @PorcentajeIVA,
+ @RegistrarEnAnalitico,
+ @Item,
+ @IdValor,
+ @IdProvinciaDestino,
+ @IdDetalleComprobanteProveedor
+)
+
+SELECT @IdDetalleAsiento=@@identity
+
+RETURN(@IdDetalleAsiento)

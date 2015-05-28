@@ -1,0 +1,11 @@
+﻿CREATE Procedure [dbo].[SalidasMateriales_DarPorRecepcionadas]
+
+@IdDetalleSalidaMateriales int,
+@IdUsuarioDioPorRecepcionado int,
+@ObservacionDioPorRecepcionado ntext
+
+AS
+
+UPDATE DetalleSalidasMateriales
+SET IdUsuarioDioPorRecepcionado=@IdUsuarioDioPorRecepcionado, FechaDioPorRecepcionado=GetDate(), ObservacionDioPorRecepcionado=@ObservacionDioPorRecepcionado
+WHERE IdDetalleSalidaMateriales=@IdDetalleSalidaMateriales

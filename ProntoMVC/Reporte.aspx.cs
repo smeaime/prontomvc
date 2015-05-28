@@ -575,6 +575,23 @@ namespace ProntoMVC.Reportes
 
             }
 
+            else if (this.Request.QueryString["ReportName"] == "IVA Ventas")
+            {
+
+
+                ReportParameter[] yourParams = new ReportParameter[3];
+                yourParams[2] = new ReportParameter("CadenaConexion", scsql, false);  // false);
+                yourParams[0] = new ReportParameter("FechaDesde", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                yourParams[1] = new ReportParameter("FechaHasta", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+
+                lblTitulo.Text = "Balance";
+
+
+
+
+            }
             else if (this.Request.QueryString["ReportName"] == "Subdiario")
             {
                 idproveedor = 7; // 7 compras, 1 ventas, 4 caja y bancos
@@ -626,7 +643,7 @@ namespace ProntoMVC.Reportes
                 var db = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
 
                 var op = db.OrdenesPago.Find(Generales.Val(this.Request.QueryString["Id"].NullSafeToString()));
-                if (op.IdProveedor != idproveedor && idproveedor!=-1)
+                if (op.IdProveedor != idproveedor && idproveedor != -1)
                 {
                     throw new Exception("No tiene permisos");
                 }
@@ -762,6 +779,348 @@ namespace ProntoMVC.Reportes
 
 
 
+/*
+
+
+ Begin VB.Menu MnuSub 
+         Caption         =   "Clientes"
+         Index           =   3
+         Begin VB.Menu MnuSubCli 
+            Caption         =   "Retenciones y Percepciones"
+            Index           =   0
+            Begin VB.Menu MnuSubCliRet 
+               Caption         =   "SICORE"
+               Index           =   0
+               Begin VB.Menu MnuSubCliRetSIC 
+                  Caption         =   "Generacion SICORE"
+                  Index           =   0
+               End
+               Begin VB.Menu MnuSubCliRetSIC 
+                  Caption         =   "Retenciones de IVA"
+                  Index           =   1
+               End
+               Begin VB.Menu MnuSubCliRetSIC 
+                  Caption         =   "Percepciones de IVA"
+                  Index           =   2
+               End
+            End
+            Begin VB.Menu MnuSubCliRet 
+               Caption         =   "Retenciones SUSS"
+               Index           =   1
+            End
+            Begin VB.Menu MnuSubCliRet 
+               Caption         =   "Percepciones IIBB"
+               Index           =   2
+            End
+            Begin VB.Menu MnuSubCliRet 
+               Caption         =   "Retenciones IIBB (Cobranzas) - SIFERE"
+               Index           =   3
+            End
+            Begin VB.Menu MnuSubCliRet 
+               Caption         =   "CITI"
+               Index           =   4
+            End
+         End
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		          Begin VB.Menu MnuSubCo 
+            Caption         =   "IVA Ventas"
+            Index           =   5
+         End
+
+      Case 16
+         Me.Caption = "Subdiario de IVA Ventas"
+         cmd(0).Caption = "Procesar"
+         cmd(1).Visible = False
+         cmd(2).Left = cmd(1).Left
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+
+    Case 16
+               mCampo = BuscarClaveINI("Modelo para libro de iva ventas")
+               If Len(Trim(mCampo)) = 0 Then
+                  Set oTab = Aplicacion.TablasGenerales.TraerFiltrado("InformesContables", "_IVAVentas", Array(DTFields(0).Value, DTFields(1).Value))
+               Else
+                  Set oTab = Aplicacion.TablasGenerales.TraerFiltrado("InformesContables", "_IVAVentas" & mCampo, Array(DTFields(0).Value, DTFields(1).Value))
+               End If
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+            
+               mCampo = BuscarClaveINI("IVAVENTAS_FilasPorHoja")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = CStr(mvarLineasIvaCompras)
+               mvarParametrosExcel = "SaltoDePaginaCada:" & mCampo
+               mCampo = BuscarClaveINI("IVAVENTAS_ColumnaConTransporte")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = "5"
+               mvarParametrosExcel = mvarParametrosExcel & "|ColumnaTransporte:" & mCampo
+               mCampo = BuscarClaveINI("IVAVENTAS_ColumnasSumaParaTransporte")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = "8,9,11,12,13"
+               mVectorAux = VBA.Split(mCampo, ",")
+               For i = 0 To UBound(mVectorAux)
+                  mvarParametrosExcel = mvarParametrosExcel & "|SumadorPorHoja" & i + 1 & ":" & mVectorAux(i)
+               Next
+               mvarParametrosExcel = mvarParametrosExcel & "|Enc:SinFecha"
+            
+			
+			
+
+		 
+		 
+		 
+		 
+		 
+Private Sub MnuSubCli_Click(Index As Integer)
+
+   EditarConsulta "Cli", Index, MnuSubCli(Index).Caption
+
+End Sub
+
+Private Sub MnuSubCliRet_Click(Index As Integer)
+
+   EditarConsulta "CliRet", Index, MnuSubCliRet(Index).Caption
+
+End Sub
+   Case "CliRet"
+         Select Case Item
+            Case 1
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 45
+                  .Show vbModal, Me
+               End With
+            Case 2
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 47
+                  .Show vbModal, Me
+               End With
+            Case 3
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 50
+                  .Show vbModal, Me
+               End With
+            Case 4
+               Set oF = New frmConsulta3
+               With oF
+                  .Id = 120
+                  .Show vbModal, Me
+               End With
+         End Select
+
+		 
+		 
+		          Case 45
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_RetencionesSUSS", Array(DTFields(0).Value, DTFields(1).Value))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+			   
+		            Case 47
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_PercepcionesIIBB", Array(DTFields(0).Value, DTFields(1).Value, mvarIdAux1))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+               cmd(3).Enabled = True
+ 
+		         Case 50
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_RetencionesIIBB_Cobranzas", Array(DTFields(0).Value, DTFields(1).Value))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+Private Sub MnuSubCliRetSIC_Click(Index As Integer)
+
+   EditarConsulta "CliRetSIC", Index, MnuSubCliRetSIC(Index).Caption
+
+End Sub
+
+    Case "CliRetSIC"
+         Select Case Item
+            Case 0
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 37
+                  .Show vbModal, Me
+               End With
+            Case 1
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 39
+                  .Show vbModal, Me
+               End With
+            Case 2
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 88
+                  .Show vbModal, Me
+               End With
+         End Select
+		 
+
+		 
+		       Case 37
+         Me.Caption = "Clientes - Retenciones de impuesto a las ganancias"
+         cmd(0).Caption = "Procesar"
+         With cmd(1)
+            .Caption = "Generar"
+            .Enabled = False
+         End With
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+         With Check1
+            .Left = cmd(2).Left + cmd(2).Width + 70
+            .Top = cmd(2).Top
+            .Width = cmd(2).Width * 2
+            .Caption = "Generar para personas juridicas"
+            .Visible = True
+         End With
+         With Frame1
+            .Left = Check1.Left + Check1.Width + 100
+            .Top = cmd(0).Top - 50
+            .Caption = "Ordenamiento :"
+            .Visible = True
+         End With
+         With Option1
+            .Caption = "x Cliente"
+            .Value = True
+         End With
+         Option2.Caption = "x Fecha"
+      
+ 
+      
+      Case 39
+         Me.Caption = "Clientes - Retenciones de IVA"
+         cmd(0).Caption = "Procesar"
+         With cmd(1)
+            .Caption = "Generar"
+            .Enabled = False
+         End With
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+		 
+
+            Case 37
+               mOrden = "C"
+               If Option2.Value Then mOrden = "F"
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_RetencionesGanancias", Array(DTFields(0).Value, DTFields(1).Value, mOrden))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+
+
+     
+            Case 39
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_RetencionesIVA", Array(DTFields(0).Value, DTFields(1).Value))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+
+
+
+			   
+			   
+			   
+			   
+			   
+			   
+			   Case 88
+         Me.Caption = "Clientes - Percepcion de IVA"
+         cmd(0).Caption = "Procesar"
+         With cmd(1)
+            .Caption = "Generar"
+            .Enabled = False
+         End With
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+      
+
+
+         Case 88
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_PercepcionesIVA", Array(DTFields(0).Value, DTFields(1).Value))
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               cmd(1).Enabled = True
+         
+
+
+
+
+
+		 
+		 
+		       Case 120
+         Me.Caption = "CITI Ventas"
+         cmd(0).Caption = "Procesar"
+         With cmd(1)
+            .Caption = "Generar"
+            .Enabled = False
+         End With
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+		 
+		           Case 120
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+               Set oTab = Aplicacion.Clientes.TraerFiltrado("_CITI", Array(DTFields(0).Value, DTFields(1).Value))
+         
+               cmd(1).Enabled = True
+         
+		 
+		 
+		 
 
 
 
@@ -769,3 +1128,64 @@ namespace ProntoMVC.Reportes
 
 
 
+
+            Case 5
+               Set oF = New frmConsulta2
+               With oF
+                  .Id = 16
+                  .Show vbModal, Me
+               End With
+			   
+			   
+			   
+			   
+			   
+			      Case 16
+         Me.Caption = "Subdiario de IVA Ventas"
+         cmd(0).Caption = "Procesar"
+         cmd(1).Visible = False
+         cmd(2).Left = cmd(1).Left
+         lblLabels(0).Visible = True
+         lblLabels(1).Visible = True
+         With DTFields(0)
+            .Visible = True
+            .Value = mvarFechaDesde
+         End With
+         With DTFields(1)
+            .Visible = True
+            .Value = mvarFechaHasta
+         End With
+      
+	  
+	                    
+            Case 16
+               mCampo = BuscarClaveINI("Modelo para libro de iva ventas")
+               If Len(Trim(mCampo)) = 0 Then
+                  Set oTab = Aplicacion.TablasGenerales.TraerFiltrado("InformesContables", "_IVAVentas", Array(DTFields(0).Value, DTFields(1).Value))
+               Else
+                  Set oTab = Aplicacion.TablasGenerales.TraerFiltrado("InformesContables", "_IVAVentas" & mCampo, Array(DTFields(0).Value, DTFields(1).Value))
+               End If
+               mvarSubTituloExcel = "|Desde el " & DTFields(0).Value & " al " & DTFields(1).Value
+            
+               mCampo = BuscarClaveINI("IVAVENTAS_FilasPorHoja")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = CStr(mvarLineasIvaCompras)
+               mvarParametrosExcel = "SaltoDePaginaCada:" & mCampo
+               mCampo = BuscarClaveINI("IVAVENTAS_ColumnaConTransporte")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = "5"
+               mvarParametrosExcel = mvarParametrosExcel & "|ColumnaTransporte:" & mCampo
+               mCampo = BuscarClaveINI("IVAVENTAS_ColumnasSumaParaTransporte")
+               If Len(mCampo) = 0 Or Not IsNumeric(mCampo) Then mCampo = "8,9,11,12,13"
+               mVectorAux = VBA.Split(mCampo, ",")
+               For i = 0 To UBound(mVectorAux)
+                  mvarParametrosExcel = mvarParametrosExcel & "|SumadorPorHoja" & i + 1 & ":" & mVectorAux(i)
+               Next
+               mvarParametrosExcel = mvarParametrosExcel & "|Enc:SinFecha"
+
+
+
+
+
+
+
+
+*/

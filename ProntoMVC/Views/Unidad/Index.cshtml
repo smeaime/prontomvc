@@ -5,12 +5,21 @@
 @*<h2>Index</h2>*@ @* <div class="container-fluid">*@
 
 <br />
+<div style="padding-left: 15px; padding-right: 15px;">
+    @*agregar esto 1*@
 
-<div class="row-fluid">
-    <div class="span10 lightblue">
-        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
+    <div class="row-fluid">
+        <div class="span10 lightblue">
+
+
+            <table id="Lista" class="scroll" cellpadding="0" cellspacing="0"
+                   style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table> @*agregar esto 2 font family*@
+
+
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px"></div>
     </div>
+</div>
 </div>
 
 <style>
@@ -18,7 +27,18 @@
         text-decoration: underline;
         cursor: pointer;
     }
+
+
+    .ui-widget {
+        /* font-size: 1.1em; */
+        /*font-size: 10pt;
+      line-height: 14px;*/
+        font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+    }
 </style>
+
+
+
 
 <script type="text/javascript">
 
@@ -261,6 +281,8 @@
             //        return false;
             //    }
             //},
+
+
             pager: $('#ListaPager'),
             rowNum: 20,
             rowList: [10, 20, 50, 100],
@@ -268,16 +290,35 @@
             sortorder: 'asc',
             viewrecords: true,
             multiselect: true,
-            shrinkToFit: true,
-            width: 'auto',
-            height: '100%',
-            altRows: false,
-            footerrow: false,
-            userDataOnFooter: true,
+            toppager: true,
+
+
+
             caption: '<b>UNIDADES</b>',
             cellEdit: true,
             cellsubmit: 'clientArray',
-            editurl: ROOT + 'Empleado/EditGridData/'
+            editurl: ROOT + 'Empleado/EditGridData/',
+
+
+
+            ///////////////////////////////
+            //width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
+            altRows: false,
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>PEDIDOS</b>'
+            , multiboxonly: true
+
+
+
+
+
+
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
         jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
@@ -295,5 +336,14 @@
                                             },
                                         });
     });
+
+
+
+
+    @*agregar esto 3 *@
+    $(window).resize(function () {
+        RefrescaAnchoJqgrids();
+    });
+
 
 </script>

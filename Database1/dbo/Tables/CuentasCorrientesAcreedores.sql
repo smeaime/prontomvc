@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[CuentasCorrientesAcreedores] (
+    [IdCtaCte]           INT             IDENTITY (1, 1) NOT NULL,
+    [IdProveedor]        INT             NULL,
+    [Fecha]              DATETIME        NULL,
+    [IdTipoComp]         INT             NULL,
+    [IdComprobante]      INT             NULL,
+    [NumeroComprobante]  INT             NULL,
+    [IdImputacion]       INT             NULL,
+    [ImporteTotal]       NUMERIC (19, 2) NULL,
+    [Saldo]              NUMERIC (19, 2) NULL,
+    [FechaVencimiento]   DATETIME        NULL,
+    [IdDetalleOrdenPago] INT             NULL,
+    [CotizacionDolar]    NUMERIC (18, 4) NULL,
+    [ImporteTotalDolar]  NUMERIC (18, 4) NULL,
+    [SaldoDolar]         NUMERIC (18, 4) NULL,
+    [IdMoneda]           INT             NULL,
+    [CotizacionMoneda]   NUMERIC (18, 4) NULL,
+    [CotizacionEuro]     NUMERIC (18, 4) NULL,
+    [ImporteTotalEuro]   NUMERIC (18, 2) NULL,
+    [SaldoEuro]          NUMERIC (18, 2) NULL,
+    [SaldoTrs]           NUMERIC (19, 2) NULL,
+    [Marca]              VARCHAR (1)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    CONSTRAINT [PK_CuentasCorrientesAcreedores] PRIMARY KEY NONCLUSTERED ([IdCtaCte] ASC) WITH (FILLFACTOR = 90),
+    CONSTRAINT [FK_CuentasCorrientesAcreedores_Proveedores] FOREIGN KEY ([IdProveedor]) REFERENCES [dbo].[Proveedores] ([IdProveedor])
+);
+

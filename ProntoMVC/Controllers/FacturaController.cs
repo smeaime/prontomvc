@@ -914,8 +914,8 @@ namespace ProntoMVC.Controllers
 
 
             string baseP = this.HttpContext.Session["BasePronto"].ToString();
-            baseP = "Vialagro";
-
+            // baseP = "Vialagro";
+            // baseP = "BDLConsultores";
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
