@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="wDemoWilliamsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="wDemoWilliamsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="wDemoWilliamsModelStoreContainer">
           <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Store.Clientes" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.Store.ControlesCalidad" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
@@ -333,7 +333,7 @@
         </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="wDemoWilliamsEntities">
           <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.DetalleRequerimientos" />
           <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Requerimientos" />
@@ -663,7 +663,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="wDemoWilliamsModelStoreContainer" CdmEntityContainer="wDemoWilliamsEntities">
           <EntitySetMapping Name="DetalleRequerimientos">
             <EntityTypeMapping TypeName="wDemoWilliamsModel.DetalleRequerimientos">
@@ -993,30 +993,30 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams>
-      <Diagram Name="Model1" ZoomLevel="38">
-        <EntityTypeShape EntityType="wDemoWilliamsModel.DetalleRequerimientos" Width="2.375" PointX="8" PointY="0.5" Height="14.672180989583332" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Requerimientos" Width="1.875" PointX="5.375" PointY="0.5" Height="12.364563802083332" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.ControlesCalidad" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9802864583333326" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Obras" Width="1.5" PointX="2.75" PointY="7.75" Height="11.595358072916667" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Sectores" Width="1.5" PointX="11.75" PointY="0.75" Height="2.3648893229166665" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Unidades" Width="1.5" PointX="11.75" PointY="4.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Clientes" Width="1.5" PointX="5.125" PointY="13.375" Height="16.595195312500007" />
-      </Diagram>
-    </Diagrams>
-  </Designer>
+    <edmx:Diagrams>
+      <edmx:Diagram Name="Model1" ZoomLevel="38">
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.DetalleRequerimientos" Width="2.375" PointX="8" PointY="0.5" Height="14.672180989583332" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Requerimientos" Width="1.875" PointX="5.375" PointY="0.5" Height="12.364563802083332" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.ControlesCalidad" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9802864583333326" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Obras" Width="1.5" PointX="2.75" PointY="7.75" Height="11.595358072916667" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Sectores" Width="1.5" PointX="11.75" PointY="0.75" Height="2.3648893229166665" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Unidades" Width="1.5" PointX="11.75" PointY="4.75" Height="2.1725878906249996" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Clientes" Width="1.5" PointX="5.125" PointY="13.375" Height="16.595195312500007" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
 </edmx:Edmx>
