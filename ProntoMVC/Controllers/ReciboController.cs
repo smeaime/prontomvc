@@ -261,6 +261,11 @@ namespace ProntoMVC.Controllers
                         sErrorMsg += "\n" + "Hay transferencias que apuntan a cuentas bancarias inexistentes";
                     }
                 }
+                if ((x.IdBanco ?? 0) > 0)
+                {
+                    if ((x.NumeroInterno ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores sin numero interno"; }
+                    if ((x.NumeroValor ?? 0) == 0) { sErrorMsg += "\n" + "Hay valores sin numero de valor"; }
+                }
                 if ((x.IdCaja ?? 0) > 0)
                 {
                     Caja Caja = db.Cajas.Where(c => c.IdCaja == x.IdCaja).SingleOrDefault();
@@ -496,6 +501,14 @@ namespace ProntoMVC.Controllers
                                 }
                                 else
                                 {
+
+                                    if ((d.NumeroInterno ?? 0) > 0)
+                                    {
+                                        mIdAux1 = parametros.ProximoNumeroInterno ?? 1;
+                                        d.NumeroInterno = mIdAux1;
+                                        parametros.ProximoNumeroInterno = mIdAux1 + 1;
+                                        db.Entry(parametros).State = System.Data.Entity.EntityState.Modified;
+                                    }
                                     EntidadOriginal.DetalleRecibosValores.Add(d);
                                 }
                             }
@@ -1536,6 +1549,7 @@ namespace ProntoMVC.Controllers
 
             var Parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdCuentaCaja = Parametros.IdCuentaCaja ?? 0;
+            mIdCuentaValores = Parametros.IdCuentaValores ?? 0;
             if (mIdCuentaRetencionIVA == 0) { mIdCuentaRetencionIVA = Parametros.IdCuentaRetencionIva ?? 0; }
             mIdCuentaRetencionGanancias = Parametros.IdCuentaRetencionGananciasCobros ?? 0;
             mIdCuentaRetencionIBrutos = Parametros.IdCuentaRetencionIBrutos ?? 0;
@@ -1557,7 +1571,7 @@ namespace ProntoMVC.Controllers
             }
 
             mRetencionIVA = Recibo.RetencionIVA ?? 0;
-            if (mImporte != 0)
+            if (mRetencionIVA != 0)
             {
                 rc = new DetalleRecibosCuenta();
                 rc.IdCuenta = mIdCuentaRetencionIVA;
@@ -1577,7 +1591,7 @@ namespace ProntoMVC.Controllers
             };
 
             mRetencionIBrutos = Recibo.RetencionIBrutos ?? 0;
-            if (mRetencionGanancias != 0)
+            if (mRetencionIBrutos != 0)
             {
                 rc = new DetalleRecibosCuenta();
                 rc.IdCuenta = mIdCuentaRetencionGanancias;

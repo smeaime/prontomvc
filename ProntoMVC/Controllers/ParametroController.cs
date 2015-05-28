@@ -41,7 +41,12 @@ namespace ProntoMVC.Controllers
                             a.IdTipoComprobanteTarjetaCredito,
                             a.ProximoNumeroAjusteStock,
                             a.ProximoNumeroOtroIngresoAlmacen,
-                            a.ProximoNumeroInternoRecepcion
+                            a.ProximoNumeroInternoRecepcion,
+                            a.PercepcionIIBB,
+                            a.OtrasPercepciones1,
+                            a.OtrasPercepciones2,
+                            a.OtrasPercepciones3,
+                            a.ProximoNumeroInterno
                         }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }

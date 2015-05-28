@@ -49,13 +49,20 @@ namespace ProntoMVC.Controllers
 
             if (id == -1)
             {
-
                 PuntosVenta = new Data.Models.PuntosVenta();
+                PuntosVenta.WebService = "";
             }
             else
             {
                 PuntosVenta = db.PuntosVentas.Find(id);
-
+                if ((PuntosVenta.CAEManual ?? "") == "SI")
+                {
+                    PuntosVenta.WebService = " ";
+                }
+                else 
+                {
+                    if ((PuntosVenta.WebService ?? "") == "") { PuntosVenta.WebService = ""; }
+                }
             }
 
             CargarViewBag(PuntosVenta);
@@ -88,6 +95,15 @@ namespace ProntoMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if ((PuntosVenta.WebService ?? "") == " ") { 
+                        PuntosVenta.CAEManual = "SI";
+                        PuntosVenta.WebService = null;
+                    }
+                    else  if ((PuntosVenta.WebService ?? "") == "") {
+                        PuntosVenta.CAEManual = null;
+                        PuntosVenta.WebService = null;
+                    }
+
                     if (PuntosVenta.IdPuntoVenta <= 0)
                     {
                         db.PuntosVentas.Add(PuntosVenta);
@@ -240,7 +256,7 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdPuntoVenta.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdPuntoVenta} )  +" target='_blank' >Editar</>",
+                                "<a href="+ Url.Action("Edit",new {id = a.IdPuntoVenta})+">Editar</>",
                                 "<a href="+ Url.Action("Imprimir",new {id = a.IdPuntoVenta} )  +">Imprimir</>",
                                 a.IdPuntoVenta.ToString(),
                                 (a.Letra ?? string.Empty).ToString(),
