@@ -17,20 +17,19 @@ Imports System.Linq
 Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
-
-<Assembly: EdmSchemaAttribute("45494dd0-d0b4-4591-83a5-2a91401f5f64")>
+<Assembly: EdmSchemaAttribute("7d4d657b-f601-451d-a6a7-974b3b7b1dc7")> 
 Namespace wDemoWilliamsModel
 
-    #Region "Contexts"
-    
+#Region "Contexts"
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
-    Public Partial Class wDemoWilliamsEntities
+    Partial Public Class wDemoWilliamsEntities
         Inherits ObjectContext
-    
-        #Region "Constructors"
-    
+
+#Region "Constructors"
+
         ''' <summary>
         ''' Initializes a new wDemoWilliamsEntities object using the connection string found in the 'wDemoWilliamsEntities' section of the application configuration file.
         ''' </summary>
@@ -38,7 +37,7 @@ Namespace wDemoWilliamsModel
             MyBase.New("name=wDemoWilliamsEntities", "wDemoWilliamsEntities")
             OnContextCreated()
         End Sub
-    
+
         ''' <summary>
         ''' Initialize a new wDemoWilliamsEntities object.
         ''' </summary>
@@ -46,7 +45,7 @@ Namespace wDemoWilliamsModel
             MyBase.New(connectionString, "wDemoWilliamsEntities")
             OnContextCreated()
         End Sub
-    
+
         ''' <summary>
         ''' Initialize a new wDemoWilliamsEntities object.
         ''' </summary>
@@ -54,18 +53,18 @@ Namespace wDemoWilliamsModel
             MyBase.New(connection, "wDemoWilliamsEntities")
             OnContextCreated()
         End Sub
-    
-        #End Region
-    
-        #Region "Partial Methods"
-    
+
+#End Region
+
+#Region "Partial Methods"
+
         Partial Private Sub OnContextCreated()
         End Sub
-    
-        #End Region
-    
-        #Region "ObjectSet Properties"
-    
+
+#End Region
+
+#Region "ObjectSet Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -77,9 +76,9 @@ Namespace wDemoWilliamsModel
                 Return _DetalleRequerimientos
             End Get
         End Property
-    
+
         Private _DetalleRequerimientos As ObjectSet(Of DetalleRequerimientos)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -91,9 +90,9 @@ Namespace wDemoWilliamsModel
                 Return _Requerimientos
             End Get
         End Property
-    
+
         Private _Requerimientos As ObjectSet(Of Requerimientos)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -105,9 +104,9 @@ Namespace wDemoWilliamsModel
                 Return _ControlesCalidad
             End Get
         End Property
-    
+
         Private _ControlesCalidad As ObjectSet(Of ControlesCalidad)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -119,9 +118,9 @@ Namespace wDemoWilliamsModel
                 Return _Obras
             End Get
         End Property
-    
+
         Private _Obras As ObjectSet(Of Obras)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -133,9 +132,9 @@ Namespace wDemoWilliamsModel
                 Return _Sectores
             End Get
         End Property
-    
+
         Private _Sectores As ObjectSet(Of Sectores)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -147,9 +146,9 @@ Namespace wDemoWilliamsModel
                 Return _Unidades
             End Get
         End Property
-    
+
         Private _Unidades As ObjectSet(Of Unidades)
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
@@ -161,55 +160,55 @@ Namespace wDemoWilliamsModel
                 Return _Clientes
             End Get
         End Property
-    
+
         Private _Clientes As ObjectSet(Of Clientes)
 
-        #End Region
+#End Region
 
-        #Region "AddTo Methods"
-    
+#Region "AddTo Methods"
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the DetalleRequerimientos EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToDetalleRequerimientos(ByVal detalleRequerimientos As DetalleRequerimientos)
             MyBase.AddObject("DetalleRequerimientos", detalleRequerimientos)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the Requerimientos EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToRequerimientos(ByVal requerimientos As Requerimientos)
             MyBase.AddObject("Requerimientos", requerimientos)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the ControlesCalidad EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToControlesCalidad(ByVal controlesCalidad As ControlesCalidad)
             MyBase.AddObject("ControlesCalidad", controlesCalidad)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the Obras EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToObras(ByVal obras As Obras)
             MyBase.AddObject("Obras", obras)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the Sectores EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToSectores(ByVal sectores As Sectores)
             MyBase.AddObject("Sectores", sectores)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the Unidades EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
         Public Sub AddToUnidades(ByVal unidades As Unidades)
             MyBase.AddObject("Unidades", unidades)
         End Sub
-    
+
         ''' <summary>
         ''' Deprecated Method for adding a new object to the Clientes EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
         ''' </summary>
@@ -217,7250 +216,7249 @@ Namespace wDemoWilliamsModel
             MyBase.AddObject("Clientes", clientes)
         End Sub
 
-        #End Region
+#End Region
 
     End Class
 
-    #End Region
+#End Region
 
-    #Region "Entities"
-    
+#Region "Entities"
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="Clientes")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class Clientes
+    Partial Public Class Clientes
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new Clientes object.
         ''' </summary>
         ''' <param name="idCliente">Initial value of the IdCliente property.</param>
         Public Shared Function CreateClientes(idCliente As Global.System.Int32) As Clientes
-            Dim clientes as Clientes = New Clientes
+            Dim clientes As Clientes = New Clientes
             clientes.IdCliente = idCliente
             Return clientes
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdCliente() As Global.System.Int32
             Get
                 Return _IdCliente
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdCliente <> Value) Then
                     OnIdClienteChanging(value)
                     ReportPropertyChanging("IdCliente")
-                    _IdCliente = StructuralObject.SetValidValue(value)
+                    _IdCliente = StructuralObject.SetValidValue(value, "IdCliente")
                     ReportPropertyChanged("IdCliente")
                     OnIdClienteChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdCliente As Global.System.Int32
-        Private Partial Sub OnIdClienteChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdClienteChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdClienteChanged()
+
+        Partial Private Sub OnIdClienteChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property RazonSocial() As Global.System.String
             Get
                 Return _RazonSocial
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnRazonSocialChanging(value)
                 ReportPropertyChanging("RazonSocial")
-                _RazonSocial = StructuralObject.SetValidValue(value, true)
+                _RazonSocial = StructuralObject.SetValidValue(value, True, "RazonSocial")
                 ReportPropertyChanged("RazonSocial")
                 OnRazonSocialChanged()
             End Set
         End Property
-    
+
         Private _RazonSocial As Global.System.String
-        Private Partial Sub OnRazonSocialChanging(value As Global.System.String)
+        Partial Private Sub OnRazonSocialChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnRazonSocialChanged()
+
+        Partial Private Sub OnRazonSocialChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Direccion() As Global.System.String
             Get
                 Return _Direccion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDireccionChanging(value)
                 ReportPropertyChanging("Direccion")
-                _Direccion = StructuralObject.SetValidValue(value, true)
+                _Direccion = StructuralObject.SetValidValue(value, True, "Direccion")
                 ReportPropertyChanged("Direccion")
                 OnDireccionChanged()
             End Set
         End Property
-    
+
         Private _Direccion As Global.System.String
-        Private Partial Sub OnDireccionChanging(value As Global.System.String)
+        Partial Private Sub OnDireccionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDireccionChanged()
+
+        Partial Private Sub OnDireccionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLocalidad() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLocalidad
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLocalidadChanging(value)
                 ReportPropertyChanging("IdLocalidad")
-                _IdLocalidad = StructuralObject.SetValidValue(value)
+                _IdLocalidad = StructuralObject.SetValidValue(value, "IdLocalidad")
                 ReportPropertyChanged("IdLocalidad")
                 OnIdLocalidadChanged()
             End Set
         End Property
-    
+
         Private _IdLocalidad As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLocalidadChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLocalidadChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLocalidadChanged()
+
+        Partial Private Sub OnIdLocalidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoPostal() As Global.System.String
             Get
                 Return _CodigoPostal
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoPostalChanging(value)
                 ReportPropertyChanging("CodigoPostal")
-                _CodigoPostal = StructuralObject.SetValidValue(value, true)
+                _CodigoPostal = StructuralObject.SetValidValue(value, True, "CodigoPostal")
                 ReportPropertyChanged("CodigoPostal")
                 OnCodigoPostalChanged()
             End Set
         End Property
-    
+
         Private _CodigoPostal As Global.System.String
-        Private Partial Sub OnCodigoPostalChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoPostalChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoPostalChanged()
+
+        Partial Private Sub OnCodigoPostalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdProvincia() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdProvincia
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdProvinciaChanging(value)
                 ReportPropertyChanging("IdProvincia")
-                _IdProvincia = StructuralObject.SetValidValue(value)
+                _IdProvincia = StructuralObject.SetValidValue(value, "IdProvincia")
                 ReportPropertyChanged("IdProvincia")
                 OnIdProvinciaChanged()
             End Set
         End Property
-    
+
         Private _IdProvincia As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdProvinciaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdProvinciaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdProvinciaChanged()
+
+        Partial Private Sub OnIdProvinciaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdPais() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdPais
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdPaisChanging(value)
                 ReportPropertyChanging("IdPais")
-                _IdPais = StructuralObject.SetValidValue(value)
+                _IdPais = StructuralObject.SetValidValue(value, "IdPais")
                 ReportPropertyChanged("IdPais")
                 OnIdPaisChanged()
             End Set
         End Property
-    
+
         Private _IdPais As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdPaisChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdPaisChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdPaisChanged()
+
+        Partial Private Sub OnIdPaisChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Telefono() As Global.System.String
             Get
                 Return _Telefono
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnTelefonoChanging(value)
                 ReportPropertyChanging("Telefono")
-                _Telefono = StructuralObject.SetValidValue(value, true)
+                _Telefono = StructuralObject.SetValidValue(value, True, "Telefono")
                 ReportPropertyChanged("Telefono")
                 OnTelefonoChanged()
             End Set
         End Property
-    
+
         Private _Telefono As Global.System.String
-        Private Partial Sub OnTelefonoChanging(value As Global.System.String)
+        Partial Private Sub OnTelefonoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnTelefonoChanged()
+
+        Partial Private Sub OnTelefonoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Fax() As Global.System.String
             Get
                 Return _Fax
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnFaxChanging(value)
                 ReportPropertyChanging("Fax")
-                _Fax = StructuralObject.SetValidValue(value, true)
+                _Fax = StructuralObject.SetValidValue(value, True, "Fax")
                 ReportPropertyChanged("Fax")
                 OnFaxChanged()
             End Set
         End Property
-    
+
         Private _Fax As Global.System.String
-        Private Partial Sub OnFaxChanging(value As Global.System.String)
+        Partial Private Sub OnFaxChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnFaxChanged()
+
+        Partial Private Sub OnFaxChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Email() As Global.System.String
             Get
                 Return _Email
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEmailChanging(value)
                 ReportPropertyChanging("Email")
-                _Email = StructuralObject.SetValidValue(value, true)
+                _Email = StructuralObject.SetValidValue(value, True, "Email")
                 ReportPropertyChanged("Email")
                 OnEmailChanged()
             End Set
         End Property
-    
+
         Private _Email As Global.System.String
-        Private Partial Sub OnEmailChanging(value As Global.System.String)
+        Partial Private Sub OnEmailChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEmailChanged()
+
+        Partial Private Sub OnEmailChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cuit() As Global.System.String
             Get
                 Return _Cuit
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCuitChanging(value)
                 ReportPropertyChanging("Cuit")
-                _Cuit = StructuralObject.SetValidValue(value, true)
+                _Cuit = StructuralObject.SetValidValue(value, True, "Cuit")
                 ReportPropertyChanged("Cuit")
                 OnCuitChanged()
             End Set
         End Property
-    
+
         Private _Cuit As Global.System.String
-        Private Partial Sub OnCuitChanging(value As Global.System.String)
+        Partial Private Sub OnCuitChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCuitChanged()
+
+        Partial Private Sub OnCuitChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCodigoIva() As Nullable(Of Global.System.Byte)
             Get
                 Return _IdCodigoIva
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnIdCodigoIvaChanging(value)
                 ReportPropertyChanging("IdCodigoIva")
-                _IdCodigoIva = StructuralObject.SetValidValue(value)
+                _IdCodigoIva = StructuralObject.SetValidValue(value, "IdCodigoIva")
                 ReportPropertyChanged("IdCodigoIva")
                 OnIdCodigoIvaChanged()
             End Set
         End Property
-    
+
         Private _IdCodigoIva As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnIdCodigoIvaChanging(value As Nullable(Of Global.System.Byte))
+        Partial Private Sub OnIdCodigoIvaChanging(value As Nullable(Of Global.System.Byte))
         End Sub
-    
-        Private Partial Sub OnIdCodigoIvaChanged()
+
+        Partial Private Sub OnIdCodigoIvaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaAlta() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaAlta
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaAltaChanging(value)
                 ReportPropertyChanging("FechaAlta")
-                _FechaAlta = StructuralObject.SetValidValue(value)
+                _FechaAlta = StructuralObject.SetValidValue(value, "FechaAlta")
                 ReportPropertyChanged("FechaAlta")
                 OnFechaAltaChanged()
             End Set
         End Property
-    
+
         Private _FechaAlta As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaAltaChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaAltaChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaAltaChanged()
+
+        Partial Private Sub OnFechaAltaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Contacto() As Global.System.String
             Get
                 Return _Contacto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnContactoChanging(value)
                 ReportPropertyChanging("Contacto")
-                _Contacto = StructuralObject.SetValidValue(value, true)
+                _Contacto = StructuralObject.SetValidValue(value, True, "Contacto")
                 ReportPropertyChanged("Contacto")
                 OnContactoChanged()
             End Set
         End Property
-    
+
         Private _Contacto As Global.System.String
-        Private Partial Sub OnContactoChanging(value As Global.System.String)
+        Partial Private Sub OnContactoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnContactoChanged()
+
+        Partial Private Sub OnContactoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EnviarEmail() As Nullable(Of Global.System.Byte)
             Get
                 Return _EnviarEmail
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnEnviarEmailChanging(value)
                 ReportPropertyChanging("EnviarEmail")
-                _EnviarEmail = StructuralObject.SetValidValue(value)
+                _EnviarEmail = StructuralObject.SetValidValue(value, "EnviarEmail")
                 ReportPropertyChanged("EnviarEmail")
                 OnEnviarEmailChanged()
             End Set
         End Property
-    
+
         Private _EnviarEmail As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
+        Partial Private Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
         End Sub
-    
-        Private Partial Sub OnEnviarEmailChanged()
+
+        Partial Private Sub OnEnviarEmailChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property DireccionEntrega() As Global.System.String
             Get
                 Return _DireccionEntrega
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDireccionEntregaChanging(value)
                 ReportPropertyChanging("DireccionEntrega")
-                _DireccionEntrega = StructuralObject.SetValidValue(value, true)
+                _DireccionEntrega = StructuralObject.SetValidValue(value, True, "DireccionEntrega")
                 ReportPropertyChanged("DireccionEntrega")
                 OnDireccionEntregaChanged()
             End Set
         End Property
-    
+
         Private _DireccionEntrega As Global.System.String
-        Private Partial Sub OnDireccionEntregaChanging(value As Global.System.String)
+        Partial Private Sub OnDireccionEntregaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDireccionEntregaChanged()
+
+        Partial Private Sub OnDireccionEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLocalidadEntrega() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLocalidadEntrega
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLocalidadEntregaChanging(value)
                 ReportPropertyChanging("IdLocalidadEntrega")
-                _IdLocalidadEntrega = StructuralObject.SetValidValue(value)
+                _IdLocalidadEntrega = StructuralObject.SetValidValue(value, "IdLocalidadEntrega")
                 ReportPropertyChanged("IdLocalidadEntrega")
                 OnIdLocalidadEntregaChanged()
             End Set
         End Property
-    
+
         Private _IdLocalidadEntrega As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLocalidadEntregaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLocalidadEntregaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLocalidadEntregaChanged()
+
+        Partial Private Sub OnIdLocalidadEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdProvinciaEntrega() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdProvinciaEntrega
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdProvinciaEntregaChanging(value)
                 ReportPropertyChanging("IdProvinciaEntrega")
-                _IdProvinciaEntrega = StructuralObject.SetValidValue(value)
+                _IdProvinciaEntrega = StructuralObject.SetValidValue(value, "IdProvinciaEntrega")
                 ReportPropertyChanged("IdProvinciaEntrega")
                 OnIdProvinciaEntregaChanged()
             End Set
         End Property
-    
+
         Private _IdProvinciaEntrega As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdProvinciaEntregaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdProvinciaEntregaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdProvinciaEntregaChanged()
+
+        Partial Private Sub OnIdProvinciaEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoCliente() As Nullable(Of Global.System.Int32)
             Get
                 Return _CodigoCliente
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnCodigoClienteChanging(value)
                 ReportPropertyChanging("CodigoCliente")
-                _CodigoCliente = StructuralObject.SetValidValue(value)
+                _CodigoCliente = StructuralObject.SetValidValue(value, "CodigoCliente")
                 ReportPropertyChanged("CodigoCliente")
                 OnCodigoClienteChanged()
             End Set
         End Property
-    
+
         Private _CodigoCliente As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnCodigoClienteChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnCodigoClienteChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnCodigoClienteChanged()
+
+        Partial Private Sub OnCodigoClienteChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCuenta() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCuenta
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCuentaChanging(value)
                 ReportPropertyChanging("IdCuenta")
-                _IdCuenta = StructuralObject.SetValidValue(value)
+                _IdCuenta = StructuralObject.SetValidValue(value, "IdCuenta")
                 ReportPropertyChanged("IdCuenta")
                 OnIdCuentaChanged()
             End Set
         End Property
-    
+
         Private _IdCuenta As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCuentaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCuentaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCuentaChanged()
+
+        Partial Private Sub OnIdCuentaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Saldo() As Nullable(Of Global.System.Decimal)
             Get
                 Return _Saldo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnSaldoChanging(value)
                 ReportPropertyChanging("Saldo")
-                _Saldo = StructuralObject.SetValidValue(value)
+                _Saldo = StructuralObject.SetValidValue(value, "Saldo")
                 ReportPropertyChanged("Saldo")
                 OnSaldoChanged()
             End Set
         End Property
-    
+
         Private _Saldo As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnSaldoChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnSaldoChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnSaldoChanged()
+
+        Partial Private Sub OnSaldoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SaldoDocumentos() As Nullable(Of Global.System.Decimal)
             Get
                 Return _SaldoDocumentos
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnSaldoDocumentosChanging(value)
                 ReportPropertyChanging("SaldoDocumentos")
-                _SaldoDocumentos = StructuralObject.SetValidValue(value)
+                _SaldoDocumentos = StructuralObject.SetValidValue(value, "SaldoDocumentos")
                 ReportPropertyChanged("SaldoDocumentos")
                 OnSaldoDocumentosChanged()
             End Set
         End Property
-    
+
         Private _SaldoDocumentos As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnSaldoDocumentosChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnSaldoDocumentosChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnSaldoDocumentosChanged()
+
+        Partial Private Sub OnSaldoDocumentosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Vendedor1() As Nullable(Of Global.System.Int32)
             Get
                 Return _Vendedor1
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnVendedor1Changing(value)
                 ReportPropertyChanging("Vendedor1")
-                _Vendedor1 = StructuralObject.SetValidValue(value)
+                _Vendedor1 = StructuralObject.SetValidValue(value, "Vendedor1")
                 ReportPropertyChanged("Vendedor1")
                 OnVendedor1Changed()
             End Set
         End Property
-    
+
         Private _Vendedor1 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnVendedor1Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnVendedor1Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnVendedor1Changed()
+
+        Partial Private Sub OnVendedor1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CreditoMaximo() As Nullable(Of Global.System.Decimal)
             Get
                 Return _CreditoMaximo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnCreditoMaximoChanging(value)
                 ReportPropertyChanging("CreditoMaximo")
-                _CreditoMaximo = StructuralObject.SetValidValue(value)
+                _CreditoMaximo = StructuralObject.SetValidValue(value, "CreditoMaximo")
                 ReportPropertyChanged("CreditoMaximo")
                 OnCreditoMaximoChanged()
             End Set
         End Property
-    
+
         Private _CreditoMaximo As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnCreditoMaximoChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnCreditoMaximoChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnCreditoMaximoChanged()
+
+        Partial Private Sub OnCreditoMaximoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IGCondicion() As Nullable(Of Global.System.Int32)
             Get
                 Return _IGCondicion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIGCondicionChanging(value)
                 ReportPropertyChanging("IGCondicion")
-                _IGCondicion = StructuralObject.SetValidValue(value)
+                _IGCondicion = StructuralObject.SetValidValue(value, "IGCondicion")
                 ReportPropertyChanged("IGCondicion")
                 OnIGCondicionChanged()
             End Set
         End Property
-    
+
         Private _IGCondicion As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIGCondicionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIGCondicionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIGCondicionChanged()
+
+        Partial Private Sub OnIGCondicionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCondicionVenta() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCondicionVenta
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCondicionVentaChanging(value)
                 ReportPropertyChanging("IdCondicionVenta")
-                _IdCondicionVenta = StructuralObject.SetValidValue(value)
+                _IdCondicionVenta = StructuralObject.SetValidValue(value, "IdCondicionVenta")
                 ReportPropertyChanged("IdCondicionVenta")
                 OnIdCondicionVentaChanged()
             End Set
         End Property
-    
+
         Private _IdCondicionVenta As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCondicionVentaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCondicionVentaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCondicionVentaChanged()
+
+        Partial Private Sub OnIdCondicionVentaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdMoneda() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdMoneda
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdMonedaChanging(value)
                 ReportPropertyChanging("IdMoneda")
-                _IdMoneda = StructuralObject.SetValidValue(value)
+                _IdMoneda = StructuralObject.SetValidValue(value, "IdMoneda")
                 ReportPropertyChanged("IdMoneda")
                 OnIdMonedaChanged()
             End Set
         End Property
-    
+
         Private _IdMoneda As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdMonedaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdMonedaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdMonedaChanged()
+
+        Partial Private Sub OnIdMonedaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IBNumeroInscripcion() As Global.System.String
             Get
                 Return _IBNumeroInscripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnIBNumeroInscripcionChanging(value)
                 ReportPropertyChanging("IBNumeroInscripcion")
-                _IBNumeroInscripcion = StructuralObject.SetValidValue(value, true)
+                _IBNumeroInscripcion = StructuralObject.SetValidValue(value, True, "IBNumeroInscripcion")
                 ReportPropertyChanged("IBNumeroInscripcion")
                 OnIBNumeroInscripcionChanged()
             End Set
         End Property
-    
+
         Private _IBNumeroInscripcion As Global.System.String
-        Private Partial Sub OnIBNumeroInscripcionChanging(value As Global.System.String)
+        Partial Private Sub OnIBNumeroInscripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnIBNumeroInscripcionChanged()
+
+        Partial Private Sub OnIBNumeroInscripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IBCondicion() As Nullable(Of Global.System.Int32)
             Get
                 Return _IBCondicion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIBCondicionChanging(value)
                 ReportPropertyChanging("IBCondicion")
-                _IBCondicion = StructuralObject.SetValidValue(value)
+                _IBCondicion = StructuralObject.SetValidValue(value, "IBCondicion")
                 ReportPropertyChanged("IBCondicion")
                 OnIBCondicionChanged()
             End Set
         End Property
-    
+
         Private _IBCondicion As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIBCondicionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIBCondicionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIBCondicionChanged()
+
+        Partial Private Sub OnIBCondicionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property TipoCliente() As Nullable(Of Global.System.Int32)
             Get
                 Return _TipoCliente
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnTipoClienteChanging(value)
                 ReportPropertyChanging("TipoCliente")
-                _TipoCliente = StructuralObject.SetValidValue(value)
+                _TipoCliente = StructuralObject.SetValidValue(value, "TipoCliente")
                 ReportPropertyChanged("TipoCliente")
                 OnTipoClienteChanged()
             End Set
         End Property
-    
+
         Private _TipoCliente As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnTipoClienteChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnTipoClienteChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnTipoClienteChanged()
+
+        Partial Private Sub OnTipoClienteChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Codigo() As Global.System.String
             Get
                 Return _Codigo
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoChanging(value)
                 ReportPropertyChanging("Codigo")
-                _Codigo = StructuralObject.SetValidValue(value, true)
+                _Codigo = StructuralObject.SetValidValue(value, True, "Codigo")
                 ReportPropertyChanged("Codigo")
                 OnCodigoChanged()
             End Set
         End Property
-    
+
         Private _Codigo As Global.System.String
-        Private Partial Sub OnCodigoChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoChanged()
+
+        Partial Private Sub OnCodigoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdListaPrecios() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdListaPrecios
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdListaPreciosChanging(value)
                 ReportPropertyChanging("IdListaPrecios")
-                _IdListaPrecios = StructuralObject.SetValidValue(value)
+                _IdListaPrecios = StructuralObject.SetValidValue(value, "IdListaPrecios")
                 ReportPropertyChanged("IdListaPrecios")
                 OnIdListaPreciosChanged()
             End Set
         End Property
-    
+
         Private _IdListaPrecios As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdListaPreciosChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdListaPreciosChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdListaPreciosChanged()
+
+        Partial Private Sub OnIdListaPreciosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdIBCondicionPorDefecto() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdIBCondicionPorDefecto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdIBCondicionPorDefectoChanging(value)
                 ReportPropertyChanging("IdIBCondicionPorDefecto")
-                _IdIBCondicionPorDefecto = StructuralObject.SetValidValue(value)
+                _IdIBCondicionPorDefecto = StructuralObject.SetValidValue(value, "IdIBCondicionPorDefecto")
                 ReportPropertyChanged("IdIBCondicionPorDefecto")
                 OnIdIBCondicionPorDefectoChanged()
             End Set
         End Property
-    
+
         Private _IdIBCondicionPorDefecto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdIBCondicionPorDefectoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdIBCondicionPorDefectoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdIBCondicionPorDefectoChanged()
+
+        Partial Private Sub OnIdIBCondicionPorDefectoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Confirmado() As Global.System.String
             Get
                 Return _Confirmado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnConfirmadoChanging(value)
                 ReportPropertyChanging("Confirmado")
-                _Confirmado = StructuralObject.SetValidValue(value, true)
+                _Confirmado = StructuralObject.SetValidValue(value, True, "Confirmado")
                 ReportPropertyChanged("Confirmado")
                 OnConfirmadoChanged()
             End Set
         End Property
-    
+
         Private _Confirmado As Global.System.String
-        Private Partial Sub OnConfirmadoChanging(value As Global.System.String)
+        Partial Private Sub OnConfirmadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnConfirmadoChanged()
+
+        Partial Private Sub OnConfirmadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoPresto() As Global.System.String
             Get
                 Return _CodigoPresto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoPrestoChanging(value)
                 ReportPropertyChanging("CodigoPresto")
-                _CodigoPresto = StructuralObject.SetValidValue(value, true)
+                _CodigoPresto = StructuralObject.SetValidValue(value, True, "CodigoPresto")
                 ReportPropertyChanged("CodigoPresto")
                 OnCodigoPrestoChanged()
             End Set
         End Property
-    
+
         Private _CodigoPresto As Global.System.String
-        Private Partial Sub OnCodigoPrestoChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoPrestoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoPrestoChanged()
+
+        Partial Private Sub OnCodigoPrestoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones() As Global.System.String
             Get
                 Return _Observaciones
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesChanging(value)
                 ReportPropertyChanging("Observaciones")
-                _Observaciones = StructuralObject.SetValidValue(value, true)
+                _Observaciones = StructuralObject.SetValidValue(value, True, "Observaciones")
                 ReportPropertyChanged("Observaciones")
                 OnObservacionesChanged()
             End Set
         End Property
-    
+
         Private _Observaciones As Global.System.String
-        Private Partial Sub OnObservacionesChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesChanged()
+
+        Partial Private Sub OnObservacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Importaciones_NumeroInscripcion() As Global.System.String
             Get
                 Return _Importaciones_NumeroInscripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnImportaciones_NumeroInscripcionChanging(value)
                 ReportPropertyChanging("Importaciones_NumeroInscripcion")
-                _Importaciones_NumeroInscripcion = StructuralObject.SetValidValue(value, true)
+                _Importaciones_NumeroInscripcion = StructuralObject.SetValidValue(value, True, "Importaciones_NumeroInscripcion")
                 ReportPropertyChanged("Importaciones_NumeroInscripcion")
                 OnImportaciones_NumeroInscripcionChanged()
             End Set
         End Property
-    
+
         Private _Importaciones_NumeroInscripcion As Global.System.String
-        Private Partial Sub OnImportaciones_NumeroInscripcionChanging(value As Global.System.String)
+        Partial Private Sub OnImportaciones_NumeroInscripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnImportaciones_NumeroInscripcionChanged()
+
+        Partial Private Sub OnImportaciones_NumeroInscripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Importaciones_DenominacionInscripcion() As Global.System.String
             Get
                 Return _Importaciones_DenominacionInscripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnImportaciones_DenominacionInscripcionChanging(value)
                 ReportPropertyChanging("Importaciones_DenominacionInscripcion")
-                _Importaciones_DenominacionInscripcion = StructuralObject.SetValidValue(value, true)
+                _Importaciones_DenominacionInscripcion = StructuralObject.SetValidValue(value, True, "Importaciones_DenominacionInscripcion")
                 ReportPropertyChanged("Importaciones_DenominacionInscripcion")
                 OnImportaciones_DenominacionInscripcionChanged()
             End Set
         End Property
-    
+
         Private _Importaciones_DenominacionInscripcion As Global.System.String
-        Private Partial Sub OnImportaciones_DenominacionInscripcionChanging(value As Global.System.String)
+        Partial Private Sub OnImportaciones_DenominacionInscripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnImportaciones_DenominacionInscripcionChanged()
+
+        Partial Private Sub OnImportaciones_DenominacionInscripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCuentaMonedaExt() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCuentaMonedaExt
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCuentaMonedaExtChanging(value)
                 ReportPropertyChanging("IdCuentaMonedaExt")
-                _IdCuentaMonedaExt = StructuralObject.SetValidValue(value)
+                _IdCuentaMonedaExt = StructuralObject.SetValidValue(value, "IdCuentaMonedaExt")
                 ReportPropertyChanged("IdCuentaMonedaExt")
                 OnIdCuentaMonedaExtChanged()
             End Set
         End Property
-    
+
         Private _IdCuentaMonedaExt As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCuentaMonedaExtChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCuentaMonedaExtChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCuentaMonedaExtChanged()
+
+        Partial Private Sub OnIdCuentaMonedaExtChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cobrador() As Nullable(Of Global.System.Int32)
             Get
                 Return _Cobrador
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnCobradorChanging(value)
                 ReportPropertyChanging("Cobrador")
-                _Cobrador = StructuralObject.SetValidValue(value)
+                _Cobrador = StructuralObject.SetValidValue(value, "Cobrador")
                 ReportPropertyChanged("Cobrador")
                 OnCobradorChanged()
             End Set
         End Property
-    
+
         Private _Cobrador As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnCobradorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnCobradorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnCobradorChanged()
+
+        Partial Private Sub OnCobradorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Auxiliar() As Global.System.String
             Get
                 Return _Auxiliar
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAuxiliarChanging(value)
                 ReportPropertyChanging("Auxiliar")
-                _Auxiliar = StructuralObject.SetValidValue(value, true)
+                _Auxiliar = StructuralObject.SetValidValue(value, True, "Auxiliar")
                 ReportPropertyChanged("Auxiliar")
                 OnAuxiliarChanged()
             End Set
         End Property
-    
+
         Private _Auxiliar As Global.System.String
-        Private Partial Sub OnAuxiliarChanging(value As Global.System.String)
+        Partial Private Sub OnAuxiliarChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAuxiliarChanged()
+
+        Partial Private Sub OnAuxiliarChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdIBCondicionPorDefecto2() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdIBCondicionPorDefecto2
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdIBCondicionPorDefecto2Changing(value)
                 ReportPropertyChanging("IdIBCondicionPorDefecto2")
-                _IdIBCondicionPorDefecto2 = StructuralObject.SetValidValue(value)
+                _IdIBCondicionPorDefecto2 = StructuralObject.SetValidValue(value, "IdIBCondicionPorDefecto2")
                 ReportPropertyChanged("IdIBCondicionPorDefecto2")
                 OnIdIBCondicionPorDefecto2Changed()
             End Set
         End Property
-    
+
         Private _IdIBCondicionPorDefecto2 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdIBCondicionPorDefecto2Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdIBCondicionPorDefecto2Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdIBCondicionPorDefecto2Changed()
+
+        Partial Private Sub OnIdIBCondicionPorDefecto2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdIBCondicionPorDefecto3() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdIBCondicionPorDefecto3
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdIBCondicionPorDefecto3Changing(value)
                 ReportPropertyChanging("IdIBCondicionPorDefecto3")
-                _IdIBCondicionPorDefecto3 = StructuralObject.SetValidValue(value)
+                _IdIBCondicionPorDefecto3 = StructuralObject.SetValidValue(value, "IdIBCondicionPorDefecto3")
                 ReportPropertyChanged("IdIBCondicionPorDefecto3")
                 OnIdIBCondicionPorDefecto3Changed()
             End Set
         End Property
-    
+
         Private _IdIBCondicionPorDefecto3 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdIBCondicionPorDefecto3Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdIBCondicionPorDefecto3Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdIBCondicionPorDefecto3Changed()
+
+        Partial Private Sub OnIdIBCondicionPorDefecto3Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdEstado() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdEstado
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdEstadoChanging(value)
                 ReportPropertyChanging("IdEstado")
-                _IdEstado = StructuralObject.SetValidValue(value)
+                _IdEstado = StructuralObject.SetValidValue(value, "IdEstado")
                 ReportPropertyChanged("IdEstado")
                 OnIdEstadoChanged()
             End Set
         End Property
-    
+
         Private _IdEstado As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdEstadoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdEstadoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdEstadoChanged()
+
+        Partial Private Sub OnIdEstadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NombreFantasia() As Global.System.String
             Get
                 Return _NombreFantasia
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnNombreFantasiaChanging(value)
                 ReportPropertyChanging("NombreFantasia")
-                _NombreFantasia = StructuralObject.SetValidValue(value, true)
+                _NombreFantasia = StructuralObject.SetValidValue(value, True, "NombreFantasia")
                 ReportPropertyChanged("NombreFantasia")
                 OnNombreFantasiaChanged()
             End Set
         End Property
-    
+
         Private _NombreFantasia As Global.System.String
-        Private Partial Sub OnNombreFantasiaChanging(value As Global.System.String)
+        Partial Private Sub OnNombreFantasiaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnNombreFantasiaChanged()
+
+        Partial Private Sub OnNombreFantasiaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EsAgenteRetencionIVA() As Global.System.String
             Get
                 Return _EsAgenteRetencionIVA
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEsAgenteRetencionIVAChanging(value)
                 ReportPropertyChanging("EsAgenteRetencionIVA")
-                _EsAgenteRetencionIVA = StructuralObject.SetValidValue(value, true)
+                _EsAgenteRetencionIVA = StructuralObject.SetValidValue(value, True, "EsAgenteRetencionIVA")
                 ReportPropertyChanged("EsAgenteRetencionIVA")
                 OnEsAgenteRetencionIVAChanged()
             End Set
         End Property
-    
+
         Private _EsAgenteRetencionIVA As Global.System.String
-        Private Partial Sub OnEsAgenteRetencionIVAChanging(value As Global.System.String)
+        Partial Private Sub OnEsAgenteRetencionIVAChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEsAgenteRetencionIVAChanged()
+
+        Partial Private Sub OnEsAgenteRetencionIVAChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property BaseMinimaParaPercepcionIVA() As Nullable(Of Global.System.Decimal)
             Get
                 Return _BaseMinimaParaPercepcionIVA
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnBaseMinimaParaPercepcionIVAChanging(value)
                 ReportPropertyChanging("BaseMinimaParaPercepcionIVA")
-                _BaseMinimaParaPercepcionIVA = StructuralObject.SetValidValue(value)
+                _BaseMinimaParaPercepcionIVA = StructuralObject.SetValidValue(value, "BaseMinimaParaPercepcionIVA")
                 ReportPropertyChanged("BaseMinimaParaPercepcionIVA")
                 OnBaseMinimaParaPercepcionIVAChanged()
             End Set
         End Property
-    
+
         Private _BaseMinimaParaPercepcionIVA As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnBaseMinimaParaPercepcionIVAChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnBaseMinimaParaPercepcionIVAChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnBaseMinimaParaPercepcionIVAChanged()
+
+        Partial Private Sub OnBaseMinimaParaPercepcionIVAChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property PorcentajePercepcionIVA() As Nullable(Of Global.System.Decimal)
             Get
                 Return _PorcentajePercepcionIVA
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnPorcentajePercepcionIVAChanging(value)
                 ReportPropertyChanging("PorcentajePercepcionIVA")
-                _PorcentajePercepcionIVA = StructuralObject.SetValidValue(value)
+                _PorcentajePercepcionIVA = StructuralObject.SetValidValue(value, "PorcentajePercepcionIVA")
                 ReportPropertyChanged("PorcentajePercepcionIVA")
                 OnPorcentajePercepcionIVAChanged()
             End Set
         End Property
-    
+
         Private _PorcentajePercepcionIVA As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnPorcentajePercepcionIVAChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnPorcentajePercepcionIVAChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnPorcentajePercepcionIVAChanged()
+
+        Partial Private Sub OnPorcentajePercepcionIVAChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUsuarioIngreso() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUsuarioIngreso
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUsuarioIngresoChanging(value)
                 ReportPropertyChanging("IdUsuarioIngreso")
-                _IdUsuarioIngreso = StructuralObject.SetValidValue(value)
+                _IdUsuarioIngreso = StructuralObject.SetValidValue(value, "IdUsuarioIngreso")
                 ReportPropertyChanged("IdUsuarioIngreso")
                 OnIdUsuarioIngresoChanged()
             End Set
         End Property
-    
+
         Private _IdUsuarioIngreso As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUsuarioIngresoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUsuarioIngresoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUsuarioIngresoChanged()
+
+        Partial Private Sub OnIdUsuarioIngresoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaIngreso() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaIngreso
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaIngresoChanging(value)
                 ReportPropertyChanging("FechaIngreso")
-                _FechaIngreso = StructuralObject.SetValidValue(value)
+                _FechaIngreso = StructuralObject.SetValidValue(value, "FechaIngreso")
                 ReportPropertyChanged("FechaIngreso")
                 OnFechaIngresoChanged()
             End Set
         End Property
-    
+
         Private _FechaIngreso As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaIngresoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaIngresoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaIngresoChanged()
+
+        Partial Private Sub OnFechaIngresoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUsuarioModifico() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUsuarioModifico
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUsuarioModificoChanging(value)
                 ReportPropertyChanging("IdUsuarioModifico")
-                _IdUsuarioModifico = StructuralObject.SetValidValue(value)
+                _IdUsuarioModifico = StructuralObject.SetValidValue(value, "IdUsuarioModifico")
                 ReportPropertyChanged("IdUsuarioModifico")
                 OnIdUsuarioModificoChanged()
             End Set
         End Property
-    
+
         Private _IdUsuarioModifico As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUsuarioModificoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUsuarioModificoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUsuarioModificoChanged()
+
+        Partial Private Sub OnIdUsuarioModificoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaModifico() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaModifico
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaModificoChanging(value)
                 ReportPropertyChanging("FechaModifico")
-                _FechaModifico = StructuralObject.SetValidValue(value)
+                _FechaModifico = StructuralObject.SetValidValue(value, "FechaModifico")
                 ReportPropertyChanged("FechaModifico")
                 OnFechaModificoChanged()
             End Set
         End Property
-    
+
         Private _FechaModifico As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaModificoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaModificoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaModificoChanged()
+
+        Partial Private Sub OnFechaModificoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property PorcentajeIBDirecto() As Nullable(Of Global.System.Decimal)
             Get
                 Return _PorcentajeIBDirecto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnPorcentajeIBDirectoChanging(value)
                 ReportPropertyChanging("PorcentajeIBDirecto")
-                _PorcentajeIBDirecto = StructuralObject.SetValidValue(value)
+                _PorcentajeIBDirecto = StructuralObject.SetValidValue(value, "PorcentajeIBDirecto")
                 ReportPropertyChanged("PorcentajeIBDirecto")
                 OnPorcentajeIBDirectoChanged()
             End Set
         End Property
-    
+
         Private _PorcentajeIBDirecto As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnPorcentajeIBDirectoChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnPorcentajeIBDirectoChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnPorcentajeIBDirectoChanged()
+
+        Partial Private Sub OnPorcentajeIBDirectoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaInicioVigenciaIBDirecto() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaInicioVigenciaIBDirecto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaInicioVigenciaIBDirectoChanging(value)
                 ReportPropertyChanging("FechaInicioVigenciaIBDirecto")
-                _FechaInicioVigenciaIBDirecto = StructuralObject.SetValidValue(value)
+                _FechaInicioVigenciaIBDirecto = StructuralObject.SetValidValue(value, "FechaInicioVigenciaIBDirecto")
                 ReportPropertyChanged("FechaInicioVigenciaIBDirecto")
                 OnFechaInicioVigenciaIBDirectoChanged()
             End Set
         End Property
-    
+
         Private _FechaInicioVigenciaIBDirecto As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaInicioVigenciaIBDirectoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaInicioVigenciaIBDirectoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaInicioVigenciaIBDirectoChanged()
+
+        Partial Private Sub OnFechaInicioVigenciaIBDirectoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaFinVigenciaIBDirecto() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaFinVigenciaIBDirecto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaFinVigenciaIBDirectoChanging(value)
                 ReportPropertyChanging("FechaFinVigenciaIBDirecto")
-                _FechaFinVigenciaIBDirecto = StructuralObject.SetValidValue(value)
+                _FechaFinVigenciaIBDirecto = StructuralObject.SetValidValue(value, "FechaFinVigenciaIBDirecto")
                 ReportPropertyChanged("FechaFinVigenciaIBDirecto")
                 OnFechaFinVigenciaIBDirectoChanged()
             End Set
         End Property
-    
+
         Private _FechaFinVigenciaIBDirecto As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaFinVigenciaIBDirectoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaFinVigenciaIBDirectoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaFinVigenciaIBDirectoChanged()
+
+        Partial Private Sub OnFechaFinVigenciaIBDirectoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property GrupoIIBB() As Nullable(Of Global.System.Int32)
             Get
                 Return _GrupoIIBB
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnGrupoIIBBChanging(value)
                 ReportPropertyChanging("GrupoIIBB")
-                _GrupoIIBB = StructuralObject.SetValidValue(value)
+                _GrupoIIBB = StructuralObject.SetValidValue(value, "GrupoIIBB")
                 ReportPropertyChanged("GrupoIIBB")
                 OnGrupoIIBBChanged()
             End Set
         End Property
-    
+
         Private _GrupoIIBB As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnGrupoIIBBChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnGrupoIIBBChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnGrupoIIBBChanged()
+
+        Partial Private Sub OnGrupoIIBBChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdBancoDebito() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdBancoDebito
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdBancoDebitoChanging(value)
                 ReportPropertyChanging("IdBancoDebito")
-                _IdBancoDebito = StructuralObject.SetValidValue(value)
+                _IdBancoDebito = StructuralObject.SetValidValue(value, "IdBancoDebito")
                 ReportPropertyChanged("IdBancoDebito")
                 OnIdBancoDebitoChanged()
             End Set
         End Property
-    
+
         Private _IdBancoDebito As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdBancoDebitoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdBancoDebitoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdBancoDebitoChanged()
+
+        Partial Private Sub OnIdBancoDebitoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CBU() As Global.System.String
             Get
                 Return _CBU
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCBUChanging(value)
                 ReportPropertyChanging("CBU")
-                _CBU = StructuralObject.SetValidValue(value, true)
+                _CBU = StructuralObject.SetValidValue(value, True, "CBU")
                 ReportPropertyChanged("CBU")
                 OnCBUChanged()
             End Set
         End Property
-    
+
         Private _CBU As Global.System.String
-        Private Partial Sub OnCBUChanging(value As Global.System.String)
+        Partial Private Sub OnCBUChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCBUChanged()
+
+        Partial Private Sub OnCBUChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property PorcentajeIBDirectoCapital() As Nullable(Of Global.System.Decimal)
             Get
                 Return _PorcentajeIBDirectoCapital
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnPorcentajeIBDirectoCapitalChanging(value)
                 ReportPropertyChanging("PorcentajeIBDirectoCapital")
-                _PorcentajeIBDirectoCapital = StructuralObject.SetValidValue(value)
+                _PorcentajeIBDirectoCapital = StructuralObject.SetValidValue(value, "PorcentajeIBDirectoCapital")
                 ReportPropertyChanged("PorcentajeIBDirectoCapital")
                 OnPorcentajeIBDirectoCapitalChanged()
             End Set
         End Property
-    
+
         Private _PorcentajeIBDirectoCapital As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnPorcentajeIBDirectoCapitalChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnPorcentajeIBDirectoCapitalChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnPorcentajeIBDirectoCapitalChanged()
+
+        Partial Private Sub OnPorcentajeIBDirectoCapitalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaInicioVigenciaIBDirectoCapital() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaInicioVigenciaIBDirectoCapital
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaInicioVigenciaIBDirectoCapitalChanging(value)
                 ReportPropertyChanging("FechaInicioVigenciaIBDirectoCapital")
-                _FechaInicioVigenciaIBDirectoCapital = StructuralObject.SetValidValue(value)
+                _FechaInicioVigenciaIBDirectoCapital = StructuralObject.SetValidValue(value, "FechaInicioVigenciaIBDirectoCapital")
                 ReportPropertyChanged("FechaInicioVigenciaIBDirectoCapital")
                 OnFechaInicioVigenciaIBDirectoCapitalChanged()
             End Set
         End Property
-    
+
         Private _FechaInicioVigenciaIBDirectoCapital As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaInicioVigenciaIBDirectoCapitalChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaInicioVigenciaIBDirectoCapitalChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaInicioVigenciaIBDirectoCapitalChanged()
+
+        Partial Private Sub OnFechaInicioVigenciaIBDirectoCapitalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaFinVigenciaIBDirectoCapital() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaFinVigenciaIBDirectoCapital
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaFinVigenciaIBDirectoCapitalChanging(value)
                 ReportPropertyChanging("FechaFinVigenciaIBDirectoCapital")
-                _FechaFinVigenciaIBDirectoCapital = StructuralObject.SetValidValue(value)
+                _FechaFinVigenciaIBDirectoCapital = StructuralObject.SetValidValue(value, "FechaFinVigenciaIBDirectoCapital")
                 ReportPropertyChanged("FechaFinVigenciaIBDirectoCapital")
                 OnFechaFinVigenciaIBDirectoCapitalChanged()
             End Set
         End Property
-    
+
         Private _FechaFinVigenciaIBDirectoCapital As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaFinVigenciaIBDirectoCapitalChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaFinVigenciaIBDirectoCapitalChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaFinVigenciaIBDirectoCapitalChanged()
+
+        Partial Private Sub OnFechaFinVigenciaIBDirectoCapitalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property GrupoIIBBCapital() As Nullable(Of Global.System.Int32)
             Get
                 Return _GrupoIIBBCapital
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnGrupoIIBBCapitalChanging(value)
                 ReportPropertyChanging("GrupoIIBBCapital")
-                _GrupoIIBBCapital = StructuralObject.SetValidValue(value)
+                _GrupoIIBBCapital = StructuralObject.SetValidValue(value, "GrupoIIBBCapital")
                 ReportPropertyChanged("GrupoIIBBCapital")
                 OnGrupoIIBBCapitalChanged()
             End Set
         End Property
-    
+
         Private _GrupoIIBBCapital As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnGrupoIIBBCapitalChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnGrupoIIBBCapitalChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnGrupoIIBBCapitalChanged()
+
+        Partial Private Sub OnGrupoIIBBCapitalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdBancoGestionador() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdBancoGestionador
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdBancoGestionadorChanging(value)
                 ReportPropertyChanging("IdBancoGestionador")
-                _IdBancoGestionador = StructuralObject.SetValidValue(value)
+                _IdBancoGestionador = StructuralObject.SetValidValue(value, "IdBancoGestionador")
                 ReportPropertyChanged("IdBancoGestionador")
                 OnIdBancoGestionadorChanged()
             End Set
         End Property
-    
+
         Private _IdBancoGestionador As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdBancoGestionadorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdBancoGestionadorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdBancoGestionadorChanged()
+
+        Partial Private Sub OnIdBancoGestionadorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ExpresionRegularNoAgruparFacturasConEstosVendedores() As Global.System.String
             Get
                 Return _ExpresionRegularNoAgruparFacturasConEstosVendedores
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanging(value)
                 ReportPropertyChanging("ExpresionRegularNoAgruparFacturasConEstosVendedores")
-                _ExpresionRegularNoAgruparFacturasConEstosVendedores = StructuralObject.SetValidValue(value, true)
+                _ExpresionRegularNoAgruparFacturasConEstosVendedores = StructuralObject.SetValidValue(value, True, "ExpresionRegularNoAgruparFacturasConEstosVendedores")
                 ReportPropertyChanged("ExpresionRegularNoAgruparFacturasConEstosVendedores")
                 OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanged()
             End Set
         End Property
-    
+
         Private _ExpresionRegularNoAgruparFacturasConEstosVendedores As Global.System.String
-        Private Partial Sub OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanging(value As Global.System.String)
+        Partial Private Sub OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanged()
+
+        Partial Private Sub OnExpresionRegularNoAgruparFacturasConEstosVendedoresChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ExigeDatosCompletosEnCartaDePorteQueLoUse() As Global.System.String
             Get
                 Return _ExigeDatosCompletosEnCartaDePorteQueLoUse
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnExigeDatosCompletosEnCartaDePorteQueLoUseChanging(value)
                 ReportPropertyChanging("ExigeDatosCompletosEnCartaDePorteQueLoUse")
-                _ExigeDatosCompletosEnCartaDePorteQueLoUse = StructuralObject.SetValidValue(value, true)
+                _ExigeDatosCompletosEnCartaDePorteQueLoUse = StructuralObject.SetValidValue(value, True, "ExigeDatosCompletosEnCartaDePorteQueLoUse")
                 ReportPropertyChanged("ExigeDatosCompletosEnCartaDePorteQueLoUse")
                 OnExigeDatosCompletosEnCartaDePorteQueLoUseChanged()
             End Set
         End Property
-    
+
         Private _ExigeDatosCompletosEnCartaDePorteQueLoUse As Global.System.String
-        Private Partial Sub OnExigeDatosCompletosEnCartaDePorteQueLoUseChanging(value As Global.System.String)
+        Partial Private Sub OnExigeDatosCompletosEnCartaDePorteQueLoUseChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnExigeDatosCompletosEnCartaDePorteQueLoUseChanged()
+
+        Partial Private Sub OnExigeDatosCompletosEnCartaDePorteQueLoUseChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property DireccionDeCorreos() As Global.System.String
             Get
                 Return _DireccionDeCorreos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDireccionDeCorreosChanging(value)
                 ReportPropertyChanging("DireccionDeCorreos")
-                _DireccionDeCorreos = StructuralObject.SetValidValue(value, true)
+                _DireccionDeCorreos = StructuralObject.SetValidValue(value, True, "DireccionDeCorreos")
                 ReportPropertyChanged("DireccionDeCorreos")
                 OnDireccionDeCorreosChanged()
             End Set
         End Property
-    
+
         Private _DireccionDeCorreos As Global.System.String
-        Private Partial Sub OnDireccionDeCorreosChanging(value As Global.System.String)
+        Partial Private Sub OnDireccionDeCorreosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDireccionDeCorreosChanged()
+
+        Partial Private Sub OnDireccionDeCorreosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLocalidadDeCorreos() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLocalidadDeCorreos
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLocalidadDeCorreosChanging(value)
                 ReportPropertyChanging("IdLocalidadDeCorreos")
-                _IdLocalidadDeCorreos = StructuralObject.SetValidValue(value)
+                _IdLocalidadDeCorreos = StructuralObject.SetValidValue(value, "IdLocalidadDeCorreos")
                 ReportPropertyChanged("IdLocalidadDeCorreos")
                 OnIdLocalidadDeCorreosChanged()
             End Set
         End Property
-    
+
         Private _IdLocalidadDeCorreos As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLocalidadDeCorreosChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLocalidadDeCorreosChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLocalidadDeCorreosChanged()
+
+        Partial Private Sub OnIdLocalidadDeCorreosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdProvinciaDeCorreos() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdProvinciaDeCorreos
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdProvinciaDeCorreosChanging(value)
                 ReportPropertyChanging("IdProvinciaDeCorreos")
-                _IdProvinciaDeCorreos = StructuralObject.SetValidValue(value)
+                _IdProvinciaDeCorreos = StructuralObject.SetValidValue(value, "IdProvinciaDeCorreos")
                 ReportPropertyChanged("IdProvinciaDeCorreos")
                 OnIdProvinciaDeCorreosChanged()
             End Set
         End Property
-    
+
         Private _IdProvinciaDeCorreos As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdProvinciaDeCorreosChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdProvinciaDeCorreosChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdProvinciaDeCorreosChanged()
+
+        Partial Private Sub OnIdProvinciaDeCorreosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoPostalDeCorreos() As Global.System.String
             Get
                 Return _CodigoPostalDeCorreos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoPostalDeCorreosChanging(value)
                 ReportPropertyChanging("CodigoPostalDeCorreos")
-                _CodigoPostalDeCorreos = StructuralObject.SetValidValue(value, true)
+                _CodigoPostalDeCorreos = StructuralObject.SetValidValue(value, True, "CodigoPostalDeCorreos")
                 ReportPropertyChanged("CodigoPostalDeCorreos")
                 OnCodigoPostalDeCorreosChanged()
             End Set
         End Property
-    
+
         Private _CodigoPostalDeCorreos As Global.System.String
-        Private Partial Sub OnCodigoPostalDeCorreosChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoPostalDeCorreosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoPostalDeCorreosChanged()
+
+        Partial Private Sub OnCodigoPostalDeCorreosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ObservacionesDeCorreos() As Global.System.String
             Get
                 Return _ObservacionesDeCorreos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesDeCorreosChanging(value)
                 ReportPropertyChanging("ObservacionesDeCorreos")
-                _ObservacionesDeCorreos = StructuralObject.SetValidValue(value, true)
+                _ObservacionesDeCorreos = StructuralObject.SetValidValue(value, True, "ObservacionesDeCorreos")
                 ReportPropertyChanged("ObservacionesDeCorreos")
                 OnObservacionesDeCorreosChanged()
             End Set
         End Property
-    
+
         Private _ObservacionesDeCorreos As Global.System.String
-        Private Partial Sub OnObservacionesDeCorreosChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesDeCorreosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesDeCorreosChanged()
+
+        Partial Private Sub OnObservacionesDeCorreosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IncluyeTarifaEnFactura() As Global.System.String
             Get
                 Return _IncluyeTarifaEnFactura
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnIncluyeTarifaEnFacturaChanging(value)
                 ReportPropertyChanging("IncluyeTarifaEnFactura")
-                _IncluyeTarifaEnFactura = StructuralObject.SetValidValue(value, true)
+                _IncluyeTarifaEnFactura = StructuralObject.SetValidValue(value, True, "IncluyeTarifaEnFactura")
                 ReportPropertyChanged("IncluyeTarifaEnFactura")
                 OnIncluyeTarifaEnFacturaChanged()
             End Set
         End Property
-    
+
         Private _IncluyeTarifaEnFactura As Global.System.String
-        Private Partial Sub OnIncluyeTarifaEnFacturaChanging(value As Global.System.String)
+        Partial Private Sub OnIncluyeTarifaEnFacturaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnIncluyeTarifaEnFacturaChanged()
+
+        Partial Private Sub OnIncluyeTarifaEnFacturaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoTitular() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoTitular
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoTitularChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoTitular")
-                _SeLeFacturaCartaPorteComoTitular = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoTitular = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoTitular")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoTitular")
                 OnSeLeFacturaCartaPorteComoTitularChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoTitular As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoTitularChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoTitularChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoTitularChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoTitularChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoIntermediario() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoIntermediario
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoIntermediarioChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoIntermediario")
-                _SeLeFacturaCartaPorteComoIntermediario = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoIntermediario = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoIntermediario")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoIntermediario")
                 OnSeLeFacturaCartaPorteComoIntermediarioChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoIntermediario As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoIntermediarioChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoIntermediarioChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoIntermediarioChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoIntermediarioChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoRemcomercial() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoRemcomercial
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoRemcomercialChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoRemcomercial")
-                _SeLeFacturaCartaPorteComoRemcomercial = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoRemcomercial = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoRemcomercial")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoRemcomercial")
                 OnSeLeFacturaCartaPorteComoRemcomercialChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoRemcomercial As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoRemcomercialChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoRemcomercialChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoRemcomercialChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoRemcomercialChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoCorredor() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoCorredor
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoCorredorChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoCorredor")
-                _SeLeFacturaCartaPorteComoCorredor = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoCorredor = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoCorredor")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoCorredor")
                 OnSeLeFacturaCartaPorteComoCorredorChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoCorredor As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoCorredorChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoCorredorChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoCorredorChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoCorredorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoDestinatario() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoDestinatario
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoDestinatarioChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoDestinatario")
-                _SeLeFacturaCartaPorteComoDestinatario = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoDestinatario = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoDestinatario")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoDestinatario")
                 OnSeLeFacturaCartaPorteComoDestinatarioChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoDestinatario As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoDestinatarioChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoDestinatarioChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoDestinatarioChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoDestinatarioChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeFacturaCartaPorteComoDestinatarioExportador() As Global.System.String
             Get
                 Return _SeLeFacturaCartaPorteComoDestinatarioExportador
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanging(value)
                 ReportPropertyChanging("SeLeFacturaCartaPorteComoDestinatarioExportador")
-                _SeLeFacturaCartaPorteComoDestinatarioExportador = StructuralObject.SetValidValue(value, true)
+                _SeLeFacturaCartaPorteComoDestinatarioExportador = StructuralObject.SetValidValue(value, True, "SeLeFacturaCartaPorteComoDestinatarioExportador")
                 ReportPropertyChanged("SeLeFacturaCartaPorteComoDestinatarioExportador")
                 OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanged()
             End Set
         End Property
-    
+
         Private _SeLeFacturaCartaPorteComoDestinatarioExportador As Global.System.String
-        Private Partial Sub OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanged()
+
+        Partial Private Sub OnSeLeFacturaCartaPorteComoDestinatarioExportadorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeLeDerivaSuFacturaAlCorredorDeLaCarta() As Global.System.String
             Get
                 Return _SeLeDerivaSuFacturaAlCorredorDeLaCarta
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanging(value)
                 ReportPropertyChanging("SeLeDerivaSuFacturaAlCorredorDeLaCarta")
-                _SeLeDerivaSuFacturaAlCorredorDeLaCarta = StructuralObject.SetValidValue(value, true)
+                _SeLeDerivaSuFacturaAlCorredorDeLaCarta = StructuralObject.SetValidValue(value, True, "SeLeDerivaSuFacturaAlCorredorDeLaCarta")
                 ReportPropertyChanged("SeLeDerivaSuFacturaAlCorredorDeLaCarta")
                 OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanged()
             End Set
         End Property
-    
+
         Private _SeLeDerivaSuFacturaAlCorredorDeLaCarta As Global.System.String
-        Private Partial Sub OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanging(value As Global.System.String)
+        Partial Private Sub OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanged()
+
+        Partial Private Sub OnSeLeDerivaSuFacturaAlCorredorDeLaCartaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property HabilitadoParaCartaPorte() As Global.System.String
             Get
                 Return _HabilitadoParaCartaPorte
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnHabilitadoParaCartaPorteChanging(value)
                 ReportPropertyChanging("HabilitadoParaCartaPorte")
-                _HabilitadoParaCartaPorte = StructuralObject.SetValidValue(value, true)
+                _HabilitadoParaCartaPorte = StructuralObject.SetValidValue(value, True, "HabilitadoParaCartaPorte")
                 ReportPropertyChanged("HabilitadoParaCartaPorte")
                 OnHabilitadoParaCartaPorteChanged()
             End Set
         End Property
-    
+
         Private _HabilitadoParaCartaPorte As Global.System.String
-        Private Partial Sub OnHabilitadoParaCartaPorteChanging(value As Global.System.String)
-        End Sub
-    
-        Private Partial Sub OnHabilitadoParaCartaPorteChanged()
+        Partial Private Sub OnHabilitadoParaCartaPorteChanging(value As Global.System.String)
         End Sub
 
-        #End Region
+        Partial Private Sub OnHabilitadoParaCartaPorteChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="ControlesCalidad")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class ControlesCalidad
+    Partial Public Class ControlesCalidad
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new ControlesCalidad object.
         ''' </summary>
         ''' <param name="idControlCalidad">Initial value of the IdControlCalidad property.</param>
         Public Shared Function CreateControlesCalidad(idControlCalidad As Global.System.Int32) As ControlesCalidad
-            Dim controlesCalidad as ControlesCalidad = New ControlesCalidad
+            Dim controlesCalidad As ControlesCalidad = New ControlesCalidad
             controlesCalidad.IdControlCalidad = idControlCalidad
             Return controlesCalidad
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdControlCalidad() As Global.System.Int32
             Get
                 Return _IdControlCalidad
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdControlCalidad <> Value) Then
                     OnIdControlCalidadChanging(value)
                     ReportPropertyChanging("IdControlCalidad")
-                    _IdControlCalidad = StructuralObject.SetValidValue(value)
+                    _IdControlCalidad = StructuralObject.SetValidValue(value, "IdControlCalidad")
                     ReportPropertyChanged("IdControlCalidad")
                     OnIdControlCalidadChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdControlCalidad As Global.System.Int32
-        Private Partial Sub OnIdControlCalidadChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdControlCalidadChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdControlCalidadChanged()
+
+        Partial Private Sub OnIdControlCalidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Descripcion() As Global.System.String
             Get
                 Return _Descripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDescripcionChanging(value)
                 ReportPropertyChanging("Descripcion")
-                _Descripcion = StructuralObject.SetValidValue(value, true)
+                _Descripcion = StructuralObject.SetValidValue(value, True, "Descripcion")
                 ReportPropertyChanged("Descripcion")
                 OnDescripcionChanged()
             End Set
         End Property
-    
+
         Private _Descripcion As Global.System.String
-        Private Partial Sub OnDescripcionChanging(value As Global.System.String)
+        Partial Private Sub OnDescripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDescripcionChanged()
+
+        Partial Private Sub OnDescripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Inspeccion() As Global.System.String
             Get
                 Return _Inspeccion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnInspeccionChanging(value)
                 ReportPropertyChanging("Inspeccion")
-                _Inspeccion = StructuralObject.SetValidValue(value, true)
+                _Inspeccion = StructuralObject.SetValidValue(value, True, "Inspeccion")
                 ReportPropertyChanged("Inspeccion")
                 OnInspeccionChanged()
             End Set
         End Property
-    
+
         Private _Inspeccion As Global.System.String
-        Private Partial Sub OnInspeccionChanging(value As Global.System.String)
+        Partial Private Sub OnInspeccionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnInspeccionChanged()
+
+        Partial Private Sub OnInspeccionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Abreviatura() As Global.System.String
             Get
                 Return _Abreviatura
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAbreviaturaChanging(value)
                 ReportPropertyChanging("Abreviatura")
-                _Abreviatura = StructuralObject.SetValidValue(value, true)
+                _Abreviatura = StructuralObject.SetValidValue(value, True, "Abreviatura")
                 ReportPropertyChanged("Abreviatura")
                 OnAbreviaturaChanged()
             End Set
         End Property
-    
+
         Private _Abreviatura As Global.System.String
-        Private Partial Sub OnAbreviaturaChanging(value As Global.System.String)
+        Partial Private Sub OnAbreviaturaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAbreviaturaChanged()
+
+        Partial Private Sub OnAbreviaturaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Detalle() As Global.System.String
             Get
                 Return _Detalle
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDetalleChanging(value)
                 ReportPropertyChanging("Detalle")
-                _Detalle = StructuralObject.SetValidValue(value, true)
+                _Detalle = StructuralObject.SetValidValue(value, True, "Detalle")
                 ReportPropertyChanged("Detalle")
                 OnDetalleChanged()
             End Set
         End Property
-    
+
         Private _Detalle As Global.System.String
-        Private Partial Sub OnDetalleChanging(value As Global.System.String)
-        End Sub
-    
-        Private Partial Sub OnDetalleChanged()
+        Partial Private Sub OnDetalleChanging(value As Global.System.String)
         End Sub
 
-        #End Region
+        Partial Private Sub OnDetalleChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="DetalleRequerimientos")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class DetalleRequerimientos
+    Partial Public Class DetalleRequerimientos
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new DetalleRequerimientos object.
         ''' </summary>
         ''' <param name="idDetalleRequerimiento">Initial value of the IdDetalleRequerimiento property.</param>
         Public Shared Function CreateDetalleRequerimientos(idDetalleRequerimiento As Global.System.Int32) As DetalleRequerimientos
-            Dim detalleRequerimientos as DetalleRequerimientos = New DetalleRequerimientos
+            Dim detalleRequerimientos As DetalleRequerimientos = New DetalleRequerimientos
             detalleRequerimientos.IdDetalleRequerimiento = idDetalleRequerimiento
             Return detalleRequerimientos
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdDetalleRequerimiento() As Global.System.Int32
             Get
                 Return _IdDetalleRequerimiento
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdDetalleRequerimiento <> Value) Then
                     OnIdDetalleRequerimientoChanging(value)
                     ReportPropertyChanging("IdDetalleRequerimiento")
-                    _IdDetalleRequerimiento = StructuralObject.SetValidValue(value)
+                    _IdDetalleRequerimiento = StructuralObject.SetValidValue(value, "IdDetalleRequerimiento")
                     ReportPropertyChanged("IdDetalleRequerimiento")
                     OnIdDetalleRequerimientoChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdDetalleRequerimiento As Global.System.Int32
-        Private Partial Sub OnIdDetalleRequerimientoChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdDetalleRequerimientoChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdDetalleRequerimientoChanged()
+
+        Partial Private Sub OnIdDetalleRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdRequerimiento() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdRequerimiento
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdRequerimientoChanging(value)
                 ReportPropertyChanging("IdRequerimiento")
-                _IdRequerimiento = StructuralObject.SetValidValue(value)
+                _IdRequerimiento = StructuralObject.SetValidValue(value, "IdRequerimiento")
                 ReportPropertyChanged("IdRequerimiento")
                 OnIdRequerimientoChanged()
             End Set
         End Property
-    
+
         Private _IdRequerimiento As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdRequerimientoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdRequerimientoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdRequerimientoChanged()
+
+        Partial Private Sub OnIdRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeroItem() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeroItem
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeroItemChanging(value)
                 ReportPropertyChanging("NumeroItem")
-                _NumeroItem = StructuralObject.SetValidValue(value)
+                _NumeroItem = StructuralObject.SetValidValue(value, "NumeroItem")
                 ReportPropertyChanged("NumeroItem")
                 OnNumeroItemChanged()
             End Set
         End Property
-    
+
         Private _NumeroItem As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeroItemChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeroItemChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeroItemChanged()
+
+        Partial Private Sub OnNumeroItemChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cantidad() As Nullable(Of Global.System.Decimal)
             Get
                 Return _Cantidad
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnCantidadChanging(value)
                 ReportPropertyChanging("Cantidad")
-                _Cantidad = StructuralObject.SetValidValue(value)
+                _Cantidad = StructuralObject.SetValidValue(value, "Cantidad")
                 ReportPropertyChanged("Cantidad")
                 OnCantidadChanged()
             End Set
         End Property
-    
+
         Private _Cantidad As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnCantidadChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnCantidadChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnCantidadChanged()
+
+        Partial Private Sub OnCantidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUnidad() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUnidad
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUnidadChanging(value)
                 ReportPropertyChanging("IdUnidad")
-                _IdUnidad = StructuralObject.SetValidValue(value)
+                _IdUnidad = StructuralObject.SetValidValue(value, "IdUnidad")
                 ReportPropertyChanged("IdUnidad")
                 OnIdUnidadChanged()
             End Set
         End Property
-    
+
         Private _IdUnidad As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUnidadChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUnidadChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUnidadChanged()
+
+        Partial Private Sub OnIdUnidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdArticulo() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdArticulo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdArticuloChanging(value)
                 ReportPropertyChanging("IdArticulo")
-                _IdArticulo = StructuralObject.SetValidValue(value)
+                _IdArticulo = StructuralObject.SetValidValue(value, "IdArticulo")
                 ReportPropertyChanged("IdArticulo")
                 OnIdArticuloChanged()
             End Set
         End Property
-    
+
         Private _IdArticulo As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdArticuloChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdArticuloChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdArticuloChanged()
+
+        Partial Private Sub OnIdArticuloChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaEntrega() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaEntrega
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaEntregaChanging(value)
                 ReportPropertyChanging("FechaEntrega")
-                _FechaEntrega = StructuralObject.SetValidValue(value)
+                _FechaEntrega = StructuralObject.SetValidValue(value, "FechaEntrega")
                 ReportPropertyChanged("FechaEntrega")
                 OnFechaEntregaChanged()
             End Set
         End Property
-    
+
         Private _FechaEntrega As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaEntregaChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaEntregaChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaEntregaChanged()
+
+        Partial Private Sub OnFechaEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones() As Global.System.String
             Get
                 Return _Observaciones
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesChanging(value)
                 ReportPropertyChanging("Observaciones")
-                _Observaciones = StructuralObject.SetValidValue(value, true)
+                _Observaciones = StructuralObject.SetValidValue(value, True, "Observaciones")
                 ReportPropertyChanged("Observaciones")
                 OnObservacionesChanged()
             End Set
         End Property
-    
+
         Private _Observaciones As Global.System.String
-        Private Partial Sub OnObservacionesChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesChanged()
+
+        Partial Private Sub OnObservacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cantidad1() As Nullable(Of Global.System.Decimal)
             Get
                 Return _Cantidad1
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnCantidad1Changing(value)
                 ReportPropertyChanging("Cantidad1")
-                _Cantidad1 = StructuralObject.SetValidValue(value)
+                _Cantidad1 = StructuralObject.SetValidValue(value, "Cantidad1")
                 ReportPropertyChanged("Cantidad1")
                 OnCantidad1Changed()
             End Set
         End Property
-    
+
         Private _Cantidad1 As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnCantidad1Changing(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnCantidad1Changing(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnCantidad1Changed()
+
+        Partial Private Sub OnCantidad1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cantidad2() As Nullable(Of Global.System.Decimal)
             Get
                 Return _Cantidad2
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnCantidad2Changing(value)
                 ReportPropertyChanging("Cantidad2")
-                _Cantidad2 = StructuralObject.SetValidValue(value)
+                _Cantidad2 = StructuralObject.SetValidValue(value, "Cantidad2")
                 ReportPropertyChanged("Cantidad2")
                 OnCantidad2Changed()
             End Set
         End Property
-    
+
         Private _Cantidad2 As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnCantidad2Changing(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnCantidad2Changing(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnCantidad2Changed()
+
+        Partial Private Sub OnCantidad2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdDetalleLMateriales() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdDetalleLMateriales
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdDetalleLMaterialesChanging(value)
                 ReportPropertyChanging("IdDetalleLMateriales")
-                _IdDetalleLMateriales = StructuralObject.SetValidValue(value)
+                _IdDetalleLMateriales = StructuralObject.SetValidValue(value, "IdDetalleLMateriales")
                 ReportPropertyChanged("IdDetalleLMateriales")
                 OnIdDetalleLMaterialesChanged()
             End Set
         End Property
-    
+
         Private _IdDetalleLMateriales As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdDetalleLMaterialesChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdDetalleLMaterialesChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdDetalleLMaterialesChanged()
+
+        Partial Private Sub OnIdDetalleLMaterialesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdControlCalidad() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdControlCalidad
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdControlCalidadChanging(value)
                 ReportPropertyChanging("IdControlCalidad")
-                _IdControlCalidad = StructuralObject.SetValidValue(value)
+                _IdControlCalidad = StructuralObject.SetValidValue(value, "IdControlCalidad")
                 ReportPropertyChanged("IdControlCalidad")
                 OnIdControlCalidadChanged()
             End Set
         End Property
-    
+
         Private _IdControlCalidad As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdControlCalidadChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdControlCalidadChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdControlCalidadChanged()
+
+        Partial Private Sub OnIdControlCalidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Adjunto() As Global.System.String
             Get
                 Return _Adjunto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAdjuntoChanging(value)
                 ReportPropertyChanging("Adjunto")
-                _Adjunto = StructuralObject.SetValidValue(value, true)
+                _Adjunto = StructuralObject.SetValidValue(value, True, "Adjunto")
                 ReportPropertyChanged("Adjunto")
                 OnAdjuntoChanged()
             End Set
         End Property
-    
+
         Private _Adjunto As Global.System.String
-        Private Partial Sub OnAdjuntoChanging(value As Global.System.String)
+        Partial Private Sub OnAdjuntoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAdjuntoChanged()
+
+        Partial Private Sub OnAdjuntoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto() As Global.System.String
             Get
                 Return _ArchivoAdjunto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjuntoChanging(value)
                 ReportPropertyChanging("ArchivoAdjunto")
-                _ArchivoAdjunto = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto")
                 ReportPropertyChanged("ArchivoAdjunto")
                 OnArchivoAdjuntoChanged()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto As Global.System.String
-        Private Partial Sub OnArchivoAdjuntoChanging(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjuntoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjuntoChanged()
+
+        Partial Private Sub OnArchivoAdjuntoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCentroCosto() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCentroCosto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCentroCostoChanging(value)
                 ReportPropertyChanging("IdCentroCosto")
-                _IdCentroCosto = StructuralObject.SetValidValue(value)
+                _IdCentroCosto = StructuralObject.SetValidValue(value, "IdCentroCosto")
                 ReportPropertyChanged("IdCentroCosto")
                 OnIdCentroCostoChanged()
             End Set
         End Property
-    
+
         Private _IdCentroCosto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCentroCostoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCentroCostoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCentroCostoChanged()
+
+        Partial Private Sub OnIdCentroCostoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdComprador() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdComprador
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCompradorChanging(value)
                 ReportPropertyChanging("IdComprador")
-                _IdComprador = StructuralObject.SetValidValue(value)
+                _IdComprador = StructuralObject.SetValidValue(value, "IdComprador")
                 ReportPropertyChanged("IdComprador")
                 OnIdCompradorChanged()
             End Set
         End Property
-    
+
         Private _IdComprador As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCompradorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCompradorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCompradorChanged()
+
+        Partial Private Sub OnIdCompradorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeroFacturaCompra1() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeroFacturaCompra1
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeroFacturaCompra1Changing(value)
                 ReportPropertyChanging("NumeroFacturaCompra1")
-                _NumeroFacturaCompra1 = StructuralObject.SetValidValue(value)
+                _NumeroFacturaCompra1 = StructuralObject.SetValidValue(value, "NumeroFacturaCompra1")
                 ReportPropertyChanged("NumeroFacturaCompra1")
                 OnNumeroFacturaCompra1Changed()
             End Set
         End Property
-    
+
         Private _NumeroFacturaCompra1 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeroFacturaCompra1Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeroFacturaCompra1Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeroFacturaCompra1Changed()
+
+        Partial Private Sub OnNumeroFacturaCompra1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaFacturaCompra() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaFacturaCompra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaFacturaCompraChanging(value)
                 ReportPropertyChanging("FechaFacturaCompra")
-                _FechaFacturaCompra = StructuralObject.SetValidValue(value)
+                _FechaFacturaCompra = StructuralObject.SetValidValue(value, "FechaFacturaCompra")
                 ReportPropertyChanged("FechaFacturaCompra")
                 OnFechaFacturaCompraChanged()
             End Set
         End Property
-    
+
         Private _FechaFacturaCompra As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaFacturaCompraChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaFacturaCompraChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaFacturaCompraChanged()
+
+        Partial Private Sub OnFechaFacturaCompraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ImporteFacturaCompra() As Nullable(Of Global.System.Decimal)
             Get
                 Return _ImporteFacturaCompra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnImporteFacturaCompraChanging(value)
                 ReportPropertyChanging("ImporteFacturaCompra")
-                _ImporteFacturaCompra = StructuralObject.SetValidValue(value)
+                _ImporteFacturaCompra = StructuralObject.SetValidValue(value, "ImporteFacturaCompra")
                 ReportPropertyChanged("ImporteFacturaCompra")
                 OnImporteFacturaCompraChanged()
             End Set
         End Property
-    
+
         Private _ImporteFacturaCompra As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnImporteFacturaCompraChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnImporteFacturaCompraChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnImporteFacturaCompraChanged()
+
+        Partial Private Sub OnImporteFacturaCompraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdProveedor() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdProveedor
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdProveedorChanging(value)
                 ReportPropertyChanging("IdProveedor")
-                _IdProveedor = StructuralObject.SetValidValue(value)
+                _IdProveedor = StructuralObject.SetValidValue(value, "IdProveedor")
                 ReportPropertyChanged("IdProveedor")
                 OnIdProveedorChanged()
             End Set
         End Property
-    
+
         Private _IdProveedor As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdProveedorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdProveedorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdProveedorChanged()
+
+        Partial Private Sub OnIdProveedorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeroFacturaCompra2() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeroFacturaCompra2
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeroFacturaCompra2Changing(value)
                 ReportPropertyChanging("NumeroFacturaCompra2")
-                _NumeroFacturaCompra2 = StructuralObject.SetValidValue(value)
+                _NumeroFacturaCompra2 = StructuralObject.SetValidValue(value, "NumeroFacturaCompra2")
                 ReportPropertyChanged("NumeroFacturaCompra2")
                 OnNumeroFacturaCompra2Changed()
             End Set
         End Property
-    
+
         Private _NumeroFacturaCompra2 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeroFacturaCompra2Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeroFacturaCompra2Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeroFacturaCompra2Changed()
+
+        Partial Private Sub OnNumeroFacturaCompra2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EsBienDeUso() As Global.System.String
             Get
                 Return _EsBienDeUso
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEsBienDeUsoChanging(value)
                 ReportPropertyChanging("EsBienDeUso")
-                _EsBienDeUso = StructuralObject.SetValidValue(value, true)
+                _EsBienDeUso = StructuralObject.SetValidValue(value, True, "EsBienDeUso")
                 ReportPropertyChanged("EsBienDeUso")
                 OnEsBienDeUsoChanged()
             End Set
         End Property
-    
+
         Private _EsBienDeUso As Global.System.String
-        Private Partial Sub OnEsBienDeUsoChanging(value As Global.System.String)
+        Partial Private Sub OnEsBienDeUsoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEsBienDeUsoChanged()
+
+        Partial Private Sub OnEsBienDeUsoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCuenta() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCuenta
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCuentaChanging(value)
                 ReportPropertyChanging("IdCuenta")
-                _IdCuenta = StructuralObject.SetValidValue(value)
+                _IdCuenta = StructuralObject.SetValidValue(value, "IdCuenta")
                 ReportPropertyChanged("IdCuenta")
                 OnIdCuentaChanged()
             End Set
         End Property
-    
+
         Private _IdCuenta As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCuentaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCuentaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCuentaChanged()
+
+        Partial Private Sub OnIdCuentaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cumplido() As Global.System.String
             Get
                 Return _Cumplido
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCumplidoChanging(value)
                 ReportPropertyChanging("Cumplido")
-                _Cumplido = StructuralObject.SetValidValue(value, true)
+                _Cumplido = StructuralObject.SetValidValue(value, True, "Cumplido")
                 ReportPropertyChanged("Cumplido")
                 OnCumplidoChanged()
             End Set
         End Property
-    
+
         Private _Cumplido As Global.System.String
-        Private Partial Sub OnCumplidoChanging(value As Global.System.String)
+        Partial Private Sub OnCumplidoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCumplidoChanged()
+
+        Partial Private Sub OnCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Usuario1() As Global.System.String
             Get
                 Return _Usuario1
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnUsuario1Changing(value)
                 ReportPropertyChanging("Usuario1")
-                _Usuario1 = StructuralObject.SetValidValue(value, true)
+                _Usuario1 = StructuralObject.SetValidValue(value, True, "Usuario1")
                 ReportPropertyChanged("Usuario1")
                 OnUsuario1Changed()
             End Set
         End Property
-    
+
         Private _Usuario1 As Global.System.String
-        Private Partial Sub OnUsuario1Changing(value As Global.System.String)
+        Partial Private Sub OnUsuario1Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnUsuario1Changed()
+
+        Partial Private Sub OnUsuario1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaIngreso1() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaIngreso1
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaIngreso1Changing(value)
                 ReportPropertyChanging("FechaIngreso1")
-                _FechaIngreso1 = StructuralObject.SetValidValue(value)
+                _FechaIngreso1 = StructuralObject.SetValidValue(value, "FechaIngreso1")
                 ReportPropertyChanged("FechaIngreso1")
                 OnFechaIngreso1Changed()
             End Set
         End Property
-    
+
         Private _FechaIngreso1 As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaIngreso1Changing(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaIngreso1Changing(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaIngreso1Changed()
+
+        Partial Private Sub OnFechaIngreso1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto1() As Global.System.String
             Get
                 Return _ArchivoAdjunto1
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto1Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto1")
-                _ArchivoAdjunto1 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto1 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto1")
                 ReportPropertyChanged("ArchivoAdjunto1")
                 OnArchivoAdjunto1Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto1 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto1Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto1Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto1Changed()
+
+        Partial Private Sub OnArchivoAdjunto1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto2() As Global.System.String
             Get
                 Return _ArchivoAdjunto2
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto2Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto2")
-                _ArchivoAdjunto2 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto2 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto2")
                 ReportPropertyChanged("ArchivoAdjunto2")
                 OnArchivoAdjunto2Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto2 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto2Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto2Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto2Changed()
+
+        Partial Private Sub OnArchivoAdjunto2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto3() As Global.System.String
             Get
                 Return _ArchivoAdjunto3
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto3Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto3")
-                _ArchivoAdjunto3 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto3 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto3")
                 ReportPropertyChanged("ArchivoAdjunto3")
                 OnArchivoAdjunto3Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto3 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto3Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto3Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto3Changed()
+
+        Partial Private Sub OnArchivoAdjunto3Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto4() As Global.System.String
             Get
                 Return _ArchivoAdjunto4
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto4Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto4")
-                _ArchivoAdjunto4 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto4 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto4")
                 ReportPropertyChanged("ArchivoAdjunto4")
                 OnArchivoAdjunto4Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto4 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto4Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto4Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto4Changed()
+
+        Partial Private Sub OnArchivoAdjunto4Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto5() As Global.System.String
             Get
                 Return _ArchivoAdjunto5
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto5Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto5")
-                _ArchivoAdjunto5 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto5 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto5")
                 ReportPropertyChanged("ArchivoAdjunto5")
                 OnArchivoAdjunto5Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto5 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto5Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto5Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto5Changed()
+
+        Partial Private Sub OnArchivoAdjunto5Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto6() As Global.System.String
             Get
                 Return _ArchivoAdjunto6
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto6Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto6")
-                _ArchivoAdjunto6 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto6 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto6")
                 ReportPropertyChanged("ArchivoAdjunto6")
                 OnArchivoAdjunto6Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto6 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto6Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto6Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto6Changed()
+
+        Partial Private Sub OnArchivoAdjunto6Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto7() As Global.System.String
             Get
                 Return _ArchivoAdjunto7
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto7Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto7")
-                _ArchivoAdjunto7 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto7 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto7")
                 ReportPropertyChanged("ArchivoAdjunto7")
                 OnArchivoAdjunto7Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto7 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto7Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto7Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto7Changed()
+
+        Partial Private Sub OnArchivoAdjunto7Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto8() As Global.System.String
             Get
                 Return _ArchivoAdjunto8
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto8Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto8")
-                _ArchivoAdjunto8 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto8 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto8")
                 ReportPropertyChanged("ArchivoAdjunto8")
                 OnArchivoAdjunto8Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto8 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto8Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto8Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto8Changed()
+
+        Partial Private Sub OnArchivoAdjunto8Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto9() As Global.System.String
             Get
                 Return _ArchivoAdjunto9
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto9Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto9")
-                _ArchivoAdjunto9 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto9 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto9")
                 ReportPropertyChanged("ArchivoAdjunto9")
                 OnArchivoAdjunto9Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto9 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto9Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto9Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto9Changed()
+
+        Partial Private Sub OnArchivoAdjunto9Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto10() As Global.System.String
             Get
                 Return _ArchivoAdjunto10
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto10Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto10")
-                _ArchivoAdjunto10 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto10 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto10")
                 ReportPropertyChanged("ArchivoAdjunto10")
                 OnArchivoAdjunto10Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto10 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto10Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto10Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto10Changed()
+
+        Partial Private Sub OnArchivoAdjunto10Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Descripcionmanual() As Global.System.String
             Get
                 Return _Descripcionmanual
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDescripcionmanualChanging(value)
                 ReportPropertyChanging("Descripcionmanual")
-                _Descripcionmanual = StructuralObject.SetValidValue(value, true)
+                _Descripcionmanual = StructuralObject.SetValidValue(value, True, "Descripcionmanual")
                 ReportPropertyChanged("Descripcionmanual")
                 OnDescripcionmanualChanged()
             End Set
         End Property
-    
+
         Private _Descripcionmanual As Global.System.String
-        Private Partial Sub OnDescripcionmanualChanging(value As Global.System.String)
+        Partial Private Sub OnDescripcionmanualChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDescripcionmanualChanged()
+
+        Partial Private Sub OnDescripcionmanualChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EnviarEmail() As Nullable(Of Global.System.Byte)
             Get
                 Return _EnviarEmail
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnEnviarEmailChanging(value)
                 ReportPropertyChanging("EnviarEmail")
-                _EnviarEmail = StructuralObject.SetValidValue(value)
+                _EnviarEmail = StructuralObject.SetValidValue(value, "EnviarEmail")
                 ReportPropertyChanged("EnviarEmail")
                 OnEnviarEmailChanged()
             End Set
         End Property
-    
+
         Private _EnviarEmail As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
+        Partial Private Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
         End Sub
-    
-        Private Partial Sub OnEnviarEmailChanged()
+
+        Partial Private Sub OnEnviarEmailChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdRequerimientoOriginal() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdRequerimientoOriginal
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdRequerimientoOriginalChanging(value)
                 ReportPropertyChanging("IdRequerimientoOriginal")
-                _IdRequerimientoOriginal = StructuralObject.SetValidValue(value)
+                _IdRequerimientoOriginal = StructuralObject.SetValidValue(value, "IdRequerimientoOriginal")
                 ReportPropertyChanged("IdRequerimientoOriginal")
                 OnIdRequerimientoOriginalChanged()
             End Set
         End Property
-    
+
         Private _IdRequerimientoOriginal As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdRequerimientoOriginalChanged()
+
+        Partial Private Sub OnIdRequerimientoOriginalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdDetalleRequerimientoOriginal() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdDetalleRequerimientoOriginal
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdDetalleRequerimientoOriginalChanging(value)
                 ReportPropertyChanging("IdDetalleRequerimientoOriginal")
-                _IdDetalleRequerimientoOriginal = StructuralObject.SetValidValue(value)
+                _IdDetalleRequerimientoOriginal = StructuralObject.SetValidValue(value, "IdDetalleRequerimientoOriginal")
                 ReportPropertyChanged("IdDetalleRequerimientoOriginal")
                 OnIdDetalleRequerimientoOriginalChanged()
             End Set
         End Property
-    
+
         Private _IdDetalleRequerimientoOriginal As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdDetalleRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdDetalleRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdDetalleRequerimientoOriginalChanged()
+
+        Partial Private Sub OnIdDetalleRequerimientoOriginalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdOrigenTransmision() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdOrigenTransmision
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdOrigenTransmisionChanging(value)
                 ReportPropertyChanging("IdOrigenTransmision")
-                _IdOrigenTransmision = StructuralObject.SetValidValue(value)
+                _IdOrigenTransmision = StructuralObject.SetValidValue(value, "IdOrigenTransmision")
                 ReportPropertyChanged("IdOrigenTransmision")
                 OnIdOrigenTransmisionChanged()
             End Set
         End Property
-    
+
         Private _IdOrigenTransmision As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdOrigenTransmisionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdOrigenTransmisionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdOrigenTransmisionChanged()
+
+        Partial Private Sub OnIdOrigenTransmisionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLlamadoAProveedor() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLlamadoAProveedor
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLlamadoAProveedorChanging(value)
                 ReportPropertyChanging("IdLlamadoAProveedor")
-                _IdLlamadoAProveedor = StructuralObject.SetValidValue(value)
+                _IdLlamadoAProveedor = StructuralObject.SetValidValue(value, "IdLlamadoAProveedor")
                 ReportPropertyChanged("IdLlamadoAProveedor")
                 OnIdLlamadoAProveedorChanged()
             End Set
         End Property
-    
+
         Private _IdLlamadoAProveedor As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLlamadoAProveedorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLlamadoAProveedorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLlamadoAProveedorChanged()
+
+        Partial Private Sub OnIdLlamadoAProveedorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaLlamadoAProveedor() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaLlamadoAProveedor
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaLlamadoAProveedorChanging(value)
                 ReportPropertyChanging("FechaLlamadoAProveedor")
-                _FechaLlamadoAProveedor = StructuralObject.SetValidValue(value)
+                _FechaLlamadoAProveedor = StructuralObject.SetValidValue(value, "FechaLlamadoAProveedor")
                 ReportPropertyChanged("FechaLlamadoAProveedor")
                 OnFechaLlamadoAProveedorChanged()
             End Set
         End Property
-    
+
         Private _FechaLlamadoAProveedor As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaLlamadoAProveedorChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaLlamadoAProveedorChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaLlamadoAProveedorChanged()
+
+        Partial Private Sub OnFechaLlamadoAProveedorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLlamadoRegistradoPor() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLlamadoRegistradoPor
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLlamadoRegistradoPorChanging(value)
                 ReportPropertyChanging("IdLlamadoRegistradoPor")
-                _IdLlamadoRegistradoPor = StructuralObject.SetValidValue(value)
+                _IdLlamadoRegistradoPor = StructuralObject.SetValidValue(value, "IdLlamadoRegistradoPor")
                 ReportPropertyChanged("IdLlamadoRegistradoPor")
                 OnIdLlamadoRegistradoPorChanged()
             End Set
         End Property
-    
+
         Private _IdLlamadoRegistradoPor As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLlamadoRegistradoPorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLlamadoRegistradoPorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLlamadoRegistradoPorChanged()
+
+        Partial Private Sub OnIdLlamadoRegistradoPorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaRegistracionLlamada() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaRegistracionLlamada
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaRegistracionLlamadaChanging(value)
                 ReportPropertyChanging("FechaRegistracionLlamada")
-                _FechaRegistracionLlamada = StructuralObject.SetValidValue(value)
+                _FechaRegistracionLlamada = StructuralObject.SetValidValue(value, "FechaRegistracionLlamada")
                 ReportPropertyChanged("FechaRegistracionLlamada")
                 OnFechaRegistracionLlamadaChanged()
             End Set
         End Property
-    
+
         Private _FechaRegistracionLlamada As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaRegistracionLlamadaChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaRegistracionLlamadaChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaRegistracionLlamadaChanged()
+
+        Partial Private Sub OnFechaRegistracionLlamadaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ObservacionesLlamada() As Global.System.String
             Get
                 Return _ObservacionesLlamada
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesLlamadaChanging(value)
                 ReportPropertyChanging("ObservacionesLlamada")
-                _ObservacionesLlamada = StructuralObject.SetValidValue(value, true)
+                _ObservacionesLlamada = StructuralObject.SetValidValue(value, True, "ObservacionesLlamada")
                 ReportPropertyChanged("ObservacionesLlamada")
                 OnObservacionesLlamadaChanged()
             End Set
         End Property
-    
+
         Private _ObservacionesLlamada As Global.System.String
-        Private Partial Sub OnObservacionesLlamadaChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesLlamadaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesLlamadaChanged()
+
+        Partial Private Sub OnObservacionesLlamadaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdAutorizoCumplido() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdAutorizoCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdAutorizoCumplidoChanging(value)
                 ReportPropertyChanging("IdAutorizoCumplido")
-                _IdAutorizoCumplido = StructuralObject.SetValidValue(value)
+                _IdAutorizoCumplido = StructuralObject.SetValidValue(value, "IdAutorizoCumplido")
                 ReportPropertyChanged("IdAutorizoCumplido")
                 OnIdAutorizoCumplidoChanged()
             End Set
         End Property
-    
+
         Private _IdAutorizoCumplido As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdAutorizoCumplidoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdAutorizoCumplidoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdAutorizoCumplidoChanged()
+
+        Partial Private Sub OnIdAutorizoCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdDioPorCumplido() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdDioPorCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdDioPorCumplidoChanging(value)
                 ReportPropertyChanging("IdDioPorCumplido")
-                _IdDioPorCumplido = StructuralObject.SetValidValue(value)
+                _IdDioPorCumplido = StructuralObject.SetValidValue(value, "IdDioPorCumplido")
                 ReportPropertyChanged("IdDioPorCumplido")
                 OnIdDioPorCumplidoChanged()
             End Set
         End Property
-    
+
         Private _IdDioPorCumplido As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdDioPorCumplidoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdDioPorCumplidoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdDioPorCumplidoChanged()
+
+        Partial Private Sub OnIdDioPorCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaDadoPorCumplido() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaDadoPorCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaDadoPorCumplidoChanging(value)
                 ReportPropertyChanging("FechaDadoPorCumplido")
-                _FechaDadoPorCumplido = StructuralObject.SetValidValue(value)
+                _FechaDadoPorCumplido = StructuralObject.SetValidValue(value, "FechaDadoPorCumplido")
                 ReportPropertyChanged("FechaDadoPorCumplido")
                 OnFechaDadoPorCumplidoChanged()
             End Set
         End Property
-    
+
         Private _FechaDadoPorCumplido As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaDadoPorCumplidoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaDadoPorCumplidoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaDadoPorCumplidoChanged()
+
+        Partial Private Sub OnFechaDadoPorCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ObservacionesCumplido() As Global.System.String
             Get
                 Return _ObservacionesCumplido
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesCumplidoChanging(value)
                 ReportPropertyChanging("ObservacionesCumplido")
-                _ObservacionesCumplido = StructuralObject.SetValidValue(value, true)
+                _ObservacionesCumplido = StructuralObject.SetValidValue(value, True, "ObservacionesCumplido")
                 ReportPropertyChanged("ObservacionesCumplido")
                 OnObservacionesCumplidoChanged()
             End Set
         End Property
-    
+
         Private _ObservacionesCumplido As Global.System.String
-        Private Partial Sub OnObservacionesCumplidoChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesCumplidoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesCumplidoChanged()
+
+        Partial Private Sub OnObservacionesCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdAproboAlmacen() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdAproboAlmacen
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdAproboAlmacenChanging(value)
                 ReportPropertyChanging("IdAproboAlmacen")
-                _IdAproboAlmacen = StructuralObject.SetValidValue(value)
+                _IdAproboAlmacen = StructuralObject.SetValidValue(value, "IdAproboAlmacen")
                 ReportPropertyChanged("IdAproboAlmacen")
                 OnIdAproboAlmacenChanged()
             End Set
         End Property
-    
+
         Private _IdAproboAlmacen As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdAproboAlmacenChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdAproboAlmacenChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdAproboAlmacenChanged()
+
+        Partial Private Sub OnIdAproboAlmacenChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdEquipo() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdEquipo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdEquipoChanging(value)
                 ReportPropertyChanging("IdEquipo")
-                _IdEquipo = StructuralObject.SetValidValue(value)
+                _IdEquipo = StructuralObject.SetValidValue(value, "IdEquipo")
                 ReportPropertyChanged("IdEquipo")
                 OnIdEquipoChanged()
             End Set
         End Property
-    
+
         Private _IdEquipo As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdEquipoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdEquipoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdEquipoChanged()
+
+        Partial Private Sub OnIdEquipoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaEntrega_Tel() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaEntrega_Tel
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaEntrega_TelChanging(value)
                 ReportPropertyChanging("FechaEntrega_Tel")
-                _FechaEntrega_Tel = StructuralObject.SetValidValue(value)
+                _FechaEntrega_Tel = StructuralObject.SetValidValue(value, "FechaEntrega_Tel")
                 ReportPropertyChanged("FechaEntrega_Tel")
                 OnFechaEntrega_TelChanged()
             End Set
         End Property
-    
+
         Private _FechaEntrega_Tel As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaEntrega_TelChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaEntrega_TelChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaEntrega_TelChanged()
+
+        Partial Private Sub OnFechaEntrega_TelChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property PRESTOConcepto() As Global.System.String
             Get
                 Return _PRESTOConcepto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnPRESTOConceptoChanging(value)
                 ReportPropertyChanging("PRESTOConcepto")
-                _PRESTOConcepto = StructuralObject.SetValidValue(value, true)
+                _PRESTOConcepto = StructuralObject.SetValidValue(value, True, "PRESTOConcepto")
                 ReportPropertyChanged("PRESTOConcepto")
                 OnPRESTOConceptoChanged()
             End Set
         End Property
-    
+
         Private _PRESTOConcepto As Global.System.String
-        Private Partial Sub OnPRESTOConceptoChanging(value As Global.System.String)
+        Partial Private Sub OnPRESTOConceptoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnPRESTOConceptoChanged()
+
+        Partial Private Sub OnPRESTOConceptoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Costo() As Nullable(Of Global.System.Decimal)
             Get
                 Return _Costo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnCostoChanging(value)
                 ReportPropertyChanging("Costo")
-                _Costo = StructuralObject.SetValidValue(value)
+                _Costo = StructuralObject.SetValidValue(value, "Costo")
                 ReportPropertyChanged("Costo")
                 OnCostoChanged()
             End Set
         End Property
-    
+
         Private _Costo As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnCostoChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnCostoChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnCostoChanged()
+
+        Partial Private Sub OnCostoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property OrigenDescripcion() As Nullable(Of Global.System.Int32)
             Get
                 Return _OrigenDescripcion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnOrigenDescripcionChanging(value)
                 ReportPropertyChanging("OrigenDescripcion")
-                _OrigenDescripcion = StructuralObject.SetValidValue(value)
+                _OrigenDescripcion = StructuralObject.SetValidValue(value, "OrigenDescripcion")
                 ReportPropertyChanged("OrigenDescripcion")
                 OnOrigenDescripcionChanged()
             End Set
         End Property
-    
+
         Private _OrigenDescripcion As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnOrigenDescripcionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnOrigenDescripcionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnOrigenDescripcionChanged()
+
+        Partial Private Sub OnOrigenDescripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property TipoDesignacion() As Global.System.String
             Get
                 Return _TipoDesignacion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnTipoDesignacionChanging(value)
                 ReportPropertyChanging("TipoDesignacion")
-                _TipoDesignacion = StructuralObject.SetValidValue(value, true)
+                _TipoDesignacion = StructuralObject.SetValidValue(value, True, "TipoDesignacion")
                 ReportPropertyChanged("TipoDesignacion")
                 OnTipoDesignacionChanged()
             End Set
         End Property
-    
+
         Private _TipoDesignacion As Global.System.String
-        Private Partial Sub OnTipoDesignacionChanging(value As Global.System.String)
+        Partial Private Sub OnTipoDesignacionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnTipoDesignacionChanged()
+
+        Partial Private Sub OnTipoDesignacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLiberoParaCompras() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLiberoParaCompras
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLiberoParaComprasChanging(value)
                 ReportPropertyChanging("IdLiberoParaCompras")
-                _IdLiberoParaCompras = StructuralObject.SetValidValue(value)
+                _IdLiberoParaCompras = StructuralObject.SetValidValue(value, "IdLiberoParaCompras")
                 ReportPropertyChanged("IdLiberoParaCompras")
                 OnIdLiberoParaComprasChanged()
             End Set
         End Property
-    
+
         Private _IdLiberoParaCompras As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLiberoParaComprasChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLiberoParaComprasChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLiberoParaComprasChanged()
+
+        Partial Private Sub OnIdLiberoParaComprasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaLiberacionParaCompras() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaLiberacionParaCompras
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaLiberacionParaComprasChanging(value)
                 ReportPropertyChanging("FechaLiberacionParaCompras")
-                _FechaLiberacionParaCompras = StructuralObject.SetValidValue(value)
+                _FechaLiberacionParaCompras = StructuralObject.SetValidValue(value, "FechaLiberacionParaCompras")
                 ReportPropertyChanged("FechaLiberacionParaCompras")
                 OnFechaLiberacionParaComprasChanged()
             End Set
         End Property
-    
+
         Private _FechaLiberacionParaCompras As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaLiberacionParaComprasChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaLiberacionParaComprasChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaLiberacionParaComprasChanged()
+
+        Partial Private Sub OnFechaLiberacionParaComprasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Recepcionado() As Global.System.String
             Get
                 Return _Recepcionado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnRecepcionadoChanging(value)
                 ReportPropertyChanging("Recepcionado")
-                _Recepcionado = StructuralObject.SetValidValue(value, true)
+                _Recepcionado = StructuralObject.SetValidValue(value, True, "Recepcionado")
                 ReportPropertyChanged("Recepcionado")
                 OnRecepcionadoChanged()
             End Set
         End Property
-    
+
         Private _Recepcionado As Global.System.String
-        Private Partial Sub OnRecepcionadoChanging(value As Global.System.String)
+        Partial Private Sub OnRecepcionadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnRecepcionadoChanged()
+
+        Partial Private Sub OnRecepcionadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Pagina() As Nullable(Of Global.System.Int32)
             Get
                 Return _Pagina
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnPaginaChanging(value)
                 ReportPropertyChanging("Pagina")
-                _Pagina = StructuralObject.SetValidValue(value)
+                _Pagina = StructuralObject.SetValidValue(value, "Pagina")
                 ReportPropertyChanged("Pagina")
                 OnPaginaChanged()
             End Set
         End Property
-    
+
         Private _Pagina As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnPaginaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnPaginaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnPaginaChanged()
+
+        Partial Private Sub OnPaginaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Item() As Nullable(Of Global.System.Int32)
             Get
                 Return _Item
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnItemChanging(value)
                 ReportPropertyChanging("Item")
-                _Item = StructuralObject.SetValidValue(value)
+                _Item = StructuralObject.SetValidValue(value, "Item")
                 ReportPropertyChanged("Item")
                 OnItemChanged()
             End Set
         End Property
-    
+
         Private _Item As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnItemChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnItemChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnItemChanged()
+
+        Partial Private Sub OnItemChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Figura() As Nullable(Of Global.System.Int32)
             Get
                 Return _Figura
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnFiguraChanging(value)
                 ReportPropertyChanging("Figura")
-                _Figura = StructuralObject.SetValidValue(value)
+                _Figura = StructuralObject.SetValidValue(value, "Figura")
                 ReportPropertyChanged("Figura")
                 OnFiguraChanged()
             End Set
         End Property
-    
+
         Private _Figura As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnFiguraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnFiguraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnFiguraChanged()
+
+        Partial Private Sub OnFiguraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoDistribucion() As Global.System.String
             Get
                 Return _CodigoDistribucion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoDistribucionChanging(value)
                 ReportPropertyChanging("CodigoDistribucion")
-                _CodigoDistribucion = StructuralObject.SetValidValue(value, true)
+                _CodigoDistribucion = StructuralObject.SetValidValue(value, True, "CodigoDistribucion")
                 ReportPropertyChanged("CodigoDistribucion")
                 OnCodigoDistribucionChanged()
             End Set
         End Property
-    
+
         Private _CodigoDistribucion As Global.System.String
-        Private Partial Sub OnCodigoDistribucionChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoDistribucionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoDistribucionChanged()
+
+        Partial Private Sub OnCodigoDistribucionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdEquipoDestino() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdEquipoDestino
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdEquipoDestinoChanging(value)
                 ReportPropertyChanging("IdEquipoDestino")
-                _IdEquipoDestino = StructuralObject.SetValidValue(value)
+                _IdEquipoDestino = StructuralObject.SetValidValue(value, "IdEquipoDestino")
                 ReportPropertyChanged("IdEquipoDestino")
                 OnIdEquipoDestinoChanged()
             End Set
         End Property
-    
+
         Private _IdEquipoDestino As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdEquipoDestinoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdEquipoDestinoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdEquipoDestinoChanged()
+
+        Partial Private Sub OnIdEquipoDestinoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Entregado() As Global.System.String
             Get
                 Return _Entregado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEntregadoChanging(value)
                 ReportPropertyChanging("Entregado")
-                _Entregado = StructuralObject.SetValidValue(value, true)
+                _Entregado = StructuralObject.SetValidValue(value, True, "Entregado")
                 ReportPropertyChanged("Entregado")
                 OnEntregadoChanged()
             End Set
         End Property
-    
+
         Private _Entregado As Global.System.String
-        Private Partial Sub OnEntregadoChanging(value As Global.System.String)
+        Partial Private Sub OnEntregadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEntregadoChanged()
+
+        Partial Private Sub OnEntregadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaAsignacionComprador() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaAsignacionComprador
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaAsignacionCompradorChanging(value)
                 ReportPropertyChanging("FechaAsignacionComprador")
-                _FechaAsignacionComprador = StructuralObject.SetValidValue(value)
+                _FechaAsignacionComprador = StructuralObject.SetValidValue(value, "FechaAsignacionComprador")
                 ReportPropertyChanged("FechaAsignacionComprador")
                 OnFechaAsignacionCompradorChanged()
             End Set
         End Property
-    
+
         Private _FechaAsignacionComprador As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaAsignacionCompradorChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaAsignacionCompradorChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaAsignacionCompradorChanged()
+
+        Partial Private Sub OnFechaAsignacionCompradorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property MoP() As Global.System.String
             Get
                 Return _MoP
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnMoPChanging(value)
                 ReportPropertyChanging("MoP")
-                _MoP = StructuralObject.SetValidValue(value, true)
+                _MoP = StructuralObject.SetValidValue(value, True, "MoP")
                 ReportPropertyChanged("MoP")
                 OnMoPChanged()
             End Set
         End Property
-    
+
         Private _MoP As Global.System.String
-        Private Partial Sub OnMoPChanging(value As Global.System.String)
+        Partial Private Sub OnMoPChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnMoPChanged()
+
+        Partial Private Sub OnMoPChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdDetalleObraDestino() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdDetalleObraDestino
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdDetalleObraDestinoChanging(value)
                 ReportPropertyChanging("IdDetalleObraDestino")
-                _IdDetalleObraDestino = StructuralObject.SetValidValue(value)
+                _IdDetalleObraDestino = StructuralObject.SetValidValue(value, "IdDetalleObraDestino")
                 ReportPropertyChanged("IdDetalleObraDestino")
                 OnIdDetalleObraDestinoChanged()
             End Set
         End Property
-    
+
         Private _IdDetalleObraDestino As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdDetalleObraDestinoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdDetalleObraDestinoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdDetalleObraDestinoChanged()
+
+        Partial Private Sub OnIdDetalleObraDestinoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdPresupuestoObraRubro() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdPresupuestoObraRubro
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdPresupuestoObraRubroChanging(value)
                 ReportPropertyChanging("IdPresupuestoObraRubro")
-                _IdPresupuestoObraRubro = StructuralObject.SetValidValue(value)
+                _IdPresupuestoObraRubro = StructuralObject.SetValidValue(value, "IdPresupuestoObraRubro")
                 ReportPropertyChanged("IdPresupuestoObraRubro")
                 OnIdPresupuestoObraRubroChanged()
             End Set
         End Property
-    
+
         Private _IdPresupuestoObraRubro As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdPresupuestoObraRubroChanging(value As Nullable(Of Global.System.Int32))
-        End Sub
-    
-        Private Partial Sub OnIdPresupuestoObraRubroChanged()
+        Partial Private Sub OnIdPresupuestoObraRubroChanging(value As Nullable(Of Global.System.Int32))
         End Sub
 
-        #End Region
+        Partial Private Sub OnIdPresupuestoObraRubroChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="Obras")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class Obras
+    Partial Public Class Obras
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new Obras object.
         ''' </summary>
         ''' <param name="idObra">Initial value of the IdObra property.</param>
         Public Shared Function CreateObras(idObra As Global.System.Int32) As Obras
-            Dim obras as Obras = New Obras
+            Dim obras As Obras = New Obras
             obras.IdObra = idObra
             Return obras
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdObra() As Global.System.Int32
             Get
                 Return _IdObra
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdObra <> Value) Then
                     OnIdObraChanging(value)
                     ReportPropertyChanging("IdObra")
-                    _IdObra = StructuralObject.SetValidValue(value)
+                    _IdObra = StructuralObject.SetValidValue(value, "IdObra")
                     ReportPropertyChanged("IdObra")
                     OnIdObraChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdObra As Global.System.Int32
-        Private Partial Sub OnIdObraChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdObraChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdObraChanged()
+
+        Partial Private Sub OnIdObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeroObra() As Global.System.String
             Get
                 Return _NumeroObra
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnNumeroObraChanging(value)
                 ReportPropertyChanging("NumeroObra")
-                _NumeroObra = StructuralObject.SetValidValue(value, true)
+                _NumeroObra = StructuralObject.SetValidValue(value, True, "NumeroObra")
                 ReportPropertyChanged("NumeroObra")
                 OnNumeroObraChanged()
             End Set
         End Property
-    
+
         Private _NumeroObra As Global.System.String
-        Private Partial Sub OnNumeroObraChanging(value As Global.System.String)
+        Partial Private Sub OnNumeroObraChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnNumeroObraChanged()
+
+        Partial Private Sub OnNumeroObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCliente() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCliente
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdClienteChanging(value)
                 ReportPropertyChanging("IdCliente")
-                _IdCliente = StructuralObject.SetValidValue(value)
+                _IdCliente = StructuralObject.SetValidValue(value, "IdCliente")
                 ReportPropertyChanged("IdCliente")
                 OnIdClienteChanged()
             End Set
         End Property
-    
+
         Private _IdCliente As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdClienteChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdClienteChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdClienteChanged()
+
+        Partial Private Sub OnIdClienteChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaInicio() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaInicio
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaInicioChanging(value)
                 ReportPropertyChanging("FechaInicio")
-                _FechaInicio = StructuralObject.SetValidValue(value)
+                _FechaInicio = StructuralObject.SetValidValue(value, "FechaInicio")
                 ReportPropertyChanged("FechaInicio")
                 OnFechaInicioChanged()
             End Set
         End Property
-    
+
         Private _FechaInicio As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaInicioChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaInicioChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaInicioChanged()
+
+        Partial Private Sub OnFechaInicioChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaFinalizacion() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaFinalizacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaFinalizacionChanging(value)
                 ReportPropertyChanging("FechaFinalizacion")
-                _FechaFinalizacion = StructuralObject.SetValidValue(value)
+                _FechaFinalizacion = StructuralObject.SetValidValue(value, "FechaFinalizacion")
                 ReportPropertyChanged("FechaFinalizacion")
                 OnFechaFinalizacionChanged()
             End Set
         End Property
-    
+
         Private _FechaFinalizacion As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaFinalizacionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaFinalizacionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaFinalizacionChanged()
+
+        Partial Private Sub OnFechaFinalizacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones() As Global.System.String
             Get
                 Return _Observaciones
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesChanging(value)
                 ReportPropertyChanging("Observaciones")
-                _Observaciones = StructuralObject.SetValidValue(value, true)
+                _Observaciones = StructuralObject.SetValidValue(value, True, "Observaciones")
                 ReportPropertyChanged("Observaciones")
                 OnObservacionesChanged()
             End Set
         End Property
-    
+
         Private _Observaciones As Global.System.String
-        Private Partial Sub OnObservacionesChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesChanged()
+
+        Partial Private Sub OnObservacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaEntrega() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaEntrega
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaEntregaChanging(value)
                 ReportPropertyChanging("FechaEntrega")
-                _FechaEntrega = StructuralObject.SetValidValue(value)
+                _FechaEntrega = StructuralObject.SetValidValue(value, "FechaEntrega")
                 ReportPropertyChanged("FechaEntrega")
                 OnFechaEntregaChanged()
             End Set
         End Property
-    
+
         Private _FechaEntrega As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaEntregaChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaEntregaChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaEntregaChanged()
+
+        Partial Private Sub OnFechaEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Descripcion() As Global.System.String
             Get
                 Return _Descripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDescripcionChanging(value)
                 ReportPropertyChanging("Descripcion")
-                _Descripcion = StructuralObject.SetValidValue(value, true)
+                _Descripcion = StructuralObject.SetValidValue(value, True, "Descripcion")
                 ReportPropertyChanged("Descripcion")
                 OnDescripcionChanged()
             End Set
         End Property
-    
+
         Private _Descripcion As Global.System.String
-        Private Partial Sub OnDescripcionChanging(value As Global.System.String)
+        Partial Private Sub OnDescripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDescripcionChanged()
+
+        Partial Private Sub OnDescripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdJefe() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdJefe
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdJefeChanging(value)
                 ReportPropertyChanging("IdJefe")
-                _IdJefe = StructuralObject.SetValidValue(value)
+                _IdJefe = StructuralObject.SetValidValue(value, "IdJefe")
                 ReportPropertyChanged("IdJefe")
                 OnIdJefeChanged()
             End Set
         End Property
-    
+
         Private _IdJefe As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdJefeChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdJefeChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdJefeChanged()
+
+        Partial Private Sub OnIdJefeChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property TipoObra() As Nullable(Of Global.System.Int32)
             Get
                 Return _TipoObra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnTipoObraChanging(value)
                 ReportPropertyChanging("TipoObra")
-                _TipoObra = StructuralObject.SetValidValue(value)
+                _TipoObra = StructuralObject.SetValidValue(value, "TipoObra")
                 ReportPropertyChanged("TipoObra")
                 OnTipoObraChanged()
             End Set
         End Property
-    
+
         Private _TipoObra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnTipoObraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnTipoObraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnTipoObraChanged()
+
+        Partial Private Sub OnTipoObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property HorasEstimadas() As Nullable(Of Global.System.Int32)
             Get
                 Return _HorasEstimadas
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnHorasEstimadasChanging(value)
                 ReportPropertyChanging("HorasEstimadas")
-                _HorasEstimadas = StructuralObject.SetValidValue(value)
+                _HorasEstimadas = StructuralObject.SetValidValue(value, "HorasEstimadas")
                 ReportPropertyChanged("HorasEstimadas")
                 OnHorasEstimadasChanged()
             End Set
         End Property
-    
+
         Private _HorasEstimadas As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnHorasEstimadasChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnHorasEstimadasChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnHorasEstimadasChanged()
+
+        Partial Private Sub OnHorasEstimadasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Consorcial() As Global.System.String
             Get
                 Return _Consorcial
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnConsorcialChanging(value)
                 ReportPropertyChanging("Consorcial")
-                _Consorcial = StructuralObject.SetValidValue(value, true)
+                _Consorcial = StructuralObject.SetValidValue(value, True, "Consorcial")
                 ReportPropertyChanged("Consorcial")
                 OnConsorcialChanged()
             End Set
         End Property
-    
+
         Private _Consorcial As Global.System.String
-        Private Partial Sub OnConsorcialChanging(value As Global.System.String)
+        Partial Private Sub OnConsorcialChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnConsorcialChanged()
+
+        Partial Private Sub OnConsorcialChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EnviarEmail() As Nullable(Of Global.System.Byte)
             Get
                 Return _EnviarEmail
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnEnviarEmailChanging(value)
                 ReportPropertyChanging("EnviarEmail")
-                _EnviarEmail = StructuralObject.SetValidValue(value)
+                _EnviarEmail = StructuralObject.SetValidValue(value, "EnviarEmail")
                 ReportPropertyChanged("EnviarEmail")
                 OnEnviarEmailChanged()
             End Set
         End Property
-    
+
         Private _EnviarEmail As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
+        Partial Private Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
         End Sub
-    
-        Private Partial Sub OnEnviarEmailChanged()
+
+        Partial Private Sub OnEnviarEmailChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Activa() As Global.System.String
             Get
                 Return _Activa
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnActivaChanging(value)
                 ReportPropertyChanging("Activa")
-                _Activa = StructuralObject.SetValidValue(value, true)
+                _Activa = StructuralObject.SetValidValue(value, True, "Activa")
                 ReportPropertyChanged("Activa")
                 OnActivaChanged()
             End Set
         End Property
-    
+
         Private _Activa As Global.System.String
-        Private Partial Sub OnActivaChanging(value As Global.System.String)
+        Partial Private Sub OnActivaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnActivaChanged()
+
+        Partial Private Sub OnActivaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ParaInformes() As Global.System.String
             Get
                 Return _ParaInformes
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnParaInformesChanging(value)
                 ReportPropertyChanging("ParaInformes")
-                _ParaInformes = StructuralObject.SetValidValue(value, true)
+                _ParaInformes = StructuralObject.SetValidValue(value, True, "ParaInformes")
                 ReportPropertyChanged("ParaInformes")
                 OnParaInformesChanged()
             End Set
         End Property
-    
+
         Private _ParaInformes As Global.System.String
-        Private Partial Sub OnParaInformesChanging(value As Global.System.String)
+        Partial Private Sub OnParaInformesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnParaInformesChanged()
+
+        Partial Private Sub OnParaInformesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUnidadOperativa() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUnidadOperativa
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUnidadOperativaChanging(value)
                 ReportPropertyChanging("IdUnidadOperativa")
-                _IdUnidadOperativa = StructuralObject.SetValidValue(value)
+                _IdUnidadOperativa = StructuralObject.SetValidValue(value, "IdUnidadOperativa")
                 ReportPropertyChanged("IdUnidadOperativa")
                 OnIdUnidadOperativaChanged()
             End Set
         End Property
-    
+
         Private _IdUnidadOperativa As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUnidadOperativaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUnidadOperativaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUnidadOperativaChanged()
+
+        Partial Private Sub OnIdUnidadOperativaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Jerarquia() As Global.System.String
             Get
                 Return _Jerarquia
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnJerarquiaChanging(value)
                 ReportPropertyChanging("Jerarquia")
-                _Jerarquia = StructuralObject.SetValidValue(value, true)
+                _Jerarquia = StructuralObject.SetValidValue(value, True, "Jerarquia")
                 ReportPropertyChanged("Jerarquia")
                 OnJerarquiaChanged()
             End Set
         End Property
-    
+
         Private _Jerarquia As Global.System.String
-        Private Partial Sub OnJerarquiaChanging(value As Global.System.String)
+        Partial Private Sub OnJerarquiaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnJerarquiaChanged()
+
+        Partial Private Sub OnJerarquiaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto1() As Global.System.String
             Get
                 Return _ArchivoAdjunto1
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto1Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto1")
-                _ArchivoAdjunto1 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto1 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto1")
                 ReportPropertyChanged("ArchivoAdjunto1")
                 OnArchivoAdjunto1Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto1 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto1Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto1Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto1Changed()
+
+        Partial Private Sub OnArchivoAdjunto1Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto2() As Global.System.String
             Get
                 Return _ArchivoAdjunto2
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto2Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto2")
-                _ArchivoAdjunto2 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto2 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto2")
                 ReportPropertyChanged("ArchivoAdjunto2")
                 OnArchivoAdjunto2Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto2 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto2Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto2Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto2Changed()
+
+        Partial Private Sub OnArchivoAdjunto2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto3() As Global.System.String
             Get
                 Return _ArchivoAdjunto3
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto3Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto3")
-                _ArchivoAdjunto3 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto3 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto3")
                 ReportPropertyChanged("ArchivoAdjunto3")
                 OnArchivoAdjunto3Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto3 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto3Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto3Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto3Changed()
+
+        Partial Private Sub OnArchivoAdjunto3Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto4() As Global.System.String
             Get
                 Return _ArchivoAdjunto4
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto4Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto4")
-                _ArchivoAdjunto4 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto4 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto4")
                 ReportPropertyChanged("ArchivoAdjunto4")
                 OnArchivoAdjunto4Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto4 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto4Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto4Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto4Changed()
+
+        Partial Private Sub OnArchivoAdjunto4Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto5() As Global.System.String
             Get
                 Return _ArchivoAdjunto5
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto5Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto5")
-                _ArchivoAdjunto5 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto5 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto5")
                 ReportPropertyChanged("ArchivoAdjunto5")
                 OnArchivoAdjunto5Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto5 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto5Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto5Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto5Changed()
+
+        Partial Private Sub OnArchivoAdjunto5Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto6() As Global.System.String
             Get
                 Return _ArchivoAdjunto6
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto6Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto6")
-                _ArchivoAdjunto6 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto6 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto6")
                 ReportPropertyChanged("ArchivoAdjunto6")
                 OnArchivoAdjunto6Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto6 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto6Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto6Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto6Changed()
+
+        Partial Private Sub OnArchivoAdjunto6Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto7() As Global.System.String
             Get
                 Return _ArchivoAdjunto7
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto7Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto7")
-                _ArchivoAdjunto7 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto7 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto7")
                 ReportPropertyChanged("ArchivoAdjunto7")
                 OnArchivoAdjunto7Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto7 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto7Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto7Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto7Changed()
+
+        Partial Private Sub OnArchivoAdjunto7Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto8() As Global.System.String
             Get
                 Return _ArchivoAdjunto8
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto8Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto8")
-                _ArchivoAdjunto8 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto8 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto8")
                 ReportPropertyChanged("ArchivoAdjunto8")
                 OnArchivoAdjunto8Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto8 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto8Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto8Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto8Changed()
+
+        Partial Private Sub OnArchivoAdjunto8Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto9() As Global.System.String
             Get
                 Return _ArchivoAdjunto9
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto9Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto9")
-                _ArchivoAdjunto9 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto9 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto9")
                 ReportPropertyChanged("ArchivoAdjunto9")
                 OnArchivoAdjunto9Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto9 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto9Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto9Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto9Changed()
+
+        Partial Private Sub OnArchivoAdjunto9Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ArchivoAdjunto10() As Global.System.String
             Get
                 Return _ArchivoAdjunto10
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnArchivoAdjunto10Changing(value)
                 ReportPropertyChanging("ArchivoAdjunto10")
-                _ArchivoAdjunto10 = StructuralObject.SetValidValue(value, true)
+                _ArchivoAdjunto10 = StructuralObject.SetValidValue(value, True, "ArchivoAdjunto10")
                 ReportPropertyChanged("ArchivoAdjunto10")
                 OnArchivoAdjunto10Changed()
             End Set
         End Property
-    
+
         Private _ArchivoAdjunto10 As Global.System.String
-        Private Partial Sub OnArchivoAdjunto10Changing(value As Global.System.String)
+        Partial Private Sub OnArchivoAdjunto10Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnArchivoAdjunto10Changed()
+
+        Partial Private Sub OnArchivoAdjunto10Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property GeneraReservaStock() As Global.System.String
             Get
                 Return _GeneraReservaStock
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnGeneraReservaStockChanging(value)
                 ReportPropertyChanging("GeneraReservaStock")
-                _GeneraReservaStock = StructuralObject.SetValidValue(value, true)
+                _GeneraReservaStock = StructuralObject.SetValidValue(value, True, "GeneraReservaStock")
                 ReportPropertyChanged("GeneraReservaStock")
                 OnGeneraReservaStockChanged()
             End Set
         End Property
-    
+
         Private _GeneraReservaStock As Global.System.String
-        Private Partial Sub OnGeneraReservaStockChanging(value As Global.System.String)
+        Partial Private Sub OnGeneraReservaStockChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnGeneraReservaStockChanged()
+
+        Partial Private Sub OnGeneraReservaStockChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdGrupoObra() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdGrupoObra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdGrupoObraChanging(value)
                 ReportPropertyChanging("IdGrupoObra")
-                _IdGrupoObra = StructuralObject.SetValidValue(value)
+                _IdGrupoObra = StructuralObject.SetValidValue(value, "IdGrupoObra")
                 ReportPropertyChanged("IdGrupoObra")
                 OnIdGrupoObraChanged()
             End Set
         End Property
-    
+
         Private _IdGrupoObra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdGrupoObraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdGrupoObraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdGrupoObraChanged()
+
+        Partial Private Sub OnIdGrupoObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdArticuloAsociado() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdArticuloAsociado
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdArticuloAsociadoChanging(value)
                 ReportPropertyChanging("IdArticuloAsociado")
-                _IdArticuloAsociado = StructuralObject.SetValidValue(value)
+                _IdArticuloAsociado = StructuralObject.SetValidValue(value, "IdArticuloAsociado")
                 ReportPropertyChanged("IdArticuloAsociado")
                 OnIdArticuloAsociadoChanged()
             End Set
         End Property
-    
+
         Private _IdArticuloAsociado As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdArticuloAsociadoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdArticuloAsociadoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdArticuloAsociadoChanged()
+
+        Partial Private Sub OnIdArticuloAsociadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones2() As Global.System.String
             Get
                 Return _Observaciones2
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservaciones2Changing(value)
                 ReportPropertyChanging("Observaciones2")
-                _Observaciones2 = StructuralObject.SetValidValue(value, true)
+                _Observaciones2 = StructuralObject.SetValidValue(value, True, "Observaciones2")
                 ReportPropertyChanged("Observaciones2")
                 OnObservaciones2Changed()
             End Set
         End Property
-    
+
         Private _Observaciones2 As Global.System.String
-        Private Partial Sub OnObservaciones2Changing(value As Global.System.String)
+        Partial Private Sub OnObservaciones2Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservaciones2Changed()
+
+        Partial Private Sub OnObservaciones2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones3() As Global.System.String
             Get
                 Return _Observaciones3
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservaciones3Changing(value)
                 ReportPropertyChanging("Observaciones3")
-                _Observaciones3 = StructuralObject.SetValidValue(value, true)
+                _Observaciones3 = StructuralObject.SetValidValue(value, True, "Observaciones3")
                 ReportPropertyChanged("Observaciones3")
                 OnObservaciones3Changed()
             End Set
         End Property
-    
+
         Private _Observaciones3 As Global.System.String
-        Private Partial Sub OnObservaciones3Changing(value As Global.System.String)
+        Partial Private Sub OnObservaciones3Changing(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservaciones3Changed()
+
+        Partial Private Sub OnObservaciones3Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdSubjefe() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdSubjefe
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdSubjefeChanging(value)
                 ReportPropertyChanging("IdSubjefe")
-                _IdSubjefe = StructuralObject.SetValidValue(value)
+                _IdSubjefe = StructuralObject.SetValidValue(value, "IdSubjefe")
                 ReportPropertyChanged("IdSubjefe")
                 OnIdSubjefeChanged()
             End Set
         End Property
-    
+
         Private _IdSubjefe As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdSubjefeChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdSubjefeChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdSubjefeChanged()
+
+        Partial Private Sub OnIdSubjefeChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Direccion() As Global.System.String
             Get
                 Return _Direccion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDireccionChanging(value)
                 ReportPropertyChanging("Direccion")
-                _Direccion = StructuralObject.SetValidValue(value, true)
+                _Direccion = StructuralObject.SetValidValue(value, True, "Direccion")
                 ReportPropertyChanged("Direccion")
                 OnDireccionChanged()
             End Set
         End Property
-    
+
         Private _Direccion As Global.System.String
-        Private Partial Sub OnDireccionChanging(value As Global.System.String)
+        Partial Private Sub OnDireccionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDireccionChanged()
+
+        Partial Private Sub OnDireccionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdProvincia() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdProvincia
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdProvinciaChanging(value)
                 ReportPropertyChanging("IdProvincia")
-                _IdProvincia = StructuralObject.SetValidValue(value)
+                _IdProvincia = StructuralObject.SetValidValue(value, "IdProvincia")
                 ReportPropertyChanged("IdProvincia")
                 OnIdProvinciaChanged()
             End Set
         End Property
-    
+
         Private _IdProvincia As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdProvinciaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdProvinciaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdProvinciaChanged()
+
+        Partial Private Sub OnIdProvinciaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdPais() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdPais
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdPaisChanging(value)
                 ReportPropertyChanging("IdPais")
-                _IdPais = StructuralObject.SetValidValue(value)
+                _IdPais = StructuralObject.SetValidValue(value, "IdPais")
                 ReportPropertyChanged("IdPais")
                 OnIdPaisChanged()
             End Set
         End Property
-    
+
         Private _IdPais As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdPaisChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdPaisChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdPaisChanged()
+
+        Partial Private Sub OnIdPaisChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoPostal() As Global.System.String
             Get
                 Return _CodigoPostal
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoPostalChanging(value)
                 ReportPropertyChanging("CodigoPostal")
-                _CodigoPostal = StructuralObject.SetValidValue(value, true)
+                _CodigoPostal = StructuralObject.SetValidValue(value, True, "CodigoPostal")
                 ReportPropertyChanged("CodigoPostal")
                 OnCodigoPostalChanged()
             End Set
         End Property
-    
+
         Private _CodigoPostal As Global.System.String
-        Private Partial Sub OnCodigoPostalChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoPostalChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoPostalChanged()
+
+        Partial Private Sub OnCodigoPostalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Telefono() As Global.System.String
             Get
                 Return _Telefono
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnTelefonoChanging(value)
                 ReportPropertyChanging("Telefono")
-                _Telefono = StructuralObject.SetValidValue(value, true)
+                _Telefono = StructuralObject.SetValidValue(value, True, "Telefono")
                 ReportPropertyChanged("Telefono")
                 OnTelefonoChanged()
             End Set
         End Property
-    
+
         Private _Telefono As Global.System.String
-        Private Partial Sub OnTelefonoChanging(value As Global.System.String)
+        Partial Private Sub OnTelefonoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnTelefonoChanged()
+
+        Partial Private Sub OnTelefonoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property LugarPago() As Global.System.String
             Get
                 Return _LugarPago
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnLugarPagoChanging(value)
                 ReportPropertyChanging("LugarPago")
-                _LugarPago = StructuralObject.SetValidValue(value, true)
+                _LugarPago = StructuralObject.SetValidValue(value, True, "LugarPago")
                 ReportPropertyChanged("LugarPago")
                 OnLugarPagoChanged()
             End Set
         End Property
-    
+
         Private _LugarPago As Global.System.String
-        Private Partial Sub OnLugarPagoChanging(value As Global.System.String)
+        Partial Private Sub OnLugarPagoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnLugarPagoChanged()
+
+        Partial Private Sub OnLugarPagoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Responsable() As Global.System.String
             Get
                 Return _Responsable
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnResponsableChanging(value)
                 ReportPropertyChanging("Responsable")
-                _Responsable = StructuralObject.SetValidValue(value, true)
+                _Responsable = StructuralObject.SetValidValue(value, True, "Responsable")
                 ReportPropertyChanged("Responsable")
                 OnResponsableChanged()
             End Set
         End Property
-    
+
         Private _Responsable As Global.System.String
-        Private Partial Sub OnResponsableChanging(value As Global.System.String)
+        Partial Private Sub OnResponsableChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnResponsableChanged()
+
+        Partial Private Sub OnResponsableChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Horario() As Global.System.String
             Get
                 Return _Horario
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnHorarioChanging(value)
                 ReportPropertyChanging("Horario")
-                _Horario = StructuralObject.SetValidValue(value, true)
+                _Horario = StructuralObject.SetValidValue(value, True, "Horario")
                 ReportPropertyChanged("Horario")
                 OnHorarioChanged()
             End Set
         End Property
-    
+
         Private _Horario As Global.System.String
-        Private Partial Sub OnHorarioChanging(value As Global.System.String)
+        Partial Private Sub OnHorarioChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnHorarioChanged()
+
+        Partial Private Sub OnHorarioChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Turnos() As Global.System.String
             Get
                 Return _Turnos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnTurnosChanging(value)
                 ReportPropertyChanging("Turnos")
-                _Turnos = StructuralObject.SetValidValue(value, true)
+                _Turnos = StructuralObject.SetValidValue(value, True, "Turnos")
                 ReportPropertyChanged("Turnos")
                 OnTurnosChanged()
             End Set
         End Property
-    
+
         Private _Turnos As Global.System.String
-        Private Partial Sub OnTurnosChanging(value As Global.System.String)
+        Partial Private Sub OnTurnosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnTurnosChanged()
+
+        Partial Private Sub OnTurnosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Operarios() As Nullable(Of Global.System.Int32)
             Get
                 Return _Operarios
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnOperariosChanging(value)
                 ReportPropertyChanging("Operarios")
-                _Operarios = StructuralObject.SetValidValue(value)
+                _Operarios = StructuralObject.SetValidValue(value, "Operarios")
                 ReportPropertyChanged("Operarios")
                 OnOperariosChanged()
             End Set
         End Property
-    
+
         Private _Operarios As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnOperariosChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnOperariosChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnOperariosChanged()
+
+        Partial Private Sub OnOperariosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Zona() As Nullable(Of Global.System.Int32)
             Get
                 Return _Zona
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnZonaChanging(value)
                 ReportPropertyChanging("Zona")
-                _Zona = StructuralObject.SetValidValue(value)
+                _Zona = StructuralObject.SetValidValue(value, "Zona")
                 ReportPropertyChanged("Zona")
                 OnZonaChanged()
             End Set
         End Property
-    
+
         Private _Zona As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnZonaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnZonaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnZonaChanged()
+
+        Partial Private Sub OnZonaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Jurisdiccion() As Nullable(Of Global.System.Int32)
             Get
                 Return _Jurisdiccion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnJurisdiccionChanging(value)
                 ReportPropertyChanging("Jurisdiccion")
-                _Jurisdiccion = StructuralObject.SetValidValue(value)
+                _Jurisdiccion = StructuralObject.SetValidValue(value, "Jurisdiccion")
                 ReportPropertyChanged("Jurisdiccion")
                 OnJurisdiccionChanged()
             End Set
         End Property
-    
+
         Private _Jurisdiccion As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnJurisdiccionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnJurisdiccionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnJurisdiccionChanged()
+
+        Partial Private Sub OnJurisdiccionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdLocalidad() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdLocalidad
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdLocalidadChanging(value)
                 ReportPropertyChanging("IdLocalidad")
-                _IdLocalidad = StructuralObject.SetValidValue(value)
+                _IdLocalidad = StructuralObject.SetValidValue(value, "IdLocalidad")
                 ReportPropertyChanged("IdLocalidad")
                 OnIdLocalidadChanged()
             End Set
         End Property
-    
+
         Private _IdLocalidad As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdLocalidadChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdLocalidadChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdLocalidadChanged()
+
+        Partial Private Sub OnIdLocalidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCuentaContableFF() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCuentaContableFF
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCuentaContableFFChanging(value)
                 ReportPropertyChanging("IdCuentaContableFF")
-                _IdCuentaContableFF = StructuralObject.SetValidValue(value)
+                _IdCuentaContableFF = StructuralObject.SetValidValue(value, "IdCuentaContableFF")
                 ReportPropertyChanged("IdCuentaContableFF")
                 OnIdCuentaContableFFChanged()
             End Set
         End Property
-    
+
         Private _IdCuentaContableFF As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCuentaContableFFChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCuentaContableFFChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCuentaContableFFChanged()
+
+        Partial Private Sub OnIdCuentaContableFFChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ValorObra() As Nullable(Of Global.System.Decimal)
             Get
                 Return _ValorObra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnValorObraChanging(value)
                 ReportPropertyChanging("ValorObra")
-                _ValorObra = StructuralObject.SetValidValue(value)
+                _ValorObra = StructuralObject.SetValidValue(value, "ValorObra")
                 ReportPropertyChanged("ValorObra")
                 OnValorObraChanged()
             End Set
         End Property
-    
+
         Private _ValorObra As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnValorObraChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnValorObraChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnValorObraChanged()
+
+        Partial Private Sub OnValorObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdMonedaValorObra() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdMonedaValorObra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdMonedaValorObraChanging(value)
                 ReportPropertyChanging("IdMonedaValorObra")
-                _IdMonedaValorObra = StructuralObject.SetValidValue(value)
+                _IdMonedaValorObra = StructuralObject.SetValidValue(value, "IdMonedaValorObra")
                 ReportPropertyChanged("IdMonedaValorObra")
                 OnIdMonedaValorObraChanged()
             End Set
         End Property
-    
+
         Private _IdMonedaValorObra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdMonedaValorObraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdMonedaValorObraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdMonedaValorObraChanged()
+
+        Partial Private Sub OnIdMonedaValorObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdJefeRegional() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdJefeRegional
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdJefeRegionalChanging(value)
                 ReportPropertyChanging("IdJefeRegional")
-                _IdJefeRegional = StructuralObject.SetValidValue(value)
+                _IdJefeRegional = StructuralObject.SetValidValue(value, "IdJefeRegional")
                 ReportPropertyChanged("IdJefeRegional")
                 OnIdJefeRegionalChanged()
             End Set
         End Property
-    
+
         Private _IdJefeRegional As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdJefeRegionalChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdJefeRegionalChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdJefeRegionalChanged()
+
+        Partial Private Sub OnIdJefeRegionalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EsPlantaDeProduccionInterna() As Global.System.String
             Get
                 Return _EsPlantaDeProduccionInterna
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEsPlantaDeProduccionInternaChanging(value)
                 ReportPropertyChanging("EsPlantaDeProduccionInterna")
-                _EsPlantaDeProduccionInterna = StructuralObject.SetValidValue(value, true)
+                _EsPlantaDeProduccionInterna = StructuralObject.SetValidValue(value, True, "EsPlantaDeProduccionInterna")
                 ReportPropertyChanged("EsPlantaDeProduccionInterna")
                 OnEsPlantaDeProduccionInternaChanged()
             End Set
         End Property
-    
+
         Private _EsPlantaDeProduccionInterna As Global.System.String
-        Private Partial Sub OnEsPlantaDeProduccionInternaChanging(value As Global.System.String)
+        Partial Private Sub OnEsPlantaDeProduccionInternaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEsPlantaDeProduccionInternaChanged()
+
+        Partial Private Sub OnEsPlantaDeProduccionInternaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ActivarPresupuestoObra() As Global.System.String
             Get
                 Return _ActivarPresupuestoObra
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnActivarPresupuestoObraChanging(value)
                 ReportPropertyChanging("ActivarPresupuestoObra")
-                _ActivarPresupuestoObra = StructuralObject.SetValidValue(value, true)
+                _ActivarPresupuestoObra = StructuralObject.SetValidValue(value, True, "ActivarPresupuestoObra")
                 ReportPropertyChanged("ActivarPresupuestoObra")
                 OnActivarPresupuestoObraChanged()
             End Set
         End Property
-    
+
         Private _ActivarPresupuestoObra As Global.System.String
-        Private Partial Sub OnActivarPresupuestoObraChanging(value As Global.System.String)
+        Partial Private Sub OnActivarPresupuestoObraChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnActivarPresupuestoObraChanged()
+
+        Partial Private Sub OnActivarPresupuestoObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ProximoNumeroAutorizacionCompra() As Nullable(Of Global.System.Int32)
             Get
                 Return _ProximoNumeroAutorizacionCompra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnProximoNumeroAutorizacionCompraChanging(value)
                 ReportPropertyChanging("ProximoNumeroAutorizacionCompra")
-                _ProximoNumeroAutorizacionCompra = StructuralObject.SetValidValue(value)
+                _ProximoNumeroAutorizacionCompra = StructuralObject.SetValidValue(value, "ProximoNumeroAutorizacionCompra")
                 ReportPropertyChanged("ProximoNumeroAutorizacionCompra")
                 OnProximoNumeroAutorizacionCompraChanged()
             End Set
         End Property
-    
+
         Private _ProximoNumeroAutorizacionCompra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnProximoNumeroAutorizacionCompraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnProximoNumeroAutorizacionCompraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnProximoNumeroAutorizacionCompraChanged()
+
+        Partial Private Sub OnProximoNumeroAutorizacionCompraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property AuxiliarDeMateriales() As Global.System.String
             Get
                 Return _AuxiliarDeMateriales
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAuxiliarDeMaterialesChanging(value)
                 ReportPropertyChanging("AuxiliarDeMateriales")
-                _AuxiliarDeMateriales = StructuralObject.SetValidValue(value, true)
+                _AuxiliarDeMateriales = StructuralObject.SetValidValue(value, True, "AuxiliarDeMateriales")
                 ReportPropertyChanged("AuxiliarDeMateriales")
                 OnAuxiliarDeMaterialesChanged()
             End Set
         End Property
-    
+
         Private _AuxiliarDeMateriales As Global.System.String
-        Private Partial Sub OnAuxiliarDeMaterialesChanging(value As Global.System.String)
+        Partial Private Sub OnAuxiliarDeMaterialesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAuxiliarDeMaterialesChanged()
+
+        Partial Private Sub OnAuxiliarDeMaterialesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property DiasLiquidacionCertificados() As Nullable(Of Global.System.Int32)
             Get
                 Return _DiasLiquidacionCertificados
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnDiasLiquidacionCertificadosChanging(value)
                 ReportPropertyChanging("DiasLiquidacionCertificados")
-                _DiasLiquidacionCertificados = StructuralObject.SetValidValue(value)
+                _DiasLiquidacionCertificados = StructuralObject.SetValidValue(value, "DiasLiquidacionCertificados")
                 ReportPropertyChanged("DiasLiquidacionCertificados")
                 OnDiasLiquidacionCertificadosChanged()
             End Set
         End Property
-    
+
         Private _DiasLiquidacionCertificados As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnDiasLiquidacionCertificadosChanging(value As Nullable(Of Global.System.Int32))
-        End Sub
-    
-        Private Partial Sub OnDiasLiquidacionCertificadosChanged()
+        Partial Private Sub OnDiasLiquidacionCertificadosChanging(value As Nullable(Of Global.System.Int32))
         End Sub
 
-        #End Region
+        Partial Private Sub OnDiasLiquidacionCertificadosChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="Requerimientos")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class Requerimientos
+    Partial Public Class Requerimientos
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new Requerimientos object.
         ''' </summary>
         ''' <param name="idRequerimiento">Initial value of the IdRequerimiento property.</param>
         Public Shared Function CreateRequerimientos(idRequerimiento As Global.System.Int32) As Requerimientos
-            Dim requerimientos as Requerimientos = New Requerimientos
+            Dim requerimientos As Requerimientos = New Requerimientos
             requerimientos.IdRequerimiento = idRequerimiento
             Return requerimientos
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdRequerimiento() As Global.System.Int32
             Get
                 Return _IdRequerimiento
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdRequerimiento <> Value) Then
                     OnIdRequerimientoChanging(value)
                     ReportPropertyChanging("IdRequerimiento")
-                    _IdRequerimiento = StructuralObject.SetValidValue(value)
+                    _IdRequerimiento = StructuralObject.SetValidValue(value, "IdRequerimiento")
                     ReportPropertyChanged("IdRequerimiento")
                     OnIdRequerimientoChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdRequerimiento As Global.System.Int32
-        Private Partial Sub OnIdRequerimientoChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdRequerimientoChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdRequerimientoChanged()
+
+        Partial Private Sub OnIdRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeroRequerimiento() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeroRequerimiento
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeroRequerimientoChanging(value)
                 ReportPropertyChanging("NumeroRequerimiento")
-                _NumeroRequerimiento = StructuralObject.SetValidValue(value)
+                _NumeroRequerimiento = StructuralObject.SetValidValue(value, "NumeroRequerimiento")
                 ReportPropertyChanged("NumeroRequerimiento")
                 OnNumeroRequerimientoChanged()
             End Set
         End Property
-    
+
         Private _NumeroRequerimiento As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeroRequerimientoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeroRequerimientoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeroRequerimientoChanged()
+
+        Partial Private Sub OnNumeroRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaRequerimiento() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaRequerimiento
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaRequerimientoChanging(value)
                 ReportPropertyChanging("FechaRequerimiento")
-                _FechaRequerimiento = StructuralObject.SetValidValue(value)
+                _FechaRequerimiento = StructuralObject.SetValidValue(value, "FechaRequerimiento")
                 ReportPropertyChanged("FechaRequerimiento")
                 OnFechaRequerimientoChanged()
             End Set
         End Property
-    
+
         Private _FechaRequerimiento As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaRequerimientoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaRequerimientoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaRequerimientoChanged()
+
+        Partial Private Sub OnFechaRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property LugarEntrega() As Global.System.String
             Get
                 Return _LugarEntrega
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnLugarEntregaChanging(value)
                 ReportPropertyChanging("LugarEntrega")
-                _LugarEntrega = StructuralObject.SetValidValue(value, true)
+                _LugarEntrega = StructuralObject.SetValidValue(value, True, "LugarEntrega")
                 ReportPropertyChanged("LugarEntrega")
                 OnLugarEntregaChanged()
             End Set
         End Property
-    
+
         Private _LugarEntrega As Global.System.String
-        Private Partial Sub OnLugarEntregaChanging(value As Global.System.String)
+        Partial Private Sub OnLugarEntregaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnLugarEntregaChanged()
+
+        Partial Private Sub OnLugarEntregaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Observaciones() As Global.System.String
             Get
                 Return _Observaciones
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesChanging(value)
                 ReportPropertyChanging("Observaciones")
-                _Observaciones = StructuralObject.SetValidValue(value, true)
+                _Observaciones = StructuralObject.SetValidValue(value, True, "Observaciones")
                 ReportPropertyChanged("Observaciones")
                 OnObservacionesChanged()
             End Set
         End Property
-    
+
         Private _Observaciones As Global.System.String
-        Private Partial Sub OnObservacionesChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesChanged()
+
+        Partial Private Sub OnObservacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdObra() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdObra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdObraChanging(value)
                 ReportPropertyChanging("IdObra")
-                _IdObra = StructuralObject.SetValidValue(value)
+                _IdObra = StructuralObject.SetValidValue(value, "IdObra")
                 ReportPropertyChanged("IdObra")
                 OnIdObraChanged()
             End Set
         End Property
-    
+
         Private _IdObra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdObraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdObraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdObraChanged()
+
+        Partial Private Sub OnIdObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCentroCosto() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCentroCosto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCentroCostoChanging(value)
                 ReportPropertyChanging("IdCentroCosto")
-                _IdCentroCosto = StructuralObject.SetValidValue(value)
+                _IdCentroCosto = StructuralObject.SetValidValue(value, "IdCentroCosto")
                 ReportPropertyChanged("IdCentroCosto")
                 OnIdCentroCostoChanged()
             End Set
         End Property
-    
+
         Private _IdCentroCosto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCentroCostoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCentroCostoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCentroCostoChanged()
+
+        Partial Private Sub OnIdCentroCostoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdSolicito() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdSolicito
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdSolicitoChanging(value)
                 ReportPropertyChanging("IdSolicito")
-                _IdSolicito = StructuralObject.SetValidValue(value)
+                _IdSolicito = StructuralObject.SetValidValue(value, "IdSolicito")
                 ReportPropertyChanged("IdSolicito")
                 OnIdSolicitoChanged()
             End Set
         End Property
-    
+
         Private _IdSolicito As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdSolicitoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdSolicitoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdSolicitoChanged()
+
+        Partial Private Sub OnIdSolicitoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdSector() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdSector
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdSectorChanging(value)
                 ReportPropertyChanging("IdSector")
-                _IdSector = StructuralObject.SetValidValue(value)
+                _IdSector = StructuralObject.SetValidValue(value, "IdSector")
                 ReportPropertyChanged("IdSector")
                 OnIdSectorChanged()
             End Set
         End Property
-    
+
         Private _IdSector As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdSectorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdSectorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdSectorChanged()
+
+        Partial Private Sub OnIdSectorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property MontoPrevisto() As Nullable(Of Global.System.Decimal)
             Get
                 Return _MontoPrevisto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnMontoPrevistoChanging(value)
                 ReportPropertyChanging("MontoPrevisto")
-                _MontoPrevisto = StructuralObject.SetValidValue(value)
+                _MontoPrevisto = StructuralObject.SetValidValue(value, "MontoPrevisto")
                 ReportPropertyChanged("MontoPrevisto")
                 OnMontoPrevistoChanged()
             End Set
         End Property
-    
+
         Private _MontoPrevisto As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnMontoPrevistoChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnMontoPrevistoChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnMontoPrevistoChanged()
+
+        Partial Private Sub OnMontoPrevistoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdComprador() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdComprador
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCompradorChanging(value)
                 ReportPropertyChanging("IdComprador")
-                _IdComprador = StructuralObject.SetValidValue(value)
+                _IdComprador = StructuralObject.SetValidValue(value, "IdComprador")
                 ReportPropertyChanged("IdComprador")
                 OnIdCompradorChanged()
             End Set
         End Property
-    
+
         Private _IdComprador As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCompradorChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCompradorChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCompradorChanged()
+
+        Partial Private Sub OnIdCompradorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Aprobo() As Nullable(Of Global.System.Int32)
             Get
                 Return _Aprobo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnAproboChanging(value)
                 ReportPropertyChanging("Aprobo")
-                _Aprobo = StructuralObject.SetValidValue(value)
+                _Aprobo = StructuralObject.SetValidValue(value, "Aprobo")
                 ReportPropertyChanged("Aprobo")
                 OnAproboChanged()
             End Set
         End Property
-    
+
         Private _Aprobo As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnAproboChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnAproboChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnAproboChanged()
+
+        Partial Private Sub OnAproboChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaAprobacion() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaAprobacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaAprobacionChanging(value)
                 ReportPropertyChanging("FechaAprobacion")
-                _FechaAprobacion = StructuralObject.SetValidValue(value)
+                _FechaAprobacion = StructuralObject.SetValidValue(value, "FechaAprobacion")
                 ReportPropertyChanged("FechaAprobacion")
                 OnFechaAprobacionChanged()
             End Set
         End Property
-    
+
         Private _FechaAprobacion As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaAprobacionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaAprobacionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaAprobacionChanged()
+
+        Partial Private Sub OnFechaAprobacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property MontoParaCompra() As Nullable(Of Global.System.Decimal)
             Get
                 Return _MontoParaCompra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnMontoParaCompraChanging(value)
                 ReportPropertyChanging("MontoParaCompra")
-                _MontoParaCompra = StructuralObject.SetValidValue(value)
+                _MontoParaCompra = StructuralObject.SetValidValue(value, "MontoParaCompra")
                 ReportPropertyChanged("MontoParaCompra")
                 OnMontoParaCompraChanged()
             End Set
         End Property
-    
+
         Private _MontoParaCompra As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnMontoParaCompraChanging(value As Nullable(Of Global.System.Decimal))
+        Partial Private Sub OnMontoParaCompraChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
-    
-        Private Partial Sub OnMontoParaCompraChanged()
+
+        Partial Private Sub OnMontoParaCompraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Cumplido() As Global.System.String
             Get
                 Return _Cumplido
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCumplidoChanging(value)
                 ReportPropertyChanging("Cumplido")
-                _Cumplido = StructuralObject.SetValidValue(value, true)
+                _Cumplido = StructuralObject.SetValidValue(value, True, "Cumplido")
                 ReportPropertyChanged("Cumplido")
                 OnCumplidoChanged()
             End Set
         End Property
-    
+
         Private _Cumplido As Global.System.String
-        Private Partial Sub OnCumplidoChanging(value As Global.System.String)
+        Partial Private Sub OnCumplidoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCumplidoChanged()
+
+        Partial Private Sub OnCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Consorcial() As Global.System.String
             Get
                 Return _Consorcial
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnConsorcialChanging(value)
                 ReportPropertyChanging("Consorcial")
-                _Consorcial = StructuralObject.SetValidValue(value, true)
+                _Consorcial = StructuralObject.SetValidValue(value, True, "Consorcial")
                 ReportPropertyChanged("Consorcial")
                 OnConsorcialChanged()
             End Set
         End Property
-    
+
         Private _Consorcial As Global.System.String
-        Private Partial Sub OnConsorcialChanging(value As Global.System.String)
+        Partial Private Sub OnConsorcialChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnConsorcialChanged()
+
+        Partial Private Sub OnConsorcialChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property UsuarioAnulacion() As Global.System.String
             Get
                 Return _UsuarioAnulacion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnUsuarioAnulacionChanging(value)
                 ReportPropertyChanging("UsuarioAnulacion")
-                _UsuarioAnulacion = StructuralObject.SetValidValue(value, true)
+                _UsuarioAnulacion = StructuralObject.SetValidValue(value, True, "UsuarioAnulacion")
                 ReportPropertyChanged("UsuarioAnulacion")
                 OnUsuarioAnulacionChanged()
             End Set
         End Property
-    
+
         Private _UsuarioAnulacion As Global.System.String
-        Private Partial Sub OnUsuarioAnulacionChanging(value As Global.System.String)
+        Partial Private Sub OnUsuarioAnulacionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnUsuarioAnulacionChanged()
+
+        Partial Private Sub OnUsuarioAnulacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaAnulacion() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaAnulacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaAnulacionChanging(value)
                 ReportPropertyChanging("FechaAnulacion")
-                _FechaAnulacion = StructuralObject.SetValidValue(value)
+                _FechaAnulacion = StructuralObject.SetValidValue(value, "FechaAnulacion")
                 ReportPropertyChanged("FechaAnulacion")
                 OnFechaAnulacionChanged()
             End Set
         End Property
-    
+
         Private _FechaAnulacion As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaAnulacionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaAnulacionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaAnulacionChanged()
+
+        Partial Private Sub OnFechaAnulacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property MotivoAnulacion() As Global.System.String
             Get
                 Return _MotivoAnulacion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnMotivoAnulacionChanging(value)
                 ReportPropertyChanging("MotivoAnulacion")
-                _MotivoAnulacion = StructuralObject.SetValidValue(value, true)
+                _MotivoAnulacion = StructuralObject.SetValidValue(value, True, "MotivoAnulacion")
                 ReportPropertyChanged("MotivoAnulacion")
                 OnMotivoAnulacionChanged()
             End Set
         End Property
-    
+
         Private _MotivoAnulacion As Global.System.String
-        Private Partial Sub OnMotivoAnulacionChanging(value As Global.System.String)
+        Partial Private Sub OnMotivoAnulacionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnMotivoAnulacionChanged()
+
+        Partial Private Sub OnMotivoAnulacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EnviarEmail() As Nullable(Of Global.System.Byte)
             Get
                 Return _EnviarEmail
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnEnviarEmailChanging(value)
                 ReportPropertyChanging("EnviarEmail")
-                _EnviarEmail = StructuralObject.SetValidValue(value)
+                _EnviarEmail = StructuralObject.SetValidValue(value, "EnviarEmail")
                 ReportPropertyChanged("EnviarEmail")
                 OnEnviarEmailChanged()
             End Set
         End Property
-    
+
         Private _EnviarEmail As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
+        Partial Private Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
         End Sub
-    
-        Private Partial Sub OnEnviarEmailChanged()
+
+        Partial Private Sub OnEnviarEmailChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdRequerimientoOriginal() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdRequerimientoOriginal
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdRequerimientoOriginalChanging(value)
                 ReportPropertyChanging("IdRequerimientoOriginal")
-                _IdRequerimientoOriginal = StructuralObject.SetValidValue(value)
+                _IdRequerimientoOriginal = StructuralObject.SetValidValue(value, "IdRequerimientoOriginal")
                 ReportPropertyChanged("IdRequerimientoOriginal")
                 OnIdRequerimientoOriginalChanged()
             End Set
         End Property
-    
+
         Private _IdRequerimientoOriginal As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdRequerimientoOriginalChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdRequerimientoOriginalChanged()
+
+        Partial Private Sub OnIdRequerimientoOriginalChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdOrigenTransmision() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdOrigenTransmision
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdOrigenTransmisionChanging(value)
                 ReportPropertyChanging("IdOrigenTransmision")
-                _IdOrigenTransmision = StructuralObject.SetValidValue(value)
+                _IdOrigenTransmision = StructuralObject.SetValidValue(value, "IdOrigenTransmision")
                 ReportPropertyChanged("IdOrigenTransmision")
                 OnIdOrigenTransmisionChanged()
             End Set
         End Property
-    
+
         Private _IdOrigenTransmision As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdOrigenTransmisionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdOrigenTransmisionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdOrigenTransmisionChanged()
+
+        Partial Private Sub OnIdOrigenTransmisionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdAutorizoCumplido() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdAutorizoCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdAutorizoCumplidoChanging(value)
                 ReportPropertyChanging("IdAutorizoCumplido")
-                _IdAutorizoCumplido = StructuralObject.SetValidValue(value)
+                _IdAutorizoCumplido = StructuralObject.SetValidValue(value, "IdAutorizoCumplido")
                 ReportPropertyChanged("IdAutorizoCumplido")
                 OnIdAutorizoCumplidoChanged()
             End Set
         End Property
-    
+
         Private _IdAutorizoCumplido As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdAutorizoCumplidoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdAutorizoCumplidoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdAutorizoCumplidoChanged()
+
+        Partial Private Sub OnIdAutorizoCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdDioPorCumplido() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdDioPorCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdDioPorCumplidoChanging(value)
                 ReportPropertyChanging("IdDioPorCumplido")
-                _IdDioPorCumplido = StructuralObject.SetValidValue(value)
+                _IdDioPorCumplido = StructuralObject.SetValidValue(value, "IdDioPorCumplido")
                 ReportPropertyChanged("IdDioPorCumplido")
                 OnIdDioPorCumplidoChanged()
             End Set
         End Property
-    
+
         Private _IdDioPorCumplido As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdDioPorCumplidoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdDioPorCumplidoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdDioPorCumplidoChanged()
+
+        Partial Private Sub OnIdDioPorCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaDadoPorCumplido() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaDadoPorCumplido
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaDadoPorCumplidoChanging(value)
                 ReportPropertyChanging("FechaDadoPorCumplido")
-                _FechaDadoPorCumplido = StructuralObject.SetValidValue(value)
+                _FechaDadoPorCumplido = StructuralObject.SetValidValue(value, "FechaDadoPorCumplido")
                 ReportPropertyChanged("FechaDadoPorCumplido")
                 OnFechaDadoPorCumplidoChanged()
             End Set
         End Property
-    
+
         Private _FechaDadoPorCumplido As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaDadoPorCumplidoChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaDadoPorCumplidoChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaDadoPorCumplidoChanged()
+
+        Partial Private Sub OnFechaDadoPorCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ObservacionesCumplido() As Global.System.String
             Get
                 Return _ObservacionesCumplido
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnObservacionesCumplidoChanging(value)
                 ReportPropertyChanging("ObservacionesCumplido")
-                _ObservacionesCumplido = StructuralObject.SetValidValue(value, true)
+                _ObservacionesCumplido = StructuralObject.SetValidValue(value, True, "ObservacionesCumplido")
                 ReportPropertyChanged("ObservacionesCumplido")
                 OnObservacionesCumplidoChanged()
             End Set
         End Property
-    
+
         Private _ObservacionesCumplido As Global.System.String
-        Private Partial Sub OnObservacionesCumplidoChanging(value As Global.System.String)
+        Partial Private Sub OnObservacionesCumplidoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnObservacionesCumplidoChanged()
+
+        Partial Private Sub OnObservacionesCumplidoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdMoneda() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdMoneda
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdMonedaChanging(value)
                 ReportPropertyChanging("IdMoneda")
-                _IdMoneda = StructuralObject.SetValidValue(value)
+                _IdMoneda = StructuralObject.SetValidValue(value, "IdMoneda")
                 ReportPropertyChanged("IdMoneda")
                 OnIdMonedaChanged()
             End Set
         End Property
-    
+
         Private _IdMoneda As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdMonedaChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdMonedaChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdMonedaChanged()
+
+        Partial Private Sub OnIdMonedaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Detalle() As Global.System.String
             Get
                 Return _Detalle
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDetalleChanging(value)
                 ReportPropertyChanging("Detalle")
-                _Detalle = StructuralObject.SetValidValue(value, true)
+                _Detalle = StructuralObject.SetValidValue(value, True, "Detalle")
                 ReportPropertyChanged("Detalle")
                 OnDetalleChanged()
             End Set
         End Property
-    
+
         Private _Detalle As Global.System.String
-        Private Partial Sub OnDetalleChanging(value As Global.System.String)
+        Partial Private Sub OnDetalleChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDetalleChanged()
+
+        Partial Private Sub OnDetalleChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property DirectoACompras() As Global.System.String
             Get
                 Return _DirectoACompras
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDirectoAComprasChanging(value)
                 ReportPropertyChanging("DirectoACompras")
-                _DirectoACompras = StructuralObject.SetValidValue(value, true)
+                _DirectoACompras = StructuralObject.SetValidValue(value, True, "DirectoACompras")
                 ReportPropertyChanged("DirectoACompras")
                 OnDirectoAComprasChanged()
             End Set
         End Property
-    
+
         Private _DirectoACompras As Global.System.String
-        Private Partial Sub OnDirectoAComprasChanging(value As Global.System.String)
+        Partial Private Sub OnDirectoAComprasChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDirectoAComprasChanged()
+
+        Partial Private Sub OnDirectoAComprasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdAutorizoDirectoACompras() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdAutorizoDirectoACompras
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdAutorizoDirectoAComprasChanging(value)
                 ReportPropertyChanging("IdAutorizoDirectoACompras")
-                _IdAutorizoDirectoACompras = StructuralObject.SetValidValue(value)
+                _IdAutorizoDirectoACompras = StructuralObject.SetValidValue(value, "IdAutorizoDirectoACompras")
                 ReportPropertyChanged("IdAutorizoDirectoACompras")
                 OnIdAutorizoDirectoAComprasChanged()
             End Set
         End Property
-    
+
         Private _IdAutorizoDirectoACompras As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdAutorizoDirectoAComprasChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdAutorizoDirectoAComprasChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdAutorizoDirectoAComprasChanged()
+
+        Partial Private Sub OnIdAutorizoDirectoAComprasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property PRESTOContrato() As Global.System.String
             Get
                 Return _PRESTOContrato
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnPRESTOContratoChanging(value)
                 ReportPropertyChanging("PRESTOContrato")
-                _PRESTOContrato = StructuralObject.SetValidValue(value, true)
+                _PRESTOContrato = StructuralObject.SetValidValue(value, True, "PRESTOContrato")
                 ReportPropertyChanged("PRESTOContrato")
                 OnPRESTOContratoChanged()
             End Set
         End Property
-    
+
         Private _PRESTOContrato As Global.System.String
-        Private Partial Sub OnPRESTOContratoChanging(value As Global.System.String)
+        Partial Private Sub OnPRESTOContratoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnPRESTOContratoChanged()
+
+        Partial Private Sub OnPRESTOContratoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Confirmado() As Global.System.String
             Get
                 Return _Confirmado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnConfirmadoChanging(value)
                 ReportPropertyChanging("Confirmado")
-                _Confirmado = StructuralObject.SetValidValue(value, true)
+                _Confirmado = StructuralObject.SetValidValue(value, True, "Confirmado")
                 ReportPropertyChanged("Confirmado")
                 OnConfirmadoChanged()
             End Set
         End Property
-    
+
         Private _Confirmado As Global.System.String
-        Private Partial Sub OnConfirmadoChanging(value As Global.System.String)
+        Partial Private Sub OnConfirmadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnConfirmadoChanged()
+
+        Partial Private Sub OnConfirmadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaImportacionTransmision() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaImportacionTransmision
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaImportacionTransmisionChanging(value)
                 ReportPropertyChanging("FechaImportacionTransmision")
-                _FechaImportacionTransmision = StructuralObject.SetValidValue(value)
+                _FechaImportacionTransmision = StructuralObject.SetValidValue(value, "FechaImportacionTransmision")
                 ReportPropertyChanged("FechaImportacionTransmision")
                 OnFechaImportacionTransmisionChanged()
             End Set
         End Property
-    
+
         Private _FechaImportacionTransmision As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaImportacionTransmisionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaImportacionTransmisionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaImportacionTransmisionChanged()
+
+        Partial Private Sub OnFechaImportacionTransmisionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdEquipoDestino() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdEquipoDestino
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdEquipoDestinoChanging(value)
                 ReportPropertyChanging("IdEquipoDestino")
-                _IdEquipoDestino = StructuralObject.SetValidValue(value)
+                _IdEquipoDestino = StructuralObject.SetValidValue(value, "IdEquipoDestino")
                 ReportPropertyChanged("IdEquipoDestino")
                 OnIdEquipoDestinoChanged()
             End Set
         End Property
-    
+
         Private _IdEquipoDestino As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdEquipoDestinoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdEquipoDestinoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdEquipoDestinoChanged()
+
+        Partial Private Sub OnIdEquipoDestinoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Impresa() As Global.System.String
             Get
                 Return _Impresa
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnImpresaChanging(value)
                 ReportPropertyChanging("Impresa")
-                _Impresa = StructuralObject.SetValidValue(value, true)
+                _Impresa = StructuralObject.SetValidValue(value, True, "Impresa")
                 ReportPropertyChanged("Impresa")
                 OnImpresaChanged()
             End Set
         End Property
-    
+
         Private _Impresa As Global.System.String
-        Private Partial Sub OnImpresaChanging(value As Global.System.String)
+        Partial Private Sub OnImpresaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnImpresaChanged()
+
+        Partial Private Sub OnImpresaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Recepcionado() As Global.System.String
             Get
                 Return _Recepcionado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnRecepcionadoChanging(value)
                 ReportPropertyChanging("Recepcionado")
-                _Recepcionado = StructuralObject.SetValidValue(value, true)
+                _Recepcionado = StructuralObject.SetValidValue(value, True, "Recepcionado")
                 ReportPropertyChanged("Recepcionado")
                 OnRecepcionadoChanged()
             End Set
         End Property
-    
+
         Private _Recepcionado As Global.System.String
-        Private Partial Sub OnRecepcionadoChanging(value As Global.System.String)
+        Partial Private Sub OnRecepcionadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnRecepcionadoChanged()
+
+        Partial Private Sub OnRecepcionadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Entregado() As Global.System.String
             Get
                 Return _Entregado
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnEntregadoChanging(value)
                 ReportPropertyChanging("Entregado")
-                _Entregado = StructuralObject.SetValidValue(value, true)
+                _Entregado = StructuralObject.SetValidValue(value, True, "Entregado")
                 ReportPropertyChanged("Entregado")
                 OnEntregadoChanged()
             End Set
         End Property
-    
+
         Private _Entregado As Global.System.String
-        Private Partial Sub OnEntregadoChanging(value As Global.System.String)
+        Partial Private Sub OnEntregadoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnEntregadoChanged()
+
+        Partial Private Sub OnEntregadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property TipoRequerimiento() As Global.System.String
             Get
                 Return _TipoRequerimiento
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnTipoRequerimientoChanging(value)
                 ReportPropertyChanging("TipoRequerimiento")
-                _TipoRequerimiento = StructuralObject.SetValidValue(value, true)
+                _TipoRequerimiento = StructuralObject.SetValidValue(value, True, "TipoRequerimiento")
                 ReportPropertyChanged("TipoRequerimiento")
                 OnTipoRequerimientoChanged()
             End Set
         End Property
-    
+
         Private _TipoRequerimiento As Global.System.String
-        Private Partial Sub OnTipoRequerimientoChanging(value As Global.System.String)
+        Partial Private Sub OnTipoRequerimientoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnTipoRequerimientoChanged()
+
+        Partial Private Sub OnTipoRequerimientoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdOrdenTrabajo() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdOrdenTrabajo
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdOrdenTrabajoChanging(value)
                 ReportPropertyChanging("IdOrdenTrabajo")
-                _IdOrdenTrabajo = StructuralObject.SetValidValue(value)
+                _IdOrdenTrabajo = StructuralObject.SetValidValue(value, "IdOrdenTrabajo")
                 ReportPropertyChanged("IdOrdenTrabajo")
                 OnIdOrdenTrabajoChanged()
             End Set
         End Property
-    
+
         Private _IdOrdenTrabajo As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdOrdenTrabajoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdOrdenTrabajoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdOrdenTrabajoChanged()
+
+        Partial Private Sub OnIdOrdenTrabajoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Aprobo2() As Nullable(Of Global.System.Int32)
             Get
                 Return _Aprobo2
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnAprobo2Changing(value)
                 ReportPropertyChanging("Aprobo2")
-                _Aprobo2 = StructuralObject.SetValidValue(value)
+                _Aprobo2 = StructuralObject.SetValidValue(value, "Aprobo2")
                 ReportPropertyChanged("Aprobo2")
                 OnAprobo2Changed()
             End Set
         End Property
-    
+
         Private _Aprobo2 As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnAprobo2Changing(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnAprobo2Changing(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnAprobo2Changed()
+
+        Partial Private Sub OnAprobo2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaAprobacion2() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaAprobacion2
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaAprobacion2Changing(value)
                 ReportPropertyChanging("FechaAprobacion2")
-                _FechaAprobacion2 = StructuralObject.SetValidValue(value)
+                _FechaAprobacion2 = StructuralObject.SetValidValue(value, "FechaAprobacion2")
                 ReportPropertyChanged("FechaAprobacion2")
                 OnFechaAprobacion2Changed()
             End Set
         End Property
-    
+
         Private _FechaAprobacion2 As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaAprobacion2Changing(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaAprobacion2Changing(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaAprobacion2Changed()
+
+        Partial Private Sub OnFechaAprobacion2Changed()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdTipoCompra() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdTipoCompra
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdTipoCompraChanging(value)
                 ReportPropertyChanging("IdTipoCompra")
-                _IdTipoCompra = StructuralObject.SetValidValue(value)
+                _IdTipoCompra = StructuralObject.SetValidValue(value, "IdTipoCompra")
                 ReportPropertyChanged("IdTipoCompra")
                 OnIdTipoCompraChanged()
             End Set
         End Property
-    
+
         Private _IdTipoCompra As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdTipoCompraChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdTipoCompraChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdTipoCompraChanged()
+
+        Partial Private Sub OnIdTipoCompraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdImporto() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdImporto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdImportoChanging(value)
                 ReportPropertyChanging("IdImporto")
-                _IdImporto = StructuralObject.SetValidValue(value)
+                _IdImporto = StructuralObject.SetValidValue(value, "IdImporto")
                 ReportPropertyChanged("IdImporto")
                 OnIdImportoChanged()
             End Set
         End Property
-    
+
         Private _IdImporto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdImportoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdImportoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdImportoChanged()
+
+        Partial Private Sub OnIdImportoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaLlegadaImportacion() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaLlegadaImportacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaLlegadaImportacionChanging(value)
                 ReportPropertyChanging("FechaLlegadaImportacion")
-                _FechaLlegadaImportacion = StructuralObject.SetValidValue(value)
+                _FechaLlegadaImportacion = StructuralObject.SetValidValue(value, "FechaLlegadaImportacion")
                 ReportPropertyChanged("FechaLlegadaImportacion")
                 OnFechaLlegadaImportacionChanged()
             End Set
         End Property
-    
+
         Private _FechaLlegadaImportacion As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaLlegadaImportacionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaLlegadaImportacionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaLlegadaImportacionChanged()
+
+        Partial Private Sub OnFechaLlegadaImportacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CircuitoFirmasCompleto() As Global.System.String
             Get
                 Return _CircuitoFirmasCompleto
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCircuitoFirmasCompletoChanging(value)
                 ReportPropertyChanging("CircuitoFirmasCompleto")
-                _CircuitoFirmasCompleto = StructuralObject.SetValidValue(value, true)
+                _CircuitoFirmasCompleto = StructuralObject.SetValidValue(value, True, "CircuitoFirmasCompleto")
                 ReportPropertyChanged("CircuitoFirmasCompleto")
                 OnCircuitoFirmasCompletoChanged()
             End Set
         End Property
-    
+
         Private _CircuitoFirmasCompleto As Global.System.String
-        Private Partial Sub OnCircuitoFirmasCompletoChanging(value As Global.System.String)
+        Partial Private Sub OnCircuitoFirmasCompletoChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCircuitoFirmasCompletoChanged()
+
+        Partial Private Sub OnCircuitoFirmasCompletoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdCuentaPresupuesto() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdCuentaPresupuesto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdCuentaPresupuestoChanging(value)
                 ReportPropertyChanging("IdCuentaPresupuesto")
-                _IdCuentaPresupuesto = StructuralObject.SetValidValue(value)
+                _IdCuentaPresupuesto = StructuralObject.SetValidValue(value, "IdCuentaPresupuesto")
                 ReportPropertyChanged("IdCuentaPresupuesto")
                 OnIdCuentaPresupuestoChanged()
             End Set
         End Property
-    
+
         Private _IdCuentaPresupuesto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdCuentaPresupuestoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdCuentaPresupuestoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdCuentaPresupuestoChanged()
+
+        Partial Private Sub OnIdCuentaPresupuestoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property MesPresupuesto() As Nullable(Of Global.System.Int32)
             Get
                 Return _MesPresupuesto
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnMesPresupuestoChanging(value)
                 ReportPropertyChanging("MesPresupuesto")
-                _MesPresupuesto = StructuralObject.SetValidValue(value)
+                _MesPresupuesto = StructuralObject.SetValidValue(value, "MesPresupuesto")
                 ReportPropertyChanged("MesPresupuesto")
                 OnMesPresupuestoChanged()
             End Set
         End Property
-    
+
         Private _MesPresupuesto As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnMesPresupuestoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnMesPresupuestoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnMesPresupuestoChanged()
+
+        Partial Private Sub OnMesPresupuestoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property RequisitosSeguridad() As Global.System.String
             Get
                 Return _RequisitosSeguridad
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnRequisitosSeguridadChanging(value)
                 ReportPropertyChanging("RequisitosSeguridad")
-                _RequisitosSeguridad = StructuralObject.SetValidValue(value, true)
+                _RequisitosSeguridad = StructuralObject.SetValidValue(value, True, "RequisitosSeguridad")
                 ReportPropertyChanged("RequisitosSeguridad")
                 OnRequisitosSeguridadChanged()
             End Set
         End Property
-    
+
         Private _RequisitosSeguridad As Global.System.String
-        Private Partial Sub OnRequisitosSeguridadChanging(value As Global.System.String)
+        Partial Private Sub OnRequisitosSeguridadChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnRequisitosSeguridadChanged()
+
+        Partial Private Sub OnRequisitosSeguridadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Adjuntos() As Global.System.String
             Get
                 Return _Adjuntos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAdjuntosChanging(value)
                 ReportPropertyChanging("Adjuntos")
-                _Adjuntos = StructuralObject.SetValidValue(value, true)
+                _Adjuntos = StructuralObject.SetValidValue(value, True, "Adjuntos")
                 ReportPropertyChanged("Adjuntos")
                 OnAdjuntosChanged()
             End Set
         End Property
-    
+
         Private _Adjuntos As Global.System.String
-        Private Partial Sub OnAdjuntosChanging(value As Global.System.String)
+        Partial Private Sub OnAdjuntosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAdjuntosChanged()
+
+        Partial Private Sub OnAdjuntosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ConfirmadoPorWeb() As Global.System.String
             Get
                 Return _ConfirmadoPorWeb
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnConfirmadoPorWebChanging(value)
                 ReportPropertyChanging("ConfirmadoPorWeb")
-                _ConfirmadoPorWeb = StructuralObject.SetValidValue(value, true)
+                _ConfirmadoPorWeb = StructuralObject.SetValidValue(value, True, "ConfirmadoPorWeb")
                 ReportPropertyChanged("ConfirmadoPorWeb")
                 OnConfirmadoPorWebChanged()
             End Set
         End Property
-    
+
         Private _ConfirmadoPorWeb As Global.System.String
-        Private Partial Sub OnConfirmadoPorWebChanging(value As Global.System.String)
+        Partial Private Sub OnConfirmadoPorWebChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnConfirmadoPorWebChanged()
+
+        Partial Private Sub OnConfirmadoPorWebChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property DetalleImputacion() As Global.System.String
             Get
                 Return _DetalleImputacion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDetalleImputacionChanging(value)
                 ReportPropertyChanging("DetalleImputacion")
-                _DetalleImputacion = StructuralObject.SetValidValue(value, true)
+                _DetalleImputacion = StructuralObject.SetValidValue(value, True, "DetalleImputacion")
                 ReportPropertyChanged("DetalleImputacion")
                 OnDetalleImputacionChanged()
             End Set
         End Property
-    
+
         Private _DetalleImputacion As Global.System.String
-        Private Partial Sub OnDetalleImputacionChanging(value As Global.System.String)
+        Partial Private Sub OnDetalleImputacionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDetalleImputacionChanged()
+
+        Partial Private Sub OnDetalleImputacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUsuarioDeslibero() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUsuarioDeslibero
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUsuarioDesliberoChanging(value)
                 ReportPropertyChanging("IdUsuarioDeslibero")
-                _IdUsuarioDeslibero = StructuralObject.SetValidValue(value)
+                _IdUsuarioDeslibero = StructuralObject.SetValidValue(value, "IdUsuarioDeslibero")
                 ReportPropertyChanged("IdUsuarioDeslibero")
                 OnIdUsuarioDesliberoChanged()
             End Set
         End Property
-    
+
         Private _IdUsuarioDeslibero As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUsuarioDesliberoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUsuarioDesliberoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUsuarioDesliberoChanged()
+
+        Partial Private Sub OnIdUsuarioDesliberoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaDesliberacion() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaDesliberacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaDesliberacionChanging(value)
                 ReportPropertyChanging("FechaDesliberacion")
-                _FechaDesliberacion = StructuralObject.SetValidValue(value)
+                _FechaDesliberacion = StructuralObject.SetValidValue(value, "FechaDesliberacion")
                 ReportPropertyChanged("FechaDesliberacion")
                 OnFechaDesliberacionChanged()
             End Set
         End Property
-    
+
         Private _FechaDesliberacion As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaDesliberacionChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaDesliberacionChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaDesliberacionChanged()
+
+        Partial Private Sub OnFechaDesliberacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeradorDesliberaciones() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeradorDesliberaciones
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeradorDesliberacionesChanging(value)
                 ReportPropertyChanging("NumeradorDesliberaciones")
-                _NumeradorDesliberaciones = StructuralObject.SetValidValue(value)
+                _NumeradorDesliberaciones = StructuralObject.SetValidValue(value, "NumeradorDesliberaciones")
                 ReportPropertyChanged("NumeradorDesliberaciones")
                 OnNumeradorDesliberacionesChanged()
             End Set
         End Property
-    
+
         Private _NumeradorDesliberaciones As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeradorDesliberacionesChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeradorDesliberacionesChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeradorDesliberacionesChanged()
+
+        Partial Private Sub OnNumeradorDesliberacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdUsuarioEliminoFirmas() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdUsuarioEliminoFirmas
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdUsuarioEliminoFirmasChanging(value)
                 ReportPropertyChanging("IdUsuarioEliminoFirmas")
-                _IdUsuarioEliminoFirmas = StructuralObject.SetValidValue(value)
+                _IdUsuarioEliminoFirmas = StructuralObject.SetValidValue(value, "IdUsuarioEliminoFirmas")
                 ReportPropertyChanged("IdUsuarioEliminoFirmas")
                 OnIdUsuarioEliminoFirmasChanged()
             End Set
         End Property
-    
+
         Private _IdUsuarioEliminoFirmas As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdUsuarioEliminoFirmasChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdUsuarioEliminoFirmasChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdUsuarioEliminoFirmasChanged()
+
+        Partial Private Sub OnIdUsuarioEliminoFirmasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property FechaEliminacionFirmas() As Nullable(Of Global.System.DateTime)
             Get
                 Return _FechaEliminacionFirmas
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.DateTime))
                 OnFechaEliminacionFirmasChanging(value)
                 ReportPropertyChanging("FechaEliminacionFirmas")
-                _FechaEliminacionFirmas = StructuralObject.SetValidValue(value)
+                _FechaEliminacionFirmas = StructuralObject.SetValidValue(value, "FechaEliminacionFirmas")
                 ReportPropertyChanged("FechaEliminacionFirmas")
                 OnFechaEliminacionFirmasChanged()
             End Set
         End Property
-    
+
         Private _FechaEliminacionFirmas As Nullable(Of Global.System.DateTime)
-        Private Partial Sub OnFechaEliminacionFirmasChanging(value As Nullable(Of Global.System.DateTime))
+        Partial Private Sub OnFechaEliminacionFirmasChanging(value As Nullable(Of Global.System.DateTime))
         End Sub
-    
-        Private Partial Sub OnFechaEliminacionFirmasChanged()
+
+        Partial Private Sub OnFechaEliminacionFirmasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeradorEliminacionesFirmas() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeradorEliminacionesFirmas
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeradorEliminacionesFirmasChanging(value)
                 ReportPropertyChanging("NumeradorEliminacionesFirmas")
-                _NumeradorEliminacionesFirmas = StructuralObject.SetValidValue(value)
+                _NumeradorEliminacionesFirmas = StructuralObject.SetValidValue(value, "NumeradorEliminacionesFirmas")
                 ReportPropertyChanged("NumeradorEliminacionesFirmas")
                 OnNumeradorEliminacionesFirmasChanged()
             End Set
         End Property
-    
+
         Private _NumeradorEliminacionesFirmas As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeradorEliminacionesFirmasChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeradorEliminacionesFirmasChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeradorEliminacionesFirmasChanged()
+
+        Partial Private Sub OnNumeradorEliminacionesFirmasChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property NumeradorModificaciones() As Nullable(Of Global.System.Int32)
             Get
                 Return _NumeradorModificaciones
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnNumeradorModificacionesChanging(value)
                 ReportPropertyChanging("NumeradorModificaciones")
-                _NumeradorModificaciones = StructuralObject.SetValidValue(value)
+                _NumeradorModificaciones = StructuralObject.SetValidValue(value, "NumeradorModificaciones")
                 ReportPropertyChanged("NumeradorModificaciones")
                 OnNumeradorModificacionesChanged()
             End Set
         End Property
-    
+
         Private _NumeradorModificaciones As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnNumeradorModificacionesChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnNumeradorModificacionesChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnNumeradorModificacionesChanged()
+
+        Partial Private Sub OnNumeradorModificacionesChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property ParaTaller() As Global.System.String
             Get
                 Return _ParaTaller
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnParaTallerChanging(value)
                 ReportPropertyChanging("ParaTaller")
-                _ParaTaller = StructuralObject.SetValidValue(value, true)
+                _ParaTaller = StructuralObject.SetValidValue(value, True, "ParaTaller")
                 ReportPropertyChanged("ParaTaller")
                 OnParaTallerChanged()
             End Set
         End Property
-    
+
         Private _ParaTaller As Global.System.String
-        Private Partial Sub OnParaTallerChanging(value As Global.System.String)
-        End Sub
-    
-        Private Partial Sub OnParaTallerChanged()
+        Partial Private Sub OnParaTallerChanging(value As Global.System.String)
         End Sub
 
-        #End Region
+        Partial Private Sub OnParaTallerChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="Sectores")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class Sectores
+    Partial Public Class Sectores
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new Sectores object.
         ''' </summary>
         ''' <param name="idSector">Initial value of the IdSector property.</param>
         Public Shared Function CreateSectores(idSector As Global.System.Int32) As Sectores
-            Dim sectores as Sectores = New Sectores
+            Dim sectores As Sectores = New Sectores
             sectores.IdSector = idSector
             Return sectores
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdSector() As Global.System.Int32
             Get
                 Return _IdSector
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdSector <> Value) Then
                     OnIdSectorChanging(value)
                     ReportPropertyChanging("IdSector")
-                    _IdSector = StructuralObject.SetValidValue(value)
+                    _IdSector = StructuralObject.SetValidValue(value, "IdSector")
                     ReportPropertyChanged("IdSector")
                     OnIdSectorChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdSector As Global.System.Int32
-        Private Partial Sub OnIdSectorChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdSectorChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdSectorChanged()
+
+        Partial Private Sub OnIdSectorChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Descripcion() As Global.System.String
             Get
                 Return _Descripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDescripcionChanging(value)
                 ReportPropertyChanging("Descripcion")
-                _Descripcion = StructuralObject.SetValidValue(value, true)
+                _Descripcion = StructuralObject.SetValidValue(value, True, "Descripcion")
                 ReportPropertyChanged("Descripcion")
                 OnDescripcionChanged()
             End Set
         End Property
-    
+
         Private _Descripcion As Global.System.String
-        Private Partial Sub OnDescripcionChanging(value As Global.System.String)
+        Partial Private Sub OnDescripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDescripcionChanged()
+
+        Partial Private Sub OnDescripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SectorDeObra() As Global.System.String
             Get
                 Return _SectorDeObra
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSectorDeObraChanging(value)
                 ReportPropertyChanging("SectorDeObra")
-                _SectorDeObra = StructuralObject.SetValidValue(value, true)
+                _SectorDeObra = StructuralObject.SetValidValue(value, True, "SectorDeObra")
                 ReportPropertyChanged("SectorDeObra")
                 OnSectorDeObraChanged()
             End Set
         End Property
-    
+
         Private _SectorDeObra As Global.System.String
-        Private Partial Sub OnSectorDeObraChanging(value As Global.System.String)
+        Partial Private Sub OnSectorDeObraChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSectorDeObraChanged()
+
+        Partial Private Sub OnSectorDeObraChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property IdEncargado() As Nullable(Of Global.System.Int32)
             Get
                 Return _IdEncargado
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnIdEncargadoChanging(value)
                 ReportPropertyChanging("IdEncargado")
-                _IdEncargado = StructuralObject.SetValidValue(value)
+                _IdEncargado = StructuralObject.SetValidValue(value, "IdEncargado")
                 ReportPropertyChanged("IdEncargado")
                 OnIdEncargadoChanged()
             End Set
         End Property
-    
+
         Private _IdEncargado As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnIdEncargadoChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnIdEncargadoChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnIdEncargadoChanged()
+
+        Partial Private Sub OnIdEncargadoChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property SeUsaEnPresupuestos() As Global.System.String
             Get
                 Return _SeUsaEnPresupuestos
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnSeUsaEnPresupuestosChanging(value)
                 ReportPropertyChanging("SeUsaEnPresupuestos")
-                _SeUsaEnPresupuestos = StructuralObject.SetValidValue(value, true)
+                _SeUsaEnPresupuestos = StructuralObject.SetValidValue(value, True, "SeUsaEnPresupuestos")
                 ReportPropertyChanged("SeUsaEnPresupuestos")
                 OnSeUsaEnPresupuestosChanged()
             End Set
         End Property
-    
+
         Private _SeUsaEnPresupuestos As Global.System.String
-        Private Partial Sub OnSeUsaEnPresupuestosChanging(value As Global.System.String)
+        Partial Private Sub OnSeUsaEnPresupuestosChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnSeUsaEnPresupuestosChanged()
+
+        Partial Private Sub OnSeUsaEnPresupuestosChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property OrdenPresentacion() As Nullable(Of Global.System.Int32)
             Get
                 Return _OrdenPresentacion
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnOrdenPresentacionChanging(value)
                 ReportPropertyChanging("OrdenPresentacion")
-                _OrdenPresentacion = StructuralObject.SetValidValue(value)
+                _OrdenPresentacion = StructuralObject.SetValidValue(value, "OrdenPresentacion")
                 ReportPropertyChanged("OrdenPresentacion")
                 OnOrdenPresentacionChanged()
             End Set
         End Property
-    
+
         Private _OrdenPresentacion As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnOrdenPresentacionChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnOrdenPresentacionChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnOrdenPresentacionChanged()
+
+        Partial Private Sub OnOrdenPresentacionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property EnviarEmail() As Nullable(Of Global.System.Byte)
             Get
                 Return _EnviarEmail
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Byte))
                 OnEnviarEmailChanging(value)
                 ReportPropertyChanging("EnviarEmail")
-                _EnviarEmail = StructuralObject.SetValidValue(value)
+                _EnviarEmail = StructuralObject.SetValidValue(value, "EnviarEmail")
                 ReportPropertyChanged("EnviarEmail")
                 OnEnviarEmailChanged()
             End Set
         End Property
-    
+
         Private _EnviarEmail As Nullable(Of Global.System.Byte)
-        Private Partial Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
-        End Sub
-    
-        Private Partial Sub OnEnviarEmailChanged()
+        Partial Private Sub OnEnviarEmailChanging(value As Nullable(Of Global.System.Byte))
         End Sub
 
-        #End Region
+        Partial Private Sub OnEnviarEmailChanged()
+        End Sub
+
+#End Region
 
     End Class
-    
+
     ''' <summary>
     ''' No Metadata Documentation available.
     ''' </summary>
     <EdmEntityTypeAttribute(NamespaceName:="wDemoWilliamsModel", Name:="Unidades")>
     <Serializable()>
     <DataContractAttribute(IsReference:=True)>
-    Public Partial Class Unidades
+    Partial Public Class Unidades
         Inherits EntityObject
-        #Region "Factory Method"
-    
+#Region "Factory Method"
+
         ''' <summary>
         ''' Create a new Unidades object.
         ''' </summary>
         ''' <param name="idUnidad">Initial value of the IdUnidad property.</param>
         Public Shared Function CreateUnidades(idUnidad As Global.System.Int32) As Unidades
-            Dim unidades as Unidades = New Unidades
+            Dim unidades As Unidades = New Unidades
             unidades.IdUnidad = idUnidad
             Return unidades
         End Function
 
-        #End Region
+#End Region
 
-        #Region "Primitive Properties"
-    
+#Region "Simple Properties"
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=True, IsNullable:=False)>
         <DataMemberAttribute()>
         Public Property IdUnidad() As Global.System.Int32
             Get
                 Return _IdUnidad
             End Get
-            Set
+            Set(value As Global.System.Int32)
                 If (_IdUnidad <> Value) Then
                     OnIdUnidadChanging(value)
                     ReportPropertyChanging("IdUnidad")
-                    _IdUnidad = StructuralObject.SetValidValue(value)
+                    _IdUnidad = StructuralObject.SetValidValue(value, "IdUnidad")
                     ReportPropertyChanged("IdUnidad")
                     OnIdUnidadChanged()
                 End If
             End Set
         End Property
-    
+
         Private _IdUnidad As Global.System.Int32
-        Private Partial Sub OnIdUnidadChanging(value As Global.System.Int32)
+        Partial Private Sub OnIdUnidadChanging(value As Global.System.Int32)
         End Sub
-    
-        Private Partial Sub OnIdUnidadChanged()
+
+        Partial Private Sub OnIdUnidadChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Descripcion() As Global.System.String
             Get
                 Return _Descripcion
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnDescripcionChanging(value)
                 ReportPropertyChanging("Descripcion")
-                _Descripcion = StructuralObject.SetValidValue(value, true)
+                _Descripcion = StructuralObject.SetValidValue(value, True, "Descripcion")
                 ReportPropertyChanged("Descripcion")
                 OnDescripcionChanged()
             End Set
         End Property
-    
+
         Private _Descripcion As Global.System.String
-        Private Partial Sub OnDescripcionChanging(value As Global.System.String)
+        Partial Private Sub OnDescripcionChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnDescripcionChanged()
+
+        Partial Private Sub OnDescripcionChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property Abreviatura() As Global.System.String
             Get
                 Return _Abreviatura
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnAbreviaturaChanging(value)
                 ReportPropertyChanging("Abreviatura")
-                _Abreviatura = StructuralObject.SetValidValue(value, true)
+                _Abreviatura = StructuralObject.SetValidValue(value, True, "Abreviatura")
                 ReportPropertyChanged("Abreviatura")
                 OnAbreviaturaChanged()
             End Set
         End Property
-    
+
         Private _Abreviatura As Global.System.String
-        Private Partial Sub OnAbreviaturaChanging(value As Global.System.String)
+        Partial Private Sub OnAbreviaturaChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnAbreviaturaChanged()
+
+        Partial Private Sub OnAbreviaturaChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property CodigoAFIP() As Global.System.String
             Get
                 Return _CodigoAFIP
             End Get
-            Set
+            Set(value As Global.System.String)
                 OnCodigoAFIPChanging(value)
                 ReportPropertyChanging("CodigoAFIP")
-                _CodigoAFIP = StructuralObject.SetValidValue(value, true)
+                _CodigoAFIP = StructuralObject.SetValidValue(value, True, "CodigoAFIP")
                 ReportPropertyChanged("CodigoAFIP")
                 OnCodigoAFIPChanged()
             End Set
         End Property
-    
+
         Private _CodigoAFIP As Global.System.String
-        Private Partial Sub OnCodigoAFIPChanging(value As Global.System.String)
+        Partial Private Sub OnCodigoAFIPChanging(value As Global.System.String)
         End Sub
-    
-        Private Partial Sub OnCodigoAFIPChanged()
+
+        Partial Private Sub OnCodigoAFIPChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property UnidadesPorPack() As Nullable(Of Global.System.Int32)
             Get
                 Return _UnidadesPorPack
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Int32))
                 OnUnidadesPorPackChanging(value)
                 ReportPropertyChanging("UnidadesPorPack")
-                _UnidadesPorPack = StructuralObject.SetValidValue(value)
+                _UnidadesPorPack = StructuralObject.SetValidValue(value, "UnidadesPorPack")
                 ReportPropertyChanged("UnidadesPorPack")
                 OnUnidadesPorPackChanged()
             End Set
         End Property
-    
+
         Private _UnidadesPorPack As Nullable(Of Global.System.Int32)
-        Private Partial Sub OnUnidadesPorPackChanging(value As Nullable(Of Global.System.Int32))
+        Partial Private Sub OnUnidadesPorPackChanging(value As Nullable(Of Global.System.Int32))
         End Sub
-    
-        Private Partial Sub OnUnidadesPorPackChanged()
+
+        Partial Private Sub OnUnidadesPorPackChanged()
         End Sub
-    
+
         ''' <summary>
         ''' No Metadata Documentation available.
         ''' </summary>
-        <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+        <EdmScalarPropertyAttribute(EntityKeyProperty:=False, IsNullable:=True)>
         <DataMemberAttribute()>
         Public Property TaraEnKg() As Nullable(Of Global.System.Decimal)
             Get
                 Return _TaraEnKg
             End Get
-            Set
+            Set(value As Nullable(Of Global.System.Decimal))
                 OnTaraEnKgChanging(value)
                 ReportPropertyChanging("TaraEnKg")
-                _TaraEnKg = StructuralObject.SetValidValue(value)
+                _TaraEnKg = StructuralObject.SetValidValue(value, "TaraEnKg")
                 ReportPropertyChanged("TaraEnKg")
                 OnTaraEnKgChanged()
             End Set
         End Property
-    
+
         Private _TaraEnKg As Nullable(Of Global.System.Decimal)
-        Private Partial Sub OnTaraEnKgChanging(value As Nullable(Of Global.System.Decimal))
-        End Sub
-    
-        Private Partial Sub OnTaraEnKgChanged()
+        Partial Private Sub OnTaraEnKgChanging(value As Nullable(Of Global.System.Decimal))
         End Sub
 
-        #End Region
+        Partial Private Sub OnTaraEnKgChanged()
+        End Sub
+
+#End Region
 
     End Class
 
-    #End Region
+#End Region
 
-    
 End Namespace

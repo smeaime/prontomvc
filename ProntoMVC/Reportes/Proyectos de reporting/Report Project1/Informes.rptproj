@@ -139,6 +139,10 @@
       <FullPath>Factura Venta.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Generacion SICORE.rdl</Name>
+      <FullPath>Generacion SICORE.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
@@ -197,10 +201,6 @@
     <ProjectItem>
       <Name>IVA Ventas.rdl</Name>
       <FullPath>IVA Ventas.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Generacion SICORE.rdl</Name>
-      <FullPath>Generacion SICORE.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
