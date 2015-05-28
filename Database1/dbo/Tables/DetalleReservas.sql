@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[DetalleReservas] (
+    [IdDetalleReserva]         INT             IDENTITY (1, 1) NOT NULL,
+    [IdReserva]                INT             NULL,
+    [IdArticulo]               INT             NULL,
+    [IdStock]                  INT             NULL,
+    [Partida]                  VARCHAR (20)    NULL,
+    [CantidadUnidades]         DECIMAL (18, 2) NULL,
+    [CantidadAdicional]        DECIMAL (18, 2) NULL,
+    [IdUnidad]                 INT             NULL,
+    [Cantidad1]                DECIMAL (18, 2) NULL,
+    [Cantidad2]                DECIMAL (18, 2) NULL,
+    [Retirada]                 VARCHAR (2)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Estado]                   VARCHAR (2)     COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdDetalleLMateriales]     INT             NULL,
+    [IdDetalleRequerimiento]   INT             NULL,
+    [IdDetalleAcopios]         INT             NULL,
+    [IdCentroCosto]            INT             NULL,
+    [IdObra]                   INT             NULL,
+    [EnviarEmail]              TINYINT         NULL,
+    [IdDetalleReservaOriginal] INT             NULL,
+    [IdReservaOriginal]        INT             NULL,
+    [IdOrigenTransmision]      INT             NULL,
+    CONSTRAINT [PK_DetalleReservas] PRIMARY KEY CLUSTERED ([IdDetalleReserva] ASC) WITH (FILLFACTOR = 90)
+);
+

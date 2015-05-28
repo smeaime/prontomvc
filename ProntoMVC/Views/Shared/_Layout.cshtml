@@ -308,6 +308,9 @@ Released   : 20120723
             border-color: #e2e2e2;
         }
 
+
+
+
         label {
             /* font-size: 10pt; */
             font-size: 10pt;
@@ -317,6 +320,32 @@ Released   : 20120723
             vertical-align: middle;
             display: inline;
         }
+
+
+
+
+        .ui-widget {
+            font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+        }
+
+            .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+                font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+                font-size: 1em;
+            }
+
+        input, button, select, textarea {
+            font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+        }
+
+        body {
+   font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 16px !important;
+}
+
+        .nav {
+  font-size: 16px  !important;
+}
+
     </style>
     <style>
         .ui-widget-header {
@@ -1642,12 +1671,16 @@ Released   : 20120723
                                                 Cambiar contraseña
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">
-                                                Notificaciones
-                                                y firmas
-                                            </a>
-                                        </li>
+
+                                        @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
+                                        {
+                                            <li>
+                                                <a href="@Url.Content("~")Autorizacion\" title="Notificaciones y Firmas">
+                                                    Notificaciones
+                                                    y firmas
+                                                </a>
+                                            </li>
+                                        }
                                         @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                         {
                                             <li class="divider"></li>
@@ -2164,7 +2197,7 @@ Released   : 20120723
                         <a id="lnkBDL" class="linkHoverSubrayado" href="http://www.bdlconsultores.com.ar/"
                            style="text-shadow: 0 1px 0 white; color: rgb(184, 172, 172); font-size: 12px;
                         font-weight: normal; bottom: 3px; text-align: center; width: 100%; text-decoration: none;
-                        margin-left: 60px">©2014 BDL</a>
+                        margin-left: 60px">©2015 BDL</a>
                     </div>
                     <br />
                     <br />

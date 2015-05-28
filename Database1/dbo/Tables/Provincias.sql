@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[Provincias] (
+    [IdProvincia]                                    INT          IDENTITY (1, 1) NOT NULL,
+    [Nombre]                                         VARCHAR (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Codigo]                                         VARCHAR (2)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [IdPais]                                         INT          NULL,
+    [ProximoNumeroCertificadoRetencionIIBB]          INT          NULL,
+    [IdCuentaRetencionIBrutos]                       INT          NULL,
+    [TipoRegistro]                                   INT          NULL,
+    [IdCuentaPercepcionIBrutos]                      INT          NULL,
+    [ProximoNumeroCertificadoPercepcionIIBB]         INT          NULL,
+    [TipoRegistroPercepcion]                         INT          NULL,
+    [IdCuentaRetencionIBrutosCobranzas]              INT          NULL,
+    [IdCuentaPercepcionIIBBConvenio]                 INT          NULL,
+    [ExportarConApertura]                            VARCHAR (2)  NULL,
+    [EnviarEmail]                                    TINYINT      NULL,
+    [InformacionAuxiliar]                            VARCHAR (50) NULL,
+    [IdCuentaPercepcionIIBBCompras]                  INT          NULL,
+    [PlantillaRetencionIIBB]                         VARCHAR (50) NULL,
+    [IdCuentaSIRCREB]                                INT          NULL,
+    [EsAgenteRetencionIIBB]                          VARCHAR (2)  NULL,
+    [IdCuentaPercepcionIIBBComprasJurisdiccionLocal] INT          NULL,
+    [CodigoESRI]                                     VARCHAR (2)  NULL,
+    [Codigo2]                                        INT          NULL,
+    [IdCuentaRetencionIBrutos2]                      INT          NULL,
+    [ProximoNumeroCertificadoRetencionIIBB2]         INT          NULL,
+    CONSTRAINT [PK_Provincias] PRIMARY KEY CLUSTERED ([IdProvincia] ASC) WITH (FILLFACTOR = 90)
+);
+

@@ -108,6 +108,8 @@ namespace ProntoMVC.Controllers
         {
             if ((o.Descripcion ?? "") == "") sErrorMsg += "\n" + "Falta la descripción";
 
+            o.IdCuantificacion = 1;
+
             if (sErrorMsg != "") return false;
             return true;
         }
@@ -536,6 +538,9 @@ namespace ProntoMVC.Controllers
         {
             ViewBag.IdRubro = new SelectList(db.Rubros, "IdRubro", "Descripcion", o.IdRubro);
             ViewBag.IdSubrubro = new SelectList(db.Subrubros, "IdSubrubro", "Descripcion", o.IdSubrubro);
+            ViewBag.IdUnidad = new SelectList(db.Unidades, "IdUnidad", "Descripcion");
+
+
 
             var q = (from i in db.DefinicionArticulos where (i.IdRubro == o.IdRubro && i.IdSubrubro == o.IdSubrubro) orderby i.Orden select i).ToList();
             ViewBag.Mascara = q;

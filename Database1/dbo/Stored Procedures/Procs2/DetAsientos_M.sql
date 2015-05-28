@@ -1,0 +1,65 @@
+﻿CREATE Procedure [dbo].[DetAsientos_M]
+
+@IdDetalleAsiento int,
+@IdAsiento int,
+@IdCuenta int,
+@IdTipoComprobante int,
+@NumeroComprobante int,
+@FechaComprobante datetime,
+@Libro varchar(1),
+@Signo varchar(1),
+@TipoImporte varchar(1),
+@Cuit varchar(13),
+@Detalle varchar(50),
+@Debe money,
+@Haber money,
+@IdObra int,
+@IdCuentaGasto int,
+@IdMoneda int,
+@CotizacionMoneda numeric(18,4),
+@IdCuentaBancaria int,
+@IdCaja int,
+@IdMonedaDestino int,
+@CotizacionMonedaDestino numeric(18,4),
+@ImporteEnMonedaDestino numeric(18,2),
+@PorcentajeIVA numeric(6,2),
+@RegistrarEnAnalitico varchar(2),
+@Item int,
+@IdValor int,
+@IdProvinciaDestino int,
+@IdDetalleComprobanteProveedor int
+
+AS
+
+UPDATE DetalleAsientos
+SET 
+ IdAsiento=@IdAsiento,
+ IdCuenta=@IdCuenta,
+ IdTipoComprobante=@IdTipoComprobante,
+ NumeroComprobante=@NumeroComprobante,
+ FechaComprobante=@FechaComprobante,
+ Libro=@Libro,
+ Signo=@Signo,
+ TipoImporte=@TipoImporte,
+ Cuit=@Cuit,
+ Detalle=@Detalle,
+ Debe=@Debe,
+ Haber=@Haber,
+ IdObra=@IdObra,
+ IdCuentaGasto=@IdCuentaGasto,
+ IdMoneda=@IdMoneda,
+ CotizacionMoneda=@CotizacionMoneda,
+ IdCuentaBancaria=@IdCuentaBancaria,
+ IdCaja=@IdCaja,
+ IdMonedaDestino=@IdMonedaDestino,
+ CotizacionMonedaDestino=@CotizacionMonedaDestino,
+ ImporteEnMonedaDestino=@ImporteEnMonedaDestino,
+ PorcentajeIVA=@PorcentajeIVA,
+ RegistrarEnAnalitico=@RegistrarEnAnalitico,
+ Item=@Item,
+ IdValor=@IdValor,
+ IdProvinciaDestino=@IdProvinciaDestino,
+ IdDetalleComprobanteProveedor=@IdDetalleComprobanteProveedor
+WHERE (IdDetalleAsiento=@IdDetalleAsiento)
+
+RETURN(@IdDetalleAsiento)

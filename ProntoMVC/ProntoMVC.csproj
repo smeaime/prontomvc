@@ -436,6 +436,7 @@
     <Content Include="Content\images\Empresas\Hawk.png" />
     <Content Include="Content\images\Empresas\Logo_BDL.jpg" />
     <Content Include="Content\images\Empresas\nueva.png" />
+    <Content Include="Content\images\Empresas\BaseNueva.png" />
     <Content Include="Content\images\Empresas\Pronto.png" />
     <Content Include="Content\images\Empresas\pruebaAutotrol.png" />
     <Content Include="Content\images\Empresas\Vialagro.png" />

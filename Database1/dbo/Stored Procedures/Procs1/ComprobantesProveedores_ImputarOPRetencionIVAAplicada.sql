@@ -1,0 +1,12 @@
+﻿
+CREATE Procedure [dbo].[ComprobantesProveedores_ImputarOPRetencionIVAAplicada]
+
+@IdComprobanteProveedor int,
+@IdDetalleOrdenPagoRetencionIVAAplicada int
+
+AS
+
+UPDATE ComprobantesProveedores
+SET IdDetalleOrdenPagoRetencionIVAAplicada=@IdDetalleOrdenPagoRetencionIVAAplicada
+WHERE IdComprobanteProveedor=@IdComprobanteProveedor
+
