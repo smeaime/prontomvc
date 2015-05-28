@@ -4,19 +4,21 @@
     ViewBag.Title = "Puntos de Venta";
 }
 
-<br />
-   <button onclick="window.location.href='@Url.Action("Nuevo", new { id = -1 })'"  class="btn btn-primary"  >
-                    Nuevo
-                </button>
+<div style="padding-left: 15px; padding-right: 15px;">
+    <div class="row-fluid">
+        <div class="span9 lightblue">
+            <button onclick="window.location.href='@Url.Action("Edit", new { id = -1 })'" class="btn btn-primary">Nuevo punto de venta</button>
+        </div>
+    </div>
+    <br />
+    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+</div>
 
-@*<p>@Html.ActionLink("Nuevo Punto de venta", "Edit", new { id = -1 }, null)</p> *@
 
 <div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
 <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
 <div><input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
-
-<table id="Lista" class="scroll" cellpadding="0" cellspacing="0"></table>
-<div id="ListaPager" class="scroll" style="text-align: center;"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -32,16 +34,10 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'impr',
-                         'IdPuntoVenta', 
-                        'Letra', 'Punto de venta',
-                       'Comprobante', 'Proximo Numero',
-                       'Descripcion', 'Fact.Electronica', 
-                       'Fact.Elect.modo test', 'Ing.manual CAE', 'Activo' 
-                       ],
+            colNames: ['Acciones', 'impr', 'IdPuntoVenta', 'Letra', 'Punto de venta', 'Comprobante', 'Proximo Numero', 'Descripcion', 'Fact.Electronica', 'Fact.Elect.modo test', 'Ing.manual CAE', 'Activo' ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'impr', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false,  hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'impr', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false,  hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPuntoVenta', index: 'IdPuntoVenta', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Letra', index: 'Letra', align: 'left', width: 50, editable: false, hidden: false },
                         { name: 'NumeroPuntoVenta', index: 'NumeroPuntoVenta', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
@@ -79,77 +75,6 @@
         //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-
     });
 
 </script>
-
-
-@*
-@{
-    var grid = new WebGrid(source: Model,
-        defaultSort: "NumeroPuntoVenta",
-        rowsPerPage: 10,
-        canPage: true,
-        canSort: true,
-        fieldNamePrefix: "ItemRM_",
-        selectionFieldName: "selectedRow");
-}
-
-<div id="grid">
-    @grid.GetHtml(
-        tableStyle: "webgrid",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        firstText: "<< Primera",
-        previousText: "< Anterior",
-        nextText: "Siguiente >",
-        lastText: "Última >>",
-                columns: new[] {
-                                        grid.Column(columnName: "NumeroPuntoVenta", header: "Nro.", style: "text-align-left"),
-                                        grid.Column(columnName: "FechaPuntoVenta", header: "Fecha", style: "text-align-left", format: p => p.FechaPuntoVenta.ToShortDateString()),
-                                        //grid.Column(columnName: "",  format: p=>p.Obra.NumeroObra, header: "Obra", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados.Nombre", header: "Solicito", style: "text-align-left"),
-                                        //grid.Column(columnName: "Empleados1.Nombre", header: "Aprobo", style: "text-align-left"),
-                                        //grid.Column(columnName: "Sectores.Descripcion", header: "Sector", style: "text-align-left"),
-                                        grid.Column(columnName: "Detalle", header: "Detalle", style: "text-align-left"),
-                                        grid.Column("", header: "Acciones", 
-                                            format: @<text>@Html.ActionLink("Editar", "Edit", new { id = item.IdPuntoVenta })|
-                                                           @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPuntoVenta })</text>
-                                        )
-                                        }
-                            )
-</div>
-
-<table>
-    <tr>
-        <th>IdPuntoVenta</th>
-        <th>Numero RM</th>
-        <th>Fecha</th>
-        <th>Obra</th>
-        <th>Sector</th>
-        <th></th>
-    </tr>
-
-@{int i = 1;}
-@foreach (var item in Model)
-{
-    <tr class="@(i++ % 2 == 0 ? "highlighted" : "")" >
-        <td>@Html.DisplayFor(modelItem => item.IdPuntoVenta)</td>
-        <td>@Html.DisplayFor(modelItem => item.NumeroPuntoVenta)</td>
-        <td>@Html.DisplayFor(modelItem => item.FechaPuntoVenta)</td>
-        <td>@Html.DisplayFor(modelItem => item.Obra.NumeroObra)</td>
-        <td>@Html.DisplayFor(modelItem => item.Sectores.Descripcion)</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IdPuntoVenta }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdPuntoVenta }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdPuntoVenta })
-        </td>
-    </tr>
-}
-</table>
-*@
