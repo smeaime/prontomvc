@@ -273,7 +273,15 @@
                                     <td width="100">COTIZ DOLAR</td>
                                     <td width="100">@Html.TextBoxFor(model => model.CotizacionDolar, new { @class = "span8 subtotales" })</td>
                                     <td width="10"></td>
-                                    <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (1)</td>
+                                    <td id="LabelPercepcionIVA" width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IVA</td>
+                                    <td width="60">@Html.TextBoxFor(model => model.PorcentajePercepcionIVA, new { @class = "span8 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
+                                    <td width="150">@Html.TextBoxFor(model => model.PercepcionIVA, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
+                                </tr>
+                                <tr>
+                                    <td width="100"></td>
+                                    <td width="100"></td>
+                                    <td width="10"></td>
+                                    <td id="LabelRetencionIBrutos1" width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (1)</td>
                                     <td width="60">@Html.TextBoxFor(model => model.PorcentajeIBrutos1, new { @class = "span8 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
                                     <td width="150">@Html.TextBoxFor(model => model.RetencionIBrutos1, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
                                 </tr>
@@ -281,27 +289,17 @@
                                     <td width="100"></td>
                                     <td width="100"></td>
                                     <td width="10"></td>
-                                    <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (2)</td>
+                                    <td id="LabelRetencionIBrutos2" width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (2)</td>
                                     <td width="60">@Html.TextBoxFor(model => model.PorcentajeIBrutos2, new { @class = "span8 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
                                     <td width="150">@Html.TextBoxFor(model => model.RetencionIBrutos2, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
-
                                 </tr>
                                 <tr>
                                     <td width="100"></td>
                                     <td width="100"></td>
                                     <td width="10"></td>
-                                    <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (3)</td>
+                                    <td id="LabelRetencionIBrutos3" width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IIBB (3)</td>
                                     <td width="60">@Html.TextBoxFor(model => model.PorcentajeIBrutos3, new { @class = "span8 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
                                     <td width="150">@Html.TextBoxFor(model => model.RetencionIBrutos3, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
-
-                                </tr>
-                                <tr>
-                                    <td width="100"></td>
-                                    <td width="100"></td>
-                                    <td width="10"></td>
-                                    <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">PERCEPCION IVA</td>
-                                    <td width="60">@Html.TextBoxFor(model => model.PorcentajePercepcionIVA, new { @class = "span8 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
-                                    <td width="150">@Html.TextBoxFor(model => model.PercepcionIVA, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;" })</td>
                                 </tr>
                                 <tr>
                                     <td width="100"></td>

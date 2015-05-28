@@ -198,8 +198,8 @@ namespace ProntoMVC.Controllers
                     mWSModoTest = PuntoVenta.WebServiceModoTest ?? "";
                     mCAEManual = PuntoVenta.CAEManual ?? "";
                 }
-                if ((mTipoABC == "A" || mTipoABC == "M") && mWS.Length == 0 && mCAI.Length == 0) { sErrorMsg += "\n" + "No existe numero de CAI"; }
-                if (mWS.Length == 0 && mCAI.Length > 0 && mFechaFactura > mFechaCAI) { sErrorMsg += "\n" + "El CAI vencio el " + mFechaCAI.ToString() + "."; }
+                if (mCAEManual != "SI" && (mTipoABC == "A" || mTipoABC == "M") && mWS.Length == 0 && mCAI.Length == 0) { sErrorMsg += "\n" + "No existe numero de CAI"; }
+                if (mCAEManual != "SI" && mWS.Length == 0 && mCAI.Length > 0 && mFechaFactura > mFechaCAI) { sErrorMsg += "\n" + "El CAI vencio el " + mFechaCAI.ToString() + "."; }
                 if (mCAEManual == "SI" && (o.CAE ?? "").Length != 14) { sErrorMsg += "\n" + "Numero de CAE incorrecto (debe tener 14 digitos)"; }
                 if (mCAI.Length > 0)
                 {
