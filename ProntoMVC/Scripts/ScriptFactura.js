@@ -1412,4 +1412,26 @@ function ActivarControles(Activar) {
         $("#CotizacionMoneda").prop("disabled", true);
         $("#CotizacionDolar").prop("disabled", true);
     }
+
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: ROOT + 'Parametro/Parametros/',
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            if ((result[0]["PercepcionIIBB"] || "") == "NO") {
+                $('#LabelRetencionIBrutos1').hide();
+                $('#PorcentajeIBrutos1').hide();
+                $('#RetencionIBrutos1').hide();
+                $('#LabelRetencionIBrutos2').hide();
+                $('#PorcentajeIBrutos2').hide();
+                $('#RetencionIBrutos2').hide();
+                $('#LabelRetencionIBrutos3').hide();
+                $('#PorcentajeIBrutos3').hide();
+                $('#RetencionIBrutos3').hide();
+            }
+        }
+    });
+
 }
