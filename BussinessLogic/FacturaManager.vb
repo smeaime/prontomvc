@@ -31,7 +31,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Shared Function SincroAmaggi(ByVal SC As String, ByVal IdFactura As Long) As String
+        Shared Function SincroFacturacionAmaggi(ByVal SC As String, ByVal IdFactura As Long) As String
 
             'COLUMNA	CAMPO	TIPO	LONG	DESDE	HASTA	OBSERVACIONES
             '1	        Fecha de Descarga	S	8	1	8	Formato DDMMAAAA
