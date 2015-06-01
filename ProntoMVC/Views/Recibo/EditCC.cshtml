@@ -87,6 +87,10 @@
                             </script>
                         </div>
                         <div class="span1 lightblue">
+                            @if (Model.Anulado == "SI")
+                            {
+                                <span style="margin: 0px 0px 0px 0px; height:; padding: 5px; border-style: groove; border-width: 4px; border-spacing: 0px; font-size: 15px; background-color: rgb(100%, 88%, 88%); ">ANULADO</span>
+                            }
                         </div>
                         <div class="span3 lightblue">
                             @Html.LabelFor(model => model.IdTipoRetencionGanancia, "Categoria retencion ganancias")
