@@ -295,7 +295,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'FechaValor', index: 'FechaValor', formoptions: { rowpos: 2, colpos: 2 }, width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
+                        name: 'FechaVencimiento', index: 'FechaVencimiento', formoptions: { rowpos: 2, colpos: 2 }, width: 100, sortable: false, align: 'right', editable: true, label: 'TB',
                         editoptions: {
                             size: 10,
                             maxlengh: 10,
@@ -577,7 +577,7 @@ $(function () {
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'NumeroValor', '', 'not-editable-cell');
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'NumeroTransferencia', '', 'not-editable-cell');
                 jQuery("#ListaValores").jqGrid('setCell', rowid, 'NumeroTarjetaCredito', '', 'not-editable-cell');
-                jQuery("#ListaValores").jqGrid('setCell', rowid, 'FechaValor', '', 'not-editable-cell');
+                jQuery("#ListaValores").jqGrid('setCell', rowid, 'FechaVencimiento', '', 'not-editable-cell');
             }
         },
         afterSaveCell: function (rowid) {
@@ -1546,6 +1546,8 @@ $(function () {
     $('#Otros4').change(function () { CalcularTotales(); });
     $('#Otros5').change(function () { CalcularTotales(); });
     
+    $('#RetencionIVA').change(function () { CalcularTotales(); });
+    $('#RetencionGanancias').change(function () { CalcularTotales(); });
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
@@ -2261,7 +2263,7 @@ function AgregarValor(grid) {
                     $('#Importe', form).val("");
                     var now = new Date();
                     var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-                    $('#FechaValor', form).val(currentDate);
+                    $('#FechaVencimiento', form).val(currentDate);
                     AsignarNumeroInterno(form);
                 },
                 onClose: function (data) {
@@ -2311,7 +2313,7 @@ function AgregarCaja(grid) {
                     $('#tr_IdTarjetaCredito', form).hide();
 
                     $('#tr_Tipo', form).hide();
-                    $('#tr_FechaValor', form).hide();
+                    $('#tr_FechaVencimiento', form).hide();
                     $('#tr_NumeroInterno', form).hide();
                     $('#tr_NumeroValor', form).hide();
                     $('#tr_Banco', form).hide();
@@ -2394,7 +2396,7 @@ function AgregarTarjeta(grid) {
                     $('#tr_IdTarjetaCredito', form).hide();
 
                     $('#tr_Tipo', form).hide();
-                    $('#tr_FechaValor', form).hide();
+                    $('#tr_FechaVencimiento', form).hide();
                     $('#tr_NumeroInterno', form).hide();
                     $('#tr_NumeroValor', form).hide();
                     $('#tr_Banco', form).hide();
