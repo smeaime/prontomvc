@@ -1052,7 +1052,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdFactura.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
-                                "<a href="+ Url.Action("ImprimirConInterop",new {id = a.IdFactura} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
                                 a.IdFactura.ToString(),
                                 a.TipoABC.NullSafeToString(),
                                 a.PuntoVenta.NullSafeToString(),
