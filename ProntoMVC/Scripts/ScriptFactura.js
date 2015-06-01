@@ -531,18 +531,59 @@
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 
 
+    $("#ListaDrag3").jqGrid({
+        url: ROOT + "Articulo/ArticulosGridData2",
+        datatype: 'json',
+        mtype: 'POST',
+        cellEdit: false,
+        colNames: ['IdArticulo', 'Codigo', 'Material', 'IdUnidad', 'Un.'],
+        colModel: [
+                    { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Codigo', index: 'Codigo', width: 100, align: 'left', search: true, stype: 'text' },
+                    { name: 'Descripcion', index: 'Descripcion', width: 3000, align: 'left', search: true, stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true } },
+                    { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
+        ],
+        ondblClickRow: function (id) {
+            Copiar3(id, "Dbl");
+        },
+        loadComplete: function () {
+            grid = $("ListaDrag3");
+        },
+        pager: $('#ListaDragPager'),
+        rowNum: 15,
+        rowList: [10, 20, 50],
+        sortname: 'Descripcion',
+        sortorder: "asc",
+        viewrecords: true,
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: '100%',
+        altRows: false,
+        emptyrecords: 'No hay registros para mostrar'
+    })
+    jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    $("#ListaDrag3").setFrozenColumns();
+
+
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Ordenes de compra');
     $('a#a_panel_este_tab2').text('Remitos');
+    $('a#a_panel_este_tab3').text('Articulos');
 
     ConectarGrillas1();
     ConectarGrillas2();
+    ConectarGrillas3();
 
     $('#a_panel_este_tab1').click(function () {
         ConectarGrillas1();
     });
     $('#a_panel_este_tab2').click(function () {
         ConectarGrillas2();
+    });
+    $('#a_panel_este_tab3').click(function () {
+        ConectarGrillas3();
     });
 
     function ConectarGrillas1() {
@@ -571,6 +612,21 @@
             },
             ondrop: function (ev, ui, getdata) {
                 Copiar2($(ui.draggable).attr("id"), "DnD");
+            }
+        });
+    }
+
+    function ConectarGrillas3() {
+        $("#ListaDrag3").jqGrid('gridDnD', {
+            connectWith: '#ListaArticulos',
+            onstart: function (ev, ui) {
+                ui.helper.removeClass("ui-state-highlight myAltRowClass")
+                            .addClass("ui-state-error ui-widget")
+                            .css({ border: "5px ridge tomato" });
+                $("#gbox_grid2").css("border", "3px solid #aaaaaa");
+            },
+            ondrop: function (ev, ui, getdata) {
+                Copiar3($(ui.draggable).attr("id"), "DnD");
             }
         });
     }
@@ -773,6 +829,52 @@
                     ActualizarDatos();
                 }
             });
+        } catch (e) { }
+
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+    function Copiar3(idsource, Origen) {
+        var acceptId = idsource, mPrimerItem = true, IdArticulo = 0, Letra = "", Precio = 0, PorcentajeBonificacion = 0, Cantidad = 0, PendienteFacturar = 0, PorcentajeIva = 0;
+        var PrecioUnitario = 0, IdCodigoIva = 0, mAux, $gridOrigen = $("#ListaDrag3"), $gridDestino = $("#ListaArticulos");
+
+        var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
+        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+
+        try {
+            IdArticulo = getdata['IdArticulo'];
+
+            tmpdata['IdArticulo'] = getdata['IdArticulo'];
+            tmpdata['Codigo'] = getdata['Codigo'];
+            tmpdata['Articulo'] = getdata['Descripcion'];
+            tmpdata['OrigenDescripcion'] = 1;
+            var now = new Date();
+            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+            tmpdata['IdUnidad'] = getdata['IdUnidad'];
+            tmpdata['Unidad'] = getdata['Unidad'];
+            tmpdata['PorcentajeCertificacion'] = "";
+            tmpdata['Cantidad'] = 0;
+            tmpdata['PrecioUnitario'] = 0;
+            tmpdata['Importe'] = 0;
+
+            getdata = tmpdata;
+
+            if (Origen == "DnD") {
+                if (mPrimerItem) {
+                    dataIds = $gridDestino.jqGrid('getDataIDs');
+                    Id = dataIds[0];
+                    $gridDestino.jqGrid('setRowData', Id, getdata);
+                    mPrimerItem = false;
+                } else {
+                    Id = Id2
+                    $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+                }
+            } else {
+                Id = Id2
+                $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+            };
+
+            ActualizarDatos();
         } catch (e) { }
 
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
