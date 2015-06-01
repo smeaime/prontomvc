@@ -1,193 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="wDemoWilliamsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="wDemoWilliamsModelStoreContainer">
-          <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Store.Clientes" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.Store.ControlesCalidad" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.Store.DetalleRequerimientos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Obras" EntityType="wDemoWilliamsModel.Store.Obras" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Store.Requerimientos" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Sectores" EntityType="wDemoWilliamsModel.Store.Sectores" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Unidades" EntityType="wDemoWilliamsModel.Store.Unidades" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          </EntityContainer>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="IdCliente" />
-          </Key>
-          <Property Name="IdCliente" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RazonSocial" Type="varchar" MaxLength="100" />
-          <Property Name="Direccion" Type="varchar" MaxLength="100" />
-          <Property Name="IdLocalidad" Type="int" />
-          <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
-          <Property Name="IdProvincia" Type="int" />
-          <Property Name="IdPais" Type="int" />
-          <Property Name="Telefono" Type="varchar" MaxLength="30" />
-          <Property Name="Fax" Type="varchar" MaxLength="30" />
-          <Property Name="Email" Type="varchar" MaxLength="200" />
-          <Property Name="Cuit" Type="varchar" MaxLength="13" />
-          <Property Name="IdCodigoIva" Type="tinyint" />
-          <Property Name="FechaAlta" Type="datetime" />
-          <Property Name="Contacto" Type="varchar" MaxLength="50" />
-          <Property Name="EnviarEmail" Type="tinyint" />
-          <Property Name="DireccionEntrega" Type="varchar" MaxLength="50" />
-          <Property Name="IdLocalidadEntrega" Type="int" />
-          <Property Name="IdProvinciaEntrega" Type="int" />
-          <Property Name="CodigoCliente" Type="int" />
-          <Property Name="IdCuenta" Type="int" />
-          <Property Name="Saldo" Type="numeric" Scale="2" />
-          <Property Name="SaldoDocumentos" Type="numeric" Scale="2" />
-          <Property Name="Vendedor1" Type="int" />
-          <Property Name="CreditoMaximo" Type="numeric" Scale="2" />
-          <Property Name="IGCondicion" Type="int" />
-          <Property Name="IdCondicionVenta" Type="int" />
-          <Property Name="IdMoneda" Type="int" />
-          <Property Name="IBNumeroInscripcion" Type="varchar" MaxLength="20" />
-          <Property Name="IBCondicion" Type="int" />
-          <Property Name="TipoCliente" Type="int" />
-          <Property Name="Codigo" Type="varchar" MaxLength="10" />
-          <Property Name="IdListaPrecios" Type="int" />
-          <Property Name="IdIBCondicionPorDefecto" Type="int" />
-          <Property Name="Confirmado" Type="varchar" MaxLength="2" />
-          <Property Name="CodigoPresto" Type="varchar" MaxLength="13" />
-          <Property Name="Observaciones" Type="ntext" />
-          <Property Name="Importaciones_NumeroInscripcion" Type="varchar" MaxLength="20" />
-          <Property Name="Importaciones_DenominacionInscripcion" Type="varchar" MaxLength="10" />
-          <Property Name="IdCuentaMonedaExt" Type="int" />
-          <Property Name="Cobrador" Type="int" />
-          <Property Name="Auxiliar" Type="varchar" MaxLength="50" />
-          <Property Name="IdIBCondicionPorDefecto2" Type="int" />
-          <Property Name="IdIBCondicionPorDefecto3" Type="int" />
-          <Property Name="IdEstado" Type="int" />
-          <Property Name="NombreFantasia" Type="varchar" MaxLength="50" />
-          <Property Name="EsAgenteRetencionIVA" Type="varchar" MaxLength="2" />
-          <Property Name="BaseMinimaParaPercepcionIVA" Type="numeric" Scale="2" />
-          <Property Name="PorcentajePercepcionIVA" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="IdUsuarioIngreso" Type="int" />
-          <Property Name="FechaIngreso" Type="datetime" />
-          <Property Name="IdUsuarioModifico" Type="int" />
-          <Property Name="FechaModifico" Type="datetime" />
-          <Property Name="PorcentajeIBDirecto" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="FechaInicioVigenciaIBDirecto" Type="datetime" />
-          <Property Name="FechaFinVigenciaIBDirecto" Type="datetime" />
-          <Property Name="GrupoIIBB" Type="int" />
-          <Property Name="IdBancoDebito" Type="int" />
-          <Property Name="CBU" Type="varchar" MaxLength="22" />
-          <Property Name="PorcentajeIBDirectoCapital" Type="numeric" Precision="6" Scale="2" />
-          <Property Name="FechaInicioVigenciaIBDirectoCapital" Type="datetime" />
-          <Property Name="FechaFinVigenciaIBDirectoCapital" Type="datetime" />
-          <Property Name="GrupoIIBBCapital" Type="int" />
-          <Property Name="IdBancoGestionador" Type="int" />
-          <Property Name="ExpresionRegularNoAgruparFacturasConEstosVendedores" Type="varchar" MaxLength="200" />
-          <Property Name="ExigeDatosCompletosEnCartaDePorteQueLoUse" Type="varchar" MaxLength="2" />
-          <Property Name="DireccionDeCorreos" Type="varchar" MaxLength="50" />
-          <Property Name="IdLocalidadDeCorreos" Type="int" />
-          <Property Name="IdProvinciaDeCorreos" Type="int" />
-          <Property Name="CodigoPostalDeCorreos" Type="varchar" MaxLength="30" />
-          <Property Name="ObservacionesDeCorreos" Type="varchar" MaxLength="150" />
-          <Property Name="IncluyeTarifaEnFactura" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoTitular" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoIntermediario" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoRemcomercial" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoCorredor" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoDestinatario" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeFacturaCartaPorteComoDestinatarioExportador" Type="varchar" MaxLength="2" />
-          <Property Name="SeLeDerivaSuFacturaAlCorredorDeLaCarta" Type="varchar" MaxLength="2" />
-          <Property Name="HabilitadoParaCartaPorte" Type="varchar" MaxLength="2" />
-        </EntityType>
+    <Schema Namespace="wDemoWilliamsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ControlesCalidad">
           <Key>
             <PropertyRef Name="IdControlCalidad" />
           </Key>
-          <Property Name="IdControlCalidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdControlCalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" />
           <Property Name="Inspeccion" Type="varchar" MaxLength="2" />
           <Property Name="Abreviatura" Type="varchar" MaxLength="2" />
           <Property Name="Detalle" Type="ntext" />
         </EntityType>
-        <EntityType Name="DetalleRequerimientos">
-          <Key>
-            <PropertyRef Name="IdDetalleRequerimiento" />
-          </Key>
-          <Property Name="IdDetalleRequerimiento" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="IdRequerimiento" Type="int" />
-          <Property Name="NumeroItem" Type="int" />
-          <Property Name="Cantidad" Type="numeric" Scale="2" />
-          <Property Name="IdUnidad" Type="int" />
-          <Property Name="IdArticulo" Type="int" />
-          <Property Name="FechaEntrega" Type="datetime" />
-          <Property Name="Observaciones" Type="ntext" />
-          <Property Name="Cantidad1" Type="numeric" Scale="2" />
-          <Property Name="Cantidad2" Type="numeric" Scale="2" />
-          <Property Name="IdDetalleLMateriales" Type="int" />
-          <Property Name="IdControlCalidad" Type="int" />
-          <Property Name="Adjunto" Type="varchar" MaxLength="2" />
-          <Property Name="ArchivoAdjunto" Type="varchar" MaxLength="50" />
-          <Property Name="IdCentroCosto" Type="int" />
-          <Property Name="IdComprador" Type="int" />
-          <Property Name="NumeroFacturaCompra1" Type="int" />
-          <Property Name="FechaFacturaCompra" Type="datetime" />
-          <Property Name="ImporteFacturaCompra" Type="numeric" Scale="2" />
-          <Property Name="IdProveedor" Type="int" />
-          <Property Name="NumeroFacturaCompra2" Type="int" />
-          <Property Name="EsBienDeUso" Type="varchar" MaxLength="2" />
-          <Property Name="IdCuenta" Type="int" />
-          <Property Name="Cumplido" Type="varchar" MaxLength="2" />
-          <Property Name="Usuario1" Type="varchar" MaxLength="6" />
-          <Property Name="FechaIngreso1" Type="datetime" />
-          <Property Name="ArchivoAdjunto1" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto2" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto3" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto4" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto5" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto6" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto7" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto8" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto9" Type="varchar" MaxLength="100" />
-          <Property Name="ArchivoAdjunto10" Type="varchar" MaxLength="100" />
-          <Property Name="Descripcionmanual" Type="varchar" MaxLength="250" />
-          <Property Name="EnviarEmail" Type="tinyint" />
-          <Property Name="IdRequerimientoOriginal" Type="int" />
-          <Property Name="IdDetalleRequerimientoOriginal" Type="int" />
-          <Property Name="IdOrigenTransmision" Type="int" />
-          <Property Name="IdLlamadoAProveedor" Type="int" />
-          <Property Name="FechaLlamadoAProveedor" Type="datetime" />
-          <Property Name="IdLlamadoRegistradoPor" Type="int" />
-          <Property Name="FechaRegistracionLlamada" Type="datetime" />
-          <Property Name="ObservacionesLlamada" Type="ntext" />
-          <Property Name="IdAutorizoCumplido" Type="int" />
-          <Property Name="IdDioPorCumplido" Type="int" />
-          <Property Name="FechaDadoPorCumplido" Type="datetime" />
-          <Property Name="ObservacionesCumplido" Type="ntext" />
-          <Property Name="IdAproboAlmacen" Type="int" />
-          <Property Name="IdEquipo" Type="int" />
-          <Property Name="FechaEntrega_Tel" Type="datetime" />
-          <Property Name="PRESTOConcepto" Type="varchar" MaxLength="13" />
-          <Property Name="Costo" Type="numeric" Scale="2" />
-          <Property Name="OrigenDescripcion" Type="int" />
-          <Property Name="TipoDesignacion" Type="varchar" MaxLength="3" />
-          <Property Name="IdLiberoParaCompras" Type="int" />
-          <Property Name="FechaLiberacionParaCompras" Type="datetime" />
-          <Property Name="Recepcionado" Type="varchar" MaxLength="2" />
-          <Property Name="Pagina" Type="int" />
-          <Property Name="Item" Type="int" />
-          <Property Name="Figura" Type="int" />
-          <Property Name="CodigoDistribucion" Type="varchar" MaxLength="3" />
-          <Property Name="IdEquipoDestino" Type="int" />
-          <Property Name="Entregado" Type="varchar" MaxLength="2" />
-          <Property Name="FechaAsignacionComprador" Type="datetime" />
-          <Property Name="MoP" Type="varchar" MaxLength="1" />
-          <Property Name="IdDetalleObraDestino" Type="int" />
-          <Property Name="IdPresupuestoObraRubro" Type="int" />
-        </EntityType>
         <EntityType Name="Obras">
           <Key>
             <PropertyRef Name="IdObra" />
           </Key>
-          <Property Name="IdObra" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdObra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NumeroObra" Type="varchar" MaxLength="13" />
           <Property Name="IdCliente" Type="int" />
           <Property Name="FechaInicio" Type="datetime" />
@@ -221,6 +53,7 @@
           <Property Name="Observaciones3" Type="ntext" />
           <Property Name="IdSubjefe" Type="int" />
           <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="IdLocalidad" Type="int" />
           <Property Name="IdProvincia" Type="int" />
           <Property Name="IdPais" Type="int" />
           <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
@@ -232,9 +65,8 @@
           <Property Name="Operarios" Type="int" />
           <Property Name="Zona" Type="int" />
           <Property Name="Jurisdiccion" Type="int" />
-          <Property Name="IdLocalidad" Type="int" />
           <Property Name="IdCuentaContableFF" Type="int" />
-          <Property Name="ValorObra" Type="numeric" Scale="2" />
+          <Property Name="ValorObra" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IdMonedaValorObra" Type="int" />
           <Property Name="IdJefeRegional" Type="int" />
           <Property Name="EsPlantaDeProduccionInterna" Type="varchar" MaxLength="2" />
@@ -242,76 +74,14 @@
           <Property Name="ProximoNumeroAutorizacionCompra" Type="int" />
           <Property Name="AuxiliarDeMateriales" Type="varchar" MaxLength="2" />
           <Property Name="DiasLiquidacionCertificados" Type="int" />
-        </EntityType>
-        <EntityType Name="Requerimientos">
-          <Key>
-            <PropertyRef Name="IdRequerimiento" />
-          </Key>
-          <Property Name="IdRequerimiento" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroRequerimiento" Type="int" />
-          <Property Name="FechaRequerimiento" Type="datetime" />
-          <Property Name="LugarEntrega" Type="ntext" />
-          <Property Name="Observaciones" Type="ntext" />
-          <Property Name="IdObra" Type="int" />
-          <Property Name="IdCentroCosto" Type="int" />
-          <Property Name="IdSolicito" Type="int" />
-          <Property Name="IdSector" Type="int" />
-          <Property Name="MontoPrevisto" Type="numeric" Scale="2" />
-          <Property Name="IdComprador" Type="int" />
-          <Property Name="Aprobo" Type="int" />
-          <Property Name="FechaAprobacion" Type="datetime" />
-          <Property Name="MontoParaCompra" Type="numeric" Scale="2" />
-          <Property Name="Cumplido" Type="varchar" MaxLength="2" />
-          <Property Name="Consorcial" Type="varchar" MaxLength="2" />
-          <Property Name="UsuarioAnulacion" Type="varchar" MaxLength="6" />
-          <Property Name="FechaAnulacion" Type="datetime" />
-          <Property Name="MotivoAnulacion" Type="ntext" />
-          <Property Name="EnviarEmail" Type="tinyint" />
-          <Property Name="IdRequerimientoOriginal" Type="int" />
-          <Property Name="IdOrigenTransmision" Type="int" />
-          <Property Name="IdAutorizoCumplido" Type="int" />
-          <Property Name="IdDioPorCumplido" Type="int" />
-          <Property Name="FechaDadoPorCumplido" Type="datetime" />
-          <Property Name="ObservacionesCumplido" Type="ntext" />
-          <Property Name="IdMoneda" Type="int" />
-          <Property Name="Detalle" Type="varchar" MaxLength="50" />
-          <Property Name="DirectoACompras" Type="varchar" MaxLength="2" />
-          <Property Name="IdAutorizoDirectoACompras" Type="int" />
-          <Property Name="PRESTOContrato" Type="varchar" MaxLength="13" />
-          <Property Name="Confirmado" Type="varchar" MaxLength="2" />
-          <Property Name="FechaImportacionTransmision" Type="datetime" />
-          <Property Name="IdEquipoDestino" Type="int" />
-          <Property Name="Impresa" Type="varchar" MaxLength="2" />
-          <Property Name="Recepcionado" Type="varchar" MaxLength="2" />
-          <Property Name="Entregado" Type="varchar" MaxLength="2" />
-          <Property Name="TipoRequerimiento" Type="varchar" MaxLength="2" />
-          <Property Name="IdOrdenTrabajo" Type="int" />
-          <Property Name="Aprobo2" Type="int" />
-          <Property Name="FechaAprobacion2" Type="datetime" />
-          <Property Name="IdTipoCompra" Type="int" />
-          <Property Name="IdImporto" Type="int" />
-          <Property Name="FechaLlegadaImportacion" Type="datetime" />
-          <Property Name="CircuitoFirmasCompleto" Type="varchar" MaxLength="2" />
-          <Property Name="IdCuentaPresupuesto" Type="int" />
-          <Property Name="MesPresupuesto" Type="int" />
-          <Property Name="RequisitosSeguridad" Type="ntext" />
-          <Property Name="Adjuntos" Type="varchar" MaxLength="2" />
-          <Property Name="ConfirmadoPorWeb" Type="varchar" MaxLength="2" />
-          <Property Name="DetalleImputacion" Type="varchar" MaxLength="50" />
-          <Property Name="IdUsuarioDeslibero" Type="int" />
-          <Property Name="FechaDesliberacion" Type="datetime" />
-          <Property Name="NumeradorDesliberaciones" Type="int" />
-          <Property Name="IdUsuarioEliminoFirmas" Type="int" />
-          <Property Name="FechaEliminacionFirmas" Type="datetime" />
-          <Property Name="NumeradorEliminacionesFirmas" Type="int" />
-          <Property Name="NumeradorModificaciones" Type="int" />
-          <Property Name="ParaTaller" Type="varchar" MaxLength="2" />
+          <Property Name="IdObraRelacionada" Type="int" />
+          <Property Name="OrdenamientoSecundario" Type="int" />
         </EntityType>
         <EntityType Name="Sectores">
           <Key>
             <PropertyRef Name="IdSector" />
           </Key>
-          <Property Name="IdSector" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdSector" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="SectorDeObra" Type="varchar" MaxLength="2" />
           <Property Name="IdEncargado" Type="int" />
@@ -323,165 +93,29 @@
           <Key>
             <PropertyRef Name="IdUnidad" />
           </Key>
-          <Property Name="IdUnidad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUnidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="30" />
           <Property Name="Abreviatura" Type="varchar" MaxLength="15" />
           <Property Name="CodigoAFIP" Type="varchar" MaxLength="2" />
           <Property Name="UnidadesPorPack" Type="int" />
-          <Property Name="TaraEnKg" Type="numeric" Scale="4" />
+          <Property Name="TaraEnKg" Type="numeric" Precision="18" Scale="4" />
         </EntityType>
-        </Schema></edmx:StorageModels>
+        <EntityContainer Name="wDemoWilliamsModelStoreContainer">
+          <EntitySet Name="ControlesCalidad" EntityType="Self.ControlesCalidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="wDemoWilliamsEntities">
-          <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.DetalleRequerimientos" />
-          <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Requerimientos" />
           <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.ControlesCalidad" />
           <EntitySet Name="Obras" EntityType="wDemoWilliamsModel.Obras" />
           <EntitySet Name="Sectores" EntityType="wDemoWilliamsModel.Sectores" />
           <EntitySet Name="Unidades" EntityType="wDemoWilliamsModel.Unidades" />
-          <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Clientes" />
         </EntityContainer>
-        <EntityType Name="DetalleRequerimientos">
-          <Key>
-            <PropertyRef Name="IdDetalleRequerimiento" />
-          </Key>
-          <Property Type="Int32" Name="IdDetalleRequerimiento" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="IdRequerimiento" />
-          <Property Type="Int32" Name="NumeroItem" />
-          <Property Type="Decimal" Name="Cantidad" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IdUnidad" />
-          <Property Type="Int32" Name="IdArticulo" />
-          <Property Type="DateTime" Name="FechaEntrega" />
-          <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Cantidad1" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Cantidad2" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IdDetalleLMateriales" />
-          <Property Type="Int32" Name="IdControlCalidad" />
-          <Property Type="String" Name="Adjunto" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdCentroCosto" />
-          <Property Type="Int32" Name="IdComprador" />
-          <Property Type="Int32" Name="NumeroFacturaCompra1" />
-          <Property Type="DateTime" Name="FechaFacturaCompra" />
-          <Property Type="Decimal" Name="ImporteFacturaCompra" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IdProveedor" />
-          <Property Type="Int32" Name="NumeroFacturaCompra2" />
-          <Property Type="String" Name="EsBienDeUso" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdCuenta" />
-          <Property Type="String" Name="Cumplido" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Usuario1" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaIngreso1" />
-          <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Descripcionmanual" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Type="Byte" Name="EnviarEmail" />
-          <Property Type="Int32" Name="IdRequerimientoOriginal" />
-          <Property Type="Int32" Name="IdDetalleRequerimientoOriginal" />
-          <Property Type="Int32" Name="IdOrigenTransmision" />
-          <Property Type="Int32" Name="IdLlamadoAProveedor" />
-          <Property Type="DateTime" Name="FechaLlamadoAProveedor" />
-          <Property Type="Int32" Name="IdLlamadoRegistradoPor" />
-          <Property Type="DateTime" Name="FechaRegistracionLlamada" />
-          <Property Type="String" Name="ObservacionesLlamada" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="IdAutorizoCumplido" />
-          <Property Type="Int32" Name="IdDioPorCumplido" />
-          <Property Type="DateTime" Name="FechaDadoPorCumplido" />
-          <Property Type="String" Name="ObservacionesCumplido" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="IdAproboAlmacen" />
-          <Property Type="Int32" Name="IdEquipo" />
-          <Property Type="DateTime" Name="FechaEntrega_Tel" />
-          <Property Type="String" Name="PRESTOConcepto" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="Costo" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="OrigenDescripcion" />
-          <Property Type="String" Name="TipoDesignacion" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdLiberoParaCompras" />
-          <Property Type="DateTime" Name="FechaLiberacionParaCompras" />
-          <Property Type="String" Name="Recepcionado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="Pagina" />
-          <Property Type="Int32" Name="Item" />
-          <Property Type="Int32" Name="Figura" />
-          <Property Type="String" Name="CodigoDistribucion" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdEquipoDestino" />
-          <Property Type="String" Name="Entregado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaAsignacionComprador" />
-          <Property Type="String" Name="MoP" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdDetalleObraDestino" />
-          <Property Type="Int32" Name="IdPresupuestoObraRubro" />
-        </EntityType>
-        <EntityType Name="Requerimientos">
-          <Key>
-            <PropertyRef Name="IdRequerimiento" />
-          </Key>
-          <Property Type="Int32" Name="IdRequerimiento" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="Int32" Name="NumeroRequerimiento" />
-          <Property Type="DateTime" Name="FechaRequerimiento" />
-          <Property Type="String" Name="LugarEntrega" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="IdObra" />
-          <Property Type="Int32" Name="IdCentroCosto" />
-          <Property Type="Int32" Name="IdSolicito" />
-          <Property Type="Int32" Name="IdSector" />
-          <Property Type="Decimal" Name="MontoPrevisto" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IdComprador" />
-          <Property Type="Int32" Name="Aprobo" />
-          <Property Type="DateTime" Name="FechaAprobacion" />
-          <Property Type="Decimal" Name="MontoParaCompra" Precision="18" Scale="2" />
-          <Property Type="String" Name="Cumplido" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Consorcial" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UsuarioAnulacion" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaAnulacion" />
-          <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Byte" Name="EnviarEmail" />
-          <Property Type="Int32" Name="IdRequerimientoOriginal" />
-          <Property Type="Int32" Name="IdOrigenTransmision" />
-          <Property Type="Int32" Name="IdAutorizoCumplido" />
-          <Property Type="Int32" Name="IdDioPorCumplido" />
-          <Property Type="DateTime" Name="FechaDadoPorCumplido" />
-          <Property Type="String" Name="ObservacionesCumplido" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="IdMoneda" />
-          <Property Type="String" Name="Detalle" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="DirectoACompras" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdAutorizoDirectoACompras" />
-          <Property Type="String" Name="PRESTOContrato" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Confirmado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="FechaImportacionTransmision" />
-          <Property Type="Int32" Name="IdEquipoDestino" />
-          <Property Type="String" Name="Impresa" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Recepcionado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Entregado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TipoRequerimiento" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdOrdenTrabajo" />
-          <Property Type="Int32" Name="Aprobo2" />
-          <Property Type="DateTime" Name="FechaAprobacion2" />
-          <Property Type="Int32" Name="IdTipoCompra" />
-          <Property Type="Int32" Name="IdImporto" />
-          <Property Type="DateTime" Name="FechaLlegadaImportacion" />
-          <Property Type="String" Name="CircuitoFirmasCompleto" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdCuentaPresupuesto" />
-          <Property Type="Int32" Name="MesPresupuesto" />
-          <Property Type="String" Name="RequisitosSeguridad" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Adjuntos" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ConfirmadoPorWeb" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="DetalleImputacion" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdUsuarioDeslibero" />
-          <Property Type="DateTime" Name="FechaDesliberacion" />
-          <Property Type="Int32" Name="NumeradorDesliberaciones" />
-          <Property Type="Int32" Name="IdUsuarioEliminoFirmas" />
-          <Property Type="DateTime" Name="FechaEliminacionFirmas" />
-          <Property Type="Int32" Name="NumeradorEliminacionesFirmas" />
-          <Property Type="Int32" Name="NumeradorModificaciones" />
-          <Property Type="String" Name="ParaTaller" MaxLength="2" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ControlesCalidad">
           <Key>
             <PropertyRef Name="IdControlCalidad" />
@@ -499,10 +133,10 @@
           <Property Type="Int32" Name="IdObra" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="NumeroObra" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdCliente" />
-          <Property Type="DateTime" Name="FechaInicio" />
-          <Property Type="DateTime" Name="FechaFinalizacion" />
+          <Property Type="DateTime" Name="FechaInicio" Precision="3" />
+          <Property Type="DateTime" Name="FechaFinalizacion" Precision="3" />
           <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="FechaEntrega" />
+          <Property Type="DateTime" Name="FechaEntrega" Precision="3" />
           <Property Type="String" Name="Descripcion" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="IdJefe" />
           <Property Type="Int32" Name="TipoObra" />
@@ -551,6 +185,8 @@
           <Property Type="Int32" Name="ProximoNumeroAutorizacionCompra" />
           <Property Type="String" Name="AuxiliarDeMateriales" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="DiasLiquidacionCertificados" />
+          <Property Name="IdObraRelacionada" Type="Int32" />
+          <Property Name="OrdenamientoSecundario" Type="Int32" />
         </EntityType>
         <EntityType Name="Sectores">
           <Key>
@@ -575,237 +211,12 @@
           <Property Type="Int32" Name="UnidadesPorPack" />
           <Property Type="Decimal" Name="TaraEnKg" Precision="18" Scale="4" />
         </EntityType>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="IdCliente" />
-          </Key>
-          <Property Type="Int32" Name="IdCliente" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Type="String" Name="RazonSocial" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Direccion" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdLocalidad" />
-          <Property Type="String" Name="CodigoPostal" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdProvincia" />
-          <Property Type="Int32" Name="IdPais" />
-          <Property Type="String" Name="Telefono" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Fax" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Email" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Cuit" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="Byte" Name="IdCodigoIva" />
-          <Property Type="DateTime" Name="FechaAlta" />
-          <Property Type="String" Name="Contacto" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Byte" Name="EnviarEmail" />
-          <Property Type="String" Name="DireccionEntrega" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdLocalidadEntrega" />
-          <Property Type="Int32" Name="IdProvinciaEntrega" />
-          <Property Type="Int32" Name="CodigoCliente" />
-          <Property Type="Int32" Name="IdCuenta" />
-          <Property Type="Decimal" Name="Saldo" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="SaldoDocumentos" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="Vendedor1" />
-          <Property Type="Decimal" Name="CreditoMaximo" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="IGCondicion" />
-          <Property Type="Int32" Name="IdCondicionVenta" />
-          <Property Type="Int32" Name="IdMoneda" />
-          <Property Type="String" Name="IBNumeroInscripcion" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IBCondicion" />
-          <Property Type="Int32" Name="TipoCliente" />
-          <Property Type="String" Name="Codigo" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdListaPrecios" />
-          <Property Type="Int32" Name="IdIBCondicionPorDefecto" />
-          <Property Type="String" Name="Confirmado" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CodigoPresto" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Importaciones_NumeroInscripcion" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Importaciones_DenominacionInscripcion" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdCuentaMonedaExt" />
-          <Property Type="Int32" Name="Cobrador" />
-          <Property Type="String" Name="Auxiliar" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdIBCondicionPorDefecto2" />
-          <Property Type="Int32" Name="IdIBCondicionPorDefecto3" />
-          <Property Type="Int32" Name="IdEstado" />
-          <Property Type="String" Name="NombreFantasia" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="EsAgenteRetencionIVA" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="BaseMinimaParaPercepcionIVA" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajePercepcionIVA" Precision="6" Scale="2" />
-          <Property Type="Int32" Name="IdUsuarioIngreso" />
-          <Property Type="DateTime" Name="FechaIngreso" />
-          <Property Type="Int32" Name="IdUsuarioModifico" />
-          <Property Type="DateTime" Name="FechaModifico" />
-          <Property Type="Decimal" Name="PorcentajeIBDirecto" Precision="6" Scale="2" />
-          <Property Type="DateTime" Name="FechaInicioVigenciaIBDirecto" />
-          <Property Type="DateTime" Name="FechaFinVigenciaIBDirecto" />
-          <Property Type="Int32" Name="GrupoIIBB" />
-          <Property Type="Int32" Name="IdBancoDebito" />
-          <Property Type="String" Name="CBU" MaxLength="22" FixedLength="false" Unicode="false" />
-          <Property Type="Decimal" Name="PorcentajeIBDirectoCapital" Precision="6" Scale="2" />
-          <Property Type="DateTime" Name="FechaInicioVigenciaIBDirectoCapital" />
-          <Property Type="DateTime" Name="FechaFinVigenciaIBDirectoCapital" />
-          <Property Type="Int32" Name="GrupoIIBBCapital" />
-          <Property Type="Int32" Name="IdBancoGestionador" />
-          <Property Type="String" Name="ExpresionRegularNoAgruparFacturasConEstosVendedores" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ExigeDatosCompletosEnCartaDePorteQueLoUse" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="DireccionDeCorreos" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="IdLocalidadDeCorreos" />
-          <Property Type="Int32" Name="IdProvinciaDeCorreos" />
-          <Property Type="String" Name="CodigoPostalDeCorreos" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ObservacionesDeCorreos" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="IncluyeTarifaEnFactura" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoTitular" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoIntermediario" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoRemcomercial" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoCorredor" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoDestinatario" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeFacturaCartaPorteComoDestinatarioExportador" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SeLeDerivaSuFacturaAlCorredorDeLaCarta" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="HabilitadoParaCartaPorte" MaxLength="2" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="wDemoWilliamsModelStoreContainer" CdmEntityContainer="wDemoWilliamsEntities">
-          <EntitySetMapping Name="DetalleRequerimientos">
-            <EntityTypeMapping TypeName="wDemoWilliamsModel.DetalleRequerimientos">
-              <MappingFragment StoreEntitySet="DetalleRequerimientos">
-                <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
-                <ScalarProperty Name="IdDetalleObraDestino" ColumnName="IdDetalleObraDestino" />
-                <ScalarProperty Name="MoP" ColumnName="MoP" />
-                <ScalarProperty Name="FechaAsignacionComprador" ColumnName="FechaAsignacionComprador" />
-                <ScalarProperty Name="Entregado" ColumnName="Entregado" />
-                <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
-                <ScalarProperty Name="CodigoDistribucion" ColumnName="CodigoDistribucion" />
-                <ScalarProperty Name="Figura" ColumnName="Figura" />
-                <ScalarProperty Name="Item" ColumnName="Item" />
-                <ScalarProperty Name="Pagina" ColumnName="Pagina" />
-                <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
-                <ScalarProperty Name="FechaLiberacionParaCompras" ColumnName="FechaLiberacionParaCompras" />
-                <ScalarProperty Name="IdLiberoParaCompras" ColumnName="IdLiberoParaCompras" />
-                <ScalarProperty Name="TipoDesignacion" ColumnName="TipoDesignacion" />
-                <ScalarProperty Name="OrigenDescripcion" ColumnName="OrigenDescripcion" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="PRESTOConcepto" ColumnName="PRESTOConcepto" />
-                <ScalarProperty Name="FechaEntrega_Tel" ColumnName="FechaEntrega_Tel" />
-                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-                <ScalarProperty Name="IdAproboAlmacen" ColumnName="IdAproboAlmacen" />
-                <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
-                <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
-                <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
-                <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
-                <ScalarProperty Name="ObservacionesLlamada" ColumnName="ObservacionesLlamada" />
-                <ScalarProperty Name="FechaRegistracionLlamada" ColumnName="FechaRegistracionLlamada" />
-                <ScalarProperty Name="IdLlamadoRegistradoPor" ColumnName="IdLlamadoRegistradoPor" />
-                <ScalarProperty Name="FechaLlamadoAProveedor" ColumnName="FechaLlamadoAProveedor" />
-                <ScalarProperty Name="IdLlamadoAProveedor" ColumnName="IdLlamadoAProveedor" />
-                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-                <ScalarProperty Name="IdDetalleRequerimientoOriginal" ColumnName="IdDetalleRequerimientoOriginal" />
-                <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
-                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-                <ScalarProperty Name="Descripcionmanual" ColumnName="Descripcionmanual" />
-                <ScalarProperty Name="ArchivoAdjunto10" ColumnName="ArchivoAdjunto10" />
-                <ScalarProperty Name="ArchivoAdjunto9" ColumnName="ArchivoAdjunto9" />
-                <ScalarProperty Name="ArchivoAdjunto8" ColumnName="ArchivoAdjunto8" />
-                <ScalarProperty Name="ArchivoAdjunto7" ColumnName="ArchivoAdjunto7" />
-                <ScalarProperty Name="ArchivoAdjunto6" ColumnName="ArchivoAdjunto6" />
-                <ScalarProperty Name="ArchivoAdjunto5" ColumnName="ArchivoAdjunto5" />
-                <ScalarProperty Name="ArchivoAdjunto4" ColumnName="ArchivoAdjunto4" />
-                <ScalarProperty Name="ArchivoAdjunto3" ColumnName="ArchivoAdjunto3" />
-                <ScalarProperty Name="ArchivoAdjunto2" ColumnName="ArchivoAdjunto2" />
-                <ScalarProperty Name="ArchivoAdjunto1" ColumnName="ArchivoAdjunto1" />
-                <ScalarProperty Name="FechaIngreso1" ColumnName="FechaIngreso1" />
-                <ScalarProperty Name="Usuario1" ColumnName="Usuario1" />
-                <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
-                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-                <ScalarProperty Name="EsBienDeUso" ColumnName="EsBienDeUso" />
-                <ScalarProperty Name="NumeroFacturaCompra2" ColumnName="NumeroFacturaCompra2" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="ImporteFacturaCompra" ColumnName="ImporteFacturaCompra" />
-                <ScalarProperty Name="FechaFacturaCompra" ColumnName="FechaFacturaCompra" />
-                <ScalarProperty Name="NumeroFacturaCompra1" ColumnName="NumeroFacturaCompra1" />
-                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="ArchivoAdjunto" ColumnName="ArchivoAdjunto" />
-                <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
-                <ScalarProperty Name="IdControlCalidad" ColumnName="IdControlCalidad" />
-                <ScalarProperty Name="IdDetalleLMateriales" ColumnName="IdDetalleLMateriales" />
-                <ScalarProperty Name="Cantidad2" ColumnName="Cantidad2" />
-                <ScalarProperty Name="Cantidad1" ColumnName="Cantidad1" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-                <ScalarProperty Name="IdUnidad" ColumnName="IdUnidad" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="NumeroItem" ColumnName="NumeroItem" />
-                <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-                <ScalarProperty Name="IdDetalleRequerimiento" ColumnName="IdDetalleRequerimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Requerimientos">
-            <EntityTypeMapping TypeName="wDemoWilliamsModel.Requerimientos">
-              <MappingFragment StoreEntitySet="Requerimientos">
-                <ScalarProperty Name="ParaTaller" ColumnName="ParaTaller" />
-                <ScalarProperty Name="NumeradorModificaciones" ColumnName="NumeradorModificaciones" />
-                <ScalarProperty Name="NumeradorEliminacionesFirmas" ColumnName="NumeradorEliminacionesFirmas" />
-                <ScalarProperty Name="FechaEliminacionFirmas" ColumnName="FechaEliminacionFirmas" />
-                <ScalarProperty Name="IdUsuarioEliminoFirmas" ColumnName="IdUsuarioEliminoFirmas" />
-                <ScalarProperty Name="NumeradorDesliberaciones" ColumnName="NumeradorDesliberaciones" />
-                <ScalarProperty Name="FechaDesliberacion" ColumnName="FechaDesliberacion" />
-                <ScalarProperty Name="IdUsuarioDeslibero" ColumnName="IdUsuarioDeslibero" />
-                <ScalarProperty Name="DetalleImputacion" ColumnName="DetalleImputacion" />
-                <ScalarProperty Name="ConfirmadoPorWeb" ColumnName="ConfirmadoPorWeb" />
-                <ScalarProperty Name="Adjuntos" ColumnName="Adjuntos" />
-                <ScalarProperty Name="RequisitosSeguridad" ColumnName="RequisitosSeguridad" />
-                <ScalarProperty Name="MesPresupuesto" ColumnName="MesPresupuesto" />
-                <ScalarProperty Name="IdCuentaPresupuesto" ColumnName="IdCuentaPresupuesto" />
-                <ScalarProperty Name="CircuitoFirmasCompleto" ColumnName="CircuitoFirmasCompleto" />
-                <ScalarProperty Name="FechaLlegadaImportacion" ColumnName="FechaLlegadaImportacion" />
-                <ScalarProperty Name="IdImporto" ColumnName="IdImporto" />
-                <ScalarProperty Name="IdTipoCompra" ColumnName="IdTipoCompra" />
-                <ScalarProperty Name="FechaAprobacion2" ColumnName="FechaAprobacion2" />
-                <ScalarProperty Name="Aprobo2" ColumnName="Aprobo2" />
-                <ScalarProperty Name="IdOrdenTrabajo" ColumnName="IdOrdenTrabajo" />
-                <ScalarProperty Name="TipoRequerimiento" ColumnName="TipoRequerimiento" />
-                <ScalarProperty Name="Entregado" ColumnName="Entregado" />
-                <ScalarProperty Name="Recepcionado" ColumnName="Recepcionado" />
-                <ScalarProperty Name="Impresa" ColumnName="Impresa" />
-                <ScalarProperty Name="IdEquipoDestino" ColumnName="IdEquipoDestino" />
-                <ScalarProperty Name="FechaImportacionTransmision" ColumnName="FechaImportacionTransmision" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-                <ScalarProperty Name="PRESTOContrato" ColumnName="PRESTOContrato" />
-                <ScalarProperty Name="IdAutorizoDirectoACompras" ColumnName="IdAutorizoDirectoACompras" />
-                <ScalarProperty Name="DirectoACompras" ColumnName="DirectoACompras" />
-                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
-                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-                <ScalarProperty Name="ObservacionesCumplido" ColumnName="ObservacionesCumplido" />
-                <ScalarProperty Name="FechaDadoPorCumplido" ColumnName="FechaDadoPorCumplido" />
-                <ScalarProperty Name="IdDioPorCumplido" ColumnName="IdDioPorCumplido" />
-                <ScalarProperty Name="IdAutorizoCumplido" ColumnName="IdAutorizoCumplido" />
-                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
-                <ScalarProperty Name="IdRequerimientoOriginal" ColumnName="IdRequerimientoOriginal" />
-                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="UsuarioAnulacion" ColumnName="UsuarioAnulacion" />
-                <ScalarProperty Name="Consorcial" ColumnName="Consorcial" />
-                <ScalarProperty Name="Cumplido" ColumnName="Cumplido" />
-                <ScalarProperty Name="MontoParaCompra" ColumnName="MontoParaCompra" />
-                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
-                <ScalarProperty Name="Aprobo" ColumnName="Aprobo" />
-                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-                <ScalarProperty Name="MontoPrevisto" ColumnName="MontoPrevisto" />
-                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
-                <ScalarProperty Name="IdSolicito" ColumnName="IdSolicito" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdObra" ColumnName="IdObra" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="LugarEntrega" ColumnName="LugarEntrega" />
-                <ScalarProperty Name="FechaRequerimiento" ColumnName="FechaRequerimiento" />
-                <ScalarProperty Name="NumeroRequerimiento" ColumnName="NumeroRequerimiento" />
-                <ScalarProperty Name="IdRequerimiento" ColumnName="IdRequerimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ControlesCalidad">
             <EntityTypeMapping TypeName="wDemoWilliamsModel.ControlesCalidad">
               <MappingFragment StoreEntitySet="ControlesCalidad">
@@ -820,6 +231,8 @@
           <EntitySetMapping Name="Obras">
             <EntityTypeMapping TypeName="wDemoWilliamsModel.Obras">
               <MappingFragment StoreEntitySet="Obras">
+                <ScalarProperty Name="OrdenamientoSecundario" ColumnName="OrdenamientoSecundario" />
+                <ScalarProperty Name="IdObraRelacionada" ColumnName="IdObraRelacionada" />
                 <ScalarProperty Name="DiasLiquidacionCertificados" ColumnName="DiasLiquidacionCertificados" />
                 <ScalarProperty Name="AuxiliarDeMateriales" ColumnName="AuxiliarDeMateriales" />
                 <ScalarProperty Name="ProximoNumeroAutorizacionCompra" ColumnName="ProximoNumeroAutorizacionCompra" />
@@ -903,120 +316,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="wDemoWilliamsModel.Clientes">
-              <MappingFragment StoreEntitySet="Clientes">
-                <ScalarProperty Name="HabilitadoParaCartaPorte" ColumnName="HabilitadoParaCartaPorte" />
-                <ScalarProperty Name="SeLeDerivaSuFacturaAlCorredorDeLaCarta" ColumnName="SeLeDerivaSuFacturaAlCorredorDeLaCarta" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoDestinatarioExportador" ColumnName="SeLeFacturaCartaPorteComoDestinatarioExportador" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoDestinatario" ColumnName="SeLeFacturaCartaPorteComoDestinatario" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoCorredor" ColumnName="SeLeFacturaCartaPorteComoCorredor" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoRemcomercial" ColumnName="SeLeFacturaCartaPorteComoRemcomercial" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoIntermediario" ColumnName="SeLeFacturaCartaPorteComoIntermediario" />
-                <ScalarProperty Name="SeLeFacturaCartaPorteComoTitular" ColumnName="SeLeFacturaCartaPorteComoTitular" />
-                <ScalarProperty Name="IncluyeTarifaEnFactura" ColumnName="IncluyeTarifaEnFactura" />
-                <ScalarProperty Name="ObservacionesDeCorreos" ColumnName="ObservacionesDeCorreos" />
-                <ScalarProperty Name="CodigoPostalDeCorreos" ColumnName="CodigoPostalDeCorreos" />
-                <ScalarProperty Name="IdProvinciaDeCorreos" ColumnName="IdProvinciaDeCorreos" />
-                <ScalarProperty Name="IdLocalidadDeCorreos" ColumnName="IdLocalidadDeCorreos" />
-                <ScalarProperty Name="DireccionDeCorreos" ColumnName="DireccionDeCorreos" />
-                <ScalarProperty Name="ExigeDatosCompletosEnCartaDePorteQueLoUse" ColumnName="ExigeDatosCompletosEnCartaDePorteQueLoUse" />
-                <ScalarProperty Name="ExpresionRegularNoAgruparFacturasConEstosVendedores" ColumnName="ExpresionRegularNoAgruparFacturasConEstosVendedores" />
-                <ScalarProperty Name="IdBancoGestionador" ColumnName="IdBancoGestionador" />
-                <ScalarProperty Name="GrupoIIBBCapital" ColumnName="GrupoIIBBCapital" />
-                <ScalarProperty Name="FechaFinVigenciaIBDirectoCapital" ColumnName="FechaFinVigenciaIBDirectoCapital" />
-                <ScalarProperty Name="FechaInicioVigenciaIBDirectoCapital" ColumnName="FechaInicioVigenciaIBDirectoCapital" />
-                <ScalarProperty Name="PorcentajeIBDirectoCapital" ColumnName="PorcentajeIBDirectoCapital" />
-                <ScalarProperty Name="CBU" ColumnName="CBU" />
-                <ScalarProperty Name="IdBancoDebito" ColumnName="IdBancoDebito" />
-                <ScalarProperty Name="GrupoIIBB" ColumnName="GrupoIIBB" />
-                <ScalarProperty Name="FechaFinVigenciaIBDirecto" ColumnName="FechaFinVigenciaIBDirecto" />
-                <ScalarProperty Name="FechaInicioVigenciaIBDirecto" ColumnName="FechaInicioVigenciaIBDirecto" />
-                <ScalarProperty Name="PorcentajeIBDirecto" ColumnName="PorcentajeIBDirecto" />
-                <ScalarProperty Name="FechaModifico" ColumnName="FechaModifico" />
-                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="IdUsuarioIngreso" ColumnName="IdUsuarioIngreso" />
-                <ScalarProperty Name="PorcentajePercepcionIVA" ColumnName="PorcentajePercepcionIVA" />
-                <ScalarProperty Name="BaseMinimaParaPercepcionIVA" ColumnName="BaseMinimaParaPercepcionIVA" />
-                <ScalarProperty Name="EsAgenteRetencionIVA" ColumnName="EsAgenteRetencionIVA" />
-                <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
-                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
-                <ScalarProperty Name="IdIBCondicionPorDefecto3" ColumnName="IdIBCondicionPorDefecto3" />
-                <ScalarProperty Name="IdIBCondicionPorDefecto2" ColumnName="IdIBCondicionPorDefecto2" />
-                <ScalarProperty Name="Auxiliar" ColumnName="Auxiliar" />
-                <ScalarProperty Name="Cobrador" ColumnName="Cobrador" />
-                <ScalarProperty Name="IdCuentaMonedaExt" ColumnName="IdCuentaMonedaExt" />
-                <ScalarProperty Name="Importaciones_DenominacionInscripcion" ColumnName="Importaciones_DenominacionInscripcion" />
-                <ScalarProperty Name="Importaciones_NumeroInscripcion" ColumnName="Importaciones_NumeroInscripcion" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="CodigoPresto" ColumnName="CodigoPresto" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
-                <ScalarProperty Name="IdIBCondicionPorDefecto" ColumnName="IdIBCondicionPorDefecto" />
-                <ScalarProperty Name="IdListaPrecios" ColumnName="IdListaPrecios" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="TipoCliente" ColumnName="TipoCliente" />
-                <ScalarProperty Name="IBCondicion" ColumnName="IBCondicion" />
-                <ScalarProperty Name="IBNumeroInscripcion" ColumnName="IBNumeroInscripcion" />
-                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-                <ScalarProperty Name="IdCondicionVenta" ColumnName="IdCondicionVenta" />
-                <ScalarProperty Name="IGCondicion" ColumnName="IGCondicion" />
-                <ScalarProperty Name="CreditoMaximo" ColumnName="CreditoMaximo" />
-                <ScalarProperty Name="Vendedor1" ColumnName="Vendedor1" />
-                <ScalarProperty Name="SaldoDocumentos" ColumnName="SaldoDocumentos" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
-                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
-                <ScalarProperty Name="IdProvinciaEntrega" ColumnName="IdProvinciaEntrega" />
-                <ScalarProperty Name="IdLocalidadEntrega" ColumnName="IdLocalidadEntrega" />
-                <ScalarProperty Name="DireccionEntrega" ColumnName="DireccionEntrega" />
-                <ScalarProperty Name="EnviarEmail" ColumnName="EnviarEmail" />
-                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
-                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-                <ScalarProperty Name="IdCodigoIva" ColumnName="IdCodigoIva" />
-                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams>
-      <Diagram Name="Model1" ZoomLevel="38">
-        <EntityTypeShape EntityType="wDemoWilliamsModel.DetalleRequerimientos" Width="2.375" PointX="8" PointY="0.5" Height="14.672180989583332" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Requerimientos" Width="1.875" PointX="5.375" PointY="0.5" Height="12.364563802083332" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.ControlesCalidad" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9802864583333326" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Obras" Width="1.5" PointX="2.75" PointY="7.75" Height="11.595358072916667" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Sectores" Width="1.5" PointX="11.75" PointY="0.75" Height="2.3648893229166665" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Unidades" Width="1.5" PointX="11.75" PointY="4.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="wDemoWilliamsModel.Clientes" Width="1.5" PointX="5.125" PointY="13.375" Height="16.595195312500007" />
-      </Diagram>
-    </Diagrams>
-  </Designer>
+    <edmx:Diagrams>
+      <edmx:Diagram Name="Model1" ZoomLevel="13">
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.ControlesCalidad" Width="1.5" PointX="0.75" PointY="7.75" Height="1.9802864583333326" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Obras" Width="1.5" PointX="2.75" PointY="7.75" Height="11.595358072916667" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Sectores" Width="1.5" PointX="11.75" PointY="0.75" Height="2.3648893229166665" />
+        <edmx:EntityTypeShape EntityType="wDemoWilliamsModel.Unidades" Width="1.5" PointX="17.75" PointY="8" Height="2.1725878906249996" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
 </edmx:Edmx>

@@ -11500,8 +11500,19 @@ Namespace Pronto.ERP.Bll
 
                     'ForzarPrefijo5(.NumeroCartaDePorte)
 
-                    sb &= Right(.NumeroCartaDePorte.ToString, 8).PadLeft(8, " ") _
-                    & Left(.SubnumeroVagon.ToString, 6).PadLeft(6, "0") 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
+
+                    '                    http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14204
+                    '                    Me aclararon algo sobre el numero de CP:
+                    'Si es camión va el numero completo de la CP
+                    'Si es vagón va como está escrito en el documento:
+                    'Posición 1 a 8 (últimos 8 dígitos del nro. carta de porte)
+                    'Posición 9 a 14 (nro. de vagón, completar los espacios con 0)
+                    If .SubnumeroVagon = 0 Then
+                        sb &= Right(.NumeroCartaDePorte.ToString, 14).PadLeft(14, " ")
+                    Else
+                        sb &= Right(.NumeroCartaDePorte.ToString, 8).PadLeft(8, " ") _
+                        & Left(.SubnumeroVagon.ToString, 6).PadLeft(6, "0") 'CarPorte	STRING(14)	Número de Carta de Porte)    827)    840
+                    End If
 
                     'Campo 57 TipoTrans: La cartas de Porte de vagón vienen con una “c” y corresponde “v”.
                     sb &= IIf(.SubnumeroVagon = 0, "c", "v").ToString.PadRight(1) 'TipoTrans	STRING(1)	Tipo de transporte c=camión  v=vagón o=Otro)    841)    841

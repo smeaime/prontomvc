@@ -41,3 +41,9 @@ C:\Backup\BDL\BussinessLogic\obj\Release\BusinessLogic.vbproj.GenerateResource.C
 C:\Backup\BDL\BussinessLogic\obj\Release\BusinessLogic.dll
 C:\Backup\BDL\BussinessLogic\obj\Release\BusinessLogic.xml
 C:\Backup\BDL\BussinessLogic\obj\Release\BusinessLogic.pdb
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\BusinessLogic.vbprojResolveAssemblyReference.cache
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\BusinessLogic.vbproj.ResolveComReference.cache
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\Resources.resources
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\BusinessLogic.vbproj.GenerateResource.Cache
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\BusinessLogic.dll
+C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\obj\Release\BusinessLogic.xml
