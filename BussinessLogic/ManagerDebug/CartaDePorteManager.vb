@@ -21070,7 +21070,7 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
 
             Case "NETO PROC", "KG", "KG. PROC.", "KG,PROC", "KG P", _
-                    "KGS", "KGS ORIGEN" '"KGS." qué va a ser? Neto proc o Neto Pto???
+                    "KGS", "KGS ORIGEN", "NETO_PROC" '"KGS." qué va a ser? Neto proc o Neto Pto???
 
                 'conflicto "PROC": lo usa "Las Palmas" para "Procedencia"
                 Return "NetoProc"
@@ -21084,12 +21084,12 @@ Public Class ExcelImportadorManager
                 '/////////////////////////////////////////////////////////////////////////
                 '/////////////////////////////////////////////////////////////////////////
 
-            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_PROC"
+            Case "BRUTO PTO", "BRUTO", "BRUTO BUNGE", "BRUTO_DEST"
 
                 Return "column12"
-            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_PROC"
+            Case "TARA PTO", "TARA", "TARA BUNGE", "TARA_DEST"
                 Return "column13"
-            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_PROC"
+            Case "NETO PTO", "NETO", "KG. DESC.", "KGS.", "KG.DESC", "DESC.", "NETO BUNGE", "DESC", "NETO_DEST"
 
                 Return "column14"
 

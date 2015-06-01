@@ -1,153 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+<Schema Namespace="wDemoWilliamsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
   <EntityContainer Name="wDemoWilliamsEntities">
-    <EntitySet Name="DetalleRequerimientos" EntityType="wDemoWilliamsModel.DetalleRequerimientos" />
-    <EntitySet Name="Requerimientos" EntityType="wDemoWilliamsModel.Requerimientos" />
     <EntitySet Name="ControlesCalidad" EntityType="wDemoWilliamsModel.ControlesCalidad" />
     <EntitySet Name="Obras" EntityType="wDemoWilliamsModel.Obras" />
     <EntitySet Name="Sectores" EntityType="wDemoWilliamsModel.Sectores" />
     <EntitySet Name="Unidades" EntityType="wDemoWilliamsModel.Unidades" />
-    <EntitySet Name="Clientes" EntityType="wDemoWilliamsModel.Clientes" />
   </EntityContainer>
-  <EntityType Name="DetalleRequerimientos">
-    <Key>
-      <PropertyRef Name="IdDetalleRequerimiento" />
-    </Key>
-    <Property Type="Int32" Name="IdDetalleRequerimiento" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Type="Int32" Name="IdRequerimiento" />
-    <Property Type="Int32" Name="NumeroItem" />
-    <Property Type="Decimal" Name="Cantidad" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IdUnidad" />
-    <Property Type="Int32" Name="IdArticulo" />
-    <Property Type="DateTime" Name="FechaEntrega" />
-    <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Decimal" Name="Cantidad1" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="Cantidad2" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IdDetalleLMateriales" />
-    <Property Type="Int32" Name="IdControlCalidad" />
-    <Property Type="String" Name="Adjunto" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdCentroCosto" />
-    <Property Type="Int32" Name="IdComprador" />
-    <Property Type="Int32" Name="NumeroFacturaCompra1" />
-    <Property Type="DateTime" Name="FechaFacturaCompra" />
-    <Property Type="Decimal" Name="ImporteFacturaCompra" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IdProveedor" />
-    <Property Type="Int32" Name="NumeroFacturaCompra2" />
-    <Property Type="String" Name="EsBienDeUso" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdCuenta" />
-    <Property Type="String" Name="Cumplido" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Usuario1" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaIngreso1" />
-    <Property Type="String" Name="ArchivoAdjunto1" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto2" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto3" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto4" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto5" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto6" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto7" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto8" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto9" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ArchivoAdjunto10" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Descripcionmanual" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Type="Byte" Name="EnviarEmail" />
-    <Property Type="Int32" Name="IdRequerimientoOriginal" />
-    <Property Type="Int32" Name="IdDetalleRequerimientoOriginal" />
-    <Property Type="Int32" Name="IdOrigenTransmision" />
-    <Property Type="Int32" Name="IdLlamadoAProveedor" />
-    <Property Type="DateTime" Name="FechaLlamadoAProveedor" />
-    <Property Type="Int32" Name="IdLlamadoRegistradoPor" />
-    <Property Type="DateTime" Name="FechaRegistracionLlamada" />
-    <Property Type="String" Name="ObservacionesLlamada" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="IdAutorizoCumplido" />
-    <Property Type="Int32" Name="IdDioPorCumplido" />
-    <Property Type="DateTime" Name="FechaDadoPorCumplido" />
-    <Property Type="String" Name="ObservacionesCumplido" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="IdAproboAlmacen" />
-    <Property Type="Int32" Name="IdEquipo" />
-    <Property Type="DateTime" Name="FechaEntrega_Tel" />
-    <Property Type="String" Name="PRESTOConcepto" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="Costo" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="OrigenDescripcion" />
-    <Property Type="String" Name="TipoDesignacion" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdLiberoParaCompras" />
-    <Property Type="DateTime" Name="FechaLiberacionParaCompras" />
-    <Property Type="String" Name="Recepcionado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Pagina" />
-    <Property Type="Int32" Name="Item" />
-    <Property Type="Int32" Name="Figura" />
-    <Property Type="String" Name="CodigoDistribucion" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdEquipoDestino" />
-    <Property Type="String" Name="Entregado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaAsignacionComprador" />
-    <Property Type="String" Name="MoP" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdDetalleObraDestino" />
-    <Property Type="Int32" Name="IdPresupuestoObraRubro" />
-  </EntityType>
-  <EntityType Name="Requerimientos">
-    <Key>
-      <PropertyRef Name="IdRequerimiento" />
-    </Key>
-    <Property Type="Int32" Name="IdRequerimiento" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Type="Int32" Name="NumeroRequerimiento" />
-    <Property Type="DateTime" Name="FechaRequerimiento" />
-    <Property Type="String" Name="LugarEntrega" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="IdObra" />
-    <Property Type="Int32" Name="IdCentroCosto" />
-    <Property Type="Int32" Name="IdSolicito" />
-    <Property Type="Int32" Name="IdSector" />
-    <Property Type="Decimal" Name="MontoPrevisto" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IdComprador" />
-    <Property Type="Int32" Name="Aprobo" />
-    <Property Type="DateTime" Name="FechaAprobacion" />
-    <Property Type="Decimal" Name="MontoParaCompra" Precision="18" Scale="2" />
-    <Property Type="String" Name="Cumplido" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Consorcial" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="UsuarioAnulacion" MaxLength="6" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaAnulacion" />
-    <Property Type="String" Name="MotivoAnulacion" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Byte" Name="EnviarEmail" />
-    <Property Type="Int32" Name="IdRequerimientoOriginal" />
-    <Property Type="Int32" Name="IdOrigenTransmision" />
-    <Property Type="Int32" Name="IdAutorizoCumplido" />
-    <Property Type="Int32" Name="IdDioPorCumplido" />
-    <Property Type="DateTime" Name="FechaDadoPorCumplido" />
-    <Property Type="String" Name="ObservacionesCumplido" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="IdMoneda" />
-    <Property Type="String" Name="Detalle" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="DirectoACompras" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdAutorizoDirectoACompras" />
-    <Property Type="String" Name="PRESTOContrato" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Confirmado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="FechaImportacionTransmision" />
-    <Property Type="Int32" Name="IdEquipoDestino" />
-    <Property Type="String" Name="Impresa" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Recepcionado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Entregado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="TipoRequerimiento" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdOrdenTrabajo" />
-    <Property Type="Int32" Name="Aprobo2" />
-    <Property Type="DateTime" Name="FechaAprobacion2" />
-    <Property Type="Int32" Name="IdTipoCompra" />
-    <Property Type="Int32" Name="IdImporto" />
-    <Property Type="DateTime" Name="FechaLlegadaImportacion" />
-    <Property Type="String" Name="CircuitoFirmasCompleto" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdCuentaPresupuesto" />
-    <Property Type="Int32" Name="MesPresupuesto" />
-    <Property Type="String" Name="RequisitosSeguridad" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Adjuntos" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ConfirmadoPorWeb" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="DetalleImputacion" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdUsuarioDeslibero" />
-    <Property Type="DateTime" Name="FechaDesliberacion" />
-    <Property Type="Int32" Name="NumeradorDesliberaciones" />
-    <Property Type="Int32" Name="IdUsuarioEliminoFirmas" />
-    <Property Type="DateTime" Name="FechaEliminacionFirmas" />
-    <Property Type="Int32" Name="NumeradorEliminacionesFirmas" />
-    <Property Type="Int32" Name="NumeradorModificaciones" />
-    <Property Type="String" Name="ParaTaller" MaxLength="2" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="ControlesCalidad">
     <Key>
       <PropertyRef Name="IdControlCalidad" />
@@ -165,10 +23,10 @@
     <Property Type="Int32" Name="IdObra" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
     <Property Type="String" Name="NumeroObra" MaxLength="13" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="IdCliente" />
-    <Property Type="DateTime" Name="FechaInicio" />
-    <Property Type="DateTime" Name="FechaFinalizacion" />
+    <Property Type="DateTime" Name="FechaInicio" Precision="3" />
+    <Property Type="DateTime" Name="FechaFinalizacion" Precision="3" />
     <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="FechaEntrega" />
+    <Property Type="DateTime" Name="FechaEntrega" Precision="3" />
     <Property Type="String" Name="Descripcion" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="IdJefe" />
     <Property Type="Int32" Name="TipoObra" />
@@ -217,6 +75,8 @@
     <Property Type="Int32" Name="ProximoNumeroAutorizacionCompra" />
     <Property Type="String" Name="AuxiliarDeMateriales" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="DiasLiquidacionCertificados" />
+    <Property Name="IdObraRelacionada" Type="Int32" />
+    <Property Name="OrdenamientoSecundario" Type="Int32" />
   </EntityType>
   <EntityType Name="Sectores">
     <Key>
@@ -240,89 +100,5 @@
     <Property Type="String" Name="CodigoAFIP" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Type="Int32" Name="UnidadesPorPack" />
     <Property Type="Decimal" Name="TaraEnKg" Precision="18" Scale="4" />
-  </EntityType>
-  <EntityType Name="Clientes">
-    <Key>
-      <PropertyRef Name="IdCliente" />
-    </Key>
-    <Property Type="Int32" Name="IdCliente" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Type="String" Name="RazonSocial" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Direccion" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdLocalidad" />
-    <Property Type="String" Name="CodigoPostal" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdProvincia" />
-    <Property Type="Int32" Name="IdPais" />
-    <Property Type="String" Name="Telefono" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Fax" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Email" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Cuit" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="Byte" Name="IdCodigoIva" />
-    <Property Type="DateTime" Name="FechaAlta" />
-    <Property Type="String" Name="Contacto" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Byte" Name="EnviarEmail" />
-    <Property Type="String" Name="DireccionEntrega" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdLocalidadEntrega" />
-    <Property Type="Int32" Name="IdProvinciaEntrega" />
-    <Property Type="Int32" Name="CodigoCliente" />
-    <Property Type="Int32" Name="IdCuenta" />
-    <Property Type="Decimal" Name="Saldo" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="SaldoDocumentos" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="Vendedor1" />
-    <Property Type="Decimal" Name="CreditoMaximo" Precision="18" Scale="2" />
-    <Property Type="Int32" Name="IGCondicion" />
-    <Property Type="Int32" Name="IdCondicionVenta" />
-    <Property Type="Int32" Name="IdMoneda" />
-    <Property Type="String" Name="IBNumeroInscripcion" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IBCondicion" />
-    <Property Type="Int32" Name="TipoCliente" />
-    <Property Type="String" Name="Codigo" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdListaPrecios" />
-    <Property Type="Int32" Name="IdIBCondicionPorDefecto" />
-    <Property Type="String" Name="Confirmado" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CodigoPresto" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Observaciones" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Importaciones_NumeroInscripcion" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Importaciones_DenominacionInscripcion" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdCuentaMonedaExt" />
-    <Property Type="Int32" Name="Cobrador" />
-    <Property Type="String" Name="Auxiliar" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdIBCondicionPorDefecto2" />
-    <Property Type="Int32" Name="IdIBCondicionPorDefecto3" />
-    <Property Type="Int32" Name="IdEstado" />
-    <Property Type="String" Name="NombreFantasia" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="EsAgenteRetencionIVA" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="BaseMinimaParaPercepcionIVA" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="PorcentajePercepcionIVA" Precision="6" Scale="2" />
-    <Property Type="Int32" Name="IdUsuarioIngreso" />
-    <Property Type="DateTime" Name="FechaIngreso" />
-    <Property Type="Int32" Name="IdUsuarioModifico" />
-    <Property Type="DateTime" Name="FechaModifico" />
-    <Property Type="Decimal" Name="PorcentajeIBDirecto" Precision="6" Scale="2" />
-    <Property Type="DateTime" Name="FechaInicioVigenciaIBDirecto" />
-    <Property Type="DateTime" Name="FechaFinVigenciaIBDirecto" />
-    <Property Type="Int32" Name="GrupoIIBB" />
-    <Property Type="Int32" Name="IdBancoDebito" />
-    <Property Type="String" Name="CBU" MaxLength="22" FixedLength="false" Unicode="false" />
-    <Property Type="Decimal" Name="PorcentajeIBDirectoCapital" Precision="6" Scale="2" />
-    <Property Type="DateTime" Name="FechaInicioVigenciaIBDirectoCapital" />
-    <Property Type="DateTime" Name="FechaFinVigenciaIBDirectoCapital" />
-    <Property Type="Int32" Name="GrupoIIBBCapital" />
-    <Property Type="Int32" Name="IdBancoGestionador" />
-    <Property Type="String" Name="ExpresionRegularNoAgruparFacturasConEstosVendedores" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ExigeDatosCompletosEnCartaDePorteQueLoUse" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="DireccionDeCorreos" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="IdLocalidadDeCorreos" />
-    <Property Type="Int32" Name="IdProvinciaDeCorreos" />
-    <Property Type="String" Name="CodigoPostalDeCorreos" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ObservacionesDeCorreos" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="IncluyeTarifaEnFactura" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoTitular" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoIntermediario" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoRemcomercial" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoCorredor" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoDestinatario" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeFacturaCartaPorteComoDestinatarioExportador" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SeLeDerivaSuFacturaAlCorredorDeLaCarta" MaxLength="2" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="HabilitadoParaCartaPorte" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

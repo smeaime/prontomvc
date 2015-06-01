@@ -89,7 +89,7 @@ Namespace Pronto.ERP.Bll
                                 " FROM " & Tabla & " A " & _
                                 " LEFT OUTER JOIN WilliamsDestinos LOCDES ON IdDestinoDeCartaDePorte = LOCDES.IdWilliamsDestino " & _
                                 " LEFT OUTER JOIN Articulos ON A.IdArticulo = Articulos.IdArticulo  WHERE IdListaPrecios=" & IdLista & _
-                                ""))
+                                " order by LOCDES.Descripcion,Articulos.Descripcion  "))
 
         End Function
 

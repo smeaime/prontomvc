@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="_TempAutorizaciones">
     <Key>
       <PropertyRef Name="IdTempAutorizacion" />
@@ -1758,7 +1758,6 @@
     <Property Name="IdTipoRetencionGanancia" Type="int" />
     <Property Name="IdIBCondicion" Type="int" />
     <Property Name="ImporteRetencionSUSS" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="SaldoAFondoDeReparo" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="DetalleOrdenesPagoCuentas">
     <Key>
@@ -2341,28 +2340,6 @@
     <Property Name="FechaDioPorRecepcionado" Type="datetime" />
     <Property Name="ObservacionDioPorRecepcionado" Type="ntext" />
     <Property Name="ImputarConsumoAObraActualEquipoMantenimiento" Type="varchar" MaxLength="2" />
-  </EntityType>
-  <EntityType Name="DetalleSalidasMaterialesKits">
-    <Key>
-      <PropertyRef Name="IdDetalleSalidaMaterialesKit" />
-    </Key>
-    <Property Name="IdDetalleSalidaMaterialesKit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdDetalleSalidaMateriales" Type="int" />
-    <Property Name="IdArticulo" Type="int" />
-    <Property Name="IdUnidad" Type="int" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="4" />
-  </EntityType>
-  <EntityType Name="DetalleSalidasMaterialesPresupuestosObras">
-    <Key>
-      <PropertyRef Name="IdDetalleSalidaMaterialesPresupuestosObras" />
-    </Key>
-    <Property Name="IdDetalleSalidaMaterialesPresupuestosObras" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdDetalleSalidaMateriales" Type="int" />
-    <Property Name="IdPresupuestoObrasNodo" Type="int" />
-    <Property Name="Cantidad" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="IdDetalleSalidaMaterialesKit" Type="int" />
-    <Property Name="IdPresupuestoObrasNodoNoMateriales" Type="int" />
   </EntityType>
   <EntityType Name="DetalleValesSalida">
     <Key>
@@ -3736,14 +3713,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="AcreditarInteresesAlFinalizar" Type="varchar" MaxLength="2" />
     <Property Name="NoExigirRubroContable" Type="varchar" MaxLength="2" />
   </EntityType>
-  <EntityType Name="PresupuestoObrasGruposMateriales">
-    <Key>
-      <PropertyRef Name="IdPresupuestoObraGrupoMateriales" />
-    </Key>
-    <Property Name="IdPresupuestoObraGrupoMateriales" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Codigo" Type="varchar" MaxLength="20" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="256" />
-  </EntityType>
   <EntityType Name="PresupuestoObrasNodos">
     <Key>
       <PropertyRef Name="IdPresupuestoObrasNodo" />
@@ -3802,16 +3771,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Costo" Type="numeric" Precision="18" Scale="8" />
     <Property Name="PrecioVentaUnitario" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
-  <EntityType Name="PresupuestoObrasNodosPresupuestos">
-    <Key>
-      <PropertyRef Name="IdPresupuestoObrasNodoPresupuesto" />
-    </Key>
-    <Property Name="IdPresupuestoObrasNodoPresupuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdObra" Type="int" />
-    <Property Name="NumeroPresupuesto" Type="int" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="Detalle" Type="varchar" MaxLength="200" />
-  </EntityType>
   <EntityType Name="PresupuestoObrasNodosPxQxPresupuesto">
     <Key>
       <PropertyRef Name="IdPresupuestoObrasNodosPxQxPresupuesto" />
@@ -3855,14 +3814,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Property Name="Mes" Type="int" />
     <Property Name="IdPresupuestoObrasNodo" Type="int" />
     <Property Name="Observaciones" Type="ntext" />
-  </EntityType>
-  <EntityType Name="PresupuestoObrasRubros">
-    <Key>
-      <PropertyRef Name="IdPresupuestoObraRubro" />
-    </Key>
-    <Property Name="IdPresupuestoObraRubro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-    <Property Name="TipoConsumo" Type="int" />
   </EntityType>
   <EntityType Name="Presupuestos">
     <Key>
@@ -6858,6 +6809,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Articulos_TX_BD_ProntoMantenimientoTodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdObraPronto" Type="int" Mode="In" />
+  </Function>
   <Function Name="Articulos_TX_DatosConCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdArticulo" Type="int" Mode="In" />
   </Function>
@@ -6914,128 +6868,6 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="Estado" Type="varchar" Mode="In" />
     <Parameter Name="IdUsuario" Type="int" Mode="In" />
   </Function>
-  <Function Name="PresupuestoObrasNodos_TX_Consumos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
-    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
-    <Parameter Name="Excluyente" Type="varchar" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ConsumosParaImputar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ActivarRangoFechas" Type="varchar" Mode="In" />
-    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
-    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
-    <Parameter Name="IncluirAsignados" Type="varchar" Mode="In" />
-    <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_DatosParaAsignacionPlantasProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
-    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_DetallePxQ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="Comparar1" Type="int" Mode="In" />
-    <Parameter Name="Comparar2" Type="int" Mode="In" />
-    <Parameter Name="CompararTomandoReal" Type="int" Mode="In" />
-    <Parameter Name="IdentificadorSesion" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_EtapasImputablesPorObraParaCombo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="PresupuestoObraRubro" Type="varchar" Mode="In" />
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="ConHijos" Type="varchar" Mode="In" />
-    <Parameter Name="Resumen" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_Hijos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ParaArbol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ParaInforme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="TipoInforme" Type="varchar" Mode="In" />
-    <Parameter Name="Desde" Type="int" Mode="In" />
-    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
-    <Parameter Name="Hasta" Type="int" Mode="In" />
-    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
-    <Parameter Name="Dts" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ParaPopUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="SoloPadres" Type="varchar" Mode="In" />
-    <Parameter Name="Dia" Type="int" Mode="In" />
-    <Parameter Name="Mes" Type="int" Mode="In" />
-    <Parameter Name="Año" Type="int" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ParaPresupuestoEstaticoYDinamico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="Datos" Type="varchar" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_ParaTransmitir_Todos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="PresupuestoObrasNodos_TX_PorCodigoPresupuesto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="NumeroPresupuesto" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Item" Type="varchar" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorItemConHijos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Item" Type="varchar" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="PresupuestoObraRubro" Type="varchar" Mode="In" />
-    <Parameter Name="SinNodoPadre" Type="varchar" Mode="In" />
-    <Parameter Name="IdEntidad" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorNodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdNodo" Type="int" Mode="In" />
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorNodoPadre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="IdNodoPadre" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorObraCodigoPresupuesto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorObraComparativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-    <Parameter Name="Desde" Type="int" Mode="In" />
-    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
-    <Parameter Name="Hasta" Type="int" Mode="In" />
-    <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorObraComparativa_Detalles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_PorObraConsumos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdPresupuestoObraRubro" Type="int" Mode="In" />
-    <Parameter Name="SoloPendientes" Type="varchar" Mode="In" />
-    <Parameter Name="ConConsumosAsignados" Type="varchar" Mode="In" />
-    <Parameter Name="TipoConsumo" Type="int" Mode="In" />
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-    <Parameter Name="IdDetalleObraDestino" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_TotalAvancePorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdPresupuestoObrasNodo" Type="int" Mode="In" />
-    <Parameter Name="CodigoPresupuesto" Type="int" Mode="In" />
-    <Parameter Name="Mes" Type="int" Mode="In" />
-    <Parameter Name="Año" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PresupuestoObrasNodos_TX_UltimoPresupuesto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdObra" Type="int" Mode="In" />
-  </Function>
   <Function Name="Remitos_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Requerimientos_ActualizarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
@@ -7065,196 +6897,191 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
     <Parameter Name="TipoMovimiento" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="DemoProntoModelStoreContainer">
-    <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Actividades Proveedores" EntityType="Self.Actividades Proveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AjustesStock" EntityType="Self.AjustesStock" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Asientos" EntityType="Self.Asientos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AutorizacionesCompra" EntityType="Self.AutorizacionesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AutorizacionesPorComprobante" EntityType="Self.AutorizacionesPorComprobante" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AutorizacionesPorComprobanteADesignar" EntityType="Self.AutorizacionesPorComprobanteADesignar" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="BancoChequeras" EntityType="Self.BancoChequeras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Choferes" EntityType="Self.Choferes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ComprobantesProveedores" EntityType="Self.ComprobantesProveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Conceptos" EntityType="Self.Conceptos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Conciliaciones" EntityType="Self.Conciliaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Condiciones Compra" EntityType="Self.Condiciones Compra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Conjuntos" EntityType="Self.Conjuntos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ControlesCalidad" EntityType="Self.ControlesCalidad" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CuentasBancarias" EntityType="Self.CuentasBancarias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CuentasCorrientesAcreedores" EntityType="Self.CuentasCorrientesAcreedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CuentasCorrientesDeudores" EntityType="Self.CuentasCorrientesDeudores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CuentasEjerciciosContables" EntityType="Self.CuentasEjerciciosContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CurvasTalles" EntityType="Self.CurvasTalles" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DefinicionArticulos" EntityType="Self.DefinicionArticulos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Depositos" EntityType="Self.Depositos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DescripcionIva" EntityType="Self.DescripcionIva" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleAjustesStock" EntityType="Self.DetalleAjustesStock" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleArticulosActivosFijos" EntityType="Self.DetalleArticulosActivosFijos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleArticulosDocumentos" EntityType="Self.DetalleArticulosDocumentos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleArticulosImagenes" EntityType="Self.DetalleArticulosImagenes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleArticulosUnidades" EntityType="Self.DetalleArticulosUnidades" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleAsientos" EntityType="Self.DetalleAsientos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleAutorizaciones" EntityType="Self.DetalleAutorizaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleAutorizacionesCompra" EntityType="Self.DetalleAutorizacionesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleAutorizacionesFirmantes" EntityType="Self.DetalleAutorizacionesFirmantes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleClientes" EntityType="Self.DetalleClientes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleClientesDirecciones" EntityType="Self.DetalleClientesDirecciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleClientesLugaresEntrega" EntityType="Self.DetalleClientesLugaresEntrega" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleClientesTelefonos" EntityType="Self.DetalleClientesTelefonos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleComparativas" EntityType="Self.DetalleComparativas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleComprobantesProveedores" EntityType="Self.DetalleComprobantesProveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleComprobantesProveedoresPresupuestosObras" EntityType="Self.DetalleComprobantesProveedoresPresupuestosObras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleComprobantesProveedoresProvincias" EntityType="Self.DetalleComprobantesProveedoresProvincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleConciliaciones" EntityType="Self.DetalleConciliaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleConjuntos" EntityType="Self.DetalleConjuntos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleadosObras" EntityType="Self.DetalleEmpleadosObras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleadosSectores" EntityType="Self.DetalleEmpleadosSectores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="Self.DetalleEmpleadosUbicaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleFacturas" EntityType="Self.DetalleFacturas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleFacturasClientesPRESTO" EntityType="Self.DetalleFacturasClientesPRESTO" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleFacturasOrdenesCompra" EntityType="Self.DetalleFacturasOrdenesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleFacturasProvincias" EntityType="Self.DetalleFacturasProvincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleFacturasRemitos" EntityType="Self.DetalleFacturasRemitos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasCredito" EntityType="Self.DetalleNotasCredito" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasCreditoImputaciones" EntityType="Self.DetalleNotasCreditoImputaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasCreditoOrdenesCompra" EntityType="Self.DetalleNotasCreditoOrdenesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasCreditoProvincias" EntityType="Self.DetalleNotasCreditoProvincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasDebito" EntityType="Self.DetalleNotasDebito" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleNotasDebitoProvincias" EntityType="Self.DetalleNotasDebitoProvincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleObrasEquiposInstalados" EntityType="Self.DetalleObrasEquiposInstalados" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleObrasEquiposInstalados2" EntityType="Self.DetalleObrasEquiposInstalados2" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleObrasPolizas" EntityType="Self.DetalleObrasPolizas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesCompra" EntityType="Self.DetalleOrdenesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPago" EntityType="Self.DetalleOrdenesPago" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPagoCuentas" EntityType="Self.DetalleOrdenesPagoCuentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPagoImpuestos" EntityType="Self.DetalleOrdenesPagoImpuestos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPagoRendicionesFF" EntityType="Self.DetalleOrdenesPagoRendicionesFF" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPagoRubrosContables" EntityType="Self.DetalleOrdenesPagoRubrosContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOrdenesPagoValores" EntityType="Self.DetalleOrdenesPagoValores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleOtrosIngresosAlmacen" EntityType="Self.DetalleOtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetallePresupuestos" EntityType="Self.DetallePresupuestos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleProveedores" EntityType="Self.DetalleProveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleProveedoresIB" EntityType="Self.DetalleProveedoresIB" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleProveedoresRubros" EntityType="Self.DetalleProveedoresRubros" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRecepciones" EntityType="Self.DetalleRecepciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRecibos" EntityType="Self.DetalleRecibos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRecibosCuentas" EntityType="Self.DetalleRecibosCuentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRecibosRubrosContables" EntityType="Self.DetalleRecibosRubrosContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRecibosValores" EntityType="Self.DetalleRecibosValores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRemitos" EntityType="Self.DetalleRemitos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleRequerimientos" EntityType="Self.DetalleRequerimientos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleSalidasMateriales" EntityType="Self.DetalleSalidasMateriales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleSalidasMaterialesKits" EntityType="Self.DetalleSalidasMaterialesKits" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleSalidasMaterialesPresupuestosObras" EntityType="Self.DetalleSalidasMaterialesPresupuestosObras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleValesSalida" EntityType="Self.DetalleValesSalida" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Devoluciones" EntityType="Self.Devoluciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DiferenciasCambio" EntityType="Self.DiferenciasCambio" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Ejercicios" EntityType="Self.Ejercicios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EjerciciosContables" EntityType="Self.EjerciciosContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EmpleadosAccesos" EntityType="Self.EmpleadosAccesos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ImpuestosDirectos" EntityType="Self.ImpuestosDirectos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ListasPrecios" EntityType="Self.ListasPrecios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="LogComprobantesElectronicos" EntityType="Self.LogComprobantesElectronicos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="NotasCredito" EntityType="Self.NotasCredito" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="NotasDebito" EntityType="Self.NotasDebito" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrdenesCompra" EntityType="Self.OrdenesCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrdenesPago" EntityType="Self.OrdenesPago" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OtrosIngresosAlmacen" EntityType="Self.OtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PlazosEntrega" EntityType="Self.PlazosEntrega" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PlazosFijos" EntityType="Self.PlazosFijos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasGruposMateriales" EntityType="Self.PresupuestoObrasGruposMateriales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodos" EntityType="Self.PresupuestoObrasNodos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodosConsumos" EntityType="Self.PresupuestoObrasNodosConsumos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodosDatos" EntityType="Self.PresupuestoObrasNodosDatos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodosPresupuestos" EntityType="Self.PresupuestoObrasNodosPresupuestos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodosPxQxPresupuesto" EntityType="Self.PresupuestoObrasNodosPxQxPresupuesto" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasNodosPxQxPresupuestoPorDia" EntityType="Self.PresupuestoObrasNodosPxQxPresupuestoPorDia" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasRedeterminaciones" EntityType="Self.PresupuestoObrasRedeterminaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PresupuestoObrasRubros" EntityType="Self.PresupuestoObrasRubros" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ProntoIni" EntityType="Self.ProntoIni" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ProntoIniClaves" EntityType="Self.ProntoIniClaves" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PuntosVenta" EntityType="Self.PuntosVenta" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Recepciones" EntityType="Self.Recepciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Regiones" EntityType="Self.Regiones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Remitos" EntityType="Self.Remitos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RubrosContables" EntityType="Self.RubrosContables" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="RubrosValores" EntityType="Self.RubrosValores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SalidasMateriales" EntityType="Self.SalidasMateriales" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Subdiarios" EntityType="Self.Subdiarios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Subrubros" EntityType="Self.Subrubros" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TarifasFletes" EntityType="Self.TarifasFletes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tipos" EntityType="Self.Tipos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposCompra" EntityType="Self.TiposCompra" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposComprobante" EntityType="Self.TiposComprobante" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposCuentaGrupos" EntityType="Self.TiposCuentaGrupos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposImpuesto" EntityType="Self.TiposImpuesto" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposNegociosVentas" EntityType="Self.TiposNegociosVentas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposOperaciones" EntityType="Self.TiposOperaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposOperacionesGrupos" EntityType="Self.TiposOperacionesGrupos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposPoliza" EntityType="Self.TiposPoliza" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ValesSalida" EntityType="Self.ValesSalida" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Actividades Proveedores" EntityType="Self.Actividades Proveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="AjustesStock" EntityType="Self.AjustesStock" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Asientos" EntityType="Self.Asientos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="AutorizacionesCompra" EntityType="Self.AutorizacionesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="AutorizacionesPorComprobante" EntityType="Self.AutorizacionesPorComprobante" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="AutorizacionesPorComprobanteADesignar" EntityType="Self.AutorizacionesPorComprobanteADesignar" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="BancoChequeras" EntityType="Self.BancoChequeras" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Cajas" EntityType="Self.Cajas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Calles" EntityType="Self.Calles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Choferes" EntityType="Self.Choferes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Colores" EntityType="Self.Colores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Comparativas" EntityType="Self.Comparativas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ComprobantesProveedores" EntityType="Self.ComprobantesProveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Conceptos" EntityType="Self.Conceptos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Conciliaciones" EntityType="Self.Conciliaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Condiciones Compra" EntityType="Self.Condiciones Compra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Conjuntos" EntityType="Self.Conjuntos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ControlesCalidad" EntityType="Self.ControlesCalidad" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CuentasBancarias" EntityType="Self.CuentasBancarias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CuentasCorrientesAcreedores" EntityType="Self.CuentasCorrientesAcreedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CuentasCorrientesDeudores" EntityType="Self.CuentasCorrientesDeudores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CuentasEjerciciosContables" EntityType="Self.CuentasEjerciciosContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="CurvasTalles" EntityType="Self.CurvasTalles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DefinicionArticulos" EntityType="Self.DefinicionArticulos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Depositos" EntityType="Self.Depositos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DescripcionIva" EntityType="Self.DescripcionIva" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleAjustesStock" EntityType="Self.DetalleAjustesStock" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleArticulosActivosFijos" EntityType="Self.DetalleArticulosActivosFijos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleArticulosDocumentos" EntityType="Self.DetalleArticulosDocumentos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleArticulosImagenes" EntityType="Self.DetalleArticulosImagenes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleArticulosUnidades" EntityType="Self.DetalleArticulosUnidades" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleAsientos" EntityType="Self.DetalleAsientos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleAutorizaciones" EntityType="Self.DetalleAutorizaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleAutorizacionesCompra" EntityType="Self.DetalleAutorizacionesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleAutorizacionesFirmantes" EntityType="Self.DetalleAutorizacionesFirmantes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleClientes" EntityType="Self.DetalleClientes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleClientesDirecciones" EntityType="Self.DetalleClientesDirecciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleClientesLugaresEntrega" EntityType="Self.DetalleClientesLugaresEntrega" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleClientesTelefonos" EntityType="Self.DetalleClientesTelefonos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleComparativas" EntityType="Self.DetalleComparativas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleComprobantesProveedores" EntityType="Self.DetalleComprobantesProveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleComprobantesProveedoresPresupuestosObras" EntityType="Self.DetalleComprobantesProveedoresPresupuestosObras" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleComprobantesProveedoresProvincias" EntityType="Self.DetalleComprobantesProveedoresProvincias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleConciliaciones" EntityType="Self.DetalleConciliaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleConciliacionesNoContables" EntityType="Self.DetalleConciliacionesNoContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleConjuntos" EntityType="Self.DetalleConjuntos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleCuentas" EntityType="Self.DetalleCuentas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleDevoluciones" EntityType="Self.DetalleDevoluciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleados" EntityType="Self.DetalleEmpleados" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleadosCuentasBancarias" EntityType="Self.DetalleEmpleadosCuentasBancarias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleadosJornadas" EntityType="Self.DetalleEmpleadosJornadas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleadosObras" EntityType="Self.DetalleEmpleadosObras" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleadosSectores" EntityType="Self.DetalleEmpleadosSectores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleEmpleadosUbicaciones" EntityType="Self.DetalleEmpleadosUbicaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleFacturas" EntityType="Self.DetalleFacturas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleFacturasClientesPRESTO" EntityType="Self.DetalleFacturasClientesPRESTO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleFacturasOrdenesCompra" EntityType="Self.DetalleFacturasOrdenesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleFacturasProvincias" EntityType="Self.DetalleFacturasProvincias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleFacturasRemitos" EntityType="Self.DetalleFacturasRemitos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasCredito" EntityType="Self.DetalleNotasCredito" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasCreditoImputaciones" EntityType="Self.DetalleNotasCreditoImputaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasCreditoOrdenesCompra" EntityType="Self.DetalleNotasCreditoOrdenesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasCreditoProvincias" EntityType="Self.DetalleNotasCreditoProvincias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasDebito" EntityType="Self.DetalleNotasDebito" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleNotasDebitoProvincias" EntityType="Self.DetalleNotasDebitoProvincias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleObrasEquiposInstalados" EntityType="Self.DetalleObrasEquiposInstalados" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleObrasEquiposInstalados2" EntityType="Self.DetalleObrasEquiposInstalados2" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleObrasPolizas" EntityType="Self.DetalleObrasPolizas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesCompra" EntityType="Self.DetalleOrdenesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPago" EntityType="Self.DetalleOrdenesPago" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPagoCuentas" EntityType="Self.DetalleOrdenesPagoCuentas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPagoImpuestos" EntityType="Self.DetalleOrdenesPagoImpuestos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPagoRendicionesFF" EntityType="Self.DetalleOrdenesPagoRendicionesFF" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPagoRubrosContables" EntityType="Self.DetalleOrdenesPagoRubrosContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOrdenesPagoValores" EntityType="Self.DetalleOrdenesPagoValores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleOtrosIngresosAlmacen" EntityType="Self.DetalleOtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetallePresupuestos" EntityType="Self.DetallePresupuestos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleProveedores" EntityType="Self.DetalleProveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleProveedoresIB" EntityType="Self.DetalleProveedoresIB" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleProveedoresRubros" EntityType="Self.DetalleProveedoresRubros" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRecepciones" EntityType="Self.DetalleRecepciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRecibos" EntityType="Self.DetalleRecibos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRecibosCuentas" EntityType="Self.DetalleRecibosCuentas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRecibosRubrosContables" EntityType="Self.DetalleRecibosRubrosContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRecibosValores" EntityType="Self.DetalleRecibosValores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRemitos" EntityType="Self.DetalleRemitos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleRequerimientos" EntityType="Self.DetalleRequerimientos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleSalidasMateriales" EntityType="Self.DetalleSalidasMateriales" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DetalleValesSalida" EntityType="Self.DetalleValesSalida" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Devoluciones" EntityType="Self.Devoluciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DiferenciasCambio" EntityType="Self.DiferenciasCambio" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Ejercicios" EntityType="Self.Ejercicios" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="EjerciciosContables" EntityType="Self.EjerciciosContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="EmpleadosAccesos" EntityType="Self.EmpleadosAccesos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Estados Proveedores" EntityType="Self.Estados Proveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Feriados" EntityType="Self.Feriados" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ImpuestosDirectos" EntityType="Self.ImpuestosDirectos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ListasPrecios" EntityType="Self.ListasPrecios" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ListasPreciosDetalle" EntityType="Self.ListasPreciosDetalle" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="LogComprobantesElectronicos" EntityType="Self.LogComprobantesElectronicos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="NotasCredito" EntityType="Self.NotasCredito" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="NotasDebito" EntityType="Self.NotasDebito" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Obras" EntityType="Self.Obras" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="OrdenesCompra" EntityType="Self.OrdenesCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="OrdenesPago" EntityType="Self.OrdenesPago" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="OtrosIngresosAlmacen" EntityType="Self.OtrosIngresosAlmacen" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Parametros2" EntityType="Self.Parametros2" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PlazosEntrega" EntityType="Self.PlazosEntrega" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PlazosFijos" EntityType="Self.PlazosFijos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasNodos" EntityType="Self.PresupuestoObrasNodos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasNodosConsumos" EntityType="Self.PresupuestoObrasNodosConsumos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasNodosDatos" EntityType="Self.PresupuestoObrasNodosDatos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasNodosPxQxPresupuesto" EntityType="Self.PresupuestoObrasNodosPxQxPresupuesto" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasNodosPxQxPresupuestoPorDia" EntityType="Self.PresupuestoObrasNodosPxQxPresupuestoPorDia" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresupuestoObrasRedeterminaciones" EntityType="Self.PresupuestoObrasRedeterminaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ProntoIni" EntityType="Self.ProntoIni" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ProntoIniClaves" EntityType="Self.ProntoIniClaves" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PuntosVenta" EntityType="Self.PuntosVenta" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Recepciones" EntityType="Self.Recepciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Recibos" EntityType="Self.Recibos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Regiones" EntityType="Self.Regiones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Remitos" EntityType="Self.Remitos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Requerimientos" EntityType="Self.Requerimientos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RubrosContables" EntityType="Self.RubrosContables" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="RubrosValores" EntityType="Self.RubrosValores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="SalidasMateriales" EntityType="Self.SalidasMateriales" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Sectores" EntityType="Self.Sectores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Subdiarios" EntityType="Self.Subdiarios" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Subrubros" EntityType="Self.Subrubros" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TarifasFletes" EntityType="Self.TarifasFletes" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TarjetasCredito" EntityType="Self.TarjetasCredito" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Tipos" EntityType="Self.Tipos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposCompra" EntityType="Self.TiposCompra" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposComprobante" EntityType="Self.TiposComprobante" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposCuentaGrupos" EntityType="Self.TiposCuentaGrupos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposImpuesto" EntityType="Self.TiposImpuesto" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposNegociosVentas" EntityType="Self.TiposNegociosVentas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposOperaciones" EntityType="Self.TiposOperaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposOperacionesGrupos" EntityType="Self.TiposOperacionesGrupos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposPoliza" EntityType="Self.TiposPoliza" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Tree" EntityType="Self.Tree" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Unidades" EntityType="Self.Unidades" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="UnidadesOperativas" EntityType="Self.UnidadesOperativas" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="ValesSalida" EntityType="Self.ValesSalida" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Valores" EntityType="Self.Valores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="EjerciciosPeriodos" EntityType="Self.EjerciciosPeriodos" store:Type="Tables" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
       <DefiningQuery>SELECT 
     [EjerciciosPeriodos].[IdEjercicioPeriodo] AS [IdEjercicioPeriodo], 
     [EjerciciosPeriodos].[Ejercicio] AS [Ejercicio], 
