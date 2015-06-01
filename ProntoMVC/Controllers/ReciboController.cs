@@ -103,7 +103,7 @@ namespace ProntoMVC.Controllers
         {
             ViewBag.IdVendedor = new SelectList(db.Vendedores, "IdVendedor", "Nombre");
             ViewBag.IdCobrador = new SelectList(db.Vendedores, "IdVendedor", "Nombre");
-            ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion");
+            ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion",o.IdTipoRetencionGanancia);
             ViewBag.IdObra = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra);
             ViewBag.IdObra1 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra1);
             ViewBag.IdObra2 = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra2);
