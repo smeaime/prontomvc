@@ -580,13 +580,13 @@ namespace ProntoMVC.Reportes
 
 
                 ReportParameter[] yourParams = new ReportParameter[3];
-                yourParams[2] = new ReportParameter("CadenaConexion", scsql, false);  // false);
-                yourParams[0] = new ReportParameter("FechaDesde", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
-                yourParams[1] = new ReportParameter("FechaHasta", "1/1/1980"); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);  // false);
+                yourParams[1] = new ReportParameter("Desde", System.Data.SqlTypes.SqlDateTime.MinValue.Value.ToShortDateString()); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
+                yourParams[2] = new ReportParameter("Hasta",  DateTime.Today.ToShortDateString()); //temita con formato en ingles o castellano:  DateTime.MinValue.ToShortDateString());
                 if (ReportViewerRemoto.ServerReport.GetParameters().Count != yourParams.Count()) throw new Exception("Distintos parámetros");
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
 
-                lblTitulo.Text = "Balance";
+                 lblTitulo.Text = "Libro de IVA Ventas";
 
 
 
