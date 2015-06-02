@@ -3645,7 +3645,7 @@ Public Class CartaDePorteManager
                 CartaDePorteManager.PDFcon_iTextSharp(output, _
                                   IIf(myCartaDePorte.PathImagen <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen, ""), _
                                 IIf(myCartaDePorte.PathImagen2 <> "", sDirFTP + "temp_" + myCartaDePorte.PathImagen2, "") _
-                                , 5)
+                                , 1)
 
 
             End If
