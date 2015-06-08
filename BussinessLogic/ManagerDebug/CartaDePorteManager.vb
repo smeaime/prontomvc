@@ -7062,6 +7062,52 @@ Public Class CartaDePorteManager
 
     End Function
 
+
+    Shared Function UsaClientesQueEstanBloqueadosPorCobranzas(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "") As Boolean
+        Dim titular, destinatario, intermediario, corredor, remitcomercial As Cliente
+        titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
+        destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
+        intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
+        corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
+        remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
+
+        If myCartaDePorte.Titular > 0 AndAlso titular.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+            ms += " " & titular.RazonSocial
+        End If
+
+        If myCartaDePorte.Entregador > 0 AndAlso destinatario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+            ms += " " & destinatario.RazonSocial
+        End If
+
+
+        If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+            ms += " " & intermediario.RazonSocial
+        End If
+
+        Try
+            If Not IsNothing(corredor) AndAlso corredor.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+                ms += " " & corredor.RazonSocial
+            End If
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+
+
+        If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+            ms += " " & remitcomercial.RazonSocial
+        End If
+
+
+
+        If ms = "" Then
+            Return False
+        Else
+            Return True
+        End If
+
+    End Function
+
+
     Public Shared Function IsValid(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean
 
         With myCartaDePorte
@@ -7088,6 +7134,11 @@ Public Class CartaDePorteManager
             '    ms = "El número de CDP debe ser menor que 2.000.000.000"
             '    Return False
             'End If
+
+
+            
+
+
 
             If IsNothing(.FechaArribo) Or .FechaArribo = #12:00:00 AM# Then
                 ms = "Falta la fecha de arribo"
@@ -7241,6 +7292,9 @@ Public Class CartaDePorteManager
                     Return False
                 End If
 
+
+
+
             End If
 
 
@@ -7253,6 +7307,23 @@ Public Class CartaDePorteManager
                 Return False
             End If
 
+
+            If False Then
+                'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
+                'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
+                'en las cartas de porte debido a un conflicto de cobranzas.
+                'Este tilde deberán verlo solo algunos usuarios (activaremos a los de cobranzas).
+                'Luego, cuando quieran usarlo en una carta de porte el sistema tiene que dar un mensaje de advertencia diciendo 
+                'que el usuario no se puede utilizar y que tiene que ponerse en contacto con el sector de cobranzas.
+                'La carta de porte no se puede grabar si tiene un cliente en esta condición.
+
+
+                Dim sClientesCobranzas As String
+                If UsaClientesQueEstanBloqueadosPorCobranzas(SC, myCartaDePorte, sClientesCobranzas) Then
+                    ms = "Cliente bloqueado. Ponerse en contacto con el sector de cobranzas (" & sClientesCobranzas & ") "
+                    Return False
+                End If
+            End If
 
 
             Dim sClientesExigentes As String
