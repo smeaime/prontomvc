@@ -13136,7 +13136,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                If Resultado <> 0 Or Rebaja <> 0 Then
+                If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
 
                     Dim cero = 0
