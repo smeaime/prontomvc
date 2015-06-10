@@ -15270,6 +15270,7 @@ Public Class LogicaFacturacion
         '        System.Data.Linq()
         '        __________________________()
 
+
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
         Dim oListaCDP = db.CartasDePortes.Where(Function(x) x.IdFacturaImputada = idfactura)
@@ -15364,7 +15365,7 @@ Public Class LogicaFacturacion
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Seeds. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
             Else
-
+                Return vbCrLf + "División AGRO – Andreas Bluhm"
             End If
 
 
