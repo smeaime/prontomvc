@@ -8926,6 +8926,9 @@ Namespace Pronto.ERP.Bll
 
 
         End Function
+
+
+
         Public Shared Function Sincronismo_AmaggiDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -13133,7 +13136,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                If Resultado <> 0 Or Rebaja <> 0 Then
+                If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
 
                     Dim cero = 0

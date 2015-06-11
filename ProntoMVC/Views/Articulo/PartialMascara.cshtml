@@ -10,10 +10,10 @@
 
 
 
-        @Html.Label(prod.Etiqueta)
         @if (prod.TablaCombo == null && prod.CampoSiNo != "SI")
         {
             <div class="span8 lightblue">
+                @Html.Label(prod.Etiqueta)
                 @Html.TextBox(prod.Campo, null, new { @class = "span12" })
             </div>
         }
@@ -23,6 +23,7 @@
             // es un checkbox
             <div class="span2 lightblue">
 
+                @Html.Label(prod.Etiqueta)
                 @Html.DropDownList(prod.Campo, null, new { @class = "span12" })
 
             </div>
@@ -32,6 +33,7 @@
             try
             {
                 <div class="span8 lightblue">
+                    @Html.Label(prod.Etiqueta)
                     @Html.DropDownList(prod.Campo, null, new { @class = "span12" })
                 </div>
             }

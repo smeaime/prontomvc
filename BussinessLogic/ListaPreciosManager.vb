@@ -85,7 +85,7 @@ Namespace Pronto.ERP.Bll
 
             Return ExecDinamico(SC, String.Format("SELECT IdListaPreciosDetalle,IdListaPrecios,Precio,A.IdArticulo, " & _
                                 " Articulos.Descripcion as Producto, A.* ," & _
-                                " LOCDES.Descripcion as DestinoDesc " & _
+                                " isnull(LOCDES.Descripcion,'') as DestinoDesc " & _
                                 " FROM " & Tabla & " A " & _
                                 " LEFT OUTER JOIN WilliamsDestinos LOCDES ON IdDestinoDeCartaDePorte = LOCDES.IdWilliamsDestino " & _
                                 " LEFT OUTER JOIN Articulos ON A.IdArticulo = Articulos.IdArticulo  WHERE IdListaPrecios=" & IdLista & _
