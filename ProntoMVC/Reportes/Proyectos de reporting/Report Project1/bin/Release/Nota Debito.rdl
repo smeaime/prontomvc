@@ -49,8 +49,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.17364in</Top>
-        <Left>3.88816in</Left>
+        <Top>3.08335in</Top>
+        <Left>4.61634in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>1</ZIndex>
@@ -81,8 +81,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.32989in</Top>
-        <Left>3.88816in</Left>
+        <Top>3.25349in</Top>
+        <Left>4.61635in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>2</ZIndex>
@@ -113,8 +113,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.95489in</Top>
-        <Left>3.88815in</Left>
+        <Top>3.87849in</Top>
+        <Left>4.61634in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>3</ZIndex>
@@ -146,8 +146,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.17364in</Top>
-        <Left>5.16545in</Left>
+        <Top>3.09724in</Top>
+        <Left>5.89364in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -179,8 +179,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.32989in</Top>
-        <Left>5.16545in</Left>
+        <Top>3.25349in</Top>
+        <Left>5.89364in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>5</ZIndex>
@@ -212,8 +212,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.95489in</Top>
-        <Left>5.16544in</Left>
+        <Top>3.87849in</Top>
+        <Left>5.89363in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>6</ZIndex>
@@ -239,13 +239,13 @@
                   <TextRun>
                     <Value>=First(Fields!Numero.Value, "DataSet1")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -380,10 +380,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
-            <Top>0.53799cm</Top>
-            <Left>4.37798in</Left>
+            <Left>5.57242in</Left>
             <Height>0.15625in</Height>
-            <Width>1in</Width>
+            <Width>1.32243in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -443,7 +442,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.55208in</Top>
+            <Top>0.27666in</Top>
             <Left>4.37798in</Left>
             <Height>0.15625in</Height>
             <Width>0.82292in</Width>
@@ -478,10 +477,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
-            <Top>0.84375in</Top>
-            <Left>4.37798in</Left>
+            <Top>0.27666in</Top>
+            <Left>5.24257in</Left>
             <Height>0.15625in</Height>
-            <Width>1.16618in</Width>
+            <Width>1.62451in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -574,9 +573,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.84375in</Top>
+            <Top>0.55208in</Top>
+            <Left>11.12007cm</Left>
             <Height>0.15625in</Height>
-            <Width>1in</Width>
+            <Width>1.125in</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -608,8 +608,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
-            <Top>0.84375in</Top>
-            <Left>1.11458in</Left>
+            <Top>0.55208in</Top>
+            <Left>5.57242in</Left>
             <Height>0.15625in</Height>
             <Width>0.63542in</Width>
             <ZIndex>11</ZIndex>
@@ -630,7 +630,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Cotiz.moneda :</Value>
+                    <Value>Cotizacion moneda :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -640,10 +640,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.84375in</Top>
-            <Left>1.82291in</Left>
+            <Top>0.82292in</Top>
+            <Left>4.37798in</Left>
             <Height>0.15625in</Height>
-            <Width>0.65626in</Width>
+            <Width>1.125in</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -676,9 +676,9 @@
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
             <Top>0.84375in</Top>
-            <Left>2.52083in</Left>
+            <Left>5.57242in</Left>
             <Height>0.15625in</Height>
-            <Width>0.44792in</Width>
+            <Width>0.63542in</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -697,7 +697,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Cotiz.u$s :</Value>
+                    <Value>Cotizacion u$s :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -707,10 +707,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.84375in</Top>
-            <Left>3.0382in</Left>
+            <Top>1.06944in</Top>
+            <Left>4.37798in</Left>
             <Height>0.15625in</Height>
-            <Width>0.53473in</Width>
+            <Width>1.125in</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -742,10 +742,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
-            <Top>0.84375in</Top>
-            <Left>3.75396in</Left>
+            <Top>1.06944in</Top>
+            <Left>5.55854in</Left>
             <Height>0.15625in</Height>
-            <Width>0.55458in</Width>
+            <Width>0.64931in</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
@@ -774,7 +774,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>1.16319in</Top>
+            <Top>0.84375in</Top>
             <Height>0.15625in</Height>
             <Width>1in</Width>
             <ZIndex>16</ZIndex>
@@ -808,9 +808,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TipoComprobante</rd:DefaultName>
-            <Top>1.16319in</Top>
-            <Left>1.11458in</Left>
-            <Height>0.15625in</Height>
+            <Top>0.82292in</Top>
+            <Left>1.12847in</Left>
+            <Height>0.40278in</Height>
             <Width>3.19396in</Width>
             <ZIndex>17</ZIndex>
             <Style>
@@ -828,7 +828,7 @@
         <Top>0.46624in</Top>
         <Left>0.13419in</Left>
         <Height>1.31944in</Height>
-        <Width>6.03126in</Width>
+        <Width>6.90626in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -853,8 +853,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.48614in</Top>
-        <Left>3.88815in</Left>
+        <Top>3.40974in</Top>
+        <Left>4.61634in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>8</ZIndex>
@@ -886,8 +886,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.48614in</Top>
-        <Left>5.16544in</Left>
+        <Top>3.40974in</Top>
+        <Left>5.89363in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>9</ZIndex>
@@ -919,8 +919,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.64239in</Top>
-        <Left>5.16544in</Left>
+        <Top>3.56599in</Top>
+        <Left>5.89363in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>10</ZIndex>
@@ -951,8 +951,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.64239in</Top>
-        <Left>3.88815in</Left>
+        <Top>3.56599in</Top>
+        <Left>4.61634in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>11</ZIndex>
@@ -984,8 +984,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TipoComprobante</rd:DefaultName>
-        <Top>3.79864in</Top>
-        <Left>5.16544in</Left>
+        <Top>3.72224in</Top>
+        <Left>5.89363in</Left>
         <Height>0.15625in</Height>
         <Width>1in</Width>
         <ZIndex>12</ZIndex>
@@ -1016,8 +1016,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.79864in</Top>
-        <Left>3.88815in</Left>
+        <Top>3.72224in</Top>
+        <Left>4.61634in</Left>
         <Height>0.15625in</Height>
         <Width>1.125in</Width>
         <ZIndex>13</ZIndex>
@@ -1044,7 +1044,7 @@
         <Top>4.712cm</Top>
         <Left>0.34083cm</Left>
         <Height>2.94333cm</Height>
-        <Width>15.31939cm</Width>
+        <Width>17.54191cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1067,7 +1067,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>8.8548cm</Top>
+        <Top>8.28387cm</Top>
         <Left>0.56605cm</Left>
         <Height>1.96438cm</Height>
         <Width>4.21979cm</Width>
@@ -1086,10 +1086,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>4.55209in</Height>
+    <Height>4.16667in</Height>
     <Style />
   </Body>
-  <Width>6.33471in</Width>
+  <Width>7.09513in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1122,7 +1122,7 @@
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
-        <CommandText>wnotasDebito_TX_PorIdConDatos</CommandText>
+        <CommandText>wNotasDebito_TX_PorIdConDatos</CommandText>
       </Query>
       <Fields>
         <Field Name="IdNotaDebito">
