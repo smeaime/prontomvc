@@ -143,13 +143,10 @@
       <FullPath>Generacion SICORE.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-<<<<<<< HEAD
       <Name>IVA Ventas.rdl</Name>
       <FullPath>IVA Ventas.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-=======
->>>>>>> 435791b4bfb4acdd3da56adb21ca529567b28ecb
       <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
       <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
     </ProjectItem>
@@ -206,13 +203,8 @@
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-<<<<<<< HEAD
-      <Name>Libro de iva ventas.rdl</Name>
-      <FullPath>Libro de iva ventas.rdl</FullPath>
-=======
-      <Name>IVA Ventas.rdl</Name>
-      <FullPath>IVA Ventas.rdl</FullPath>
->>>>>>> 435791b4bfb4acdd3da56adb21ca529567b28ecb
+      <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
+      <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -222,7 +214,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://localhost/ReportServer_MSSQLSERVER2</TargetServerURL>
+        <TargetServerURL>http://bdlconsultores.sytes.net/ReportServer</TargetServerURL>
         <TargetFolder>Pronto informes</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
