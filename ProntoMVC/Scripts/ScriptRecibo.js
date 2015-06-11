@@ -1,4 +1,7 @@
+var MARGENSUPERIOR = 50;
+
 $(function () {
+
     $("#loading").hide();
 
     'use strict';
@@ -2562,7 +2565,13 @@ function AsignarBancoPorIdCuentaBancaria(IdCuentaBancaria) {
     });
 }
 
+
+
+
 function PopupCentrar(grid) {
+
+
+
     var dlgDiv = $("#editmod" + grid[0].id);
     //$("#editmod" + grid[0].id).find('.ui-datepicker-trigger').attr("class", "btn btn-primary");
     //$("#editmod" + grid[0].id).find('#FechaPosible').width(160);
@@ -2579,10 +2588,14 @@ function PopupCentrar(grid) {
     var dlgHeight = dlgDiv.height();
     var parentHeight = parentDiv.height();
     var left = (screen.width / 2) - (dlgWidth / 2) + "px";
-    var top = (screen.height / 2) - (dlgHeight / 2) + "px";
+    var top = MARGENSUPERIOR + (screen.height / 2) - (dlgHeight / 2) + "px";
     dlgDiv[0].style.top = top; // 500; // Math.round((parentHeight - dlgHeight) / 2) + "px";
     dlgDiv[0].style.left = left; //Math.round((parentWidth - dlgWidth) / 2) + "px";
 };
+
+
+
+
 
 function MostrarDatosCliente(Id) {
     var Entidad = "";

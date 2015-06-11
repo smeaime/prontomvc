@@ -861,7 +861,8 @@ namespace ProntoMVC.Controllers
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
             // db = new DemoProntoEntities(Funciones.Generales.sCadenaConex(sBasePronto));
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-            if (db.Facturas.Find(id).IdCliente != idcliente
+            if (idcliente!=0 &&
+                  db.Facturas.Find(id).IdCliente != idcliente
                  && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
                 !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
@@ -1051,7 +1052,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdFactura.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdFactura} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
                                 a.IdFactura.ToString(),
                                 a.TipoABC.NullSafeToString(),
                                 a.PuntoVenta.NullSafeToString(),

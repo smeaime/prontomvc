@@ -190,7 +190,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdNotaCredito.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdNotaCredito} ) + ">Editar</>",
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdNotaCredito} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdNotaCredito} ) + ">Emitir</a> ",
                                 a.IdNotaCredito.NullSafeToString(),
                                 a.Tipo.NullSafeToString(),
                                 a.TipoABC.NullSafeToString(),
@@ -225,6 +225,65 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+        public virtual FileResult ImprimirConInteropPDF(int id)
+        {
+            int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            //if (db.Facturas.Find(id).IdCliente != idcliente
+            //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") && 
+            //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
+            //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
+
+
+            string baseP = this.HttpContext.Session["BasePronto"].ToString();
+            // baseP = "Vialagro";
+            // baseP = "BDLConsultores";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            string plantilla;
+            if (db.NotasCreditoes.Find(id).TipoABC == "A")
+            {
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "NotaCredito_A_" + baseP + "";
+            }
+            else
+            {
+                plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "NotaCredito_B_" + baseP + "";
+            }
+
+            if (db.NotasCreditoes.Find(id).CAE.NullSafeToString() != "")
+            {
+                plantilla += "_FA.dot";
+            }
+            else
+            {
+                plantilla += ".dot";
+            }
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            //Pronto.ERP.BO.NotaCredito fac = NotaCreditoManager.GetItem(SC, id, true);
+
+            object nulo = null;
+            var mvarClausula = false;
+            var mPrinter = "";
+            var mCopias = 1;
+
+            string mArgs = "NO|NO|2|3|4|1/1/1800|1/1/2100";
+
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF
+                (plantilla, ref nulo, SC, nulo,  ref nulo, id, mvarClausula, mPrinter, mCopias,  output);
+      
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "NotaCredito.pdf");
+        }
+
+
 
         public virtual ActionResult DetNotaCredito(string sidx, string sord, int? page, int? rows, int? IdNotaCredito)
         {
