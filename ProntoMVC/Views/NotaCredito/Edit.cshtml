@@ -306,8 +306,18 @@
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
                         <div class="span4 lightblue">
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
+
                             @if (Model.IdNotaCredito > 0)
-                            {<input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />}
+                            {
+                                <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
+                                <a class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConInteropPDF", new { @id = Model.IdNotaCredito })">
+                                    <i class="icon-print"></i>&nbsp;Imprimir
+                                </a>
+
+
+                            }
+                            
+                        
                             @*<input type="button" id="probar" value="Probar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />*@
                             <script>
                                 $(function () {

@@ -643,12 +643,46 @@ Fields!IdTipoComp.Value=53,"Comprobante Proveedores"
                       <ActionInfo>
                         <Actions>
                           <Action>
-                            <Hyperlink>= Parameters!UrlDominio.Value  &amp; "Factura/ImprimirConInteropPDF/" &amp; Fields!IdComprobante.Value</Hyperlink>
+                            <Hyperlink>= Parameters!UrlDominio.Value  &amp; 
+
+iif(
+Fields!IdComprobante.Value=Nothing
+,Nothing
+,
+
+Switch(
+Fields!IdTipoComp.Value=1,"Factura/ImprimirConInteropPDF/",
+Fields!IdTipoComp.Value=2,"Recibo/ImprimirConInteropPDF/",
+Fields!IdTipoComp.Value=3,"NotaDebito/ImprimirConInteropPDF/",
+Fields!IdTipoComp.Value=4,"NotaCredito/ImprimirConInteropPDF/",
+Fields!IdTipoComp.Value=10,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=11,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=13,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=14,"Deposito Bancario",
+Fields!IdTipoComp.Value=17,"Orden Pago",
+Fields!IdTipoComp.Value=18,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=19,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=22,"Gasto Bancario",
+Fields!IdTipoComp.Value=28,"Gasto Bancario",
+Fields!IdTipoComp.Value=29,"Gasto Bancario",
+Fields!IdTipoComp.Value=31,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=36,"Asiento",
+Fields!IdTipoComp.Value=37,"Asiento",
+Fields!IdTipoComp.Value=38,"Asiento",
+Fields!IdTipoComp.Value=40,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=42,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=52,"Comprobante Proveedores",
+Fields!IdTipoComp.Value=53,"Comprobante Proveedores"
+)
+
+)
+
+ &amp; Fields!IdComprobante.Value</Hyperlink>
                           </Action>
                         </Actions>
                       </ActionInfo>
                       <Visibility>
-                        <Hidden>=(Fields!IdTipoComp.Value&lt;&gt;1 or Fields!IdComprobante.Value=Nothing)</Hidden>
+                        <Hidden>=(Fields!IdTipoComp.Value&lt;&gt;1 and Fields!IdTipoComp.Value&lt;&gt;3  and Fields!IdTipoComp.Value&lt;&gt;4)  or Fields!IdComprobante.Value=Nothing</Hidden>
                       </Visibility>
                       <Style>
                         <Border>
@@ -661,6 +695,7 @@ Fields!IdTipoComp.Value=53,"Comprobante Proveedores"
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
