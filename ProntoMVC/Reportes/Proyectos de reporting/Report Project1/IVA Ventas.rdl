@@ -1349,6 +1349,11 @@
     </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Dateserial(Year(now),Month(now),1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">

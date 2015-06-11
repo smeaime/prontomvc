@@ -236,6 +236,11 @@ namespace ProntoMVC.Controllers
                         if (CtaCte != null)
                         {
                             if ((CtaCte.IdCliente ?? 0) != mIdCliente) { sErrorMsg += "\n" + "Hay imputaciones en cuenta corriente que corresponden a otro cliente"; }
+                            ProntoMVC.Data.Models.TiposComprobante tc = db.TiposComprobantes.Where(c => c.IdTipoComprobante == CtaCte.IdTipoComp).SingleOrDefault();
+                            if (tc != null)
+                            {
+                                if ((tc.Coeficiente ?? 0) == -1 && (x.Importe ?? 0) > 0) { sErrorMsg += "\n" + "Hay imputaciones en cuenta corriente aplicadas a creditos que deben ser negativas"; }
+                            }
                         }
                     }
                 }
@@ -610,7 +615,7 @@ namespace ProntoMVC.Controllers
                         {
                             foreach (var d in Recibo.DetalleRecibosImputaciones)
                             {
-                                mImporte = d.Importe ?? 0;
+                                mImporte = Math.Abs(d.Importe ?? 0);
                                 mImportePesos = mImporte * mCotizacionMoneda;
                                 mImporteDolares = 0;
                                 if (mCotizacionDolar != 0) { mImporteDolares = decimal.Round(mImporte * mCotizacionMoneda / mCotizacionDolar, 2); }

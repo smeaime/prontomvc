@@ -174,7 +174,7 @@ $(function () {
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
                                     if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                                    if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 45 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             },
                             {
