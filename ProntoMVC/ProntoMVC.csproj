@@ -704,10 +704,18 @@
     <Content Include="Documentos\Pedido_DemoProntoWeb_PUNTONET.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Documentos\Factura_A_BaseNueva.dot" />
-    <Content Include="Documentos\Factura_A_BaseNueva_FA.dot" />
-    <Content Include="Documentos\NotaCredito_A_BaseNueva.dot" />
-    <Content Include="Documentos\NotaDebito_A_BaseNueva.dot" />
+    <Content Include="Documentos\Factura_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_A_BaseNueva_FA.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\NotaCredito_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\NotaDebito_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Documentos\vb6\2 -Articulos.pdf" />
     <None Include="Documentos\vb6\Factura.clsz" />
     <None Include="Documentos\vb6\Facturas.clsz" />
