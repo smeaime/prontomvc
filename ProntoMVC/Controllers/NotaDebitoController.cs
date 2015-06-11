@@ -288,7 +288,10 @@ namespace ProntoMVC.Controllers
 
             string mArgs = "NO|NO|2|3|4|1/1/1800|1/1/2100";
 
-            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output, mArgs);
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF
+                (plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output);
+            
+
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "NotaDebito.pdf");
