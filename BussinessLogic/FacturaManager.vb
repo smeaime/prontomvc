@@ -215,7 +215,7 @@ Namespace Pronto.ERP.Bll
             Dim DatosRem As DataSet
             Dim DatosCtaCte As New DataTable
             Dim DatosCtaCteNv As New DataTable
-            Dim DatosCliente As Cliente
+            Dim DatosCliente As ClienteNuevo
             Dim DetRem As DataSet
             Dim DatosAsiento As DataSet
             Dim DatosAsientoNv As DataSet
@@ -2114,7 +2114,7 @@ Mal:
                 Dim mFechaInicioVigenciaIBDirecto
                 Dim mFechaFinVigenciaIBDirecto
 
-                Dim oCli As Cliente = ClienteManager.GetItem(SC, .IdCliente)
+                Dim oCli As ClienteNuevo = ClienteManager.GetItem(SC, .IdCliente)
 
                 For Each oL In .Detalles
                     With oL
