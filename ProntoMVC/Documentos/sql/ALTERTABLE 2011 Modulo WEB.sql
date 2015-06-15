@@ -1262,9 +1262,16 @@ GO
 alter table Localidades add 
 	 CodigoAfip int null
 go
+
 alter table Localidades ADD
 	constraint U_LocalidadesAFIP unique NONCLUSTERED (CodigoAfip)
 go
 
+
+
+
+ALTER TABLE   williamsdestinos ADD
+	 PuntoVenta int null
+GO
 
 

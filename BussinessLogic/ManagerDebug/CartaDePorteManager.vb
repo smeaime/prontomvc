@@ -7019,7 +7019,7 @@ Public Class CartaDePorteManager
     End Function
 
     Shared Function UsaClientesQueExigenDatosDeDescargaCompletos(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "") As Boolean
-        Dim titular, destinatario, intermediario, corredor, remitcomercial As Cliente
+        Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
         titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
         destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
         intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
@@ -7064,28 +7064,28 @@ Public Class CartaDePorteManager
 
 
     Shared Function UsaClientesQueEstanBloqueadosPorCobranzas(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "") As Boolean
-        Dim titular, destinatario, intermediario, corredor, remitcomercial As Cliente
+        Dim titular, destinatario, intermediario, corredor, remitcomercial As ClienteNuevo
         titular = ClienteManager.GetItem(SC, myCartaDePorte.Titular)
         destinatario = ClienteManager.GetItem(SC, myCartaDePorte.Entregador)
         intermediario = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden1)
         corredor = ClienteManager.GetItem(SC, BuscaIdClientePreciso(EntidadManager.NombreVendedor(SC, myCartaDePorte.Corredor), SC))
         remitcomercial = ClienteManager.GetItem(SC, myCartaDePorte.CuentaOrden2)
 
-        If myCartaDePorte.Titular > 0 AndAlso titular.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+        If myCartaDePorte.Titular > 0 AndAlso titular.DeshabilitadoPorCobranzas = "NO" Then
             ms += " " & titular.RazonSocial
         End If
 
-        If myCartaDePorte.Entregador > 0 AndAlso destinatario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+        If myCartaDePorte.Entregador > 0 AndAlso destinatario.DeshabilitadoPorCobranzas = "NO" Then
             ms += " " & destinatario.RazonSocial
         End If
 
 
-        If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+        If myCartaDePorte.CuentaOrden1 > 0 AndAlso intermediario.DeshabilitadoPorCobranzas = "NO" Then
             ms += " " & intermediario.RazonSocial
         End If
 
         Try
-            If Not IsNothing(corredor) AndAlso corredor.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+            If Not IsNothing(corredor) AndAlso corredor.DeshabilitadoPorCobranzas = "NO" Then
                 ms += " " & corredor.RazonSocial
             End If
         Catch ex As Exception
@@ -7093,7 +7093,7 @@ Public Class CartaDePorteManager
         End Try
 
 
-        If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.ExigeDatosCompletosEnCartaDePorteQueLoUse = "SI" Then
+        If myCartaDePorte.CuentaOrden2 > 0 AndAlso remitcomercial.DeshabilitadoPorCobranzas = "NO" Then
             ms += " " & remitcomercial.RazonSocial
         End If
 
@@ -7308,7 +7308,7 @@ Public Class CartaDePorteManager
             End If
 
 
-            If False Then
+            If True Then
                 'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14168
                 'Precisan agregar una marca en el formulario de clientes para poder bloquear la carga de estos 
                 'en las cartas de porte debido a un conflicto de cobranzas.
@@ -16604,7 +16604,7 @@ Public Class LogicaFacturacion
 
 
 
-        Dim cli As Cliente = ClienteManager.GetItem(sc, oFac.Registro.Fields("IdCliente").Value)
+        Dim cli As ClienteNuevo = ClienteManager.GetItem(sc, oFac.Registro.Fields("IdCliente").Value)
         Dim mvarTipoIVA = cli.IdCodigoIva
 
         If mvarTipoIVA = 0 Then
@@ -16814,7 +16814,7 @@ Public Class LogicaFacturacion
     End Sub
 
 
-    Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, cli As Cliente, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
+    Private Shared Function PercepcionIngresosBrutos(ByRef oFac As Object, ByVal sc As String, ByRef session As System.Web.SessionState.HttpSessionState, cli As ClienteNuevo, mvarNetoGravado As Double, Parametros_EsAgenteDePercepcionIIBB As Boolean, Pventa_AgentePercepcionIIBB As Boolean) As Double
 
         'origen.Registro.Fields("NumeroCertificadoPercepcionIIBB").Value = Null
 
@@ -18289,7 +18289,7 @@ Public Class barras
             Dim destinatario As String
 
             Dim idcli As Integer
-            Dim cli As Cliente
+            Dim cli As ClienteNuevo
             Try
                 'Dim idcli = BuscaIdClientePreciso(cliente, SC)
 

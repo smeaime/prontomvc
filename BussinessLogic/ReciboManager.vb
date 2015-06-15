@@ -113,7 +113,7 @@ Namespace Pronto.ERP.Bll
             Dim DatosAnt As DataTable
             Dim DatosCtaCte As DataTable
             Dim DatosCtaCteNv As DataTable
-            Dim DatosCliente As Cliente
+            Dim DatosCliente As ClienteNuevo
             Dim oRsValores As DataTable
             Dim oRsValoresNv As DataTable
             Dim oRsComp As DataTable
