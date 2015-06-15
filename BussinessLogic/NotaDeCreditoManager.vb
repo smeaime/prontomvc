@@ -168,7 +168,7 @@ Namespace Pronto.ERP.Bll
             myNotaDeCredito = NotaDeCreditoDB.GetItem(SC, id)
             If Not (myNotaDeCredito Is Nothing) AndAlso getNotaDeCreditoDetalles Then
 
-                myNotaDeCredito.Cliente = ClienteManager.GetItem(SC, myNotaDeCredito.IdCliente)
+                '  myNotaDeCredito.Cliente = ClienteManager.GetItem(SC, myNotaDeCredito.IdCliente)
                 myNotaDeCredito.CondicionVenta_Descripcion = NombreCondicionVenta_y_Compra(SC, myNotaDeCredito.IdCondicionVenta)
                 myNotaDeCredito.CondicionIVADescripcion = NombreCondicionIVA(SC, myNotaDeCredito.IdCodigoIva)
 
