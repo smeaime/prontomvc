@@ -3977,7 +3977,7 @@ Public Class CartaDePorteManager
             strWHERE += "AND (CDP.SubnumeroVagon=" & Vagon & ")"
         End If
         If Patente <> "" Then
-            strWHERE += "AND (CDP.Patente='" & puntoventa & "')"
+            strWHERE += "AND (CDP.Patente='" & Patente & "')"
         End If
 
 
@@ -6134,7 +6134,7 @@ Public Class CartaDePorteManager
 "         CEE as   [Nro CEE]	, " & _
 "          FechaVencimiento as  [Vencim.CP], " & _
 "          FechaDeCarga as  [Emision CP], " & _
-"          PuntoVenta  as Sucursal, " & _
+"          CDP.PuntoVenta  as Sucursal, " & _
 "          KmARecorrer as  Km, " & _
 "          Tarifa as Tarifa, " & _
 "           CTG as CTG, FechaAnulacion,MotivoAnulacion " & _
@@ -22400,7 +22400,7 @@ Public Class CDPMailFiltrosManager2
                       " LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo " & _
                       " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
                       " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
-                      " WHERE isnull(PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
+                      " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
                       " ORDER BY IdWilliamsMailFiltro DESC " _
                                   ))
 
@@ -22436,7 +22436,7 @@ Public Class CDPMailFiltrosManager2
                             " LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad " & _
                             " LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino " & _
                             " LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar= CLIAUX.IdCliente " & _
-                            " WHERE isnull(PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
+                            " WHERE isnull(CDP.PuntoVenta,0)=" & puntoventa & " OR " & puntoventa & "=0" & _
                             " ORDER BY IdWilliamsMailFiltro DESC " _
                                         ))
 
