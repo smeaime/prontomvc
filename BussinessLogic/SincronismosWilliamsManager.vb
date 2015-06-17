@@ -8946,13 +8946,22 @@ Namespace Pronto.ERP.Bll
                     ).ToList
 
 
-            Dim sss = (From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
-                        Select i _
-                        Where cartasrepetidasaa.Contains(i.NumeroCartaDePorte)
+            Dim sss = ( _
+                                    From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+                                    Select i _
+                                    Where Not cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
+                   ).ToArray
+
+            Dim sss2 = ( _
+                                    From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+                                    Select i _
+                                    Where cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
                    ).ToArray
 
 
-            aa = sss
+            Dim sss3 = sss.Union(sss2)
+
+            aa = sss3
 
             'For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa
             '    With cdp
