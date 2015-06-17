@@ -8937,31 +8937,42 @@ Namespace Pronto.ERP.Bll
 
             Dim bb As DataRow()
 
-            Dim cartasrepetidasaa = (From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
-                    Group By Numero = i.NumeroCartaDePorte, _
-                             SubnumeroVagon = i.SubnumeroVagon _
-                        Into Group _
-                    Where Group.Count() > 1 _
-                    Select Numero
-                    ).ToList
+            'Dim cartasrepetidasaa = (From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+            '        Group By Numero = i.NumeroCartaDePorte, _
+            '                 SubnumeroVagon = i.SubnumeroVagon _
+            '            Into Group _
+            '        Where Group.Count() > 1 _
+            '        Select Numero
+            '        ).ToList
 
 
-            Dim sss = ( _
+            'Dim sss = ( _
+            '                        From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+            '                        Select i _
+            '                        Where Not cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
+            '       ).ToArray
+
+            'Dim sss2 = ( _
+            '                        From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+            '                        Where cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
+            '                        Group By Numero = i.NumeroCartaDePorte _
+            '                           Into Group _
+            '                        Select f = Group.First _
+            '       ).ToArray
+
+
+            'http://stackoverflow.com/questions/13230835/detecting-duplicate-records-selecting-only-first-and-counting-with-linq-c
+            Dim sss4 = ( _
                                     From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
-                                    Select i _
-                                    Where Not cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
+                                    Group By i.NumeroCartaDePorte, i.SubnumeroVagon _
+                                       Into Group _
+                                    Select f = Group.First _
                    ).ToArray
 
-            Dim sss2 = ( _
-                                    From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
-                                    Select i _
-                                    Where cartasrepetidasaa.Contains(i.NumeroCartaDePorte) _
-                   ).ToArray
 
+            '  Dim sss3 = sss.Union(sss2)
 
-            Dim sss3 = sss.Union(sss2)
-
-            aa = sss3
+            aa = sss4
 
             'For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa
             '    With cdp
