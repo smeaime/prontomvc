@@ -1,4 +1,6 @@
-﻿Imports Microsoft.VisualBasic
+﻿Option Infer On
+
+Imports Microsoft.VisualBasic
 Imports System.Data
 Imports System.IO
 Imports System.Diagnostics 'para usar Debug.Print
@@ -8929,6 +8931,49 @@ Namespace Pronto.ERP.Bll
 
 
 
+        Public Shared Function BorrarCartasRepetidas(ByRef aa As DataRow())
+
+            'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
+
+            Dim bb As DataRow()
+
+            Dim cartasrepetidasaa = (From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+                    Group By Numero = i.NumeroCartaDePorte, _
+                             SubnumeroVagon = i.SubnumeroVagon _
+                        Into Group _
+                    Where Group.Count() > 1 _
+                    Select Numero
+                    ).ToList
+
+
+            Dim sss = (From i As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa _
+                        Select i _
+                        Where cartasrepetidasaa.Contains(i.NumeroCartaDePorte)
+                   ).ToArray
+
+
+            aa = sss
+
+            'For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aa
+            '    With cdp
+
+            '        bb.add(cdp)
+            '    End With
+            'Next
+
+            'For Each i In cartasrepetidasaa
+
+            '    aa.find(i.Numero
+
+            'Next
+
+
+
+        End Function
+
+
+
+
         Public Shared Function Sincronismo_AmaggiDescargas(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
 
 
@@ -9018,10 +9063,12 @@ Namespace Pronto.ERP.Bll
 
 
             'Dim a = pDataTable(1)
+            Dim aaa = pDataTable.Select(sWHERE)
+            BorrarCartasRepetidas(aaa)
 
 
             'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
-            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In pDataTable.Select(sWHERE)
+            For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In aaa
                 With cdp
 
                     i = 0 : sb = ""
@@ -19157,7 +19204,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
+        Public Shared Function DataTableToExcel(ByVal pDataTable As DataTable, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
 
             Dim vFileName As String = Path.GetTempFileName()
             'Dim vFileName As String = "c:\archivo.txt"
@@ -19254,7 +19301,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
+        Public Shared Function TextToExcel(ByVal pFileName As String, Optional ByVal titulo As String = "", Optional ByVal sSufijoNombreArchivo As String = "Notas de Entrega") As String
 
             Dim vFormato As Excel.XlRangeAutoFormat
             Dim Exc As Excel.Application = CreateObject("Excel.Application")
