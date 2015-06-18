@@ -108,7 +108,21 @@ namespace ProntoMVC.Controllers
 
             // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
 
-            totalRecords = filteredQuery.Count();
+            try
+            {
+                totalRecords = filteredQuery.Count();
+            }
+            catch (Exception)
+            {
+                
+                // estas tratando de usar un LIKE sobre una columna que es numerica?
+                throw;
+            }
+
+
+
+
+            
 
 
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
@@ -191,6 +205,7 @@ namespace ProntoMVC.Controllers
                 ObjectParameter param;
                 switch (propertyInfo.PropertyType.FullName)
                 {
+                    case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
                     case "System.Int32":  // int
                         param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
                         break;
@@ -217,6 +232,12 @@ namespace ProntoMVC.Controllers
                             true :
                             false);
                         break;
+
+                    case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                    case "System.DateTime": // Edm.Single, in SQL: float
+                        param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
+                        break;
+
                     default:
                         // TODO: Extend to other data types
                         // binary, date, datetimeoffset,
@@ -224,7 +245,16 @@ namespace ProntoMVC.Controllers
                         // money, smallmoney
                         // and so on
 
+
+                        if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
+                        {
+                            // si es nullable, no uses string!!!
+                            throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
+                        }
+
                         param = new ObjectParameter("p" + iParam, rule.data);
+
+
                         break;
                 }
                 objParams.Add(param);
