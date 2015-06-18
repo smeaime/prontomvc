@@ -58,9 +58,17 @@ namespace ProntoMVC.Data.Models
         public string Estado { get; set; }
         public Nullable<int> IdUsuarioCambioEstado { get; set; }
         public Nullable<System.DateTime> FechaCambioEstado { get; set; }
+        public Nullable<System.DateTime> FechaEntrega { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }
         public virtual ICollection<DetalleOrdenesCompra> DetalleOrdenesCompras { get; set; }
+        public virtual Condiciones_Compra Condiciones_Compra { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Empleado Empleado2 { get; set; }
+        public virtual Empleado Empleado3 { get; set; }
+        public virtual ListasPrecio ListasPrecio { get; set; }
+        public virtual Obra Obra { get; set; }
     }
 }

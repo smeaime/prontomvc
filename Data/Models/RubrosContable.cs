@@ -31,6 +31,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CodigoAgrupacion { get; set; }
         public Nullable<int> IdTipoRubroFinancieroGrupo { get; set; }
         public string TomarMesDeVentaEnResumen { get; set; }
+        public string TipoNegocioVentaGrupo { get; set; }
     
         public virtual ICollection<DetalleOrdenesPagoRubrosContable> DetalleOrdenesPagoRubrosContables { get; set; }
     }

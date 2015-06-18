@@ -23,5 +23,6 @@ namespace ProntoMVC.Data.Models
         public string ParaTaller { get; set; }
         public Nullable<decimal> ImporteDesde { get; set; }
         public Nullable<decimal> ImporteHasta { get; set; }
+        public Nullable<int> IdObra { get; set; }
     }
 }
