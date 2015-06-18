@@ -651,7 +651,7 @@ namespace ProntoMVC.Controllers
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             ClienteCuit = a.Cliente.Cuit,
-                            a.Cliente.DescripcionIva.Descripcion,
+                            DescripcionIva=a.Cliente.DescripcionIva.Descripcion,
                             ProveedorCodigo = a.Proveedore.CodigoEmpresa,
                             ProveedorNombre = a.Proveedore.RazonSocial,
                             ProveedorCuit = a.Proveedore.Cuit,
@@ -659,11 +659,13 @@ namespace ProntoMVC.Controllers
                             OCompras = "",
                             Facturas = "",
                             Materiales = "",
-                            TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" : ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
+                            TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" :
+                                          ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? 
+                                        "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
                             CondicionVenta = a.Condiciones_Compra.Descripcion ,
                             Transportista = a.Transportista.RazonSocial,
-                            ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
-                            Obra = c != null ? c.NumeroObra : "",
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
+                            Obra = a.Obra.NumeroObra,
                             a.TotalBultos,
                             a.ValorDeclarado,
                             CantidadItems = 0,
@@ -673,7 +675,9 @@ namespace ProntoMVC.Controllers
                             PendienteFacturar = PendienteFactura == "SI"
                                                 ? (db.DetalleRemitos.Where(x => x.IdRemito == a.IdRemito && (a.Anulado ?? "NO") != "SI")
                                                     .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : y.PorcentajeCertificacion) -
-                                                        (db.DetalleFacturasRemitos.Where(x => x.IdDetalleRemito == y.IdDetalleRemito && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0))) ?? 0
+                                                        (db.DetalleFacturasRemitos.Where(x => x.IdDetalleRemito == y.IdDetalleRemito &&
+                                                           (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI")
+                                                     .Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0))) ?? 0
                                                 : 1
                         }).AsQueryable();
 
