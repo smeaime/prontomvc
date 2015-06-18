@@ -628,12 +628,11 @@ namespace ProntoMVC.Controllers
             int currentPage = page ;
 
             var data = (from a in pagedQuery
-                        from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.Cliente.IdCodigoIva).DefaultIfEmpty()
-                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
-                        from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
-                        from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
-                        from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
-                        from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
                         select new
                         {
                             a.IdRemito,
@@ -652,7 +651,7 @@ namespace ProntoMVC.Controllers
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             ClienteCuit = a.Cliente.Cuit,
-                            DescripcionIva = b != null ? b.Descripcion : "",
+                            a.Cliente.DescripcionIva.Descripcion,
                             ProveedorCodigo = a.Proveedore.CodigoEmpresa,
                             ProveedorNombre = a.Proveedore.RazonSocial,
                             ProveedorCuit = a.Proveedore.Cuit,
@@ -661,8 +660,8 @@ namespace ProntoMVC.Controllers
                             Facturas = "",
                             Materiales = "",
                             TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" : ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
-                            CondicionVenta = i != null ? i.Descripcion : "",
-                            Transportista = d != null ? d.RazonSocial : "",
+                            CondicionVenta = a.Condiciones_Compra.Descripcion ,
+                            Transportista = a.Transportista.RazonSocial,
                             ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
                             Obra = c != null ? c.NumeroObra : "",
                             a.TotalBultos,

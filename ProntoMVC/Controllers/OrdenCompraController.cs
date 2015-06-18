@@ -356,13 +356,13 @@ namespace ProntoMVC.Controllers
             decimal cien = 100;
 
             var data = (from a in pagedQuery
-                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
-                        from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-                        from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
-                        from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
-                        from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
-                        from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
-                        from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+                        //from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
                         select new
                         {
                             a.IdOrdenCompra,
@@ -426,7 +426,8 @@ namespace ProntoMVC.Controllers
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
-                        .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
+                        .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) 
+                                 && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroOrdenCompra)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 

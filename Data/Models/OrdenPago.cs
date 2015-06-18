@@ -96,6 +96,9 @@ namespace ProntoMVC.Data.Models
         public string IdsComprobanteProveedorRetenidosIva { get; set; }
         public string TotalesImportesRetenidosIva { get; set; }
         public string ReversionContablePorAnulacion { get; set; }
+        public string ArchivoAdjunto1 { get; set; }
+        public string ArchivoAdjunto2 { get; set; }
+        public Nullable<System.DateTime> FechaReversionContablePorAnulacion { get; set; }
     
         public virtual Proveedor Proveedore { get; set; }
         public virtual ICollection<DetalleOrdenesPago> DetalleOrdenesPagoes { get; set; }
