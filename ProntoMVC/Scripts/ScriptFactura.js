@@ -757,7 +757,7 @@
             name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
             search: true, searchoptions: {
                 clearSearch: true, searchOperators: true
-                , sopt: ['eq', 'cn']
+                , sopt: [ 'cn']
             }
         },
         {
@@ -767,7 +767,7 @@
             , search: true, searchoptions: {
                 clearSearch: true,
                 searchOperators: true
-                , sopt: ['eq', 'cn']
+                , sopt: [ 'cn']
                 //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
             }
         },
@@ -882,6 +882,7 @@
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
     //myGrid.filterToolbar({  });
+
     jQuery("#ListaDrag3").jqGrid('navButtonAdd', '#ListaDragPager3',
         {
             caption: "Filter", title: "Toggle Searching Toolbar",
