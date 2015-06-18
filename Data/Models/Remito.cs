@@ -64,5 +64,10 @@ namespace ProntoMVC.Data.Models
         public virtual Proveedor Proveedore { get; set; }
         public virtual PuntosVenta PuntosVenta { get; set; }
         public virtual ICollection<DetalleRemito> DetalleRemitos { get; set; }
+        public virtual Condiciones_Compra Condiciones_Compra { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual ListasPrecio ListasPrecio { get; set; }
+        public virtual Obra Obra { get; set; }
+        public virtual Transportista Transportista { get; set; }
     }
 }
