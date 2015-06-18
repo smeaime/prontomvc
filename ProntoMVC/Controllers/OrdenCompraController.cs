@@ -321,6 +321,175 @@ namespace ProntoMVC.Controllers
             }
         }
 
+
+
+        
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.OrdenesCompra>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string PendienteRemito = "";
+            string PendienteFactura = "";
+
+
+            string campo = String.Empty;
+            int pageSize = rows ;
+            int currentPage = page ;
+            decimal cien = 100;
+
+            var data = (from a in pagedQuery
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+                        //from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdOrdenCompra,
+                            a.IdCliente,
+                            a.IdObra,
+                            a.IdCondicionVenta,
+                            a.IdListaPrecios,
+                            a.IdMoneda,
+                            a.NumeroOrdenCompraCliente,
+                            a.NumeroOrdenCompra,
+                            a.FechaOrdenCompra,
+                            Producido = a.Estado,
+                            // Case When Exists(Select Top 1 doc.IdOrdenCompra From DetalleOrdenesCompra doc Where doc.IdOrdenCompra=OrdenesCompra.IdOrdenCompra and IsNull(doc.Cumplido,'NO')='NO') Then Null Else 'SI' End as [Cumplido],
+                            Cumplido = "",
+                            a.Anulada,
+                            a.SeleccionadaParaFacturacion,
+                            Obra = a.Obra != null ? a.Obra.NumeroObra : "",
+                            ClienteCodigo = a.Cliente.CodigoCliente,
+                            ClienteNombre = a.Cliente.RazonSocial,
+                            ClienteCuit = a.Cliente.Cuit,
+                            Aprobo = a.Empleado3.Nombre ,
+                            //#Auxiliar3.Remitos as [Remitos],
+                            Remitos = "",
+                            //#Auxiliar5.Facturas as [Facturas],
+                            Facturas = "",
+                            CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
+                            // (Select Count(*) From DetalleOrdenesCompra Where DetalleOrdenesCompra.IdOrdenCompra=OrdenesCompra.IdOrdenCompra) as [Cant.Items],
+                            Items = 0,
+                            FacturarA = (a.AgrupacionFacturacion ?? 1) == 1 ? "Cliente" : 
+                                ((a.AgrupacionFacturacion ?? 1) == 2 ? "Obra" : ((a.AgrupacionFacturacion ?? 1) == 3 ? "U.Operativa" : "")),
+                            a.FechaAnulacion,
+                            UsuarioAnulo = a.Empleado != null ? a.Empleado.Nombre : "",
+                            a.FechaIngreso,
+                            UsuarioIngreso = a.Empleado2 != null ? a.Empleado2.Nombre : "",
+                            a.FechaModifico,
+                            UsuarioModifico = a.Empleado1 != null ? a.Empleado1.Nombre : "",
+                            GrupoFacturacion = (a.Agrupacion2Facturacion ?? 1) == 1 ? "Grupo 1" : ((a.Agrupacion2Facturacion ?? 1) == 2 ? "Grupo 2" : ((a.Agrupacion2Facturacion ?? 1) == 3 ? "Grupo 3" : "")),
+                            //IsNull(#Auxiliar2.Automatica+' ','')+IsNull(#Auxiliar2.Manual,'') as [Tipo OC],
+                            TipoOC = "",
+                             //(Select Max(Det.FechaEntrega) From DetalleOrdenesCompra Det Where Det.IdOrdenCompra=OrdenesCompra.IdOrdenCompra) as [Mayor fecha entrega],
+                             MayorFechaEntrega = "",
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
+                            a.PorcentajeBonificacion,
+                            a.ImporteTotal,
+                            Moneda = a.Moneda.Abreviatura,
+                            a.Observaciones,
+                            PendienteRemitir = PendienteRemito == "SI"
+                                                ? ((db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) - (db.DetalleRemitos.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0)
+                                                : 1,
+                            PendienteFacturar = PendienteFactura == "SI"
+                                                ? (db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) -
+                                                        (db.DetalleFacturasOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0) +
+                                                        (db.DetalleNotasCreditoOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0
+                                                : 1
+                        }).AsQueryable();
+
+            
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) 
+                                 && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
+                        .OrderByDescending(x => x.NumeroOrdenCompra)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdOrdenCompra.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdOrdenCompra} ) + ">Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdOrdenCompra} ) + ">Emitir</a> ",
+                                a.IdOrdenCompra.ToString(),
+                                a.IdCliente.NullSafeToString(),
+                                a.IdObra.NullSafeToString(),
+                                a.IdCondicionVenta.NullSafeToString(),
+                                a.IdListaPrecios.NullSafeToString(),
+                                a.IdMoneda.NullSafeToString(),
+                                a.NumeroOrdenCompraCliente.NullSafeToString(),
+                                a.NumeroOrdenCompra.NullSafeToString(),
+                                a.FechaOrdenCompra == null ? "" : a.FechaOrdenCompra.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Producido.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.SeleccionadaParaFacturacion.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.Remitos.NullSafeToString(),
+                                a.Facturas.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                db.DetalleOrdenesCompras.Where(x=>x.IdOrdenCompra==a.IdOrdenCompra).Select(x=>x.IdDetalleOrdenCompra).Distinct().Count().ToString(),
+                                a.FacturarA.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioAnulo.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioIngreso.NullSafeToString(),
+                                a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioModifico.NullSafeToString(),
+                                a.GrupoFacturacion.NullSafeToString(),
+                                a.TipoOC.NullSafeToString(),
+                                a.MayorFechaEntrega.NullSafeToString(),
+                                a.ListaDePrecio.NullSafeToString(),
+                                a.PorcentajeBonificacion.NullSafeToString(),
+                                a.ImporteTotal.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
         {
             string campo = String.Empty;

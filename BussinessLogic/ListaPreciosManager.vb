@@ -367,7 +367,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
         Public Shared Function CrearleListaAlCliente(ByVal SC As String, ByVal IdCliente As Long) As Long
-            Dim myCliente As Cliente = ClienteManager.GetItem(SC, IdCliente)
+            Dim myCliente As ClienteNuevo = ClienteManager.GetItem(SC, IdCliente)
             If myCliente.IdLocalidad = 0 Then myCliente.IdLocalidad = BuscaIdLocalidadPreciso("CIUDAD AUTONOMA BUENOS AIRES", SC) 'le fuerzo una localidad para que no me aborte la lista de precios
             If myCliente.IdProvincia = 0 Then myCliente.IdProvincia = 2 'BuscaIdProvinciaNET("BUENOS AIRES", SC)
             myCliente.IdListaPrecios = CrearLista(SC, myCliente.RazonSocial & " - Precios", 1)
