@@ -14,6 +14,11 @@ namespace ProntoMVC.Data.Models
     
     public partial class Transportista
     {
+        public Transportista()
+        {
+            this.Remitos = new HashSet<Remito>();
+        }
+    
         public int IdTransportista { get; set; }
         public string RazonSocial { get; set; }
         public string Direccion { get; set; }
@@ -35,5 +40,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> Codigo { get; set; }
     
         public virtual Localidad Localidade { get; set; }
+        public virtual ICollection<Remito> Remitos { get; set; }
     }
 }

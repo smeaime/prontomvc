@@ -1014,3 +1014,108 @@ go
 
 
 
+
+
+
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+--agregar los de remitos y ordenescompra
+
+
+
+
+alter table  Remitos
+		ADD CONSTRAINT FK_Remitos_Obras
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+alter table  Remitos
+		ADD CONSTRAINT FK_Remitos_Transportistas
+		FOREIGN KEY (IdTransportista) REFERENCES Transportistas(IdTransportista)
+go
+
+alter table  Remitos
+		ADD CONSTRAINT FK_Remitos_Empleados
+		FOREIGN KEY (IdAutorizaAnulacion) REFERENCES Empleados(IdEmpleado)
+go
+
+
+
+
+alter table  Remitos
+		ADD CONSTRAINT FK_Remitos_Condiciones_Compras
+		FOREIGN KEY (IdCondicionVenta) REFERENCES  [Condiciones Compra](IdCondicionCompra)
+go
+
+
+alter table  Remitos
+		ADD CONSTRAINT FK_Remitos_ListasPrecios
+		FOREIGN KEY (IdListaPrecios) REFERENCES ListasPrecios(IdListaPrecios)
+go
+--                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+--                        from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
+--                        from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+--                        from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+--                        from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_Obras
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_Condiciones_Compras
+		FOREIGN KEY (IdCondicionVenta) REFERENCES  [Condiciones Compra](IdCondicionCompra)
+go
+
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_ListasPrecios
+		FOREIGN KEY (IdListaPrecios) REFERENCES ListasPrecios(IdListaPrecios)
+go
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_IdUsuarioIngreso
+		FOREIGN KEY (IdUsuarioIngreso) REFERENCES Empleados(IdEmpleado)
+go
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_IdUsuarioModifico
+		FOREIGN KEY (IdUsuarioModifico) REFERENCES Empleados(IdEmpleado)
+go
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_IdUsuarioAnulacion
+		FOREIGN KEY (IdUsuarioAnulacion) REFERENCES Empleados(IdEmpleado)
+go
+
+
+alter table  OrdenesCompra
+		ADD CONSTRAINT FK_OrdenesCompra_Aprobo
+		FOREIGN KEY (Aprobo) REFERENCES Empleados(IdEmpleado)
+go
+--                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+--                        from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+--                        from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+--                        from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+--                        from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+--                        from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+--                        from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+
+
+
+
+

@@ -241,6 +241,89 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+
+                
+
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.OrdenesCompra>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            string campo = String.Empty;
+            int pageSize = rows ;
+            int currentPage = page ;
+
+            var Entidad = db.OrdenesTrabajoes.AsQueryable();
+            //if (_search)
+            //{
+            //    switch (searchField.ToLower())
+            //    {
+            //        case "nombre":
+            //            campo = String.Format("{0} = {1}", searchField, searchString);
+            //            break;
+            //        default:
+            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    campo = "true";
+            //}
+
+            var Entidad1 = (from a in Entidad
+                            select new { IdOrdenTrabajo = a.IdOrdenTrabajo }).Where(campo).ToList();
+
+           
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select new
+                        {
+                            a.IdOrdenTrabajo,
+                            a.NumeroOrdenTrabajo,
+                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdOrdenTrabajo.ToString(),
+                            cell = new string[] { 
+                                "",
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdOrdenTrabajo}) +">Editar</>  -  <a href="+ Url.Action("Delete",new {id = a.IdOrdenTrabajo}) +">Eliminar</>",
+                                a.IdOrdenTrabajo.ToString(),
+                                a.NumeroOrdenTrabajo.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
         public virtual JsonResult GetOrdenesTrabajo(int IdEquipoDestino)
         {
             var ProntoIni = BuscarClaveINI("OTs desde Mantenimiento") ?? "";
