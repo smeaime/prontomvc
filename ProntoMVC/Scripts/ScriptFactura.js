@@ -568,8 +568,36 @@
                     { name: 'IdListaPrecios', index: 'IdListaPrecios', width: 80, sortable: false, editable: false, search: false, hidden: true },
                     { name: 'Destino', index: 'Destino', width: 80, sortable: false, editable: false, search: false, hidden: true },
                     { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'NumeroRemito', index: 'NumeroRemito', align: 'right', width: 80, editable: false, hidden: false },
-                    { name: 'FechaRemito', index: 'FechaRemito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    {
+                        name: 'NumeroRemito', index: 'NumeroRemito', align: 'right',
+                        width: 80, editable: false, hidden: false
+                        , search: true, searchoptions: { sopt: ['eq'] }
+                    },
+                    {
+                        name: 'FechaRemito', index: 'FechaRemito', width: 80, align: 'center',
+                        sorttype: 'date', hidden: false, editable: false,
+                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true,
+                        searchrules: {
+                            date: true
+                        },
+                        searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                            sopt: ['ge', 'le'],
+                            dataInit: function (elem) {
+                                $(elem).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    changeYear: true,
+                                    changeMonth: true,
+                                    showButtonPanel: true,
+                                    onSelect: function () {
+                                        $(this).keydown();
+                                    }
+                                });
+                            }
+                        }
+
+
+                    },
                     { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
@@ -607,7 +635,7 @@
 
 
 
-        
+
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -633,10 +661,10 @@
         , multiboxonly: true
         , multipleSearch: true
 
-        
+
 
     })
-   // jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    // jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
 
 
 
