@@ -238,8 +238,6 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
@@ -249,10 +247,7 @@ namespace ProntoMVC.Controllers
             //    !Roles.IsUserInRole(Membership.GetUser().UserName, "Comercial")
             //    ) throw new Exception("Sólo podes acceder a facturas a tu nombre");
 
-
             string baseP = this.HttpContext.Session["BasePronto"].ToString();
-            // baseP = "Vialagro";
-            // baseP = "BDLConsultores";
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
@@ -288,17 +283,11 @@ namespace ProntoMVC.Controllers
 
             string mArgs = "NO|NO|2|3|4|1/1/1800|1/1/2100";
 
-            EntidadManager.ImprimirWordDOT_VersionDLL_PDF
-                (plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output);
-            
-
+            EntidadManager.ImprimirWordDOT_VersionDLL_PDF(plantilla, ref nulo, SC, nulo, ref nulo, id, mvarClausula, mPrinter, mCopias, output);
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "NotaDebito.pdf");
         }
-
-
-
 
         public virtual ActionResult DetNotaDebito(string sidx, string sord, int? page, int? rows, int? IdNotaDebito)
         {

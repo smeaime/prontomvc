@@ -662,47 +662,16 @@
     <Content Include="Documentos\CertificadoRetencionSUSS.dot" />
     <Content Include="Documentos\Comparativa.xlsx" />
     <Content Include="Documentos\Comparativa.xlt" />
-    <Content Include="Documentos\Factura A_Hawk_DOT_ORIGINAL.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_A_Hawk_FA.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_B_Hawk.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_A_VialAgro.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_A_Vialagro_FA.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_B_VialAgro.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Factura_B_Vialagro_FA.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentos\Pedido_Autotrol_PUNTONET.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Documentos\Pedido_Esuco.dot">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Pedido_ESUCO_PUNTONET.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentos\Pronto.app" />
-    <Content Include="Documentos\Requerimiento1_ESUCO_PUNTONET.docx" />
     <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
     <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET - Copia.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Documentos\Pedido_DemoProntoWeb_PUNTONET.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Documentos\Factura_A_BaseNueva.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -801,7 +770,6 @@
     <None Include="Documentos\vb6\frmArticulos.frmzz" />
     <None Include="Documentos\vb6\frmDetRequerimientos.frmz" />
     <None Include="Documentos\vb6\frmRequerimientos.frmz" />
-    <None Include="Documentos\RequerimientoWeb_AUTOTROL.docx" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
@@ -1566,9 +1534,6 @@
     <Content Include="Views\Shared\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentos\FacturaNET_Hawk.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Documentos\vb6\frmClientes.frmzzz" />
     <None Include="Documentos\vb6\frmConceptos.frmzzz" />
     <None Include="Documentos\vb6\frmCondicionesCompra.frmzzz" />
