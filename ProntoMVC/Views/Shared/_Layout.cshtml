@@ -338,14 +338,13 @@ Released   : 20120723
         }
 
         body {
-   font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
-   font-size: 16px !important;
-}
+            font-family: 'Helvetica Narrow', 'Arial Narrow',Tahoma,Arial,Helvetica,sans-serif;
+            font-size: 16px !important;
+        }
 
         .nav {
-  font-size: 16px  !important;
-}
-
+            font-size: 16px !important;
+        }
     </style>
     <style>
         .ui-widget-header {
@@ -1688,7 +1687,7 @@ Released   : 20120723
 
                                             <li><a href="#">Administrador</a></li>
                                             <li>
-                                                <a href=' @( Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())=) ='>
+                                                <a href='@(Url.Content("~") + "MvcMembership\\UserAdministration\\Details\\" + Membership.GetUser().ProviderUserKey.ToString())'>
                                                     Mi cuenta
                                                 </a>
                                             </li>
@@ -2487,16 +2486,17 @@ Released   : 20120723
 
 
 
-                                @if (false) { 
-                                <button type="button" class="btn btn-small clearfix"
-                                        id="btnConmutarPanelDerecho"
-                                        value="Buscar"
-                                        style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
-                                        onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
+                                @if (false)
+                                {
+                                    <button type="button" class="btn btn-small clearfix"
+                                            id="btnConmutarPanelDerecho"
+                                            value="Buscar"
+                                            style="display:block; position:absolute; bottom: 70px; right:20px ; text-align: right; margin-right: 0px; float: right;"
+                                            onclick="conmutarPanelesDerecho(); pageLayout.hide('south');
                                         pageLayout.hide('north');
                                         RefrescaAnchoGrillaDetalle(); ">
-                                    Grillas
-                                </button>
+                                        Grillas
+                                    </button>
                                 }
 
 
