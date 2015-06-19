@@ -114,15 +114,16 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-                
-                // estas tratando de usar un LIKE sobre una columna que es numerica?
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
                 throw;
             }
 
 
 
 
-            
+
 
 
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
@@ -260,11 +261,24 @@ namespace ProntoMVC.Controllers
                 objParams.Add(param);
             }
 
-            ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
-            foreach (var objParam in objParams)
-                filteredQuery.Parameters.Add(objParam);
+            try
+            {
+                ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
+                
+                foreach (var objParam in objParams)
+                    filteredQuery.Parameters.Add(objParam);
+                
+                return filteredQuery;
 
-            return filteredQuery;
+            }
+            catch (Exception)
+            {
+                // algun problema en los nombres de columna en el modelo de la jqgrid???               
+                throw;
+            }
+
+
+
         }
     }
 }
