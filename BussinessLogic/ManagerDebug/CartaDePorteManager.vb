@@ -8710,6 +8710,9 @@ Public Class CartaDePorteManager
 
 
     Shared Sub ParseNombreCarta(nombre As String, ByRef numeroCarta As Long, ByRef vagon As Long)
+
+        nombre = Path.GetFileNameWithoutExtension(nombre)
+
         Dim no As String() = Split(nombre)
         numeroCarta = Val(no(0))
         vagon = 0
