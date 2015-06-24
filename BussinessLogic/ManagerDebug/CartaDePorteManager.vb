@@ -6399,8 +6399,34 @@ Public Class CartaDePorteManager
                 End Try
 
 
+                .CalidadGastoDeSecada = GetDetalle("CalidadGastoDeSecada", db, id)
+                .CalidadGastoDeSecadaRebaja = GetDetalle("CalidadGastoDeSecadaRebaja", db, id)
+                .CalidadGastoDeSecadaMerma = GetDetalle("CalidadGastoDeSecadaMerma", db, id)
+                .TipoMermaGastoDeSecada = GetDetalle("TipoMermaGastoDeSecada", db, id)
 
 
+                .CalidadMermaVolatil = GetDetalle("CalidadMermaVolatil", db, id)
+                .CalidadMermaVolatilRebaja = GetDetalle("CalidadMermaVolatilRebaja", db, id)
+                .CalidadMermaVolatilMerma = GetDetalle("CalidadMermaVolatilMerma", db, id)
+                .TipoMermaVolatil = GetDetalle("TipoMermaVolatil", db, id)
+
+
+                .CalidadFondoNidera = GetDetalle("CalidadFondoNidera", db, id)
+                .CalidadFondoNideraRebaja = GetDetalle("CalidadFondoNideraRebaja", db, id)
+                .CalidadFondoNideraMerma = GetDetalle("CalidadFondoNideraMerma", db, id)
+                .TipoMermaFondoNidera = GetDetalle("TipoMermaFondoNidera", db, id)
+
+
+                .CalidadMermaConvenida = GetDetalle("CalidadMermaConvenida", db, id)
+                .CalidadMermaConvenidaRebaja = GetDetalle("CalidadMermaConvenidaRebaja", db, id)
+                .CalidadMermaConvenidaMerma = GetDetalle("CalidadMermaConvenidaMerma", db, id)
+                .TipoMermaConvenida = GetDetalle("TipoMermaConvenida", db, id)
+
+
+                .CalidadTalCualVicentin = GetDetalle("CalidadTalCualVicentin", db, id)
+                .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
+                .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
+                .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
 
 
 
@@ -6416,6 +6442,54 @@ Public Class CartaDePorteManager
         Return myCartaDePorte
     End Function
 
+
+    Shared Function GetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long) As Decimal
+
+        Try
+
+            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                                                Where i.IdCartaDePorte = id _
+                                                And i.Campo = nombrecampo
+                                            ).SingleOrDefault
+
+            If oDet IsNot Nothing Then
+                Return oDet.Valor
+            Else
+                Return 0
+            End If
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+
+    End Function
+
+    Shared Sub SetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long, valor As Decimal)
+
+
+
+
+        Try
+
+            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                                                Where i.IdCartaDePorte = id _
+                                                And i.Campo = nombrecampo
+                                            ).SingleOrDefault
+            If IsNothing(oDet) Then
+                oDet = New CartasDePorteDetalle
+                oDet.IdCartaDePorte = id
+                oDet.Campo = nombrecampo
+                oDet.Valor = valor
+                db.CartasDePorteDetalles.InsertOnSubmit(oDet)
+            Else
+                oDet.Valor = valor
+            End If
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+
+
+
+    End Sub
 
 
 
@@ -6731,24 +6805,61 @@ Public Class CartaDePorteManager
 
 
 
-                    Try
+                    'Try
 
-                        Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
-                                                            Where i.IdCartaDePorte = CartaDePorteId _
-                                                            And i.Campo = "CalidadGastoDeSecada"
-                                                        ).SingleOrDefault
-                        If IsNothing(oDet) Then
-                            oDet = New CartasDePorteDetalle
-                            oDet.IdCartaDePorte = CartaDePorteId
-                            oDet.Campo = "CalidadGastoDeSecada"
-                            oDet.Valor = .CalidadGastoDeSecada
-                            db.CartasDePorteDetalles.InsertOnSubmit(oDet)
-                        Else
-                            oDet.Valor = .CalidadGastoDeSecada
-                        End If
-                    Catch ex As Exception
-                        ErrHandler.WriteError(ex)
-                    End Try
+                    '    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                    '                                        Where i.IdCartaDePorte = CartaDePorteId _
+                    '                                        And i.Campo = "CalidadGastoDeSecada"
+                    '                                    ).SingleOrDefault
+                    '    If IsNothing(oDet) Then
+                    '        oDet = New CartasDePorteDetalle
+                    '        oDet.IdCartaDePorte = CartaDePorteId
+                    '        oDet.Campo = "CalidadGastoDeSecada"
+                    '        oDet.Valor = .CalidadGastoDeSecada
+                    '        db.CartasDePorteDetalles.InsertOnSubmit(oDet)
+                    '    Else
+                    '        oDet.Valor = .CalidadGastoDeSecada
+                    '    End If
+                    'Catch ex As Exception
+                    '    ErrHandler.WriteError(ex)
+                    'End Try
+
+                    
+
+                    SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
+                    SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
+                    SetDetalle("CalidadGastoDeSecadaMerma", db, CartaDePorteId, .CalidadGastoDeSecadaMerma)
+                    SetDetalle("TipoMermaGastoDeSecada", db, CartaDePorteId, .TipoMermaGastoDeSecada)
+
+
+                    SetDetalle("CalidadMermaVolatil", db, CartaDePorteId, .CalidadMermaVolatil)
+                    SetDetalle("CalidadMermaVolatilRebaja", db, CartaDePorteId, .CalidadMermaVolatilRebaja)
+                    SetDetalle("CalidadMermaVolatilMerma", db, CartaDePorteId, .CalidadMermaVolatilMerma)
+                    SetDetalle("TipoMermaVolatil", db, CartaDePorteId, .TipoMermaVolatil)
+
+
+                    SetDetalle("CalidadFondoNidera", db, CartaDePorteId, .CalidadFondoNidera)
+                    SetDetalle("CalidadFondoNideraRebaja", db, CartaDePorteId, .CalidadFondoNideraRebaja)
+                    SetDetalle("CalidadFondoNideraMerma", db, CartaDePorteId, .CalidadFondoNideraMerma)
+                    SetDetalle("TipoMermaFondoNidera", db, CartaDePorteId, .TipoMermaFondoNidera)
+
+
+                    SetDetalle("CalidadMermaConvenida", db, CartaDePorteId, .CalidadMermaConvenida)
+                    SetDetalle("CalidadMermaConvenidaRebaja", db, CartaDePorteId, .CalidadMermaConvenidaRebaja)
+                    SetDetalle("CalidadMermaConvenidaMerma", db, CartaDePorteId, .CalidadMermaConvenidaMerma)
+                    SetDetalle("TipoMermaConvenida", db, CartaDePorteId, .TipoMermaConvenida)
+
+
+                    SetDetalle("CalidadTalCualVicentin", db, CartaDePorteId, .CalidadTalCualVicentin)
+                    SetDetalle("CalidadTalCualVicentinRebaja", db, CartaDePorteId, .CalidadTalCualVicentinRebaja)
+                    SetDetalle("CalidadTalCualVicentinMerma", db, CartaDePorteId, .CalidadTalCualVicentinMerma)
+                    SetDetalle("TipoMermaTalCualVicentin", db, CartaDePorteId, .TipoMermaTalCualVicentin)
+
+
+
+
+
+
 
 
 
@@ -7186,7 +7297,7 @@ Public Class CartaDePorteManager
             'End If
 
 
-            
+
 
 
 
@@ -7707,7 +7818,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
 
 
         ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
@@ -7736,7 +7847,7 @@ Public Class CartaDePorteManager
             '    [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
             '    GO()
         End Try
-        
+
 
 
 
