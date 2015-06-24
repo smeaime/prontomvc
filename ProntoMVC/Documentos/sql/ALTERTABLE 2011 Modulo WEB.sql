@@ -1292,10 +1292,11 @@ alter table CartasDePorte add
 go
 
 
+--drop table CartasDePorteDetalle
 create table CartasDePorteDetalle (
 		IdCartaDePorteDetalle int IDENTITY (1, 1) PRIMARY KEY,
 		IdCartaDePorte int REFERENCES CartasDePorte(IdCartaDePorte),
-		Campo varchar(20),
+		Campo varchar(40),
 		Valor numeric(18,2) NULL,		
 		
 		constraint U_Unicidad_CartasDePorteDetalle unique NONCLUSTERED (IdCartaDePorte,Campo)
