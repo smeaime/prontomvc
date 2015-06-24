@@ -6737,7 +6737,7 @@ Public Class CartaDePorteManager
                     oCarta.Acopio3 = .Acopio3
                     oCarta.Acopio4 = .Acopio4
                     oCarta.Acopio5 = .Acopio5
-                    oCarta.Acopio6 = IIf(.Acopio6 = 0, Nothing, .Acopio6)
+                    oCarta.Acopio6 = IIf(.Acopio6 <= 0, Nothing, .Acopio6)
                     oCarta.AcopioFacturarleA = .AcopioFacturarleA
 
                     oCarta.ClaveEncriptada = EntidadManager.encryptQueryString(CartaDePorteId)
@@ -15829,7 +15829,7 @@ Public Class LogicaFacturacion
 
 
                         '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
-                        If False And SeFiltraEsteClienteComoCorredor(SC, IdClienteObservaciones) Then
+                        If False And SeFacturaEsteClienteObservacionesComoCorredor(SC, IdClienteObservaciones) Then
                             .Fields("IdClienteObservaciones").Value = IdClienteObservaciones
                         End If
 
@@ -16452,11 +16452,13 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Function SeFiltraEsteClienteComoCorredor(SC As String, idcliente As Long) As Boolean
+    Shared Function SeFacturaEsteClienteObservacionesComoCorredor(SC As String, idcliente As Long) As Boolean
         '        http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13928
 
         '* Agregar una marca en la tabla de clientes para indicar cuales tienen que entrar por este circuito
         '* En facturación cuando filtren con el campo Cliente Observaciones algún cliente que tiene la marca del punto anterior, ponerle el id del cliente en cuestión a todas las facturas que se creen en un campo nuevo en la cabeza de las facturas (IdClienteObservaciones)
+
+        Return False
 
         Dim clipront = ClienteManager.GetItem(SC, idcliente)
 
