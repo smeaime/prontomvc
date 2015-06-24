@@ -499,7 +499,7 @@
       <Column Name="Cuit" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
       <Association Name="linqCorredor_linqCliente" Member="Clientes" ThisKey="IdVendedor" OtherKey="Cobrador" Type="linqCliente" />
       <Association Name="linqCorredor_linqCliente1" Member="linqClientes" ThisKey="IdVendedor" OtherKey="Vendedor1" Type="linqCliente" />
-      <Association Name="linqCorredor_CartasDePorte" Member="CartasDePorte" ThisKey="IdVendedor" OtherKey="IdCorredor2" Type="CartasDePorte" />
+      <Association Name="linqCorredor_CartasDePorte" Member="CartasDePortes" ThisKey="IdVendedor" OtherKey="IdCorredor2" Type="CartasDePorte" />
     </Type>
   </Table>
   <Table Name="dbo.Calidades" Member="Calidades">
@@ -638,6 +638,7 @@
     <Type Name="CartasPorteAcopio">
       <Column Name="IdAcopio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Association Name="CartasPorteAcopio_CartasDePorte" Member="CartasDePortes" ThisKey="IdAcopio" OtherKey="Acopio6" Type="CartasDePorte" />
     </Type>
   </Table>
   <Table Name="dbo.DetalleFacturas" Member="linqDetalleFacturas">
@@ -672,7 +673,7 @@
       <Column Name="IdColor" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdDetallePresupuestoVenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OrigenRegistro" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Association Name="linqDetalleFacturas_CartasDePorte" Member="CartasDePorte" ThisKey="IdDetalleFactura" OtherKey="IdDetalleFactura" Type="CartasDePorte" />
+      <Association Name="linqDetalleFacturas_CartasDePorte" Member="CartasDePortes" ThisKey="IdDetalleFactura" OtherKey="IdDetalleFactura" Type="CartasDePorte" />
       <Association Name="linqArticulo_linqDetalleFacturas" Member="linqArticulo" ThisKey="IdArticulo" OtherKey="IdArticulo" Type="linqArticulo" IsForeignKey="true" />
     </Type>
   </Table>
@@ -954,9 +955,9 @@
       <Column Name="CartaPorteTipoDeAdjuntoDeFacturacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="linqCliente_linqFactura" Member="linqFacturas" ThisKey="IdCliente" OtherKey="IdCliente" Type="linqFactura" />
       <Association Name="linqCliente_CartasDePorteReglasDeFacturacion" Member="CartasDePorteReglasDeFacturacions" ThisKey="IdCliente" OtherKey="IdCliente" Type="CartasDePorteReglasDeFacturacion" />
-      <Association Name="linqCliente_CartasDePorte" Member="CartasDePorte" ThisKey="IdCliente" OtherKey="IdClienteAuxiliar" Type="CartasDePorte" />
-      <Association Name="linqCliente_CartasDePorte1" Member="CartasDePorte1" ThisKey="IdCliente" OtherKey="IdClienteEntregador" Type="CartasDePorte" />
-      <Association Name="linqCliente_CartasDePorte2" Member="CartasDePorte2" ThisKey="IdCliente" OtherKey="Vendedor" Type="CartasDePorte" />
+      <Association Name="linqCliente_CartasDePorte" Member="CartasDePortes" ThisKey="IdCliente" OtherKey="IdClienteAuxiliar" Type="CartasDePorte" />
+      <Association Name="linqCliente_CartasDePorte1" Member="CartasDePortes1" ThisKey="IdCliente" OtherKey="IdClienteEntregador" Type="CartasDePorte" />
+      <Association Name="linqCliente_CartasDePorte2" Member="CartasDePortes2" ThisKey="IdCliente" OtherKey="Vendedor" Type="CartasDePorte" />
       <Association Name="linqCorredor_linqCliente" Member="linqCorredor" ThisKey="Cobrador" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
       <Association Name="linqEmpleado_linqCliente" Member="linqEmpleado" ThisKey="IdUsuarioIngreso" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
       <Association Name="linqEmpleado_linqCliente1" Member="linqEmpleado1" ThisKey="IdUsuarioModifico" OtherKey="IdEmpleado" Type="linqEmpleado" IsForeignKey="true" />
@@ -981,9 +982,62 @@
       <Column Name="IdAcopio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
       <Column Name="IdCliente" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CartasPorteAcopios_CartasDePorte" Member="CartasDePortes" ThisKey="IdAcopio" OtherKey="Acopio6" Type="CartasDePorte" />
     </Type>
   </Table>
-  <Table Name="dbo.CartasDePorte" Member="CartasDePorte">
+  <Table Name="dbo.Localidades" Member="Localidades">
+    <Type Name="Localidade">
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoPostal" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnviarEmail" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="CodigoONCAA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoESRI" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="CodigoWilliams" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoLosGrobo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Partido" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Codigo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdPartido" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoAfip" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Localidade_linqCliente" Member="linqClientes" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="linqCliente" />
+      <Association Name="linqPartido_Localidade" Member="linqPartido" ThisKey="IdPartido" OtherKey="IdPartido" Type="linqPartido" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WilliamsDestinos" Member="WilliamsDestinos">
+    <Type Name="WilliamsDestino">
+      <Column Name="IdWilliamsDestino" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Subcontratista1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Subcontratista2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoSAJPYA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoONCAA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SincronismoNoble1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SincronismoNoble2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AuxiliarString1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AuxiliarString2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AuxiliarString3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoWilliams" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoPostal" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CUIT" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="CodigoLosGrobo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoYPF" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PuntoVenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CartasDePorteDetalle" Member="CartasDePorteDetalles">
+    <Type Name="CartasDePorteDetalle">
+      <Column Name="IdCartaDePorteDetalle" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdCartaDePorte" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Campo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="CartasDePorte_CartasDePorteDetalle" Member="CartasDePorte" ThisKey="IdCartaDePorte" OtherKey="IdCartaDePorte" Type="CartasDePorte" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CartasDePorte" Member="CartasDePortes">
     <Type Name="CartasDePorte">
       <Column Name="IdCartaDePorte" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NumeroCartaDePorte" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
@@ -1159,54 +1213,15 @@
       <Column Name="CalidadGastosFumigacionRebaja" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CalidadHumedadResultado" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CalidadGastosFumigacionResultado" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Acopio6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CartasDePorte_CartasDePorteDetalle" Member="CartasDePorteDetalles" ThisKey="IdCartaDePorte" OtherKey="IdCartaDePorte" Type="CartasDePorteDetalle" />
+      <Association Name="CartasPorteAcopio_CartasDePorte" Member="CartasPorteAcopio" ThisKey="Acopio6" OtherKey="IdAcopio" Type="CartasPorteAcopio" IsForeignKey="true" />
+      <Association Name="CartasPorteAcopios_CartasDePorte" Member="CartasPorteAcopios" ThisKey="Acopio6" OtherKey="IdAcopio" Type="CartasPorteAcopios" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte" Member="linqCliente" ThisKey="IdClienteAuxiliar" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte1" Member="linqCliente1" ThisKey="IdClienteEntregador" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqCliente_CartasDePorte2" Member="linqCliente2" ThisKey="Vendedor" OtherKey="IdCliente" Type="linqCliente" IsForeignKey="true" />
       <Association Name="linqDetalleFacturas_CartasDePorte" Member="linqDetalleFacturas" ThisKey="IdDetalleFactura" OtherKey="IdDetalleFactura" Type="linqDetalleFacturas" IsForeignKey="true" />
       <Association Name="linqCorredor_CartasDePorte" Member="linqCorredor" ThisKey="IdCorredor2" OtherKey="IdVendedor" Type="linqCorredor" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Localidades" Member="Localidades">
-    <Type Name="Localidade">
-      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CodigoPostal" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="EnviarEmail" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="CodigoONCAA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CodigoESRI" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
-      <Column Name="CodigoWilliams" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CodigoLosGrobo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Partido" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
-      <Column Name="Codigo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdPartido" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CodigoAfip" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Localidade_linqCliente" Member="linqClientes" ThisKey="IdLocalidad" OtherKey="IdLocalidad" Type="linqCliente" />
-      <Association Name="linqPartido_Localidade" Member="linqPartido" ThisKey="IdPartido" OtherKey="IdPartido" Type="linqPartido" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.WilliamsDestinos" Member="WilliamsDestinos">
-    <Type Name="WilliamsDestino">
-      <Column Name="IdWilliamsDestino" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Codigo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Subcontratista1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Subcontratista2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CodigoSAJPYA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CodigoONCAA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="SincronismoNoble1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="SincronismoNoble2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="AuxiliarString1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AuxiliarString2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AuxiliarString3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CodigoWilliams" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CodigoPostal" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="CUIT" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
-      <Column Name="CodigoLosGrobo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="CodigoYPF" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdLocalidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PuntoVenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.wTarifaWilliamsEstimada" Method="wTarifaWilliamsEstimada" IsComposable="true">

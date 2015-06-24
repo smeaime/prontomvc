@@ -213,6 +213,8 @@ Namespace Pronto.ERP.BO
         Public Acopio3 As Integer
         Public Acopio4 As Integer
         Public Acopio5 As Integer
+        Public Acopio6 As Integer
+
 
         Public AcopioFacturarleA As Integer
 
@@ -264,6 +266,36 @@ Namespace Pronto.ERP.BO
 
         Public CalidadGastosFumigacionResultado As Double = 0
         Public CalidadHumedadResultado As Double = 0
+
+
+
+        Public TipoMermaGastoDeSecada As Double = 0
+        Public TipoMermaVolatil As Double = 0
+        Public TipoMermaFondoNidera As Double = 0
+        Public TipoMermaConvenida As Double = 0
+        Public TipoMermaTalCualVicentin As Double = 0
+
+
+        Public CalidadGastoDeSecada As Double = 0
+        Public CalidadGastoDeSecadaMerma As Double = 0
+        Public CalidadGastoDeSecadaRebaja As Double = 0
+
+        Public CalidadMermaVolatil As Double = 0
+        Public CalidadMermaVolatilMerma As Double = 0
+        Public CalidadMermaVolatilRebaja As Double = 0
+
+        Public CalidadFondoNidera As Double = 0
+        Public CalidadFondoNideraMerma As Double = 0
+        Public CalidadFondoNideraRebaja As Double = 0
+
+        Public CalidadMermaConvenida As Double = 0
+        Public CalidadMermaConvenidaMerma As Double = 0
+        Public CalidadMermaConvenidaRebaja As Double = 0
+
+        Public CalidadTalCualVicentin As Double = 0
+        Public CalidadTalCualVicentinMerma As Double = 0
+        Public CalidadTalCualVicentinRebaja As Double = 0
+
 
 
 
