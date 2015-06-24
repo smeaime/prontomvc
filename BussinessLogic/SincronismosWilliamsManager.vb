@@ -12637,7 +12637,11 @@ Namespace Pronto.ERP.Bll
                         sb = RenglonBLDCalidad(cdp, 15, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Tierra", carta.CalidadTierraMerma, _TipoMerma(s.Tierra, carta.Secada))
 
                         sb = RenglonBLDCalidad(cdp, 16, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Zarandeo", carta.CalidadZarandeoMerma, _TipoMerma(s.Zarandeo, carta.Secada))
+
+
                         sb = RenglonBLDCalidad(cdp, 17, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "DescuentoFinal", carta.CalidadDescuentoFinalMerma, _TipoMerma(s.DescuentoFinal, carta.Secada))
+
+
                         sb = RenglonBLDCalidad(cdp, 18, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Humedad", carta.CalidadHumedadMerma, _TipoMerma(s.Humedad, carta.Secada))
 
                         sb = RenglonBLDCalidad(cdp, 19, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "GastosFumigacion", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Fumigacion, carta.Secada))
@@ -13244,7 +13248,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
 
 
                     'Dim desc As Double
@@ -13257,9 +13260,10 @@ Namespace Pronto.ERP.Bll
 
                     If descripcion = "DescuentoFinal" Then
 
-                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR
+                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
                     Else
 
+                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
 
                         sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
 
