@@ -287,13 +287,143 @@ namespace ProntoMVC.Controllers
             return errors;
         }
 
+
+
         [HttpPost]
-        public virtual ActionResult ArticulosGridData(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, int IdRubro = 0)
+        public virtual JsonResult ArticulosGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
+                                ("Marcas,Modelos", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            var data = (from a in pagedQuery
+                        select new
+                        {
+                            a.IdArticulo,
+                            a.IdRubro,
+                            a.Codigo,
+                            a.NumeroInventario,
+                            a.Descripcion,
+                            Rubro = (a.Rubro.Descripcion ?? ""),
+                            Subrubro = (a.Subrubro.Descripcion ?? ""),
+                            a.AlicuotaIVA,
+                            a.CostoPPP,
+                            a.CostoPPPDolar,
+                            a.CostoReposicion,
+                            a.CostoReposicionDolar,
+                            a.StockMinimo,
+                            a.StockReposicion,
+                            StockActual = (db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0,
+                            Unidad = (a.Unidad.Abreviatura ?? ""),
+                            Ubicacion = (a.Ubicacione.Deposito.Abreviatura ?? "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
+                            Marca = a.marc b.Descripcion != null ? b.Descripcion : "",
+                            Modelo = c.Descripcion != null ? c.Descripcion : "",
+                            a.ParaMantenimiento,
+                            CuentaCompra = (a.Cuenta.Descripcion ?? ""),
+                            a.FechaAlta,
+                            a.UsuarioAlta,
+                            a.FechaUltimaModificacion
+                        }).AsQueryable();
+
+            data = (from a in data where (IdRubro == 0 || (IdRubro != 0 && a.IdRubro == IdRubro)) select a).AsQueryable();
+            if (_search)
+            {
+                data = (from a in data where a.Descripcion.Contains(searchString) || a.Codigo.Contains(searchString) select a).AsQueryable();
+            }
+
+            int totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            //if (sortByColumnName == "Descripcion")
+            //{
+            //    if (sortDirection.Equals("desc"))
+            //        data = (from a in data select a).OrderByDescending(x => x.Descripcion);
+            //    else
+            //        data = (from a in data select a).OrderBy(x => x.Descripcion);
+            //}
+            //else
+            //{
+            //    if ("desc".Equals(sortDirection))
+            //        data = data.OrderByDescending(a => a.FechaUltimaModificacion);
+            //    else
+            //        data = data.OrderBy(a => a.FechaUltimaModificacion);
+            //}
+
+            //var data1 = (from a in data select a).OrderBy(x => x.Descripcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var data1 = from a in data.OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+                        select a;
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (
+                    from a in data1
+                    select new jqGridRowJson
+                    {
+                        id = a.IdArticulo.ToString(),
+                        cell = new string[] { 
+                            "<a href="+ Url.Action("Edit",new {id = a.IdArticulo} )  +"  >Editar</>",
+                            "",
+                            a.IdArticulo.ToString(),
+                            a.Codigo.NullSafeToString(), 
+                            a.NumeroInventario.NullSafeToString(), 
+                            a.Descripcion.NullSafeToString(),
+                            a.Rubro.NullSafeToString(),
+                            a.Subrubro.NullSafeToString(),
+                            a.AlicuotaIVA.NullSafeToString(),  
+                            a.CostoPPP.NullSafeToString(),  
+                            a.CostoPPPDolar.NullSafeToString(),  
+                            a.CostoReposicion.NullSafeToString(),  
+                            a.CostoReposicionDolar.NullSafeToString(),  
+                            a.StockMinimo.NullSafeToString(),  
+                            a.StockReposicion.NullSafeToString(),  
+                            a.StockActual.NullSafeToString(),  
+                            a.Unidad.NullSafeToString(),  
+                            a.Ubicacion.NullSafeToString(),  
+                            a.Marca.NullSafeToString(),  
+                            a.Modelo.NullSafeToString(),  
+                            a.ParaMantenimiento.NullSafeToString() ,  
+                            a.CuentaCompra.NullSafeToString() ,  
+                            a.FechaAlta.NullSafeToString(),  
+                            a.UsuarioAlta.NullSafeToString(),  
+                            a.FechaUltimaModificacion.NullSafeToString()
+                    }
+                    }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpPost]
+        public virtual ActionResult ArticulosGridData_obsoleto(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, int IdRubro = 0)
         {
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
             string sortByColumnName = sidx ?? "Descripcion";
             string sortDirection = sord ?? "desc";
+
+
+
+         
 
             var data = (from a in db.Articulos
                         from b in db.Marcas.Where(o => o.IdMarca == a.IdMarca).DefaultIfEmpty()
