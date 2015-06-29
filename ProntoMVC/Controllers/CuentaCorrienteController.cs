@@ -294,6 +294,9 @@ namespace ProntoMVC.Controllers
             int currentPage = page ?? 1;
             IdCliente = IdCliente ?? -1;
 
+
+            db.CuentasCorrientesDeudores
+
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S";
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "CtasCtesD_TXPorTrs", IdCliente, -1, DateTime.Now, DateTime.Now, -1, pendiente);

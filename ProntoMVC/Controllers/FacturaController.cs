@@ -958,6 +958,183 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "factura.pdf");
         }
 
+
+
+
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Factura>
+                                ("DescripcionIvas,Obras,Vendedores,Empleados,Provincias,Condiciones_Compras,ListasPrecios", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            var data = (from a in pagedQuery
+                        //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+                        //from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
+                        //from h in db.Depositos.Where(v => v.IdDeposito == a.IdDeposito).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdFactura,
+                            a.TipoABC,
+                            a.PuntoVenta,
+                            a.NumeroFactura,
+                            a.FechaFactura,
+                            Sucursal = h != null ? h.Descripcion : "",
+                            a.Anulada,
+                            ClienteSubCod = a.Cliente.Codigo.Substring(1, 2),
+                            ClienteCodigo = a.Cliente.CodigoCliente,
+                            ClienteNombre = a.Cliente.RazonSocial,
+                            DescripcionIva = b != null ? b.Descripcion : "",
+                            ClienteCuit = a.Cliente.Cuit,
+                            CondicionVenta =  i != null ? i.Descripcion : "",
+                            a.FechaVencimiento,
+                            ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
+                            //#Auxiliar1.OCompras as [Ordenes de compra],
+                            //#Auxiliar3.Remitos as [Remitos],
+                            OCompras = "",
+                            Remitos = "",
+                            TotalGravado = (a.ImporteTotal ?? 0) - (a.ImporteIva1 ?? 0) - (a.AjusteIva ?? 0) - (a.PercepcionIVA ?? 0) - (a.RetencionIBrutos1 ?? 0) - (a.RetencionIBrutos2 ?? 0) - (a.RetencionIBrutos3 ?? 0) - (a.OtrasPercepciones1 ?? 0) - (a.OtrasPercepciones2 ?? 0) - (a.OtrasPercepciones3 ?? 0) + (a.ImporteBonificacion ?? 0),
+                            Bonificacion = a.ImporteBonificacion,
+                            TotalIva = a.ImporteIva1,
+                            AjusteIva = a.AjusteIva,
+                            TotalIIBB = (a.RetencionIBrutos1 ?? 0) + (a.RetencionIBrutos2 ?? 0) + (a.RetencionIBrutos3 ?? 0),
+                            TotalPercepcionIVA = a.PercepcionIVA,
+                            TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
+                            a.ImporteTotal,
+                            Moneda = a.Moneda.Abreviatura,
+                            Obra = a.Obra c != null ? c.NumeroObra : "",
+                            Vendedor = a.Vendedore != null ? d.Nombre : "",
+                            ProvinciaDestino = a.Provincia g != null ? g.Nombre : "",
+                            //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
+                            //'Grupo '+Convert(varchar,
+                            //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
+                            //   Left Outer Join DetalleOrdenesCompra doc On doc.IdDetalleOrdenCompra=dfoc.IdDetalleOrdenCompra
+                            //   Left Outer Join OrdenesCompra oc On oc.IdOrdenCompra=doc.IdOrdenCompra
+                            //   Where dfoc.IdFactura=Facturas.IdFactura)) as [Grupo facturacion automatica],
+                            CantidadItems = 0,
+                            CantidadAbonos = 0,
+                            GrupoFacturacionAutomatica = "",
+                            FechaContabilizacion = (a.ContabilizarAFechaVencimiento ?? "NO") == "NO" ? a.FechaFactura : a.FechaVencimiento,
+                            a.FechaAnulacion,
+                            UsuarioAnulo = a. f != null ? f.Nombre : "",
+                            a.FechaIngreso,
+                            UsuarioIngreso = e != null ? e.Nombre : "",
+                            a.CAE,
+                            a.RechazoCAE,
+                            a.FechaVencimientoORechazoCAE,
+                            a.Observaciones
+                        }).AsQueryable();
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
+            }
+
+            int totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdFactura.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdFactura} ) + ">Editar</>",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdFactura} ) + ">Emitir</a> ",
+                                a.IdFactura.ToString(),
+                                a.TipoABC.NullSafeToString(),
+                                a.PuntoVenta.NullSafeToString(),
+                                a.NumeroFactura.NullSafeToString(),
+                                a.FechaFactura == null ? "" : a.FechaFactura.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Sucursal.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.ClienteSubCod.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                a.FechaVencimiento == null ? "" : a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.ListaDePrecio.NullSafeToString(),
+                                a.OCompras.NullSafeToString(),
+                                a.Remitos.NullSafeToString(),
+
+                                //string.Join(",", a.DetalleRequerimientos
+                                //    .SelectMany(x =>
+                                //        (x.DetallePresupuestos == null) ?
+                                //        null :
+                                //        x.DetallePresupuestos.Select(y =>
+                                //                    (y.Presupuesto == null) ?
+                                //                    null :
+                                //                    y.Presupuesto.Numero.NullSafeToString()
+                                //            )
+                                //    ).Distinct()
+                                //),
+                                
+                                a.TotalGravado.NullSafeToString(),
+                                a.Bonificacion.NullSafeToString(),
+                                a.TotalIva.NullSafeToString(),
+                                a.AjusteIva.NullSafeToString(),
+                                a.TotalIIBB.NullSafeToString(),
+                                a.TotalPercepcionIVA.NullSafeToString(),
+                                a.TotalOtrasPercepciones.NullSafeToString(),
+                                a.ImporteTotal.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Vendedor.NullSafeToString(),
+                                a.ProvinciaDestino.NullSafeToString(),
+                                db.DetalleFacturas.Where(x=>x.IdFactura==a.IdFactura).Select(x=>x.IdDetalleFactura).Distinct().Count().ToString(),
+                                a.CantidadAbonos.NullSafeToString(),
+                                a.GrupoFacturacionAutomatica.NullSafeToString(),
+                                a.FechaContabilizacion == null ? "" : a.FechaContabilizacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioAnulo.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioIngreso.NullSafeToString(),
+                                a.CAE.NullSafeToString(),
+                                a.RechazoCAE.NullSafeToString(),
+                                a.FechaVencimientoORechazoCAE.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;

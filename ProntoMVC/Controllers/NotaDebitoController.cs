@@ -238,6 +238,134 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+        public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.NotasDebito>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            var data = (from a in db.NotasDebitoes
+                        from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
+                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
+                        from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        from f in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+                        from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdNotaDebito,
+                            Tipo = a.CtaCte == "SI" ? "Normal" : "Interna",
+                            a.TipoABC,
+                            a.PuntoVenta,
+                            a.NumeroNotaDebito,
+                            a.FechaNotaDebito,
+                            a.Anulada,
+                            ClienteCodigo = a.Cliente.CodigoCliente,
+                            ClienteNombre = a.Cliente.RazonSocial,
+                            DescripcionIva = b != null ? b.Descripcion : "",
+                            ClienteCuit = a.Cliente.Cuit,
+                            TotalGravado = (a.ImporteTotal ?? 0) - (a.ImporteIva1 ?? 0) - (a.PercepcionIVA ?? 0) - (a.RetencionIBrutos1 ?? 0) - (a.RetencionIBrutos2 ?? 0) - (a.RetencionIBrutos3 ?? 0) - (a.OtrasPercepciones1 ?? 0) - (a.OtrasPercepciones2 ?? 0) - (a.OtrasPercepciones3 ?? 0),
+                            TotalIva = a.ImporteIva1,
+                            TotalIIBB = (a.RetencionIBrutos1 ?? 0) + (a.RetencionIBrutos2 ?? 0) + (a.RetencionIBrutos3 ?? 0),
+                            TotalPercepcionIVA = a.PercepcionIVA,
+                            TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
+                            a.ImporteTotal,
+                            MonedaAbreviatura = a.Moneda.Abreviatura,
+                            Obra = c != null ? c.NumeroObra : "",
+                            Vendedor = d != null ? d.Nombre : "",
+                            ProvinciaDestino = g != null ? g.Nombre : "",
+                            a.FechaAnulacion,
+                            UsuarioAnulo = f != null ? f.Nombre : "",
+                            a.NumeroCuota,
+                            a.FechaIngreso,
+                            UsuarioIngreso = e != null ? e.Nombre : "",
+                            a.CAE,
+                            a.RechazoCAE,
+                            a.FechaVencimientoORechazoCAE,
+                            a.Observaciones
+                        }).AsQueryable();
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
+            }
+
+            int totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .OrderByDescending(x => x.FechaNotaDebito)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdNotaDebito.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdNotaDebito} ) + ">Editar</>",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdNotaDebito} ) + ">Emitir</a> ",
+                                a.IdNotaDebito.NullSafeToString(),
+                                a.Tipo.NullSafeToString(),
+                                a.TipoABC.NullSafeToString(),
+                                a.PuntoVenta.NullSafeToString(),
+                                a.NumeroNotaDebito.NullSafeToString(),
+                                a.FechaNotaDebito == null ? "" : a.FechaNotaDebito.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Anulada.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.TotalGravado.NullSafeToString(),
+                                a.TotalIva.NullSafeToString(),
+                                a.TotalIIBB.NullSafeToString(),
+                                a.TotalPercepcionIVA.NullSafeToString(),
+                                a.TotalOtrasPercepciones.NullSafeToString(),
+                                a.ImporteTotal.NullSafeToString(),
+                                a.MonedaAbreviatura.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Vendedor.NullSafeToString(),
+                                a.ProvinciaDestino.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioAnulo.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioIngreso.NullSafeToString(),
+                                a.NumeroCuota.NullSafeToString(),
+                                a.CAE.NullSafeToString(),
+                                a.RechazoCAE.NullSafeToString(),
+                                a.FechaVencimientoORechazoCAE.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);ssdfsdf
+        }
+
+
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             int idcliente = buscaridclienteporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));

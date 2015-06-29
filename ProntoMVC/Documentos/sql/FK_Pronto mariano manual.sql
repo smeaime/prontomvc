@@ -1115,7 +1115,239 @@ go
 --                        from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
 --                        from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
 
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+alter table  Articulos
+		ADD CONSTRAINT FK_Articulos_IdModelo
+		FOREIGN KEY (IdModelo) REFERENCES Modelos(IdModelo)
+go
+
+
+
+alter table  Articulos
+		ADD CONSTRAINT FK_Articulos_IdMarca
+		FOREIGN KEY (IdMarca) REFERENCES Marcas(IdMarca)
+go
+
+
+
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
+--//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
+
+
+
+
+
+
+						
+
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_DescripcionIva
+		FOREIGN KEY (IdCodigoIva) REFERENCES  DescripcionIva(IdCodigoIva)
+go
+
+
+
+
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_ListasPrecios
+		FOREIGN KEY (IdListaPrecios) REFERENCES ListasPrecios(IdListaPrecios)
+go
+
+
+
+
+                     
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_IdUsuarioIngreso
+		FOREIGN KEY (IdUsuarioIngreso) REFERENCES Empleados(IdEmpleado)
+go
+
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_IdAutorizaAnulacion
+		FOREIGN KEY (IdAutorizaAnulacion) REFERENCES Empleados(IdEmpleado)
+go
+
+
+
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_IdDeposito
+		FOREIGN KEY (IdDeposito) REFERENCES Depositos(IdDeposito)
+go
+
+
+
+alter table  Facturas
+		ADD CONSTRAINT FK_Facturas_Condiciones_Compras
+		FOREIGN KEY (IdCondicionVenta) REFERENCES  [Condiciones Compra](IdCondicionCompra)
+go
+
+
+          
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdUsuarioIngreso
+		FOREIGN KEY (IdUsuarioIngreso) REFERENCES Empleados(IdEmpleado)
+go
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdUsuarioModifico
+		FOREIGN KEY (IdUsuarioModifico) REFERENCES Empleados(IdEmpleado)
+go
+
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdObra
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdVendedor
+		FOREIGN KEY (IdVendedor) REFERENCES Vendedores(IdVendedor)
+go
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdCobrador
+		FOREIGN KEY (IdCobrador) REFERENCES Vendedores(IdVendedor)
+go
+
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdMoneda
+		FOREIGN KEY (IdMoneda) REFERENCES Monedas(IdMoneda)
+go
+
+
+alter table  Recibos
+		ADD CONSTRAINT FK_Recibos_IdCuenta
+		FOREIGN KEY (IdCuenta) REFERENCES Cuentas(IdCuenta)
+go
+
+
+
+
+
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                        
+
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdCodigoIva
+		FOREIGN KEY (IdCodigoIva) REFERENCES DescripcionIva(IdCodigoIva)
+go
+
+
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdObra
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdVendedor
+		FOREIGN KEY (IdVendedor) REFERENCES Vendedores(IdVendedor)
+go
+
+
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdUsuarioIngreso
+		FOREIGN KEY (IdUsuarioIngreso) REFERENCES Empleados(IdEmpleado)
+go
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdUsuarioAnulacion
+		FOREIGN KEY (IdUsuarioAnulacion) REFERENCES Empleados(IdEmpleado)
+go
+
+alter table  NotasCredito
+		ADD CONSTRAINT FK_NotasCredito_IdProvinciaDestino
+		FOREIGN KEY (IdProvinciaDestino) REFERENCES Provincias(IdProvincia)
+go
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                        
+
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdCodigoIva
+		FOREIGN KEY (IdCodigoIva) REFERENCES DescripcionIva(IdCodigoIva)
+go
+
+
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdObra
+		FOREIGN KEY (IdObra) REFERENCES Obras(IdObra)
+go
+
+
+                      
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdVendedor
+		FOREIGN KEY (IdVendedor) REFERENCES Vendedores(IdVendedor)
+go
+
+
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdUsuarioIngreso
+		FOREIGN KEY (IdUsuarioIngreso) REFERENCES Empleados(IdEmpleado)
+go
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdUsuarioAnulacion
+		FOREIGN KEY (IdUsuarioAnulacion) REFERENCES Empleados(IdEmpleado)
+go
+
+
+
+alter table  NotasDebito
+		ADD CONSTRAINT FK_NotasDebito_IdProvinciaDestino
+		FOREIGN KEY (IdProvinciaDestino) REFERENCES Provincias(IdProvincia)
+go
+                        

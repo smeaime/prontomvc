@@ -2325,6 +2325,21 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesCompra_Obras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Obras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Transportistas" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_IdMarca" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_IdModelo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Condiciones_Compras" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdCuenta" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdDeposito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_DescripcionIva" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdAutorizaAnulacion" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdUsuarioModifico" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_ListasPrecios" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdMoneda" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdCobrador" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdVendedor" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
@@ -2747,6 +2762,21 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesCompra_Obras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Obras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Remitos_Transportistas" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_IdMarca" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Articulos_IdModelo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_Condiciones_Compras" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdCuenta" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdDeposito" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_DescripcionIva" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdAutorizaAnulacion" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdUsuarioModifico" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Facturas_ListasPrecios" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdMoneda" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdCobrador" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Recibos_IdVendedor" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
