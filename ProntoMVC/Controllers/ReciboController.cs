@@ -1105,6 +1105,7 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "Recibo.docx");
         }
 
+
         public virtual ActionResult Recibos(string sidx, string sord, int? page, int? rows, bool? _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
@@ -1139,6 +1140,168 @@ namespace ProntoMVC.Controllers
                             OtrosConceptos = (a.Otros1 ?? 0) + (a.Otros2 ?? 0) + (a.Otros3 ?? 0) + (a.Otros4 ?? 0) + (a.Otros5 ?? 0) + (a.Otros6 ?? 0) + (a.Otros7 ?? 0) + (a.Otros8 ?? 0) + (a.Otros9 ?? 0) + (a.Otros10 ?? 0),
                             Obra = d != null ? d.NumeroObra : "",
                             Vendedor = g != null ? g.Nombre : "",
+                            Cobrador = h != null ? h.Nombre : "",
+                            Ingreso = e != null ? e.Nombre : "",
+                            a.FechaIngreso,
+                            Modifico = f != null ? f.Nombre : "",
+                            a.FechaModifico,
+                            a.Observaciones,
+                            a.Cotizacion
+                        }).AsQueryable();
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaRecibo >= FechaDesde && a.FechaRecibo <= FechaHasta select a).AsQueryable();
+            }
+
+            if (_search ?? false)
+            {
+                switch (searchField.ToLower())
+                {
+                    case "numeroRecibo":
+                        campo = String.Format("{0} = {1}", searchField, searchString);
+                        break;
+                    case "fechaRecibo":
+                        //No anda
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                    default:
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                }
+            }
+            else
+            {
+                campo = "true";
+            }
+
+            int totalRecords = data.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+                        .OrderByDescending(x => x.FechaRecibo)
+                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            //switch (sidx.ToLower())
+            //{
+            //    case "numeroRecibo":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.NumeroRecibo);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.NumeroRecibo);
+            //        break;
+            //    case "fechaRecibo":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.FechaRecibo);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.FechaRecibo);
+            //        break;
+            //    default:
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.NumeroRecibo);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.NumeroRecibo);
+            //        break;
+            //}
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdRecibo.ToString(),
+                            cell = new string[] { 
+                                a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdRecibo} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdRecibo} ) + " target='' >Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRecibo} ) + ">Emitir</a> ",
+                                a.IdRecibo.ToString(),
+                                a.PuntoVenta.NullSafeToString(),
+                                a.NumeroRecibo.NullSafeToString(),
+                                a.FechaRecibo == null ? "" : a.FechaRecibo.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Tipo.NullSafeToString(),
+                                a.Anulado.NullSafeToString(),
+                                a.CodigoCliente.NullSafeToString(),
+                                a.NombreCliente.NullSafeToString(),
+                                a.Cuenta.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Deudores.NullSafeToString(),
+                                a.Valores.NullSafeToString(),
+                                a.RetencionIVA.NullSafeToString(),
+                                a.RetencionGanancias.NullSafeToString(),
+                                a.RetencionIBrutos.NullSafeToString(),
+                                a.OtrosConceptos.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Vendedor.NullSafeToString(),
+                                a.Cobrador.NullSafeToString(),
+                                a.Ingreso.NullSafeToString(),
+                                a.FechaIngreso.NullSafeToString(),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico.NullSafeToString(),
+                                a.Cotizacion.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public virtual ActionResult Recibos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Recibo>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            var data = (from a in pagedQuery
+                        //from b in db.Cuentas.Where(p => p.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        //from c in db.Monedas.Where(q => q.IdMoneda == a.IdMoneda).DefaultIfEmpty()
+                        //from d in db.Obras.Where(u => u.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(w => w.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(x => x.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        //from g in db.Vendedores.Where(y => y.IdVendedor == a.IdVendedor).DefaultIfEmpty()
+                        //from h in db.Vendedores.Where(y => y.IdVendedor == a.IdCobrador).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdRecibo,
+                            a.PuntoVenta,
+                            a.NumeroRecibo,
+                            a.FechaRecibo,
+                            a.Tipo,
+                            a.Anulado,
+                            CodigoCliente = a.Cliente.CodigoCliente,
+                            NombreCliente = a.Cliente.RazonSocial,
+                            Cuenta = b != null ? b.Descripcion : "",
+                            Moneda = c != null ? c.Abreviatura : "",
+                            a.Deudores,
+                            a.Valores,
+                            a.RetencionIVA,
+                            a.RetencionGanancias,
+                            a.RetencionIBrutos,
+                            OtrosConceptos = (a.Otros1 ?? 0) + (a.Otros2 ?? 0) + (a.Otros3 ?? 0) + (a.Otros4 ?? 0) + (a.Otros5 ?? 0) + (a.Otros6 ?? 0) + (a.Otros7 ?? 0) + (a.Otros8 ?? 0) + (a.Otros9 ?? 0) + (a.Otros10 ?? 0),
+                            Obra = a.obra != null ? d.NumeroObra : "",
+                            Vendedor =a.ven g != null ? g.Nombre : "",
                             Cobrador = h != null ? h.Nombre : "",
                             Ingreso = e != null ? e.Nombre : "",
                             a.FechaIngreso,
