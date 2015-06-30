@@ -309,7 +309,9 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+            string campo = String.Empty;
+            int pageSize = rows;
+            int currentPage = page;
 
             var data = (from a in pagedQuery
                         select new
@@ -331,8 +333,8 @@ namespace ProntoMVC.Controllers
                             StockActual = (db.Stocks.Where(x => x.IdArticulo == a.IdArticulo).Sum(y => y.CantidadUnidades)) ?? 0,
                             Unidad = (a.Unidad.Abreviatura ?? ""),
                             Ubicacion = (a.Ubicacione.Deposito.Abreviatura ?? "") + (a.Ubicacione.Descripcion != null ? " " + a.Ubicacione.Descripcion : "") + (a.Ubicacione.Estanteria != null ? " Est.:" + a.Ubicacione.Estanteria : "") + (a.Ubicacione.Modulo != null ? " Mod.:" + a.Ubicacione.Modulo : "") + (a.Ubicacione.Gabeta != null ? " Gab.:" + a.Ubicacione.Gabeta : ""),
-                            Marca = a.marc b.Descripcion != null ? b.Descripcion : "",
-                            Modelo = c.Descripcion != null ? c.Descripcion : "",
+                            Marca = a.Marca != null ? a.Marca.Descripcion : "",
+                            Modelo = a.Modelo.Descripcion != null ? a.Modelo.Descripcion : "",
                             a.ParaMantenimiento,
                             CuentaCompra = (a.Cuenta.Descripcion ?? ""),
                             a.FechaAlta,
@@ -340,13 +342,6 @@ namespace ProntoMVC.Controllers
                             a.FechaUltimaModificacion
                         }).AsQueryable();
 
-            data = (from a in data where (IdRubro == 0 || (IdRubro != 0 && a.IdRubro == IdRubro)) select a).AsQueryable();
-            if (_search)
-            {
-                data = (from a in data where a.Descripcion.Contains(searchString) || a.Codigo.Contains(searchString) select a).AsQueryable();
-            }
-
-            int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             //if (sortByColumnName == "Descripcion")

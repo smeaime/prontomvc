@@ -259,8 +259,8 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows ;
+            int currentPage = page ;
 
             var data = (from a in db.NotasDebitoes
                         from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
@@ -303,14 +303,8 @@ namespace ProntoMVC.Controllers
                             a.Observaciones
                         }).AsQueryable();
 
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                data = (from a in data where a.FechaNotaDebito >= FechaDesde && a.FechaNotaDebito <= FechaHasta select a).AsQueryable();
-            }
-
-            int totalRecords = data.Count();
+            
+            
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)
@@ -362,7 +356,7 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
-            return Json(jsonData, JsonRequestBehavior.AllowGet);ssdfsdf
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
 
