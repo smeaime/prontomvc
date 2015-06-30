@@ -1175,7 +1175,7 @@
         </edmx:AssociationConnector>
         <edmx:EntityTypeShape EntityType="DemoProntoModel.BancoChequera" Width="1.5" PointX="9.625" PointY="47.5" Height="0.4" IsExpanded="false" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Banco" Width="1.5" PointX="7.375" PointY="47" Height="0.4" IsExpanded="false" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarjetasCredito" Width="1.5" PointX="5" PointY="1.75" Height="0.4" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TarjetasCredito" Width="1.5" PointX="4.5" PointY="1.5" Height="0.4" IsExpanded="true" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_BancoChequeras_Bancos">
           <edmx:ConnectorPoint PointX="8.8749999999999574" PointY="47.4" />
           <edmx:ConnectorPoint PointX="9.625" PointY="47.5" />
