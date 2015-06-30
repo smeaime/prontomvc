@@ -287,7 +287,8 @@ namespace ProntoMVC.Controllers
 
         // /////////////////////////////////////////// DEUDORES //////////////////////////////////////////////
 
-        public virtual ActionResult CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData
+                    (string sidx, string sord, int page, int rows, bool _search, string filters, int? IdCliente)
         {
 
             string campo = String.Empty;
@@ -317,7 +318,7 @@ namespace ProntoMVC.Controllers
 
 
             //var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
-            var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(1, 1, null, null, null, null);
+            var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(IdCliente, 1, null, null, null, null);
 
 
 
@@ -331,14 +332,14 @@ namespace ProntoMVC.Controllers
             {
                 var sb = new StringBuilder();
                 var objParams = new List<ObjectParameter>();
-                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>(sb, objParams);
+                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>(sb, objParams);
                 s = sb.ToString();
             }
 
             // var filteredQuery = set.Where(x=>x.IdImputacion==1);
             var filteredQuery = set.AsQueryable().Where(s).ToList();
 
-
+            
 
             // var sasdasd= f .FilterObjectSet( set);
 
@@ -407,25 +408,6 @@ namespace ProntoMVC.Controllers
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data = (from a in pagedQuery
-                        select new
-                        {
-                            IdCtaCte = a.IdCtaCte,
-                            IdImputacion = (a.IdImputacion.NullSafeToString() == "") ? 0 : Convert.ToInt32(a.IdImputacion.NullSafeToString()),
-                            Tipo = "", // a[2],
-                            IdTipoComp = "", // a[3],
-                            IdComprobante = "", // a[4],
-                            Numero = "", // a[5],
-                            Fecha = "", //  a[6],
-                            FechaVencimiento = "", //  a[7],
-                            ImporteTotal = "", //  a[8],
-                            Saldo = "", //  a[9],
-                            SaldoTrs = "", //  a[10],
-                            Observaciones = "", //  a[11],
-                            Cabeza = "", // a[12],
-                            IdImputacion2 = "", //  a[13],
-                            Moneda = "" //  a[18]
-                        }).ToList();
 
 
             var jsonData = new jqGridJson()
@@ -433,26 +415,26 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in filteredQuery
                         select new jqGridRowJson
                         {
                             id = a.IdCtaCte.ToString(),
                             cell = new string[] { 
                                 string.Empty,
-                                a.IdCtaCte.ToString(),
-                                a.IdImputacion.ToString(),
-                                a.IdTipoComp.ToString(),
-                                a.IdComprobante.ToString(),
-                                a.Cabeza.ToString(),
-                                a.Tipo.ToString(),
-                                a.Numero.ToString(),
+                                a.IdCtaCte.NullSafeToString(),
+                                a.IdImputacion.NullSafeToString(),
+                                a.IdTipoComp.NullSafeToString(),
+                                a.IdComprobante.NullSafeToString(),
+                                a.Cabeza.NullSafeToString(),
+                                a.Comp.NullSafeToString(),
+                                a.Numero.NullSafeToString(),
                                 a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.FechaVencimiento == null || a.FechaVencimiento.ToString() == "" ? "" : Convert.ToDateTime(a.FechaVencimiento.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.Moneda.ToString(),
-                                a.ImporteTotal.ToString(),
-                                a.Saldo.ToString(),
-                                a.SaldoTrs.ToString(),
-                                a.Observaciones.ToString()
+                                a.Fechavt.NullSafeToString(),
+                                a.Monorigen.NullSafeToString(),
+                                a.Imporig.NullSafeToString(),
+                                a.SaldoComp.NullSafeToString(),
+                                a.SaldoTrs.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
                             }
                         }).ToArray()
             };
