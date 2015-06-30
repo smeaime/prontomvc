@@ -287,15 +287,90 @@ namespace ProntoMVC.Controllers
 
         // /////////////////////////////////////////// DEUDORES //////////////////////////////////////////////
 
+        public virtual ActionResult CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+            string campo = String.Empty;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>
+                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            var pendiente = "S";
+
+        
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in pagedQuery
+                        select new
+                        {
+                            IdCtaCte = a.IdCtaCte,
+                            IdImputacion = (a[1].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[1].NullSafeToString()),
+                            Tipo = a[2],
+                            IdTipoComp = a[3],
+                            IdComprobante = a[4],
+                            Numero = a[5],
+                            Fecha = a[6],
+                            FechaVencimiento = a[7],
+                            ImporteTotal = a[8],
+                            Saldo = a[9],
+                            SaldoTrs = a[10],
+                            Observaciones = a[11],
+                            Cabeza = a[12],
+                            IdImputacion2 = a. a[13],
+                            Moneda = a[18]
+                        }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCtaCte.ToString(),
+                            cell = new string[] { 
+                                string.Empty,
+                                a.IdCtaCte.ToString(),
+                                a.IdImputacion.ToString(),
+                                a.IdTipoComp.ToString(),
+                                a.IdComprobante.ToString(),
+                                a.Cabeza.ToString(),
+                                a.Tipo.ToString(),
+                                a.Numero.ToString(),
+                                a.Fecha == null || a.Fecha.ToString() == "" ? "" : Convert.ToDateTime(a.Fecha.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.FechaVencimiento == null || a.FechaVencimiento.ToString() == "" ? "" : Convert.ToDateTime(a.FechaVencimiento.NullSafeToString()).ToString("dd/MM/yyyy"),
+                                a.Moneda.ToString(),
+                                a.ImporteTotal.ToString(),
+                                a.Saldo.ToString(),
+                                a.SaldoTrs.ToString(),
+                                a.Observaciones.ToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
         public virtual ActionResult CuentaCorrienteDeudoresPendientePorCliente(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, int? IdCliente)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 50;
             int currentPage = page ?? 1;
             IdCliente = IdCliente ?? -1;
-
-
-            db.CuentasCorrientesDeudores
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S";
@@ -323,7 +398,7 @@ namespace ProntoMVC.Controllers
                 campo = "true";
             }
 
-            int totalRecords = Entidad.Count();  
+            int totalRecords = Entidad.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data = (from a in Entidad
@@ -377,6 +452,8 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+
         public virtual JsonResult TraerUnoDeudor(int IdCtaCte)
         {
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
@@ -402,7 +479,7 @@ namespace ProntoMVC.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        
+
         [HttpPost]
         public void EditGridData(int? IdRequerimiento, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
         {
