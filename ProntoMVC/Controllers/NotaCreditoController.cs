@@ -250,13 +250,13 @@ namespace ProntoMVC.Controllers
             int pageSize = rows ?? 20;
             int currentPage = page ?? 1;
 
-            var data = (from a in db.NotasCreditoes
-                        from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
-                        from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
-                        from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
-                        from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
-                        from f in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
-                        from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
+            var data = (from a in pagedQuery
+                        //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Vendedores.Where(v => v.IdVendedor == a.IdVendedor).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+                        //from g in db.Provincias.Where(v => v.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
                         select new
                         {
                             a.IdNotaCredito,
@@ -349,7 +349,7 @@ namespace ProntoMVC.Controllers
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
-            sssss
+            
         }
 
         public virtual FileResult ImprimirConInteropPDF(int id)
