@@ -1111,7 +1111,7 @@ $(function () {
 
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente',
+        url: ROOT + 'CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData',
         postData: { 'IdCliente': function () { return $("#IdCliente").val(); } },
         datatype: 'json',
         mtype: 'POST',

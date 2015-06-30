@@ -296,10 +296,102 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+            //http://stackoverflow.com/questions/9811766/can-dynamic-linq-be-made-compatible-with-entity-complex-types
+
+            //http://stackoverflow.com/questions/1494273/data-reader-is-incompatible-member-does-not-have-corresponding-column-in-data
+
+
+            //            I had a similar issue which produced the same error message - the problem was that a column name returned by the proc included a space.
+
+            //When creating the complex type, [my column] was created as my_column.
+
+            //Then when executing the proc with ExecuteStoreQuery, my_column did not exist in the data reader, as the proc still returned [my column].
+
+            //Solution: remove the space from proc column name and recreate your complex type for the imported function.
+
+
+
             int totalRecords = 0;
 
-            var pagedQuery = Filters.FiltroGenerico<Data.Models.CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>
-                                ("Localidade,Provincia,Vendedore,Empleado,Cuentas,Transportista", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+
+            //var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
+            var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(1, 1, null, null, null, null);
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+
+            string s = "true";
+
+            // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
+            if (f != null)
+            {
+                var sb = new StringBuilder();
+                var objParams = new List<ObjectParameter>();
+                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>(sb, objParams);
+                s = sb.ToString();
+            }
+
+            // var filteredQuery = set.Where(x=>x.IdImputacion==1);
+            var filteredQuery = set.AsQueryable().Where(s).ToList();
+
+
+
+            // var sasdasd= f .FilterObjectSet( set);
+
+
+            //ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result> filteredQuery =
+            //    (f == null ? (ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set :
+            //    f.FilterObjectSet((ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set));
+
+            //filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
+
+            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
+
+            // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
+
+            try
+            {
+                totalRecords = filteredQuery.Count();
+            }
+            catch (Exception)
+            {
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
+                throw;
+            }
+
+
+
+
+
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            var pagedQuery = filteredQuery;
+            //.Skip("it." + sidx + " " + sord, "@skip",
+            //        new ObjectParameter("skip", (page - 1) * rows))
+            // .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,7 +401,9 @@ namespace ProntoMVC.Controllers
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S";
 
-        
+
+            int pageSize = rows;
+            int currentPage = page;
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
@@ -317,21 +411,22 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             IdCtaCte = a.IdCtaCte,
-                            IdImputacion = (a[1].NullSafeToString() == "") ? 0 : Convert.ToInt32(a[1].NullSafeToString()),
-                            Tipo = a[2],
-                            IdTipoComp = a[3],
-                            IdComprobante = a[4],
-                            Numero = a[5],
-                            Fecha = a[6],
-                            FechaVencimiento = a[7],
-                            ImporteTotal = a[8],
-                            Saldo = a[9],
-                            SaldoTrs = a[10],
-                            Observaciones = a[11],
-                            Cabeza = a[12],
-                            IdImputacion2 = a. a[13],
-                            Moneda = a[18]
-                        }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                            IdImputacion = (a.IdImputacion.NullSafeToString() == "") ? 0 : Convert.ToInt32(a.IdImputacion.NullSafeToString()),
+                            Tipo = "", // a[2],
+                            IdTipoComp = "", // a[3],
+                            IdComprobante = "", // a[4],
+                            Numero = "", // a[5],
+                            Fecha = "", //  a[6],
+                            FechaVencimiento = "", //  a[7],
+                            ImporteTotal = "", //  a[8],
+                            Saldo = "", //  a[9],
+                            SaldoTrs = "", //  a[10],
+                            Observaciones = "", //  a[11],
+                            Cabeza = "", // a[12],
+                            IdImputacion2 = "", //  a[13],
+                            Moneda = "" //  a[18]
+                        }).ToList();
+
 
             var jsonData = new jqGridJson()
             {

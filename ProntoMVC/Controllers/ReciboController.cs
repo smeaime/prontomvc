@@ -1271,8 +1271,8 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows;
+            int currentPage = page;
 
             var data = (from a in pagedQuery
                         //from b in db.Cuentas.Where(p => p.IdCuenta == a.IdCuenta).DefaultIfEmpty()
@@ -1292,54 +1292,25 @@ namespace ProntoMVC.Controllers
                             a.Anulado,
                             CodigoCliente = a.Cliente.CodigoCliente,
                             NombreCliente = a.Cliente.RazonSocial,
-                            Cuenta = b != null ? b.Descripcion : "",
-                            Moneda = c != null ? c.Abreviatura : "",
+                            Cuenta = a.Cuenta != null ? a.Cuenta.Descripcion : "",
+                            Moneda = a.Moneda != null ? a.Moneda.Abreviatura : "",
                             a.Deudores,
                             a.Valores,
                             a.RetencionIVA,
                             a.RetencionGanancias,
                             a.RetencionIBrutos,
                             OtrosConceptos = (a.Otros1 ?? 0) + (a.Otros2 ?? 0) + (a.Otros3 ?? 0) + (a.Otros4 ?? 0) + (a.Otros5 ?? 0) + (a.Otros6 ?? 0) + (a.Otros7 ?? 0) + (a.Otros8 ?? 0) + (a.Otros9 ?? 0) + (a.Otros10 ?? 0),
-                            Obra = a.obra != null ? d.NumeroObra : "",
-                            Vendedor =a.ven g != null ? g.Nombre : "",
-                            Cobrador = h != null ? h.Nombre : "",
-                            Ingreso = e != null ? e.Nombre : "",
+                            Obra = a.Obra != null ? a.Obra.NumeroObra : "",
+                            Vendedor =a.Vendedore  != null ? a.Vendedore.Nombre : "",
+                            Cobrador = a.Vendedore1 != null ? a.Vendedore1.Nombre : "",
+                            Ingreso = a.Empleado != null ? a.Empleado.Nombre : "",
                             a.FechaIngreso,
-                            Modifico = f != null ? f.Nombre : "",
+                            Modifico = a.Empleado1 != null ? a.Empleado1.Nombre : "",
                             a.FechaModifico,
                             a.Observaciones,
                             a.Cotizacion
                         }).AsQueryable(); 
 
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                data = (from a in data where a.FechaRecibo >= FechaDesde && a.FechaRecibo <= FechaHasta select a).AsQueryable();
-            }
-
-            if (_search ?? false)
-            {
-                switch (searchField.ToLower())
-                {
-                    case "numeroRecibo":
-                        campo = String.Format("{0} = {1}", searchField, searchString);
-                        break;
-                    case "fechaRecibo":
-                        //No anda
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                    default:
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                }
-            }
-            else
-            {
-                campo = "true";
-            }
-
-            int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)

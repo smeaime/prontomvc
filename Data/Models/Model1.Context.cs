@@ -474,7 +474,7 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>("CtasCtesD_TXPorTrs", idClienteParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
         }
     
-        public virtual ObjectResult<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result> CtasCtesD_TXPorTrs_AuxiliarEntityFramework(Nullable<int> idCliente, Nullable<int> todo, Nullable<System.DateTime> fechaLimite, Nullable<System.DateTime> fechaDesde, Nullable<int> consolidar, string pendiente)
+        public virtual ObjectResult<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1> CtasCtesD_TXPorTrs_AuxiliarEntityFramework(Nullable<int> idCliente, Nullable<int> todo, Nullable<System.DateTime> fechaLimite, Nullable<System.DateTime> fechaDesde, Nullable<int> consolidar, string pendiente)
         {
             var idClienteParameter = idCliente.HasValue ?
                 new ObjectParameter("IdCliente", idCliente) :
@@ -500,7 +500,7 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("Pendiente", pendiente) :
                 new ObjectParameter("Pendiente", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>("CtasCtesD_TXPorTrs_AuxiliarEntityFramework", idClienteParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>("CtasCtesD_TXPorTrs_AuxiliarEntityFramework", idClienteParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
         }
     }
 }
