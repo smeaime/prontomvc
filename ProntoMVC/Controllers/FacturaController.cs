@@ -982,8 +982,8 @@ namespace ProntoMVC.Controllers
             
 
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows ;
+            int currentPage = page ;
 
             var data = (from a in pagedQuery
                         //from b in db.DescripcionIvas.Where(v => v.IdCodigoIva == a.IdCodigoIva).DefaultIfEmpty()
@@ -1002,16 +1002,16 @@ namespace ProntoMVC.Controllers
                             a.PuntoVenta,
                             a.NumeroFactura,
                             a.FechaFactura,
-                            Sucursal = h != null ? h.Descripcion : "",
+                            Sucursal = a.Deposito  != null ? a.Deposito.Descripcion : "",
                             a.Anulada,
                             ClienteSubCod = a.Cliente.Codigo.Substring(1, 2),
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
-                            DescripcionIva = b != null ? b.Descripcion : "",
+                            DescripcionIva = a.DescripcionIva != null ? a.DescripcionIva.Descripcion : "",
                             ClienteCuit = a.Cliente.Cuit,
-                            CondicionVenta =  i != null ? i.Descripcion : "",
+                            CondicionVenta =  a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
                             a.FechaVencimiento,
-                            ListaDePrecio = j != null ? "Lista " + j.NumeroLista.ToString() + " " + j.Descripcion : "",
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
                             //#Auxiliar1.OCompras as [Ordenes de compra],
                             //#Auxiliar3.Remitos as [Remitos],
                             OCompras = "",
@@ -1025,9 +1025,9 @@ namespace ProntoMVC.Controllers
                             TotalOtrasPercepciones = (a.OtrasPercepciones1 ?? 0) + (a.OtrasPercepciones2 ?? 0) + (a.OtrasPercepciones3 ?? 0),
                             a.ImporteTotal,
                             Moneda = a.Moneda.Abreviatura,
-                            Obra = a.Obra c != null ? c.NumeroObra : "",
-                            Vendedor = a.Vendedore != null ? d.Nombre : "",
-                            ProvinciaDestino = a.Provincia g != null ? g.Nombre : "",
+                            Obra = a.Obra  != null ? a.Obra.NumeroObra : "",
+                            Vendedor = a.Vendedore != null ? a.Vendedore.Nombre : "",
+                            ProvinciaDestino =  a.Provincia  != null ? a.Provincia.Nombre : "",
                             //(Select Count(*) From DetalleFacturas df Where df.IdFactura=Facturas.IdFactura and Patindex('%'+Convert(varchar,df.IdArticulo)+'%', @IdAbonos)<>0) as [Cant.Abonos],
                             //'Grupo '+Convert(varchar,
                             //(Select Top 1 oc.Agrupacion2Facturacion From DetalleFacturasOrdenesCompra dfoc 
@@ -1039,23 +1039,15 @@ namespace ProntoMVC.Controllers
                             GrupoFacturacionAutomatica = "",
                             FechaContabilizacion = (a.ContabilizarAFechaVencimiento ?? "NO") == "NO" ? a.FechaFactura : a.FechaVencimiento,
                             a.FechaAnulacion,
-                            UsuarioAnulo = a. f != null ? f.Nombre : "",
+                            UsuarioAnulo = a.Empleado1 != null ? a.Empleado1.Nombre : "",
                             a.FechaIngreso,
-                            UsuarioIngreso = e != null ? e.Nombre : "",
+                            UsuarioIngreso = a.Empleado != null ? a.Empleado.Nombre : "",
                             a.CAE,
                             a.RechazoCAE,
                             a.FechaVencimientoORechazoCAE,
                             a.Observaciones
                         }).AsQueryable();
 
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                data = (from a in data where a.FechaFactura >= FechaDesde && a.FechaFactura <= FechaHasta select a).AsQueryable();
-            }
-
-            int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var data1 = (from a in data select a)

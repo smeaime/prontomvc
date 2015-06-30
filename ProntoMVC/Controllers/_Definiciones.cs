@@ -151,13 +151,11 @@ namespace ProntoMVC.Controllers
         }
 
 
-        internal ObjectQuery<T> FilterObjectSet<T>(ObjectQuery<T> inputQuery) where T : class
-        {
-            if (rules.Count <= 0)
-                return inputQuery;
 
-            var sb = new StringBuilder();
-            var objParams = new List<ObjectParameter>(rules.Count);
+
+        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams)
+        {
+
 
             foreach (Rule rule in rules)
             {
@@ -261,13 +259,32 @@ namespace ProntoMVC.Controllers
                 objParams.Add(param);
             }
 
+
+            // return sb.ToString();
+
+        }
+
+
+
+
+        internal ObjectQuery<T> FilterObjectSet<T>(ObjectQuery<T> inputQuery) where T : class
+        {
+            if (rules.Count <= 0)
+                return inputQuery;
+
+
+            var sb = new StringBuilder();
+            var objParams = new List<ObjectParameter>(rules.Count);
+            CrearFiltro<T>(sb, objParams);
+
+
             try
             {
                 ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
-                
+
                 foreach (var objParam in objParams)
                     filteredQuery.Parameters.Add(objParam);
-                
+
                 return filteredQuery;
 
             }
