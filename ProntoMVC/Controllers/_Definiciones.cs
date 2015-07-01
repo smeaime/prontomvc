@@ -8,6 +8,40 @@ using System.Reflection;
 using System.Web.Script.Serialization;
 
 
+
+// http://stackoverflow.com/questions/5500805/asp-net-mvc-2-0-implementation-of-searching-in-jqgrid
+// esto es la modificacion de Oleg usando los filtros de EF a lo que hizo Phil Haack con los filtros del addon de Linq.Dynamic
+
+
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * 
+ * // -y cómo seguir usando, en el caso de los storeprocs, el filtro nativo de EF en lugar del linq.dynamic?
+ * http://stackoverflow.com/questions/2772295/iqueryable-from-stored-procedure-entity-framework
+ * You can't do what you're trying to do, for the same 
+reason that you can't put a stored procedure in a FROM clause of a SELECT 
+query - SQL isn't built to support this kind of operation.
+Could you put the logic you want into a view instead of a stored procedure?
+  
+ -y en lugar de una vista o una tabla temporal, podemos usar una TVF
+
+ * Support for table-valued functions has been added in .NET 4.5 and EF5. Change your 
+ * stored proc into a TVF and you can use the code from this answer. –  Alex Oct 17 '13 at 13:24
+ http://stackoverflow.com/questions/16769299/how-to-use-table-valued-function-in-entity-framework-code-first-approach/16811388#16811388
+ https://technet.microsoft.com/en-us/library/ms191165(v=sql.105).aspx
+  
+ * 
+ * 
+ * 
+
+*/
+
+
+
 namespace ProntoMVC.Controllers
 {
     public class Filters
@@ -58,6 +92,23 @@ namespace ProntoMVC.Controllers
             "(it.{0} NOT LIKE ('%'+@p{1}+'%'))" //" nc" - does not contain
         };
 
+
+
+        // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
+        private static readonly string[] FormatMapping_ParaLinqDynamic = {
+            "({0} = @{1})",                 // "eq" - equal
+            "({0} <> @{1})",                // "ne" - not equal
+            "({0} < @{1})",                 // "lt" - less than
+            "({0} <= @{1})",                // "le" - less than or equal to
+            "({0} > @{1})",                 // "gt" - greater than
+            "({0} >= @{1})",                // "ge" - greater than or equal to
+            "({0}!= NULL  AND  {0}.StartsWith(@{1}))",        // "bw" - begins with
+            "({0}!= NULL  AND !{0}.StartsWith(@{1}))",    // "bn" - does not begin with
+            "({0}!= NULL  AND {0}.EndsWith(@{1}))",        // "ew" - ends with
+            "({0}!= NULL  AND !{0}.EndsWith(@{1}))",    // "en" - does not end with
+            "({0}!= NULL  AND {0}.Contains(@{1}))",    // "cn" - contains
+            "({0}!= NULL  AND !{0}.Contains(@{1}))" //" nc" - does not contain
+        };
 
 
         private static System.Reflection.PropertyInfo GetProperty(object t, string PropertName)
@@ -114,15 +165,16 @@ namespace ProntoMVC.Controllers
             }
             catch (Exception)
             {
-                
-                // estas tratando de usar un LIKE sobre una columna que es numerica?
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
                 throw;
             }
 
 
 
 
-            
+
 
 
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
@@ -150,13 +202,11 @@ namespace ProntoMVC.Controllers
         }
 
 
-        internal ObjectQuery<T> FilterObjectSet<T>(ObjectQuery<T> inputQuery) where T : class
-        {
-            if (rules.Count <= 0)
-                return inputQuery;
 
-            var sb = new StringBuilder();
-            var objParams = new List<ObjectParameter>(rules.Count);
+
+        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic =false)
+        {
+
 
             foreach (Rule rule in rules)
             {
@@ -200,7 +250,14 @@ namespace ProntoMVC.Controllers
                     sb.Append(groupOp);
 
                 var iParam = objParams.Count;
-                sb.AppendFormat(FormatMapping[(int)rule.op], rule.field, iParam);
+                
+                if (EsParaLinqDynamic)
+                    sb.AppendFormat(FormatMapping_ParaLinqDynamic [(int)rule.op], rule.field, iParam);
+                else
+                    sb.AppendFormat(FormatMapping[(int)rule.op], rule.field, iParam);
+                    
+
+
 
                 ObjectParameter param;
                 switch (propertyInfo.PropertyType.FullName)
@@ -260,11 +317,43 @@ namespace ProntoMVC.Controllers
                 objParams.Add(param);
             }
 
-            ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
-            foreach (var objParam in objParams)
-                filteredQuery.Parameters.Add(objParam);
 
-            return filteredQuery;
+            // return sb.ToString();
+
+        }
+
+
+
+
+        internal ObjectQuery<T> FilterObjectSet<T>(ObjectQuery<T> inputQuery) where T : class
+        {
+            if (rules.Count <= 0)
+                return inputQuery;
+
+
+            var sb = new StringBuilder();
+            var objParams = new List<ObjectParameter>(rules.Count);
+            CrearFiltro<T>(sb, objParams);
+
+
+            try
+            {
+                ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
+
+                foreach (var objParam in objParams)
+                    filteredQuery.Parameters.Add(objParam);
+
+                return filteredQuery;
+
+            }
+            catch (Exception)
+            {
+                // algun problema en los nombres de columna en el modelo de la jqgrid???               
+                throw;
+            }
+
+
+
         }
     }
 }

@@ -193,16 +193,16 @@
     <Compile Include="Models\Conjunto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mantenimiento\Articulo.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\Consumos.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ControlCalidad.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cotizacione.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta.cs">
@@ -427,12 +427,6 @@
     <Compile Include="Models\DetalleSalidasMateriale.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleUserBD.cs">
-      <DependentUpon>bdlmaster.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DetalleUserPermisos.cs">
-      <DependentUpon>bdlmaster.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DetalleValesSalida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -441,9 +435,6 @@
     </Compile>
     <Compile Include="Models\DiferenciasCambio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dtproperties.cs">
-      <DependentUpon>bdlmaster.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ejercicio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -481,15 +472,6 @@
     <Compile Include="Models\GruposObra.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mantenimiento\HorasAseguradasEquipos.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\HorasEquipo.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\HorasStandar.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IBCondicion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -498,11 +480,6 @@
     </Compile>
     <Compile Include="Models\ImpuestosDirecto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LinqToSQL_Pronto.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LinqToSQL_Pronto.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\ListasPrecio.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -516,14 +493,43 @@
     <Compile Include="Models\LogComprobantesElectronico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mantenimiento\Articulo.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\Consumos.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleUserBD.cs">
+      <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleUserPermisos.cs">
+      <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dtproperties.cs">
+      <DependentUpon>bdlmaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\HorasAseguradasEquipos.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\HorasEquipo.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\HorasStandar.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LinqToSQL_Pronto.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinqToSQL_Pronto.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\Materiales.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Marca.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Materiale.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\Materiales.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -543,6 +549,15 @@
     <Compile Include="Models\Mantenimiento\Model2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\OrdenesTrabajo.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\PartesDiarios.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mantenimiento\PartesDiariosEmpleados.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.cs">
@@ -566,9 +581,6 @@
     <Compile Include="Models\OrdenesPago_TX_EnCaja_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Mantenimiento\OrdenesTrabajo.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OrdenesTrabajo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -586,12 +598,6 @@
     </Compile>
     <Compile Include="Models\Parametros2.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\PartesDiarios.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\PartesDiariosEmpleados.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -628,16 +634,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pronto.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mantenimiento\ProntoMantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProntoIni.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProntoIniClaves.cs">
       <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Mantenimiento\ProntoMantenimiento.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProntoMantenimiento.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>Model1.tt</DependentUpon>

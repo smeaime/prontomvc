@@ -131,5 +131,12 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleRecibosRubrosContable> DetalleRecibosRubrosContables { get; set; }
         public virtual ICollection<DetalleRecibosValore> DetalleRecibosValores { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual Cuenta Cuenta { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Moneda Moneda { get; set; }
+        public virtual Obra Obra { get; set; }
+        public virtual Vendedor Vendedore { get; set; }
+        public virtual Vendedor Vendedore1 { get; set; }
     }
 }

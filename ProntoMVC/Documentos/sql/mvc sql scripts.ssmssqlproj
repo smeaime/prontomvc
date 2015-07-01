@@ -97,6 +97,12 @@
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>ALTERTABLE 2011 Modulo WEB.sql</FullPath>
         </FileNode>
+        <FileNode Name="CtasCtesD_TXPorTrs_AuxiliarEntityFramework.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3\Testing</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>CtasCtesD_TXPorTrs_AuxiliarEntityFramework.sql</FullPath>
+        </FileNode>
         <FileNode Name="DetalleFacturas_PorIdCartaPorte RefrescarCartasPorteDetalleFacturas.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>

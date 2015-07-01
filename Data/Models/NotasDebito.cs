@@ -79,10 +79,17 @@ namespace ProntoMVC.Data.Models
         public string RechazoCAE { get; set; }
         public Nullable<System.DateTime> FechaVencimientoORechazoCAE { get; set; }
         public Nullable<int> IdIdentificacionCAE { get; set; }
+        public Nullable<int> IdClienteObservaciones { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }
         public virtual ICollection<DetalleNotasDebito> DetalleNotasDebitoes { get; set; }
         public virtual ICollection<DetalleNotasDebitoProvincia> DetalleNotasDebitoProvincias { get; set; }
+        public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Obra Obra { get; set; }
+        public virtual Provincia Provincia { get; set; }
+        public virtual Vendedor Vendedore { get; set; }
     }
 }

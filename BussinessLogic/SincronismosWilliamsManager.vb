@@ -12637,9 +12637,30 @@ Namespace Pronto.ERP.Bll
                         sb = RenglonBLDCalidad(cdp, 15, .CalidadTierra, .CalidadMermaChamicoBonifica_o_Rebaja, carta.CalidadTierraRebaja, nF, "01", "Tierra", carta.CalidadTierraMerma, _TipoMerma(s.Tierra, carta.Secada))
 
                         sb = RenglonBLDCalidad(cdp, 16, .CalidadMermaZarandeo, carta.CalidadGranosDanadosRebaja, carta.CalidadZarandeoRebaja, nF, "01", "Zarandeo", carta.CalidadZarandeoMerma, _TipoMerma(s.Zarandeo, carta.Secada))
+
+
                         sb = RenglonBLDCalidad(cdp, 17, .CalidadDescuentoFinal, carta.CalidadGranosDanadosRebaja, carta.CalidadDescuentoFinalRebaja, nF, "01", "DescuentoFinal", carta.CalidadDescuentoFinalMerma, _TipoMerma(s.DescuentoFinal, carta.Secada))
+
+
                         sb = RenglonBLDCalidad(cdp, 18, carta.CalidadHumedadResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadHumedadRebaja, nF, "01", "Humedad", carta.CalidadHumedadMerma, _TipoMerma(s.Humedad, carta.Secada))
+
                         sb = RenglonBLDCalidad(cdp, 19, carta.CalidadGastosFumigacionResultado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "GastosFumigacion", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Fumigacion, carta.Secada))
+
+
+
+                        Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+
+                        sb = RenglonBLDCalidad(cdp, 20, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaRebaja, cc.CalidadGastoDeSecadaRebaja, nF, "01", "GastoDeSecada", cc.CalidadGastoDeSecadaMerma, cc.TipoMermaGastoDeSecada <> 0)
+
+                        sb = RenglonBLDCalidad(cdp, 21, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilRebaja, cc.CalidadMermaVolatilRebaja, nF, "01", "MermaVolatil", cc.CalidadMermaVolatilMerma, cc.TipoMermaVolatil <> 0)
+
+                        sb = RenglonBLDCalidad(cdp, 22, cc.CalidadFondoNidera, cc.CalidadFondoNideraRebaja, cc.CalidadFondoNideraRebaja, nF, "01", "FondoNidera", cc.CalidadFondoNideraMerma, cc.TipoMermaFondoNidera <> 0)
+
+                        sb = RenglonBLDCalidad(cdp, 23, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaRebaja, cc.CalidadMermaConvenidaRebaja, nF, "01", "MermaConvenida", cc.CalidadMermaConvenidaMerma, cc.TipoMermaConvenida <> 0)
+
+                        sb = RenglonBLDCalidad(cdp, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, nF, "01", "TalCualVicentin", cc.CalidadTalCualVicentinMerma, cc.TipoMermaTalCualVicentin <> 0)
+
+
 
 
 
@@ -13203,6 +13224,8 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+
                 If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
 
@@ -13225,7 +13248,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
 
 
                     'Dim desc As Double
@@ -13238,9 +13260,10 @@ Namespace Pronto.ERP.Bll
 
                     If descripcion = "DescuentoFinal" Then
 
-                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR
+                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
                     Else
 
+                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
 
                         sb &= LeftMasPadLeft(Rebaja, 7) & SEPARADOR                 'Descuento Final http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9291    
 

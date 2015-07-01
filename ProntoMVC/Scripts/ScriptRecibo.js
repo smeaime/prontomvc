@@ -1111,7 +1111,7 @@ $(function () {
 
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente',
+        url: ROOT + 'CuentaCorriente/CuentaCorrienteDeudoresPendientePorCliente_DynamicGridData',
         postData: { 'IdCliente': function () { return $("#IdCliente").val(); } },
         datatype: 'json',
         mtype: 'POST',
@@ -1124,16 +1124,43 @@ $(function () {
                         { name: 'IdTipoComp', index: 'IdTipoComp', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdComprobante', index: 'IdComprobante', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cabeza', index: 'Cabeza', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Tipo', index: 'Tipo', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Fecha', index: 'Fecha', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Moneda', index: 'Moneda', align: 'left', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'Saldo', index: 'Saldo', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                        { name: 'Comp', index: 'Comp', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn,eq'] } },
+
+                          {
+                              name: 'Fecha', index: 'Fecha', width: 80, align: 'center',
+                              sorttype: 'date', hidden: false, editable: false,
+                              formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                              search: true,
+                              searchrules: {
+                                  date: true
+                              },
+                              searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                  sopt: ['ge', 'le'],
+                                  dataInit: function (elem) {
+                                      $(elem).datepicker({
+                                          dateFormat: 'dd/mm/yy',
+                                          changeYear: true,
+                                          changeMonth: true,
+                                          showButtonPanel: true,
+                                          onSelect: function () {
+                                              $(this).keydown();
+                                          }
+                                      });
+                                  }
+                              }
+
+
+                          },
+
+                        { name: 'Fechavt', index: 'Fechavt', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Monorigen', index: 'Monorigen', align: 'left', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Imporig', index: 'Imporig', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                        { name: 'SaldoComp', index: 'SaldoComp', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: 'SaldoTrs', index: 'SaldoTrs', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
-        ],
+
+       ],
         ondblClickRow: function (id) {
             CopiarCtaCte(id, "Dbl");
         },
@@ -1141,20 +1168,80 @@ $(function () {
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-        pager: $('#ListaDragPager'),
-        rowNum: 15,
-        rowList: [10, 20, 50],
-        sortname: 'IdImputacion,Cabeza,Fecha,Numero',
-        sortorder: "asc",
-        viewrecords: true,
-        width: 'auto', // 'auto',
-        autowidth: true,
-        shrinkToFit: false,
-        height: '100%',
-        altRows: false,
-        emptyrecords: 'No hay registros para mostrar'//,
+    
+
+
+        
+        ///////////////////////////////
+        ///////////////////////////////
+
+     pager: $('#ListaDragPager'),
+    rowNum: 15,
+    rowList: [10, 20, 50],
+    sortname: 'Fecha',//,NumeroOrdenCompra',
+    sortorder: "desc",
+    viewrecords: true,
+    emptyrecords: 'No hay registros para mostrar', //,
+
+
+    ///////////////////////////////
+    width: 'auto', // 'auto',
+    autowidth: true,
+    shrinkToFit: false,
+    //////////////////////////////
+
+    height: $(window).height() - ALTOLISTADO, // '100%'
+    altRows: false,
+    footerrow: false, //true,
+    userDataOnFooter: true
+    // ,caption: '<b>PEDIDOS</b>'
+
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
+
+
+
     })
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
+
+          
+    jQuery("#ListaDrag").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+    //myGrid.filterToolbar({  });
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager',
+            {
+                caption: "Filter", title: "Toggle Searching Toolbar",
+                buttonicon: 'ui-icon-pin-s',
+                onClickButton: function () { myGrid[0].toggleToolbar(); }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Cuenta corriente');

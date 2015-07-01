@@ -40,6 +40,14 @@ namespace ProntoMVC.Data.Models
             this.OrdenesCompras2 = new HashSet<OrdenesCompra>();
             this.OrdenesCompras3 = new HashSet<OrdenesCompra>();
             this.Remitos = new HashSet<Remito>();
+            this.Facturas = new HashSet<Factura>();
+            this.Facturas1 = new HashSet<Factura>();
+            this.Recibos = new HashSet<Recibo>();
+            this.Recibos1 = new HashSet<Recibo>();
+            this.NotasCreditoes = new HashSet<NotasCredito>();
+            this.NotasCreditoes1 = new HashSet<NotasCredito>();
+            this.NotasDebitoes = new HashSet<NotasDebito>();
+            this.NotasDebitoes1 = new HashSet<NotasDebito>();
         }
     
         public int IdEmpleado { get; set; }
@@ -107,5 +115,13 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<OrdenesCompra> OrdenesCompras2 { get; set; }
         public virtual ICollection<OrdenesCompra> OrdenesCompras3 { get; set; }
         public virtual ICollection<Remito> Remitos { get; set; }
+        public virtual ICollection<Factura> Facturas { get; set; }
+        public virtual ICollection<Factura> Facturas1 { get; set; }
+        public virtual ICollection<Recibo> Recibos { get; set; }
+        public virtual ICollection<Recibo> Recibos1 { get; set; }
+        public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
+        public virtual ICollection<NotasCredito> NotasCreditoes1 { get; set; }
+        public virtual ICollection<NotasDebito> NotasDebitoes { get; set; }
+        public virtual ICollection<NotasDebito> NotasDebitoes1 { get; set; }
     }
 }

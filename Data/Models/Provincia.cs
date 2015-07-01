@@ -25,6 +25,8 @@ namespace ProntoMVC.Data.Models
             this.DetalleClientesLugaresEntregas = new HashSet<DetalleClientesLugaresEntrega>();
             this.Facturas = new HashSet<Factura>();
             this.Localidades = new HashSet<Localidad>();
+            this.NotasCreditoes = new HashSet<NotasCredito>();
+            this.NotasDebitoes = new HashSet<NotasDebito>();
         }
     
         public int IdProvincia { get; set; }
@@ -62,5 +64,7 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleClientesLugaresEntrega> DetalleClientesLugaresEntregas { get; set; }
         public virtual ICollection<Factura> Facturas { get; set; }
         public virtual ICollection<Localidad> Localidades { get; set; }
+        public virtual ICollection<NotasCredito> NotasCreditoes { get; set; }
+        public virtual ICollection<NotasDebito> NotasDebitoes { get; set; }
     }
 }
