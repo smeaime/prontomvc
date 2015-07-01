@@ -4015,6 +4015,7 @@ Public Class CartaDePorteManager
             strWHERE += " OR CDP.Acopio3=" & IdAcopio & ""
             strWHERE += " OR CDP.Acopio4=" & IdAcopio & ""
             strWHERE += " OR CDP.Acopio5=" & IdAcopio & ""
+            strWHERE += " OR CDP.Acopio6=" & IdAcopio & ""
 
             strWHERE += " )"
         End If
@@ -4249,6 +4250,7 @@ Public Class CartaDePorteManager
             strWHERE += " OR Acopio3=" & IdAcopio & ""
             strWHERE += " OR Acopio4=" & IdAcopio & ""
             strWHERE += " OR Acopio5=" & IdAcopio & ""
+            strWHERE += " OR Acopio6=" & IdAcopio & ""
 
             strWHERE += " )"
         End If
@@ -4643,6 +4645,7 @@ Public Class CartaDePorteManager
             strWHERE += "           OR CDP.Acopio3=" & IdAcopio & ""
             strWHERE += "           OR CDP.Acopio4=" & IdAcopio & ""
             strWHERE += "           OR CDP.Acopio5=" & IdAcopio & ""
+            strWHERE += "           OR CDP.Acopio6=" & IdAcopio & ""
             strWHERE += "       )"
             strWHERE += "       OR CDP.AcopioFacturarleA=" & IdAcopio & ""
             strWHERE += ")"
@@ -4815,7 +4818,7 @@ Public Class CartaDePorteManager
     "         '' as   [Nro CAC]	, " & _
     "          FechaVencimiento as  [Vencim.CP], " & _
     "          '' as  [Emision CP], " & _
-    "          ''  as Sucursal, PuntoVenta, " & _
+    "          ''  as Sucursal, CDP.PuntoVenta, " & _
     "          KmARecorrer as  Km, " & _
     "          Tarifa as Tarifa, " & _
     "         Articulos.AuxiliarString5 as  [EspecieONCAA] , " & _
@@ -4883,7 +4886,7 @@ Public Class CartaDePorteManager
 "      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
 "      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
 "      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
-"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja ,  " & _
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5   ,CDP.Acopio6      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja ,  " & _
 "			cast (cdp.NumeroCartaDePorte as varchar) +" & _
 "					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
 "           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
@@ -5118,7 +5121,7 @@ Public Class CartaDePorteManager
 "      ,CDP.NumeroSubfijo      ,CDP.IdEstablecimiento      ,CDP.EnumSyngentaDivision      ,CDP.Corredor2      ,CDP.IdUsuarioModifico      ,CDP.FechaModificacion      ,CDP.FechaEmision      ,CDP.EstaArchivada      ,CDP.ExcluirDeSubcontratistas      ,CDP.IdTipoMovimiento      ,CDP.IdClienteAFacturarle      ,CDP.SubnumeroDeFacturacion      ,CDP.AgregaItemDeGastosAdministrativos      ,CDP.CalidadGranosQuemados      ,CDP.CalidadGranosQuemadosBonifica_o_Rebaja      ,CDP.CalidadTierra      ,CDP.CalidadTierraBonifica_o_Rebaja      ,CDP.CalidadMermaChamico " & _
 "      ,CDP.CalidadMermaChamicoBonifica_o_Rebaja      ,CDP.CalidadMermaZarandeo      ,CDP.CalidadMermaZarandeoBonifica_o_Rebaja      ,CDP.FueraDeEstandar      ,CDP.CalidadPuntaSombreada      ,CDP.CobraAcarreo      ,CDP.LiquidaViaje      ,CDP.IdClienteAuxiliar      ,CDP.CalidadDescuentoFinal      ,CDP.PathImagen      ,CDP.PathImagen2 " & _
 "      ,CDP.AgrupadorDeTandaPeriodos      ,CDP.ClaveEncriptada      ,CDP.NumeroCartaEnTextoParaBusqueda      ,CDP.IdClienteEntregador      ,CDP.IdDetalleFactura      ,CDP.SojaSustentableCodCondicion      ,CDP.SojaSustentableCondicion      ,CDP.SojaSustentableNroEstablecimientoDeProduccion      ,CDP.IdClientePagadorFlete      ,CDP.SubnumeroVagonEnTextoParaBusqueda      ,CDP.IdCorredor2 " & _
-"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5      ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
+"      ,CDP.Acopio1      ,CDP.Acopio2      ,CDP.Acopio3      ,CDP.Acopio4      ,CDP.Acopio5 ,CDP.Acopio6        ,CDP.AcopioFacturarleA      ,CDP.CalidadGranosDanadosRebaja      ,CDP.CalidadGranosExtranosRebaja , " & _
 "			cast (cdp.NumeroCartaDePorte as varchar) +" & _
 "					CASE WHEN cdp.numerosubfijo<>0 OR cdp.subnumerovagon<>0 THEN " & _
 "           '  ' + cast (cdp.numerosubfijo as varchar) + '/' +cast (cdp.subnumerovagon as varchar) 	" & _
@@ -6328,6 +6331,7 @@ Public Class CartaDePorteManager
                 .Acopio3 = If(oCarta.Acopio3, -1)
                 .Acopio4 = If(oCarta.Acopio4, -1)
                 .Acopio5 = If(oCarta.Acopio5, -1)
+                .Acopio6 = If(oCarta.Acopio6, -1)
 
                 .AcopioFacturarleA = If(oCarta.AcopioFacturarleA, -1)
 
@@ -6379,6 +6383,53 @@ Public Class CartaDePorteManager
                 .CalidadHumedadResultado = iisNull(oCarta.CalidadHumedadResultado, 0)
                 .CalidadGastosFumigacionResultado = iisNull(oCarta.CalidadGastosFumigacionResultado, 0)
 
+
+
+
+                Try
+
+                    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                                                        Where i.IdCartaDePorte = id _
+                                                        And i.Campo = "CalidadGastoDeSecada"
+                                                    ).SingleOrDefault
+
+                    If oDet IsNot Nothing Then .CalidadGastoDeSecada = oDet.Valor Else .CalidadGastoDeSecada = 0
+                Catch ex As Exception
+                    ErrHandler.WriteError(ex)
+                End Try
+
+
+                .CalidadGastoDeSecada = GetDetalle("CalidadGastoDeSecada", db, id)
+                .CalidadGastoDeSecadaRebaja = GetDetalle("CalidadGastoDeSecadaRebaja", db, id)
+                .CalidadGastoDeSecadaMerma = GetDetalle("CalidadGastoDeSecadaMerma", db, id)
+                .TipoMermaGastoDeSecada = GetDetalle("TipoMermaGastoDeSecada", db, id)
+
+
+                .CalidadMermaVolatil = GetDetalle("CalidadMermaVolatil", db, id)
+                .CalidadMermaVolatilRebaja = GetDetalle("CalidadMermaVolatilRebaja", db, id)
+                .CalidadMermaVolatilMerma = GetDetalle("CalidadMermaVolatilMerma", db, id)
+                .TipoMermaVolatil = GetDetalle("TipoMermaVolatil", db, id)
+
+
+                .CalidadFondoNidera = GetDetalle("CalidadFondoNidera", db, id)
+                .CalidadFondoNideraRebaja = GetDetalle("CalidadFondoNideraRebaja", db, id)
+                .CalidadFondoNideraMerma = GetDetalle("CalidadFondoNideraMerma", db, id)
+                .TipoMermaFondoNidera = GetDetalle("TipoMermaFondoNidera", db, id)
+
+
+                .CalidadMermaConvenida = GetDetalle("CalidadMermaConvenida", db, id)
+                .CalidadMermaConvenidaRebaja = GetDetalle("CalidadMermaConvenidaRebaja", db, id)
+                .CalidadMermaConvenidaMerma = GetDetalle("CalidadMermaConvenidaMerma", db, id)
+                .TipoMermaConvenida = GetDetalle("TipoMermaConvenida", db, id)
+
+
+                .CalidadTalCualVicentin = GetDetalle("CalidadTalCualVicentin", db, id)
+                .CalidadTalCualVicentinRebaja = GetDetalle("CalidadTalCualVicentinRebaja", db, id)
+                .CalidadTalCualVicentinMerma = GetDetalle("CalidadTalCualVicentinMerma", db, id)
+                .TipoMermaTalCualVicentin = GetDetalle("TipoMermaTalCualVicentin", db, id)
+
+
+
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
@@ -6391,6 +6442,54 @@ Public Class CartaDePorteManager
         Return myCartaDePorte
     End Function
 
+
+    Shared Function GetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long) As Decimal
+
+        Try
+
+            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                                                Where i.IdCartaDePorte = id _
+                                                And i.Campo = nombrecampo
+                                            ).SingleOrDefault
+
+            If oDet IsNot Nothing Then
+                Return oDet.Valor
+            Else
+                Return 0
+            End If
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+
+    End Function
+
+    Shared Sub SetDetalle(nombrecampo As String, db As LinqCartasPorteDataContext, id As Long, valor As Decimal)
+
+
+
+
+        Try
+
+            Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                                                Where i.IdCartaDePorte = id _
+                                                And i.Campo = nombrecampo
+                                            ).SingleOrDefault
+            If IsNothing(oDet) Then
+                oDet = New CartasDePorteDetalle
+                oDet.IdCartaDePorte = id
+                oDet.Campo = nombrecampo
+                oDet.Valor = valor
+                db.CartasDePorteDetalles.InsertOnSubmit(oDet)
+            Else
+                oDet.Valor = valor
+            End If
+        Catch ex As Exception
+            ErrHandler.WriteError(ex)
+        End Try
+
+
+
+    End Sub
 
 
 
@@ -6638,6 +6737,7 @@ Public Class CartaDePorteManager
                     oCarta.Acopio3 = .Acopio3
                     oCarta.Acopio4 = .Acopio4
                     oCarta.Acopio5 = .Acopio5
+                    oCarta.Acopio6 = IIf(.Acopio6 <= 0, Nothing, .Acopio6)
                     oCarta.AcopioFacturarleA = .AcopioFacturarleA
 
                     oCarta.ClaveEncriptada = EntidadManager.encryptQueryString(CartaDePorteId)
@@ -6700,6 +6800,67 @@ Public Class CartaDePorteManager
 
                     oCarta.CalidadHumedadResultado = .CalidadHumedadResultado
                     oCarta.CalidadGastosFumigacionResultado = .CalidadGastosFumigacionResultado
+
+
+
+
+
+                    'Try
+
+                    '    Dim oDet As CartasDePorteDetalle = (From i In db.CartasDePorteDetalles _
+                    '                                        Where i.IdCartaDePorte = CartaDePorteId _
+                    '                                        And i.Campo = "CalidadGastoDeSecada"
+                    '                                    ).SingleOrDefault
+                    '    If IsNothing(oDet) Then
+                    '        oDet = New CartasDePorteDetalle
+                    '        oDet.IdCartaDePorte = CartaDePorteId
+                    '        oDet.Campo = "CalidadGastoDeSecada"
+                    '        oDet.Valor = .CalidadGastoDeSecada
+                    '        db.CartasDePorteDetalles.InsertOnSubmit(oDet)
+                    '    Else
+                    '        oDet.Valor = .CalidadGastoDeSecada
+                    '    End If
+                    'Catch ex As Exception
+                    '    ErrHandler.WriteError(ex)
+                    'End Try
+
+                    
+
+                    SetDetalle("CalidadGastoDeSecada", db, CartaDePorteId, .CalidadGastoDeSecada)
+                    SetDetalle("CalidadGastoDeSecadaRebaja", db, CartaDePorteId, .CalidadGastoDeSecadaRebaja)
+                    SetDetalle("CalidadGastoDeSecadaMerma", db, CartaDePorteId, .CalidadGastoDeSecadaMerma)
+                    SetDetalle("TipoMermaGastoDeSecada", db, CartaDePorteId, .TipoMermaGastoDeSecada)
+
+
+                    SetDetalle("CalidadMermaVolatil", db, CartaDePorteId, .CalidadMermaVolatil)
+                    SetDetalle("CalidadMermaVolatilRebaja", db, CartaDePorteId, .CalidadMermaVolatilRebaja)
+                    SetDetalle("CalidadMermaVolatilMerma", db, CartaDePorteId, .CalidadMermaVolatilMerma)
+                    SetDetalle("TipoMermaVolatil", db, CartaDePorteId, .TipoMermaVolatil)
+
+
+                    SetDetalle("CalidadFondoNidera", db, CartaDePorteId, .CalidadFondoNidera)
+                    SetDetalle("CalidadFondoNideraRebaja", db, CartaDePorteId, .CalidadFondoNideraRebaja)
+                    SetDetalle("CalidadFondoNideraMerma", db, CartaDePorteId, .CalidadFondoNideraMerma)
+                    SetDetalle("TipoMermaFondoNidera", db, CartaDePorteId, .TipoMermaFondoNidera)
+
+
+                    SetDetalle("CalidadMermaConvenida", db, CartaDePorteId, .CalidadMermaConvenida)
+                    SetDetalle("CalidadMermaConvenidaRebaja", db, CartaDePorteId, .CalidadMermaConvenidaRebaja)
+                    SetDetalle("CalidadMermaConvenidaMerma", db, CartaDePorteId, .CalidadMermaConvenidaMerma)
+                    SetDetalle("TipoMermaConvenida", db, CartaDePorteId, .TipoMermaConvenida)
+
+
+                    SetDetalle("CalidadTalCualVicentin", db, CartaDePorteId, .CalidadTalCualVicentin)
+                    SetDetalle("CalidadTalCualVicentinRebaja", db, CartaDePorteId, .CalidadTalCualVicentinRebaja)
+                    SetDetalle("CalidadTalCualVicentinMerma", db, CartaDePorteId, .CalidadTalCualVicentinMerma)
+                    SetDetalle("TipoMermaTalCualVicentin", db, CartaDePorteId, .TipoMermaTalCualVicentin)
+
+
+
+
+
+
+
 
 
 
@@ -7136,7 +7297,7 @@ Public Class CartaDePorteManager
             'End If
 
 
-            
+
 
 
 
@@ -7657,7 +7818,7 @@ Public Class CartaDePorteManager
 
 
 
-        
+
 
 
         ErrHandler.WriteError("InformeAdjuntoDeFacturacionWilliamsEPSON_A4 Idfactura=" & IdFactura)
@@ -7686,7 +7847,7 @@ Public Class CartaDePorteManager
             '    [Destino], [FechaDescarga], [IdEstablecimiento], [AgregaItemDeGastosAdministrativos])
             '    GO()
         End Try
-        
+
 
 
 
@@ -8710,6 +8871,9 @@ Public Class CartaDePorteManager
 
 
     Shared Sub ParseNombreCarta(nombre As String, ByRef numeroCarta As Long, ByRef vagon As Long)
+
+        nombre = Path.GetFileNameWithoutExtension(nombre)
+
         Dim no As String() = Split(nombre)
         numeroCarta = Val(no(0))
         vagon = 0
@@ -12763,6 +12927,7 @@ Public Class LogicaFacturacion
                         If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio3
                         If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio4
                         If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio5
+                        If If(acopioseparado, 0) = 0 Then acopioseparado = cartamapeada.Acopio6
 
                         If If(acopioseparado, 0) > 0 Then carta.ClienteSeparado = "acopiosepara " & acopioseparado
                     End If
@@ -12799,7 +12964,7 @@ Public Class LogicaFacturacion
 
         Dim cartas = From i In listaDeCartasPorteAFacturar Select i.IdCartaDePorte
         Dim q = db.CartasDePortes.Where(Function(x) cartas.Contains(x.IdCartaDePorte))
-        Dim acopioseparado = q.Select(Function(x) If(If(If(If(If(x.AcopioFacturarleA, x.Acopio1), x.Acopio2), x.Acopio3), x.Acopio4), x.Acopio5))
+        Dim acopioseparado = q.Select(Function(x) If(If(If(If(If(If(x.AcopioFacturarleA, x.Acopio1), x.Acopio2), x.Acopio3), x.Acopio4), x.Acopio5), x.Acopio6))
 
         'carta.ClienteSeparado = "acopiosepara " & acopioseparado
 
@@ -14248,7 +14413,7 @@ Public Class LogicaFacturacion
                                          ByVal PuntoVenta As Integer, ByVal dtViewstateRenglonesManuales As DataTable, _
                                          ByVal agruparArticulosPor As String, ByVal txtBuscar As String, _
                                          ByVal txtTarifaGastoAdministrativo As String, ByRef errLog As String, _
-                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, ByRef UltimaIdFacturaGenerada As Object)
+                                         ByVal txtCorredor As String, ByVal chkPagaCorredor As Boolean, numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, ByRef UltimaIdFacturaGenerada As Object, idClienteObservaciones As Long)
 
         Dim idFactura As Long
         Dim ultimo = 0
@@ -14745,7 +14910,7 @@ Public Class LogicaFacturacion
             Try
                 idFactura = CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta, dtRenglonesAgregados, SC, Session, optFacturarA, _
                                              agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor, _
-                                             txtCorredor, chkPagaCorredor, listEmbarques, imputaciones, Nothing)
+                                             txtCorredor, chkPagaCorredor, listEmbarques, imputaciones, idClienteObservaciones)
 
             Catch ex As AccessViolationException
                 'http://stackoverflow.com/questions/5842985/attempted-to-read-or-write-protected-memory-error-when-accessing-com-component
@@ -15277,7 +15442,7 @@ Public Class LogicaFacturacion
         Dim oFac = db.linqFacturas.Where(Function(x) x.IdFactura = idfactura).FirstOrDefault()
 
 
-        Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.AcopioFacturarleA}).Distinct.ToList
+        Dim acopios = oListaCDP.SelectMany(Function(x) {x.Acopio1, x.Acopio2, x.Acopio3, x.Acopio4, x.Acopio5, x.Acopio6, x.AcopioFacturarleA}).Distinct.ToList
 
 
         'Dim acopioseparado As Integer? = cartamapeada.AcopioFacturarleA
@@ -15345,7 +15510,8 @@ Public Class LogicaFacturacion
 
         If oFac.IdCliente = idSyngentaAGRO Then
 
-            If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro Or If(c.Acopio5, -1) = IdAcopioAgro) Then
+            If oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioAgro Or If(c.Acopio2, -1) = IdAcopioAgro Or If(c.Acopio3, -1) = IdAcopioAgro Or If(c.Acopio4, -1) = IdAcopioAgro _
+                                    Or If(c.Acopio5, -1) = IdAcopioAgro Or If(c.Acopio6, -1) = IdAcopioAgro) Then
 
                 'quienautoriza()
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
@@ -15355,7 +15521,7 @@ Public Class LogicaFacturacion
                 Return vbCrLf + "División AGRO – Andreas Bluhm"
                 Return vbCrLf + "Syngenta División Agro. Autoriza: " & IIf(quienautoriza = "", "[vacío]", quienautoriza)
 
-            ElseIf oListaCDP.Exists(Function(c) If(c.Acopio1, -1) = IdAcopioSeeds Or If(c.Acopio2, -1) = IdAcopioSeeds Or If(c.Acopio3, -1) = IdAcopioSeeds Or If(c.Acopio4, -1) = IdAcopioSeeds Or If(c.Acopio5, -1) = IdAcopioSeeds) Then
+            ElseIf oListaCDP.Exists(Function(xc) If(xc.Acopio1, -1) = IdAcopioSeeds Or If(xc.Acopio2, -1) = IdAcopioSeeds Or If(xc.Acopio3, -1) = IdAcopioSeeds Or If(xc.Acopio4, -1) = IdAcopioSeeds Or If(xc.Acopio5, -1) = IdAcopioSeeds Or If(xc.Acopio6, -1) = IdAcopioSeeds) Then
 
                 ErrHandler.WriteError("LeyendaSyngenta Seeds")
 
@@ -15384,7 +15550,7 @@ Public Class LogicaFacturacion
 
 
         If IdClienteAFacturarle = idSyngentaAGRO Then
-            If oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioAgro Or c.Acopio2 = IdAcopioAgro Or c.Acopio3 = IdAcopioAgro Or c.Acopio4 = IdAcopioAgro Or c.Acopio5 = IdAcopioAgro) Then
+            If oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioAgro Or c.Acopio2 = IdAcopioAgro Or c.Acopio3 = IdAcopioAgro Or c.Acopio4 = IdAcopioAgro Or c.Acopio5 = IdAcopioAgro Or c.Acopio6 = IdAcopioAgro) Then
                 ErrHandler.WriteError("LeyendaSyngenta Agro")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
@@ -15396,7 +15562,7 @@ Public Class LogicaFacturacion
 
 
 
-            ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds) Then
+            ElseIf oListaCDP.Exists(Function(c) c.Acopio1 = IdAcopioSeeds Or c.Acopio2 = IdAcopioSeeds Or c.Acopio3 = IdAcopioSeeds Or c.Acopio4 = IdAcopioSeeds Or c.Acopio5 = IdAcopioSeeds Or c.Acopio6 = IdAcopioSeeds) Then
                 ErrHandler.WriteError("LeyendaSyngenta Seeds")
                 'quienautoriza()
                 Dim quienautoriza = ClienteManager.GetItem(SC, IdClienteAFacturarle).AutorizacionSyngenta
@@ -15432,7 +15598,7 @@ Public Class LogicaFacturacion
                                          ByVal chkPagaCorredor As Boolean, _
                                          ByVal listEmbarques As System.Collections.Generic.List(Of DataRow), _
                                         ByRef ImputacionDevuelta As IEnumerable(Of grup), _
-                                        IdCorredorObservaciones As Integer _
+                                        IdClienteObservaciones As Integer _
 ) As Integer
         'Revisar tambien en
         ' Pronto el Utilidades->"Generacion de Facturas a partir de Ordenes de Compra automaticas",
@@ -15663,8 +15829,9 @@ Public Class LogicaFacturacion
 
 
                         '.Fields("IdCorredorObservaciones").Value = IdCorredorObservaciones
-
-
+                        If False And SeFacturaEsteClienteObservacionesComoCorredor(SC, IdClienteObservaciones) Then
+                            .Fields("IdClienteObservaciones").Value = IdClienteObservaciones
+                        End If
 
 
 
@@ -16285,7 +16452,29 @@ Public Class LogicaFacturacion
 
     End Function
 
-    Shared Function TraerUltimaIdFacturaCreada(SC) As Long
+    Shared Function SeFacturaEsteClienteObservacionesComoCorredor(SC As String, idcliente As Long) As Boolean
+        '        http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=13928
+
+        '* Agregar una marca en la tabla de clientes para indicar cuales tienen que entrar por este circuito
+        '* En facturación cuando filtren con el campo Cliente Observaciones algún cliente que tiene la marca del punto anterior, ponerle el id del cliente en cuestión a todas las facturas que se creen en un campo nuevo en la cabeza de las facturas (IdClienteObservaciones)
+
+        Return False
+
+        Dim clipront = ClienteManager.GetItem(SC, idcliente)
+
+        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim cli = db.linqClientes.Where(Function(x) x.IdCliente = idcliente).FirstOrDefault
+
+
+        If clipront.EsClienteObservacionesFacturadoComoCorredor = "SI" Then Return True
+
+
+        Return False
+    End Function
+
+
+
+    Shared Function TraerUltimaIdFacturaCreada(SC As String) As Long
 
         Dim id As Long
         Try
@@ -20482,6 +20671,7 @@ Public Class LogicaImportador
                     .Acopio3 = excep(otros).idacopio
                     .Acopio4 = excep(otros).idacopio
                     .Acopio5 = excep(otros).idacopio
+                    .Acopio6 = excep(otros).idacopio
 
 
                 End If

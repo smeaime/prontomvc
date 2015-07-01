@@ -298,5 +298,7 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleRecepcione> DetalleRecepciones { get; set; }
         public virtual ICollection<DetalleSalidasMateriale> DetalleSalidasMateriales { get; set; }
         public virtual ICollection<DetalleValesSalida> DetalleValesSalidas { get; set; }
+        public virtual Marca Marca { get; set; }
+        public virtual Modelo Modelo { get; set; }
     }
 }

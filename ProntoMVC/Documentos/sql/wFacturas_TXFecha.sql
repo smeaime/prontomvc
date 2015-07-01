@@ -63,7 +63,7 @@ SELECT
  Facturas.CAE as [CAE],  
  Facturas.RechazoCAE as [Rech.CAE],  
  Facturas.FechaVencimientoORechazoCAE as [Fecha vto.CAE],  
- Facturas.FueEnviadoCorreoConFacturaElectronica,
+ isnull(Facturas.FueEnviadoCorreoConFacturaElectronica,'NO') as FueEnviadoCorreoConFacturaElectronica,
  
  
 (select count (*) -- idfactura,idnotacredito 

@@ -88,6 +88,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> CuentaVentaPuntoVenta { get; set; }
         public Nullable<int> CuentaVentaNumero { get; set; }
         public Nullable<int> IdTipoOperacion { get; set; }
+        public Nullable<int> IdClienteObservaciones { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual IBCondicion IBCondicione { get; set; }
@@ -96,5 +97,11 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleNotasCreditoImputacione> DetalleNotasCreditoImputaciones { get; set; }
         public virtual ICollection<DetalleNotasCreditoOrdenesCompra> DetalleNotasCreditoOrdenesCompras { get; set; }
         public virtual ICollection<DetalleNotasCreditoProvincia> DetalleNotasCreditoProvincias { get; set; }
+        public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Obra Obra { get; set; }
+        public virtual Provincia Provincia { get; set; }
+        public virtual Vendedor Vendedore { get; set; }
     }
 }

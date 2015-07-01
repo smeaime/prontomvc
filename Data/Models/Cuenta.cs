@@ -34,6 +34,7 @@ namespace ProntoMVC.Data.Models
             this.ComprobantesProveedores = new HashSet<ComprobanteProveedor>();
             this.OrdenesPagoes = new HashSet<OrdenPago>();
             this.ComprobantesProveedores1 = new HashSet<ComprobanteProveedor>();
+            this.Recibos = new HashSet<Recibo>();
         }
     
         public int IdCuenta { get; set; }
@@ -77,6 +78,7 @@ namespace ProntoMVC.Data.Models
         public string TextoAuxiliar2 { get; set; }
         public string TextoAuxiliar3 { get; set; }
         public string ImputarAPresupuestoDeObra { get; set; }
+        public string Activa { get; set; }
     
         public virtual ICollection<Articulo> Articulos { get; set; }
         public virtual ICollection<Articulo> Articulos1 { get; set; }
@@ -99,5 +101,6 @@ namespace ProntoMVC.Data.Models
         public virtual CuentasGasto CuentasGasto { get; set; }
         public virtual ICollection<OrdenPago> OrdenesPagoes { get; set; }
         public virtual ICollection<ComprobanteProveedor> ComprobantesProveedores1 { get; set; }
+        public virtual ICollection<Recibo> Recibos { get; set; }
     }
 }

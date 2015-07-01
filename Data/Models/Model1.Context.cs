@@ -403,16 +403,8 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Obras_EliminarCuentasNoUsadasPorIdObra", idObraParameter);
         }
     
-        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> puntoVenta, Nullable<int> numeroComprobante, Nullable<int> identificador, string enviado, string recibido, string tipo, string letra)
+        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> identificador, string enviado, string recibido, string tipo, string letra, Nullable<int> puntoVenta, Nullable<int> numeroComprobante)
         {
-            var puntoVentaParameter = puntoVenta.HasValue ?
-                new ObjectParameter("PuntoVenta", puntoVenta) :
-                new ObjectParameter("PuntoVenta", typeof(int));
-    
-            var numeroComprobanteParameter = numeroComprobante.HasValue ?
-                new ObjectParameter("NumeroComprobante", numeroComprobante) :
-                new ObjectParameter("NumeroComprobante", typeof(int));
-    
             var identificadorParameter = identificador.HasValue ?
                 new ObjectParameter("Identificador", identificador) :
                 new ObjectParameter("Identificador", typeof(int));
@@ -433,7 +425,15 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("Letra", letra) :
                 new ObjectParameter("Letra", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter);
+            var puntoVentaParameter = puntoVenta.HasValue ?
+                new ObjectParameter("PuntoVenta", puntoVenta) :
+                new ObjectParameter("PuntoVenta", typeof(int));
+    
+            var numeroComprobanteParameter = numeroComprobante.HasValue ?
+                new ObjectParameter("NumeroComprobante", numeroComprobante) :
+                new ObjectParameter("NumeroComprobante", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter, puntoVentaParameter, numeroComprobanteParameter);
         }
     
         public virtual int Articulos_TX_BD_ProntoMantenimientoTodos(Nullable<int> idObraPronto)
@@ -443,6 +443,64 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("IdObraPronto", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Articulos_TX_BD_ProntoMantenimientoTodos", idObraProntoParameter);
+        }
+    
+        public virtual ObjectResult<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result> CtasCtesD_TXPorTrs(Nullable<int> idCliente, Nullable<int> todo, Nullable<System.DateTime> fechaLimite, Nullable<System.DateTime> fechaDesde, Nullable<int> consolidar, string pendiente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var todoParameter = todo.HasValue ?
+                new ObjectParameter("Todo", todo) :
+                new ObjectParameter("Todo", typeof(int));
+    
+            var fechaLimiteParameter = fechaLimite.HasValue ?
+                new ObjectParameter("FechaLimite", fechaLimite) :
+                new ObjectParameter("FechaLimite", typeof(System.DateTime));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("FechaDesde", fechaDesde) :
+                new ObjectParameter("FechaDesde", typeof(System.DateTime));
+    
+            var consolidarParameter = consolidar.HasValue ?
+                new ObjectParameter("Consolidar", consolidar) :
+                new ObjectParameter("Consolidar", typeof(int));
+    
+            var pendienteParameter = pendiente != null ?
+                new ObjectParameter("Pendiente", pendiente) :
+                new ObjectParameter("Pendiente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>("CtasCtesD_TXPorTrs", idClienteParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
+        }
+    
+        public virtual ObjectResult<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1> CtasCtesD_TXPorTrs_AuxiliarEntityFramework(Nullable<int> idCliente, Nullable<int> todo, Nullable<System.DateTime> fechaLimite, Nullable<System.DateTime> fechaDesde, Nullable<int> consolidar, string pendiente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var todoParameter = todo.HasValue ?
+                new ObjectParameter("Todo", todo) :
+                new ObjectParameter("Todo", typeof(int));
+    
+            var fechaLimiteParameter = fechaLimite.HasValue ?
+                new ObjectParameter("FechaLimite", fechaLimite) :
+                new ObjectParameter("FechaLimite", typeof(System.DateTime));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("FechaDesde", fechaDesde) :
+                new ObjectParameter("FechaDesde", typeof(System.DateTime));
+    
+            var consolidarParameter = consolidar.HasValue ?
+                new ObjectParameter("Consolidar", consolidar) :
+                new ObjectParameter("Consolidar", typeof(int));
+    
+            var pendienteParameter = pendiente != null ?
+                new ObjectParameter("Pendiente", pendiente) :
+                new ObjectParameter("Pendiente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>("CtasCtesD_TXPorTrs_AuxiliarEntityFramework", idClienteParameter, todoParameter, fechaLimiteParameter, fechaDesdeParameter, consolidarParameter, pendienteParameter);
         }
     }
 }

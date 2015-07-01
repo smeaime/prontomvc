@@ -28,7 +28,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> PuntoVenta { get; set; }
         public Nullable<int> IdCliente { get; set; }
         public Nullable<System.DateTime> FechaFactura { get; set; }
-        public Nullable<short> IdCondicionVenta { get; set; }
+        public Nullable<int> IdCondicionVenta { get; set; }
         public Nullable<int> IdVendedor { get; set; }
         public Nullable<byte> IdTransportista1 { get; set; }
         public Nullable<byte> IdTransportista2 { get; set; }
@@ -145,6 +145,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> NumeroOrdenCompraExterna { get; set; }
         public Nullable<int> IdTipoOperacion { get; set; }
         public string FueEnviadoCorreoConFacturaElectronica { get; set; }
+        public Nullable<int> IdClienteObservaciones { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Moneda Moneda { get; set; }
@@ -156,5 +157,11 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleFacturasOrdenesCompra> DetalleFacturasOrdenesCompras { get; set; }
         public virtual ICollection<DetalleFacturasProvincia> DetalleFacturasProvincias { get; set; }
         public virtual ICollection<DetalleFacturasRemito> DetalleFacturasRemitos { get; set; }
+        public virtual Condiciones_Compra Condiciones_Compra { get; set; }
+        public virtual Deposito Deposito { get; set; }
+        public virtual DescripcionIva DescripcionIva { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual ListasPrecio ListasPrecio { get; set; }
     }
 }
