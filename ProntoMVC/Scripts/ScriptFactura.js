@@ -1632,15 +1632,16 @@ function CalcularTotales() {
 
     mImporteTotal = mSubtotal + mImporteIva1 + mPercepcionIIBB1 + mPercepcionIIBB2 + mPercepcionIIBB3 + mPercepcionIVA
 
-    $("#Subtotal").val(addCommas(mSubtotal.toFixed(2)));
-    $("#RetencionIBrutos1").val(addCommas(mPercepcionIIBB1.toFixed(2)));
-    $("#RetencionIBrutos2").val(addCommas(mPercepcionIIBB2.toFixed(2)));
-    $("#RetencionIBrutos3").val(addCommas(mPercepcionIIBB3.toFixed(2)));
+    //$("#Subtotal").val(addCommas(mSubtotal.toFixed(2)));
+    $("#Subtotal").val((mSubtotal.toFixed(2)));
+    $("#RetencionIBrutos1").val((mPercepcionIIBB1.toFixed(2)));
+    $("#RetencionIBrutos2").val((mPercepcionIIBB2.toFixed(2)));
+    $("#RetencionIBrutos3").val((mPercepcionIIBB3.toFixed(2)));
     $("#PorcentajeIBrutos1").val(mPorcentajePercepcionIIBB1.toFixed(2));
     $("#PorcentajeIBrutos2").val(mPorcentajePercepcionIIBB2.toFixed(2));
     $("#PorcentajeIBrutos3").val(mPorcentajePercepcionIIBB3.toFixed(2));
-    $("#PercepcionIVA").val(addCommas(mPercepcionIVA.toFixed(2)));
-    $("#ImporteTotal").val(addCommas(mImporteTotal.toFixed(2)));
+    $("#PercepcionIVA").val((mPercepcionIVA.toFixed(2)));
+    $("#ImporteTotal").val((mImporteTotal.toFixed(2)));
 };
 
 function TraerCotizacion() {
