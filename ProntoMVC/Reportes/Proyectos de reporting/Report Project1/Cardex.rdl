@@ -2806,8 +2806,12 @@ Fields!IdTipoComprobante.Value=108,"Otros Ingresos"
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>f6ad1b47-2a9c-4ef3-8599-4c13c186a2b2</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -3002,6 +3006,10 @@ Order By [Titulo]</CommandText>
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
     <ReportParameter Name="IdArticulo">
       <DataType>Integer</DataType>
       <DefaultValue>
@@ -3019,16 +3027,16 @@ Order By [Titulo]</CommandText>
           <Value>=Dateserial(2011,1,1)</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Fecha Desde</Prompt>
+      <Prompt>Fecha desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="FechaHasta">
       <DataType>DateTime</DataType>
       <DefaultValue>
         <Values>
-          <Value>=Dateserial(2011,7,31)</Value>
+          <Value>=Dateserial(Year(Now),Month(Now),Day(Now))</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Fecha Hasta</Prompt>
+      <Prompt>Fecha hasta</Prompt>
     </ReportParameter>
     <ReportParameter Name="CodigoDesde">
       <DataType>String</DataType>
@@ -3037,7 +3045,7 @@ Order By [Titulo]</CommandText>
           <Value xml:space="preserve"> </Value>
         </Values>
       </DefaultValue>
-      <Prompt>Codigo Desde</Prompt>
+      <Prompt>Codigo desde</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="CodigoHasta">
@@ -3047,37 +3055,37 @@ Order By [Titulo]</CommandText>
           <Value xml:space="preserve"> </Value>
         </Values>
       </DefaultValue>
-      <Prompt>Codigo Hasta</Prompt>
+      <Prompt>Codigo hasta</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="IdObra1">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
           <Value>-1</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Id Obra1</Prompt>
+      <Prompt>IdObra1</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="IdDeposito1">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
           <Value>-1</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Id Deposito1</Prompt>
+      <Prompt>IdDeposito1</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="IdUbicacion1">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
           <Value>-1</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Id Ubicacion1</Prompt>
+      <Prompt>IdUbicacion1</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="MostrarCosto">
@@ -3087,7 +3095,7 @@ Order By [Titulo]</CommandText>
           <Value>NO</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Mostrar Costo</Prompt>
+      <Prompt>MostrarCosto</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="Detallado">
@@ -3104,10 +3112,10 @@ Order By [Titulo]</CommandText>
       <DataType>String</DataType>
       <DefaultValue>
         <Values>
-          <Value>SI</Value>
+          <Value xml:space="preserve"> </Value>
         </Values>
       </DefaultValue>
-      <Prompt>Registros Resumidos</Prompt>
+      <Prompt>RegistrosResumidos</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
     <ReportParameter Name="Descripcion">
