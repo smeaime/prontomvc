@@ -1666,11 +1666,30 @@ namespace ProntoMVC.Controllers
                 if (glbDebugFacturaElectronica) { 
                     Console.Write("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); 
                 }
-                
+
+                if (!mResul) {
+                    ErrHandler.WriteError("ActivarLicenciaSiNoExiste : " + glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic - Ultimo mensaje : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                }
+
                 mResul = FE.iniciar(WSAFIPFE.Factura.modoFiscal.Fiscal, mCuitEmpresa, glbPathPlantillas + "\\" + mArchivoAFIP + ".pfx", glbPathPlantillas + "\\FE_" + mCuitEmpresa + ".lic");
 
+                if (!mResul)
+                {
+                    ErrHandler.WriteError("iniciar : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg );
+                }
+
+
                 if (mResul) mResul = FE.f1ObtenerTicketAcceso();
-                if (glbDebugFacturaElectronica) { Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg); }
+                if (!mResul)
+                {
+                    ErrHandler.WriteError("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                }
+
+
+                if (glbDebugFacturaElectronica) { 
+                    Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+                
+                }
 
                 if (mResul)
                 {
@@ -1869,6 +1888,8 @@ namespace ProntoMVC.Controllers
                 }
                 else
                 {
+                    ErrHandler.WriteError("algo anduvo mal : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
+
                 }
                 FE = null;
             }
