@@ -327,19 +327,31 @@ namespace ProntoMVC.Controllers
 
             string s = "true";
 
+            var sb = new StringBuilder();
+            var objParams = new List<ObjectParameter>();
+
             // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
             if (f != null)
             {
-                var sb = new StringBuilder();
-                var objParams = new List<ObjectParameter>();
-                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>(sb, objParams);
+                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>(sb, objParams, true);
                 s = sb.ToString();
+
+                //s = s.Replace("it.", "");
+                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
+                //set.AsQueryable().Where(s, objParams[0].Value.ToString()).ToList();  // este where es de dynamic, no de EF
             }
 
-            // var filteredQuery = set.Where(x=>x.IdImputacion==1);
-            var filteredQuery = set.AsQueryable().Where(s).ToList();
 
-            
+
+            // var filteredQuery = set.Where(x=>x.IdImputacion==1);
+            // String.Format("{1
+            s = "(Comp.Contains(\"ND\"))";
+            s = s.Replace("@0", "\"" + objParams[0].Value.ToString() + "\"");
+            s = "true";
+            var filteredQuery = set.AsQueryable().Where(s).ToList();
+            //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
+
+
 
             // var sasdasd= f .FilterObjectSet( set);
 
