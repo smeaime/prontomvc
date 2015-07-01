@@ -1124,9 +1124,35 @@ $(function () {
                         { name: 'IdTipoComp', index: 'IdTipoComp', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdComprobante', index: 'IdComprobante', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cabeza', index: 'Cabeza', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Comp', index: 'Comp', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Fecha', index: 'Fecha', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'Comp', index: 'Comp', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn,eq'] } },
+
+                          {
+                              name: 'Fecha', index: 'Fecha', width: 80, align: 'center',
+                              sorttype: 'date', hidden: false, editable: false,
+                              formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                              search: true,
+                              searchrules: {
+                                  date: true
+                              },
+                              searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                  sopt: ['ge', 'le'],
+                                  dataInit: function (elem) {
+                                      $(elem).datepicker({
+                                          dateFormat: 'dd/mm/yy',
+                                          changeYear: true,
+                                          changeMonth: true,
+                                          showButtonPanel: true,
+                                          onSelect: function () {
+                                              $(this).keydown();
+                                          }
+                                      });
+                                  }
+                              }
+
+
+                          },
+
                         { name: 'Fechavt', index: 'Fechavt', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Monorigen', index: 'Monorigen', align: 'left', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Imporig', index: 'Imporig', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
@@ -1145,6 +1171,17 @@ $(function () {
     
 
 
+        
+        ///////////////////////////////
+        ///////////////////////////////
+
+     pager: $('#ListaDragPager'),
+    rowNum: 15,
+    rowList: [10, 20, 50],
+    sortname: 'Fecha',//,NumeroOrdenCompra',
+    sortorder: "desc",
+    viewrecords: true,
+    emptyrecords: 'No hay registros para mostrar', //,
 
 
     ///////////////////////////////
@@ -1159,9 +1196,9 @@ $(function () {
     userDataOnFooter: true
     // ,caption: '<b>PEDIDOS</b>'
 
-  , gridview: true
-  , multiboxonly: true
-  , multipleSearch: true
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
 
 
 
