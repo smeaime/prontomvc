@@ -345,10 +345,13 @@ namespace ProntoMVC.Controllers
 
             // var filteredQuery = set.Where(x=>x.IdImputacion==1);
             // String.Format("{1
-            s = "(Comp.Contains(\"ND\"))";
-            s = s.Replace("@0", "\"" + objParams[0].Value.ToString() + "\"");
-            s = "true";
-            var filteredQuery = set.AsQueryable().Where(s).ToList();
+            //s = s.Replace("@0", "\"" + objParams[0].Value.ToString() + "\"");
+            //s = "true";
+            //s = "(Comp=\"ND\")";
+            // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
+           //  http://stackoverflow.com/questions/27690738/object-reference-not-set-to-an-instance-of-an-object-in-linq-when-using-contains
+             var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x=>x.Value).ToArray());
+            var qqqq = filteredQuery.ToList();
             //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
 
 
@@ -368,7 +371,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                totalRecords = filteredQuery.Count();
+                totalRecords = qqqq.Count();
             }
             catch (Exception)
             {
@@ -391,7 +394,7 @@ namespace ProntoMVC.Controllers
             // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
 
 
-            var pagedQuery = filteredQuery;
+            var pagedQuery = qqqq;
             //.Skip("it." + sidx + " " + sord, "@skip",
             //        new ObjectParameter("skip", (page - 1) * rows))
             // .Top("@limit", new ObjectParameter("limit", rows));
@@ -427,7 +430,7 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in filteredQuery
+                rows = (from a in qqqq
                         select new jqGridRowJson
                         {
                             id = a.IdCtaCte.ToString(),
