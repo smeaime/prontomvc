@@ -17,6 +17,7 @@ namespace ProntoMVC.Data.Models
         public Deposito()
         {
             this.Ubicaciones = new HashSet<Ubicacion>();
+            this.Facturas = new HashSet<Factura>();
         }
     
         public int IdDeposito { get; set; }
@@ -25,5 +26,6 @@ namespace ProntoMVC.Data.Models
         public Nullable<int> IdObra { get; set; }
     
         public virtual ICollection<Ubicacion> Ubicaciones { get; set; }
+        public virtual ICollection<Factura> Facturas { get; set; }
     }
 }

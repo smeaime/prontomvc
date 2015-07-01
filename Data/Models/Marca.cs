@@ -14,8 +14,15 @@ namespace ProntoMVC.Data.Models
     
     public partial class Marca
     {
+        public Marca()
+        {
+            this.Articulos = new HashSet<Articulo>();
+        }
+    
         public int IdMarca { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Codigo { get; set; }
+    
+        public virtual ICollection<Articulo> Articulos { get; set; }
     }
 }

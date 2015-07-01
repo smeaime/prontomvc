@@ -611,9 +611,10 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Remito>
-                                ("DetalleRemito", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                                ("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleRemito,DetalleOrdenesCompra,OrdenesCompra"
+                                , sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
-
+            
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

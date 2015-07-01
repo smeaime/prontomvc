@@ -1,5 +1,6 @@
 
 
+
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -1274,5 +1275,35 @@ go
 ALTER TABLE   williamsdestinos ADD
 	 PuntoVenta int null
 GO
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+alter table CartasDePorte add
+		 Acopio6 int null REFERENCES CartasPorteAcopios(IdAcopio)
+go
+
+
+--drop table CartasDePorteDetalle
+create table CartasDePorteDetalle (
+		IdCartaDePorteDetalle int IDENTITY (1, 1) PRIMARY KEY,
+		IdCartaDePorte int REFERENCES CartasDePorte(IdCartaDePorte),
+		Campo varchar(40),
+		Valor numeric(18,2) NULL,		
+		
+		constraint U_Unicidad_CartasDePorteDetalle unique NONCLUSTERED (IdCartaDePorte,Campo)
+		)
+go
+
+
+--select * from CartasDePorteDetalle
 
 

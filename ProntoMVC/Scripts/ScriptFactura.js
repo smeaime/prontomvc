@@ -423,19 +423,49 @@
                         //sorttype: 'integer',
                         width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] }
                     },
-                    { name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+
+                    {
+                        name: 'FechaOrdenCompra', index: 'FechaOrdenCompra', width: 80, align: 'center',
+                        sorttype: 'date', hidden: false, editable: false,
+                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true,
+                        searchrules: {
+                            date: true
+                        },
+                        searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                            sopt: ['ge', 'le'],
+                            dataInit: function (elem) {
+                                $(elem).datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    changeYear: true,
+                                    changeMonth: true,
+                                    showButtonPanel: true,
+                                    onSelect: function () {
+                                        $(this).keydown();
+                                    }
+                                });
+                            }
+                        }
+
+
+                    },
+
+
+
+
                     { name: 'Producido', index: 'Producido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'SeleccionadaParaFacturacion', index: 'SeleccionadaParaFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'Obra', index: 'Obra', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Obra.Descripcion', index: 'Obra.Descripcion', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Codigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.RazonSocial', index: 'Cliente.RazonSocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Cuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, hidden: false },
                     { name: 'Remitos', index: 'Remitos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'CondicionVenta', index: 'CondicionVenta', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Condiciones_Compra.Descripcion', index: 'Condiciones_Compra.Descripcion', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'Items', index: 'Items', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'FacturarA', index: 'FacturarA', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
@@ -447,7 +477,7 @@
                     { name: 'GrupoFacturacion', index: 'GrupoFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'TipoOC', index: 'TipoOC', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'MayorFechaEntrega', index: 'MayorFechaEntrega', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'ListaDePrecio', index: 'ListaDePrecio', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ListasPrecio.Descripcion', index: 'ListaDePrecio.Descripcion', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'PorcentajeBonificacion', index: 'PorcentajeBonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
@@ -599,9 +629,9 @@
 
                     },
                     { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Codigo', index: 'Cliente.Codigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.RazonSocial', index: 'Cliente.RazonSocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Cuit', index: 'Cliente.Cuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'ProveedorCodigo', index: 'ProveedorCodigo', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'ProveedorNombre', index: 'ProveedorNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
@@ -611,10 +641,10 @@
                     { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'Materiales', index: 'Materiales', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'TipoRemito', index: 'TipoRemito', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'CondicionVenta', index: 'CondicionVenta', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'Transportista', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'ListaDePrecio', index: 'ListaDePrecio', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'Obra', index: 'Obra', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Condiciones_Compra.Descripcion', index: 'Condiciones_Compra.Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Transportista.RazonSocial', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ListasPrecio.Descripcion', index: 'ListasPrecio.Descripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Obra.Descripcion', index: 'Obra.Descripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'TotalBultos', index: 'TotalBultos', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'ValorDeclarado', index: 'ValorDeclarado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -757,7 +787,7 @@
             name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
             search: true, searchoptions: {
                 clearSearch: true, searchOperators: true
-                , sopt: [ 'cn']
+                , sopt: ['cn']
             }
         },
         {
@@ -767,7 +797,7 @@
             , search: true, searchoptions: {
                 clearSearch: true,
                 searchOperators: true
-                , sopt: [ 'cn']
+                , sopt: ['cn']
                 //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
             }
         },
@@ -780,7 +810,7 @@
         },
 
 
-        { name: 'Subrubro', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+        { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
         { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
 
         ],
