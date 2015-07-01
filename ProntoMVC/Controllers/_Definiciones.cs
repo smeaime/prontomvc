@@ -92,6 +92,9 @@ namespace ProntoMVC.Controllers
             "(it.{0} NOT LIKE ('%'+@p{1}+'%'))" //" nc" - does not contain
         };
 
+
+
+        // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
         private static readonly string[] FormatMapping_ParaLinqDynamic = {
             "({0} = @{1})",                 // "eq" - equal
             "({0} <> @{1})",                // "ne" - not equal

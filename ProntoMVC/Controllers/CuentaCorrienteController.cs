@@ -349,7 +349,7 @@ namespace ProntoMVC.Controllers
             //s = "true";
             //s = "(Comp=\"ND\")";
             // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
-           //  http://stackoverflow.com/questions/27690738/object-reference-not-set-to-an-instance-of-an-object-in-linq-when-using-contains
+        // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
              var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x=>x.Value).ToArray());
             var qqqq = filteredQuery.ToList();
             //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
