@@ -2882,8 +2882,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>33db6a29-7da8-405e-b58e-e9d82269e0e9</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -2953,7 +2957,7 @@
         <DataSourceName>DataSource1</DataSourceName>
         <CommandText>Select -1 as [IdObra], '_Todas' as [Titulo]
 Union all
-Select IdObra as [IdObra], NumeroObra+' - '+Descripcion as [Titulo]
+Select IdObra as [IdObra], NumeroObra+' - '+Descripcion COLLATE SQL_Latin1_General_CP1_CI_AS as [Titulo]
 From Obras
 Where IsNull(Activa,'')&lt;&gt;'NO' and Jerarquia is not null
 Order By [Titulo]</CommandText>
@@ -3167,6 +3171,10 @@ Select 3 as [IdAux], 'Remitos enviados' as [Titulo]
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
       <Prompt>Desde</Prompt>
@@ -3214,7 +3222,7 @@ Select 3 as [IdAux], 'Remitos enviados' as [Titulo]
           <Value>-1</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Id Obra Asignada Usuario</Prompt>
+      <Prompt>IdObraAsignadaUsuario</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
   </ReportParameters>

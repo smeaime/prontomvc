@@ -63,6 +63,10 @@
       <FullPath>Comprobante Proveedores.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
+      <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Detalle Comprobante Proveedores.rdl</Name>
       <FullPath>Detalle Comprobante Proveedores.rdl</FullPath>
     </ProjectItem>
@@ -179,8 +183,16 @@
       <FullPath>Orden Pago.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Pedidos pendientes de recibir.rdl</Name>
+      <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Recibo.rdl</Name>
       <FullPath>Recibo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Requerimientos pendientes de asignacion.rdl</Name>
+      <FullPath>Requerimientos pendientes de asignacion.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Resumen Cuenta Corriente Acreedores.rdl</Name>
@@ -203,8 +215,16 @@
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
-      <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
+      <Name>Vales emitidos no retirados.rdl</Name>
+      <FullPath>Vales emitidos no retirados.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Cardex.rdl</Name>
+      <FullPath>Cardex.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Transporte de mercaderia.rdl</Name>
+      <FullPath>Transporte de mercaderia.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
