@@ -383,6 +383,43 @@ namespace ProntoMVC.Reportes
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
 
+            else if (reportName == "Requerimientos pendientes de asignacion")
+            {
+                ReportParameter[] yourParams = new ReportParameter[2];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                yourParams[1] = new ReportParameter("Depositos", "-1", false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Pedidos pendientes de recibir")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);  
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Vales emitidos no retirados")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Cardex")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Transporte de mercaderia")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+
             else
             {
                 var keys = this.Request.QueryString.AllKeys;

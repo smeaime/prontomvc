@@ -1227,8 +1227,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>69d87686-89d9-4c53-9b0f-b9f1f55a3744</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1364,13 +1368,12 @@ Select 1 as [IdAux], 'Solo con entregas parciales' as [Titulo]
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
     <ReportParameter Name="Parciales">
       <DataType>Integer</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>-1</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>Tipo de seleccion : </Prompt>
       <ValidValues>
         <DataSetReference>
