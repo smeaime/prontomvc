@@ -99,12 +99,12 @@ namespace ProntoMVC.Controllers
             "({0} <= @{1})",                // "le" - less than or equal to
             "({0} > @{1})",                 // "gt" - greater than
             "({0} >= @{1})",                // "ge" - greater than or equal to
-            "({0}.StartsWith(@{1}))",        // "bw" - begins with
-            "(!{0}.StartsWith(@{1}))",    // "bn" - does not begin with
-            "({0}.EndsWith(@{1}))",        // "ew" - ends with
-            "(!{0}.EndsWith(@{1}))",    // "en" - does not end with
-            "({0}.Contains(@{1}))",    // "cn" - contains
-            "(!{0}.Contains(@{1}))" //" nc" - does not contain
+            "({0}!= NULL  AND  {0}.StartsWith(@{1}))",        // "bw" - begins with
+            "({0}!= NULL  AND !{0}.StartsWith(@{1}))",    // "bn" - does not begin with
+            "({0}!= NULL  AND {0}.EndsWith(@{1}))",        // "ew" - ends with
+            "({0}!= NULL  AND !{0}.EndsWith(@{1}))",    // "en" - does not end with
+            "({0}!= NULL  AND {0}.Contains(@{1}))",    // "cn" - contains
+            "({0}!= NULL  AND !{0}.Contains(@{1}))" //" nc" - does not contain
         };
 
 
