@@ -1207,6 +1207,7 @@ $(function () {
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
          { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
          {
+
              //sopt: ["cn"]
              //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
              width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
