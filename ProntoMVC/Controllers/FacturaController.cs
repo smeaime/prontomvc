@@ -455,7 +455,12 @@ namespace ProntoMVC.Controllers
                                 if (mWebService.Length > 0)
                                 {
                                     LogComprobantesElectronico log = new LogComprobantesElectronico();
-                                    Logica_FacturaElectronica(ref Factura, ref log);
+                                    string sErrores = "";
+                                    if  (!Logica_FacturaElectronica(ref Factura, ref log, ref sErrores))
+                                    {
+                                        throw new Exception(sErrores);
+                                    }
+                                        
                                     db.LogComprobantesElectronicos.Add(log);
                                 }
                                 PuntoVenta.ProximoNumero = Factura.NumeroFactura + 1;
@@ -1545,7 +1550,7 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public void Logica_FacturaElectronica(ref ProntoMVC.Data.Models.Factura o,ref ProntoMVC.Data.Models.LogComprobantesElectronico log)
+        public bool Logica_FacturaElectronica(ref ProntoMVC.Data.Models.Factura o,ref ProntoMVC.Data.Models.LogComprobantesElectronico log, ref string sErrores)
         {
             WSAFIPFE.Factura FE;
 
@@ -1595,7 +1600,7 @@ namespace ProntoMVC.Controllers
             decimal mOtrasPercepciones2 = 0;
             decimal mOtrasPercepciones3 = 0;
 
-            bool mResul;
+            bool mResul=false;
             bool glbDebugFacturaElectronica = false;
 
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
@@ -1690,6 +1695,7 @@ namespace ProntoMVC.Controllers
                     Console.Write("f1ObtenerTicketAcceso : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
                 
                 }
+                                
 
                 if (mResul)
                 {
@@ -1891,9 +1897,13 @@ namespace ProntoMVC.Controllers
                     ErrHandler.WriteError("algo anduvo mal : " + FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg);
 
                 }
+
+                sErrores = FE.UltimoMensajeError + " - " + FE.F1RespuestaDetalleObservacionMsg;
                 FE = null;
             }
 
+            
+            return mResul;
         }
 
         public void Probar(ProntoMVC.Data.Models.Factura o)
