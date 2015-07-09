@@ -18458,6 +18458,20 @@ Public Class barras
 
 
 
+    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
+        Dim listaf = New Generic.List(Of Integer)
+
+        For idfac = desde To hasta
+            listaf.Add(idfac)
+        Next
+
+        Return EnviarFacturaElectronicaEMail(listaf, cliente, SC, bVistaPrevia, sEmail)
+
+    End Function
+
+
+
+
     Shared Function EnviarFacturaElectronicaEMail(ByVal Facturas As Generic.IList(Of Integer), cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
 
 
@@ -18506,19 +18520,31 @@ Public Class barras
                 'destinatario = cli.Email
                 destinatario = cli.EmailFacturacionElectronica
 
-
-
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
 
+
             ErrHandler.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
 
+            Try
 
-            If destinatario.ToString = "" Then
-                sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
-                bMarcar = False
-            End If
+                If destinatario.ToString = "" Then
+
+                    If cli Is Nothing Then
+                        sErr += "El cliente no tiene casilla de correo " + Environment.NewLine
+                    Else
+                        sErr += "El cliente " & NombreCliente(SC, idcli) & " no tiene casilla de correo " + Environment.NewLine
+                        'cli.RazonSocial  no anda...
+                    End If
+
+                    bMarcar = False
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+                ErrHandler.WriteError("cli está en null????")
+            End Try
 
 
 
@@ -18634,18 +18660,6 @@ Public Class barras
             Return False
         End Try
 
-
-    End Function
-
-
-    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
-        Dim listaf = New Generic.List(Of Integer)
-
-        For idfac = desde To hasta
-            listaf.Add(idfac)
-        Next
-
-        Return EnviarFacturaElectronicaEMail(listaf, cliente, SC, bVistaPrevia, sEmail)
 
     End Function
 
