@@ -373,11 +373,11 @@
           <AssociatedConnUserName>sa</AssociatedConnUserName>
           <FullPath>wCartasDePorte_TX_FacturacionAutomatica.sql</FullPath>
         </FileNode>
-        <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:Mariano-PC\MSSQLSERVER2:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>Mariano-PC\MSSQLSERVER2</AssociatedConnSrvName>
+        <FileNode Name="wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>serversql3</AssociatedConnSrvName>
           <AssociatedConnUserName>sa</AssociatedConnUserName>
-          <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia y wCartasDePorte_TX_FacturacionAutomatica original.sql</FullPath>
+          <FullPath>wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia.sql</FullPath>
         </FileNode>
         <FileNode Name="wCartasDePorte_TX_InformesCorregido.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:serversql3\Testing:False:sa</AssociatedConnectionMoniker>
