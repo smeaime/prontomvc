@@ -156,7 +156,6 @@ FechaArribo,        FechaDescarga  ,      CLIAUX.razonsocial as FacturarselaA,  
 			      CLICOR.Nombre as    [Corredor ],       CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc    ,   
 				        		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino   , 0 as IdCartaOriginal,CDP.AgregaItemDeGastosAdministrativos,cdp.exporta
   from CartasDePorte CDP    
-  inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion=@Sesion 
 
   LEFT OUTER JOIN Clientes CLIAUX ON CDP.IdClienteAuxiliar = CLIAUX.IdCliente     
   LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     
@@ -171,7 +170,10 @@ FechaArribo,        FechaDescarga  ,      CLIAUX.razonsocial as FacturarselaA,  
    LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     
    LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
 --INNER JOIN  #temptab on  CDP.IdCartaDePorte=#temptab.IdCarta   
+
+  inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion=@Sesion 
 inner join CartasDePorteReglasDeFacturacion REG on CLIAUX.IdCliente=REG.IdCliente and REG.puntoVenta=@PuntoVenta
+
  where REG.SeLeFacturaCartaPorteComoClienteAuxiliar='SI'  
  
    and isnull(CDP.IdClienteAFacturarle,-1) <= 0  and isnull(IdFacturaImputada,0)<=0            
@@ -189,11 +191,26 @@ union ALL
 SELECT DISTINCT 0 as ColumnaTilde    ,IdCartaDePorte, CDP.IdArticulo,    NumeroCartaDePorte, 
 SubNumeroVagon  ,CDP.SubnumeroDeFacturacion , FechaArribo,        FechaDescarga  ,      CLIENT.razonsocial as FacturarselaA,  CLIENT.idcliente as IdFacturarselaA    	  ,isnull(CLIENT.Confirmado,'NO') as Confirmado,           CLIENT.IdCodigoIVA    		  ,CLIENT.CUIT,           '' as ClienteSeparado ,  		 
 0.0  as TarifaFacturada       ,Articulos.Descripcion as  Producto,    NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,   CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,                CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,      CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],       CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc    ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino , 0 as IdCartaOriginal,CDP.AgregaItemDeGastosAdministrativos    ,cdp.exporta
-from CartasDePorte CDP    LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente     LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIENT.idListaPrecios = LPD.idListaPrecios    LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente     LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente     LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor     LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)     LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo     LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista     LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer     LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
+from CartasDePorte CDP    
+LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente     
+LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIENT.idListaPrecios = LPD.idListaPrecios    
+LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente     
+LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente     
+LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     
+LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor     
+LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)     
+LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo     
+LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista     
+LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer     
+LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     
+LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
+
 inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion=@Sesion 
+inner join CartasDePorteReglasDeFacturacion REG on CLIENT.IdCliente=REG.IdCliente and REG.puntoVenta=@PuntoVenta
+ 
 
 --INNER JOIN  #temptab on  CDP.IdCartaDePorte=#temptab.IdCarta    
-where CLIENT.SeLeFacturaCartaPorteComoDestinatario='SI' and isnull(CDP.Exporta,'NO')='NO'
+where REG.SeLeFacturaCartaPorteComoDestinatario='SI' and isnull(CDP.Exporta,'NO')='NO'
  and isnull(CDP.IdClienteAFacturarle,-1) <= 0  and isnull(IdFacturaImputada,0)<=0            
  and cdp.puntoVenta=@PuntoVenta
 
@@ -210,9 +227,10 @@ SELECT DISTINCT 0 as ColumnaTilde    ,IdCartaDePorte, CDP.IdArticulo,    NumeroC
 SubNumeroVagon  ,CDP.SubnumeroDeFacturacion , FechaArribo,        FechaDescarga  ,      CLIENT.razonsocial as FacturarselaA,  CLIENT.idcliente as IdFacturarselaA    	  ,isnull(CLIENT.Confirmado,'NO') as Confirmado,           CLIENT.IdCodigoIVA    		  ,CLIENT.CUIT,           '' as ClienteSeparado ,  		 
 0.0  as TarifaFacturada       ,Articulos.Descripcion as  Producto,    NetoFinal  as  KgNetos , Corredor as IdCorredor, Vendedor as IdTitular,   CDP.CuentaOrden1 as IdIntermediario, CDP.CuentaOrden2 as IdRComercial, CDP.Entregador as IdDestinatario,                CLIVEN.Razonsocial as   Titular  ,        CLICO1.Razonsocial as   Intermediario  ,      CLICO2.Razonsocial as   [R. Comercial]  ,        CLICOR.Nombre as    [Corredor ],       CLIENT.Razonsocial  as  [Destinatario],          LOCDES.Descripcion   as  DestinoDesc    ,         		 LOCORI.Nombre as    [Procedcia.] ,            CDP.Destino as IdDestino , 0 as IdCartaOriginal,CDP.AgregaItemDeGastosAdministrativos,cdp.exporta
     from CartasDePorte CDP    LEFT OUTER JOIN Clientes CLIENT ON CDP.Entregador = CLIENT.IdCliente     LEFT OUTER JOIN ListasPreciosDetalle LPD ON CLIENT.idListaPrecios = LPD.idListaPrecios    LEFT OUTER JOIN Clientes CLICO1 ON CDP.CuentaOrden1 = CLICO1.IdCliente     LEFT OUTER JOIN Clientes CLIVEN ON CDP.Vendedor = CLIVEN.IdCliente     LEFT OUTER JOIN Clientes CLICO2 ON CDP.CuentaOrden2 = CLICO2.IdCliente     LEFT OUTER JOIN Vendedores CLICOR ON CDP.Corredor = CLICOR.IdVendedor     LEFT OUTER JOIN Clientes CLICORCLI ON CLICORCLI.idcliente  = (select top 1 idcliente from clientes c1 where c1.RazonSocial = CLICOR.Nombre)     LEFT OUTER JOIN Articulos ON CDP.IdArticulo = Articulos.IdArticulo     LEFT OUTER JOIN Transportistas TRANS ON CDP.IdTransportista = TRANS.IdTransportista     LEFT OUTER JOIN Choferes CHOF ON CDP.IdChofer = CHOF.IdChofer     LEFT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad     LEFT OUTER JOIN WilliamsDestinos LOCDES ON CDP.Destino = LOCDES.IdWilliamsDestino     
-	inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion=@Sesion 
 
+inner join wGrillaPersistencia  on CDP.IdCartaDePorte=wGrillaPersistencia.idrenglon and wGrillaPersistencia.Sesion=@Sesion 
 inner join CartasDePorteReglasDeFacturacion REG on CLIENT.IdCliente=REG.IdCliente and REG.puntoVenta=@PuntoVenta
+
  where REG.SeLeFacturaCartaPorteComoDestinatarioExportador='SI' and CDP.Exporta='SI'
 
 	and isnull(CDP.IdClienteAFacturarle,-1) <= 0  and isnull(IdFacturaImputada,0)<=0            
@@ -318,9 +336,9 @@ go
 
 
 
-[wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia] 1,'sss'
+--[wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia] 1,'sss'
 
-
+wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistencia 2,'bevysgkcf5x21vjt3wkwex5c'
 
 
 
