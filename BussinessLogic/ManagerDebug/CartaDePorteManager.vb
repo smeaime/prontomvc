@@ -7324,13 +7324,17 @@ Public Class CartaDePorteManager
             'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14488
             'En los campos CEE y CTG controlar que tengan 14 y 8 dígitos, respectivamente.
             'Si no se cumple, avisar al usuario con una advertencia, pero dejar grabar.
-            If .CEE.Length <> 14 Then
-                sWarnings &= "El CEE no tiene 14 dígitos" & vbCrLf
-            End If
-            If .CTG.ToString().Length <> 8 Then
-                sWarnings &= "El CTG no tiene 8 dígitos" & vbCrLf
-            End If
+            If iisNull(.SubnumeroVagon, 0) = 0 Then
 
+                If Val(.CEE) > 0 And .CEE.Length <> 14 Then
+                    sWarnings &= "El CEE no tiene 14 dígitos" & vbCrLf
+                End If
+
+                If .CTG.ToString().Length <> 8 Then
+                    sWarnings &= "El CTG no tiene 8 dígitos" & vbCrLf
+                End If
+
+            End If
 
 
             If False Then
