@@ -36,6 +36,9 @@
                         </button>
                     </div>
                 }
+                
+                <a href="@Url.Content("~")Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=Descripcion&sord=asc&page=1&rows=222&_search=false&filters=">Excel2</a>
+                
             </div>
         </div>
         <div class="span1">
@@ -174,6 +177,9 @@
         pageLayout.hide('south');
     });
 
+
+
+
     function exportExcel($id) {
         var keys = [], ii = 0, rows = "";
         var ids = $id.getDataIDs();  // Get All IDs
@@ -196,6 +202,9 @@
         OpenWindow.document.write(form);
         OpenWindow.document.close();
     }
+
+
+
 
     function gridcsvexport(id) {
         $('#' + id).jqGrid('navButtonAdd', '#' + id + '_pager', {
