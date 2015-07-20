@@ -5,9 +5,11 @@ using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
+
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -291,7 +293,6 @@ namespace ProntoMVC.Controllers
                     (string sidx, string sord, int page, int rows, bool _search, string filters, int? IdCliente)
         {
 
-            string campo = String.Empty;
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -315,90 +316,13 @@ namespace ProntoMVC.Controllers
 
             int totalRecords = 0;
 
-
-
-            //var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
             var set = db.CtasCtesD_TXPorTrs_AuxiliarEntityFramework(IdCliente, 1, null, null, null, null);
 
-
-
-            var serializer = new JavaScriptSerializer();
-            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
-
-            string s = "true";
-
-            var sb = new StringBuilder();
-            var objParams = new List<ObjectParameter>();
-
-            // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
-            if (f != null)
-            {
-                f.CrearFiltro<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>(sb, objParams, true);
-                s = sb.ToString();
-
-                //s = s.Replace("it.", "");
-                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
-                //set.AsQueryable().Where(s, objParams[0].Value.ToString()).ToList();  // este where es de dynamic, no de EF
-            }
+            var pagedQuery = Filters.FiltroGenerico_UsandoStore<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result1>
+                              (sidx, sord, page, rows, _search, filters, db, ref totalRecords , set  );
 
 
 
-            // var filteredQuery = set.Where(x=>x.IdImputacion==1);
-            // String.Format("{1
-            //s = s.Replace("@0", "\"" + objParams[0].Value.ToString() + "\"");
-            //s = "true";
-            //s = "(Comp=\"ND\")";
-            // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
-        // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
-             var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x=>x.Value).ToArray());
-            var qqqq = filteredQuery.ToList();
-            //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
-
-
-
-            // var sasdasd= f .FilterObjectSet( set);
-
-
-            //ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result> filteredQuery =
-            //    (f == null ? (ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set :
-            //    f.FilterObjectSet((ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set));
-
-            //filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
-
-            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
-
-            // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
-
-            try
-            {
-                totalRecords = qqqq.Count();
-            }
-            catch (Exception)
-            {
-
-                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
-                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
-                throw;
-            }
-
-
-
-
-
-
-
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
-
-
-            var pagedQuery = qqqq;
-            //.Skip("it." + sidx + " " + sord, "@skip",
-            //        new ObjectParameter("skip", (page - 1) * rows))
-            // .Top("@limit", new ObjectParameter("limit", rows));
-            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
 
 
             ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
@@ -413,6 +337,8 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string campo = String.Empty;
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var pendiente = "S";
@@ -430,7 +356,7 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in qqqq
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdCtaCte.ToString(),
