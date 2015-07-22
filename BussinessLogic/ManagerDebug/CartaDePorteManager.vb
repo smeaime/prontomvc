@@ -1,4 +1,6 @@
-﻿
+﻿'Option Strict On
+Option Explicit On
+
 Option Infer On
 
 Imports System
@@ -18502,7 +18504,7 @@ Public Class barras
 
 
 
-            Dim destinatario As String
+            Dim destinatario As String = ""
 
             Dim idcli As Integer
             Dim cli As ClienteNuevo
@@ -18522,7 +18524,7 @@ Public Class barras
                 cli = ClienteManager.GetItem(SC, idcli)
 
                 'destinatario = cli.Email
-                destinatario = cli.EmailFacturacionElectronica
+                destinatario = If(cli.EmailFacturacionElectronica, "")
 
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
@@ -18533,10 +18535,11 @@ Public Class barras
 
             Try
 
-                If destinatario.ToString = "" Then
+                If destinatario = "" Then
 
                     If cli Is Nothing Then
                         sErr += "El cliente no tiene casilla de correo " + Environment.NewLine
+
                     Else
                         sErr += "El cliente " & NombreCliente(SC, idcli) & " no tiene casilla de correo " + Environment.NewLine
                         'cli.RazonSocial  no anda...
@@ -18547,9 +18550,12 @@ Public Class barras
 
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
-                ErrHandler.WriteError("cli está en null????")
+                ErrHandler.WriteError("cli está en null???? -NO. el problema es que destinatario ( que es un string) puede ser nothing " & sErr)
             End Try
 
+            If Not bVistaPrevia And destinatario = "" Then
+                Continue For
+            End If
 
 
             If bVistaPrevia Then
