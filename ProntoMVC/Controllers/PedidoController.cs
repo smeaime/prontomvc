@@ -1674,6 +1674,164 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        public virtual ActionResult Pedidos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Pedido>
+                                ("Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                        //.Include(x => x.Moneda)
+                        //.Include(x => x.Proveedor)
+                        //.Include(x => x.DetallePedidos
+                        //            .Select(y => y.DetalleRequerimiento
+                        //                )
+                        //        )
+                        //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                        //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            var Entidad1 = (from a in Entidad.Where(campo) select new { IdPedido = a.IdPedido });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+
+
+                        //   .Include(x => x.Proveedor)
+                        //  .Include("DetallePedidos.IdDetalleRequerimiento") // funciona tambien
+                        //.Include(x => x.DetallePedidos.Select(y => y. y.IdDetalleRequerimiento))
+                        // .Include(x => x.Aprobo)
+                        select
+
+                        a
+                //                        new
+                //                        {
+                //                            IdPedido = a.IdPedido,
+
+//                            Numero = a.NumeroPedido,
+                //                            fecha
+                //                            fechasalida
+                //                            cumpli
+                //                            rms
+                //                            obras
+                //                            proveedor
+                //                            neto gravado
+                //                            bonif
+                //                            total iva
+
+
+//// IsNull(Pedidos.TotalPedido,0)-IsNull(Pedidos.TotalIva1,0)+IsNull(Pedidos.Bonificacion,0)-  
+                //// IsNull(Pedidos.ImpuestosInternos,0)-IsNull(Pedidos.OtrosConceptos1,0)-IsNull(Pedidos.OtrosConceptos2,0)-  
+                //// IsNull(Pedidos.OtrosConceptos3,0)-IsNull(Pedidos.OtrosConceptos4,0)-IsNull(Pedidos.OtrosConceptos5,0)as [Neto gravado],  
+                //// Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
+
+//// Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
+
+//// IsNull(Pedidos.ImpuestosInternos,0)+IsNull(Pedidos.OtrosConceptos1,0)+IsNull(Pedidos.OtrosConceptos2,0)+  
+                //// IsNull(Pedidos.OtrosConceptos3,0)+IsNull(Pedidos.OtrosConceptos4,0)+IsNull(Pedidos.OtrosConceptos5,0)as [Otros Conceptos],  
+                //// TotalPedido as [Total pedido],  
+
+
+
+
+
+//                        }
+
+
+                        ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdPedido.ToString(),
+                            cell = new string[] { 
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
+                                "<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                a.IdPedido.ToString(), 
+                                a.NumeroPedido.NullSafeToString(), 
+                                a.SubNumero.NullSafeToString(), 
+                                a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                //GetCustomDateFormat(a.FechaPedido).NullSafeToString(), 
+                                a.FechaSalida.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Cumplido.NullSafeToString(), 
+
+
+
+                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : x.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString() ).Distinct()),
+                                string.Join(" ",  a.DetallePedidos.Select(x=>(x.DetalleRequerimiento==null) ? "" : x.DetalleRequerimiento.Requerimientos.Obra.NumeroObra).Distinct()),
+                                //(i.DetalleRequerimiento == null ? "" : i.DetalleRequerimiento.Requerimientos.NumeroRequerimiento.NullSafeToString()));
+                                //"", //a.detallepedidos.select (obras,
+                                
+                                
+                                
+                                a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                (a.TotalPedido- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                a.Bonificacion.NullSafeToString(), 
+                                a.TotalIva1.NullSafeToString(), 
+                                a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                a.DetallePedidos.Count().NullSafeToString(),  
+                                a.IdPedido.NullSafeToString(), 
+                                a.NumeroComparativa.NullSafeToString(),  
+                                a.IdTipoCompraRM.NullSafeToString(), 
+                                a.Observaciones.NullSafeToString(),   
+                                a.DetalleCondicionCompra.NullSafeToString(),   
+                                a.PedidoExterior.NullSafeToString(),  
+                                a.IdPedidoAbierto.NullSafeToString(), 
+                                a.NumeroLicitacion .NullSafeToString(), 
+                                a.Impresa.NullSafeToString(), 
+                                a.UsuarioAnulacion.NullSafeToString(), 
+                                a.FechaAnulacion.NullSafeToString(),  
+                                a.MotivoAnulacion.NullSafeToString(),  
+                                a.ImpuestosInternos.NullSafeToString(), 
+                                "", // #Auxiliar1.Equipos , 
+                                a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() ,
+                                a.IdComprador.NullSafeToString(),
+                                a.IdProveedor.NullSafeToString(),
+                                a.ConfirmadoPorWeb_1.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
         public virtual ActionResult Pedidos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
