@@ -1791,6 +1791,9 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+
         public virtual ActionResult Pedidos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
