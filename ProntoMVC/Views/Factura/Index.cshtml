@@ -29,7 +29,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "Factura")',
+            url: '@Url.Action("TT_DynamicGridData", "Factura")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -43,7 +43,7 @@
                         { name: 'IdFactura', index: 'IdFactura', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'NumeroFactura', index: 'NumeroFactura', align: 'right', width: 80, editable: false, hidden: false },
+                        { name: 'NumeroFactura', index: 'NumeroFactura', align: 'right', width: 80, editable: false, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'FechaFactura', index: 'FechaFactura', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Sucursal', index: 'Sucursal', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
@@ -90,24 +90,101 @@
                     lastSelectedId = id;
                 }
             },
+
+
+
+
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 20000],
-            sortname: 'FechaFactura,NumeroFactura',
-            sortorder: 'desc',
+            rowList: [10, 20, 50],
+            sortname: 'FechaFactura', // 'FechaFactura,NumeroFactura',
+            sortorder: "desc",
             viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            height: '100%',
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            footerrow: false,
-            userDataOnFooter: true,
-            caption: '<b>FACTURAS</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>FACTURAS</b>'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
+
+
         });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-        //jQuery("#Lista").jqGrid('setFrozenColumns');
+
+
+
+   
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager', {
+            caption: "",
+            buttonicon: "ui-icon-calculator",
+            title: "Choose columns",
+            onClickButton: function () {
+                $(this).jqGrid('columnChooser',
+                    { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+                $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
+                    .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
+            }
+        });
+
+
+
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+        {
+            caption: "Filter", title: "Toggle Searching Toolbar",
+            buttonicon: 'ui-icon-pin-s',
+            onClickButton: function () { myGrid[0].toggleToolbar(); }
+        });
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();

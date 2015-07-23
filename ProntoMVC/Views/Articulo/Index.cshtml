@@ -36,9 +36,9 @@
                         </button>
                     </div>
                 }
-                
+
                 <a href="@Url.Content("~")Articulo/Articulos_DynamicGridData_GenerarExcel?sidx=Descripcion&sord=asc&page=1&rows=222&_search=false&filters=">Excel2</a>
-                
+
             </div>
         </div>
         <div class="span1">
@@ -100,34 +100,67 @@
             ondblClickRow: function (idrow) {
                 window.location.href = ROOT + 'Articulo/Edit/' + idrow;
             },
+
+
+
+
             pager: $('#ListaPager'),
-            rowNum: 20,
-            rowList: [10, 20, 50, 100],
-            sortname: 'Descripcion',
+            rowNum: 15,
+            rowList: [10, 20, 50],
+            sortname: 'Descripcion', // 'FechaFactura,NumeroFactura',
             sortorder: "asc",
             viewrecords: true,
-            //toppager: true,
-            emptyrecords: 'No hay registros para mostrar',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
             width: 'auto', // 'auto',
-            height: 'auto',
             autowidth: true,
             shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false, //true,
-            userDataOnFooter: true,
-            caption: '<b>ARTICULOS</b>',
-            multiboxonly: true
+            userDataOnFooter: true
+            // ,caption: '<b>FACTURAS</b>'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
 
 
-                                  , multipleSearch: true
 
         })
-
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true }
-            );
+;
 
         jQuery("#Lista").jqGrid('bindKeys');
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+
+
 
         $("#BuscadorListado").keyup(function () {
             filtrar()
