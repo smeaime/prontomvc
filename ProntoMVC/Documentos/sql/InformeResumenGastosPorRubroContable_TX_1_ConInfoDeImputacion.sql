@@ -4,7 +4,10 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-alter PROCEDURE [dbo].[InformeResumenGastosPorRubroContable_TX_1_ConInfoDeImputacion]
+drop  PROCEDURE [dbo].[InformeResumenGastosPorRubroContable_TX_1_ConInfoDeImputacion]
+go 
+
+create PROCEDURE [dbo].[InformeResumenGastosPorRubroContable_TX_1_ConInfoDeImputacion]
 
 @Desde datetime,
 @Hasta datetime,
@@ -73,7 +76,7 @@ CREATE TABLE #Auxiliar3
 			 Cantidad NUMERIC(18, 2),
 			 Porcentaje NUMERIC(6, 2),
 			 Grupo2 INTEGER,
-			 Observaciones  VARCHAR(2000) collate SQL_Latin1_General_CP1_CI_AS
+			 Observaciones  NTEXT collate SQL_Latin1_General_CP1_CI_AS
 			)
 CREATE NONCLUSTERED INDEX IX__Auxiliar3 ON #Auxiliar3 (IdObra, Tipo, IdArticulo) ON [PRIMARY]
 
@@ -297,11 +300,11 @@ WHERE Grupo2<>1
 INSERT INTO #Auxiliar3 
  SELECT IdObra, CodigoTipo, Tipo, Grupo, IdArticulo, Sum(IsNull(NetoGravado,0)), Sum(IsNull(Cantidad,0)), 0, Grupo2, 
     substring((
-				Select ','+ cast(CDP.idcartadeporte  as varchar(20)) AS [text()]
+				Select ','+ aaaa.Observaciones   AS [text()]
 				FROM #Auxiliar2 aaaa
-				where  #Auxiliar2.IdObra=aaa.IdObra
+				where  #Auxiliar2.IdObra=aaaa.IdObra
 				For XML PATH ('')
-			), 2, 1800) [asdad]
+			), 2, 19900) [asdad]
 
  FROM #Auxiliar2
  GROUP BY IdObra, CodigoTipo, Tipo, Grupo, IdArticulo, Grupo2
@@ -410,7 +413,7 @@ IF @Salida='GASTOS'
 	LEFT OUTER JOIN Obras ON Obras.IdObra=a9.IdObra
 	ORDER BY RubrosContables.Descripcion, a9.IdObra
 
-select * from #Auxiliar2
+select * from #Auxiliar3
 
 DROP TABLE #Auxiliar1
 DROP TABLE #Auxiliar10
