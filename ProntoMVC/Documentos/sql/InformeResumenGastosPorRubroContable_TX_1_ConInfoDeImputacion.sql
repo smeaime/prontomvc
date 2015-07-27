@@ -39,7 +39,7 @@ CREATE TABLE #Auxiliar1
 			 IdFactura INTEGER,
 			 IdTipoNegocioVentas INTEGER,
 			 Cantidad NUMERIC(18, 2),
-			 Observaciones  VARCHAR(2000) collate SQL_Latin1_General_CP1_CI_AS
+			 Observaciones  VARCHAR(MAX)  collate SQL_Latin1_General_CP1_CI_AS
 			)
 
 CREATE TABLE #Auxiliar10 
@@ -47,7 +47,7 @@ CREATE TABLE #Auxiliar10
 			 IdDetalleFactura INTEGER,
 			 Tipo VARCHAR(50) collate SQL_Latin1_General_CP1_CI_AS,
 			 Cantidad NUMERIC(18, 2),
-			 Observaciones  VARCHAR(200) collate SQL_Latin1_General_CP1_CI_AS
+			 Observaciones   VARCHAR(MAX)   collate SQL_Latin1_General_CP1_CI_AS
 			)
 
 CREATE TABLE #Auxiliar2 
@@ -62,7 +62,7 @@ CREATE TABLE #Auxiliar2
 			 NetoGravado NUMERIC(18, 2),
 			 Cantidad NUMERIC(18, 2),
 			 Grupo2 INTEGER,
-			 Observaciones  VARCHAR(2000) collate SQL_Latin1_General_CP1_CI_AS
+			 Observaciones   VARCHAR(MAX)  collate SQL_Latin1_General_CP1_CI_AS
 			)
 
 CREATE TABLE #Auxiliar3 
@@ -76,7 +76,7 @@ CREATE TABLE #Auxiliar3
 			 Cantidad NUMERIC(18, 2),
 			 Porcentaje NUMERIC(6, 2),
 			 Grupo2 INTEGER,
-			 Observaciones  NTEXT collate SQL_Latin1_General_CP1_CI_AS
+			 Observaciones  VARCHAR(MAX) collate SQL_Latin1_General_CP1_CI_AS 
 			)
 CREATE NONCLUSTERED INDEX IX__Auxiliar3 ON #Auxiliar3 (IdObra, Tipo, IdArticulo) ON [PRIMARY]
 
@@ -151,12 +151,12 @@ INSERT INTO #Auxiliar1
 
 
 
-		    substring((
-				Select ','+ cast(CDP.idcartadeporte  as varchar(20)) AS [text()]
+		    (
+				Select ','+ cast(CDP.numerocartadeporte as varchar(20)) + 'id' + cast(CDP.idcartadeporte  as varchar(20))     AS [text()]
 				FROM CartasDePorte CDP 
 				where  CDP.IdDetalleFactura=Det.IdDetalleFactura
 				For XML PATH ('')
-			), 2, 1800) [asdad]
+			) [asdad]
 
 
 
@@ -299,12 +299,16 @@ WHERE Grupo2<>1
 
 INSERT INTO #Auxiliar3 
  SELECT IdObra, CodigoTipo, Tipo, Grupo, IdArticulo, Sum(IsNull(NetoGravado,0)), Sum(IsNull(Cantidad,0)), 0, Grupo2, 
-    substring((
-				Select ','+ aaaa.Observaciones   AS [text()]
-				FROM #Auxiliar2 aaaa
-				where  #Auxiliar2.IdObra=aaaa.IdObra
+    (
+				Select ','+ AUX.Observaciones   AS [text()]
+				FROM #Auxiliar2 AUX
+				where  #Auxiliar2.IdObra=AUX.IdObra and 
+						#Auxiliar2.CodigoTipo=AUX.CodigoTipo and 
+						#Auxiliar2.Grupo=AUX.Grupo and 
+						#Auxiliar2.IdArticulo=AUX.IdArticulo and 
+						#Auxiliar2.Grupo2=AUX.Grupo2  
 				For XML PATH ('')
-			), 2, 19900) [asdad]
+			) [asdad]
 
  FROM #Auxiliar2
  GROUP BY IdObra, CodigoTipo, Tipo, Grupo, IdArticulo, Grupo2
@@ -437,3 +441,4 @@ set @Hasta=convert(datetime,'30/4/2015',103)
 set @Salida='VENTAS'
 
 exec InformeResumenGastosPorRubroContable_TX_1_ConInfoDeImputacion @desde,@hasta,@salida
+exec InformeResumenGastosPorRubroContable_TX_1 @desde,@hasta,@salida
