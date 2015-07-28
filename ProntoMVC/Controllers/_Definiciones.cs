@@ -132,7 +132,7 @@ namespace ProntoMVC.Controllers
                                  string includes,
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
                                  ProntoMVC.Data.Models.DemoProntoEntities db,
-                                 ref int totalRecords
+                                 ref int totalRecords, string includes2 = ""
                              )
                                where T : class
         {
@@ -148,7 +148,23 @@ namespace ProntoMVC.Controllers
             //var sc = Generales.sCadenaConex("Autotrol");
             //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
             var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
-            var set = context.CreateObjectSet<T>().Include(includes);
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ObjectQuery<T> set;
+            
+            if (includes2=="") 
+                set = context.CreateObjectSet<T>().Include(includes); 
+            else 
+                set = context.CreateObjectSet<T>().Include(includes).Include(includes2);
+
+
+            // estoy usando un include adicional porque no anduvo bien pasar en uno solo una lista doble de subcolecciones (por ejemplo
+            //                   el caso del maestro de requerimientos:
+            //                  db.Requerimientos.Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos")  no funciona
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -208,7 +224,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        
+
         static public List<T> FiltroGenerico_UsandoStore<T>(
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
                                  ProntoMVC.Data.Models.DemoProntoEntities db,
@@ -219,7 +235,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            
+
 
 
 
@@ -251,8 +267,8 @@ namespace ProntoMVC.Controllers
             //s = "true";
             //s = "(Comp=\"ND\")";
             // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
-        // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
-             var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x=>x.Value).ToArray());
+            // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
+            var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
             var qqqq = filteredQuery.ToList();
             //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
 
@@ -308,7 +324,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic =false)
+        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic = false)
         {
 
 
@@ -354,12 +370,12 @@ namespace ProntoMVC.Controllers
                     sb.Append(groupOp);
 
                 var iParam = objParams.Count;
-                
+
                 if (EsParaLinqDynamic)
-                    sb.AppendFormat(FormatMapping_ParaLinqDynamic [(int)rule.op], rule.field, iParam);
+                    sb.AppendFormat(FormatMapping_ParaLinqDynamic[(int)rule.op], rule.field, iParam);
                 else
                     sb.AppendFormat(FormatMapping[(int)rule.op], rule.field, iParam);
-                    
+
 
 
 
