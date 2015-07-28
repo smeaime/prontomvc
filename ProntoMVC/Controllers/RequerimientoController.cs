@@ -888,7 +888,15 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult Requerimientos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
+            /*
 
+            var aada =( db.Requerimientos
+                    .Include("DetalleRequerimientos.DetallePedidos") // funciona tambien
+                    .Include("DetalleRequerimientos.DetallePresupuestos") // funciona tambien
+                    .Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos") // funciona tambien
+                    .Take(10) ).ToList();
+
+            */
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -896,8 +904,11 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Requerimiento>
-                                ("Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
-
+                                ("DetalleRequerimientos.DetallePedidos", 
+                                sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                                 "DetalleRequerimientos.DetallePresupuestos"      );
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+                                //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1006,6 +1017,7 @@ namespace ProntoMVC.Controllers
             //        break;
             //}
 
+            
             var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 

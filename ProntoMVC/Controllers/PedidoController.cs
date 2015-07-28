@@ -1685,7 +1685,8 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Pedido>
-                                ("Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                                ("DetallePedidos,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                               //"Moneda,Proveedor,DetallePedidos,Comprador,DetallePedidos.DetalleRequerimiento.Requerimientos.Obra"
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1705,14 +1706,14 @@ namespace ProntoMVC.Controllers
             //if (searchField == "Numero") searchField = "NumeroPedido"; 
 
             var Entidad = pagedQuery
-                        //.Include(x => x.Moneda)
-                        //.Include(x => x.Proveedor)
-                        //.Include(x => x.DetallePedidos
-                        //            .Select(y => y.DetalleRequerimiento
-                        //                )
-                        //        )
-                        //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
-                        //.Include(x => x.Comprador)
+                //.Include(x => x.Moneda)
+                //.Include(x => x.Proveedor)
+                //.Include(x => x.DetallePedidos
+                //            .Select(y => y.DetalleRequerimiento
+                //                )
+                //        )
+                //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                //.Include(x => x.Comprador)
                           .AsQueryable();
 
 
