@@ -387,7 +387,7 @@
 
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'OrdenCompra/TT',
+        url: ROOT + 'OrdenCompra/TT_DynamicGridData',
         postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteRemito': "SI" },
         datatype: 'json',
         mtype: 'POST',
@@ -442,20 +442,61 @@
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
+
+
+
+
+
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'FechaOrdenCompra,NumeroOrdenCompra',
-        sortorder: "desc",
+        sortname: 'NumeroOrdenCompra', // 'FechaRecibo,NumeroRecibo',
+        sortorder: 'desc',
         viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
+
+
+        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        height: '100%',
+        //////////////////////////////
+
+        height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar'//,
+        footerrow: false, //true,
+        userDataOnFooter: true
+        // ,caption: '<b>ORDENES DE COMPRA</b>'
+
+, gridview: true
+, multiboxonly: true
+, multipleSearch: true
+
+
     })
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+
+
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+ { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+ {
+     //sopt: ["cn"]
+     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+ }
+);
+
+
+    jQuery("#ListaDrag").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
     $('a#a_panel_este_tab1').text('Ordenes de compra');

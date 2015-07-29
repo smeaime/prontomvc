@@ -72,7 +72,7 @@ Released   : 20120723
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-glyphicons.css"
               rel="stylesheet" />
     }
-    else
+    else if (true)
     {
         <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
         @*      <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"
@@ -1500,6 +1500,7 @@ Released   : 20120723
                                                                     +
                                                                 </a>
                                                             </li>
+                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
                                                             <li style="line-height: 30px;">
                                                                 <a href="@Url.Content("~")OrdenPago/Index/-1">
                                                                     Orden de
@@ -1542,11 +1543,21 @@ Released   : 20120723
                                                                 </a>
                                                             </li>
                                                             <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")NotaCredito/Index/-1">NC</a><a class="pull-right" href="@Url.Content("~")Recibo/EditCC/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
+                                                                <a href="@Url.Content("~")NotaDebito/Index/-1">ND</a><a class="pull-right" href="@Url.Content("~")Recibo/EditCC/-1">
+                                                                    +
+                                                                </a>
+                                                            </li>
+                                                            <li style="line-height: 30px;">
                                                                 <a href="@Url.Content("~")Recibo/Index/-1">Recibo</a><a class="pull-right" href="@Url.Content("~")Recibo/EditCC/-1">
                                                                     +
                                                                 </a>
                                                             </li>
-                                                            <li style="line-height: 30px;"><a href="#">...</a> </li>
+                                                            
                                                             <li style="line-height: 30px;">
                                                                 <a href="@Url.Content("~/Reporte.aspx?ReportName=Resumen Cuenta Corriente Deudores")">
                                                                     Cta Corr Deudor

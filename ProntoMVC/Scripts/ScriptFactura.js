@@ -86,8 +86,12 @@
         grid.jqGrid('addRowData', Id, data);
         grid.jqGrid('setCell', Id, 'OrigenDescripcion', 1);
         grid.jqGrid('setCell', Id, 'TiposDeDescripcion', "Solo material");
-        grid.jqGrid('setCell', Id, 'Cantidad', 1);
+        grid.jqGrid('setCell', Id, 'Cantidad', 0);
     };
+
+
+
+
 
     var CalcularItem = function (value, colname) {
         if (colname === "Cantidad") {
@@ -345,7 +349,22 @@
         },
         gridComplete: function () {
             calculaTotalImputaciones();
+
+       
         },
+
+        loadComplete: function () { //si uso esto, no puedo usar tranquilo lo de aria-selected para el refresco de la edicion inline
+            
+
+                AgregarItemVacio(jQuery("#ListaArticulos"));
+                //AgregarItemVacio(jQuery("#ListaArticulos"));
+                //AgregarItemVacio(jQuery("#ListaArticulos"));
+
+                //AgregarRenglonesEnBlanco({ "IdDetalleFactura": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "", "TiposDeDescripcion": "Solo material", "OrigenDescripcion": "1" }, "#ListaArticulos");
+
+            },
+       
+
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -434,7 +453,7 @@
                             date: true
                         },
                         searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                            sopt: ['ge', 'le'],
+                            sopt: ['ge', 'le', 'eq'],
                             dataInit: function (elem) {
                                 $(elem).datepicker({
                                     dateFormat: 'dd/mm/yy',
@@ -459,9 +478,9 @@
                     { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'SeleccionadaParaFacturacion', index: 'SeleccionadaParaFacturacion', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Obra.Descripcion', index: 'Obra.Descripcion', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                    { name: 'Cliente.Codigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Codigo', index: 'Cliente.Codigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Cliente.RazonSocial', index: 'Cliente.RazonSocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                    { name: 'Cliente.Cuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Cliente.Cuit', index: 'Cliente.Cuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                     { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, hidden: false },
                     { name: 'Remitos', index: 'Remitos', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                     { name: 'Facturas', index: 'Facturas', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
@@ -1869,6 +1888,11 @@ function CalcularFechaVencimiento(fecha) {
 
     return (fechaFinal);
 }
+
+
+
+
+
 
 function ActivarControles(Activar) {
     var $td;

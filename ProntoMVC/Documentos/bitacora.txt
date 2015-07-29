@@ -1,4 +1,32 @@
 ﻿
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
+----------------------------------------------------------------------------------------
+
+
+sacar el formato del popup de busqueda -en realidad, lo que más molesta es el ancho!!!! (y que sombree la grilla) 
+-de dónde está sacando el "width 700"?
+-solo me está cambiando el ancho si el popup está visible
+
+
+No funciona el filtro "eq" en columnas tipo fecha
+Cómo sacar el formato bootstrap sobre la jqgrid?
+debería sombrear la grilla cuando aparece el popup (no es así el comportamiento default?)...
+Mejorar aspecto del login (el logo tiene rebarbas..., las tipografías parecen distintas)
+
+
+renglones en blanco en la factura
+
+
+
+
+
+
+
+
 
 imagenes en el autocomplete
 http://stackoverflow.com/questions/911537/jquery-autocomplete-with-images
@@ -22,13 +50,6 @@ http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-f
 
 
 
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
-----------------------------------------------------------------------------------------
 
 
 Terminar de calcular el total bien 
