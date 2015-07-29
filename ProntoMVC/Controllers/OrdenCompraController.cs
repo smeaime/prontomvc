@@ -491,6 +491,7 @@ namespace ProntoMVC.Controllers
 
 
 
+
         public virtual ActionResult TT(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal, string PendienteRemito = "", string PendienteFactura = "")
         {
             string campo = String.Empty;
