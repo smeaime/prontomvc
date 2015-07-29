@@ -1480,7 +1480,6 @@
     <Content Include="Scripts\TreeView\jquery.cookie.js" />
     <Content Include="Scripts\TreeView\jquery.treeview.edit.js" />
     <Content Include="Scripts\TreeView\jquery.treeview.js" />
-    <Content Include="Scripts\ScriptFactura2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
