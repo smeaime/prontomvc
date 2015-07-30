@@ -7332,7 +7332,7 @@ Public Class CartaDePorteManager
                     sWarnings &= "El CEE no tiene 14 dígitos" & vbCrLf
                 End If
 
-                If .CTG.ToString().Length <> 8 Then
+                If Val(.CTG) > 0 And .CTG.ToString().Length <> 8 Then
                     sWarnings &= "El CTG no tiene 8 dígitos" & vbCrLf
                 End If
 
