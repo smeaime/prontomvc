@@ -1,4 +1,46 @@
 ﻿
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
+----------------------------------------------------------------------------------------
+
+
+cómo usar las busquedas Contain con columnas numericas?
+
+poner bien los nombres de columnas para que funcionen los filtros (es decir, los "index" y los "sopt". "name" puede quedar distinto)
+no podes cambiar de un saque las [eq] a [cn,eq] porque las numericas no se bancan el cn
+
+No funciona el filtro "eq" en columnas tipo fecha
+
+
+////////////////////////////////
+sacar el formato del popup de busqueda -en realidad, lo que más molesta es el ancho!!!! (y que no esté sombreando la grilla) 
+-de dónde está sacando el "width 700"?
+-solo me está cambiando el ancho si el popup está visible
+-POSTERGAR, porque es complicado
+////////////////////////////////
+
+tambien queda feo el autofiltro por el estilo del Bootstrap
+-y si usas el parche ese de Soliman? https://github.com/Soliman/jqGrid.bootstrap
+
+
+Cómo sacar el formato bootstrap sobre la jqgrid?
+debería sombrear la grilla cuando aparece el popup (no es así el comportamiento default?)...
+Mejorar aspecto del login (el logo tiene rebarbas..., las tipografías parecen distintas)
+
+
+renglones en blanco en la factura
+
+
+
+
+
+
+
+
+
 
 imagenes en el autocomplete
 http://stackoverflow.com/questions/911537/jquery-autocomplete-with-images
@@ -22,13 +64,6 @@ http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-f
 
 
 
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
-----------------------------------------------------------------------------------------
 
 
 Terminar de calcular el total bien 

@@ -418,7 +418,7 @@ namespace ProntoMVC.Controllers
 
 
 
-         
+
 
             var data = (from a in db.Articulos
                         from b in db.Marcas.Where(o => o.IdMarca == a.IdMarca).DefaultIfEmpty()
@@ -1389,6 +1389,64 @@ namespace ProntoMVC.Controllers
         }
 
 
+        public virtual FileResult Articulos_DynamicGridData_GenerarExcel(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
+                                ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            var q = (from a in pagedQuery
+                    select new
+                    {
+                        aa= a.Codigo.ToString() +  ", " + "adsasdasd"                       
+                    }).ToList();
+            
+
+
+            string myCSV = string.Join("\n", q.Select(i => i.aa.ToString()).ToArray());
+
+
+
+
+            var contentType = "text/csv";
+            //var content = "<content>Your content</content>";
+            var bytes = Encoding.UTF8.GetBytes(myCSV);
+            var result = new FileContentResult(bytes, contentType);
+            result.FileDownloadName = "Articulo.csv";
+            return result;
+
+
+
+
+            /*
+
+            string output = "Articulo.csv";
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, output);
+            */
+
+        }
+
+
 
         public virtual JsonResult Articulos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
@@ -1397,7 +1455,7 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            int totalRecords=0;
+            int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
                                 ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
@@ -1518,7 +1576,7 @@ namespace ProntoMVC.Controllers
         }
 
 
-            public virtual JsonResult GetEquiposPorObra(int IdObra)
+        public virtual JsonResult GetEquiposPorObra(int IdObra)
         {
             //var oRsx = Pronto.ERP.Bll.EntidadManager.TraerFiltrado(SCsql(), ProntoFuncionesGenerales.enumSPs.Articulos_TX_BD_ProntoMantenimientoTodos, IdObra);
             //if (oRsx.Rows.Count > 0)
@@ -1529,7 +1587,7 @@ namespace ProntoMVC.Controllers
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
 
-            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Articulos_TX_BD_ProntoMantenimientoTodos", IdObra); 
+            var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "Articulos_TX_BD_ProntoMantenimientoTodos", IdObra);
             IEnumerable<DataRow> Entidad = dt.AsEnumerable();
 
             var data = (from a in Entidad

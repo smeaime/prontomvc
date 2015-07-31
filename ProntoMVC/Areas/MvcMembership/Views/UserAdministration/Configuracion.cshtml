@@ -35,23 +35,23 @@
 
             <p>
                 @*Logs de RRSS en la base (tablas [ExecutionLogStorage] ?)
-                http://stackoverflow.com/questions/491389/where-does-reporting-services-store-its-log-files
-                C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles*@
+                    http://stackoverflow.com/questions/491389/where-does-reporting-services-store-its-log-files
+                    C:\Program Files\Microsoft SQL Server\MSRS10_50.BDL\Reporting Services\LogFiles*@
             </p>
 
 
 
             @Html.LabelFor(model => model.CartelAviso, "Aviso") @*para que quede el espacio*@
-            @Html.TextAreaFor(m => m.CartelAviso, new { id = "Aviso", @class = "span12" })
+            @Html.TextAreaFor(m => m.CartelAviso, new { id = "Aviso", @class = "span8" })
 
             <br />
             <br />
             @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Numeradores:") @*para que quede el espacio*@
-
+            <br />
             @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Compr. Proveedor") @*para que quede el espacio*@
             @Html.TextBoxFor(m => m.ProximoComprobanteProveedorReferencia, new { id = "Aviso", @class = "span2" })
 
-
+            <br /><br />
 
             @Html.LabelFor(model => model.PathPlantillas, "Directorio de plantillas y archivo .APP") @*para que quede el espacio*@
             @Html.TextBoxFor(m => m.PathPlantillas, new { id = "Aviso", @class = "span6" })
@@ -63,13 +63,15 @@
                 <br />      <br />
                 <div>
                     @Html.LabelFor(model => model.ProximoComprobanteProveedorReferencia, "Plantilla de Requerimientos")
+                    <br />
                     @*para que quede el espacio*@
                     <input type="file" name="file" />
                     <input type="submit" class="btn" value="Subir" />
                     <br />
                     <a class="btn  " style="color: Black" href="@Url.Action("BajarPlantilla")">
-                        <i class="icon-print">
-                        </i>&nbsp;Descargar
+                        @*<i class="icon-print">
+                        </i>&nbsp;*@
+                        Descargar
                     </a>
                 </div>
 

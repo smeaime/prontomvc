@@ -12072,9 +12072,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-
-
-
                 End With
             Next
 
@@ -12333,7 +12330,7 @@ Namespace Pronto.ERP.Bll
                 Dim cartas '= db.CartasDePortes.Where(sWHERE)
 
 
-                PrintLine(nF, "CartaPorte;IdRubro;TipoRubro;DRubro;ResFinal;DescuentoFinal;KilosMerma")
+                PrintLine(nF, "CartaPorte;IdRubro;TipoRubro;DRubro;ResFinal;DescuentoFinal;KilosMerma;Destino")
 
 
                 'CartaPorte	IdRubro	TipoRubro	DRubro	ResFinal	 DescuentoFinal 	 KilosMerma 
@@ -12661,6 +12658,10 @@ Namespace Pronto.ERP.Bll
                         sb = RenglonBLDCalidad(cdp, 24, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinRebaja, cc.CalidadTalCualVicentinRebaja, nF, "01", "TalCualVicentin", cc.CalidadTalCualVicentinMerma, cc.TipoMermaTalCualVicentin <> 0)
 
 
+
+
+
+                        sb = RenglonBLDCalidad(cdp, 25, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Grado", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
 
 
 
@@ -13261,6 +13262,11 @@ Namespace Pronto.ERP.Bll
                     If descripcion = "DescuentoFinal" Then
 
                         sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+
+                    ElseIf descripcion = "Grado" Then
+
+                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+
                     Else
 
                         sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR                 'Resultado del ensayo	7	25	31	N
@@ -13300,7 +13306,8 @@ Namespace Pronto.ERP.Bll
                     'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829
                     'Solicitan agregar al sincronismo de Calidad de BLD una ultima columna, donde se envíe el Destino de la Carta de Porte
 
-                    'sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+                    sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomDestino	STRING(30)	Nombre Destino)    573)    602
+
 
 
 

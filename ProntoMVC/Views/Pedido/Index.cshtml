@@ -153,7 +153,7 @@ If you want additionally remove vertical border between the cells in the grid yo
 
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Pedidos", "Pedido")',
+            url: '@Url.Action("Pedidos_DynamicGridData", "Pedido")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -170,9 +170,9 @@ If you want additionally remove vertical border between the cells in the grid yo
 
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
                         { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -242,25 +242,21 @@ If you want additionally remove vertical border between the cells in the grid yo
                 //   
 
             },
+
+
+
+
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 100],
-            sortname: 'NumeroPedido',
+            rowList: [10, 20, 50],
+            sortname: 'NumeroPedido', // 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
-            toppager: true,
-
-
-
-            ////////////////////////////
-            ///// problemas de desfasaje en las columnas entre el encabezado y el cuerpo
-            //deepempty: true,
-            //cellLayout: 20,
-            /////////////////
+            emptyrecords: 'No hay registros para mostrar', //,
 
 
             ///////////////////////////////
-            //width: 'auto', // 'auto',
+            width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
             //////////////////////////////
@@ -269,29 +265,37 @@ If you want additionally remove vertical border between the cells in the grid yo
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
-            , multiboxonly: true
+            // ,caption: '<b>FACTURAS</b>'
 
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
+       
 
 
         });
 
-        //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //      jQuery("#Lista").jqGrid('bindKeys');
-
-        // http://stackoverflow.com/questions/20190137/jqgrid-toolbar-search-add-clear-search-button-next-to-search-box
-        //        $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND", clearSearch: false });
-        //$("#Lista").filterToolbar();
-
-        // $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
-        //$("#Lista").setFrozenColumns();
         jQuery("#Lista").jqGrid('bindKeys');
 
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
 
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-        { sopt: ["cn"], width: 0, closeOnEscape: true, closeAfterSearch: true });
-        // jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
 
 
         $(window).resize(function () {
