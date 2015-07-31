@@ -24,7 +24,13 @@
         <rd:DefaultName>textbox1</rd:DefaultName>
         <Height>0.36in</Height>
         <Width>8in</Width>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
         <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -1049,14 +1055,14 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.47167in</Top>
+        <Top>0.42944in</Top>
         <Height>0.43in</Height>
         <Width>15.60295in</Width>
         <ZIndex>1</ZIndex>
         <Style />
       </Tablix>
     </ReportItems>
-    <Height>1.21875in</Height>
+    <Height>1.33333in</Height>
     <Style />
   </Body>
   <Width>15.60295in</Width>
@@ -1073,8 +1079,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>8a1945bf-3d4e-4bf0-b6ac-3820a260decf</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1239,6 +1249,10 @@
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
     <ReportParameter Name="TiposComprobante">
       <DataType>String</DataType>
       <DefaultValue>
@@ -1246,7 +1260,7 @@
           <Value>T</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Tipos Comprobante</Prompt>
+      <Prompt>Tipos de comprobante</Prompt>
       <Hidden>true</Hidden>
     </ReportParameter>
   </ReportParameters>
