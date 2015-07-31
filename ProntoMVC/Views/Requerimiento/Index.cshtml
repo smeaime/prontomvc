@@ -7,54 +7,47 @@
 @if (false)
 {
     <style>
-                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
 
 
-                .ui-widget-content
-                {
-                    border: 0px solid #aaaaaa;
-                }
+        .ui-widget-content {
+            border: 0px solid #aaaaaa;
+        }
 
-                .ui-jqgrid
-                {
-                    border-right-width: 0px;
-                    border-left-width: 0px;
-                }
-                /* If you need to remove all grid's borders you can use
+        .ui-jqgrid {
+            border-right-width: 0px;
+            border-left-width: 0px;
+        }
+            /* If you need to remove all grid's borders you can use
 
         .ui-jqgrid { border-width: 0px; }
         If you want additionally remove vertical border between the cells in the grid you can use */
 
-                .ui-jqgrid tr.ui-row-ltr td
-                {
-                    border-right-color: #E4E4E4;
-                }
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-right-color: #E4E4E4;
+            }
 
 
-                .ui-jqgrid tr.footrow-ltr td
-                {
-                    border-right-color: #E4E4E4 !important;
-                }
+            .ui-jqgrid tr.footrow-ltr td {
+                border-right-color: #E4E4E4 !important;
+            }
 
-                /*To remove horizontal border between the rows you can use */
+            /*To remove horizontal border between the rows you can use */
 
-                .ui-jqgrid tr.ui-row-ltr td
-                {
-                    border-bottom-color: #E4E4E4;
-                }
-                /*To remove vertical borders between the column headers you can use */
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-bottom-color: #E4E4E4;
+            }
+        /*To remove vertical borders between the column headers you can use */
 
-                th.ui-th-column
-                {
-                    border-right-color: #E4E4E4 !important;
-                }
-                /* or alternatively (without the usage of !important) */
+        th.ui-th-column {
+            border-right-color: #E4E4E4 !important;
+        }
+        /* or alternatively (without the usage of !important) */
 
-                .ui-jqgrid-labels .ui-th-column
-                {
-                    border-right-color: #E4E4E4;
-                }
+        .ui-jqgrid-labels .ui-th-column {
+            border-right-color: #E4E4E4;
+        }
     </style>
 }
 
@@ -85,13 +78,13 @@
                         <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
                         @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                         {
-                        <select id="campos " class="span4">
-                            <option>Número</option>
-                            @* <option>Fecha</option>*@
-                        </select>
-                        <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
-                            ...
-                        </button>
+                            <select id="campos " class="span4">
+                                <option>Número</option>
+                                @* <option>Fecha</option>*@
+                            </select>
+                            <button onclick=" jQuery('#Lista').searchGrid({}) " class="btn append ">
+                                ...
+                            </button>
                         }
                     </div>
                 </div>
@@ -112,15 +105,15 @@
                     </div>*@
                 @if (false)
                 {
-                <div class="btn-group span2">
-                    <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
-                    <button class="btn dropdown-toggle " data-toggle="dropdown">
-                        <span class="caret "></span>
-                    </button>
-                    <ul class="dropdown-menu ">
-                        <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
-                    </ul>
-                </div>
+                    <div class="btn-group span2">
+                        <a class="btn  " style="color: Black" href="#"><i class="icon-print"></i>&nbsp;más</a>
+                        <button class="btn dropdown-toggle " data-toggle="dropdown">
+                            <span class="caret "></span>
+                        </button>
+                        <ul class="dropdown-menu ">
+                            <li><a class="" href="#"><i class="icon-print"></i>&nbsp;Excel</a></li>
+                        </ul>
+                    </div>
                 }
                 <div class="span1">
                     <div>
@@ -195,7 +188,7 @@
         //$('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Requerimientos", "Requerimiento")',
+            url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
 
             postData: {
                 'FechaInicial': function () { return $("#FechaInicial").val(); },
@@ -219,7 +212,7 @@
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         {
                             name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
                             sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false
@@ -229,7 +222,7 @@
                         { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Impresa', index: 'Impresa', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra.NumeroObra', index: 'Obra.NumeroObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -278,25 +271,20 @@
                 //$("#Lista").jqGrid('filterToolbar', {})
             },
 
+
+
+
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 100],
-            sortname: 'NumeroRequerimiento',
+            rowList: [10, 20, 50],
+            sortname: 'NumeroRequerimiento', // 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
-            toppager: true,
-
-
-
-            ////////////////////////////
-            ///// problemas de desfasaje en las columnas entre el encabezado y el cuerpo
-            //deepempty: true,
-            //cellLayout: 20,
-            /////////////////
+            emptyrecords: 'No hay registros para mostrar', //,
 
 
             ///////////////////////////////
-            //width: 'auto', // 'auto',
+            width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
             //////////////////////////////
@@ -305,26 +293,39 @@
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
-            // ,caption: '<b>PEDIDOS</b>'
+            // ,caption: '<b>FACTURAS</b>'
+
+        , gridview: true
+        , multiboxonly: true
+        , multipleSearch: true
 
 
 
 
-               , multiboxonly: true
+
+
             //imgpath: '/content/cupertino/images',
             //loadonce: true,
             //, caption: '<b>REQUERIMIENTOS</b>'
         });
-
-        // $("#Lista").filterToolbar({ searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
-        //$("#Lista").setFrozenColumns();
         jQuery("#Lista").jqGrid('bindKeys');
 
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
 
-        //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-        { sopt: ["cn"], width: 0, closeOnEscape: true, closeAfterSearch: true });
-        // jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
 
 
         $(window).resize(function () {

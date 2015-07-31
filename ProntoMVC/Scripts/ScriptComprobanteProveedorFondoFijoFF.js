@@ -950,7 +950,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         stype: 'select',
                         searchoptions: {
                             value: buildSearchSelect(getUniqueNames(columnName)),
-                            sopt: ['eq']
+                            sopt: ['cn','eq'] 
                         }
                     }
         );
@@ -1048,7 +1048,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         {name: '', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cuenta', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn']} },
-                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['eq']} },
+                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn','eq'] } },
 
 
                         {
@@ -1209,7 +1209,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     });
     //jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //$("#ListaDrag").filterToolbar({ searchOnEnter: true, enableClear: false });    // usar search: true, searchoptions: { sopt: ['cn']} o  { sopt: ['eq']}
+    //$("#ListaDrag").filterToolbar({ searchOnEnter: true, enableClear: false });    // usar search: true, searchoptions: { sopt: ['cn']} o  { sopt: ['cn','eq'] }
     //    $("#ListaDrag").setFrozenColumns();
 
     myGrid.jqGrid('navGrid', '#ListaDragPager', { add: false, edit: false, del: false },

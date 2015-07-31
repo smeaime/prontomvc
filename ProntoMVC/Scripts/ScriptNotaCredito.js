@@ -372,7 +372,7 @@
                         { name: 'IdComprobante', index: 'IdComprobante', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cabeza', index: 'Cabeza', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Tipo', index: 'Tipo', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Fecha', index: 'Fecha', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Moneda', index: 'Moneda', align: 'left', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -1145,14 +1145,29 @@ function ActivarControles(Activar) {
         pageLayout.close('east');
 
         $("#Lista").unblock({ message: "", theme: true, });
-        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');        $td.show();        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');
+        $td.show();
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.show();
 
         $("#ListaConceptos").unblock({ message: "", theme: true, });
-        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.show();        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.show();
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.show();
     } else {
         pageLayout.hide('east');
-        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');        $td.hide();        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
-        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.hide();        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar sin imputacion"]');
+        $td.hide();
+        $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.hide();
+
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.hide();
+        $td = $($("#ListaConceptos")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.hide();
+
         $("#ListaConceptos").block({ message: "", theme: true, });
         $("#Cliente").prop("disabled", true);
         $("#FechaNotaCredito").prop("disabled", true);

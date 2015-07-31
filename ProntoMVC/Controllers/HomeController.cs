@@ -298,8 +298,8 @@ namespace ProntoMVC.Controllers
                 q = TablaTree("01").ToList();
                 //como hacer si es esxterno, o si tiene permisos a todos los nodos raiz?
 
-                    //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
-                    // mostrar todos los nodos raíces de los que tenga permiso...
+                //no hay cacheados nodos expandidos ni el nodo apretado. Debe ser la primera pantalla de la sesión. entonces, debo 
+                // mostrar todos los nodos raíces de los que tenga permiso...
 
             }
             else if (collection.AllKeys.Contains("idsOfExpandedRows"))
@@ -739,6 +739,38 @@ namespace ProntoMVC.Controllers
             return Json(filesData);
 
         }
+
+
+
+
+
+
+
+        public virtual FileResult Log()
+        {
+            // TambienLogDelPronto()
+
+
+
+            DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\Error"); // (ErrHandler.DirectorioErrores)
+            FileSystemInfo[] files = di.GetFileSystemInfos(); // agarro el directorio con los logs de errores
+
+
+            var orderedFiles = files.OrderByDescending(f => f.LastWriteTime).Select(f => f.FullName);
+
+            string output = orderedFiles.First();
+
+
+
+
+
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, output);
+
+        }
+
+
 
 
 
