@@ -2655,7 +2655,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         stype: 'select',
                         searchoptions: {
                             value: buildSearchSelect(getUniqueNames(columnName)),
-                            sopt: ['eq']
+                            sopt: ['cn','eq'] 
                         }
                     }
         );
@@ -2750,7 +2750,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: '', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdCuenta', key: true, index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cuenta', index: 'Descripcion', align: 'left', width: 200, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn'] } },
-                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['eq'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'center', width: 50, editable: false, search: true, searchoptions: { clearSearch: false, searchOperators: true, sopt: ['cn','eq']  } },
 
 
                         {
@@ -2907,7 +2907,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
 
     });
     //jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //$("#ListaDrag").filterToolbar({ searchOnEnter: true, enableClear: false });    // usar search: true, searchoptions: { sopt: ['cn']} o  { sopt: ['eq']}
+    //$("#ListaDrag").filterToolbar({ searchOnEnter: true, enableClear: false });    // usar search: true, searchoptions: { sopt: ['cn']} o  { sopt: ['cn','eq'] }
     //    $("#ListaDrag").setFrozenColumns();
 
     myGrid.jqGrid('navGrid', '#ListaDragPager', { add: false, edit: false, del: false },
@@ -2966,7 +2966,7 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPresupuestoObrasNodo', index: 'IdPresupuestoObrasNodo', align: 'left', width: 40, editable: false, hidden: true },
-                        { name: 'Descripcion', index: 'Descripcion', align: 'right', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Descripcion', index: 'Descripcion', align: 'right', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Cantidad', index: '', width: 100 },
 
                         { name: 'CantidadAvanzada', index: '', width: 80 },
@@ -3034,18 +3034,18 @@ $(function () {     // lo mismo que $(document).ready(function () {
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'act2', index: 'act2', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRecepcion', index: 'IdRecepcion', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Orden', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
                         { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -3131,8 +3131,8 @@ $(function () {     // lo mismo que $(document).ready(function () {
     //            },
 
     //                { name: 'IdFactura', index: 'IdFactura', align: 'left', width: 0, editable: false, hidden: true },
-    //                { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-    //                { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+    //                { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
 
     //                { name: '', index: '', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
     //                { name: '', index: '', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -3204,9 +3204,9 @@ $(function () {     // lo mismo que $(document).ready(function () {
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 50, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                         { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                         { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
                         { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
