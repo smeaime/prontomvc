@@ -221,7 +221,7 @@ table {
 }
 
 table td {
-    padding: 5px;
+    /*padding: 5px;*/
     border: solid 1px #e8eef4;
 }
 

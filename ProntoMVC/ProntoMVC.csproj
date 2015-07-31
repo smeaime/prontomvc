@@ -808,6 +808,7 @@
     <Content Include="Scripts\ScriptObra.js" />
     <Content Include="Scripts\ScriptProveedor.js" />
     <Content Include="Views\Moneda\Index.cshtml" />
+    <Content Include="Views\Shared\favicon.png" />
     <Content Include="Views\Transportista\Delete.cshtml" />
     <Content Include="Views\Transportista\Edit.cshtml" />
     <Content Include="Views\Transportista\Index.cshtml" />

@@ -93,7 +93,7 @@ namespace ProntoMVC.Controllers
             "(it.{0} NOT LIKE (@p{1}+'%'))",    // "bn" - does not begin with
             "(it.{0} LIKE ('%'+@p{1}))",        // "ew" - ends with
             "(it.{0} NOT LIKE ('%'+@p{1}))",    // "en" - does not end with
-            "(it.{0} LIKE ('%'+@p{1}+'%'))",    // "cn" - contains
+            "( CAST (it.{0} AS System.String )  LIKE ('%'+@p{1}+'%'))",    // "cn" - contains
             "(it.{0} NOT LIKE ('%'+@p{1}+'%'))" //" nc" - does not contain
         };
 
@@ -380,60 +380,79 @@ namespace ProntoMVC.Controllers
 
 
                 ObjectParameter param;
-                switch (propertyInfo.PropertyType.FullName)
+                
+
+                
+                
+                
+                // si usás "contains" tenés que usar sí o sí el tipo string
+                if (rule.op == Operations.cn) param = new ObjectParameter("p" + iParam, rule.data);
+                    
+                else
                 {
-                    case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                    case "System.Int32":  // int
-                        param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
-                        break;
-                    case "System.Int64":  // bigint
-                        param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
-                        break;
-                    case "System.Int16":  // smallint
-                        param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
-                        break;
-                    case "System.SByte":  // tinyint
-                        param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
-                        break;
-                    case "System.Single": // Edm.Single, in SQL: float
-                        param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
-                        break;
-                    case "System.Double": // float(53), double precision
-                        param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
-                        break;
-                    case "System.Boolean": // Edm.Boolean, in SQL: bit
-                        param = new ObjectParameter("p" + iParam,
-                            String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
-                            String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
-                            String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
-                            true :
-                            false);
-                        break;
-
-                    case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                    case "System.DateTime": // Edm.Single, in SQL: float
-                        param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
-                        break;
-
-                    default:
-                        // TODO: Extend to other data types
-                        // binary, date, datetimeoffset,
-                        // decimal, numeric,
-                        // money, smallmoney
-                        // and so on
 
 
-                        if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
-                        {
-                            // si es nullable, no uses string!!!
-                            throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
-                        }
+                    switch (propertyInfo.PropertyType.FullName)
+                    {
+                        case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                        case "System.Int32":  // int
+                            param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
+                            break;
+                        case "System.Int64":  // bigint
+                            param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
+                            break;
+                        case "System.Int16":  // smallint
+                            param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
+                            break;
+                        case "System.SByte":  // tinyint
+                            param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
+                            break;
+                        case "System.Single": // Edm.Single, in SQL: float
+                            param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
+                            break;
+                        case "System.Double": // float(53), double precision
+                            param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
+                            break;
+                        case "System.Boolean": // Edm.Boolean, in SQL: bit
+                            param = new ObjectParameter("p" + iParam,
+                                String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
+                                String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
+                                String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
+                                true :
+                                false);
+                            break;
 
-                        param = new ObjectParameter("p" + iParam, rule.data);
+                        case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                        case "System.DateTime": // Edm.Single, in SQL: float
+                            param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
+                            break;
+
+                        default:
+                            // el default es string
+
+                            // TODO: Extend to other data types
+                            // binary, date, datetimeoffset,
+                            // decimal, numeric,
+                            // money, smallmoney
+                            // and so on
 
 
-                        break;
+                            if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
+                            {
+                                // si es nullable, no uses string!!!
+                                throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
+                            }
+
+                            param = new ObjectParameter("p" + iParam, rule.data);
+
+
+                            break;
+                    }
+
                 }
+
+
+
                 objParams.Add(param);
             }
 
@@ -458,7 +477,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
+                ObjectQuery<T> filteredQuery = inputQuery.Where(  sb.ToString());
 
                 foreach (var objParam in objParams)
                     filteredQuery.Parameters.Add(objParam);
