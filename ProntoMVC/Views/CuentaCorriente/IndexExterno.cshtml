@@ -79,20 +79,20 @@ Jose. A Fernandez | blog: http://geeks.ms/blogs/fernandezja *@@*<rsweb:ReportVie
 
                         {name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, hidden: true, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', hidden: true, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
                         { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Validez', index: 'Validez', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 0, editable: false, hidden: false },
                         { name: 'Moneda', index: 'Moneda', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
-                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 0, editable: false, hidden: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 0, editable: false, hidden: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
                         { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
