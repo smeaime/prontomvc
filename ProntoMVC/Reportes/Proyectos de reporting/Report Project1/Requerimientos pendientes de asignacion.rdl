@@ -24,7 +24,13 @@
         <rd:DefaultName>textbox1</rd:DefaultName>
         <Height>0.36in</Height>
         <Width>8in</Width>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
         <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
