@@ -29,7 +29,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "NotaDebito")',
+            url: '@Url.Action("TT_DynamicGridData", "NotaDebito")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -40,31 +40,31 @@
                         { name: 'ver', index: 'ver', hidden: false, width: 50 },
                         { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
                         { name: 'IdNotaDebito', index: 'IdNotaDebito', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'NumeroNotaDebito', index: 'NumeroNotaDebito', align: 'right', width: 80, editable: false, hidden: false },
                         { name: 'FechaNotaDebito', index: 'FechaNotaDebito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'TotalIva', index: 'TotalIva', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'TotalIIBB', index: 'TotalIIBB', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'TotalPercepcionIVA', index: 'TotalPercepcionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'TotalOtrasPercepciones', index: 'TotalOtrasPercepciones', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'MonedaAbreviatura', index: 'MonedaAbreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Obra', index: 'Obra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'MonedaAbreviatura', index: 'MonedaAbreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Obra', index: 'Obra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'ProvinciaDestino', index: 'ProvinciaDestino', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'UsuarioIngreso', index: 'UsuarioIngreso', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'NumeroCuota', index: 'NumeroCuota', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroCuota', index: 'NumeroCuota', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'CAE', index: 'CAE', align: 'left', width: 200, editable: false, hidden: false },
                         { name: 'RechazoCAE', index: 'RechazoCAE', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'FechaVencimientoORechazoCAE', index: 'FechaVencimientoORechazoCAE', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
@@ -78,24 +78,57 @@
                     lastSelectedId = id;
                 }
             },
+
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 20000],
-            sortname: 'Numero',
-            sortorder: 'asc',
+            rowList: [10, 20, 50],
+            sortname: 'FechaRecibo', // 'FechaRecibo,NumeroRecibo',
+            sortorder: 'desc',
             viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            height: '100%',
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            footerrow: false,
-            userDataOnFooter: true,
-            caption: '<b>NOTAS DE DEBITO</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // ,caption: '<b>FACTURAS</b>'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
+
+
+
+
         });
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-        //jQuery("#Lista").jqGrid('setFrozenColumns');
+        jQuery("#Lista").jqGrid('bindKeys');
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();

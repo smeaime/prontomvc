@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+
+
 using System.Web;
 using System.Data.Entity.Core.Objects;
 using System.Text;
@@ -88,7 +93,7 @@ namespace ProntoMVC.Controllers
             "(it.{0} NOT LIKE (@p{1}+'%'))",    // "bn" - does not begin with
             "(it.{0} LIKE ('%'+@p{1}))",        // "ew" - ends with
             "(it.{0} NOT LIKE ('%'+@p{1}))",    // "en" - does not end with
-            "(it.{0} LIKE ('%'+@p{1}+'%'))",    // "cn" - contains
+            "( CAST (it.{0} AS System.String )  LIKE ('%'+@p{1}+'%'))",    // "cn" - contains
             "(it.{0} NOT LIKE ('%'+@p{1}+'%'))" //" nc" - does not contain
         };
 
@@ -127,7 +132,7 @@ namespace ProntoMVC.Controllers
                                  string includes,
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
                                  ProntoMVC.Data.Models.DemoProntoEntities db,
-                                 ref int totalRecords
+                                 ref int totalRecords, string includes2 = ""
                              )
                                where T : class
         {
@@ -143,7 +148,23 @@ namespace ProntoMVC.Controllers
             //var sc = Generales.sCadenaConex("Autotrol");
             //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
             var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
-            var set = context.CreateObjectSet<T>().Include(includes);
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ObjectQuery<T> set;
+            
+            if (includes2=="") 
+                set = context.CreateObjectSet<T>().Include(includes); 
+            else 
+                set = context.CreateObjectSet<T>().Include(includes).Include(includes2);
+
+
+            // estoy usando un include adicional porque no anduvo bien pasar en uno solo una lista doble de subcolecciones (por ejemplo
+            //                   el caso del maestro de requerimientos:
+            //                  db.Requerimientos.Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos")  no funciona
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -204,7 +225,106 @@ namespace ProntoMVC.Controllers
 
 
 
-        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic =false)
+        static public List<T> FiltroGenerico_UsandoStore<T>(
+                                 string sidx, string sord, int page, int rows, bool _search, string filters,
+                                 ProntoMVC.Data.Models.DemoProntoEntities db,
+                                 ref int totalRecords,
+                                ObjectResult<T> set
+                             )
+                               where T : class
+        {
+
+
+
+
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+
+            string s = "true";
+
+            var sb = new StringBuilder();
+            var objParams = new List<ObjectParameter>();
+
+            // hay que poner lo del FM y sacar los espacios en los nombres de las columnas
+            if (f != null)
+            {
+                f.CrearFiltro<T>(sb, objParams, true);
+                s = sb.ToString();
+
+                //s = s.Replace("it.", "");
+                //s = s.Replace("@p0", "\"" +  objParams[0].Value.ToString() + "\"");
+                //set.AsQueryable().Where(s, objParams[0].Value.ToString()).ToList();  // este where es de dynamic, no de EF
+            }
+
+
+
+            // var filteredQuery = set.Where(x=>x.IdImputacion==1);
+            // String.Format("{1
+            //s = s.Replace("@0", "\"" + objParams[0].Value.ToString() + "\"");
+            //s = "true";
+            //s = "(Comp=\"ND\")";
+            // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
+            // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
+            var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            var qqqq = filteredQuery.ToList();
+            //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
+
+
+
+            // var sasdasd= f .FilterObjectSet( set);
+
+
+            //ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result> filteredQuery =
+            //    (f == null ? (ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set :
+            //    f.FilterObjectSet((ObjectQuery<CtasCtesD_TXPorTrs_AuxiliarEntityFramework_Result>)set));
+
+            //filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
+
+            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
+
+            // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
+
+            try
+            {
+                totalRecords = qqqq.Count();
+            }
+            catch (Exception)
+            {
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
+                throw;
+            }
+
+
+
+
+
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            // var pagedQuery = qqqq;
+            //.Skip("it." + sidx + " " + sord, "@skip",
+            //        new ObjectParameter("skip", (page - 1) * rows))
+            // .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            return qqqq;
+
+        }
+
+
+        public void CrearFiltro<T>(StringBuilder sb, List<ObjectParameter> objParams, bool EsParaLinqDynamic = false)
         {
 
 
@@ -250,70 +370,89 @@ namespace ProntoMVC.Controllers
                     sb.Append(groupOp);
 
                 var iParam = objParams.Count;
-                
+
                 if (EsParaLinqDynamic)
-                    sb.AppendFormat(FormatMapping_ParaLinqDynamic [(int)rule.op], rule.field, iParam);
+                    sb.AppendFormat(FormatMapping_ParaLinqDynamic[(int)rule.op], rule.field, iParam);
                 else
                     sb.AppendFormat(FormatMapping[(int)rule.op], rule.field, iParam);
-                    
+
 
 
 
                 ObjectParameter param;
-                switch (propertyInfo.PropertyType.FullName)
+                
+
+                
+                
+                
+                // si usás "contains" tenés que usar sí o sí el tipo string
+                if (rule.op == Operations.cn) param = new ObjectParameter("p" + iParam, rule.data);
+                    
+                else
                 {
-                    case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                    case "System.Int32":  // int
-                        param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
-                        break;
-                    case "System.Int64":  // bigint
-                        param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
-                        break;
-                    case "System.Int16":  // smallint
-                        param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
-                        break;
-                    case "System.SByte":  // tinyint
-                        param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
-                        break;
-                    case "System.Single": // Edm.Single, in SQL: float
-                        param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
-                        break;
-                    case "System.Double": // float(53), double precision
-                        param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
-                        break;
-                    case "System.Boolean": // Edm.Boolean, in SQL: bit
-                        param = new ObjectParameter("p" + iParam,
-                            String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
-                            String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
-                            String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
-                            true :
-                            false);
-                        break;
-
-                    case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
-                    case "System.DateTime": // Edm.Single, in SQL: float
-                        param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
-                        break;
-
-                    default:
-                        // TODO: Extend to other data types
-                        // binary, date, datetimeoffset,
-                        // decimal, numeric,
-                        // money, smallmoney
-                        // and so on
 
 
-                        if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
-                        {
-                            // si es nullable, no uses string!!!
-                            throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
-                        }
+                    switch (propertyInfo.PropertyType.FullName)
+                    {
+                        case "System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                        case "System.Int32":  // int
+                            param = new ObjectParameter("p" + iParam, Int32.Parse(rule.data));
+                            break;
+                        case "System.Int64":  // bigint
+                            param = new ObjectParameter("p" + iParam, Int64.Parse(rule.data));
+                            break;
+                        case "System.Int16":  // smallint
+                            param = new ObjectParameter("p" + iParam, Int16.Parse(rule.data));
+                            break;
+                        case "System.SByte":  // tinyint
+                            param = new ObjectParameter("p" + iParam, SByte.Parse(rule.data));
+                            break;
+                        case "System.Single": // Edm.Single, in SQL: float
+                            param = new ObjectParameter("p" + iParam, Single.Parse(rule.data));
+                            break;
+                        case "System.Double": // float(53), double precision
+                            param = new ObjectParameter("p" + iParam, Double.Parse(rule.data));
+                            break;
+                        case "System.Boolean": // Edm.Boolean, in SQL: bit
+                            param = new ObjectParameter("p" + iParam,
+                                String.Compare(rule.data, "1", StringComparison.Ordinal) == 0 ||
+                                String.Compare(rule.data, "yes", StringComparison.OrdinalIgnoreCase) == 0 ||
+                                String.Compare(rule.data, "true", StringComparison.OrdinalIgnoreCase) == 0 ?
+                                true :
+                                false);
+                            break;
 
-                        param = new ObjectParameter("p" + iParam, rule.data);
+                        case "System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]":
+                        case "System.DateTime": // Edm.Single, in SQL: float
+                            param = new ObjectParameter("p" + iParam, DateTime.Parse(rule.data));
+                            break;
+
+                        default:
+                            // el default es string
+
+                            // TODO: Extend to other data types
+                            // binary, date, datetimeoffset,
+                            // decimal, numeric,
+                            // money, smallmoney
+                            // and so on
 
 
-                        break;
+                            if (propertyInfo.PropertyType.FullName.Contains("Nullable"))
+                            {
+                                // si es nullable, no uses string!!!
+                                throw new Exception("Incluir el tipo " + propertyInfo.PropertyType.FullName + " en el selectcase");
+                            }
+
+                            param = new ObjectParameter("p" + iParam, rule.data);
+
+
+                            break;
+                    }
+
                 }
+
+
+
                 objParams.Add(param);
             }
 
@@ -338,7 +477,7 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                ObjectQuery<T> filteredQuery = inputQuery.Where(sb.ToString());
+                ObjectQuery<T> filteredQuery = inputQuery.Where(  sb.ToString());
 
                 foreach (var objParam in objParams)
                     filteredQuery.Parameters.Add(objParam);

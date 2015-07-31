@@ -96,6 +96,9 @@ function RefrescaAnchoJqgrids() {
         });
     }
 
+
+    searchBoxAncho();
+
 }
 
 
@@ -215,12 +218,46 @@ function ProximoNumeroItem() {
 
 
 
-function AgregarRenglonesEnBlanco(renglonVacio) {
+function searchBoxAncho() {
+    // http://stackoverflow.com/questions/5688158/possible-to-make-jqgrid-search-box-stay-on-page
+
+    var grid = $("#ListaDrag");
+
+    // find the div which contain the searching dialog
+    var searchDialog = $("#fbox_" + grid[0].id);
+
+    // make the searching dialog non-popup
+    searchDialog.css({ "width": "500px" });
+
+
+    /*
+    You can see the results live here. To make away the border over the searching dialog and grid you can do additionally the following:
+
+    searchDialog.addClass("ui-jqgrid ui-widget ui-widget-content ui-corner-all");
+    searchDialog.css({position:"relative", "z-index":"auto", float:"left"})
+    var gbox = $("#gbox_"+grid[0].id);
+    gbox.before(searchDialog);
+    gbox.css({clear:"left"});
+    */
+
+    searchDialog = $("#searchmodfbox_ListaDrag");
+    searchDialog.css({ "width": "500px" });
+
     
-    var grid = jQuery("#Lista")
+
+
+}
+
+
+
+function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
+    
+
+    nombregrilla = nombregrilla || "#Lista";
+    var grid = jQuery(nombregrilla)
     var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
 
-    var rows = $("#Lista").getGridParam("reccount");
+    var rows = grid.getGridParam("reccount") || 0;
 
 
     // jQuery("#Lista").jqGrid('getGridParam', 'records')
@@ -239,10 +276,10 @@ function AgregarRenglonesEnBlanco(renglonVacio) {
 
     var rowsLlenas = 0;
 
-    var dataIds = $('#Lista').jqGrid('getDataIDs');
+    var dataIds = grid.jqGrid('getDataIDs');
     for (var i = 0; i < dataIds.length; i++) {
 
-        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+        var data = grid.jqGrid('getRowData', dataIds[i]);
 
 
         var desc = data['Descripcion'];
@@ -251,7 +288,7 @@ function AgregarRenglonesEnBlanco(renglonVacio) {
 
         if (data['NumeroItem'] == "") {
             data['NumeroItem'] = ProximoNumeroItem();
-            $('#Lista').jqGrid('setRowData', dataIds[i], data);
+            grid.jqGrid('setRowData', dataIds[i], data);
         }
 
         rowsLlenas++;
@@ -306,12 +343,12 @@ function AgregarRenglonesEnBlanco(renglonVacio) {
         }
 
     }
-    rows = $("#Lista").getGridParam("reccount");
+    rows = grid.getGridParam("reccount");
 
 
     //alert(rows);
 
-    $("#Lista").jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+    grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
 }
 
 

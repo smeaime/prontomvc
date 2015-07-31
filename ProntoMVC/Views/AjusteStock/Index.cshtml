@@ -44,18 +44,18 @@
                         { name: 'TipoAjuste', index: 'TipoAjuste', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'NumeroAjusteStock', index: 'NumeroAjusteStock', align: 'right', width: 80, editable: false, hidden: false },
                         { name: 'FechaAjuste', index: 'FechaAjuste', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'TipoAjusteStock', index: 'TipoAjusteStock', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Realizo', index: 'Realizo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'TipoAjusteStock', index: 'TipoAjusteStock', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Realizo', index: 'Realizo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaModifico', index: 'FechaModifico', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false },
-                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'SolicitudesMaterial', index: 'SolicitudesMaterial', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['eq'] } }
+                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'SolicitudesMaterial', index: 'SolicitudesMaterial', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {

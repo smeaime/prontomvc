@@ -1,8 +1,24 @@
+
+
+
 declare @Desde datetime,@Hasta datetime,@Salida varchar(10),@IdCentroCosto int = Null
-set @Desde=convert(datetime,'1/2/2014',103)
-set @Hasta=convert(datetime,'31/8/2014',103)
+set @Desde=convert(datetime,'1/4/2015',103)
+set @Hasta=convert(datetime,'30/4/2015',103)
 set @Salida='VENTAS'
 set @IdCentroCosto=-1
+
+
+--El informe de contribución emitido para 04/2015 indica que se facturaron en BsAs 98,262.10 TN de Elevación.
+--Al emitir el listado de descargas de Exportacion del 01/04/2015 al 30/04/2015 de BsAs el kilaje total da 216,634,870.
+exec InformeResumenGastosPorRubroContable_TX_1 @desde,@hasta,@salida
+
+
+exec InformeResumenGastosPorRubroContable_TX_1 '1/4/2015','30/4/2015','VENTAS'
+
+
+
+
+
 
 
 DECLARE @Desde1 datetime, @Hasta1 datetime, @TotalVentas numeric(18,2), @TotalPorcentaje numeric(6,2), @IdObraAdministracion int, @IdObra int, @IdObra2 int, 

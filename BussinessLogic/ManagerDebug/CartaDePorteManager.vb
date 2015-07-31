@@ -1,4 +1,6 @@
-﻿
+﻿'Option Strict On
+Option Explicit On
+
 Option Infer On
 
 Imports System
@@ -7321,7 +7323,20 @@ Public Class CartaDePorteManager
             End If
 
 
+            'http://bdlconsultores.ddns.net/Consultas/Admin/verConsultas1.php?recordid=14488
+            'En los campos CEE y CTG controlar que tengan 14 y 8 dígitos, respectivamente.
+            'Si no se cumple, avisar al usuario con una advertencia, pero dejar grabar.
+            If iisNull(.SubnumeroVagon, 0) = 0 Then
 
+                If Val(.CEE) > 0 And .CEE.Length <> 14 Then
+                    sWarnings &= "El CEE no tiene 14 dígitos" & vbCrLf
+                End If
+
+                If Val(.CTG) > 0 And .CTG.ToString().Length <> 8 Then
+                    sWarnings &= "El CTG no tiene 8 dígitos" & vbCrLf
+                End If
+
+            End If
 
 
             If False Then
@@ -18449,6 +18464,20 @@ Public Class barras
 
 
 
+    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
+        Dim listaf = New Generic.List(Of Integer)
+
+        For idfac = desde To hasta
+            listaf.Add(idfac)
+        Next
+
+        Return EnviarFacturaElectronicaEMail(listaf, cliente, SC, bVistaPrevia, sEmail)
+
+    End Function
+
+
+
+
     Shared Function EnviarFacturaElectronicaEMail(ByVal Facturas As Generic.IList(Of Integer), cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
 
 
@@ -18475,7 +18504,7 @@ Public Class barras
 
 
 
-            Dim destinatario As String
+            Dim destinatario As String = ""
 
             Dim idcli As Integer
             Dim cli As ClienteNuevo
@@ -18495,22 +18524,38 @@ Public Class barras
                 cli = ClienteManager.GetItem(SC, idcli)
 
                 'destinatario = cli.Email
-                destinatario = cli.EmailFacturacionElectronica
-
-
+                destinatario = If(cli.EmailFacturacionElectronica, "")
 
             Catch ex As Exception
                 ErrHandler.WriteError(ex)
             End Try
 
+
             ErrHandler.WriteError("cli " & idcli & " " & destinatario & " " & fac.IdVendedor & " " & fac.IdCliente)
 
+            Try
 
-            If destinatario.ToString = "" Then
-                sErr += "El cliente " & cli.RazonSocial & " no tiene casilla de correo " + Environment.NewLine
-                bMarcar = False
+                If destinatario = "" Then
+
+                    If cli Is Nothing Then
+                        sErr += "El cliente no tiene casilla de correo " + Environment.NewLine
+
+                    Else
+                        sErr += "El cliente " & NombreCliente(SC, idcli) & " no tiene casilla de correo " + Environment.NewLine
+                        'cli.RazonSocial  no anda...
+                    End If
+
+                    bMarcar = False
+                End If
+
+            Catch ex As Exception
+                ErrHandler.WriteError(ex)
+                ErrHandler.WriteError("cli está en null???? -NO. el problema es que destinatario ( que es un string) puede ser nothing " & sErr)
+            End Try
+
+            If Not bVistaPrevia And destinatario = "" Then
+                Continue For
             End If
-
 
 
             If bVistaPrevia Then
@@ -18625,18 +18670,6 @@ Public Class barras
             Return False
         End Try
 
-
-    End Function
-
-
-    Shared Function EnviarFacturaElectronicaEMail(desde As Integer, hasta As Integer, cliente As String, SC As String, bVistaPrevia As Boolean, sEmail As String) As String
-        Dim listaf = New Generic.List(Of Integer)
-
-        For idfac = desde To hasta
-            listaf.Add(idfac)
-        Next
-
-        Return EnviarFacturaElectronicaEMail(listaf, cliente, SC, bVistaPrevia, sEmail)
 
     End Function
 
