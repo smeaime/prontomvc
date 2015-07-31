@@ -12330,7 +12330,7 @@ Namespace Pronto.ERP.Bll
                 Dim cartas '= db.CartasDePortes.Where(sWHERE)
 
 
-                PrintLine(nF, "CartaPorte;IdRubro;TipoRubro;DRubro;ResFinal;DescuentoFinal;KilosMerma")
+                PrintLine(nF, "CartaPorte;IdRubro;TipoRubro;DRubro;ResFinal;DescuentoFinal;KilosMerma;Destino")
 
 
                 'CartaPorte	IdRubro	TipoRubro	DRubro	ResFinal	 DescuentoFinal 	 KilosMerma 
@@ -13227,7 +13227,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Or descripcion = "Grado" Then
+                If Resultado <> 0 Or Rebaja <> 0 Or Merma <> 0 Then
 
 
                     Dim cero = 0
