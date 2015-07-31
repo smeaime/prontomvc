@@ -7,7 +7,10 @@ BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importa
 ----------------------------------------------------------------------------------------
 
 
-poner bien los nombres de columnas para que funcionen los filtros
+cómo usar las busquedas Contain con columnas numericas?
+
+poner bien los nombres de columnas para que funcionen los filtros (es decir, los "index" y los "sopt". "name" puede quedar distinto)
+no podes cambiar de un saque las [eq] a [cn,eq] porque las numericas no se bancan el cn
 
 No funciona el filtro "eq" en columnas tipo fecha
 
@@ -19,6 +22,8 @@ sacar el formato del popup de busqueda -en realidad, lo que más molesta es el a
 -POSTERGAR, porque es complicado
 ////////////////////////////////
 
+tambien queda feo el autofiltro por el estilo del Bootstrap
+-y si usas el parche ese de Soliman? https://github.com/Soliman/jqGrid.bootstrap
 
 
 Cómo sacar el formato bootstrap sobre la jqgrid?
