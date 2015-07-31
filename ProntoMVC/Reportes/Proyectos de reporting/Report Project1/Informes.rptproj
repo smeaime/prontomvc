@@ -31,6 +31,10 @@
       <FullPath>Balance2.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Cardex.rdl</Name>
+      <FullPath>Cardex.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Certificado Ganancias.rdl</Name>
       <FullPath>Certificado Ganancias.rdl</FullPath>
     </ProjectItem>
@@ -215,16 +219,16 @@
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Transporte de mercaderia.rdl</Name>
+      <FullPath>Transporte de mercaderia.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Vales emitidos no retirados.rdl</Name>
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Cardex.rdl</Name>
-      <FullPath>Cardex.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Transporte de mercaderia.rdl</Name>
-      <FullPath>Transporte de mercaderia.rdl</FullPath>
+      <Name>Requerimientos pendientes sin pedido.rdl</Name>
+      <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
