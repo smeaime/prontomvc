@@ -419,6 +419,12 @@ namespace ProntoMVC.Reportes
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
 
+            else if (reportName == "Requerimientos pendientes sin pedido")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
 
             else
             {
