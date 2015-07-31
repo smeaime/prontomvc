@@ -259,9 +259,9 @@ If you want additionally remove vertical border between the cells in the grid yo
                         {name: 'act', index: 'act', align: 'center', width: 80, hidden: false, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'act', index: 'act', align: 'center', width: 80, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Tipo', index: 'Numero', align: 'left', width: 230, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Nro int', index: 'Numero', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq']} },
-                        { name: 'Nro', index: 'Orden', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['eq']} },
+                        { name: 'Tipo', index: 'Numero', align: 'left', width: 230, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'Nro int', index: 'Numero', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'Nro', index: 'Orden', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
                         { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
                         { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },

@@ -1259,7 +1259,7 @@ $(function () {
                         { name: 'IdComprobante', index: 'IdComprobante', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Cabeza', index: 'Cabeza', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Tipo', index: 'Tipo', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Fecha', index: 'Fecha', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'FechaVencimiento', index: 'FechaVencimiento', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Moneda', index: 'Moneda', align: 'left', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -1303,13 +1303,13 @@ $(function () {
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'IdValor', index: 'IdValor', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Tipo', index: 'Tipo', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'NumeroInterno', index: 'NumeroInterno', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'NumeroValor', index: 'NumeroValor', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroInterno', index: 'NumeroInterno', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'NumeroValor', index: 'NumeroValor', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaValor', index: 'FechaValor', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Banco', index: 'Banco', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Importe', index: 'Importe', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
                         { name: 'TipoComprobante', index: 'TipoComprobante', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: false },
-                        { name: 'NumeroComprobante', index: 'NumeroComprobante', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroComprobante', index: 'NumeroComprobante', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaComprobante', index: 'FechaComprobante', width: 90, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Cliente', index: 'Cliente', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
         ],
@@ -2779,7 +2779,11 @@ function deshabilitar() {
             left: "30%"
         }
     });
-    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar anticipo"]');    $td.hide();    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Agregar anticipo"]');
+    $td.hide();
+    var $td = $($("#Lista")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaContable").block({
         message: "",
         theme: true,
@@ -2789,12 +2793,22 @@ function deshabilitar() {
         message: "",
         theme: true,
     });
-    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar valor"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar caja"]');    $td.hide();    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar valor"]');
+    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Agregar caja"]');
+    $td.hide();
+    var $td = $($("#ListaValores")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaRubrosContables").block({
         message: "",
         theme: true,
     });
-    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Agregar rubro contable"]');    $td.hide();    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Eliminar"]');    $td.hide();
+    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Agregar rubro contable"]');
+    $td.hide();
+    var $td = $($("#ListaRubrosContables")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+    $td.hide();
+
     $("#ListaImpuestos").block({
         message: "",
         theme: true,
@@ -2818,9 +2832,17 @@ function ActivarAsientoManual(Activar) {
             message: "",
             theme: true,
         });
-        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.show();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.show();
+
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.show();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.show();
     } else {
-        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');        $td.hide();        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');        $td.hide();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Agregar item"]');
+        $td.hide();
+        $td = $($("#ListaContable")[0].p.pager + '_left ' + 'td[title="Eliminar"]');
+        $td.hide();
+
         $("#ListaContable").block({
             message: "",
             theme: true,
