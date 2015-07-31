@@ -89,19 +89,18 @@ else
                         <br />
                         <br />
                     </p>
-                    <div class="text-center  editor-label">
+                    <div class="text-center  editor-label" style="font-size: 14px">
                         @Html.CheckBoxFor(m => m.RememberMe) Entrar automáticamente @*@Html.LabelFor(m => m.RememberMe)*@
                         @Html.ValidationSummary(false)
                     </div>
                     <p>
                         @*@Html.ValidationSummary(true, "No se ha iniciado la sesión. Corrija los errores e inténtelo de nuevo.")*@
                     </p>
-                    @if (false)
+                    @if (true)
                     {
                         <a style="width: ; font-size: 14px; line-height: 46px;" href="RecuperarPassword">
                             ¿Olvidaste
-                            tu contraseña?
-                        </a><br /> }
+                            tu contraseña?</a><br /> }
                     <a style="width: ; font-size: 14px" href="Register" class="text-center  editor-label">¿No tenés cuenta? Registrate!</a><br />
                 </div>
             </div>

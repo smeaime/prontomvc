@@ -336,10 +336,19 @@ namespace ProntoMVC.Controllers
                 if (rule.field.Split('.').Length == 2) // si usamos más niveles, hay que modificar esto
                 {
 
+                    // Si pasan Empleado1.Nombre, Empleado1 no es un type, sino el nombre del objeto, que en este
+                    //      caso especial no tiene el mismo nombre que su tipo ... Cómo hacés ahí?
+                    // Tengo que obtener de qué tipo es esa variable
 
 
-                    propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data")
-                                        .GetProperty(rule.field.Split('.')[1]); ; //target type
+                    PropertyInfo padrepropertyInfo = null;
+                    padrepropertyInfo = typeof(T).GetProperty(rule.field.Split('.')[0]); 
+
+                   
+
+                    //propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data").GetProperty(rule.field.Split('.')[1]); ; 
+
+                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(rule.field.Split('.')[1]); ; //target type
 
                 }
                 else if (rule.field.Split('.').Length == 1)

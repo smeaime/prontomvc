@@ -37,16 +37,38 @@
             colNames: ['', 'Emitir', 'IdRecibo', 'Punto venta', 'Numero recibo', 'Fecha recibo', 'Tipo', 'Anulado', 'Codigo cliente', 'Cliente', 'Cuenta', 'Mon.', 'Deudores', 'Valores', 'Ret. iva', 'Ret. gan',
                        'Ret. iibb', 'Otros conceptos', 'Obra', 'Vendedor', 'Cobrador', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Cotizacion', 'Observaciones'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50, search: false },
                         { name: 'IdRecibo', index: 'IdRecibo', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'right', width: 50, editable: false, hidden: false },
                         { name: 'NumeroRecibo', index: 'NumeroRecibo', align: 'right', width: 80, editable: false, hidden: false },
-                        { name: 'FechaRecibo', index: 'FechaRecibo', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        {
+                            name: 'FechaRecibo', index: 'FechaRecibo', width: 80, align: 'center', sorttype: 'date',
+                            hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+                        },
                         { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CodigoCliente', index: 'CodigoCliente', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Cliente', index: 'Cliente.RazonSocial', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false },
                         { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Deudores', index: 'Deudores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
