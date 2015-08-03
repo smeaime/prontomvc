@@ -323,6 +323,308 @@ namespace ProntoMVC.Controllers
 
 
 
+
+
+        public class OrdenesCompra2
+        {
+            //public OrdenesCompra2();
+
+            public int? Agrupacion2Facturacion { get; set; }
+            public int? AgrupacionFacturacion { get; set; }
+            public string Anulada { get; set; }
+            //public int? Aprobo { get; set; }
+            public string ArchivoAdjunto1 { get; set; }
+            public string ArchivoAdjunto10 { get; set; }
+            public string ArchivoAdjunto2 { get; set; }
+            public string ArchivoAdjunto3 { get; set; }
+            public string ArchivoAdjunto4 { get; set; }
+            public string ArchivoAdjunto5 { get; set; }
+            public string ArchivoAdjunto6 { get; set; }
+            public string ArchivoAdjunto7 { get; set; }
+            public string ArchivoAdjunto8 { get; set; }
+            public string ArchivoAdjunto9 { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            //  public virtual Cliente Cliente { get; set; }
+            public virtual Condiciones_Compra Condiciones_Compra { get; set; }
+            public virtual ICollection<DetalleOrdenesCompra> DetalleOrdenesCompras { get; set; }
+            public virtual Empleado Empleado { get; set; }
+            public virtual Empleado Empleado1 { get; set; }
+            public virtual Empleado Empleado2 { get; set; }
+            public virtual Empleado Empleado3 { get; set; }
+            public string Estado { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public DateTime? FechaAprobacion { get; set; }
+            public DateTime? FechaCambioEstado { get; set; }
+            public DateTime? FechaEntrega { get; set; }
+            public DateTime? FechaIngreso { get; set; }
+            public DateTime? FechaModifico { get; set; }
+            public DateTime? FechaOrdenCompra { get; set; }
+            public int? IdCliente { get; set; }
+            public int? IdCondicionVenta { get; set; }
+            public int? IdDetalleClienteLugarEntrega { get; set; }
+            public int? IdListaPrecios { get; set; }
+            public int? IdMoneda { get; set; }
+            public int? IdObra { get; set; }
+            public int IdOrdenCompra { get; set; }
+            public int? IdUsuarioAnulacion { get; set; }
+            public int? IdUsuarioCambioEstado { get; set; }
+            public int? IdUsuarioIngreso { get; set; }
+            public int? IdUsuarioModifico { get; set; }
+            public decimal? ImporteTotal { get; set; }
+            public virtual ListasPrecio ListasPrecio { get; set; }
+            // public virtual Moneda Moneda { get; set; }
+            public int? NumeroOrdenCompra { get; set; }
+            public string NumeroOrdenCompraCliente { get; set; }
+            //public virtual Obra Obra { get; set; }
+            public string Observaciones { get; set; }
+            public decimal? PorcentajeBonificacion { get; set; }
+            public string SeleccionadaParaFacturacion { get; set; }
+            public decimal PendienteRemitir { get; set; }
+            public decimal PendienteFacturar { get; set; }
+
+            public string Producido { get; set; }
+            public string Cumplido { get; set; }
+            public int? ClienteCodigo { get; set; }
+            public string ClienteNombre { get; set; }
+            public string ClienteCuit { get; set; }
+            public string Aprobo { get; set; }
+            public string Remitos { get; set; }
+            public string Facturas { get; set; }
+            public string CondicionVenta { get; set; }
+            public int Items { get; set; }
+            public string FacturarA { get; set; }
+            public string UsuarioAnulo { get; set; }
+            public string UsuarioIngreso { get; set; }
+            public string UsuarioModifico { get; set; }
+            public string GrupoFacturacion { get; set; }
+            public string TipoOC { get; set; }
+            public string MayorFechaEntrega { get; set; }
+            public string ListaDePrecio { get; set; }
+            public string Obra { get; set; }
+            public string Moneda { get; set; }
+
+
+        }
+
+        public virtual ActionResult TT_DynamicGridData_ConQueryEntera(string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            string PendienteRemito = "";
+            string PendienteFactura = "";
+
+
+            string campo = String.Empty;
+            int pageSize = rows ;
+            int currentPage = page ;
+            decimal cien = 100;
+
+
+            var context = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
+
+
+            var data = (ObjectQuery<OrdenesCompra2>)(from a in db.OrdenesCompras // context.OrdenesCompras
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from e in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(v => v.IdEmpleado == a.IdUsuarioAnulacion).DefaultIfEmpty()
+                        //from g in db.Empleados.Where(v => v.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        select new OrdenesCompra2
+                        {
+                           IdOrdenCompra=  a.IdOrdenCompra,
+                           IdCliente= a.IdCliente,
+                          IdObra=  a.IdObra,
+                          IdCondicionVenta=  a.IdCondicionVenta,
+                       IdListaPrecios=     a.IdListaPrecios,
+                       IdMoneda=     a.IdMoneda,
+                        NumeroOrdenCompraCliente=    a.NumeroOrdenCompraCliente,
+                          NumeroOrdenCompra = a.NumeroOrdenCompra,
+                        FechaOrdenCompra =   a.FechaOrdenCompra,
+                           Anulada = a.Anulada,
+                           SeleccionadaParaFacturacion = a.SeleccionadaParaFacturacion,
+                           Obra = a.Obra != null ? a.Obra.NumeroObra : "",
+                            Producido = a.Estado,
+                          Cumplido=   "",
+                        
+                            ClienteCodigo = a.Cliente.CodigoCliente,
+                            ClienteNombre = a.Cliente.RazonSocial,
+                            ClienteCuit = a.Cliente.Cuit,
+                            Aprobo = a.Empleado3.Nombre ,
+                            Remitos = "",
+                            Facturas = "",
+                            CondicionVenta = a.Condiciones_Compra != null ? a.Condiciones_Compra.Descripcion : "",
+                            Items = 0,
+                            FacturarA = (a.AgrupacionFacturacion ?? 1) == 1 ? "Cliente" : 
+                                ((a.AgrupacionFacturacion ?? 1) == 2 ? "Obra" : ((a.AgrupacionFacturacion ?? 1) == 3 ? "U.Operativa" : "")),
+                            UsuarioAnulo = a.Empleado != null ? a.Empleado.Nombre : "",
+                         UsuarioIngreso = a.Empleado2 != null ? a.Empleado2.Nombre : "",
+                            UsuarioModifico = a.Empleado1 != null ? a.Empleado1.Nombre : "",
+                            GrupoFacturacion = (a.Agrupacion2Facturacion ?? 1) == 1 ? "Grupo 1" : ((a.Agrupacion2Facturacion ?? 1) == 2 ? "Grupo 2" : ((a.Agrupacion2Facturacion ?? 1) == 3 ? "Grupo 3" : "")),
+                            TipoOC = "",
+                             MayorFechaEntrega = "",
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
+                           FechaAnulacion = a.FechaAnulacion,
+                           FechaIngreso = a.FechaIngreso,
+                           FechaModifico = a.FechaModifico,
+                           
+                         PorcentajeBonificacion  = a.PorcentajeBonificacion,
+                          ImporteTotal  =a.ImporteTotal,
+                            Moneda = a.Moneda.Abreviatura,
+                         Observaciones =  a.Observaciones,
+                            PendienteRemitir = PendienteRemito == "SI"
+                                                ? ((db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) - (db.DetalleRemitos.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.Remito.Anulado ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0)
+                                                : 1,
+                            PendienteFacturar = PendienteFactura == "SI"
+                                                ? (db.DetalleOrdenesCompras.Where(x => x.IdOrdenCompra == a.IdOrdenCompra && (a.Anulada ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : 100) -
+                                                        (db.DetalleFacturasOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0) +
+                                                        (db.DetalleNotasCreditoOrdenesCompras.Where(x => x.IdDetalleOrdenCompra == y.IdDetalleOrdenCompra && (x.NotasCredito.Anulada ?? "NO") != "SI").Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.Cantidad : z.PorcentajeCertificacion)) ?? 0)
+                                                    )) ?? 0
+                                                : 1
+                        }).AsQueryable();
+
+
+
+
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Oleg: filtros avanzados con jqgrid y LINQ    http://stackoverflow.com/questions/5500805/asp-net-mvc-2-0-implementation-of-searching-in-jqgrid/5501644#5501644
+            // usando dbcontext en lugar de objectcontext   http://stackoverflow.com/questions/9027150/jqgrid-asp-net-4-mvc-how-to-make-search-implementation-on-a-dbcontext-reposit
+
+            //var sc = Generales.sCadenaConex("Autotrol");
+            //var dbcontext = new ProntoMVC.Data.Models.DemoProntoEntities(sc);
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ObjectQuery<OrdenesCompra2> set;
+            // set = context.CreateObjectSet<Data.Models.OrdenesCompra>()
+
+
+            IQueryable<OrdenesCompra2>  aaaa= data
+                        .Include("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleOrdenesCompra,OrdenesCompra")
+                        .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0))
+                                 && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)));
+
+
+            set = aaaa as ObjectQuery<OrdenesCompra2>;
+
+            // estoy usando un include adicional porque no anduvo bien pasar en uno solo una lista doble de subcolecciones (por ejemplo
+            //                   el caso del maestro de requerimientos:
+            //                  db.Requerimientos.Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos")  no funciona
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<OrdenesCompra2>
+                                (data
+                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+            var jsonData = new jqGridJson()
+            {
+                total =  (totalRecords + rows - 1) / rows,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdOrdenCompra.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdOrdenCompra} ) + ">Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdOrdenCompra} ) + ">Emitir</a> ",
+                                a.IdOrdenCompra.ToString(),
+                                a.IdCliente.NullSafeToString(),
+                                a.IdObra.NullSafeToString(),
+                                a.IdCondicionVenta.NullSafeToString(),
+                                a.IdListaPrecios.NullSafeToString(),
+                                a.IdMoneda.NullSafeToString(),
+                                a.NumeroOrdenCompraCliente.NullSafeToString(),
+                                a.NumeroOrdenCompra.NullSafeToString(),
+                                a.FechaOrdenCompra == null ? "" : a.FechaOrdenCompra.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Producido.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.SeleccionadaParaFacturacion.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.Remitos.NullSafeToString(),
+                                a.Facturas.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                db.DetalleOrdenesCompras.Where(x=>x.IdOrdenCompra==a.IdOrdenCompra).Select(x=>x.IdDetalleOrdenCompra).Distinct().Count().ToString(),
+                                a.FacturarA.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioAnulo.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioIngreso.NullSafeToString(),
+                                a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.UsuarioModifico.NullSafeToString(),
+                                a.GrupoFacturacion.NullSafeToString(),
+                                a.TipoOC.NullSafeToString(),
+                                a.MayorFechaEntrega.NullSafeToString(),
+                                a.ListaDePrecio.NullSafeToString(),
+                                a.PorcentajeBonificacion.NullSafeToString(),
+                                a.ImporteTotal.NullSafeToString(),
+                                a.Moneda.NullSafeToString(),
+                                a.Observaciones.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
         
         public virtual ActionResult TT_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
