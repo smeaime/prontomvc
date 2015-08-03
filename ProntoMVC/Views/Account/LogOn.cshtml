@@ -89,8 +89,8 @@ else
                         <br />
                         <br />
                     </p>
-                    <div class="text-center  editor-label" style="font-size: 14px">
-                        @Html.CheckBoxFor(m => m.RememberMe) Entrar automáticamente @*@Html.LabelFor(m => m.RememberMe)*@
+                    <div class="text-center  editor-label" style="font-size: 14px;   ">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { style = "vertical-align: top;" }) Entrar automáticamente @*@Html.LabelFor(m => m.RememberMe)*@
                         @Html.ValidationSummary(false)
                     </div>
                     <p>

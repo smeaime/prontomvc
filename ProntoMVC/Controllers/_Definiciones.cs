@@ -128,6 +128,77 @@ namespace ProntoMVC.Controllers
 
 
 
+
+        static public ObjectQuery<T> FiltroGenerico_PasandoQueryEntera<T>(
+                             ObjectQuery<T> set,
+                              
+                             string sidx, string sord, int page, int rows, bool _search, string filters,
+                             ref int totalRecords
+                         )
+                           where T : class
+        {
+
+
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+            ObjectQuery<T> filteredQuery =
+                (f == null ? (ObjectQuery<T>)set :
+                f.FilterObjectSet((ObjectQuery<T>)set));
+
+            filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
+
+            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
+
+            // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
+
+            try
+            {
+                totalRecords = filteredQuery.Count();
+            }
+            catch (Exception)
+            {
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
+                throw;
+            }
+
+
+
+
+
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            var pagedQuery = filteredQuery
+                                        .Skip("it." + sidx + " " + sord, "@skip",
+                                                new ObjectParameter("skip", (page - 1) * rows))
+                                         .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            return pagedQuery;
+
+            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        }
+
+
+
         static public ObjectQuery<T> FiltroGenerico<T>(
                                  string includes,
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
