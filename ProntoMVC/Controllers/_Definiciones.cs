@@ -300,7 +300,7 @@ namespace ProntoMVC.Controllers
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
                                  ProntoMVC.Data.Models.DemoProntoEntities db,
                                  ref int totalRecords,
-                                ObjectResult<T> set
+                                IEnumerable<T> set
                              )
                                where T : class
         {
