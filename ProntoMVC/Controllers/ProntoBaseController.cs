@@ -175,18 +175,24 @@ namespace ProntoMVC.Controllers
 
             db = new DemoProntoEntities(sc);
 
-            try
-            {
-                dbmant = new ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
-                //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
 
-            }
-            catch (Exception e)
+
+            if (false) // desactivé la creacion de dbmant porque desde el studio me está poniendo lenta la cosa creo
             {
 
-                ErrHandler.WriteError(e);
-            }
 
+                try
+                {
+                    dbmant = new ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
+                    //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+
+                }
+                catch (Exception e)
+                {
+
+                    ErrHandler.WriteError(e);
+                }
+            }
 
 
 
