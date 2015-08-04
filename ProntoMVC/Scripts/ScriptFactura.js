@@ -1478,7 +1478,11 @@
                     $('#grabar2').attr("disabled", false).val("Aceptar");
                     $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
                     $("#mensajeAlerta").show();
+                    pageLayout.show('east', true);
+                    pageLayout.open('east');
+
                     alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+
                 } catch (e) {
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
