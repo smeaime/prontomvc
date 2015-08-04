@@ -111,7 +111,7 @@ namespace ProntoMVC.Controllers
             "({0}!= NULL  AND !{0}.StartsWith(@{1}))",    // "bn" - does not begin with
             "({0}!= NULL  AND {0}.EndsWith(@{1}))",        // "ew" - ends with
             "({0}!= NULL  AND !{0}.EndsWith(@{1}))",    // "en" - does not end with
-            "({0}!= NULL  AND {0}.Contains(@{1}))",    // "cn" - contains
+            "({0}!= NULL  AND {0}.ToString().Contains(@{1}))",    // "cn" - contains
             "({0}!= NULL  AND !{0}.Contains(@{1}))" //" nc" - does not contain
         };
 
@@ -339,7 +339,18 @@ namespace ProntoMVC.Controllers
             //s = "(Comp=\"ND\")";
             // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
             // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
-            var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            
+             IQueryable<T> filteredQuery;
+            try
+            {
+                filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            }
+            catch (Exception)
+            {
+                s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                 filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            }
+            
             var qqqq = filteredQuery.ToList();
             //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
 
