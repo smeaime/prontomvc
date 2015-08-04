@@ -1,10 +1,22 @@
 ﻿
+
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
 BUGS (Orden descendiente de importancia) /  TO DO (Orden descendiente de importancia):
 ----------------------------------------------------------------------------------------
+
+agregar lo del tree_actualizar
+
+uno es que me dice fer y tiene razon, cuando grabas un comprobante y se produjo un error (cartel rojo) 
+no lo ves si no desplegas el panel de la derecha, eso lo tendriamos que hacer automaticamente, no asi el verde que dice que se graba ok
+
+
+otro tema es que no se porque en los campos de observacion de cualquier comprobante tenes que hacer 2 click para que tome el foco. 
+-no lo puedo reproducir
+
+
 
 
 cómo usar las busquedas Contain con columnas numericas?
