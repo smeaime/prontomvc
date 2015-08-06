@@ -192,7 +192,9 @@ namespace ProntoMVC.Controllers
                             Provincia = b != null ? b.Nombre : "",
                             a.CodigoESRI,
                             a.Partido
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

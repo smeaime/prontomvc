@@ -531,7 +531,9 @@ namespace ProntoMVC.Controllers
                             a.FechaCambio,
                             Sector = b != null ? b.Descripcion : null,
                             a.IdSectorNuevo
-                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.FechaCambio)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -587,7 +589,9 @@ namespace ProntoMVC.Controllers
                             a.IdEmpleado,
                             FechaCambio = a.FechaCambio,
                             a.HorasJornada
-                        }).OrderBy(x => x.FechaCambio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.FechaCambio)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -645,7 +649,9 @@ namespace ProntoMVC.Controllers
                             Banco = c != null ? c.Nombre : null,
                             CuentaBancaria = b != null ? b.Cuenta : null,
                             a.IdCuentaBancaria
-                        }).OrderBy(x => x.Banco).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.Banco)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -703,7 +709,9 @@ namespace ProntoMVC.Controllers
                             a.IdEmpleado,
                             Ubicacion = b != null ? b.Descripcion : null,
                             a.IdUbicacion
-                        }).OrderBy(x => x.Ubicacion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.Ubicacion)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -775,7 +783,9 @@ namespace ProntoMVC.Controllers
                             ObraAsignada = c != null ? c.NumeroObra : null,
                             a.Activo
                         }
-                        ).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        ).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

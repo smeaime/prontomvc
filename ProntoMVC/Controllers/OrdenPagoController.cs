@@ -336,7 +336,9 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaOrdenPago)
                         //.OrderByDescending(x => x.NumeroOrdenPago)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -465,7 +467,9 @@ namespace ProntoMVC.Controllers
                         })
                 //.Where(campo)
                 //.OrderBy(sidx + " " + sord)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -600,7 +604,9 @@ namespace ProntoMVC.Controllers
             //                c.PorcentajeIVAParaMonotributistas,
             //                b.IdTipoComp,
             //                b.IdComprobante
-            //            }).OrderBy(x => x.IdDetalleOrdenPago).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            //            }).OrderBy(x => x.IdDetalleOrdenPago)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.ToList();
 
             var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
             var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "DetOrdenesPago_TXOrdenPago", IdOrdenesPago1);
@@ -640,7 +646,9 @@ namespace ProntoMVC.Controllers
                             NumeroEndosoPoliza = a[26],
                             CategoriaIIBB = a[27],
                             CategoriaGanancias = a[28]
-                        }).OrderBy(s => s.IdDetalleOrdenPago).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(s => s.IdDetalleOrdenPago)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -740,7 +748,9 @@ namespace ProntoMVC.Controllers
                             Chequera = h != null ? h.NumeroChequera.ToString() : "",
                             a.ChequesALaOrdenDe,
                             a.NoALaOrden
-                        }).OrderBy(x => x.IdDetalleOrdenPagoValores).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleOrdenPagoValores)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -823,7 +833,9 @@ namespace ProntoMVC.Controllers
                             TipoCuentaGrupo = "",
                             a.Debe,
                             a.Haber
-                        }).OrderBy(x => x.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleOrdenPagoCuentas)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
             //var data = (from a in Entidad
@@ -835,7 +847,9 @@ namespace ProntoMVC.Controllers
             //                Cuenta = a[4],
             //                Debe = a[5],
             //                Haber = a[6]
-            //            }).OrderBy(s => s.IdDetalleOrdenPagoCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            //            }).OrderBy(s => s.IdDetalleOrdenPagoCuentas)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -909,7 +923,9 @@ namespace ProntoMVC.Controllers
                             NumeroCertificadoRetencionGanancias = a[15],
                             NumeroCertificadoRetencionIIBB = a[16],
                             ImporteTotalFacturasMPagadasSujetasARetencion = a[17]
-                        }).OrderBy(s => s.IdDetalleOrdenPagoImpuestos).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(s => s.IdDetalleOrdenPagoImpuestos)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -963,7 +979,9 @@ namespace ProntoMVC.Controllers
                             a.IdRubroContable,
                             RubroContable = b.Descripcion != null ? b.Descripcion : "",
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleOrdenPagoRubrosContables).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleOrdenPagoRubrosContables)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1025,7 +1043,9 @@ namespace ProntoMVC.Controllers
                             Subtotal = a.IdMoneda == IdMonedaOP1 ? a.TotalBruto * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalBruto * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
                             Iva = a.IdMoneda == IdMonedaOP1 ? a.TotalIva1 * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalIva1 * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0)),
                             Total = a.IdMoneda == IdMonedaOP1 ? a.TotalComprobante * b.Coeficiente : (IdMonedaOP1 == mIdMonedaPesos ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda : (IdMonedaOP1 == mIdMonedaDolar && (a.CotizacionDolar ?? 0) != 0 ? a.TotalComprobante * b.Coeficiente * a.CotizacionMoneda / a.CotizacionDolar : 0))
-                        }).OrderBy(x => x.IdComprobanteProveedor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdComprobanteProveedor)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

@@ -384,7 +384,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.NumeroOtroIngresoAlmacen)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -453,7 +455,9 @@ namespace ProntoMVC.Controllers
                             a.CostoUnitario,
                             Moneda = h.Abreviatura != null ? h.Abreviatura : "",
                             a.Observaciones,
-                        }).OrderBy(x => x.IdDetalleOtroIngresoAlmacen).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleOtroIngresoAlmacen)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

@@ -596,7 +596,9 @@ namespace ProntoMVC.Controllers
                             CondicionVenta = l != null ? l.Descripcion : "",
                             Transportista = m != null ? m.RazonSocial : "",
                             Region = n != null ? n.Descripcion : ""
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -738,7 +740,9 @@ namespace ProntoMVC.Controllers
                             CondicionVenta = l != null ? l.Descripcion : "",
                             Transportista = m != null ? m.RazonSocial : "",
                             Region = n != null ? n.Descripcion : ""
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -811,7 +815,9 @@ namespace ProntoMVC.Controllers
                             a.Puesto,
                             a.Telefono,
                             a.Email
-                        }).OrderBy(x => x.IdDetalleCliente).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleCliente)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -854,7 +860,9 @@ namespace ProntoMVC.Controllers
                             a.DireccionEntrega,
                             Localidad = a.Localidad.Nombre,
                             Provincia = a.Provincia.Nombre
-                        }).OrderBy(p => p.IdDetalleClienteLugarEntrega).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(p => p.IdDetalleClienteLugarEntrega)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -902,7 +910,9 @@ namespace ProntoMVC.Controllers
                             Localidad = b != null ? b.Nombre : "",
                             Provincia = c != null ? c.Nombre : "",
                             Pais = d != null ? d.Descripcion : "",
-                        }).OrderBy(x => x.IdDetalleClienteDireccion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleClienteDireccion)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -944,7 +954,9 @@ namespace ProntoMVC.Controllers
                             a.IdDetalleClienteTelefono,
                             a.Detalle,
                             a.Telefono
-                        }).OrderBy(x => x.IdDetalleClienteTelefono).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleClienteTelefono)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

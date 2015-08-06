@@ -219,7 +219,9 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdOrdenTrabajo,
                             a.NumeroOrdenTrabajo,
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -301,7 +303,9 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdOrdenTrabajo,
                             a.NumeroOrdenTrabajo,
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

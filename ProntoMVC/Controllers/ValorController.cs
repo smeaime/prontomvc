@@ -47,7 +47,9 @@ namespace ProntoMVC.Controllers
                             a.NumeroComprobante,
                             a.FechaComprobante,
                             Cliente = c.RazonSocial
-                        }).OrderBy(x => x.FechaValor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.FechaValor)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             int totalRecords = Entidad.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);

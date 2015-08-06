@@ -118,7 +118,9 @@ namespace ProntoMVC.Controllers
                             a16 = a[16],
                             a17 = a[17]
                         }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.fecha).ThenBy(s => s.Numero)
-                          .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                          
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -215,7 +217,9 @@ namespace ProntoMVC.Controllers
                             Moneda = a[16],
                             Observaciones = a[17]
                         }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero)
-                          .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                          
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -437,7 +441,9 @@ namespace ProntoMVC.Controllers
                             Cabeza = a[12],
                             IdImputacion2 = a[13],
                             Moneda = a[18]
-                        }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(s => s.IdImputacion).ThenBy(s => s.Cabeza).ThenBy(s => s.Fecha).ThenBy(s => s.Numero)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
