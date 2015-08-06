@@ -113,7 +113,9 @@ namespace ProntoMVC.Controllers
                             a.Fecha,
                             Moneda = b != null ? b.Nombre : null,
                             a.CotizacionLibre
-                        }).OrderByDescending(x => x.Fecha).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderByDescending(x => x.Fecha)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

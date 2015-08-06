@@ -188,7 +188,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaNotaDebito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -309,7 +311,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaNotaDebito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -436,7 +440,9 @@ namespace ProntoMVC.Controllers
                             Caja = c != null ? c.Descripcion : "",
                             a.Gravado,
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleNotaDebito).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleNotaDebito)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -482,7 +488,9 @@ namespace ProntoMVC.Controllers
                             a.IdProvinciaDestino,
                             Provincia = b != null ? b.Nombre : "",
                             a.Porcentaje
-                        }).OrderBy(x => x.IdDetalleNotaDebitoProvincias).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleNotaDebitoProvincias)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

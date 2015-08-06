@@ -519,8 +519,15 @@ namespace ProntoMVC.Controllers
 
 
                     db.SaveChanges();
+                    
+                    
                     db.wActualizacionesVariasPorComprobante(103, requerimiento.IdRequerimiento, tipomovimiento);
-
+                    db.Tree_TX_Actualizar("RequerimientosAgrupados", requerimiento.IdRequerimiento, "Requerimiento");
+                    
+                    
+                    //////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////
 
                     try
                     {
@@ -1018,7 +1025,9 @@ namespace ProntoMVC.Controllers
             //}
 
             
-            var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+            var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
 
@@ -1305,7 +1314,9 @@ namespace ProntoMVC.Controllers
             //        break;
             //}
 
-            var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+            var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
 
@@ -1557,7 +1568,9 @@ namespace ProntoMVC.Controllers
                             IdSector = a.IdSector,
                             a.ConfirmadoPorWeb
 
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1823,7 +1836,9 @@ namespace ProntoMVC.Controllers
                             a.IdRequerimiento,
                             a.Requerimientos.NumeroRequerimiento
 
-                        }).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        })
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
