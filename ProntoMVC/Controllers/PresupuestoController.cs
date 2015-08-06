@@ -496,7 +496,9 @@ namespace ProntoMVC.Controllers
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones,
                             a.IdProveedor
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -618,7 +620,9 @@ namespace ProntoMVC.Controllers
                             Detalle = a.Detalle,
                             Contacto = a.Contacto,
                             Observaciones = a.Observaciones
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -703,7 +707,9 @@ namespace ProntoMVC.Controllers
                             a.ArchivoAdjunto1,
                             a.ArchivoAdjunto2,
                             a.ArchivoAdjunto3
-                        }).OrderBy(p => p.NumeroItem).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(p => p.NumeroItem)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

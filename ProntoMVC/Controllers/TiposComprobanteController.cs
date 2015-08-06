@@ -203,7 +203,9 @@ namespace ProntoMVC.Controllers
                             a.CodigoAFIP3_Letra_B,
                             a.CodigoAFIP3_Letra_C,
                             a.CodigoAFIP3_Letra_E
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

@@ -177,7 +177,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaNotaCredito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -297,7 +299,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaNotaCredito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
             var jsonData = new jqGridJson()
@@ -431,7 +435,9 @@ namespace ProntoMVC.Controllers
                             Caja = c != null ? c.Descripcion : "",
                             a.Gravado,
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleNotaCredito).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleNotaCredito)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -490,7 +496,9 @@ namespace ProntoMVC.Controllers
                             ImporteOriginal = (a.NotasCredito.IdMoneda ?? 0) == mIdMonedaDolar ? b.ImporteTotalDolar * (c.Coeficiente ?? 1) : b.ImporteTotal * (c.Coeficiente ?? 1),
                             Saldo = (a.NotasCredito.IdMoneda ?? 0) == mIdMonedaDolar ? b.SaldoDolar * (c.Coeficiente ?? 1) : b.Saldo * (c.Coeficiente ?? 1),
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleNotaCreditoImputaciones).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleNotaCreditoImputaciones)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -537,7 +545,9 @@ namespace ProntoMVC.Controllers
                             a.IdProvinciaDestino,
                             Provincia = b != null ? b.Nombre : "",
                             a.Porcentaje
-                        }).OrderBy(x => x.IdDetalleNotaCreditoProvincias).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleNotaCreditoProvincias)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

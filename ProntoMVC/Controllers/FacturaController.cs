@@ -471,6 +471,11 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+
+
+
+
+
                         ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
                         if (mIdFactura <= 0 && !mAnulada && mAplicarEnCtaCte)
                         {
@@ -793,8 +798,30 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+
+
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+
+                        db.Tree_TX_Actualizar("FacturasAgrupadas", Factura.IdFactura, "Factura");
+                        // db.SaveChanges(); // no tiene sentido con un store
+
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+
+
+
+
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
                         scope.Complete();
                         scope.Dispose();
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
+                        //////////////////////////////////////////////////////////
                     }
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
@@ -1057,7 +1084,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1213,7 +1242,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaFactura).ThenByDescending(y => y.NumeroFactura)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1327,7 +1358,9 @@ namespace ProntoMVC.Controllers
                             OrdenCompraItem = d.NumeroItem,
                             RemitoNumero = f.Remito.NumeroRemito,
                             RemitoItem = f.NumeroItem
-                        }).OrderBy(x => x.IdDetalleFactura).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleFactura)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1439,7 +1472,9 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Fac
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        select a).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1516,7 +1551,9 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Fac
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        select a).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

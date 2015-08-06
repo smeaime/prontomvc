@@ -424,7 +424,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.Descripcion)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -511,7 +513,9 @@ namespace ProntoMVC.Controllers
                             a.CondicionRecupero,
                             a.MotivoDeContratacionSeguro,
                             a.Observaciones
-                        }).OrderBy(x => x.IdDetalleObraPoliza).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleObraPoliza)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -566,7 +570,9 @@ namespace ProntoMVC.Controllers
                             a.FechaInstalacion,
                             a.FechaDesinstalacion,
                             a.Observaciones
-                        }).OrderBy(x => x.IdDetalleObraEquipoInstalado).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleObraEquipoInstalado)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

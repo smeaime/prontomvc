@@ -568,7 +568,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaSalidaMateriales)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -712,7 +714,9 @@ namespace ProntoMVC.Controllers
                             OrdenTrabajo = "",
                             PresupuestoObrasEtapa = (i != null ? i.Item + " " : "") + (j != null ? j.Descripcion : "") + (i != null ? " - " + i.Descripcion : ""),
                             a.Observaciones
-                        }).OrderBy(x => x.IdDetalleSalidaMateriales).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleSalidaMateriales)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
             var data2 = (from a in data

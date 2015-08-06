@@ -10,16 +10,18 @@
 namespace ProntoMVC.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DetalleProveedoresRubro
+    public partial class Tree_TX_Arbol_Result
     {
-        public int IdDetalleProveedorRubros { get; set; }
-        public Nullable<int> IdProveedor { get; set; }
-        public Nullable<int> IdRubro { get; set; }
-        public Nullable<int> IdSubrubro { get; set; }
-    
-        public virtual Proveedor Proveedor { get; set; }
-        public virtual Rubro Rubro { get; set; }
+        public string IdItem { get; set; }
+        public string Clave { get; set; }
+        public string Descripcion { get; set; }
+        public string ParentId { get; set; }
+        public Nullable<int> Orden { get; set; }
+        public string Parametros { get; set; }
+        public string Link { get; set; }
+        public string Imagen { get; set; }
+        public string EsPadre { get; set; }
+        public string GrupoMenu { get; set; }
     }
 }

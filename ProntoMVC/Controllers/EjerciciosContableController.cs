@@ -107,7 +107,9 @@ namespace ProntoMVC.Controllers
                             a.IdEjercicioContable,
                             a.FechaInicio,
                             a.FechaFinalizacion
-                        }).OrderByDescending(x => x.FechaInicio).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderByDescending(x => x.FechaInicio)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

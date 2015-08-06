@@ -437,7 +437,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.RazonSocial)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -554,7 +556,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.RazonSocial)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -677,7 +681,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderBy(x => x.RazonSocial)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -760,7 +766,9 @@ namespace ProntoMVC.Controllers
                             a.Puesto,
                             a.Telefono,
                             a.Email
-                        }).OrderBy(x => x.IdDetalleProveedor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleProveedor)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -803,7 +811,9 @@ namespace ProntoMVC.Controllers
                             a.IdSubrubro,
                             Rubro = b != null ? b.Descripcion : "",
                             Subrubro = c != null ? c.Descripcion : ""
-                        }).OrderBy(x => x.IdDetalleProveedorRubros).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleProveedorRubros)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -845,7 +855,9 @@ namespace ProntoMVC.Controllers
                             Jurisdiccion = b != null ? b.Descripcion : "",
                             a.AlicuotaAAplicar,
                             a.FechaVencimiento
-                        }).OrderBy(x => x.IdDetalleProveedorIB).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleProveedorIB)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

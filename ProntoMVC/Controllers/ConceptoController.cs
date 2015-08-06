@@ -218,7 +218,9 @@ namespace ProntoMVC.Controllers
                             a.CoeficienteAuxiliar_1,
                             a.GeneraComision,
                             TiposConcepto = ((a.Grupo ?? 0) == 1 ? "Otros conceptos para OP" : ((a.Grupo ?? 0) == 2 ? "Clasificacion por tipo de cancelacion" : ((a.Grupo ?? 0) == 3 ? "Modalidades de pago" : ((a.Grupo ?? 0) == 4 ? "Enviar a" : ((a.Grupo ?? 0) == 5 ? "Textos auxiliares para OP" : "")))))
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

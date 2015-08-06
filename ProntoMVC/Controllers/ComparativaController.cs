@@ -354,7 +354,9 @@ namespace ProntoMVC.Controllers
                         select a)
                 //.OrderBy(sidx + " " + sord)
                         .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
