@@ -12660,8 +12660,17 @@ Namespace Pronto.ERP.Bll
 
 
 
+                        Dim codgrado As Integer
 
-                        sb = RenglonBLDCalidad(cdp, 25, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Grado", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
+                        If carta.NobleGrado = 1 Then
+                            codgrado = 25
+                        ElseIf carta.NobleGrado = 2 Then
+                            codgrado = 26
+                        ElseIf carta.NobleGrado = 3 Then
+                            codgrado = 27
+                        End If
+
+                        sb = RenglonBLDCalidad(cdp, codgrado, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Grado", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
 
 
 
