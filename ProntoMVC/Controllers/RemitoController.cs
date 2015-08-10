@@ -394,6 +394,7 @@ namespace ProntoMVC.Controllers
                             }
                             db.SaveChanges();
                         }
+                           db.Tree_TX_Actualizar( Tree_TX_ActualizarParam.RemitosAgrupados.ToString(), Remito.IdRemito, "Remito");
 
                         scope.Complete();
                         scope.Dispose();

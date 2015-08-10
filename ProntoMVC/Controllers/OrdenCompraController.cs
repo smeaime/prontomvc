@@ -282,6 +282,8 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.OrdenesCompraAgrupadas.ToString(), OrdenCompra.IdOrdenCompra, "OrdenCompra");
+
                         scope.Complete();
                         scope.Dispose();
                     }

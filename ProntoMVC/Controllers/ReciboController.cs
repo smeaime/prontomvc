@@ -1040,7 +1040,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         db.SaveChanges();
-
+                        db.Tree_TX_Actualizar("RecibosAgrupados", Recibo.IdRecibo, "Recibo");
                         scope.Complete();
                         scope.Dispose();
                     }

@@ -13084,5 +13084,6 @@
     <Build Include="Security\aspnet_Profile_BasicAccess_1.sql" />
     <Build Include="Security\aspnet_Profile_FullAccess_1.sql" />
     <Build Include="Security\aspnet_Profile_ReportingAccess_1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs5\dbo.Tree_TX_Actualizar.sql" />
   </ItemGroup>
 </Project>
