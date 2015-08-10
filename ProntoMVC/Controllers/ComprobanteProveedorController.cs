@@ -1560,6 +1560,8 @@ namespace ProntoMVC.Controllers
 
                     unitOfWork.Save();
 
+                    // db.Tree_TX_Actualizar("ComprobantesPrvPorMes", o.IdComprobanteProveedor, "ComprobanteProveedor");
+
 
                     if (!System.Diagnostics.Debugger.IsAttached)
                     {
