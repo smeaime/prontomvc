@@ -139,7 +139,9 @@ namespace ProntoMVC.Controllers
                             a.EsCajaBanco,
                             IdTipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? 1 : ((a.EsCajaBanco ?? "") == "BA" ? 2 : ((a.EsCajaBanco ?? "") == "TC" ? 3 : 4)),
                             TipoGrupo = (a.EsCajaBanco ?? "") == "CA" ? "Cajas" : ((a.EsCajaBanco ?? "") == "BA" ? "Bancos" : ((a.EsCajaBanco ?? "") == "TC" ? "Tarjetas" : "Otros"))
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

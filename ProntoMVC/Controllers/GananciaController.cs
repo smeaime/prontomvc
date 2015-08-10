@@ -145,7 +145,9 @@ namespace ProntoMVC.Controllers
                             a.PorcentajeAdicional,
                             a.MinimoNoImponible,
                             a.MinimoARetener
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

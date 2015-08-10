@@ -182,7 +182,9 @@ namespace ProntoMVC.Controllers
                             a.IdFeriado,
                             a.Descripcion,
                             a.Fecha
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

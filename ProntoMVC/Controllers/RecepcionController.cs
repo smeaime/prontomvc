@@ -327,7 +327,9 @@ namespace ProntoMVC.Controllers
 
             var data = from a in Req  // .Where(campo)
                            .OrderBy(sidx + " " + sord)
-                           .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+                           
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList()
                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
 
@@ -971,7 +973,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.NumeroRecepcionAlmacen)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1079,7 +1083,9 @@ namespace ProntoMVC.Controllers
                             a.Partida,
                             ControlCalidad = f != null ? f.Descripcion : "",
                             a.Observaciones
-                        }).OrderBy(x => x.IdDetalleRecepcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleRecepcion)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1200,7 +1206,9 @@ namespace ProntoMVC.Controllers
                             a.Partida,
                             ControlCalidad = f != null ? f.Descripcion : "",
                             a.Observaciones
-                        }).OrderByDescending(x => x.NumeroRecepcionAlmacen).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderByDescending(x => x.NumeroRecepcionAlmacen)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
