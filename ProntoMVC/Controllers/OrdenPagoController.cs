@@ -3129,9 +3129,15 @@ namespace ProntoMVC.Controllers
                         }
                         db.SaveChanges();
 
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.OPagoPorMes.ToString(), OrdenPago.IdOrdenPago, "OrdenPago");
+
+
+
                         scope.Complete();
                         scope.Dispose();
                     }                    
+
+
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 

@@ -1264,6 +1264,8 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.NotasDebitoAgrupadas.ToString(), NotaDebito.IdNotaDebito, "NotaDebito");
+
                         scope.Complete();
                         scope.Dispose();
                     }

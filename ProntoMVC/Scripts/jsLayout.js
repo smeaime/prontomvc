@@ -180,6 +180,13 @@ jQuery("#addtree").jqGrid('bindKeys');
 jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
+
+
+    jQuery("#addtree").jqGrid('setGridHeight', 600);
+
+
+
+
  ///////////////////////////////////////////
  /////////////////////////////////////
  /////////////////////////////////////

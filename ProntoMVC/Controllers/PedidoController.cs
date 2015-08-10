@@ -796,8 +796,8 @@ namespace ProntoMVC.Controllers
 
                     db.Tree_TX_Actualizar("PedidosAgrupados", Pedido.IdPedido, "Pedido");
 
-                 
 
+                    
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
 

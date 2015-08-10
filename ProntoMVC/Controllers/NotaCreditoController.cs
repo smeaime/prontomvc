@@ -1377,9 +1377,16 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+
+
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.NotasCreditoAgrupadas.ToString(),
+                                                NotaCredito.IdNotaCredito, "NotaCredito");
+
                         scope.Complete();
                         scope.Dispose();
                     }
+
+
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
