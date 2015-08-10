@@ -37,30 +37,52 @@
             colNames: ['', 'Emitir', 'IdRecibo', 'Punto venta', 'Numero recibo', 'Fecha recibo', 'Tipo', 'Anulado', 'Codigo cliente', 'Cliente', 'Cuenta', 'Mon.', 'Deudores', 'Valores', 'Ret. iva', 'Ret. gan',
                        'Ret. iibb', 'Otros conceptos', 'Obra', 'Vendedor', 'Cobrador', 'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Cotizacion', 'Observaciones'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: true, width: 50, search: false },
                         { name: 'IdRecibo', index: 'IdRecibo', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'right', width: 50, editable: false, hidden: false },
                         { name: 'NumeroRecibo', index: 'NumeroRecibo', align: 'right', width: 80, editable: false, hidden: false },
-                        { name: 'FechaRecibo', index: 'FechaRecibo', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        {
+                            name: 'FechaRecibo', index: 'FechaRecibo', width: 80, align: 'center', sorttype: 'date',
+                            hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+                        },
                         { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulado', index: 'Anulado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CodigoCliente', index: 'CodigoCliente', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false },
-                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoCliente', index: 'Cliente.CodigoCliente', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Cliente', index: 'Cliente.RazonSocial', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Cuenta', index: 'Cuenta.Descripcion', align: 'left', width: 200, editable: false },
+                        { name: 'Moneda', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Deudores', index: 'Deudores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'OtrosConceptos', index: 'OtrosConceptos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Obra', index: 'Obra', align: 'left', width: 100, editable: false },
-                        { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Cobrador', index: 'Cobrador', align: 'left', width: 120, editable: false, hidden: false },
-                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionGanancias', index: 'RetencionGanancias', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RetencionIBrutos', index: 'RetencionIBrutos', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'OtrosConceptos', index: 'OtrosConceptos', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra.NumeroObra', align: 'left', width: 100, editable: false },
+                        { name: 'Vendedor', index: 'Vendedore.Nombre', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Cobrador', index: 'Vendedore1.Nombre', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Ingreso', index: 'Empleado.Nombre', align: 'left', width: 120, editable: false, hidden: false },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, hidden: false },
+                        { name: 'Modifico', index: 'Empleado1.Nombre', align: 'left', width: 120, editable: false, hidden: false },
                         { name: 'FechaModifico', index: 'FechaModifico', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Cotizacion', index: 'Cotizacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, hidden: false }

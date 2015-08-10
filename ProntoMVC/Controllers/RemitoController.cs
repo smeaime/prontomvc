@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 
 
-//using System.Data.Entity.Core.Objects.ObjectQuery; //using System.Data.Objects;
+using System.Data.Entity.Core.Objects; //using System.Data.Objects;
 
 using System.Globalization;
 using System.IO;
@@ -394,6 +394,7 @@ namespace ProntoMVC.Controllers
                             }
                             db.SaveChanges();
                         }
+                           db.Tree_TX_Actualizar( Tree_TX_ActualizarParam.RemitosAgrupados.ToString(), Remito.IdRemito, "Remito");
 
                         scope.Complete();
                         scope.Dispose();
@@ -505,7 +506,9 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroRemito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -597,6 +600,206 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+        public virtual ActionResult TT_DynamicGridData_ConQueryEntera(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string PendienteFactura = "")
+        {
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+
+            IQueryable<Data.Models.Remito> aaaa = db.Remitos.Take(19);
+
+
+            ObjectQuery<Data.Models.Remito> set = aaaa as ObjectQuery<Data.Models.Remito>;
+
+
+            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Remito>
+                                (db.Remitos.Take(19) as ObjectQuery<Data.Models.Remito>
+                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+
+            // .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            string campo = String.Empty;
+            int pageSize = rows;
+            int currentPage = page;
+
+            var data = (from a in pagedQuery
+                        //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from d in db.Transportistas.Where(v => v.IdTransportista == a.IdTransportista).DefaultIfEmpty()
+                        //from f in db.Empleados.Where(y => y.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+                        //from i in db.Condiciones_Compras.Where(v => v.IdCondicionCompra == a.IdCondicionVenta).DefaultIfEmpty()
+                        //from j in db.ListasPrecios.Where(v => v.IdListaPrecios == a.IdListaPrecios).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdRemito,
+                            a.DetalleRemitos,
+                            a.IdCliente,
+                            a.IdProveedor,
+                            a.IdObra,
+                            a.IdTransportista,
+                            a.IdCondicionVenta,
+                            a.IdListaPrecios,
+                            a.Destino,
+                            a.PuntoVenta,
+                            a.NumeroRemito,
+                            a.FechaRemito,
+                            a.Anulado,
+                            ClienteCodigo = a.Cliente.CodigoCliente,
+                            ClienteNombre = a.Cliente.RazonSocial,
+                            ClienteCuit = a.Cliente.Cuit,
+                            DescripcionIva = a.Cliente.DescripcionIva.Descripcion,
+                            ProveedorCodigo = a.Proveedore.CodigoEmpresa,
+                            ProveedorNombre = a.Proveedore.RazonSocial,
+                            ProveedorCuit = a.Proveedore.Cuit,
+                            Obras = "",
+                            OCompras = "",
+                            Facturas = "",
+                            Materiales = "",
+                            TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" :
+                                          ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ?
+                                        "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
+                            CondicionVenta = a.Condiciones_Compra.Descripcion,
+                            Transportista = a.Transportista.RazonSocial,
+                            ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
+                            Obra = a.Obra.NumeroObra,
+                            a.TotalBultos,
+                            a.ValorDeclarado,
+                            CantidadItems = 0,
+                            a.Chofer,
+                            a.HoraSalida,
+                            a.Observaciones,
+                            PendienteFacturar = PendienteFactura == "SI"
+                                                ? (db.DetalleRemitos.Where(x => x.IdRemito == a.IdRemito && (a.Anulado ?? "NO") != "SI")
+                                                    .Sum(y => ((y.TipoCancelacion ?? 1) == 1 ? y.Cantidad : y.PorcentajeCertificacion) -
+                                                        (db.DetalleFacturasRemitos.Where(x => x.IdDetalleRemito == y.IdDetalleRemito &&
+                                                           (x.DetalleFactura.Factura.Anulada ?? "NO") != "SI")
+                                                     .Sum(z => ((y.TipoCancelacion ?? 1) == 1 ? z.DetalleFactura.Cantidad : z.DetalleFactura.PorcentajeCertificacion)) ?? 0))) ?? 0
+                                                : 1
+                        }).AsQueryable();
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                data = (from a in data where a.FechaRemito >= FechaDesde && a.FechaRemito <= FechaHasta select a).AsQueryable();
+            }
+
+
+            //int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+
+
+            var jsonData = new jqGridJson()
+            {
+                total = (int)Math.Ceiling((float)totalRecords / (float)pageSize),
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdRemito.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRemito} ) + ">Editar</>",
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRemito} ) + ">Emitir</a> ",
+                                a.IdRemito.ToString(),
+                                a.IdCliente.NullSafeToString(),
+                                a.IdProveedor.NullSafeToString(),
+                                a.IdObra.NullSafeToString(),
+                                a.IdTransportista.NullSafeToString(),
+                                a.IdCondicionVenta.NullSafeToString(),
+                                a.IdListaPrecios.NullSafeToString(),
+                                a.Destino.NullSafeToString(),
+                                a.PuntoVenta.NullSafeToString(),
+                                a.NumeroRemito.NullSafeToString(),
+                                a.FechaRemito.NullSafeToString(),
+                                a.Anulado.NullSafeToString(),
+                                a.ClienteCodigo.NullSafeToString(),
+                                a.ClienteNombre.NullSafeToString(),
+                                a.ClienteCuit.NullSafeToString(),
+                                a.DescripcionIva.NullSafeToString(),
+                                a.ProveedorCodigo.NullSafeToString(),
+                                a.ProveedorNombre.NullSafeToString(),
+                                a.ProveedorCuit.NullSafeToString(),
+                                string.Join(",", 
+                                       a.DetalleRemitos
+                                       .Select(x => 
+                                           (x.Obra == null) ?
+                                           "" :
+                                           ((   x.Obra.NumeroObra == null) ? 
+                                               "" :
+                                               x.Obra.NumeroObra.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                string.Join(",", 
+                                       a.DetalleRemitos
+                                       .Select(x => 
+                                           (x.DetalleOrdenesCompra == null) ?
+                                           "" :
+                                           ((   x.DetalleOrdenesCompra.OrdenesCompra == null) ? 
+                                               "" :
+                                               x.DetalleOrdenesCompra.OrdenesCompra.NumeroOrdenCompra.NullSafeToString()
+                                           )
+                                       ).Distinct()
+                                ),
+                                string.Join(",",  a.DetalleRemitos
+                                    .SelectMany(x =>
+                                        (x.DetalleFacturas == null) ?
+                                        null :
+                                        x.DetalleFacturas.Select(y =>
+                                                    (y.Factura == null) ?
+                                                    "" :
+                                                    y.Factura.NumeroFactura.NullSafeToString()
+                                            )
+                                    ).Distinct()
+                                ),
+                                ""
+                                //string.Join(",", 
+                                //       a.DetalleRemitos
+                                //       .Select(x => 
+                                //          ( (x.Articulo == null) ?
+                                //                    "" :   x.Articulo.Codigo.NullSafeToString() 
+                                //           )
+                                //       ).Distinct()
+                                //)
+                                ,
+                                a.TipoRemito.NullSafeToString(),
+                                a.CondicionVenta.NullSafeToString(),
+                                a.Transportista.NullSafeToString(),
+                                a.ListaDePrecio.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.TotalBultos.NullSafeToString(),
+                                a.ValorDeclarado.NullSafeToString(),
+                                db.DetalleRemitos.Where(x=>x.IdRemito==a.IdRemito).Select(x=>x.IdDetalleRemito).Distinct().Count().ToString(),
+                                a.Chofer.NullSafeToString(),
+                                a.HoraSalida.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
@@ -695,7 +898,9 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroRemito)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -831,7 +1036,9 @@ namespace ProntoMVC.Controllers
                             a.Observaciones,
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
                             OrdenCompraItem = d.NumeroItem,
-                        }).OrderBy(x => x.NumeroItem).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.NumeroItem)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

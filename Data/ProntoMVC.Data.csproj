@@ -744,6 +744,9 @@
     <Compile Include="Models\Tree.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tree_TX_Arbol_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ubicacion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

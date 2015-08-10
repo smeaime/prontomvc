@@ -1560,6 +1560,8 @@ namespace ProntoMVC.Controllers
 
                     unitOfWork.Save();
 
+                    // db.Tree_TX_Actualizar("ComprobantesPrvPorMes", o.IdComprobanteProveedor, "ComprobanteProveedor");
+
 
                     if (!System.Diagnostics.Debugger.IsAttached)
                     {
@@ -6146,7 +6148,9 @@ namespace ProntoMVC.Controllers
                 ).Where(campo)
                 // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                 .OrderBy("IdComprobanteProveedor desc")
-                .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -6445,7 +6449,9 @@ namespace ProntoMVC.Controllers
                     ).Where(campo)
                     // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                     .OrderBy("IdComprobanteProveedor desc")
-                    .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                    
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
             }
@@ -6667,7 +6673,9 @@ namespace ProntoMVC.Controllers
                             //Detalle = a.Detalle,
                             // Contacto = a.Contacto,
                             Observaciones = a.Observaciones
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -6729,7 +6737,9 @@ namespace ProntoMVC.Controllers
                         select
                       a)
                .OrderBy(p => p.Item)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
 
@@ -6892,7 +6902,9 @@ namespace ProntoMVC.Controllers
                         select
                       a)
                .OrderBy(p => p.Item)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
 

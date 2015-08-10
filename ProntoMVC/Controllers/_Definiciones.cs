@@ -111,7 +111,7 @@ namespace ProntoMVC.Controllers
             "({0}!= NULL  AND !{0}.StartsWith(@{1}))",    // "bn" - does not begin with
             "({0}!= NULL  AND {0}.EndsWith(@{1}))",        // "ew" - ends with
             "({0}!= NULL  AND !{0}.EndsWith(@{1}))",    // "en" - does not end with
-            "({0}!= NULL  AND {0}.Contains(@{1}))",    // "cn" - contains
+            "({0}!= NULL  AND {0}.ToString().Contains(@{1}))",    // "cn" - contains
             "({0}!= NULL  AND !{0}.Contains(@{1}))" //" nc" - does not contain
         };
 
@@ -124,6 +124,77 @@ namespace ProntoMVC.Controllers
                 return t.GetType().GetProperty(PropertName);
             else
                 return GetProperty(t.GetType().GetProperty(PropertName.Split('.')[0]).GetValue(t, null), PropertName.Split('.')[1]);
+        }
+
+
+
+
+        static public ObjectQuery<T> FiltroGenerico_PasandoQueryEntera<T>(
+                             ObjectQuery<T> set,
+                              
+                             string sidx, string sord, int page, int rows, bool _search, string filters,
+                             ref int totalRecords
+                         )
+                           where T : class
+        {
+
+
+
+
+
+            var serializer = new JavaScriptSerializer();
+            Filters f = (!_search || string.IsNullOrEmpty(filters)) ? null : serializer.Deserialize<Filters>(filters);
+            ObjectQuery<T> filteredQuery =
+                (f == null ? (ObjectQuery<T>)set :
+                f.FilterObjectSet((ObjectQuery<T>)set));
+
+            filteredQuery.MergeOption = MergeOption.NoTracking; // we don't want to update the data
+
+            //filteredQuery = filteredQuery.Where("it.IdCuentaGasto IS NOT NULL");
+
+            // var d = filteredQuery.Where(x => x.IdCuentaGasto != null);
+
+            try
+            {
+                totalRecords = filteredQuery.Count();
+            }
+            catch (Exception)
+            {
+
+                // ¿estas tratando de usar un LIKE sobre una columna que es numerica?
+                // ¿pusiste bien el nombre del campo en el modelo de la jqgrid?? (ejemplo: pusiste "Subrubro" en lugar de "Subrubro.Descripcion"?)
+                throw;
+            }
+
+
+
+
+
+
+
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+            // http://stackoverflow.com/questions/3791060/how-to-use-objectquery-with-where-filter-separated-by-or-clause
+
+
+            var pagedQuery = filteredQuery
+                                        .Skip("it." + sidx + " " + sord, "@skip",
+                                                new ObjectParameter("skip", (page - 1) * rows))
+                                         .Top("@limit", new ObjectParameter("limit", rows));
+            // to be able to use ToString() below which is NOT exist in the LINQ to Entity
+
+
+            return pagedQuery;
+
+            ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
         }
 
 
@@ -229,7 +300,7 @@ namespace ProntoMVC.Controllers
                                  string sidx, string sord, int page, int rows, bool _search, string filters,
                                  ProntoMVC.Data.Models.DemoProntoEntities db,
                                  ref int totalRecords,
-                                ObjectResult<T> set
+                                IEnumerable<T> set
                              )
                                where T : class
         {
@@ -268,7 +339,18 @@ namespace ProntoMVC.Controllers
             //s = "(Comp=\"ND\")";
             // s = "(Comp != NULL AND Comp.Contains(\"ND\"))";
             // http://stackoverflow.com/questions/18387153/linq-query-fails-only-on-contains-object-reference-not-set-to-an-instance-of-an
-            var filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            
+             IQueryable<T> filteredQuery;
+            try
+            {
+                filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            }
+            catch (Exception)
+            {
+                s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
+                 filteredQuery = set.AsQueryable().Where(s, objParams.Select(x => x.Value).ToArray());
+            }
+            
             var qqqq = filteredQuery.ToList();
             //   var  q = set.AsQueryable().Where(s, objParams[0].Value).ToList();  // este where es de dynamic, no de EF
 
@@ -336,10 +418,19 @@ namespace ProntoMVC.Controllers
                 if (rule.field.Split('.').Length == 2) // si usamos más niveles, hay que modificar esto
                 {
 
+                    // Si pasan Empleado1.Nombre, Empleado1 no es un type, sino el nombre del objeto, que en este
+                    //      caso especial no tiene el mismo nombre que su tipo ... Cómo hacés ahí?
+                    // Tengo que obtener de qué tipo es esa variable
 
 
-                    propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data")
-                                        .GetProperty(rule.field.Split('.')[1]); ; //target type
+                    PropertyInfo padrepropertyInfo = null;
+                    padrepropertyInfo = typeof(T).GetProperty(rule.field.Split('.')[0]); 
+
+                   
+
+                    //propertyInfo = Type.GetType("ProntoMVC.Data.Models." + rule.field.Split('.')[0] + ", ProntoMVC.Data").GetProperty(rule.field.Split('.')[1]); ; 
+
+                    propertyInfo = padrepropertyInfo.PropertyType.GetProperty(rule.field.Split('.')[1]); ; //target type
 
                 }
                 else if (rule.field.Split('.').Length == 1)

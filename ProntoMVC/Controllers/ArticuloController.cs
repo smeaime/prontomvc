@@ -359,8 +359,12 @@ namespace ProntoMVC.Controllers
             //        data = data.OrderBy(a => a.FechaUltimaModificacion);
             //}
 
-            //var data1 = (from a in data select a).OrderBy(x => x.Descripcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-            var data1 = from a in data.OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+            //var data1 = (from a in data select a).OrderBy(x => x.Descripcion)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+            //.ToList();
+            var data1 = from a in data.OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList()
                         select a;
 
             var jsonData = new jqGridJson()
@@ -475,8 +479,12 @@ namespace ProntoMVC.Controllers
             //        data = data.OrderBy(a => a.FechaUltimaModificacion);
             //}
 
-            //var data1 = (from a in data select a).OrderBy(x => x.Descripcion).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-            var data1 = from a in data.OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+            //var data1 = (from a in data select a).OrderBy(x => x.Descripcion)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.ToList();
+            var data1 = from a in data.OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList()
                         select a;
 
             var jsonData = new jqGridJson()
@@ -565,7 +573,9 @@ namespace ProntoMVC.Controllers
                         .Include(x => x.Ubicacione.Deposito)
                         .Include(x => x.Rubro)
                         .Include(x => x.Subrubro)
-                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToArray();
+                         
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToArray();
 
             var jsonData = new jqGridJson()
             {
@@ -775,7 +785,9 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleArticuloDocumentos,
                             a.PathDocumento
-                        }).OrderBy(p => p.IdDetalleArticuloDocumentos).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(p => p.IdDetalleArticuloDocumentos)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -829,7 +841,9 @@ namespace ProntoMVC.Controllers
                             a.IdUnidad,
                             a.Unidade,
                             a.Equivalencia
-                        }).OrderBy(p => p.IdDetalleArticuloUnidades).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(p => p.IdDetalleArticuloUnidades)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -922,7 +936,9 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Fac
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        select a).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1006,7 +1022,9 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Fac
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
-                        select a).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        select a).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1300,7 +1318,9 @@ namespace ProntoMVC.Controllers
             List<Articulo> Articulos = ProntoMVC.Models.ArticuloDAL.SelectArticulos("filtro", this.Session["BasePronto"].ToString());
             int totalRecords = Articulos.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            var data = Articulos.Skip((currentPage - 1) * pageSize).Take(pageSize).ToArray();
+            var data = Articulos
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToArray();
 
             var jsonData = new jqGridJson()
             {
@@ -1363,7 +1383,9 @@ namespace ProntoMVC.Controllers
                             IdUnidad = a.IdUnidad,
                             Unidad = a.Unidad.Abreviatura,
                             Iva = a.AlicuotaIVA
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

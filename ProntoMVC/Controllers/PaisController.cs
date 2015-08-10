@@ -195,7 +195,9 @@ namespace ProntoMVC.Controllers
                             a.Codigo2,
                             a.CodigoESRI,
                             a.Cuit
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
