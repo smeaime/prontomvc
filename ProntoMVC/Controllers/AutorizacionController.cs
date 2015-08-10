@@ -511,7 +511,9 @@ namespace ProntoMVC.Controllers
                 //.Where(campo)
                 //  .OrderBy(sidx + " " + sord)
                    .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
-                    .Skip((currentPage - 1) * pageSize).Take(pageSize)
+                    
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+
                    .ToList();
 
 

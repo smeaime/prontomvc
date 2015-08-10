@@ -417,7 +417,9 @@ namespace ProntoMVC.Controllers
                         //join c in db.IngresoBrutos on a.IdIBCondicion equals c.IdIBCondicion
                         select a)
                         .Where(campo)
-                        .OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        .OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -490,7 +492,9 @@ namespace ProntoMVC.Controllers
                             
                         })
                                                       .OrderBy(p => p.IdListaPreciosDetalle)
-                                                      .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                                                      
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

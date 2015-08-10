@@ -227,7 +227,9 @@ namespace ProntoMVC.Controllers
                             a.Modulo,
                             a.Gabeta,
                             DepositoActual = b != null ? b.Descripcion : ""
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

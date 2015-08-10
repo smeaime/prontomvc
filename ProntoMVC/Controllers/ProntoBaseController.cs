@@ -24,6 +24,36 @@ using StackExchange.Profiling;
 
 namespace ProntoMVC.Controllers
 {
+
+
+    public enum Tree_TX_ActualizarParam
+    {
+        RequerimientosAgrupados,
+        SolicitudesCompraAgrupadas,
+        AjustesStockAgrupados,
+        RecepcionesAgrupadas,
+        ValesSalidaAgrupados,
+        SalidaMaterialesAgrupadas,
+        OtrosIngresosAlmacenAgrupados,
+        OrdenesCompraAgrupadas,
+        RemitosAgrupados,
+        FacturasAgrupadas,
+        DevolucionesAgrupadas,
+        RecibosAgrupados,
+        NotasDebitoAgrupadas,
+        NotasCreditoAgrupadas,
+        PresupuestosAgrupados,
+        ComparativasAgrupadas,
+        PedidosAgrupados,
+        AutorizacionesCompraAgrupadas,
+        ComprobantesPrvPorMes,
+        OPagoPorMes,
+        DepositosBancariosAgrupados,
+        GastosBancariosAgrupados
+    }
+
+
+
     public abstract partial class ProntoBaseController : Controller // , IProntoInterface<Object>
     {
         public DemoProntoEntities db; //= new DemoProntoEntities(sCadenaConex());
@@ -39,7 +69,7 @@ namespace ProntoMVC.Controllers
             {
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
-                
+
                 return IdUsuario;
             }
 
@@ -175,18 +205,24 @@ namespace ProntoMVC.Controllers
 
             db = new DemoProntoEntities(sc);
 
-            try
-            {
-                dbmant = new ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
-                //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
 
-            }
-            catch (Exception e)
+
+            if (false) // desactivé la creacion de dbmant porque desde el studio me está poniendo lenta la cosa creo
             {
 
-                ErrHandler.WriteError(e);
-            }
 
+                try
+                {
+                    dbmant = new ProntoMVC.Data.Models.Mantenimiento.ProntoMantenimientoEntities(Generales.sCadenaConexMant(db, this.Session["BasePronto"].ToString()));
+                    //dbmant = new  ProntoMantenimientoEntities(Generales.sCadenaConexMant(this.Session["BasePronto"].ToString()));
+
+                }
+                catch (Exception e)
+                {
+
+                    ErrHandler.WriteError(e);
+                }
+            }
 
 
 

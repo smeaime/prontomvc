@@ -1040,7 +1040,7 @@ namespace ProntoMVC.Controllers
                         }
 
                         db.SaveChanges();
-
+                        db.Tree_TX_Actualizar("RecibosAgrupados", Recibo.IdRecibo, "Recibo");
                         scope.Complete();
                         scope.Dispose();
                     }
@@ -1182,7 +1182,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaRecibo)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             //switch (sidx.ToLower())
             //{
@@ -1315,7 +1317,9 @@ namespace ProntoMVC.Controllers
 
             var data1 = (from a in data select a)
                         .OrderByDescending(x => x.FechaRecibo)
-                        .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             //switch (sidx.ToLower())
             //{
@@ -1431,7 +1435,9 @@ namespace ProntoMVC.Controllers
                             ImporteOriginal = a.Recibo.IdMoneda == mIdMonedaDolar ? b.ImporteTotalDolar * h.Coeficiente : b.ImporteTotal * h.Coeficiente,
                             Saldo = a.Recibo.IdMoneda == mIdMonedaDolar ? b.Saldo * h.Coeficiente : b.Saldo * h.Coeficiente,
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleRecibo).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleRecibo)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1499,7 +1505,9 @@ namespace ProntoMVC.Controllers
                             a.FechaExpiracionTarjetaCredito,
                             a.CantidadCuotas,
                             a.NumeroAutorizacionTarjetaCredito
-                        }).OrderBy(x => x.IdDetalleReciboValores).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleReciboValores)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1576,7 +1584,9 @@ namespace ProntoMVC.Controllers
                             TipoCuentaGrupo = "",
                             a.Debe,
                             a.Haber
-                        }).OrderBy(x => x.IdDetalleReciboCuentas).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleReciboCuentas)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1630,7 +1640,9 @@ namespace ProntoMVC.Controllers
                             a.IdRubroContable,
                             RubroContable = b.Descripcion != null ? b.Descripcion : "",
                             a.Importe
-                        }).OrderBy(x => x.IdDetalleReciboRubrosContables).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.IdDetalleReciboRubrosContables)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

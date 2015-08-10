@@ -239,7 +239,9 @@ namespace ProntoMVC.Controllers
                             a.Comision,
                             a.TodasLasZonas,
                             a.EmiteComision
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -296,7 +298,9 @@ namespace ProntoMVC.Controllers
                         {
                             IdVendedor2 = a.IdVendedor,
                             Vendedor = a.Nombre
-                        }).OrderBy(x => x.Vendedor).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(x => x.Vendedor)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             int totalRecords = data.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);

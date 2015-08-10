@@ -37,33 +37,59 @@
                        'Total percepcion iva', 'Otras Percepciones', 'Importe total', 'Mon.', 'Obra', 'Vendedor', 'Provincia destino', 'Fecha anulacion', 'Usuario anulo', 'Fecha ingreso', 'Usuario ingreso',
                        'CAE', 'Rechazo CAE', 'Fecha Vto. o Rech. CAE', 'Observaciones'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search:false },
                         { name: 'IdNotaCredito', index: 'IdNotaCredito', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'Tipo', index: 'Tipo', align: 'left', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Tipo', index: 'CtaCte', align: 'left', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'TipoABC', index: 'TipoABC', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'PuntoVenta', index: 'PuntoVenta', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'NumeroNotaCredito', index: 'NumeroNotaCredito', align: 'right', width: 80, editable: false, hidden: false },
-                        { name: 'FechaNotaCredito', index: 'FechaNotaCredito', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        {
+                            name: 'FechaNotaCredito', index: 'FechaNotaCredito', width: 80, align: 'center', sorttype: 'date',
+                            hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+
+
+                            search: true,
+                            searchrules: {
+                                date: true
+                            },
+                            searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
+                                sopt: ['ge', 'le', 'eq'],
+                                dataInit: function (elem) {
+                                    $(elem).datepicker({
+                                        dateFormat: 'dd/mm/yy',
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        showButtonPanel: true,
+                                        onSelect: function () {
+                                            $(this).keydown();
+                                        }
+                                    });
+                                }
+                            }
+                        },
                         { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ClienteCodigo', index: 'ClienteCodigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ClienteNombre', index: 'ClienteNombre', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'ClienteCuit', index: 'ClienteCuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'TotalIva', index: 'TotalIva', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'TotalIIBB', index: 'TotalIIBB', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'TotalPercepcionIVA', index: 'TotalPercepcionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'TotalOtrasPercepciones', index: 'TotalOtrasPercepciones', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'MonedaAbreviatura', index: 'MonedaAbreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Obra', index: 'Obra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'ProvinciaDestino', index: 'ProvinciaDestino', align: 'left', width: 150, editable: false, hidden: false },
-                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ClienteCodigo', index: 'Cliente.Codigo', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ClienteNombre', index: 'Cliente.RazonSocial', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'DescripcionIva', index: 'DescripcionIva.Descripcion', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'ClienteCuit', index: 'Cliente.Cuit', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIva', index: 'TotalIva', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalIIBB', index: 'TotalIIBB', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalPercepcionIVA', index: 'TotalPercepcionIVA', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'TotalOtrasPercepciones', index: 'TotalOtrasPercepciones', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'MonedaAbreviatura', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+
+                         { name: 'Obra', index: 'Obra.NumeroObra', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Vendedor', index: 'Vendedore.Nombre', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'ProvinciaDestino', index: 'Provincia.Nombre', align: 'left', width: 150, editable: false, hidden: false },
+
+                         { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'UsuarioAnulo', index: 'Empleado1.Nombre', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'UsuarioIngreso', index: 'UsuarioIngreso', align: 'left', width: 150, editable: false, hidden: false },
+                        { name: 'UsuarioIngreso', index: 'Empleado.Nombre', align: 'left', width: 150, editable: false, hidden: false },
+
                         { name: 'CAE', index: 'CAE', align: 'left', width: 200, editable: false, hidden: false },
                         { name: 'RechazoCAE', index: 'RechazoCAE', align: 'left', width: 150, editable: false, hidden: false },
                         { name: 'FechaVencimientoORechazoCAE', index: 'FechaVencimientoORechazoCAE', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },

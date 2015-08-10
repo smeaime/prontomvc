@@ -322,7 +322,9 @@ namespace ProntoMVC.Controllers
         //    var data1 = (from a in data select a)
         //                .Where(x => (PendienteRemito != "SI" || (PendienteRemito == "SI" && x.PendienteRemitir > 0)) && (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
         //                .OrderByDescending(x => x.NumeroValeSalida)
-        //                .Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        //                
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.ToList();
 
         //    var jsonData = new jqGridJson()
         //    {
@@ -415,7 +417,9 @@ namespace ProntoMVC.Controllers
         //                    a.CantidadMesesAFacturar,
         //                    a.FacturacionCompletaMensual,
         //                    a.Observaciones
-        //                }).OrderBy(x => x.NumeroItem).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        //                }).OrderBy(x => x.NumeroItem)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+//.ToList();
 
         //    var jsonData = new jqGridJson()
         //    {
@@ -521,7 +525,9 @@ namespace ProntoMVC.Controllers
                             Observaciones = a[19],
                             ObservacionesRM = a[20],
                             EquipoDestino = a[21]
-                        }).OrderByDescending(s => s.NumeroValeSalida).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderByDescending(s => s.NumeroValeSalida)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {

@@ -84,7 +84,9 @@ namespace ProntoMVC.Controllers
 
             var data = Articulos
                 //.Include(x => x.empl)
-                         .Skip((currentPage - 1) * pageSize).Take(pageSize).ToArray();
+                         
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToArray();
 
             var jsonData = new jqGridJson()
             {

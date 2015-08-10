@@ -187,7 +187,9 @@ namespace ProntoMVC.Controllers
                             a.Abreviatura,
                             a.Inspeccion,
                             a.Detalle
-                        }).Where(campo).OrderBy(sidx + " " + sord).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).Where(campo).OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -259,7 +261,9 @@ namespace ProntoMVC.Controllers
                             a.IdControlCalidad,
                             a.Descripcion,
                             a.Abreviatura
-                        }).OrderBy(p => p.IdControlCalidad).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                        }).OrderBy(p => p.IdControlCalidad)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
 
 
             var jsonData = new jqGridJson()
