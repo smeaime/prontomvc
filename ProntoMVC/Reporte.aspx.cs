@@ -426,6 +426,20 @@ namespace ProntoMVC.Reportes
                 ReportViewerRemoto.ServerReport.SetParameters(yourParams);
             }
 
+            else if (reportName == "Salidas de materiales")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
+            else if (reportName == "Movimientos por partida")
+            {
+                ReportParameter[] yourParams = new ReportParameter[1];
+                yourParams[0] = new ReportParameter("CadenaConexion", scsql, false);
+                ReportViewerRemoto.ServerReport.SetParameters(yourParams);
+            }
+
             else
             {
                 var keys = this.Request.QueryString.AllKeys;

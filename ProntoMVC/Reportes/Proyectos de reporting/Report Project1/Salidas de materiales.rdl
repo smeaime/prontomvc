@@ -1305,8 +1305,12 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource1">
-      <DataSourceReference>DemoPronto</DataSourceReference>
-      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!CadenaConexion.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
       <rd:DataSourceID>72c16b7b-366c-4cb4-9856-4e4f50c1c599</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -1474,8 +1478,17 @@ Order By [Titulo]</CommandText>
     </DataSet>
   </DataSets>
   <ReportParameters>
+    <ReportParameter Name="CadenaConexion">
+      <DataType>String</DataType>
+      <Prompt>CadenaConexion</Prompt>
+    </ReportParameter>
     <ReportParameter Name="Desde">
       <DataType>DateTime</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=DateSerial(2000,1,1)</Value>
+        </Values>
+      </DefaultValue>
       <Prompt>Desde</Prompt>
     </ReportParameter>
     <ReportParameter Name="Hasta">

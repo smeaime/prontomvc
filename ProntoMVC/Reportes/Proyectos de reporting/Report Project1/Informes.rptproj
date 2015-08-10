@@ -199,6 +199,10 @@
       <FullPath>Requerimientos pendientes de asignacion.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Requerimientos pendientes sin pedido.rdl</Name>
+      <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Resumen Cuenta Corriente Acreedores.rdl</Name>
       <FullPath>Resumen Cuenta Corriente Acreedores.rdl</FullPath>
     </ProjectItem>
@@ -227,8 +231,16 @@
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Requerimientos pendientes sin pedido.rdl</Name>
-      <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
+      <Name>Salida Materiales.rdl</Name>
+      <FullPath>Salida Materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Salidas de materiales.rdl</Name>
+      <FullPath>Salidas de materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Movimientos por partida.rdl</Name>
+      <FullPath>Movimientos por partida.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
