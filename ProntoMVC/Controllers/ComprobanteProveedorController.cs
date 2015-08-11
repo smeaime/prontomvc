@@ -6149,7 +6149,7 @@ namespace ProntoMVC.Controllers
                 // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                 .OrderBy("IdComprobanteProveedor desc")
                 
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -6450,7 +6450,7 @@ namespace ProntoMVC.Controllers
                     // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                     .OrderBy("IdComprobanteProveedor desc")
                     
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
 
