@@ -2352,6 +2352,15 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdVendedor" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdConcepto" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdConcepto2" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdEmpleadoFF" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioAnulo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioModifico" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdMoneda" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
@@ -2801,6 +2810,15 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdProvinciaDestino" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_NotasDebito_IdVendedor" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdConcepto" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdConcepto2" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdEmpleadoFF" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioAnulo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioIngreso" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdUsuarioModifico" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdMoneda" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

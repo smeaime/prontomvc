@@ -4,56 +4,53 @@
 }
 @*<a>@Html.ActionLink("Nueva Factura", "Edit", new { id = -1 }, new { @class = "btn btn-primary" })</a>*@
 @*http://stackoverflow.com/questions/10429510/display-html-within-html-actionlink-with-twitter-bootstrap*@
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
+@if (false)
+{
+    <style>
+                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4;
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
-    }
-</style>
+
+
+                .ui-widget-content {
+                    border: 0px solid #aaaaaa;
+                }
+
+                .ui-jqgrid {
+                    border-right-width: 0px;
+                    border-left-width: 0px;
+                }
+                    /* If you need to remove all grid's borders you can use
+
+        .ui-jqgrid { border-width: 0px; }
+        If you want additionally remove vertical border between the cells in the grid you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-right-color: #E4E4E4;
+                    }
+
+
+                    .ui-jqgrid tr.footrow-ltr td {
+                        border-right-color: #E4E4E4 !important;
+                    }
+
+                    /*To remove horizontal border between the rows you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-bottom-color: #E4E4E4;
+                    }
+                /*To remove vertical borders between the column headers you can use */
+
+                th.ui-th-column {
+                    border-right-color: #E4E4E4 !important;
+                }
+                /* or alternatively (without the usage of !important) */
+
+                .ui-jqgrid-labels .ui-th-column {
+                    border-right-color: #E4E4E4;
+                }
+    </style>
+}
+
 <div class="container-fluid">
     <br />
     <div>
@@ -64,7 +61,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                         Nueva Comparativa
                     </button>
                 </div>
-                <div class="span10">
+                @*<div class="span10">
                     <div class="input-prepend ">
                         <div class="btn-group ">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -79,7 +76,7 @@ If you want additionally remove vertical border between the cells in the grid yo
                         </div>
                         <input id="BuscadorListado" type="text" class="" placeholder="Filtrar" style="" />
                     </div>
-                </div>
+                </div>*@
                 @*
                 <button onclick="window.location.href='@Url.Action("Imprimir", new { id = -1 })'"  class="btn btn-primary"  >
                     imprimir prueba
@@ -95,11 +92,15 @@ If you want additionally remove vertical border between the cells in the grid yo
                     <input id="IdObra" name="IdObra" type="hidden" value=@Request.QueryString["idobra"]></div>
             </div>
         </div>
+        <br />
+
         <div class="row-fluid">
             <div class="span12 lightblue">
-                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-                </table>
-                <div id="ListaPager" class="scroll" style="text-align: center;">
+               
+
+                <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px;
+        font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+                <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px">
                 </div>
             </div>
         </div>
@@ -115,7 +116,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Comparativas", "Comparativa")',
+            url: '@Url.Action("Comparativas_DynamicGridData", "Comparativa")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'IdObra': function () { return $("#IdObra").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -219,20 +220,22 @@ If you want additionally remove vertical border between the cells in the grid yo
             viewrecords: true,
 
 
-
-
-
-
             ///////////////////////////////
-            //width: 'auto', // 'auto',
+            width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
             //////////////////////////////
 
             height: $(window).height() - ALTOLISTADO, // '100%'
-            //altRows: false,
+            altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
+            // ,caption: '<b>FACTURAS</b>'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
 
 
 
@@ -241,12 +244,29 @@ If you want additionally remove vertical border between the cells in the grid yo
         });
         //jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { edit: false, add: false, del: false, refresh: true, search: true });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-        //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350,
-        //            maxWidth: 1500,
-        //            minHeight: 80, maxHeight: 500
-        //        });
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+ { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+ {
+     //sopt: ["cn"]
+     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+ }
+);
 
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+        $(window).resize(function () {
+            RefrescaAnchoJqgrids();
+        });
 
         $("#Aux3").change(function () {
 

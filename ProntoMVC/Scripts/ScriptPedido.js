@@ -3343,7 +3343,7 @@ $(function () {
 
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'Requerimiento/RequerimientosComprables',
+        url: ROOT + 'Requerimiento/RequerimientosComprables_DynamicGridData',
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
         datatype: 'json',
         mtype: 'POST',
@@ -3420,7 +3420,7 @@ $(function () {
 
 
     $("#ListaDrag2").jqGrid({
-        url: ROOT + 'Requerimiento/DetRequerimientosComprables',
+        url: ROOT + 'Requerimiento/DetRequerimientosComprables_DynamicGridData',
         postData: { 'IdRequerimiento': function () { return "-1"; } },
         datatype: 'json',
         mtype: 'POST',
@@ -3492,7 +3492,7 @@ $(function () {
 
 
     $("#ListaDrag3").jqGrid({
-        url: ROOT + 'Presupuesto/Presupuestos',
+        url: ROOT + 'Presupuesto/Presupuestos_DynamicGridData',
 
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
         datatype: 'json',
@@ -3561,7 +3561,7 @@ $(function () {
 
 
     $("#ListaDrag4").jqGrid({
-        url: ROOT + 'Comparativa/Comparativas',
+        url: ROOT + 'Comparativa/Comparativas_DynamicGridData',
 
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
         datatype: 'json',
@@ -3655,7 +3655,7 @@ $(function () {
 
 
     $("#ListaDrag5").jqGrid({
-        url: ROOT + 'Pedido/Pedidos',
+        url: ROOT + 'Pedido/Pedidos_DynamicGridData',
 
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
         datatype: 'json',

@@ -1938,7 +1938,7 @@ namespace ProntoMVC.Controllers
                 //// TotalPedido as [Total pedido],  
                 //                        }
                         ).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
