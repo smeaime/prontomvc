@@ -6037,6 +6037,292 @@ namespace ProntoMVC.Controllers
         //    return RedirectToAction("Index");
         //}
 
+
+
+
+
+
+        public virtual ActionResult ComprobantesProveedor_DynamicGridData(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+        {
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            //if (sidx == "Numero") sidx = "NumeroComprobanteProveedor"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroComprobanteProveedor"; 
+
+            var Entidad = fondoFijoService.ObtenerTodos()
+                // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Unidad))
+                // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Moneda))
+                //.Include(x => x.DetalleComprobantesProveedores. .moneda)
+                //   .Include("DetalleComprobantesProveedores.Unidad") // funciona tambien
+                // .Include(x => x.Moneda)
+                //.Include(x => x.Proveedor)
+                //  .Include("DetalleComprobantesProveedores.IdDetalleRequerimiento") // funciona tambien
+                //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
+                // .Include(x => x.Aprobo)
+                //.Include(x => x.Comprador)
+                //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
+                // .Include(x => x.Aprobo)
+                //.Include(x => x.Comprador)
+                .Include(x => x.DetalleComprobantesProveedores)
+                .Include(x => x.DescripcionIva)
+                .Include(x => x.Cuenta)
+                .Include(x => x.Proveedor)
+                .Include(x => x.Proveedore)
+                .Include(x => x.Obra)
+                //.Where(x => (x.Confirmado ?? "SI") != "NO") // verificar si lo de "confirmado" solo se debe revisar para fondos fijos
+                          .AsQueryable();
+
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                Entidad = (from a in Entidad where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
+            }
+            if (_search)
+            {
+                switch (searchField.ToLower())
+                {
+                    case "numero":
+                        campo = String.Format("{0} = {1}", searchField, searchString);
+                        break;
+                    case "fechaingreso":
+                        //No anda
+                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        break;
+                    default:
+                        if (searchOper == "eq")
+                        {
+                            campo = String.Format("{0} = {1}", searchField, searchString);
+                        }
+                        else
+                        {
+                            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                campo = "true";
+            }
+
+            var Entidad1 = (from a in Entidad.Where(campo) select new { IdComprobanteProveedor = a.IdComprobanteProveedor });
+
+            int totalRecords = Entidad1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad.Include("Proveedor")
+                        select a
+                /*   new         
+                {
+                                    IdComprobanteProveedor = a.IdComprobanteProveedor,
+
+                                    Numero = a.NumeroComprobante1
+                                    //fecha
+                                    //fechasalida
+                                    //cumpli
+                                    //rms
+                                    //obras
+                                    //proveedor
+                                    //neto gravado
+                                    //bonif
+                                    //total iva
+
+
+                                    // IsNull(ComprobantesProveedores.TotalComprobanteProveedor,0)-IsNull(ComprobantesProveedores.TotalIva1,0)+IsNull(ComprobantesProveedores.Bonificacion,0)-  
+                                    // IsNull(ComprobantesProveedores.ImpuestosInternos,0)-IsNull(ComprobantesProveedores.OtrosConceptos1,0)-IsNull(ComprobantesProveedores.OtrosConceptos2,0)-  
+                                    // IsNull(ComprobantesProveedores.OtrosConceptos3,0)-IsNull(ComprobantesProveedores.OtrosConceptos4,0)-IsNull(ComprobantesProveedores.OtrosConceptos5,0)as [Neto gravado],  
+                                    // Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
+
+                                    // Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
+
+                                    // IsNull(ComprobantesProveedores.ImpuestosInternos,0)+IsNull(ComprobantesProveedores.OtrosConceptos1,0)+IsNull(ComprobantesProveedores.OtrosConceptos2,0)+  
+                                    // IsNull(ComprobantesProveedores.OtrosConceptos3,0)+IsNull(ComprobantesProveedores.OtrosConceptos4,0)+IsNull(ComprobantesProveedores.OtrosConceptos5,0)as [Otros Conceptos],  
+                                    // TotalComprobanteProveedor as [Total ComprobanteProveedor],  
+
+
+
+
+
+                                } */
+
+
+                ).Where(campo)
+                // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
+                .OrderBy("IdComprobanteProveedor desc")
+                
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdComprobanteProveedor.ToString(),
+                            cell = new string[] { 
+                                                              
+                                "<a href="+ Url.Action("EditFF",new {id = a.IdComprobanteProveedor} ) +  " target='' >Editar</>"   +  " | " +
+                                //"<a href="+ Url.Action("Edit","Subdiario",new {id =    
+                                //                fondoFijoService.Subdiarios.Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdSubdiario).FirstOrDefault()  
+                                //                    } )   +  " target='' >Subdiario</>"  +  " | " +
+                                
+                                #if false 
+
+                                "<a href="+  Url.Content("~/Reporte.aspx?ReportName=Subdiario&idProveedor=" +
+                                                fondoFijoService.Subdiarios_Listado().Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdCuentaSubdiario).FirstOrDefault().NullSafeToString()  )
+                                                +  " target='' >Subdiario</>"  +  " | " +
+                                 #else
+                                    "" + 
+                                #endif
+
+                                "<a href="+ Url.Content("~/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores&idProveedor=" + ((a.IdProveedorEventual ?? 0)>0 ? a.IdProveedorEventual :  a.IdProveedor))  +  " target='' >CtaCte</>"    +  " | " + 
+                                "<a href="+ Url.Action("IncrementarRendicionFF", new {idcuentaFF = a.IdCuenta } ) +  " target='' >Cerrar rendición</>"  ,
+                                ///////
+                                
+                                "<a href="+ Url.Action("EditFF",new {id = a.IdComprobanteProveedor} ) +  " target='' >Editar</>" ,
+
+                                //"<a href="+ Url.Content("~/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores&idProveedor=" + a.IdProveedor +  "&busq=" + a.Letra  +'-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroComprobante1.NullSafeToString().PadLeft(8,'0')  )  +  " target='' >CtaCte</>" ,
+                                //"<a href="+ Url.Action("Edit","Asiento",new {id = a.IdComprobanteProveedor}) +  " target='' >Asiento</>" ,
+                                
+                                
+                                "<a href="+ Url.Action("Edit","Subdiario",new {id = a.IdComprobanteProveedor}) +  " target='' >Subdiario</>" ,
+                                
+                                
+
+                                a.IdComprobanteProveedor.ToString(), 
+                  
+
+                                #if false 
+
+                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
+                                
+                              #else
+                                "",
+                                #endif
+
+                                a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  
+                                a.Letra  +'-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroComprobante2.NullSafeToString().PadLeft(8,'0') , //  Substring(cp.Letra+'-'+Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+   Convert(varchar,cp.NumeroComprobante1)+'-'+Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2),1,20) as [Numero],  
+                                 
+                                
+                                
+                                (a.IdProveedor!=null ?    "Cta. cte." : ( a.IdCuenta!=null ? "F.fijo" :    (a.IdCuentaOtros!=null ?  "Otros" :""  ))  )   , 
+
+
+
+                                 a.FechaComprobante.GetValueOrDefault().ToString("dd/MM/yyyy"),  //  as [Fecha comp.],   
+                                 a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"), //  as [Fecha recep.],  
+                                 a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"), // as [Fecha vto.],  
+                                                            (a.Proveedore ==null ) ? "" :   a.Proveedore.CodigoEmpresa, //  IsNull(P1.CodigoEmpresa,P2.CodigoEmpresa) as [Cod.Prov.],   
+
+  
+      
+ 
+                                (a.Proveedor ==null ) ?  ((a.Cuenta==null) ? "" :   a.Cuenta.Descripcion.NullSafeToString()) :    "<a href="+ Url.Action("Edit","Proveedor",new {id = a.Proveedor.IdProveedor} ) +  " target='' >" + a.Proveedor.RazonSocial + "</>" ,  //  as [Proveedor / Cuenta],   
+                                (a.Proveedore ==null ) ?  "" :    "<a href="+ Url.Action("Edit","Proveedor",new {id = a.Proveedore.IdProveedor} ) +  " target='' >" + a.Proveedore.RazonSocial + "</>" ,  //  as [Proveedor / Cuenta],   
+
+                            
+                                "", // as [Vale],  
+
+                                
+#if false 
+ // ineficientes 
+                                      (a.DescripcionIva==null) ? "" :   a.DescripcionIva.Descripcion.NullSafeToString(), //  as [Condicion IVA],   
+
+                                (a.Obra ==null ) ?  (( fondoFijoService.ObrasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+                              
+                                (a.Cuenta ==null || true ) ? (( fondoFijoService.CuentasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdCuenta) ??  new Cuenta()).Descripcion  )  :   a.Cuenta.Descripcion, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+
+#else
+                                "" , "" ,"",
+#endif
+
+                                
+                                
+                               
+
+                          
+
+                              
+                                 a.TotalBruto.NullSafeToString(),// as [Subtotal],  
+                                 0 .NullSafeToString() , //  [Neto gravado],  
+                                 a.TotalIva1.NullSafeToString(), //  as [IVA 1],  
+                                 a.TotalIva2.NullSafeToString(), //  as [IVA 2],  
+                                 a.AjusteIVA.NullSafeToString(), // as [Aj.IVA],  
+                                 a.TotalBonificacion.NullSafeToString(), //  as [Imp.bonif.],  
+                                 a.TotalComprobante .NullSafeToString(), // as [Total],  
+                                "" , // as [Mon.],  
+                                 a.CotizacionDolar .NullSafeToString(), //  as [Cotiz. dolar],  
+                                 "" , //  as [Provincia destino],  
+                                 a.Observaciones, // ,  
+
+                          
+#if false 
+                                 a.IdUsuarioIngreso>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
+                                 a.FechaIngreso==null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy") , // as [Fecha ingreso],  
+                           a.IdUsuarioModifico>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioModifico).Nombre : "", //   as [Modifico],  
+                          a.FechaModifico==null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy")    ,  
+
+#else
+                                "" , "" ,"","" , 
+#endif
+
+
+                                 a.DestinoPago=="A" ? "ADM" : "OBRA", // as [Dest.Pago],  
+                                 a.NumeroRendicionFF.NullSafeToString() , // as [Nro.Rend.FF],  
+                                "", // as [Etapa],  
+                                "", //  as [Rubro],  
+                                 a.CircuitoFirmasCompleto, //  as [Circuito de firmas completo],  
+
+  
+
+
+                                //a.SubNumero.NullSafeToString(), 
+                                //a.FechaComprobanteProveedor.NullSafeToString(), 
+                                ////GetCustomDateFormat(a.FechaComprobanteProveedor).NullSafeToString(), 
+                                //a.FechaSalida.NullSafeToString(), 
+                                //a.Cumplido.NullSafeToString(), 
+                                //"", //a.DetalleComprobantesProveedores..Select (requerimientos),
+                                //"", //a.DetalleComprobantesProveedores.select (obras,
+                                //a.Proveedor==null ? "" :  a.Proveedor.RazonSocial.NullSafeToString(), 
+                                //(a.TotalComprobanteProveedor- a.TotalIva1+a.Bonificacion- (a.ImpuestosInternos ?? 0)- (a.OtrosConceptos1 ?? 0) - (a.OtrosConceptos2 ?? 0)-    (a.OtrosConceptos3 ?? 0) -( a.OtrosConceptos4 ?? 0) - (a.OtrosConceptos5 ?? 0)).ToString(),  
+                                //a.Bonificacion.NullSafeToString(), 
+                                //a.TotalIva1.NullSafeToString(), 
+                                //a.Moneda==null ? "" :   a.Moneda.Abreviatura.NullSafeToString(),  
+                                //a.Comprador==null ? "" :    a.Comprador.Nombre.NullSafeToString(),  
+                                //a.Empleado==null ? "" :  a.Empleado.Nombre.NullSafeToString(),  
+                                //a.DetalleComprobantesProveedores.Count().NullSafeToString(),  
+                                //a.IdComprobanteProveedor.NullSafeToString(), 
+                                //a.NumeroComparativa.NullSafeToString(),  
+                                //a.IdTipoCompraRM.NullSafeToString(), 
+                                //a.Observaciones.NullSafeToString(),   
+                                //a.DetalleCondicionCompra.NullSafeToString(),   
+                                //a.ComprobanteProveedorExterior.NullSafeToString(),  
+                                //a.IdComprobanteProveedorAbierto.NullSafeToString(), 
+                                //a.NumeroLicitacion .NullSafeToString(), 
+                                //a.Impresa.NullSafeToString(), 
+                                //a.UsuarioAnulacion.NullSafeToString(), 
+                                //a.FechaAnulacion.NullSafeToString(),  
+                                //a.MotivoAnulacion.NullSafeToString(),  
+                                //a.ImpuestosInternos.NullSafeToString(), 
+                                //"", // #Auxiliar1.Equipos , 
+                                //a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() 
+
+                                
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult ComprobantesProveedor(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
@@ -6311,6 +6597,264 @@ namespace ProntoMVC.Controllers
                                 //a.Proveedor==null ? "" : a.Proveedor.IdCodigoIva.NullSafeToString() 
 
                                 
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public virtual ActionResult ComprobantesProveedorFF_DynamicGridData(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
+                                         string FechaInicial, string FechaFinal, string rendicion, string idcuenta)
+        {
+            string campo = String.Empty;
+            int pageSize = rows ?? 20;
+            int currentPage = page ?? 1;
+
+            //if (sidx == "Numero") sidx = "NumeroComprobanteProveedor"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroComprobanteProveedor"; 
+
+
+            var Entidad1 = fondoFijoService.ObtenerTodos(sidx, sord, page, rows, _search, searchField, searchOper, searchString,
+                                            FechaInicial, FechaFinal, rendicion, idcuenta);
+
+            int totalRecords = Entidad1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = Entidad1;
+
+
+
+            if (false)
+            {
+
+                var Entidad = fondoFijoService.ObtenerTodos()
+                    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Unidad))
+                    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Moneda))
+                    //.Include(x => x.DetalleComprobantesProveedores. .moneda)
+                    //   .Include("DetalleComprobantesProveedores.Unidad") // funciona tambien
+                    // .Include(x => x.Moneda)
+                    //.Include(x => x.Proveedor)
+                    //  .Include("DetalleComprobantesProveedores.IdDetalleRequerimiento") // funciona tambien
+                    //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
+                    // .Include(x => x.Aprobo)
+                    //.Include(x => x.Comprador)
+                    .Include(x => x.DetalleComprobantesProveedores)
+                    .Include(x => x.DescripcionIva)
+                    .Include(x => x.Cuenta)
+                    .Include(x => x.Proveedor)
+                    .Include(x => x.Proveedore)
+                    .Include(x => x.Obra)
+                        .Where(x => x.IdCuenta != null)
+                              .AsQueryable();
+
+
+                if (FechaInicial != string.Empty)
+                {
+                    DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                    DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                    Entidad = (from a in Entidad where a.FechaComprobante >= FechaDesde && a.FechaComprobante <= FechaHasta select a).AsQueryable();
+                }
+                if (rendicion != string.Empty)
+                {
+                    int rend = Generales.Val(rendicion);
+                    Entidad = (from a in Entidad where a.NumeroRendicionFF == rend select a).AsQueryable();
+                }
+
+
+
+                if (idcuenta != string.Empty)
+                {
+                    int idcuentaff = Generales.Val(idcuenta);
+                    Entidad = (from a in Entidad where a.IdCuenta == idcuentaff select a).AsQueryable();
+                }
+
+                var usuario = glbUsuario;
+
+                int ffasociado = usuario.IdCuentaFondoFijo ?? 0;
+
+                if (ffasociado > 0)
+                {
+                    Entidad = (from a in Entidad where a.IdCuenta == ffasociado select a).AsQueryable();
+                }
+
+                int obraasociada = usuario.IdObraAsignada ?? 0;
+                if (obraasociada > 0)
+                {
+                    Entidad = (from a in Entidad where a.IdObra == obraasociada select a).AsQueryable();
+                }
+
+
+
+
+
+
+
+
+
+                if (_search)
+                {
+                    switch (searchField.ToLower())
+                    {
+                        case "numero":
+                            campo = String.Format("{0} = {1}", searchField, searchString);
+                            break;
+                        case "fechaingreso":
+                            //No anda
+                            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                            break;
+                        default:
+
+                            campo = String.Format("Proveedor.RazonSocial.Contains(\"{0}\") OR NumeroReferencia = {1} ", searchString, Generales.Val(searchString));
+
+                            //if (searchOper == "eq")
+                            //{
+                            //    campo = String.Format("{0} = {1}", searchField, searchString);
+                            //}
+                            //else
+                            //{
+                            //    campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+                            //}
+                            break;
+                    }
+                }
+                else
+                {
+                    campo = "true";
+                }
+
+                var Entidad3 = (from a in Entidad.Where(campo) select a);
+
+                totalRecords = Entidad3.Count();
+                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+                data = (from a in Entidad.Include("Proveedor")
+                        select a
+
+
+                    ).Where(campo)
+                    // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
+                    .OrderBy("IdComprobanteProveedor desc")
+
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+
+            }
+
+
+
+
+            var jsonData = new // jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                userdata = new
+                {
+                    // combinado con la opcion de la jqgrid "userDataOnFooter: true" lo manda al pie
+                    neto = Entidad1.Sum(x => x.TotalBruto),
+                    Total = Entidad1.Sum(x => x.TotalComprobante),
+                    IVA1 = Entidad1.Sum(x => x.TotalIva1),
+                    IVA2 = Entidad1.Sum(x => x.TotalIva2),
+                    Subtotal = Entidad1.Sum(x => x.TotalBruto)
+                    //TotalBonificacion
+                },
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdComprobanteProveedor.ToString(),
+                            cell = new string[] { 
+                                
+                                "<a href="+ Url.Action("EditFF",new {id = a.IdComprobanteProveedor} ) +  " target='' >Editar</>"   +  " | " +
+                                //"<a href="+ Url.Action("Edit","Subdiario",new {id =    
+                                //                fondoFijoService.Subdiarios.Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdSubdiario).FirstOrDefault()  
+                                //                    } )   +  " target='' >Subdiario</>"  +  " | " +
+//                               "<a href="+  
+                                        //Url.Content("~/Reporte.aspx?ReportName=Subdiario&idProveedor="
+                                        // + fondoFijoService.Subdiarios.Where(x=>x.IdTipoComprobante==11 && x.IdComprobante==a.IdComprobanteProveedor).Select(x=>x.IdCuentaSubdiario).FirstOrDefault().NullSafeToString()  )
+                                 //       +  " target='' >Subdiario</>"  +  " | " +
+                                "<a href="+ Url.Content("~/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores&idProveedor=" + ((a.IdProveedorEventual ?? 0)>0 ? a.IdProveedorEventual :  a.IdProveedor))  +  " target='' >CtaCte</>"    +  " | " + 
+                                "<a href="+ Url.Action("IncrementarRendicionFF", new {idcuentaFF = a.IdCuenta } ) +  " target='' >Cerrar rendición</>"  ,
+                                ///////
+                                
+                                "<a href="+ Url.Action("EditFF",new {id = a.IdComprobanteProveedor} ) +  " target='' >Editar</>" ,
+
+                                //"<a href="+ Url.Content("~/Reporte.aspx?ReportName=Resumen%20Cuenta%20Corriente%20Acreedores&idProveedor=" + a.IdProveedor +  "&busq=" + a.Letra  +'-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroComprobante1.NullSafeToString().PadLeft(8,'0')  )  +  " target='' >CtaCte</>" ,
+                                //"<a href="+ Url.Action("Edit","Asiento",new {id = a.IdComprobanteProveedor}) +  " target='' >Asiento</>" ,
+                                
+                                
+                                "<a href="+ Url.Action("Edit","Subdiario",new {id = a.IdComprobanteProveedor}) +  " target='' >Subdiario</>" ,
+                                
+                                
+
+                                a.IdComprobanteProveedor.ToString(), 
+                  
+
+                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
+                                
+                              
+                                a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  
+                                a.Letra  +'-' + a.NumeroComprobante1.NullSafeToString().PadLeft(4,'0') + '-'+a.NumeroComprobante2.NullSafeToString().PadLeft(8,'0') , //  Substring(cp.Letra+'-'+Substring('0000',1,4-Len(Convert(varchar,cp.NumeroComprobante1)))+   Convert(varchar,cp.NumeroComprobante1)+'-'+Substring('00000000',1,8-Len(Convert(varchar,cp.NumeroComprobante2)))+Convert(varchar,cp.NumeroComprobante2),1,20) as [Numero],  
+                                 
+                                
+                                
+                                (a.IdProveedor!=null ?    "Cta. cte." : ( a.IdCuenta!=null ? "F.fijo" :    (a.IdCuentaOtros!=null ?  "Otros" :""  ))  )   , 
+
+
+                                (a.Proveedore ==null ) ?  "" :    "<a href="+ Url.Action("Edit","Proveedor",new {id = a.Proveedore.IdProveedor} ) +  " target='' >" + a.Proveedore.RazonSocial + "</>" ,  //  as [Proveedor / Cuenta],   
+
+
+                                 a.TotalBruto.NullSafeToString().Replace(",",".") ,// as [Subtotal],  
+                                 0 .NullSafeToString().Replace(",",".") , //  [Neto gravado],  
+                                 a.TotalIva1.NullSafeToString().Replace(",","."), //  as [IVA 1],  
+                                 a.TotalIva2.NullSafeToString().Replace(",","."), //  as [IVA 2],  
+                                 a.AjusteIVA.NullSafeToString().Replace(",","."), // as [Aj.IVA],  
+                                 a.TotalBonificacion.NullSafeToString().Replace(",","."), //  as [Imp.bonif.],  
+                                 a.TotalComprobante .NullSafeToString().Replace(",","."), // as [Total],  
+
+
+                                 a.FechaComprobante.GetValueOrDefault().ToString("dd/MM/yyyy"),  //  as [Fecha comp.],   
+                                 a.FechaRecepcion.GetValueOrDefault().ToString("dd/MM/yyyy"), //  as [Fecha recep.],  
+                                 a.FechaVencimiento.GetValueOrDefault().ToString("dd/MM/yyyy"), // as [Fecha vto.],  
+                                                            (a.Proveedore ==null ) ? "" :   a.Proveedore.CodigoEmpresa, //  IsNull(P1.CodigoEmpresa,P2.CodigoEmpresa) as [Cod.Prov.],   
+
+  
+      
+ 
+                                (a.Proveedor ==null ) ?  ((a.Cuenta==null) ? "" :   a.Cuenta.Descripcion.NullSafeToString()) :    "<a href="+ Url.Action("Edit","Proveedor",new {id = a.Proveedor.IdProveedor} ) +  " target='' >" + a.Proveedor.RazonSocial + "</>" ,  //  as [Proveedor / Cuenta],   
+
+                            
+                                      
+
+
+
+                                "", // as [Vale],  
+                               (a.DescripcionIva==null) ? "" :   a.DescripcionIva.Descripcion.NullSafeToString(), //  as [Condicion IVA],   
+
+                                (a.Obra ==null ) ?  (( fondoFijoService.ObrasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+
+                                
+                                (a.Cuenta ==null || true ) ? (( fondoFijoService.CuentasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdCuenta) ??  new Cuenta()).Descripcion  )  :   a.Cuenta.Descripcion, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+
+                        
+
+
+                                "" , // as [Mon.],  
+                                 a.CotizacionDolar .NullSafeToString(), //  as [Cotiz. dolar],  
+                                 "" , //  as [Provincia destino],  
+                                 a.Observaciones, // ,  
+                           a.IdUsuarioIngreso>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
+                                 a.FechaIngreso==null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy") , // as [Fecha ingreso],  
+                           a.IdUsuarioModifico>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioModifico).Nombre : "", //   as [Modifico],  
+                          a.FechaModifico==null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy")    ,  
+                                 a.DestinoPago=="A" ? "ADM" : "OBRA", // as [Dest.Pago],  
+                                 a.NumeroRendicionFF.NullSafeToString() , // as [Nro.Rend.FF],  
+                                "", // as [Etapa],  
+                                "", //  as [Rubro],  
+                                 a.CircuitoFirmasCompleto //  as [Circuito de firmas completo],  
+
                             }
                         }).ToArray()
             };

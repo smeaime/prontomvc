@@ -7426,26 +7426,49 @@ Public Class CartaDePorteManager
 
 
 
-                If (InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0 And .Acopio1 <= 0) Then
-                    ms = "Falta elegir a qué acopio de A.C.A corresponde el titular"
+
+                If (CartaDePorteManager.excepciones(SC, .Titular).Count > 1 And .Acopio1 <= 0) Then
+                    ms = "Falta elegir a qué acopio corresponde el titular"
                     Return False
                 End If
 
                 If (.CuentaOrden2 > 0) Then
-                    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden2).ToUpper, "A.C.A") > 0 And .Acopio3 <= 0) Then
+                    If (CartaDePorteManager.excepciones(SC, .CuentaOrden2).Count > 1 And .Acopio3 <= 0) Then
                         'rcomercial
-                        ms = "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
+                        ms = "Falta elegir a qué acopio corresponde el remitente comercial"
                         Return False
                     End If
                 End If
 
                 If (.CuentaOrden1 > 0) Then
-                    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden1).ToUpper, "A.C.A") > 0 And .Acopio2 <= 0) Then
+                    If (CartaDePorteManager.excepciones(SC, .CuentaOrden1).Count > 1 And .Acopio2 <= 0) Then
                         'intermediario
-                        ms = "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
+                        ms = "Falta elegir a qué acopio corresponde el intermediario"
                         Return False
                     End If
                 End If
+
+
+                'If (InStr(EntidadManager.NombreCliente(SC, .Titular).ToUpper, "A.C.A") > 0 And .Acopio1 <= 0) Then
+                '    ms = "Falta elegir a qué acopio de A.C.A corresponde el titular"
+                '    Return False
+                'End If
+
+                'If (.CuentaOrden2 > 0) Then
+                '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden2).ToUpper, "A.C.A") > 0 And .Acopio3 <= 0) Then
+                '        'rcomercial
+                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el remitente comercial"
+                '        Return False
+                '    End If
+                'End If
+
+                'If (.CuentaOrden1 > 0) Then
+                '    If (InStr(EntidadManager.NombreCliente(SC, .CuentaOrden1).ToUpper, "A.C.A") > 0 And .Acopio2 <= 0) Then
+                '        'intermediario
+                '        ms = "Falta elegir a qué acopio de A.C.A corresponde el intermediario"
+                '        Return False
+                '    End If
+                'End If
                 'Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden1), "").ToUpper, "A.C.A") > 0 _
                 'Or InStr(If(EntidadManager.NombreCliente(SC, .CuentaOrden2), "").ToUpper, "A.C.A") > 0) _
                 'And .EnumSyngentaDivision = "" Then
