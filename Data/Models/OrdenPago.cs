@@ -21,6 +21,7 @@ namespace ProntoMVC.Data.Models
             this.DetalleOrdenesPagoImpuestos = new HashSet<DetalleOrdenesPagoImpuesto>();
             this.DetalleOrdenesPagoRubrosContables = new HashSet<DetalleOrdenesPagoRubrosContable>();
             this.DetalleOrdenesPagoValores = new HashSet<DetalleOrdenesPagoValore>();
+            this.OrdenesPago1 = new HashSet<OrdenPago>();
         }
     
         public int IdOrdenPago { get; set; }
@@ -107,5 +108,15 @@ namespace ProntoMVC.Data.Models
         public virtual ICollection<DetalleOrdenesPagoRubrosContable> DetalleOrdenesPagoRubrosContables { get; set; }
         public virtual ICollection<DetalleOrdenesPagoValore> DetalleOrdenesPagoValores { get; set; }
         public virtual Cuenta Cuenta { get; set; }
+        public virtual Concepto Concepto { get; set; }
+        public virtual Concepto Concepto1 { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
+        public virtual Empleado Empleado2 { get; set; }
+        public virtual Empleado Empleado3 { get; set; }
+        public virtual Moneda Moneda { get; set; }
+        public virtual Obra Obra { get; set; }
+        public virtual ICollection<OrdenPago> OrdenesPago1 { get; set; }
+        public virtual OrdenPago OrdenesPago2 { get; set; }
     }
 }

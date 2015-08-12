@@ -440,6 +440,146 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+
+
+        public virtual ActionResult Cuentas_DynamicGridData
+    (string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            string campo = String.Empty;
+            int pageSize = rows; // ?? 20;
+            int currentPage = page; // ?? 1;
+
+            int totalPages = 0;
+
+
+            var Req = db.Cuentas.AsQueryable();
+            //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Cuenta>
+                                ("DetalleRequerimientos.DetallePedidos",
+                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
+                                 );
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+            try
+            {
+
+                var Req1 = from a in Req.Where(campo) select a.IdCuenta;
+
+                totalRecords = Req1.Count();
+                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            }
+            catch (Exception)
+            {
+
+                //                throw;
+            }
+
+            //switch (sidx.ToLower())
+            //{
+            //    case "numerorequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //    case "fecharequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
+            //        break;
+            //    case "numeroobra":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
+            //        else
+            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
+            //        break;
+            //    case "libero":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
+            //        break;
+            //    case "aprobo":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
+            //        break;
+            //    case "sector":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
+            //        else
+            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
+            //        break;
+            //    case "detalle":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Detalle);
+            //        else
+            //            Req = Req.OrderBy(a => a.Detalle);
+            //        break;
+            //    default:
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //}
+
+            var data = (from a in Req
+                        select a
+            ).Where(campo).OrderBy(sidx + " " + sord)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdCuenta.ToString(),
+                            cell = new string[] { 
+                            "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
+							"<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
+                            a.IdCuenta.ToString(), 
+                            a.Descripcion.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.IdTipoCuenta==null ? "" :  db.TiposCuentas.Find(a.IdTipoCuenta).Descripcion,  
+                            a.Jerarquia.NullSafeToString(),  
+                            a.IdRubroContable==null  ? "" :  db.RubrosContables.Find(a.IdRubroContable).Descripcion,  
+                            a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
+                            a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
+                            a.AjustaPorInflacion .NullSafeToString(),
+                            a.CodigoSecundario   .NullSafeToString(),
+                            a.IdCuentaGasto.NullSafeToString(),
+                            a.IdObra.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
         public virtual ActionResult GetCuentas(int? TipoEntidad)
         {
             int TipoEntidad1 = TipoEntidad ?? 0;
@@ -543,6 +683,41 @@ namespace ProntoMVC.Controllers
                                  }).ToList();
 
             return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public virtual ActionResult Edit(int id)
+        {
+            Cuenta o;
+            if (id <= 0)
+            {
+                o = new Cuenta();
+            }
+            else
+            {
+                o = db.Cuentas.SingleOrDefault(x => x.IdCuenta == id);
+            }
+            CargarViewBag(o);
+            return View(o);
+        }
+
+        void CargarViewBag(Cuenta o)
+        {
+            Parametros parametros = db.Parametros.Find(1);
+            int? i = parametros.IdTipoCuentaGrupoFF;
+
+            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
+            //ViewBag.IdUnidadOperativa = new SelectList(db.UnidadesOperativas, "IdUnidadOperativa", "Descripcion", o.IdUnidadOperativa);
+            //ViewBag.IdGrupoObra = new SelectList(db.GruposObras, "IdGrupoObra", "Descripcion", o.IdGrupoObra);
+            //ViewBag.IdMonedaValorObra = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMonedaValorObra);
+            //ViewBag.IdCuentaContableFF = new SelectList(db.Cuentas.Where(x => (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4) && x.IdTipoCuentaGrupo == i).OrderBy(x => x.Codigo), "IdCuenta", "Descripcion", o.IdCuentaContableFF);
+            //ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvincia);
+            //ViewBag.IdPais = new SelectList(db.Paises, "IdPais", "Descripcion", o.IdPais);
+            //ViewBag.IdJefeRegional = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefeRegional);
+            //ViewBag.IdJefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdJefe);
+            //ViewBag.IdSubjefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdSubjefe);
+
         }
     }
 }

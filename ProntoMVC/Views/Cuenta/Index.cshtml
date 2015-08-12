@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ProntoMVC.Data.Models.Pedido>
+﻿@model IEnumerable<ProntoMVC.Data.Models.Cuenta>
 @{
-    ViewBag.Title = "Pedidos";
+    ViewBag.Title = "Cuentas";
 }
 <div>
     <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
@@ -28,7 +28,7 @@ If you want additionally remove vertical border between the cells in the grid yo
     
     .ui-jqgrid tr.ui-row-ltr td
     {
-        border-right-color: #E4E4E4;
+        border-right-color: #E4E4E4; 
     }
     
     
@@ -143,7 +143,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("Pedidos", "Pedido")',
+            url: '@Url.Action("Cuentas_DynamicGridData", "Cuenta")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
