@@ -462,7 +462,7 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Cuenta>
-                                ("DetalleRequerimientos.DetallePedidos",
+                                ("",
                                 sidx, sord, page, rows, _search, filters, db, ref totalRecords
                                  );
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
@@ -479,9 +479,9 @@ namespace ProntoMVC.Controllers
             try
             {
 
-                var Req1 = from a in Req.Where(campo) select a.IdCuenta;
+                //var Req1 = from a in Req.Where(campo) select a.IdCuenta;
 
-                totalRecords = Req1.Count();
+               // totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
             catch (Exception)
@@ -542,9 +542,9 @@ namespace ProntoMVC.Controllers
             //        break;
             //}
 
-            var data = (from a in Req
+            var data = (from a in pagedQuery
                         select a
-            ).Where(campo).OrderBy(sidx + " " + sord)
+            )//.Where(campo).OrderBy(sidx + " " + sord)
                 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
