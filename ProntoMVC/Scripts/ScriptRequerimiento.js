@@ -170,7 +170,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
         $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
-                {term: val }, // JSON.stringify(val)},
+                { term: val }, // JSON.stringify(val)},
                 function (data) {
                     if (data.length > 0) {
                         var ui = data[0];
@@ -249,7 +249,7 @@ function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
 
 
         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
-                {term: val }, // JSON.stringify(val)},
+                { term: val }, // JSON.stringify(val)},
                 function (data) {
                     if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
                         var ui = data[0];
@@ -550,7 +550,8 @@ function PopupCentrar() {
 function SerializaForm() {
 
     var colModel = jQuery("#Lista").jqGrid('getGridParam', 'colModel');
-    var cabecera = { "IdRequerimiento": "", "NumeroRequerimiento": "", "FechaRequerimiento": "", "LugarEntrega": "", "Observaciones": "", "IdObra": "", "IdSector": "", "IdSolicito": "",
+    var cabecera = {
+        "IdRequerimiento": "", "NumeroRequerimiento": "", "FechaRequerimiento": "", "LugarEntrega": "", "Observaciones": "", "IdObra": "", "IdSector": "", "IdSolicito": "",
         "Aprobo": "", "Detalle": "", "Cumplido": "", "FechaAnulacion": "", "UsuarioAnulacion": "", "MotivoAnulacion": "", "DetalleRequerimientos": []
     };
 
@@ -845,9 +846,10 @@ $(function () {
 
     $('#Lista').jqGrid({
         url: ROOT + 'Requerimiento/DetRequerimientos/',
-        postData: { 'IdRequerimiento': function () {
-            return $("#IdRequerimiento").val();
-        }
+        postData: {
+            'IdRequerimiento': function () {
+                return $("#IdRequerimiento").val();
+            }
 
         },
         datatype: 'json',
@@ -856,7 +858,8 @@ $(function () {
                      'Artículo', 'Descripción', 'Entrega', 'Observaciones',
                        'Cump', 'Adjunto', 'OrigenDescripcion', '', 'IdCalidad', 'Calidad'],
         colModel: [
-                        { formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre',
+                        {
+                            formoptions: { rowpos: 1, colpos: 1 }, name: 'act', index: 'act', align: 'centre',
                             width: 30,
                             hidden: true, sortable: false, editable: false
 
@@ -869,62 +872,67 @@ $(function () {
                             }
                         },
 
-                        { formoptions: { rowpos: 1, colpos: 2 }, name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false} },
-                        { formoptions: { rowpos: 2, colpos: 1 }, name: 'IdArticulo', index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true} },
-                        { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdUnidad', index: 'IdUnidad', label: 'TB',
+                        { formoptions: { rowpos: 1, colpos: 2 }, name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false } },
+                        { formoptions: { rowpos: 2, colpos: 1 }, name: 'IdArticulo', index: 'IdArticulo', label: 'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: true } },
+                        {
+                            formoptions: { rowpos: 2, colpos: 2 }, name: 'IdUnidad', index: 'IdUnidad', label: 'TB',
                             align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
                         },
         //{ name: 'Eliminado', index: 'Eliminado', label:'TB', align: 'left', width: 85, editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true} },
 
 
                         {
-                        name: 'NumeroItem'
+                            name: 'NumeroItem'
                             , formoptions: { rowpos: 3, colpos: 1 }
                             , index: 'NumeroItem'
                             , label: 'TB', align: 'center', width: 30,
-                        editable: true, edittype: 'text',
-                        editoptions: { disabled: true },
-                        editrules: { readonly: 'readonly' }
-                    },
+                            editable: true, edittype: 'text',
+                            editoptions: { disabled: true },
+                            editrules: { readonly: 'readonly' }
+                        },
         ////////////////////////////////////////////
         // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:predefined_formatter
-                        {name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60,
-                        editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true }
+                        {
+                            name: 'Cantidad', formoptions: { rowpos: 9, colpos: 1 }, index: 'Cantidad', label: 'TB', align: 'right', width: 60,
+                            editable: true, edittype: 'text', editoptions: { maxlength: 20 }, editrules: { required: true }
 
 
-                        // formatter:'number', formatoptions: {decimalSeparator:".", thousandsSeparator: "", decimalPlaces: 4}
-                        //formatter:'currency', formatoptions:{decimalSeparator:",", thousandsSeparator: ",", decimalPlaces: 2, prefix: "$ ",defaultValue: '0.00'}
-                        // formatter: numFormat, unformat: numUnformat  
-                    }, //, unformat:numUnformat
+                            // formatter:'number', formatoptions: {decimalSeparator:".", thousandsSeparator: "", decimalPlaces: 4}
+                            //formatter:'currency', formatoptions:{decimalSeparator:",", thousandsSeparator: ",", decimalPlaces: 2, prefix: "$ ",defaultValue: '0.00'}
+                            // formatter: numFormat, unformat: numUnformat  
+                        }, //, unformat:numUnformat
         ////////////////////////////////////////////
-                        {name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left',
-                        width: 60, editable: true, edittype: 'select', editrules: { required: true },
-                        editoptions: { dataUrl: ROOT + 'Articulo/Unidades',
-                            dataEvents: [{
-                                type: 'change',
-                                fn: function (e) {
+                        {
+                            name: 'Unidad', formoptions: { rowpos: 9, colpos: 2 }, index: 'Unidad', align: 'left',
+                            width: 60, editable: true, edittype: 'select', editrules: { required: true },
+                            editoptions: {
+                                dataUrl: ROOT + 'Articulo/Unidades',
+                                dataEvents: [{
+                                    type: 'change',
+                                    fn: function (e) {
 
-                                    //alert('aasasd');
-                                    RefrescarRenglon(this);
-                                    //  UltimoIdArticulo=ui.item.id;
-                                    UltimoIdUnidad = this.value;
-                                    $('#IdUnidad').val(this.value);
-                                    //UltimoDescUnidad =""
-                                    // ojo. si está editando inline, #Unidad no existe
-                                    // if (modoform) {
-                                    //      UltimoDescUnidad = $("#Unidad").children("option").filter(":selected").text(); // ojo. si está editando inline, #Unidad no existe
-                                    //}
-                                    //alert(UltimoDescUnidad);
-                                    //UltimoDescUnidad
-                                }
-                            }]
-                        }
+                                        //alert('aasasd');
+                                        RefrescarRenglon(this);
+                                        //  UltimoIdArticulo=ui.item.id;
+                                        UltimoIdUnidad = this.value;
+                                        $('#IdUnidad').val(this.value);
+                                        //UltimoDescUnidad =""
+                                        // ojo. si está editando inline, #Unidad no existe
+                                        // if (modoform) {
+                                        //      UltimoDescUnidad = $("#Unidad").children("option").filter(":selected").text(); // ojo. si está editando inline, #Unidad no existe
+                                        //}
+                                        //alert(UltimoDescUnidad);
+                                        //UltimoDescUnidad
+                                    }
+                                }]
+                            }
 
-                    },
+                        },
 
 
 
-                        { name: 'Codigo', formoptions: { rowpos: 5, colpos: 1 }, index: 'Codigo', align: 'left',
+                        {
+                            name: 'Codigo', formoptions: { rowpos: 5, colpos: 1 }, index: 'Codigo', align: 'left',
                             width: 100, editable: true, edittype: 'text',
                             editoptions: {
                                 dataInit: function (elem) {
@@ -982,7 +990,7 @@ $(function () {
                                         // alert('aasasd');
 
                                         $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
-                                            {term: this.value },
+                                            { term: this.value },
                                             function (data) {
                                                 if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
                                                     var ui = data[0];
@@ -1028,19 +1036,22 @@ $(function () {
                             },
                             editrules: { required: false }
                         },
-                        { formoptions: { rowpos: 6, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 400
+                        {
+                            formoptions: { rowpos: 6, colpos: 2 }, name: 'DescripcionFalsa', index: '', editable: false, width: 400
                             , hidden: true //lo pongo en hidden porque edu me aclara que no juntamos la descripcion + observacion en el abm, solo en la impresion
                             , editoptions: { disabled: 'disabled' }, editrules: { edithidden: true, required: false }
                         },
 
-                        { name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450,
+                        {
+                            name: 'Descripcion', formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, index: 'Descripcion', align: 'left', width: 450,
                             hidden: false,
                             editable: true, edittype: 'text',
                             editoptions: {
                                 rows: '1', cols: '1',
                                 dataInit: function (elem) {
                                     var NoResultsLabel = "No se encontraron resultados";
-                                    $(elem).autocomplete({ source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
+                                    $(elem).autocomplete({
+                                        source: ROOT + "Articulo/GetArticulosAutocomplete2", minLength: 0,
                                         select: function (event, ui) {
 
                                             //alert(ui.item.value);
@@ -1094,7 +1105,7 @@ $(function () {
                                         }
 
                                         $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',  // ?term=' + val
-                                            {term: this.value },
+                                            { term: this.value },
                                             function (data) {
                                                 if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
                                                     var ui = data[0];
@@ -1138,15 +1149,16 @@ $(function () {
                             editrules: { required: true }
                         },
         //{ name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300, editable: true, edittype: 'select', editoptions: { dataUrl: '@Url.Action("Articulos")' }, editrules: { required: true} },
-                        {name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 },
-                        index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
-                        formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
-                        editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit },
-                        editrules: { required: false }
+                        {
+                            name: 'FechaEntrega', formoptions: { rowpos: 3, colpos: 2 },
+                            index: 'FechaEntrega', label: 'TB', width: 250, align: 'center', sorttype: 'date', editable: true,
+                            formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            editoptions: { size: 10, maxlengh: 10, dataInit: initDateEdit },
+                            editrules: { required: false }
 
 
 
-                    },
+                        },
         //                        { name: 'Adjunto', index: 'Adjunto', align: 'left', width: 67, align: 'center', formatter: 'checkbox', editable: true, edittype: 'checkbox', hidden: true, 
         //                            editoptions: { value: "True:False", //value: 'Yes:No', defaultValue: 'Si', 
         //                                            dataEvents: [{ type: 'change', fn: function (e) {
@@ -1167,27 +1179,28 @@ $(function () {
         ////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        {formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones',
+                        {
+                            formoptions: { rowpos: 11, colpos: 1, label: 'Obs' }, name: 'Observaciones', index: 'Observaciones',
 
-                        classes: "textInDiv", // http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only
-                        //                                formatter: function (v) {
-                        //                                    return '<div>' + $.jgrid.htmlEncode(v) + '</div>';
-                        //                                },
-                        label: 'TB', align: 'left', editable: true
-                        ///////////////////////////////////////////////////////////
-                        /////////////////////////////////////////////////////////
+                            classes: "textInDiv", // http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only
+                            //                                formatter: function (v) {
+                            //                                    return '<div>' + $.jgrid.htmlEncode(v) + '</div>';
+                            //                                },
+                            label: 'TB', align: 'left', editable: true
+                            ///////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////
                          , edittype: 'text'  // para que no deforme el inline, 
-                        // ,hidden: true  //aparecerá en el form pero no en la grilla, tal como la columna Descripcion
-                        ///////////////////////////////////////////////////////////
-                        // , edittype: 'textarea'
+                            // ,hidden: true  //aparecerá en el form pero no en la grilla, tal como la columna Descripcion
+                            ///////////////////////////////////////////////////////////
+                            // , edittype: 'textarea'
                                , width: 300
-                        ///////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////
+                            ///////////////////////////////////////////////////////////
+                            ///////////////////////////////////////////////////////////
                         , editoptions: { rows: '4', cols: '40' }
 
 
 
-                    },
+                        },
 
 
 
@@ -1203,20 +1216,23 @@ $(function () {
 
 
 
-                        {formoptions: { rowpos: 21, colpos: 1 }, name: 'Cumplido', index: 'Cumplido', label: 'TB', align: 'center', width: 50, sortable: false, editable: false },
-                        { name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
+                        { formoptions: { rowpos: 21, colpos: 1 }, name: 'Cumplido', index: 'Cumplido', label: 'TB', align: 'center', width: 50, sortable: false, editable: false },
+                        {
+                            name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 100, editable: true, edittype: 'file',
                             formoptions: { rowpos: 22, colpos: 1 },
-                            editoptions: { enctype: "multipart/form-data", dataEvents: [{ type: 'change', fn: function (e) {
-                                var thisval = $(e.target).val();
-                                //var filed=$('#ArchivoAdjunto1').attr('value');
-                                if ($(this).val() != "") {
-                                    $("#Adjunto").checked = true;
-                                }
-                                else {
-                                    $("#Adjunto").checked = false;
-                                }
-                            }
-                            }]
+                            editoptions: {
+                                enctype: "multipart/form-data", dataEvents: [{
+                                    type: 'change', fn: function (e) {
+                                        var thisval = $(e.target).val();
+                                        //var filed=$('#ArchivoAdjunto1').attr('value');
+                                        if ($(this).val() != "") {
+                                            $("#Adjunto").checked = true;
+                                        }
+                                        else {
+                                            $("#Adjunto").checked = false;
+                                        }
+                                    }
+                                }]
                             }
                         },
         //////////////////////////////////////////////////////////////////////////////////
@@ -1227,24 +1243,25 @@ $(function () {
         // http://www.trirand.com/jqgridwiki/doku.php?id=wiki:common_rules#custom
                     {
 
-                    name: 'OrigenDescripcion', label: 'TB'
+                        name: 'OrigenDescripcion', label: 'TB'
                             , formoptions: { rowpos: 11, colpos: 2, label: "Tomar desc. de" }
                             , index: 'OrigenDescripcion',
-                    align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
-                    // formatter: radioFormatter, unformat: unformatRadio,
-                    editrules: { required: true
-                        //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
-                    },
-                    editoptions: {
-                        //                         readonly: true,
-                        //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
-                        defaultValue: OrigenDescripcionDefault,
-                        value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
-                        //,
-                        //     custom_element: myelem, custom_value: myvalue
-                    }
+                        align: 'center', width: 35, editable: true, hidden: true, edittype: 'select', // edittype: 'custom',
+                        // formatter: radioFormatter, unformat: unformatRadio,
+                        editrules: {
+                            required: true
+                            //                                      , readonly: ( (OrigenDescripcionDefault==3 || true) ?  'readonly' : ''  )                , disabled: 'disabled'
+                        },
+                        editoptions: {
+                            //                         readonly: true,
+                            //   disabled:  ( (OrigenDescripcionDefault==3 ) ?  'disabled' : ''  )  ,
+                            defaultValue: OrigenDescripcionDefault,
+                            value: "1:Solo el material; 2:Solo las observaciones; 3:Material mas observaciones", size: 3
+                            //,
+                            //     custom_element: myelem, custom_value: myvalue
+                        }
 
-                }
+                    }
 
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -1252,15 +1269,18 @@ $(function () {
         //////////////////////////////////////////////////////////////////////////////////
                 , { name: 'IdRequerimiento', index: 'IdRequerimiento', label: 'TB', hidden: true }
 
-                , { formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true
+                , {
+                    formoptions: { rowpos: 2, colpos: 2 }, name: 'IdControlCalidad', index: 'IdControlCalidad', label: 'TB', hidden: true
                     //                    align: 'left', width: 85, editable: true, hidden: true, 
                     //                    editoptions: { disabled: 'disabled' }, 
                     //                            editrules: { edithidden: true, required: true }
                 }
 
-               , { name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '',
+               , {
+                   name: 'ControlCalidad', formoptions: { rowpos: 12, colpos: 2 }, index: 'ControlCalidad', align: 'center', label: '',
                    width: 150, editable: true, edittype: 'select', editrules: { required: false },
-                   editoptions: { dataUrl: ROOT + 'ControlCalidad/ControlCalidades', //  ROOT + 'ControlCalidad/ControlCalidadParaCombo',
+                   editoptions: {
+                       dataUrl: ROOT + 'ControlCalidad/ControlCalidades', //  ROOT + 'ControlCalidad/ControlCalidadParaCombo',
 
 
                        // $("#IdUnidad").val(ui.item.IdUnidad|| 1);
@@ -1268,14 +1288,15 @@ $(function () {
 
 
 
-                       dataEvents: [{ type: 'change', fn: function (e) {
+                       dataEvents: [{
+                           type: 'change', fn: function (e) {
 
-                           $('#IdControlCalidad').val(this.value);
-                           UltimoIdControlCalidad = this.value;
+                               $('#IdControlCalidad').val(this.value);
+                               UltimoIdControlCalidad = this.value;
 
-                            RefrescarRenglon(this);
+                               RefrescarRenglon(this);
 
-                       }
+                           }
                        }]
 
 
@@ -1288,7 +1309,7 @@ $(function () {
 
 
 
-                    ],
+        ],
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1543,7 +1564,7 @@ $(function () {
 
     //        jQuery("#grid_id").jqGrid('navGrid',pagerid, {});
     //jQuery("#grid_id").jqGrid('inlineNav',pagerid, parameters);
-    $('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last"} });
+    $('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
 
 
 
@@ -1601,25 +1622,27 @@ $(function () {
         var grid = jQuery("#ListaDrag");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'Descripcion', // Codigo
                    searchOper: 'contains',
                    searchString: $("#BuscadorPanelDerecho").val()
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
 
         var grid = jQuery("#ListaDrag2");
         var postdata = grid.jqGrid('getGridParam', 'postData');
         jQuery.extend(postdata,
-               { filters: '',
+               {
+                   filters: '',
                    searchField: 'NumeroRequerimiento', // Codigo
                    searchOper: 'eq',
                    searchString: $("#BuscadorPanelDerecho").val()
                });
         grid.jqGrid('setGridParam', { search: true, postData: postdata });
-        grid.trigger("reloadGrid", [{ page: 1}]);
+        grid.trigger("reloadGrid", [{ page: 1 }]);
 
     });
 
@@ -1843,157 +1866,460 @@ $(function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
     $("#ListaDrag").jqGrid({
-        url: ROOT + "Articulo/ArticulosGridData2",
+
+
+        //url: ROOT + 'Articulo/ArticulosGridDataResumido', // '@Url.Action("ArticulosGridData", "Articulo")',
+        url: ROOT + 'Articulo/Articulos_DynamicGridData',
+
+
         datatype: 'json',
         mtype: 'POST',
-        cellEdit: false,
-        colNames: ['IdArticulo', 'Codigo', 'Material', 'IdUnidad', 'Un.'],
+        postData: {
+            'FechaInicial': function () { return $("#FechaInicial").val(); },
+            'FechaFinal': function () { return $("#FechaFinal").val(); },
+            'IdObra': function () { return $("#IdObra").val(); }
+        },
+
+
+
+        colNames: ['', '', 'Codigo', 'Descripcion'
+
+   , 'Rubro'
+
+   , 'Subrubro'
+   , 'Nro.inv.', '','', 'Unidad'
+
+
+        ],
+
+
+
+
+
+
         colModel: [
-                        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Codigo', index: 'Codigo', width: 100, align: 'left', search: true, stype: 'text' },
-                        { name: 'Descripcion', index: 'Descripcion', width: 3000, align: 'left', search: true, stype: 'text',
-                            editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
-                        },
-                        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
-            ],
+        { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+        { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+        {
+            name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+            search: true, searchoptions: {
+                clearSearch: true, searchOperators: true
+                , sopt: ['cn']
+            }
+        },
+        {
+            name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+            editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
+
+            , search: true, searchoptions: {
+                clearSearch: true,
+                searchOperators: true
+                , sopt: ['cn']
+                //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
+            }
+        },
+        {
+            name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
+            editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+            , search: true, searchoptions: {
+                //sopt: ['cn']
+            }
+        },
+
+
+        { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+        { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+
+        ,
+        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
+        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
+        { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
+
+
+        ],
+
         ondblClickRow: function (id) {
             copiarArticulo(id);
         },
-
         loadComplete: function () {
             grid = $("ListaDrag");
-            // $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-        pager: $('#ListaDragPager'),
-        rowNum: 15,
-        rowList: [10, 20, 50],
-        sortname: 'Descripcion',
-        sortorder: "asc",
+
+
+
+
+
+        pager: '#ListaDragPager', // $(),
+        rowNum: 50,
+        rowList: [10, 20, 50, 100],
+        sortname: 'IdArticulo',
+        sortorder: "desc",
         viewrecords: true,
+        //toppager: true,
+
+        emptyrecords: 'No hay registros para mostrar',
 
 
 
-
+        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
+        //////////////////////////////
 
-
-        height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar'
+        footerrow: false, //true,
+        userDataOnFooter: true
+        // ,caption: '<b>PEDIDOS</b>'
+
+          , gridview: true
+
+          , multiboxonly: true
+
+          , multipleSearch: true
         //,
-        // caption: '<b>Artículos</b>'
+        //search : { caption: "Search...", Find: "Find", Reset: "Reset",
+        //odata : ['equal', 'not equal', 'less'],
+        //groupOps: [ { op: "AND", text: "all" },
+        //            { op: "OR", text: "any" }],
+        //matchText: " match",
+        //rulesText: " rules" },
+
     })
+    //        .navGrid("#ListaPager",
+    //            { refresh: true, add: false, edit: false, del: false },
+    //                {}, // settings for edit
+    //                {}, // settings for add
+    //                {}, // settings for delete
+    //                {closeAfterSearch: true, closeOnEscape: true },
+    //                { sopt: ["cn"]} // Search options. Some options can be set on column level
+    //         );
 
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    // jQuery("#ListaDrag").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
-    // $("#ListaDrag").filterToolbar();
-    $("#ListaDrag").setFrozenColumns();
+    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
+    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
+    //http://stackoverflow.com/questions/6591930/problem-with-jqgrid-4-1-1-search-operator-select-box-is-disabled-when-search-fi
 
-    // $("#ListaDrag").parents('div.ui-jqgrid-bdiv').css("max-height", "600px");
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+     {
+         //sopt: ["cn"]
+         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+         width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+     }
+    );
 
 
+
+    //      jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { add: false, edit: false, del: false },
+    //{}, {}, {}, { multipleSearch: true, overlay: false });
+
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager', {
+        caption: "",
+        buttonicon: "ui-icon-calculator",
+        title: "Choose columns",
+        onClickButton: function () {
+            $(this).jqGrid('columnChooser',
+                { width: 550, msel_opts: { dividerLocation: 0.5 }, modal: true });
+            $("#colchooser_" + $.jgrid.jqID(this.id) + ' div.available>div.actions')
+                .prepend('<label style="float:left;position:relative;margin-left:0.6em;top:0.6em">Search:</label>');
+        }
+    });
+
+
+
+    jQuery("#ListaDrag").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+    //myGrid.filterToolbar({  });
+
+    jQuery("#ListaDrag").jqGrid('navButtonAdd', '#ListaDragPager',
+        {
+            caption: "Filter", title: "Toggle Searching Toolbar",
+            buttonicon: 'ui-icon-pin-s',
+            onClickButton: function () { myGrid[0].toggleToolbar(); }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-    var prmSearch = { multipleSearch: false, overlay: true, sopt: ["cn"], width: 500, closeOnEscape: true, closeAfterSearch: true };
+    //var prmSearch = { multipleSearch: false, overlay: true, sopt: ["cn"], width: 500, closeOnEscape: true, closeAfterSearch: true };
 
 
-    $("#ListaDrag2").jqGrid({
-        url: ROOT + 'Requerimiento/Requerimientos',
-        postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
+    //$("#ListaDrag2").jqGrid({
+    //    url: ROOT + 'Requerimiento/Requerimientos',
+    //    postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
+    //    datatype: 'json',
+    //    mtype: 'POST',
+    //    cellEdit: false,
+    //    colNames: ['Acciones', 'Acciones', 'IdRequerimiento', 'N°', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
+    //                   'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario_anulo', 'Fecha_anulacion', 'Motivo_anulacion', 'Fechas_liberacion',
+    //                   'Observaciones', 'Lugar de necesidad', 'IdObra', 'IdSector'],
+    //    colModel: [
+    //                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                    { name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                    { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
+    //                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+    //                    { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 80, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+    //                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Entregado', index: 'Entregado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Impresa', index: 'Impresa', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 155, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Salidas', index: 'Salidas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Libero', index: 'Libero', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: [''] }, hidden: true },
+    //                    { name: 'Solicito', index: 'Solicito', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Sector', index: 'Sector', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
+    //                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+    //                    { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } }
+    //    ],
+
+    //    ondblClickRow: function (id) {
+    //        //$("#ListaDrag2").jqGrid('gridDnD', 'ondrop');
+    //        // $('#ListaDrag2').trigger("ondrop");
+    //        copiarRM(id);
+    //    },
+    //    loadComplete: function () {
+    //        grid = $("ListaDrag2");
+    //        // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+
+    //        //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+    //        // rows = $("#Lista").getGridParam("reccount");
+    //        //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+    //    },
+
+    //    pager: $('#ListaDragPager2'),
+    //    rowNum: 15,
+    //    rowList: [10, 20, 50],
+    //    sortname: 'NumeroRequerimiento',
+    //    sortorder: "desc",
+    //    viewrecords: true,
+
+    //    width: 'auto', // 'auto',
+    //    autowidth: true,
+    //    shrinkToFit: false,
+
+    //    height: '100%',
+    //    altRows: false,
+    //    emptyrecords: 'No hay registros para mostrar'
+    //    //,            caption: '<b>REQUERIMIENTOS</b>'
+    //})
+
+    //jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
+    //     { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+    //      prmSearch);
+
+    ////$("#ListaDrag2").filterToolbar();
+    //$("#ListaDrag2").setFrozenColumns();
+    //// jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    $('#ListaDrag2').jqGrid({
+        url: ROOT + 'Requerimiento/Requerimientos_DynamicGridData',
+
+
+        postData: {
+            'FechaInicial': function () { return $("#FechaInicial").val(); },
+            'FechaFinal': function () { return $("#FechaFinal").val(); },
+            'IdObra': function () { return $("#IdObra").val(); },
+            'bAConfirmar': function () {
+                return $('#bAConfirmar').is(":checked");
+            },
+            'bALiberar': function () {
+                return $('#bALiberar').is(":checked");
+            }
+        },
+
+
         datatype: 'json',
         mtype: 'POST',
-        cellEdit: false,
-        colNames: ['Acciones', 'Acciones', 'IdRequerimiento', 'N°', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
-                       'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario_anulo', 'Fecha_anulacion', 'Motivo_anulacion', 'Fechas_liberacion',
-                       'Observaciones', 'Lugar de necesidad', 'IdObra', 'IdSector'],
+        colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas',
+                   'Pedidos', 'Recepciones', 'Salidas', 'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion',
+                   'Observaciones', 'Lugar de entrega', '', '', 'Web'],
         colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'act', index: 'act', align: 'center', width: 0, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 80, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Entregado', index: 'Entregado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Impresa', index: 'Impresa', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroObra', index: 'NumeroObra', align: 'left', width: 155, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Salidas', index: 'Salidas', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Libero', index: 'Libero', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: [''] }, hidden: true },
-                        { name: 'Solicito', index: 'Solicito', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Sector', index: 'Sector', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 75, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} }
-                    ],
+                    { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
+                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    {
+                        name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center',
+                        sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false
+                    },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Impresa', index: 'Impresa', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Obra.NumeroObra', index: 'Obra.NumeroObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Salidas', index: 'Salidas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Libero', index: 'Libero', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: [''] } },
+                    { name: 'Solicito', index: 'Solicito', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
 
-        ondblClickRow: function (id) {
-            //$("#ListaDrag2").jqGrid('gridDnD', 'ondrop');
-            // $('#ListaDrag2').trigger("ondrop");
-            copiarRM(id);
-        },
-        loadComplete: function () {
-            grid = $("ListaDrag2");
-            // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+        ],
+        //            onSelectRow: function (id) {
+        //                if (id && id !== lastSelectedId) {
+        //                    if (typeof lastSelectedId !== "undefined") {
+        //                        grid.jqGrid('restoreRow', lastSelectedId);
+        //                    }
+        //                    lastSelectedId = id;
+        //                }
+        //            },
 
-            //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
-            // rows = $("#Lista").getGridParam("reccount");
-            //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
 
-        },
+            ondblClickRow: function (id) {
+                //$("#ListaDrag2").jqGrid('gridDnD', 'ondrop');
+                // $('#ListaDrag2').trigger("ondrop");
+                copiarRM(id);
+            },
+            loadComplete: function () {
+                grid = $("ListaDrag2");
+                // $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+
+                //AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+                // rows = $("#Lista").getGridParam("reccount");
+                //if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+            },
+
+
+
 
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'NumeroRequerimiento',
-        sortorder: "desc",
+        sortname: 'NumeroRequerimiento', // 'FechaRecibo,NumeroRecibo',
+        sortorder: 'desc',
         viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
 
+
+        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
+        //////////////////////////////
 
-        height: '100%',
+        height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar'
-        //,            caption: '<b>REQUERIMIENTOS</b>'
-    })
+        footerrow: false, //true,
+        userDataOnFooter: true
+        // ,caption: '<b>FACTURAS</b>'
+
+, gridview: true
+, multiboxonly: true
+, multipleSearch: true
+
+
+
+
+
+
+        //imgpath: '/content/cupertino/images',
+        //loadonce: true,
+        //, caption: '<b>REQUERIMIENTOS</b>'
+    });
+    jQuery("#ListaDrag2").jqGrid('bindKeys');
 
     jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
-         { refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-          prmSearch);
+     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+     {
+         //sopt: ["cn"]
+         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+         width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+     }
+    );
 
-    //$("#ListaDrag2").filterToolbar();
-    $("#ListaDrag2").setFrozenColumns();
-    // jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+    jQuery("#ListaDrag2").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
 
 
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // buscador aparte
 
     var grid22 = $("#ListaDrag2")
@@ -2078,7 +2404,7 @@ $(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-   ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $("#Aprobo").change(function () {
         var IdAprobo = $("#Aprobo > option:selected").attr("value");
@@ -2187,13 +2513,13 @@ $(function () {
         $('#Lista').navGrid(
                 '#Lista',
         //enabling buttons
-                {add: true, del: true, edit: true, search: false },
+                { add: true, del: true, edit: true, search: false },
         //edit option
-                {width: 'auto' },
+                { width: 'auto' },
         //add options
-                {width: 'auto', url: '/Home/AddProduct/' },
+                { width: 'auto', url: '/Home/AddProduct/' },
         //delete options
-                {url: '/Home/DeleteProduct/' });
+                { url: '/Home/DeleteProduct/' });
     };
 
 
@@ -2634,23 +2960,23 @@ $(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2672,7 +2998,8 @@ $(function () {
         sacarDeEditMode();
 
         jQuery("#Lista").jqGrid('editGridRow', "new",
-                { addCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
+                {
+                    addCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800, reloadAfterSubmit: false,
 
                     // addParams: { position: "last"}, // esto va en el ListaPager
 
@@ -2755,12 +3082,13 @@ $(function () {
     $("#delData").click(function () {
         //var gr = jQuery("#Lista").jqGrid('getGridParam', 'selrow');
         var gr = jQuery("#Lista").jqGrid('getGridParam', 'selarrrow');
-        
+
         if (gr != null) {
             //jQuery("#Lista").jqGrid('setRowData',gr,{Eliminado:"true"});
             //$("#"+gr).hide();  
             if (false) {
-                jQuery("#Lista").jqGrid('delGridRow', gr, { caption: "Borrar", msg: "Elimina el registro seleccionado?",
+                jQuery("#Lista").jqGrid('delGridRow', gr, {
+                    caption: "Borrar", msg: "Elimina el registro seleccionado?",
                     bSubmit: "Borrar", bCancel: "Cancelar", width: 300, closeOnEscape: true, reloadAfterSubmit: false
                 });
             }
@@ -2812,7 +3140,8 @@ function EditarItem(rowid) {
 
     if (gr != null) jQuery("#Lista")
                                     .jqGrid('editGridRow', gr,
-                                                { editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
+                                                {
+                                                    editCaption: "", bSubmit: "Aceptar", bCancel: "Cancelar", width: 800
                                                     , reloadAfterSubmit: false, closeOnEscape: true,
                                                     closeAfterEdit: true, recreateForm: true, Top: 0,
                                                     beforeShowForm: function (form) {
