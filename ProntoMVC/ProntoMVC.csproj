@@ -444,6 +444,7 @@
     <Content Include="Content\images\Empresas\wDemoWilliams.png" />
     <Content Include="Content\images\Empresas\wDemoWilliams2.png" />
     <Content Include="Content\images\Empresas\williams.png" />
+    <Content Include="Content\images\Empresas\_DemoWeb.png" />
     <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\favicon16.png" />
     <Content Include="Content\images\faviconfiel.png" />
