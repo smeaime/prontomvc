@@ -372,7 +372,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("ComprobantesProveedorFF", "ComprobanteProveedor")',
+            url: '@Url.Action("ComprobantesProveedorFF_DynamicGridData", "ComprobanteProveedor")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); },
                 'FechaFinal': function () { return $("#FechaFinal").val(); },
                 'rendicion': function () { return $("#rendicion").val(); },
@@ -380,7 +380,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', '', '', 'IdPedido', 'Tipo comp', 'Nro.interno', 'Numero', 'CtaCte/FFijo',
+            colNames: ['Acciones', '', '', 'IdComprobanteProveedor', 'Tipo comp', 'Nro.interno', 'Numero', 'CtaCte/FFijo',
 
 
              'Proveedor',
@@ -428,16 +428,23 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'act', index: 'act', align: 'center', width: 220, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'act', index: 'act', align: 'center', width: 80, hidden: false, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         {name: 'act', index: 'act', align: 'center', width: 80, hidden: true, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Tipo', index: 'Numero', align: 'left', width: 100, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'Nro int', index: 'Numero', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'Nro', index: 'Orden', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+                        { name: 'IdComprobanteProveedor', index: 'IdComprobanteProveedor', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'Tipo', index: 'TiposComprobante.Descripcion', align: 'left', width: 100, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Nro int', index: 'NumeroReferencia', align: 'right', width: 80, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Nro', index: 'NumeroComprobante2', align: 'right', width: 160, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'tipoff', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', hidden: true, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
 
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Proveedor', index: 'Proveedore.RazonSocial', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
             /* , formatter: "number" */
+
+
+           
+
+      
+          
+
                         {name: 'Subtotal', index: 'zzzzzz', align: 'right', formatter: "number", width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Neto', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'IVA1', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
@@ -446,12 +453,15 @@ If you want additionally remove vertical border between the cells in the grid yo
                           { name: 'bonif', index: 'zzzzzz', align: 'right', formatter: "number", width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Total', index: 'zzzzzz', align: 'right', formatter: "number", width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
+          
+          
 
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'codProveedor', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                              { name: 'ProveedorFF', index: 'ProveedorFF', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'Fechacomp', index: 'FechaComprobante', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'recep', index: 'FechaRecepcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Vence', index: 'FechaVencimiento', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'codProveedor', index: 'Proveedore.CodigoEmpresa', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ProveedorFF', index: 'Proveedor.RazonSocial', align: 'right', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
 
 
@@ -472,17 +482,19 @@ If you want additionally remove vertical border between the cells in the grid yo
                         { name: 'Cotiz', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'ProvDest', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
 
-                        { name: 'Obs', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Obs', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva2', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva3', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva4', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+  
+                        { name: 'UsuarioIngreso', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaIngreso', index: 'FechaIngreso', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdUsuarioModifico', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'FechaModifico', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'DestinoPago', index: 'DestinoPago', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Etapa', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Rubro', index: '', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
 
 
                     ],
@@ -526,7 +538,7 @@ If you want additionally remove vertical border between the cells in the grid yo
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50],
-            sortname: 'Numero', // 'FechaRecibo,NumeroRecibo',
+            sortname: 'IdComprobanteProveedor', // 'FechaRecibo,NumeroRecibo',
             sortorder: 'desc',
             viewrecords: true,
             emptyrecords: 'No hay registros para mostrar', //,
