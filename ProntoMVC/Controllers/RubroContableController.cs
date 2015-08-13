@@ -102,7 +102,7 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.RubrosContable>
-                                ("DetalleRequerimientos.DetallePedidos",
+                                ("",
                                 sidx, sord, page, rows, _search, filters, db, ref totalRecords
                                  );
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
@@ -126,7 +126,7 @@ namespace ProntoMVC.Controllers
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in pagedQuery
+                rows = (from a in pagedQuery.ToList()
                         select new jqGridRowJson
                         {
                             id = a.IdRubroContable.ToString(),
