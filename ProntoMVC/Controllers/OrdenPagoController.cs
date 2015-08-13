@@ -293,9 +293,8 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
         
-            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.OrdenPago>
-                                (Req as ObjectQuery<Data.Models.OrdenPago>
-                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.OrdenPago>
+                                (                               sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req  );
 
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
                                 //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"

@@ -224,85 +224,85 @@
 
 
 
-                        <div class="accordion-group" style="border: 0px; padding: 0px;">
-                            <div class="accordion-heading" style="border: 0px; padding: 0px;">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
-                                    más...
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
-                                @*si pones "collapse in" empieza abierto*@
-                                <div class="accordion-inner" style="border: 0px; padding: 0px;">
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                            @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Aprobo)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span8 lightblue">
-                                            @Html.LabelFor(model => model.Detalle)
-                                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Detalle)
-                                        </div>
-                                        <!--/span-->
+                    <div class="accordion-group" style="border: 0px; padding: 0px;">
+                        <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
+                               style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
+                                más...
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
+                            @*si pones "collapse in" empieza abierto*@
+                            <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Aprobo, "Aprobo")
+                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Aprobo)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                            @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.IdCondicionCompra)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Validez, "Validez")
-                                            @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Validez)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Referencia, "Referencia")
-                                            @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Referencia)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                    <div class="span8 lightblue">
+                                        @Html.LabelFor(model => model.Detalle)
+                                        @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Detalle)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                            @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Garantia, "Garantia")
-                                            @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Garantia)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Contacto, "Contacto")
-                                            @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Contacto)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
+                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span12 lightblue">
-                                            @Html.LabelFor(model => model.Observaciones)
-                                            @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Observaciones)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Validez, "Validez")
+                                        @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Validez)
                                     </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Referencia, "Referencia")
+                                        @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Referencia)
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
+                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
+                                    </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Garantia, "Garantia")
+                                        @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Garantia)
+                                    </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Contacto, "Contacto")
+                                        @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Contacto)
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span12 lightblue">
+                                        @Html.LabelFor(model => model.Observaciones)
+                                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Observaciones)
+                                    </div>
+                                    <!--/span-->
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <!--/row-->
                 <div class="row-fluid">
                     <div id="divGrilla" class="span12 lightblue">
@@ -365,7 +365,7 @@
                                 /*  background-image: none; */
                             }
                         </style>
-                     
+
 
                         <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
                                style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
@@ -464,7 +464,7 @@
                     </table>
                 </form>
                 <br />
-                
+
             </div>
 
             <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
@@ -476,9 +476,9 @@
                     <div class="span11 pull-right">
                         @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
                         <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" />
-                       
+
                     </div>
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -1065,7 +1065,7 @@
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
@@ -1108,6 +1108,11 @@
         jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
         //jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
+
+
+
+
+
         $("#ListaDrag3").jqGrid({
             url: '@Url.Action("Presupuestos", "Presupuesto")',
             postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
@@ -1118,25 +1123,66 @@
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
+
+
             pager: $('#ListaDragPager3'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'Numero',
-            sortorder: "desc",
+            sortorder: 'desc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>SOLICITUDES DE COTIZACION</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            ,caption: 'SOLICITUDES DE COTIZACION'
+
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
+            
+
         })
         jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag3").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag3").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+
 
         // make grid2 sortable
         $("#Lista").jqGrid('sortableRows', {
@@ -1644,7 +1690,7 @@
     }
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function CopiarPresupuesto(acceptId, ui) {
 
 
