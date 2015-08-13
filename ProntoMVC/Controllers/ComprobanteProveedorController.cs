@@ -6661,7 +6661,7 @@ namespace ProntoMVC.Controllers
                                 a.IdComprobanteProveedor.ToString(), 
                   
 
-                                (fondoFijoService.TiposComprobantesById(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
+                                (  db.TiposComprobantes.Find(a.IdTipoComprobante) ?? new  Data.Models.TiposComprobante()).Descripcion, // as [Tipo comp.],  
                                 
                               
                                 a.NumeroReferencia.NullSafeToString() , // as [Nro.interno],  
@@ -6702,10 +6702,10 @@ namespace ProntoMVC.Controllers
                                 "", // as [Vale],  
                                (a.DescripcionIva==null) ? "" :   a.DescripcionIva.Descripcion.NullSafeToString(), //  as [Condicion IVA],   
 
-                                (a.Obra ==null ) ?  (( fondoFijoService.ObrasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+                                (a.Obra ==null ) ?  (( db.Obras.Find(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdObra) ??  new Obra()).NumeroObra  )  :   a.Obra.NumeroObra, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
 
                                 
-                                (a.Cuenta ==null || true ) ? (( fondoFijoService.CuentasById(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdCuenta) ??  new Cuenta()).Descripcion  )  :   a.Cuenta.Descripcion, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
+                                (a.Cuenta ==null || true ) ? (( db.Cuentas.Find(  (a.DetalleComprobantesProveedores.FirstOrDefault() ?? new DetalleComprobantesProveedore() ).IdCuenta) ??  new Cuenta()).Descripcion  )  :   a.Cuenta.Descripcion, // si no está la obra en el encabezado, la tre del primer item, //  as [Obra],  
 
                         
 
@@ -6714,9 +6714,9 @@ namespace ProntoMVC.Controllers
                                  a.CotizacionDolar .NullSafeToString(), //  as [Cotiz. dolar],  
                                  "" , //  as [Provincia destino],  
                                  a.Observaciones, // ,  
-                           a.IdUsuarioIngreso>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
+                           a.IdUsuarioIngreso>0 ?    db.Empleados.Find( a.IdUsuarioIngreso).Nombre : "" , //  as [Ingreso],  
                                  a.FechaIngreso==null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy") , // as [Fecha ingreso],  
-                           a.IdUsuarioModifico>0 ?    fondoFijoService.EmpleadoById( a.IdUsuarioModifico).Nombre : "", //   as [Modifico],  
+                           a.IdUsuarioModifico>0 ?    db.Empleados.Find( a.IdUsuarioModifico).Nombre : "", //   as [Modifico],  
                           a.FechaModifico==null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy")    ,  
                                  a.DestinoPago=="A" ? "ADM" : "OBRA", // as [Dest.Pago],  
                                  a.NumeroRendicionFF.NullSafeToString() , // as [Nro.Rend.FF],  
