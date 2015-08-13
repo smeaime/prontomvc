@@ -388,7 +388,7 @@
                             height: 15px;
                         }
                     </style>
-                    <table class="subtotales" width="700" border="0" cellspacing="0" cellpadding="0"
+                    <table class="subtotales span12"  border="0" cellspacing="0" cellpadding="0"
                            style="margin: 0px 0px 0px 0px; height: 100; padding: 0px; border-style: none;
             border-width: thin; border-spacing: 0px; font-size: xx-small">
                         <tr>
@@ -1356,19 +1356,19 @@
 
         })
         jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
-        //    { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-        //    {
-        //        //sopt: ["cn"]
-        //        //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-        //        width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-        //    }
-        //);
-        //jQuery("#ListaDrag3").filterToolbar({
-        //    stringResult: true, searchOnEnter: true,
-        //    defaultSearch: 'cn',
-        //    enableClear: false
-        //}); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag3").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
 
@@ -1506,7 +1506,7 @@
 
     // total generales y del pie de la grilla
     calculateTotal = function () {
-        var totalCantidad = grid.jqGrid('getCol', 'Cantidad', false, 'sum')
+        var totalCantidad = $('#Lista').jqGrid('getCol', 'Cantidad', false, 'sum')
 
         var pr, cn, st, ib, ib_, ib_t, pi, ii, st1, ib1, ib2, ii1, st2, pb, st3, tp, tg;
         st1 = 0;
@@ -1788,6 +1788,7 @@
                         success: function (data) {
                             var longitud = data.length;
                             for (var i = 0; i < data.length; i++) {
+                                if (!FechaEntrega) FechaEntrega = "";
                                 var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                                 var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
                                 tmpdata['IdArticulo'] = data[i].IdArticulo;
