@@ -43,23 +43,10 @@ namespace ProntoMVC.Controllers
 {
 
     // [Authorize(Roles = "Administrador,SuperAdmin,Compras,FondosFijos")] //ojo que el web.config tambien te puede bochar hacia el login
-    public partial class ComprobanteProveedorController : ProntoBaseController2 // ProntoBaseController
+
+    public partial class ComprobanteProveedorController2 : ProntoBaseController2 // ProntoBaseController2 // ProntoBaseController
     {
-
-        //public DemoProntoEntities db2; //= new DemoProntoEntities(sCadenaConex());
-
-        //string SC2;
-
-        //private UnitOfWork unitOfWork;
-
-
         private Servicio.FondoFijoService fondoFijoService;
-
-
-        public ComprobanteProveedorController()
-        {
-            // paso estas cosas al Initialize, porque no tengo la cadena de conexion
-        }
 
         protected override void Initialize(System.Web.Routing.RequestContext rc)
         {
@@ -88,6 +75,27 @@ namespace ProntoMVC.Controllers
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////
+
+    }
+
+    public partial class ComprobanteProveedorController : ProntoBaseController // ProntoBaseController2 // ProntoBaseController
+    {
+
+        //public DemoProntoEntities db2; //= new DemoProntoEntities(sCadenaConex());
+
+        //string SC2;
+
+        //private UnitOfWork unitOfWork;
+
+
+        private Servicio.FondoFijoService fondoFijoService;
+
+
+        public ComprobanteProveedorController()
+        {
+            // paso estas cosas al Initialize, porque no tengo la cadena de conexion
+        }
+
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////
@@ -1289,7 +1297,8 @@ namespace ProntoMVC.Controllers
                     fondoFijoService.Guardar(o);
                     //fondoFijoService.Guardar((ComprobanteProveedor)ComprobanteProveedor);
 
-                    unitOfWork.Save();
+                    //unitOfWork.Save();
+                    db.SaveChanges();
 
 
                     if (!System.Diagnostics.Debugger.IsAttached)
@@ -1558,7 +1567,8 @@ namespace ProntoMVC.Controllers
                     fondoFijoService.Guardar(o);
                     //fondoFijoService.Guardar((ComprobanteProveedor)ComprobanteProveedor);
 
-                    unitOfWork.Save();
+                    //unitOfWork.Save();
+                    db.SaveChanges();
 
                     // db.Tree_TX_Actualizar("ComprobantesPrvPorMes", o.IdComprobanteProveedor, "ComprobanteProveedor");
 
@@ -5257,7 +5267,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            
+
             if (o.IdComprobanteProveedor <= 0)
             {
                 //  string connectionString = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());
@@ -5299,8 +5309,8 @@ namespace ProntoMVC.Controllers
             //    // verifico que NoAsyncTimeoutAttribute exista
 
 
-            
-        
+
+
 
             //    try
             //    {
@@ -6042,127 +6052,59 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual ActionResult ComprobantesProveedor_DynamicGridData(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+        public virtual ActionResult ComprobantesProveedor_DynamicGridData
+              (string sidx, string sord, int page, int rows, bool _search, string filters,
+                     string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows; // ?? 20;
+            int currentPage = page; // ?? 1;
 
             //if (sidx == "Numero") sidx = "NumeroComprobanteProveedor"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
             //if (searchField == "Numero") searchField = "NumeroComprobanteProveedor"; 
 
-            var Entidad = fondoFijoService.ObtenerTodos()
-                // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Unidad))
-                // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Moneda))
-                //.Include(x => x.DetalleComprobantesProveedores. .moneda)
-                //   .Include("DetalleComprobantesProveedores.Unidad") // funciona tambien
-                // .Include(x => x.Moneda)
-                //.Include(x => x.Proveedor)
-                //  .Include("DetalleComprobantesProveedores.IdDetalleRequerimiento") // funciona tambien
-                //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
-                // .Include(x => x.Aprobo)
-                //.Include(x => x.Comprador)
-                //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
-                // .Include(x => x.Aprobo)
-                //.Include(x => x.Comprador)
-                .Include(x => x.DetalleComprobantesProveedores)
-                .Include(x => x.DescripcionIva)
-                .Include(x => x.Cuenta)
-                .Include(x => x.Proveedor)
-                .Include(x => x.Proveedore)
-                .Include(x => x.Obra)
-                //.Where(x => (x.Confirmado ?? "SI") != "NO") // verificar si lo de "confirmado" solo se debe revisar para fondos fijos
-                          .AsQueryable();
+            //var Entidad = fondoFijoService.ObtenerTodos()
+            //    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Unidad))
+            //    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Moneda))
+            //    //.Include(x => x.DetalleComprobantesProveedores. .moneda)
+            //    //   .Include("DetalleComprobantesProveedores.Unidad") // funciona tambien
+            //    // .Include(x => x.Moneda)
+            //    //.Include(x => x.Proveedor)
+            //    //  .Include("DetalleComprobantesProveedores.IdDetalleRequerimiento") // funciona tambien
+            //    //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
+            //    // .Include(x => x.Aprobo)
+            //    //.Include(x => x.Comprador)
+            //    //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
+            //    // .Include(x => x.Aprobo)
+            //    //.Include(x => x.Comprador)
+            //    .Include(x => x.DetalleComprobantesProveedores)
+            //    .Include(x => x.DescripcionIva)
+            //    .Include(x => x.Cuenta)
+            //    .Include(x => x.Proveedor)
+            //    .Include(x => x.Proveedore)
+            //    .Include(x => x.Obra)
+            //    //.Where(x => (x.Confirmado ?? "SI") != "NO") // verificar si lo de "confirmado" solo se debe revisar para fondos fijos
+            //              .AsQueryable();
 
 
-            if (FechaInicial != string.Empty)
-            {
-                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                Entidad = (from a in Entidad where a.FechaRecepcion >= FechaDesde && a.FechaRecepcion <= FechaHasta select a).AsQueryable();
-            }
-            if (_search)
-            {
-                switch (searchField.ToLower())
-                {
-                    case "numero":
-                        campo = String.Format("{0} = {1}", searchField, searchString);
-                        break;
-                    case "fechaingreso":
-                        //No anda
-                        campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        break;
-                    default:
-                        if (searchOper == "eq")
-                        {
-                            campo = String.Format("{0} = {1}", searchField, searchString);
-                        }
-                        else
-                        {
-                            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                campo = "true";
-            }
 
-            var Entidad1 = (from a in Entidad.Where(campo) select new { IdComprobanteProveedor = a.IdComprobanteProveedor });
+            int totalRecords = 0;
+            var Entidad = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.ComprobanteProveedor>
+                    (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                    db.ComprobantesProveedor.Include("DetalleComprobantesProveedores"));
 
-            int totalRecords = Entidad1.Count();
+
+
+
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
-            var data = (from a in Entidad.Include("Proveedor")
-                        select a
-                /*   new         
-                {
-                                    IdComprobanteProveedor = a.IdComprobanteProveedor,
-
-                                    Numero = a.NumeroComprobante1
-                                    //fecha
-                                    //fechasalida
-                                    //cumpli
-                                    //rms
-                                    //obras
-                                    //proveedor
-                                    //neto gravado
-                                    //bonif
-                                    //total iva
-
-
-                                    // IsNull(ComprobantesProveedores.TotalComprobanteProveedor,0)-IsNull(ComprobantesProveedores.TotalIva1,0)+IsNull(ComprobantesProveedores.Bonificacion,0)-  
-                                    // IsNull(ComprobantesProveedores.ImpuestosInternos,0)-IsNull(ComprobantesProveedores.OtrosConceptos1,0)-IsNull(ComprobantesProveedores.OtrosConceptos2,0)-  
-                                    // IsNull(ComprobantesProveedores.OtrosConceptos3,0)-IsNull(ComprobantesProveedores.OtrosConceptos4,0)-IsNull(ComprobantesProveedores.OtrosConceptos5,0)as [Neto gravado],  
-                                    // Case When Bonificacion=0 Then Null Else Bonificacion End as [Bonificacion],  
-
-                                    // Case When TotalIva1=0 Then Null Else TotalIva1 End as [Total Iva],  
-
-                                    // IsNull(ComprobantesProveedores.ImpuestosInternos,0)+IsNull(ComprobantesProveedores.OtrosConceptos1,0)+IsNull(ComprobantesProveedores.OtrosConceptos2,0)+  
-                                    // IsNull(ComprobantesProveedores.OtrosConceptos3,0)+IsNull(ComprobantesProveedores.OtrosConceptos4,0)+IsNull(ComprobantesProveedores.OtrosConceptos5,0)as [Otros Conceptos],  
-                                    // TotalComprobanteProveedor as [Total ComprobanteProveedor],  
-
-
-
-
-
-                                } */
-
-
-                ).Where(campo)
-                // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
-                .OrderBy("IdComprobanteProveedor desc")
-                
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
                 page = currentPage,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in Entidad
                         select new jqGridRowJson
                         {
                             id = a.IdComprobanteProveedor.ToString(),
@@ -6390,10 +6332,18 @@ namespace ProntoMVC.Controllers
                 campo = "true";
             }
 
+
+
+
             var Entidad1 = (from a in Entidad.Where(campo) select new { IdComprobanteProveedor = a.IdComprobanteProveedor });
 
             int totalRecords = Entidad1.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+
+
+
+
 
             var data = (from a in Entidad.Include("Proveedor")
                         select a
@@ -6434,7 +6384,7 @@ namespace ProntoMVC.Controllers
                 ).Where(campo)
                 // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                 .OrderBy("IdComprobanteProveedor desc")
-                
+
 .Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -6605,143 +6555,62 @@ namespace ProntoMVC.Controllers
         }
 
 
-        public virtual ActionResult ComprobantesProveedorFF_DynamicGridData(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
+        public virtual ActionResult ComprobantesProveedorFF_DynamicGridData
+             (string sidx, string sord, int page, int rows, bool _search, string filters,
                                          string FechaInicial, string FechaFinal, string rendicion, string idcuenta)
         {
             string campo = String.Empty;
-            int pageSize = rows ?? 20;
-            int currentPage = page ?? 1;
+            int pageSize = rows;  // ?? 20;
+            int currentPage = page; // ?? 1;
 
             //if (sidx == "Numero") sidx = "NumeroComprobanteProveedor"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
             //if (searchField == "Numero") searchField = "NumeroComprobanteProveedor"; 
 
 
-            var Entidad1 = fondoFijoService.ObtenerTodos(sidx, sord, page, rows, _search, searchField, searchOper, searchString,
-                                            FechaInicial, FechaFinal, rendicion, idcuenta);
-
-            int totalRecords = Entidad1.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-            var data = Entidad1;
+            //var Entidad1 = fondoFijoService.ObtenerTodos(sidx, sord, page, rows, _search, searchField, searchOper, searchString,
+            //                                FechaInicial, FechaFinal, rendicion, idcuenta);
 
 
+            var Entidad = db.ComprobantesProveedor.AsQueryable();
+            
 
-            if (false)
+            //int totalRecords = Entidad1.Count();
+
+
+
+
+
+
+            if (idcuenta != string.Empty)
             {
-
-                var Entidad = fondoFijoService.ObtenerTodos()
-                    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Unidad))
-                    // .Include(x => x.DetalleComprobantesProveedores.Select(y => y.Moneda))
-                    //.Include(x => x.DetalleComprobantesProveedores. .moneda)
-                    //   .Include("DetalleComprobantesProveedores.Unidad") // funciona tambien
-                    // .Include(x => x.Moneda)
-                    //.Include(x => x.Proveedor)
-                    //  .Include("DetalleComprobantesProveedores.IdDetalleRequerimiento") // funciona tambien
-                    //.Include(x => x.DetalleComprobantesProveedores.Select(y => y. y.IdDetalleRequerimiento))
-                    // .Include(x => x.Aprobo)
-                    //.Include(x => x.Comprador)
-                    .Include(x => x.DetalleComprobantesProveedores)
-                    .Include(x => x.DescripcionIva)
-                    .Include(x => x.Cuenta)
-                    .Include(x => x.Proveedor)
-                    .Include(x => x.Proveedore)
-                    .Include(x => x.Obra)
-                        .Where(x => x.IdCuenta != null)
-                              .AsQueryable();
-
-
-                if (FechaInicial != string.Empty)
-                {
-                    DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
-                    DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
-                    Entidad = (from a in Entidad where a.FechaComprobante >= FechaDesde && a.FechaComprobante <= FechaHasta select a).AsQueryable();
-                }
-                if (rendicion != string.Empty)
-                {
-                    int rend = Generales.Val(rendicion);
-                    Entidad = (from a in Entidad where a.NumeroRendicionFF == rend select a).AsQueryable();
-                }
-
-
-
-                if (idcuenta != string.Empty)
-                {
-                    int idcuentaff = Generales.Val(idcuenta);
-                    Entidad = (from a in Entidad where a.IdCuenta == idcuentaff select a).AsQueryable();
-                }
-
-                var usuario = glbUsuario;
-
-                int ffasociado = usuario.IdCuentaFondoFijo ?? 0;
-
-                if (ffasociado > 0)
-                {
-                    Entidad = (from a in Entidad where a.IdCuenta == ffasociado select a).AsQueryable();
-                }
-
-                int obraasociada = usuario.IdObraAsignada ?? 0;
-                if (obraasociada > 0)
-                {
-                    Entidad = (from a in Entidad where a.IdObra == obraasociada select a).AsQueryable();
-                }
-
-
-
-
-
-
-
-
-
-                if (_search)
-                {
-                    switch (searchField.ToLower())
-                    {
-                        case "numero":
-                            campo = String.Format("{0} = {1}", searchField, searchString);
-                            break;
-                        case "fechaingreso":
-                            //No anda
-                            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                            break;
-                        default:
-
-                            campo = String.Format("Proveedor.RazonSocial.Contains(\"{0}\") OR NumeroReferencia = {1} ", searchString, Generales.Val(searchString));
-
-                            //if (searchOper == "eq")
-                            //{
-                            //    campo = String.Format("{0} = {1}", searchField, searchString);
-                            //}
-                            //else
-                            //{
-                            //    campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
-                            //}
-                            break;
-                    }
-                }
-                else
-                {
-                    campo = "true";
-                }
-
-                var Entidad3 = (from a in Entidad.Where(campo) select a);
-
-                totalRecords = Entidad3.Count();
-                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-
-                data = (from a in Entidad.Include("Proveedor")
-                        select a
-
-
-                    ).Where(campo)
-                    // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
-                    .OrderBy("IdComprobanteProveedor desc")
-
-.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
-
-
+                int idcuentaff = Generales.Val(idcuenta);
+                Entidad = (from a in Entidad where a.IdCuenta == idcuentaff select a).AsQueryable();
             }
+
+            var usuario = glbUsuario;
+
+            int ffasociado = usuario.IdCuentaFondoFijo ?? 0;
+
+            if (ffasociado > 0)
+            {
+                Entidad = (from a in Entidad where a.IdCuenta == ffasociado select a).AsQueryable();
+            }
+
+            int obraasociada = usuario.IdObraAsignada ?? 0;
+            if (obraasociada > 0)
+            {
+                Entidad = (from a in Entidad where a.IdObra == obraasociada select a).AsQueryable();
+            }
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.ComprobanteProveedor>
+                    (sidx, sord, page, rows, _search, filters, db, ref totalRecords,
+                             Entidad);
+
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
 
 
@@ -6754,14 +6623,14 @@ namespace ProntoMVC.Controllers
                 userdata = new
                 {
                     // combinado con la opcion de la jqgrid "userDataOnFooter: true" lo manda al pie
-                    neto = Entidad1.Sum(x => x.TotalBruto),
-                    Total = Entidad1.Sum(x => x.TotalComprobante),
-                    IVA1 = Entidad1.Sum(x => x.TotalIva1),
-                    IVA2 = Entidad1.Sum(x => x.TotalIva2),
-                    Subtotal = Entidad1.Sum(x => x.TotalBruto)
+                    neto = Entidad.Sum(x => x.TotalBruto),
+                    Total = Entidad.Sum(x => x.TotalComprobante),
+                    IVA1 = Entidad.Sum(x => x.TotalIva1),
+                    IVA2 = Entidad.Sum(x => x.TotalIva2),
+                    Subtotal = Entidad.Sum(x => x.TotalBruto)
                     //TotalBonificacion
                 },
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdComprobanteProveedor.ToString(),
@@ -6993,7 +6862,7 @@ namespace ProntoMVC.Controllers
                     ).Where(campo)
                     // .OrderBy((sidx == "Numero" ? "NumeroReferencia" : sidx) + " " + sord)
                     .OrderBy("IdComprobanteProveedor desc")
-                    
+
 .Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -7218,7 +7087,7 @@ namespace ProntoMVC.Controllers
                             // Contacto = a.Contacto,
                             Observaciones = a.Observaciones
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -7281,7 +7150,7 @@ namespace ProntoMVC.Controllers
                         select
                       a)
                .OrderBy(p => p.Item)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -7446,7 +7315,7 @@ namespace ProntoMVC.Controllers
                         select
                       a)
                .OrderBy(p => p.Item)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -7701,7 +7570,13 @@ namespace ProntoMVC.Controllers
             //   End With
             //   Set oCP = Nothing
             //End If
-            unitOfWork.SaveChanges();
+
+
+
+
+            //unitOfWork.SaveChanges();
+            db.SaveChanges();
+
 
             return RedirectToAction("Index");
         }
