@@ -222,8 +222,8 @@ namespace ProntoMVC.Controllers
         {
 
 
-            
-            string campo = String.Empty;
+
+            string campo = "true"; // String.Empty;
             int pageSize = rows ; // ?? 20;
             int currentPage = page; //  ?? 1;
 
@@ -306,9 +306,13 @@ namespace ProntoMVC.Controllers
             // ObjectQuery<Data.Models.Requerimiento> set = Req as ObjectQuery<Data.Models.Requerimiento>;
 
 
-            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Comparativa>
-                                (Req as ObjectQuery<Data.Models.Comparativa>
-                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
+                    sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req.ToList());
+
+
+            //var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Comparativa>
+            //                    (Req as ObjectQuery<Data.Models.Comparativa>
+            //                    , sidx, sord, page, rows, _search, filters, ref totalRecords);
 
             // .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
 

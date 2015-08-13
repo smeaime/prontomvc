@@ -42,9 +42,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC", "ProntoMVC\Pron
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessLogic", "BussinessLogic\BusinessLogic.vbproj", "{AB8BB713-FFA1-4440-B49B-1857E61367C9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{918DDC53-B568-4181-86C3-A3A44DFA6149} = {918DDC53-B568-4181-86C3-A3A44DFA6149}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Test", "TestProject2\ProntoMVC.Test.csproj", "{4E3DDBC8-E035-452F-9984-06E02E173E73}"
 EndProject
@@ -60,8 +57,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Repositorio", "Re
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Data", "Data\ProntoMVC.Data.csproj", "{2F9B9020-304C-44A6-BCC4-9E434C687D31}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessObject", "..\BussinessObject\BusinessObject.vbproj", "{918DDC53-B568-4181-86C3-A3A44DFA6149}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1ECBCA37-23DE-4ECC-9613-0AD6013FA18E}"
 	ProjectSection(SolutionItems) = preProject
@@ -173,21 +168,6 @@ Global
 		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|x86.ActiveCfg = Release|x86
 		{2F9B9020-304C-44A6-BCC4-9E434C687D31}.Release|x86.Build.0 = Release|x86
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Any CPU.Build.0 = Release|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{918DDC53-B568-4181-86C3-A3A44DFA6149}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.ActiveCfg = Debug
 		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.Build.0 = Debug
 		{7F44CDB9-C2E1-4389-8CB6-F47CB4E47D2C}.Debug|Any CPU.Deploy.0 = Debug
