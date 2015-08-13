@@ -3413,6 +3413,26 @@ $(function () {
     jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     // jQuery("#ListaDrag").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
     // jQuery("#ListaDrag").jqGrid('filterToolbar', {});
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+{ csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+{
+    //sopt: ["cn"]
+    //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+    width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+}
+);
+
+
+    jQuery("#ListaDrag").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3436,24 +3456,24 @@ $(function () {
                       ],
         colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdDetalleRequerimiento', index: 'IdRequerimiento', align: 'left', width: 40, editable: false, hidden: true },
-                        { name: 'IdArticulo', index: 'NumeroRequerimiento', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'IdUnidad', index: '', width: 30 },
-                        { name: 'NumeroItem', index: '', width: 80 },
+                        { name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', align: 'left', width: 40, editable: false, hidden: true },
+                        { name: 'IdArticulo', index: 'IdArticulo', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'IdUnidad', index: 'IdUnidad', width: 30 },
+                        { name: 'NumeroItem', index: 'NumeroItem', width: 80 },
                         { name: 'Cantidad', index: '', width: 40 },
                         { name: 'Abreviatura', index: '', width: 100 },
-                        { name: 'Codigo', index: '', width: 100 },
+                        { name: 'Codigo', index: 'Articulo.Codigo', width: 100 },
                         { name: '', index: '', width: 40 },
 
-                           { name: 'Descripcion', index: '', width: 200 },
+                           { name: 'Descripcion', index: 'Articulo.Descripcion', width: 200 },
                         { name: 'FechaEntrega', index: '', width: 40 },
-                        { name: 'Observaciones', index: '', width: 40, hidden: true },
+                        { name: 'Observaciones', index: 'Observaciones', width: 40, hidden: true },
                         { name: 'Cumplido', index: '', width: 40 },
                         { name: 'ArchivoAdjunto1', index: '', width: 40 },
 
-                         { name: 'OrigenDescripcion', index: '', width: 40 },
-                        { name: 'IdRequerimiento', index: '', width: 40 },
-                        { name: '', index: '' },
+                         { name: 'OrigenDescripcion', index: 'OrigenDescripcion', width: 40 },
+                        { name: 'IdRequerimiento', index: 'IdRequerimiento', width: 40 },
+                        { name: 'NumeroRequerimiento', index: 'Requerimientos.NumeroRequerimiento' },
                         { name: '', index: '' },
                         { name: '', index: '' }
 
@@ -3466,7 +3486,7 @@ $(function () {
         pager: $('#ListaDragPager2'),
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'NumeroRequerimiento',
+        sortname: 'Requerimientos.NumeroRequerimiento',
         sortorder: "desc",
         viewrecords: true,
         ///////////////////////////////
@@ -3486,6 +3506,38 @@ $(function () {
 
 
 
+    jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+
+    jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
+{ csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+{
+    //sopt: ["cn"]
+    //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+    width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+}
+);
+
+
+    jQuery("#ListaDrag2").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3495,65 +3547,173 @@ $(function () {
         url: ROOT + 'Presupuesto/Presupuestos_DynamicGridData',
 
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+
         datatype: 'json',
         mtype: 'POST',
-        cellEdit: false,
         colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
-                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
+                   'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones',''],
         colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 20, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
-                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Comprador', index: 'Comprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
+                    { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Comprador', index: 'Comprador.Nombre', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'IdProveedor', index: 'IdProveedor' }
-                    ],
+        ],
+
+
         ondblClickRow: function (id) {
             CopiarPresupuesto(id);
         },
+
         pager: $('#ListaDragPager3'),
+
+
         rowNum: 15,
-        rowList: [10, 20, 50],
+        rowList: [10, 20, 50, 100],
         sortname: 'Numero',
-        sortorder: "desc",
+        sortorder: 'asc',
         viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
+
+
         ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
         //////////////////////////////
-        height: '100%',
+
+        height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar' // ,
-        // caption: '<b>SOLICITUDES DE COTIZACION</b>'
-    })
+        footerrow: false, //true,
+        userDataOnFooter: true
+        // ,caption: '<b>FACTURAS</b>'
+
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
+
+
+
+        //footerrow: true,
+        //userDataOnFooter: true,
+        //caption: '<b>SOLICITUDES DE COTIZACION</b>'
+    });
     jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    //jQuery("#ListaDrag3").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+    //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+    jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
+{ csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+{
+    //sopt: ["cn"]
+    //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+    width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+}
+);
+
+
+    jQuery("#ListaDrag3").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
 
 
 
 
+
+
+
+    //$("#ListaDrag3").jqGrid({
+    //    url: ROOT + 'Presupuesto/Presupuestos_DynamicGridData',
+
+    //    postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+    //    datatype: 'json',
+    //    mtype: 'POST',
+    //    cellEdit: false,
+    //    colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor', 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
+    //                   'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', ''],
+    //    colModel: [
+    //                    { name: 'act', index: 'act', align: 'center', width: 40, sortable: false, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                    {name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
+    //                    { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'Orden', index: 'Orden', align: 'right', width: 20, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+    //                    { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
+    //                    { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdProveedor', index: 'IdProveedor' }
+    //                ],
+    //    ondblClickRow: function (id) {
+    //        CopiarPresupuesto(id);
+    //    },
+    //    pager: $('#ListaDragPager3'),
+    //    rowNum: 15,
+    //    rowList: [10, 20, 50],
+    //    sortname: 'Numero',
+    //    sortorder: "desc",
+    //    viewrecords: true,
+    //    ///////////////////////////////
+    //    width: 'auto', // 'auto',
+    //    autowidth: true,
+    //    shrinkToFit: false,
+    //    //////////////////////////////
+    //    height: '100%',
+    //    altRows: false,
+    //    emptyrecords: 'No hay registros para mostrar' // ,
+    //    // caption: '<b>SOLICITUDES DE COTIZACION</b>'
+    //})
+    //jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    ////jQuery("#ListaDrag3").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3650,86 +3810,104 @@ $(function () {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     $("#ListaDrag5").jqGrid({
-        url: ROOT + 'Pedido/Pedidos_DynamicGridData',
-
-        postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+            url: ROOT + 'Pedido/Pedidos_DynamicGridData',
+            
+            postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+            
+        
         datatype: 'json',
         mtype: 'POST',
-        cellEdit: false,
-        colNames: ['Acciones',
-                    'IdPedido', 'Numero', 'Sub.', 'Fecha', 'Salida',
-                    'Cumplido', '', '', 'Proveedor', '',
-                    'Bonificacion', '', '', '', '',
-                    'Cant.', '', '', '', '', '', '', '',
-                     '', '', '', '', '',
-                    '', '', '', '', '', ''
+        colNames: ['Acciones', 'IdPedido', 'Numero', 'Sub', 'Fecha', 'Salida',
+        'Cumplido', 'RMs', 'Obras', 'Proveedor', 'Total',
+        'Bonif.', 'IVA', 'Moneda', 'Comprador', 'Aprobo',
+        'Items', 'idaux', 'Comparativa', 'TipCompra', 'Observaciones',
+        'Detcondcompra', 'PedExterior', 'IdPedAbierto', 'Licitacion', 'Impresa',
+        'Anuló', 'Fecha Anulacion', 'MotivAn', 'ImpInts', 'Equipos',
+        'CircFirmComp', '', '', '', 'Web'
 
-                    ],
+        ],
         colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 50, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                         { name: 'SubNumero', index: 'Numero', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaPedido', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
-                        { name: 'FechaSalida', index: 'FechaIngreso', width: 50, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
-                        { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'RMs', index: 'zzzzzz', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Obras', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'Numero', index: 'Numero', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'SubNumero', index: 'Numero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'FechaPedido', index: 'Orden', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'FechaSalida', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
 
-                        { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Comprador', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                    { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'RMs', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Obras', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'idaux', index: 'zzzzzz', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                    { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
+                    { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'idaux', index: 'zzzzzz', align: 'left', width: 100, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
+                    { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-                        { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Auxiliar1', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-
-                        { name: 'IdProveedor', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+                    { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
 
-                    ],
-        ondblClickRow: function (id) {
-            CopiarPedido(id);
-        },
-        loadComplete: function () {
-            grid = $("ListaDrag5");
-            //   $("#ListaDrag5 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
-        },
+                    { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
 
-        pager: $('#ListaDragPager5'),
+                    { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Equipos', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                    { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'IdComprador', index: 'IdComprador', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+                        { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+        
+        
+                    { name: '', index: '', align: 'left', width: 100, hidden: false, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+
+
+        ],
+
+
+
+ondblClickRow: function (id) {
+    CopiarPedido(id);
+},
+loadComplete: function () {
+    grid = $("ListaDrag5");
+    //   $("#ListaDrag5 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+},
+
+pager: $('#ListaDragPager5'),
+
         rowNum: 15,
         rowList: [10, 20, 50],
-        sortname: 'NumeroPedido',
-        sortorder: "desc",
+        sortname: 'NumeroPedido', // 'FechaRecibo,NumeroRecibo',
+        sortorder: 'desc',
         viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar', //,
 
 
         ///////////////////////////////
@@ -3737,14 +3915,142 @@ $(function () {
         autowidth: true,
         shrinkToFit: false,
         //////////////////////////////
-        height: '100%',
+
+        height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
-        emptyrecords: 'No hay registros para mostrar' //,
+        footerrow: false, //true,
+        userDataOnFooter: true
+        // ,caption: '<b>FACTURAS</b>'
+
+        , gridview: true
+        , multiboxonly: true
+        , multipleSearch: true
 
 
-    })
-    jQuery("#ListaDrag5").jqGrid('navGrid', '#ListaDragPager5', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    // jQuery("#ListaDrag5").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+
+
+    });
+
+    jQuery("#ListaDrag5").jqGrid('bindKeys');
+
+    jQuery("#ListaDrag5").jqGrid('navGrid', '#ListaPager',
+     { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+     {
+         //sopt: ["cn"]
+         //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+         width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+     }
+    );
+
+
+    jQuery("#ListaDrag5").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+
+
+
+    //$("#ListaDrag5").jqGrid({
+    //    url: ROOT + 'Pedido/Pedidos_DynamicGridData',
+
+    //    postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
+    //    datatype: 'json',
+    //    mtype: 'POST',
+    //    cellEdit: false,
+    //    colNames: ['Acciones',
+    //                'IdPedido', 'Numero', 'Sub.', 'Fecha', 'Salida',
+    //                'Cumplido', '', '', 'Proveedor', '',
+    //                'Bonificacion', '', '', '', '',
+    //                'Cant.', '', '', '', '', '', '', '',
+    //                 '', '', '', '', '',
+    //                '', '', '', '', '', ''
+
+    //                ],
+    //    colModel: [
+    //                    { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, hidden: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+    //                    {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 50, editable: false, hidden: true },
+    //                    { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                     { name: 'SubNumero', index: 'Numero', align: 'right', width: 50, frozen: true, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'FechaPedido', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq'] } },
+    //                    { name: 'FechaSalida', index: 'FechaIngreso', width: 50, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+
+    //                    { name: 'Cumplido', index: 'Proveedor', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'RMs', index: 'zzzzzz', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Obras', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Proveedor', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'TotalPedido', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+    //                    { name: 'Bonificacion', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'TotalIva1', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdMoneda', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Comprador', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Aprobo', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+    //                    { name: 'cantitems', index: 'zzzzzz', align: 'right', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'idaux', index: 'zzzzzz', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'NumeroComparativa', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdTipoCompraRM', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Observaciones', index: 'zzzzzz', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+
+
+    //                    { name: 'DetalleCondicionCompra', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'PedidoExterior', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdPedidoAbierto', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'NumeroLicitacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Impresa', index: 'zzzzzz', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'UsuarioAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'FechaAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'MotivoAnulacion', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'ImpuestosInternos', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'Auxiliar1', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'CircuitoFirmasCompleto', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdCodigoIva', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+    //                    { name: 'IdComprador', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+
+    //                    { name: 'IdProveedor', index: 'zzzzzz', align: 'left', width: 0, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn']} }
+
+
+    //                ],
+    //    ondblClickRow: function (id) {
+    //        CopiarPedido(id);
+    //    },
+    //    loadComplete: function () {
+    //        grid = $("ListaDrag5");
+    //        //   $("#ListaDrag5 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+    //    },
+
+    //    pager: $('#ListaDragPager5'),
+    //    rowNum: 15,
+    //    rowList: [10, 20, 50],
+    //    sortname: 'NumeroPedido',
+    //    sortorder: "desc",
+    //    viewrecords: true,
+
+
+    //    ///////////////////////////////
+    //    width: 'auto', // 'auto',
+    //    autowidth: true,
+    //    shrinkToFit: false,
+    //    //////////////////////////////
+    //    height: '100%',
+    //    altRows: false,
+    //    emptyrecords: 'No hay registros para mostrar' //,
+
+
+    //})
+    //jQuery("#ListaDrag5").jqGrid('navGrid', '#ListaDragPager5', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    //// jQuery("#ListaDrag5").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -896,7 +896,6 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Requerimientos_DynamicGridData
             (string sidx, string sord, int page, int rows, bool _search, string filters,
 string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
-
         {
             /*
 
@@ -1431,7 +1430,7 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
 
         public virtual ActionResult RequerimientosComprables_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-            string campo = String.Empty;
+            string campo = "true";
             int pageSize = rows;// ?? 20;
             int currentPage = page;// ?? 1;
 
@@ -1462,9 +1461,18 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
             // ObjectQuery<Data.Models.Requerimiento> set = Req as ObjectQuery<Data.Models.Requerimiento>;
 
 
-            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Requerimiento>
-                                (Req as ObjectQuery<Data.Models.Requerimiento>
-                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+            //var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
+            //                 sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req.ToList());
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable(
+                             sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req);
+
+
+            
+
+            //    var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Requerimiento>
+            //                        (Req as ObjectQuery<Data.Models.Requerimiento>
+            //                        , sidx, sord, page, rows, _search, filters, ref totalRecords);
 
             // .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
 
@@ -1482,9 +1490,9 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
             try
             {
 
-                var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
+                //var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
 
-                totalRecords = Req1.Count();
+                //totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
             catch (Exception)
@@ -1545,7 +1553,7 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
             //        break;
             //}
 
-            var data = (from a in Req
+            var data = (from a in pagedQuery
                         select new
                         {
                             IdRequerimiento = a.IdRequerimiento,
@@ -1562,9 +1570,9 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                             Pedidos = a.Pedidos,
                             Recepciones = a.Recepciones,
                             Salidas = a.SalidasMateriales,
-                            Libero = a.AproboRequerimiento.Nombre,
-                            Solicito = a.SolicitoRequerimiento.Nombre,
-                            Sector = a.Sectores.Descripcion,
+                            Libero = (a.AproboRequerimiento != null) ? a.AproboRequerimiento.Nombre : "",
+                            Solicito =  (a.SolicitoRequerimiento!=null) ?a.SolicitoRequerimiento.Nombre : "",
+                            Sector = (a.Sectores!=null) ?  a.Sectores.Descripcion : "",
                             Usuario_anulo = a.UsuarioAnulacion,
                             Fecha_anulacion = a.FechaAnulacion,
                             Motivo_anulacion = a.MotivoAnulacion,
@@ -1575,7 +1583,8 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                             IdSector = a.IdSector,
                             a.ConfirmadoPorWeb
 
-                        }).Where(campo).OrderBy(sidx + " " + sord)
+                        })//.Where(campo)
+                        //.OrderBy(sidx + " " + sord)
                 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -1950,17 +1959,17 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
 
 
         public virtual ActionResult DetRequerimientosComprables_DynamicGridData
-            (string sidx, string sord, int page, int rows, bool _search, string filters,           
+            (string sidx, string sord, int page, int rows, bool _search, string filters,
                                                 int? IdRequerimiento)
         {
-            int IdRequerimiento1 = IdRequerimiento ?? 0;
-            var DetReq = db.DetalleRequerimientos
+            int IdRequerimiento1 = IdRequerimiento ?? -1;
+            IQueryable<Data.Models.DetalleRequerimiento> DetReq = db.DetalleRequerimientos
                             .Include(x => x.Requerimientos)
                             .Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI"))
                             .Where(p => p.IdRequerimiento == IdRequerimiento1 || IdRequerimiento1 == -1).AsQueryable();
             bool Eliminado = false;
 
-            string campo = String.Empty;
+            string campo = "true";
 
 
             DetReq = DetReq.Where(a =>
@@ -2021,12 +2030,27 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
             int totalRecords = 0;
 
 
-            var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.DetalleRequerimiento>
-                                (DetReq as ObjectQuery<Data.Models.DetalleRequerimiento   >
-                                , sidx, sord, page, rows, _search, filters, ref totalRecords);
+
+            //IQueryable<Data.Models.DetalleRequerimiento> aaaa = ;
+
+
+            //ObjectQuery<Data.Models.DetalleRequerimiento> set = aaaa as ObjectQuery<Data.Models.DetalleRequerimiento>;
+
+
+            //var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.DetalleRequerimiento>
+            //                    (DetReq as ObjectQuery<Data.Models.DetalleRequerimiento   >
+            //                    , sidx, sord, page, rows, _search, filters, ref totalRecords);
+
+            //var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
+            //    sidx, sord, page, rows, _search, filters, db, ref totalRecords, DetReq.ToList());
+
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable(
+                sidx, sord, page, rows, _search, filters, db, ref totalRecords, DetReq);
+
 
             //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
-                                //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2066,9 +2090,9 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                             a.IdUnidad,
                             a.NumeroItem,
                             a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
+                            (a.Unidad ?? new Unidad()).Abreviatura,
+                            (a.Articulo ?? new Articulo()) .Codigo,
+                            (a.Articulo ?? new Articulo()).Descripcion,
                             a.FechaEntrega,
                             a.Observaciones,
                             a.Adjunto,
@@ -2117,11 +2141,11 @@ string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false,
                                 a.Cumplido,
                                 a.ArchivoAdjunto1,
                                 a.OrigenDescripcion.ToString(),
-                                                            a.IdRequerimiento.NullSafeToString(),
-                                                           a.NumeroRequerimiento.NullSafeToString(),
-                                                           "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" 
+                                a.IdRequerimiento.NullSafeToString(),
+                                a.NumeroRequerimiento.NullSafeToString(),
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" 
 
-                        
+                                
                        
                         
                         
