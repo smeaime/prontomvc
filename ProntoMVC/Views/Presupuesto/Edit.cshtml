@@ -169,7 +169,7 @@
                         @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            <span class="span1" style="padding-top: 15px; width: 110px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+                            <span class="span1" style="padding-top: 15px; width: 120px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
                             @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
                             <span class="" style="padding-top: 15px; width: 10px">/ </span>
                             @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
@@ -1001,7 +1001,6 @@
             });
         });
 
-
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
         // get the header row which contains
@@ -1021,40 +1020,178 @@
             ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
         });
 
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
         $("#ListaDrag").jqGrid({
-            url: '@Url.Action("ArticulosGridData2", "Articulo")',
+            url: '@Url.Action("Articulos_DynamicGridData", "Articulo")',
             datatype: 'json',
             mtype: 'POST',
             cellEdit: true,
-            colNames: ['IdArticulo', 'Codigo', 'Material', 'IdUnidad', 'Un.', '% Iva'],
-            colModel: [
-                        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Codigo', index: 'Codigo', width: 100, align: 'left', search: true, stype: 'text' },
-                        { name: 'Descripcion', index: 'Descripcion', width: 400, align: 'left', search: true, stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true } },
-                        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Unidad', index: 'Unidad', width: 50, align: 'left', search: true, stype: 'text' },
-                        { name: 'Iva', index: 'Iva', width: 50, align: 'left', search: true, stype: 'text' },
+
+
+            colNames: ['', '', 'Codigo', 'Descripcion'
+
+       , 'Rubro'
+
+       , 'Subrubro'
+       , 'Nro.inv.', '', '', 'Unidad'
+
+
             ],
+
+
+
+
+
+
+            colModel: [
+            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+            {
+                name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+                search: true, searchoptions: {
+                    clearSearch: true, searchOperators: true
+                    , sopt: ['cn']
+                }
+            },
+            {
+                name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
+
+                , search: true, searchoptions: {
+                    clearSearch: true,
+                    searchOperators: true
+                    , sopt: ['cn']
+                    //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
+                }
+            },
+            {
+                name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
+                editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+                , search: true, searchoptions: {
+                    //sopt: ['cn']
+                }
+            },
+
+
+            { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+            { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+
+            ,
+            { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
+            { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
+            { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
+
+
+            ],
+
             ondblClickRow: function (id) {
                 copiarArticulo(id);
             },
+            loadComplete: function () {
+                grid = $("ListaDrag");
+            },
+
+
             pager: $('#ListaDragPager'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'Descripcion',
-            sortorder: "asc",
+            sortorder: 'asc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>MATERIALES</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            //, caption: 'MATERIALES'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
         })
         jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
         $("#ListaDrag2").jqGrid({
-            url: '@Url.Action("Requerimientos", "Requerimiento")',
+            url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
             postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
             datatype: 'json',
             mtype: 'POST',
@@ -1090,23 +1227,82 @@
                         { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
+
+
             ondblClickRow: function (id) {
-                copiarArticulo(id);
+                copiarRM(id);
             },
+
+
             pager: $('#ListaDragPager2'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'NumeroRequerimiento',
-            sortorder: "desc",
+            sortorder: 'desc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>REQUERIMIENTOS</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+           // , caption: 'REQUERIMIENTOS'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
         })
         jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag2").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        
+        
+        
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1114,7 +1310,7 @@
 
 
         $("#ListaDrag3").jqGrid({
-            url: '@Url.Action("Presupuestos", "Presupuesto")',
+            url: '@Url.Action("Presupuestos_DynamicGridData", "Presupuesto")',
             postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
             datatype: 'json',
             mtype: 'POST',
@@ -1124,9 +1320,9 @@
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                        { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
 
 
@@ -1151,34 +1347,47 @@
             altRows: false,
             footerrow: false, //true,
             userDataOnFooter: true
-            ,caption: 'SOLICITUDES DE COTIZACION'
+            //, caption: 'SOLICITUDES DE COTIZACION'
 
     , gridview: true
     , multiboxonly: true
     , multipleSearch: true
-            
+
 
         })
         jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
-            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-            {
-                //sopt: ["cn"]
-                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-            }
-        );
-        jQuery("#ListaDrag3").filterToolbar({
-            stringResult: true, searchOnEnter: true,
-            defaultSearch: 'cn',
-            enableClear: false
-        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+        //jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
+        //    { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        //    {
+        //        //sopt: ["cn"]
+        //        //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+        //        width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+        //    }
+        //);
+        //jQuery("#ListaDrag3").filterToolbar({
+        //    stringResult: true, searchOnEnter: true,
+        //    defaultSearch: 'cn',
+        //    enableClear: false
+        //}); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
 
 
 
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

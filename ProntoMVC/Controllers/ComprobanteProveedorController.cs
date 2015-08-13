@@ -85,7 +85,7 @@ namespace ProntoMVC.Controllers
 
         //string SC2;
 
-        //private UnitOfWork unitOfWork;
+        private UnitOfWork unitOfWork;
 
 
         private Servicio.FondoFijoService fondoFijoService;
@@ -94,6 +94,17 @@ namespace ProntoMVC.Controllers
         public ComprobanteProveedorController()
         {
             // paso estas cosas al Initialize, porque no tengo la cadena de conexion
+        }
+
+        protected override void Initialize(System.Web.Routing.RequestContext rc)
+        {
+
+            base.Initialize(rc); // recien recupero a qué base se está conectando cuando tengo acceso a la sesión
+            unitOfWork = new UnitOfWork(SC);
+            fondoFijoService = new FondoFijoService(unitOfWork);
+
+            //base.db = unitOfWork.ComprobantesproveedorRepositorio.HACKEADOcontext;
+
         }
 
         /// //////////////////////////////////////////////////////////
@@ -3610,7 +3621,7 @@ namespace ProntoMVC.Controllers
 
 
 
-            Parametros parametros = fondoFijoService.Parametros();
+            Parametros parametros = db.Parametros.Find(1); // fondoFijoService.Parametros();
 
             combo.Add(0, "0");
             //combo.Add("0", "0");
@@ -4163,7 +4174,7 @@ namespace ProntoMVC.Controllers
         {
 
 
-            Parametros parametros = fondoFijoService.Parametros();
+            Parametros parametros =  db.Parametros.Find(1); //fondoFijoService.Parametros();
             o.NumeroReferencia = parametros.ProximoComprobanteProveedorReferencia;
             //o.SubNumero = 1;
             o.FechaComprobante = DateTime.Today;
@@ -4231,7 +4242,7 @@ namespace ProntoMVC.Controllers
 
 
             // fondoFijoService.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            var mvarCotizacion = fondoFijoService.Cotizaciones_Listado().OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
+            var mvarCotizacion = db.Cotizaciones. OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
             //  o.CotizacionADolarFijo=
             o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
@@ -4265,7 +4276,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult Autorizaciones(int IdComprobanteProveedor)
         {
-            var Autorizaciones = fondoFijoService.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante
+            var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante
                     ((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.ComprobantesProveedores, IdComprobanteProveedor);
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
@@ -4277,17 +4288,17 @@ namespace ProntoMVC.Controllers
 
             ViewBag.PorcentajesIVA = ListaPorcentajesIVA();
 
-            ViewBag.IdTipoComprobante = new SelectList(fondoFijoService.TiposComprobantes_Listado(), "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
+            ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
 
-            ViewBag.IdCondicionCompra = new SelectList(fondoFijoService.Condiciones_Compras_Listado().OrderBy(x => x.Descripcion), "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
-            ViewBag.IdMoneda = new SelectList(fondoFijoService.Monedas_Listado().OrderBy(x => x.Nombre), "IdMoneda", "Nombre", o.IdMoneda);
+            ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras.OrderBy(x => x.Descripcion), "IdCondicionCompra", "Descripcion", o.IdCondicionCompra);
+            ViewBag.IdMoneda = new SelectList(db.Monedas.OrderBy(x => x.Nombre), "IdMoneda", "Nombre", o.IdMoneda);
             //ViewBag.IdPlazoEntrega = new SelectList(fondoFijoService.PlazosEntregas.OrderBy(x => x.Descripcion), "IdPlazoEntrega", "Descripcion", o.PlazoEntrega);
             //ViewBag.IdComprador = new SelectList(fondoFijoService.Empleados.OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.IdComprador);
             //ViewBag.Aprobo = new SelectList(fondoFijoService.Empleados.OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
-            ViewBag.Proveedor = (fondoFijoService.ProveedoresById(o.IdProveedor) ?? new Proveedor()).RazonSocial;
+            ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
 
-            ViewBag.IdCodigoIVA = new SelectList(fondoFijoService.DescripcionIvas_Listado(), "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
-            ViewBag.CantidadAutorizaciones = fondoFijoService.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.ComprobantesProveedores, 0, -1).Count();
+            ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
+            ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.ComprobantesProveedores, 0, -1).Count();
 
             ViewBag.Letra = new SelectList(new List<string> { "A", "B", "C", "M" }, o.Letra);
 
@@ -7301,7 +7312,7 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult DetComprobantesProveedorFF(string sidx, string sord, int? page, int? rows, int? IdComprobanteProveedor)
         {
             int IdComprobanteProveedor1 = IdComprobanteProveedor ?? 0;
-            var DetEntidad = fondoFijoService.ObtenerTodosDetalle().Include("Cuenta").Where(p => p.IdComprobanteProveedor == IdComprobanteProveedor1).AsQueryable();
+            var DetEntidad = db.DetalleComprobantesProveedores.Where(p => p.IdComprobanteProveedor == IdComprobanteProveedor1).AsQueryable();
 
             int pageSize = rows ?? 20;
             int totalRecords = DetEntidad.Count();
