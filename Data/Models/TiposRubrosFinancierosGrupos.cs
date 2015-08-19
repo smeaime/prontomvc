@@ -12,16 +12,17 @@ namespace ProntoMVC.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TiposCuenta
+    public partial class TiposRubrosFinancierosGrupos
     {
-        public TiposCuenta()
+        public TiposRubrosFinancierosGrupos()
         {
-            this.Cuentas = new HashSet<Cuenta>();
+            this.RubrosContables = new HashSet<RubrosContable>();
         }
     
-        public int IdTipoCuenta { get; set; }
+        public int IdTipoRubroFinancieroGrupo { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<int> Codigo { get; set; }
     
-        public virtual ICollection<Cuenta> Cuentas { get; set; }
+        public virtual ICollection<RubrosContable> RubrosContables { get; set; }
     }
 }

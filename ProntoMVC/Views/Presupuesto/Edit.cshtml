@@ -4,6 +4,11 @@
 }
 @Html.ValidationSummary(true)
 
+<script src="@Url.Content("~/Scripts/ScriptPresupuesto.js?1518")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
+
+
+
+
 <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
     <form class="form-horizontal" style=" margin-bottom: 0px;">
 
@@ -42,6 +47,7 @@
 
 
         <div class="modal" id="loading">
+            <label> Espere...</label>
             <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
             Cargando...
         </div>
@@ -505,6 +511,70 @@
     });
 
 
+    // total generales y del pie de la grilla
+    function calculateTotal() {
+        var totalCantidad = $('#Lista').jqGrid('getCol', 'Cantidad', false, 'sum')
+
+        var pr, cn, st, ib, ib_, ib_t, pi, ii, st1, ib1, ib2, ii1, st2, pb, st3, tp, tg;
+        st1 = 0;
+        ib1 = 0;
+        ib2 = 0;
+        ii1 = 0;
+        pb = parseFloat($("#Bonificacion").val().replace(",", "."));
+        if (isNaN(pb)) { pb = 0; }
+        var dataIds = $('#Lista').jqGrid('getDataIDs');
+        for (var i = 0; i < dataIds.length; i++) {
+            var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+            pr = parseFloat(data['Precio'].replace(",", "."));
+            if (isNaN(pr)) { pr = 0; }
+            cn = parseFloat(data['Cantidad'].replace(",", "."));
+            if (isNaN(cn)) { cn = 0; }
+            st = Math.round(pr * cn * 10000) / 10000;
+            st1 = Math.round((st1 + st) * 10000) / 10000;
+            ////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////
+            var pbi = parseFloat(data['PorcentajeBonificacion'].replace(",", ".")) || 0;
+            ib = Math.round(st * pbi / 100 * 10000) / 10000;    //  parseFloat(data['ImporteBonificacion'].replace(",", "."));
+            if (isNaN(ib)) { ib = 0; }
+            ib1 = ib1 + ib;
+            ib_ = Math.round((st - ib) * pb / 100 * 10000) / 10000;
+            ib2 = ib2 + ib_;
+            ib_t = ib1 + ib_;
+            ////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////
+            pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
+            ii = Math.round((st - ib - ib_) * pi / 100 * 10000) / 10000;
+            ii1 = ii1 + ii
+            tp = st - ib_t + ii;
+            // por qué aplica el global sobre los items? está bien?
+            // y si está bien, no debe usarse a sí mismo (como en la linea ib = parseFloat(data['ImporteBonificacion']. etc)
+            // porque si no, se va aplicando a sí mismo cada vez que editas el item
+            data['ImporteBonificacion'] = ib_t.toFixed(4);
+            data['ImporteIva'] = ii.toFixed(4);
+            data['ImporteTotalItem'] = tp.toFixed(4);
+            $('#Lista').jqGrid('setRowData', dataIds[i], data);
+        }
+        st2 = Math.round((st1 - ib1) * 10000) / 10000;
+        st3 = Math.round((st2 - ib2) * 10000) / 10000;
+        tg = Math.round((st3 + ii1) * 10000) / 10000;
+
+        $("#Subtotal1").val(st1.toFixed(4));
+        $("#TotalBonificacionItems").val(ib1.toFixed(4));
+        $("#TotalBonificacionGlobal").val(ib2.toFixed(4));
+        $("#Subtotal2").val(st3.toFixed(4));
+        $("#TotalIva").val(ii1.toFixed(4));
+        $("#Total").val(tg.toFixed(4));
+
+        grid.jqGrid('footerData', 'set', {
+            NumeroObra: 'TOTALES', Cantidad: totalCantidad.toFixed(2),
+            ImporteBonificacion: ib1.toFixed(4),
+            ImporteIva: ii1.toFixed(4),
+            ImporteTotalItem: tg.toFixed(4)
+        });
+    };
+
+
+
     $(document).ready(function () {
         var lastSelectedId;
         var inEdit
@@ -558,7 +628,6 @@
         $('#Lista').jqGrid({
             url: ROOT + 'Presupuesto/DetPresupuestos/',
             postData: { 'IdPresupuesto': function () { return $("#IdPresupuesto").val(); } },
-            editurl: ROOT + 'Presupuesto/EditGridData/',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdDetallePresupuesto', 'IdArticulo', 'IdUnidad', 'Item', 'Obra', 'Cant.', 'Un.', 'Codigo', 'Material', 'Precio', '% Bon.', 'Imp.Bon.', '% Iva',
@@ -1550,67 +1619,6 @@
     }
 
 
-    // total generales y del pie de la grilla
-    calculateTotal = function () {
-        var totalCantidad = $('#Lista').jqGrid('getCol', 'Cantidad', false, 'sum')
-
-        var pr, cn, st, ib, ib_, ib_t, pi, ii, st1, ib1, ib2, ii1, st2, pb, st3, tp, tg;
-        st1 = 0;
-        ib1 = 0;
-        ib2 = 0;
-        ii1 = 0;
-        pb = parseFloat($("#Bonificacion").val().replace(",", "."));
-        if (isNaN(pb)) { pb = 0; }
-        var dataIds = $('#Lista').jqGrid('getDataIDs');
-        for (var i = 0; i < dataIds.length; i++) {
-            var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-            pr = parseFloat(data['Precio'].replace(",", "."));
-            if (isNaN(pr)) { pr = 0; }
-            cn = parseFloat(data['Cantidad'].replace(",", "."));
-            if (isNaN(cn)) { cn = 0; }
-            st = Math.round(pr * cn * 10000) / 10000;
-            st1 = Math.round((st1 + st) * 10000) / 10000;
-            ////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////
-            var pbi = parseFloat(data['PorcentajeBonificacion'].replace(",", ".")) || 0;
-            ib = Math.round(st * pbi / 100 * 10000) / 10000;    //  parseFloat(data['ImporteBonificacion'].replace(",", "."));
-            if (isNaN(ib)) { ib = 0; }
-            ib1 = ib1 + ib;
-            ib_ = Math.round((st - ib) * pb / 100 * 10000) / 10000;
-            ib2 = ib2 + ib_;
-            ib_t = ib1 + ib_;
-            ////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////
-            pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
-            ii = Math.round((st - ib - ib_) * pi / 100 * 10000) / 10000;
-            ii1 = ii1 + ii
-            tp = st - ib_t + ii;
-            // por qué aplica el global sobre los items? está bien?
-            // y si está bien, no debe usarse a sí mismo (como en la linea ib = parseFloat(data['ImporteBonificacion']. etc)
-            // porque si no, se va aplicando a sí mismo cada vez que editas el item
-            data['ImporteBonificacion'] = ib_t.toFixed(4);
-            data['ImporteIva'] = ii.toFixed(4);
-            data['ImporteTotalItem'] = tp.toFixed(4);
-            $('#Lista').jqGrid('setRowData', dataIds[i], data);
-        }
-        st2 = Math.round((st1 - ib1) * 10000) / 10000;
-        st3 = Math.round((st2 - ib2) * 10000) / 10000;
-        tg = Math.round((st3 + ii1) * 10000) / 10000;
-
-        $("#Subtotal1").val(st1.toFixed(4));
-        $("#TotalBonificacionItems").val(ib1.toFixed(4));
-        $("#TotalBonificacionGlobal").val(ib2.toFixed(4));
-        $("#Subtotal2").val(st3.toFixed(4));
-        $("#TotalIva").val(ii1.toFixed(4));
-        $("#Total").val(tg.toFixed(4));
-
-        grid.jqGrid('footerData', 'set', {
-            NumeroObra: 'TOTALES', Cantidad: totalCantidad.toFixed(2),
-            ImporteBonificacion: ib1.toFixed(4),
-            ImporteIva: ii1.toFixed(4),
-            ImporteTotalItem: tg.toFixed(4)
-        });
-    };
 
     getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -1955,6 +1963,11 @@
 
 
 
+            $("#Numero").val(getdata['Numero']);
+            $("#SubNumero").val("");
+            BuscarOrden(getdata['Numero']);
+
+
             //me traigo los datos de detalle
             var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
 
@@ -1965,6 +1978,13 @@
                 url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
                 data: { IdPresupuesto: IdPresupuesto },
                 dataType: "Json",
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                complete: function () {
+                    $("#loading").hide();
+                },
+
                 success: function (data) {
 
                     // agrego los items a la grilla de detalle
@@ -2028,12 +2048,12 @@
 
                     //                rows = $("#Lista").getGridParam("reccount");
                     //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+                    AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
 
 
 
 
-                    Validar();
+                    //Validar();
                 }
 
             });
@@ -2235,16 +2255,16 @@
                                 tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                                 getdata = tmpdata;
                                 idazar = Math.ceil(Math.random() * 1000000);
-
+    
                                 //    $("#Lista").jqGrid('addRowData', idazar, getdata);
-
-
+    
+    
                                 ///////////////
                                 // paso 2: agregar en el ultimo lugar antes de los renglones vacios
                                 ///////////////
-
+    
                                 //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
-
+    
                                 var pos = TraerPosicionLibre();
                                 if (pos == null) {
                                     $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
@@ -2255,12 +2275,12 @@
                                 //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
                                 // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
                                 // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
+    
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
-
-
+    
+    
                             }
                         }
                     });
