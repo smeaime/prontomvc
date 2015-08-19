@@ -155,7 +155,8 @@
             }
         </style>
 
-        <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
+        <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative;  " @*Height of the footer *@>
+
 
             @*http://stackoverflow.com/questions/6431881/css-layout-for-fixed-header-and-100-content-height*@
 
@@ -164,19 +165,27 @@
             <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
-                <div id="">
-                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                        @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+
+                <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                    @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+                    <div class="span8">
+
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            <span class="span1" style="padding-top: 15px; width: 120px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+                            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+
+
+                            <span class="span2" style="padding-top: 15px; width: 150px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+
                             @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
+
                             <span class="" style="padding-top: 15px; width: 10px">/ </span>
                             @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
                         </div>
 
                     </div>
                 </div>
+
+
 
 
 
@@ -1316,15 +1325,51 @@
             datatype: 'json',
             mtype: 'POST',
             cellEdit: true,
-            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor'],
+            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor'
+
+            , 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
+                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', 'IdProveedor'
+            ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                        { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comprador', index: 'Comprador.Nombre', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+
             ],
+
+
+
+
+
+            ondblClickRow: function (id) {
+                CopiarPresupuesto(id)
+            },
+
+
+
 
 
             pager: $('#ListaDragPager3'),
@@ -1873,12 +1918,23 @@
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function CopiarPresupuesto(acceptId, ui) {
 
 
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+
+    function CopiarPresupuesto(acceptId) {
+
+
+
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+            LogJavaScript("Error en Script copiarArticulo   ", e);
+        }
+
+        //sacarDeEditMode();
 
         GrabarGrillaLocal()
+
 
         // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
         var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
@@ -1895,7 +1951,7 @@
             $("#IdSector").val(getdata['IdSector']);
 
             $("#IdProveedor").val(getdata['IdProveedor']);
-            $("#DescripcionProveedor").val(getdata['Proveedor']);
+            $("#Proveedor").val(getdata['Proveedor']);
 
 
 
@@ -1962,8 +2018,11 @@
                         tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
                         tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                         getdata = tmpdata;
-                        grid = Math.ceil(Math.random() * 1000000);
-                        $("#Lista").jqGrid('addRowData', grid, getdata);
+                        var idazar = Math.ceil(Math.random() * 1000000);
+
+                        QuitarRenglonDragDrop(idazar, getdata)
+
+                        //    $("#Lista").jqGrid('addRowData', grid, getdata);
                     }
 
 
@@ -2139,6 +2198,11 @@
                 var j = 0, tmpdata = {}, dropname, IdPresupuesto;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
                 var grid;
+
+
+                CopiarPresupuesto(acceptId)
+
+                /*
                 try {
                     $("#Numero").val(getdata['Numero']);
                     $("#SubNumero").val("");
@@ -2201,7 +2265,13 @@
                         }
                     });
                 } catch (e) { }
+                */
+
+
+
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
             }
         });
     }
