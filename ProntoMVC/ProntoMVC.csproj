@@ -799,6 +799,7 @@
     <Content Include="Scripts\ScriptOtroIngresoAlmacen.js" />
     <Content Include="Scripts\ScriptCliente.js" />
     <Content Include="Scripts\ScriptAjusteStock.js" />
+    <Content Include="Scripts\ScriptPresupuesto.js" />
     <Content Include="Scripts\ScriptSalidaMateriales.js" />
     <Content Include="Scripts\ScriptRecepcion.js" />
     <Content Include="Scripts\ScriptRemito.js" />

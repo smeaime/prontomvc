@@ -563,11 +563,22 @@ namespace ProntoMVC.Controllers
                             a.IdCuenta.ToString(), 
                             a.Descripcion.NullSafeToString(),
                             a.Codigo.NullSafeToString(),
-                            a.IdTipoCuenta==null ? "" :  db.TiposCuentas.Find(a.IdTipoCuenta).Descripcion,  
+                            
+                            
+                            (a.TiposCuenta==null) ?  "" :  a.TiposCuenta.Descripcion,
+                            
                             a.Jerarquia.NullSafeToString(),  
-                            a.IdRubroContable==null  ? "" :  db.RubrosContables.Find(a.IdRubroContable).Descripcion,  
-                            a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
-                            a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
+                            
+                            (a.RubrosContable==null) ?  "" :  a.RubrosContable.Descripcion,
+                            
+                         
+                           
+                            (a.TiposCuentaGrupos==null) ?  "" :  a.TiposCuentaGrupos.Descripcion,
+                            (a.Obra==null) ?  "" :  a.Obra.Descripcion,
+                           
+                           // a.IdTipoCuentaGrupo==null  ? "" :  db.TiposCuentaGrupos.Find(a.IdTipoCuentaGrupo).Descripcion,  
+                           // a.IdObra==null ? "" :  db.Obras.Find(a.IdObra).Descripcion,  
+                           
                             a.AjustaPorInflacion .NullSafeToString(),
                             a.CodigoSecundario   .NullSafeToString(),
                             a.IdCuentaGasto.NullSafeToString(),

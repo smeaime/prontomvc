@@ -732,6 +732,9 @@
     <Compile Include="Models\TiposRetencionGanancia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TiposRubrosFinancierosGrupos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiposValore.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

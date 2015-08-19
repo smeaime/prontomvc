@@ -2361,6 +2361,12 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdMoneda" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.TiposRubrosFinancierosGrupos" Width="1.5" PointX="20.375" PointY="6.875" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdRubroContable" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdCuenta" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdTipoRubroFinancieroGrupo" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdTipoCuenta" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
@@ -2819,6 +2825,10 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdMoneda" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_OrdenesPago_IdOPComplementariaFF" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdRubroContable" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdCuenta" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdObra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdTipoCuenta" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
