@@ -212,6 +212,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<PresupuestoObrasNodosPxQxPresupuesto> PresupuestoObrasNodosPxQxPresupuestoes { get; set; }
         public virtual DbSet<PresupuestoObrasNodosPxQxPresupuestoPorDia> PresupuestoObrasNodosPxQxPresupuestoPorDias { get; set; }
         public virtual DbSet<PresupuestoObrasRedeterminacione> PresupuestoObrasRedeterminaciones { get; set; }
+        public virtual DbSet<TiposRubrosFinancierosGrupos> TiposRubrosFinancierosGrupos { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {
@@ -226,17 +227,17 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Requerimientos_ActualizarEstado", idRequerimientoParameter, idDetalleRequerimientoParameter);
         }
     
-        public virtual ObjectResult<AutorizacionesPorComprobante> AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante(Nullable<int> idFormulario, Nullable<int> idComprobante)
+        public virtual ObjectResult<AutorizacionesPorComprobante> AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante(Nullable<int> idComprobante, Nullable<int> idFormulario)
         {
-            var idFormularioParameter = idFormulario.HasValue ?
-                new ObjectParameter("IdFormulario", idFormulario) :
-                new ObjectParameter("IdFormulario", typeof(int));
-    
             var idComprobanteParameter = idComprobante.HasValue ?
                 new ObjectParameter("IdComprobante", idComprobante) :
                 new ObjectParameter("IdComprobante", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizacionesPorComprobante>("AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante", idFormularioParameter, idComprobanteParameter);
+            var idFormularioParameter = idFormulario.HasValue ?
+                new ObjectParameter("IdFormulario", idFormulario) :
+                new ObjectParameter("IdFormulario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AutorizacionesPorComprobante>("AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante", idComprobanteParameter, idFormularioParameter);
         }
     
         public virtual int Cotizaciones_TX_PorFechaMoneda(Nullable<System.DateTime> fecha, Nullable<int> idMoneda)
@@ -403,8 +404,16 @@ namespace ProntoMVC.Data.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Obras_EliminarCuentasNoUsadasPorIdObra", idObraParameter);
         }
     
-        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> identificador, string enviado, string recibido, string tipo, string letra, Nullable<int> puntoVenta, Nullable<int> numeroComprobante)
+        public virtual int LogComprobantesElectronicos_InsertarRegistro(Nullable<int> puntoVenta, Nullable<int> numeroComprobante, Nullable<int> identificador, string enviado, string recibido, string tipo, string letra)
         {
+            var puntoVentaParameter = puntoVenta.HasValue ?
+                new ObjectParameter("PuntoVenta", puntoVenta) :
+                new ObjectParameter("PuntoVenta", typeof(int));
+    
+            var numeroComprobanteParameter = numeroComprobante.HasValue ?
+                new ObjectParameter("NumeroComprobante", numeroComprobante) :
+                new ObjectParameter("NumeroComprobante", typeof(int));
+    
             var identificadorParameter = identificador.HasValue ?
                 new ObjectParameter("Identificador", identificador) :
                 new ObjectParameter("Identificador", typeof(int));
@@ -425,15 +434,7 @@ namespace ProntoMVC.Data.Models
                 new ObjectParameter("Letra", letra) :
                 new ObjectParameter("Letra", typeof(string));
     
-            var puntoVentaParameter = puntoVenta.HasValue ?
-                new ObjectParameter("PuntoVenta", puntoVenta) :
-                new ObjectParameter("PuntoVenta", typeof(int));
-    
-            var numeroComprobanteParameter = numeroComprobante.HasValue ?
-                new ObjectParameter("NumeroComprobante", numeroComprobante) :
-                new ObjectParameter("NumeroComprobante", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter, puntoVentaParameter, numeroComprobanteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LogComprobantesElectronicos_InsertarRegistro", puntoVentaParameter, numeroComprobanteParameter, identificadorParameter, enviadoParameter, recibidoParameter, tipoParameter, letraParameter);
         }
     
         public virtual int Articulos_TX_BD_ProntoMantenimientoTodos(Nullable<int> idObraPronto)

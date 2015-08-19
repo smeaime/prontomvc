@@ -134,7 +134,12 @@ namespace ProntoMVC.Controllers
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRubroContable} ) + " target='' >Editar</>" ,
 								// +"|"+"<a href=../Presupuesto/Edit/" + a.IdPresupuesto + "?code=1" + ">Detalles</a> ",
                                 a.IdRubroContable.ToString(), 
-                                a.Descripcion.NullSafeToString()
+                                a.Descripcion.NullSafeToString(),
+
+                                (a.Cuenta==null) ?  "" :  a.Cuenta.Descripcion,
+                                //a.Cuenta.Descripcion.NullSafeToString(),
+                                //a.Obra.Descripcion.NullSafeToString(),
+                                //a.TiposRubrosFinancierosGrupos.Descripcion.NullSafeToString()
                             }
                         }).ToArray()
             };

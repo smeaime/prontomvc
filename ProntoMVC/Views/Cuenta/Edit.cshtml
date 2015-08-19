@@ -107,6 +107,17 @@ If you want additionally remove vertical border between the cells in the grid yo
                 </script>
             </div>
           
+
+
+
+            <div class="row-fluid">
+
+                <div class="span8 lightblue">
+                    @Html.LabelFor(model => model.Descripcion, "Descripción")
+                    @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                    @Html.ValidationMessageFor(model => model.Descripcion)
+                </div>
+            </div>
             
         </div>
         <div class="row-fluid navbar navbar-fixed-bottom" style="background: rgba(234, 234, 234, 0.78);
