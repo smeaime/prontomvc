@@ -802,6 +802,9 @@ namespace ProntoMVC.Controllers
             dic.Add("Cuenta Corriente Deudores - Ctas. Ctes.", "Reporte.aspx");
             dic.Add("Solicitudes de Cotización - Presupuestos ", "Presupuesto/");
 
+            dic.Add("Cuentas", "Cuenta/");
+            dic.Add("Rubros contables", "RubroContable/");
+
 
             //var lista = EntidadManager.GetStoreProcedure("", enumSPs.wbusqueda, prefixText);
             var sc = Generales.sCadenaConexSQL(this.Session["BasePronto"].ToString());

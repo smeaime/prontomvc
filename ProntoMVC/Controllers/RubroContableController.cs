@@ -117,7 +117,7 @@ namespace ProntoMVC.Controllers
 
 
             //int totalRecords = Entidad1.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
 
             
 

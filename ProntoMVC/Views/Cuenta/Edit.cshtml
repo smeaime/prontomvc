@@ -33,43 +33,43 @@
             }
         </style>
         <style>
-                        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+            /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
 
-                        .ui-jqgrid {
-                            border-right-width: 0px;
-                            border-left-width: 0px;
-                        }
-                            /* If you need to remove all grid's borders you can use
+            .ui-jqgrid {
+                border-right-width: 0px;
+                border-left-width: 0px;
+            }
+                /* If you need to remove all grid's borders you can use
 
             .ui-jqgrid { border-width: 0px; }
             If you want additionally remove vertical border between the cells in the grid you can use */
 
-                            .ui-jqgrid tr.ui-row-ltr td {
-                                border-right-color: transparent;
-                            }
+                .ui-jqgrid tr.ui-row-ltr td {
+                    border-right-color: transparent;
+                }
 
 
-                            .ui-jqgrid tr.footrow-ltr td {
-                                border-right-color: transparent !important;
-                                border: 0 transparent !important;
-                            }
+                .ui-jqgrid tr.footrow-ltr td {
+                    border-right-color: transparent !important;
+                    border: 0 transparent !important;
+                }
 
-                            /*To remove horizontal border between the rows you can use */
+                /*To remove horizontal border between the rows you can use */
 
-                            .ui-jqgrid tr.ui-row-ltr td {
-                                border-bottom-color: transparent;
-                            }
-                        /*To remove vertical borders between the column headers you can use */
+                .ui-jqgrid tr.ui-row-ltr td {
+                    border-bottom-color: transparent;
+                }
+            /*To remove vertical borders between the column headers you can use */
 
-                        th.ui-th-column {
-                            /*    border-right-color: transparent !important; */
-                            border-right-color: rgb(234, 234, 234) !important;
-                        }
-                        /* or alternatively (without the usage of !important) */
+            th.ui-th-column {
+                /*    border-right-color: transparent !important; */
+                border-right-color: rgb(234, 234, 234) !important;
+            }
+            /* or alternatively (without the usage of !important) */
 
-                        .ui-jqgrid-labels .ui-th-column {
-                            /* border-right-color: transparent;*/
-                        }
+            .ui-jqgrid-labels .ui-th-column {
+                /* border-right-color: transparent;*/
+            }
         </style>
         <form class="form-horizontal">
             <div>@Html.Hidden("IdCuenta", Model.IdCuenta)</div>
@@ -80,7 +80,7 @@
                     <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                         <span class="span1" style="padding-top: 15px; width: 110px">Cuenta </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
-                        @Html.TextBoxFor(model => model.Descripcion, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
+                        @Html.TextBoxFor(model => model.Descripcion, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span6 ", @readonly = "readonly" })
                     </div>
                     <script>
                         $(function () {
@@ -185,18 +185,79 @@
                 </div>
 
 
+                <div class="row-fluid">
 
-
-            </div>
-            <div class="row-fluid navbar navbar-fixed-bottom" style="background: rgba(234, 234, 234, 0.78);
-            border: 1px solid lightgray; height: 70px; padding-top: 15px;">
-                <div class="span7 pull-right">
-                    <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
-                    @if (Model.IdCuenta > 0)
-                    { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdCuenta }, new { @class = "btn  btn-large  btn-default" }) }
-                    @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
+                    <div class="span8 lightblue">
+                        @Html.LabelFor(model => model.Descripcion, "jerarquia")
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
                 </div>
-            </div>
+
+
+
+                <div class="row-fluid">
+
+                    <div class="span8 lightblue">
+                        @Html.LabelFor(model => model.Descripcion, "Provincia opcional p/IIBB")
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+
+
+
+                <div class="row-fluid">
+                    <div id="divGrilla" class="span8 lightblue">
+
+
+
+                        <table id="ListaCambios" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
+                               style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+
+
+                    </div>
+                </div>
+                <div class="row-fluid">
+
+                    <div class="span8 lightblue">
+                        @Html.LabelFor(model => model.Descripcion, "Datos adicionales 1")
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+
+                    <div class="span8 lightblue">
+                        @Html.LabelFor(model => model.Descripcion, "Datos adicionales 2")
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+                <div class="row-fluid">
+
+                    <div class="span8 lightblue">
+                        @Html.LabelFor(model => model.Descripcion, "Datos adicionales 3")
+                        @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="row-fluid navbar navbar-fixed-bottom" style="background: rgba(234, 234, 234, 0.78);
+            border: 1px solid lightgray; height: 70px; padding-top: 15px;">
+                    <div class="span7 pull-right">
+                        <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
+                        @if (Model.IdCuenta > 0)
+                        { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdCuenta }, new { @class = "btn  btn-large  btn-default" }) }
+                        @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
+                    </div>
+                </div>
         </form>
     </div>
     <!--/.fluid-container-->
@@ -261,5 +322,229 @@
                 }
             }
         })
+
+
+
+
+
+
+
+
+
+
+
+        $('#ListaCambios').jqGrid({
+            url: ROOT + 'Cuenta/DetCambios/', // no puedo usar el modelo para cargar la grilla?????
+            postData: { 'Id': function () { return $("#IdCuenta").val(); } }, //esto es el parametro con que se llama a la url
+            editurl: ROOT + 'Cuenta/EditGridData/', // "clientArray",
+            /////////
+            datatype: 'json',
+            mtype: 'POST',
+            //////////////////////////////////////////////
+            //////////////////////////////////////////////
+            //////////////////////////////////////////////
+
+            colNames: ['Acciones', 'IdDetalleCuenta', 'Codigo anterior', 'Nombre anterior', 'FechaCambio'],
+            colModel: [
+                            { name: 'act', index: 'act', align: 'left', width: 70, sortable: false, editable: false, hidden: true },
+                            {
+                                name: 'IdDetalleArticuloDocumento', index: 'IdDetalleArticuloDocumento', label: 'TB', align: 'left',
+                                width: 85, editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false, required: true }
+                            },
+                            {
+                                name: 'CodigoAnterior', index: 'CodigoAnterior', label: 'TB', align: 'left', width: 300, editable: true,
+                                hidden: false,
+                                editoptions: {
+                                    //    disabled: 'disabled'
+                                },
+                                editrules: { edithidden: false, required: true }
+                            },
+                             {
+                                 name: 'NombreAnterior', index: 'NombreAnterior', label: 'TB', align: 'left', width: 300, editable: true,
+                                 hidden: false,
+                                 editoptions: {
+                                     //    disabled: 'disabled'
+                                 },
+                                 editrules: { edithidden: false, required: true }
+                             },
+                              {
+                                  name: 'FechaCambio', index: 'FechaCambio', label: 'TB', align: 'left', width: 300, editable: true,
+                                  hidden: false,
+                                  editoptions: {
+                                      //    disabled: 'disabled'
+                                  },
+                                  editrules: { edithidden: false, required: true }
+                              },
+
+            ],
+
+            //////////////////////////////////////////////
+            //////////////////////////////////////////////
+            //////////////////////////////////////////////
+
+            onSelectRow: function (id) {
+                if (id && id !== lastSelectedId) {
+                    if (typeof lastSelectedId !== "undefined") {
+                        grid.jqGrid('restoreRow', lastSelectedId);
+                    }
+                    lastSelectedId = id;
+                    calculateTotal();
+                }
+            },
+
+            beforeShowForm: function (form) {
+                // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
+                var dlgDiv = $("#editmod" + grid[0].id);
+                var parentDiv = dlgDiv.parent(); // div#gbox_list
+                var dlgWidth = dlgDiv.width();
+                var parentWidth = parentDiv.width();
+                var dlgHeight = dlgDiv.height();
+                var parentHeight = parentDiv.height();
+                // TODO: change parentWidth and parentHeight in case of the grid
+                //       is larger as the browser window
+                dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
+                dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
+            },
+
+
+            pager: $('#PagerDocumentos'),
+            rowNum: 15,
+            sortname: 'NumeroItem',
+            sortorder: 'asc',
+            width: 'auto',
+            height: 'auto',
+            altRows: false,
+            ////////////////////////
+            autowidth: true,
+            shrinkToFit: false,
+            ////////////////////////
+            footerrow: false,
+            userDataOnFooter: false,
+            loadonce: true
+
+
+
+            ////////////////////////
+            // PAGER
+            ////////////////////////
+
+           , rowList: [],        // disable page size dropdown
+            pgbuttons: false,     // disable page control like next, back button
+            pgtext: null,         // disable pager text like 'Page 0 of 10'
+            viewrecords: false    // disable current view record text like 'View 1-10 of 100'
+            ////////////////////////
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $("#grabar2").click(function () {
+            //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
+            //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
+
+
+            var griddata = $("#Lista").jqGrid('getGridParam', 'data');
+            var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray 
+
+
+            //  var aaa = $.toJSON(formdata);
+
+            var fullData = jQuery("#Lista").jqGrid('getRowData');
+
+            //        var gd = $('#ListaLugaresEntrega').jqGrid('getRowData'); // use preferred interface
+            //        for (var i = 0; i < gd.length; ++i) {
+            //            for (var f in gd[i]) res.push({ name: '_detail[' + i + '].' + f, value: gd[i][f] });
+            //        }
+
+            var grid1 = $("#Lista");
+            var colModel = grid1.jqGrid('getGridParam', 'colModel');
+
+            var items = [];
+
+
+            // cabecera.DetalleFacturas.push(items);
+            // $(items).appendTo(cabecera);
+
+
+
+            //        var allData = {
+            //            localGridData:   griddata,       // grid.jqGrid('Lista','data'),
+            //            formData: formdata
+            //        };
+
+            var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
+
+
+            // ShowProgressAnimation();
+
+            $.ajax({
+                type: 'POST',
+                // contentType: 'application/json; charset=utf-8',
+                contentType: 'application/json; charset=utf-8', // http://stackoverflow.com/a/2281875/1054200
+                url: ROOT + 'Cuenta/BatchUpdate',   // 'Factura/UpdateAwesomeGridData',
+                dataType: 'json',
+                // data:JSON.stringify( {formulario: colData , grilla: dataToSend })
+                data: dataToSend,
+                //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
+                success: function (result) {
+                    if (result) {
+                        //alert('hola.');
+                        grid1.trigger('reloadGrid');
+
+                        //window.location.replace(ROOT + "Cliente/index");
+                        window.location = (ROOT + "Cuenta/index");
+
+                    } else {
+                        // window.location.replace(ROOT + "Cliente/index");
+                        alert('No se pudo grabar el comprobante.');
+                    }
+
+                },
+
+
+                error: function (xhr, textStatus, exceptionThrown) {
+                    var errorData = $.parseJSON(xhr.responseText);
+                    var errorMessages = [];
+                    //this ugly loop is because List<> is serialized to an object instead of an array
+                    for (var key in errorData) {
+                        errorMessages.push(errorData[key]);
+                    }
+                    $('#result').html(errorMessages.join("<br />"));
+                    alert(errorMessages.join("<br />"));
+
+                }
+
+
+
+
+            });
+
+
+
+
+
+
+
+        });
+
+
+
+
+        //////////////////////////////////////////////////////////////////
+
+
     </script>
 }
