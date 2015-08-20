@@ -30,25 +30,40 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual ViewResult Index()
+
+        public virtual ViewResult Index(Exception exception)
         {
 
-            //string s =Model.c  .ControllerName;
-            //    <
-            ///p>
-            //        <p>
-            //            Action = @Model.ActionName</p>
-            //        <p>
-            //            Message = @Model.Exception.Message</p>
-            //        <p>
-            //            StackTrace :</p>
-            //        <pre>@Model.Exception.StackTrace</pre>
-            //    ";
 
+            // Response.StatusCode = statusCode;
+            //var model = new ErrorModel() {Exception = exception, HttpStatusCode = statusCode};
+            //return View(model);
 
+            var m = new HandleErrorInfo(exception, "Error", "Index");
+            
 
-            return View("PageNotFound");
+            return View("PageNotFound", m);
         }
+
+        //public virtual ViewResult Index()
+        //{
+
+        //    //string s =Model.c  .ControllerName;
+        //    //    <
+        //    ///p>
+        //    //        <p>
+        //    //            Action = @Model.ActionName</p>
+        //    //        <p>
+        //    //            Message = @Model.Exception.Message</p>
+        //    //        <p>
+        //    //            StackTrace :</p>
+        //    //        <pre>@Model.Exception.StackTrace</pre>
+        //    //    ";
+
+
+
+        //    return View("PageNotFound");
+        //}
 
 
         public virtual ViewResult PageNotFound()

@@ -248,18 +248,18 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "codigo")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.Codigo, "Código")
+                            @Html.TextBoxFor(model => model.Codigo, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Codigo)
                         </div>
                     </div>
 
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "codigo secundario")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.CodigoSecundario, "Código secundario")
+                            @Html.TextBoxFor(model => model.CodigoSecundario, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.CodigoSecundario)
                         </div>
                     </div>
 
@@ -271,40 +271,31 @@
                             @Html.ValidationMessageFor(model => model.Descripcion)
                         </div>
                     </div>
+
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "tipo de cuenta")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.IdTipoCuenta, "Tipo de cuenta")
+                            @Html.DropDownList("IdTipoCuenta", null, String.Empty, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.IdTipoCuenta)
                         </div>
                     </div>
 
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "agrupacion de cuenta")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.IdTipoCuentaGrupo, "Agrupacion de cuenta")
+                            @Html.DropDownList("IdTipoCuentaGrupo", null, String.Empty, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.IdTipoCuentaGrupo)
                         </div>
                     </div>
 
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "rubro contable")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
-                        </div>
-                    </div>
-
-
-                    <div class="row-fluid">
-
-                        <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "obra/centro de costo")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.IdRubroContable, "Rubro contable")
+                            @Html.DropDownList("IdRubroContable", null, String.Empty, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.IdRubroContable)
                         </div>
                     </div>
 
@@ -312,9 +303,19 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            @Html.LabelFor(model => model.Descripcion, "grupo de gasto")
-                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Descripcion)
+                            @Html.LabelFor(model => model.Obra.Descripcion, "Obra/centro de costo")
+                            @Html.TextBoxFor(model => model.Obra.Descripcion, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Obra.Descripcion)
+                        </div>
+                    </div>
+
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.CuentasGasto.Descripcion, "Grupo de gasto")
+                            @Html.TextBoxFor(model => model.CuentasGasto.Descripcion, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.CuentasGasto.Descripcion)
                         </div>
                     </div>
 
