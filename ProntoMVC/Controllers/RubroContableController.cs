@@ -136,10 +136,14 @@ namespace ProntoMVC.Controllers
                                 a.IdRubroContable.ToString(), 
                                 a.Descripcion.NullSafeToString(),
 
+                                a.CodigoAgrupacion.NullSafeToString(),
+                                a.DistribuirGastosEnResumen.NullSafeToString(),
+                                a.TomarMesDeVentaEnResumen.NullSafeToString(),
+                                (a.TiposRubrosFinancierosGrupos==null) ?  "" :  a.TiposRubrosFinancierosGrupos.Descripcion.NullSafeToString(),
+
                                 (a.Cuenta==null) ?  "" :  a.Cuenta.Descripcion,
                                 //a.Cuenta.Descripcion.NullSafeToString(),
-                                //a.Obra.Descripcion.NullSafeToString(),
-                                //a.TiposRubrosFinancierosGrupos.Descripcion.NullSafeToString()
+                                (a.Obra==null) ?  "" :  a.Obra.Descripcion.NullSafeToString(),
                             }
                         }).ToArray()
             };
