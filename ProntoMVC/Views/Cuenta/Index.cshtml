@@ -6,57 +6,54 @@
     <input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
 <div>
     <input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-<style>
-    /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-    
-    
-    
-    .ui-widget-content
-    {
-        border: 0px solid #aaaaaa;
-    }
-    
-    .ui-jqgrid
-    {
-        border-right-width: 0px;
-        border-left-width: 0px;
-    }
-    /* If you need to remove all grid's borders you can use
-
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-right-color: #E4E4E4; 
-    }
-    
-    
-    .ui-jqgrid tr.footrow-ltr td
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    
-    /*To remove horizontal border between the rows you can use */
-    
-    .ui-jqgrid tr.ui-row-ltr td
-    {
-        border-bottom-color: #E4E4E4;
-    }
-    /*To remove vertical borders between the column headers you can use */
-    
-    th.ui-th-column
-    {
-        border-right-color: #E4E4E4 !important;
-    }
-    /* or alternatively (without the usage of !important) */
-    
-    .ui-jqgrid-labels .ui-th-column
-    {
-        border-right-color: #E4E4E4;
-    }
-</style>
 <br />
+@if (false)
+{
+    <style>
+        /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+
+
+
+        .ui-widget-content {
+            border: 0px solid #aaaaaa;
+        }
+
+        .ui-jqgrid {
+            border-right-width: 0px;
+            border-left-width: 0px;
+        }
+            /* If you need to remove all grid's borders you can use
+
+        .ui-jqgrid { border-width: 0px; }
+        If you want additionally remove vertical border between the cells in the grid you can use */
+
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-right-color: #E4E4E4;
+            }
+
+
+            .ui-jqgrid tr.footrow-ltr td {
+                border-right-color: #E4E4E4 !important;
+            }
+
+            /*To remove horizontal border between the rows you can use */
+
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-bottom-color: #E4E4E4;
+            }
+        /*To remove vertical borders between the column headers you can use */
+
+        th.ui-th-column {
+            border-right-color: #E4E4E4 !important;
+        }
+        /* or alternatively (without the usage of !important) */
+
+        .ui-jqgrid-labels .ui-th-column {
+            border-right-color: #E4E4E4;
+        }
+    </style>
+}
+
 
 <div style=" padding-left: 15px;  padding-right: 15px ;">
     <div class="row-fluid">

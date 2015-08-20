@@ -1619,7 +1619,7 @@ $(document).ready(function () {
 
 
     $("#ListaDrag3").jqGrid({
-        url: ROOT + 'Presupuestos_DynamicGridData/Presupuestos',
+        url: ROOT + 'Presupuesto/Presupuestos_DynamicGridData',
 
         postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
         datatype: 'json',
@@ -1649,7 +1649,7 @@ $(document).ready(function () {
                         { name: 'Comprador', index: 'Comprador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn']} },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn']} },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn']} },
                         { name: 'IdProveedor', index: 'IdProveedor' }
@@ -1674,7 +1674,7 @@ $(document).ready(function () {
 
         loadComplete: function () {
             grid = $("ListaDrag3");
-            $("#ListaDrag3 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+            // $("#ListaDrag3 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
 
 

@@ -40,8 +40,12 @@ else
 
         <p>ver detalles </p>
         <p>
-            @if (Model.Exception != null) { @Model.Exception.Message.NullSafeToString(); }
-
+            @if (Model != null)
+            {
+                if (Model.Exception != null)
+                { @Model.Exception.Message.NullSafeToString();
+                }
+            }
 
         </p>
         <p>

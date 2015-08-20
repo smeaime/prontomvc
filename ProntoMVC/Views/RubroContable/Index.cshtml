@@ -27,15 +27,13 @@
             url: '@Url.Action("RubrosContables_DynamicGridData", "RubroContable")',
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdCliente', 'Razon social', 'Codigo', 'Subcod.', 'Direccion', 'Localidad', 'Cod. postal', 'Provincia', 'Pais', 'Telefono', 'Fax', 'Email', 'Cuit',
-                       'Condicion iva', 'Contacto', 'Direccion entrega', 'Localidad entrega', 'Provincia entrega', 'Vendedor', 'Cobrador', 'Estado', 'Nombre comercial', 'Observaciones',
-                       'Ingreso', 'Fecha ingreso', 'Modifico', 'Fecha modifico', 'Categoria  IIBB', 'Condicion IIBB', 'Nro. inscr. IIBB', 'Cuenta contable', 'Cuenta contable exterior',
-                       'Condicion venta', 'Transportista habitual', 'Region'],
+            colNames: ['Acciones', 'IdCliente', 'Razon social', '', 'codigo de agrupacion.', 'grupo', 'Distribuir gastos en analisis', 'Tomar datos del mes'
+                       ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
                         { name: 'IdCliente', index: 'IdCliente', align: 'left', width: 100, editable: false, hidden: true },
                         {
-                            name: 'RazonSocial', index: 'RazonSocial', align: 'left', width: 200, 
+                            name: 'Descripcion', index: 'Descripcion', align: 'left', width: 300,
 
                             editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' ,
 
@@ -48,39 +46,11 @@
                         },
 
 
-                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Subcodigo', index: 'Subcodigo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Codigo', index: 'Codigo', align: 'left', width: 70, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Subcodigo', index: 'Subcodigo', align: 'left', width: 40, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 200, editable: true, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Provincia', index: 'Provincia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Pais', index: 'Pais', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Telefono', index: 'Telefono', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Fax', index: 'Fax', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Email', index: 'Email', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Cuit', index: 'Cuit', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 140, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'DireccionEntrega', index: 'DireccionEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'LocalidadEntrega', index: 'LocalidadEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'ProvinciaEntrega', index: 'ProvinciasEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Vendedor', index: 'Vendedor', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Cobrador', index: 'Cobrador', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Estado', index: 'Estado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'NombreComercial', index: 'NombreComercial', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Ingreso', index: 'Ingreso', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'FechaIngreso', index: 'FechaIngreso', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 120, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'FechaModifico', index: 'FechaModifico', align: 'center', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CategoriaIIBB', index: 'CategoriaIIBB', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CondicionIIBB', index: 'CondicionIIBB', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'IBNumeroInscripcion', index: 'IBNumeroInscripcion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaContable', index: 'CuentaContable', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CuentaContableExterior', index: 'CuentaContableExterior', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CondicionVenta', index: 'CondicionVenta', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Region', index: 'Region', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {

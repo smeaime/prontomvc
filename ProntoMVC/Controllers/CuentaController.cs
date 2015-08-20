@@ -785,7 +785,48 @@ namespace ProntoMVC.Controllers
 
             ViewBag.IdTipoCuenta = new SelectList(db.TiposCuentas, "IdTipoCuenta", "Descripcion", o.IdTipoCuenta);
             ViewBag.IdTipoCuentaGrupo = new SelectList(db.TiposCuentaGrupos, "IdTipoCuentaGrupo", "Descripcion", o.IdTipoCuentaGrupo);
-            
+            ViewBag.IdRubroContable = new SelectList(db.RubrosContables, "IdRubroContable", "Descripcion", o.IdRubroContable);
+
+
+
+
+            ViewBag.IdCuentaConsolidacion = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion);
+            ViewBag.IdCuentaConsolidacion2 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion2);
+            ViewBag.IdCuentaConsolidacion3 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion3);
+            //Set oControl.RowSource = oAp.Cuentas.TraerFiltrado("_CuentasConsolidacionParaCombo", 1)
+
+
+
+            ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "Descripcion", o.IdObra);
+            ViewBag.IdCuentaGasto = new SelectList(db.CuentasGastos, "IdCuentaGasto", "Descripcion", o.IdCuentaGasto);
+            ViewBag.IdProvincia = new SelectList(db.Provincias, "IdProvincia", "Nombre", o.IdProvincia);
+
+
+
+
+
+            IEnumerable<DataRow> Entidad  = EntidadManager.GetStoreProcedure(SCsql(), ProntoFuncionesGenerales.enumSPs.RubrosContables_TX_ParaComboFinancierosTodos).AsEnumerable();
+            var data = (from a in Entidad
+                        select new
+                        {
+                            IdRubroContable = a["IdRubroContable"].ToString(),
+                            Titulo = a["Titulo"].ToString()
+                        }).ToList();
+            ViewBag.IdRubroFinanciero = new SelectList(data
+                        , "IdRubroContable", "Titulo", o.IdRubroFinanciero);
+
+
+
+
+            //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 3)
+            //Set DataCombo2(0).RowSource = oRs
+            //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 4)
+            //Set DataCombo2(1).RowSource = oRs
+            //Set oRs = oAp.Conceptos.TraerFiltrado("_PorGrupoParaCombo", 5)
+            //Set DataCombo2(2).RowSource = oRs
+
+
+
 
             //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
             //ViewBag.IdUnidadOperativa = new SelectList(db.UnidadesOperativas, "IdUnidadOperativa", "Descripcion", o.IdUnidadOperativa);
@@ -806,7 +847,7 @@ namespace ProntoMVC.Controllers
         {
             if ((o.Descripcion ?? "") == "") sErrorMsg += "\n" + "Falta la descripción";
 
-            
+
 
             if (sErrorMsg != "") return false;
             return true;
@@ -814,7 +855,7 @@ namespace ProntoMVC.Controllers
 
 
         [HttpPost]
-        public virtual JsonResult BatchUpdate( Cuenta Cuenta) // el Exclude es para las altas, donde el Id viene en 0
+        public virtual JsonResult BatchUpdate(Cuenta Cuenta) // el Exclude es para las altas, donde el Id viene en 0
         {
             if (!PuedeEditar(enumNodos.Cuentas)) throw new Exception("No tenés permisos");
 
@@ -898,7 +939,7 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
-   
+
 
     }
 
