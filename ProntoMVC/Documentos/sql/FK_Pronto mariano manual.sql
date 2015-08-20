@@ -1472,5 +1472,15 @@ alter table  Cuentas
 		FOREIGN KEY (IdRubroContable) REFERENCES RubrosContables(IdRubroContable)
 go
 
+alter table  Cuentas
+		ADD CONSTRAINT FK_Cuentas_IdRubroFinanciero
+		FOREIGN KEY (IdRubroFinanciero) REFERENCES RubrosContables(IdRubroContable)
+go
+
+
+
+
+
+
 
 
