@@ -562,7 +562,7 @@ namespace ProntoMVC.Controllers
                             "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
 							"<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
                             a.IdCuenta.ToString(), 
-                            new String('.',  (a.Jerarquia.Split('.').ToArray().Where(x=> Convert.ToInt16(x) >0).Count()-1) *5 )  +  a.Descripcion.NullSafeToString()   ,
+                            new String('.',  (a.Jerarquia==null ? 0 : a.Jerarquia.NullSafeToString().Split('.').ToArray().Where(x=> Generales.Val(x) >0).Count() -1) *5 )  +  a.Descripcion.NullSafeToString()   ,
                             a.Codigo.NullSafeToString(),
                             
                             
@@ -782,6 +782,11 @@ namespace ProntoMVC.Controllers
             Parametros parametros = db.Parametros.Find(1);
             int? i = parametros.IdTipoCuentaGrupoFF;
 
+
+            ViewBag.IdTipoCuenta = new SelectList(db.TiposCuentas, "IdTipoCuenta", "Descripcion", o.IdTipoCuenta);
+            ViewBag.IdTipoCuentaGrupo = new SelectList(db.TiposCuentaGrupos, "IdTipoCuentaGrupo", "Descripcion", o.IdTipoCuentaGrupo);
+            
+
             //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
             //ViewBag.IdUnidadOperativa = new SelectList(db.UnidadesOperativas, "IdUnidadOperativa", "Descripcion", o.IdUnidadOperativa);
             //ViewBag.IdGrupoObra = new SelectList(db.GruposObras, "IdGrupoObra", "Descripcion", o.IdGrupoObra);
@@ -832,6 +837,12 @@ namespace ProntoMVC.Controllers
                 {
                     if (Cuenta.IdCuenta > 0)
                     {
+                        var EntidadOriginal = db.Cuentas.Where(p => p.IdCuenta == Cuenta.IdCuenta).SingleOrDefault();
+                        var EntidadEntry = db.Entry(EntidadOriginal);
+                        EntidadEntry.CurrentValues.SetValues(Cuenta);
+
+                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+
                         //UpdateColecciones(ref Articulo);
                     }
                     else
