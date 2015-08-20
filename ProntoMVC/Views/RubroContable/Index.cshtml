@@ -35,9 +35,9 @@
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false },
                         { name: 'IdCliente', index: 'IdCliente', align: 'left', width: 100, editable: false, hidden: true },
                         {
-                            name: 'RazonSocial', index: 'RazonSocial', align: 'left', width: 200, editable: false,
+                            name: 'RazonSocial', index: 'RazonSocial', align: 'left', width: 200, 
 
-
+                            editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' ,
 
                             search: true, searchoptions: {
                                 clearSearch: true,
@@ -91,6 +91,18 @@
                 }
             },
 
+            onCellSelect: function (rowid, iCol, cellcontent, e) {
+                var $this = $(this);
+                var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
+                lastSelectedId = rowid;
+                lastSelectediCol = iCol;
+                lastSelectediRow = iRow;
+            },
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                var se = "<input style='height:22px;width:20px;' type='button' value='G' onclick=\"GrabarFila('" + id + "');\"  />";
+                jQuery("#Lista").jqGrid('setRowData', id, { act: se });
+            },
+
 
             pager: $('#ListaPager'),
             rowNum: 20,
@@ -123,6 +135,9 @@
           , multipleSearch: true
 
 
+           , cellEdit: true,
+        cellsubmit: 'clientArray',
+        editurl: ROOT + 'Empleado/EditGridData/'
         });
 
 
@@ -182,7 +197,20 @@
                 });
 
 
-
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                {
+                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+                                    onClickButton: function () {
+                                        AgregarItemVacio(jQuery("#Lista"));
+                                    },
+                                });
+        jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                                        {
+                                            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                                            onClickButton: function () {
+                                                MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                                            },
+                                        });
 
 
 

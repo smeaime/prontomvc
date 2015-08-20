@@ -92,18 +92,18 @@ namespace ProntoMVC.Controllers
 
 
             var filtereditems = (from item in db.CuentasGastos
-                                 join cu in db.Cuentas on item.IdCuentaGasto  equals  cu.IdCuentaGasto
+                                 join cu in db.Cuentas on item.IdCuentaGasto equals cu.IdCuentaGasto
                                  where ((
 
-                                 (item.Descripcion ).StartsWith(term)
-                                 //(item.Descripcion + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))).StartsWith(term)
+                                 (item.Descripcion).StartsWith(term)
+                                     //(item.Descripcion + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))).StartsWith(term)
 
                                      //       || SqlFunctions.StringConvert((double)(item.Codigo ?? 0)).StartsWith(term)
                                          )
                                      && (cu.IdTipoCuenta == 2 || cu.IdTipoCuenta == 4)
                                      // && item.Descripcion.Trim().Length > 0
 
-                                     && (obra==0 || cu.IdObra==obra)
+                                     && (obra == 0 || cu.IdObra == obra)
                                      )
                                  orderby item.Descripcion
                                  select new
@@ -111,7 +111,8 @@ namespace ProntoMVC.Controllers
                                      id = cu.IdCuenta,
                                      codigo = SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)).Trim(), // me estaba agregando espacios en blanco http://stackoverflow.com/questions/6158706/sqlfunctions-stringconvert-unnecessary-padding-added
                                      value = item.Descripcion // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0)),
-                                     , title = item.Descripcion // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))
+                                     ,
+                                     title = item.Descripcion // + " " + SqlFunctions.StringConvert((double)(cu.Codigo ?? 0))
 
                                      ,
                                      idcuentagasto = cu.IdCuenta
@@ -143,7 +144,7 @@ namespace ProntoMVC.Controllers
 
         public virtual JsonResult GetCodigosCuentasAutocomplete2(string term)
         {
-            int term2 = Generales.Val (term);
+            int term2 = Generales.Val(term);
 
             var q = (from item in db.Cuentas
                      where (item.Codigo == term2)
@@ -406,7 +407,7 @@ namespace ProntoMVC.Controllers
             var data = (from a in Req
                         select a
             ).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()
@@ -481,7 +482,7 @@ namespace ProntoMVC.Controllers
 
                 //var Req1 = from a in Req.Where(campo) select a.IdCuenta;
 
-               // totalRecords = Req1.Count();
+                // totalRecords = Req1.Count();
                 totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
             catch (Exception)
@@ -561,7 +562,7 @@ namespace ProntoMVC.Controllers
                             "<a href="+ Url.Action("Edit",new {id = a.IdCuenta} ) + " target='' >Editar</>" ,
 							"<a href="+ Url.Action("Imprimir",new {id = a.IdCuenta} )  +">Imprimir</>" ,
                             a.IdCuenta.ToString(), 
-                            a.Descripcion.NullSafeToString(),
+                            new String('.',  (a.Jerarquia.Split('.').ToArray().Where(x=> Convert.ToInt16(x) >0).Count()-1) *5 )  +  a.Descripcion.NullSafeToString()   ,
                             a.Codigo.NullSafeToString(),
                             
                             
@@ -583,6 +584,9 @@ namespace ProntoMVC.Controllers
                             a.CodigoSecundario   .NullSafeToString(),
                             a.IdCuentaGasto.NullSafeToString(),
                             a.IdObra.NullSafeToString()
+
+                            
+
                             }
                         }).ToArray()
             };
@@ -590,6 +594,65 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+
+        public virtual ActionResult DetCambios(string sidx, string sord, int? page, int? rows, int? Id)
+        {
+            int IdCuenta1 = Id ?? 0;
+            var DetEntidad = db.DetalleCuentas.Where(p => p.IdCuenta == IdCuenta1).AsQueryable();
+
+            int pageSize = rows ?? 20;
+            int totalRecords = DetEntidad.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
+
+            var data = (from a in DetEntidad
+                        select new
+                        {
+                            a.IdDetalleCuenta,
+                            a.CodigoAnterior,
+                            a.NombreAnterior,
+                            a.FechaCambio,
+                        }).OrderBy(p => p.IdDetalleCuenta)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleCuenta.ToString(),
+                            cell = new string[] { 
+                                string.Empty, // guarda con este espacio vacio
+                                a.IdDetalleCuenta.ToString(),
+                                a.CodigoAnterior.NullSafeToString(),
+                                a.NombreAnterior.NullSafeToString(),
+                                a.FechaCambio.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public void EditGridData(int? IdArticulo, int? NumeroItem, decimal? Cantidad, string Unidad, string Codigo, string Descripcion, string oper)
+        {
+            switch (oper)
+            {
+                case "add": //Validate Input ; Add Method
+                    break;
+                case "edit":  //Validate Input ; Edit Method
+                    break;
+                case "del": //Validate Input ; Delete Method
+                    break;
+                default: break;
+            }
+
+        }
 
         public virtual ActionResult GetCuentas(int? TipoEntidad)
         {
@@ -643,7 +706,8 @@ namespace ProntoMVC.Controllers
             {
                 filtereditems = (from a in filtereditems
                                  where (a.IdObra == IdObra && a.IdCuentaGasto == IdCuentaGasto)
-                                 orderby a.Cuenta select a).ToList();
+                                 orderby a.Cuenta
+                                 select a).ToList();
             }
             if (IdObra != 0 && IdCuentaGasto == 0)
             {
@@ -652,7 +716,7 @@ namespace ProntoMVC.Controllers
                                  orderby a.Cuenta
                                  select a).ToList();
             }
-            if (IdObra == 0 && IdCuentaGasto  != 0)
+            if (IdObra == 0 && IdCuentaGasto != 0)
             {
                 filtereditems = (from a in filtereditems
                                  where (a.IdCuentaGasto == IdCuentaGasto)
@@ -730,5 +794,102 @@ namespace ProntoMVC.Controllers
             //ViewBag.IdSubjefe = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.IdSubjefe);
 
         }
+
+
+
+        private bool Validar(ProntoMVC.Data.Models.Cuenta o, ref string sErrorMsg)
+        {
+            if ((o.Descripcion ?? "") == "") sErrorMsg += "\n" + "Falta la descripción";
+
+            
+
+            if (sErrorMsg != "") return false;
+            return true;
+        }
+
+
+        [HttpPost]
+        public virtual JsonResult BatchUpdate( Cuenta Cuenta) // el Exclude es para las altas, donde el Id viene en 0
+        {
+            if (!PuedeEditar(enumNodos.Cuentas)) throw new Exception("No tenés permisos");
+
+            try
+            {
+                string erar = "";
+
+
+                if (!Validar(Cuenta, ref erar))
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    List<string> errors = new List<string>();
+                    errors.Add(erar);
+                    return Json(errors);
+                }
+
+
+
+                if (ModelState.IsValid || true)
+                {
+                    if (Cuenta.IdCuenta > 0)
+                    {
+                        //UpdateColecciones(ref Articulo);
+                    }
+                    else
+                    {
+                        db.Cuentas.Add(Cuenta);
+                    }
+
+                    db.SaveChanges();
+
+                    return Json(new { Success = 1, IdCuenta = Cuenta.IdCuenta, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
+                }
+                else
+                {
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "La Cuenta es inválida";
+                    return Json(res);
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                //http://stackoverflow.com/questions/10219864/ef-code-first-how-do-i-see-entityvalidationerrors-property-from-the-nuget-pac
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new System.Data.Entity.Validation.DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+
+
+            }
+            catch (Exception ex)
+            {
+                JsonResponse res = new JsonResponse();
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                res.Status = Status.Error;
+                res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                res.Message = ex.Message.ToString();
+                return Json(res);
+            }
+            return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+        }
+
+   
+
     }
+
+
 }
