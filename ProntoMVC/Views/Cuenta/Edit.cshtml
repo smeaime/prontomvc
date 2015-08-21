@@ -313,9 +313,9 @@
                     <div class="row-fluid">
 
                         <div class="span8 lightblue">
-                            Agrupación auxiliar 
+                            Agrupación auxiliar
                             @*@Html.RadioButtonFor(model => model.Activo, "SI") SI
-                            @Html.RadioButtonFor(model => model.Activo, "NO") NO*@
+                                @Html.RadioButtonFor(model => model.Activo, "NO") NO*@
                             @Html.LabelFor(model => model.Descripcion, "Codigo agrupacion")
                             @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
                             @Html.LabelFor(model => model.Descripcion, "Obra/ CC")
@@ -376,8 +376,8 @@
                     <div class="row-fluid">
                         <div class="span4 lightblue">
                             @*@Html.LabelFor(model => model..Activo, "Activo")
-                            @Html.RadioButtonFor(model => model.Activo, "SI") ACTIVAR
-                            @Html.RadioButtonFor(model => model.Activo, "NO") DESACTIVAR*@
+                                @Html.RadioButtonFor(model => model.Activo, "SI") ACTIVAR
+                                @Html.RadioButtonFor(model => model.Activo, "NO") DESACTIVAR*@
                         </div>
 
                         <div class="span4 lightblue">
@@ -772,12 +772,7 @@
 
 
 
-
             });
-
-
-
-
 
 
 
@@ -786,7 +781,17 @@
 
 
 
-        //////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
 
 
     </script>
