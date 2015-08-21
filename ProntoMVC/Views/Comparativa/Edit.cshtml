@@ -139,7 +139,31 @@
                 .ui-jqgrid { border-width: 0px; }
                 If you want additionally remove vertical border between the cells in the grid you can use */
 
-                    
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-right-color: transparent;
+                    }
+
+
+                    .ui-jqgrid tr.footrow-ltr td {
+                        border-right-color: transparent !important;
+                        border: 0 transparent !important;
+                    }
+
+                    /*To remove horizontal border between the rows you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        border-bottom-color: transparent;
+                    }
+                /*To remove vertical borders between the column headers you can use */
+
+                th.ui-th-column {
+                    border-right-color: transparent !important;
+                }
+                /* or alternatively (without the usage of !important) */
+
+                .ui-jqgrid-labels .ui-th-column {
+                    border-right-color: transparent;
+                }
             </style>
         }
         <form class="form-horizontal">

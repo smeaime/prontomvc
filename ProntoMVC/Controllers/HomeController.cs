@@ -803,6 +803,7 @@ namespace ProntoMVC.Controllers
             dic.Add("Solicitudes de Cotización - Presupuestos ", "Presupuesto/");
 
             dic.Add("Cuentas", "Cuenta/");
+            dic.Add("Asientos", "Asiento/");
             dic.Add("Rubros contables", "RubroContable/");
 
 

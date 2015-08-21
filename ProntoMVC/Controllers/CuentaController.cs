@@ -790,9 +790,9 @@ namespace ProntoMVC.Controllers
 
 
 
-            ViewBag.IdCuentaConsolidacion = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion);
-            ViewBag.IdCuentaConsolidacion2 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion2);
-            ViewBag.IdCuentaConsolidacion3 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdRubroContable", "Descripcion", o.IdCuentaConsolidacion3);
+            ViewBag.IdCuentaConsolidacion = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion);
+            ViewBag.IdCuentaConsolidacion2 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion2);
+            ViewBag.IdCuentaConsolidacion3 = new SelectList(db.Cuentas.Where(x => x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4), "IdCuenta", "Descripcion", o.IdCuentaConsolidacion3);
             //Set oControl.RowSource = oAp.Cuentas.TraerFiltrado("_CuentasConsolidacionParaCombo", 1)
 
 
@@ -854,6 +854,13 @@ namespace ProntoMVC.Controllers
         }
 
 
+        private void GuardarHistoricoDeCambio(Cuenta Cuenta) {
+            
+
+
+        }
+
+
         [HttpPost]
         public virtual JsonResult BatchUpdate(Cuenta Cuenta) // el Exclude es para las altas, donde el Id viene en 0
         {
@@ -878,10 +885,16 @@ namespace ProntoMVC.Controllers
                 {
                     if (Cuenta.IdCuenta > 0)
                     {
+                        
+                        //if (SeCambioLaCuenta())
+                        //{
+                        //    GuardarHistoricoDeCambio();
+                        //}
+                        
                         var EntidadOriginal = db.Cuentas.Where(p => p.IdCuenta == Cuenta.IdCuenta).SingleOrDefault();
                         var EntidadEntry = db.Entry(EntidadOriginal);
                         EntidadEntry.CurrentValues.SetValues(Cuenta);
-
+                        
                         db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
 
                         //UpdateColecciones(ref Articulo);

@@ -1,4 +1,24 @@
-﻿alter Procedure [dbo].[Tree_TX_Generar]    
+﻿drop table tree
+go
+
+CREATE TABLE Tree       
+   (      
+    IdItem VARCHAR(30) COLLATE Modern_Spanish_CI_AS NOT NULL,         
+    Clave VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,          
+    Descripcion VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,    
+    ParentId VARCHAR(30) COLLATE Modern_Spanish_CI_AS NULL,      
+    Orden INTEGER,      
+    Parametros VARCHAR(50) COLLATE Modern_Spanish_CI_AS NULL,      
+    Link VARCHAR(200) COLLATE Modern_Spanish_CI_AS NULL,      
+    Imagen VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,      
+    EsPadre VARCHAR(2) COLLATE Modern_Spanish_CI_AS NULL,      
+    GrupoMenu VARCHAR(30) COLLATE Modern_Spanish_CI_AS NULL,
+	  CONSTRAINT [PK_Tree] PRIMARY KEY CLUSTERED ([IdItem] ASC)
+   )  
+go
+
+
+alter Procedure [dbo].[Tree_TX_Generar]    
     
 AS     
   
@@ -10,16 +30,16 @@ SET @Directorio='Pronto2'
       
 CREATE TABLE #Auxiliar0       
    (      
-    IdItem VARCHAR(30),      
-    Clave VARCHAR(100),      
-    Descripcion VARCHAR(100),      
-    ParentId VARCHAR(30),      
+    IdItem VARCHAR(30) COLLATE Modern_Spanish_CI_AS NOT NULL,         
+    Clave VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,          
+    Descripcion VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,    
+    ParentId VARCHAR(30) COLLATE Modern_Spanish_CI_AS NULL,      
     Orden INTEGER,      
-    Parametros VARCHAR(50),      
-    Link VARCHAR(200),      
-    Imagen VARCHAR(100),      
-    EsPadre VARCHAR(2),      
-    GrupoMenu VARCHAR(30)      
+    Parametros VARCHAR(50) COLLATE Modern_Spanish_CI_AS NULL,      
+    Link VARCHAR(200) COLLATE Modern_Spanish_CI_AS NULL,      
+    Imagen VARCHAR(100) COLLATE Modern_Spanish_CI_AS NULL,      
+    EsPadre VARCHAR(2) COLLATE Modern_Spanish_CI_AS NULL,      
+    GrupoMenu VARCHAR(30) COLLATE Modern_Spanish_CI_AS NULL
    )      
 CREATE NONCLUSTERED INDEX IX__Auxiliar1 ON #Auxiliar0 (IdItem) ON [PRIMARY]      
       
@@ -1195,6 +1215,8 @@ DELETE Tree WHERE Imagen='ComprobantesPrv'
 DELETE Tree WHERE Imagen='Requerimientos'      
 DELETE Tree WHERE Imagen='Pedidos'      
 DELETE Tree WHERE Imagen='FondoFijo'      
+
+--verificar que los collate de los campos VARCHAR esten todos explícitos!!!!
     
 INSERT INTO Tree      
  SELECT * FROM #Auxiliar0      
@@ -1205,3 +1227,10 @@ SELECT * FROM #Auxiliar0 ORDER BY IdItem, Orden
 DROP TABLE #Auxiliar0  
 DROP TABLE #Auxiliar1  
 DROP TABLE #Auxiliar2
+go
+
+
+
+
+
+[Tree_TX_Generar]    
