@@ -11,75 +11,75 @@
 
     <script>
 
-    function deshabilitar() {
+        function deshabilitar() {
 
-        // $("*").attr("disabled", "disabled");
-        $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
-
-
-        // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+            // $("*").attr("disabled", "disabled");
+            $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
 
 
-        $.blockUI.defaults.css.cursor = 'default';
-        $.blockUI.defaults.overlayCSS.cursor = 'default';
-
-        //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
-        //                $("#Lista").closest(".ui-jqgrid").block({
-        //                    message: "", //"<h1>Being processed...</h1>",
-        //                    css: { border: "3px solid #a00" }
-        //                });
+            // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
 
 
+            $.blockUI.defaults.css.cursor = 'default';
+            $.blockUI.defaults.overlayCSS.cursor = 'default';
+
+            //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
+            //                $("#Lista").closest(".ui-jqgrid").block({
+            //                    message: "", //"<h1>Being processed...</h1>",
+            //                    css: { border: "3px solid #a00" }
+            //                });
 
 
 
-        $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-            message: "", //"<h1>Being processed...</h1>",
-            //                css: {
-            //                    // border: "3px solid #a00"
-            ////                    'cursor': 'default',
-            ////                    'background-color': 'rgb(218, 211, 211)',
-            ////                    'color': '#fff'
-            //                }
-            //                ,
-            theme: true,
-            themedCSS: {
-                width: "35%",
-                left: "30%"
-                // ,  background-color: 'rgb(218, 211, 211)'
-                //  ,  border: "3px solid #a00"
-            }
-
-        });
-
-        $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-            message: "", //"<h1>Being processed...</h1>",
-            css: {
-                // border: "3px solid #a00"
-                // cursor: 'default'
-            }
-              ,
-            theme: true,
-            themedCSS: {
-                width: "35%",
-                left: "30%"
-                // ,  background-color: 'rgb(218, 211, 211)'
-                //  ,  border: "3px solid #a00"
-            }
-        });
-        $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-            message: "", //"<h1>Being processed...</h1>",
-            css: {
-                // border: "3px solid #a00"
-                cursor: 'default'
-
-            }
-        });
-        //panelLayout(""
 
 
+            $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                //                css: {
+                //                    // border: "3px solid #a00"
+                ////                    'cursor': 'default',
+                ////                    'background-color': 'rgb(218, 211, 211)',
+                ////                    'color': '#fff'
+                //                }
+                //                ,
+                theme: true,
+                themedCSS: {
+                    width: "35%",
+                    left: "30%"
+                    // ,  background-color: 'rgb(218, 211, 211)'
+                    //  ,  border: "3px solid #a00"
+                }
 
-    }
+            });
+
+            $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                css: {
+                    // border: "3px solid #a00"
+                    // cursor: 'default'
+                }
+                  ,
+                theme: true,
+                themedCSS: {
+                    width: "35%",
+                    left: "30%"
+                    // ,  background-color: 'rgb(218, 211, 211)'
+                    //  ,  border: "3px solid #a00"
+                }
+            });
+            $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                css: {
+                    // border: "3px solid #a00"
+                    cursor: 'default'
+
+                }
+            });
+            //panelLayout(""
+
+
+
+        }
     </script>
 
     @*para centrar verticalmente las observaciones *@
@@ -224,23 +224,23 @@
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                             <span class="span8" style="padding-top: 15px; width: ">
-                                Cuenta @Html.DisplayFor( model => model.Descripcion, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
+                                Cuenta @Html.DisplayFor(model => model.Descripcion, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
                             </span>
                         </div>
                         <script>
-                        $(function () {
+                            $(function () {
 
-                            function resizeInput() {
-                                // $(this).attr('size', $(this).val().length + 2);
-                                $(this).css('width', $(this).val().length * 32);
-                            }
+                                function resizeInput() {
+                                    // $(this).attr('size', $(this).val().length + 2);
+                                    $(this).css('width', $(this).val().length * 32);
+                                }
 
 
-                            $('#SubNumero').keyup(resizeInput).each(resizeInput);
+                                $('#SubNumero').keyup(resizeInput).each(resizeInput);
 
-                            $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
+                                $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
 
-                        })
+                            })
                         </script>
                     </div>
 
@@ -275,12 +275,64 @@
 
                     <div class="row-fluid">
 
-                        <div class="span8 lightblue">
+                        <div class="span4 lightblue">
                             @Html.LabelFor(model => model.IdTipoCuenta, "Tipo de cuenta")
                             @Html.DropDownList("IdTipoCuenta", null, String.Empty, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdTipoCuenta)
                         </div>
+                        <div class="span4 lightblue">
+                            @Html.LabelFor(model => model.DebeHaber, "tipo")
+                            @Html.RadioButtonFor(model => model.DebeHaber, "D") DEBE
+                            @Html.RadioButtonFor(model => model.DebeHaber, "H") HABER
+                        </div>
+
                     </div>
+
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            Va al CITI? (p/cta.IVA)
+                            @Html.RadioButtonFor(model => model.VaAlCiti, "SI") SI
+                            @Html.RadioButtonFor(model => model.VaAlCiti, "NO") NO
+                            debe haber
+                        </div>
+                    </div>
+
+
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            Ajusta por inflacion
+                            @Html.RadioButtonFor(model => model.AjustaPorInflacion, "SI") SI
+                            @Html.RadioButtonFor(model => model.AjustaPorInflacion, "NO") NO
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            Agrupación auxiliar 
+                            @*@Html.RadioButtonFor(model => model.Activo, "SI") SI
+                            @Html.RadioButtonFor(model => model.Activo, "NO") NO*@
+                            @Html.LabelFor(model => model.Descripcion, "Codigo agrupacion")
+                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "span12" })
+                            @Html.LabelFor(model => model.Descripcion, "Obra/ CC")
+                            @Html.DropDownList("IdTipoCuentaGrupo", null, String.Empty, new { @class = "span12" })
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            Imputar a presupuesto de obra
+                            @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "SI") SI
+                            @Html.RadioButtonFor(model => model.ImputarAPresupuestoDeObra, "NO") NO
+                        </div>
+                    </div>
+
+
 
                     <div class="row-fluid">
 
@@ -322,8 +374,13 @@
 
 
                     <div class="row-fluid">
+                        <div class="span4 lightblue">
+                            @*@Html.LabelFor(model => model..Activo, "Activo")
+                            @Html.RadioButtonFor(model => model.Activo, "SI") ACTIVAR
+                            @Html.RadioButtonFor(model => model.Activo, "NO") DESACTIVAR*@
+                        </div>
 
-                        <div class="span8 lightblue">
+                        <div class="span4 lightblue">
                             @Html.LabelFor(model => model.IdRubroFinanciero, "Rubro financiero")
                             @Html.DropDownList("IdRubroFinanciero", null, String.Empty, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdRubroFinanciero)
@@ -589,6 +646,9 @@
                 dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
             },
 
+
+
+            caption: "Detalle de cambios en la denominación de la cuenta",
 
             pager: $('#PagerDocumentos'),
             rowNum: 15,
