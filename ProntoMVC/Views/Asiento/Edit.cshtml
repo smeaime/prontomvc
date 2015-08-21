@@ -1,4 +1,4 @@
-﻿@model ProntoMVC.Data.Models.Pedido
+﻿@model ProntoMVC.Data.Models.Asiento
 @{
     ViewBag.Title = "Asiento";
 }
@@ -7,128 +7,309 @@
 
     @Html.ValidationSummary(true)
 
-    <script src="@Url.Content("~/Scripts/ScriptPedido.js?1519")"  type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
 
- 
 
-        
-    
-    
-    <div class="container-fluid">
+    <script>
+
+        function deshabilitar() {
+
+            // $("*").attr("disabled", "disabled");
+            $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
+
+
+            // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+
+
+            $.blockUI.defaults.css.cursor = 'default';
+            $.blockUI.defaults.overlayCSS.cursor = 'default';
+
+            //http://stackoverflow.com/questions/19810312/disabling-entire-jqgrid-jquery-grid-plugin-using-jquery-blockui-plugin
+            //                $("#Lista").closest(".ui-jqgrid").block({
+            //                    message: "", //"<h1>Being processed...</h1>",
+            //                    css: { border: "3px solid #a00" }
+            //                });
+
+
+
+
+
+            $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                //                css: {
+                //                    // border: "3px solid #a00"
+                ////                    'cursor': 'default',
+                ////                    'background-color': 'rgb(218, 211, 211)',
+                ////                    'color': '#fff'
+                //                }
+                //                ,
+                theme: true,
+                themedCSS: {
+                    width: "35%",
+                    left: "30%"
+                    // ,  background-color: 'rgb(218, 211, 211)'
+                    //  ,  border: "3px solid #a00"
+                }
+
+            });
+
+            $("#ListaDrag").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                css: {
+                    // border: "3px solid #a00"
+                    // cursor: 'default'
+                }
+                  ,
+                theme: true,
+                themedCSS: {
+                    width: "35%",
+                    left: "30%"
+                    // ,  background-color: 'rgb(218, 211, 211)'
+                    //  ,  border: "3px solid #a00"
+                }
+            });
+            $("#ListaDrag2").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
+                message: "", //"<h1>Being processed...</h1>",
+                css: {
+                    // border: "3px solid #a00"
+                    cursor: 'default'
+
+                }
+            });
+            //panelLayout(""
+
+
+
+        }
+    </script>
+
+    @*para centrar verticalmente las observaciones *@
+    <style type="text/css">
+        .ui-jqgrid tr.jqgrow td {
+            vertical-align: middle !important;
+        }
+    </style>
+
+
+
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <div class="modal" id="loading">
-            <img  src="@Url.Content("~/Content/images/fhhrx.gif")"  style="margin-right: 5px;" />
+            <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
             Cargando...
         </div>
         <style>
-            input[readonly]
-            {
+            /* probando cómo zafar del color en los border del arbol de la izquierda */
+            .ui-jqgrid tr.ui-row-ltr td {
+                border-color: rgb(234, 234, 234) /* rgba(213, 175, 175, 0); */;
+            }
+        </style>
+        <style>
+            input[readonly] {
                 background: transparent;
                 border: 0;
                 -webkit-box-shadow: none;
                 -moz-box-shadow: none;
                 box-shadow: none;
             }
-            
-            .container-fluid
-            {
+
+            .container-fluid {
                 padding-left: 8px; /*    margin-right: 15px; */
             }
         </style>
         <style>
-            /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-            
-            .ui-jqgrid
-            {
-                border-right-width: 0px;
-                border-left-width: 0px;
-            }
-            /* If you need to remove all grid's borders you can use
-
-.ui-jqgrid { border-width: 0px; }
-If you want additionally remove vertical border between the cells in the grid you can use */
-            
-            .ui-jqgrid tr.ui-row-ltr td
-            {
-                border-right-color: transparent;
-            }
-            
-            
-            .ui-jqgrid tr.footrow-ltr td
-            {
+            .ui-jqgrid tr.footrow-ltr td {
                 border-right-color: transparent !important;
                 border: 0 transparent !important;
             }
-            
-            /*To remove horizontal border between the rows you can use */
-            
-            .ui-jqgrid tr.ui-row-ltr td
-            {
-                border-bottom-color: transparent;
+        </style>
+        <style>
+            .accordion-heading {
+                /*   font-size: 25px !important;  */
             }
-            /*To remove vertical borders between the column headers you can use */
-            
-            th.ui-th-column
-            {
-                /*    border-right-color: transparent !important; */
-                border-right-color: rgb(234, 234, 234) !important;
+
+            /* http://stackoverflow.com/questions/13778703/adding-open-closed-icon-to-twitter-bootstrap-collapsibles-accordions */
+            .accordion-caret .accordion-toggle:hover {
+                text-decoration: none;
             }
-            /* or alternatively (without the usage of !important) */
-            
-            .ui-jqgrid-labels .ui-th-column
-            {
-                /* border-right-color: transparent;*/
+
+                .accordion-caret .accordion-toggle:hover span, .accordion-caret .accordion-toggle:hover strong {
+                    text-decoration: underline;
+                }
+
+            .accordion-caret .accordion-toggle:before {
+                font-size: 20px;
+                vertical-align: -3px;
+            }
+
+            .accordion-caret .accordion-toggle:not(.collapsed):before {
+                /*                content: "▾"; */
+                margin-right: 0px;
+            }
+
+            .accordion-caret .accordion-toggle.collapsed:before {
+                /*             content: "▸"; */
+                margin-right: 0px;
+            }
+        </style>
+        @if (false)
+        {
+
+            <style>
+                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
+
+                .ui-jqgrid {
+                    border-right-width: 0px;
+                    border-left-width: 0px;
+                }
+
+                    /* If you need to remove all grid's borders you can use
+
+                .ui-jqgrid { border-width: 0px; }
+                If you want additionally remove vertical border between the cells in the grid you can use */
+
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        /* border-right-color: transparent; */
+                        border-right-color: #E4E4E4;
+                    }
+
+
+
+
+                    /*To remove horizontal border between the rows you can use */
+
+                    .ui-jqgrid tr.ui-row-ltr td {
+                        /* border-right-color: transparent; */
+                        border-right-color: #E4E4E4;
+                    }
+                /*To remove vertical borders between the column headers you can use */
+
+                th.ui-th-column {
+                    /*    border-right-color: transparent !important; */
+                    border-right-color: rgb(234, 234, 234) !important;
+                }
+                /* or alternatively (without the usage of !important) */
+
+                .ui-jqgrid-labels .ui-th-column {
+                    /* border-right-color: transparent;*/
+                    border-right-color: #E4E4E4;
+                }
+            </style>
+        }
+        <style>
+            /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
+            tr.jqgrow > td.textInDiv > div {
+                max-height: 30px;
+                height: 30px;
+                overflow: auto;
+            }
+
+            td.form-view-data > span > div {
+                max-height: 30px;
+                height: 30px;
+                overflow: auto;
             }
         </style>
         <form class="form-horizontal">
-  @*      <div>@Html.Hidden("IdPedido", Model.IdPedido)</div>
-        <div>@Html.Hidden("IdProveedor", Model.IdProveedor)</div>*@
-        <div class="span12">
-            <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
-                <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
+            <div>@Html.Hidden("IdAsiento", Model.IdAsiento)</div>
+
+
+            <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative;  " @*Height of the footer *@>
+                <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;
+                padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
+
+
+
+                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                        @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+                        <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
                     text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                    @*    <div class="span4  ">
-                        Pedido
-                    </div>*@ @*@Html.Display("Pedido" , new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding: 0; background: transparent;", @class = "span6", @readonly = "readonly" })*@
-                    @*@Html.TextBox("dummy","Pedido", new { style = "height: 45px ; font-weight: bold; font-size: 34px; border: 0; padding:0 ; background: transparent;", @class = "span4", @readonly = "readonly" })*@
-                    <span class="span1" style="padding-top: 15px; width: 110px">Asiento</span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
-                    @Html.TextBoxFor(model => model.NumeroPedido, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
-               
+                            <span class="span8" style="padding-top: 15px; width: ">
+                                Asiento @Html.DisplayFor(model => model.NumeroAsiento, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "", @readonly = "readonly" })
+                            </span>
+                        </div>
+                        <script>
+                            $(function () {
+
+                                function resizeInput() {
+                                    // $(this).attr('size', $(this).val().length + 2);
+                                    $(this).css('width', $(this).val().length * 32);
+                                }
+
+
+                                $('#SubNumero').keyup(resizeInput).each(resizeInput);
+
+                                $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
+
+                            })
+                        </script>
+                    </div>
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "Numero de asiento")
+                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "FechaIngreso")
+                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+
+                        <div class="span8 lightblue">
+                            @Html.LabelFor(model => model.FechaIngreso, "Concepto")
+                            @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.FechaIngreso)
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div id="divGrilla" class="span8 lightblue">
+
+
+
+                            <table id="ListaCambios" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
+                                   style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;"></table>
+
+
+                        </div>
+                    </div>
                 </div>
-                <script>
-                    $(function () {
-
-                        function resizeInput() {
-                            // $(this).attr('size', $(this).val().length + 2);
-                            $(this).css('width', $(this).val().length * 32);
-                        }
 
 
-                        $('#SubNumero').keyup(resizeInput).each(resizeInput);
-
-                        $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
-
-                    })
-                </script>
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
+                width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                    <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;" />
+                    <div class="row-fluid " style="padding: 11px 0px 0px 0px">
+                        <div class="span7 pull-right">
+                            <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary" />
+                            @if (Model.IdAsiento > 0)
+                            { @Html.ActionLink("Eliminar", "DeleteConfirmed", new { id = Model.IdAsiento }, new { @class = "btn  btn-large  btn-default" }) }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn  btn-large  btn-link" })
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!--/row-->
-            
-            <!--/row-->
-            
-            <!--/row-->
-            
-            @* <div id="ListaPager" class="scroll">
-        </div>*@
-  
-            <br />
-            
-        </div>
-        
         </form>
     </div>
     <!--/.fluid-container-->
     <script type="text/javascript">
+
+
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
+
+            $("#conscroll").height($(window).height() - 120);
+        });
+
+
         $(function () {
 
 
@@ -142,7 +323,8 @@ If you want additionally remove vertical border between the cells in the grid yo
             //            });
 
 
-            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault 
+            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault
+
 
 
 
@@ -188,6 +370,316 @@ If you want additionally remove vertical border between the cells in the grid yo
                     $("#chk0").attr('title', "");
                 }
             }
-        })
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+        $(function () {
+
+
+            $('#ListaCambios').jqGrid({
+                url: ROOT + 'Cuenta/DetCambios/', // no puedo usar el modelo para cargar la grilla?????
+                postData: { 'Id': function () { return $("#IdAsiento").val(); } }, //esto es el parametro con que se llama a la url
+                editurl: ROOT + 'Cuenta/EditGridData/', // "clientArray",
+                /////////
+                datatype: 'json',
+                mtype: 'POST',
+                //////////////////////////////////////////////
+                //////////////////////////////////////////////
+                //////////////////////////////////////////////
+
+                colNames: ['Acciones', 'IdDetalleCuenta', 'Codigo anterior', 'Nombre anterior', 'FechaCambio'],
+                colModel: [
+                                { name: 'act', index: 'act', align: 'left', width: 70, sortable: false, editable: false, hidden: true },
+                                {
+                                    name: 'IdDetalleArticuloDocumento', index: 'IdDetalleArticuloDocumento', label: 'TB', align: 'left',
+                                    width: 85, editable: false, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false, required: true }
+                                },
+                                {
+                                    name: 'CodigoAnterior', index: 'CodigoAnterior', label: 'TB', align: 'left', width: 300, editable: true,
+                                    hidden: false,
+                                    editoptions: {
+                                        //    disabled: 'disabled'
+                                    },
+                                    editrules: { edithidden: false, required: true }
+                                },
+                                 {
+                                     name: 'NombreAnterior', index: 'NombreAnterior', label: 'TB', align: 'left', width: 300, editable: true,
+                                     hidden: false,
+                                     editoptions: {
+                                         //    disabled: 'disabled'
+                                     },
+                                     editrules: { edithidden: false, required: true }
+                                 },
+                                  {
+                                      name: 'FechaCambio', index: 'FechaCambio', label: 'TB', align: 'left', width: 300, editable: true,
+                                      hidden: false,
+                                      editoptions: {
+                                          //    disabled: 'disabled'
+                                      },
+                                      editrules: { edithidden: false, required: true }
+                                  },
+
+                ],
+
+                //////////////////////////////////////////////
+                //////////////////////////////////////////////
+                //////////////////////////////////////////////
+
+                onSelectRow: function (id) {
+                    if (id && id !== lastSelectedId) {
+                        if (typeof lastSelectedId !== "undefined") {
+                            grid.jqGrid('restoreRow', lastSelectedId);
+                        }
+                        lastSelectedId = id;
+                        calculateTotal();
+                    }
+                },
+
+                beforeShowForm: function (form) {
+                    // "editmodlist" //http://stackoverflow.com/questions/3967488/how-to-center-jqgrid-popup-modal-window
+                    var dlgDiv = $("#editmod" + grid[0].id);
+                    var parentDiv = dlgDiv.parent(); // div#gbox_list
+                    var dlgWidth = dlgDiv.width();
+                    var parentWidth = parentDiv.width();
+                    var dlgHeight = dlgDiv.height();
+                    var parentHeight = parentDiv.height();
+                    // TODO: change parentWidth and parentHeight in case of the grid
+                    //       is larger as the browser window
+                    dlgDiv[0].style.top = Math.round((parentHeight - dlgHeight) / 2) + "px";
+                    dlgDiv[0].style.left = Math.round((parentWidth - dlgWidth) / 2) + "px";
+                },
+
+
+
+                caption: "Detalle de cambios en la denominación de la cuenta",
+
+                pager: $('#PagerDocumentos'),
+                rowNum: 15,
+                sortname: 'NumeroItem',
+                sortorder: 'asc',
+                width: 'auto',
+                height: 'auto',
+                altRows: false,
+                ////////////////////////
+                autowidth: true,
+                shrinkToFit: false,
+                ////////////////////////
+                footerrow: false,
+                userDataOnFooter: false,
+                loadonce: true
+
+
+
+                ////////////////////////
+                // PAGER
+                ////////////////////////
+
+               , rowList: [],        // disable page size dropdown
+                pgbuttons: false,     // disable page control like next, back button
+                pgtext: null,         // disable pager text like 'Page 0 of 10'
+                viewrecords: false    // disable current view record text like 'View 1-10 of 100'
+                ////////////////////////
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $("#grabar2").click(function () {
+                //  http://stackoverflow.com/questions/10744694/submitting-jqgrid-row-data-from-view-to-controller-what-method
+                //  http://stackoverflow.com/questions/6798671/how-to-submit-local-jqgrid-data-and-form-input-elements?answertab=votes#tab-top
+
+
+                var griddata = $("#Lista").jqGrid('getGridParam', 'data');
+                var cabecera = $("#formid").serializeObject(); // .serializeArray(); // serializeArray
+
+
+                //  var aaa = $.toJSON(formdata);
+
+                var fullData = jQuery("#Lista").jqGrid('getRowData');
+
+                //        var gd = $('#ListaLugaresEntrega').jqGrid('getRowData'); // use preferred interface
+                //        for (var i = 0; i < gd.length; ++i) {
+                //            for (var f in gd[i]) res.push({ name: '_detail[' + i + '].' + f, value: gd[i][f] });
+                //        }
+
+                var grid1 = $("#Lista");
+                var colModel = grid1.jqGrid('getGridParam', 'colModel');
+
+                var items = [];
+
+
+                // cabecera.DetalleFacturas.push(items);
+                // $(items).appendTo(cabecera);
+
+
+
+                //        var allData = {
+                //            localGridData:   griddata,       // grid.jqGrid('Lista','data'),
+                //            formData: formdata
+                //        };
+
+                var dataToSend = JSON.stringify(cabecera); // JSON.stringify(griddata);   JSON.parse() ;   $.toJSON();
+
+
+                // ShowProgressAnimation();
+
+                $.ajax({
+                    type: 'POST',
+                    // contentType: 'application/json; charset=utf-8',
+                    contentType: 'application/json; charset=utf-8', // http://stackoverflow.com/a/2281875/1054200
+                    url: ROOT + 'Cuenta/BatchUpdate',   // 'Factura/UpdateAwesomeGridData',
+                    dataType: 'json',
+                    // data:JSON.stringify( {formulario: colData , grilla: dataToSend })
+                    data: dataToSend,
+                    //  data: { "formulario": formdata ,"grilla": dataToSend }, // $.toJSON(griddata),
+                    success: function (result) {
+                        if (result) {
+                            //alert('hola.');
+                            grid1.trigger('reloadGrid');
+
+                            //window.location.replace(ROOT + "Cliente/index");
+                            window.location = (ROOT + "Cuenta/index");
+
+                        } else {
+                            // window.location.replace(ROOT + "Cliente/index");
+                            alert('No se pudo grabar el comprobante.');
+                        }
+
+                    },
+
+
+                    error: function (xhr, textStatus, exceptionThrown) {
+                        var errorData = $.parseJSON(xhr.responseText);
+                        var errorMessages = [];
+                        //this ugly loop is because List<> is serialized to an object instead of an array
+                        for (var key in errorData) {
+                            errorMessages.push(errorData[key]);
+                        }
+                        $('#result').html(errorMessages.join("<br />"));
+                        alert(errorMessages.join("<br />"));
+
+                    }
+
+
+
+
+                });
+            });
+
+
+
+
+
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+        $(function () {
+
+
+
+            var myGrid = $('#ListaDrag')
+
+            //function decodeErrorMessage(jqXHR, textStatus, errorThrown) {
+            //    var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
+            //    if (jqXHR.responseText.charAt(0) === '[') {
+            //        try {
+            //            errorInfo = $.parseJSON(jqXHR.responseText);
+            //            errorText = "";
+            //            for (i = 0; i < errorInfo.length; i++) {
+            //                if (errorText.length !== 0) {
+            //                    errorText += "<hr/>";
+            //                }
+            //                errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
+            //            }
+            //        }
+            //        catch (e) { }
+            //    } else {
+            //        html = /<body.*?>([\s\S]*)<\/body>/.exec(jqXHR.responseText);
+            //        if (html !== null && html.length > 1) {
+            //            errorText = html[1];
+            //        }
+            //    }
+            //    return errorText;
+            //};
+
+
+
+
+
+
+            myGrid.jqGrid('navGrid', '#ListaDragPager', { add: false, edit: false, del: false },
+                      {}, {}, {}, { multipleSearch: true, overlay: false });
+
+            myGrid.filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+            myGrid.jqGrid('navButtonAdd', '#ListaDragPager',
+                    {
+                        caption: "Filter", title: "Toggle Searching Toolbar",
+                        buttonicon: 'ui-icon-pin-s',
+                        onClickButton: function () { myGrid[0].toggleToolbar(); }
+                    });
+
+        
+
+
+
+
+
+
+        });
+
+
+        //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
+        $('a#a_panel_este_tab1').text('Cuentas');
+        $('a#a_panel_este_tab2').text('RMDet');
+        $('a#a_panel_este_tab2').remove();  //
+        $('a#a_panel_este_tab3').text('Presup');
+        $('a#a_panel_este_tab3').remove();  //
+        $('a#a_panel_este_tab4').text('Comp');
+        $('a#a_panel_este_tab4').remove();  //
+        $('a#a_panel_este_tab5').text('Ped');
+        $('a#a_panel_este_tab5').remove();  //
+        //////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
     </script>
 }
