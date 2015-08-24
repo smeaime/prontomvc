@@ -1300,6 +1300,7 @@
     <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
+    <Content Include="Views\OrdenPago\IndexExterno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

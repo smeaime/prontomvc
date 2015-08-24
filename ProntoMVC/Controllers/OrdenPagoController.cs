@@ -39,7 +39,17 @@ namespace ProntoMVC.Controllers
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
+        
+        
         }
+
+
+        public virtual ViewResult IndexExterno()
+        {
+            //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
+            return View();
+        }
+
 
         public virtual ActionResult Edit(int id)
         {
