@@ -567,11 +567,11 @@ namespace ProntoMVC.Controllers
                                    (db.LMateriales.Find(a.IdComprobante).IdObra ==null ? "" : db.LMateriales.Find(a.IdComprobante).IdObra.NullSafeToString()) :
                             (a.IdFormulario == 3 && a.IdComprobante!=null) ?
                                    (db.Requerimientos.Find(a.IdComprobante).Obra ==null ? "" : db.Requerimientos.Find(a.IdComprobante).Obra.NumeroObra.NullSafeToString()) :
-                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
-                                (db.DetalleRequerimientos.Where(x=>x.IdRequerimiento== 
-                                        (db.DetallePedidos.Where(y=>y.IdPedido==a.IdComprobante && y.IdDetalleRequerimiento!=null).FirstOrDefault().IdDetalleRequerimiento)
-                                )
-                                .FirstOrDefault().Requerimientos.Obra.NumeroObra.NullSafeToString()) :                                          
+                            //(a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                            //    (db.DetalleRequerimientos.Where(x=>x.IdRequerimiento== 
+                            //            (db.DetallePedidos.Where(y=>y.IdPedido==a.IdComprobante && y.IdDetalleRequerimiento!=null).FirstOrDefault().IdDetalleRequerimiento)
+                            //    )
+                            //    .FirstOrDefault().Requerimientos.Obra.NumeroObra.NullSafeToString()) :                                          
                             (a.IdFormulario == 31 && a.IdComprobante!=null) ?
                                    (db.ComprobantesProveedor.Find(a.IdComprobante).Obra==null ? "" : db.ComprobantesProveedor.Find(a.IdComprobante).Obra.NumeroObra.NullSafeToString()) :
                                    "" ,
