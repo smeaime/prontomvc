@@ -106,5 +106,6 @@ namespace ProntoMVC.Data.Models
         public virtual RubrosContable RubrosContable { get; set; }
         public virtual ICollection<RubrosContable> RubrosContables { get; set; }
         public virtual TiposCuenta TiposCuenta { get; set; }
+        public virtual RubrosContable RubrosContable1 { get; set; }
     }
 }

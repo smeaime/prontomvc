@@ -1,4 +1,4 @@
-sp_who2
+orsp_who2
 exec sp_lock
 --:connect MARIANO-PC
 use demopronto
