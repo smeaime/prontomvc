@@ -2367,6 +2367,12 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdTipoRubroFinancieroGrupo" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdTipoCuenta" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Acopio" Width="1.5" PointX="13.375" PointY="23.75" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdRubroFinanciero" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleAcopio" Width="1.5" PointX="25.75" PointY="8.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleLMateriale" Width="1.5" PointX="0.75" PointY="25.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.LMateriale" Width="1.5" PointX="15.75" PointY="23.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.CentrosCosto" Width="1.5" PointX="4.375" PointY="21.75" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
@@ -2829,6 +2835,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdCuenta" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_RubrosContables_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdTipoCuenta" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_Cuentas_IdRubroFinanciero" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
