@@ -51,6 +51,58 @@ namespace ProntoMVC.Controllers
         }
 
 
+
+
+        public virtual ActionResult EditExterno(int id)
+        {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //   ) throw new Exception("No tenés permisos");
+
+            if (id == -1)
+            {
+                OrdenPago OrdenPago = new OrdenPago();
+
+                inic(ref OrdenPago);
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+            else
+            {
+                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                if (OrdenPago.IdProveedor != idproveedor
+                //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+                    ) throw new Exception("No tenés permisos para esa Orden de Pago");
+
+
+                //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
+                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
+                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
+                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
+                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
+                try
+                {
+                    ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
+                }
+                catch (Exception e)
+                {
+
+                    ErrHandler.WriteError(e);
+                }
+
+                CargarViewBag(OrdenPago);
+                Session.Add("OrdenPago", OrdenPago);
+                return View(OrdenPago);
+            }
+        }
+
+
         public virtual ActionResult Edit(int id)
         {
             if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
