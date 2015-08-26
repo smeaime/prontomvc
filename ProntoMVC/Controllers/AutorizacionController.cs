@@ -376,6 +376,7 @@ namespace ProntoMVC.Controllers
                             a.SectorEmisor,
                             a.IdComprobante,
                             a.IdLibero,
+                            a.IdSector,
 
 
                             //NumeroObra=a.Obra.NumeroObra,
@@ -385,96 +386,6 @@ namespace ProntoMVC.Controllers
                             //Detalle=a.Detalle
 
 
-
-
-                            //SELECT    
-                            // Aut.IdComprobante as [IdComprobante],  
-                            // Aut.TipoComprobante as [Documento],  
-                            // Aut.Numero as [Numero],  
-                            // Aut.Fecha as [Fecha],  
-                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Proveedores.RazonSocial From Proveedores  
-                            //     Where (Select Top 1 Pedidos.IdProveedor From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)=Proveedores.IdProveedor)  
-                            // When Aut.IdFormulario=31 Then (Select Top 1 Proveedores.RazonSocial From Proveedores  
-                            //     Where (Select Top 1 cp.IdProveedor From ComprobantesProveedores cp Where Aut.IdComprobante=cp.IdComprobanteProveedor)=Proveedores.IdProveedor)  
-                            // Else Null  
-                            // End as [Proveedor],  
-                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.MontoParaCompra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
-                            // When Aut.IdFormulario=4 Then (Select Top 1 Pedidos.TotalPedido From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
-                            // When Aut.IdFormulario=5 Then (Select Top 1 Comparativas.ImporteComparativaCalculado From Comparativas Where Aut.IdComprobante=Comparativas.IdComparativa)  
-                            // When Aut.IdFormulario=31 Then (Select Top 1 cp.TotalComprobante From ComprobantesProveedores cp Where Aut.IdComprobante=cp.IdComprobanteProveedor)  
-                            // Else Null  
-                            // End as [Monto p/compra],  
-                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Acopios.MontoPrevisto From Acopios Where Aut.IdComprobante=Acopios.IdAcopio)  
-                            // When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.MontoPrevisto From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
-                            // Else Null  
-                            // End as [Monto previsto],  
-                            // Aut.OrdenAutorizacion as [Orden],  
-                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Monedas.Abreviatura From Monedas   
-                            //     Where (Select Top 1 Pedidos.IdMoneda From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)=Monedas.IdMoneda)  
-                            // Else Null  
-                            // End as [Mon.],  
-                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select Acopios.IdObra From Acopios Where Aut.IdComprobante=Acopios.IdAcopio )=Obras.IdObra)  
-                            // When Aut.IdFormulario=2 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select LMateriales.IdObra From LMateriales Where Aut.IdComprobante=LMateriales.IdLMateriales )=Obras.IdObra)  
-                            // When Aut.IdFormulario=3 Then (Select Top 1 Obras.NumeroObra From Obras  
-                            //     Where (Select Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=Obras.IdObra)  
-                            // When Aut.IdFormulario=4 Then (Select Top 1 Obras.NumeroObra From Obras  
-                            //     Where (Select Top 1 Requerimientos.IdObra From Requerimientos  
-                            //      Where Requerimientos.IdRequerimiento=  
-                            //       (Select Top 1 DR.IdRequerimiento   
-                            //        From DetalleRequerimientos DR   
-                            //        Where DR.IdDetalleRequerimiento=  
-                            //        (Select Top 1 DP.IdDetalleRequerimiento  
-                            //         From DetallePedidos DP   
-                            //         Where DP.IdPedido=Aut.IdComprobante and   
-                            //         DP.IdDetalleRequerimiento is not null)))=Obras.IdObra)  
-                            // When Aut.IdFormulario=31 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select ComprobantesProveedores.IdObra From ComprobantesProveedores Where Aut.IdComprobante=ComprobantesProveedores.IdComprobanteProveedor)=Obras.IdObra)  
-                            // Else Null  
-                            // End as [Obra],  
-                            // Case When Aut.IdFormulario=3 Then ( Select Top 1 Sectores.Descripcion   
-                            //        From Sectores   
-                            //        Where Sectores.IdSector=(Select Top 1 Requerimientos.IdSector From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento))  
-                            // Else Null  
-                            // End as [Sector],  
-                            // Case When Aut.IdFormulario=3 Then (Select Top 1 CentrosCosto.Descripcion From CentrosCosto  
-                            //     Where (Select Requerimientos.IdCentroCosto From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=CentrosCosto.IdCentroCosto)  
-                            // Else Null  
-                            // End as [Centro de costo],  
-                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Clientes.RazonSocial From Clientes   
-                            //     Where (Select Acopios.IdCliente From Acopios Where Aut.IdComprobante=Acopios.IdAcopio)=Clientes.IdCliente)  
-                            // When Aut.IdFormulario=2 Then (Select Top 1 Clientes.RazonSocial From Clientes  
-                            //     Where (Select LMateriales.IdCliente From LMateriales Where Aut.IdComprobante=LMateriales.IdLMateriales)=Clientes.IdCliente)  
-                            // When Aut.IdFormulario=3 Then (Select Top 1 Clientes.RazonSocial From Clientes  
-                            //     Where (Select Top 1 Obras.IdCliente From Obras  
-                            //      Where (Select Top 1 Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=Obras.IdObra) = Clientes.IdCliente)  
-                            // Else Null  
-                            // End as [Cliente],  
-                            // Aut.IdFormulario as [IdFormulario],  
-                            // Aut.OrdenAutorizacion as [Nro.Orden],  
-                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.IdSector From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
-                            // When Aut.IdFormulario=4 Then Aut.IdSector   
-                            // Else 0  
-                            // End as [SectorEmisor],  
-                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
-                            // When Aut.IdFormulario=4 Then (Select Top 1 Requerimientos.IdObra From Requerimientos  
-                            //     Where Requerimientos.IdRequerimiento=  
-                            //      (Select Top 1 DR.IdRequerimiento From DetalleRequerimientos DR   
-                            //       Where DR.IdDetalleRequerimiento=(Select Top 1 DP.IdDetalleRequerimiento From DetallePedidos DP Where DP.IdPedido=Aut.IdComprobante and DP.IdDetalleRequerimiento is not null)))  
-                            // When Aut.IdFormulario=31 Then (Select Top 1 ComprobantesProveedores.IdObra From ComprobantesProveedores Where Aut.IdComprobante=ComprobantesProveedores.IdComprobanteProveedor)  
-                            // Else Null  
-                            // End as [IdObra],  
-                            // Aut.IdComprobante as [IdAux],  
-                            // Case When Aut.IdFormulario=4 Then (Select Pedidos.CotizacionMoneda From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
-                            // Else Null  
-                            // End as [Cotizacion],  
-                            // Empleados.Nombre as [Liberado por],  
-                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Pedidos.TotalIva1 From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
-                            // Else Null  
-                            // End as [Importe Iva],  
-                            // Aut.IdAutoriza as [IdAutoriza],  
-                            //FROM _TempAutorizaciones Aut  
-                            //LEFT OUTER JOIN Empleados ON Aut.IdLibero=Empleados.IdEmpleado  
-                            //WHERE Aut.IdAutoriza is not null and Aut.IdAutoriza=@IdAutoriza  
-                            //ORDER BY Aut.TipoComprobante,Aut.Numero,Aut.OrdenAutorizacion  
 
                             //    //  a["IdComprobante"].ToString(),
                             //    //  a["Documento"].ToString(),
@@ -543,14 +454,298 @@ namespace ProntoMVC.Controllers
 
                                 a.TipoComprobante,
                                 a.Numero.ToString(),
-                               a.Fecha.ToString(),
-                               "", //proveedor
-                                a.IdFormulario==5 ?  db.Comparativas.Find(a.IdComprobante) .ImporteComparativaCalculado.NullSafeToString() : "",
-                               a.IdFormulario==5 ?  db.Comparativas.Find(a.IdComprobante) .MontoPrevisto.NullSafeToString() : "",
-                                a.OrdenAutorizacion.ToString(),
-                               // a.SectorEmisor.ToString(), 
-                                db.Empleados.Find( a.IdLibero).Nombre.NullSafeToString()
+                               a.Fecha.Value.ToShortDateString(),
+                            
+                            
+
+                               /// proveedor
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).Proveedor==null ? "" : db.Pedidos.Find(a.IdComprobante).Proveedor.RazonSocial)
+                                   :
+                            (a.IdFormulario == 31 && a.IdComprobante!=null) ?
+                                   (db.ComprobantesProveedor.Find(a.IdComprobante).Proveedor==null ? "" : db.ComprobantesProveedor.Find(a.IdComprobante).Proveedor.RazonSocial)
+                                : "" ,
+
+                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Proveedores.RazonSocial From Proveedores  
+                            //     Where (Select Top 1 Pedidos.IdProveedor From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)=Proveedores.IdProveedor)  
+                            // When Aut.IdFormulario=31 Then (Select Top 1 Proveedores.RazonSocial From Proveedores  
+                            //     Where (Select Top 1 cp.IdProveedor From ComprobantesProveedores cp Where Aut.IdComprobante=cp.IdComprobanteProveedor)=Proveedores.IdProveedor)  
+                            // Else Null  
+                            // End as [Proveedor],  
+
+
+
+
+
+
+                            
+                               // a.IdFormulario==5 ?  db.Comparativas.Find(a.IdComprobante) .ImporteComparativaCalculado.NullSafeToString() : "",
+                               //a.IdFormulario==5 ?  db.Comparativas.Find(a.IdComprobante) .MontoPrevisto.NullSafeToString() : "",
+
+
+
+
+
                                 
+
+                            //SELECT    
+                            // Aut.IdComprobante as [IdComprobante],  
+                            // Aut.TipoComprobante as [Documento],  
+                            // Aut.Numero as [Numero],  
+                            // Aut.Fecha as [Fecha],  
+                            
+                            
+
+
+
+
+
+
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).MontoParaCompra==null ? "" : db.Requerimientos.Find(a.IdComprobante).MontoParaCompra.NullSafeToString()) :
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).TotalPedido==null ? "" : db.Pedidos.Find(a.IdComprobante).TotalPedido.NullSafeToString()) :
+                            (a.IdFormulario == 5 && a.IdComprobante!=null) ?
+                                   (db.Comparativas.Find(a.IdComprobante).ImporteComparativaCalculado==null ? "" : db.Comparativas.Find(a.IdComprobante).ImporteComparativaCalculado.NullSafeToString()) :
+                            (a.IdFormulario == 31 && a.IdComprobante!=null) ?
+                                   (db.ComprobantesProveedor.Find(a.IdComprobante).TotalComprobante==null ? "" : db.ComprobantesProveedor.Find(a.IdComprobante).TotalComprobante.NullSafeToString()) :
+                                   "" ,
+
+
+                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.MontoParaCompra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
+                            // When Aut.IdFormulario=4 Then (Select Top 1 Pedidos.TotalPedido From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
+                            // When Aut.IdFormulario=5 Then (Select Top 1 Comparativas.ImporteComparativaCalculado From Comparativas Where Aut.IdComprobante=Comparativas.IdComparativa)  
+                            // When Aut.IdFormulario=31 Then (Select Top 1 cp.TotalComprobante From ComprobantesProveedores cp Where Aut.IdComprobante=cp.IdComprobanteProveedor)  
+                            // Else Null  
+                            // End as [Monto p/compra],  
+
+
+
+
+
+                            (a.IdFormulario == 1 && a.IdComprobante!=null) ?
+                                   (db.Acopios.Find(a.IdComprobante).MontoPrevisto==null ? "" : db.Acopios.Find(a.IdComprobante).MontoPrevisto.NullSafeToString()) :
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).MontoPrevisto==null ? "" : db.Requerimientos.Find(a.IdComprobante).MontoPrevisto.NullSafeToString()) :
+                                   "" ,
+
+                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Acopios.MontoPrevisto From Acopios Where Aut.IdComprobante=Acopios.IdAcopio)  
+                            // When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.MontoPrevisto From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
+                            // Else Null  
+                            // End as [Monto previsto], 
+ 
+
+
+
+
+                             a.OrdenAutorizacion.ToString(),
+                            // Aut.OrdenAutorizacion as [Orden],  
+
+
+                            
+                            // db.Empleados.Find( a.IdLibero).Nombre.NullSafeToString()
+                            a.IdLibero==null ? "" :     db.Empleados.Where(x=> x.IdEmpleado== a.IdLibero).FirstOrDefault().Nombre.NullSafeToString(),
+                            //a.IdLibero.NullSafeToString(),
+                            // Empleados.Nombre as [Liberado por],  
+
+
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).Moneda==null ? "" : db.Pedidos.Find(a.IdComprobante).Moneda.Abreviatura.NullSafeToString()) :
+                                   "" ,
+
+                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Monedas.Abreviatura From Monedas   
+                            //     Where (Select Top 1 Pedidos.IdMoneda From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)=Monedas.IdMoneda)  
+                            // Else Null  
+                            // End as [Mon.],  
+
+
+
+
+                            (a.IdFormulario == 1 && a.IdComprobante!=null) ?
+                                   (db.Acopios.Find(a.IdComprobante).IdObra==null ? "" : db.Acopios.Find(a.IdComprobante).IdObra.NullSafeToString()) :
+                            (a.IdFormulario == 2 && a.IdComprobante!=null) ?
+                                   (db.LMateriales.Find(a.IdComprobante).IdObra ==null ? "" : db.LMateriales.Find(a.IdComprobante).IdObra.NullSafeToString()) :
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).Obra ==null ? "" : db.Requerimientos.Find(a.IdComprobante).Obra.NumeroObra.NullSafeToString()) :
+                            //(a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                            //    (db.DetalleRequerimientos.Where(x=>x.IdRequerimiento== 
+                            //            (db.DetallePedidos.Where(y=>y.IdPedido==a.IdComprobante && y.IdDetalleRequerimiento!=null).FirstOrDefault().IdDetalleRequerimiento)
+                            //    )
+                            //    .FirstOrDefault().Requerimientos.Obra.NumeroObra.NullSafeToString()) :                                          
+                            (a.IdFormulario == 31 && a.IdComprobante!=null) ?
+                                   (db.ComprobantesProveedor.Find(a.IdComprobante).Obra==null ? "" : db.ComprobantesProveedor.Find(a.IdComprobante).Obra.NumeroObra.NullSafeToString()) :
+                                   "" ,
+                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select Acopios.IdObra From Acopios Where Aut.IdComprobante=Acopios.IdAcopio )=Obras.IdObra)  
+                            // When Aut.IdFormulario=2 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select LMateriales.IdObra From LMateriales Where Aut.IdComprobante=LMateriales.IdLMateriales )=Obras.IdObra)  
+                            // When Aut.IdFormulario=3 Then (Select Top 1 Obras.NumeroObra From Obras  
+                            //     Where (Select Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=Obras.IdObra)  
+                            // When Aut.IdFormulario=4 Then (Select Top 1 Obras.NumeroObra From Obras  
+                            //     Where (Select Top 1 Requerimientos.IdObra From Requerimientos  
+                            //      Where Requerimientos.IdRequerimiento=  
+                            //       (Select Top 1 DR.IdRequerimiento   
+                            //        From DetalleRequerimientos DR   
+                            //        Where DR.IdDetalleRequerimiento=  
+                            //        (Select Top 1 DP.IdDetalleRequerimiento  
+                            //         From DetallePedidos DP   
+                            //         Where DP.IdPedido=Aut.IdComprobante and   
+                            //         DP.IdDetalleRequerimiento is not null)))=Obras.IdObra)  
+                            // When Aut.IdFormulario=31 Then (Select Top 1 Obras.NumeroObra From Obras Where (Select ComprobantesProveedores.IdObra From ComprobantesProveedores Where Aut.IdComprobante=ComprobantesProveedores.IdComprobanteProveedor)=Obras.IdObra)  
+                            // Else Null  
+                            // End as [Obra],  
+
+
+
+
+
+
+                              (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).IdSector ==null ? "" : db.Requerimientos.Find(a.IdComprobante).IdSector.NullSafeToString()) :
+                                    "",
+
+                            // Case When Aut.IdFormulario=3 Then ( Select Top 1 Sectores.Descripcion   
+                            //        From Sectores   
+                            //        Where Sectores.IdSector=(Select Top 1 Requerimientos.IdSector From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento))  
+                            // Else Null  
+                            // End as [Sector],  
+
+
+                            
+                            
+                            
+
+                            
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).IdCentroCosto==null ? "" : db.CentrosCostoes.Find(db.Requerimientos.Find(a.IdComprobante).IdCentroCosto).Descripcion.NullSafeToString()) :
+                                   "" ,
+                            // Case When Aut.IdFormulario=3 Then (Select Top 1 CentrosCosto.Descripcion From CentrosCosto  
+                            //     Where (Select Requerimientos.IdCentroCosto From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=CentrosCosto.IdCentroCosto)  
+                            // Else Null  
+                            // End as [Centro de costo],  
+
+
+
+
+
+
+
+
+                            (a.IdFormulario == 1 && a.IdComprobante!=null) ?
+                                   (db.Acopios.Find(a.IdComprobante).IdCliente==null ? "" : db.Acopios.Find(a.IdComprobante).IdCliente.NullSafeToString()) :
+                            (a.IdFormulario == 2 && a.IdComprobante!=null) ?
+                                   (db.LMateriales.Find(a.IdComprobante).IdCliente ==null ? "" : db.LMateriales.Find(a.IdComprobante).IdCliente.NullSafeToString()) :
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).IdObra ==null ? "" : db.Requerimientos.Find(a.IdComprobante).IdObra.NullSafeToString()) :
+                                   "" ,
+
+                            // Case When Aut.IdFormulario=1 Then (Select Top 1 Clientes.RazonSocial From Clientes   
+                            //     Where (Select Acopios.IdCliente From Acopios Where Aut.IdComprobante=Acopios.IdAcopio)=Clientes.IdCliente)  
+                            // When Aut.IdFormulario=2 Then (Select Top 1 Clientes.RazonSocial From Clientes  
+                            //     Where (Select LMateriales.IdCliente From LMateriales Where Aut.IdComprobante=LMateriales.IdLMateriales)=Clientes.IdCliente)  
+                            // When Aut.IdFormulario=3 Then (Select Top 1 Clientes.RazonSocial From Clientes  
+                            //     Where (Select Top 1 Obras.IdCliente From Obras  
+                            //      Where (Select Top 1 Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)=Obras.IdObra) = Clientes.IdCliente)  
+                            // Else Null  
+                            // End as [Cliente],  
+
+
+
+
+
+
+                            // Aut.IdFormulario as [IdFormulario],  
+
+                            // Aut.OrdenAutorizacion as [Nro.Orden],  
+
+
+
+
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).IdSector ==null ? "" : db.Requerimientos.Find(a.IdComprobante).IdSector.NullSafeToString()) :
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (a.IdSector.NullSafeToString() ) :
+                                   "0" ,
+                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.IdSector From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
+                            // When Aut.IdFormulario=4 Then Aut.IdSector   
+                            // Else 0  
+                            // End as [SectorEmisor],  
+                            
+                            
+
+
+
+                            
+                            (a.IdFormulario == 3 && a.IdComprobante!=null) ?
+                                   (db.Requerimientos.Find(a.IdComprobante).MontoParaCompra==null ? "" : db.Requerimientos.Find(a.IdComprobante).MontoParaCompra.NullSafeToString()) :
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).TotalPedido==null ? "" : db.Pedidos.Find(a.IdComprobante).TotalPedido.NullSafeToString()) :
+                            (a.IdFormulario == 5 && a.IdComprobante!=null) ?
+                                   (db.Comparativas.Find(a.IdComprobante).ImporteComparativaCalculado==null ? "" : db.Comparativas.Find(a.IdComprobante).ImporteComparativaCalculado.NullSafeToString()) :
+                            (a.IdFormulario == 31 && a.IdComprobante!=null) ?
+                                   (db.ComprobantesProveedor.Find(a.IdComprobante).TotalComprobante==null ? "" : db.ComprobantesProveedor.Find(a.IdComprobante).TotalComprobante.NullSafeToString()) :
+                                   "" ,
+                            // Case When Aut.IdFormulario=3 Then (Select Top 1 Requerimientos.IdObra From Requerimientos Where Aut.IdComprobante=Requerimientos.IdRequerimiento)  
+                            // When Aut.IdFormulario=4 Then (Select Top 1 Requerimientos.IdObra From Requerimientos  
+                            //     Where Requerimientos.IdRequerimiento=  
+                            //      (Select Top 1 DR.IdRequerimiento From DetalleRequerimientos DR   
+                            //       Where DR.IdDetalleRequerimiento=(Select Top 1 DP.IdDetalleRequerimiento From DetallePedidos DP Where DP.IdPedido=Aut.IdComprobante and DP.IdDetalleRequerimiento is not null)))  
+                            // When Aut.IdFormulario=31 Then (Select Top 1 ComprobantesProveedores.IdObra From ComprobantesProveedores Where Aut.IdComprobante=ComprobantesProveedores.IdComprobanteProveedor)  
+                            // Else Null  
+                            // End as [IdObra],  
+
+
+
+                            // Aut.IdComprobante as [IdAux],  
+
+
+
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).CotizacionMoneda==null ? "" : db.Pedidos.Find(a.IdComprobante).CotizacionMoneda.NullSafeToString()) :
+                                   "" ,
+
+                            // Case When Aut.IdFormulario=4 Then (Select Pedidos.CotizacionMoneda From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
+                            // Else Null  
+                            // End as [Cotizacion],  
+
+
+                            
+                            
+                            
+
+                            (a.IdFormulario == 4 && a.IdComprobante!=null) ?
+                                   (db.Pedidos.Find(a.IdComprobante).TotalIva1==null ? "" : db.Pedidos.Find(a.IdComprobante).TotalIva1.NullSafeToString()) :
+                                   "" ,
+                            // Case When Aut.IdFormulario=4 Then (Select Top 1 Pedidos.TotalIva1 From Pedidos Where Aut.IdComprobante=Pedidos.IdPedido)  
+                            // Else Null  
+                            // End as [Importe Iva],  
+
+
+
+                            a.IdAutoriza.NullSafeToString(),
+                            // Aut.IdAutoriza as [IdAutoriza],  
+                            
+
+
+
+                            
+                            //FROM _TempAutorizaciones Aut  
+                            //LEFT OUTER JOIN Empleados ON Aut.IdLibero=Empleados.IdEmpleado  
+                            //WHERE Aut.IdAutoriza is not null and Aut.IdAutoriza=@IdAutoriza  
+                            //ORDER BY Aut.TipoComprobante,Aut.Numero,Aut.OrdenAutorizacion  
+
+
+
+
+
+
+
+                               // a.SectorEmisor.ToString(), 
+                                
+
+
+
+                            
+                            
+
                                      //    //  a["IdComprobante"].ToString(),
                             //    //  a["Documento"].ToString(),
                             //    //  a["Numero"].ToString(),

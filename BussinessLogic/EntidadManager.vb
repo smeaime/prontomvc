@@ -381,7 +381,9 @@ Namespace Pronto.ERP.Bll
 
 
                 Try
-                    Dim ret = GeneralDB.ExecDinamico(SC, sComandoDinamico, timeoutSegundos)
+                Dim ret = GeneralDB.ExecDinamico(SC, sComandoDinamico, timeoutSegundos)
+                'si no se está conectando remotamente, verificá que en host la ip de SERVERSQL3 esté apuntando a la ip (en numeros) de bdl
+
                     'If IsNothing(ret) Then Return 0
                     Return ret
                 Catch ex As Exception
@@ -399,7 +401,7 @@ Namespace Pronto.ERP.Bll
                     ErrHandler.WriteError(ex.Message)
                     Throw
                 End Try
-            End Function
+        End Function
 
 
 

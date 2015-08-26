@@ -183,6 +183,55 @@ function ReajustarAlto(g) {
 
 
 
+function QuitarRenglonDragDrop(idazar, getdata) {
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+
+    ///////////////
+    // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+    ///////////////
+    var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+    // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+    //alert(segundorenglon);
+    if (segundorenglon != undefined) {
+        if (segundorenglon.indexOf("dnd") != -1) {
+            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            $("#Lista").jqGrid('delRowData', segundorenglon);
+        }
+    }
+    //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+    //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+
+    ///////////////
+    // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+    ///////////////
+
+    //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+
+    var pos = TraerPosicionLibre();
+    if (pos == null) {
+        $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+    }
+    else {
+        $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+    }
+    //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+    // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+    // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
+}
+
+
 function TraerPosicionLibre() {
     //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo... Y usando solo click, no.
 

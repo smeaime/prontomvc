@@ -144,31 +144,31 @@ namespace ProntoMVC.Controllers
             if ((o.Destino ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el destino"; }
             if ((o.TotalBultos ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cantidad de bultos"; }
             if ((o.ValorDeclarado ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el valor declarado"; }
-            
+
             var Remitos = db.Remitos.Where(x => x.IdPuntoVenta == mIdPuntoVenta && x.NumeroRemito == mNumero && x.IdRemito != mIdRemito).Select(x => x.IdRemito).FirstOrDefault();
             if (Remitos > 0) { sErrorMsg += "\n" + "El remito ya existe."; }
 
-            if (mIdCliente > 0) { if ((db.Clientes.Where(x => x.IdCliente == mIdCliente).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") != "SI") {sErrorMsg += "\n" + "Cliente inhabilitado";} }
+            if (mIdCliente > 0) { if ((db.Clientes.Where(x => x.IdCliente == mIdCliente).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") != "SI") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
             if (mIdProveedor > 0) { if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") != "SI") { sErrorMsg += "\n" + "Proveedor inhabilitado"; } }
 
-             //If Not IsNumeric(dcfields(5).BoundText) And dcfields(5).Visible And mvarTransportistaConEquipos Then
-             //   MsgBox "Debe ingresar el equipo de transporte", vbExclamation
-             //   Exit Sub
-             //End If
+            //If Not IsNumeric(dcfields(5).BoundText) And dcfields(5).Visible And mvarTransportistaConEquipos Then
+            //   MsgBox "Debe ingresar el equipo de transporte", vbExclamation
+            //   Exit Sub
+            //End If
 
-             //If BuscarClaveINI("Controlar la imputacion de varios ordenes de compra en un mismo remito de venta") = "SI" Then
-             //   mvarAux1 = origen.DetRemitos.OrdenesCompraImputadas
-             //   If InStr(1, mvarAux1, ",") <> 0 Then
-             //      MsgBox "El remito imputa a mas de una nota de venta : " & mvarAux1, vbInformation
-             //   End If
-             //End If
-         
-             //If txtPesoNeto.Visible Then
-             //   If Val(txtPesoNeto.Text) <> origen.DetRemitos.TotalCantidad Then
-             //      mvarSeguro = MsgBox("La suma de cantidades de los items del remito no coincide con el peso neto informado, Desea continuar?", vbYesNo, "Sin orden de compra")
-             //      If mvarSeguro = vbNo Then Exit Sub
-             //   End If
-             //End If
+            //If BuscarClaveINI("Controlar la imputacion de varios ordenes de compra en un mismo remito de venta") = "SI" Then
+            //   mvarAux1 = origen.DetRemitos.OrdenesCompraImputadas
+            //   If InStr(1, mvarAux1, ",") <> 0 Then
+            //      MsgBox "El remito imputa a mas de una nota de venta : " & mvarAux1, vbInformation
+            //   End If
+            //End If
+
+            //If txtPesoNeto.Visible Then
+            //   If Val(txtPesoNeto.Text) <> origen.DetRemitos.TotalCantidad Then
+            //      mvarSeguro = MsgBox("La suma de cantidades de los items del remito no coincide con el peso neto informado, Desea continuar?", vbYesNo, "Sin orden de compra")
+            //      If mvarSeguro = vbNo Then Exit Sub
+            //   End If
+            //End If
 
             mProntoIni_InhabilitarUbicaciones = BuscarClaveINI("Inhabilitar ubicaciones en movimientos de stock", -1) ?? "";
             mProntoIni_InhabilitarStockNegativo = BuscarClaveINI("Inhabilitar stock negativo", -1) ?? "";
@@ -191,18 +191,21 @@ namespace ProntoMVC.Controllers
                 if ((x.TipoCancelacion ?? 0) == 0) { sErrorMsg += "\n" + "Hay items que no tienen definido el tipo de cancelacion"; }
                 if (mCantidad <= 0 && mProntoIni_NoPermitirItemsEnCero == "SI") { sErrorMsg += "\n" + "Hay items que no tienen la cantidad mayor a cero"; }
 
-                if ((x.IdDetalleOrdenCompra ?? 0) <= 0 ) {
+                if ((x.IdDetalleOrdenCompra ?? 0) <= 0)
+                {
                     if (mProntoIni_ExigirOrdenCompra == "SI") { sErrorMsg += "\n" + "Hay items sin imputar a orden de compra"; }
                     if (mProntoIni_AvisarOrdenCompraPendiente == "SI") { sWarningMsg += "\n" + "Hay items sin imputar a orden de compra"; }
                 }
 
                 // FALTA CONTROLAR SI EL ARTICULO ES UN PACK Y DESCONTAR POR COMPONENTES
-                if (mRegistrarStock != "NO") {
+                if (mRegistrarStock != "NO")
+                {
                     var mStockGlobal1 = db.Stocks.Where(y => y.IdArticulo == mIdArticulo).Sum(y => y.CantidadUnidades);
                     mStockGlobal = mStockGlobal1 ?? 0;
                     mIdArticuloAnterior = 0;
                     mCantidadAnterior = 0;
-                    if (x.IdDetalleRemito > 0) {
+                    if (x.IdDetalleRemito > 0)
+                    {
                         DetalleRemito DetalleRemitoAnterior = db.DetalleRemitos.Where(c => c.IdDetalleRemito == x.IdDetalleRemito).FirstOrDefault();
                         if (DetalleRemitoAnterior != null)
                         {
@@ -212,9 +215,10 @@ namespace ProntoMVC.Controllers
                     }
                     mCantidadNeta = mCantidad;
                     if (mIdArticulo == mIdArticuloAnterior) { mCantidadNeta = mCantidad - mCantidadAnterior; }
-                    if (mCantidadNeta > mStockGlobal && mProntoIni_InhabilitarStockNegativoGlobal == "SI") {
+                    if (mCantidadNeta > mStockGlobal && mProntoIni_InhabilitarStockNegativoGlobal == "SI")
+                    {
                         mArticulo = db.Articulos.Where(y => y.IdArticulo == mIdArticulo).Select(y => y.Descripcion).FirstOrDefault() ?? "";
-                        sErrorMsg += "\n" + "El articulo " + mArticulo + ", no tiene stock global suficiente"; 
+                        sErrorMsg += "\n" + "El articulo " + mArticulo + ", no tiene stock global suficiente";
                     }
                 }
             }
@@ -394,7 +398,7 @@ namespace ProntoMVC.Controllers
                             }
                             db.SaveChanges();
                         }
-                           db.Tree_TX_Actualizar( Tree_TX_ActualizarParam.RemitosAgrupados.ToString(), Remito.IdRemito, "Remito");
+                        db.Tree_TX_Actualizar(Tree_TX_ActualizarParam.RemitosAgrupados.ToString(), Remito.IdRemito, "Remito");
 
                         scope.Complete();
                         scope.Dispose();
@@ -506,7 +510,7 @@ namespace ProntoMVC.Controllers
             var data1 = (from a in data select a)
                         .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroRemito)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -817,7 +821,7 @@ namespace ProntoMVC.Controllers
                                 ("Obra,Condiciones_Compra,Empleado,ListasPrecio,Transportista,DetalleRemito,DetalleOrdenesCompra,OrdenesCompra"
                                 , sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
-            
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -828,8 +832,8 @@ namespace ProntoMVC.Controllers
 
 
             string campo = String.Empty;
-            int pageSize = rows ;
-            int currentPage = page ;
+            int pageSize = rows;
+            int currentPage = page;
 
             var data = (from a in pagedQuery
                         //from c in db.Obras.Where(v => v.IdObra == a.IdObra).DefaultIfEmpty()
@@ -855,7 +859,7 @@ namespace ProntoMVC.Controllers
                             ClienteCodigo = a.Cliente.CodigoCliente,
                             ClienteNombre = a.Cliente.RazonSocial,
                             ClienteCuit = a.Cliente.Cuit,
-                            DescripcionIva=a.Cliente.DescripcionIva.Descripcion,
+                            DescripcionIva = a.Cliente.DescripcionIva.Descripcion,
                             ProveedorCodigo = a.Proveedore.CodigoEmpresa,
                             ProveedorNombre = a.Proveedore.RazonSocial,
                             ProveedorCuit = a.Proveedore.Cuit,
@@ -864,9 +868,9 @@ namespace ProntoMVC.Controllers
                             Facturas = "",
                             Materiales = "",
                             TipoRemito = (a.Destino ?? 1) == 1 ? "A facturar" : ((a.Destino ?? 1) == 2 ? "A proveedor p/fabricar" :
-                                          ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ? 
+                                          ((a.Destino ?? 1) == 3 ? "Con cargo devolucion" : ((a.Destino ?? 1) == 4 ?
                                         "Muestra" : ((a.Destino ?? 1) == 5 ? "A prestamo" : ((a.Destino ?? 1) == 6 ? "Traslado" : ""))))),
-                            CondicionVenta = a.Condiciones_Compra.Descripcion ,
+                            CondicionVenta = a.Condiciones_Compra.Descripcion,
                             Transportista = a.Transportista.RazonSocial,
                             ListaDePrecio = a.ListasPrecio != null ? "Lista " + a.ListasPrecio.NumeroLista.ToString() + " " + a.ListasPrecio.Descripcion : "",
                             Obra = a.Obra.NumeroObra,
@@ -892,13 +896,13 @@ namespace ProntoMVC.Controllers
                 data = (from a in data where a.FechaRemito >= FechaDesde && a.FechaRemito <= FechaHasta select a).AsQueryable();
             }
 
-           
+
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            
+
             var data1 = (from a in data select a)
                         .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
                         .OrderByDescending(x => x.NumeroRemito)
-                        
+
 //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
@@ -1037,7 +1041,7 @@ namespace ProntoMVC.Controllers
                             OrdenCompraNumero = d.OrdenesCompra.NumeroOrdenCompra,
                             OrdenCompraItem = d.NumeroItem,
                         }).OrderBy(x => x.NumeroItem)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()

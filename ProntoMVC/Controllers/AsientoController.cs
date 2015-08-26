@@ -735,166 +735,99 @@ namespace ProntoMVC.Controllers
         }
 
 
+
+
+
+
+        public virtual ActionResult Edit(int id)
+        {
+            if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
+            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+             ) throw new Exception("No tenés permisos");
+
+            if (id == -1)
+            {
+                Asiento Asiento = new Asiento();
+
+                //inic(ref Asiento);
+
+                //CargarViewBag(Asiento);
+
+
+                return View(Asiento);
+            }
+            else
+            {
+
+                Asiento Asiento = db.Asientos.Find(id);
+                //CargarViewBag(Asiento);
+                Session.Add("Asiento", Asiento);
+                return View(Asiento);
+            }
+
+
+        }
+
+
+
+
         [HttpPost]
-        public virtual JsonResult BatchUpdate(Pedido Pedido)
+        public virtual JsonResult BatchUpdate(Asiento Asiento) // el Exclude es para las altas, donde el Id viene en 0
         {
             if (!PuedeEditar(enumNodos.Asientos)) throw new Exception("No tenés permisos");
 
-
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-                !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-                )
-            {
-
-                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
-
-                if (Pedido.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a Pedidos tuyos");
-                //throw new Exception("No tenés permisos");
-
-            }
-
-
-
-            //Pedido.mail
-
             try
             {
-                //var mailcomp = db.Empleados.Where(e => e.IdEmpleado == Pedido.IdComprador).Select(e => e.Email).FirstOrDefault();
-                //Generales.enviarmailAlComprador(mailcomp   ,Pedido.IdPedido );
-
-            }
-            catch (Exception e)
-            {
-                ErrHandler.WriteError(e); //throw;
-            }
+                string erar = "";
 
 
+                //if (!Validar(Asiento, ref erar))
+                //{
+                //    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                //    List<string> errors = new List<string>();
+                //    errors.Add(erar);
+                //    return Json(errors);
+                //}
 
 
-            string errs = "";
-            string warnings = "";
 
-            if (!Validar(Pedido, ref errs, ref warnings))
-            {
-                try
+                if (ModelState.IsValid || true)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                    Response.TrySkipIisCustomErrors = true;
-
-                }
-                catch (Exception)
-                {
-
-                    //    throw;
-                }
-
-
-
-                JsonResponse res = new JsonResponse();
-                res.Status = Status.Error;
-
-                //List<string> errors = new List<string>();
-                //errors.Add(errs);
-                string[] words = errs.Split('\n');
-                res.Errors = words.ToList(); // GetModelStateErrorsAsString(this.ModelState);
-                res.Message = "El Pedido es inválido";
-
-
-
-                return Json(res);
-            }
-
-
-
-
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Pedido.ConfirmadoPorWeb_1 = "SI";
-
-                    string tipomovimiento = "";
-                    if (Pedido.IdPedido > 0)
+                    if (Asiento.IdAsiento > 0)
                     {
-                        UpdateColeccion(Pedido);
+
+                        //if (SeCambioLaCuenta())
+                        //{
+                        //    GuardarHistoricoDeCambio();
+                        //}
+
+                        var EntidadOriginal = db.Asientos.Where(p => p.IdAsiento == Asiento.IdAsiento).SingleOrDefault();
+                        var EntidadEntry = db.Entry(EntidadOriginal);
+                        EntidadEntry.CurrentValues.SetValues(Asiento);
+
+                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+
+                        //UpdateColecciones(ref Articulo);
                     }
                     else
                     {
-                        if (Pedido.SubNumero == 0)
-                        {
-                            tipomovimiento = "N";
-
-
-
-                            Parametros parametros = db.Parametros.Find(1);
-                            if (Pedido.PedidoExterior == "SI")
-                            {
-                                Pedido.NumeroPedido = parametros.ProximoNumeroPedidoExterior;
-                                parametros.ProximoNumeroPedidoExterior += 1;
-                            }
-                            else
-                            {
-                                Pedido.NumeroPedido = parametros.ProximoNumeroPedido;
-                                parametros.ProximoNumeroPedido += 1;
-                            }
-
-                        }
-                        db.Pedidos.Add(Pedido);
+                        db.Asientos.Add(Asiento);
                     }
-
-
-
-                    try
-                    {
-                        //  ActivarUsuarioYContacto(Pedido.IdPedido);
-                    }
-                    catch (Exception e)
-                    {
-                        ErrHandler.WriteError(e); //throw;
-                    }
-
-                    db.wActualizacionesVariasPorComprobante(104, Pedido.IdPedido, tipomovimiento);
-
-                    ActualizacionesVariasPorComprobante(Pedido);
 
                     db.SaveChanges();
 
-                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
-
-
-                    try
-                    {
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString());
-
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrHandler.WriteError(ex);
-                        //                        throw;
-                    }
-                    // TODO: acá se regenera el arbol???
-
-
-                    return Json(new { Success = 1, IdPedido = Pedido.IdPedido, ex = "" });
+                    return Json(new { Success = 1, IdCuenta = Asiento.IdAsiento, ex = "" }); //, DetalleArticulos = Articulo.DetalleArticulos
                 }
                 else
                 {
-
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                    Response.TrySkipIisCustomErrors = true;
-
                     JsonResponse res = new JsonResponse();
                     res.Status = Status.Error;
                     res.Errors = GetModelStateErrorsAsString(this.ModelState);
-                    res.Message = "El Pedido es inválido";
-                    //return Json(res);
-                    //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
-
-
+                    res.Message = "La Cuenta es inválida";
                     return Json(res);
                 }
-
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
@@ -911,48 +844,28 @@ namespace ProntoMVC.Controllers
                     }
                 }
 
-                //throw new System.Data.Entity.Validation.DbEntityValidationException(
-                //    "Entity Validation Failed - errors follow:\n" +
-                //    sb.ToString(), ex
-                //); // Add the original exception as the innerException
+                throw new System.Data.Entity.Validation.DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
 
-                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                Response.TrySkipIisCustomErrors = true;
 
-                JsonResponse res = new JsonResponse();
-                res.Status = Status.Error;
-                res.Errors = GetModelStateErrorsAsString(this.ModelState);
-
-                res.Errors.Add(sb.ToString());
-                res.Errors.Add(ex.ToString());
-                res.Message = "El Pedido es inválido. " + ex.ToString();
-                //return Json(res);
-                //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
-
-                return Json(res);
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                Response.TrySkipIisCustomErrors = true;
-
                 JsonResponse res = new JsonResponse();
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 res.Status = Status.Error;
                 res.Errors = GetModelStateErrorsAsString(this.ModelState);
-                res.Errors.Add(ex.ToString());
-                res.Message = "El Pedido es inválido. " + ex.ToString();
-                //return Json(res);
-                //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
-
+                res.Message = ex.Message.ToString();
                 return Json(res);
-
-                // return Json(new { Success = 0, ex = ex.Message.ToString() });
             }
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
-
-
         }
 
+
+ 
         private void ActualizacionesVariasPorComprobante(Pedido o)
         {
             // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11061
@@ -1016,36 +929,160 @@ namespace ProntoMVC.Controllers
         //    return String.Join("\n", fields);
         //}
 
-        public virtual ActionResult Edit(int id)
+
+        public virtual ActionResult Asientos_DynamicGridData
+    (string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-            if (!PuedeLeer(enumNodos.Asientos)) throw new Exception("No tenés permisos");
-            if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
-             !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
-             ) throw new Exception("No tenés permisos");
+            string campo = String.Empty;
+            int pageSize = rows; // ?? 20;
+            int currentPage = page; // ?? 1;
 
-            if (id == -1)
+            int totalPages = 0;
+
+
+            var Req = db.Asientos.AsQueryable();
+            //  Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Asiento>
+                                ("",
+                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
+                                 );
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+            //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+            try
             {
-                Pedido Pedido = new Pedido();
 
-                inic(ref Pedido);
+                //var Req1 = from a in Req.Where(campo) select a.IdCuenta;
 
-                CargarViewBag(Pedido);
-
-
-                return View(Pedido);
+                // totalRecords = Req1.Count();
+                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             }
-            else
+            catch (Exception)
             {
 
-                Pedido Pedido = db.Pedidos.Find(id);
-                CargarViewBag(Pedido);
-                Session.Add("Pedido", Pedido);
-                return View(Pedido);
+                //                throw;
             }
 
+            //switch (sidx.ToLower())
+            //{
+            //    case "numerorequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //    case "fecharequerimiento":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.FechaRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.FechaRequerimiento);
+            //        break;
+            //    case "numeroobra":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Obra.NumeroObra);
+            //        else
+            //            Req = Req.OrderBy(a => a.Obra.NumeroObra);
+            //        break;
+            //    case "libero":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados.Nombre);
+            //        break;
+            //    case "aprobo":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Empleados1.Nombre);
+            //        else
+            //            Req = Req.OrderBy(a => a.Empleados1.Nombre);
+            //        break;
+            //    case "sector":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Sectores.Descripcion);
+            //        else
+            //            Req = Req.OrderBy(a => a.Sectores.Descripcion);
+            //        break;
+            //    case "detalle":
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.Detalle);
+            //        else
+            //            Req = Req.OrderBy(a => a.Detalle);
+            //        break;
+            //    default:
+            //        if (sord.Equals("desc"))
+            //            Req = Req.OrderByDescending(a => a.NumeroRequerimiento);
+            //        else
+            //            Req = Req.OrderBy(a => a.NumeroRequerimiento);
+            //        break;
+            //}
 
+            var data = (from a in pagedQuery
+                        select a
+            )//.Where(campo).OrderBy(sidx + " " + sord)
+                //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdAsiento.ToString(),
+                            cell = new string[] { 
+                            "<a href="+ Url.Action("Edit",new {id = a.IdAsiento} ) + " target='' >Editar</>" ,
+							"<a href="+ Url.Action("Imprimir",new {id = a.IdAsiento} )  +">Imprimir</>" ,
+                            a.IdAsiento.ToString(), 
+                            
+                            a.NumeroAsiento.NullSafeToString(),
+                            a.FechaAsiento.NullSafeToString(),
+                            a.Tipo.NullSafeToString(),
+                            a.IdCuentaSubdiario.NullSafeToString(),
+                            a.AsientoApertura.NullSafeToString(),
+
+                            
+                            // (a.TiposCuenta==null) ?  "" :  a.TiposCuenta.Descripcion,
+                            
+ //Case When Asientos.IdCuentaSubdiario is not null Then Titulos.Titulo Else null End as [Subdiario],
+ //Case When Asientos.AsientoApertura='NO' Then Null Else Asientos.AsientoApertura End as [Apertura], 
+ //Case When Asientos.IdCuentaSubdiario is not null Then Titulos.Titulo Else Asientos.Concepto End as [Concepto], 
+ //(Select Sum(IsNull(DetAsi.Debe,0)) From DetalleAsientos DetAsi Where DetAsi.IdAsiento=Asientos.IdAsiento) as [Total debe],
+ //(Select Sum(IsNull(DetAsi.Haber,0)) From DetalleAsientos DetAsi Where DetAsi.IdAsiento=Asientos.IdAsiento) as [Total haber],
+ //(IsNull((Select Sum(IsNull(DetAsi.Debe,0)) From DetalleAsientos DetAsi Where DetAsi.IdAsiento=Asientos.IdAsiento),0) - 
+ // IsNull((Select Sum(IsNull(DetAsi.Haber,0)) From DetalleAsientos DetAsi Where DetAsi.IdAsiento=Asientos.IdAsiento),0)) as [Diferencia],
+ //(Select Empleados.Nombre From Empleados Where Empleados.IdEmpleado=Asientos.IdIngreso) as [Ingreso],
+ //Asientos.FechaIngreso as [Fecha ingreso],
+ //(Select Empleados.Nombre From Empleados Where Empleados.IdEmpleado=Asientos.IdModifico) as [Modifico],
+ 
+
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
+
 
 
 
