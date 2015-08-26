@@ -18,6 +18,40 @@
     <Property Name="Fecha" Type="datetime" />
     <Property Name="IdTempAutorizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="Acopios">
+    <Key>
+      <PropertyRef Name="IdAcopio" />
+    </Key>
+    <Property Name="IdAcopio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroAcopio" Type="int" />
+    <Property Name="IdObra" Type="int" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Realizo" Type="int" />
+    <Property Name="Aprobo" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" />
+    <Property Name="Observaciones" Type="ntext" />
+    <Property Name="IdAutorizacion1" Type="int" />
+    <Property Name="FechaAutorizacion1" Type="datetime" />
+    <Property Name="IdAutorizacion2" Type="int" />
+    <Property Name="FechaAutorizacion2" Type="datetime" />
+    <Property Name="IdAutorizacion3" Type="int" />
+    <Property Name="FechaAutorizacion3" Type="datetime" />
+    <Property Name="MontoPrevisto" Type="numeric" Precision="20" Scale="0" />
+    <Property Name="FechaAprobacion" Type="datetime" />
+    <Property Name="Estado" Type="varchar" MaxLength="2" />
+    <Property Name="UsuarioAnulacion" Type="varchar" MaxLength="6" />
+    <Property Name="Fechaanulacion" Type="datetime" />
+    <Property Name="MotivoAnulacion" Type="ntext" />
+    <Property Name="IdComprador" Type="int" />
+    <Property Name="IdAutorizoCumplido" Type="int" />
+    <Property Name="IdDioPorCumplido" Type="int" />
+    <Property Name="FechaDadoPorCumplido" Type="datetime" />
+    <Property Name="ObservacionesCumplido" Type="ntext" />
+    <Property Name="EnviarEmail" Type="tinyint" />
+    <Property Name="IdAcopioOriginal" Type="int" />
+    <Property Name="IdOrigenTransmision" Type="int" />
+  </EntityType>
   <EntityType Name="Actividades Proveedores">
     <Key>
       <PropertyRef Name="IdActividad" />
@@ -872,6 +906,7 @@
     <Property Name="TextoAuxiliar2" Type="varchar" MaxLength="100" />
     <Property Name="TextoAuxiliar3" Type="varchar" MaxLength="100" />
     <Property Name="ImputarAPresupuestoDeObra" Type="varchar" MaxLength="2" />
+    <Property Name="Activa" Type="varchar" MaxLength="2" />
   </EntityType>
   <EntityType Name="CuentasBancarias">
     <Key>
@@ -1564,6 +1599,8 @@
     <Property Name="IdColor" Type="int" />
     <Property Name="IdDetallePresupuestoVenta" Type="int" />
     <Property Name="OrigenRegistro" Type="varchar" MaxLength="12" />
+    <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
   </EntityType>
   <EntityType Name="DetalleFacturasClientesPRESTO">
     <Key>
@@ -1619,6 +1656,8 @@
     <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="2" />
     <Property Name="IdCuentaBancaria" Type="int" />
     <Property Name="IdCaja" Type="int" />
+    <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
   </EntityType>
   <EntityType Name="DetalleNotasCreditoImputaciones">
     <Key>
@@ -1661,6 +1700,8 @@
     <Property Name="IvaNoDiscriminado" Type="numeric" Precision="19" Scale="2" />
     <Property Name="IdCuentaBancaria" Type="int" />
     <Property Name="IdCaja" Type="int" />
+    <Property Name="PorcentajeIva" Type="numeric" Precision="6" Scale="2" />
+    <Property Name="ImporteIva" Type="numeric" Precision="18" Scale="4" />
   </EntityType>
   <EntityType Name="DetalleNotasDebitoProvincias">
     <Key>
@@ -2342,6 +2383,11 @@
     <Property Name="FechaDioPorRecepcionado" Type="datetime" />
     <Property Name="ObservacionDioPorRecepcionado" Type="ntext" />
     <Property Name="ImputarConsumoAObraActualEquipoMantenimiento" Type="varchar" MaxLength="2" />
+    <Property Name="OrdenTrabajoMalaAplicacion" Type="varchar" MaxLength="2" />
+    <Property Name="ImputarConsumoAObraSalida" Type="varchar" MaxLength="2" />
+    <Property Name="NumeroSubcontrato" Type="int" />
+    <Property Name="IdSubcontrato" Type="int" />
+    <Property Name="IdDetalleSubcontratoDatos" Type="int" />
   </EntityType>
   <EntityType Name="DetalleValesSalida">
     <Key>
@@ -2573,7 +2619,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="PuntoVenta" Type="int" />
     <Property Name="IdCliente" Type="int" />
     <Property Name="FechaFactura" Type="datetime" />
-    <Property Name="IdCondicionVenta" Type="smallint" />
+    <Property Name="IdCondicionVenta" Type="int" />
     <Property Name="IdVendedor" Type="int" />
     <Property Name="IdTransportista1" Type="int" />
     <Property Name="IdTransportista2" Type="int" />
@@ -2690,6 +2736,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="NumeroOrdenCompraExterna" Type="bigint" />
     <Property Name="IdTipoOperacion" Type="int" />
     <Property Name="FueEnviadoCorreoConFacturaElectronica" Type="varchar" MaxLength="2" />
+    <Property Name="IdClienteObservaciones" Type="int" />
   </EntityType>
   <EntityType Name="Feriados">
     <Key>
@@ -2961,6 +3008,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="CuentaVentaPuntoVenta" Type="int" />
     <Property Name="CuentaVentaNumero" Type="int" />
     <Property Name="IdTipoOperacion" Type="int" />
+    <Property Name="IdClienteObservaciones" Type="int" />
   </EntityType>
   <EntityType Name="NotasDebito">
     <Key>
@@ -3025,6 +3073,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="RechazoCAE" Type="varchar" MaxLength="11" />
     <Property Name="FechaVencimientoORechazoCAE" Type="datetime" />
     <Property Name="IdIdentificacionCAE" Type="int" />
+    <Property Name="IdClienteObservaciones" Type="int" />
   </EntityType>
   <EntityType Name="Obras">
     <Key>
@@ -4752,6 +4801,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="ProximoNumeroCertificadoRetencionGanancias" Type="int" />
     <Property Name="BienesOServicios" Type="varchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="TiposRubrosFinancierosGrupos">
+    <Key>
+      <PropertyRef Name="IdTipoRubroFinancieroGrupo" />
+    </Key>
+    <Property Name="IdTipoRubroFinancieroGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="int" />
+  </EntityType>
   <EntityType Name="TiposValores">
     <Key>
       <PropertyRef Name="IdTipoValor" />
@@ -4971,6 +5028,30 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
     <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
   </EntityType>
+  <Association Name="FK_Articulos_IdMarca">
+    <End Role="Marcas" Type="Self.Marcas" Multiplicity="0..1" />
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marcas">
+        <PropertyRef Name="IdMarca" />
+      </Principal>
+      <Dependent Role="Articulos">
+        <PropertyRef Name="IdMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articulos_IdModelo">
+    <End Role="Modelos" Type="Self.Modelos" Multiplicity="0..1" />
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelos">
+        <PropertyRef Name="IdModelo" />
+      </Principal>
+      <Dependent Role="Articulos">
+        <PropertyRef Name="IdModelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Articulos_Rubros">
     <End Role="Rubros" Type="Self.Rubros" Multiplicity="0..1" />
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
@@ -5316,6 +5397,54 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Principal>
       <Dependent Role="Cuentas">
         <PropertyRef Name="IdCuentaGasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_IdRubroContable">
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="0..1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RubrosContables">
+        <PropertyRef Name="IdRubroContable" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdRubroContable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_IdRubroFinanciero">
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="0..1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RubrosContables">
+        <PropertyRef Name="IdRubroContable" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdRubroFinanciero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_IdTipoCuenta">
+    <End Role="TiposCuenta" Type="Self.TiposCuenta" Multiplicity="0..1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposCuenta">
+        <PropertyRef Name="IdTipoCuenta" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdTipoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_IdTipoCuentaGrupo">
+    <End Role="TiposCuentaGrupos" Type="Self.TiposCuentaGrupos" Multiplicity="0..1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposCuentaGrupos">
+        <PropertyRef Name="IdTipoCuentaGrupo" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdTipoCuentaGrupo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6327,6 +6456,78 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Facturas_Condiciones_Compras">
+    <End Role="Condiciones Compra" Type="Self.Condiciones Compra" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Condiciones Compra">
+        <PropertyRef Name="IdCondicionCompra" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdCondicionVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_DescripcionIva">
+    <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DescripcionIva">
+        <PropertyRef Name="IdCodigoIva" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdCodigoIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_IdAutorizaAnulacion">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdAutorizaAnulacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_IdDeposito">
+    <End Role="Depositos" Type="Self.Depositos" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Depositos">
+        <PropertyRef Name="IdDeposito" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdDeposito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_IdUsuarioIngreso">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Facturas_ListasPrecios">
+    <End Role="ListasPrecios" Type="Self.ListasPrecios" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListasPrecios">
+        <PropertyRef Name="IdListaPrecios" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdListaPrecios" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Facturas_Obra">
     <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
     <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
@@ -6483,6 +6684,78 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_NotasCredito_IdCodigoIva">
+    <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DescripcionIva">
+        <PropertyRef Name="IdCodigoIva" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdCodigoIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IdObra">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IdProvinciaDestino">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdProvinciaDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IdUsuarioAnulacion">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdUsuarioAnulacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IdUsuarioIngreso">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasCredito_IdVendedor">
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
+    <End Role="NotasCredito" Type="Self.NotasCredito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedores">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="NotasCredito">
+        <PropertyRef Name="IdVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NotasDebito_Clientes">
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
     <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
@@ -6492,6 +6765,78 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Principal>
       <Dependent Role="NotasDebito">
         <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdCodigoIva">
+    <End Role="DescripcionIva" Type="Self.DescripcionIva" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DescripcionIva">
+        <PropertyRef Name="IdCodigoIva" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdCodigoIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdObra">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdProvinciaDestino">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="IdProvincia" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdProvinciaDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdUsuarioAnulacion">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdUsuarioAnulacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdUsuarioIngreso">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotasDebito_IdVendedor">
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
+    <End Role="NotasDebito" Type="Self.NotasDebito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedores">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="NotasDebito">
+        <PropertyRef Name="IdVendedor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6588,6 +6933,114 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Principal>
       <Dependent Role="OrdenesPago">
         <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdConcepto">
+    <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conceptos">
+        <PropertyRef Name="IdConcepto" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdConcepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdConcepto2">
+    <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conceptos">
+        <PropertyRef Name="IdConcepto" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdConcepto2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdEmpleadoFF">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdEmpleadoFF" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdMoneda">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdObra">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdOPComplementariaFF">
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="0..1" />
+    <End Role="OrdenesPago1" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenesPago">
+        <PropertyRef Name="IdOrdenPago" />
+      </Principal>
+      <Dependent Role="OrdenesPago1">
+        <PropertyRef Name="IdOPComplementariaFF" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdUsuarioAnulo">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdUsuarioAnulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdUsuarioIngreso">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrdenesPago_IdUsuarioModifico">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="OrdenesPago" Type="Self.OrdenesPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="OrdenesPago">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6783,6 +7236,90 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Recibos_IdCobrador">
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedores">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdCobrador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdCuenta">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdMoneda">
+    <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monedas">
+        <PropertyRef Name="IdMoneda" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdObra">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdUsuarioIngreso">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdUsuarioIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdUsuarioModifico">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibos_IdVendedor">
+    <End Role="Vendedores" Type="Self.Vendedores" Multiplicity="0..1" />
+    <End Role="Recibos" Type="Self.Recibos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedores">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="Recibos">
+        <PropertyRef Name="IdVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Remitos_Condiciones_Compras">
     <End Role="Condiciones Compra" Type="Self.Condiciones Compra" Multiplicity="0..1" />
     <End Role="Remitos" Type="Self.Remitos" Multiplicity="*" />
@@ -6903,6 +7440,42 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RubrosContables_IdCuenta">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="IdCuenta" />
+      </Principal>
+      <Dependent Role="RubrosContables">
+        <PropertyRef Name="IdCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RubrosContables_IdObra">
+    <End Role="Obras" Type="Self.Obras" Multiplicity="0..1" />
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Obras">
+        <PropertyRef Name="IdObra" />
+      </Principal>
+      <Dependent Role="RubrosContables">
+        <PropertyRef Name="IdObra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RubrosContables_IdTipoRubroFinancieroGrupo">
+    <End Role="TiposRubrosFinancierosGrupos" Type="Self.TiposRubrosFinancierosGrupos" Multiplicity="0..1" />
+    <End Role="RubrosContables" Type="Self.RubrosContables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposRubrosFinancierosGrupos">
+        <PropertyRef Name="IdTipoRubroFinancieroGrupo" />
+      </Principal>
+      <Dependent Role="RubrosContables">
+        <PropertyRef Name="IdTipoRubroFinancieroGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Transportistas_Localidades">
     <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
     <End Role="Transportistas" Type="Self.Transportistas" Multiplicity="*" />
@@ -6984,8 +7557,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Parameter Name="IdAutorizacionPorComprobante" Type="int" Mode="InOut" />
   </Function>
   <Function Name="AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdFormulario" Type="int" Mode="In" />
     <Parameter Name="IdComprobante" Type="int" Mode="In" />
+    <Parameter Name="IdFormulario" Type="int" Mode="In" />
   </Function>
   <Function Name="Cotizaciones_TX_PorFechaMoneda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Fecha" Type="datetime" Mode="In" />
@@ -6998,6 +7571,22 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <Parameter Name="FechaLimite" Type="datetime" Mode="In" />
     <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
     <Parameter Name="Consolidar" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CtasCtesD_TXPorTrs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCliente" Type="int" Mode="In" />
+    <Parameter Name="Todo" Type="int" Mode="In" />
+    <Parameter Name="FechaLimite" Type="datetime" Mode="In" />
+    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+    <Parameter Name="Consolidar" Type="int" Mode="In" />
+    <Parameter Name="Pendiente" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CtasCtesD_TXPorTrs_AuxiliarEntityFramework" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCliente" Type="int" Mode="In" />
+    <Parameter Name="Todo" Type="int" Mode="In" />
+    <Parameter Name="FechaLimite" Type="datetime" Mode="In" />
+    <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+    <Parameter Name="Consolidar" Type="int" Mode="In" />
+    <Parameter Name="Pendiente" Type="varchar" Mode="In" />
   </Function>
   <Function Name="Facturas_OrdenesCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="IdFactura" Type="int" Mode="In" />
@@ -7039,6 +7628,15 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
   <Function Name="Requerimientos_SalidasMateriales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
   </Function>
+  <Function Name="Tree_TX_Actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Clave" Type="varchar" Mode="In" />
+    <Parameter Name="IdComprobante" Type="int" Mode="In" />
+    <Parameter Name="Controlador" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Tree_TX_Arbol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GrupoMenu" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Tree_TX_Generar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Valores_BorrarPorIdDetalleOrdenPagoCuentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdDetalleOrdenPagoCuentas" Type="int" Mode="In" />
   </Function>
@@ -7052,6 +7650,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
   </Function>
   <EntityContainer Name="DemoProntoModelStoreContainer">
     <EntitySet Name="_TempAutorizaciones" EntityType="Self._TempAutorizaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Acopios" EntityType="Self.Acopios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Actividades Proveedores" EntityType="Self.Actividades Proveedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AjustesStock" EntityType="Self.AjustesStock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
@@ -7225,6 +7824,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <EntitySet Name="TiposOperacionesGrupos" EntityType="Self.TiposOperacionesGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPoliza" EntityType="Self.TiposPoliza" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposRetencionGanancia" EntityType="Self.TiposRetencionGanancia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposRubrosFinancierosGrupos" EntityType="Self.TiposRubrosFinancierosGrupos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposValores" EntityType="Self.TiposValores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Titulos" EntityType="Self.Titulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transportistas" EntityType="Self.Transportistas" Schema="dbo" store:Type="Tables" />
@@ -7243,6 +7843,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     [EjerciciosPeriodos].[FechaFinalizacion] AS [FechaFinalizacion]
     FROM [dbo].[EjerciciosPeriodos] AS [EjerciciosPeriodos]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_Articulos_IdMarca" Association="Self.FK_Articulos_IdMarca">
+      <End Role="Marcas" EntitySet="Marcas" />
+      <End Role="Articulos" EntitySet="Articulos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articulos_IdModelo" Association="Self.FK_Articulos_IdModelo">
+      <End Role="Modelos" EntitySet="Modelos" />
+      <End Role="Articulos" EntitySet="Articulos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Articulos_Rubros" Association="Self.FK_Articulos_Rubros">
       <End Role="Rubros" EntitySet="Rubros" />
       <End Role="Articulos" EntitySet="Articulos" />
@@ -7357,6 +7965,22 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     </AssociationSet>
     <AssociationSet Name="FK_Cuentas_CuentasGastos" Association="Self.FK_Cuentas_CuentasGastos">
       <End Role="CuentasGastos" EntitySet="CuentasGastos" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_IdRubroContable" Association="Self.FK_Cuentas_IdRubroContable">
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_IdRubroFinanciero" Association="Self.FK_Cuentas_IdRubroFinanciero">
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_IdTipoCuenta" Association="Self.FK_Cuentas_IdTipoCuenta">
+      <End Role="TiposCuenta" EntitySet="TiposCuenta" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_IdTipoCuentaGrupo" Association="Self.FK_Cuentas_IdTipoCuentaGrupo">
+      <End Role="TiposCuentaGrupos" EntitySet="TiposCuentaGrupos" />
       <End Role="Cuentas" EntitySet="Cuentas" />
     </AssociationSet>
     <AssociationSet Name="FK_Cuentas_TipoCuentaGrupos" Association="Self.FK_Cuentas_TipoCuentaGrupos">
@@ -7695,6 +8319,30 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Facturas" EntitySet="Facturas" />
     </AssociationSet>
+    <AssociationSet Name="FK_Facturas_Condiciones_Compras" Association="Self.FK_Facturas_Condiciones_Compras">
+      <End Role="Condiciones Compra" EntitySet="Condiciones Compra" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_DescripcionIva" Association="Self.FK_Facturas_DescripcionIva">
+      <End Role="DescripcionIva" EntitySet="DescripcionIva" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_IdAutorizaAnulacion" Association="Self.FK_Facturas_IdAutorizaAnulacion">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_IdDeposito" Association="Self.FK_Facturas_IdDeposito">
+      <End Role="Depositos" EntitySet="Depositos" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_IdUsuarioIngreso" Association="Self.FK_Facturas_IdUsuarioIngreso">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Facturas_ListasPrecios" Association="Self.FK_Facturas_ListasPrecios">
+      <End Role="ListasPrecios" EntitySet="ListasPrecios" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
     <AssociationSet Name="FK_Facturas_Obra" Association="Self.FK_Facturas_Obra">
       <End Role="Obras" EntitySet="Obras" />
       <End Role="Facturas" EntitySet="Facturas" />
@@ -7747,8 +8395,56 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="NotasCredito" EntitySet="NotasCredito" />
     </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdCodigoIva" Association="Self.FK_NotasCredito_IdCodigoIva">
+      <End Role="DescripcionIva" EntitySet="DescripcionIva" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdObra" Association="Self.FK_NotasCredito_IdObra">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdProvinciaDestino" Association="Self.FK_NotasCredito_IdProvinciaDestino">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdUsuarioAnulacion" Association="Self.FK_NotasCredito_IdUsuarioAnulacion">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdUsuarioIngreso" Association="Self.FK_NotasCredito_IdUsuarioIngreso">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasCredito_IdVendedor" Association="Self.FK_NotasCredito_IdVendedor">
+      <End Role="Vendedores" EntitySet="Vendedores" />
+      <End Role="NotasCredito" EntitySet="NotasCredito" />
+    </AssociationSet>
     <AssociationSet Name="FK_NotasDebito_Clientes" Association="Self.FK_NotasDebito_Clientes">
       <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdCodigoIva" Association="Self.FK_NotasDebito_IdCodigoIva">
+      <End Role="DescripcionIva" EntitySet="DescripcionIva" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdObra" Association="Self.FK_NotasDebito_IdObra">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdProvinciaDestino" Association="Self.FK_NotasDebito_IdProvinciaDestino">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdUsuarioAnulacion" Association="Self.FK_NotasDebito_IdUsuarioAnulacion">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdUsuarioIngreso" Association="Self.FK_NotasDebito_IdUsuarioIngreso">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="NotasDebito" EntitySet="NotasDebito" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotasDebito_IdVendedor" Association="Self.FK_NotasDebito_IdVendedor">
+      <End Role="Vendedores" EntitySet="Vendedores" />
       <End Role="NotasDebito" EntitySet="NotasDebito" />
     </AssociationSet>
     <AssociationSet Name="FK_OrdenesCompra_Aprobo" Association="Self.FK_OrdenesCompra_Aprobo">
@@ -7781,6 +8477,42 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     </AssociationSet>
     <AssociationSet Name="FK_OrdenesPago_Cuentas" Association="Self.FK_OrdenesPago_Cuentas">
       <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdConcepto" Association="Self.FK_OrdenesPago_IdConcepto">
+      <End Role="Conceptos" EntitySet="Conceptos" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdConcepto2" Association="Self.FK_OrdenesPago_IdConcepto2">
+      <End Role="Conceptos" EntitySet="Conceptos" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdEmpleadoFF" Association="Self.FK_OrdenesPago_IdEmpleadoFF">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdMoneda" Association="Self.FK_OrdenesPago_IdMoneda">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdObra" Association="Self.FK_OrdenesPago_IdObra">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdOPComplementariaFF" Association="Self.FK_OrdenesPago_IdOPComplementariaFF">
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+      <End Role="OrdenesPago1" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdUsuarioAnulo" Association="Self.FK_OrdenesPago_IdUsuarioAnulo">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdUsuarioIngreso" Association="Self.FK_OrdenesPago_IdUsuarioIngreso">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="OrdenesPago" EntitySet="OrdenesPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrdenesPago_IdUsuarioModifico" Association="Self.FK_OrdenesPago_IdUsuarioModifico">
+      <End Role="Empleados" EntitySet="Empleados" />
       <End Role="OrdenesPago" EntitySet="OrdenesPago" />
     </AssociationSet>
     <AssociationSet Name="FK_OrdenesPago_Proveedor" Association="Self.FK_OrdenesPago_Proveedor">
@@ -7847,6 +8579,34 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Recibos" EntitySet="Recibos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdCobrador" Association="Self.FK_Recibos_IdCobrador">
+      <End Role="Vendedores" EntitySet="Vendedores" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdCuenta" Association="Self.FK_Recibos_IdCuenta">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdMoneda" Association="Self.FK_Recibos_IdMoneda">
+      <End Role="Monedas" EntitySet="Monedas" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdObra" Association="Self.FK_Recibos_IdObra">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdUsuarioIngreso" Association="Self.FK_Recibos_IdUsuarioIngreso">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdUsuarioModifico" Association="Self.FK_Recibos_IdUsuarioModifico">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibos_IdVendedor" Association="Self.FK_Recibos_IdVendedor">
+      <End Role="Vendedores" EntitySet="Vendedores" />
+      <End Role="Recibos" EntitySet="Recibos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Remitos_Condiciones_Compras" Association="Self.FK_Remitos_Condiciones_Compras">
       <End Role="Condiciones Compra" EntitySet="Condiciones Compra" />
       <End Role="Remitos" EntitySet="Remitos" />
@@ -7886,6 +8646,18 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
     <AssociationSet Name="FK_Requerimientos_Empleados_IdSolicito" Association="Self.FK_Requerimientos_Empleados_IdSolicito">
       <End Role="Empleados" EntitySet="Empleados" />
       <End Role="Requerimientos" EntitySet="Requerimientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RubrosContables_IdCuenta" Association="Self.FK_RubrosContables_IdCuenta">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RubrosContables_IdObra" Association="Self.FK_RubrosContables_IdObra">
+      <End Role="Obras" EntitySet="Obras" />
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RubrosContables_IdTipoRubroFinancieroGrupo" Association="Self.FK_RubrosContables_IdTipoRubroFinancieroGrupo">
+      <End Role="TiposRubrosFinancierosGrupos" EntitySet="TiposRubrosFinancierosGrupos" />
+      <End Role="RubrosContables" EntitySet="RubrosContables" />
     </AssociationSet>
     <AssociationSet Name="FK_Transportistas_Localidades" Association="Self.FK_Transportistas_Localidades">
       <End Role="Localidades" EntitySet="Localidades" />

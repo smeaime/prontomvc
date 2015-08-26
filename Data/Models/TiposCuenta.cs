@@ -14,7 +14,14 @@ namespace ProntoMVC.Data.Models
     
     public partial class TiposCuenta
     {
+        public TiposCuenta()
+        {
+            this.Cuentas = new HashSet<Cuenta>();
+        }
+    
         public int IdTipoCuenta { get; set; }
         public string Descripcion { get; set; }
+    
+        public virtual ICollection<Cuenta> Cuentas { get; set; }
     }
 }

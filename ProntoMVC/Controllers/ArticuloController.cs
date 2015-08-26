@@ -1480,7 +1480,7 @@ namespace ProntoMVC.Controllers
             int totalRecords = 0;
 
             var pagedQuery = Filters.FiltroGenerico<Data.Models.Articulo>
-                                ("Ubicacione,Deposito,Rubro,Subrubro", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
+                                ("", sidx, sord, page, rows, _search, filters, db, ref totalRecords);
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1489,21 +1489,7 @@ namespace ProntoMVC.Controllers
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-            var queryDetails = (from item in pagedQuery
-                                select new
-                                {
-                                    item.IdArticulo,
-                                    item.Descripcion,
-                                    item.Codigo,
-                                    item.Rubro,
-                                    item.Subrubro,
-                                    item.NumeroInventario
-                                })
-
-                                .ToList(); //.Where(x => x.CuentasGasto != null );
-
+            var q = pagedQuery.ToList();
 
 
             var jsonData = new ProntoMVC.Controllers.jqGridJson()
@@ -1511,7 +1497,7 @@ namespace ProntoMVC.Controllers
                 total = (totalRecords + rows - 1) / rows,
                 page = page,
                 records = totalRecords,
-                rows = (from a in queryDetails
+                rows = (from a in q
 
 
 
@@ -1528,8 +1514,12 @@ namespace ProntoMVC.Controllers
                             (a.Rubro ?? new Rubro()).Descripcion.NullSafeToString()   ,
                             (a.Subrubro ?? new Subrubro()).Descripcion.NullSafeToString()   ,
  
-                            a.NumeroInventario  
-                        
+                            a.NumeroInventario.NullSafeToString()  ,
+                            
+                            a.IdArticulo.NullSafeToString(),
+                            a.IdUnidad.NullSafeToString(),
+
+                            (a.Unidad ?? new Unidad()).Abreviatura.NullSafeToString()   ,
                             }
                         }
                         ).ToArray()

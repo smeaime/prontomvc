@@ -248,6 +248,12 @@ namespace ProntoMVC.Controllers
                     .SingleOrDefault(x => x.IdEmpleado == id);
 
 
+                foreach(EmpleadosAcceso e in o.EmpleadosAccesos)
+                {
+                    if (!e.Acceso) e.Nivel = 10;
+                    
+                }
+
             }
             CargarViewBag(o);
 
@@ -588,7 +594,11 @@ namespace ProntoMVC.Controllers
                 if (DetalleEntidadOriginal != null) // && dr.IdEmpleadoAcceso > 0)
                 {
                     //ya existe, solo refresco el nivel
-                    if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
+                    if ((dr.Nivel ?? 9) >= 9)
+                    {
+                        dr.Acceso = false; // le quito el acceso
+                        dr.Nivel = 9;
+                    }
                     else dr.Acceso = true;
 
                     var DetalleEntidadEntry = dbcontext.Entry(DetalleEntidadOriginal);
@@ -608,7 +618,11 @@ namespace ProntoMVC.Controllers
                         if (!(dr.Nodo.Contains("Agrupad") || dr.Nodo.Contains("RequerimientosPorObra")) || dr.Nodo == "RequerimientosPorObra" || dr.Nodo == "RequerimientosAgrupados" || dr.Nodo == "PedidosAgrupados")
                         {
                             dr.IdEmpleado = o.IdEmpleado;
-                            if ((dr.Nivel ?? 9) == 9) dr.Acceso = false; // le quito el acceso
+                            if ((dr.Nivel ?? 9) >= 9)
+                            {
+                                dr.Acceso = false; // le quito el acceso
+                                dr.Nivel = 9;
+                            }
                             else dr.Acceso = true;
                             EntidadOriginal.EmpleadosAccesos.Add(dr); // necesito traer la clave en estos casos, que
                             // han de ser los de los menus, que no tienen bien la equivalencia
