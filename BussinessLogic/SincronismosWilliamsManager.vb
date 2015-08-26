@@ -12661,16 +12661,20 @@ Namespace Pronto.ERP.Bll
 
 
                         Dim codgrado As Integer
+                        Dim nombre As String
 
                         If carta.NobleGrado = 1 Then
                             codgrado = 25
+                            nombre = "Grado_1"
                         ElseIf carta.NobleGrado = 2 Then
                             codgrado = 26
+                            nombre = "Grado_2"
                         ElseIf carta.NobleGrado = 3 Then
                             codgrado = 27
+                            nombre = "Grado_3"
                         End If
 
-                        sb = RenglonBLDCalidad(cdp, codgrado, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", "Grado", carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
+                        sb = RenglonBLDCalidad(cdp, codgrado, carta.NobleGrado, carta.CalidadGranosDanadosRebaja, carta.CalidadGastosFumigacionRebaja, nF, "01", nombre, carta.CalidadGastosFumigacionMerma, _TipoMerma(s.Grado, carta.Secada))
 
 
 
@@ -13272,9 +13276,10 @@ Namespace Pronto.ERP.Bll
 
                         sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
 
-                    ElseIf descripcion = "Grado" Then
+                    ElseIf descripcion.StartsWith("Grado") Then
 
-                        sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+                        'sb &= LeftMasPadLeft(Resultado, 7) & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
+                        sb &= "NULL" & SEPARADOR & "NULL" & SEPARADOR & Merma & SEPARADOR
 
                     Else
 
@@ -13310,6 +13315,7 @@ Namespace Pronto.ERP.Bll
 
 
                     sb = Replace(sb, " ", "0")
+                    sb = Replace(sb, "_", " ")
                     sb = Replace(sb, "Merma_Física", "Merma Física")
 
                     'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9829

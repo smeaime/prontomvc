@@ -4,6 +4,11 @@
 }
 @Html.ValidationSummary(true)
 
+<script src="@Url.Content("~/Scripts/ScriptPresupuesto.js?1518")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
+
+
+
+
 <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
     <form class="form-horizontal" style=" margin-bottom: 0px;">
 
@@ -42,6 +47,7 @@
 
 
         <div class="modal" id="loading">
+            <label> Espere...</label>
             <img src="@Url.Content("~/Content/images/fhhrx.gif")" style="margin-right: 5px;" />
             Cargando...
         </div>
@@ -155,7 +161,8 @@
             }
         </style>
 
-        <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative; height: 100%  " @*Height of the footer *@>
+        <div id="cuerposinpie" class="" style="padding-bottom:2px; position: relative;  " @*Height of the footer *@>
+
 
             @*http://stackoverflow.com/questions/6431881/css-layout-for-fixed-header-and-100-content-height*@
 
@@ -164,19 +171,27 @@
             <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;
                 padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
 
-                <div id="">
-                    <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-                        @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+
+                <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
+                    @* <div class="span5 lightblue" style="font-weight: bold; font-size: 34px; vertical-align: "> *@
+                    <div class="span8">
+
                         <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                    text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-                            <span class="span1" style="padding-top: 15px; width: 110px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+                            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+
+
+                            <span class="span2" style="padding-top: 15px; width: 150px; margin-right: 15px;">Presupuesto </span>@*@Html.DisplayFor(model => model.NumeroPedido, new { style = "height: 42px ; font-weight: bold; font-size: 34px; border: 0; padding: ; text-align: right; background: transparent; ", @class = "span4", @readonly = "readonly" })*@
+
                             @Html.TextBoxFor(model => model.Numero, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span2", @readonly = "readonly" })
+
                             <span class="" style="padding-top: 15px; width: 10px">/ </span>
                             @Html.TextBoxFor(model => model.SubNumero, new { style = "width: 40px; height: 50px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: ; text-align: left; background: ;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';  ", @class = "span1" })
                         </div>
 
                     </div>
                 </div>
+
+
 
 
 
@@ -224,85 +239,85 @@
 
 
 
-                        <div class="accordion-group" style="border: 0px; padding: 0px;">
-                            <div class="accordion-heading" style="border: 0px; padding: 0px;">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
-                                    más...
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
-                                @*si pones "collapse in" empieza abierto*@
-                                <div class="accordion-inner" style="border: 0px; padding: 0px;">
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Aprobo, "Aprobo")
-                                            @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Aprobo)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span8 lightblue">
-                                            @Html.LabelFor(model => model.Detalle)
-                                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Detalle)
-                                        </div>
-                                        <!--/span-->
+                    <div class="accordion-group" style="border: 0px; padding: 0px;">
+                        <div class="accordion-heading" style="border: 0px; padding: 0px;">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
+                               style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
+                                más...
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse" style="border: 0px; padding: 0px;">
+                            @*si pones "collapse in" empieza abierto*@
+                            <div class="accordion-inner" style="border: 0px; padding: 0px;">
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Aprobo, "Aprobo")
+                                        @Html.DropDownList("Aprobo", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Aprobo)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
-                                            @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.IdCondicionCompra)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Validez, "Validez")
-                                            @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Validez)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Referencia, "Referencia")
-                                            @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Referencia)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                    <div class="span8 lightblue">
+                                        @Html.LabelFor(model => model.Detalle)
+                                        @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Detalle)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
-                                            @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Garantia, "Garantia")
-                                            @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Garantia)
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span4 lightblue">
-                                            @Html.LabelFor(model => model.Contacto, "Contacto")
-                                            @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Contacto)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdCondicionCompra, "Condicion compra")
+                                        @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                     </div>
-                                    <!--/row-->
-                                    <div class="row-fluid">
-                                        <div class="span12 lightblue">
-                                            @Html.LabelFor(model => model.Observaciones)
-                                            @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
-                                            @Html.ValidationMessageFor(model => model.Observaciones)
-                                        </div>
-                                        <!--/span-->
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Validez, "Validez")
+                                        @Html.TextBoxFor(model => model.Validez, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Validez)
                                     </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Referencia, "Referencia")
+                                        @Html.TextBoxFor(model => model.Referencia, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Referencia)
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.IdPlazoEntrega, "Plazo de entrega")
+                                        @Html.DropDownList("IdPlazoEntrega", null, String.Empty, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.IdPlazoEntrega)
+                                    </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Garantia, "Garantia")
+                                        @Html.TextBoxFor(model => model.Garantia, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Garantia)
+                                    </div>
+                                    <!--/span-->
+                                    <div class="span4 lightblue">
+                                        @Html.LabelFor(model => model.Contacto, "Contacto")
+                                        @Html.TextBoxFor(model => model.Contacto, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Contacto)
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row-fluid">
+                                    <div class="span12 lightblue">
+                                        @Html.LabelFor(model => model.Observaciones)
+                                        @Html.TextAreaFor(model => model.Observaciones, new { @class = "span12" })
+                                        @Html.ValidationMessageFor(model => model.Observaciones)
+                                    </div>
+                                    <!--/span-->
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <!--/row-->
                 <div class="row-fluid">
                     <div id="divGrilla" class="span12 lightblue">
@@ -365,7 +380,7 @@
                                 /*  background-image: none; */
                             }
                         </style>
-                     
+
 
                         <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
                                style="font-size: 22px; font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial, Helvetica, sans-serif;">
@@ -388,7 +403,7 @@
                             height: 15px;
                         }
                     </style>
-                    <table class="subtotales" width="700" border="0" cellspacing="0" cellpadding="0"
+                    <table class="subtotales span12" border="0" cellspacing="0" cellpadding="0"
                            style="margin: 0px 0px 0px 0px; height: 100; padding: 0px; border-style: none;
             border-width: thin; border-spacing: 0px; font-size: xx-small">
                         <tr>
@@ -464,7 +479,7 @@
                     </table>
                 </form>
                 <br />
-                
+
             </div>
 
             <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
@@ -475,10 +490,11 @@
                     </div>
                     <div class="span11 pull-right">
                         @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
+
                         <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary  pull-right" />
-                       
+
                     </div>
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -493,6 +509,70 @@
 
         $("#conscroll").height($(window).height() - 120);
     });
+
+
+    // total generales y del pie de la grilla
+    function calculateTotal() {
+        var totalCantidad = $('#Lista').jqGrid('getCol', 'Cantidad', false, 'sum')
+
+        var pr, cn, st, ib, ib_, ib_t, pi, ii, st1, ib1, ib2, ii1, st2, pb, st3, tp, tg;
+        st1 = 0;
+        ib1 = 0;
+        ib2 = 0;
+        ii1 = 0;
+        pb = parseFloat($("#Bonificacion").val().replace(",", "."));
+        if (isNaN(pb)) { pb = 0; }
+        var dataIds = $('#Lista').jqGrid('getDataIDs');
+        for (var i = 0; i < dataIds.length; i++) {
+            var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+            pr = parseFloat(data['Precio'].replace(",", "."));
+            if (isNaN(pr)) { pr = 0; }
+            cn = parseFloat(data['Cantidad'].replace(",", "."));
+            if (isNaN(cn)) { cn = 0; }
+            st = Math.round(pr * cn * 10000) / 10000;
+            st1 = Math.round((st1 + st) * 10000) / 10000;
+            ////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////
+            var pbi = parseFloat(data['PorcentajeBonificacion'].replace(",", ".")) || 0;
+            ib = Math.round(st * pbi / 100 * 10000) / 10000;    //  parseFloat(data['ImporteBonificacion'].replace(",", "."));
+            if (isNaN(ib)) { ib = 0; }
+            ib1 = ib1 + ib;
+            ib_ = Math.round((st - ib) * pb / 100 * 10000) / 10000;
+            ib2 = ib2 + ib_;
+            ib_t = ib1 + ib_;
+            ////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////
+            pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
+            ii = Math.round((st - ib - ib_) * pi / 100 * 10000) / 10000;
+            ii1 = ii1 + ii
+            tp = st - ib_t + ii;
+            // por qué aplica el global sobre los items? está bien?
+            // y si está bien, no debe usarse a sí mismo (como en la linea ib = parseFloat(data['ImporteBonificacion']. etc)
+            // porque si no, se va aplicando a sí mismo cada vez que editas el item
+            data['ImporteBonificacion'] = ib_t.toFixed(4);
+            data['ImporteIva'] = ii.toFixed(4);
+            data['ImporteTotalItem'] = tp.toFixed(4);
+            $('#Lista').jqGrid('setRowData', dataIds[i], data);
+        }
+        st2 = Math.round((st1 - ib1) * 10000) / 10000;
+        st3 = Math.round((st2 - ib2) * 10000) / 10000;
+        tg = Math.round((st3 + ii1) * 10000) / 10000;
+
+        $("#Subtotal1").val(st1.toFixed(4));
+        $("#TotalBonificacionItems").val(ib1.toFixed(4));
+        $("#TotalBonificacionGlobal").val(ib2.toFixed(4));
+        $("#Subtotal2").val(st3.toFixed(4));
+        $("#TotalIva").val(ii1.toFixed(4));
+        $("#Total").val(tg.toFixed(4));
+
+        grid.jqGrid('footerData', 'set', {
+            NumeroObra: 'TOTALES', Cantidad: totalCantidad.toFixed(2),
+            ImporteBonificacion: ib1.toFixed(4),
+            ImporteIva: ii1.toFixed(4),
+            ImporteTotalItem: tg.toFixed(4)
+        });
+    };
+
 
 
     $(document).ready(function () {
@@ -548,7 +628,6 @@
         $('#Lista').jqGrid({
             url: ROOT + 'Presupuesto/DetPresupuestos/',
             postData: { 'IdPresupuesto': function () { return $("#IdPresupuesto").val(); } },
-            editurl: ROOT + 'Presupuesto/EditGridData/',
             datatype: 'json',
             mtype: 'POST',
             colNames: ['Acciones', 'IdDetallePresupuesto', 'IdArticulo', 'IdUnidad', 'Item', 'Obra', 'Cant.', 'Un.', 'Codigo', 'Material', 'Precio', '% Bon.', 'Imp.Bon.', '% Iva',
@@ -1001,7 +1080,6 @@
             });
         });
 
-
         jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
 
         // get the header row which contains
@@ -1021,40 +1099,178 @@
             ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
         });
 
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
         $("#ListaDrag").jqGrid({
-            url: '@Url.Action("ArticulosGridData2", "Articulo")',
+            url: '@Url.Action("Articulos_DynamicGridData", "Articulo")',
             datatype: 'json',
             mtype: 'POST',
             cellEdit: true,
-            colNames: ['IdArticulo', 'Codigo', 'Material', 'IdUnidad', 'Un.', '% Iva'],
-            colModel: [
-                        { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Codigo', index: 'Codigo', width: 100, align: 'left', search: true, stype: 'text' },
-                        { name: 'Descripcion', index: 'Descripcion', width: 400, align: 'left', search: true, stype: 'text', editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true } },
-                        { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Unidad', index: 'Unidad', width: 50, align: 'left', search: true, stype: 'text' },
-                        { name: 'Iva', index: 'Iva', width: 50, align: 'left', search: true, stype: 'text' },
+
+
+            colNames: ['', '', 'Codigo', 'Descripcion'
+
+       , 'Rubro'
+
+       , 'Subrubro'
+       , 'Nro.inv.', '', '', 'Unidad'
+
+
             ],
+
+
+
+
+
+
+            colModel: [
+            { name: 'Edit', index: 'Edit', width: 50, align: 'left', sortable: false, search: false },
+            { name: 'Delete', index: 'Delete', width: 1, align: 'left', sortable: false, search: false, hidden: true },
+            {
+                name: 'Codigo', index: 'Codigo', width: 130, align: 'left', stype: 'text',
+                search: true, searchoptions: {
+                    clearSearch: true, searchOperators: true
+                    , sopt: ['cn']
+                }
+            },
+            {
+                name: 'Descripcion', index: 'Descripcion', width: 480, align: 'left', stype: 'text',
+                editable: false, edittype: 'text', editoptions: { maxlength: 250 }, editrules: { required: true }
+
+                , search: true, searchoptions: {
+                    clearSearch: true,
+                    searchOperators: true
+                    , sopt: ['cn']
+                    //, sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni']
+                }
+            },
+            {
+                name: 'Rubro.Descripcion', index: 'Rubro.Descripcion', width: 200, align: 'left', editable: true, edittype: 'select',
+                editoptions: { dataUrl: '@Url.Action("Unidades")' }, editrules: { required: true }
+                , search: true, searchoptions: {
+                    //sopt: ['cn']
+                }
+            },
+
+
+            { name: 'Subrubro.Descripcion', index: '', width: 200, align: 'left', search: true, stype: 'text' },
+            { name: 'NumeroInventario', index: '', width: 50, align: 'left', search: true, stype: 'text' }
+
+            ,
+            { name: 'IdArticulo', index: 'IdArticulo', align: 'left', width: 100, editable: false, hidden: true },
+            { name: 'IdUnidad', index: 'IdUnidad', align: 'left', width: 100, editable: false, hidden: true },
+            { name: 'Unidad', index: 'Unidad', width: 100, align: 'left', search: true, stype: 'text' },
+
+
+            ],
+
             ondblClickRow: function (id) {
                 copiarArticulo(id);
             },
+            loadComplete: function () {
+                grid = $("ListaDrag");
+            },
+
+
             pager: $('#ListaDragPager'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'Descripcion',
-            sortorder: "asc",
+            sortorder: 'asc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>MATERIALES</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            //, caption: 'MATERIALES'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
         })
         jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
         $("#ListaDrag2").jqGrid({
-            url: '@Url.Action("Requerimientos", "Requerimiento")',
+            url: '@Url.Action("Requerimientos_DynamicGridData", "Requerimiento")',
             postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; }, 'IdObra': function () { return ""; } },
             datatype: 'json',
             mtype: 'POST',
@@ -1065,7 +1281,7 @@
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                         { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
                         { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] }, hidden: true },
@@ -1090,53 +1306,207 @@
                         { name: 'IdObra', index: 'IdObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'IdSector', index: 'IdSector', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
+
+
             ondblClickRow: function (id) {
-                copiarArticulo(id);
+                copiarRM(id);
             },
+
+
             pager: $('#ListaDragPager2'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'NumeroRequerimiento',
-            sortorder: "desc",
+            sortorder: 'desc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>REQUERIMIENTOS</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            // , caption: 'REQUERIMIENTOS'
+
+            , gridview: true
+            , multiboxonly: true
+            , multipleSearch: true
+
+
         })
         jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag2").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+        jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag2").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
         $("#ListaDrag3").jqGrid({
-            url: '@Url.Action("Presupuestos", "Presupuesto")',
+            url: '@Url.Action("Presupuestos_DynamicGridData", "Presupuesto")',
             postData: { 'FechaInicial': function () { return ""; }, 'FechaFinal': function () { return ""; } },
             datatype: 'json',
             mtype: 'POST',
             cellEdit: true,
-            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor'],
+            colNames: ['Acciones', 'IdPresupuesto', 'Numero', 'Orden', 'Fecha', 'Proveedor'
+
+            , 'Validez', 'Bonif.', '% Iva', 'Mon', 'Subtotal', 'Imp.Bon.', 'Imp.Iva', 'Imp.Total',
+                       'Plazo_entrega', 'Condicion_compra', 'Garantia', 'Lugar_entrega', 'Comprador', 'Aprobo', 'Referencia', 'Detalle', 'Contacto', 'Observaciones', 'IdProveedor'
+            ],
             colModel: [
                         { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdPresupuesto', index: 'IdPresupuesto', align: 'left', width: 100, editable: false, hidden: true },
-                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Orden', index: 'Orden', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'Numero', index: 'Numero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Orden', index: 'SubNumero', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                         { name: 'FechaIngreso', index: 'FechaIngreso', width: 75, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                        { name: 'Proveedor', index: 'Proveedor.RazonSocial', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+
+                        { name: 'Validez', index: 'Validez', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Bonificacion', index: 'Bonificacion', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PorcentajeIva1', index: 'PorcentajeIva1', align: 'right', width: 40, editable: false, hidden: true },
+                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 30, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Subtotal', index: 'Subtotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'PlazoEntrega', index: 'PlazoEntrega', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Garantia', index: 'Garantia', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Comprador', index: 'Comprador.Nombre', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Referencia', index: 'Referencia', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Contacto', index: 'Contacto', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+
             ],
+
+
+
+
+
+            ondblClickRow: function (id) {
+                CopiarPresupuesto(id)
+            },
+
+
+
+
+
             pager: $('#ListaDragPager3'),
+
+
             rowNum: 15,
-            rowList: [10, 20, 50],
+            rowList: [10, 20, 50, 100],
             sortname: 'Numero',
-            sortorder: "desc",
+            sortorder: 'desc',
             viewrecords: true,
-            width: 'auto',
-            height: '100%',
+            emptyrecords: 'No hay registros para mostrar', //,
+
+
+            ///////////////////////////////
+            width: 'auto', // 'auto',
+            autowidth: true,
+            shrinkToFit: false,
+            //////////////////////////////
+
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
-            emptyrecords: 'No hay registros para mostrar',
-            caption: '<b>SOLICITUDES DE COTIZACION</b>'
+            footerrow: false, //true,
+            userDataOnFooter: true
+            //, caption: 'SOLICITUDES DE COTIZACION'
+
+    , gridview: true
+    , multiboxonly: true
+    , multipleSearch: true
+
+
         })
         jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#ListaDrag3").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#ListaDrag3").jqGrid('navGrid', '#ListaDragPager3',
+            { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+            {
+                //sopt: ["cn"]
+                //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+            }
+        );
+        jQuery("#ListaDrag3").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
         // make grid2 sortable
         $("#Lista").jqGrid('sortableRows', {
@@ -1249,67 +1619,6 @@
     }
 
 
-    // total generales y del pie de la grilla
-    calculateTotal = function () {
-        var totalCantidad = grid.jqGrid('getCol', 'Cantidad', false, 'sum')
-
-        var pr, cn, st, ib, ib_, ib_t, pi, ii, st1, ib1, ib2, ii1, st2, pb, st3, tp, tg;
-        st1 = 0;
-        ib1 = 0;
-        ib2 = 0;
-        ii1 = 0;
-        pb = parseFloat($("#Bonificacion").val().replace(",", "."));
-        if (isNaN(pb)) { pb = 0; }
-        var dataIds = $('#Lista').jqGrid('getDataIDs');
-        for (var i = 0; i < dataIds.length; i++) {
-            var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
-            pr = parseFloat(data['Precio'].replace(",", "."));
-            if (isNaN(pr)) { pr = 0; }
-            cn = parseFloat(data['Cantidad'].replace(",", "."));
-            if (isNaN(cn)) { cn = 0; }
-            st = Math.round(pr * cn * 10000) / 10000;
-            st1 = Math.round((st1 + st) * 10000) / 10000;
-            ////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////
-            var pbi = parseFloat(data['PorcentajeBonificacion'].replace(",", ".")) || 0;
-            ib = Math.round(st * pbi / 100 * 10000) / 10000;    //  parseFloat(data['ImporteBonificacion'].replace(",", "."));
-            if (isNaN(ib)) { ib = 0; }
-            ib1 = ib1 + ib;
-            ib_ = Math.round((st - ib) * pb / 100 * 10000) / 10000;
-            ib2 = ib2 + ib_;
-            ib_t = ib1 + ib_;
-            ////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////
-            pi = parseFloat(data['PorcentajeIva'].replace(",", "."));
-            ii = Math.round((st - ib - ib_) * pi / 100 * 10000) / 10000;
-            ii1 = ii1 + ii
-            tp = st - ib_t + ii;
-            // por qué aplica el global sobre los items? está bien?
-            // y si está bien, no debe usarse a sí mismo (como en la linea ib = parseFloat(data['ImporteBonificacion']. etc)
-            // porque si no, se va aplicando a sí mismo cada vez que editas el item
-            data['ImporteBonificacion'] = ib_t.toFixed(4);
-            data['ImporteIva'] = ii.toFixed(4);
-            data['ImporteTotalItem'] = tp.toFixed(4);
-            $('#Lista').jqGrid('setRowData', dataIds[i], data);
-        }
-        st2 = Math.round((st1 - ib1) * 10000) / 10000;
-        st3 = Math.round((st2 - ib2) * 10000) / 10000;
-        tg = Math.round((st3 + ii1) * 10000) / 10000;
-
-        $("#Subtotal1").val(st1.toFixed(4));
-        $("#TotalBonificacionItems").val(ib1.toFixed(4));
-        $("#TotalBonificacionGlobal").val(ib2.toFixed(4));
-        $("#Subtotal2").val(st3.toFixed(4));
-        $("#TotalIva").val(ii1.toFixed(4));
-        $("#Total").val(tg.toFixed(4));
-
-        grid.jqGrid('footerData', 'set', {
-            NumeroObra: 'TOTALES', Cantidad: totalCantidad.toFixed(2),
-            ImporteBonificacion: ib1.toFixed(4),
-            ImporteIva: ii1.toFixed(4),
-            ImporteTotalItem: tg.toFixed(4)
-        });
-    };
 
     getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -1339,8 +1648,134 @@
 
 
 
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    function copiarRM(id) {
+
+        $("#loading").show();
+
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+            LogJavaScript("Error en Script copiarArticulo   ", e);
+        }
+
+        //sacarDeEditMode();
+
+
+
+        GrabarGrillaLocal()
+
+        var acceptId = id;
+        var getdata = $("#ListaDrag2").jqGrid('getRowData', acceptId);
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        var dropmodel = $("#ListaDrag2").jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            //IdRequerimiento = getdata['IdRequerimiento'];
+            IdRequerimiento = getdata['NumeroRequerimiento'];
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Requerimiento/DetRequerimientosSinFormato/',
+                data: { IdRequerimiento: IdRequerimiento },
+                dataType: "Json",
+                success: function (data) {
+                    var prox = ProximoNumeroItem();
+                    var longitud = data.length;
+                    for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        tmpdata['Unidad'] = data[i].Unidad;
+                        tmpdata['IdDetallePresupuesto'] = 0;
+
+                        tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['Observaciones'] = data[i].Observaciones;
+                        tmpdata['NumeroItem'] = prox;
+
+                        var now = new Date();
+                        var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                        tmpdata['FechaEntrega'] = currentDate;
+
+
+
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+                        //tmpdata['FechaNecesidad'] = displayDate;
+                        tmpdata['Precio'] = 0;
+                        tmpdata['PorcentajeBonificacion'] = 0;
+                        tmpdata['ImporteBonificacion'] = 0;
+                        tmpdata['ImporteIva'] = 0;
+                        tmpdata['ImporteTotalItem'] = 0;
+
+
+
+                        prox++;
+                        getdata = tmpdata;
+                        var idazar = Math.ceil(Math.random() * 1000000);
+
+
+
+
+
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                        tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+
+
+                        QuitarRenglonDragDrop(idazar, getdata)
+
+
+
+
+                    }
+                    RefrescarOrigenDescripcion();
+
+                    AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+                    //                    rows = $("#Lista").getGridParam("reccount");
+                    //                    if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+
+                }
+            });
+        } catch (e) { }
+
+
+        $("#loading").hide();
+
+    }
+
+
+
     function copiarArticulo(id) {
 
+
+        $("#loading").show();
 
         try {
             jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
@@ -1380,7 +1815,7 @@
             tmpdata['NumeroItem'] = prox++;
 
 
-            tmpdata['PorcentajeIva'] = getdata['Iva'].replace(",", ".");
+            // tmpdata['PorcentajeIva'] = getdata['Iva'].replace(",", ".");
             tmpdata['Cantidad'] = 1;
             tmpdata['FechaEntrega'] = $("#FechaIngreso").val();
 
@@ -1393,48 +1828,8 @@
 
 
 
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
 
-
-
-        ///////////////
-        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
-        ///////////////
-        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
-        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
-        //alert(segundorenglon);
-        if (segundorenglon.indexOf("dnd") != -1) {
-            // tiró el renglon en modo dragdrop, no hizo dobleclic
-            $("#Lista").jqGrid('delRowData', segundorenglon);
-        }
-        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
-
-
-        ///////////////
-        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
-        ///////////////
-
-        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
-
-        var pos = TraerPosicionLibre();
-        if (pos == null) {
-            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
-        }
-        else {
-            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
-        }
-        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
-        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
-        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
+        QuitarRenglonDragDrop(idazar, getdata)
         //////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////
 
@@ -1450,7 +1845,171 @@
         //        rows = $("#Lista").getGridParam("reccount");
         //        if (rows >= 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
 
+        $("#loading").hide();
+
     }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    function CopiarPresupuesto(acceptId) {
+
+
+
+        try {
+            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        } catch (e) {
+            LogJavaScript("Error en Script copiarArticulo   ", e);
+        }
+
+        //sacarDeEditMode();
+
+        GrabarGrillaLocal()
+
+
+        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
+        var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
+
+        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
+        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+        var grid;
+        try {
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#Observaciones").val(getdata['Observaciones']);
+            $("#LugarEntrega").val(getdata['LugarEntrega']);
+            $("#IdObra").val(getdata['IdObra']);
+            $("#IdSector").val(getdata['IdSector']);
+
+            $("#IdProveedor").val(getdata['IdProveedor']);
+            $("#Proveedor").val(getdata['Proveedor']);
+
+
+
+            $("#Numero").val(getdata['Numero']);
+            $("#SubNumero").val("");
+            BuscarOrden(getdata['Numero']);
+
+
+            //me traigo los datos de detalle
+            var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
+                data: { IdPresupuesto: IdPresupuesto },
+                dataType: "Json",
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                complete: function () {
+                    $("#loading").hide();
+                },
+
+                success: function (data) {
+
+                    // agrego los items a la grilla de detalle
+                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
+                    // venido el objeto devuelto (jsoneado) ?
+
+                    var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
+                    for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdArticulo'] = data[i].IdArticulo;
+                        tmpdata['Codigo'] = data[i].Codigo;
+                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['IdUnidad'] = data[i].IdUnidad;
+                        tmpdata['Unidad'] = data[i].Abreviatura;
+                        tmpdata['IdDetallePedido'] = 0;
+                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
+                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['NumeroObra'] = data[i].NumeroObra;
+
+                        ///////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////////////////////////////
+
+                        if (true) {
+                            // fecha de hoy
+                            var now = new Date();
+                            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                            tmpdata['FechaEntrega'] = currentDate;
+                        }
+                        else {
+                            // fecha del rm
+                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
+                            var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
+                            tmpdata['FechaEntrega'] = displayDate;
+                        }
+                        tmpdata['FechaNecesidad'] = displayDate;
+
+                        ///////////////////////////////////////////////////////////////////
+
+
+                        tmpdata['Precio'] = data[i].Precio;
+                        tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
+                        tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
+                        tmpdata['ImporteIva'] = data[i].ImporteIva;
+                        tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
+
+
+                        tmpdata['Observaciones'] = data[i].Observaciones;
+
+
+                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
+                        tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
+                        getdata = tmpdata;
+                        var idazar = Math.ceil(Math.random() * 1000000);
+
+                        QuitarRenglonDragDrop(idazar, getdata)
+
+                        //    $("#Lista").jqGrid('addRowData', grid, getdata);
+                    }
+
+
+                    //                rows = $("#Lista").getGridParam("reccount");
+                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+                    AgregarRenglonesEnBlanco({ "IdDetallePresupuesto": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
+
+
+
+
+                    //Validar();
+                }
+
+            });
+
+
+
+
+        } catch (e) {
+
+            alert(e.message);
+
+        }
+
+        var grid;
+        grid = Math.ceil(Math.random() * 1000000);
+        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
+        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
+        //resetAltRows.call(this);
+        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     function ConectarGrillas1() {
@@ -1517,6 +2076,8 @@
                 var j = 0, tmpdata = {}, dropname, IdRequerimiento;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
                 var grid;
+
+
                 try {
                     $("#Observaciones").val(getdata['Observaciones']);
                     $("#LugarEntrega").val(getdata['LugarEntrega']);
@@ -1524,6 +2085,10 @@
                     $("#IdSector").val(getdata['IdSector']);
 
                     IdRequerimiento = getdata['NumeroRequerimiento'];
+
+                    copiarRM(IdRequerimiento);
+
+                    /*
                     $.ajax({
                         type: "GET",
                         contentType: "application/json; charset=utf-8",
@@ -1533,6 +2098,7 @@
                         success: function (data) {
                             var longitud = data.length;
                             for (var i = 0; i < data.length; i++) {
+                                if (!FechaEntrega) FechaEntrega = "";
                                 var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
                                 var displayDate = $.datepicker.formatDate("mm/dd/yy", date);
                                 tmpdata['IdArticulo'] = data[i].IdArticulo;
@@ -1555,6 +2121,8 @@
                             }
                         }
                     });
+                    */
+
                 } catch (e) { }
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
             }
@@ -1576,6 +2144,11 @@
                 var j = 0, tmpdata = {}, dropname, IdPresupuesto;
                 var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
                 var grid;
+
+
+                CopiarPresupuesto(acceptId)
+
+                /*
                 try {
                     $("#Numero").val(getdata['Numero']);
                     $("#SubNumero").val("");
@@ -1608,16 +2181,16 @@
                                 tmpdata['NumeroItem'] = jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
                                 getdata = tmpdata;
                                 idazar = Math.ceil(Math.random() * 1000000);
-
+    
                                 //    $("#Lista").jqGrid('addRowData', idazar, getdata);
-
-
+    
+    
                                 ///////////////
                                 // paso 2: agregar en el ultimo lugar antes de los renglones vacios
                                 ///////////////
-
+    
                                 //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
-
+    
                                 var pos = TraerPosicionLibre();
                                 if (pos == null) {
                                     $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
@@ -1628,145 +2201,27 @@
                                 //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
                                 // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
                                 // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
-
+    
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
                                 //////////////////////////////////////////////////////////////////////////////////
-
-
+    
+    
                             }
                         }
                     });
                 } catch (e) { }
+                */
+
+
+
                 $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+
+
             }
         });
     }
 
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    function CopiarPresupuesto(acceptId, ui) {
-
-
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
-
-        GrabarGrillaLocal()
-
-        // var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-        var getdata = jQuery("#ListaDrag3").jqGrid('getRowData', acceptId);
-
-        var j = 0, tmpdata = {}, dropname, IdRequerimiento;
-        // var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
-        var grid;
-        try {
-
-            // estos son datos de cabecera que ya tengo en la grilla auxiliar
-            $("#Observaciones").val(getdata['Observaciones']);
-            $("#LugarEntrega").val(getdata['LugarEntrega']);
-            $("#IdObra").val(getdata['IdObra']);
-            $("#IdSector").val(getdata['IdSector']);
-
-            $("#IdProveedor").val(getdata['IdProveedor']);
-            $("#DescripcionProveedor").val(getdata['Proveedor']);
-
-
-
-            //me traigo los datos de detalle
-            var IdPresupuesto = getdata['IdPresupuesto']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
-
-
-            $.ajax({
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                url: ROOT + 'Presupuesto/DetPresupuestosSinFormato/',
-                data: { IdPresupuesto: IdPresupuesto },
-                dataType: "Json",
-                success: function (data) {
-
-                    // agrego los items a la grilla de detalle
-                    // -tiene sentido que se encargue el cliente de agregar la lista de items, cuando ya podr�a haber
-                    // venido el objeto devuelto (jsoneado) ?
-
-                    var longitud = data.length; //si no usaste el action SinFormato, no podes hacer length
-                    for (var i = 0; i < data.length; i++) {
-                        tmpdata['IdArticulo'] = data[i].IdArticulo;
-                        tmpdata['Codigo'] = data[i].Codigo;
-                        tmpdata['Descripcion'] = data[i].Descripcion;
-                        tmpdata['IdUnidad'] = data[i].IdUnidad;
-                        tmpdata['Unidad'] = data[i].Abreviatura;
-                        tmpdata['IdDetallePedido'] = 0;
-                        tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                        tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                        tmpdata['NumeroItemRM'] = data[i].NumeroItem;
-                        tmpdata['Cantidad'] = data[i].Cantidad;
-                        tmpdata['NumeroObra'] = data[i].NumeroObra;
-
-                        ///////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////
-
-                        if (true) {
-                            // fecha de hoy
-                            var now = new Date();
-                            var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
-                            tmpdata['FechaEntrega'] = currentDate;
-                        }
-                        else {
-                            // fecha del rm
-                            var date = new Date(parseInt(data[i].FechaEntrega.substr(6)));
-                            var displayDate = $.datepicker.formatDate("dd/mm/yy", date);  // $.datepicker.formatDate("mm/dd/yy", date);
-                            tmpdata['FechaEntrega'] = displayDate;
-                        }
-                        tmpdata['FechaNecesidad'] = displayDate;
-
-                        ///////////////////////////////////////////////////////////////////
-
-
-                        tmpdata['Precio'] = data[i].Precio;
-                        tmpdata['PorcentajeBonificacion'] = data[i].PorcentajeBonificacion;
-                        tmpdata['ImporteBonificacion'] = data[i].ImporteBonificacion;
-                        tmpdata['ImporteIva'] = data[i].ImporteIva;
-                        tmpdata['ImporteTotalItem'] = data[i].ImporteTotalItem;
-
-
-                        tmpdata['Observaciones'] = data[i].Observaciones;
-
-
-                        tmpdata['PorcentajeIva'] = data[i].PorcentajeIva;
-                        tmpdata['NumeroItem'] = ProximoNumeroItem();   // jQuery("#Lista").jqGrid('getGridParam', 'records') + 1;
-                        getdata = tmpdata;
-                        grid = Math.ceil(Math.random() * 1000000);
-                        $("#Lista").jqGrid('addRowData', grid, getdata);
-                    }
-
-
-                    //                rows = $("#Lista").getGridParam("reccount");
-                    //                if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
-                    AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
-
-
-
-
-                    Validar();
-                }
-
-            });
-
-
-
-
-        } catch (e) {
-
-            alert(e.message);
-
-        }
-
-        var grid;
-        grid = Math.ceil(Math.random() * 1000000);
-        // SE CAMBIO EN EL COMPONENTE grid.jqueryui.js LA LINEA 435 (SE COMENTO LA INSTRUCCION addRowData)
-        //                    $("#" + this.id).jqGrid('addRowData', grid, getdata);
-        //resetAltRows.call(this);
-        $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-    }
 
 
 

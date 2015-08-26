@@ -419,6 +419,119 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+
+
+        public virtual ActionResult Presupuestos_DynamicGridData
+            (string sidx, string sord, int page, int rows, bool _search, string filters)
+        {
+            string campo = String.Empty;
+            //int pageSize = rows ?? 20;
+            int currentPage = page; // ?? 1;
+
+           // var Entidad = db.Presupuestos.AsQueryable();
+         
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+            var pagedQuery = Filters.FiltroGenerico<Data.Models.Presupuesto>
+                                ("DetalleRequerimientos.DetallePedidos", 
+                                sidx, sord, page, rows, _search, filters, db, ref totalRecords
+                                 );
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+                                //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
+
+
+
+
+            //int totalRecords = Entidad1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in pagedQuery
+                        select new
+                        {
+                            IdPresupuesto = a.IdPresupuesto,
+                            Numero = a.Numero,
+                            Orden = a.SubNumero,
+                            FechaIngreso = a.FechaIngreso,
+                            Proveedor = a.Proveedor.RazonSocial,
+                            Validez = a.Validez,
+                            Bonificacion = a.Bonificacion,
+                            PorcentajeIva1 = a.PorcentajeIva1,
+                            Moneda = a.Moneda.Abreviatura,
+                            Subtotal = (a.ImporteTotal - a.ImporteIva1 + a.ImporteBonificacion),
+                            ImporteBonificacion = a.ImporteBonificacion,
+                            ImporteIva1 = a.ImporteIva1,
+                            ImporteTotal = a.ImporteTotal,
+                            PlazoEntrega = a.PlazosEntrega.Descripcion,
+                            CondicionCompra = a.Condiciones_Compra.Descripcion,
+                            Garantia = a.Garantia,
+                            LugarEntrega = a.LugarEntrega,
+                            Comprador = a.Comprador.Nombre,
+                            Aprobo = a.AproboPresupuesto.Nombre,
+                            Referencia = a.Referencia,
+                            Detalle = a.Detalle,
+                            Contacto = a.Contacto,
+                            Observaciones = a.Observaciones,
+                            a.IdProveedor
+                        })//.Where(campo) // .OrderBy(sidx + " " + sord)
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdPresupuesto.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdPresupuesto} ) + " target='' >Editar</>" ,
+								// +"|"+"<a href=../Presupuesto/Edit/" + a.IdPresupuesto + "?code=1" + ">Detalles</a> ",
+                                a.IdPresupuesto.ToString(), 
+                                a.Numero.ToString(), 
+                                a.Orden.ToString(), 
+                                //(a.FechaIngreso ?? DateTime.MinValue ).ToShortDateString(),
+                                a.FechaIngreso.Value.ToShortDateString(),
+                                a.Proveedor,
+                                a.Validez,
+                                a.Bonificacion.ToString(),
+                                a.PorcentajeIva1.ToString(),
+                                a.Moneda,
+                                a.Subtotal.ToString(),
+                                a.ImporteBonificacion.ToString(),
+                                a.ImporteIva1.ToString(),
+                                a.ImporteTotal.ToString(),
+                                a.PlazoEntrega,
+                                a.CondicionCompra,
+                                a.Garantia,
+                                a.LugarEntrega,
+                                a.Comprador,
+                                a.Aprobo,
+                                a.Referencia,
+                                a.Detalle,
+                                a.Contacto,
+                                a.Observaciones
+                                ,a.IdProveedor.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public virtual ActionResult Presupuestos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;

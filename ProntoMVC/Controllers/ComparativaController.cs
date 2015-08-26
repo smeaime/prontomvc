@@ -216,6 +216,253 @@ namespace ProntoMVC.Controllers
 
 
 
+        public virtual ActionResult Comparativas_DynamicGridData
+            (string sidx, string sord, int page, int rows, bool _search, string filters,
+            string FechaInicial, string FechaFinal, string IdObra)
+        {
+
+
+
+            string campo = "true"; // String.Empty;
+            int pageSize = rows ; // ?? 20;
+            int currentPage = page; //  ?? 1;
+
+            var Fac = db.Comparativas.AsQueryable();
+            if (IdObra != string.Empty)
+            {
+                int IdObra1 = Convert.ToInt32(IdObra);
+                Fac = (from a in Fac select a).AsQueryable();
+            }
+
+            try
+            {
+                if (FechaInicial != string.Empty)
+                {
+                    DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                    DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                    Fac = (from a in Fac where a.Fecha >= FechaDesde && a.Fecha <= FechaHasta select a).AsQueryable();
+                }
+
+            }
+            catch (Exception e)
+            {
+                ErrHandler.WriteError(e); //throw;
+            }
+
+
+            //if (_search ?? false)
+            //{
+            //    switch (searchField.ToLower())
+            //    {
+            //        case "numerocomparativa":
+            //            if (searchString != "")
+            //            {
+            //                campo = String.Format("{0} = {1}", searchField, Generales.Val(searchString));
+            //            }
+            //            else
+            //            {
+            //                campo = "true";
+            //            }
+            //            break;
+            //        case "fechacomparativa":
+            //            //No anda
+            //            campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+            //            break;
+            //        default:
+            //            if (searchOper == "eq")
+            //            {
+            //                campo = String.Format("{0} = {1}", searchField, searchString);
+            //            }
+            //            else
+            //            {
+            //                campo = String.Format("{0}.Contains(\"{1}\")", searchField, searchString);
+            //            }
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    campo = "true";
+            //}
+
+
+
+
+            var Req = Fac.Where(campo);
+                        
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+
+            // IQueryable<Data.Models.Remito> aaaa = db.Remitos.Take(19);
+
+
+            // ObjectQuery<Data.Models.Requerimiento> set = Req as ObjectQuery<Data.Models.Requerimiento>;
+
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
+                    sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req.ToList());
+
+
+            //var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Comparativa>
+            //                    (Req as ObjectQuery<Data.Models.Comparativa>
+            //                    , sidx, sord, page, rows, _search, filters, ref totalRecords);
+
+            // .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            //int totalRecords = Req1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            //switch (sidx.ToLower())
+            //{
+            //    case "numeroComparativa":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.NumeroComparativa);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.NumeroComparativa);
+            //        break;
+            //    case "fechaComparativa":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.FechaComparativa);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.FechaComparativa);
+            //        break;
+            //    case "numeroobra":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.Obra.NumeroObra);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.Obra.NumeroObra);
+            //        break;
+            //    case "libero":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.Empleados.Nombre);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.Empleados.Nombre);
+            //        break;
+            //    case "aprobo":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.Empleados1.Nombre);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.Empleados1.Nombre);
+            //        break;
+            //    case "sector":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.Sectores.Descripcion);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.Sectores.Descripcion);
+            //        break;
+            //    case "detalle":
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.Detalle);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.Detalle);
+            //        break;
+            //    default:
+            //        if (sord.Equals("desc"))
+            //            Fac = Fac.OrderByDescending(a => a.NumeroComparativa);
+            //        else
+            //            Fac = Fac.OrderBy(a => a.NumeroComparativa);
+            //        break;
+            //}
+
+            var data = (from a in pagedQuery // Fac.Where(campo)
+                        //join c in db.Clientes on a.IdCliente equals c.IdCliente
+                        select a)
+                //.OrderBy(sidx + " " + sord)
+           //             .OrderByDescending(x => x.Fecha).ThenByDescending(x => x.Numero)
+
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdComparativa.ToString(),
+                            cell = new string[] { 
+                                "<a href="+ Url.Action("Edit",new {id = a.IdComparativa} )  +" target='_blank' >Editar</>"
+                                //+
+                                //"|" +
+                                //"<a href=/Comparativa/Details/" + a.IdComparativa + ">Detalles</a> "
+                                ,
+                                "<a href="+ Url.Action("Imprimir",new {id = a.IdComparativa} )  +">Excel</>" ,
+                                
+                                //"<a href="+ Url.Action("Firmar",new {id = a.IdComparativa} )  +">Firmar</>", // con action
+                                "<a  id='firmalink' value='"+ a.IdComparativa +"' href='#' >Firmar</>",                                // con jscript
+                                // puede firmarlo? -si no está el circuito completo
+                                a.CircuitoFirmasCompleto ?? "NO",
+                               //  ( a.Cliente ?? new Cliente()).Cuit.NullSafeToString() 
+
+                                a.IdComparativa.NullSafeToString(),
+                                a.Numero.NullSafeToString(),
+                                a.Fecha.NullSafeToString(),  
+                                 (a.PresupuestoSeleccionado??0)!=-1 ? "Monopresupuesto" : "Multipresupuesto",  
+                                 
+                                 
+                                 (db.Empleados.Find(a.IdConfecciono) ?? new Empleado()).Nombre,
+                                 (db.Empleados.Find(a.IdAprobo) ?? new Empleado()).Nombre,
+                                  //E1.Nombre as [Confecciono],  
+                                  // E2.Nombre as [Aprobo],  
+                                 
+                                 
+                                 a.MontoPrevisto.NullSafeToString() ,  
+                                 a.MontoParaCompra.NullSafeToString() ,  
+
+                                 //db.AutorizacionesPorComprobante1
+                                 //.Where(x=>x.IdComprobante==a.IdComparativa && x.IdFormulario==(int)EntidadManager.EnumFormularios.Comparativa)
+                                 //.Count().ToString(),
+
+
+                                 //string.Join(",", db.AutorizacionesPorComprobante1
+                                 //.Where(f=>(f.IdFormulario == (int)EntidadManager.EnumFormularios.Comparativa && f.IdComprobante == a.IdComparativa))
+                                 // .Select(f=>f.IdAutorizo).ToArray()),
+
+                                 ///////////
+                                 //tarda mucho hacerlo así
+                              db.DetalleComparativas.Where(x=>x.IdComparativa==a.IdComparativa).Select(x=>x.IdPresupuesto).Distinct().Count().ToString() , //  (Select Count(*) From #Auxiliar0 Where #Auxiliar0.IdComparativa=Cmp.IdComparativa) as [Cant.Sol.],  
+                              ///db.DetalleComparativas.Where(x=>x.IdComparativa==a.IdComparativa).Select(x=>x.IdArticulo).Distinct().Count().ToString() , 
+                              "",// "",
+                                /////////
+
+                                 a.ArchivoAdjunto1.NullSafeToString(),  
+                                 a.ArchivoAdjunto2.NullSafeToString() ,  
+                                 a.Anulada.NullSafeToString() ,  
+                                 a.FechaAnulacion.NullSafeToString() ,  
+                                 //E3.Nombre as [Anulo],  
+                                 a.MotivoAnulacion.NullSafeToString()   
+ 
+                                //LEFT OUTER JOIN Empleados E1 ON E1.IdEmpleado=Cmp.IdConfecciono  
+                                //LEFT OUTER JOIN Empleados E2 ON E2.IdEmpleado=Cmp.IdAprobo  
+                                //LEFT OUTER JOIN Empleados E3 ON E3.IdEmpleado=Cmp.IdUsuarioAnulo  
+                                //ORDER BY Cmp.Fecha Desc, Cmp.Numero Desc  
+
+
+                                                            }
+                        }).ToArray()
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public virtual ActionResult Comparativas(string sidx, string sord, int? page, int? rows, bool? _search, string searchField, string searchOper, string searchString,
                                          string FechaInicial, string FechaFinal, string IdObra)
         {

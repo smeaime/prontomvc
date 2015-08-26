@@ -437,6 +437,7 @@
     <Content Include="Content\images\Empresas\Logo_BDL.jpg" />
     <Content Include="Content\images\Empresas\nueva.png" />
     <Content Include="Content\images\Empresas\BaseNueva.png" />
+    <Content Include="Content\images\Empresas\Desvelo.png" />
     <Content Include="Content\images\Empresas\Pronto.png" />
     <Content Include="Content\images\Empresas\pruebaAutotrol.png" />
     <Content Include="Content\images\Empresas\Vialagro.png" />
@@ -444,6 +445,7 @@
     <Content Include="Content\images\Empresas\wDemoWilliams.png" />
     <Content Include="Content\images\Empresas\wDemoWilliams2.png" />
     <Content Include="Content\images\Empresas\williams.png" />
+    <Content Include="Content\images\Empresas\_DemoWeb.png" />
     <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\favicon16.png" />
     <Content Include="Content\images\faviconfiel.png" />
@@ -712,6 +714,7 @@
     <None Include="Documentos\vb6\frmAutorizaciones.frms" />
     <None Include="Documentos\vb6\frmAutorizacionesArbol.frms" />
     <None Include="Documentos\vb6\frmComparativa.frmzz" />
+    <None Include="Documentos\vb6\frmCuentas.frmz" />
     <None Include="Documentos\vb6\frmPedidos.frmzzz" />
     <None Include="Documentos\vb6\Recibo.aspx.vb.sss" />
     <Content Include="Documentos\shortkeys_topten.txt" />
@@ -798,6 +801,7 @@
     <Content Include="Scripts\ScriptOtroIngresoAlmacen.js" />
     <Content Include="Scripts\ScriptCliente.js" />
     <Content Include="Scripts\ScriptAjusteStock.js" />
+    <Content Include="Scripts\ScriptPresupuesto.js" />
     <Content Include="Scripts\ScriptSalidaMateriales.js" />
     <Content Include="Scripts\ScriptRecepcion.js" />
     <Content Include="Scripts\ScriptRemito.js" />
@@ -1265,9 +1269,7 @@
     <Content Include="Views\NotaCredito\Edit.cshtml" />
     <Content Include="Views\NotaCredito\Index.cshtml" />
     <Content Include="Views\Cuenta\Edit.cshtml" />
-    <Content Include="Views\Cuenta\EditExterno.cshtml" />
     <Content Include="Views\Cuenta\Index.cshtml" />
-    <Content Include="Views\Cuenta\IndexExterno.cshtml" />
     <Content Include="Views\Deposito\Index.cshtml" />
     <Content Include="Views\Ubicacion\Index.cshtml" />
     <Content Include="Views\Unidad\Index.cshtml" />
@@ -1291,9 +1293,15 @@
     <Content Include="Views\Cliente\IndexAConfirmar.cshtml" />
     <Content Include="Views\OtroIngresoAlmacen\Edit.cshtml" />
     <Content Include="Views\OtroIngresoAlmacen\Index.cshtml" />
+    <Content Include="Views\RubroContable\Edit.cshtml" />
+    <Content Include="Views\RubroContable\Index.cshtml" />
     <None Include="Views\ComprobanteProveedor\frmComprobantesPrv.frm" />
     <None Include="Views\ComprobanteProveedor\frmDetComprobantesProveedores.frm" />
+    <Content Include="Views\Cuenta\EditExterno.cshtml" />
+    <Content Include="Views\Cuenta\IndexExterno.cshtml" />
     <Content Include="Views\Cuenta\IndexFF.cshtml" />
+    <Content Include="Views\OrdenPago\IndexExterno.cshtml" />
+    <Content Include="Views\OrdenPago\EditExterno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controllers\Content\bootstrap.css" />

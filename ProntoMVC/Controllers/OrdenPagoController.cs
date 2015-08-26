@@ -39,7 +39,69 @@ namespace ProntoMVC.Controllers
 
             //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
             return View();
+        
+        
         }
+
+
+        public virtual ViewResult IndexExterno()
+        {
+            //var OrdenesPago = db.OrdenesPago.Include(r => r.Condiciones_Compra).OrderBy(r => r.Numero);
+            return View();
+        }
+
+
+
+
+        public virtual ActionResult EditExterno(int id)
+        {
+            if (!PuedeLeer(enumNodos.OPago)) throw new Exception("No tenés permisos");
+
+            //if (!Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador") &&
+            //   !Roles.IsUserInRole(Membership.GetUser().UserName, "Compras")
+            //   ) throw new Exception("No tenés permisos");
+
+            if (id == -1)
+            {
+                OrdenPago OrdenPago = new OrdenPago();
+
+                inic(ref OrdenPago);
+                CargarViewBag(OrdenPago);
+                return View(OrdenPago);
+            }
+            else
+            {
+                OrdenPago OrdenPago = db.OrdenesPago.Find(id);
+
+                int idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+                if (OrdenPago.IdProveedor != idproveedor
+                //     && !Roles.IsUserInRole(Membership.GetUser().UserName, "SuperAdmin") &&
+                //!Roles.IsUserInRole(Membership.GetUser().UserName, "Administrador")
+                    ) throw new Exception("No tenés permisos para esa Orden de Pago");
+
+
+                //  ViewBag.IdCondicionCompra = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", OrdenPago.IdCondicionCompra);
+                //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", OrdenPago.IdMoneda);
+                //ViewBag.IdPlazoEntrega = new SelectList(db.PlazosEntregas, "IdPlazoEntrega", "Descripcion", OrdenPago.IdPlazoEntrega);
+                //ViewBag.IdComprador = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.IdComprador);
+                //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", OrdenPago.Aprobo);
+                try
+                {
+                    ViewBag.Proveedor = db.Proveedores.Find(OrdenPago.IdProveedor).RazonSocial;
+                }
+                catch (Exception e)
+                {
+
+                    ErrHandler.WriteError(e);
+                }
+
+                CargarViewBag(OrdenPago);
+                Session.Add("OrdenPago", OrdenPago);
+                return View(OrdenPago);
+            }
+        }
+
 
         public virtual ActionResult Edit(int id)
         {
@@ -248,7 +310,196 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public virtual ActionResult OrdenesPago(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
+
+
+
+
+        public virtual ActionResult OrdenesPago_DynamicGridData
+            (string sidx, string sord, int page, int rows, bool _search, string filters,
+            string FechaInicial, string FechaFinal)
+           
+        {
+            string campo = String.Empty;
+            int pageSize = rows ; // ?? 20;
+            int currentPage = page; //  ?? 1;
+            int idproveedor;
+
+            //var SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString()));
+            //var dt = Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(SC, "OrdenesPago_TT"); // "FI", "EN", "CA"
+            //IEnumerable<DataRow> Entidad = dt.AsEnumerable();
+
+
+
+            var Req = db.OrdenesPago.AsQueryable();
+
+
+            if (FechaInicial != string.Empty)
+            {
+                DateTime FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+                DateTime FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+                Req = (from a in Req where a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta select a).AsQueryable();
+            }
+            
+            idproveedor = buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)Membership.GetUser().ProviderUserKey));
+            if (idproveedor > 0)
+            {
+                string razonsocial = db.Proveedores.Find(idproveedor).RazonSocial;
+                Req = (from a in Req where a.Proveedore.RazonSocial.NullSafeToString() == razonsocial select a).AsQueryable();
+                //Entidad = Entidad.Where(p => (string)p["Proveedor"].NullSafeToString() == razonsocial).AsQueryable();
+            }
+
+
+                
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            int totalRecords = 0;
+
+        
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Data.Models.OrdenPago>
+                                (                               sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req  );
+
+            //DetalleRequerimientos.DetallePedidos, DetalleRequerimientos.DetallePresupuestos
+                                //"Obra,DetalleRequerimientos.DetallePedidos.Pedido,DetalleRequerimientos.DetallePresupuestos.Presupuesto"
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
+
+
+
+
+
+
+
+            var data = (
+                        from a in pagedQuery //db.OrdenesPago
+                        //from b in db.Proveedores.Where(o => o.IdProveedor == a.IdProveedor).DefaultIfEmpty()
+                        //from c in db.Cuentas.Where(p => p.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        //from d in db.Monedas.Where(q => q.IdMoneda == a.IdMoneda).DefaultIfEmpty()
+                        //from e in db.Conceptos.Where(r => r.IdConcepto == a.IdConcepto).DefaultIfEmpty()
+                        //from f in db.Conceptos.Where(s => s.IdConcepto == a.IdConcepto2).DefaultIfEmpty()
+                        //from g in db.Obras.Where(u => u.IdObra == a.IdObra).DefaultIfEmpty()
+                        //from h in db.Empleados.Where(v => v.IdEmpleado == a.IdEmpleadoFF).DefaultIfEmpty()
+                        //from i in db.Empleados.Where(w => w.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        //from j in db.Empleados.Where(x => x.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        //from k in db.Empleados.Where(y => y.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
+                        //from l in db.OrdenesPago.Where(z => z.IdOrdenPago == a.IdOPComplementariaFF).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdOrdenPago,
+                            a.IdOPComplementariaFF,
+                            a.NumeroOrdenPago,
+                            a.Exterior,
+                            FechaOrdenPago = a.FechaOrdenPago ?? DateTime.MinValue,
+                            a.Tipo,
+                            a.Anulada,
+                            Estado = a.Estado == "CA" ? "En Caja" : (a.Estado == "FI" ? "A la firma" : (a.Estado == "EN" ? "Entregado" : (a.Estado == "CO" ? "Caja obra" : ""))),
+                            Proveedor = a.Proveedore != null ? a.Proveedore.RazonSocial : "",
+                            Cuenta = a.Cuenta != null ? a.Cuenta.Descripcion : "",
+                            Moneda = a.Moneda != null ? a.Moneda.Abreviatura : "",
+                            Obra = a.Obra  != null ? a.Obra.NumeroObra : "",
+                            a.Valores,
+                            a.Acreedores,
+                            a.RetencionIVA,
+                            a.RetencionGanancias,
+                            a.RetencionIBrutos,
+                            a.RetencionSUSS,
+                            DevolucionFF = a.GastosGenerales,
+                            DiferenciaBalanceo = a.Tipo == "OT" ? "" : (a.Anulada == "SI" ? "" : a.DiferenciaBalanceo.ToString()),
+                            OPComplementariaFF = a.OrdenesPago2 != null ? a.OrdenesPago2.NumeroOrdenPago.ToString() : "",
+                            DestinatarioFF = a.Empleado != null ?  a.Empleado.Nombre : "",
+                            a.NumeroRendicionFF,
+                            a.ConfirmacionAcreditacionFF,
+                            ConceptoOPOtros = a.Concepto  != null ?  a.Concepto.Descripcion : "",
+                            Clasificacion = a.Concepto1 != null ? a.Concepto1.Descripcion : "",
+                            a.Detalle,
+                            Modalidad = a.TextoAuxiliar1,
+                            EnviarA = a.TextoAuxiliar2,
+                            Auxiliar = a.TextoAuxiliar3,
+                            Ingreso = a.Empleado1  != null ? a.Empleado1.Nombre : "",
+                            a.FechaIngreso,
+                            Modifico = a.Empleado2 != null ? a.Empleado2.Nombre : "",
+                            a.FechaModifico,
+                            Anulo = a.Empleado3 != null ? a.Empleado3.Nombre : "",
+                            a.FechaAnulacion,
+                            a.MotivoAnulacion,
+                            a.Observaciones,
+                            a.CotizacionDolar,
+                            a.CotizacionEuro
+                        }).AsQueryable(); 
+
+            //int totalRecords = data.Count();  // Entidad1.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data1 = (from a in data select a)
+  //                      .OrderByDescending(x => x.FechaOrdenPago)
+                        //.OrderByDescending(x => x.NumeroOrdenPago)
+                        
+//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data1
+                        select new jqGridRowJson
+                        {
+                            id = a.IdOrdenPago.ToString(),
+                            cell = new string[] { 
+                                a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : (a.Tipo=="FF" ? "<a href="+ Url.Action("EditFF",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdOrdenPago} ) + " target='' >Editar</>"),
+                                "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
+                                a.IdOrdenPago.NullSafeToString(),
+                                a.IdOPComplementariaFF.NullSafeToString(),
+                                a.NumeroOrdenPago.NullSafeToString(),
+                                a.Exterior.NullSafeToString(),
+                                a.FechaOrdenPago.NullSafeToString(),
+                                a.Tipo.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.Estado.NullSafeToString(),
+                                a.Proveedor.NullSafeToString(),  
+                                a.Cuenta.NullSafeToString(),  
+                                a.Moneda.NullSafeToString() ,  
+                                a.Obra.NullSafeToString() ,  
+                                a.Valores.NullSafeToString(),
+                                a.Acreedores.NullSafeToString(),
+                                a.RetencionIVA.NullSafeToString(),
+                                a.RetencionGanancias.NullSafeToString(),
+                                a.RetencionIBrutos.NullSafeToString(),
+                                a.RetencionSUSS.NullSafeToString(),
+                                a.DevolucionFF.NullSafeToString(),
+                                a.DiferenciaBalanceo.NullSafeToString(),
+                                a.OPComplementariaFF.NullSafeToString(),
+                                a.DestinatarioFF.NullSafeToString(),
+                                a.NumeroRendicionFF.NullSafeToString(),
+                                a.ConfirmacionAcreditacionFF.NullSafeToString(),
+                                a.ConceptoOPOtros.NullSafeToString(),
+                                a.Clasificacion.NullSafeToString(),
+                                a.Detalle.NullSafeToString(),
+                                a.Modalidad.NullSafeToString(),
+                                a.EnviarA.NullSafeToString(),
+                                a.Auxiliar.NullSafeToString(),
+                                a.Ingreso.NullSafeToString(),
+                                a.FechaIngreso.NullSafeToString(),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion.NullSafeToString(),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.CotizacionDolar.NullSafeToString(),
+                                a.CotizacionEuro.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public virtual ActionResult OrdenesPago(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
+            string FechaInicial, string FechaFinal)
         {
             string campo = String.Empty;
             int pageSize = rows ?? 20;
@@ -337,7 +588,7 @@ namespace ProntoMVC.Controllers
                         .OrderByDescending(x => x.FechaOrdenPago)
                         //.OrderByDescending(x => x.NumeroOrdenPago)
                         
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
+.Skip((currentPage - 1) * pageSize).Take(pageSize)
 .ToList();
 
             var jsonData = new jqGridJson()

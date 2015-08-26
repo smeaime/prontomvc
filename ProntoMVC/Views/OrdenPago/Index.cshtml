@@ -31,7 +31,7 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("OrdenesPago", "OrdenPago")',
+            url: '@Url.Action("OrdenesPago_DynamicGridData", "OrdenPago")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
@@ -50,10 +50,10 @@
                         { name: 'Tipo', index: 'Tipo', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Estado', index: 'Estado', align: 'left', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'Cuenta', index: 'Cuenta', align: 'left', width: 200, editable: false },
-                        { name: 'Moneda', index: 'Moneda', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false },
+                        { name: 'Proveedor', index: 'Proveedore.RazonSocia', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                        { name: 'Cuenta', index: 'Cuenta.Descripcion', align: 'left', width: 200, editable: false },
+                        { name: 'Moneda', index: 'Moneda.Abreviatura', align: 'center', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Obra', index: 'Obra.NumeroObra', align: 'left', width: 70, editable: false },
                         { name: 'Valores', index: 'Valores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Acreedores', index: 'Acreedores', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'RetencionIVA', index: 'RetencionIVA', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
@@ -91,24 +91,62 @@
                     lastSelectedId = id;
                 }
             },
+
+
+
+
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50, 20000],
-            sortname: 'Numero',
+            sortname: 'NumeroOrdenPago',
             sortorder: 'asc',
             viewrecords: true,
+            emptyrecords: 'No hay registros para mostrar', //,
+
+        
+
+            
+            ///////////////////////////////
             width: 'auto', // 'auto',
-            autowidth: true,
-            shrinkToFit: false,
-            height: '100%',
-            altRows: false,
-            footerrow: false,
-            userDataOnFooter: true,
-            caption: '<b>ORDENES DE PAGO</b>'
+        autowidth: true,
+        shrinkToFit: false,
+        //////////////////////////////
+
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        altRows: false,
+        footerrow: false, //true,
+        userDataOnFooter: true
+        //    caption: '<b>ORDENES DE PAGO</b>'
+        // ,caption: '<b>FACTURAS</b>'
+
+        , gridview: true
+        , multiboxonly: true
+        , multipleSearch: true
+
+
+
+
         });
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
-        //jQuery("#Lista").jqGrid('setFrozenColumns');
+        //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+
+        jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+ { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+ {
+     //sopt: ["cn"]
+     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+ }
+);
+
+
+        jQuery("#Lista").filterToolbar({
+            stringResult: true, searchOnEnter: true,
+            defaultSearch: 'cn',
+            enableClear: false
+        }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
