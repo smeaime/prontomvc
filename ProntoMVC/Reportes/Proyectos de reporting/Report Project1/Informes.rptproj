@@ -175,6 +175,10 @@
       <FullPath>Mayor.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Movimientos por partida.rdl</Name>
+      <FullPath>Movimientos por partida.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Nota Credito.rdl</Name>
       <FullPath>Nota Credito.rdl</FullPath>
     </ProjectItem>
@@ -219,6 +223,14 @@
       <FullPath>Saldos Proveedores.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Salida Materiales.rdl</Name>
+      <FullPath>Salida Materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Salidas de materiales.rdl</Name>
+      <FullPath>Salidas de materiales.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Subdiario.rdl</Name>
       <FullPath>Subdiario.rdl</FullPath>
     </ProjectItem>
@@ -229,18 +241,6 @@
     <ProjectItem>
       <Name>Vales emitidos no retirados.rdl</Name>
       <FullPath>Vales emitidos no retirados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Salida Materiales.rdl</Name>
-      <FullPath>Salida Materiales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Salidas de materiales.rdl</Name>
-      <FullPath>Salidas de materiales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Movimientos por partida.rdl</Name>
-      <FullPath>Movimientos por partida.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
