@@ -85,7 +85,104 @@ namespace ProntoMVC.Controllers
 
         }
 
+        public bool Validar(ProntoMVC.Data.Models.RubrosContable o, ref string sErrorMsg)
+        {
+            Int32 mPruebaInt = 0;
+            Int32 mMaxLength = 0;
+            string mProntoIni = "";
+            string mExigirCUIT = "";
+            Boolean result;
 
+            //if (o.Nombre.NullSafeToString() == "")
+            //{
+            //    sErrorMsg += "\n" + "Falta el nombre";
+            //}
+            //else
+            //{
+            //    mMaxLength = GetMaxLength<Localidad>(x => x.Nombre) ?? 0;
+            //    if (o.Nombre.Length > mMaxLength) { sErrorMsg += "\n" + "El nombre de la localidad no puede tener mas de " + mMaxLength + " digitos"; }
+            //}
+
+            //if ((o.IdProvincia ?? 0) == 0) { sErrorMsg += "\n" + "Falta la provincia"; }
+
+            if ((o.Codigo ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo"; }
+
+            if (sErrorMsg != "") return false;
+            else return true;
+        }
+
+
+        public virtual JsonResult BatchUpdate(RubrosContable RubrosContable)
+        {
+            if (!PuedeEditar(enumNodos.RubrosContables)) throw new Exception("No tenés permisos");
+
+            try
+            {
+                string errs = "";
+                if (!Validar(RubrosContable, ref errs))
+                {
+                    try
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+
+                    string[] words = errs.Split('\n');
+                    res.Errors = words.ToList();
+                    res.Message = "Hay datos invalidos";
+
+                    return Json(res);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    if (RubrosContable.IdRubroContable > 0)
+                    {
+                        var EntidadOriginal = db.RubrosContables.Where(p => p.IdRubroContable == RubrosContable.IdRubroContable).SingleOrDefault();
+                        var EntidadEntry = db.Entry(EntidadOriginal);
+                        EntidadEntry.CurrentValues.SetValues(RubrosContable);
+
+                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.RubrosContables.Add(RubrosContable);
+                    }
+
+                    db.SaveChanges();
+
+                    TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
+
+                    return Json(new { Success = 1, IdLocalidad = RubrosContable.IdRubroContable, ex = "" });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    Response.TrySkipIisCustomErrors = true;
+
+                    JsonResponse res = new JsonResponse();
+                    res.Status = Status.Error;
+                    res.Errors = GetModelStateErrorsAsString(this.ModelState);
+                    res.Message = "El registro tiene datos invalidos";
+
+                    return Json(res);
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                Response.TrySkipIisCustomErrors = true;
+
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return Json(errors);
+            }
+        }
 
         public virtual ActionResult RubrosContables_DynamicGridData
     (string sidx, string sord, int page, int rows, bool _search, string filters)
@@ -131,9 +228,10 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdRubroContable.ToString(),
                             cell = new string[] { 
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRubroContable} ) + " target='' >Editar</>" ,
+                                "", // "<a href="+ Url.Action("Edit",new {id = a.IdRubroContable} ) + " target='' >Editar</>" ,
 								// +"|"+"<a href=../Presupuesto/Edit/" + a.IdPresupuesto + "?code=1" + ">Detalles</a> ",
                                 a.IdRubroContable.ToString(), 
+                                a.Codigo.NullSafeToString(),
                                 a.Descripcion.NullSafeToString(),
 
                                 a.CodigoAgrupacion.NullSafeToString(),
@@ -151,6 +249,15 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+
+        public virtual ActionResult GetTiposRubrosFinancierosGrupos()
+        {
+            Dictionary<int, string> provincias = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.TiposRubrosFinancierosGrupos u in db.TiposRubrosFinancierosGrupos.OrderBy(x => x.Descripcion).ToList())
+                provincias.Add(u.IdTipoRubroFinancieroGrupo, u.Descripcion);
+
+            return PartialView("Select", provincias);
+        }
 
     }
 }

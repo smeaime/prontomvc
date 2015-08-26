@@ -68,6 +68,7 @@ namespace ProntoMVC.Controllers
 
         public virtual ViewResult PageNotFound()
         {
+
             //Response.StatusCode = 404;  //you may want to set this to 200
             return View("PageNotFound");
             //return View("../ErrorPages/PageNotFound");
